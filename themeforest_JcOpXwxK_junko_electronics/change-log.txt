@@ -1,0 +1,6 @@
+Date:    12-11-2019
+Version: 2.2.1
+===================
+1. Added: New Home Version
+2. Updated: Style CSS
+3. Fixed: Minor Responsive Issue
