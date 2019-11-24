@@ -900,8 +900,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 @media only screen and (max-width: 767px) {
   .top_right > ul > li {
-    padding-right: 15px;
-    margin-right: 15px;
+    padding-right: 10px;
+    margin-right: 2px;
   }
 }
 .top_right > ul > li:last-child {
@@ -1079,7 +1079,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   border-radius: 5px;
   border: 2px solid #ebebeb;
   background: #fff;
-  width: 600px;
+  width: 700px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .search_container form {
