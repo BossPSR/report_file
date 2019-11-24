@@ -19,6 +19,9 @@
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/style.css">
 
+    <!-- Main New Style CSS -->
+    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
+    
 </head>
 
 <body>
