@@ -44,7 +44,7 @@
                                                 <span>
                                                     <i class="fa fa-minus-square" aria-hidden="true"></i>
                                                     <br>
-                                                    With draw
+                                                    Withdraw
                                                 </span>
                                             </li>
                                             <li>
