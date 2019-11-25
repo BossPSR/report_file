@@ -6789,7 +6789,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .table_desc {
-  border: 1px solid #ebebeb;
+  border: 0px solid #ebebeb;
   margin-bottom: 60px;
   margin-top: 2px;
 }

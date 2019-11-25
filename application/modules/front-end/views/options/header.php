@@ -48,7 +48,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="account_form">
-                            <form action="#">
+                            <form action="my-profile">
                                 <p>   
                                     <label>Username or email <span>*</span></label>
                                     <input type="text">
