@@ -27,16 +27,32 @@
                                     <div class="show_sign">
                                         <ul class="list_sign_login">
                                             <li>
-                                                <span>My wallet</span>
+                                                <span>
+                                                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                                                    <br> 
+                                                    My wallet
+                                                </span>
                                             </li>
                                             <li>
-                                                <span>Deposit</span>
+                                                <span>
+                                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                                    <br> 
+                                                    Deposit
+                                                </span>
                                             </li>
                                             <li>
-                                                <span>Withdraw</span>
+                                                <span>
+                                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                                    <br>
+                                                    With draw
+                                                </span>
                                             </li>
                                             <li>
-                                                <span>My slip</span>
+                                                <span>
+                                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                    <br> 
+                                                    My slip
+                                                </span>
                                             </li>
                                            
                                         </ul>

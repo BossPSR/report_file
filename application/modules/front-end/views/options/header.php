@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="public/frontend/assets/css/style.css">
 
     <!-- Main New Style CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css?v=1001">
+    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
+
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     
 </head>
 
