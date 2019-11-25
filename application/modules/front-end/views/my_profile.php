@@ -115,7 +115,7 @@
                                          <th class="product_quantity">Rejected</th>
                                      </tr>
                                  </thead>
-                                 <tbody style="background-color:#e5e535;color:red;">
+                                 <tbody style="background-color:#e5e535;color:red;font-size:16px;">
                                      <tr>
                                          <td><?php echo number_format("145201"); ?></td>
                                          <td><?php echo number_format("7421985"); ?></td>
