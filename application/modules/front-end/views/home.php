@@ -1171,16 +1171,4 @@
  <!--shipping area start-->
  
  <!--shipping area end-->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- <script>
-     $(document).ready(function() {
-         $(".sign_login").click(function() {
-             $(".show_sign").toggle();
-             $(".show_login").slideUp(2000).slideDown(2000).show();
-         });
-         $(".sign_login_change").click(function() {
-             $(".show_login").toggle();
-             $(".show_sign").slideUp(2000).slideDown(2000).show();
-         });
-     });
- </script>
+ 
