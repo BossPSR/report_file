@@ -21,10 +21,61 @@
 
     <!-- Main New Style CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
-    
+
 </head>
 
 <body>
+    <script>
+        $('#myModal').on('shown.bs.modal', function() {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12"><img style="width: 100px;" src="public/frontend/assets/img/logo/logo.png" alt=""></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="account_form">
+                            <form action="#">
+                                <p>   
+                                    <label>Username or email <span>*</span></label>
+                                    <input type="text">
+                                </p>
+                                <p>   
+                                    <label>Passwords <span>*</span></label>
+                                    <input type="password">
+                                </p>   
+                                <div class="login_submit">
+                                <a href="#">Lost your password?</a>
+                                    <label for="remember">
+                                        <input id="remember" type="checkbox">
+                                        Remember me
+                                    </label>
+                                    
+                                </div>
+                                <div class="login_submit">
+                                <button type="submit">login</button> 
+                                </div>
+
+                            </form>
+                        </div>    
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
 
     <!--header area start-->
 
@@ -48,7 +99,7 @@
                         </div> -->
                         <div class="top_right text-right">
                             <ul>
-                                <li><a href="my-account.html"> Login member </a></li>
+                                <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                 <li><a href="checkout.html"> Sign </a></li>
                                 <li><a href="checkout.html"> TH </a></li>
                                 <li><a href="checkout.html"> ENG </a></li>
@@ -204,7 +255,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="top_right text-right">
                                 <ul>
-                                    <li><a href="my-account.html"> Login member </a></li>
+                                    <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                     <li><a href="checkout.html"> Sign </a></li>
                                     <li><a href="checkout.html"> TH </a></li>
                                     <li><a href="checkout.html"> ENG </a></li>

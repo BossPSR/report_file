@@ -7529,8 +7529,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 .account_form form {
-  border: 1px solid #ebebeb;
-  padding: 23px 20px 29px;
+  /* border: 1px solid #ebebeb; */
+  padding: 40px;
   border-radius: 5px;
 }
 .account_form label {
@@ -7556,17 +7556,18 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   border: 0;
   color: #ffffff;
   display: inline-block;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
-  height: 34px;
+  width: 100%;
+  height: 40px;
   line-height: 21px;
   padding: 5px 20px;
   text-transform: uppercase;
   cursor: pointer;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  margin-left: 20px;
-  border-radius: 20px;
+  /* margin-left: 20px;
+  border-radius: 20px; */
 }
 .account_form button:hover {
   background: #242424;
@@ -7584,7 +7585,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .login_submit a {
   font-size: 13px;
   float: left;
-  line-height: 39px;
+  line-height: 25px;
 }
 .login_submit a:hover {
   color: #0063d1;
@@ -9345,11 +9346,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 /*blog details css end*/
 /*  24. modal css here */
 .modal-dialog.modal-dialog-centered {
-  min-width: 1100px;
+  min-width: 500px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .modal-dialog.modal-dialog-centered {
-    min-width: 1000px;
+    min-width: 500px;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -9547,11 +9548,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .modal-content button.close {
   position: absolute;
-  left: 94%;
+  left: 91%;
   width: 35px;
   height: 35px;
   display: block;
-  border: 1px solid #ebebeb;
+  /* border: 1px solid #ebebeb; */
   top: 10px;
   border-radius: 50%;
   cursor: pointer;
