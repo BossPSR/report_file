@@ -1,40 +1,41 @@
 .right_menu_new{
     position: fixed;
-    top: 10%;
-    right: 2%;
-    width: 20%;
+    top: 35%;
+    right: 10px;
+    width: 10%;
     z-index: 100;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,.1);
+    box-shadow: 1px 1px 5px rgba(0,0,0,.1);
+    border-radius: 8px;
+    
 }
 
-.sign_login,.sign_login_change{
-    background: #0063d1;
-    color: #fff;
-    border-radius: 0.4285rem;
-    cursor: pointer;
-    padding: 15px;
-    text-align: center;
-    transition:0.3s;
-}
-
-.sign_login:hover,.sign_login_change:hover{
-    background:#333;
-}
-
-.button_sign{
-    background: #0063d1;
-    color: #fff;
-    margin-top: 15px;
-    transition:0.3s;
-}
-
-.button_sign:hover{
-    background:#333;
+.right_menu_fixed{
+    padding: 0;
 }
 
 .list_sign_login > li {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ebebeb;
+    cursor: pointer;
+    line-height: 32px;
+    padding: 15px;
+}
+
+.list_sign_login > li:hover{
+    background: #0063d1;
+    color: #fff;
+    transition: 0.3s;
 }
 
 .list_sign_login > li:last-child{
     border-bottom:none;
+}
+
+.list_sign_login > li > span{
+    width: 60px;
+    text-align: center;
+    font-size: 18px;
 }

@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="public/frontend/assets/css/style.css">
 
     <!-- Main New Style CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
-
+    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css?v=1001">
+    
 </head>
 
 <body>
