@@ -378,7 +378,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-12">
-                            <div class="categories_menu categories_four">
+                            <div class="categories_menu categories_four menu_left_new">
                                 <div class="categories_title">
                                     <h2 class="categori_toggle">Category</h2>
                                 </div>
@@ -422,3 +422,46 @@
         </div>
     </header>
     <!--header area end-->
+
+     <!--sidebar widget start-->
+                    <aside class="sidebar_widget right_menu_new">
+                            <div class="widget_inner right_menu_fixed">
+                                <div class="widget_list widget_categories">
+                                    <div class="show_sign">
+                                        <ul class="list_sign_login">
+                                            <li>
+                                                <span>
+                                                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                                                    <br> 
+                                                    My wallet
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span>
+                                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                                    <br> 
+                                                    Deposit
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span>
+                                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                                    <br>
+                                                    Withdraw
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span>
+                                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                    <br> 
+                                                    My slip
+                                                </span>
+                                            </li>
+                                           
+                                        </ul>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                    </aside> 
+    <!--sidebar widget end-->
