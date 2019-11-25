@@ -14,15 +14,15 @@
     ========================= -->
 
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/plugins.css">
+    <link rel="stylesheet" href="public/frontend/assets/css/plugins.css?v=1001">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="public/frontend/assets/css/style.css?v=1001">
 
     <!-- Main New Style CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
+    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css?v=1001">
 
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css?v=1001">
     
 </head>
 
@@ -403,11 +403,6 @@
                                         <li><a href="#"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
                                         <li><a href="#"> Package</a></li>
-                                        <li><a href="#"> </a></li>
-                                        <li><a href="#"> </a></li>
-                                        <li><a href="#"> </a></li>
-                                        <li><a href="#"> </a></li>
-                                        <li><a href="#"> </a></li>
                                         <li class="menu-item-has-children">
                                             <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                         </li>

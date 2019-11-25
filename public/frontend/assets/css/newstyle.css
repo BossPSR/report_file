@@ -72,6 +72,10 @@
     .menu_left_new{
         width: 100%;
     }
+
+    .categories_menu_toggle > ul > li {
+        margin-left: 15px;
+    }
     
     }
 
@@ -97,6 +101,9 @@
         width: 100%;
     }
 
+    .categories_menu_toggle > ul > li {
+        margin-left: 15px;
+    }
 }
 
 /* Ipad */

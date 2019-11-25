@@ -956,7 +956,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .header_middle {
-  padding: 25px 0;
+  padding: 25px 0 0;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header_middle {
@@ -1053,7 +1053,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .search_container {
-  margin-right: 150px;
+  margin-right: 32px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .search_container {
@@ -1226,7 +1226,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .header_wishlist {
   position: relative;
-  margin-right: 40px;
+  margin-right: 155px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .header_wishlist {
@@ -1542,6 +1542,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   margin-right: 45px;
   padding: 14px 0;
 }
+
+.main_menu nav > ul > li:nth-last-child(2) {
+  margin-right: 67px;
+}
 .main_menu nav > ul > li:last-child {
   margin-right: 0;
 }
@@ -1833,7 +1837,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-size: 18px;
   line-height: 43px;
   text-transform: capitalize;
-  font-weight: 500;
+  /* font-weight: 500; */
   display: block;
   cursor: pointer;
   padding: 0 20px 0 30px;
@@ -2296,7 +2300,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 .categories_four .categories_menu_toggle > ul > li > a {
-  line-height: 45px;
+  line-height: 40px;
 }
 
 /* 02. slider area css here */

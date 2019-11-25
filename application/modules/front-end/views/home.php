@@ -2,9 +2,9 @@
  <section class="slider_section slider_section_four mb-70 mt-30">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 offset-lg-3 col-ld-12">
+                <div class="col-lg-9 offset-lg-2 col-ld-12">
                     <div class="slider_area owl-carousel">
-                    <div class="single_slider d-flex align-items-center" >
+                    <div class="single_slider d-flex align-items-center justify-content-center" >
                         <iframe width="870" height="410" src="https://www.youtube.com/embed/CpMnEJwk0TU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                 </div>
