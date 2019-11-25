@@ -1,23 +1,13 @@
 .right_menu_new{
     position: fixed;
-    top: 10%;
-    right: 2%;
+    top: 40%;
+    right: 10px;
     width: 20%;
     z-index: 100;
-}
-
-.sign_login,.sign_login_change{
-    background: #0063d1;
-    color: #fff;
-    border-radius: 0.4285rem;
-    cursor: pointer;
-    padding: 15px;
-    text-align: center;
-    transition:0.3s;
-}
-
-.sign_login:hover,.sign_login_change:hover{
-    background:#333;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,.1);
+    box-shadow: 1px 1px 5px rgba(0,0,0,.1);
+    border-radius: 8px;
+    margin-top: 150px;
 }
 
 .button_sign{
@@ -33,6 +23,7 @@
 
 .list_sign_login > li {
     text-align: center;
+    border-bottom: 1px solid #ebebeb;
 }
 
 .list_sign_login > li:last-child{
