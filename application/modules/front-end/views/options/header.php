@@ -100,7 +100,7 @@
                         <div class="top_right text-right">
                             <ul>
                                 <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                <li><a href="checkout.html"> Sign </a></li>
+                                <li><a href="register"> Sign </a></li>
                                 <li><a href="checkout.html"> TH </a></li>
                                 <li><a href="checkout.html"> ENG </a></li>
                             </ul>
@@ -256,7 +256,7 @@
                             <div class="top_right text-right">
                                 <ul>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                    <li><a href="checkout.html"> Sign </a></li>
+                                    <li><a href="register"> Sign </a></li>
                                     <li><a href="checkout.html"> TH </a></li>
                                     <li><a href="checkout.html"> ENG </a></li>
                                 </ul>
@@ -272,7 +272,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6">
                             <div class="logo">
-                                <a href="index.html"><img src="public/frontend/assets/img/logo/logo.png" alt=""></a>
+                                <a href="home"><img src="public/frontend/assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-6">
@@ -383,7 +383,7 @@
                                 </div>
                                 <div class="categories_menu_toggle">
                                     <ul>
-                                        <li><a href="#"> Home</a></li>
+                                        <li><a href="home"> Home</a></li>
                                         <li><a href="#"> News Update</a></li>
                                         <li><a href="#"> Highest Score</a></li>
                                         <li><a href="#"> Upload +</a></li>

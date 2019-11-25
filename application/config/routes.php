@@ -53,6 +53,9 @@ $route['default_controller'] = 'front-end/Home_ctr';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['register']  = 'front-end/Register_ctr';
+$route['home']      = 'front-end/Home_ctr';
+
 
 
 
