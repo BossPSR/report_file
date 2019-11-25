@@ -276,9 +276,12 @@
                             <div class="middel_right">
                                 <div class="search_container">
                                     <form action="#">
-                                        <div class="hover_category">
+                                        <div class="search_box">
+                                            <input placeholder="Search item /Code ...." type="text">
+                                        </div>
+                                        <div class="hover_category search_box" style="width: 521px;">
                                             <select class="select_option" name="select" id="categori1">
-                                                <option selected value="1">Search item</option>
+                                                <option selected value="1">Select item</option>
                                                 <option value="2">Accessories</option>
                                                 <option value="3">Accessories & More</option>
                                                 <option value="4">Butters & Eggs</option>
@@ -295,11 +298,9 @@
                                                 <option value="15">Watchs</option>
                                                 <option value="16">Electronic</option>
                                             </select>
-                                        </div>
-                                        <div class="search_box">
-                                            <input placeholder="Search item /Code ...." type="text">
                                             <button type="submit">Search</button>
                                         </div>
+                                        
                                     </form>
                                 </div>
                                 <div class="middel_right_info">
@@ -376,7 +377,7 @@
                         <div class="col-lg-3 col-md-12">
                             <div class="categories_menu categories_four">
                                 <div class="categories_title">
-                                    <h2 class="categori_toggle">หมวดหมู่เมนู</h2>
+                                    <h2 class="categori_toggle">Category</h2>
                                 </div>
                                 <div class="categories_menu_toggle">
                                     <ul>
