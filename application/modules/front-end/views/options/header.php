@@ -198,8 +198,8 @@
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children">
-                                    <a href="my-account.html">Upload</a>
-                                </li>
+                                    <a href="my-account.html">Upload +</a>
+                                </li> 
                                 <li class="menu-item-has-children">
                                     <a href="about.html">My Upload</a>
                                 </li>
@@ -208,6 +208,9 @@
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="my-account.html">Package </a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                 </li>
                             </ul>
                         </div>
@@ -396,10 +399,18 @@
                             <div class="main_menu menu_position">
                                 <nav>
                                     <ul>
-                                        <li><a href="#"> Upload</a></li>
+                                        <li><a href="#"> Upload +</a></li>
                                         <li><a href="#"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
                                         <li><a href="#"> Package</a></li>
+                                        <li><a href="#"> </a></li>
+                                        <li><a href="#"> </a></li>
+                                        <li><a href="#"> </a></li>
+                                        <li><a href="#"> </a></li>
+                                        <li><a href="#"> </a></li>
+                                        <li class="menu-item-has-children">
+                                            <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
