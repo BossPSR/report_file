@@ -1,13 +1,12 @@
 .right_menu_new{
     position: fixed;
-    top: 40%;
+    top: 35%;
     right: 10px;
     width: 10%;
     z-index: 100;
     -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,.1);
     box-shadow: 1px 1px 5px rgba(0,0,0,.1);
     border-radius: 8px;
-    /* margin-top: 150px; */
     
 }
 
