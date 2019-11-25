@@ -1135,57 +1135,52 @@
     </div>
     <!--hoem section four area end-->
 
-    <!--shipping area start-->
-    <section class="shipping_area shipping_four mb-70">
-        <div class="container">
-            <div class="shipping_inner">
-                <div class=" row no-gutters">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single_shipping">
-                            <div class="shipping_icone">
-                                <img src="public/frontend/assets/img/about/shipping1.png" alt="">
-                            </div>
-                            <div class="shipping_content">
-                                <h2>Free Delivery</h2>
-                                <p>For all oders over $99</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single_shipping">
-                            <div class="shipping_icone">
-                                <img src="public/frontend/assets/img/about/shipping2.png" alt="">
-                            </div>
-                            <div class="shipping_content">
-                                <h2>Safe Payment</h2>
-                                <p>100% secure payment</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single_shipping">
-                            <div class="shipping_icone">
-                                <img src="public/frontend/assets/img/about/shipping3.png" alt="">
-                            </div>
-                            <div class="shipping_content">
-                                <h2>Shop With Confidence</h2>
-                                <p>If goods have problems</p>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single_shipping last_child">
-                            <div class="shipping_icone">
-                                <img src="public/frontend/assets/img/about/shipping4.png" alt="">
-                            </div>
-                            <div class="shipping_content">
-                                <h2>24/7 Help Center</h2>
-                                <p>Dedicated 24/7 support</p>
-                            </div>
-                        </div>
-                    </div>                          
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--shipping area end-->
+ </section>
+ <!--slider area end-->
+ <div class="banner_area mb-40">
+     <div class="container">
+
+         <div class="row">
+
+             <div class="col-lg-6 col-md-6">
+                 <div class="section_title">
+                     <h2>Highest score</h2>
+                 </div>
+                 <br>
+                 <div class="single_banner mb-30">
+                     <div class="banner_thumb">
+                         <a href="shop.html"><img src="public/frontend/assets/img/bg/banner4.jpg" alt=""></a>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-6 col-md-6">
+                 <div class="section_title">
+                     <h2>Poster </h2>
+                 </div>
+                 <br>
+                 <div class="single_banner mb-30">
+                     <div class="banner_thumb">
+                         <a href="shop.html"><img src="public/frontend/assets/img/bg/banner5.jpg" alt=""></a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!--shipping area start-->
+ 
+ <!--shipping area end-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script>
+     $(document).ready(function() {
+         $(".sign_login").click(function() {
+             $(".show_sign").toggle();
+             $(".show_login").slideUp(2000).slideDown(2000).show();
+         });
+         $(".sign_login_change").click(function() {
+             $(".show_login").toggle();
+             $(".show_sign").slideUp(2000).slideDown(2000).show();
+         });
+     });
+ </script>
