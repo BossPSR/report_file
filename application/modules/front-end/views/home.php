@@ -5,7 +5,7 @@
                 <div class="col-lg-9 offset-lg-2 col-ld-12">
                     <div class="slider_area owl-carousel">
                     <div class="single_slider d-flex align-items-center justify-content-center" >
-                        <iframe width="870" height="410" src="https://www.youtube.com/embed/CpMnEJwk0TU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe width="870" height="410" src="https://www.youtube.com/embed/CpMnEJwk0TU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="margin-left:20px;"></iframe>
                     </div>
                 </div>
                  <!--sidebar widget start-->
