@@ -14,15 +14,15 @@
     ========================= -->
 
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/plugins.css?v=1001">
+    <link rel="stylesheet" href="public/frontend/assets/css/plugins.css">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/style.css?v=1001">
+    <link rel="stylesheet" href="public/frontend/assets/css/style.css">
 
     <!-- Main New Style CSS -->
-    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css?v=1001">
+    <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
 
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css?v=1001">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     
 </head>
 
@@ -384,13 +384,13 @@
                                 </div>
                                 <div class="categories_menu_toggle">
                                     <ul>
-                                        <li><a href="home"> Home</a></li>
-                                        <li><a href="#"> Bookmarked</a></li>
-                                        <li><a href="#"> Recently Accessed</a></li>
-                                        <li><a href="#"> Rejected</a></li>
-                                        <li><a href="#"> My Rewards</a></li>
-                                        <li><a href="#"> Bins</a></li>
-                                        <li><a href="#"> User manual</a></li>
+                                        <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -399,10 +399,13 @@
                             <div class="main_menu menu_position">
                                 <nav>
                                     <ul>
-                                        <li><a href="#"> Upload +</a></li>
+                                        <li><a href="#"> Upload + <div class="arrow_box"></div></a></li>
                                         <li><a href="#"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
                                         <li><a href="#"> Package</a></li>
+                                        <li class="menu-item-has-children">
+                                            <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
+                                        </li>
                                         <li class="menu-item-has-children">
                                             <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                         </li>

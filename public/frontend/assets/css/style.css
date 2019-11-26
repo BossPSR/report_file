@@ -955,9 +955,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 
-.header_middle {
+/* .header_middle {
   padding: 25px 0 0;
-}
+} */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header_middle {
     padding: 28px 0;
@@ -1014,7 +1014,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 47px;
   padding-left: 13px;
   padding-right: 30px;
-  font-size: 14px;
+  font-size: 16px;
   min-width: 170px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -1044,7 +1044,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 .hover_category .select_option::after {
-  top: 54%;
+  top: 48%;
   right: 13px;
 }
 .hover_category .select_option ul.list {
@@ -1106,6 +1106,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .search_box {
   position: relative;
   width: 100%;
+  border-right: 2px solid #ebebeb;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search_box {
@@ -1141,7 +1142,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   width: 100%;
   height: 46px;
   color: #242424;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   padding: 0 20px 0 20px;
   opacity: 0.7;
@@ -1176,6 +1177,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   border-radius: 0 5px 5px 0;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+  font-size: 16px;
 }
 .search_box button:hover {
   background: #242424;
@@ -1544,6 +1546,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .main_menu nav > ul > li:nth-last-child(2) {
+  margin-right: 67px;
+}
+
+.main_menu nav > ul > li:nth-last-child(3) {
   margin-right: 67px;
 }
 .main_menu nav > ul > li:last-child {
