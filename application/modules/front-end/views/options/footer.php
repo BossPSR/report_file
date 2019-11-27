@@ -219,7 +219,14 @@
 <!-- Main JS -->
 <script src="public/frontend/assets/js/main.js"></script>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".target_menuright").click(function(){
+    $(".right_menu_new").slideToggle("slow");
+  });
+});
+</script>
 
 </body>
 
