@@ -74,7 +74,11 @@
     transition: 0.9s;
 }
 
-
+.line_package{
+    border: 2px solid #999; 
+    width: 18%;
+    margin-top:0;
+}
 
 
 .red

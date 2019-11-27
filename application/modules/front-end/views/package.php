@@ -1,11 +1,12 @@
 <br>
-<h2 class="form-group text-center">Package</h2><hr>
+<h2 class="text-center">Package</h2>
+<hr class="line_package">
 <br>
 <div class="container">
     <div class="row">
 
         <div class="col-lg-4 col-md-4 col-12 ">
-            <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2);">
+            <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2); position:relative;">
             <div class="label_product">
                     <span class="label_sale">sale</span>
             </div>
