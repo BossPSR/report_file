@@ -127,6 +127,59 @@
     color: red;
 }
 
+.listProfile{
+    display: flex;
+}
+
+.image_profile{
+    background-color:#1953b4;
+    color:#fff; 
+    border:1px solid #ebebeb; 
+    border-radius: 8px;
+    width: 20%;
+    margin-right: 30px;
+}
+
+.image_PF{
+    padding: 15px;
+}
+
+.image_PF > img{
+    border: 3px solid #fff;
+    border-radius: 25%; 
+}
+
+.menu_in_image{
+    padding: 15px;
+    text-align: center;
+}
+
+.menu_profileList{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: 15% 15%;
+    margin-left: 30px;
+}
+
+.menu_profileList > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ebebeb;
+}
+
+.result_list_menu{
+    background-color:#1953b4;
+    color:#fff;
+}
+
+.result_menu{
+    background-color:#f7ff7e;
+    color:red;
+    font-size:16px;
+}
+
 /* Mobile */
 @media only screen and (min-width: 300px) and (max-width: 568px){
     .right_menu_new{
@@ -161,8 +214,43 @@
         bottom: 24%;
         right: 5%;
     }
-    
+
+    .listProfile{
+        display: block;
     }
+
+    .image_profile{
+        width: 100%;
+        margin-right: 0;
+        margin-bottom:15px;
+    }
+
+    .menu_profileList{
+        margin-left: 0;
+        grid-template-columns: auto auto;
+    }
+
+    .result_menu_1{
+        grid-area: 1 / 2;
+    }
+
+    .result_menu_2{
+        grid-area: 2 / 2;
+    }
+
+    .result_menu_3{
+        grid-area: 3 / 2;
+    }
+
+    .result_menu_4{
+        grid-area: 4 / 2;
+    }
+
+    .result_menu_5{
+        grid-area: 5 / 2;
+    }
+    
+}
 
 @media only screen and (min-width: 375px) and (max-width: 767px){
     .right_menu_new{
@@ -196,10 +284,117 @@
         bottom: 20%;
         right: 4%;
     }
+
+    .listProfile{
+        display: block;
+    }
+
+    .image_profile{
+        width: 100%;
+        margin-right: 0;
+        margin-bottom:15px;
+    }
+
+    .menu_profileList{
+        margin-left: 0;
+        grid-template-columns: auto auto;
+    }
+
+    .result_menu_1{
+        grid-area: 1 / 2;
+    }
+
+    .result_menu_2{
+        grid-area: 2 / 2;
+    }
+
+    .result_menu_3{
+        grid-area: 3 / 2;
+    }
+
+    .result_menu_4{
+        grid-area: 4 / 2;
+    }
+
+    .result_menu_5{
+        grid-area: 5 / 2;
+    }
 }
 
 /* Ipad */
-@media only screen and (max-width: 1100px) and (min-width: 768px){
+
+@media only screen and (min-width:  768px) and (max-width:  1100px){
+    .right_menu_new{
+        width: 100%;   
+        bottom: 0;
+        top:unset;
+        right: 0;
+        text-align: center;
+    }
+
+    .list_sign_login > li {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .list_sign_login > li > span{
+        font-size: 15px;
+    }
+
+    .menu_left_new{
+        width: 100%;
+    }
+
+    .categories_menu_toggle > ul > li {
+        margin-left: 15px;
+    }
+
+    .target_menuright{
+        font-size: 10px;
+        top: unset;
+        bottom: 20%;
+        right: 4%;
+    }
+
+    .listProfile{
+        display: block;
+    }
+
+    .image_profile{
+        width: 100%;
+        margin-right: 0;
+        margin-bottom:15px;
+    }
+
+    .menu_profileList{
+        margin-left: 0;
+        grid-template-columns: auto auto;
+        grid-template-rows: unset!important;
+    }
+
+    .result_menu_1{
+        grid-area: 1 / 2;
+    }
+
+    .result_menu_2{
+        grid-area: 2 / 2;
+    }
+
+    .result_menu_3{
+        grid-area: 3 / 2;
+    }
+
+    .result_menu_4{
+        grid-area: 4 / 2;
+    }
+
+    .result_menu_5{
+        grid-area: 5 / 2;
+    }
+
+}
+
+@media only screen and (max-width: 1370px) and (min-width:1024px){
     .right_menu_new{
         width: 15%;
     }
@@ -211,5 +406,21 @@
     .target_menuright{
         right:17%;
     }
+
+    .listProfile{
+        display: block;
+    }
+
+    .image_profile{
+        width: 50%;
+        margin-right: 0;
+        margin: auto auto 15px;
+    }
+
+    .menu_profileList{
+        margin-left: 0;
+        grid-template-rows: 50% 50%;
+    }
+    
 
 }
