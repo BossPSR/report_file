@@ -308,7 +308,7 @@
                                 </div>
                                 <div class="middel_right_info">
                                     <div class="header_wishlist">
-                                        <img src="public/image/frame.png" alt="" style="width: 100px;height: auto;">
+                                   
                                         <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                         <span class="wishlist_quantity">3</span> -->
                                     </div>

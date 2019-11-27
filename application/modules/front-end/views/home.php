@@ -25,7 +25,7 @@
 
          <div class="row">
 
-             <div class="col-lg-6 col-md-6">
+             <div class="col-lg-6 col-md-6 text-center">
                  <div class="section_title">
                      <h2>Highest score</h2>
                  </div>
@@ -36,7 +36,7 @@
                      </div>
                  </div>
              </div>
-             <div class="col-lg-6 col-md-6">
+             <div class="col-lg-6 col-md-6 text-center">
                  <div class="section_title">
                      <h2>Poster </h2>
                  </div>
