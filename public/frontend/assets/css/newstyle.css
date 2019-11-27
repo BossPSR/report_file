@@ -80,6 +80,47 @@
     margin-top:0;
 }
 
+.line_package_m
+{
+    margin: 15px 0px 60px 0;
+}
+
+
+.hover-fx {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 300ms;
+  }
+  
+  .hover-fx:after {
+    pointer-events: none;
+    position: absolute;
+    width: 84%;
+    height: 90%;
+    border-radius: 4%;
+    content: '';
+    box-sizing: content-box;
+    box-shadow: 0 0 0 3px #007bff94;
+    top: 14px;
+    left: 36px;
+    opacity: 0;
+    transition: 300ms;
+  }
+  
+  /* .hover-fx:hover {
+    background-color: #fff;
+    color: #00989A;
+  } */
+  
+  .hover-fx:hover:after {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
 
 .red
 {

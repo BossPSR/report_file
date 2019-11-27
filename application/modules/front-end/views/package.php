@@ -1,11 +1,11 @@
 <br>
-<h2 class="text-center">Package</h2>
+<h2 class="text-center" style="margin-top: 30px;">Package</h2>
 <hr class="line_package">
 <br>
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 20px;">
 
-        <div class="col-lg-4 col-md-4 col-12 ">
+        <div class="col-lg-4 col-md-4 col-12 line_package_m hover-fx">
             <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2); position:relative;">
             <div class="label_product">
                     <span class="label_sale">sale</span>
@@ -13,18 +13,15 @@
                 <figure>
                     <div class="product_thumb">
 
-                     
-
-
                     </div>
                     <div class="product_content grid_content">
-                        <h4 style="MARGIN-BOTTOM: 3rem;">Annual</h4>
+                        <h4 style="MARGIN-BOTTOM: 2rem;">Annual</h4>
                         <div class="price_box">
 
-                            <span class="current_price" style="font-size:25px">$9.95/mo</span>
+                            <span class="current_price" style="font-size:30px">$9.95/mo</span>
                         </div>
-                    <h3 class="product_name grid_name"><a href="product-details.html">Natus erro at congue massa commodo sit</a></h3>
-                    <h3 class="product_name">Natus erro at congue massa commodo sit</a></h3><br>
+                    <h3 class="product_name grid_name"><a href="product-details.html">เหมาะสำหรับเว็บไซต์ส่วนตัว</a></h3>
+                    <h3 class="product_name">เว็บบริษัทขนาดเล็ก</a></h3><br>
 
                         <button type="button" class="btn btn-primary" style="width: 80%">Choose Annual</button>
                     </div>
@@ -57,7 +54,7 @@
                 </figure>
             </article>
         </div>
-        <div class="col-lg-4 col-md-4 col-12 ">
+        <div class="col-lg-4 col-md-4 col-12 line_package_m hover-fx">
             <article class="single_product" style="border-radius:5%;box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2);">
                 <figure>
                     <div class="product_thumb">
@@ -67,14 +64,15 @@
                     </div>
 
                     <div class="product_content grid_content">
-                        <h4 style="MARGIN-BOTTOM: 3rem;">Quarterly</h4>
+                        <h4 style="MARGIN-BOTTOM: 2rem;">Quarterly</h4>
                         <div class="price_box">
 
-                            <span class="current_price" style="font-size:25px">$19.95/mo</span>
+                            <span class="current_price" style="font-size:30px">$19.95/mo</span>
                         </div>
 
-                        <h3 class="product_name grid_name"><a href="product-details.html">Natus erro at congue massa commodo sit</a></h3>
-                        <h3 class="product_name">Natus erro at congue massa commodo sit</a></h3><br>
+                        <h3 class="product_name grid_name"><a href="product-details.html">เหมาะสำหรับเว็บไซต์ทั่วไป</a></h3>
+                        <h3 class="product_name">Natus erro at congue massa commodo sit</a></h3>
+                        <br>
                         <button type="button" class="btn btn-primary" style="width: 80%">Choose Quarterly</button>
                     </div>
                     <div class="product_content list_content">
@@ -97,7 +95,7 @@
                 </figure>
             </article>
         </div>
-        <div class="col-lg-4 col-md-4 col-12 ">
+        <div class="col-lg-4 col-md-4 col-12 line_package_m hover-fx">
             <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2);">
                 <figure>
                     <div class="product_thumb">
@@ -107,14 +105,14 @@
 
                     </div>
                     <div class="product_content grid_content">
-                        <h4 style="MARGIN-BOTTOM: 3rem;">Monthly</h4>
+                        <h4 style="MARGIN-BOTTOM: 2rem;">Monthly</h4>
                         <div class="price_box">
 
-                            <span class="current_price" style="font-size:25px">$39.95/mo</span>
+                            <span class="current_price" style="font-size:30px">$39.95/mo</span>
                         </div>
 
-                        <h3 class="product_name grid_name"><a href="product-details.html">Natus erro at congue massa commodo sit</a></h3>
-                        <h3 class="product_name">Natus erro at congue massa commodo sit</a></h3><br>
+                        <h3 class="product_name grid_name"><a href="product-details.html">เหมาะสำหรับเว็บไซต์ขนาดใหญ่</a></h3>
+                        <h3 class="product_name">จำนวนข้อมูลหรือมีผู้เข้าชมจำนวนมาก</a></h3><br>
                         <button type="button" class="btn btn-primary" style="width: 80%">Choose Quarterly</button>
                     </div>
                     <div class="product_content list_content">
