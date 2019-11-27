@@ -1,5 +1,6 @@
 <br>
-<h2 class="form-group text-center">Package</h2>
+<h2 class="form-group text-center">Package</h2><hr>
+<br>
 <div class="container">
     <div class="row">
 
