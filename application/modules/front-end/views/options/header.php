@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    
+
 </head>
 
 <body>
@@ -49,31 +49,30 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="account_form">
                             <form action="my-profile">
-                                <p>   
+                                <p>
                                     <label>Username or email <span>*</span></label>
                                     <input type="text">
                                 </p>
-                                <p>   
+                                <p>
                                     <label>Passwords <span>*</span></label>
                                     <input type="password">
-                                </p>   
+                                </p>
                                 <div class="login_submit">
-                                <a href="#">Lost your password?</a>
+                                    <a href="#">Lost your password?</a>
                                     <label for="remember">
                                         <input id="remember" type="checkbox">
                                         Remember me
                                     </label>
-                                    
+
                                 </div>
                                 <div class="login_submit">
-                                <button type="submit">login</button> 
+                                    <button type="submit">login</button>
                                 </div>
 
                             </form>
-                        </div>    
+                        </div>
                     </div>
                 </div>
-              
             </div>
         </div>
     </div>
@@ -102,7 +101,7 @@
                         <div class="top_right text-right">
                             <ul>
                                 <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                <li><a href="register"> Sign </a></li>
+                                <li><a href="register"> Sign up </a></li>
                                 <li><a href="checkout.html"> TH </a></li>
                                 <li><a href="checkout.html"> ENG </a></li>
                             </ul>
@@ -199,7 +198,7 @@
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children">
                                     <a href="my-account.html">Upload +</a>
-                                </li> 
+                                </li>
                                 <li class="menu-item-has-children">
                                     <a href="about.html">My Upload</a>
                                 </li>
@@ -210,11 +209,11 @@
                                     <a href="my-account.html">Package </a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                    <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                 </li>
                             </ul>
                         </div>
-                           
+
 
                         <div class="Offcanvas_footer">
                             <span><a href="#"><i class="fa fa-envelope-o"></i> info@yourdomain.com</a></span>
@@ -256,7 +255,7 @@
                             <div class="top_right text-right">
                                 <ul>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                    <li><a href="register"> Sign </a></li>
+                                    <li><a href="register"> Sign up </a></li>
                                     <li><a href="checkout.html"> TH </a></li>
                                     <li><a href="checkout.html"> ENG </a></li>
                                 </ul>
@@ -303,12 +302,11 @@
                                             </select>
                                             <button type="submit">Search</button>
                                         </div>
-                                        
                                     </form>
                                 </div>
                                 <div class="middel_right_info">
                                     <div class="header_wishlist">
-                                   
+
                                         <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                         <span class="wishlist_quantity">3</span> -->
                                     </div>
@@ -361,9 +359,9 @@
                                                     <a href="checkout.html">Checkout</a>
                                                 </div>
 
-                                            </div>
+                                            </div> -->
 
-                                        </div> -->
+                                        </div>
                                         <!--mini cart end-->
                                     </div>
                                 </div>
@@ -421,48 +419,48 @@
     </header>
     <!--header area end-->
 
-     <!--sidebar widget start-->
-                    <div class="target_menuright">
-                        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
-                    </div>
-                    <aside class="sidebar_widget right_menu_new">
-                            <div class="widget_inner right_menu_fixed">
-                                <div class="widget_list widget_categories">
-                                    <div class="show_sign">
-                                        <ul class="list_sign_login">
-                                            <li>
-                                                <span>
-                                                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
-                                                    <br> 
-                                                    My wallet
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                                    <br> 
-                                                    Deposit
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
-                                                    <br>
-                                                    Withdraw
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                                    <br> 
-                                                    My slip
-                                                </span>
-                                            </li>
-                                           
-                                        </ul>
-                                    </div>
-                                        
-                                </div>
-                            </div>
-                    </aside> 
+    <!--sidebar widget start-->
+    <div class="target_menuright">
+        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    </div>
+    <aside class="sidebar_widget right_menu_new">
+        <div class="widget_inner right_menu_fixed">
+            <div class="widget_list widget_categories">
+                <div class="show_sign">
+                    <ul class="list_sign_login">
+                        <li>
+                            <span>
+                                <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                                <br>
+                                My wallet
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                                <br>
+                                Deposit
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                <br>
+                                Withdraw
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                <br>
+                                My slip
+                            </span>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </aside>
     <!--sidebar widget end-->

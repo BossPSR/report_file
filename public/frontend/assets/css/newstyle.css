@@ -52,7 +52,7 @@
 
 .target_menuright{
     position: fixed;
-    right: 10%;
+    right: 9%;
     top: 25%;
     z-index: 100;
     background: #f8f8f8;
@@ -66,6 +66,11 @@
     background: #0063d1;
     color: #fff;
     transition: 0.3s;
+}
+
+.red
+{
+    color: red;
 }
 
 /* Mobile */
