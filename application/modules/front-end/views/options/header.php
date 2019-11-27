@@ -422,6 +422,9 @@
     <!--header area end-->
 
      <!--sidebar widget start-->
+                    <div class="target_menuright">
+                        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+                    </div>
                     <aside class="sidebar_widget right_menu_new">
                             <div class="widget_inner right_menu_fixed">
                                 <div class="widget_list widget_categories">
