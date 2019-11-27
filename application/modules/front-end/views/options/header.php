@@ -50,7 +50,11 @@
                         <div class="account_form">
                             <form action="my-profile">
                                 <p>   
-                                    <label>Username or email <span>*</span></label>
+                                    <label>Email Address <span>*</span></label>
+                                    <input type="email">
+                                </p>
+                                <p>   
+                                    <label>Username<span>*</span></label>
                                     <input type="text">
                                 </p>
                                 <p>   
@@ -58,11 +62,8 @@
                                     <input type="password">
                                 </p>   
                                 <div class="login_submit">
-                                <a href="#">Lost your password?</a>
-                                    <label for="remember">
-                                        <input id="remember" type="checkbox">
-                                        Remember me
-                                    </label>
+                                <a href="#">Forgot password?</a>
+                                   
                                     
                                 </div>
                                 <div class="login_submit">
@@ -207,7 +208,7 @@
                                     <a href="contact.html"> My Unlocks</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="my-account.html">Package </a>
+                                    <a href="Package">Package </a>
                                 </li>
                                 <li class="menu-item-has-children">
                                      <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
@@ -402,7 +403,7 @@
                                         <li><a href="#"> Upload + <div class="arrow_box"></div></a></li>
                                         <li><a href="#"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
-                                        <li><a href="#"> Package</a></li>
+                                        <li><a href="Package"> Package</a></li>
                                         <li class="menu-item-has-children">
                                             <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                         </li>
