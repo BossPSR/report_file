@@ -60,6 +60,7 @@
     box-shadow: 1px 1px 5px rgba(0,0,0,.1);
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.9s;
 }
 
 .target_menuright:hover{
@@ -67,6 +68,14 @@
     color: #fff;
     transition: 0.3s;
 }
+
+.target_menuright_active {
+    right: 0;
+    transition: 0.9s;
+}
+
+
+
 
 .red
 {

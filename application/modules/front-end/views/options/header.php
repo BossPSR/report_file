@@ -421,47 +421,49 @@
     <!--header area end-->
 
     <!--sidebar widget start-->
-    <div class="target_menuright">
-        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
-    </div>
-    <aside class="sidebar_widget right_menu_new">
-        <div class="widget_inner right_menu_fixed">
-            <div class="widget_list widget_categories">
-                <div class="show_sign">
-                    <ul class="list_sign_login">
-                        <li>
-                            <span>
-                                <i class="fa fa-google-wallet" aria-hidden="true"></i>
-                                <br>
-                                My wallet
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class="fa fa-money" aria-hidden="true"></i>
-                                <br>
-                                Deposit
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class="fa fa-minus-square" aria-hidden="true"></i>
-                                <br>
-                                Withdraw
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                <br>
-                                My slip
-                            </span>
-                        </li>
 
-                    </ul>
-                </div>
-
-            </div>
+        <div class="target_menuright">
+            <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
         </div>
-    </aside>
+        <aside class="sidebar_widget right_menu_new">
+            <div class="widget_inner right_menu_fixed">
+                <div class="widget_list widget_categories">
+                    <div class="show_sign">
+                        <ul class="list_sign_login">
+                            <li>
+                                <span>
+                                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                                    <br>
+                                    My wallet
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                    <br>
+                                    Deposit
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                    <br>
+                                    Withdraw
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                    <br>
+                                    My slip
+                                </span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+
     <!--sidebar widget end-->

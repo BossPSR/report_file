@@ -223,15 +223,10 @@
 <script>
 $(document).ready(function(){
   $(".target_menuright").click(function(){
+        $(".target_menuright").toggleClass("target_menuright_active");
         $(".right_menu_new").slideToggle("slow");
-        // $(".right_menu_new").slideUp("slow");
-        // $(".target_menuright").animate({right:'0',transition: '0.3s'});
-  
-        //     $(".right_menu_new").slideDown("slow");
-        //     $(".target_menuright").animate({right:'10%',transition: '0.3s'});
+        
   });
-
-
 });
 </script>
 
