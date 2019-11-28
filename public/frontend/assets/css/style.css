@@ -7560,7 +7560,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #0063d1;
 }
 .account_form input {
-  border: 1px solid #ebebeb;
+  border: 1px solid #d8d8d8;
   height: 40px;
   max-width: 100%;
   padding: 0 20px;

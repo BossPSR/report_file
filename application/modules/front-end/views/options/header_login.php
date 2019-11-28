@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
+
 
 </head>
 

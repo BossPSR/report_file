@@ -3,12 +3,23 @@
     font-size: 19px;
     font-weight: 500;
 }
+.font-size-upload
+{
+    font-size: 18px !important;
+}
 
 .input-upload
 {
     border-radius: 0%;
     box-shadow: 1px 3px 13px 0 rgba(0, 0, 0, 0.12);
     position: relative;
+}
+.plus-upload
+{
+    align-items: center;
+    display: flex;
+    font-size: 50px;
+    color: #00c00f;
 }
 .my-income
 {
@@ -163,7 +174,7 @@
 }
 
 .image_PF{
-    padding: 15px;
+    padding-top: 30px;
     text-align: center;
     
 }
@@ -186,7 +197,7 @@
 }
 
 .menu_in_image{
-    padding: 15px;
+    padding: 0px;
     text-align: center;
 }
 
@@ -215,7 +226,7 @@
     padding: 40px;
     flex-direction: column;
     margin: 10px;
-    box-shadow: 2px 2px 6px 1px #1693a740;
+    /* box-shadow: 2px 2px 6px 1px #1693a740; */
 }
 
 
