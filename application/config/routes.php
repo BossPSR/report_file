@@ -54,10 +54,10 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['my-profile']    = 'front-end/My_user_ctr/my_profile';
-$route['register']  = 'front-end/Register_ctr';
-$route['home']      = 'front-end/Home_ctr';
-$route['package']      = 'front-end/Package_ctr';
-$route['upload']      = 'front-end/Package_ctr';
+$route['register']      = 'front-end/Register_ctr';
+$route['home']          = 'front-end/Home_ctr';
+$route['package']       = 'front-end/Package_ctr';
+$route['upload']        = 'front-end/Upload_ctr';
 
 
 

@@ -2885,7 +2885,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   border-radius: 50%;
 }
 
-.single_product {
+
+.single_product, 
+.single_upload {
   padding: 20px 15px;
   border: 2px solid transparent;
   border-radius: 3px;

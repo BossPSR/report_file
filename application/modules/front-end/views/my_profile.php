@@ -42,6 +42,10 @@
                                 <div class="result_menu"><?php echo number_format("1527"); ?></div>
                                 <div class="list_menu">Unlocked</div>
                             </div>
+                            
+                        </div>
+
+                        <div class="menu_profileRow">
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format("150"); ?></div>
                                 <div class="list_menu">Upload</div>
@@ -50,12 +54,7 @@
                                 <div class="result_menu"><?php echo number_format("47"); ?></div>
                                 <div class="list_menu">Rejected</div>
                             </div>
-                        </div>
-
-                        <!-- <div class="menu_profileRow">
-                            
-                        </div> -->
-
+                        </div> 
                     </div>
 
 
