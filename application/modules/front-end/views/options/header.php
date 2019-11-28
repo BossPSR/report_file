@@ -306,13 +306,21 @@
                                     </form>
                                 </div>
                                 <div class="middel_right_info">
-                                    <div class="header_wishlist">
-
+                                    <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                        <div class="menu-list">421</div>
+                                        <div>Follower</div>
                                         <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                         <span class="wishlist_quantity">3</span> -->
                                     </div>
-                                    <div class="mini_cart_wrapper">
-
+                                    <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                        <div class="menu-list">5,788</div>
+                                        <div>View</div>
+                                        <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                        <span class="wishlist_quantity">3</span> -->
+                                    </div>
+                                    <div class="mini_cart_wrapper text-center">
+                                        <div class="menu-list">12</div>
+                                        <div>Rejected</div>
                                         <!-- <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
                                         <span class="cart_quantity">2</span> -->
                                         <!--mini cart-->
@@ -398,10 +406,10 @@
                             <div class="main_menu menu_position">
                                 <nav>
                                     <ul>
-                                        <li><a href="#"> Upload + <div class="arrow_box"></div></a></li>
+                                        <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
                                         <li><a href="#"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
-                                        <li><a href="Package"> Package</a></li>
+                                        <li><a href="package"> Package</a></li>
                                         <li class="menu-item-has-children">
                                             <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                         </li>

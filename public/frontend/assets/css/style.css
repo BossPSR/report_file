@@ -1053,7 +1053,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .search_container {
-  margin-right: 32px;
+  margin-right: 74px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .search_container {
