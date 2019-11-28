@@ -11,7 +11,8 @@
                  <div class="single_services listProfile">
 
                      <div class="image_profile">
-                        <h2 class="text-center" style="font-size:18px;">My income<br><?php echo number_format("487515"); ?></h2>
+                        <h2 class="text-center my-income">My income</h2>
+                        <div class="text-center money"><i class="fa fa-money" aria-hidden="true"></i>  <?php echo number_format("487515"); ?></div>
                         <div class="image_PF">
                             <div class="imageProfile_show">
                                 <img src="public/frontend/assets/img/3297.png" alt="">
@@ -41,9 +42,6 @@
                                 <div class="result_menu"><?php echo number_format("1527"); ?></div>
                                 <div class="list_menu">Unlocked</div>
                             </div>
-                        </div>
-
-                        <div class="menu_profileRow">
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format("150"); ?></div>
                                 <div class="list_menu">Upload</div>
@@ -53,6 +51,10 @@
                                 <div class="list_menu">Rejected</div>
                             </div>
                         </div>
+
+                        <!-- <div class="menu_profileRow">
+                            
+                        </div> -->
 
                     </div>
 

@@ -3,6 +3,18 @@
     font-size: 19px;
     font-weight: 500;
 }
+.my-income
+{
+    font-size: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #d8d8d8;
+}
+.money
+{
+    font-size: 30px;
+    color: #428a00;
+}
 .right_menu_new{
     position: fixed;
     top: 25%;
@@ -154,8 +166,8 @@
 }
 
 .image_PF > .imageProfile_show >img{
-    border-radius: 8%;
-    height: 121px;
+    border-radius: 4%;
+    height: 180px;
 }
 
 .edit_name_user{
@@ -178,20 +190,24 @@
 
 
 .result_menu{
-    font-size: 20px;
+    font-size: 22px;
+    padding-bottom: 6px;
+    font-weight: 500;
+    color: #0063d1;
 }
 
 .list_menu{
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .result_list_menu{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 40px;
     flex-direction: column;
-    margin: 0 10px;
+    margin: 10px;
+    box-shadow: 2px 2px 6px 1px #1693a740;
 }
 
 
