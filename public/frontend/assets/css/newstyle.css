@@ -285,6 +285,10 @@
         grid-template-columns: auto auto;
     }
 
+    .menu_profileRow{
+        display: block;
+    }
+
     
 }
 
@@ -336,6 +340,10 @@
         grid-template-columns: auto auto;
     }
 
+    .menu_profileRow{
+        display: block;
+    }
+
 }
 
 /* Ipad */
@@ -385,8 +393,11 @@
 
     .menu_profileList{
         margin-left: 0;
-        grid-template-columns: auto auto;
-        grid-template-rows: unset!important;
+    }
+
+    .menu_profileRow{
+        display: grid;
+        grid-template-columns: auto auto auto;
     }
 
 }

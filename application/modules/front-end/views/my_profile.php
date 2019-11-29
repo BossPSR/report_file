@@ -2,12 +2,12 @@
  <div class="services_gallery mt-60">
      <div class="container">
          <div class="row">
-             <div class="col-lg-3 col-md-6">
+             <div class="col-lg-3 col-md-0">
                  <div class="single_services">
 
                  </div>
              </div>
-             <div class="col-lg-7 col-md-6">
+             <div class="col-lg-7 col-md-12">
                  <div class="single_services listProfile">
 
                      <div class="image_profile">
