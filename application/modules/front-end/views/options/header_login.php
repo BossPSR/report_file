@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
+
 
 </head>
 
@@ -100,8 +103,8 @@
                             <ul>
                                 <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                 <li><a href="register"> Sign up </a></li>
-                                <li><a href="checkout.html"> TH </a></li>
-                                <li><a href="checkout.html"> ENG </a></li>
+                                <li><a href="#"> TH </a></li>
+                                <li><a href="#"> ENG </a></li>
                             </ul>
                         </div>
                         <div class="search_container">
@@ -388,10 +391,10 @@
                             <div class="main_menu menu_position"> 
                                 <nav>  
                                     <ul>
-                                        <li><a href="#"> Upload + <div class="arrow_box"></div></a></li>
+                                        <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
                                         <li><a href="#"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
-                                        <li><a href="#"> Package</a></li>
+                                        <li><a href="package"> Package</a></li>
                                         <li class="menu-item-has-children">
                                             <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                         </li>

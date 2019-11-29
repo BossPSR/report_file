@@ -1,4 +1,39 @@
+.menu-list
+{
+    font-size: 19px;
+    font-weight: 500;
+}
+.font-size-upload
+{
+    font-size: 18px !important;
+}
 
+.input-upload
+{
+    border-radius: 0%;
+    box-shadow: 1px 3px 13px 0 rgba(0, 0, 0, 0.12);
+    position: relative;
+}
+.plus-upload
+{
+    align-items: center;
+    display: flex;
+    font-size: 50px;
+    color: #00c00f;
+}
+.my-income
+{
+    font-size: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid #d8d8d8;
+}
+.money
+{
+    font-size: 30px;
+    color: #428a00;
+}
 .right_menu_new{
     position: fixed;
     top: 25%;
@@ -130,56 +165,71 @@
 
 .listProfile{
     display: flex;
+    justify-content: center;
+    flex-direction:column;
 }
 
 .image_profile{
-    background-color:#1953b4;
-    color:#fff; 
-    border:1px solid #ebebeb; 
     border-radius: 8px;
-    width: 20%;
-    margin-right: 30px;
 }
 
 .image_PF{
-    padding: 15px;
+    padding-top: 30px;
+    text-align: center;
+    
 }
 
-.image_PF > img{
-    border: 3px solid #fff;
-    border-radius: 25%; 
+.imageProfile_show {
+    display: inline-block;
+    position: relative;
+}
+
+.image_PF > .imageProfile_show >img{
+    border-radius: 4%;
+    height: 180px;
+}
+
+.edit_name_user{
+    position: relative;
+    bottom: 24px;
+    color: #fff;
+    background-color:rgb(0, 0, 0, 0.5);
 }
 
 .menu_in_image{
-    padding: 15px;
+    padding: 0px;
     text-align: center;
 }
 
-.menu_profileList{
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    grid-template-rows: 15% 15%;
-    margin-left: 30px;
-}
-
-.menu_profileList > div{
+.menu_profileRow{
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 15px;
-    border: 1px solid #ebebeb;
+}
+
+
+
+.result_menu{
+    font-size: 22px;
+    padding-bottom: 6px;
+    font-weight: 500;
+    color: #0063d1;
+}
+
+.list_menu{
+    font-size: 15px;
 }
 
 .result_list_menu{
-    background-color:#1953b4;
-    color:#fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    flex-direction: column;
+    margin: 10px;
+    /* box-shadow: 2px 2px 6px 1px #1693a740; */
 }
 
-.result_menu{
-    background-color:#f7ff7e;
-    color:red;
-    font-size:16px;
-}
+
 
 /* Mobile */
 @media only screen and (min-width: 300px) and (max-width: 568px){
@@ -231,25 +281,6 @@
         grid-template-columns: auto auto;
     }
 
-    .result_menu_1{
-        grid-area: 1 / 2;
-    }
-
-    .result_menu_2{
-        grid-area: 2 / 2;
-    }
-
-    .result_menu_3{
-        grid-area: 3 / 2;
-    }
-
-    .result_menu_4{
-        grid-area: 4 / 2;
-    }
-
-    .result_menu_5{
-        grid-area: 5 / 2;
-    }
     
 }
 
@@ -301,25 +332,6 @@
         grid-template-columns: auto auto;
     }
 
-    .result_menu_1{
-        grid-area: 1 / 2;
-    }
-
-    .result_menu_2{
-        grid-area: 2 / 2;
-    }
-
-    .result_menu_3{
-        grid-area: 3 / 2;
-    }
-
-    .result_menu_4{
-        grid-area: 4 / 2;
-    }
-
-    .result_menu_5{
-        grid-area: 5 / 2;
-    }
 }
 
 /* Ipad */
@@ -373,28 +385,8 @@
         grid-template-rows: unset!important;
     }
 
-    .result_menu_1{
-        grid-area: 1 / 2;
-    }
-
-    .result_menu_2{
-        grid-area: 2 / 2;
-    }
-
-    .result_menu_3{
-        grid-area: 3 / 2;
-    }
-
-    .result_menu_4{
-        grid-area: 4 / 2;
-    }
-
-    .result_menu_5{
-        grid-area: 5 / 2;
-    }
-
 }
-
+/* 
 @media only screen and (max-width: 1370px) and (min-width:1024px){
     .right_menu_new{
         width: 15%;
@@ -424,4 +416,4 @@
     }
     
 
-}
+} */
