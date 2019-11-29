@@ -182,18 +182,22 @@
 .imageProfile_show {
     display: inline-block;
     position: relative;
+    width: 261px;
+    height: 180px;
+    border-radius: 4%;
+    overflow: hidden;
 }
 
-.image_PF > .imageProfile_show >img{
-    border-radius: 4%;
-    height: 180px;
-}
 
 .edit_name_user{
     position: relative;
     bottom: 24px;
     color: #fff;
     background-color:rgb(0, 0, 0, 0.5);
+}
+
+.edit_name_user > a{
+    display: block;
 }
 
 .menu_in_image{
