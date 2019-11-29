@@ -1,9 +1,9 @@
 <br>
-<h2 class="text-center" style="margin-top: 30px;">Upload + </h2>
+<h2 class="text-center" style="margin-top: 15px;">Upload + </h2>
 <hr class="line_package">
 <br>
 <div class="container">
-    <div class="row" style="margin-top: 20px;margin-bottom: 100px;">
+    <div class="row" style="margin-bottom: 100px;">
 
         <div class="col-lg-12 col-md-12 col-12 ">
             <article class="single_upload input-upload">
