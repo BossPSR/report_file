@@ -3,6 +3,11 @@
     font-size: 19px;
     font-weight: 500;
 }
+.margin-20
+{
+    margin: 20px 0px;
+    font-size: 18px;
+}
 .font-size-upload
 {
     font-size: 18px !important;
