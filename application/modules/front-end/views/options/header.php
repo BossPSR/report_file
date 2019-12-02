@@ -53,12 +53,8 @@
                         <div class="account_form">
                             <form action="my-profile">
                                 <p>   
-                                    <label>Email Address <span>*</span></label>
+                                    <label>Email <span>*</span></label>
                                     <input type="email">
-                                </p>
-                                <p>   
-                                    <label>Username<span>*</span></label>
-                                    <input type="text">
                                 </p>
                                 <p>
                                     <label>Passwords <span>*</span></label>
@@ -316,13 +312,13 @@
                                         <span class="wishlist_quantity">3</span> -->
                                     </div>
                                     <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                        <div class="menu-list">5,788</div>
-                                        <div>View</div>
+                                        <div class="menu-list">1,527</div>
+                                        <div>Unlocked</div>
                                         <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                         <span class="wishlist_quantity">3</span> -->
                                     </div>
                                     <div class="mini_cart_wrapper text-center">
-                                        <div class="menu-list">12</div>
+                                        <div class="menu-list">47</div>
                                         <div>Rejected</div>
                                         <!-- <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
                                         <span class="cart_quantity">2</span> -->

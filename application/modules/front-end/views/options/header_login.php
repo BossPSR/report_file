@@ -53,8 +53,8 @@
                         <div class="account_form">
                             <form action="my-profile">
                                 <p>
-                                    <label>Username or email <span>*</span></label>
-                                    <input type="text">
+                                    <label>Email <span>*</span></label>
+                                    <input type="email">
                                 </p>
                                 <p>
                                     <label>Passwords <span>*</span></label>
@@ -62,10 +62,10 @@
                                 </p>
                                 <div class="login_submit">
                                     <a href="#">Lost your password?</a>
-                                    <label for="remember">
+                                    <!-- <label for="remember">
                                         <input id="remember" type="checkbox">
                                         Remember me
-                                    </label>
+                                    </label> -->
 
                                 </div>
                                 <div class="login_submit">

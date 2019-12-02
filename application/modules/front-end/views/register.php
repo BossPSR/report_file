@@ -39,7 +39,7 @@
                                 <input type="number" name="passport" required>
                             </p>
                             <p>   
-                                <label>Email Address <span class="red">*</span></label>
+                                <label>Email <span class="red">*</span></label>
                                 <input type="email" name="email" required>
                             </p>
                             <p>   
@@ -47,7 +47,7 @@
                                 <input type="number" name="phone" required>
                             </p>
                             <p>   
-                                <label>Username <span class="red">*</span></label>
+                                <label>Name <span class="red">*</span></label>
                                 <input type="text" name="username" required>
                             </p>
                             <p>   
