@@ -277,7 +277,7 @@
                         <div class="col-lg-10 col-md-6">
                             <div class="middel_right">
                                 <div class="search_container">
-                                    <form action="#">
+                                    <form action="search">
                                         <div class="search_box">
                                             <input placeholder="Search item /Code ...." type="text">
                                         </div>
