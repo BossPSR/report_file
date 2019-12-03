@@ -10,9 +10,8 @@
                     <div class="col-12 margin-20">
                         <div class="text-center" style="position: relative;">
                             <label>How to disable downloading</label>
-                            <div style="position: absolute;right: 10%;bottom: 10%;">
-                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-warning">Unlock</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-danger">Price</button></div>
+                            <div style="position: absolute;right: 0;bottom: 10%;">
+                                <div style="display:inline-block;"><button type="button" style="font-size: 24px; color:red;" class="btn btn-warning">Unlock</button></div>
                             </div>
                         </div>
                         <label class="pricebg">$ 600.00</label>
