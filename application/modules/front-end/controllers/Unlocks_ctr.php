@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Myunlocks_ctr extends CI_Controller {
+class Unlocks_ctr extends CI_Controller {
 
 	public function __construct()
     {
@@ -12,7 +12,7 @@ class Myunlocks_ctr extends CI_Controller {
 	public function index()
 	{
 	
-		$this->load->view('options/header');
+		$this->load->view('options/header_login');
 		$this->load->view('unlocks');
 		$this->load->view('options/footer');
 		

@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">Unlocks</h2>
+<h2 class="text-center" style="margin-top: 15px;">Download Reject</h2>
 <hr class="line_package">
 <br>
 <div class="container">
@@ -11,8 +11,10 @@
                         <div class="text-center" style="position: relative;">
                             <label>How to disable downloading</label>
                             <div style="position: absolute;right: 10%;bottom: 10%;">
-                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-warning">Unlock</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-danger">Price</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-info">Follow</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-warning">Bookmark</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-success">Download</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 14px; color:#fff;" class="btn btn-danger">Reject</button></div>
                             </div>
                         </div>
                         <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
