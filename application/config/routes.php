@@ -59,6 +59,7 @@ $route['home']          = 'front-end/Home_ctr';
 $route['package']       = 'front-end/Package_ctr';
 $route['upload']        = 'front-end/Upload_ctr';
 $route['search']        = 'front-end/Search_ctr';
+$route['unlocks']        = 'front-end/Myunlocks_ctr';
 
 
 
