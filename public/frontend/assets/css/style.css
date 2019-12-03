@@ -1053,7 +1053,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .search_container {
-  margin-right: 74px;
+  margin-right: 45px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .search_container {
@@ -1079,7 +1079,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   border-radius: 5px;
   border: 2px solid #ebebeb;
   background: #fff;
-  width: 870px;
+  width: 838px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .search_container form {
