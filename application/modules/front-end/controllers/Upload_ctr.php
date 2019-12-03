@@ -15,5 +15,12 @@ class Upload_ctr extends CI_Controller {
 		$this->load->view('options/footer');
 	}	
 
+	public function My_upload()
+	{
+		$this->load->view('options/header_login');
+		$this->load->view('my_upload');
+		$this->load->view('options/footer');
+	}	
+
 	
 }

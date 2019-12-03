@@ -61,6 +61,7 @@ $route['upload']           = 'front-end/Upload_ctr';
 $route['search']           = 'front-end/Search_ctr';
 $route['unlocks']          = 'front-end/Unlocks_ctr';
 $route['download-reject']  = 'front-end/Download_Reject_ctr';
+$route['My_Upload']          = 'front-end/Upload_ctr/My_upload';
 
 
 

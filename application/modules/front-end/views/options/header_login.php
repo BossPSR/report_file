@@ -199,7 +199,7 @@
                                     <a href="my-account.html">Upload +</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="about.html">My Upload</a>
+                                    <a href="My_Upload">My Upload</a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="contact.html"> My Unlocks</a>
@@ -392,7 +392,7 @@
                                 <nav>  
                                     <ul>
                                         <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
-                                        <li><a href="#"> My Upload</a></li>
+                                        <li><a href="My_Upload"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
                                         <li><a href="package"> Package</a></li>
                                         <li class="menu-item-has-children">
