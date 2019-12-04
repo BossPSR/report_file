@@ -1,20 +1,22 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">Download Reject</h2>
+<h2 class="text-center" style="margin-top: 15px;">After Unlocks</h2>
 <hr class="line_package">
 <br>
 <div class="container">
     <div class="row" style="margin-bottom: 100px;">
-        <div class="col-lg-12 col-md-12 col-12 ">
+        <div class="col-lg-2 col-md-2 col-2 ">
+        </div>
+        <div class="col-lg-8 col-md-8 col-8 ">
             <article class="single_upload input-upload">
                 <div class="row">
                     <div class="col-12 margin-20">
                         <div class="text-center" style="position: relative;">
                             <label>How to disable downloading</label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><button type="button" style="font-size: 22px; color:#fff;" class="btn btn-info">Follow</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 22px; color:#fff;" class="btn btn-warning">Bookmark</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 22px; color:#fff;" class="btn btn-success">Download</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 22px; color:#fff;" class="btn btn-danger">Reject</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info">Follow</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-warning">Bookmark</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success">Download</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger">Reject</button></div>
                             </div>
                         </div>
                         <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
@@ -22,7 +24,8 @@
                 </div>
             </article>
         </div>
-
+        <div class="col-lg-2 col-md-2 col-2 ">
+        </div>
     </div>
 </div>
 

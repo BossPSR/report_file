@@ -4,21 +4,28 @@
 <br>
 <div class="container">
     <div class="row" style="margin-bottom: 100px;">
-        <div class="col-lg-12 col-md-12 col-12 ">
+        <div class="col-lg-2 col-md-2 col-2 ">
+        </div>
+        <div class="col-lg-8 col-md-8 col-8 ">
             <article class="single_upload input-upload">
                 <div class="row">
                     <div class="col-12 margin-20">
                         <div class="text-center" style="position: relative;">
                             <label>How to disable downloading</label>
-                            <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><button type="button" style="font-size: 24px; color:red;" class="btn btn-warning">Unlock</button></div>
-                            </div>
                         </div>
                         <label class="pricebg">$ 600.00</label>
-                        <iframe src="public/image/ExportServlet.pdf" width="100%" height="1000px"></iframe>
+                        <div class="blurPDF">
+                            <iframe src="public/image/ExportServlet.pdf" width="100%" height="100%"></iframe>
+                        </div>
+                        <div style="position: absolute;right: 0;top: 3%;">
+                            <div style="display:inline-block;"><button type="button" style="font-size: 24px; color:red;" class="btn btn-warning">Unlock</button></div>
+                        </div>              
                     </div>
+                   
                 </div>
             </article>
+        </div>
+        <div class="col-lg-2 col-md-2 col-2 ">
         </div>
 
     </div>

@@ -72,6 +72,7 @@
     -moz-border-radius: 0 3px 2px 0px;
     -webkit-border-radius: 0;
     border-radius: 0 3px 2px 0px;
+    z-index: 100;
   }
   label.pricebg:after {
     content: "";
@@ -347,6 +348,12 @@
 
 }
 
+
+.blurPDF{
+    filter: blur(5px);
+    height: 1000px;
+    position: relative;
+}
 
 
 /* Mobile */

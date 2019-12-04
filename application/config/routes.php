@@ -60,7 +60,7 @@ $route['package']          = 'front-end/Package_ctr';
 $route['upload']           = 'front-end/Upload_ctr';
 $route['search']           = 'front-end/Search_ctr';
 $route['unlocks']          = 'front-end/Unlocks_ctr';
-$route['download-reject']  = 'front-end/Download_Reject_ctr';
+$route['after-unlocks']  = 'front-end/After_Unlocks_ctr';
 $route['My_Upload']          = 'front-end/Upload_ctr/My_upload';
 
 
