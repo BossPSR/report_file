@@ -301,15 +301,21 @@
                                     </form>
                                 </div>
                                 <div class="middel_right_info">
-                                    <div class="header_wishlist">
+                                    <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                        <div class="menu-list">421</div>
+                                        <div>Follower</div>
                                         <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                         <span class="wishlist_quantity">3</span> -->
                                     </div>
-                                    <div class="mini_cart_wrapper">
-                                        <!-- <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
-                                        <span class="cart_quantity">2</span> -->
-                                        <!--mini cart-->
-                                         <div class="mini_cart">
+                                    <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                        <div class="menu-list">1,527</div>
+                                        <div>Unlocked</div>
+                                        <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                        <span class="wishlist_quantity">3</span> -->
+                                    </div>
+                                    <div class="mini_cart_wrapper text-center">
+                                        <div class="menu-list">47</div>
+                                        <div>Rejected</div>
                                             <!-- <div class="cart_item">
                                                <div class="cart_img">
                                                    <a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a>
@@ -377,8 +383,8 @@
                                 <div class="categories_menu_toggle">
                                     <ul>
                                         <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> Rejected <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
