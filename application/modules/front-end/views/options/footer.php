@@ -225,6 +225,18 @@
 
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
 
+<script src="public/frontend/assets/js/pdfobject.js"></script>
+
+<script>
+    var options = {
+        height: "400px",
+        pdfOpenParams: { view: 'FitV', page: '2' },
+        fallbackLink: "<p>This is a <a href='TEST'>fallback link</a></p>"
+    };
+    PDFObject.embed("public/image/mycourselive.pdf", "#example1",options );
+
+</script>
+
 <script>
 $(document).ready(function(){
   $(".target_menuright").click(function(){

@@ -9,8 +9,8 @@
             <article class="single_upload input-upload">
                 <div class="row">
                     <div class="col-3 text-right margin-5 product">
-
-                        <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px" style="position:relative"></iframe>
+                        <div id="example1"></div>
+                        <!-- <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px" style="position:relative"></iframe> -->
                         <div class="boxdel">
                             <button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
                         </div>
