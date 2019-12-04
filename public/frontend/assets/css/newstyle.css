@@ -25,6 +25,13 @@
     -webkit-border-radius: 0;
     border-radius: 0 3px 2px 0px;
   }
+  .boxdel {
+    
+    position: absolute;
+    right: 5%;
+    top: 0%;
+
+  }
   label.price:after {
     content: "";
     position: absolute;
