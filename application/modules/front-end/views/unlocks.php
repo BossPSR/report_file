@@ -38,11 +38,7 @@
             <article class="single_upload input-upload">
                 <div class="row">
                     <div class="col-12 margin-20">
-                        <div class="text-center" style="position: relative;">
-                            <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><button type="button" style="font-size: 20px; color:red;" class="btn btn-warning"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Unlock</button></div>
-                            </div>
-                        </div>
+                   
                         <label class="pricebg">$ 600.00</label>
                         <div class="blurPDF">
                             <iframe src="public/image/ExportServlet.pdf" width="100%" height="100%"></iframe>
