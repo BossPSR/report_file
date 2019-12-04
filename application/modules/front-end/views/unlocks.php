@@ -11,7 +11,7 @@
                         <div class="text-center" style="position: relative;">
                             <label>How to disable downloading</label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><button type="button" style="font-size: 24px; color:red;" class="btn btn-warning">Unlock</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 20px; color:red;" class="btn btn-warning"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Unlock</button></div>
                             </div>
                         </div>
                         <label class="pricebg">$ 600.00</label>
