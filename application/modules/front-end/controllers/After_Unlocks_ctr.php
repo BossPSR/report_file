@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Download_Reject_ctr extends CI_Controller {
+class After_Unlocks_ctr extends CI_Controller {
 
 	public function __construct()
     {
@@ -13,7 +13,7 @@ class Download_Reject_ctr extends CI_Controller {
 	{
 	
 		$this->load->view('options/header_login');
-		$this->load->view('download_reject');
+		$this->load->view('after_unlocks');
 		$this->load->view('options/footer');
 		
 	}
