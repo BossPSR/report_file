@@ -62,6 +62,8 @@ $route['search']           = 'front-end/Search_ctr';
 $route['unlocks']          = 'front-end/Unlocks_ctr';
 $route['after-unlocks']  = 'front-end/After_Unlocks_ctr';
 $route['My_Upload']          = 'front-end/Upload_ctr/My_upload';
+$route['Bookmarked']          = 'front-end/Bookmarked_ctr';
+$route['Recently-Accessed']          = 'front-end/Recently_ctr';
 
 
 
