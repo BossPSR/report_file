@@ -229,11 +229,18 @@
 
 <script>
     var options = {
-        height: "400px",
-        pdfOpenParams: { view: 'FitV', page: '2' },
-        fallbackLink: "<p>This is a <a href='TEST'>fallback link</a></p>"
+        height: "24rem",
+        width: "20rem",
+        pdfOpenParams: { view: 'FitV', page: '1' },
     };
-    PDFObject.embed("public/image/mycourselive.pdf", "#example1",options );
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example1", options );
+
+    var options1 = {
+        height: "24rem",
+        width: "20rem",
+        pdfOpenParams: { view: 'FitV', page: '2' },
+    };
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example2", options1 );
 
 </script>
 
