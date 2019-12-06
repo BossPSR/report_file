@@ -3,7 +3,7 @@
 <hr class="line_package">
 <br>
 <!--Checkout page section-->
-<div class="Checkout_section mt-60">
+<div class="Checkout_section">
     <div class="container">
         <div class="checkout_form">
             <div class="row">
