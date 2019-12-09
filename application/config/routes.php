@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['my-profile']       = 'front-end/My_user_ctr/my_profile';
 $route['register']         = 'front-end/Register_ctr';
+$route['register_success']         = 'front-end/Register_ctr/register_success';
 $route['home']             = 'front-end/Home_ctr';
 $route['package']          = 'front-end/Package_ctr';
 $route['upload']           = 'front-end/Upload_ctr';
@@ -67,7 +68,9 @@ $route['Recently-Accessed']          = 'front-end/Recently_ctr';
 
 
 
-// /------------------------------------- front-end  ---------------------
+// /------------------------------------- back-end  ---------------------
+
+$route['backend']             = 'back-end/Home_ctr';
 
 
 

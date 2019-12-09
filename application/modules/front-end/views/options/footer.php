@@ -209,7 +209,7 @@
     </div>
     <!-- modal area end-->
 
-
+ 
 <!-- JS
 ============================================ -->
 
@@ -224,7 +224,14 @@
 <script src="public/frontend/assets/dist/dropzone.js"></script>
 
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
-
+<script>
+    $('#password, #c_password').on('keyup', function() {
+        if ($('#password').val() == $('#c_password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
 <script>
 $(document).ready(function(){
   $(".target_menuright").click(function(){
