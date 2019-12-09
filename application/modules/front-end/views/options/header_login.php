@@ -386,7 +386,7 @@
                                         <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> Rejected <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
                                     </ul>

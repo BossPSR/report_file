@@ -53,18 +53,19 @@ $route['default_controller'] = 'front-end/Home_ctr';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['my-profile']       = 'front-end/My_user_ctr/my_profile';
-$route['register']         = 'front-end/Register_ctr';
-$route['register_success']         = 'front-end/Register_ctr/register_success';
-$route['home']             = 'front-end/Home_ctr';
-$route['package']          = 'front-end/Package_ctr';
-$route['upload']           = 'front-end/Upload_ctr';
-$route['search']           = 'front-end/Search_ctr';
-$route['unlocks']          = 'front-end/Unlocks_ctr';
-$route['after-unlocks']  = 'front-end/After_Unlocks_ctr';
+$route['my-profile']         = 'front-end/My_user_ctr/my_profile';
+$route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
+$route['register']           = 'front-end/Register_ctr';
+$route['register_success']   = 'front-end/Register_ctr/register_success';
+$route['home']               = 'front-end/Home_ctr';
+$route['package']            = 'front-end/Package_ctr';
+$route['upload']             = 'front-end/Upload_ctr';
+$route['search']             = 'front-end/Search_ctr';
+$route['unlocks']            = 'front-end/Unlocks_ctr';
+$route['after-unlocks']      = 'front-end/After_Unlocks_ctr';
 $route['My_Upload']          = 'front-end/Upload_ctr/My_upload';
-$route['Bookmarked']          = 'front-end/Bookmarked_ctr';
-$route['Recently-Accessed']          = 'front-end/Recently_ctr';
+$route['Bookmarked']         = 'front-end/Bookmarked_ctr';
+$route['Recently-Accessed']  = 'front-end/Recently_ctr';
 
 
 
