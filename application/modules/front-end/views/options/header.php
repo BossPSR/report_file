@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
-
+  
 
 </head>
 
@@ -50,27 +50,26 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
-                        <div class="account_form">
-                            <form action="my-profile">
-                                <p>   
-                                    <label>Email <span>*</span></label>
-                                    <input type="email">
-                                </p>
-                                <p>
-                                    <label>Passwords <span>*</span></label>
-                                    <input type="password">
-                                </p>
-                                <div class="login_submit">
+                        <div class="account_form" >
+                            <form action="LoginMe" method="post">
+                            <p>
+                                <label>Email <span>*</span></label>
+                                <input type="email" id="inputemail" name="email">
+                            </p>
+                            <p>
+                                <label>Passwords <span>*</span></label>
+                                <input type="password" id="inputpassword" name="password">
+                            </p>
+                            <div class="login_submit">
                                 <a href="#">Forgot password?</a>
-                                   
-                                    
-                                </div>
-                                <div class="login_submit">
-                                    <button type="submit">login</button>
-                                </div>
 
-                            </form>
+
+                            </div>
+                            <div class="login_submit">
+                                <button type="submit" >login</button>
+                            </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -100,8 +99,15 @@
                         </div> -->
                         <div class="top_right text-right">
                             <ul>
+                            <?php $user = $this->db->get_where('tbl_user',['email'=> $this->session->userdata('email')])->row_array() ?>
+                                <?php if($user == true):  ?>
                                 <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                 <li><a href="register"> Sign up </a></li>
+                                <?php else : ?>
+                                    <?php $user = $this->db->get_where('tbl_user',['email'=> $this->session->userdata('email')])->row_array() ?>
+                                <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                <li><a href="Logout"> Logout </a></li>
+                                <?php endif  ?>
                                 <li><a href="checkout.html"> TH </a></li>
                                 <li><a href="checkout.html"> ENG </a></li>
                             </ul>
@@ -254,8 +260,14 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="top_right text-right">
                                 <ul>
+                                <?php $user = $this->db->get_where('tbl_user',['email'=> $this->session->userdata('email')])->row_array() ?>
+                                <?php if($user == true):  ?>
+                                    <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                <li><a href="Logout"> Logout </a></li>
+                                <?php else:  ?>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                     <li><a href="register"> Sign up </a></li>
+                                    <?php endif  ?> 
                                     <li><a href="checkout.html"> TH </a></li>
                                     <li><a href="checkout.html"> ENG </a></li>
                                 </ul>
@@ -369,108 +381,109 @@
 
                                             </div> -->
 
-                                        </div>
-                                        <!--mini cart end-->
                                     </div>
+                                    <!--mini cart end-->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--header middel end-->
-            <!--header bottom satrt-->
-            <div class="main_menu_area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-12">
-                            <div class="categories_menu categories_four menu_left_new">
-                                <div class="categories_title">
-                                    <h2 class="categori_toggle">Category</h2>
-                                </div>
-                                <div class="categories_menu_toggle">
-                                    <ul>
-                                        <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> Rejected <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
-                                    </ul>
-                                </div>
+        </div>
+        <!--header middel end-->
+        <!--header bottom satrt-->
+        <div class="main_menu_area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="categories_menu categories_four menu_left_new">
+                            <div class="categories_title">
+                                <h2 class="categori_toggle">Category</h2>
+                            </div>
+                            <div class="categories_menu_toggle">
+                                <ul>
+                                    <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="#"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-12">
-                            <div class="main_menu menu_position">
-                                <nav>
-                                    <ul>
-                                        <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
-                                        <li><a href="My_Upload"> My Upload</a></li>
-                                        <li><a href="#"> My Unlocks</a></li>
-                                        <li><a href="package"> Package</a></li>
-                                        <li class="menu-item-has-children">
-                                            <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+                        <div class="main_menu menu_position">
+                            <nav>
+                                <ul>
+                                    <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
+                                    <li><a href="My_Upload"> My Upload</a></li>
+                                    <li><a href="#"> My Unlocks</a></li>
+                                    <li><a href="package"> Package</a></li>
+                                    <li class="menu-item-has-children">
+                                        <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--header bottom end-->
+        </div>
+        <!--header bottom end-->
         </div>
     </header>
     <!--header area end-->
 
     <!--sidebar widget start-->
 
-        <div class="target_menuright">
-            <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
-        </div>
-        <aside class="sidebar_widget right_menu_new">
-            <div class="widget_inner right_menu_fixed">
-                <div class="widget_list widget_categories">
-                    <div class="show_sign">
-                        <ul class="list_sign_login">
-                            <li>
-                                <span>
-                                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
-                                    <br>
-                                    My wallet
-                                </span>
-                            </li>
-                            <li>
-                                <span>
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                    <br>
-                                    Deposit
-                                </span>
-                            </li>
-                            <li>
-                                <span>
-                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
-                                    <br>
-                                    Withdraw
-                                </span>
-                            </li>
-                            <li>
-                                <span>
-                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                    <br>
-                                    My slip
-                                </span>
-                            </li>
+    <div class="target_menuright">
+        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    </div>
+    <aside class="sidebar_widget right_menu_new">
+        <div class="widget_inner right_menu_fixed">
+            <div class="widget_list widget_categories">
+                <div class="show_sign">
+                    <ul class="list_sign_login">
+                        <li>
+                            <span>
+                                <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                                <br>
+                                My wallet
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                                <br>
+                                Deposit
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                <br>
+                                Withdraw
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                <br>
+                                My slip
+                            </span>
+                        </li>
 
-                        </ul>
-                    </div>
-
+                    </ul>
                 </div>
+
             </div>
-        </aside>
+        </div>
+    </aside>
+  
 
     <!--sidebar widget end-->

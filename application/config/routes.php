@@ -53,9 +53,14 @@ $route['default_controller'] = 'front-end/Home_ctr';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['LoginMe']              = 'front-end/Login_ctr/loginMe';
+$route['Logout']              = 'front-end/Login_ctr/logout';
+
+$route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
 $route['my-profile']         = 'front-end/My_user_ctr/my_profile';
 $route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
 $route['register']           = 'front-end/Register_ctr';
+$route['register_success']   = 'front-end/Register_ctr/register_success';
 $route['home']               = 'front-end/Home_ctr';
 $route['package']            = 'front-end/Package_ctr';
 $route['upload']             = 'front-end/Upload_ctr';
@@ -68,7 +73,9 @@ $route['Recently-Accessed']  = 'front-end/Recently_ctr';
 
 
 
-// /------------------------------------- front-end  ---------------------
+// /------------------------------------- back-end  ---------------------
+
+$route['backend']             = 'back-end/Home_ctr';
 
 
 

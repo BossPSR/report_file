@@ -33,7 +33,7 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="account_form register">
                         <h2>Sign Up</h2>
-                        <form action="#" action="POST">
+                        <form action="register_success" method="POST" >
                             <p>   
                                 <label>Passport No.  <span class="red">*</span></label>
                                 <input type="number" name="passport" required>
@@ -52,7 +52,12 @@
                             </p>
                             <p>   
                                 <label>Passwords <span class="red">*</span></label>
-                                <input type="password" name="password" required>
+                                <input type="password" id="password" name="password" required>
+                            </p>
+                            <p>   
+                                <label>Comfirm password <span class="red">*</span></label>
+                                <input type="password" id="c_password" name="c_password" required>
+                                <span id="message" ></span>
                             </p>
                             <div class="login_submit">
                                 <button type="submit">Save</button>

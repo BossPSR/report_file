@@ -56,11 +56,11 @@
                             <form action="my-profile">
                                 <p>
                                     <label>Email <span>*</span></label>
-                                    <input type="email">
+                                    <input type="email" name="email">
                                 </p>
                                 <p>
                                     <label>Passwords <span>*</span></label>
-                                    <input type="password">
+                                    <input type="password" name="password">
                                 </p>
                                 <div class="login_submit">
                                     <a href="#">Lost your password?</a>
@@ -103,10 +103,17 @@
                         </div> -->
                         <div class="top_right text-right">
                             <ul>
+                            <?php $user = $this->db->get_where('tbl_user',['email'=> $this->session->userdata('email')])->row_array() ?>
+                                <?php if($user == true):  ?>
                                 <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                 <li><a href="register"> Sign up </a></li>
-                                <li><a href="#"> TH </a></li>
-                                <li><a href="#"> ENG </a></li>
+                                <?php else : ?>
+                                    
+                                <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                <li><a href="Logout"> Logout </a></li>
+                                <?php endif  ?>
+                                <li><a href="checkout.html"> TH </a></li>
+                                <li><a href="checkout.html"> ENG </a></li>
                             </ul>
                         </div>
                         <div class="search_container">
@@ -249,14 +256,20 @@
                             </div> -->
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <div class="top_right text-right">
+                        <div class="top_right text-right">
                                 <ul>
+                                <?php $user = $this->db->get_where('tbl_user',['email'=> $this->session->userdata('email')])->row_array() ?>
+                                <?php if($user == true):  ?>
+                                    <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                <li><a href="Logout"> Logout </a></li>
+                                <?php else:  ?>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                     <li><a href="register"> Sign up </a></li>
+                                    <?php endif  ?> 
                                     <li><a href="checkout.html"> TH </a></li>
                                     <li><a href="checkout.html"> ENG </a></li>
                                 </ul>
-                            </div>   
+                            </div> 
                         </div>
                     </div>
                 </div>

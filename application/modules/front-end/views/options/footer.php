@@ -209,7 +209,7 @@
     </div>
     <!-- modal area end-->
 
-
+ 
 <!-- JS
 ============================================ -->
 
@@ -222,8 +222,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script src="public/frontend/assets/dist/dropzone.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<script>
+    <?php if($this->session->flashdata('save_ss')): ?>
+        swal("Good job!", "You clicked the button!", "success");
+    <?php endif; ?>
+    <?php if($this->session->flashdata('del_ss')): ?>
+        swal("fill !", "You clicked the button!", "error");
+    <?php endif; ?>
+</script>
+    
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
+
+<script src="public/frontend/assets/js/myscript.js"></script>
+<script>
+    $('#password, #c_password').on('keyup', function() {
+        if ($('#password').val() == $('#c_password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
 
 <script src="public/frontend/assets/js/pdfobject.js"></script>
 
