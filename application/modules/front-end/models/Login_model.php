@@ -23,6 +23,28 @@ class Login_model extends CI_Model{
        }
 
     }
+
+    public function check_usre($passport,$email)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_user');
+        $this->db->where('passport',$passport);
+        $this->db->where('email',$email);
+        $data = $this->db->get();
+        
+        return $data->row_array();
+    }
+
+    public function check_usre2($username)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_user');
+        $this->db->where('username',$username);
+    
+        $data = $this->db->get();
+        
+        return $data->row_array();
+    }
 }
 
 ?>

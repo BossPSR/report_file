@@ -27,40 +27,44 @@ class Register_ctr extends CI_Controller
 		$c_password          = $this->input->post('c_password');
 		$password            = $this->input->post('password');
 		$created_at          = date('Y-m-d H:i:s');
-		$username_check      = $this->Login_model->check_usre($passport, $email, $username);
-		if ($username_check) {
+		$username_check      = $this->Login_model->check_usre($passport, $email);
+		$check_usre2         = $this->Login_model->check_usre2($username);
+		
+		if ($username_check  && $check_usre2) {
 			echo "<script>";
 			echo "alert('ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!!');";
 			echo "window.location='register';";
 			echo "</script>";
-		} elseif ($password != $c_password) {
-			echo "<script>";
-			echo "alert('กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!!');";
-			echo "window.location='register';";
-			echo "</script>";
-		} else {
-			$data = array(
-				'passport'          => $passport,
-				'email'             => $email,
-				'phone'             => $phone,
-				'username'          => $username,
-				'password'          => md5($password),
-				'created_at'        => $created_at
-			);
-
-			$success = $this->db->insert('tbl_user', $data);
-
-			if ($success > 0) {
+		}else{
+			if ($password != $c_password) {
 				echo "<script>";
-				echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
+				echo "alert('กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!!');";
 				echo "window.location='register';";
 				echo "</script>";
 			} else {
-				echo "<script>";
-				echo "alert('ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง !!!');";
-				echo "window.location='register';";
-				echo "</script>";
+				$data = array(
+					'passport'          => $passport,
+					'email'             => $email,
+					'phone'             => $phone,
+					'username'          => $username,
+					'password'          => md5($password),
+					'created_at'        => $created_at
+				);
+	
+				$success = $this->db->insert('tbl_user', $data);
+	
+				if ($success > 0) {
+					echo "<script>";
+					echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
+					echo "window.location='register';";
+					echo "</script>";
+				} else {
+					echo "<script>";
+					echo "alert('ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง !!!');";
+					echo "window.location='register';";
+					echo "</script>";
+				}
 			}
-		}
+		} 
 	}
 }
