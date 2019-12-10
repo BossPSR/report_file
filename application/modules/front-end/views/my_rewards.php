@@ -7,78 +7,28 @@
     <div class="container">
         <div class="checkout_form">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <h3 style="background-color:#0063d1">Ranking</h3>
-                    <div class="order_table table-responsive">
-                        <table>
-                            <thead>
-                                <tr style="background:#dddddd08;">
-                                    <th style="width:30px">Ranking</th>
-                                    <th style="width:300px">Name</th>
-                                    <th style="width:100px">Follower</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td> 1</td>
-                                    <td> Addison</td>
-                                    <td> <i class="fa fa-user-plus" style="color:#999" aria-hidden="true"></i> <?php echo number_format('976380'); ?></td>
-                                </tr>
-                                <tr>
-                                    <td> 2</td>
-                                    <td> Daniel</td>
-                                    <td> <i class="fa fa-user-plus" style="color:#999" aria-hidden="true"></i> <?php echo number_format('471430'); ?></td>
-                                </tr>
-                                <tr>
-                                    <td> 3</td>
-                                    <td> Edward </td>
-                                    <td> <i class="fa fa-user-plus" style="color:#999" aria-hidden="true"></i> <?php echo number_format('276354'); ?></td>
-                                </tr>
-                                <tr>
-                                    <td> 4</td>
-                                    <td> Jordan</td>
-                                    <td> <i class="fa fa-user-plus" style="color:#999" aria-hidden="true"></i> <?php echo number_format('186090'); ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="col-lg-12 col-md-12 text-center" data-aos="zoom-in" >
+                    <img src="public/image/501890-PIIDRV-434.png" style="width: 300px;" alt="">
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <h3 style="background-color:#0063d1">Uploads</h3>
-                    <div class="order_table table-responsive">
-                        <table>
-                            <thead>
-                                <tr style="background:#dddddd08;">
-                                    <th style="width:30px">Ranking</th>
-                                    <th style="width:300px">Name</th>
-                                    <th style="width:100px">Uploads</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td> 1</td>
-                                    <td> Richard</td>
-                                    <td> <i class="fa fa-cloud-upload" style="color:#999" aria-hidden="true"></i> <?php echo number_format('1174'); ?></td>
-                                </tr>
-                                <tr>
-                                    <td> 2</td>
-                                    <td> Samuel</td>
-                                    <td> <i class="fa fa-cloud-upload" style="color:#999" aria-hidden="true"></i> <?php echo number_format('1049'); ?></td>
-                                </tr>
-                                <tr>
-                                    <td> 3</td>
-                                    <td> William</td>
-                                    <td> <i class="fa fa-cloud-upload" style="color:#999" aria-hidden="true"></i> <?php echo number_format('893'); ?></td>
-                                </tr>
-                                <tr>
-                                    <td> 4</td>
-                                    <td> Morgan</td>
-                                    <td> <i class="fa fa-cloud-upload" style="color:#999" aria-hidden="true"></i> <?php echo number_format('617'); ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="col-lg-12 col-md-12 text-center" >
+                    <div class="vi">Victory!</div>
                 </div>
+                <div class="col-lg-12 col-md-12 text-center type-vi" >
+                    ประเภทของรางวัล 
+                </div>
+                <div class="col-lg-12 col-md-12 text-center" style="color: #b6b6b6;">
+                    Rating / Upload 
+                <hr style="width: 59%;">
+                </div>
+                <div class="col-lg-2 col-md-2 text-center" ></div>
+                <div class="col-lg-4 col-md-4 text-center " >
+                    <div class="detail-vi"> รางวัลนี้เป็นส่วนลดราคาสินค้าได้ 10 % </div> 
+                    <div style="color: #b6b6b6;"> รายละเอียดรางวัล </div> 
+                </div>
+                <div class="col-lg-4 col-md-4 text-center" style="border-left: 1px solid #e5e5e5;margin-top: 20px;" >
+                    <button type="button" class="btn btn-info">ประวัติย้อนหลัง</button> 
+                </div>
+                <div class="col-lg-2 col-md-2 text-center" ></div>
             </div>
         </div>
     </div>

@@ -227,21 +227,36 @@
 
 <script src="public/frontend/assets/js/pdfobject.js"></script>
 
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
 <script>
     var options = {
-        height: "24rem",
-        width: "20rem",
+        height: "23rem",
+        width: "19rem",
         pdfOpenParams: { view: 'FitV', page: '1' },
     };
     PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example1", options );
-
     var options1 = {
-        height: "24rem",
-        width: "20rem",
+        height: "23rem",
+        width: "19rem",
         pdfOpenParams: { view: 'FitV', page: '2' },
     };
     PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example2", options1 );
-
+    var options2 = {
+        height: "23rem",
+        width: "19rem",
+        pdfOpenParams: { view: 'FitV', page: '2' },
+    };
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example3", options2 );
+    var options3 = {
+        height: "23rem",
+        width: "19rem",
+        pdfOpenParams: { view: 'FitV', page: '2' },
+    };
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example4", options3 );
 </script>
 
 <script>
