@@ -17,6 +17,8 @@ class Home_ctr extends CI_Controller {
 		$this->load->view('options/footer');
 		
 	}
+
+	
 	
 	
 }
