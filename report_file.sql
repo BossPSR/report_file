@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : db
+Source Server         : database
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-11 09:53:00
+Date: 2019-12-11 11:07:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,10 +28,9 @@ CREATE TABLE `tbl_user` (
   `password` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
-INSERT INTO `tbl_user` VALUES ('1', '123456789', 'test@test.com', '0895377846', 'mikiboy004', 'e10adc3949ba59abbe56e057f20f883e', '2019-12-10 16:36:21');
-INSERT INTO `tbl_user` VALUES ('6', '123456789', 'mikiboy004@gmail.com', '0895377846', 'mmm', 'e10adc3949ba59abbe56e057f20f883e', '2019-12-10 10:46:38');
+INSERT INTO `tbl_user` VALUES ('1', '1659900740516', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', '2019-12-11 04:07:28');

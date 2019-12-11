@@ -12,10 +12,13 @@ class Register_ctr extends CI_Controller
 
 	public function index()
 	{
-
-		$this->load->view('options/header');
-		$this->load->view('register');
-		$this->load->view('options/footer');
+		if ($this->session->userdata('email') == '') {
+			$this->load->view('options/header');
+			$this->load->view('register');
+			$this->load->view('options/footer');
+		} else {
+			redirect('my-profile');
+		}
 	}
 
 	public function register_success()
@@ -29,13 +32,13 @@ class Register_ctr extends CI_Controller
 		$created_at          = date('Y-m-d H:i:s');
 		$username_check      = $this->Login_model->check_usre($passport, $email);
 		$check_usre2         = $this->Login_model->check_usre2($username);
-		
+
 		if ($username_check  && $check_usre2) {
 			echo "<script>";
 			echo "alert('ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!!');";
 			echo "window.location='register';";
 			echo "</script>";
-		}else{
+		} else {
 			if ($password != $c_password) {
 				echo "<script>";
 				echo "alert('กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!!');";
@@ -50,9 +53,9 @@ class Register_ctr extends CI_Controller
 					'password'          => md5($password),
 					'created_at'        => $created_at
 				);
-	
+
 				$success = $this->db->insert('tbl_user', $data);
-	
+
 				if ($success > 0) {
 					echo "<script>";
 					echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
@@ -65,6 +68,6 @@ class Register_ctr extends CI_Controller
 					echo "</script>";
 				}
 			}
-		} 
+		}
 	}
 }

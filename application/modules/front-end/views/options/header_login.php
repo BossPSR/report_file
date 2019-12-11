@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    
+
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -85,7 +85,7 @@
     <!--header area start-->
     <!--Offcanvas menu area start-->
     <div class="off_canvars_overlay">
-                
+
     </div>
     <div class="Offcanvas_menu">
         <div class="container">
@@ -96,21 +96,20 @@
                     </div>
                     <div class="Offcanvas_menu_wrapper">
                         <div class="canvas_close">
-                              <a href="javascript:void(0)"><i class="ion-android-close"></i></a>  
+                            <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                         </div>
                         <!-- <div class="support_info">
                             <p>Telephone Enquiry: <a href="tel:+6494461709">(012) 800 456 789 – 987</a></p>
                         </div> -->
                         <div class="top_right text-right">
                             <ul>
-                            <?php $user = $this->db->get_where('tbl_user',['email'=> $this->session->userdata('email')])->row_array() ?>
-                                <?php if($user == true):  ?>
-                                <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                <li><a href="register"> Sign up </a></li>
+                                <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
+                                <?php if ($user == true) :  ?>
+                                    <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                    <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                 <?php else : ?>
-                                    
-                                <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
-                                <li><a href="Logout"> Logout </a></li>
+                                    <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
+                                    <li><a href="register"> Sign up </a></li>
                                 <?php endif  ?>
                                 <li><a href="checkout.html"> TH </a></li>
                                 <li><a href="checkout.html"> ENG </a></li>
@@ -144,7 +143,7 @@
                                 </div>
                             </form>
                         </div>
-                        
+
                         <div class="middel_right_info">
                             <div class="header_wishlist">
                                 <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
@@ -154,71 +153,46 @@
                                 <!-- <a href="javascript:void(0)"><i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i></a>
                                 <span class="cart_quantity">2</span> -->
                                 <!--mini cart-->
-                                 <div class="mini_cart">
-                                    <!-- <div class="cart_item">
-                                       <div class="cart_img">
-                                           <a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a>
-                                       </div>
-                                        <div class="cart_info">
-                                            <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                            <p>Qty: 1 X <span> $60.00 </span></p>    
-                                        </div>
-                                        <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="cart_item">
-                                       <div class="cart_img">
-                                           <a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>
-                                       </div>
-                                        <div class="cart_info">
-                                            <a href="#">Natus erro at congue massa commodo</a>
-                                            <p>Qty: 1 X <span> $60.00 </span></p>   
-                                        </div>
-                                        <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="mini_cart_table">
-                                        <div class="cart_total">
-                                            <span>Sub total:</span>
-                                            <span class="price">$138.00</span>
-                                        </div>
-                                        <div class="cart_total mt-10">
-                                            <span>total:</span>
-                                            <span class="price">$138.00</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="mini_cart_footer">
-                                       <div class="cart_button">
-                                            <a href="cart.html">View cart</a>
-                                        </div>
-                                        <div class="cart_button">
-                                            <a href="checkout.html">Checkout</a>
-                                        </div>
-                                    </div> -->
+                                <div class="mini_cart">
                                 </div>
                                 <!--mini cart end-->
                             </div>
                         </div>
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
-                                <li class="menu-item-has-children">
-                                    <a href="my-account.html">Upload +</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="My_Upload">My Upload</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="contact.html"> My Unlocks</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="my-account.html">Package </a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
-                                </li>
+                                <?php if ($user) :  ?>
+                                    <li class="menu-item-has-children">
+                                        <a href="upload">Upload +</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="My_Upload">My Upload</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> My Unlocks</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="package">Package </a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                    </li>
+                                <?php else : ?>
+                                    <li class="menu-item-has-children">
+                                        <a href="#exampleModalCenter" data-toggle="modal">Upload +</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#exampleModalCenter" data-toggle="modal">My Upload</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#exampleModalCenter" data-toggle="modal">My Unlocks</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Package </a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                    </li>
+                                <?php endif ?>
                             </ul>
                         </div>
 
@@ -238,17 +212,11 @@
         </div>
     </div>
     <!--Offcanvas menu area end-->
-    
-
-
-
-
-
     <header>
         <div class="main_header">
             <!--header top start-->
             <div class="header_top">
-                <div class="container">  
+                <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             <!-- <div class="support_info">
@@ -256,26 +224,26 @@
                             </div> -->
                         </div>
                         <div class="col-lg-6 col-md-6">
-                        <div class="top_right text-right">
+                            <div class="top_right text-right">
                                 <ul>
-                                <?php $user = $this->db->get_where('tbl_user',['email'=> $this->session->userdata('email')])->row_array() ?>
-                                <?php if($user == true):  ?>
-                                    <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
-                                <li><a href="Logout"> Logout </a></li>
-                                <?php else:  ?>
-                                    <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                    <li><a href="register"> Sign up </a></li>
-                                    <?php endif  ?> 
+                                    <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
+                                    <?php if ($user == true) :  ?>
+                                        <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                        <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
+                                    <?php else :  ?>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
+                                        <li><a href="register"> Sign up </a></li>
+                                    <?php endif  ?>
                                     <li><a href="checkout.html"> TH </a></li>
                                     <li><a href="checkout.html"> ENG </a></li>
                                 </ul>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!--header top start-->
-            
+
             <!--header middel start-->
             <div class="header_middle">
                 <div class="container">
@@ -287,116 +255,77 @@
                         </div>
                         <div class="col-lg-10 col-md-6">
                             <div class="middel_right">
-                                <div class="search_container">
-                                <form action="search">
-                                        <div class="search_box">
-                                            <input placeholder="Search item /Code ...." type="text">
+                                <?php if ($user == false) :  ?>
+                                    <div class="search_container" style="margin-right:200px;">
+                                    <?php else : ?>
+                                        <div class="search_container">
+                                        <?php endif ?>
+                                        <form action="search">
+                                            <div class="search_box">
+                                                <input placeholder="Search item /Code ...." type="text">
+                                            </div>
+                                            <div class="hover_category search_box" style="width: 521px;">
+                                                <select class="select_option" name="select" id="categori1">
+                                                    <option selected value="1">Select item</option>
+                                                    <option value="2">Accessories</option>
+                                                    <option value="3">Accessories & More</option>
+                                                    <option value="4">Butters & Eggs</option>
+                                                    <option value="5">Camera & Video </option>
+                                                    <option value="6">Mornitors</option>
+                                                    <option value="7">Tablets</option>
+                                                    <option value="8">Laptops</option>
+                                                    <option value="9">Handbags</option>
+                                                    <option value="10">Headphone & Speaker</option>
+                                                    <option value="11">Herbs & botanicals</option>
+                                                    <option value="12">Vegetables</option>
+                                                    <option value="13">Shop</option>
+                                                    <option value="14">Laptops & Desktops</option>
+                                                    <option value="15">Watchs</option>
+                                                    <option value="16">Electronic</option>
+                                                </select>
+                                                <button type="submit">Search</button>
+                                            </div>
+                                        </form>
                                         </div>
-                                        <div class="hover_category search_box" style="width: 521px;">
-                                            <select class="select_option" name="select" id="categori1">
-                                                <option selected value="1">Select item</option>
-                                                <option value="2">Accessories</option>
-                                                <option value="3">Accessories & More</option>
-                                                <option value="4">Butters & Eggs</option>
-                                                <option value="5">Camera & Video </option>
-                                                <option value="6">Mornitors</option>
-                                                <option value="7">Tablets</option>
-                                                <option value="8">Laptops</option>
-                                                <option value="9">Handbags</option>
-                                                <option value="10">Headphone & Speaker</option>
-                                                <option value="11">Herbs & botanicals</option>
-                                                <option value="12">Vegetables</option>
-                                                <option value="13">Shop</option>
-                                                <option value="14">Laptops & Desktops</option>
-                                                <option value="15">Watchs</option>
-                                                <option value="16">Electronic</option>
-                                            </select>
-                                            <button type="submit">Search</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="middel_right_info">
-                                    <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                        <div class="menu-list">421</div>
-                                        <div>Follower</div>
-                                        <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                        <span class="wishlist_quantity">3</span> -->
-                                    </div>
-                                    <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                        <div class="menu-list">1,527</div>
-                                        <div>Unlocked</div>
-                                        <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                        <span class="wishlist_quantity">3</span> -->
-                                    </div>
-                                    <div class="mini_cart_wrapper text-center">
-                                        <div class="menu-list">47</div>
-                                        <div>Rejected</div>
-                                            <!-- <div class="cart_item">
-                                               <div class="cart_img">
-                                                   <a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a>
-                                               </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Sit voluptatem rhoncus sem lectus</a>
-                                                    <p>Qty: 1 X <span> $60.00 </span></p>    
+                                        <?php if ($user == true) :  ?>
+                                            <div class="middel_right_info">
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                    <div class="menu-list">421</div>
+                                                    <div>Follower</div>
                                                 </div>
-                                                <div class="cart_remove">
-                                                    <a href="#"><i class="ion-android-close"></i></a>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                    <div class="menu-list">1,527</div>
+                                                    <div>Unlocked</div>
+                                                </div>
+                                                <div class="mini_cart_wrapper text-center">
+                                                    <div class="menu-list">47</div>
+                                                    <div>Rejected</div>
                                                 </div>
                                             </div>
-                                            <div class="cart_item">
-                                               <div class="cart_img">
-                                                   <a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>
-                                               </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Natus erro at congue massa commodo</a>
-                                                    <p>Qty: 1 X <span> $60.00 </span></p>   
-                                                </div>
-                                                <div class="cart_remove">
-                                                    <a href="#"><i class="ion-android-close"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="mini_cart_table">
-                                                <div class="cart_total">
-                                                    <span>Sub total:</span>
-                                                    <span class="price">$138.00</span>
-                                                </div>
-                                                <div class="cart_total mt-10">
-                                                    <span>total:</span>
-                                                    <span class="price">$138.00</span>
-                                                </div>
-                                            </div>
+                                        <?php else : ?>
 
-                                            <div class="mini_cart_footer">
-                                               <div class="cart_button">
-                                                    <a href="cart.html">View cart</a>
-                                                </div>
-                                                <div class="cart_button">
-                                                    <a href="checkout.html">Checkout</a>
-                                                </div>
-
-                                            </div> -->
-                                        </div>
-                                        <!--mini cart end-->
+                                        <?php endif ?>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--header middel end-->
-            
-            <!--header bottom satrt-->
-            <div class="main_menu_area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-12">
-                            <div class="categories_menu">
-                                <div class="categories_title">
-                                    <h2 class="categori_toggle">Category</h2>
-                                </div>
-                                <div class="categories_menu_toggle">
-                                    <ul>
+        </div>
+        <!--header middel end-->
+
+        <!--header bottom satrt-->
+        <div class="main_menu_area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="categories_menu">
+                            <div class="categories_title">
+                                <h2 class="categori_toggle">Category</h2>
+                            </div>
+                            <div class="categories_menu_toggle">
+                                <ul>
+                                    <?php if ($user) :  ?>
                                         <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
@@ -404,14 +333,24 @@
                                         <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
-                                    </ul>
-                                </div>
+                                    <?php else : ?>
+                                        <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                    <?php endif ?>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-12">
-                            <div class="main_menu menu_position"> 
-                                <nav>  
-                                    <ul>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+                        <div class="main_menu menu_position">
+                            <nav>
+                                <ul>
+                                    <?php if ($user) :  ?>
                                         <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
                                         <li><a href="My_Upload"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
@@ -422,15 +361,27 @@
                                         <li class="menu-item-has-children">
                                             <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                         </li>
-                                    </ul>  
-                                </nav> 
-                            </div>
+                                    <?php else : ?>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Upload + <div class="arrow_box"></div></a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Upload</a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Unlocks</a></li>
+                                        <li><a href="#"> Package</a></li>
+                                        <li class="menu-item-has-children">
+                                            <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
+                                        </li>
+                                        <li class="menu-item-has-children">
+                                            <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                        </li>
+                                    <?php endif ?>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--header bottom end-->
-        </div> 
+        </div>
+        <!--header bottom end-->
+        </div>
     </header>
     <!--header area end-->
 
