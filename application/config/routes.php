@@ -58,6 +58,7 @@ $route['Logout']              = 'front-end/Login_ctr/logout';
 
 $route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
 $route['my-profile']         = 'front-end/My_user_ctr/my_profile';
+$route['my-wallet']         = 'front-end/My_wallet_ctr/my_wallet';
 $route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
 $route['register']           = 'front-end/Register_ctr';
 $route['register_success']   = 'front-end/Register_ctr/register_success';
