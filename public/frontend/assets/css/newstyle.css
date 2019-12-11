@@ -1,3 +1,77 @@
+#posup
+{
+    background-image: url("../../../../public/image/501890-PIIDRV-431.png");
+    height: 198px;
+    width: 99%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 360px;
+    position: absolute;
+    margin: 0 0px 0px 50px;
+}
+#poscenter
+{
+    background-image: url("../../../../public/image/501890-PIIDRV-432.png");
+    height: 590px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+}
+#posbotton
+{
+    background-image: url("../../../../public/image/501890-PIIDRV-430.png");
+    height: 252px;
+    width: 92%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 260px;
+    position: absolute;
+    margin: 296px 0px 0 50px;
+}
+#posback
+{
+    background-image: url("../../../../public/image/501890-PIIDRV-433.png");
+    opacity: 0.4;
+    height: 550px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    z-index: -1;
+}
+.vi
+{
+    font-size: 26px;
+    font-weight: 600;
+}
+.type-vi
+{
+    margin-top: 40px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.detail-vi
+{
+    font-size: 18px;
+    margin: 10px 0;
+}
+#wow
+{
+    position: absolute;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 470px;
+    color: #ffc107;
+    font-size: 93px;
+    text-shadow: 2px 2px 4px #131313;
+    z-index: 1000;
+}
 .menu-list
 {
     font-size: 19px;
