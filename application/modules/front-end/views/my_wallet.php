@@ -9,13 +9,13 @@
                             โปรไฟล์ของฉัน
                         </div>
                         <div class="p-15 text-center">
-                            <img class="profile-small" src="public/frontend/assets/img/3297.png" alt="">
+                            <img class="profile-small" src="public/image/man.png" alt="">
                         </div>
                         <div class="p-15 text-center font18">
                             User001
                         </div>
                         <div class="ptw-5 text-center font17">
-                            เอกสารของฉัน : 5 ฉบับ
+                            เอกสารของฉัน : 11 ฉบับ
                         </div>
                         <div class="pw-5 text-center font17">
                             ยอดคงเหลือ : ฿<?php echo number_format("487515"); ?>

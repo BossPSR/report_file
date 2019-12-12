@@ -9,13 +9,13 @@
                             โปรไฟล์ของฉัน
                         </div>
                         <div class="p-15 text-center">
-                            <img class="profile-small" src="public/frontend/assets/img/3297.png" alt="">
+                            <img class="profile-small" src="public/image/man.png" alt="">
                         </div>
                         <div class="p-15 text-center font18">
                             User001
                         </div>
                         <div class="ptw-5 text-center font17">
-                            เอกสารของฉัน : 5 ฉบับ
+                            เอกสารของฉัน : 11 ฉบับ
                         </div>
                         <div class="pw-5 text-center font17">
                             ยอดคงเหลือ : ฿<?php echo number_format("487515"); ?>
@@ -34,8 +34,8 @@
                             ฿0
                         </div>
                         <div class="pb-18 text-center">
-                            <button type="button" class="btn btn-primary button-p">เติมเงิน</button>
-                            <button type="button" class="btn btn-outline-dark button-100">ถอนเงิน</button>
+                            <a href="my-deposit" class="btn btn-primary button-p">เติมเงิน</a>
+                            <a href="my-deposit" class="btn btn-outline-dark button-100">ถอนเงิน</a>
                         </div>
                     </div>
 
@@ -52,14 +52,22 @@
                     </div>
 
                     <div class="col-lg-11 col-md-11 wall-center shadow-b table-w mtp-20">
-                        <div class="text-center">
+                        <div class="text-center mbc-20">
                             เติมเงินเข้าสู่ระบบ
                         </div>
+                        <hr>
                         <div class="text-center">
-                            <img src="public/image/Gadgeteer_-477-Feb.-19-21.03.16.png" alt="" style="width: 500px;">
+                            <img src="public/image/Gadgeteer_-477-Feb.-19-21.03.16.png" alt="" style="width: 300px;">
                         </div>
-                        <div style="width: 200px;">
-                            <input type="text" class="form-control" placeholder="กรอกจำนวนเงิน"  style="height: 51px;text-align: center;font-size: 20px;">
+                        <div class="row text-center wall-center mtb-17-30">
+                            <div class="col-md-6 ">
+                                <input type="number" class="form-control" placeholder="กรอกจำนวนเงิน"  style="height: 51px;text-align: center;font-size: 20px;">
+                            </div>
+                        </div>
+                        <div class="row text-center wall-center mtb-20">
+                            <div class="col-md-4">
+                                <div id="paypal-button-container"  style="width: 300px"></div>
+                            </div>
                         </div>
                     </div>
 

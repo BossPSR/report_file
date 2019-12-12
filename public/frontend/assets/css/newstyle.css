@@ -15,6 +15,21 @@
     padding-bottom: 15px;
     background-color: #0063d1;
 }
+.mtb-20
+{
+    margin: 20px 0px;
+}
+.mbc-20
+{
+    font-size: 21px;
+    margin-bottom: 20px;
+    color: #989898;
+}
+.mtb-17-30
+{
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
 .font18
 {
     font-size: 18px;

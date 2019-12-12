@@ -27,6 +27,24 @@
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            style: {
+                color:  'blue',
+                shape:  'pill',
+                label:  'pay',
+                size: 'responsive',
+                height: 40
+            }
+
+        }).render('#paypal-button-container');
+    </script>
+
 
 
 </head>

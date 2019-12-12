@@ -14,7 +14,7 @@
                         <h2 class="text-center my-income">My income</h2>
                         <div class="image_PF">
                             <div class="">
-                                <img class="profile" src="public/frontend/assets/img/3297.png" alt="">
+                                <img class="profile" src="public/image/man.png" alt="">
                                 <!-- <div class="edit_name_user"><a href="#"><i class="fa fa-edit"></i>  Edited</a></div> -->
                             </div>
                         </div>
