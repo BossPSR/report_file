@@ -32,7 +32,7 @@
                  <br>
                  <div class="single_banner mb-30">
                      <div class="banner_thumb">
-                         <a href="shop.html"><img src="public/frontend/assets/img/bg/banner4.jpg" alt=""></a>
+                         <a href="#"><img src="public/image/24610-[Converted].png" alt=""></a>
                      </div>
                  </div>
              </div>
@@ -43,7 +43,7 @@
                  <br>
                  <div class="single_banner mb-30">
                      <div class="banner_thumb">
-                         <a href="shop.html"><img src="public/frontend/assets/img/bg/banner5.jpg" alt=""></a>
+                         <a href="#"><img src="public/image/24619-[Converted].png" alt=""></a>
                      </div>
                  </div>
              </div>

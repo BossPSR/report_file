@@ -6,11 +6,35 @@
     height: 200px;
     border-radius: 50%;
 }
+.header-profile
+{
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    border: 1px solid #0063d1;
+    padding-bottom: 15px;
+    background-color: #0063d1;
+}
+.font18
+{
+    font-size: 18px;
+}
+.font17
+{
+    font-size: 17px;
+}
+.p3-rem
+{
+    padding: 2rem 0px;
+}
+.hight-100
+{
+    height: auto;
+}
 .table-w
 {
-    flex: 0 0 68%;
-    flex: 0 0 68.066667%; 
-    max-width: 68.666667%;
+    flex: 0 0 93.666667%;
+    max-width: 93.666667%;
 }
 .button-p
 {
@@ -46,6 +70,9 @@
 {
     padding-top: 30px;
 }
+.ptw-5 {
+    padding-top: 5px;
+}
 .pw-5
 {
     padding-top: 5px;
@@ -54,10 +81,15 @@
 .pb-18
 {
     padding-top: 18px;
+    padding-bottom: 23px;
 }
 .ml-20
 {
     margin-left: 20px;
+}
+.mt-15
+{
+    margin-top: 15px;
 }
 .shadow-b
 {
@@ -67,13 +99,14 @@
 .wall-center
 {
     justify-content: center;
+ 
 }
 .profile-small
 {
     cursor: pointer;
     border: 3px solid #8cc2ff;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
 }
 

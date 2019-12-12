@@ -395,7 +395,7 @@
             <div class="widget_list widget_categories">
                 <div class="show_sign">
                     <ul class="list_sign_login">
-                    <a href="my-wallet">
+                        <a href="<?php echo ($user) ? 'my-wallet':'#exampleModalCenter' ;?>" <?php echo ($user) ? '':'data-toggle="modal"' ;?>>
                             <li>
                                 <span>
                                     <i class="fa fa-google-wallet" aria-hidden="true"></i>
@@ -404,7 +404,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="my-wallet">
+                        <a href="<?php echo ($user) ? 'my-deposit':'#exampleModalCenter' ;?>">
                             <li>
                                 <span>
                                     <i class="fa fa-money" aria-hidden="true"></i>
