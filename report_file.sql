@@ -10,10 +10,29 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-11 11:07:51
+Date: 2019-12-12 15:25:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `tbl_upload`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_upload`;
+CREATE TABLE `tbl_upload` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `search_item` varchar(255) DEFAULT '',
+  `search_category` varchar(255) DEFAULT '',
+  `search_code` varchar(255) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_upload
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_user`

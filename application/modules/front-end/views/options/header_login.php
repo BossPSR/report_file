@@ -27,8 +27,7 @@
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-
+    
 </head>
 
 <body>

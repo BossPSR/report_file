@@ -64,14 +64,14 @@ $route['register_success']   = 'front-end/Register_ctr/register_success';
 $route['home']               = 'front-end/Home_ctr';
 $route['package']            = 'front-end/Package_ctr';
 $route['upload']             = 'front-end/Upload_ctr';
+$route['upload_search']      = 'front-end/Upload_ctr/My_upload_search';
+$route['upload_step2']       = 'front-end/Upload_ctr/My_upload_step2';
 $route['search']             = 'front-end/Search_ctr';
 $route['unlocks']            = 'front-end/Unlocks_ctr';
 $route['after-unlocks']      = 'front-end/After_Unlocks_ctr';
 $route['My_Upload']          = 'front-end/Upload_ctr/My_upload';
 $route['Bookmarked']         = 'front-end/Bookmarked_ctr';
 $route['Recently-Accessed']  = 'front-end/Recently_ctr';
-
-
 
 // /------------------------------------- back-end  ---------------------
 
