@@ -12,16 +12,15 @@
 
                      <div class="image_profile">
                         <h2 class="text-center my-income">My income</h2>
-                        <div class="text-center money"><i class="fa fa-money" aria-hidden="true"></i>  <?php echo number_format("487515"); ?></div>
                         <div class="image_PF">
-                            <div class="imageProfile_show">
-                                <img src="public/frontend/assets/img/3297.png" alt="">
-                                <div class="edit_name_user"><a href="#"><i class="fa fa-edit"></i>  Edited</a></div>
+                            <div class="">
+                                <img class="profile" src="public/frontend/assets/img/3297.png" alt="">
+                                <!-- <div class="edit_name_user"><a href="#"><i class="fa fa-edit"></i>  Edited</a></div> -->
                             </div>
                         </div>
                         <div class="menu_in_image">
-                            <div class="name_user"><i class="fa fa-user"></i>  Name : User001</div>
-                            
+                            <div class="name_user m17"><i class="fa fa-user"></i>  Name : User001</div>
+                            <div class="text-center money"> ยอดคงเหลือ : ฿<?php echo number_format("487515"); ?></div>  
                         </div>
                      </div>
 

@@ -1,3 +1,119 @@
+.profile
+{
+    cursor: pointer;
+    border: 3px solid #8cc2ff;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.header-profile
+{
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    border: 1px solid #0063d1;
+    padding-bottom: 15px;
+    background-color: #0063d1;
+}
+.font18
+{
+    font-size: 18px;
+}
+.font17
+{
+    font-size: 17px;
+}
+.p3-rem
+{
+    padding: 2rem 0px;
+}
+.hight-100
+{
+    height: auto;
+}
+.table-w
+{
+    flex: 0 0 93.666667%;
+    max-width: 93.666667%;
+}
+.button-p
+{
+    margin-right: 10px;
+    width: 100px;
+}
+.mtp-20
+{
+    margin-left: 20px;
+    margin-top: 20px;
+    padding-top: 15px;
+}
+.button-100
+{
+    width: 100px;
+}
+.color-w
+{
+    color: #9b9b9b;
+    font-size: 18px;
+}
+.color-p
+{
+    color: #0063d1;
+    font-size: 32px;
+    margin: 15px 0;
+}
+.p-15
+{
+    padding-top: 15px;
+}
+.p-30
+{
+    padding-top: 30px;
+}
+.ptw-5 {
+    padding-top: 5px;
+}
+.pw-5
+{
+    padding-top: 5px;
+    padding-bottom: 20px;
+}
+.pb-18
+{
+    padding-top: 18px;
+    padding-bottom: 23px;
+}
+.ml-20
+{
+    margin-left: 20px;
+}
+.mt-15
+{
+    margin-top: 15px;
+}
+.shadow-b
+{
+    border: 1px solid #f3f3f3;
+    box-shadow: 1px 1px 3px 1px #ededed;
+}
+.wall-center
+{
+    justify-content: center;
+ 
+}
+.profile-small
+{
+    cursor: pointer;
+    border: 3px solid #8cc2ff;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.m17
+{
+    margin: 17px 0;
+}
 #posup
 {
     background-image: url("../../../../public/image/501890-PIIDRV-431.png");
@@ -222,7 +338,7 @@
 }
 .money
 {
-    font-size: 30px;
+    font-size: 24px;
     color: #428a00;
 }
 .right_menu_new{
@@ -241,7 +357,7 @@
     padding: 0;
 }
 
-.list_sign_login > li {
+.list_sign_login > a > li {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -251,17 +367,17 @@
     padding: 15px;
 }
 
-.list_sign_login > li:hover{
+.list_sign_login > a > li:hover{
     background: #0063d1;
     color: #fff;
     transition: 0.3s;
 }
 
-.list_sign_login > li:last-child{
+.list_sign_login > a > li:last-child{
     border-bottom:none;
 }
 
-.list_sign_login > li > span{
+.list_sign_login > a > li > span{
     width: 90px;
     text-align: center;
     font-size: 18px;
@@ -365,7 +481,7 @@
 }
 
 .image_PF{
-    padding-top: 30px;
+    padding-top: 10px;
     text-align: center;
     
 }
@@ -393,6 +509,8 @@
 
 .menu_in_image{
     padding: 0px;
+    margin-top: 20px;
+    font-size: 18px;
     text-align: center;
 }
 
