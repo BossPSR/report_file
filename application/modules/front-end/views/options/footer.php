@@ -1,18 +1,18 @@
 <!--footer area start-->
 <footer class="footer_widgets">
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
+    <div class="footer_top">
+        <div class="container">
+            <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="widgets_container contact_us">
                         <div class="footer_logo">
                             <a href="#"><img src="public/frontend/img/logo/logo.png" alt=""></a>
                         </div>
                         <div class="footer_contact">
-                            <p>We are a team of designers and developers that 
+                            <p>We are a team of designers and developers that
                                 create high quality HTML Template, Woocommerce, Shopify Theme.</p>
                             <p><span>Address</span> The Barn, Ullenhall, Henley in Arden B578 5C, England.</p>
-                            <p><span>Mobile: </span><a href="tel:+123.456.789">+123.456.789</a>  – <a href="tel:+123.456.678">+123.456.678</a> </p>
+                            <p><span>Mobile: </span><a href="tel:+123.456.789">+123.456.789</a> – <a href="tel:+123.456.678">+123.456.678</a> </p>
                             <p><span>Support: </span><a target="_blank" href="https://hasthemes.com/contact-us/">https://hasthemes.com/contact-us/</a></p>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                   <div class="widgets_container newsletter">
+                    <div class="widgets_container newsletter">
                         <h3>Follow Us</h3>
                         <div class="footer_social_link">
                             <ul>
@@ -60,8 +60,8 @@
                             </ul>
                         </div>
                         <div class="subscribe_form">
-                           <h3>Join Our Newsletter Now</h3>
-                            <form id="mc-form" class="mc-form footer-newsletter" >
+                            <h3>Join Our Newsletter Now</h3>
+                            <form id="mc-form" class="mc-form footer-newsletter">
                                 <input id="mc-email" type="email" autocomplete="off" placeholder="Your email address..." />
                                 <button id="mc-submit">Subscribe!</button>
                             </form>
@@ -75,151 +75,149 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="copyright_area">
+                        <p>Copyright &copy; 2019 <a href="#">Junko</a> All Right Reserved.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="footer_payment text-right">
+                        <a href="#"><img src="public/frontend/img/icon/payment.png" alt=""></a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="copyright_area">
-                            <p>Copyright &copy; 2019 <a href="#">Junko</a>  All Right Reserved.</p>
+    </div>
+</footer>
+<!--footer area end-->
+
+<!-- modal area start-->
+<div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal_body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-12">
+                            <div class="modal_tab">
+                                <div class="tab-content product-details-large">
+                                    <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="public/frontend/img/product/product1.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab2" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="public/frontend/img/product/product2.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab3" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="public/frontend/img/product/product3.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab4" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="public/frontend/img/product/product5.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_tab_button">
+                                    <ul class="nav product_navactive owl-carousel" role="tablist">
+                                        <li>
+                                            <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="public/frontend/img/product/product1.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img src="public/frontend/img/product/product2.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img src="public/frontend/img/product/product3.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img src="public/frontend/img/product/product5.jpg" alt=""></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="footer_payment text-right">
-                            <a href="#"><img src="public/frontend/img/icon/payment.png" alt=""></a>
+                        <div class="col-lg-7 col-md-7 col-sm-12">
+                            <div class="modal_right">
+                                <div class="modal_title mb-10">
+                                    <h2>Handbag feugiat</h2>
+                                </div>
+                                <div class="modal_price mb-10">
+                                    <span class="new_price">$64.99</span>
+                                    <span class="old_price">$78.99</span>
+                                </div>
+                                <div class="modal_description mb-15">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>
+                                </div>
+                                <div class="variants_selects">
+                                    <div class="variants_size">
+                                        <h2>size</h2>
+                                        <select class="select_option">
+                                            <option selected value="1">s</option>
+                                            <option value="1">m</option>
+                                            <option value="1">l</option>
+                                            <option value="1">xl</option>
+                                            <option value="1">xxl</option>
+                                        </select>
+                                    </div>
+                                    <div class="variants_color">
+                                        <h2>color</h2>
+                                        <select class="select_option">
+                                            <option selected value="1">purple</option>
+                                            <option value="1">violet</option>
+                                            <option value="1">black</option>
+                                            <option value="1">pink</option>
+                                            <option value="1">orange</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal_add_to_cart">
+                                        <form action="#">
+                                            <input min="0" max="100" step="2" value="1" type="number">
+                                            <button type="submit">add to cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal_social">
+                                    <h2>Share this product</h2>
+                                    <ul>
+                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>   
-    </footer>
-    <!--footer area end-->
-   
-    <!-- modal area start-->
-    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5 col-sm-12">
-                                <div class="modal_tab">  
-                                    <div class="tab-content product-details-large">
-                                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="public/frontend/img/product/product1.jpg" alt=""></a>    
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="public/frontend/img/product/product2.jpg" alt=""></a>    
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="tab3" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="public/frontend/img/product/product3.jpg" alt=""></a>    
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="tab4" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="public/frontend/img/product/product5.jpg" alt=""></a>    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal_tab_button">    
-                                        <ul class="nav product_navactive owl-carousel" role="tablist">
-                                            <li >
-                                                <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="public/frontend/img/product/product1.jpg" alt=""></a>
-                                            </li>
-                                            <li>
-                                                 <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img src="public/frontend/img/product/product2.jpg" alt=""></a>
-                                            </li>
-                                            <li>
-                                               <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img src="public/frontend/img/product/product3.jpg" alt=""></a>
-                                            </li>
-                                            <li>
-                                               <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img src="public/frontend/img/product/product5.jpg" alt=""></a>
-                                            </li>
-
-                                        </ul>
-                                    </div>    
-                                </div>  
-                            </div> 
-                            <div class="col-lg-7 col-md-7 col-sm-12">
-                                <div class="modal_right">
-                                    <div class="modal_title mb-10">
-                                        <h2>Handbag feugiat</h2> 
-                                    </div>
-                                    <div class="modal_price mb-10">
-                                        <span class="new_price">$64.99</span>    
-                                        <span class="old_price" >$78.99</span>    
-                                    </div>
-                                    <div class="modal_description mb-15">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>    
-                                    </div> 
-                                    <div class="variants_selects">
-                                        <div class="variants_size">
-                                           <h2>size</h2>
-                                           <select class="select_option">
-                                               <option selected value="1">s</option>
-                                               <option value="1">m</option>
-                                               <option value="1">l</option>
-                                               <option value="1">xl</option>
-                                               <option value="1">xxl</option>
-                                           </select>
-                                        </div>
-                                        <div class="variants_color">
-                                           <h2>color</h2>
-                                           <select class="select_option">
-                                               <option selected value="1">purple</option>
-                                               <option value="1">violet</option>
-                                               <option value="1">black</option>
-                                               <option value="1">pink</option>
-                                               <option value="1">orange</option>
-                                           </select>
-                                        </div>
-                                        <div class="modal_add_to_cart">
-                                            <form action="#">
-                                                <input min="0" max="100" step="2" value="1" type="number">
-                                                <button type="submit">add to cart</button>
-                                            </form>
-                                        </div>   
-                                    </div>
-                                    <div class="modal_social">
-                                        <h2>Share this product</h2>
-                                        <ul>
-                                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul>    
-                                    </div>      
-                                </div>    
-                            </div>    
-                        </div>     
-                    </div>
-                </div>    
-            </div>
         </div>
     </div>
-    <!-- modal area end-->
+</div>
+<!-- modal area end-->
 
- 
+
 <!-- JS
 ============================================ -->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Plugins JS -->
 <script src="public/frontend/assets/js/plugins.js"></script>
 
 <!-- Main JS -->
 <script src="public/frontend/assets/js/main.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script src="public/frontend/assets/dist/dropzone.js"></script>
 
@@ -228,14 +226,22 @@
 
 
 <script>
-    <?php if($this->session->flashdata('save_ss')): ?>
+    <?php if ($this->session->flashdata('save_ss')) : ?>
         swal("Good job!", "You clicked the button!", "success");
     <?php endif; ?>
-    <?php if($this->session->flashdata('del_ss')): ?>
+    <?php if ($this->session->flashdata('del_ss')) : ?>
         swal("fill !", "You clicked the button!", "error");
     <?php endif; ?>
 </script>
-    
+<script>
+    <?php if ($this->session->flashdata('upload_ss')) : ?>
+        swal("Good job!", "Upload for data successfull", "success");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('upload_fail')) : ?>
+        swal("fill !", "Error for upload. Please try again later.!", "error");
+    <?php endif; ?>
+</script>
+
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
 
 <script src="public/frontend/assets/js/myscript.js"></script>
@@ -259,38 +265,124 @@
     var options = {
         height: "23rem",
         width: "19rem",
-        pdfOpenParams: { view: 'FitV', page: '1' },
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '1'
+        },
     };
-    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example1", options );
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example1", options);
     var options1 = {
         height: "23rem",
         width: "19rem",
-        pdfOpenParams: { view: 'FitV', page: '2' },
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '2'
+        },
     };
-    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example2", options1 );
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example2", options1);
     var options2 = {
         height: "23rem",
         width: "19rem",
-        pdfOpenParams: { view: 'FitV', page: '2' },
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '2'
+        },
     };
-    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example3", options2 );
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example3", options2);
     var options3 = {
         height: "23rem",
         width: "19rem",
-        pdfOpenParams: { view: 'FitV', page: '2' },
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '2'
+        },
     };
-    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example4", options3 );
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example4", options3);
 </script>
 
 <script>
-$(document).ready(function(){
-  $(".target_menuright").click(function(){
-        $(".target_menuright").toggleClass("target_menuright_active");
-        $(".right_menu_new").slideToggle("slow");
-        
-  });
-});
+    $(document).ready(function() {
+        $(".target_menuright").click(function() {
+            $(".target_menuright").toggleClass("target_menuright_active");
+            $(".right_menu_new").slideToggle("slow");
+
+        });
+    });
 </script>
+<!-- <script>
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        //... and run a function that will display the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+    }
+</script> -->
 
 </body>
 

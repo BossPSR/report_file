@@ -152,7 +152,7 @@ var Dropzone = function (_Emitter) {
          * provide a function that will be called with `files` and
          * must return the url (since `v3.12.0`)
          */
-        url: null,
+        url: 'http://127.0.0.1/',
 
         /**
          * Can be changed to `"put"` if necessary. You can also provide a function
@@ -304,7 +304,7 @@ var Dropzone = function (_Emitter) {
         /**
          * Can be used to limit the maximum number of files that will be handled by this Dropzone
          */
-        maxFiles: null,
+        maxFiles: 1,
 
         /**
          * An optional object to send additional headers to the server. Eg:
@@ -369,7 +369,7 @@ var Dropzone = function (_Emitter) {
          * already uploading) the file. The `dictCancelUpload`, `dictCancelUploadConfirmation`
          * and `dictRemoveFile` options are used for the wording.
          */
-        addRemoveLinks: false,
+        addRemoveLinks: true,
 
         /**
          * Defines where to display the file previews – if `null` the
