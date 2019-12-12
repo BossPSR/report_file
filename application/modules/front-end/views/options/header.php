@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="account_form">
-                            <form action="LoginMe" method="post">
+                            <form action="loginme" method="post">
                                 <p>
                                     <label>Email <span>*</span></label>
                                     <input type="email" id="inputemail" name="email">
@@ -446,7 +446,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="<?php echo ($user) ? 'my-deposit':'#exampleModalCenter' ;?>">
+                        <a href="<?php echo ($user) ? 'my-deposit':'#exampleModalCenter' ;?>" <?php echo ($user) ? '':'data-toggle="modal"' ;?>>
                             <li>
                                 <span>
                                     <i class="fa fa-money" aria-hidden="true"></i>
