@@ -18,7 +18,7 @@
         <div class="col-lg-2 col-md-2 col-2 text-center">
             <div class="menu-list">2,300</div>
             <div class="menu-bottom">Viewed </div>
-        </div> 
+        </div>
         <div class="col-lg-2 col-md-2 col-2 text-center">
             <div class="menu-list">190</div>
             <div class="menu-bottom">Page </div>
@@ -41,10 +41,10 @@
                         <div class="text-center" style="position: relative;">
                             <label></label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info">Follow</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-warning">Bookmark</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success">Download</button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger">Reject</button></div>
+                                <div style="display:inline-block;"><a href="#?userId=<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-warning"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;BOOKMARK</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
                             </div>
                         </div>
                         <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
