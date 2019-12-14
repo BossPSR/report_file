@@ -24,9 +24,11 @@
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
-
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
+    
+    <script src="public/frontend/assets/dist/dropzone.js"></script>
     
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 

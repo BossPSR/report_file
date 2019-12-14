@@ -219,8 +219,6 @@
 <!-- Main JS -->
 <script src="public/frontend/assets/js/main.js"></script>
 
-<script src="public/frontend/assets/dist/dropzone.js"></script>
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
@@ -309,6 +307,7 @@
         });
     });
 </script>
+
 <!-- <script>
     var currentTab = 0; // Current tab is set to be the first tab (0)
     showTab(currentTab); // Display the current tab

@@ -74,6 +74,9 @@ $route['after-unlocks']      = 'front-end/After_Unlocks_ctr';
 $route['My_Upload']          = 'front-end/Upload_ctr/My_upload';
 $route['Bookmarked']         = 'front-end/Bookmarked_ctr';
 $route['Recently-Accessed']  = 'front-end/Recently_ctr';
+$route['fileUpload']         = 'front-end/Upload_ctr/fileUpload';
+$route['fileUploadfull']     = 'front-end/Upload_ctr/fileUploadfull';
+
 
 // /------------------------------------- back-end  ---------------------
 

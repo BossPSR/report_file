@@ -120,11 +120,22 @@
             </ul>
             <article class="single_upload input-upload">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
+                        <div class="tab">
+                            <label for="" class="font-size-upload">Preview PDF</label>
+                            <form action="fileUpload" class="dropzone" id="fileupload">
+                                <div class="dz-message needsclick">
+                                    Drop files here or click to upload.<br>
+                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-6">
                         <div class="tab">
                             <label for="" class="font-size-upload">Upload PDF</label>
                             <div id="dropzone">
-                                <form action="/upload" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                <form action="fileUploadfull" class="dropzone needsclick dz-clickable" id="demo-upload">
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
