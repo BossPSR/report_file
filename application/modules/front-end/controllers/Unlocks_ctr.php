@@ -14,9 +14,16 @@ class Unlocks_ctr extends CI_Controller
 		if ($this->session->userdata('email') == '') {
 			redirect('home');
 		} else {
+			$data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+
 			$this->load->view('options/header_login');
-			$this->load->view('unlocks');
+			$this->load->view('unlocks', $data);
 			$this->load->view('options/footer');
 		}
 	}
+
+	// function user_follow()
+	// {
+	// 	$userId = $this->input->get('userId');
+	// }
 }

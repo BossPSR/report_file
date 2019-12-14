@@ -18,7 +18,7 @@
         <div class="col-lg-2 col-md-2 col-2 text-center">
             <div class="menu-list">2,300</div>
             <div class="menu-bottom">Viewed </div>
-        </div> 
+        </div>
         <div class="col-lg-2 col-md-2 col-2 text-center">
             <div class="menu-list">190</div>
             <div class="menu-bottom">Page </div>
@@ -38,16 +38,20 @@
             <article class="single_upload input-upload">
                 <div class="row">
                     <div class="col-12 margin-20">
-                   
+                        <div class="text-center" style="position: relative;">
+                            <label></label>
+                            <div style="position: absolute;right: 0;bottom: 10%;">
+                                <div style="display:inline-block;"><a href="#?userId=<?php echo $userId['id'] ;?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-warning"><i class="fa fa-unlock-alt"></i>&nbsp;&nbsp;UNLOCK</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
+                            </div>
+                        </div>
                         <label class="pricebg">$ 600.00</label>
                         <div class="blurPDF">
                             <iframe src="public/image/ExportServlet.pdf" width="100%" height="100%"></iframe>
                         </div>
-                        <div style="position: absolute;right: 0;top: 3%;">
-                            <div style="display:inline-block;"><button type="button" style="font-size: 24px; color:red;" class="btn btn-warning">Unlock</button></div>
-                        </div>              
                     </div>
-                   
+
                 </div>
             </article>
         </div>

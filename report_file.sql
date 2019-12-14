@@ -10,10 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-12 15:25:19
+Date: 2019-12-14 15:36:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `tbl_follow`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_follow`;
+CREATE TABLE `tbl_follow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender_userId` int(11) DEFAULT NULL,
+  `receiver_userId` int(11) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_follow
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
@@ -28,11 +45,12 @@ CREATE TABLE `tbl_upload` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload
 -- ----------------------------
+INSERT INTO `tbl_upload` VALUES ('1', '1', 'หนังสือรับรองสุขภาพ', 'Butters & Eggs', 'หนังสือรับรองสุขภาพ', '2019-12-13 08:26:23', null);
 
 -- ----------------------------
 -- Table structure for `tbl_user`

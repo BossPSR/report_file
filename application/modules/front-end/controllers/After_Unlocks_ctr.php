@@ -14,8 +14,10 @@ class After_Unlocks_ctr extends CI_Controller
 		if ($this->session->userdata('email') == '') {
 			redirect('home');
 		} else {
+			$data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+
 			$this->load->view('options/header_login');
-			$this->load->view('after_unlocks');
+			$this->load->view('after_unlocks', $data);
 			$this->load->view('options/footer');
 		}
 	}
