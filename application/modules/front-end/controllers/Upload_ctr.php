@@ -7,6 +7,7 @@ class Upload_ctr extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->db->model('Upload_model');
 	}
 
 	public function index()
@@ -115,4 +116,10 @@ class Upload_ctr extends CI_Controller
 			}
 		}
 	}
+
+	public function delete_files() {
+        $file_name = $this->input->post('file_name');
+        $this->Upload_model->delete_files($file_name);
+	}
+	
 }

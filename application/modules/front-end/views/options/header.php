@@ -455,7 +455,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="my-wallet">
+                        <a href="<?php echo ($user) ? 'my-withdraw':'#exampleModalCenter' ;?>" <?php echo ($user) ? '':'data-toggle="modal"' ;?>>
                             <li>
                                 <span>
                                     <i class="fa fa-minus-square" aria-hidden="true"></i>
@@ -464,7 +464,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="my-wallet">
+                        <a href="<?php echo ($user) ? 'my-slip':'#exampleModalCenter' ;?>" <?php echo ($user) ? '':'data-toggle="modal"' ;?>>
                             <li>
                                 <span>
                                     <i class="fa fa-file-text-o" aria-hidden="true"></i>
