@@ -127,6 +127,7 @@
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload.<br>
                                     <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                    <input type="text" name="upload_id" value="<?php echo $insert_id ;?>" hidden>
                                 </div>
                             </form>
                         </div>
@@ -140,6 +141,7 @@
                                         Drop files here or click to upload.<br>
                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                     </div>
+                                    <input type="text" name="upload_id" value="<?php echo $insert_id ;?>" hidden>
                                 </form>
                             </div>
                         </div>

@@ -36,21 +36,22 @@ class Upload_ctr extends CI_Controller
 		$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 
 		$search_item			= $this->input->post('search_item');
-		$search_category		= $this->input->post('search_category');
-		$search_code			= $this->input->post('search_code');
+		$select_item			= $this->input->post('select_item');
+		$topic					= $this->input->post('topic');
 		$create_at				= date('Y-m-d H:i:s');
 
 		$data = array(
 			'search_item'		=> $search_item,
+			'select_item'		=> $select_item,
+			'topic'				=> $topic,
 			'userId'			=> $user['id'],
-			'search_category'	=> $search_category,
-			'search_code'		=> $search_code,
 			'create_at'			=> $create_at
 		);
 
 		if ($this->db->insert('tbl_upload', $data)) {
+			$insert_id = $this->db->insert_id();
 			$this->session->set_flashdata('upload_ss', TRUE);
-			redirect('upload_step2');
+			redirect('upload_step2?insert_id=' . $insert_id);
 		} else {
 			$this->session->set_flashdata('upload_fail', TRUE);
 			redirect('upload');
@@ -59,42 +60,48 @@ class Upload_ctr extends CI_Controller
 
 	public function My_upload_step2()
 	{
+		$data['insert_id'] = $this->input->get('insert_id');
 		if ($this->session->userdata('email') == '') {
 			redirect('home');
 		} else {
+
 			$this->load->view('options/header_login');
-			$this->load->view('upload_step2');
+			$this->load->view('upload_step2', $data);
 			$this->load->view('options/footer');
 		}
 	}
 
 	// File upload
-	public function fileUpload(){
-		$target_dir = "uploads/Preview/"; // Upload directory
-		$request = 1;
-		if(isset($_POST['request'])){
-			$request = $_POST['request'];
-		}
+	public function fileUpload()
+	{
+		$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+		$insert_id = $this->input->post('upload_id');
+		if (!empty($_FILES['file']['name'])) {
 
-		if($request == 1){
-			if(!empty($_FILES['file']['name'])){
-				
-				// Set preference
-				$config['upload_path'] = 'uploads/Preview/';	
-				$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
-				$config['max_size']    = '1024'; // max_size in kb
-				$config['file_name'] = $_FILES['file']['name'];
-						
-				//Load upload library
-				$this->load->library('upload',$config);		
-				
-				$this->upload->initialize($config);
-				
-				// File upload
-				if($this->upload->do_upload('file')){
-					// Get data about the file
-					$uploadData = $this->upload->data();
-				}
+			// Set preference
+			$config['upload_path'] 		= 'uploads/Preview/';
+			$config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf';
+			$config['max_size']    		= '1024'; // max_size in kb
+			$config['file_name'] 		= $_FILES['file']['name'];
+
+			//Load upload library
+			$this->load->library('upload', $config);
+
+			$this->upload->initialize($config);
+
+			// File upload
+			if ($this->upload->do_upload('file')) {
+				// Get data about the file
+				$uploadData = $this->upload->data();
+
+				$data = array(
+					'userId'			=> $user['id'],
+					'upload_id'			=> $insert_id,
+					'file_name'			=> $uploadData['file_name'],
+					'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
+					'create_at'			=> date('Y-m-d H:i:s'),
+				);
+				$this->db->insert('tbl_upload_preview', $data);
 			}
 		}
 
@@ -104,33 +111,28 @@ class Upload_ctr extends CI_Controller
 		}
 	}
 
-	// File upload
-	public function fileUploadfull(){
-		$target_dir = "uploads/full/"; // Upload directory
-		$request = 1;
-		if(isset($_POST['request'])){
-			$request = $_POST['request'];
-		}
 
-		if($request == 1){
-			if(!empty($_FILES['file']['name'])){
-				
-				// Set preference
-				$config['upload_path'] = 'uploads/full/';	
-				$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
-				$config['max_size']    = '1024'; // max_size in kb
-				$config['file_name'] = $_FILES['file']['name'];
-						
-				//Load upload library
-				$this->load->library('upload',$config);		
-				
-				$this->upload->initialize($config);
-				
-				// File upload
-				if($this->upload->do_upload('file')){
-					// Get data about the file
-					$uploadData = $this->upload->data();
-				}
+	// File upload
+	public function fileUploadfull()
+	{
+
+		if (!empty($_FILES['file']['name'])) {
+
+			// Set preference
+			$config['upload_path'] = 'uploads/full/';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
+			$config['max_size']    = '1024'; // max_size in kb
+			$config['file_name'] = $_FILES['file']['name'];
+
+			//Load upload library
+			$this->load->library('upload', $config);
+
+			$this->upload->initialize($config);
+
+			// File upload
+			if ($this->upload->do_upload('file')) {
+				// Get data about the file
+				$uploadData = $this->upload->data();
 			}
 		}
 
