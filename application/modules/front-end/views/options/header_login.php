@@ -33,6 +33,18 @@
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
     <script>
+        Dropzone.autoDiscover = false;
+        myDropzone.on('removedfile', function (file) {
+            var secure_property_id = $("#fileupload").val();
+            $.ajax({
+                url: "controller_name/delete_files",
+                type: "POST",
+                data: {'file_name': file.name}
+            });
+        });
+    </script>
+
+    <script>
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
 
@@ -433,7 +445,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="my-wallet">
+                        <a href="<?php echo ($user) ? 'my-withdraw':'#exampleModalCenter' ;?>">
                             <li>
                                 <span>
                                     <i class="fa fa-minus-square" aria-hidden="true"></i>
@@ -442,7 +454,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="my-wallet">
+                        <a href="<?php echo ($user) ? 'my-slip':'#exampleModalCenter' ;?>">
                             <li>
                                 <span>
                                     <i class="fa fa-file-text-o" aria-hidden="true"></i>

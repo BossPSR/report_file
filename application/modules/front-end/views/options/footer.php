@@ -243,6 +243,7 @@
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
 
 <script src="public/frontend/assets/js/myscript.js"></script>
+
 <script>
     $('#password, #c_password').on('keyup', function() {
         if ($('#password').val() == $('#c_password').val()) {
