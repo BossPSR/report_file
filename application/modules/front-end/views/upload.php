@@ -124,16 +124,16 @@
                         <form action="upload_search" method="post">
                             <div class="tab">
                                 <div class="row account_form">
-                                    <div class="col-md-9 col-xs-9 col-sm-9">
+                                    <div class="col-md-8 col-xs-8 col-sm-8">
                                         <p>
                                             <label class="font-size-upload"> Search Item</label>
                                             <input name="search_item" class="form-control" placeholder="Search Item *" type="text" required>
                                         </p>
                                     </div>
-                                    <div class="col-md-3 col-xs-3 col-sm-3">
+                                    <div class="col-md-4 col-xs-4 col-sm-4">
                                         <p class="inputKuy">
                                             <label class="font-size-upload"> Select Item</label>
-                                            <select class="form-control" name="search_category" id="categori1" required>
+                                            <select class="form-control" name="select_item" id="categori1" required>
                                                 <option selected disabled><b>-- Select item --</b></option>
                                                 <option value="Accessories">Accessories</option>
                                                 <option value="Accessories & More">Accessories & More</option>
@@ -153,15 +153,14 @@
                                             </select>
                                         </p>
                                     </div>
-                                    <div class="col-md-9 col-xs-9 col-sm-9 "></div>
-                                    <div class="col-md-3 col-xs-3 col-sm-3 ">
-                                        <button type="button" class="btn btn-success">Add Item</button>
+                                    <div class="col-md-8 col-xs-8 col-sm-8 "></div>
+                                    <div class="col-md-4 col-xs-4 col-sm-4 ">
+                                        <button type="button" class="btn btn-success" style="margin-bottom:17px;">Add Item</button>
                                     </div>
-
                                     <div class="col-md-12" style="margin-top: 10px;">
                                         <p>
                                             <label class="font-size-upload"> Put Your topic</label>
-                                            <textarea name="search_code" placeholder="Search Code *" class="form-control" rows="5"></textarea>
+                                            <textarea name="topic" placeholder="Put Your topic *" class="form-control" rows="5"></textarea>
                                         </p>
                                         <button type="submit" class="btn btn-info">ADD FILE UPLOAD +</button>
                                     </div>
