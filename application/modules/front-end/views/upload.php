@@ -157,6 +157,18 @@
                                     <div class="col-md-4 col-xs-4 col-sm-4 ">
                                         <button type="button" class="btn btn-success" style="margin-bottom:17px;">Add Item</button>
                                     </div>
+                                    <div class="col-md-8 col-xs-8 col-sm-8">
+                                        <p>
+                                            <label class="font-size-upload"> Search code</label>
+                                            <input name="search_code" class="form-control" placeholder="Search Item *" type="text" required>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12" style="margin-top: 10px;">
+                                        <p>
+                                            <label class="font-size-upload"> Put Your code</label>
+                                            <textarea name="put_code" placeholder="Put Your Code *" class="form-control" rows="5"></textarea>
+                                        </p>
+                                    </div>
                                     <div class="col-md-12" style="margin-top: 10px;">
                                         <p>
                                             <label class="font-size-upload"> Put Your topic</label>

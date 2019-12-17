@@ -37,12 +37,16 @@ class Upload_ctr extends CI_Controller
 
 		$search_item			= $this->input->post('search_item');
 		$select_item			= $this->input->post('select_item');
+		$search_code			= $this->input->post('search_code');
+		$put_code			= $this->input->post('put_code');
 		$topic					= $this->input->post('topic');
 		$create_at				= date('Y-m-d H:i:s');
 
 		$data = array(
 			'search_item'		=> $search_item,
 			'select_item'		=> $select_item,
+			'search_code'		=> $search_code,
+			'code'				=> $put_code,
 			'topic'				=> $topic,
 			'userId'			=> $user['id'],
 			'create_at'			=> $create_at
