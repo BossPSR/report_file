@@ -122,7 +122,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="tab">
-                            <label for="" class="font-size-upload">Preview PDF</label>
+                            <label for="" class="font-size-upload">Preview </label>
                             <form action="fileUpload" class="dropzone" id="fileupload">
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload.<br>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="col-6">
                         <div class="tab">
-                            <label for="" class="font-size-upload">Upload PDF</label>
+                            <label for="" class="font-size-upload">Upload Full Version</label>
                             <div id="dropzone">
                                 <form action="fileUploadfull" class="dropzone dropzonefull needsclick dz-clickable" id="demo-upload">
                                     <div class="dz-message needsclick">
@@ -145,6 +145,9 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 text-right" style="padding-top: 10px;">
+                        <button type="submit" class="btn btn-info">NEXT </button>
                     </div>
                 </div>
             </article>
