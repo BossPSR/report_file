@@ -76,38 +76,49 @@ class Upload_ctr extends CI_Controller
 	{
 		$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 		$insert_id = $this->input->post('upload_id');
-		if (!empty($_FILES['file']['name'])) {
+		$target_dir = "uploads/Preview/"; // Upload directory
 
-			// Set preference
-			$config['upload_path'] 		= 'uploads/Preview/';
-			$config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf';
-			$config['max_size']    		= '1024'; // max_size in kb
-			$config['file_name'] 		= $_FILES['file']['name'];
+		$request = 1;
 
-			//Load upload library
-			$this->load->library('upload', $config);
+		if(isset($_POST['request'])){
+			$request = $_POST['request'];
+		}
 
-			$this->upload->initialize($config);
+		if($request == 1){
+			if (!empty($_FILES['file']['name'])) {
 
-			// File upload
-			if ($this->upload->do_upload('file')) {
-				// Get data about the file
-				$uploadData = $this->upload->data();
+				// Set preference
+				$config['upload_path'] 		= 'uploads/Preview/';
+				$config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf';
+				$config['max_size']    		= '1024'; // max_size in kb
+				$config['file_name'] 		= $_FILES['file']['name'];
 
-				$data = array(
-					'userId'			=> $user['id'],
-					'upload_id'			=> $insert_id,
-					'file_name'			=> $uploadData['file_name'],
-					'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
-					'create_at'			=> date('Y-m-d H:i:s'),
-				);
-				$this->db->insert('tbl_upload_preview', $data);
+				//Load upload library
+				$this->load->library('upload', $config);
+
+				$this->upload->initialize($config);
+
+				// File upload
+				if ($this->upload->do_upload('file')) {
+					// Get data about the file
+					$uploadData = $this->upload->data();
+
+					$data = array(
+						'userId'			=> $user['id'],
+						'upload_id'			=> $insert_id,
+						'file_name'			=> $uploadData['file_name'],
+						'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
+						'create_at'			=> date('Y-m-d H:i:s'),
+					);
+					$this->db->insert('tbl_upload_preview', $data);
+				}
 			}
 		}
 
 		if($request == 2){
 			$filename = $target_dir.$_POST['name']; 
 			unlink($filename); exit;
+			
 		}
 	}
 
@@ -115,56 +126,38 @@ class Upload_ctr extends CI_Controller
 	// File upload
 	public function fileUploadfull()
 	{
-
-		if (!empty($_FILES['file']['name'])) {
-
-			// Set preference
-			$config['upload_path'] = 'uploads/full/';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
-			$config['max_size']    = '1024'; // max_size in kb
-			$config['file_name'] = $_FILES['file']['name'];
-
-			//Load upload library
-			$this->load->library('upload', $config);
-
-			$this->upload->initialize($config);
-
-			// File upload
-			if ($this->upload->do_upload('file')) {
-				// Get data about the file
-				$uploadData = $this->upload->data();
-			}
+		$target_dir = "uploads/full/"; // Upload directory
+		$request = 1;
+		if(isset($_POST['request'])){
+			$request = $_POST['request'];
 		}
-
-		if($request == 2){
-			$filename = $target_dir.$_POST['name']; 
-			unlink($filename); exit;
-		}
-	}
-
-	public function delete_files() {
-        $target_dir = "upload/"; // Upload directory
-
-		
-
-		// Upload file
 		if($request == 1){
-			$target_file = $target_dir . basename($_FILES["file"]["name"]);
+			if (!empty($_FILES['file']['name'])) {
 
-			$msg = "";
-			if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir.$_FILES['file']['name'])) {
-				$msg = "Successfully uploaded";
-			}else{
-				$msg = "Error while uploading";
+				// Set preference
+				$config['upload_path'] = 'uploads/full/';
+				$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
+				$config['max_size']    = '1024'; // max_size in kb
+				$config['file_name'] = $_FILES['file']['name'];
+
+				//Load upload library
+				$this->load->library('upload', $config);
+
+				$this->upload->initialize($config);
+
+				// File upload
+				if ($this->upload->do_upload('file')) {
+					// Get data about the file
+					$uploadData = $this->upload->data();
+				}
 			}
-			echo $msg;
 		}
 
-		// Remove file
 		if($request == 2){
 			$filename = $target_dir.$_POST['name']; 
 			unlink($filename); exit;
 		}
 	}
+	
 	
 }
