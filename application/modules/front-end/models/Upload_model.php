@@ -10,7 +10,7 @@ class Upload_model extends CI_Model
     }
 
     public function delete_files($file_name) {
-        return $this->db->delete('images', array('image_name' => $file_name));
+        
     }
     
 }

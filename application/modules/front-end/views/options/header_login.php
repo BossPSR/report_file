@@ -32,17 +32,7 @@
     
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
-    <script>
-        Dropzone.autoDiscover = false;
-        myDropzone.on('removedfile', function (file) {
-            var secure_property_id = $("#fileupload").val();
-            $.ajax({
-                url: "controller_name/delete_files",
-                type: "POST",
-                data: {'file_name': file.name}
-            });
-        });
-    </script>
+      
 
     <script>
         // Render the PayPal button into #paypal-button-container
