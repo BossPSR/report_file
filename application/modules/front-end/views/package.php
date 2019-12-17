@@ -23,7 +23,8 @@
                     <h3 class="product_name grid_name"><a href="product-details.html">เหมาะสำหรับเว็บไซต์ส่วนตัว</a></h3>
                     <h3 class="product_name">เว็บบริษัทขนาดเล็ก</a></h3><br>
 
-                        <button type="button" class="btn btn-primary" style="width: 80%">Choose Annual</button>
+                        <!-- <button type="button" class="btn btn-primary" style="width: 80%">Choose Annual</button> -->
+                        <div id="paypal-button-container"></div>
                     </div>
                     <div class="product_content list_content">
                         <div class="left_caption">
@@ -38,7 +39,8 @@
                             <div class="product_desc">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus</p><br>
                             </div>
-                            <button type="button" class="btn btn-primary" style="width: 80%">Choose Annual</button>
+                            <!-- <button type="button" class="btn btn-primary" style="width: 80%">Choose Annual</button> -->
+                            <div id="paypal-button-container"></div>
                         </div>
                         <div class="right_caption">
 
@@ -142,3 +144,49 @@
     </div>
 </div>
 <br>
+
+<script>
+    paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '1.0'
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Transaction completed by ' + details.payer.name.given_name);
+        // Call your server to save the transaction
+        // return fetch('/ss', {
+        //   method: 'post',
+        //   headers: {
+        //     'content-type': 'application/json'
+        //   },
+        //   body: JSON.stringify({
+        //     orderID: data.orderID
+        //   })
+        // });
+        console.log(details);
+        $.ajax({
+          url:'paypal_success',
+          method: 'post',
+          data:{
+            orderId: data.orderID,
+            payerId: data.payerID,
+            name: details.payer.name.given_name +" "+details.payer.name.surname,
+            create_time: details.create_time,
+            amount: details.purchase_units['0'].amount.value,
+            currency_code: details.purchase_units['0'].amount.currency_code,
+          },
+          success:function (response) {
+            let dataSucces = JSON.parse(response);
+            console.log(dataSucces);
+          }
+        });
+        
+      });
+    }
+  }).render('#paypal-button-container');
