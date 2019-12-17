@@ -80,6 +80,7 @@ class Upload_ctr extends CI_Controller
 	{
 		$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 		$insert_id = $this->input->post('upload_id');
+
 		$target_dir = "uploads/Preview/"; // Upload directory
 
 		$request = 1;
@@ -115,11 +116,19 @@ class Upload_ctr extends CI_Controller
 						'create_at'			=> date('Y-m-d H:i:s'),
 					);
 					$this->db->insert('tbl_upload_preview', $data);
+					$last_id = $this->db->insert_id();
+					$delete = array(
+						'last_id' => $last_id
+					);
+					$this->session->set_userdata($delete);
 				}
 			}
 		}
 
 		if($request == 2){
+			$last = $this->session->userdata('last_id');
+			$this->db->where('id', $last);
+			$this->db->delete('tbl_upload_preview');
 			$filename = $target_dir.$_POST['name']; 
 			unlink($filename); exit;
 			
@@ -130,6 +139,9 @@ class Upload_ctr extends CI_Controller
 	// File upload
 	public function fileUploadfull()
 	{
+		$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+		$insert_id = $this->input->post('upload_id');
+
 		$target_dir = "uploads/full/"; // Upload directory
 		$request = 1;
 		if(isset($_POST['request'])){
@@ -153,6 +165,14 @@ class Upload_ctr extends CI_Controller
 				if ($this->upload->do_upload('file')) {
 					// Get data about the file
 					$uploadData = $this->upload->data();
+					$data = array(
+						'userId'			=> $user['id'],
+						'upload_id'			=> $insert_id,
+						'file_name'			=> $uploadData['file_name'],
+						'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
+						'create_at'			=> date('Y-m-d H:i:s'),
+					);
+					$this->db->insert('tbl_upload_full', $data);
 				}
 			}
 		}
