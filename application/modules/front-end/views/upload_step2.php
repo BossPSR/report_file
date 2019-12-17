@@ -136,7 +136,7 @@
                         <div class="tab">
                             <label for="" class="font-size-upload">Upload PDF</label>
                             <div id="dropzone">
-                                <form action="fileUploadfull" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                <form action="fileUploadfull" class="dropzone dropzonefull needsclick dz-clickable" id="demo-upload">
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>

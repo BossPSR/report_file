@@ -244,6 +244,27 @@
 
 <script src="public/frontend/assets/js/myscript.js"></script>
 
+  <!-- Script -->
+  <script type='text/javascript'>
+    $(".dropzonefull").dropzone({
+        addRemoveLinks: true,
+        removedfile: function(file) {
+            var name = file.name;    
+            $.ajax({
+                type: 'POST',
+                url: 'fileUploadfull',
+                data: {name: name,request: 2},
+                sucess: function(data){
+                    console.log('success: ' + data);
+                },
+                
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+    </script>
+
     <!-- Script -->
     <script type='text/javascript'>
     Dropzone.autoDiscover = false;
@@ -266,6 +287,8 @@
     });
     </script>
 
+   
+
 <script>
     $('#password, #c_password').on('keyup', function() {
         if ($('#password').val() == $('#c_password').val()) {
@@ -281,29 +304,7 @@
 <script>
     AOS.init();
 </script>
-<script>
-    Dropzone.autoDiscover = false;
-    $('.dropzone').dropzone({
-        addRemoveLinks: true,
-        removedfile: function(file) {
-            var name = file.name;
 
-            $.ajax({
-                type: 'post',
-                url: 'fileUploadDelete',
-                data: {
-                    name: name,
-                    request: 2
-                },
-                success: function(response) {
-                    console.log('success: ' + response);
-                }
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    })
-</script>
 <script>
     var options = {
         height: "23rem",
