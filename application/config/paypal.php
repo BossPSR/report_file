@@ -9,7 +9,7 @@ $config['sandbox'] = FALSE;
 
 
 // PayPal business email
-$config['business'] = 'infinityp.soft@gmail.com';
+$config['business'] = 'sb-bt28o721146@business.example.com';
 
 // What is the default currency?
 $config['paypal_lib_currency_code'] = 'USD';

@@ -36,10 +36,7 @@
         })
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=ATNCwhUWxnsEaA60rIujlP7ldVxp6ZYxBw6VrezAFPAZPDO-qrjaNFtsM-U-d2smTh5m9o1qtEBmqFIe"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-    </script>
+
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
