@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : db
+Source Server         : database
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,10 +10,26 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-17 15:05:59
+Date: 2019-12-17 15:10:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `tbl_follow`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_follow`;
+CREATE TABLE `tbl_follow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender_userId` int(11) DEFAULT NULL,
+  `receiver_userId` int(11) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_follow
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
@@ -30,23 +46,30 @@ CREATE TABLE `tbl_upload` (
   `select_item` varchar(255) DEFAULT NULL,
   `topic` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload
 -- ----------------------------
-INSERT INTO `tbl_upload` VALUES ('1', '2', 'TEST', 'Butters & Eggs', 'TEST', '2019-12-13 08:26:02', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('2', '2', 'TEST', 'Butters & Eggs', 'TEST', '2019-12-13 08:27:47', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('3', '2', 'TEST', 'Butters & Eggs', 'TEST', '2019-12-13 08:28:27', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('4', '2', 'TEST', 'Tablets', 'TEST', '2019-12-13 10:01:27', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('5', '2', 'TEST', 'Butters & Eggs', 'TEST', '2019-12-14 03:52:42', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('6', '2', 'TEST', 'Accessories & More', 'TEST', '2019-12-14 05:26:24', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('7', '2', 'TEST', 'Accessories & More', 'TEST', '2019-12-14 06:08:18', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('8', '2', 'TEST', 'Accessories', 'TESTT', '2019-12-14 07:11:05', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('9', '2', 'YRDY', 'Butters & Eggs', 'YRDY', '2019-12-14 09:53:53', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('10', '2', 'TEST', 'Accessories & More', 'TESTTEST', '2019-12-17 05:15:28', null, null, null);
-INSERT INTO `tbl_upload` VALUES ('11', '2', 'TEST', '', null, '2019-12-17 08:56:07', null, 'Accessories', 'TEST');
-INSERT INTO `tbl_upload` VALUES ('12', '2', 'TEST Item', 'Put Your code', 'Search code', '2019-12-17 09:05:01', null, 'Accessories & More', 'Put Your topic');
+
+-- ----------------------------
+-- Table structure for `tbl_upload_preview`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_upload_preview`;
+CREATE TABLE `tbl_upload_preview` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `upload_id` varchar(110) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_upload_preview
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_user`
