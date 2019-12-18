@@ -2,114 +2,49 @@
 <h2 class="text-center" style="margin-top: 15px;">My-Upload</h2>
 <hr class="line_package">
 <br>
+<?php if(!empty($documents)) :  ?>
 <div class="container">
     <div class="row" style="margin-bottom: 100px;">
-
         <div class="col-lg-12 col-md-12 col-12 ">
             <article class="single_upload input-upload">
                 <div class="row">
-
+                <?php foreach ($documents as $key => $documents) : ?>
                     <div class="col-3 text-right margin-5 product">
-                        <!-- <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px" style="position:relative"></iframe> -->
                         <div class="boxdel">
-                            <button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
+                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
                         </div>
-                        <div id="example1"></div>
+                        <iframe src="<?php echo $documents['path']; ?>" width="100%" height="440px"></iframe>
                         <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
                             <span ><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
                             <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
                             <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
                         </div>
                     </div>
-
-                    <div class="col-3 text-right margin-5">
-                        <div class="boxdel">
-                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
-                        </div>
-                        <div id="example2"></div>
-                        <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                            <span ><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
-                            <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
-                            <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
-                        </div>
-                    </div>
-
-                    <div class="col-3 text-right margin-5">
-                        <div class="boxdel">
-                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
-                        </div>
-                        <div id="example3"></div>                        
-                        <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                            <span ><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
-                            <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
-                            <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
-                        </div>
-                    </div>
-
-                    <div class="col-3 text-right margin-5">
-                        <div class="boxdel">
-                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
-                        </div>
-                        <div id="example4"></div>
-                        <div  style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                            <span><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
-                            <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
-                            <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
-                        </div>
-                    </div>
-
-                    <div class="col-3 text-right margin-5">
-                        <div class="boxdel">
-                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
-                        </div>
-                        <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
-                        <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                            <span ><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
-                            <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
-                            <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
-                        </div>
-                    </div>
-
-                    <div class="col-3 text-right margin-5">
-                        <div class="boxdel">
-                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
-                        </div>
-                        <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
-                        <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                            <span ><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
-                            <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
-                            <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
-                        </div>
-                    </div>
-                    
-                    <div class="col-3 text-right margin-5">
-                        <div class="boxdel">
-                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
-                        </div>
-                        <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
-                        <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                            <span ><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
-                            <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
-                            <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
-                        </div>
-                    </div>
-
-                    <div class="col-3 text-right margin-5">
-                        <div class="boxdel">
-                            <button type="button" class="btn btn-danger" class="boxdel"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></button>
-                        </div>
-                        <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
-                        <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                            <span ><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
-                            <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
-                            <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
-                        </div>
-                    </div>
-                    
+                <?php endforeach ; ?>
                 </div>
             </article>
         </div>
-
     </div>
 </div>
 <br>
+
+<?php else : ?>
+
+<!--error section area start-->
+<div class="error_section">
+   <div class="container">   
+       <div class="row">
+           <div class="col-12">
+               <div class="error_form">
+                   <h1>No file</h1>
+                   <h2>Data Not Found</h2>
+                   <p>Sorry, the file you are looking for does not exist.</p>
+                   <a href="upload">Back to home page</a>
+               </div>
+           </div>
+       </div>
+   </div>    
+</div>
+<!--error section area end--> 
+
+<?php endif; ?>

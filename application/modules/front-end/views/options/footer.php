@@ -267,7 +267,7 @@
 
     <!-- Script -->
     <script type='text/javascript'>
-    Dropzone.autoDiscover = false;
+    // Dropzone.autoDiscover = false;
     $(".dropzone").dropzone({
         addRemoveLinks: true,
         removedfile: function(file) {

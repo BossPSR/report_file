@@ -62,6 +62,7 @@ $route['my-wallet']          = 'front-end/My_wallet_ctr/my_wallet';
 $route['my-deposit']         = 'front-end/My_deposit_ctr/my_deposit';
 $route['my-withdraw']        = 'front-end/My_withdraw_ctr/my_withdraw';
 $route['my-slip']            = 'front-end/My_slip_ctr/my_slip';
+
 $route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
 $route['register']           = 'front-end/Register_ctr';
 $route['register_success']   = 'front-end/Register_ctr/register_success';
@@ -73,7 +74,7 @@ $route['upload_step2']       = 'front-end/Upload_ctr/My_upload_step2';
 $route['search']             = 'front-end/Search_ctr';
 $route['unlocks']            = 'front-end/Unlocks_ctr';
 $route['after-unlocks']      = 'front-end/After_Unlocks_ctr';
-$route['My_Upload']          = 'front-end/Upload_ctr/My_upload';
+$route['my-upload']          = 'front-end/My_upload_ctr/my_upload';
 $route['Bookmarked']         = 'front-end/Bookmarked_ctr';
 $route['Recently-Accessed']  = 'front-end/Recently_ctr';
 $route['fileUpload']         = 'front-end/Upload_ctr/fileUpload';

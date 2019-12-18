@@ -209,7 +209,7 @@
                                         <a href="upload">Upload +</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="My_Upload">My Upload</a>
+                                        <a href="my-upload">My Upload</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#"> My Unlocks</a>
@@ -395,7 +395,7 @@
                                         <ul>
                                             <?php if ($user) :  ?>
                                                 <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
-                                                <li><a href="My_Upload"> My Upload</a></li>
+                                                <li><a href="my-upload"> My Upload</a></li>
                                                 <li><a href="#"> My Unlocks</a></li>
                                                 <li><a href="package"> Package</a></li>
                                                 <li class="menu-item-has-children">
