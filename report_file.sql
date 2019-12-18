@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : database
+Source Server         : db
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-18 17:12:47
+Date: 2019-12-18 17:35:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,28 @@ CREATE TABLE `tbl_follow` (
 -- ----------------------------
 -- Records of tbl_follow
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_paypal`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_paypal`;
+CREATE TABLE `tbl_paypal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orderID` varchar(255) NOT NULL,
+  `payerID` varchar(255) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `currency_code` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `create_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_paypal
+-- ----------------------------
+INSERT INTO `tbl_paypal` VALUES ('1', '5XG65837WK7507415', 'J3GJEC9GX23VS', '1', 'USD', '3', 'John', 'Doe', '2019-10-01 11:50:00');
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
