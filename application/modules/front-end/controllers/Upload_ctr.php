@@ -20,17 +20,6 @@ class Upload_ctr extends CI_Controller
 		}
 	}
 
-	public function My_upload()
-	{
-		if ($this->session->userdata('email') == '') {
-			redirect('home');
-		} else {
-			$this->load->view('options/header_login');
-			$this->load->view('my_upload');
-			$this->load->view('options/footer');
-		}
-	}
-
 	public function My_upload_search()
 	{
 		$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
@@ -93,7 +82,7 @@ class Upload_ctr extends CI_Controller
 				// Set preference
 				$config['upload_path'] 		= 'uploads/Preview/';
 				$config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-				$config['max_size']    		= '1024'; // max_size in kb
+				$config['max_size']    		= '9999'; // max_size in kb
 				$config['file_name'] 		= $_FILES['file']['name'];
 
 				//Load upload library
@@ -151,7 +140,7 @@ class Upload_ctr extends CI_Controller
 				// Set preference
 				$config['upload_path'] = 'uploads/full/';
 				$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-				$config['max_size']    = '1024'; // max_size in kb
+				$config['max_size']    = '9999'; // max_size in kb
 				$config['file_name'] = $_FILES['file']['name'];
 
 				//Load upload library
@@ -171,14 +160,21 @@ class Upload_ctr extends CI_Controller
 						'create_at'			=> date('Y-m-d H:i:s'),
 					);
 					$this->db->insert('tbl_upload_full', $data);
+					$lastfull_id = $this->db->insert_id();
+					$deletefull = array(
+						'lastfull_id' => $lastfull_id
+					);
+					$this->session->set_userdata($deletefull);
 				}
 			}
 		}
 
-		if ($request == 2) {
-			$filename = $target_dir . $_POST['name'];
-			unlink($filename);
-			exit;
+		if($request == 2){
+			$lastfull = $this->session->userdata('lastfull_id');
+			$this->db->where('id', $lastfull);
+			$this->db->delete('tbl_upload_full');
+			$filename = $target_dir.$_POST['name']; 
+			unlink($filename); exit;
 		}
 	}
 }

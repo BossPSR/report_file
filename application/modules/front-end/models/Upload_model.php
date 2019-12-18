@@ -9,7 +9,14 @@ class Upload_model extends CI_Model
         parent::__construct();
     }
 
-    public function delete_files($file_name) {
+    public function my_upload($usersid) {
+        
+        $this->db->select('*');
+        $this->db->from('tbl_upload_preview');
+        $this->db->where('userId', $usersid);
+        $data = $this->db->get();
+
+        return $data->result_array();
         
     }
     
