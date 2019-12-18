@@ -8,7 +8,6 @@ class Login_ctr extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Login_model');
-       
     }
 
 
@@ -30,7 +29,21 @@ class Login_ctr extends CI_Controller {
                 );
                 $this->session->set_userdata($user_data);
                 $this->session->set_flashdata('save_ss', TRUE);
-                redirect('my-profile');
+                $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+                $paypal = $this->db->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
+                if (!empty($paypal)) {
+                    $datePaypal = date("Y-m-d",strtotime($paypal['create_time']));
+                    $checkDate = DateDiff($datePaypal,date("Y-m-d"));
+                    if ($checkDate <= 30) {
+                        redirect('my-profile');
+                    }else{
+                        redirect('package');
+                    }
+                    
+                }else{
+                    redirect('package');
+                }
+                
             }
             else
             {
