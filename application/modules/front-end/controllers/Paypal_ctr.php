@@ -12,22 +12,23 @@ class Paypal_ctr extends CI_Controller{
     public function success()
     {
         $data = [];
-        $data['name'] = $this->input->post('name');
+        $data['user_id'] = $this->input->post('user_id');
+        $data['first_name'] = $this->input->post('first_name');
+        $data['last_name'] = $this->input->post('last_name');
         $data['create_time'] = $this->input->post('create_time');
         $data['amount'] = $this->input->post('amount');
         $data['currency_code'] = $this->input->post('currency_code');
-        $data['orderID'] = $this->input->post('orderId');
-        $data['payerId'] = $this->input->post('payerId');
-        $data['slip_id'] = $this->input->post('slip_id');
+        $data['orderID'] = $this->input->post('orderID');
+        $data['payerID'] = $this->input->post('payerID');
 
         $insert = [
             'orderID' => $data['orderID'],
-            'payerId' => $data['payerId'],
+            'payerID' => $data['payerID'],
             'amount' => $data['amount'],
-            'slip_id' => $data['slip_id'],
             'currency_code' => $data['currency_code'],
-            'first_name' => $data['name'],
-            'last_name' => $data['name'],
+            'user_id' => $data['user_id'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'create_time' => date("Y-m-d H:i:s")
         ];
 
