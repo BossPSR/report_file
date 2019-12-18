@@ -381,12 +381,15 @@
                                         <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
                                         <li><a href="my-upload"> My Upload</a></li>
                                         <li><a href="#"> My Unlocks</a></li>
-                                        <li><a href="package"> Package</a></li>
-                                        <li class="menu-item-has-children">
+                                        <li style="margin-right: 150px;"><a href="package"> Package</a></li>
+                                        <li class="menu-item-has-children" style="margin-right: 15px;">
                                             <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                         </li>
-                                        <li class="menu-item-has-children">
+                                        <li class="menu-item-has-children" style="margin-right: 40px;">
                                             <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                        </li>
+                                        <li >
+                                            <a href="package">ยอดคงเหลือ : $1,000</a></li>
                                         </li>
                                     <?php else : ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Upload + <div class="arrow_box"></div></a></li>
