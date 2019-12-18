@@ -79,7 +79,7 @@ $route['Recently-Accessed']  = 'front-end/Recently_ctr';
 $route['fileUpload']         = 'front-end/Upload_ctr/fileUpload';
 $route['fileUploadfull']     = 'front-end/Upload_ctr/fileUploadfull';
 $route['paypal_success']     = 'front-end/Paypal_ctr/success';
-
+$route['get_search']         = 'front-end/Search_ctr/get_search';
 // /------------------------------------- back-end  ---------------------
 
 $route['backend']             = 'back-end/Home_ctr';

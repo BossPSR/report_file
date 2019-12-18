@@ -287,28 +287,28 @@
                                     <?php else : ?>
                                         <div class="search_container">
                                         <?php endif ?>
-                                        <form action="search">
+                                        <form action="get_search" method="POST">
                                             <div class="search_box">
-                                                <input placeholder="Search item /Code ...." type="text">
+                                                <input placeholder="Search item /Code ...." type="text" name="search">
                                             </div>
                                             <div class="hover_category search_box" style="width: 521px;">
-                                                <select class="select_option" name="select" id="categori1">
-                                                    <option selected value="1">Select item</option>
-                                                    <option value="2">Accessories</option>
-                                                    <option value="3">Accessories & More</option>
-                                                    <option value="4">Butters & Eggs</option>
-                                                    <option value="5">Camera & Video </option>
-                                                    <option value="6">Mornitors</option>
-                                                    <option value="7">Tablets</option>
-                                                    <option value="8">Laptops</option>
-                                                    <option value="9">Handbags</option>
-                                                    <option value="10">Headphone & Speaker</option>
-                                                    <option value="11">Herbs & botanicals</option>
-                                                    <option value="12">Vegetables</option>
-                                                    <option value="13">Shop</option>
-                                                    <option value="14">Laptops & Desktops</option>
-                                                    <option value="15">Watchs</option>
-                                                    <option value="16">Electronic</option>
+                                                <select class="select_option" name="select_item" id="categori1">
+                                                    <option selected value="Select item">Select item</option>
+                                                    <option value="Accessories">Accessories</option>
+                                                    <option value="Accessories & More">Accessories & More</option>
+                                                    <option value="Butters & Eggs">Butters & Eggs</option>
+                                                    <option value="Camera & Video">Camera & Video </option>
+                                                    <option value="Mornitors">Mornitors</option>
+                                                    <option value="Tablets">Tablets</option>
+                                                    <option value="Laptops">Laptops</option>
+                                                    <option value="Handbags">Handbags</option>
+                                                    <option value="Headphone & Speaker">Headphone & Speaker</option>
+                                                    <option value="Herbs & botanicals">Herbs & botanicals</option>
+                                                    <option value="Vegetables">Vegetables</option>
+                                                    <option value="Shop">Shop</option>
+                                                    <option value="Laptops & Desktops">Laptops & Desktops</option>
+                                                    <option value="Watchs">Watchs</option>
+                                                    <option value="Electronic">Electronic</option>
                                                 </select>
                                                 <button type="submit">Search</button>
                                             </div>
