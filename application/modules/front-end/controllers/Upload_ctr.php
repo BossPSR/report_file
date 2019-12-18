@@ -26,7 +26,6 @@ class Upload_ctr extends CI_Controller
 
 		$search_item			= $this->input->post('search_item');
 		$select_item			= $this->input->post('select_item');
-		$search_code			= $this->input->post('search_code');
 		$put_code			= $this->input->post('put_code');
 		$topic					= $this->input->post('topic');
 		$create_at				= date('Y-m-d H:i:s');
@@ -34,7 +33,6 @@ class Upload_ctr extends CI_Controller
 		$data = array(
 			'search_item'		=> $search_item,
 			'select_item'		=> $select_item,
-			'search_code'		=> $search_code,
 			'code'				=> $put_code,
 			'topic'				=> $topic,
 			'userId'			=> $user['id'],
@@ -74,11 +72,11 @@ class Upload_ctr extends CI_Controller
 
 		$request = 1;
 
-		if(isset($_POST['request'])){
+		if (isset($_POST['request'])) {
 			$request = $_POST['request'];
 		}
 
-		if($request == 1){
+		if ($request == 1) {
 			if (!empty($_FILES['file']['name'])) {
 
 				// Set preference
@@ -114,13 +112,13 @@ class Upload_ctr extends CI_Controller
 			}
 		}
 
-		if($request == 2){
+		if ($request == 2) {
 			$last = $this->session->userdata('last_id');
 			$this->db->where('id', $last);
 			$this->db->delete('tbl_upload_preview');
-			$filename = $target_dir.$_POST['name']; 
-			unlink($filename); exit;
-			
+			$filename = $target_dir . $_POST['name'];
+			unlink($filename);
+			exit;
 		}
 	}
 
@@ -133,10 +131,10 @@ class Upload_ctr extends CI_Controller
 
 		$target_dir = "uploads/full/"; // Upload directory
 		$request = 1;
-		if(isset($_POST['request'])){
+		if (isset($_POST['request'])) {
 			$request = $_POST['request'];
 		}
-		if($request == 1){
+		if ($request == 1) {
 			if (!empty($_FILES['file']['name'])) {
 
 				// Set preference
@@ -179,6 +177,4 @@ class Upload_ctr extends CI_Controller
 			unlink($filename); exit;
 		}
 	}
-	
-	
 }
