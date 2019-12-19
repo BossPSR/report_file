@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-18 17:35:24
+Date: 2019-12-19 10:11:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,13 +67,30 @@ CREATE TABLE `tbl_upload` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload
 -- ----------------------------
-INSERT INTO `tbl_upload` VALUES ('1', '1', 'หนังสือรับรองสุขภาพ', 'Laptops', 'หนังสือรับรองสุขภาพ', 'test123', '2019-12-18 08:13:19', null);
-INSERT INTO `tbl_upload` VALUES ('2', '1', 'codeigniter pdf array pages', 'Mornitors', 'codeigniter pdf array pages', 'nunggift', '2019-12-18 09:48:36', null);
+
+-- ----------------------------
+-- Table structure for `tbl_upload_full`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_upload_full`;
+CREATE TABLE `tbl_upload_full` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `upload_id` varchar(110) DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_upload_full
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_upload_preview`
@@ -88,13 +105,11 @@ CREATE TABLE `tbl_upload_preview` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_preview
 -- ----------------------------
-INSERT INTO `tbl_upload_preview` VALUES ('1', '1', '1', 'ExportServlet.pdf', '2019-12-18 08:13:28', null, 'uploads/Preview/ExportServlet.pdf');
-INSERT INTO `tbl_upload_preview` VALUES ('2', '1', '2', 'AIA_2_Health_Certificate_th_20130808.pdf', '2019-12-18 09:48:42', null, 'uploads/Preview/AIA_2_Health_Certificate_th_20130808.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
