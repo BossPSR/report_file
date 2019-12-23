@@ -244,6 +244,8 @@
 
 <script src="public/frontend/assets/js/myscript.js"></script>
 
+
+
   <!-- Script -->
   <script type='text/javascript'>
     $(".dropzonefull").dropzone({
