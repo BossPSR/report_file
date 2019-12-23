@@ -10,6 +10,16 @@ class My_upload_ctr extends CI_Controller
 		$this->load->model('Upload_model');
 	}
 
+	public function my_upload_edit()
+	{
+		$upload_preview_id = $this->input->get('upload_preview_id');
+		$data['document_preview'] = $this->db->get_where('tbl_upload_preview' , ['id' =>$upload_preview_id])->row_array();
+
+		$this->load->view('options/header_login');
+		$this->load->view('my_upload_edit',$data);
+		$this->load->view('options/footer');
+	}
+
 	function my_upload()
 	{
 		if ($this->session->userdata('email') == '') {

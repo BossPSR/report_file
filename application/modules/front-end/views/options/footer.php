@@ -348,6 +348,7 @@
 
 
 
+
 <script>
     $('#password, #c_password').on('keyup', function() {
         if ($('#password').val() == $('#c_password').val()) {

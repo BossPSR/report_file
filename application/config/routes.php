@@ -64,6 +64,7 @@ $route['my-withdraw']        = 'front-end/My_withdraw_ctr/my_withdraw';
 $route['my-slip']            = 'front-end/My_slip_ctr/my_slip';
 $route['my-upload']          = 'front-end/My_upload_ctr/my_upload';
 $route['my-upload-delete']   = 'front-end/My_upload_ctr/delete_file';
+$route['my-upload-edit']   = 'front-end/My_upload_ctr/my_upload_edit';
 
 
 $route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
@@ -81,6 +82,7 @@ $route['Bookmarked']         = 'front-end/Bookmarked_ctr';
 $route['Recently-Accessed']  = 'front-end/Recently_ctr';
 $route['fileUpload']         = 'front-end/Upload_ctr/fileUpload';
 $route['fileUploadfull']     = 'front-end/Upload_ctr/fileUploadfull';
+$route['fileUploadEdit']     = 'front-end/Upload_ctr/fileUploadEdit';
 $route['paypal_success']     = 'front-end/Paypal_ctr/success';
 $route['get_search']         = 'front-end/Search_ctr/get_search';
 // /------------------------------------- back-end  ---------------------

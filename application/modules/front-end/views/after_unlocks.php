@@ -47,7 +47,7 @@
                                 <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
                             </div>
                         </div>
-                        <iframe src="public/image/ExportServlet.pdf" width="100%" height="620px"></iframe>
+                        <iframe src="<?php echo $dou['path']; ?>" width="100%" height="700px"></iframe>
                     </div>
                 </div>
             </article>
