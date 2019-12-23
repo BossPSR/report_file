@@ -16,8 +16,16 @@ class My_upload_ctr extends CI_Controller
 			redirect('home');
 		} else {
             $users              = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
-            $usersid            = $users['id'];
-            $data['documents']   = $this->Upload_model->my_upload($usersid);
+			$usersid            = $users['id'];
+			$insert_id          = $this->input->get('insert_id');
+			$data['documents']   = $this->Upload_model->my_upload($usersid);
+			if (empty($data['documents'])) {
+
+				echo "<script>";
+				echo "alert('ขออภัย กรุณาอัพไฟล์เอกสารด้วยค่ะ !!!');";
+				echo "window.location='upload_step2?insert_id=$insert_id';";
+				echo "</script>";
+			}
 
 			$this->load->view('options/header_login');
 			$this->load->view('my_upload',$data);
