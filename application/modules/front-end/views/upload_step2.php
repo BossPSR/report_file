@@ -136,7 +136,7 @@
                         <div class="tab">
                             <label for="" class="font-size-upload">Upload Full Version</label>
                             <div id="dropzone">
-                                <form action="fileUploadfull" class="dropzone dropzonefull needsclick dz-clickable" id="demo-upload">
+                                <form action="fileUploadfull" class="dropzone dropzonefull needsclick dz-clickable" id="demo-upload" required >
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
@@ -146,12 +146,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4 text-left" style="padding-top: 10px;">
-                        <a href="upload" class="btn btn-warning" style="color:#fff;">BACK</a>
-                    </div>
-                    <div class="col-4" style="padding-top: 10px;"></div>
-                    <div class="col-4 text-right" style="padding-top: 10px;">
-                        <button type="submit" class="btn btn-info">NEXT </button>
+                    <div class="col-12 text-right" style="padding-top: 10px;">
+                        <a href="my-upload?insert_id=<?php echo $insert_id; ?>" class="btn btn-info">NEXT </a>
                     </div>
                 </div>
             </article>
