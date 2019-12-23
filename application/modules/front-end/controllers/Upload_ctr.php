@@ -11,6 +11,7 @@ class Upload_ctr extends CI_Controller
 
 	public function index()
 	{
+		// $data['insert_id'] = $this->input->get('insert_id');
 		if ($this->session->userdata('email') == '') {
 			redirect('home');
 		} else {
@@ -169,12 +170,13 @@ class Upload_ctr extends CI_Controller
 			}
 		}
 
-		if($request == 2){
+		if ($request == 2) {
 			$lastfull = $this->session->userdata('lastfull_id');
 			$this->db->where('id', $lastfull);
 			$this->db->delete('tbl_upload_full');
-			$filename = $target_dir.$_POST['name']; 
-			unlink($filename); exit;
+			$filename = $target_dir . $_POST['name'];
+			unlink($filename);
+			exit;
 		}
 	}
 }
