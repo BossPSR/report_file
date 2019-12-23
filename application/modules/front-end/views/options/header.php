@@ -35,6 +35,11 @@
             $('#myInput').trigger('focus')
         })
     </script>
+     <script>
+        $('#myModal1').on('shown.bs.modal', function() {
+            $('#myInput1').trigger('focus')
+        })
+    </script>
 
 
 

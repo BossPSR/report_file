@@ -10000,6 +10000,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     margin-bottom: 12px;
   }
 }
+.blocker {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
 
 /*privacy policy css end*/
 

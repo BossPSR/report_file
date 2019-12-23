@@ -9,15 +9,24 @@ class Upload_model extends CI_Model
         parent::__construct();
     }
 
-    public function my_upload($usersid) {
-        
+    public function my_upload($usersid)
+    {
+
         $this->db->select('*');
         $this->db->from('tbl_upload_preview');
         $this->db->where('userId', $usersid);
         $data = $this->db->get();
 
         return $data->result_array();
-        
     }
-    
+
+    public function unlocks($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_upload_preview');
+        $this->db->where('userId', $id);
+        $data = $this->db->get();
+
+        return $data->row_array();
+    }
 }
