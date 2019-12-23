@@ -293,7 +293,7 @@
                                             </div>
                                             <div class="hover_category search_box" style="width: 521px;">
                                                 <select class="select_option" name="select_item" id="categori1">
-                                                    <option selected value="Select item">Select item</option>
+                                                    <option selected disabled>Select item</option>
                                                     <option value="Accessories">Accessories</option>
                                                     <option value="Accessories & More">Accessories & More</option>
                                                     <option value="Butters & Eggs">Butters & Eggs</option>
