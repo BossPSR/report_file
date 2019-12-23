@@ -81,7 +81,8 @@ class Upload_ctr extends CI_Controller
 
 				// Set preference
 				$config['upload_path'] 		= 'uploads/Preview/';
-				$config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+				// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+				$config['allowed_types'] 	= '*';
 				$config['max_size']    		= '99999'; // max_size in kb
 				$config['file_name'] 		= $_FILES['file']['name'];
 
@@ -139,7 +140,8 @@ class Upload_ctr extends CI_Controller
 
 				// Set preference
 				$config['upload_path'] = 'uploads/full/';
-				$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+				// $config['allowed_types'] = 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+				$config['allowed_types'] 	= '*';
 				$config['max_size']    = '99999'; // max_size in kb
 				$config['file_name'] = $_FILES['file']['name'];
 

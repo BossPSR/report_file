@@ -123,7 +123,7 @@
                     <div class="col-6">
                         <div class="tab">
                             <label for="" class="font-size-upload">Preview </label>
-                            <form action="fileUpload" class="dropzone" id="fileupload" required>
+                            <form action="fileUpload" class="dropzone" id="fileupload">
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload.<br>
                                     <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
