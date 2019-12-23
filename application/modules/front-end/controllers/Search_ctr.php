@@ -26,18 +26,13 @@ class Search_ctr extends CI_Controller
 		$data['keyword'] 		= $this->input->post('search');
 		if ($select_item == "") {
 			$data['search_code'] = $this->Search_model->get_searchAll($keyword);
-		}elseif($keyword == ""){
+		} elseif ($keyword == "") {
 			$data['search_code'] = $this->Search_model->get_search_one($select_item);
-		}elseif($select_item == "" && $keyword == ""){
+		} elseif ($select_item == "" && $keyword == "") {
 			$data['search_code'] = $this->db->get('tbl_upload')->result_array();
-		}
-		else{
+		} else {
 			$data['search_code'] = $this->Search_model->get_search($keyword, $select_item);
-			
 		}
-		
-		
-
 		$this->load->view('options/header_login');
 		$this->load->view('search', $data);
 		$this->load->view('options/footer');

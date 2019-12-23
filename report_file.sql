@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-19 10:11:51
+Date: 2019-12-23 19:11:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,11 +67,12 @@ CREATE TABLE `tbl_upload` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload
 -- ----------------------------
+INSERT INTO `tbl_upload` VALUES ('5', '2', 'Google เอกสาร สร้างและแก้ไขเอกสารออนไลน์ฟรี', 'Accessories', 'MX0001', 'สร้างเอกสารใหม่และทำการแก้ไขพร้อมๆ กับผู้อื่นจากคอมพิวเตอร์ โทรศัพท์ หรือแท็บเล็ตของคุณ มีหรือไม่มีอินเทอร์เน็ตก็ทำงานเสร็จได้เหมือนกัน ใช้เอกสารเพื่อแก้ไขไฟล์ Word ', '2019-12-23 19:09:18', null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_full`
@@ -86,11 +87,12 @@ CREATE TABLE `tbl_upload_full` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_full
 -- ----------------------------
+INSERT INTO `tbl_upload_full` VALUES ('1', '2', '5', 'sample-3pp.pdf', '2019-12-23 19:11:07', null, 'uploads/Preview/sample-3pp.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_upload_preview`
@@ -105,11 +107,12 @@ CREATE TABLE `tbl_upload_preview` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_preview
 -- ----------------------------
+INSERT INTO `tbl_upload_preview` VALUES ('1', '2', '5', 'sample-3pp.pdf', '2019-12-23 19:11:04', null, 'uploads/Preview/sample-3pp.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_user`

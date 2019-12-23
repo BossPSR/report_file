@@ -220,7 +220,58 @@
 <script src="public/frontend/assets/js/main.js"></script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script type="text/javascript">
+    function daletedata(id) {
+        // var url = $(this).attr('href');
+        swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: 'my-upload-delete',
+                        type: 'GET',
+                        data: {id:id},
+                        error: function() {
+                            alert('Something is wrong');
+                        },
+                        success: function(id) {
+                            swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+                        }
+                    });
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+                
+              
+            });
+    };
+</script> -->
+<script>
+    function confirmalert2(data) {
 
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'my-upload-delete?Id=' + data;
+                swal("Good job!", "You clicked the button!", "success");
+            } else {
+                swal("Your imaginary file is safe!");
+            }
+        })
+    }
+</script>
 
 
 <script>
@@ -253,50 +304,56 @@
 
 
 
-  <!-- Script -->
-  <script type='text/javascript'>
+<!-- Script -->
+<script type='text/javascript'>
     $(".dropzonefull").dropzone({
         addRemoveLinks: true,
         removedfile: function(file) {
-            var name = file.name;    
+            var name = file.name;
             $.ajax({
                 type: 'POST',
                 url: 'fileUploadfull',
-                data: {name: name,request: 2},
-                sucess: function(data){
+                data: {
+                    name: name,
+                    request: 2
+                },
+                sucess: function(data) {
                     console.log('success: ' + data);
                 },
-                
+
             });
             var _ref;
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });
-    </script>
+</script>
 
-    <!-- Script -->
-    <script type='text/javascript'>
+<!-- Script -->
+<script type='text/javascript'>
     // Dropzone.autoDiscover = false;
     $(".dropzone").dropzone({
         addRemoveLinks: true,
         removedfile: function(file) {
-            var name = file.name;    
+            var name = file.name;
             $.ajax({
                 type: 'POST',
                 url: 'fileUpload',
-                data: {name: name,request: 2},
-                sucess: function(data){
+                data: {
+                    name: name,
+                    request: 2
+                },
+                sucess: function(data) {
                     console.log('success: ' + data);
                 },
-                
+
             });
             var _ref;
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });
-    </script>
+</script>
 
-   
+
 
 <script>
     $('#password, #c_password').on('keyup', function() {
