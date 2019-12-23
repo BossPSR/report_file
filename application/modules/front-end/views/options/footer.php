@@ -239,7 +239,14 @@
         swal("fill !", "Error for upload. Please try again later.!", "error");
     <?php endif; ?>
 </script>
-
+<script>
+    <?php if ($suss = $this->session->flashdata('save_ss2')) : ?>
+        swal("Good job!", '<?php echo $suss; ?>', "success");
+    <?php endif; ?>
+    <?php if ($error = $this->session->flashdata('del_ss2')) : ?>
+        swal("Fail !", '<?php echo $error; ?>', "error");
+    <?php endif; ?>
+</script>
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
 
 <script src="public/frontend/assets/js/myscript.js"></script>
