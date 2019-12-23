@@ -1,3 +1,4 @@
+<?php $uploadBy = $this->db->get_where('tbl_user', ['id' => $Id_unlock['userId']])->row_array(); ?>
 <br>
 <h2 class="text-center" style="margin-top: 15px;">Unlocks</h2>
 <hr class="line_package">
@@ -24,7 +25,7 @@
             <div class="menu-bottom">Page </div>
         </div>
         <div class="col-lg-2 col-md-2 col-2 text-center">
-            <div class="menu-list">@BossPSR</div>
+            <div class="menu-list">@<?php echo $uploadBy['username']; ?></div>
             <div class="menu-bottom">Uploaded By </div>
         </div>
         <div class="col-lg-1 col-md-1 col-1"></div>
@@ -41,14 +42,14 @@
                         <div class="text-center" style="position: relative;">
                             <label></label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><a href="#?userId=<?php echo $userId['id'] ;?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
+                                <div style="display:inline-block;"><a href="#?uploadBy=<?php echo $uploadBy['id']; ?>&userId<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></button></div>
                                 <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-warning"><i class="fa fa-unlock-alt"></i>&nbsp;&nbsp;UNLOCK</button></div>
                                 <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
                             </div>
                         </div>
                         <label class="pricebg">$ 600.00</label>
                         <div class="blurPDF">
-                            <iframe src="public/image/ExportServlet.pdf" width="100%" height="100%"></iframe>
+                            <iframe src="<?php echo $Id_unlock['path']; ?>" width="100%" height="100%"></iframe>
                         </div>
                     </div>
 
