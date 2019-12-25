@@ -333,6 +333,34 @@
 
 <!-- Script -->
 <script type='text/javascript'>
+    // Dropzone.autoDiscover = false;
+    $(".dropzoneEditfull").dropzone({
+        addRemoveLinks: true,
+        removedfile: function(file) {
+            var name = file.name;
+            var document_preview_id = document_preview_id;
+
+            $.ajax({
+                type: 'POST',
+                url: 'fileUploadEdit',
+                data: {
+                    name: name,
+                    request: 2,
+                    document_preview_id:document_preview_id
+                },
+                success: function(data) {
+                    console.log('success: ' + data);
+                },
+
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+</script>
+
+<!-- Script -->
+<script type='text/javascript'>
     $(".dropzonefull").dropzone({
         addRemoveLinks: true,
         removedfile: function(file) {
