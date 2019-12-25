@@ -188,7 +188,7 @@ class Upload_ctr extends CI_Controller
 			$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 			$document_preview_id = $this->input->post('document_preview_id');
 			$target_dir = "uploads/Preview/"; // Upload directory
-	
+
 			$request = 1;
 	
 			if (isset($_POST['request'])) {
@@ -221,8 +221,9 @@ class Upload_ctr extends CI_Controller
 							'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
 							'update_at'			=> date('Y-m-d H:i:s'),
 						);
+
 						$this->db->where('id',$document_preview_id);
-						$this->db->update('tbl_upload_preview', $data);
+            			$success = $this->db->update('tbl_upload_preview',$data);
 						// $last_id = $this->db->insert_id();
 						// $delete = array(
 						// 	'last_id' => $last_id

@@ -118,12 +118,12 @@
                     <div class="col-6">
                         <div class="tab form-group">
                             <label for="" class="font-size-upload">Preview </label>
-                            <form action="dropzoneEdit" class="dropzone dropzoneEdit" id="fileupload">
+                            <form action="fileUploadEdit" class="dropzone dropzoneEdit" id="fileupload">
                                 
                                 <div class="dz-message needsclick">
                                     Drop files here or click to upload.<br>
                                     <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                    <!-- <input type="text" name="upload_id" value="<?php echo $insert_id; ?>" hidden> -->
+                                    <input type="hidden" name="document_preview_id" value="<?php echo $document_preview['id'];?>" hidden>
                                 </div>
                             </form>
                         </div>
@@ -160,56 +160,3 @@
 </div>
 <br>
 
-<!-- Script -->
-<!-- <script type='text/javascript'>
-    // Dropzone.autoDiscover = false;
-    $(".dropzoneEdit").dropzone({
-        addRemoveLinks: false,
-        removedfile: function(file) {
-            var name = file.name;
-            var document_preview_id = <?php echo $document_preview['id'];?>
-            $.ajax({
-                type: 'POST',
-                url: 'fileUploadEdit',
-                data: {
-                    name: name,
-                    document_preview_id:document_preview_id,
-                    request: 2
-                },
-                sucess: function(data) {
-                    console.log('success: ' + data);
-                },
-
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    });
-</script> -->
-
-<!-- Script -->
-<script type='text/javascript'>
-    // Dropzone.autoDiscover = false;
-    $(".dropzoneEdit").dropzone({
-        addRemoveLinks: false,
-        removedfile: function(file) {
-            var name = file.name;
-            var document_preview_id = <?php echo $document_preview['id'];?>
-            $.ajax({
-                type: 'POST',
-                url: 'fileUploadEdit',
-                data: {
-                    name: name,
-                    request: 2,
-                    document_preview_id:document_preview_id,
-                },
-                success: function(data) {
-                    console.log('success: ' + data);
-                },
-
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    });
-</script>
