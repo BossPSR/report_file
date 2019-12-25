@@ -254,6 +254,25 @@
     };
 </script> -->
 <script>
+    function confirmalertunlock(data, data2) {
+
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure you want to unlock this document ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'unlock_document?upload_id=' + data + '&userId=' + data2;
+                swal("Good job!", "You clicked the button!", "success");
+            } else {
+                swal("Your imaginary file is safe!");
+            }
+        })
+    }
+</script>
+<script>
     function confirmalert2(data) {
 
         swal({
@@ -318,7 +337,7 @@
                 data: {
                     name: name,
                     request: 2,
-                    document_preview_id:document_preview_id
+                    document_preview_id: document_preview_id
                 },
                 success: function(data) {
                     console.log('success: ' + data);
@@ -346,7 +365,7 @@
                 data: {
                     name: name,
                     request: 2,
-                    document_preview_id:document_preview_id
+                    document_preview_id: document_preview_id
                 },
                 success: function(data) {
                     console.log('success: ' + data);
