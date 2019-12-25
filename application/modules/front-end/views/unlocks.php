@@ -42,8 +42,18 @@
                         <div class="text-center" style="position: relative;">
                             <label></label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><a href="#?uploadBy=<?php echo $uploadBy['id']; ?>&userId<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></button></div>
-                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-warning"><i class="fa fa-unlock-alt"></i>&nbsp;&nbsp;UNLOCK</button></div>
+                                <div style="display:inline-block;"><a href="#?uploadBy=<?php echo $uploadBy['id']; ?>&userId<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
+
+                                <div style="display:inline-block;">
+                                    <?php if (empty($unlocks)) : ?>
+                                        <a style="font-size: 12px; color:#fff;" class="btn btn-warning" onclick="confirmalertunlock('<?php echo $Id_unlock['upload_id']; ?>','<?php echo $userId['id']; ?>')">
+                                            <i class="fa fa-unlock-alt"></i>&nbsp;&nbsp;UNLOCK
+                                        </a>
+                                    <?php else : ?>
+                                        <a href="downloadDocument?id=<?php echo $check_after_unlock['id']; ?>&upload_id=<?php echo $Id_unlock['upload_id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></a>
+                                    <?php endif; ?>
+                                </div>
+
                                 <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
                             </div>
                         </div>

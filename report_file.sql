@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : db
+Source Server         : database
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-12-25 18:44:20
+Date: 2019-12-25 18:52:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,6 +54,26 @@ CREATE TABLE `tbl_paypal` (
 INSERT INTO `tbl_paypal` VALUES ('1', '5XG65837WK7507415', 'J3GJEC9GX23VS', '1', 'USD', '3', 'John', 'Doe', '2019-10-01 11:50:00');
 
 -- ----------------------------
+-- Table structure for `tbl_unlocks`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_unlocks`;
+CREATE TABLE `tbl_unlocks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `upload_id` int(11) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `ip_address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_unlocks
+-- ----------------------------
+INSERT INTO `tbl_unlocks` VALUES ('1', '1', '2', '2019-12-25 18:40:02', null, '1', '127.0.0.1');
+INSERT INTO `tbl_unlocks` VALUES ('2', '2', '2', '2019-12-25 18:46:56', null, '1', '127.0.0.1');
+INSERT INTO `tbl_unlocks` VALUES ('3', '1', '2', '2019-12-25 18:48:52', null, '1', '127.0.0.1');
 -- Table structure for `tbl_select_item`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_select_item`;
@@ -98,9 +118,9 @@ CREATE TABLE `tbl_upload` (
 -- ----------------------------
 -- Records of tbl_upload
 -- ----------------------------
-INSERT INTO `tbl_upload` VALUES ('1', '2', '0', 'ปัญญาประดิษฐ์ (AI : Artificial Intelligence) คืออะไร ???', 'Electronic', 'MX001', 'เครื่องจักร(machine) ที่มีฟังก์ชันทีมีความสามารถในการทำความเข้าใจ เรียนรู้องค์ความรู้ต่างๆ อาทิเช่น การรับรู้  การเรียนรู้ การให้เหตุผล และการแก้ปัญหาต่างๆ  เครื่องจักรที่มีความสามารถเหล่านี้ก็ถือว่าเป็น ปัญญาประดิษฐ์  (AI : Artificial Intelligence) นั่นเอง\r\n\r\nเพราะฉะนั้นจึงสามารถกล่าวได้ว่า AI ถือกำเนิดขึ้นเมื่อเครื่องจักรมีความสามารถที่จะเรียนรู้นั่นเอง  ซึ่ง AI ก็ถูกแบ่งออกเป็นหลายระดับตามความสามารถหรือความฉลาด  โดยจะวัดจากความสามารถในการ ให้เหตุผล การพูด และทัศนคติของ AI ตัวนั้นๆ เมื่อเปรียบเทียบกับมนุษย์อย่างเราๆ', '2019-12-24 10:21:54', null);
-INSERT INTO `tbl_upload` VALUES ('2', '2', '3', 'เอกสารสำคัญ - โปรแกรม ร้าน ค้า ปลีก', 'ภาพยนต์', 'MX0032', 'โปรแกรมร้านค้าปลีก ค้าส่งราคา 2000 บาท ใช้งานง่าย บริการหลังการขายฟรี มีครบทั้ง ระบบขายสินค้า สต๊อกสินค้า บัญชี บาร์โค้ด รายงานยอดขาย ฯลฯ เอกสารสำคัญ ใบเสนอราคา ...', '2019-12-25 11:26:16', '2019-12-25 17:10:25');
-INSERT INTO `tbl_upload` VALUES ('3', '2', '1', 'Can I have two jquery onclick events in one element? - Stack Overflow', 'หนังสือ', 'MX008', '20 มิ.ย. 2556 - 3 คำตอบ - I know this has been asked before but I can\'t quite get the syntax of how to add my particular functions in one onclick even. Current onclick code', '2019-12-25 15:41:57', null);
+INSERT INTO `tbl_upload` VALUES ('1', '2', 'ปัญญาประดิษฐ์ (AI : Artificial Intelligence) คืออะไร ???', 'Electronic', 'MX001', 'เครื่องจักร(machine) ที่มีฟังก์ชันทีมีความสามารถในการทำความเข้าใจ เรียนรู้องค์ความรู้ต่างๆ อาทิเช่น การรับรู้  การเรียนรู้ การให้เหตุผล และการแก้ปัญหาต่างๆ  เครื่องจักรที่มีความสามารถเหล่านี้ก็ถือว่าเป็น ปัญญาประดิษฐ์  (AI : Artificial Intelligence) นั่นเอง\r\n\r\nเพราะฉะนั้นจึงสามารถกล่าวได้ว่า AI ถือกำเนิดขึ้นเมื่อเครื่องจักรมีความสามารถที่จะเรียนรู้นั่นเอง  ซึ่ง AI ก็ถูกแบ่งออกเป็นหลายระดับตามความสามารถหรือความฉลาด  โดยจะวัดจากความสามารถในการ ให้เหตุผล การพูด และทัศนคติของ AI ตัวนั้นๆ เมื่อเปรียบเทียบกับมนุษย์อย่างเราๆ', '2019-12-24 10:21:54', null);
+INSERT INTO `tbl_upload` VALUES ('2', '2', 'เอกสารสำคัญ - โปรแกรม ร้าน ค้า ปลีก', 'Herbs & botanicals', 'MX003', 'โปรแกรมร้านค้าปลีก ค้าส่งราคา 2000 บาท ใช้งานง่าย บริการหลังการขายฟรี มีครบทั้ง ระบบขายสินค้า สต๊อกสินค้า บัญชี บาร์โค้ด รายงานยอดขาย ฯลฯ เอกสารสำคัญ ใบเสนอราคา ...', '2019-12-25 11:26:16', null);
+INSERT INTO `tbl_upload` VALUES ('3', '2', 'หนังสือรับรองสุขภาพ', 'Laptops', 'หนังสือรับรองสุขภาพ', 'หนังสือรับรองสุขภาพ', '2019-12-25 18:44:04', null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_full`
@@ -115,12 +135,13 @@ CREATE TABLE `tbl_upload_full` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_full
 -- ----------------------------
-INSERT INTO `tbl_upload_full` VALUES ('1', '2', '2', 'ใบเสนอราคาfurnitmall_31-10-2562_(2).pdf', '2019-12-25 11:26:26', '2019-12-25 12:02:19', 'uploads/full/ใบเสนอราคาfurnitmall_31-10-2562_(2).pdf');
+INSERT INTO `tbl_upload_full` VALUES ('1', '2', '2', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019100001_บริษัท_ตัวอย่าง_จำกัด.pdf', '2019-12-25 11:26:26', null, 'uploads/full/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019100001_บริษัท_ตัวอย่าง_จำกัด.pdf');
+INSERT INTO `tbl_upload_full` VALUES ('2', '2', '3', 'AIA_2_Health_Certificate_th_20130808.pdf', '2019-12-25 18:45:11', null, 'uploads/full/AIA_2_Health_Certificate_th_20130808.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_upload_preview`
@@ -135,12 +156,13 @@ CREATE TABLE `tbl_upload_preview` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_preview
 -- ----------------------------
-INSERT INTO `tbl_upload_preview` VALUES ('4', '2', '2', 'หน้าเว็บของแอดมิน.pdf', '2019-12-25 11:26:22', '2019-12-25 12:02:52', 'uploads/Preview/หน้าเว็บของแอดมิน.pdf');
+INSERT INTO `tbl_upload_preview` VALUES ('4', '2', '2', '09102562.pdf', '2019-12-25 11:26:22', null, 'uploads/Preview/09102562.pdf');
+INSERT INTO `tbl_upload_preview` VALUES ('5', '2', '3', 'ExportServlet.pdf', '2019-12-25 18:44:25', null, 'uploads/Preview/ExportServlet.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
