@@ -129,22 +129,26 @@
                         </div>
                         <div class="">
                             <div>Preview</div>
-                            <iframe src="<?php echo $document_preview['path']; ?>" width="100%" height="440px"></iframe>
+                            <iframe src="<?php echo $document_preview['path']; ?>" width="100%" height="700px"></iframe>
                         </div>
                         
                     </div>
                     <div class="col-6">
-                        <div class="tab">
+                        <div class="tab form-group">
                             <label for="" class="font-size-upload">Upload Full Version</label>
                             <div id="dropzone">
-                                <form action="fileUploadfull" class="dropzone needsclick dz-clickable" id="demo-upload" required >
+                                <form action="fileUploadEditfull" class="dropzone dropzoneEditfull needsclick dz-clickable" id="demo-upload" required >
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                     </div>
-                                    <!-- <input type="text" name="upload_id" value="<?php echo $insert_id; ?>" hidden> -->
+                                    <input type="hidden" name="document_full_id" value="<?php echo $document_full['id'];?>" hidden>
                                 </form>
                             </div>
+                        </div>
+                        <div class="">
+                            <div>Preview</div>
+                            <iframe src="<?php echo $document_full['path']; ?>" width="100%" height="700px"></iframe>
                         </div>
                     </div>
                     <div class="col-12 text-right" style="padding-top: 10px;">

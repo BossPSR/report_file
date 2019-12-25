@@ -159,7 +159,7 @@ class Upload_ctr extends CI_Controller
 						'userId'			=> $user['id'],
 						'upload_id'			=> $insert_id,
 						'file_name'			=> $uploadData['file_name'],
-						'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
+						'path'				=> 'uploads/full/' . $uploadData['file_name'],
 						'create_at'			=> date('Y-m-d H:i:s'),
 					);
 					$this->db->insert('tbl_upload_full', $data);

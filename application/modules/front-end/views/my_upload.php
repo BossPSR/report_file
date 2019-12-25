@@ -16,8 +16,8 @@
                                     
                                 </div>
                                 <div class="boxdel">
-                                    <a href="after-unlocks?id=<?php echo $documents['id']; ?>" class="btn btn-info" class="boxdel"><i class="fa fa-file-text" aria-hidden="true" style="font-size: 26px;"></i></a>
-                                    <a href="my-upload-edit?upload_preview_id=<?php echo $documents['id']; ?>" class="btn btn-warning" class="boxdel"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 26px;"></i></a>
+                                    <a href="after-unlocks?id=<?php echo $documents['upload_id']; ?>" class="btn btn-info" class="boxdel"><i class="fa fa-file-text" aria-hidden="true" style="font-size: 26px;"></i></a>
+                                    <a href="my-upload-edit?upload_preview_id=<?php echo $documents['upload_id']; ?>" class="btn btn-warning" class="boxdel"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 26px;"></i></a>
                                     <a onclick="confirmalert2('<?php echo $documents['id']; ?>')" class="btn btn-danger" class="boxdel delete-s remove"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 26px;"></i></a>
                                 </div>
                                 <iframe src="<?php echo $documents['path']; ?>" width="100%" height="440px"></iframe>
