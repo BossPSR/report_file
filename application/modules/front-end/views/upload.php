@@ -104,6 +104,31 @@
         background-color: #4CAF50;
     }
 </style> -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Add item</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="add_item" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Select Item:</label>
+                        <input type="text" name="select" class="form-control" id="recipient-name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <br>
 <h2 class="text-center" style="margin-top: 15px;">Upload + </h2>
 <hr class="line_package">
@@ -136,14 +161,14 @@
                                             <select class="form-control" name="select_item" id="categori1" required>
                                                 <option selected disabled><b>-- Select item --</b></option>
                                                 <?php foreach ($select as $key => $select) : ?>
-                                                <option value="<?php echo $select['id']; ?>,<?php echo $select['name_item']; ?>"><?php echo $select['name_item']; ?></option>
-                                                <?php endforeach ; ?>
+                                                    <option value="<?php echo $select['id']; ?>,<?php echo $select['name_item']; ?>"><?php echo $select['name_item']; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </p>
                                     </div>
                                     <div class="col-md-8 col-xs-8 col-sm-8 "></div>
                                     <div class="col-md-4 col-xs-4 col-sm-4 ">
-                                        <button type="button" class="btn btn-success" style="margin-bottom:17px;">Add Item</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalUpload" style="margin-bottom:17px;">Add Item</button>
                                     </div>
                                     <div class="col-md-12" style="margin-top: 10px;">
                                         <p>

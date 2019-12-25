@@ -37,6 +37,46 @@ class Upload_ctr extends CI_Controller
 		}
 	}
 
+	public function add_item()
+	{
+		$data = array(
+			'name_item' 	=> $this->input->post('select'),
+			'created_at' 	=> date('Y-m-d H:i:s')
+		);
+		
+		if ($this->db->insert('tbl_select_item', $data)) 
+		{
+			$this->session->set_flashdata('upload_ss', TRUE);
+			redirect('upload');
+		} 
+		else 
+		{
+			$this->session->set_flashdata('upload_fail', TRUE);
+			redirect('upload');
+		}	
+	}
+
+	public function edit_item()
+	{
+		$idmodal = $this->input->post('idmodal');
+		
+		$data = array(
+			'name_item' 	=> $this->input->post('select'),
+			'created_at' 	=> date('Y-m-d H:i:s')
+		);
+		
+		if ($this->db->insert('tbl_select_item', $data)) 
+		{
+			$this->session->set_flashdata('upload_ss', TRUE);
+			redirect('upload-edit?id='.$idmodal);
+		} 
+		else 
+		{
+			$this->session->set_flashdata('upload_fail', TRUE);
+			redirect('upload-edit?id='.$idmodal);
+		}	
+	}
+
 	public function upload_edit_complete()
 	{
 		$id			 	= $this->input->post('id');

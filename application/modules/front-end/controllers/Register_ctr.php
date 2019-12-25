@@ -34,16 +34,20 @@ class Register_ctr extends CI_Controller
 		$check_usre2         = $this->Login_model->check_usre2($username);
 
 		if ($username_check  && $check_usre2) {
-			echo "<script>";
-			echo "alert('ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!!');";
-			echo "window.location='register';";
-			echo "</script>";
+			$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!! </div>');
+            redirect('register','refresh');
+			// echo "<script>";
+			// echo "alert('ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!!');";
+			// echo "window.location='register';";
+			// echo "</script>";
 		} else {
 			if ($password != $c_password) {
-				echo "<script>";
-				echo "alert('กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!!');";
-				echo "window.location='register';";
-				echo "</script>";
+				$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!! </div>');
+               	redirect('register','refresh');
+				// echo "<script>";
+				// echo "alert('กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!!');";
+				// echo "window.location='register';";
+				// echo "</script>";
 			} else {
 				$data = array(
 					'passport'          => $passport,
@@ -57,15 +61,19 @@ class Register_ctr extends CI_Controller
 				$success = $this->db->insert('tbl_user', $data);
 
 				if ($success > 0) {
-					echo "<script>";
-					echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
-					echo "window.location='register';";
-					echo "</script>";
+					$this->session->set_flashdata('save_ss', TRUE);
+                	redirect('register','refresh');
+					// echo "<script>";
+					// echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
+					// echo "window.location='register';";
+					// echo "</script>";
 				} else {
-					echo "<script>";
-					echo "alert('ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง !!!');";
-					echo "window.location='register';";
-					echo "</script>";
+					$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอก Email หรือ Password ให้ถูกต้อง !! </div>');
+               	 	redirect('register','refresh');
+					// echo "<script>";
+					// echo "alert('ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง !!!');";
+					// echo "window.location='register';";
+					// echo "</script>";
 				}
 			}
 		}
