@@ -308,6 +308,7 @@
     // Dropzone.autoDiscover = false;
     $(".dropzoneEdit").dropzone({
         addRemoveLinks: true,
+        maxFiles: 1,
         removedfile: function(file) {
             var name = file.name;
             var document_preview_id = document_preview_id;
@@ -336,6 +337,7 @@
     // Dropzone.autoDiscover = false;
     $(".dropzoneEditfull").dropzone({
         addRemoveLinks: true,
+        maxFiles: 1,
         removedfile: function(file) {
             var name = file.name;
             var document_full_id = document_full_id;
@@ -363,6 +365,7 @@
 <script type='text/javascript'>
     $(".dropzonefull").dropzone({
         addRemoveLinks: true,
+        maxFiles: 1,
         removedfile: function(file) {
             var name = file.name;
             $.ajax({
@@ -388,6 +391,7 @@
     // Dropzone.autoDiscover = false;
     $(".dropzone").dropzone({
         addRemoveLinks: true,
+        maxFiles: 1,
         removedfile: function(file) {
             var name = file.name;
             $.ajax({
