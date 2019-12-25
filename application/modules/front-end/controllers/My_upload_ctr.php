@@ -21,6 +21,7 @@ class My_upload_ctr extends CI_Controller
 		$this->load->view('options/footer');
 	}
 
+
 	function my_upload()
 	{
 		if ($this->session->userdata('email') == '') {

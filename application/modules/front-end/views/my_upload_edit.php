@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-right" style="padding-top: 10px;">
-                        <a href="#" class="btn btn-info">NEXT </a>
+                        <a href="my-upload" class="btn btn-info">กลับสู่หน้า My Upload </a>
                     </div>
                 </div>
             </article>

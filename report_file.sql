@@ -74,6 +74,29 @@ CREATE TABLE `tbl_unlocks` (
 INSERT INTO `tbl_unlocks` VALUES ('1', '1', '2', '2019-12-25 18:40:02', null, '1', '127.0.0.1');
 INSERT INTO `tbl_unlocks` VALUES ('2', '2', '2', '2019-12-25 18:46:56', null, '1', '127.0.0.1');
 INSERT INTO `tbl_unlocks` VALUES ('3', '1', '2', '2019-12-25 18:48:52', null, '1', '127.0.0.1');
+-- Table structure for `tbl_select_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_select_item`;
+CREATE TABLE `tbl_select_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_item` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_select_item
+-- ----------------------------
+INSERT INTO `tbl_select_item` VALUES ('1', 'หนังสือ', '2019-12-25 15:25:32', null);
+INSERT INTO `tbl_select_item` VALUES ('2', 'เกม', '2019-12-25 15:25:40', null);
+INSERT INTO `tbl_select_item` VALUES ('3', 'ภาพยนต์', '2019-12-25 15:25:43', null);
+INSERT INTO `tbl_select_item` VALUES ('4', 'วรรณกรรม', '2019-12-25 15:25:45', null);
+INSERT INTO `tbl_select_item` VALUES ('5', 'ประวัติศาสตร์', '2019-12-25 15:25:46', null);
+INSERT INTO `tbl_select_item` VALUES ('6', 'คณิตศาสตร์', '2019-12-25 18:34:06', null);
+INSERT INTO `tbl_select_item` VALUES ('7', 'ดาราศาสตร์', '2019-12-25 18:37:03', null);
+INSERT INTO `tbl_select_item` VALUES ('8', 'ภาษาไทย', '2019-12-25 18:41:06', null);
+INSERT INTO `tbl_select_item` VALUES ('9', 'อาหาร', '2019-12-25 18:43:11', null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
@@ -82,6 +105,7 @@ DROP TABLE IF EXISTS `tbl_upload`;
 CREATE TABLE `tbl_upload` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
+  `select_item_id` int(11) NOT NULL,
   `search_item` varchar(255) DEFAULT '',
   `select_item` varchar(255) DEFAULT '',
   `code` text DEFAULT NULL,
@@ -154,11 +178,13 @@ CREATE TABLE `tbl_user` (
   `file_name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
 INSERT INTO `tbl_user` VALUES ('1', '1659900740516', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', null, '2019-12-11 04:07:28');
-INSERT INTO `tbl_user` VALUES ('2', '1269900232221', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', null, '2019-12-13 08:25:38');
+INSERT INTO `tbl_user` VALUES ('2', '1269900232221', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '2019-12-25 15:19:48');
 INSERT INTO `tbl_user` VALUES ('3', '123456789', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '2019-12-23 19:29:15');
+INSERT INTO `tbl_user` VALUES ('4', '4444555666112', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', null, '2019-12-25 17:14:08');
+INSERT INTO `tbl_user` VALUES ('5', '123123', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '2019-12-25 17:23:11');
