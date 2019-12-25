@@ -76,6 +76,8 @@ $route['package']            = 'front-end/Package_ctr';
 $route['upload']             = 'front-end/Upload_ctr';
 $route['upload_search']      = 'front-end/Upload_ctr/My_upload_search';
 $route['upload_step2']       = 'front-end/Upload_ctr/My_upload_step2';
+$route['upload-edit']       = 'front-end/Upload_ctr/upload_edit';
+$route['upload_edit_complete']       = 'front-end/Upload_ctr/upload_edit_complete';
 $route['search']             = 'front-end/Search_ctr';
 $route['unlocks']            = 'front-end/Unlocks_ctr';
 $route['after-unlocks']      = 'front-end/After_Unlocks_ctr';
@@ -84,6 +86,7 @@ $route['Recently-Accessed']  = 'front-end/Recently_ctr';
 $route['fileUpload']         = 'front-end/Upload_ctr/fileUpload';
 $route['fileUploadfull']     = 'front-end/Upload_ctr/fileUploadfull';
 $route['fileUploadEdit']     = 'front-end/Upload_ctr/fileUploadEdit';
+$route['fileUploadEditfull'] = 'front-end/Upload_ctr/fileUploadEditfull';
 $route['paypal_success']     = 'front-end/Paypal_ctr/success';
 $route['get_search']         = 'front-end/Search_ctr/get_search';
 // /------------------------------------- back-end  ---------------------

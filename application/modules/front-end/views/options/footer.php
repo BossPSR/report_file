@@ -338,7 +338,7 @@
         addRemoveLinks: true,
         removedfile: function(file) {
             var name = file.name;
-            var document_preview_id = document_preview_id;
+            var document_full_id = document_full_id;
 
             $.ajax({
                 type: 'POST',
@@ -346,7 +346,7 @@
                 data: {
                     name: name,
                     request: 2,
-                    document_preview_id:document_preview_id
+                    document_full_id:document_full_id
                 },
                 success: function(data) {
                     console.log('success: ' + data);
