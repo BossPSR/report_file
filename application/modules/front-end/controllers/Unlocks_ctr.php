@@ -24,7 +24,6 @@ class Unlocks_ctr extends CI_Controller
 			$data['unlocks']						= $this->Upload_model->get_unlocks($data['userId']['id'], $upload_id);
 			$data['check_after_unlock']				= $this->Upload_model->check_afterunlocks($upload_id);
 
-
 			$this->load->view('options/header_login');
 			$this->load->view('unlocks', $data);
 			$this->load->view('options/footer');

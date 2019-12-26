@@ -7,6 +7,7 @@ class Upload_ctr extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('image_lib');
 	}
 
 	public function index()
@@ -17,7 +18,7 @@ class Upload_ctr extends CI_Controller
 		} else {
 			$data['select'] 	= $this->db->get('tbl_select_item')->result_array();
 			$this->load->view('options/header_login');
-			$this->load->view('upload',$data);
+			$this->load->view('upload', $data);
 			$this->load->view('options/footer');
 		}
 	}
@@ -29,10 +30,10 @@ class Upload_ctr extends CI_Controller
 			redirect('home');
 		} else {
 			$id = $this->input->get('id');
-			$data['key_search'] = $this->db->get_where('tbl_upload' , ['id' =>$id])->row_array();
+			$data['key_search'] = $this->db->get_where('tbl_upload', ['id' => $id])->row_array();
 			$data['select'] 	= $this->db->get('tbl_select_item')->result_array();
 			$this->load->view('options/header_login');
-			$this->load->view('upload_edit',$data);
+			$this->load->view('upload_edit', $data);
 			$this->load->view('options/footer');
 		}
 	}
@@ -43,38 +44,32 @@ class Upload_ctr extends CI_Controller
 			'name_item' 	=> $this->input->post('select'),
 			'created_at' 	=> date('Y-m-d H:i:s')
 		);
-		
-		if ($this->db->insert('tbl_select_item', $data)) 
-		{
+
+		if ($this->db->insert('tbl_select_item', $data)) {
 			$this->session->set_flashdata('upload_ss', TRUE);
 			redirect('upload');
-		} 
-		else 
-		{
+		} else {
 			$this->session->set_flashdata('upload_fail', TRUE);
 			redirect('upload');
-		}	
+		}
 	}
 
 	public function edit_item()
 	{
 		$idmodal = $this->input->post('idmodal');
-		
+
 		$data = array(
 			'name_item' 	=> $this->input->post('select'),
 			'created_at' 	=> date('Y-m-d H:i:s')
 		);
-		
-		if ($this->db->insert('tbl_select_item', $data)) 
-		{
+
+		if ($this->db->insert('tbl_select_item', $data)) {
 			$this->session->set_flashdata('upload_ss', TRUE);
-			redirect('upload-edit?id='.$idmodal);
-		} 
-		else 
-		{
+			redirect('upload-edit?id=' . $idmodal);
+		} else {
 			$this->session->set_flashdata('upload_fail', TRUE);
-			redirect('upload-edit?id='.$idmodal);
-		}	
+			redirect('upload-edit?id=' . $idmodal);
+		}
 	}
 
 	public function upload_edit_complete()
@@ -85,7 +80,7 @@ class Upload_ctr extends CI_Controller
 		$put_code		= $this->input->post('put_code');
 		$topic			= $this->input->post('topic');
 		$update_at		= date('Y-m-d H:i:s');
-		$select_exp 	= explode(",",$select_item);
+		$select_exp 	= explode(",", $select_item);
 
 		$data = array(
 			'search_item'		=> $search_item,
@@ -95,14 +90,14 @@ class Upload_ctr extends CI_Controller
 			'topic'				=> $topic,
 			'update_at'			=> $update_at
 		);
-			$this->db->where('id', $id);
+		$this->db->where('id', $id);
 		if ($this->db->update('tbl_upload', $data)) {
 			$insert_id = $this->db->insert_id();
 			$this->session->set_flashdata('upload_ss', TRUE);
-			redirect('upload-edit?id='.$id);
+			redirect('upload-edit?id=' . $id);
 		} else {
 			$this->session->set_flashdata('upload_fail', TRUE);
-			redirect('upload-edit?id'.$id);
+			redirect('upload-edit?id' . $id);
 		}
 	}
 
@@ -115,7 +110,7 @@ class Upload_ctr extends CI_Controller
 		$put_code			= $this->input->post('put_code');
 		$topic					= $this->input->post('topic');
 		$create_at				= date('Y-m-d H:i:s');
-		$select_exp = explode(",",$select_item);
+		$select_exp = explode(",", $select_item);
 
 		$data = array(
 			'search_item'		=> $search_item,
@@ -151,65 +146,73 @@ class Upload_ctr extends CI_Controller
 	}
 
 	// File upload
-	public function fileUpload()
-	{
-		$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-		$insert_id = $this->input->post('upload_id');
+	// public function fileUpload()
+	// {
+	// 	// image_lib
+		
 
-		$target_dir = "uploads/Preview/"; // Upload directory
+	// 	$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+	// 	$insert_id = $this->input->post('upload_id');
 
-		$request = 1;
+	// 	$target_dir = "uploads/Preview/"; // Upload directory
 
-		if (isset($_POST['request'])) {
-			$request = $_POST['request'];
-		}
+	// 	$request = 1;
 
-		if ($request == 1) {
-			if (!empty($_FILES['file']['name'])) {
+	// 	if (isset($_POST['request'])) {
+	// 		$request = $_POST['request'];
+	// 	}
 
-				// Set preference
-				$config['upload_path'] 		= 'uploads/Preview/';
-				// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-				$config['allowed_types'] 	= '*';
-				$config['max_size']    		= '99999'; // max_size in kb
-				$config['file_name'] 		= $_FILES['file']['name'];
+	// 	if ($request == 1) {
+	// 		if (!empty($_FILES['file']['name'])) {
 
-				//Load upload library
-				$this->load->library('upload', $config);
+				
 
-				$this->upload->initialize($config);
+	// 			// Set preference
+	// 			$config['upload_path'] 		= 'uploads/Preview/';
+	// 			// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+	// 			$config['allowed_types'] 	= '*';
+	// 			$config['max_size']    		= '99999'; // max_size in kb
+	// 			$config['file_name'] 		= $_FILES['file']['name'];
 
-				// File upload
-				if ($this->upload->do_upload('file')) {
-					// Get data about the file
-					$uploadData = $this->upload->data();
+	// 			//Load upload library
+	// 			$this->load->library('upload', $config);
+	// 			$this->upload->initialize($config);
 
-					$data = array(
-						'userId'			=> $user['id'],
-						'upload_id'			=> $insert_id,
-						'file_name'			=> $uploadData['file_name'],
-						'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
-						'create_at'			=> date('Y-m-d H:i:s'),
-					);
-					$this->db->insert('tbl_upload_preview', $data);
-					$last_id = $this->db->insert_id();
-					$delete = array(
-						'last_id' => $last_id
-					);
-					$this->session->set_userdata($delete);
-				}
-			}
-		}
+	// 			// File upload
+	// 			if ($this->upload->do_upload('file')) {
+	// 				// Get data about the file
+	// 				$uploadData = $this->upload->data();
+				
+	// 				$data = array(
+	// 					'userId'			=> $user['id'],
+	// 					'upload_id'			=> $insert_id,
+	// 					'file_name'			=> $uploadData['file_name'],
+	// 					'path'				=> 'uploads/Preview/' . $uploadData['file_name'],
+	// 					'create_at'			=> date('Y-m-d H:i:s'),
+	// 				);
+	// 				$this->db->insert('tbl_upload_preview', $data);
+	// 				$last_id = $this->db->insert_id();
+	// 				$delete = array(
+	// 					'last_id' => $last_id
+	// 				);
+	// 				$this->session->set_userdata($delete);
 
-		if ($request == 2) {
-			$last = $this->session->userdata('last_id');
-			$this->db->where('id', $last);
-			$this->db->delete('tbl_upload_preview');
-			$filename = $target_dir . $_POST['name'];
-			unlink($filename);
-			exit;
-		}
-	}
+	// 			}
+
+					
+	// 		}
+	// 	}
+
+	// 	if ($request == 2) {
+	// 		$last = $this->session->userdata('last_id');
+	// 		$this->db->where('id', $last);
+	// 		$this->db->delete('tbl_upload_preview');
+	// 		$filename = $target_dir . $_POST['name'];
+	// 		unlink($filename);
+	// 		exit;
+	// 	}
+	// }
+
 
 
 	// File upload

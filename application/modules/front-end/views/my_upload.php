@@ -10,11 +10,11 @@
                     <div class="row">
                         <?php foreach ($documents as $key => $documents) : ?>
                             <div class="col-3 text-right margin-5 product">
-                                <div style="position:absolute;top:-30px;">
+                                <!-- <div style="position:absolute;top:-30px;">
                                   
                                        Preview
                                     
-                                </div>
+                                </div> -->
                                 <div class="boxdel">
                                     <a href="after-unlocks?id=<?php echo $documents['upload_id']; ?>" class="btn btn-info" class="boxdel"><i class="fa fa-file-text" aria-hidden="true" style="font-size: 26px;"></i></a>
                                     <a href="my-upload-edit?upload_preview_id=<?php echo $documents['upload_id']; ?>" class="btn btn-warning" class="boxdel"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 26px;"></i></a>

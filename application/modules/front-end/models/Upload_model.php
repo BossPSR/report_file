@@ -13,7 +13,7 @@ class Upload_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('tbl_upload_preview');
+        $this->db->from('tbl_upload_full');
         $this->db->where('userId', $usersid);
         $data = $this->db->get();
 
@@ -23,7 +23,7 @@ class Upload_model extends CI_Model
     public function unlocks($id)
     {
         $this->db->select('*');
-        $this->db->from('tbl_upload_preview');
+        $this->db->from('tbl_upload_full');
         $this->db->where('userId', $id);
         $data = $this->db->get();
 

@@ -35,7 +35,7 @@
                             </div>
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format("1527"); ?></div>
-                                <div class="list_menu">Unlocked</div>
+                                <div class="list_menu">Download</div>
                             </div>
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format("150"); ?></div>

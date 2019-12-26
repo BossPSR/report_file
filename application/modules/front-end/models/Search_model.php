@@ -13,7 +13,7 @@ class Search_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload');
-        $this->db->join('tbl_upload_preview', 'tbl_upload_preview.upload_id = tbl_upload.id', 'left');
+        $this->db->join('tbl_upload_full', 'tbl_upload_full.upload_id = tbl_upload.id');
         $this->db->where("search_item LIKE '%$keyword%'");
         $this->db->or_like("code", $keyword);
         $this->db->or_like("topic", $keyword);
@@ -26,7 +26,7 @@ class Search_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload');
-        $this->db->join('tbl_upload_preview', 'tbl_upload_preview.upload_id = tbl_upload.id', 'left');
+        $this->db->join('tbl_upload_full', 'tbl_upload_full.upload_id = tbl_upload.id');
         $this->db->where("select_item", $select_item);
         $query  =   $this->db->get();
 
@@ -38,7 +38,7 @@ class Search_model extends CI_Model
 
         $this->db->select('*');
         $this->db->from('tbl_upload');
-        $this->db->join('tbl_upload_preview', 'tbl_upload_preview.upload_id = tbl_upload.id', 'left');
+        $this->db->join('tbl_upload_full', 'tbl_upload_full.upload_id = tbl_upload.id');
         $this->db->where("select_item", $select_item);
         $this->db->group_start();
         $this->db->like("search_item", $keyword);

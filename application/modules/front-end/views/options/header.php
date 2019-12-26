@@ -217,7 +217,7 @@
                                         <a href="my-upload">My Upload</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My Unlocks</a>
+                                        <a href="#"> My Download</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="package">Package </a>
@@ -233,7 +233,7 @@
                                         <a href="#exampleModalCenter" data-toggle="modal">My Upload</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal">My Unlocks</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal">My Download</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Package </a>
@@ -346,7 +346,7 @@
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                     <div class="menu-list">1,527</div>
-                                                    <div>Unlocked</div>
+                                                    <div>Download</div>
                                                 </div>
                                                 <div class="mini_cart_wrapper text-center">
                                                     <div class="menu-list">47</div>
@@ -401,7 +401,7 @@
                                             <?php if ($user) :  ?>
                                                 <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
                                                 <li><a href="my-upload"> My Upload</a></li>
-                                                <li><a href="#"> My Unlocks</a></li>
+                                                <li><a href="#"> My Download</a></li>
                                                 <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                                 <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
@@ -416,7 +416,7 @@
                                             <?php else : ?>
                                                 <li><a href="#exampleModalCenter" data-toggle="modal"> Upload + <div class="arrow_box"></div></a></li>
                                                 <li><a href="#exampleModalCenter" data-toggle="modal"> My Upload</a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> My Unlocks</a></li>
+                                                <li><a href="#exampleModalCenter" data-toggle="modal"> My Download</a></li>
                                                 <li><a href="#"> Package</a></li>
                                                 <li class="menu-item-has-children">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>

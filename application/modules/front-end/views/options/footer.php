@@ -323,7 +323,7 @@
 
 
 <!-- Script -->
-<script type='text/javascript'>
+<!-- <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
     $(".dropzoneEdit").dropzone({
         addRemoveLinks: true,
@@ -349,7 +349,7 @@
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });
-</script>
+</script> -->
 
 <!-- Script -->
 <script type='text/javascript'>
@@ -406,7 +406,7 @@
 </script>
 
 <!-- Script -->
-<script type='text/javascript'>
+<!-- <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
     $(".dropzone").dropzone({
         addRemoveLinks: true,
@@ -429,7 +429,7 @@
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });
-</script>
+</script> -->
 
 
 
