@@ -40,7 +40,6 @@
                             <label></label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
                                 <div style="display:inline-block;"><a href="#?uploadBy=<?php echo $Id_unlock['userId']; ?>&userId<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
-
                                 <div style="display:inline-block;">
                                     <?php if (empty($unlocks) && ($userId['id'] != $Id_unlock['userId'])) : ?>
                                         <a style="font-size: 12px; color:#fff;" class="btn btn-warning" onclick="confirmalertunlock('<?php echo $Id_unlock['upload_id']; ?>','<?php echo $userId['id']; ?>','<?php echo $Id_unlock['price']; ?>','<?php echo $Id_unlock['userId']; ?> ')">
@@ -50,7 +49,6 @@
                                         <a href="downloadDocument?id=<?php echo $Id_unlock['id_full']; ?>&upload_id=<?php echo $Id_unlock['upload_id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></a>
                                     <?php endif; ?>
                                 </div>
-
                                 <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
                             </div>
                         </div>

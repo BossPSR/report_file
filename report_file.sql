@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-04 16:35:55
+Date: 2020-01-04 17:49:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -91,11 +91,12 @@ CREATE TABLE `tbl_unlocks` (
   `ip_address` varchar(200) DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_unlocks
 -- ----------------------------
+INSERT INTO `tbl_unlocks` VALUES ('4', '6', '4', '4', '1', '2020-01-04 16:46:00', null, '::1', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
@@ -188,4 +189,4 @@ INSERT INTO `tbl_user` VALUES ('2', '1269900232221', '0', 'jame0925623256@gmail.
 INSERT INTO `tbl_user` VALUES ('3', '123456789', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '2019-12-23 19:29:15');
 INSERT INTO `tbl_user` VALUES ('4', '4444555666112', '0', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', null, '2020-01-04 15:36:53');
 INSERT INTO `tbl_user` VALUES ('5', '123123', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '2019-12-25 17:23:11');
-INSERT INTO `tbl_user` VALUES ('6', '987456123', '2', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', null, '2020-01-04 16:22:28');
+INSERT INTO `tbl_user` VALUES ('6', '987456123', '99', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '2020-01-04 17:48:59');

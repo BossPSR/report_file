@@ -12,7 +12,7 @@
                             <?php foreach ($search_code as $key => $data) { ?>
                                 <div class="col-3 text-center margin-5 product">
                                     <label class="price">$ <?php echo $data['price'] ;?>.00</label>
-                                    <a href="unlocks_search?search=<?php echo $data['id'] ;?>">
+                                    <a href="unlocks?id=<?php echo $data['userId']; ?>&upload_id=<?php echo $data['upload_id'] ;?>">
                                         <div class="blocker"></div>
                                         <iframe src="<?php echo $data['path']; ?>" width="100%" height="440px"></iframe>
                                     </a>
