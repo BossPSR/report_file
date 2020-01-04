@@ -285,8 +285,8 @@
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                         <li><a href="register"> Sign up </a></li>
                                     <?php endif  ?>
-                                    <li><a href="checkout.html"> TH </a></li>
-                                    <li><a href="checkout.html"> ENG </a></li>
+                                    <li><a href="#"> TH </a></li>
+                                    <li><a href="#"> ENG </a></li>
                                 </ul>
                             </div>
                         </div>

@@ -264,8 +264,8 @@
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                         <li><a href="register"> Sign up </a></li>
                                     <?php endif  ?>
-                                    <li><a href="checkout.html"> TH </a></li>
-                                    <li><a href="checkout.html"> ENG </a></li>
+                                    <li><a href="#"> TH </a></li>
+                                    <li><a href="#"> ENG </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -359,7 +359,7 @@
                                         <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                        <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
                                         <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>

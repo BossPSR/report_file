@@ -84,6 +84,7 @@ $route['add_item']              = 'front-end/Upload_ctr/add_item';
 $route['edit_item']             = 'front-end/Upload_ctr/edit_item';
 $route['search']                = 'front-end/Search_ctr';
 $route['unlocks']               = 'front-end/Unlocks_ctr';
+$route['unlocks_search']               = 'front-end/Unlocks_ctr/unlocks_search';
 $route['unlock_document']       = 'front-end/Unlocks_ctr/unlock_document';
 $route['downloadDocument']      = 'front-end/Unlocks_ctr/downloadDocument';
 $route['after-unlocks']         = 'front-end/After_Unlocks_ctr';

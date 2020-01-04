@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-04 11:44:07
+Date: 2020-01-04 16:35:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,18 +83,19 @@ DROP TABLE IF EXISTS `tbl_unlocks`;
 CREATE TABLE `tbl_unlocks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) DEFAULT NULL,
+  `merchant_id` int(11) NOT NULL,
   `upload_id` int(11) DEFAULT NULL,
+  `total` int(11) NOT NULL,
   `create_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `ip_address` varchar(200) DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_unlocks
 -- ----------------------------
-INSERT INTO `tbl_unlocks` VALUES ('2', '4', '1', '2020-01-04 11:29:00', null, '::1', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
@@ -111,12 +112,13 @@ CREATE TABLE `tbl_upload` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload
 -- ----------------------------
-INSERT INTO `tbl_upload` VALUES ('1', '4', '1', 'อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'MX001', 'เมนูอาหาร อาหารไทยง่ายๆ ทำกินเองที่บ้านได้ กับข้าว อาหารไทยมีอะไรบ้าง สูตรอาหาร เมนูผัด เมนูแกง เมนูทอด เมนูนึ่ง เมนูปิ้งย่าง เมนูหมู เมนูปลา เมนูไก่ เมนูปลาหมึก เมนูกุ้ง', '2020-01-04 11:04:55', null);
+INSERT INTO `tbl_upload` VALUES ('4', '4', '1', 'อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'ZXC001', 'สำหรับคนรักการทำอาหาร', '2020-01-04 14:09:31', null);
+INSERT INTO `tbl_upload` VALUES ('5', '4', '2', 'เอกสารสำคัญ - โปรแกรม ร้าน ค้า ปลีก', 'คณิตศาสตร์', 'ZXV33', 'โปรแกรม ร้าน ค้า ปลีก', '2020-01-04 14:10:10', null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_full`
@@ -127,16 +129,18 @@ CREATE TABLE `tbl_upload_full` (
   `userId` int(11) NOT NULL,
   `upload_id` varchar(110) DEFAULT NULL,
   `file_name` varchar(255) DEFAULT NULL,
+  `price` int(11) NOT NULL DEFAULT 1,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_full
 -- ----------------------------
-INSERT INTO `tbl_upload_full` VALUES ('1', '4', '1', 'sample-3pp.pdf', '2020-01-04 11:05:28', null, 'uploads/full/sample-3pp.pdf');
+INSERT INTO `tbl_upload_full` VALUES ('5', '4', '4', 'sample-3pp_(1)1.pdf', '1', '2020-01-04 14:09:41', null, 'uploads/full/sample-3pp_(1)1.pdf');
+INSERT INTO `tbl_upload_full` VALUES ('6', '4', '5', 'ข้อเสนอโครงการ.pdf', '1', '2020-01-04 14:11:24', '2020-01-04 14:11:57', 'uploads/full/ข้อเสนอโครงการ.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_upload_preview`
@@ -151,11 +155,13 @@ CREATE TABLE `tbl_upload_preview` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_preview
 -- ----------------------------
+INSERT INTO `tbl_upload_preview` VALUES ('2', '4', '4', '091025621.pdf', '2020-01-04 14:09:36', null, 'uploads/Preview/091025621.pdf');
+INSERT INTO `tbl_upload_preview` VALUES ('3', '4', '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', '2020-01-04 14:10:22', null, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
@@ -172,7 +178,7 @@ CREATE TABLE `tbl_user` (
   `file_name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_user
@@ -180,5 +186,6 @@ CREATE TABLE `tbl_user` (
 INSERT INTO `tbl_user` VALUES ('1', '1659900740516', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', null, '2019-12-11 04:07:28');
 INSERT INTO `tbl_user` VALUES ('2', '1269900232221', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '2019-12-25 15:19:48');
 INSERT INTO `tbl_user` VALUES ('3', '123456789', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '2019-12-23 19:29:15');
-INSERT INTO `tbl_user` VALUES ('4', '4444555666112', '0', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', null, '2019-12-25 17:14:08');
+INSERT INTO `tbl_user` VALUES ('4', '4444555666112', '0', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', null, '2020-01-04 15:36:53');
 INSERT INTO `tbl_user` VALUES ('5', '123123', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '2019-12-25 17:23:11');
+INSERT INTO `tbl_user` VALUES ('6', '987456123', '2', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', null, '2020-01-04 16:22:28');

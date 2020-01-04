@@ -222,7 +222,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-    function confirmalertunlock(data, data2) {
+    function confirmalertunlock(data, data2, data3 ,data4) {
 
         swal({
             title: "Are you sure?",
@@ -232,8 +232,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'unlock_document?upload_id=' + data + '&userId=' + data2;
-                swal("Good job!", "You clicked the button!", "success");
+                window.location = 'unlock_document?upload_id=' + data + '&userId=' + data2 + '&price=' + data3 + '&merchant_id=' + data4 ;
             } else {
                 swal("Your imaginary file is safe!");
             }
@@ -262,11 +261,17 @@
 
 
 <script>
+    <?php if ($this->session->flashdata('successtotal')) : ?>
+        swal("Good job!", "Already paid Thank you for using the service.", "success");
+    <?php endif; ?>
     <?php if ($this->session->flashdata('save_ss')) : ?>
         swal("Good job!", "You clicked the button!", "success");
     <?php endif; ?>
     <?php if ($this->session->flashdata('del_ss')) : ?>
         swal("fill !", "You clicked the button!", "error");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('without')) : ?>
+        swal("fill !", "Not enough money Please top up!!", "error");
     <?php endif; ?>
 </script>
 <script>
@@ -288,6 +293,35 @@
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
 
 <script src="public/frontend/assets/js/myscript.js"></script>
+
+<!-- Script -->
+<script type='text/javascript'>
+    // Dropzone.autoDiscover = false;
+    $(".dropzoneEdit").dropzone({
+        addRemoveLinks: true,
+        maxFiles: 1,
+        removedfile: function(file) {
+            var name = file.name;
+            var document_preview_id = document_preview_id;
+
+            $.ajax({
+                type: 'POST',
+                url: 'fileUploadEdit',
+                data: {
+                    name: name,
+                    request: 2,
+                    document_preview_id: document_preview_id
+                },
+                success: function(data) {
+                    console.log('success: ' + data);
+                },
+
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+</script> 
 
 <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
@@ -341,6 +375,32 @@
         }
     });
 </script>
+
+<!-- Script -->
+<script type='text/javascript'>
+    // Dropzone.autoDiscover = false;
+    $(".dropzone").dropzone({
+        addRemoveLinks: true,
+        maxFiles: 1,
+        removedfile: function(file) {
+            var name = file.name;
+            $.ajax({
+                type: 'POST',
+                url: 'fileUpload',
+                data: {
+                    name: name,
+                    request: 2
+                },
+                sucess: function(data) {
+                    console.log('success: ' + data);
+                },
+
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+</script> 
 
 <script>
     $('#password, #c_password').on('keyup', function() {

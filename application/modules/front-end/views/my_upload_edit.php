@@ -115,7 +115,7 @@
            
             <article class="single_upload input-upload">
                 <div class="row">
-                    <!-- <div class="col-6">
+                    <div class="col-6">
                         <div class="tab form-group">
                             <label for="" class="font-size-upload">Preview </label>
                             <form action="fileUploadEdit" class="dropzone dropzoneEdit" id="fileupload">
@@ -132,8 +132,8 @@
                             <iframe src="<?php echo $document_preview['path']; ?>" width="100%" height="700px"></iframe>
                         </div>
                         
-                    </div> -->
-                    <div class="col-12">
+                    </div>
+                    <div class="col-6">
                         <div class="tab form-group">
                             <label for="" class="font-size-upload">Upload Full Version</label>
                             <div id="dropzone">
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-right" style="padding-top: 10px;">
-                        <a href="my-upload" class="btn btn-info">กลับสู่หน้า My Upload </a>
+                        <a href="my-upload?id=<?php echo $_GET['id']; ?>" class="btn btn-info">กลับสู่หน้า My Upload </a>
                     </div>
                 </div>
             </article>

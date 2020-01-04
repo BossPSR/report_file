@@ -51,8 +51,16 @@ class My_upload_ctr extends CI_Controller
 
 	public function delete_file()
 	{
-		$id = $this->input->get('Id');
-		$this->db->delete('tbl_upload_preview', array('id' => $id));
-		redirect('my-upload');
+		$id 	= $this->input->get('Id');
+		// $users  = $this->db->get_where('tbl_upload', ['id' => $id])->row_array();
+		if ($this->db->delete('tbl_upload_full', array('upload_id' => $id))) 
+		{
+			if($this->db->delete('tbl_upload_preview', array('upload_id' => $id)))
+			{
+				$this->db->delete('tbl_upload', array('id' => $id));
+			}
+		} 
+		$this->session->set_flashdata('upload_ss', TRUE);
+		redirect('my-upload?id='.$id);
 	}
 }

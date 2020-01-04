@@ -1,4 +1,3 @@
-<?php $uploadBy = $this->db->get_where('tbl_user', ['id' => $Id_unlock['userId']])->row_array(); ?>
 <br>
 <h2 class="text-center" style="margin-top: 15px;">Unlocks</h2>
 <hr class="line_package">
@@ -24,7 +23,7 @@
             <div class="menu-bottom">Page </div>
         </div>
         <div class="col-lg-4 col-md-4 col-4 text-center">
-            <div class="menu-list">@<?php echo $uploadBy['username']; ?></div>
+            <div class="menu-list">@<?php echo $Id_unlock['username']; ?> </div>
             <div class="menu-bottom">Uploaded By </div>
         </div>
     </div>
@@ -40,15 +39,15 @@
                         <div class="text-center" style="position: relative;">
                             <label></label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
-                                <div style="display:inline-block;"><a href="#?uploadBy=<?php echo $uploadBy['id']; ?>&userId<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
+                                <div style="display:inline-block;"><a href="#?uploadBy=<?php echo $Id_unlock['userId']; ?>&userId<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
 
                                 <div style="display:inline-block;">
-                                    <?php if (empty($unlocks) && $uploadBy['id'] == $Id_unlock['userId']) : ?>
+                                    <?php if (empty($unlocks) && ($userId['id'] != $Id_unlock['userId'])) : ?>
                                         <a style="font-size: 12px; color:#fff;" class="btn btn-warning" onclick="confirmalertunlock('<?php echo $Id_unlock['upload_id']; ?>','<?php echo $userId['id']; ?>','<?php echo $Id_unlock['price']; ?>','<?php echo $Id_unlock['userId']; ?> ')">
                                             <i class="fa fa-unlock-alt"></i>&nbsp;&nbsp;UNLOCK
                                         </a>
                                     <?php else : ?>
-                                        <a href="downloadDocument?id=<?php echo $check_after_unlock['id']; ?>&upload_id=<?php echo $Id_unlock['upload_id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></a>
+                                        <a href="downloadDocument?id=<?php echo $Id_unlock['id_full']; ?>&upload_id=<?php echo $Id_unlock['upload_id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></a>
                                     <?php endif; ?>
                                 </div>
 

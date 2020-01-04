@@ -11,7 +11,7 @@
                 <div class="single_services listProfile">
 
                     <div class="image_profile">
-                        <h2 class="text-center my-income">My income</h2>
+                        <h2 class="text-center my-income"><div class="name_user m17"><i class="fa fa-user"></i> Name : <?php echo $user['username']; ?></div></h2>
                         <div class="image_PF">
                             <div class=""><?php  ?>
                                 <a href="#exampleModalCenter1" data-toggle="modal"><img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt=""></a>
@@ -19,15 +19,9 @@
                             </div>
                         </div>
                         <div class="menu_in_image">
-                            <div class="name_user m17"><i class="fa fa-user"></i> Name : <?php echo $user['username']; ?></div>
-                            <div class="text-center money"> ยอดคงเหลือ : ฿<?php echo number_format($user['cash']); ?></div>
                         </div>
                     </div>
-
-
-
                     <div class="single_banner menu_profileList">
-
                         <div class="menu_profileRow">
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format("145201"); ?></div>
@@ -47,14 +41,8 @@
                             </div>
 
                         </div>
-
-                        <!-- <div class="menu_profileRow">
-                           
-                        </div>  -->
+                        <!-- <div class="menu_profileRow"></div>  -->
                     </div>
-
-
-
                 </div>
             </div>
             <div class="col-lg-2 col-md-6">
