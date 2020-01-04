@@ -63,12 +63,14 @@ $route['my-wallet']          = 'front-end/My_wallet_ctr/my_wallet';
 $route['my-deposit']         = 'front-end/My_deposit_ctr/my_deposit';
 $route['my-withdraw']        = 'front-end/My_withdraw_ctr/my_withdraw';
 $route['my-slip']            = 'front-end/My_slip_ctr/my_slip';
+$route['my-folder']         = 'front-end/My_upload_ctr/my_upload_folder';
 $route['my-upload']          = 'front-end/My_upload_ctr/my_upload';
 $route['my-upload-delete']   = 'front-end/My_upload_ctr/delete_file';
-$route['my-upload-edit']   = 'front-end/My_upload_ctr/my_upload_edit';
+$route['my-upload-edit']     = 'front-end/My_upload_ctr/my_upload_edit';
 
 
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
+$route['my-rejected']            = 'front-end/Rejected_ctr/my_rejected';
 $route['register']              = 'front-end/Register_ctr';
 $route['register_success']      = 'front-end/Register_ctr/register_success';
 $route['home']                  = 'front-end/Home_ctr';
@@ -82,8 +84,8 @@ $route['add_item']              = 'front-end/Upload_ctr/add_item';
 $route['edit_item']             = 'front-end/Upload_ctr/edit_item';
 $route['search']                = 'front-end/Search_ctr';
 $route['unlocks']               = 'front-end/Unlocks_ctr';
-$route['unlock_document']    = 'front-end/Unlocks_ctr/unlock_document';
-$route['downloadDocument']   = 'front-end/Unlocks_ctr/downloadDocument';
+$route['unlock_document']       = 'front-end/Unlocks_ctr/unlock_document';
+$route['downloadDocument']      = 'front-end/Unlocks_ctr/downloadDocument';
 $route['after-unlocks']         = 'front-end/After_Unlocks_ctr';
 $route['Bookmarked']            = 'front-end/Bookmarked_ctr';
 $route['Recently-Accessed']     = 'front-end/Recently_ctr';
@@ -93,9 +95,11 @@ $route['fileUploadEdit']        = 'front-end/Upload_ctr/fileUploadEdit';
 $route['fileUploadEditfull']    = 'front-end/Upload_ctr/fileUploadEditfull';
 $route['paypal_success']        = 'front-end/Paypal_ctr/success';
 $route['get_search']            = 'front-end/Search_ctr/get_search';
+
 // /------------------------------------- back-end  ---------------------
 
 $route['backend']             = 'back-end/Home_ctr';
+$route['pdf']                 = 'front-end/pdf';
 
 
 

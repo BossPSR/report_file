@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-right" style="padding-top: 10px;">
-                        <a href="my-upload?insert_id=<?php echo $insert_id; ?>" class="btn btn-info">NEXT </a>
+                        <a href="my-folder" class="btn btn-info">NEXT </a>
                     </div>
                 </div>
             </article>

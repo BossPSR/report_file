@@ -23,7 +23,9 @@
                                 </div>
                                 <iframe src="<?php echo $documents['path']; ?>" width="100%" height="440px"></iframe>
                                 <div style="color: #a7a7a7; display:flex;justify-content:space-around;">
-                                    <span><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
+                                <?php $_doc = $documents['create_at'] ; ?>
+                                <?php $edco = explode(" ",$_doc) ?>
+                                    <span><i class="fa fa-clock-o" aria-hidden="true"> <?php echo $edco[0]; ?> </i></span>
                                     <span><i class="fa fa-unlock-alt" aria-hidden="true"> 5,000</i></span>
                                     <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
                                 </div>
@@ -31,6 +33,10 @@
                         <?php endforeach; ?>
                     </div>
                 </article>
+                
+                <div style="margin-top: 20px;">
+                    <a href="my-folder" type="button" class="btn btn-info" style="font-size: 20px;">ฺBACK</a>
+                </div> 
             </div>
         </div>
     </div>

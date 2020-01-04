@@ -220,39 +220,7 @@
 <script src="public/frontend/assets/js/main.js"></script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- <script type="text/javascript">
-    function daletedata(id) {
-        // var url = $(this).attr('href');
-        swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: 'my-upload-delete',
-                        type: 'GET',
-                        data: {id:id},
-                        error: function() {
-                            alert('Something is wrong');
-                        },
-                        success: function(id) {
-                            swal("Poof! Your imaginary file has been deleted!", {
-                                icon: "success",
-                            });
-                        }
-                    });
-                } else {
-                    swal("Your imaginary file is safe!");
-                }
-                
-              
-            });
-    };
-</script> -->
+
 <script>
     function confirmalertunlock(data, data2) {
 
@@ -321,37 +289,6 @@
 
 <script src="public/frontend/assets/js/myscript.js"></script>
 
-
-<!-- Script -->
-<!-- <script type='text/javascript'>
-    // Dropzone.autoDiscover = false;
-    $(".dropzoneEdit").dropzone({
-        addRemoveLinks: true,
-        maxFiles: 1,
-        removedfile: function(file) {
-            var name = file.name;
-            var document_preview_id = document_preview_id;
-
-            $.ajax({
-                type: 'POST',
-                url: 'fileUploadEdit',
-                data: {
-                    name: name,
-                    request: 2,
-                    document_preview_id: document_preview_id
-                },
-                success: function(data) {
-                    console.log('success: ' + data);
-                },
-
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    });
-</script> -->
-
-<!-- Script -->
 <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
     $(".dropzoneEditfull").dropzone({
@@ -405,35 +342,6 @@
     });
 </script>
 
-<!-- Script -->
-<!-- <script type='text/javascript'>
-    // Dropzone.autoDiscover = false;
-    $(".dropzone").dropzone({
-        addRemoveLinks: true,
-        maxFiles: 1,
-        removedfile: function(file) {
-            var name = file.name;
-            $.ajax({
-                type: 'POST',
-                url: 'fileUpload',
-                data: {
-                    name: name,
-                    request: 2
-                },
-                sucess: function(data) {
-                    console.log('success: ' + data);
-                },
-
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    });
-</script> -->
-
-
-
-
 <script>
     $('#password, #c_password').on('keyup', function() {
         if ($('#password').val() == $('#c_password').val()) {
@@ -446,6 +354,8 @@
 <script src="public/frontend/assets/js/pdfobject.js"></script>
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+
 <script>
     AOS.init();
 </script>

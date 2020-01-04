@@ -9,12 +9,28 @@ class Upload_model extends CI_Model
         parent::__construct();
     }
 
-    public function my_upload($usersid)
+    public function my_upload($id,$usersid)
     {
 
         $this->db->select('*');
-        $this->db->from('tbl_upload_full');
+        $this->db->from('tbl_upload');
+        $this->db->join('tbl_upload_full', 'tbl_upload_full.upload_id = tbl_upload.id', 'left');
+        $this->db->where('tbl_upload.select_item_id', $id);
+        $this->db->where('tbl_upload_full.userId', $usersid);
+        $data = $this->db->get();
+
+        return $data->result_array();
+    }
+
+    public function my_upload_folder($usersid)
+    {
+
+        $this->db->select('*,count(tbl_upload.select_item_id) AS count_');
+        $this->db->from('tbl_upload');
+        $this->db->join('tbl_select_item', 'tbl_select_item.id = tbl_upload.select_item_id', 'left');
         $this->db->where('userId', $usersid);
+        $this->db->group_by('tbl_upload.select_item_id');
+        // $this->db->where('tbl_upload.select_item_id');
         $data = $this->db->get();
 
         return $data->result_array();

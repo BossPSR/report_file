@@ -18,6 +18,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="public/frontend/assets/css/hover.css">
 
     <!-- Main New Style CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/newstyle.css">
@@ -29,6 +30,8 @@
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
     
     <script src="public/frontend/assets/dist/dropzone.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
@@ -192,7 +195,7 @@
                                         <a href="upload">Upload +</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="my-upload">My Upload</a>
+                                        <a href="my-folder">My Upload</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#"> My download</a>
@@ -379,7 +382,7 @@
                                 <ul>
                                     <?php if ($user) :  ?>
                                         <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
-                                        <li><a href="my-upload"> My Upload</a></li>
+                                        <li><a href="my-folder"> My Upload</a></li>
                                         <li><a href="#"> My Download</a></li>
                                         <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                         <li class="menu-item-has-children" style="margin-right: 15px;">
@@ -389,7 +392,7 @@
                                             <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                         </li>
                                         <li >
-                                            <a href="package">ยอดคงเหลือ : $1,000</a></li>
+                                            <a href="package">ยอดคงเหลือ : $<?php echo $user['cash']; ?></a></li>
                                         </li>
                                     <?php else : ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Upload + <div class="arrow_box"></div></a></li>

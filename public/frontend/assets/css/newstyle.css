@@ -278,7 +278,7 @@
     margin-left: 50px;
     position: absolute;
     display: inline-block;
-    width: 153px;
+    width: 140px;
     height: 80px;
     line-height: 85px;
     font-size: 29px;
@@ -568,8 +568,8 @@
 
 
 .blurPDF{
-    filter: blur(5px);
-    height: 1000px;
+    /* filter: blur(5px); */
+    height: 1130px;
     position: relative;
 }
 

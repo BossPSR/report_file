@@ -7,7 +7,6 @@
         <div class="col-lg-12 col-md-12 col-12 text-center" style="font-size: 22px;margin: 30px 0;">
             <label style="color: #656565;">Google เอกสาร: การประมวลผลคำออนไลน์สำหรับธุรกิจ | G Suite</label>
         </div>
-        <div class="col-lg-1 col-md-1 col-1"></div>
         <div class="col-lg-2 col-md-2 col-2 text-center">
             <div class="menu-list">1,200</div>
             <div class="menu-bottom">Item </div>
@@ -24,11 +23,10 @@
             <div class="menu-list">190</div>
             <div class="menu-bottom">Page </div>
         </div>
-        <div class="col-lg-2 col-md-2 col-2 text-center">
+        <div class="col-lg-4 col-md-4 col-4 text-center">
             <div class="menu-list">@<?php echo $uploadBy['username']; ?></div>
             <div class="menu-bottom">Uploaded By </div>
         </div>
-        <div class="col-lg-1 col-md-1 col-1"></div>
     </div>
 </div>
 <div class="container">
@@ -57,12 +55,11 @@
                                 <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
                             </div>
                         </div>
-                        <label class="pricebg">$ 600.00</label>
+                        <label class="pricebg">$ 1.00</label>
                         <div class="blurPDF">
                             <iframe src="<?php echo $Id_unlock['path']; ?>" width="100%" height="100%"></iframe>
                         </div>
                     </div>
-
                 </div>
             </article>
         </div>

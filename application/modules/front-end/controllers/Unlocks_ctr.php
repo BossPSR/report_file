@@ -50,12 +50,12 @@ class Unlocks_ctr extends CI_Controller
 		if ($success > 0) {
 			echo "<script>";
 			echo "alert('You have successfully unlocked the document.');";
-			echo "window.location='after-unlocks';";
+			echo "window.location='unlocks?id=$userId&upload_id=$upload_id';";
 			echo "</script>";
 		} else {
 			echo "<script>";
 			echo "alert('You don't have unlocked the document.');";
-			echo "window.location='after-unlocks';";
+			echo "window.location='unlocks?id=$userId&upload_id=$upload_id';";
 			echo "</script>";
 		}
 	}

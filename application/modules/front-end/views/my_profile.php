@@ -20,7 +20,7 @@
                         </div>
                         <div class="menu_in_image">
                             <div class="name_user m17"><i class="fa fa-user"></i> Name : <?php echo $user['username']; ?></div>
-                            <div class="text-center money"> ยอดคงเหลือ : ฿<?php echo number_format("487515"); ?></div>
+                            <div class="text-center money"> ยอดคงเหลือ : ฿<?php echo number_format($user['cash']); ?></div>
                         </div>
                     </div>
 
