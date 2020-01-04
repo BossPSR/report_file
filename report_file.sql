@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-03 17:20:45
+Date: 2020-01-04 11:44:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -84,14 +84,17 @@ CREATE TABLE `tbl_unlocks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) DEFAULT NULL,
   `upload_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `ip_address` varchar(200) DEFAULT NULL,
+  `status` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_unlocks
 -- ----------------------------
+INSERT INTO `tbl_unlocks` VALUES ('2', '4', '1', '2020-01-04 11:29:00', null, '::1', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
@@ -108,15 +111,12 @@ CREATE TABLE `tbl_upload` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload
 -- ----------------------------
-INSERT INTO `tbl_upload` VALUES ('1', '4', '1', 'อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'MX001', 'เมนูอาหาร อาหารไทยง่ายๆ ทำกินเองที่บ้านได้ กับข้าว อาหารไทยมีอะไรบ้าง สูตรอาหาร เมนูผัด เมนูแกง เมนูทอด เมนูนึ่ง เมนูปิ้งย่าง เมนูหมู เมนูปลา เมนูไก่ เมนูปลาหมึก เมนูกุ้ง', '2020-01-03 15:00:33', null);
-INSERT INTO `tbl_upload` VALUES ('2', '4', '3', 'ดนตรี - วิกิพีเดีย', 'ดาราศาสตร์', 'MX002', 'ดนตรี (อังกฤษ: music) คือ เสียงและโครงสร้างที่จัดเรียงอย่างเป็นระเบียบแบบแผน ซึ่งมนุษย์ใช้ประกอบกิจกรรมศิลปะที่เกี่ยวข้องกับเสียง โดยดนตรีนั้นแสดงออกมาในด้านระดับเสียง', '2020-01-03 15:10:49', null);
-INSERT INTO `tbl_upload` VALUES ('3', '4', '1', 'ผลการค้นหา ผลการค้นเว็บ อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'MX004', 'เมนูอาหาร อาหารไทยง่ายๆ ทำกินเองที่บ้านได้ กับข้าว อาหารไทยมีอะไรบ้าง สูตรอาหาร เมนูผัด เมนูแกง เมนูทอด เมนูนึ่ง เมนูปิ้งย่าง เมนูหมู เมนูปลา เมนูไก่ เมนูปลาหมึก เมนูกุ้ง', '2020-01-03 15:27:58', null);
-INSERT INTO `tbl_upload` VALUES ('4', '4', '8', 'สำนักงานสลากกินแบ่งรัฐบาล ช่วยราษฎร์ เสริมรัฐ ยืนหยัดยุติธรรม', 'รัฐบาล', 'MX0010', 'รางวัลที่ 1, เลขหน้า 3 ตัว, เลขท้าย 3 ตัว, เลขท้าย 2 ตัว. 510541, 116 382, 250 140, 81. พิมพ์หมายเลขเพื่อตรวจรางวัลงวดปัจจุบันด้านล่าง : ตรวจผลรางวัลงวดปัจจุบัน ยกเลิก', '2020-01-03 16:18:50', null);
+INSERT INTO `tbl_upload` VALUES ('1', '4', '1', 'อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'MX001', 'เมนูอาหาร อาหารไทยง่ายๆ ทำกินเองที่บ้านได้ กับข้าว อาหารไทยมีอะไรบ้าง สูตรอาหาร เมนูผัด เมนูแกง เมนูทอด เมนูนึ่ง เมนูปิ้งย่าง เมนูหมู เมนูปลา เมนูไก่ เมนูปลาหมึก เมนูกุ้ง', '2020-01-04 11:04:55', null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_full`
@@ -131,15 +131,12 @@ CREATE TABLE `tbl_upload_full` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_full
 -- ----------------------------
-INSERT INTO `tbl_upload_full` VALUES ('1', '4', '1', 'sample-3pp.pdf', '2020-01-03 15:00:42', null, 'uploads/full/sample-3pp.pdf');
-INSERT INTO `tbl_upload_full` VALUES ('2', '4', '2', 'สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_2539.pdf', '2020-01-03 15:10:57', null, 'uploads/full/สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_2539.pdf');
-INSERT INTO `tbl_upload_full` VALUES ('3', '4', '3', 'pdf_open_parameters.pdf', '2020-01-03 15:28:13', null, 'uploads/full/pdf_open_parameters.pdf');
-INSERT INTO `tbl_upload_full` VALUES ('4', '4', '4', 'ข้อเสนอโครงการ.pdf', '2020-01-03 16:18:56', null, 'uploads/full/ข้อเสนอโครงการ.pdf');
+INSERT INTO `tbl_upload_full` VALUES ('1', '4', '1', 'sample-3pp.pdf', '2020-01-04 11:05:28', null, 'uploads/full/sample-3pp.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_upload_preview`
