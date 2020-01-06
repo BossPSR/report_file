@@ -41,24 +41,26 @@
                             <label></label>
                             <div style="position: absolute;right: 0;bottom: 10%;">
                                 <div style="display:inline-block;"><a href="#?uploadBy=<?php echo $uploadBy['id']; ?>&userId<?php echo $userId['id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;&nbsp;FOLLOW</button></a></div>
-
                                 <div style="display:inline-block;">
-                                    <?php if (empty($unlocks) && $uploadBy['id'] == $Id_unlock['userId']) : ?>
-                                        <a style="font-size: 12px; color:#fff;" class="btn btn-warning" onclick="confirmalertunlock('<?php echo $Id_unlock['upload_id']; ?>','<?php echo $userId['id']; ?>','<?php echo $Id_unlock['price']; ?>','<?php echo $Id_unlock['userId']; ?> ')">
+                                    <?php if ($userId['id'] == $Id_unlock['userId']) : ?>
+                                        <a href="downloadDocument?id=<?php echo $check_after_unlock['id']; ?>&upload_id=<?php echo $Id_unlock['upload_id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></a>
+                                    <?php elseif($unlocks['userId'] == $userId['id']) : ?>
+                                        <a href="downloadDocument?id=<?php echo $check_after_unlock['id']; ?>&upload_id=<?php echo $Id_unlock['upload_id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></a>
+                                    <?php else : ?>
+                                        <a style="font-size: 12px; color:#fff;" class="btn btn-warning" onclick="confirmalertunlock('<?php echo $Id_unlock['upload_id']; ?>','<?php echo $userId['id']; ?>','<?php echo $Id_unlock['price']; ?>','<?php echo $Id_unlock['userId']; ?>')">
                                             <i class="fa fa-unlock-alt"></i>&nbsp;&nbsp;UNLOCK
                                         </a>
-                                    <?php else : ?>
-                                        <a href="downloadDocument?id=<?php echo $check_after_unlock['id']; ?>&upload_id=<?php echo $Id_unlock['upload_id']; ?>"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-success"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;DOWNLOAD</button></a>
                                     <?php endif; ?>
                                 </div>
-
-                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
+                                <div style="display:inline-block;"><button type="button" style="font-size: 12px; color:#fff;" class="btn btn-danger" onclick="confirmalertreject('<?php echo $Id_unlock['upload_id']; ?>','<?php echo $Id_unlock['userId']; ?>');"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;REJECT</button></div>
                             </div>
                         </div>
-                        <?php if (empty($unlocks)) : ?>
-                        <label class="pricebg">$ <?php echo $Id_unlock['price']; ?>.00</label>
-                        <?php else : ?>
+                        <?php if ($userId['id'] == $Id_unlock['userId']) : ?>
 
+                        <?php elseif($unlocks['userId'] == $userId['id']) : ?>
+                            
+                        <?php else : ?>
+                            <label class="pricebg">$ <?php echo $Id_unlock['price']; ?>.00</label>
                         <?php endif; ?>
                         <div class="blurPDF">
                             <iframe src="<?php echo $Id_unlock['path']; ?>" width="100%" height="100%"></iframe>

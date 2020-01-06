@@ -41,7 +41,7 @@ class Upload_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_full');
-        $this->db->where('userId', $id);
+        $this->db->where('upload_id', $id);
         $data = $this->db->get();
 
         return $data->row_array();
@@ -74,6 +74,17 @@ class Upload_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_upload_full');
         $this->db->where('upload_id', $upload_id);
+        $data = $this->db->get();
+
+        return $data->row_array();
+    }
+
+    public function check_rejected($bookid,$_userId)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rejected');
+        $this->db->where('bookid_rj', $bookid);
+        $this->db->where('userId_rj', $_userId);
         $data = $this->db->get();
 
         return $data->row_array();

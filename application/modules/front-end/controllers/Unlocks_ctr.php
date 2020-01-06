@@ -20,7 +20,7 @@ class Unlocks_ctr extends CI_Controller
 			//upload_id
 			$upload_id 								= $this->input->get('upload_id');
 			$data['userId'] 						= $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-			$data['Id_unlock']						= $this->Upload_model->unlocks($id);
+			$data['Id_unlock']						= $this->Upload_model->unlocks($upload_id);
 			$data['unlocks']						= $this->Upload_model->get_unlocks($data['userId']['id'], $upload_id);
 			$data['check_after_unlock']				= $this->Upload_model->check_afterunlocks($upload_id);
 
@@ -44,10 +44,12 @@ class Unlocks_ctr extends CI_Controller
 
 	public function unlock_document()
 	{
-		$session = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-
+		// get_where
+		$session 		= $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 		$price			= $this->input->get('price');
 		$merchant_id	= $this->input->get('merchant_id');
+		// get_where
+		$sessionM 		= $this->db->get_where('tbl_user', ['id' => $merchant_id])->row_array();
 		$upload_id		= $this->input->get('upload_id');
 		$userId			= $this->input->get('userId');
 		$ip_address 	= $this->input->ip_address();
@@ -58,7 +60,7 @@ class Unlocks_ctr extends CI_Controller
 		if ($price > $session['cash']) 
 		{
 			$this->session->set_flashdata('without', TRUE);
-            redirect('unlocks?id='.$userId.'&upload_id='.$upload_id.'','refresh');
+            redirect('unlocks?id='.$merchant_id.'&upload_id='.$upload_id.'','refresh');
 		}
 		else
 		{
@@ -74,24 +76,30 @@ class Unlocks_ctr extends CI_Controller
 	
 			if ($this->db->insert('tbl_unlocks', $data)) 
 			{
-				$utotal = array(
-					'cash' => $total
-				);
+					$utotal = array(
+						'cash' => $total
+					);
 
-				$this->db->where('id', $userId);
-				$success = $this->db->update('tbl_user', $utotal);
+					$this->db->where('id', $userId);
+				if ($this->db->update('tbl_user', $utotal)) 
+				{
+					$uptotal = array(
+						'cash' => $sessionM['cash'] + $price
+					);
+							   $this->db->where('id', $merchant_id);
+					$success = $this->db->update('tbl_user', $uptotal);
+				} 
+
 			}
 	
 			if ($success > 0) {
 				$this->session->set_flashdata('successtotal', TRUE);
-				redirect('unlocks?id='.$userId.'&upload_id='.$upload_id.'','refresh');
+				redirect('unlocks?id='.$merchant_id.'&upload_id='.$upload_id.'','refresh');
 			} else {
 				$this->session->set_flashdata('del_ss', TRUE);
-				redirect('unlocks?id='.$userId.'&upload_id='.$upload_id.'','refresh');
+				redirect('unlocks?id='.$merchant_id.'&upload_id='.$upload_id.'','refresh');
 			}
 		}
-
-		
 	}
 
 	public function downloadDocument()
@@ -117,6 +125,38 @@ class Unlocks_ctr extends CI_Controller
 			redirect('file_teacher');
 		} else {
 			redirect('login');
+		}
+	}
+
+	public function reject_document()
+	{
+		$userId 	 = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+		$_userId 	 = $userId['id'];
+		$bookid 	 = $this->input->get('bookid');
+		$merchant_id = $this->input->get('merchant_id');
+		$model		 = $this->Upload_model->check_rejected($bookid,$_userId);
+		// array
+		if ($model)
+		{
+			$this->session->set_flashdata('reject', TRUE);
+			redirect('unlocks?id='.$merchant_id.'&upload_id='.$bookid.'','refresh');
+		}
+		else
+		{
+			$data 	= array(
+				'bookid_rj' => $bookid ,
+				'userId_rj' => $userId['id'] ,
+				'create_at' => date('Y-m-d H:i:s')
+			);
+			
+			$success = $this->db->insert('tbl_rejected', $data);
+			if ($success > 0) {
+				$this->session->set_flashdata('successtotal', TRUE);
+				redirect('unlocks?id='.$merchant_id.'&upload_id='.$bookid.'','refresh');
+			} else {
+				$this->session->set_flashdata('reject', TRUE);
+				redirect('unlocks?id='.$merchant_id.'&upload_id='.$bookid.'','refresh');
+			}
 		}
 	}
 }

@@ -212,7 +212,7 @@
 
 <!-- JS
 ============================================ -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <!-- Plugins JS -->
 <script src="public/frontend/assets/js/plugins.js"></script>
 
@@ -225,7 +225,7 @@
     function confirmalertunlock(data, data2, data3 ,data4) {
 
         swal({
-            title: "Are you sure?",
+            title: "Are you sure Unloc?",
             text: "Are you sure you want to unlock this document ?",
             icon: "warning",
             buttons: true,
@@ -233,12 +233,28 @@
         }).then(function(isConfirm) {
             if (isConfirm) {
                 window.location = 'unlock_document?upload_id=' + data + '&userId=' + data2 + '&price=' + data3 + '&merchant_id=' + data4 ;
-            } else {
-                swal("Your imaginary file is safe!");
+            } 
+        })
+    }
+</script>
+
+<script>
+    function confirmalertreject(data, data2) {
+
+        swal({
+            title: "Are you sure Reject?",
+            text: "Are you sure you want to reject this document ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'reject_document?bookid=' + data + '&merchant_id=' + data2;
             }
         })
     }
 </script>
+
 <script>
     function confirmalert2(data) {
 
@@ -272,6 +288,9 @@
     <?php endif; ?>
     <?php if ($this->session->flashdata('without')) : ?>
         swal("fill !", "Not enough money Please top up!!", "error");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('reject')) : ?>
+        swal("Rejected!", "You have already rejected!!", "error");
     <?php endif; ?>
 </script>
 <script>

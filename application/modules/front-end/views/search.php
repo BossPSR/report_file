@@ -17,7 +17,8 @@
                                         <iframe src="<?php echo $data['path']; ?>" width="100%" height="440px"></iframe>
                                     </a>
                                     <div class="text-left" style="color: #a7a7a7;">
-                                        <span style="margin: 0px 45px;"><i class="fa fa-clock-o" aria-hidden="true"> 20/11/2562</i></span>
+                                        <?php $_date = explode(" ",$data['create_at']) ?>
+                                        <span style="margin: 0px 45px;"><i class="fa fa-clock-o" aria-hidden="true"> <?php echo $_date[0] ; ?></i></span>
                                         <span><i class="fa fa-eye" aria-hidden="true"> 1,501</i></span>
                                     </div>
                                 </div>
