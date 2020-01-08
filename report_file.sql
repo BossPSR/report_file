@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-07 10:15:35
+Date: 2020-01-07 18:57:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -82,18 +82,23 @@ CREATE TABLE `tbl_paypal` (
 DROP TABLE IF EXISTS `tbl_rejected`;
 CREATE TABLE `tbl_rejected` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` text NOT NULL,
   `bookid_rj` int(11) DEFAULT NULL,
   `userId_rj` int(11) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `status` int(2) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_rejected
 -- ----------------------------
-INSERT INTO `tbl_rejected` VALUES ('7', '7', '4', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('7', '', '7', '5', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('8', '', '7', '6', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('9', '', '7', '7', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('10', '', '7', '8', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('11', '', '8', '6', '2020-01-07 15:30:45', null, '1');
 
 -- ----------------------------
 -- Table structure for `tbl_select_item`
@@ -155,7 +160,7 @@ CREATE TABLE `tbl_upload` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload
@@ -163,6 +168,7 @@ CREATE TABLE `tbl_upload` (
 INSERT INTO `tbl_upload` VALUES ('4', '4', '1', 'อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'ZXC001', 'สำหรับคนรักการทำอาหาร', '2020-01-04 14:09:31', null);
 INSERT INTO `tbl_upload` VALUES ('5', '4', '2', 'เอกสารสำคัญ - โปรแกรม ร้าน ค้า ปลีก', 'คณิตศาสตร์', 'ZXV33', 'โปรแกรม ร้าน ค้า ปลีก', '2020-01-04 14:10:10', null);
 INSERT INTO `tbl_upload` VALUES ('7', '6', '8', 'Test the integration', 'รัฐบาล', 'MX00113', 'Log in to the developer dashboard and create a new sandbox test account.\r\nClick the Smart Payment Buttons. Make sure to also test the credit card buttons.\r\nLog in to PayPal using the test buyer account you created.\r\nComplete a transaction.', '2020-01-06 14:53:20', null);
+INSERT INTO `tbl_upload` VALUES ('8', '6', '2', 'คณิตศาสตร์ - วิกิพีเดีย', 'คณิตศาสตร์', 'XA112', 'คณิตศาสตร์ เป็นศาสตร์ที่มุ่งค้นคว้าเกี่ยวกับโครงสร้างนามธรรมที่ถูกกำหนดขึ้นผ่านทางกลุ่มของสัจพจน์ซึ่งมีการให้เหตุผลที่แน่นอนโดยใช้ตรรกศาสตร์สัญลักษณ์', '2020-01-07 15:30:14', null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_full`
@@ -178,7 +184,7 @@ CREATE TABLE `tbl_upload_full` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_full
@@ -186,6 +192,7 @@ CREATE TABLE `tbl_upload_full` (
 INSERT INTO `tbl_upload_full` VALUES ('5', '4', '4', 'sample-3pp_(1)1.pdf', '1', '2020-01-04 14:09:41', null, 'uploads/full/sample-3pp_(1)1.pdf');
 INSERT INTO `tbl_upload_full` VALUES ('6', '4', '5', 'ข้อเสนอโครงการ.pdf', '1', '2020-01-04 14:11:24', '2020-01-04 14:11:57', 'uploads/full/ข้อเสนอโครงการ.pdf');
 INSERT INTO `tbl_upload_full` VALUES ('8', '6', '7', 'การแชร์_เอกสาร_(Google_Doc)1.pdf', '1', '2020-01-06 14:53:32', null, 'uploads/full/การแชร์_เอกสาร_(Google_Doc)1.pdf');
+INSERT INTO `tbl_upload_full` VALUES ('9', '6', '8', 'pdf_open_parameters.pdf', '1', '2020-01-07 15:30:30', null, 'uploads/full/pdf_open_parameters.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_upload_preview`
@@ -200,7 +207,7 @@ CREATE TABLE `tbl_upload_preview` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_preview
@@ -208,6 +215,7 @@ CREATE TABLE `tbl_upload_preview` (
 INSERT INTO `tbl_upload_preview` VALUES ('2', '4', '4', '091025621.pdf', '2020-01-04 14:09:36', null, 'uploads/Preview/091025621.pdf');
 INSERT INTO `tbl_upload_preview` VALUES ('3', '4', '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', '2020-01-04 14:10:22', null, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf');
 INSERT INTO `tbl_upload_preview` VALUES ('5', '6', '7', 'กำหนดการโครงการอบรมการใช้_google_ในการบริหารจัดการสำนักงานสำหรับพนักงาน1.pdf', '2020-01-06 14:53:29', null, 'uploads/Preview/กำหนดการโครงการอบรมการใช้_google_ในการบริหารจัดการสำนักงานสำหรับพนักงาน1.pdf');
+INSERT INTO `tbl_upload_preview` VALUES ('6', '6', '8', 'pdf_open_parameters.pdf', '2020-01-07 15:30:27', null, 'uploads/Preview/pdf_open_parameters.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
