@@ -1,4 +1,17 @@
  <!--slider area start-->
+ 
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="myModal2">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="">
+                <center>
+                    <img src="uploads/popup/374879-PBNFLV-999.jpg" style="width:100%">
+                </center>
+            </div>
+
+        </div>
+        
+</div>
+
  <section class="slider_section slider_section_four mb-70 mt-30">
         <div class="container">
             <div class="row">

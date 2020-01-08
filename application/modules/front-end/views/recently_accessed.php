@@ -2,9 +2,9 @@
 <h2 class="text-center" style="margin-top: 15px;">Recently-Accessed</h2>
 <hr class="line_package">
 <br>
+<?php if (!empty($folder)) :  ?>
 <div class="container">
     <div class="row" style="margin-bottom: 100px;">
-
         <div class="col-lg-12 col-md-12 col-12 ">
             <article class="single_upload input-upload">
                 <div class="row">
@@ -26,11 +26,29 @@
                     </div>
                     <?php endif; ?>
                 <?php } ?>
-
                 </div>
             </article>
         </div>
-
     </div>
 </div>
+<?php else : ?>
+
+<!--error section area start-->
+<div class="error_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="error_form">
+                    <h1>No Recently</h1>
+                    <h2>Data Not Found</h2>
+                    <p>Sorry, the file you are looking for does not exist.</p>
+                    <a href="home">Back to home page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--error section area end-->
+
+<?php endif; ?>
 <br>

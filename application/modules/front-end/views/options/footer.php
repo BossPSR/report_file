@@ -275,6 +275,7 @@
     }
 </script>
 
+<script>$('#myModal2').modal('show')</script>
 
 <script>
     <?php if ($this->session->flashdata('successtotal')) : ?>
