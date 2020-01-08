@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-07 18:57:10
+Date: 2020-01-08 11:21:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,24 @@ CREATE TABLE `tbl_follow` (
 -- ----------------------------
 -- Records of tbl_follow
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_history`;
+CREATE TABLE `tbl_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) DEFAULT NULL,
+  `upload_id` varchar(255) DEFAULT NULL,
+  `created_at` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_history
+-- ----------------------------
+INSERT INTO `tbl_history` VALUES ('1', '7', '4', '2020-01-07 11:12:20');
+INSERT INTO `tbl_history` VALUES ('2', '7', '5', '2020-01-07 11:25:41');
 
 -- ----------------------------
 -- Table structure for `tbl_package`
@@ -70,11 +88,12 @@ CREATE TABLE `tbl_paypal` (
   `last_name` varchar(150) NOT NULL,
   `create_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_paypal
 -- ----------------------------
+INSERT INTO `tbl_paypal` VALUES ('1', '2JK036727F184940W', 'MTFNHJN8FN8ZG', '1', 'USD', '7', 'John', 'Doe', '2020-01-07 10:22:26');
 
 -- ----------------------------
 -- Table structure for `tbl_rejected`
@@ -139,11 +158,12 @@ CREATE TABLE `tbl_unlocks` (
   `ip_address` varchar(200) DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_unlocks
 -- ----------------------------
+INSERT INTO `tbl_unlocks` VALUES ('2', '7', '4', '4', '1', '2020-01-07 10:28:35', null, '::1', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_upload`
@@ -232,7 +252,7 @@ CREATE TABLE `tbl_user` (
   `file_name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_user
@@ -240,6 +260,7 @@ CREATE TABLE `tbl_user` (
 INSERT INTO `tbl_user` VALUES ('1', '1659900740516', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', null, '2019-12-11 04:07:28');
 INSERT INTO `tbl_user` VALUES ('2', '1269900232221', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '2019-12-25 15:19:48');
 INSERT INTO `tbl_user` VALUES ('3', '123456789', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '2019-12-23 19:29:15');
-INSERT INTO `tbl_user` VALUES ('4', '4444555666112', '8', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/7.png', '2020-01-06 13:35:29');
+INSERT INTO `tbl_user` VALUES ('4', '4444555666112', '9', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/7.png', '2020-01-07 10:28:35');
 INSERT INTO `tbl_user` VALUES ('5', '123123', '96', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '2020-01-06 11:27:08');
 INSERT INTO `tbl_user` VALUES ('6', '987456123', '94', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '2020-01-06 13:27:49');
+INSERT INTO `tbl_user` VALUES ('7', '123456789', '99', 'mikiboy004@gmail.com', '0895377846', 'mikiboy004', '5d1d14584b0c06caf0496045c696e989', null, '2020-01-07 10:28:35');

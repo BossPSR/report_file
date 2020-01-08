@@ -24,6 +24,27 @@ class Unlocks_ctr extends CI_Controller
 			$data['unlocks']						= $this->Upload_model->get_unlocks($data['userId']['id'], $upload_id);
 			$data['check_after_unlock']				= $this->Upload_model->check_afterunlocks($upload_id);
 
+
+		
+        
+            $data2 = array(
+                'user_id'               => $data['userId']['id'],
+                'upload_id'             => $upload_id,
+       			'created_at'             => date('Y-m-d H:i:s')
+               
+               
+			);
+			$user_his = $this->db->get_where('tbl_history', ['user_id' => $data['userId']['id'],'upload_id' => $upload_id])->row_array();
+			if($user_his== true){
+
+				       $this->db->where('upload_id',$user_his['upload_id']);
+			$success = $this->db->update('tbl_history',$data2);
+			}
+			else
+			{
+		    $success = $this->db->insert('tbl_history',$data2);
+			}
+
 			$this->load->view('options/header_login');
 			$this->load->view('unlocks', $data);
 			$this->load->view('options/footer');
