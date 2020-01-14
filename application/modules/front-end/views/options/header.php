@@ -121,7 +121,7 @@
                                 <li><a href="checkout.html"> ENG </a></li>
                             </ul>
                         </div>
-                        <div class="search_container">
+                        <!-- <div class="search_container">
                             <form action="#">
                                 <div class="hover_category">
                                     <select class="select_option" name="select" id="categori">
@@ -148,7 +148,7 @@
                                     <button type="submit">Search</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                         <div class="middel_right_info">
                             <div class="header_wishlist">
@@ -307,7 +307,7 @@
                         <div class="col-lg-10 col-md-6">
                             <div class="middel_right">
                                 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
-                                <?php if ($user == false) :  ?>
+                                <!-- <?php if ($user == false) :  ?>
                                     <div class="search_container" style="margin-right:200px;">
                                     <?php else : ?>
                                         <div class="search_container">
@@ -338,9 +338,9 @@
                                                 <button type="submit">Search</button>
                                             </div>
                                         </form>
-                                        </div>
+                                        </div> -->
 
-                                        <?php if ($user == true) :  ?>
+                                        <!-- <?php if ($user == true) :  ?>
                                             <div class="middel_right_info">
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                     <div class="menu-list">421</div>
@@ -357,7 +357,7 @@
                                             </div>
                                         <?php else : ?>
 
-                                        <?php endif ?>
+                                        <?php endif ?> -->
                                     </div>
                             </div>
                         </div>

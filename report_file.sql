@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-08 16:08:26
+Date: 2020-01-14 14:25:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,15 +41,11 @@ CREATE TABLE `tbl_history` (
   `upload_id` varchar(255) DEFAULT NULL,
   `created_at` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_history
 -- ----------------------------
-INSERT INTO `tbl_history` VALUES ('1', '7', '4', '2020-01-07 11:12:20');
-INSERT INTO `tbl_history` VALUES ('2', '7', '5', '2020-01-07 11:25:41');
-INSERT INTO `tbl_history` VALUES ('3', '4', '8', '2020-01-08 11:55:17');
-INSERT INTO `tbl_history` VALUES ('4', '4', '5', '2020-01-08 11:55:29');
 
 -- ----------------------------
 -- Table structure for `tbl_package`

@@ -1,3 +1,43 @@
+.team-R-center
+{
+    position: absolute;
+    left: 35%;
+    top: 40%;
+    text-align: center;
+}
+.bk-main-whith{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    background: #f7fbffbd;
+}
+.bk-main-black{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    background: #0e1427cc;
+}
+.bk-main-imgL
+{
+    background-image:url('../../../../uploads/Main/52233.jpg'); 
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bk-main-imgR
+{
+    background-image:url('../../../../uploads/Main/2731070.jpg');  
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .profile
 {
     cursor: pointer;
