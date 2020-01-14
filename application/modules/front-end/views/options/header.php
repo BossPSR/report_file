@@ -29,6 +29,10 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+    <!-- Start of  Zendesk Widget script -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=17e6cdb5-780a-4235-8324-782430ccd49e"> </script>
+    <!-- End of  Zendesk Widget script -->
+
 </head>
 
 <body>
@@ -405,12 +409,12 @@
                                                 <li><a href="my-folder"> ต้องการขาย </a></li>
                                                 <li><a href="#"> Feedback </a></li>
                                                 <li style="margin-right: 150px;"><a href="package"> Package</a></li>
-                                                <li class="menu-item-has-children" style="margin-right: 15px;">
+                                                <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                                 </li>
                                                 <li class="menu-item-has-children" style="margin-right: 40px;">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
-                                                </li>
+                                                </li> -->
                                                 <li >
                                                     <a href="package">ยอดคงเหลือ : $<?php echo $user['cash']; ?></a></li>
                                                 </li>
@@ -420,12 +424,14 @@
                                                 <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
                                                 <li><a href="#exampleModalCenter" data-toggle="modal"> Feedback </a></li>
                                                 <li><a href="#"> Package</a></li>
-                                                <li class="menu-item-has-children">
+                                                <li></li>
+                                                <li></li>
+                                                <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
-                                                </li>
-                                                <li class="menu-item-has-children">
+                                                </li> -->
+                                                <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
-                                                </li>
+                                                </li> -->
                                             <?php endif ?>
                                         </ul>
                                        
