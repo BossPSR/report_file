@@ -284,7 +284,7 @@
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php else :  ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                        <li><a href="register"> Sign up </a></li>
+                                        <li><a href="main"> Sign up </a></li>
                                     <?php endif  ?>
                                     <li><a href="#"> TH </a></li>
                                     <li><a href="#"> ENG </a></li>
@@ -358,7 +358,7 @@
                                         <?php else : ?>
 
                                         <?php endif ?> -->
-                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
