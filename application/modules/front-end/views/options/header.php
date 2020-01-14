@@ -213,13 +213,13 @@
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
                                     <li class="menu-item-has-children">
-                                        <a href="upload">Upload +</a>
+                                        <a href="upload"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="my-folder">My Upload</a>
+                                        <a href="my-folder"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My Download</a>
+                                        <a href="#"> Feedback</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="package">Package </a>
@@ -229,13 +229,13 @@
                                     </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal">Upload +</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal">My Upload</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal">My Download</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> Feedback</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Package </a>
@@ -377,19 +377,19 @@
                                         <ul>
                                             <?php if ($user) :  ?>
                                                 <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                                <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                                <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                                <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                                 <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
+                                                <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                                 <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
                                             <?php else : ?>
                                                 <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                                <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                                <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                                <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                                 <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                                <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
+                                                <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                                 <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
                                             <?php endif ?>
                                         </ul>
@@ -401,9 +401,9 @@
                                     <nav>
                                         <ul>
                                             <?php if ($user) :  ?>
-                                                <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
-                                                <li><a href="my-folder"> My Upload</a></li>
-                                                <li><a href="#"> My Download</a></li>
+                                                <li><a href="upload"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                                <li><a href="my-folder"> ต้องการขาย </a></li>
+                                                <li><a href="#"> Feedback </a></li>
                                                 <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                                 <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
@@ -416,9 +416,9 @@
                                                 </li>
                                                 
                                             <?php else : ?>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> Upload + <div class="arrow_box"></div></a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> My Upload</a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> My Download</a></li>
+                                                <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                                <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
+                                                <li><a href="#exampleModalCenter" data-toggle="modal"> Feedback </a></li>
                                                 <li><a href="#"> Package</a></li>
                                                 <li class="menu-item-has-children">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
