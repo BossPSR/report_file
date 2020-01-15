@@ -31,7 +31,7 @@
             <div class="col-lg-8 col-md-8">
                 <div class="account_form register">
                     <h2>Sign Up for team</h2>
-                    <form action="#" method="POST">
+                    <form action="register-team-success" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <p>
@@ -83,7 +83,7 @@
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <p>
                                     <label>Job <span class="red">*</span></label>
-                                    <select id="multiple" name="job" style="width: 100%" multiple>
+                                    <select id="multiple" name="job[]" style="width: 100%" multiple>
                                         <option value="1">HTML</option>
                                         <option value="2">CSS</option>
                                         <option value="3">Bootstrap</option>

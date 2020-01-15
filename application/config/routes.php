@@ -75,6 +75,7 @@ $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rejected']           = 'front-end/Rejected_ctr/my_rejected';
 $route['register']              = 'front-end/Register_ctr';
 $route['register-team']         = 'front-end/Register_ctr/register_team';
+$route['register-team-success'] = 'front-end/Register_ctr/register_team_success';
 $route['register_success']      = 'front-end/Register_ctr/register_success';
 $route['home']                  = 'front-end/Home_ctr';
 $route['package']               = 'front-end/Package_ctr';
