@@ -40,7 +40,7 @@
                 <img src="uploads/Main/regis_icon.png" alt="icon">
                 <h4 style="color: #ffff;    padding-top: 20px;">ฉันต้องการเป็นทีมงาน</h4>
                 <div style="padding-top: 20px;">
-                    <a href="" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-success"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นทีมงาน</a>
+                    <a href="register-team" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-success"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นทีมงาน</a>
                 </div>
             </div>
         </div>

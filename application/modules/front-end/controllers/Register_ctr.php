@@ -8,6 +8,7 @@ class Register_ctr extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Login_model');
+		$this->load->model('Countries_model');
 	}
 
 	public function index()
@@ -35,7 +36,7 @@ class Register_ctr extends CI_Controller
 
 		if ($username_check  && $check_usre2) {
 			$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!! </div>');
-            redirect('register','refresh');
+			redirect('register', 'refresh');
 			// echo "<script>";
 			// echo "alert('ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!!');";
 			// echo "window.location='register';";
@@ -43,7 +44,7 @@ class Register_ctr extends CI_Controller
 		} else {
 			if ($password != $c_password) {
 				$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!! </div>');
-               	redirect('register','refresh');
+				redirect('register', 'refresh');
 				// echo "<script>";
 				// echo "alert('กรุณากรอกรหัสผ่านให้ตรงกัน กรุณาลองใหม่อีกครั้ง !!!');";
 				// echo "window.location='register';";
@@ -62,14 +63,14 @@ class Register_ctr extends CI_Controller
 
 				if ($success > 0) {
 					$this->session->set_flashdata('save_ss', TRUE);
-                	redirect('register','refresh');
+					redirect('register', 'refresh');
 					// echo "<script>";
 					// echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
 					// echo "window.location='register';";
 					// echo "</script>";
 				} else {
 					$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอก Email หรือ Password ให้ถูกต้อง !! </div>');
-               	 	redirect('register','refresh');
+					redirect('register', 'refresh');
 					// echo "<script>";
 					// echo "alert('ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง !!!');";
 					// echo "window.location='register';";
@@ -78,4 +79,36 @@ class Register_ctr extends CI_Controller
 			}
 		}
 	}
+
+	public function register_team()
+	{
+		$data['countries'] = $this->Countries_model->get_countries();
+
+		if ($this->session->userdata('email') == '') {
+			$this->load->view('options/header');
+			$this->load->view('register_team', $data);
+			$this->load->view('options/footer');
+		} else {
+			redirect('my-profile');
+		}
+	}
+
+	// public function register_team_success()
+	// {
+	// 	$countries			= $this->input->post('countries');
+	// 	$name				= $this->input->post('name');
+	// 	$phone				= $this->input->post('phone');
+	// 	$email				= $this->input->post('email');
+	// 	$password			= $this->input->post('password');
+	// 	$c_password			= $this->input->post('c_password');
+
+	// 	if ($password != $c_password) {
+	// 		echo "<script>";
+	// 		echo "alert('Passwords do not match !!!');";
+	// 		echo "window.location='register-team';";
+	// 		echo "</script>";
+	// 	} else {
+
+	// 	}
+	// }
 }

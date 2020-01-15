@@ -10,12 +10,10 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="public/frontend/assets/img/favicon.ico">
 
-    <!-- CSS 
-    ========================= -->
-
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/plugins.css">
-
+    <link href="assets/reponsive/plugins/selectator/fm.selectator.css" rel="stylesheet">
+    
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/style.css">
     <link rel="stylesheet" href="public/frontend/assets/css/hover.css">
@@ -26,7 +24,7 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Start of  Zendesk Widget script -->
@@ -41,14 +39,11 @@
             $('#myInput').trigger('focus')
         })
     </script>
-     <script>
+    <script>
         $('#myModal1').on('shown.bs.modal', function() {
             $('#myInput1').trigger('focus')
         })
     </script>
-
-
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -344,7 +339,7 @@
                                         </form>
                                         </div> -->
 
-                                        <!-- <?php if ($user == true) :  ?>
+                                <!-- <?php if ($user == true) :  ?>
                                             <div class="middel_right_info">
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                     <div class="menu-list">421</div>
@@ -362,88 +357,88 @@
                                         <?php else : ?>
 
                                         <?php endif ?> -->
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--header middel end-->
-                <!--header bottom satrt-->
-                <div class="main_menu_area">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-3 col-md-12">
-                                <div class="categories_menu categories_four menu_left_new">
-                                    <div class="categories_title">
-                                        <h2 class="categori_toggle">Category</h2>
-                                    </div>
-                                    <div class="categories_menu_toggle">
-                                        <ul>
-                                            <?php if ($user) :  ?>
-                                                <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                                <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
-                                                <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
-                                                <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
-                                                <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                                <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
-                                                <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
-                                            <?php else : ?>
-                                                <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                                <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
-                                                <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
-                                                <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                                <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
-                                                <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
-                                            <?php endif ?>
-                                        </ul>
-                                    </div>
+            </div>
+            <!--header middel end-->
+            <!--header bottom satrt-->
+            <div class="main_menu_area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-12">
+                            <div class="categories_menu categories_four menu_left_new">
+                                <div class="categories_title">
+                                    <h2 class="categori_toggle">Category</h2>
+                                </div>
+                                <div class="categories_menu_toggle">
+                                    <ul>
+                                        <?php if ($user) :  ?>
+                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                        <?php else : ?>
+                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                        <?php endif ?>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-9 col-md-12">
-                                <div class="main_menu menu_position">
-                                    <nav>
-                                        <ul>
-                                            <?php if ($user) :  ?>
-                                                <li><a href="upload"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
-                                                <li><a href="my-folder"> ต้องการขาย </a></li>
-                                                <li><a href="#"> Feedback </a></li>
-                                                <li style="margin-right: 150px;"><a href="package"> Package</a></li>
-                                                <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
+                        </div>
+                        <div class="col-lg-9 col-md-12">
+                            <div class="main_menu menu_position">
+                                <nav>
+                                    <ul>
+                                        <?php if ($user) :  ?>
+                                            <li><a href="upload"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                            <li><a href="my-folder"> ต้องการขาย </a></li>
+                                            <li><a href="#"> Feedback </a></li>
+                                            <li style="margin-right: 150px;"><a href="package"> Package</a></li>
+                                            <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                                 </li>
                                                 <li class="menu-item-has-children" style="margin-right: 40px;">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                                <li >
-                                                    <a href="package">ยอดคงเหลือ : $<?php echo $user['cash']; ?></a></li>
-                                                </li>
-                                                
-                                            <?php else : ?>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal"> Feedback </a></li>
-                                                <li><a href="#"> Package</a></li>
-                                                <li></li>
-                                                <li></li>
-                                                <!-- <li class="menu-item-has-children">
+                                            <li>
+                                                <a href="package">ยอดคงเหลือ : $<?php echo $user['cash']; ?></a></li>
+                                            </li>
+
+                                        <?php else : ?>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> Feedback </a></li>
+                                            <li><a href="#"> Package</a></li>
+                                            <li></li>
+                                            <li></li>
+                                            <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                                <!-- <li class="menu-item-has-children">
+                                            <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                            <?php endif ?>
-                                        </ul>
-                                       
+                                        <?php endif ?>
+                                    </ul>
 
-                                    </nav>
-                                </div>
+
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--header bottom end-->
             </div>
+            <!--header bottom end-->
+        </div>
     </header>
     <!--header area end-->
 

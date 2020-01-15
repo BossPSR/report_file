@@ -220,9 +220,11 @@
 <script src="public/frontend/assets/js/main.js"></script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<!-- <script src="assets/reponsive/js/jquery.min.js"></script>
+<script src="assets/reponsive/js/bootstrap.min.js"></script> -->
+<script src="assets/reponsive/plugins/selectator/fm.selectator.js"></script>
 <script>
-    function confirmalertunlock(data, data2, data3 ,data4) {
+    function confirmalertunlock(data, data2, data3, data4) {
 
         swal({
             title: "Are you sure Unloc?",
@@ -232,8 +234,8 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'unlock_document?upload_id=' + data + '&userId=' + data2 + '&price=' + data3 + '&merchant_id=' + data4 ;
-            } 
+                window.location = 'unlock_document?upload_id=' + data + '&userId=' + data2 + '&price=' + data3 + '&merchant_id=' + data4;
+            }
         })
     }
 </script>
@@ -275,7 +277,9 @@
     }
 </script>
 
-<script>$('#myModal2').modal('show')</script>
+<script>
+    $('#myModal2').modal('show')
+</script>
 
 <script>
     <?php if ($this->session->flashdata('successtotal')) : ?>
@@ -341,7 +345,7 @@
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });
-</script> 
+</script>
 
 <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
@@ -358,7 +362,7 @@
                 data: {
                     name: name,
                     request: 2,
-                    document_full_id:document_full_id
+                    document_full_id: document_full_id
                 },
                 success: function(data) {
                     console.log('success: ' + data);
@@ -420,7 +424,7 @@
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         }
     });
-</script> 
+</script>
 
 <script>
     $('#password, #c_password').on('keyup', function() {
