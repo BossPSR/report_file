@@ -45,6 +45,22 @@ class Login_model extends CI_Model{
         
         return $data->row_array();
     }
-}
 
-?>
+    public function team_check($email)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_team');
+        $this->db->where('email',$email);
+        $data = $this->db->get();
+        return $data->row_array();
+    }
+
+    public function user_check($email)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_user');
+        $this->db->where('email',$email);
+        $data = $this->db->get();
+        return $data->row_array();
+    }
+}
