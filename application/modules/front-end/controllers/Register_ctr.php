@@ -34,7 +34,7 @@ class Register_ctr extends CI_Controller
 		$username_check      = $this->Login_model->check_usre($passport, $email);
 		$check_usre2         = $this->Login_model->check_usre2($username);
 
-		if ($username_check  && $check_usre2) {
+		if ($username_check || $check_usre2) {
 			$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!! </div>');
 			redirect('register', 'refresh');
 			// echo "<script>";
@@ -102,72 +102,78 @@ class Register_ctr extends CI_Controller
 		$password			= $this->input->post('password');
 		$c_password			= $this->input->post('c_password');
 		$job				= $this->input->post('job');
-
-		// print_r($job);
-		// exit();
-		if ($password != $c_password) {
+		$team_check			= $this->Login_model->team_check($email);
+		$user_check 		= $this->Login_model->user_check($email);
+		if ($team_check || $user_check) {
 			echo "<script>";
-			echo "alert('Passwords do not match !!!');";
+			echo "alert('Data no must be filled out!!!');";
 			echo "window.location='register-team';";
 			echo "</script>";
 		} else {
-			if (!empty($_FILES['file_name']['name'])) {
+			if ($password != $c_password) {
+				echo "<script>";
+				echo "alert('Passwords do not match !!!');";
+				echo "window.location='register-team';";
+				echo "</script>";
+			} else {
+				if (!empty($_FILES['file_name']['name'])) {
 
-				$config['upload_path'] 		= 'uploads/resume/';
-				// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-				$config['allowed_types'] 	= '*';
-				$config['max_size']    		= '99999'; // max_size in kb
-				$config['file_name'] 		= $_FILES['file_name']['name'];
-				//Load upload library
-				$this->load->library('upload', $config);
-				$this->upload->initialize($config);
+					$config['upload_path'] 		= 'uploads/resume/';
+					// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+					$config['allowed_types'] 	= '*';
+					$config['max_size']    		= '99999'; // max_size in kb
+					$config['file_name'] 		= $_FILES['file_name']['name'];
+					//Load upload library
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
 
-				// File upload
-				if ($this->upload->do_upload('file_name')) {
-					// Get data about the file
-					$uploadData = $this->upload->data();
-					$data = array(
-						'country_id'		=> $countries,
-						'name'				=> $name,
-						'phone'				=> $phone,
-						'email'				=> $email,
-						'password'			=> $password,
-						'file_name'			=> $uploadData['file_name'],
-						'created_at'		=> date('Y-m-d H:i:s'),
-					);
-					if ($this->db->insert('tbl_team', $data)) {
-						$team_id = $this->db->insert_id();
-						foreach ($job as $key => $job) {
-							$data2 = array(
-								'id_team'			=> $team_id,
-								'job_position'		=> $job,
-								'create_at'		=> date('Y-m-d H:i:s'),
-							);
-							$saveData = $this->db->insert('tbl_job_position',$data2);
-						}
-						if ($saveData > 0) {
-							echo "<script>";
-							echo "alert('Thank for send register team.');";
-							echo "window.location='home';";
-							echo "</script>";
+					// File upload
+					if ($this->upload->do_upload('file_name')) {
+						// Get data about the file
+						$uploadData = $this->upload->data();
+						$data = array(
+							'country_id'		=> $countries,
+							'name'				=> $name,
+							'phone'				=> $phone,
+							'email'				=> $email,
+							'password'			=> md5($password),
+							'file_name'			=> $uploadData['file_name'],
+							'created_at'		=> date('Y-m-d H:i:s'),
+						);
+						if ($this->db->insert('tbl_team', $data)) {
+							$team_id = $this->db->insert_id();
+							foreach ($job as $key => $job) {
+								$data2 = array(
+									'id_team'			=> $team_id,
+									'job_position'		=> $job,
+									'create_at'		=> date('Y-m-d H:i:s'),
+								);
+								$saveData = $this->db->insert('tbl_job_position', $data2);
+							}
+							if ($saveData > 0) {
+								echo "<script>";
+								echo "alert('Thank for send register team.');";
+								echo "window.location='home';";
+								echo "</script>";
+							} else {
+								echo "<script>";
+								echo "alert('Error for send resume. Plase try agian !!');";
+								echo "window.location='register-team';";
+								echo "</script>";
+							}
 						} else {
 							echo "<script>";
-							echo "alert('Error for send resume. Plase try agian !!');";
+							echo "alert('Data no must be filled out!!!');";
 							echo "window.location='register-team';";
 							echo "</script>";
 						}
-					} else {
-						echo "<script>";
-						echo "alert('Data no must be filled out!!!');";
-						echo "window.location='register-team';";
-						echo "</script>";
 					}
+				} else {
+					echo "<script>";
+					echo "alert('Resume no must be filled out!!!');";
+					echo "window.location='register-team';";
+					echo "</script>";
 				}
-			} else {
-				echo "<script>";
-				echo "alert('Resume no must be filled out!!!');";
-				echo "window.location='register-team';";
-				echo "</script>";
 			}
 		}
 	}
