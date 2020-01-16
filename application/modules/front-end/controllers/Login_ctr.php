@@ -48,6 +48,9 @@ class Login_ctr extends CI_Controller
                 );
                 $this->session->set_userdata($user_data);
                 $this->session->set_flashdata('save_ss', TRUE);
+                // $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+                // print_r($team);
+                // exit();
                 redirect('home');
             } else {
                 $this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอก Email หรือ Password ให้ถูกต้อง !! </div>');
