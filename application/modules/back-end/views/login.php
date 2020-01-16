@@ -67,16 +67,16 @@
                                         <p class="px-2">Welcome back, please login to your account.</p>
                                         <div class="card-content">
                                             <div class="card-body pt-1">
-                                                <form action="index.html">
+                                                <form action="Login_admin" method="POST">
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input type="email" class="form-control" id="user-name" placeholder="email" name="email" required>
+                                                        <input type="email" class="form-control"  placeholder="email" name="email" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
                                                         <label for="user-name">email</label>
                                                     </fieldset>
                                                     <fieldset class="form-label-group position-relative has-icon-left">
-                                                        <input type="password" class="form-control" id="user-password" placeholder="Password" name="password" required>
+                                                        <input type="password" class="form-control" " placeholder="Password" name="password" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-lock"></i>
                                                         </div>
