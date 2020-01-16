@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home_ctr extends CI_Controller {
+class Login_ctr extends CI_Controller {
 
 	public function __construct()
     {
@@ -12,10 +12,7 @@ class Home_ctr extends CI_Controller {
 	public function index()
 	{
 	
-		
-		$this->load->view('options/header');
-		$this->load->view('index');
-		$this->load->view('options/footer');
+		$this->load->view('login');
 	
 	}
 	

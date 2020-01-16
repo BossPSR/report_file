@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : database
+Source Server         : db
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-15 16:00:02
+Date: 2020-01-16 14:41:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -297,6 +297,22 @@ CREATE TABLE `tbl_follow` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `tbl_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_history`;
+CREATE TABLE `tbl_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) DEFAULT NULL,
+  `upload_id` varchar(255) DEFAULT NULL,
+  `created_at` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_history
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tbl_job`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_job`;
@@ -330,6 +346,30 @@ CREATE TABLE `tbl_job_position` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `tbl_package`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_package`;
+CREATE TABLE `tbl_package` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title_pk` varchar(200) DEFAULT NULL,
+  `price_pk` varchar(100) DEFAULT '',
+  `description_pk` text DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `userId_pk` int(11) DEFAULT NULL,
+  `status` int(2) DEFAULT 0,
+  `time_pk` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_package
+-- ----------------------------
+INSERT INTO `tbl_package` VALUES ('1', 'Annual', '9.95', 'เหมาะสำหรับเว็บไซต์ส่วนตัวเว็บบริษัทขนาดเล็ก Natus erro at congue massa commodo sit', '2020-01-06 00:00:00', null, null, '0', 'mo');
+INSERT INTO `tbl_package` VALUES ('2', 'Quarterly', '19.95', 'เหมาะสำหรับเว็บไซต์ทั่วไป\r\nNatus erro at congue massa commodo sit', '2020-01-06 00:00:00', null, null, '0', 'mo');
+INSERT INTO `tbl_package` VALUES ('3', 'Monthly', '39.95', 'เหมาะสำหรับเว็บไซต์ขนาดใหญ่\r\nจำนวนข้อมูลหรือมีผู้เข้าชมจำนวนมาก Natus erro at congue massa commodo sit', '2020-01-06 00:00:00', null, null, '0', 'mo');
+
+-- ----------------------------
 -- Table structure for `tbl_paypal`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_paypal`;
@@ -349,6 +389,30 @@ CREATE TABLE `tbl_paypal` (
 -- ----------------------------
 -- Records of tbl_paypal
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_rejected`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_rejected`;
+CREATE TABLE `tbl_rejected` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` text NOT NULL,
+  `bookid_rj` int(11) DEFAULT NULL,
+  `userId_rj` int(11) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `status` int(2) DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_rejected
+-- ----------------------------
+INSERT INTO `tbl_rejected` VALUES ('7', '', '7', '5', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('8', '', '7', '6', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('9', '', '7', '7', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('10', '', '7', '8', '2020-01-06 16:50:55', null, '1');
+INSERT INTO `tbl_rejected` VALUES ('11', '', '8', '6', '2020-01-07 15:30:45', null, '1');
 
 -- ----------------------------
 -- Table structure for `tbl_select_item`
