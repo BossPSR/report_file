@@ -71,12 +71,12 @@
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        Check
+                                                                    Pending approval
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="#">Option 1</a>
-                                                                        <a class="dropdown-item" href="#">Option 2</a>
-                                                                        <a class="dropdown-item" href="#">Option 3</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
+                                                                      
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -85,12 +85,12 @@
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        Confirm
+                                                                    approve
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="#">Option 1</a>
-                                                                        <a class="dropdown-item" href="#">Option 2</a>
-                                                                        <a class="dropdown-item" href="#">Option 3</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
+                                                                      
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -99,12 +99,12 @@
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        Reject
+                                                                    Not approved
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="#">Option 1</a>
-                                                                        <a class="dropdown-item" href="#">Option 2</a>
-                                                                        <a class="dropdown-item" href="#">Option 3</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
+                                                                       
                                                                     </div>
                                                                 </div>
                                                             </td>

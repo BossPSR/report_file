@@ -19,6 +19,26 @@ class Team_ctr extends CI_Controller {
 		$this->load->view('options/footer');
 	
 	}
+
+	public function status_team()
+    {
+        $id = $this->input->get('id');
+        $status = $this->input->get('status');
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_team',['status' => $status]);
+
+        if($resultsedit > 0)
+        {
+            $this->session->set_flashdata('save_ss2',' Successfully updated status information !!.');
+        }
+        else
+        {
+            $this->session->set_flashdata('del_ss2','Not Successfully updated status information');
+        }
+        return redirect('back_team');
+    }
+
 	
 	
 }

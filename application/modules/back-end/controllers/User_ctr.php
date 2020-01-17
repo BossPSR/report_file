@@ -6,14 +6,16 @@ class User_ctr extends CI_Controller {
 	public function __construct()
     {
 		parent::__construct();
+		$this->load->model('User_list_model');
 
     }
 
 	public function index()
 	{
 	
+		$data['user_list'] = $this->User_list_model->user_list();
 		$this->load->view('options/header');
-		$this->load->view('user_list');
+		$this->load->view('user_list',$data);
 		$this->load->view('options/footer');
 	
 	}
