@@ -69,32 +69,44 @@
                                                         <td><?php echo $team['phone']; ?></td>
                                                         <?php if ($team['status'] == 0) : ?>
                                                             <td>
-                                                            <td>
-                                                                <div class="chip chip-warning">
-                                                                    <div class="chip-body">
-                                                                        <div class="chip-text">Awaiting review</div>
+                                                                <div class="dropdown ">
+                                                                    <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Check
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="#">Option 1</a>
+                                                                        <a class="dropdown-item" href="#">Option 2</a>
+                                                                        <a class="dropdown-item" href="#">Option 3</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                               
                                                         <?php elseif($team['status'] == 1) : ?>
                                                             <td>
-                                                            <a href=""><div class="chip chip-success">
-                                                                    <div class="chip-body">
-                                                                        <div class="chip-text">approve</div>
+                                                                <div class="dropdown ">
+                                                                    <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Confirm
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="#">Option 1</a>
+                                                                        <a class="dropdown-item" href="#">Option 2</a>
+                                                                        <a class="dropdown-item" href="#">Option 3</a>
                                                                     </div>
                                                                 </div>
-                                                                </a>
                                                             </td>
                                                             
                                                        <?php else : ?>
-                                                        <td>
-                                                            <a href=""><div class="chip chip-success">
-                                                                    <div class="chip-body">
-                                                                        <div class="chip-text">approve</div>
+                                                            <td>
+                                                                <div class="dropdown ">
+                                                                    <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        Reject
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="#">Option 1</a>
+                                                                        <a class="dropdown-item" href="#">Option 2</a>
+                                                                        <a class="dropdown-item" href="#">Option 3</a>
                                                                     </div>
                                                                 </div>
-                                                                </a>
                                                             </td>
                                                             
                                                         <?php endif; ?>
