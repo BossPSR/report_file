@@ -106,8 +106,9 @@ $route['get_search']            = 'front-end/Search_ctr/get_search';
 
 $route['back_dashboard']        = 'back-end/Home_ctr';
 $route['back_team']             = 'back-end/Team_ctr';
-$route['Login_admin']             = 'back-end/Login_ctr/admin_loginMe';
-$route['Logout_admin']             = 'back-end/Login_ctr/admin_logout';
+$route['back_user']             = 'back-end/User_ctr';
+$route['Login_admin']           = 'back-end/Login_ctr/admin_loginMe';
+$route['Logout_admin']          = 'back-end/Login_ctr/admin_logout';
 $route['backend']               = 'back-end/Login_ctr';
 $route['pdf']                   = 'front-end/pdf';
 
