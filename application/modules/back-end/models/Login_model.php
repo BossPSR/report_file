@@ -7,11 +7,11 @@ class Login_model extends CI_Model{
         parent::__construct();
     }
     
-    public function login_company($username, $password)
+    public function login_admin($email, $password)
     {
-       $this->db->where('email', $username);
+       $this->db->where('email', $email);
        $this->db->where('password', $password);
-       $query = $this->db->get('tbl_user');
+       $query = $this->db->get('tbl_admin');
 
        if ($query->num_rows() > 0)
        {
@@ -23,17 +23,7 @@ class Login_model extends CI_Model{
        }
 
     }
-    function check_usre($passport,$email,$username)
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_user');
-        $this->db->where('passport',$passport);
-        $this->db->where('email',$email);
-        $this->db->where('username',$username);
-        $data = $this->db->get();
-        
-        return $data->row_array();
-    }
+   
 
 
 

@@ -13,7 +13,7 @@
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/plugins.css">
     <link href="assets/reponsive/plugins/selectator/fm.selectator.css" rel="stylesheet">
-    
+
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/style.css">
     <link rel="stylesheet" href="public/frontend/assets/css/hover.css">
@@ -108,9 +108,12 @@
                         <div class="top_right text-right">
                             <ul>
                                 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
+                                <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                 <?php if ($user == true) :  ?>
-                                    <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
                                     <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                    <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
+                                <?php elseif ($team == true) : ?>
+                                    <li><a href="#"> <?php echo $team['name'] ?> </a></li>
                                     <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                 <?php else : ?>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
@@ -278,8 +281,12 @@
                             <div class="top_right text-right">
                                 <ul>
                                     <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
+                                    <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                     <?php if ($user == true) :  ?>
                                         <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                        <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
+                                    <?php elseif ($team == true) : ?>
+                                        <li><a href="#"> <?php echo $team['name'] ?> </a></li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php else :  ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>

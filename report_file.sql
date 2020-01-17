@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-16 14:41:14
+Date: 2020-01-16 17:23:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -281,6 +281,30 @@ INSERT INTO `countries` VALUES ('249', 'ZM', 'Zambia');
 INSERT INTO `countries` VALUES ('250', 'ZW', 'Zimbabwe');
 
 -- ----------------------------
+-- Table structure for `tbl_admin`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_admin`;
+CREATE TABLE `tbl_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_admin
+-- ----------------------------
+INSERT INTO `tbl_admin` VALUES ('1', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', '2019-12-11 04:07:28');
+INSERT INTO `tbl_admin` VALUES ('2', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', '2019-12-25 15:19:48');
+INSERT INTO `tbl_admin` VALUES ('3', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', '2019-12-23 19:29:15');
+INSERT INTO `tbl_admin` VALUES ('4', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-04 15:36:53');
+INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', '2019-12-25 17:23:11');
+INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-04 16:22:28');
+
+-- ----------------------------
 -- Table structure for `tbl_follow`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_follow`;
@@ -333,17 +357,20 @@ CREATE TABLE `tbl_job` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_job_position`;
 CREATE TABLE `tbl_job_position` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_team` int(11) DEFAULT NULL,
   `job_position` varchar(150) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_job_position
 -- ----------------------------
+INSERT INTO `tbl_job_position` VALUES ('1', '1', '1', '2020-01-16 14:50:18', null);
+INSERT INTO `tbl_job_position` VALUES ('2', '1', '3', '2020-01-16 14:50:18', null);
+INSERT INTO `tbl_job_position` VALUES ('3', '1', '4', '2020-01-16 14:50:18', null);
 
 -- ----------------------------
 -- Table structure for `tbl_package`
@@ -452,12 +479,14 @@ CREATE TABLE `tbl_team` (
   `file_name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT 0 COMMENT '0 == approve //  == non-approve',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_team
 -- ----------------------------
+INSERT INTO `tbl_team` VALUES ('1', '218', 'famnoiii@gmail.com', '0968138751', 'Fam Worapong', 'e10adc3949ba59abbe56e057f20f883e', 'screencapture-file-G-Fam-E-backup-19-9-19-profile-profile-index-html-2020-01-06-19_08_028.png', '2020-01-16 14:50:17', null, '1');
 
 -- ----------------------------
 -- Table structure for `tbl_unlocks`

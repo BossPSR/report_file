@@ -21,7 +21,23 @@ class Login_model extends CI_Model{
        {
         return false;
        }
+    }
 
+    public function login_team($email,$password)
+    {
+        $this->db->where('email', $email);
+        $this->db->where('password', $password);
+        $this->db->where('status',1);
+        $query = $this->db->get('tbl_team');
+ 
+        if ($query->num_rows() > 0)
+        {
+         return true;
+        }
+        else
+        {
+         return false;
+        }
     }
 
     public function check_usre($passport,$email)
