@@ -14,12 +14,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="public/backend/assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
+    
+
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/charts/apexcharts.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/extensions/tether-theme-arrows.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/extensions/tether.min.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/extensions/shepherd-theme-default.css">
+    <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -263,7 +266,7 @@
                     </li>
                     <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Apps</span></a>
                         <ul class="dropdown-menu">
-                            <li data-menu=""><a class="dropdown-item" href="app-email.html" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Email</a>
+                            <li data-menu=""><a class="dropdown-item" href="back_team" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>ข้อมูลทีมงาน</a>
                             </li>
                             <li data-menu=""><a class="dropdown-item" href="app-chat.html" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-message-square"></i>Chat</a>
                             </li>
