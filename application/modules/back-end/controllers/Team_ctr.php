@@ -12,8 +12,10 @@ class Team_ctr extends CI_Controller {
 	public function index()
 	{
 	
+		$data['team'] = $this->db->get('tbl_team')->result_array();
+
 		$this->load->view('options/header');
-		$this->load->view('team_list');
+		$this->load->view('team_list',$data);
 		$this->load->view('options/footer');
 	
 	}
