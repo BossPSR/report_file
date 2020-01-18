@@ -101,7 +101,7 @@ $route['fileUploadEdit']        = 'front-end/Upload_ctr/fileUploadEdit';
 $route['fileUploadEditfull']    = 'front-end/Upload_ctr/fileUploadEditfull';
 $route['paypal_success']        = 'front-end/Paypal_ctr/success';
 $route['get_search']            = 'front-end/Search_ctr/get_search';
-
+$route['buy']                   = 'front-end/Buy_ctr';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']        = 'back-end/Home_ctr';

@@ -99,6 +99,7 @@ class Register_ctr extends CI_Controller
 		$name				= $this->input->post('name');
 		$phone				= $this->input->post('phone');
 		$email				= $this->input->post('email');
+		$bank_account		= $this->input->post('bank_account');
 		$password			= $this->input->post('password');
 		$c_password			= $this->input->post('c_password');
 		$job				= $this->input->post('job');
@@ -136,6 +137,7 @@ class Register_ctr extends CI_Controller
 							'name'				=> $name,
 							'phone'				=> $phone,
 							'email'				=> $email,
+							'bank_account'		=> $bank_account,
 							'password'			=> md5($password),
 							'file_name'			=> $uploadData['file_name'],
 							'created_at'		=> date('Y-m-d H:i:s'),
