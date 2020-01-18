@@ -215,7 +215,7 @@
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
                                     <li class="menu-item-has-children">
-                                        <a href="upload"> ต้องการซื้อ</a>
+                                        <a href="buy"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="my-folder"> ต้องการขาย</a>
@@ -423,7 +423,7 @@
                                 <nav>
                                     <ul>
                                         <?php if ($user) :  ?>
-                                            <li><a href="upload"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                            <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                             <li><a href="my-folder"> ต้องการขาย </a></li>
                                             <li><a href="#"> Feedback </a></li>
                                             <li style="margin-right: 150px;"><a href="package"> Package</a></li>

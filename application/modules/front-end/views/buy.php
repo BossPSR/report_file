@@ -28,6 +28,39 @@
                                          <!-- <td class=""><span class="badge badge-warning" style="color:#fff;">Wait</span></td> -->
                                          <td class="product-price"><?php echo date('Y-m-d'); ?></td>
                                      </tr>
+                                     <tr>
+                                         <!-- <td class="product_remove"><a href="#">X</a></td> -->
+                                         <td class="product_thumb"><a href="#"><?php echo (rand(100000, 1000000)); ?></a></td>
+                                         <td class="">
+                                             <div class="progress">
+                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">SUCCESS</div>
+                                             </div>
+                                         </td>
+                                         <!-- <td class=""><span class="badge badge-warning" style="color:#fff;">Wait</span></td> -->
+                                         <td class="product-price"><?php echo date('Y-m-d'); ?></td>
+                                     </tr>
+                                     <tr>
+                                         <!-- <td class="product_remove"><a href="#">X</a></td> -->
+                                         <td class="product_thumb"><a href="#"><?php echo (rand(100000, 1000000)); ?></a></td>
+                                         <td class="">
+                                             <div class="progress">
+                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">SUCCESS</div>
+                                             </div>
+                                         </td>
+                                         <!-- <td class=""><span class="badge badge-warning" style="color:#fff;">Wait</span></td> -->
+                                         <td class="product-price"><?php echo date('Y-m-d'); ?></td>
+                                     </tr>
+                                     <tr>
+                                         <!-- <td class="product_remove"><a href="#">X</a></td> -->
+                                         <td class="product_thumb"><a href="#"><?php echo (rand(100000, 1000000)); ?></a></td>
+                                         <td class="">
+                                             <div class="progress">
+                                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">CANCEL</div>
+                                             </div>
+                                         </td>
+                                         <!-- <td class=""><span class="badge badge-warning" style="color:#fff;">Wait</span></td> -->
+                                         <td class="product-price"><?php echo date('Y-m-d'); ?></td>
+                                     </tr>
                                  </tbody>
                              </table>
                          </div>
