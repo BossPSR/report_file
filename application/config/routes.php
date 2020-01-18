@@ -49,26 +49,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'front-end/Main_ctr';
+$route['default_controller'] = 'front-end/Home_ctr';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['main']              = 'front-end/Main_ctr';
+$route['main']                  = 'front-end/Main_ctr';
 
-$route['loginme']              = 'front-end/Login_ctr/loginMe';
-$route['Logout']              = 'front-end/Login_ctr/logout';
+$route['loginme']               = 'front-end/Login_ctr/loginMe';
+$route['Logout']                = 'front-end/Login_ctr/logout';
 
-$route['my-rewards']         = 'front-end/Rewards_ctr/my_rewards';
-$route['my-profile']         = 'front-end/My_user_ctr/my_profile';
-$route['my-profile_edit']         = 'front-end/My_user_ctr/profile_edit';
-$route['my-wallet']          = 'front-end/My_wallet_ctr/my_wallet';
-$route['my-deposit']         = 'front-end/My_deposit_ctr/my_deposit';
-$route['my-withdraw']        = 'front-end/My_withdraw_ctr/my_withdraw';
-$route['my-slip']            = 'front-end/My_slip_ctr/my_slip';
-$route['my-folder']         = 'front-end/My_upload_ctr/my_upload_folder';
-$route['my-upload']          = 'front-end/My_upload_ctr/my_upload';
-$route['my-upload-delete']   = 'front-end/My_upload_ctr/delete_file';
-$route['my-upload-edit']     = 'front-end/My_upload_ctr/my_upload_edit';
+$route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
+$route['my-profile']            = 'front-end/My_user_ctr/my_profile';
+$route['my-profile_edit']       = 'front-end/My_user_ctr/profile_edit';
+$route['my-wallet']             = 'front-end/My_wallet_ctr/my_wallet';
+$route['my-deposit']            = 'front-end/My_deposit_ctr/my_deposit';
+$route['my-withdraw']           = 'front-end/My_withdraw_ctr/my_withdraw';
+$route['my-slip']               = 'front-end/My_slip_ctr/my_slip';
+$route['my-folder']             = 'front-end/My_upload_ctr/my_upload_folder';
+$route['my-upload']             = 'front-end/My_upload_ctr/my_upload';
+$route['my-upload-delete']      = 'front-end/My_upload_ctr/delete_file';
+$route['my-upload-edit']        = 'front-end/My_upload_ctr/my_upload_edit';
 
 
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';

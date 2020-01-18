@@ -30,11 +30,10 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Zero configuration</h4>
+                                    <h4 class="card-title">User List</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body card-dashboard">
-                                        <p class="card-text">DataTables has most features enabled by default, so all you need to do to use it with your own ables is to call the construction function: $().DataTable();.</p>
                                         <div class="table-responsive">
                                             <table class="table zero-configuration">
                                                 <thead>
