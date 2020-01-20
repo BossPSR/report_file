@@ -50,49 +50,45 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>image</th>
-                                                    <th>Name</th>
-                                                    <th>country</th>
                                                     <th>email</th>
+                                                    <th>UserName</th>                                      
                                                     <th>phone</th>
+                                                    <th>created_at</th>
                                                     <th>status</th>
+                                                    <th>Tool</th>
 
                                                 </tr>
                                             </thead>
-                                            <?php foreach ($team as $team) { ?>
+                                            <?php foreach ($admin as $admin) { ?>
                                                 <tbody>
                                                     <tr>
-                                                        <td><img src="uploads/resume/<?php echo $team['file_name']; ?>" alt="" style="width: 250px"></td>
-                                                        <td><?php echo $team['name']; ?></td>
-                                                        <?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
-                                                        <?php foreach ($country as $country) { ?>
-                                                            <td><?php echo $country['countryName']; ?></td>
-                                                        <?php  } ?>
-                                                        <td><?php echo $team['email']; ?></td>
-                                                        <td><?php echo $team['phone']; ?></td>
-                                                        <?php if ($team['status'] == 0) : ?>
+                                                        <td><?php echo $admin['email']; ?></td>
+                                                        <td><?php echo $admin['username']; ?></td>
+                                                        <td><?php echo $admin['phone']; ?></td>
+                                                        <td><?php echo $admin['created_at']; ?></td>
+                                                        <?php if ($admin['is_admin'] == 1) : ?>
                                                             <td>
                                                                 <div class="dropdown ">
-                                                                    <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Pending approval
+                                                                    <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Admin
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
+                                                                        <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=2">Superadmin</a>
+                                                                        <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=3">Administrator</a>
                                                                       
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                               
-                                                        <?php elseif($team['status'] == 1) : ?>
+                                                        <?php elseif($admin['is_admin'] == 2) : ?>
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    approve
+                                                                    Superadmin
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
+                                                                        <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=1">Admin</a>
+                                                                        <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=3">Administrator</a>
                                                                       
                                                                     </div>
                                                                 </div>
@@ -101,19 +97,24 @@
                                                        <?php else : ?>
                                                             <td>
                                                                 <div class="dropdown ">
-                                                                    <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Not approved
+                                                                    <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Administrator
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
+                                                                        <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=1">Admin</a>
+                                                                        <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=2">Superadmin</a>
                                                                        
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             
+                                                            
                                                         <?php endif; ?>
+                                                            <td>
+                                                            <a href="back_admin_edit?id=<?php echo $admin['id']; ?>"><i class="feather icon-edit" style="font-size: 25px;"></i></a>
+                                                            <a href="back_admin_delete_admin?id=<?php echo $admin['id']; ?>"><i class="feather icon-trash" style="font-size: 25px;"></i></a>
 
+                                                            </td>
                                                     </tr>
                                                 <?php  } ?>
                                         </table>

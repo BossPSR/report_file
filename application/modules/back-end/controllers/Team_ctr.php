@@ -11,13 +11,16 @@ class Team_ctr extends CI_Controller {
 
 	public function index()
 	{
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
 	
 		$data['team'] = $this->db->get('tbl_team')->result_array();
 
 		$this->load->view('options/header');
 		$this->load->view('team_list',$data);
 		$this->load->view('options/footer');
-	
+     }
 	}
 
 	public function status_team()

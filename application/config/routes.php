@@ -104,16 +104,21 @@ $route['get_search']            = 'front-end/Search_ctr/get_search';
 $route['buy']                   = 'front-end/Buy_ctr';
 // /------------------------------------- back-end  ---------------------
 
-$route['back_dashboard']        = 'back-end/Home_ctr';
-$route['back_team']             = 'back-end/Team_ctr';
-$route['back_admin']            = 'back-end/Admin_ctr';
-$route['back_admin_add']            = 'back-end/Admin_ctr/add_admin';
-$route['status_team']           = 'back-end/Team_ctr/status_team';
-$route['back_user']             = 'back-end/User_ctr';
-$route['Login_admin']           = 'back-end/Login_ctr/admin_loginMe';
-$route['Logout_admin']          = 'back-end/Login_ctr/admin_logout';
-$route['backend']               = 'back-end/Login_ctr';
-$route['pdf']                   = 'front-end/pdf';
+$route['back_dashboard']                      = 'back-end/Home_ctr';
+$route['back_team']                           = 'back-end/Team_ctr';
+$route['back_admin']                          = 'back-end/Admin_ctr';
+$route['back_admin_add']                      = 'back-end/Admin_ctr/add_admin';
+$route['back_admin_edit']                     = 'back-end/Admin_ctr/edit_admin';
+$route['back_admin_edit_save']                = 'back-end/Admin_ctr/edit_admin_save';
+$route['back_admin_Admin_add_com']            = 'back-end/Admin_ctr/Admin_add_com';
+$route['back_admin_status_Admin']             = 'back-end/Admin_ctr/status_Admin';
+$route['back_admin_delete_admin']             = 'back-end/Admin_ctr/delete_admin';
+$route['status_team']                         = 'back-end/Team_ctr/status_team';
+$route['back_user']                           = 'back-end/User_ctr';
+$route['Login_admin']                         = 'back-end/Login_ctr/admin_loginMe';
+$route['Logout_admin']                        = 'back-end/Login_ctr/admin_logout';
+$route['backend']                             = 'back-end/Login_ctr';
+$route['pdf']                                 = 'front-end/pdf';
 
 
 

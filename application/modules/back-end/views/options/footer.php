@@ -46,6 +46,14 @@
         swal("Fail !", '<?php echo $error; ?>', "error");
     <?php endif; ?>
 </script>
+<script>
+    $('#password, #c_password').on('keyup', function() {
+        if ($('#password').val() == $('#c_password').val()) {
+            $('#message').html('Matches').css('color', 'green');
+        } else
+            $('#message').html('Not Matches').css('color', 'red');
+    });
+</script>
 </body>
 <!-- END: Body-->
 
