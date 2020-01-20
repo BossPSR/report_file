@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-16 17:23:58
+Date: 2020-01-20 14:01:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -291,18 +291,19 @@ CREATE TABLE `tbl_admin` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `is_admin` varchar(255) DEFAULT '' COMMENT '1// admin 2// superadmin 3//administrator',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_admin
 -- ----------------------------
-INSERT INTO `tbl_admin` VALUES ('1', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', '2019-12-11 04:07:28');
-INSERT INTO `tbl_admin` VALUES ('2', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', '2019-12-25 15:19:48');
-INSERT INTO `tbl_admin` VALUES ('3', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', '2019-12-23 19:29:15');
-INSERT INTO `tbl_admin` VALUES ('4', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-04 15:36:53');
-INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', '2019-12-25 17:23:11');
-INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-04 16:22:28');
+INSERT INTO `tbl_admin` VALUES ('1', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', '2020-01-20 10:48:48', '3');
+INSERT INTO `tbl_admin` VALUES ('2', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 10:48:48', '3');
+INSERT INTO `tbl_admin` VALUES ('3', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 11:14:25', '3');
+INSERT INTO `tbl_admin` VALUES ('4', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 10:48:50', '2');
+INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', '2020-01-20 10:48:51', '2');
+INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 11:04:55', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_follow`
@@ -411,11 +412,12 @@ CREATE TABLE `tbl_paypal` (
   `last_name` varchar(150) NOT NULL,
   `create_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_paypal
 -- ----------------------------
+INSERT INTO `tbl_paypal` VALUES ('1', '', '', '0', '', '0', '', '', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for `tbl_rejected`
@@ -555,6 +557,28 @@ INSERT INTO `tbl_upload_full` VALUES ('5', '4', '4', 'sample-3pp_(1)1.pdf', '1',
 INSERT INTO `tbl_upload_full` VALUES ('6', '4', '5', 'ข้อเสนอโครงการ.pdf', '1', '2020-01-04 14:11:24', '2020-01-04 14:11:57', 'uploads/full/ข้อเสนอโครงการ.pdf');
 
 -- ----------------------------
+-- Table structure for `tbl_upload_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_upload_order`;
+CREATE TABLE `tbl_upload_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `order_id` varchar(110) DEFAULT '' COMMENT 'OR00001',
+  `file_name` varchar(255) DEFAULT NULL,
+  `price` int(11) NOT NULL DEFAULT 1,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_upload_order
+-- ----------------------------
+INSERT INTO `tbl_upload_order` VALUES ('5', '4', '4', 'sample-3pp_(1)1.pdf', '1', '2020-01-04 14:09:41', null, 'uploads/full/sample-3pp_(1)1.pdf');
+INSERT INTO `tbl_upload_order` VALUES ('6', '4', '5', 'ข้อเสนอโครงการ.pdf', '1', '2020-01-04 14:11:24', '2020-01-04 14:11:57', 'uploads/full/ข้อเสนอโครงการ.pdf');
+
+-- ----------------------------
 -- Table structure for `tbl_upload_preview`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_upload_preview`;
@@ -574,6 +598,27 @@ CREATE TABLE `tbl_upload_preview` (
 -- ----------------------------
 INSERT INTO `tbl_upload_preview` VALUES ('2', '4', '4', '091025621.pdf', '2020-01-04 14:09:36', null, 'uploads/Preview/091025621.pdf');
 INSERT INTO `tbl_upload_preview` VALUES ('3', '4', '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', '2020-01-04 14:10:22', null, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf');
+
+-- ----------------------------
+-- Table structure for `tbl_upload_store`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_upload_store`;
+CREATE TABLE `tbl_upload_store` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `store_id` varchar(110) DEFAULT '' COMMENT 'ST00001',
+  `file_name` varchar(255) DEFAULT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_upload_store
+-- ----------------------------
+INSERT INTO `tbl_upload_store` VALUES ('2', '4', '4', '091025621.pdf', '2020-01-04 14:09:36', null, 'uploads/Preview/091025621.pdf');
+INSERT INTO `tbl_upload_store` VALUES ('3', '4', '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', '2020-01-04 14:10:22', null, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
