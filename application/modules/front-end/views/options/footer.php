@@ -410,7 +410,7 @@
             var name = file.name;
             $.ajax({
                 type: 'POST',
-                url: 'fileUpload',
+                url: 'buy_upload',
                 data: {
                     name: name,
                     request: 2
