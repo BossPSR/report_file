@@ -418,6 +418,31 @@
     });
 </script>
 
+<script type='text/javascript'>
+    // Dropzone.autoDiscover = false;
+    $("#dropzone2").dropzone({
+        addRemoveLinks: true,
+        maxFiles: 5,
+        removedfile: function(file) {
+            var name = file.name;
+            $.ajax({
+                type: 'POST',
+                url: 'store_upload',
+                data: {
+                    name: name,
+                    request: 2
+                },
+                sucess: function(data) {
+                    console.log('success: ' + data);
+                },
+
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+</script>
+
 <!-- Script -->
 <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
@@ -443,6 +468,8 @@
         }
     });
 </script>
+
+
 
 <script>
     $('#password, #c_password').on('keyup', function() {
