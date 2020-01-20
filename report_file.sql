@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-20 14:01:02
+Date: 2020-01-20 15:04:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -306,6 +306,27 @@ INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962
 INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 11:04:55', '1');
 
 -- ----------------------------
+-- Table structure for `tbl_deposit`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_deposit`;
+CREATE TABLE `tbl_deposit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `status` int(10) DEFAULT NULL,
+  `create_at` datetime NOT NULL,
+  `update_at` datetime NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `
+bill_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_deposit
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tbl_follow`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_follow`;
@@ -535,28 +556,6 @@ INSERT INTO `tbl_upload` VALUES ('4', '4', '1', 'อาหารไทย เม
 INSERT INTO `tbl_upload` VALUES ('5', '4', '2', 'เอกสารสำคัญ - โปรแกรม ร้าน ค้า ปลีก', 'คณิตศาสตร์', 'ZXV33', 'โปรแกรม ร้าน ค้า ปลีก', '2020-01-04 14:10:10', null);
 
 -- ----------------------------
--- Table structure for `tbl_upload_full`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_upload_full`;
-CREATE TABLE `tbl_upload_full` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
-  `upload_id` varchar(110) DEFAULT NULL,
-  `file_name` varchar(255) DEFAULT NULL,
-  `price` int(11) NOT NULL DEFAULT 1,
-  `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  `path` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_upload_full
--- ----------------------------
-INSERT INTO `tbl_upload_full` VALUES ('5', '4', '4', 'sample-3pp_(1)1.pdf', '1', '2020-01-04 14:09:41', null, 'uploads/full/sample-3pp_(1)1.pdf');
-INSERT INTO `tbl_upload_full` VALUES ('6', '4', '5', 'ข้อเสนอโครงการ.pdf', '1', '2020-01-04 14:11:24', '2020-01-04 14:11:57', 'uploads/full/ข้อเสนอโครงการ.pdf');
-
--- ----------------------------
 -- Table structure for `tbl_upload_order`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_upload_order`;
@@ -577,27 +576,6 @@ CREATE TABLE `tbl_upload_order` (
 -- ----------------------------
 INSERT INTO `tbl_upload_order` VALUES ('5', '4', '4', 'sample-3pp_(1)1.pdf', '1', '2020-01-04 14:09:41', null, 'uploads/full/sample-3pp_(1)1.pdf');
 INSERT INTO `tbl_upload_order` VALUES ('6', '4', '5', 'ข้อเสนอโครงการ.pdf', '1', '2020-01-04 14:11:24', '2020-01-04 14:11:57', 'uploads/full/ข้อเสนอโครงการ.pdf');
-
--- ----------------------------
--- Table structure for `tbl_upload_preview`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_upload_preview`;
-CREATE TABLE `tbl_upload_preview` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
-  `upload_id` varchar(110) DEFAULT NULL,
-  `file_name` varchar(255) DEFAULT NULL,
-  `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  `path` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_upload_preview
--- ----------------------------
-INSERT INTO `tbl_upload_preview` VALUES ('2', '4', '4', '091025621.pdf', '2020-01-04 14:09:36', null, 'uploads/Preview/091025621.pdf');
-INSERT INTO `tbl_upload_preview` VALUES ('3', '4', '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', '2020-01-04 14:10:22', null, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_upload_store`
@@ -646,3 +624,24 @@ INSERT INTO `tbl_user` VALUES ('3', '123456789', '0', 'infinityp.soft@gmail.com'
 INSERT INTO `tbl_user` VALUES ('4', '4444555666112', '0', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', null, '2020-01-04 15:36:53');
 INSERT INTO `tbl_user` VALUES ('5', '123123', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '2019-12-25 17:23:11');
 INSERT INTO `tbl_user` VALUES ('6', '987456123', '2', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', null, '2020-01-04 16:22:28');
+
+-- ----------------------------
+-- Table structure for `tbl_withdraw`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_withdraw`;
+CREATE TABLE `tbl_withdraw` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `status` int(10) DEFAULT NULL,
+  `create_at` datetime NOT NULL,
+  `update_at` datetime NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `
+bill_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_withdraw
+-- ----------------------------
