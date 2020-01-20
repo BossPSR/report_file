@@ -28,25 +28,25 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
-    
+
     <script src="public/frontend/assets/dist/dropzone.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-    
+
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-      
+
 
     <script>
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
 
             style: {
-                color:  'blue',
-                shape:  'pill',
-                label:  'pay',
+                color: 'blue',
+                shape: 'pill',
+                label: 'pay',
                 size: 'responsive',
                 height: 40
             }
@@ -65,9 +65,9 @@
         })
     </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=Ac07KebLbktQxg880Patw7ecxIfrV9267ir0H_n4uPFYww0abgRMKsRZW7VY6hMSgOh4Ho7v8fpRgUFF"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ac07KebLbktQxg880Patw7ecxIfrV9267ir0H_n4uPFYww0abgRMKsRZW7VY6hMSgOh4Ho7v8fpRgUFF">
+        // Required. Replace SB_CLIENT_ID with your sandbox client ID.
     </script>
 
     <!-- Modal -->
@@ -136,8 +136,12 @@
                         <div class="top_right text-right">
                             <ul>
                                 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
+                                <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                 <?php if ($user == true) :  ?>
                                     <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                    <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
+                                <?php elseif ($team == true) : ?>
+                                    <li><a href="#"> <?php echo $team['name'] ?> </a></li>
                                     <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                 <?php else : ?>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
@@ -194,13 +198,13 @@
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
                                     <li class="menu-item-has-children">
-                                        <a href="upload">Upload +</a>
+                                        <a href="buy"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="my-folder">My Upload</a>
+                                        <a href="my-folder"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My download</a>
+                                        <a href="#"> Feedback</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="package">Package </a>
@@ -208,15 +212,31 @@
                                     <li class="menu-item-has-children">
                                         <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                     </li>
+                                <?php elseif ($team) : ?>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> คลังสินค้า</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> My task</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="upload"> Delivery</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="upload"> Delivery</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> My Feedback</a>
+                                    </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal">Upload +</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal">My Upload</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal">My download</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> Feedback</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Package </a>
@@ -259,12 +279,16 @@
                             <div class="top_right text-right">
                                 <ul>
                                     <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
+                                    <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                     <?php if ($user == true) :  ?>
                                         <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
+                                    <?php elseif ($team == true) : ?>
+                                        <li><a href="#"> <?php echo $team['name'] ?> </a></li>
+                                        <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php else :  ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                        <li><a href="register"> Sign up </a></li>
+                                        <li><a href="main"> Sign up </a></li>
                                     <?php endif  ?>
                                     <li><a href="#"> TH </a></li>
                                     <li><a href="#"> ENG </a></li>
@@ -383,32 +407,53 @@
                             <nav>
                                 <ul>
                                     <?php if ($user) :  ?>
-                                        <li><a href="upload"> Upload + <div class="arrow_box"></div></a></li>
-                                        <li><a href="my-folder"> My Upload</a></li>
-                                        <li><a href="#"> My Download</a></li>
+                                        <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                        <li><a href="my-folder"> ต้องการขาย </a></li>
+                                        <li><a href="#"> Feedback </a></li>
                                         <li style="margin-right: 150px;"><a href="package"> Package</a></li>
-                                        <li class="menu-item-has-children" style="margin-right: 15px;">
-                                            <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
+                                        <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
+                                                    <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
+                                                </li>
+                                                <li class="menu-item-has-children" style="margin-right: 40px;">
+                                                    <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                                </li> -->
+                                        <li>
+                                            <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
                                         </li>
-                                        <li class="menu-item-has-children" style="margin-right: 40px;">
-                                            <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                    <?php elseif ($team) : ?>
+                                        <li>
+                                            <a href="#"> My Stock</a>
                                         </li>
-                                        <li >
-                                            <a href="package">ยอดคงเหลือ : $<?php echo $user['cash']; ?></a></li>
+                                        <li>
+                                            <a href="#"> My task</a>
                                         </li>
+                                        <li>
+                                            <a href="#"> Delivery</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"> My Feedback</a>
+                                        </li>
+                                        <li>
+                                            <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
+                                        </li>
+                                        <li></li>
                                     <?php else : ?>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Upload + <div class="arrow_box"></div></a></li>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Upload</a></li>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Download</a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Feedback </a></li>
                                         <li><a href="#"> Package</a></li>
-                                        <li class="menu-item-has-children">
-                                            <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
-                                        </li>
-                                        <li class="menu-item-has-children">
-                                            <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
-                                        </li>
+                                        <li></li>
+                                        <li></li>
+                                        <!-- <li class="menu-item-has-children">
+                                                    <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
+                                                </li> -->
+                                        <!-- <li class="menu-item-has-children">
+                                                    <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                                </li> -->
                                     <?php endif ?>
                                 </ul>
+
+
                             </nav>
                         </div>
                     </div>
@@ -430,7 +475,7 @@
             <div class="widget_list widget_categories">
                 <div class="show_sign">
                     <ul class="list_sign_login">
-                        <a href="<?php echo ($user) ? 'my-wallet':'#exampleModalCenter' ;?>" <?php echo ($user) ? '':'data-toggle="modal"' ;?>>
+                        <a href="<?php echo ($user) ? 'my-wallet' : '#exampleModalCenter'; ?>" <?php echo ($user) ? '' : 'data-toggle="modal"'; ?>>
                             <li>
                                 <span>
                                     <i class="fa fa-google-wallet" aria-hidden="true"></i>
@@ -439,7 +484,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="<?php echo ($user) ? 'my-deposit':'#exampleModalCenter' ;?>">
+                        <a href="<?php echo ($user) ? 'my-deposit' : '#exampleModalCenter'; ?>">
                             <li>
                                 <span>
                                     <i class="fa fa-money" aria-hidden="true"></i>
@@ -448,7 +493,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="<?php echo ($user) ? 'my-withdraw':'#exampleModalCenter' ;?>">
+                        <a href="<?php echo ($user) ? 'my-withdraw' : '#exampleModalCenter'; ?>">
                             <li>
                                 <span>
                                     <i class="fa fa-minus-square" aria-hidden="true"></i>
@@ -457,7 +502,7 @@
                                 </span>
                             </li>
                         </a>
-                        <a href="<?php echo ($user) ? 'my-slip':'#exampleModalCenter' ;?>">
+                        <a href="<?php echo ($user) ? 'my-slip' : '#exampleModalCenter'; ?>">
                             <li>
                                 <span>
                                     <i class="fa fa-file-text-o" aria-hidden="true"></i>
