@@ -276,6 +276,16 @@
         })
     }
 </script>
+<script>
+    function confirmalert_buy() {
+
+        swal("Good job!", "", "success");
+        setTimeout(function() {
+            window.location.reload('home');
+        }, 1000);
+        // window.location = 'buy';
+    }
+</script>
 
 <script>
     $('#myModal2').modal('show')
@@ -408,12 +418,37 @@
     });
 </script>
 
+<script type='text/javascript'>
+    // Dropzone.autoDiscover = false;
+    $("#dropzone2").dropzone({
+        addRemoveLinks: true,
+        maxFiles: 5,
+        removedfile: function(file) {
+            var name = file.name;
+            $.ajax({
+                type: 'POST',
+                url: 'store_upload',
+                data: {
+                    name: name,
+                    request: 2
+                },
+                sucess: function(data) {
+                    console.log('success: ' + data);
+                },
+
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+</script>
+
 <!-- Script -->
 <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
     $(".dropzone").dropzone({
         addRemoveLinks: true,
-        maxFiles: 1,
+        maxFiles: 5,
         removedfile: function(file) {
             var name = file.name;
             $.ajax({
@@ -433,6 +468,8 @@
         }
     });
 </script>
+
+
 
 <script>
     $('#password, #c_password').on('keyup', function() {

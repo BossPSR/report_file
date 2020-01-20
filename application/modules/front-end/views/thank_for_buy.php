@@ -4,10 +4,9 @@
          <div class="row">
              <div class="col-3"></div>
              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
-                 <article class="single_upload input-upload">
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="tab">
+
+
+                 <!-- <div class="tab">
                                  <label for="" class="font-size-upload">You can buy document. </label>
 
                                  <form action="buy_upload" class="dropzone" id="fileupload">
@@ -17,13 +16,12 @@
                                          <input type="text" name="userId" value="<?php echo $userId['id']; ?>" hidden>
                                      </div>
                                  </form>
-                             </div>
-                         </div>
-                         <div class="col-12 text-right" style="padding-top: 10px;">
-                             <button type="button" class="btn btn-info" onclick="confirmalert_buy();">SUBMIT</button>
-                         </div>
-                     </div>
-                 </article>
+                             </div> -->
+                 <div class="alert alert-success" role="alert">
+                     <h4 class="alert-heading">SUCCESS</h4>
+                     <hr>
+                     <p class="mb-0">Thank you for supporting us. Please wait for the administrator to approve.</p>
+                 </div>
              </div>
              <div class="col-3"></div>
          </div>

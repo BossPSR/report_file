@@ -1,4 +1,6 @@
 <!-- BEGIN: Content-->
+<?php $id = $this->input->get('id') ?>
+<?php  $admin = $this->db->get_where('tbl_admin',['id'=>$id])->row_array(); ?>
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -12,21 +14,14 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_admin">Admin</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Add Admin</a>
+                                <li class="breadcrumb-item"><a href="#">Edit Admin</a>
                                 </li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                <div class="form-group breadcrum-right">
-                    <div class="dropdown">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
-                    </div>
-                </div>
-            </div>
+          
         </div>
         <div class="content-body">
             <!-- Basic Inputs start -->
@@ -35,28 +30,29 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add Admin</h4>
+                                <h4 class="card-title">Edit Admin</h4>
                             </div>
-                            <form action="back_admin_Admin_add_com" method="POST" >
+                            <form action="back_admin_edit_save" method="POST" >
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <fieldset class="form-group">
+                                                <input type="hidden" name="id" value="<?php echo $admin['id']; ?>" > 
                                                 <label for="basicInput">Email</label>
-                                                <input type="text" name="email"  class="form-control" placeholder="Enter email">
+                                                <input type="text" name="email"  value="<?php echo $admin['email']; ?>" class="form-control" placeholder="Enter email" readonly>
                                             </fieldset>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <fieldset class="form-group">
                                                 <label for="helpInputTop">Username</label>
-                                                <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                                                <input type="text" class="form-control" value="<?php echo $admin['username']; ?>" name="username" placeholder="Enter Username">
                                             </fieldset>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <fieldset class="form-group">
                                                 <label for="disabledInput">Tel.</label>
-                                                <input type="text" class="form-control" name="phone" placeholder="Enter Tel.">
+                                                <input type="text" class="form-control" value="<?php echo $admin['phone']; ?>" name="phone" placeholder="Enter Tel.">
                                             </fieldset>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12">
@@ -79,9 +75,9 @@
                                                 <label for="disabledInput">Status Admin</label>
                                                 <select class="form-control" name="is_admin">
                                                     <option value="" selected disabled>Status Admin</option>
-                                                    <option value="1">Admin</option>selected
-                                                    <option value="2">super Admin</option>
-                                                    <option value="3">Administrator</option>
+                                                    <option value="1" <?php if ($admin['is_admin'] == '1') {echo 'selected';} ?>>Admin</option>
+                                                    <option value="2"<?php if ($admin['is_admin'] == '2') {echo 'selected';} ?>>super Admin</option>
+                                                    <option value="3"<?php if ($admin['is_admin'] == '3') {echo 'selected';} ?>>Administrator</option>
                                            
                                                 </select>
                                             </fieldset>
@@ -89,7 +85,7 @@
                                         <div class="col-xl-4 col-md-6 col-12">
                                             <fieldset class="form-group">
                                                 <label for="disabledInput"></label>
-                                                <button type="submit" class="btn btn-primary mr-1 mb-1"> Add Admin</button>
+                                                <button type="submit" class="btn btn-warning mr-1 mb-1"> Edit Admin</button>
                                                 <a href="back_admin"><button type="button" class="btn btn-danger mr-1 mb-1">Cancel</button></a>
                                             </fieldset>
                                         </div>
