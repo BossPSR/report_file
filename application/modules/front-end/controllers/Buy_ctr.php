@@ -11,10 +11,27 @@ class Buy_ctr extends CI_Controller
 
   public function index()
   {
-    $data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-    $this->load->view('options/header_login');
-    $this->load->view('buy', $data);
-    $this->load->view('options/footer');
+    if ($this->session->userdata('email') == '') {
+      redirect('home');
+    } else {
+
+      $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+      $data['userId'] = $user;
+      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
+      if (!empty($paypal)) {
+        $datePaypal = date("Y-m-d", strtotime($paypal['create_time']));
+        $checkDate = DateDiff($datePaypal, date("Y-m-d"));
+        if ($checkDate <= 30) {
+          $this->load->view('options/header_login');
+          $this->load->view('buy', $data);
+          $this->load->view('options/footer');
+        } else {
+          redirect('package');
+        }
+      } else {
+        redirect('package');
+      }
+    }
   }
 
   public function fileUpload_buy()
@@ -29,30 +46,6 @@ class Buy_ctr extends CI_Controller
     if (isset($_POST['request'])) {
       $request = $_POST['request'];
     }
-
-	public function index()
-	{
-      if ($this->session->userdata('email') == '') {
-          redirect('home');
-      } else {
-       
-        $user = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
-        $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal',['user_id' => $user['id']])->row_array();
-        if (!empty($paypal)) {
-            $datePaypal = date("Y-m-d", strtotime($paypal['create_time']));
-            $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-            if ($checkDate <= 30) {
-              $this->load->view('options/header');
-              $this->load->view('buy');
-              $this->load->view('options/footer');      
-            } else {
-              redirect('package');
-            }
-        }else{
-          redirect('package');
-        }
-      } 
-	}	
     if ($request == 1) {
       if (!empty($_FILES['file']['name'])) {
 
