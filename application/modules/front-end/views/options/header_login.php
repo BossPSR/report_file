@@ -201,7 +201,7 @@
                                         <a href="buy"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="my-folder"> ต้องการขาย</a>
+                                        <a href="store"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#"> Feedback</a>
@@ -408,7 +408,7 @@
                                 <ul>
                                     <?php if ($user) :  ?>
                                         <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
-                                        <li><a href="my-folder"> ต้องการขาย </a></li>
+                                        <li><a href="store"> ต้องการขาย </a></li>
                                         <li><a href="#"> Feedback </a></li>
                                         <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                         <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
@@ -420,6 +420,7 @@
                                         <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
                                         </li>
+                                        <li></li>
                                     <?php elseif ($team) : ?>
                                         <li>
                                             <a href="#"> My Stock</a>

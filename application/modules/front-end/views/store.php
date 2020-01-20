@@ -8,9 +8,8 @@
                      <div class="row">
                          <div class="col-12">
                              <div class="tab">
-                                 <label for="" class="font-size-upload">You can buy document. </label>
-
-                                 <form action="buy_upload" class="dropzone" id="fileupload">
+                                 <label for="" class="font-size-upload">You can store document. </label>
+                                 <form action="store_upload" class="dropzone" id="dropzone2">
                                      <div class="dz-message needsclick">
                                          Drop files here or click to upload.<br>
                                          <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
