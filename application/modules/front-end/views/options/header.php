@@ -25,7 +25,7 @@
 
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
     <!-- Start of  Zendesk Widget script -->
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=17e6cdb5-780a-4235-8324-782430ccd49e"> </script>
@@ -215,7 +215,7 @@
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
                                     <li class="menu-item-has-children">
-                                        <a href="upload"> ต้องการซื้อ</a>
+                                        <a href="buy"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="my-folder"> ต้องการขาย</a>
@@ -228,6 +228,22 @@
                                     </li>
                                     <li class="menu-item-has-children">
                                         <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                    </li>
+                                <?php elseif ($team) : ?>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> คลังสินค้า</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> My task</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="upload"> Delivery</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="upload"> Delivery</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> My Feedback</a>
                                     </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
@@ -407,7 +423,7 @@
                                 <nav>
                                     <ul>
                                         <?php if ($user) :  ?>
-                                            <li><a href="upload"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                            <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                             <li><a href="my-folder"> ต้องการขาย </a></li>
                                             <li><a href="#"> Feedback </a></li>
                                             <li style="margin-right: 150px;"><a href="package"> Package</a></li>
@@ -418,9 +434,25 @@
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
                                             <li>
-                                                <a href="package">ยอดคงเหลือ : $<?php echo $user['cash']; ?></a></li>
+                                                <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
                                             </li>
-
+                                        <?php elseif ($team) : ?>
+                                            <li>
+                                                <a href="#"> My Stock</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> My task</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> Delivery</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> My Feedback</a>
+                                            </li>
+                                            <li>
+                                                <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
+                                            </li>
+                                            <li></li>
                                         <?php else : ?>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>

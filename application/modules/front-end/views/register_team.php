@@ -101,6 +101,12 @@
                                     <input type="file" class="form-control" name="file_name" required>
                                     <!-- <input type="file" name="file_name" required> -->
                                 </p>
+                            </div class="col-lg-12 col-md-12 col-sm-12">
+                            <div>
+                                <p>
+                                    <label for="">Bank account number</label>
+                                    <input type="text" class="form-control" name="bank_account" value="" required>
+                                </p>
                             </div>
                         </div>
                         <div class="login_submit">
