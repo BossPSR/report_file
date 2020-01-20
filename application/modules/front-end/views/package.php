@@ -7,6 +7,9 @@
     <?php $i = 1; ?>
     <?php $e = 1; ?>
     <?php foreach ($package as $key => $package) : ?>
+      <div class="col-lg-4 col-md-4 col-12">
+      </div>
+
       <div class="col-lg-4 col-md-4 col-12 line_package_m hover-fx">
         <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2); position:relative;">
           <div class="label_product">
@@ -30,13 +33,15 @@
         </article>
       </div>
 
+      <div class="col-lg-4 col-md-4 col-12">
+      </div>
       <script>
         paypal.Buttons({
           createOrder: function(data, actions) {
             return actions.order.create({
               purchase_units: [{
                 amount: {
-                  value: '1.0'
+                  value: '10.00'
                 }
               }]
             });
@@ -71,6 +76,7 @@
                 success: function(response) {
                   let dataSucces = JSON.parse(response);
                   console.log(dataSucces);
+                  window.location.href = 'my-profile';
                 }
               });
 
