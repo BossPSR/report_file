@@ -95,7 +95,7 @@ class Admin_ctr extends CI_Controller
                 } else {
                     $this->session->set_flashdata('del_ss2', 'Not Successfully updated Admin information');
                 }
-                return redirect('Profile');
+                return redirect('back_admin');
             } else {
                 if ($password == $c_password) {
                     $data = array(
