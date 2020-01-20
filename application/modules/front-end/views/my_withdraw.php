@@ -35,7 +35,6 @@
                         </div>
                         <div class="pb-18 text-center">
                             <a href="my-deposit" class="btn btn-primary button-p">เติมเงิน</a>
-                            <a href="my-withdraw" class="btn btn-outline-dark button-100">ถอนเงิน</a>
                         </div>
                     </div>
                    
@@ -44,19 +43,18 @@
                             ถอนเงินออกจากระบบ
                         </div>
                         <hr>
-                        <div class="text-center">
-                            <img src="public/image/Gadgeteer_-477-Feb.-19-21.03.16.png" alt="" style="width: 300px;">
-                        </div>
-                        <div class="row text-center wall-center mtb-17-30">
-                            <div class="col-md-6 ">
-                                <input type="number" class="form-control" placeholder="กรอกจำนวนเงิน"  style="height: 51px;text-align: center;font-size: 20px;">
+                        <form action="withdraw_cash" method="post">
+                            <div class="row text-center wall-center mtb-17-30">
+                                <div class="col-md-6 ">
+                                    <input type="number" name="number" class="form-control" placeholder="กรอกจำนวนเงิน"  style="height: 51px;text-align: center;font-size: 20px;">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row text-center wall-center mtb-20">
-                            <div class="col-md-4">
-                                <div id="paypal-button-container"  style="width: 300px"></div>
+                            <div class="row text-center wall-center mtb-20">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-info" style="font-size: 20px;"><i class="fa fa-money" aria-hidden="true"></i> ถอนเงิน</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
 
                 </div>

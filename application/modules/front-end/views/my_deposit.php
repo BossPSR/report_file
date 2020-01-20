@@ -34,7 +34,6 @@
                             ฿0
                         </div>
                         <div class="pb-18 text-center">
-                            <a href="my-deposit" class="btn btn-primary button-p">เติมเงิน</a>
                             <a href="my-deposit" class="btn btn-outline-dark button-100">ถอนเงิน</a>
                         </div>
                     </div>
