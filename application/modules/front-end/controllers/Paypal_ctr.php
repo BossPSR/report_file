@@ -34,7 +34,6 @@ class Paypal_ctr extends CI_Controller{
 
         $success = $this->db->insert('tbl_paypal', $insert);
 
-        echo json_encode($data);
-        
+        echo json_encode($data);  
     }
 }
