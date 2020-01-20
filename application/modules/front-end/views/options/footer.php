@@ -314,6 +314,14 @@
         swal("Fail !", '<?php echo $error; ?>', "error");
     <?php endif; ?>
 </script>
+
+<script>
+    <?php if ($this->session->flashdata('package_check')) : ?>
+        swal("คำเตือน", "Package ของคุณยังไม่หมดอายุ", "error");
+    <?php endif; ?>
+
+</script>
+
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
 
 <script src="public/frontend/assets/js/myscript.js"></script>
