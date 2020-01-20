@@ -276,6 +276,16 @@
         })
     }
 </script>
+<script>
+    function confirmalert_buy() {
+
+        swal("Good job!", "", "success");
+        setTimeout(function() {
+            window.location.reload('home');
+        }, 1000);
+        // window.location = 'buy';
+    }
+</script>
 
 <script>
     $('#myModal2').modal('show')
@@ -405,7 +415,7 @@
     // Dropzone.autoDiscover = false;
     $(".dropzone").dropzone({
         addRemoveLinks: true,
-        maxFiles: 1,
+        maxFiles: 5,
         removedfile: function(file) {
             var name = file.name;
             $.ajax({

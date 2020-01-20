@@ -420,6 +420,7 @@
                                         <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
                                         </li>
+                                        <li></li>
                                     <?php elseif ($team) : ?>
                                         <li>
                                             <a href="#"> My Stock</a>
