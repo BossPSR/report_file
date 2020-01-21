@@ -108,6 +108,7 @@ $route['withdraw_cash']            = 'front-end/My_withdraw_ctr/withdraw_cash';
 $route['thank_for_buy']         = 'front-end/Buy_ctr/thank_for_buy';
 $route['store']                 = 'front-end/Store_ctr';
 $route['store_upload']          = 'front-end/Store_ctr/fileUpload_store';
+$route['my_deposit_paypal']     = 'front-end/My_deposit_ctr/my_deposit_paypal';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';
