@@ -31,10 +31,9 @@
                             ยอดคงเหลือในบัญชี
                         </div>
                         <div class="p-15 text-center color-p">
-                            ฿0
+                            ฿<?php echo $userId['cash']; ?>
                         </div>
                         <div class="pb-18 text-center">
-                            <a href="my-deposit" class="btn btn-primary button-p">เติมเงิน</a>
                             <a href="my-deposit" class="btn btn-outline-dark button-100">ถอนเงิน</a>
                         </div>
                     </div>
@@ -61,7 +60,7 @@
                         </div>
                         <div class="row text-center wall-center mtb-17-30">
                             <div class="col-md-6 ">
-                                <input type="number" class="form-control" placeholder="กรอกจำนวนเงิน" id="paypal_price" style="height: 51px;text-align: center;font-size: 20px;">
+                                <input type="text" class="form-control" placeholder="กรอกจำนวนเงิน" id="paypal_price" style="height: 51px;text-align: center;font-size: 20px;">
                             </div>
                         </div>
                         <div class="row text-center wall-center mtb-20">
@@ -79,11 +78,39 @@
 
 <script>
 
+function setInputFilter(textbox, inputFilter) {
+  ["input"].forEach(function(event) {
+    textbox.addEventListener(event, function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  });
+}
 
-$('#paypal_price').keyup(function() {   
-    let paypal_price = this.value;
-    console.log(paypal_price);
+setInputFilter(document.getElementById("paypal_price"), function(value) {
+  return /^-?\d*$/.test(value); 
+  
 });
+
+
+paypal_price();
+
+var paypal_price = '';
+
+function paypal_price() {
+    $("#paypal_price").keyup(function(){
+        let paypal_priceVal = $('#paypal_price').val();
+        paypal_price = paypal_priceVal;
+    });
+}
 
         paypal.Buttons({
           createOrder: function(data, actions) {
@@ -110,26 +137,23 @@ $('#paypal_price').keyup(function() {
               // });
               console.log(details);
               $.ajax({
-                url: 'paypal_success',
+                url:'my_deposit_paypal',
                 method: 'post',
-                data: {
-                  orderID: data.orderID,
-                  payerID: data.payerID,
-                  user_id: <?php echo $userId['id']; ?>,
-                  first_name: details.payer.name.given_name,
-                  last_name: details.payer.name.surname,
-                  create_time: details.create_time,
-                  amount: details.purchase_units['0'].amount.value,
-                  currency_code: details.purchase_units['0'].amount.currency_code,
+                data:{
+                    paypal_price:paypal_price,
+                    userId:<?php echo $userId['id']; ?>,
                 },
                 success: function(response) {
                   let dataSucces = JSON.parse(response);
                   console.log(dataSucces);
-                  window.location.href = 'my-profile';
+                  window.location.href = 'my-deposit';
                 }
               });
 
             });
           }
         }).render('#paypal-button-containers');
+
+
+
       </script>

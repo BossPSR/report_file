@@ -26,7 +26,7 @@
 
             <div class="col-lg-9 col-md-9">
                 <div class="row">
-                    <div class="col-lg-5 col-md-5 wall-center shadow-b ml-20">
+                    <div class="col-lg-11 col-md-11 wall-center shadow-b ml-20">
                         <div class="p-30 text-center color-w">
                             ยอดคงเหลือในบัญชี
                         </div>
@@ -39,19 +39,8 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 wall-center shadow-b ml-20">
-                        <div class="p-30 text-center color-w">
-                            เอกสารของฉันทั้งหมด
-                        </div>
-                        <div class="p-15 text-center color-p">
-                            11 +
-                        </div>
-                        <div class="pb-18 text-center">
-                            <button type="button" class="btn btn-primary">จัดการเอกสาร</button>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-11 col-md-11 wall-center shadow-b table-w mtp-20">
+                    <div class="col-lg-11 col-md-11 wall-center shadow-b mtp-20">
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
@@ -60,9 +49,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ประวัติการถอนเงิน</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">ประวัติการใช้จ่าย</a>
-                            </li>
+                            </li> -->
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -77,13 +66,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php foreach ($deposit as $key => $deposit) : ?>
                                         <tr>
-                                            <th scope="row">฿200</th>
-                                            <td>0123456789</td>
-                                            <td class="text-center"><span class="badge badge-pill badge-success">ใช้งานได้</span></td>
-                                            <td>10/10/2562</td>
-                                            <td>-</td>
+                                            <th scope="row">฿<?php echo $deposit['price']; ?></th>
+                                            <td><?php echo $deposit['bill_id']; ?></td>
+                                            <td class="text-center">
+                                                <?php if ($deposit['status'] == 1) : ?>
+                                                <span class="badge badge-pill badge-warning" >กำลังดำเนินงาน</span>
+                                                <?php elseif($deposit['status'] == 2) : ?>
+                                                <span class="badge badge-pill badge-success" >เสร็จสิ้น</span>
+                                                <?php else : ?>
+                                                <span class="badge badge-pill badge-danger" >ล้มเหลว</span>
+                                                <?php endif ; ?>
+                                            </td>
+                                            <td><?php echo $deposit['create_at']; ?></td>
+                                            <td><?php echo $deposit['note']; ?></td>
                                         </tr>
+                                    <?php endforeach ; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -98,12 +97,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach ($withdraw as $key => $withdraw) : ?>
                                         <tr>
-                                            <th scope="row">฿200</th>
-                                            <td>0123456789</td>
-                                            <td class="text-center"><span class="badge badge-pill badge-success">ใช้งานได้</span></td>
-                                            <td>10/10/2562</td>
+                                            <th scope="row">฿<?php echo $withdraw['price']; ?></th>
+                                            <td><?php echo $withdraw['bill_id']; ?></td>
+                                            <td class="text-center">
+                                                <?php if ($withdraw['status'] == 1) : ?>
+                                                <span class="badge badge-pill badge-warning" >กำลังดำเนินงาน</span>
+                                                <?php elseif($withdraw['status'] == 2) : ?>
+                                                <span class="badge badge-pill badge-success" >เสร็จสิ้น</span>
+                                                <?php else : ?>
+                                                <span class="badge badge-pill badge-danger" >ล้มเหลว</span>
+                                                <?php endif ; ?>
+                                            </td>
+                                            <td><?php echo $withdraw['create_at']; ?></td>
                                         </tr>
+                                        <?php endforeach ; ?>
                                     </tbody>
                                 </table>
                             </div>
