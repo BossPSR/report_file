@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="account_form">
-                            <form action="my-profile">
+                            <form action="loginme" method="post">
                                 <p>
                                     <label>Email <span>*</span></label>
                                     <input type="email" name="email">
@@ -202,6 +202,9 @@
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="store"> ต้องการขาย</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> My order</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#"> Feedback</a>
@@ -347,16 +350,16 @@
                                             <div class="middel_right_info">
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                     <div class="menu-list">421</div>
-                                                    <div>Follower</div>
+                                                    <div>My income</div>
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                     <div class="menu-list">1,527</div>
-                                                    <div>Download</div>
+                                                    <div>My wallet</div>
                                                 </div>
-                                                <div class="mini_cart_wrapper text-center">
+                                                <!-- <div class="mini_cart_wrapper text-center">
                                                     <div class="menu-list">47</div>
                                                     <div>Rejected</div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         <?php else : ?>
 
@@ -409,6 +412,7 @@
                                     <?php if ($user) :  ?>
                                         <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                         <li><a href="store"> ต้องการขาย </a></li>
+                                        <li><a href="#"> My order </a></li>
                                         <li><a href="#"> Feedback </a></li>
                                         <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                         <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
@@ -417,9 +421,10 @@
                                                 <li class="menu-item-has-children" style="margin-right: 40px;">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                        <li>
+                                        <!-- <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
-                                        </li>
+                                        </li> -->
+                                        <li></li>
                                         <li></li>
                                     <?php elseif ($team) : ?>
                                         <li>
@@ -434,9 +439,10 @@
                                         <li>
                                             <a href="#"> My Feedback</a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
-                                        </li>
+                                        </li> -->
+                                        <li></li>
                                         <li></li>
                                     <?php else : ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>

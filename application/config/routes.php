@@ -111,25 +111,27 @@ $route['store_upload']          = 'front-end/Store_ctr/fileUpload_store';
 $route['my_deposit_paypal']     = 'front-end/My_deposit_ctr/my_deposit_paypal';
 // /------------------------------------- back-end  ---------------------
 
-$route['back_dashboard']            = 'back-end/Home_ctr';
-$route['back_team']                 = 'back-end/Team_ctr';
-$route['back_admin']                = 'back-end/Admin_ctr';
-$route['back_admin_add']            = 'back-end/Admin_ctr/add_admin';
-$route['back_admin_edit']           = 'back-end/Admin_ctr/edit_admin';
-$route['back_admin_edit_save']      = 'back-end/Admin_ctr/edit_admin_save';
-$route['back_admin_Admin_add_com']  = 'back-end/Admin_ctr/Admin_add_com';
-$route['back_admin_status_Admin']   = 'back-end/Admin_ctr/status_Admin';
-$route['back_admin_delete_admin']   = 'back-end/Admin_ctr/delete_admin';
-$route['status_team']               = 'back-end/Team_ctr/status_team';
-$route['back_user']                 = 'back-end/User_ctr';
-$route['back_store']                = 'back-end/Store_ctr';
-$route['back_store_add_com']        = 'back-end/Store_ctr/store_add_com';
-$route['delete_store']              = 'back-end/Store_ctr/delete_store';
-$route['back_store_buy']            = 'back-end/Store_ctr/storeForbuy';
-$route['Login_admin']               = 'back-end/Login_ctr/admin_loginMe';
-$route['Logout_admin']              = 'back-end/Login_ctr/admin_logout';
-$route['backend']                   = 'back-end/Login_ctr';
-$route['back_withdraw']             = 'back-end/withdraw_ctr';
+$route['back_dashboard']                      = 'back-end/Home_ctr';
+$route['back_team']                           = 'back-end/Team_ctr';
+$route['back_admin']                          = 'back-end/Admin_ctr';
+$route['back_admin_add']                      = 'back-end/Admin_ctr/add_admin';
+$route['back_admin_edit']                     = 'back-end/Admin_ctr/edit_admin';
+$route['back_admin_edit_save']                = 'back-end/Admin_ctr/edit_admin_save';
+$route['back_admin_Admin_add_com']            = 'back-end/Admin_ctr/Admin_add_com';
+$route['back_admin_status_Admin']             = 'back-end/Admin_ctr/status_Admin';
+$route['back_admin_delete_admin']             = 'back-end/Admin_ctr/delete_admin';
+$route['status_team']                         = 'back-end/Team_ctr/status_team';
+$route['back_user']                           = 'back-end/User_ctr';
+$route['back_store']                          = 'back-end/Store_ctr';
+$route['back_store_add_com']                  = 'back-end/Store_ctr/store_add_com';
+$route['delete_store']                        = 'back-end/Store_ctr/delete_store';
+$route['back_store_buy']                      = 'back-end/Store_ctr/storeForbuy';
+$route['back_store_checkForsell']             = 'back-end/Store_ctr/checkForsell';
+$route['back_store_check_store_add_com']      = 'back-end/Store_ctr/check_store_add_com';
+$route['Login_admin']                         = 'back-end/Login_ctr/admin_loginMe';
+$route['Logout_admin']                        = 'back-end/Login_ctr/admin_logout';
+$route['backend']                             = 'back-end/Login_ctr';
+$route['back_withdraw']                       = 'back-end/withdraw_ctr';
 $route['back_withdraw_update']      = 'back-end/withdraw_ctr/withdraw_status';
 
 
