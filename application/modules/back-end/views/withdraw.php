@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">User List</h2>
+                        <h2 class="content-header-title float-left mb-0">Withdraw</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">User List
+                                <li class="breadcrumb-item active">Withdraw
                                 </li>
                             </ol>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">User List</h4>
+                                <h4 class="card-title">Withdraw</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -37,31 +37,33 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>UserName</th>
                                                     <th>Passport</th>
                                                     <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th>Cash</th>
-                                                    <th>package</th>
+                                                    <th>Username</th>
+                                                    <th>Withdraw</th>
+                                                    <th>Telephone</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
-
-                                            <tbody>
-                                                <?php foreach ($user_list as $user_list) { ?>
+                                            <?php foreach ($withdraw as $withdraw) { ?>
+                                                <tbody>
                                                     <tr>
-                                                        <td><?php echo $user_list['username']; ?></td>
-                                                        <td><?php echo $user_list['passport']; ?></td>
-                                                        <td><?php echo $user_list['email']; ?></td>
-                                                        <td><?php echo $user_list['phone']; ?></td>
-                                                        <td>$<?php echo $user_list['cash']; ?></td>
-                                                        <?php if ($user_list['user_id'] == '') :  ?>
-                                                            <td>Not package</td>
-                                                        <?php else :  ?>
-                                                            <td>have package </td>
-                                                        <?php endif  ?>
+                                                        <td><?php echo $withdraw['passport']; ?></td>
+                                                        <td><?php echo $withdraw['email']; ?></td>
+                                                        <td><?php echo $withdraw['username']; ?></td>
+                                                        <td><?php echo $withdraw['price']; ?></td>
+                                                        <td>
+                                                            <?php if ($withdraw['status'] == 1) : ?>
+                                                                <span class="badge badge-warning">กำลังดำเนินการ</span> 
+                                                            <?php elseif ($withdraw['status'] == 2): ?>
+                                                                <span class="badge badge-success">ชำระเงินแล้ว</span>
+                                                            <?php else: ?>
+                                                                <span class="badge badge-danger">ยกเลิก</span> 
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
-                                                <?php  } ?>
-                                            </tbody>
+                                                </tbody>
+                                            <?php  } ?>
                                         </table>
                                     </div>
                                 </div>
