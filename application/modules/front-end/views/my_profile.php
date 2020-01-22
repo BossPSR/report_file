@@ -80,7 +80,7 @@
                                 <a href="my-profile_edit?logo=public/frontend/assets/img/profile/8.jpg"><img src="public/frontend/assets/img/profile/8.jpg" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
                                 <a href="my-profile_edit?logo=public/frontend/assets/img/profile/4.png"><img src="public/frontend/assets/img/profile/4.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
                                 <a href="my-profile_edit?logo=public/frontend/assets/img/profile/5.png"><img src="public/frontend/assets/img/profile/5.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/6.png"> <img src="public/frontend/assets/img/profile/6.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
+                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/6.png"><img src="public/frontend/assets/img/profile/6.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
                                 <a href="my-profile_edit?logo=public/frontend/assets/img/profile/7.png"><img src="public/frontend/assets/img/profile/7.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
                             </p>
                         </form>

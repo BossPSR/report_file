@@ -301,6 +301,9 @@
     <?php if ($this->session->flashdata('del_ss')) : ?>
         swal("fill !", "You clicked the button!", "error");
     <?php endif; ?>
+    <?php if ($this->session->flashdata('nomoney')) : ?>
+        swal("fill !", "Your money is not enough to withdraw money.", "error");
+    <?php endif; ?>
     <?php if ($this->session->flashdata('without')) : ?>
         swal("fill !", "Not enough money Please top up!!", "error");
     <?php endif; ?>
@@ -328,6 +331,27 @@
 <script>
     <?php if ($this->session->flashdata('package_check')) : ?>
         swal("คำเตือน", "Package ของคุณยังไม่หมดอายุ", "error");
+    <?php endif; ?>
+
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('package_timeOut_3_day')) : ?>
+        swal("Good job!", "You clicked the button! คำเตือนอีก 3 วัน Package จะหมดอายุ", "warning");
+    <?php endif; ?>
+
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('package_timeOut_2_day')) : ?>
+        swal("Good job!", "You clicked the button! คำเตือนอีก 2 วัน Package จะหมดอายุ", "warning");
+    <?php endif; ?>
+
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('package_timeOut_1_day')) : ?>
+        swal("Good job!", "You clicked the button! คำเตือนอีก 1 วัน Package จะหมดอายุ", "warning");
     <?php endif; ?>
 
 </script>

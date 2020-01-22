@@ -28,6 +28,24 @@ class Login_ctr extends CI_Controller
                 );
                 $this->session->set_userdata($user_data);
                 $this->session->set_flashdata('save_ss', TRUE);
+                $user = $this->db->get_where('tbl_user',['email'=>$email])->row_array();
+                $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal',['user_id'=>$user['id']])->row_array();
+                if (!empty($packAgeCheck)) {
+                    $datePaypal = date("Y-m-d", strtotime($packAgeCheck['create_time']));
+                    $checkDate = DateDiff($datePaypal, date("Y-m-d"));
+
+                    if ($checkDate == 28) {
+                        $this->session->set_flashdata('package_timeOut_3_day', TRUE);
+                    }
+
+                    if ($checkDate == 29) {
+                        $this->session->set_flashdata('package_timeOut_2_day', TRUE);
+                    }
+
+                    if ($checkDate == 30) {
+                        $this->session->set_flashdata('package_timeOut_1_day', TRUE);
+                    }
+                }
                
                 redirect('my-profile');
                    
