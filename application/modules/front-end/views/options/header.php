@@ -218,7 +218,10 @@
                                         <a href="buy"> ต้องการซื้อ</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="my-folder"> ต้องการขาย</a>
+                                        <a href="store"> ต้องการขาย</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#"> My order</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#"> Feedback</a>
@@ -433,9 +436,11 @@
                                                 <li class="menu-item-has-children" style="margin-right: 40px;">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                            <li>
+                                            <!-- <li>
                                                 <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
-                                            </li>
+                                            </li> -->
+                                            <li></li>
+                                            <li></li>
                                         <?php elseif ($team) : ?>
                                             <li>
                                                 <a href="#"> My Stock</a>
@@ -449,9 +454,10 @@
                                             <li>
                                                 <a href="#"> My Feedback</a>
                                             </li>
-                                            <li>
+                                            <!-- <li>
                                                 <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
-                                            </li>
+                                            </li> -->
+                                            <li></li>
                                             <li></li>
                                         <?php else : ?>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
