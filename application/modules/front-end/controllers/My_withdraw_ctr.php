@@ -14,8 +14,9 @@ class My_withdraw_ctr extends CI_Controller
 		if ($this->session->userdata('email') == '') {
 			redirect('home');
 		} else {
+			$data['user'] = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
 			$this->load->view('options/header_login');
-			$this->load->view('my_withdraw');
+			$this->load->view('my_withdraw',$data);
 			$this->load->view('options/footer');
 		}
 	}
@@ -25,8 +26,8 @@ class My_withdraw_ctr extends CI_Controller
 		$user 	= $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
 
 		if ($user['cash'] < $this->input->post('number')) {
-			$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> ยอดเงินของคุณไม่เพียงพอ! </div>');
-			redirect('register', 'refresh');
+			$this->session->set_flashdata('nomoney', TRUE);
+			redirect('my-withdraw', 'refresh');
 		}
 		else
 		{
