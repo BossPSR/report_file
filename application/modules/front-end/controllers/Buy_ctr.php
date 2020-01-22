@@ -20,7 +20,7 @@ class Buy_ctr extends CI_Controller
         if (!empty($paypal)) {
             $datePaypal = date("Y-m-d", strtotime($paypal['create_time']));
             $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-            if ($checkDate < 30) {
+            if ($checkDate < 31) {
               $this->load->view('options/header_login');
               $this->load->view('buy',$data);
               $this->load->view('options/footer');      

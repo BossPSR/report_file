@@ -332,6 +332,27 @@
 
 </script>
 
+<script>
+    <?php if ($this->session->flashdata('package_timeOut_3_day')) : ?>
+        swal("Good job!", "You clicked the button! คำเตือนอีก 3 วัน Package จะหมดอายุ", "warning");
+    <?php endif; ?>
+
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('package_timeOut_2_day')) : ?>
+        swal("Good job!", "You clicked the button! คำเตือนอีก 2 วัน Package จะหมดอายุ", "warning");
+    <?php endif; ?>
+
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('package_timeOut_1_day')) : ?>
+        swal("Good job!", "You clicked the button! คำเตือนอีก 1 วัน Package จะหมดอายุ", "warning");
+    <?php endif; ?>
+
+</script>
+
 <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
 
 <script src="public/frontend/assets/js/myscript.js"></script>
