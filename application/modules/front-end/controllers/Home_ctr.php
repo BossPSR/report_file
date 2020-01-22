@@ -12,7 +12,7 @@ class Home_ctr extends CI_Controller {
 	public function index()
 	{
 	
-		$this->load->view('options/header');
+		$this->load->view('options/header_login');
 		$this->load->view('home');
 		$this->load->view('options/footer');
 		
