@@ -129,6 +129,9 @@ $route['back_store_buy']                        = 'back-end/Store_ctr/storeForbu
 $route['Login_admin']                         = 'back-end/Login_ctr/admin_loginMe';
 $route['Logout_admin']                        = 'back-end/Login_ctr/admin_logout';
 $route['backend']                             = 'back-end/Login_ctr';
+$route['back_withdraw']                       = 'back-end/withdraw_ctr';
+
+
 $route['pdf']                                 = 'front-end/pdf';
 
 

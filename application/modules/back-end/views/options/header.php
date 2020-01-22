@@ -285,7 +285,7 @@
                             
                         </ul>
                     </li>
-                    <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables">Forms &amp; Tables</span></a>
+                    <li class="nav-item"><a class="nav-link" href="back_withdraw" ><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables"> Withdraw </span></a>
 
                     </li>
                     <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Pages">Pages</span></a>
