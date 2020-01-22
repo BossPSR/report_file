@@ -263,16 +263,23 @@
                                                                         } ?>" href="back_user" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-message-square"></i>User List</a>
                             </li>
                             
-                            <li data-menu=""><a class="dropdown-item" href="app-calender.html" data-toggle="dropdown" data-i18n="Calender"><i class="feather icon-calendar"></i>Calender</a>
-                            </li>
-                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Ecommerce"><i class="feather icon-shopping-cart"></i>Ecommerce</a>
-                            </li>
-                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="User"><i class="feather icon-user"></i>User</a>
-
-                            </li>
+                            
                         </ul>
                     </li>
-                    <li class="dropdown nav-item" data-menu="dropdown"><a class="nav-link" href="#"><i class="feather icon-layers"></i><span data-i18n="UI Elements">Customer Order</span></a></li>
+                    <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "#" ||  $this->uri->segment(1) ==  "back_store") { echo 'active';} ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My order</span></a>
+                        <ul class="dropdown-menu">
+                        <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store") {
+                                                                            echo 'active';
+                                                                        } ?>" href="back_store" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Store</a>
+                            </li>
+                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "#") {
+                                                                            echo 'active';
+                                                                        } ?>" href="#" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Order</a>
+                            </li>
+                         
+                            
+                        </ul>
+                    </li>
                     <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables">Forms &amp; Tables</span></a>
 
                     </li>

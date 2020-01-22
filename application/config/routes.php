@@ -108,6 +108,7 @@ $route['withdraw_cash']            = 'front-end/My_withdraw_ctr/withdraw_cash';
 $route['thank_for_buy']         = 'front-end/Buy_ctr/thank_for_buy';
 $route['store']                 = 'front-end/Store_ctr';
 $route['store_upload']          = 'front-end/Store_ctr/fileUpload_store';
+$route['my_deposit_paypal']     = 'front-end/My_deposit_ctr/my_deposit_paypal';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';
@@ -121,6 +122,8 @@ $route['back_admin_status_Admin']             = 'back-end/Admin_ctr/status_Admin
 $route['back_admin_delete_admin']             = 'back-end/Admin_ctr/delete_admin';
 $route['status_team']                         = 'back-end/Team_ctr/status_team';
 $route['back_user']                           = 'back-end/User_ctr';
+$route['back_store']                          = 'back-end/Store_ctr';
+$route['back_store_add_com']                  = 'back-end/Store_ctr/store_add_com';
 $route['Login_admin']                         = 'back-end/Login_ctr/admin_loginMe';
 $route['Logout_admin']                        = 'back-end/Login_ctr/admin_logout';
 $route['backend']                             = 'back-end/Login_ctr';
