@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Store For sell</h2>
+                        <h2 class="content-header-title float-left mb-0">Store For buy</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Store For sell
+                                <li class="breadcrumb-item active">Store For buy
                                 </li>
                             </ol>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Store For sell</h4>
+                                <h4 class="card-title">Store For buy</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -49,17 +49,17 @@
                                             <?php foreach ($store as $store) { ?>
                                                 <tbody>
                                                     <tr>
-                                                        <td><?php echo $store['store_id']; ?></td>
+                                                        <td><?php echo $store['id']; ?></td>
                                                         <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $store['userId']])->result_array(); ?>
                                                         <?php foreach ($store_name as $store_name) { ?>
                                                             <td><?php echo $store_name['username']; ?></td>
                                                         <?php  } ?>
                                                         <td><?php echo $store['file_name']; ?></td>
                                                         <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
-                                                        <?php if ($store['price_file'] == '') :   ?>
+                                                        <?php if ($store['price'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
-                                                            <td>$<?php echo $store['price_file']; ?></td>
+                                                            <td>$<?php echo $store['price']; ?></td>
                                                         <?php endif; ?>
                                                         <td><?php echo $store['create_at']; ?></td>
                                                         <td>
@@ -83,28 +83,19 @@
                                                                 <form action="back_store_add_com" method="POST" class="form-horizontal">
                                                                     <div class="modal-body">
 
-                                                                        <iframe src="<?php echo $store['path']; ?>" width="100%" height="400px"></iframe>
+                                                                        <iframe src="<?php echo $store['path']; ?>" width="100%" height="500px"></iframe>
                                                                         <input type="hidden" class="form-control" name="id" value="<?php echo $store['id']; ?>">
                                                                         <div class="data-items pb-3">
                                                                             <div class="data-fields px-2 mt-3">
                                                                                 <div class="row">
-                                                                                    <div class="col-sm-12 data-field-col">
-                                                                                        <div class="form-group">
-                                                                                            <div class="controls">
-                                                                                                <label for="data-name">PriceFile</label>
-                                                                                                <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" required>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
+                                                                               
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
+                                                                            
 
                                                                         </div>
                                                                     </div>

@@ -266,15 +266,15 @@
                             
                         </ul>
                     </li>
-                    <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "#" ||  $this->uri->segment(1) ==  "back_store") { echo 'active';} ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My order</span></a>
+                    <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store") { echo 'active';} ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store</span></a>
                         <ul class="dropdown-menu">
                         <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store") {
                                                                             echo 'active';
-                                                                        } ?>" href="back_store" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Store</a>
+                                                                        } ?>" href="back_store" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Store for sell</a>
                             </li>
-                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "#") {
+                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_buy") {
                                                                             echo 'active';
-                                                                        } ?>" href="#" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Order</a>
+                                                                        } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Store for buy</a>
                             </li>
                          
                             

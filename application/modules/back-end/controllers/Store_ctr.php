@@ -22,6 +22,18 @@ class Store_ctr extends CI_Controller {
 		$this->load->view('options/footer');
 	 }
     }
+    public function storeForbuy()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+	
+        $data['store'] = $this->db->get('tbl_upload_order')->result_array();
+		$this->load->view('options/header');
+		$this->load->view('storeforbuy',$data);
+		$this->load->view('options/footer');
+	 }
+    }
     
     public function store_add_com()
     {
@@ -40,6 +52,22 @@ class Store_ctr extends CI_Controller {
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+        return redirect('back_store');
+    }
+
+    public function  delete_store()
+    {
+        $id = $this->input->get('id');
+       
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->delete('tbl_upload_store', ['id' => $id]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully Reject store for sale information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Reject store for sale information');
         }
         return redirect('back_store');
     }

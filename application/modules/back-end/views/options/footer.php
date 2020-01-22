@@ -54,6 +54,23 @@
             $('#message').html('Not Matches').css('color', 'red');
     });
 </script>
+
+<script>
+    function confirmalertunlock(data) {
+
+        swal({
+            title: "Are you sure Unloc?",
+            text: "Are you sure you want to unlock this document ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_store?id=' + data;
+            }
+        })
+    }
+</script>
 </body>
 <!-- END: Body-->
 
