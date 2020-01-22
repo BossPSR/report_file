@@ -14,11 +14,11 @@
                         <div class="p-15 text-center font18">
                             User001
                         </div>
-                        <div class="ptw-5 text-center font17">
+                        <!-- <div class="ptw-5 text-center font17">
                             เอกสารของฉัน : 11 ฉบับ
-                        </div>
+                        </div> -->
                         <div class="pw-5 text-center font17">
-                            ยอดคงเหลือ : ฿<?php echo number_format("487515"); ?>
+                            ยอดคงเหลือ : ฿<?php echo number_format($user['cash']); ?>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                             ยอดคงเหลือในบัญชี
                         </div>
                         <div class="p-15 text-center color-p">
-                            ฿0
+                            ฿<?php echo number_format($user['cash']); ?>
                         </div>
                         <div class="pb-18 text-center">
                             <a href="my-deposit" class="btn btn-primary button-p">เติมเงิน</a>
@@ -43,6 +43,9 @@
                             ถอนเงินออกจากระบบ
                         </div>
                         <hr>
+                        <div class="text-center">
+                            ถอนเงินออกจากระบบ
+                        </div>
                         <form action="withdraw_cash" method="post">
                             <div class="row text-center wall-center mtb-17-30">
                                 <div class="col-md-6 ">

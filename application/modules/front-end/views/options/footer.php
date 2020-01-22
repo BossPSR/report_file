@@ -301,6 +301,9 @@
     <?php if ($this->session->flashdata('del_ss')) : ?>
         swal("fill !", "You clicked the button!", "error");
     <?php endif; ?>
+    <?php if ($this->session->flashdata('nomoney')) : ?>
+        swal("fill !", "Your money is not enough to withdraw money.", "error");
+    <?php endif; ?>
     <?php if ($this->session->flashdata('without')) : ?>
         swal("fill !", "Not enough money Please top up!!", "error");
     <?php endif; ?>
