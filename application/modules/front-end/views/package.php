@@ -1,8 +1,20 @@
 <style>
-  .free-button-container > div{
-    height: 24px;
-    max-height: 33px;
-    min-height: 22px;
+  .free-button-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height:100%;
+    width:100%;
+  }
+  .freeButton{
+    width:100%;
+    
+  }
+  .freeButton > button{
+    width:100%;
+    padding:15px;
+    font-size: 18px;
   }
 </style>
 <br>
@@ -25,7 +37,7 @@
             <div class="product_thumb">
 
             </div>
-            <div class="product_content grid_content">
+            <div class="product_content grid_content" style="position: relative;">
               <h4 style="MARGIN-BOTTOM: 2rem;"><?php echo $package['title_pk']; ?></h4>
               <div class="price_box">
                 <span class="current_price" style="font-size:30px">$<?php echo $package['price_pk']; ?>/<?php echo $package['time_pk']; ?></span>
@@ -35,8 +47,11 @@
               <?php if ($i == 2) { ?>
                 <div class="paypal-button-container<?php echo $i; ?>"></div>
               <?php }else{ ?>
-                <div class="free-button-container btn btn-success">
-                      <div>Free</div>
+                <div class="free-button-container">
+                  <div class="freeButton">
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Free</button>
+                  </div>
+                      
                 </div>
               <?php } 
                 $i++;
@@ -124,4 +139,27 @@
 </div>
 <br>
 
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-top: none;">
+        <h5 class="modal-title" id="exampleModalLabel">Free</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       ท่านต้องการใช้ Free Package ใช่มั้ย?
+      </div>
+      <div class="modal-footer">
+        <form action="free_package" method="post">
+          <input type="hidden" name="user_id" value="<?php echo $userId['id']; ?>">
+            <button type="submit" class="btn btn-success">ตกลง</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+        </form>
+      
+      </div>
+    </div>
+  </div>
+</div>

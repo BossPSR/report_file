@@ -16,20 +16,12 @@ class Store_ctr extends CI_Controller
             redirect('home');
         } else {
           $data['userId'] = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
-          $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal',['user_id' => $data['userId']['id']])->row_array();
-          if (!empty($paypal)) {
-              $datePaypal = date("Y-m-d", strtotime($paypal['create_time']));
-              $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-              if ($checkDate < 31) {
-                $this->load->view('options/header_login');
-                $this->load->view('store',$data);
-                $this->load->view('options/footer');      
-              } else {
-                redirect('package');
-              }
-          }else{
-            redirect('package');
-          }
+          
+         
+            $this->load->view('options/header_login');
+            $this->load->view('store',$data);
+            $this->load->view('options/footer');      
+             
       }
     }
 
