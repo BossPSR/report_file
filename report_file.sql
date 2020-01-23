@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-22 16:57:50
+Date: 2020-01-23 13:39:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -643,4 +643,4 @@ CREATE TABLE `tbl_withdraw` (
 -- ----------------------------
 -- Records of tbl_withdraw
 -- ----------------------------
-INSERT INTO `tbl_withdraw` VALUES ('1', '4', '150', '1', '2020-01-20 15:20:23', '2020-01-20 15:20:26', '-', 'WD-321');
+INSERT INTO `tbl_withdraw` VALUES ('1', '4', '150', '2', '2020-01-20 15:20:23', '2020-01-20 15:20:26', '-', 'WD-321');
