@@ -18,9 +18,9 @@ class Buy_ctr extends CI_Controller
         $data['userId'] = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
         $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal',['user_id' => $data['userId']['id']])->row_array();
         if (!empty($paypal)) {
-            $datePaypal = date("Y-m-d", strtotime($paypal['create_time']));
+            $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
             $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-            if ($checkDate < 31) {
+            if ($checkDate < 8) {
               $this->load->view('options/header_login');
               $this->load->view('buy',$data);
               $this->load->view('options/footer');      
@@ -43,9 +43,9 @@ class Buy_ctr extends CI_Controller
       $data['userId'] = $user;
       $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
       if (!empty($paypal)) {
-        $datePaypal = date("Y-m-d", strtotime($paypal['create_time']));
+        $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
         $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-        if ($checkDate <= 30) {
+        if ($checkDate <= 7) {
           $this->load->view('options/header_login');
           $this->load->view('thank_for_buy', $data);
           $this->load->view('options/footer');
