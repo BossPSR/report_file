@@ -7,7 +7,7 @@
 
                 </div>
             </div>
-            <div class="col-lg-7 col-md-12">
+            <div class="col-lg-6 col-md-12">
                 <div class="single_services listProfile">
 
                     <div class="image_profile">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-3 col-md-6">
                 <div class="single_services">
 
                 </div>

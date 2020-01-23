@@ -151,7 +151,7 @@
                                 <li><a href="checkout.html"> ENG </a></li>
                             </ul>
                         </div>
-                        <div class="search_container">
+                        <!-- <div class="search_container">
                             <form action="search">
                                 <div class="hover_category">
                                     <select class="select_option" name="select" id="categori">
@@ -178,7 +178,7 @@
                                     <button type="submit">Search</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
 
                         <div class="middel_right_info">
                             <div class="header_wishlist">
@@ -317,9 +317,9 @@
                                 <?php if ($user == false) :  ?>
                                     <div class="search_container" style="margin-right:200px;">
                                     <?php else : ?>
-                                        <div class="search_container">
+                                        <!-- <div class="search_container"> -->
                                         <?php endif ?>
-                                        <form action="get_search" method="POST">
+                                        <!-- <form action="get_search" method="POST">
                                             <div class="search_box">
                                                 <input placeholder="Search item /Code ...." type="text" name="search">
                                             </div>
@@ -345,7 +345,7 @@
                                                 <button type="submit">Search</button>
                                             </div>
                                         </form>
-                                        </div>
+                                        </div> -->
                                         <?php if ($user == true) :  ?>
                                             <div class="middel_right_info">
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
@@ -386,19 +386,19 @@
                                 <ul>
                                     <?php if ($user) :  ?>
                                         <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                        <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                        <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                        <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                         <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
+                                        <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                         <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
                                     <?php else : ?>
                                         <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li>
+                                        <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                        <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                        <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                        <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li>
+                                        <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                         <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
                                     <?php endif ?>
                                 </ul>
