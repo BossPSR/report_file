@@ -66,7 +66,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'delete_store?id=' + data;
+                window.location = 'back_store_status_reject?id=' + data;
             }
         })
     }

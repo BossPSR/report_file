@@ -265,9 +265,10 @@
                             
                             
                             
+                            
                         </ul>
                     </li>
-                    <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell") { echo 'active';} ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store</span></a>
+                    <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell" ||  $this->uri->segment(1) ==  "back_store_reject") { echo 'active';} ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store</span></a>
                         <ul class="dropdown-menu">
                         <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_checkForsell") {
                                                                             echo 'active';
@@ -281,6 +282,11 @@
                                                                             echo 'active';
                                                                         } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Store for buy</a>
                             </li>
+                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject") {
+                                                                            echo 'active';
+                                                                        } ?>" href="back_store_reject" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Reject</a>
+                            </li>
+                         
                          
                             
                         </ul>

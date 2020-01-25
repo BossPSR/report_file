@@ -107,6 +107,38 @@ class Store_ctr extends CI_Controller {
         }
         return redirect('back_store');
     }
+
+    public function reject()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+	
+        $data['store'] = $this->db->get('tbl_upload_store')->result_array();
+		$this->load->view('options/header');
+		$this->load->view('reject',$data);
+		$this->load->view('options/footer');
+	 }
+    }
+
+    public function status_reject()
+    {
+        $id = $this->input->get('id');
+      
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_upload_store',['is_check' => 1]);
+
+        if($resultsedit > 0)
+        {
+            $this->session->set_flashdata('save_ss2',' Successfully updated status information !!.');
+        }
+        else
+        {
+            $this->session->set_flashdata('del_ss2','Not Successfully updated status information');
+        }
+        return redirect('back_store_checkForsell');
+    }
+
 	
 	
 }
