@@ -30,7 +30,8 @@ class Paypal_ctr extends CI_Controller{
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'create_time' => date("Y-m-d H:i:s"),
-            'start_time' => date("Y-m-d H:i:s")
+            'start_time' => date("Y-m-d H:i:s"),
+            'status_drop' => 0
         ];
 
         $success = $this->db->insert('tbl_paypal', $insert);

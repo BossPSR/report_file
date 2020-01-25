@@ -153,11 +153,9 @@
        ท่านต้องการใช้ Free Package ใช่มั้ย?
       </div>
       <div class="modal-footer">
-        <form action="free_package" method="post">
-          <input type="hidden" name="user_id" value="<?php echo $userId['id']; ?>">
-            <button type="submit" class="btn btn-success">ตกลง</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-        </form>
+
+          <a href="store"><button type="button" class="btn btn-success">ตกลง</button></a>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
       
       </div>
     </div>

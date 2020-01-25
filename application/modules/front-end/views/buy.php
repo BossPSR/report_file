@@ -20,7 +20,7 @@
                              </div>
                          </div>
                          <div class="col-12 text-right" style="padding-top: 10px;">
-                             <button type="button" class="btn btn-info" onclick="confirmalert_buy();">SUBMIT</button>
+                             <!-- <button type="button" class="btn btn-info" onclick="confirmalert_buy();">SUBMIT</button> -->
                          </div>
                      </div>
                  </article>
