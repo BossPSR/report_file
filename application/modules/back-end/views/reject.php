@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Store For sell</h2>
+                        <h2 class="content-header-title float-left mb-0">Reject</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Store For sell
+                                <li class="breadcrumb-item active">Reject
                                 </li>
                             </ol>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Store For sell</h4>
+                                <h4 class="card-title">Reject</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -47,7 +47,7 @@
                                                 </tr>
                                             </thead>
                                             <?php foreach ($store as $store) { ?>
-                                               <?php if($store['price_file']=="" ): ?>
+                                               <?php if($store['is_check']=="0"): ?>
                                                 <?php else :?>
                                                 <tbody>
                                                     <tr>
@@ -65,8 +65,8 @@
                                                             <?php endif; ?>
                                                         <td><?php echo $store['create_at']; ?></td>
                                                         <td>
-                                                            <button  onclick="confirmalertunlock('<?php echo $store['id']; ?>')"  class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
-                                                             del
+                                                            <button    class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
+                                                             Reject
                                                             </button>
                                                         </td>
 

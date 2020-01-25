@@ -47,7 +47,7 @@
                                                 </tr>
                                             </thead>
                                             <?php foreach ($store as $store) { ?>
-                                               <?php if($store['price_file']): ?>
+                                               <?php if($store['price_file'] || $store['is_check']== '1'): ?>
                                                 <?php else :?>
                                                 <tbody>
                                                     <tr>
