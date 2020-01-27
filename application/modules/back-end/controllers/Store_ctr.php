@@ -83,6 +83,10 @@ class Store_ctr extends CI_Controller {
                        $this->db->where('id', $id);     
         $resultsedit = $this->db->update('tbl_upload_store', $data);
 
+        $uploadStore =   $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
+        $this->db->where('id', $uploadStore['userId']);     
+        $this->db->update('tbl_user', ['free_forever' => 1]);
+
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {

@@ -19,6 +19,11 @@ class Package_ctr extends CI_Controller {
         $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
 		$checkDate = DateDiff($datePaypal, date("Y-m-d"));
 
+		if ($data['userId']['free_forever'] == 1) {
+			$this->session->set_flashdata('package_check', TRUE);
+			redirect('home');
+		}
+
         if ($checkDate > 7 || empty($paypal)){
 			$this->load->view('options/header_login');
 			$this->load->view('package',$data);
