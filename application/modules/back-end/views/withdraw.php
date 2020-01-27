@@ -52,13 +52,38 @@
                                                         <td><?php echo $withdraw['email']; ?></td>
                                                         <td><?php echo $withdraw['username']; ?></td>
                                                         <td><?php echo $withdraw['price']; ?></td>
+                                                        <td><?php echo $withdraw['phone']; ?></td>
                                                         <td>
                                                             <?php if ($withdraw['status'] == 1) : ?>
-                                                                <span class="badge badge-warning">กำลังดำเนินการ</span> 
+                                                            <div class="dropdown ">
+                                                                <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                กำลังดำเนินการ
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
+                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                </div>
+                                                            </div>
                                                             <?php elseif ($withdraw['status'] == 2): ?>
-                                                                <span class="badge badge-success">ชำระเงินแล้ว</span>
+                                                            <div class="dropdown ">
+                                                                <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                ชำระเงินแล้ว
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
+                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                </div>
+                                                            </div>
                                                             <?php else: ?>
-                                                                <span class="badge badge-danger">ยกเลิก</span> 
+                                                            <div class="dropdown ">
+                                                                <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                ยกเลิก
+                                                                </button>
+                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
+                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                </div>
+                                                            </div>
                                                             <?php endif; ?>
                                                         </td>
                                                     </tr>

@@ -17,6 +17,7 @@ class Store_ctr extends CI_Controller {
      } else {
 	
         $data['store'] = $this->db->get('tbl_upload_store')->result_array();
+       
 		$this->load->view('options/header');
 		$this->load->view('store',$data);
 		$this->load->view('options/footer');
@@ -27,10 +28,23 @@ class Store_ctr extends CI_Controller {
 		if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
      } else {
-	
+	 
         $data['store'] = $this->db->get('tbl_upload_order')->result_array();
+
 		$this->load->view('options/header');
 		$this->load->view('storeforbuy',$data);
+		$this->load->view('options/footer');
+	 }
+    }
+    public function checkForsell()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+	
+        $data['store'] = $this->db->get('tbl_upload_store')->result_array();
+		$this->load->view('options/header');
+		$this->load->view('checkforsell',$data);
 		$this->load->view('options/footer');
 	 }
     }
@@ -56,6 +70,28 @@ class Store_ctr extends CI_Controller {
         return redirect('back_store');
     }
 
+    public function check_store_add_com()
+    {
+            $id = $this->input->post('id');
+
+        $data = array(
+
+            'price_file'         => $this->input->post('price_file'),
+           
+
+        );
+                       $this->db->where('id', $id);     
+        $resultsedit = $this->db->update('tbl_upload_store', $data);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+        return redirect('back_store_checkForsell');
+    }
+
+
     public function  delete_store()
     {
         $id = $this->input->get('id');
@@ -71,6 +107,38 @@ class Store_ctr extends CI_Controller {
         }
         return redirect('back_store');
     }
+
+    public function reject()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+	
+        $data['store'] = $this->db->get('tbl_upload_store')->result_array();
+		$this->load->view('options/header');
+		$this->load->view('reject',$data);
+		$this->load->view('options/footer');
+	 }
+    }
+
+    public function status_reject()
+    {
+        $id = $this->input->get('id');
+      
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_upload_store',['is_check' => 1]);
+
+        if($resultsedit > 0)
+        {
+            $this->session->set_flashdata('save_ss2',' Successfully updated status information !!.');
+        }
+        else
+        {
+            $this->session->set_flashdata('del_ss2','Not Successfully updated status information');
+        }
+        return redirect('back_store_checkForsell');
+    }
+
 	
 	
 }

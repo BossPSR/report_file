@@ -103,7 +103,7 @@ $route['paypal_success']        = 'front-end/Paypal_ctr/success';
 $route['get_search']            = 'front-end/Search_ctr/get_search';
 $route['buy']                   = 'front-end/Buy_ctr';
 $route['buy_upload']            = 'front-end/Buy_ctr/fileUpload_buy';
-$route['withdraw_cash']            = 'front-end/My_withdraw_ctr/withdraw_cash';
+$route['withdraw_cash']         = 'front-end/My_withdraw_ctr/withdraw_cash';
 
 $route['thank_for_buy']         = 'front-end/Buy_ctr/thank_for_buy';
 $route['store']                 = 'front-end/Store_ctr';
@@ -125,14 +125,19 @@ $route['back_user']                           = 'back-end/User_ctr';
 $route['back_store']                          = 'back-end/Store_ctr';
 $route['back_store_add_com']                  = 'back-end/Store_ctr/store_add_com';
 $route['delete_store']                        = 'back-end/Store_ctr/delete_store';
-$route['back_store_buy']                        = 'back-end/Store_ctr/storeForbuy';
+$route['back_store_buy']                      = 'back-end/Store_ctr/storeForbuy';
+$route['back_store_checkForsell']             = 'back-end/Store_ctr/checkForsell';
+$route['back_store_check_store_add_com']      = 'back-end/Store_ctr/check_store_add_com';
+$route['back_store_reject']                   = 'back-end/Store_ctr/reject';
+$route['back_store_status_reject']            = 'back-end/Store_ctr/status_reject';
 $route['Login_admin']                         = 'back-end/Login_ctr/admin_loginMe';
 $route['Logout_admin']                        = 'back-end/Login_ctr/admin_logout';
 $route['backend']                             = 'back-end/Login_ctr';
 $route['back_withdraw']                       = 'back-end/withdraw_ctr';
+$route['back_withdraw_update']      = 'back-end/withdraw_ctr/withdraw_status';
 
 
-$route['pdf']                                 = 'front-end/pdf';
+$route['pdf']                       = 'front-end/pdf';
 
 
 

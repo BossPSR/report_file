@@ -29,11 +29,32 @@ class Paypal_ctr extends CI_Controller{
             'user_id' => $data['user_id'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'create_time' => date("Y-m-d H:i:s")
+            'create_time' => date("Y-m-d H:i:s"),
+            'start_time' => date("Y-m-d H:i:s"),
+            'status_drop' => 0
         ];
 
         $success = $this->db->insert('tbl_paypal', $insert);
 
         echo json_encode($data);  
+    }
+
+    public function FreePackage_success()
+    {
+        $user_id = $this->input->post('user_id');
+        $currency_code = "USD";
+        $amount = 0;
+
+        $insert = [
+            
+            'amount' => $amount,
+            'currency_code' => $currency_code,
+            'user_id' => $user_id,
+            'create_time' => date("Y-m-d H:i:s"),
+            'start_time' => date("Y-m-d H:i:s")
+        ];
+
+        $success = $this->db->insert('tbl_paypal', $insert);
+        redirect('my-profile');
     }
 }

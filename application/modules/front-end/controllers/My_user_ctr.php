@@ -15,7 +15,7 @@ class My_user_ctr extends CI_Controller
 			redirect('home');
 		} else {
 			$data['user'] = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
-			$this->load->view('options/header');
+			$this->load->view('options/header_login');
 			$this->load->view('my_profile',$data);
 			$this->load->view('options/footer');	
 		}

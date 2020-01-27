@@ -456,7 +456,7 @@
                     name: name,
                     request: 2
                 },
-                sucess: function(data) {
+                success: function(data) {
                     console.log('success: ' + data);
                 },
 
