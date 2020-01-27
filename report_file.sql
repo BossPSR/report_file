@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2020 at 08:41 AM
+-- Generation Time: Jan 27, 2020 at 10:33 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -450,6 +450,13 @@ CREATE TABLE `tbl_paypal` (
   `status_drop` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tbl_paypal`
+--
+
+INSERT INTO `tbl_paypal` (`id`, `orderID`, `payerID`, `amount`, `currency_code`, `user_id`, `first_name`, `last_name`, `create_time`, `start_time`, `status_drop`) VALUES
+(1, '', '', 0, 'USD', 4, '', '', '2020-01-27 16:03:52', '2020-02-25 16:03:52', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -666,14 +673,6 @@ CREATE TABLE `tbl_upload_store` (
   `price_file` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `tbl_upload_store`
---
-
-INSERT INTO `tbl_upload_store` (`id`, `userId`, `store_id`, `file_name`, `is_check`, `create_at`, `update_at`, `path`, `price_file`) VALUES
-(2, 4, '4', '091025621.pdf', 1, '2020-01-04 14:09:36', NULL, 'uploads/Preview/091025621.pdf', '500'),
-(3, 4, '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', 0, '2020-01-04 14:10:22', NULL, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -689,6 +688,7 @@ CREATE TABLE `tbl_user` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `file_name` varchar(255) DEFAULT NULL,
+  `free_forever` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -696,13 +696,13 @@ CREATE TABLE `tbl_user` (
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id`, `passport`, `cash`, `email`, `phone`, `username`, `password`, `file_name`, `created_at`) VALUES
-(1, '1659900740516', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', NULL, '2019-12-10 21:07:28'),
-(2, '1269900232221', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '2019-12-25 08:19:48'),
-(3, '123456789', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '2019-12-23 12:29:15'),
-(4, '4444555666112', '150', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '2020-01-21 07:02:02'),
-(5, '123123', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', NULL, '2019-12-25 10:23:11'),
-(6, '987456123', '2', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2020-01-04 09:22:28');
+INSERT INTO `tbl_user` (`id`, `passport`, `cash`, `email`, `phone`, `username`, `password`, `file_name`, `free_forever`, `created_at`) VALUES
+(1, '1659900740516', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', NULL, 0, '2019-12-10 21:07:28'),
+(2, '1269900232221', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', 0, '2019-12-25 08:19:48'),
+(3, '123456789', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', 0, '2019-12-23 12:29:15'),
+(4, '4444555666112', '150', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', 1, '2020-01-27 09:16:59'),
+(5, '123123', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', NULL, 0, '2019-12-25 10:23:11'),
+(6, '987456123', '2', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', NULL, 0, '2020-01-04 09:22:28');
 
 -- --------------------------------------------------------
 
@@ -962,7 +962,7 @@ ALTER TABLE `tbl_upload_preview`
 -- AUTO_INCREMENT for table `tbl_upload_store`
 --
 ALTER TABLE `tbl_upload_store`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
