@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-25 17:05:27
+Date: 2020-01-28 10:11:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -584,19 +584,18 @@ CREATE TABLE `tbl_upload_store` (
   `userId` int(11) NOT NULL,
   `store_id` varchar(110) DEFAULT '' COMMENT 'ST00001',
   `file_name` varchar(255) DEFAULT NULL,
-  `is_check` int(5) DEFAULT 0,
+  `is_check` int(5) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
-  `price_file` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_store
 -- ----------------------------
-INSERT INTO `tbl_upload_store` VALUES ('2', '4', '4', '091025621.pdf', '1', '2020-01-04 14:09:36', null, 'uploads/Preview/091025621.pdf', '500');
-INSERT INTO `tbl_upload_store` VALUES ('3', '4', '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', '0', '2020-01-04 14:10:22', null, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', null);
+INSERT INTO `tbl_upload_store` VALUES ('2', '4', '4', '091025621.pdf', null, '2020-01-04 14:09:36', null, 'uploads/Preview/091025621.pdf');
+INSERT INTO `tbl_upload_store` VALUES ('3', '4', '5', 'ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf', null, '2020-01-04 14:10:22', null, 'uploads/Preview/ห้างหุ้นส่วนจำกัด_อินฟินิตี้_ฟีโนมีนอล_ซอฟท์แวร์_QT2019110001_บริษัท_ตัวอย่าง_จำกัด_Test.pdf');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
