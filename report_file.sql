@@ -666,7 +666,7 @@ CREATE TABLE `tbl_upload_store` (
   `userId` int(11) NOT NULL,
   `store_id` varchar(110) DEFAULT '' COMMENT 'ST00001',
   `file_name` varchar(255) DEFAULT NULL,
-  `is_check` int(5) DEFAULT 0,
+  `is_check` int(5) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
