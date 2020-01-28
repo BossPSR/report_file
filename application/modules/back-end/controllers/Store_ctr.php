@@ -6,7 +6,7 @@ class Store_ctr extends CI_Controller {
 	public function __construct()
     {
 		parent::__construct();
-		$this->load->model('');
+		$this->load->model('Store_model');
 
     }
 
@@ -15,9 +15,7 @@ class Store_ctr extends CI_Controller {
 		if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
      } else {
-	
-        $data['store'] = $this->db->get('tbl_upload_store')->result_array();
-       
+        $data['store'] = $this->Store_model->store_list();
 		$this->load->view('options/header');
 		$this->load->view('store',$data);
 		$this->load->view('options/footer');
@@ -42,7 +40,7 @@ class Store_ctr extends CI_Controller {
             redirect('backend');
      } else {
 	
-        $data['store'] = $this->db->get('tbl_upload_store')->result_array();
+        $data['store'] = $this->Store_model->store_list();
 		$this->load->view('options/header');
 		$this->load->view('checkforsell',$data);
 		$this->load->view('options/footer');
@@ -72,11 +70,13 @@ class Store_ctr extends CI_Controller {
 
     public function check_store_add_com()
     {
-            $id = $this->input->post('id');
+            $id = $this->input->get('id');
 
         $data = array(
 
-            'price_file'         => $this->input->post('price_file'),
+            'status_cp'                     => $this->input->get('com'),
+            'grade'                         => $this->input->get('grad'),
+            'price_file'                    => $this->input->get('price'),
            
 
         );
