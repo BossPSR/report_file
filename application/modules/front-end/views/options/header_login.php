@@ -204,7 +204,7 @@
                                         <a href="store"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My order</a>
+                                        <a href="order"> My order</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#"> Feedback</a>
@@ -419,7 +419,7 @@
                                     <?php if ($user) :  ?>
                                         <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                         <li><a href="store"> ต้องการขาย </a></li>
-                                        <li><a href="#"> My order </a></li>
+                                        <li><a href="order"> My order </a></li>
                                         <li><a href="#"> Feedback </a></li>
                                         <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                         <!-- <li class="menu-item-has-children" style="margin-right: 15px;">

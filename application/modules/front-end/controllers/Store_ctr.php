@@ -94,7 +94,7 @@ class Store_ctr extends CI_Controller
             $this->db->update('tbl_paypal',['status_drop' => 1,'start_time' => $start_time]);
         }
         
-        if(empty($paypalCheck) || $paypalCheck['orderID'] && $paypalCheck['payerID']){
+        if(empty($paypalCheck) || empty($paypalCheck['orderID']) && empty($paypalCheck['payerID'])){
             $start_time = date('Y-m-d H:i:s',strtotime("+29 day"));
             $dataFree = [
                 'currency_code' => 'USD',
