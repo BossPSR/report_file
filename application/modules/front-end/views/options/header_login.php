@@ -346,11 +346,18 @@
                                             </div>
                                         </form>
                                         </div> -->
-                                        <?php if ($user == true) :  ?>
+                                        <?php if ($user == true) :  
+                                            $score = $this->db->get_where('tbl_upload_store',['userId' => $user['id']])->result_array();
+                                            $scoreAll = [];
+                                            foreach ($score as $scoreNum) {
+                                                $scoreAll[] = $scoreNum['price_file'];
+                                            }
+                                            $scoreAll = array_sum($scoreAll);
+                                        ?>
                                             <div class="middel_right_info">
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list">421</div>
-                                                    <div>My income</div>
+                                                    <div class="menu-list"><?php echo $scoreAll; ?></div>
+                                                    <div>Score</div>
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                     <div class="menu-list">1,527</div>

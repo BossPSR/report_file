@@ -92,8 +92,10 @@ class Store_ctr extends CI_Controller
             $start_time = date('Y-m-d H:i:s', strtotime($paypalCheck['start_time']. ' + 30 days'));
             $this->db->where('user_id', $paypalCheck['user_id']);
             $this->db->update('tbl_paypal',['status_drop' => 1,'start_time' => $start_time]);
-        }elseif(empty($paypalCheck) || $paypalCheck['orderID'] && $paypalCheck['payerID']){
-            $start_time = date('Y-m-d H:i:s', strtotime('Y-m-d H:i:s'. ' + 29 days'));
+        }
+        
+        if(empty($paypalCheck) || $paypalCheck['orderID'] && $paypalCheck['payerID']){
+            $start_time = date('Y-m-d H:i:s',strtotime("+29 day"));
             $dataFree = [
                 'currency_code' => 'USD',
                 'user_id' => $userId,
