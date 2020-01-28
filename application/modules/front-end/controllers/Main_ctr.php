@@ -14,6 +14,16 @@ class Main_ctr extends CI_Controller {
 		$this->load->view('main');
 	}
 
+	public function mainbuysell()
+	{
+		if ($this->session->userdata('email') == '') {
+			redirect('home');
+		} else {
+			$this->load->view('mainbuysell');
+		}
+	}
+	
+
 	
 	
 	
