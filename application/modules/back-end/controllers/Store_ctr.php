@@ -40,7 +40,8 @@ class Store_ctr extends CI_Controller {
             redirect('backend');
      } else {
 	
-        $data['store'] = $this->Store_model->store_list();
+        // $data['store'] = $this->Store_model->store_list();
+        $data['store'] = $this->db->get('tbl_upload_store')->result_array();
 		$this->load->view('options/header');
 		$this->load->view('checkforsell',$data);
 		$this->load->view('options/footer');
