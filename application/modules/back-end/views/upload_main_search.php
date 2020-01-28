@@ -92,8 +92,7 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                         <td><?php echo $value['select_item']; ?></td>
                                                         <td><?php echo $value['code']; ?></td>
                                                         <td><?php echo $value['topic']; ?></td>
-                                                        <td><?php echo $value['create_at']; ?></td>
-                                                       
+                                                        <td><?php echo $value['create_at']; ?></td>    
 
                                                     </tr>
 
@@ -101,7 +100,22 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                     
                                                     <?php  
                                                             }
-                                                        }
+                                                        
+                                                    ?>
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col"></th>
+                                                            <th scope="col"></th>
+                                                            <th scope="col"></th>
+                                                            <th scope="col"></th>
+                                                            <th scope="col"></th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <?php  
+                                                            }
+                                                        
                                                     ?>
                                                 </tbody>      
                                                 
