@@ -143,6 +143,18 @@ class Store_ctr extends CI_Controller {
         return redirect('back_store_checkForsell');
     }
 
+	public function upload_main_search()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
 	
+            $data['upload_main_search'] = $this->db->get('tbl_upload_main_search')->result_array();
+        
+            $this->load->view('options/header');
+            $this->load->view('upload_main_search',$data);
+            $this->load->view('options/footer');
+	    }
+    }
 	
 }
