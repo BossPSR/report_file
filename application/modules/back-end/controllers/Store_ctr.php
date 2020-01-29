@@ -21,6 +21,42 @@ class Store_ctr extends CI_Controller {
 		$this->load->view('options/footer');
 	 }
     }
+    public function store_a()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+
+        $data['store'] = $this->Store_model->store_list_a();
+		$this->load->view('options/header');
+		$this->load->view('store_a',$data);
+		$this->load->view('options/footer');
+	 }
+    }
+    public function store_b()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+
+        $data['store'] = $this->Store_model->store_list_b();
+		$this->load->view('options/header');
+		$this->load->view('store_b',$data);
+		$this->load->view('options/footer');
+	 }
+    }
+    public function store_c()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+
+        $data['store'] = $this->Store_model->store_list_c();
+		$this->load->view('options/header');
+		$this->load->view('store_c',$data);
+		$this->load->view('options/footer');
+	 }
+    }
     public function storeForbuy()
 	{
 		if ($this->session->userdata('email_admin') == '') {
@@ -34,6 +70,7 @@ class Store_ctr extends CI_Controller {
 		$this->load->view('options/footer');
 	 }
     }
+
     public function checkForsell()
 	{
 		if ($this->session->userdata('email_admin') == '') {
@@ -41,7 +78,7 @@ class Store_ctr extends CI_Controller {
      } else {
 	
         // $data['store'] = $this->Store_model->store_list();
-        $data['store'] = $this->db->get('tbl_upload_store')->result_array();
+        $data['store'] = $this->db->get_where('tbl_upload_store',['grade' => null || '','price_file'=> null || '','status_cp'=> null || ''])->result_array();
 		$this->load->view('options/header');
 		$this->load->view('checkforsell',$data);
 		$this->load->view('options/footer');
