@@ -87,17 +87,17 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <tr>
                                                             <td><?php echo $i++ ; ?></td>
                                                            
-                                                            <?php if($key == 0) {?>
+                                                           
                                                         
-                                                            <td rowspan="<?php echo count($orders);?>">
+                                                            <td>
                                                                 <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); ?>
                                                                 <?php echo $store_name['username'];?>
                                                             </td>
                                                         
-                                                            <?php } ?>
+                                                            
                                                    
                                                             <td><?php echo $order['file_name']; ?></td>
-                                                            <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $order['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
+                                                            <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $order['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span></td>
                                                             <?php if ($order['price_file'] == '') :   ?>
                                                                 <td>-</td>
                                                             <?php else : ?>
@@ -178,8 +178,8 @@ foreach ($store as $upload_main_searchDetail) {
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body" style="text-align: center"> 
-                                                                       <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&com=complete&grad=b&price=20" class="btn btn-success">Complete</a>
-                                                                       <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&com=notcomplete&grad=b&price=20" class="btn btn-danger">Not Complete</a>
+                                                                       <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&com=complete&grad=B&price=20" class="btn btn-success">Complete</a>
+                                                                       <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&com=notcomplete&grad=B&price=20" class="btn btn-danger">Not Complete</a>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                           
@@ -199,8 +199,8 @@ foreach ($store as $upload_main_searchDetail) {
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body" style="text-align: center"> 
-                                                                       <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&test?com=complete&grad=c&price=10" class="btn btn-success">Complete</a>
-                                                                         <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&com=notcomplete&grad=c&price=10" class="btn btn-danger">Not Complete </a>
+                                                                       <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&com=complete&grad=C&price=10" class="btn btn-success">Complete</a>
+                                                                         <a href="back_store_check_store_add_com?id=<?php echo $order['id']; ?>&com=notcomplete&grad=C&price=10" class="btn btn-danger">Not Complete </a>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                           

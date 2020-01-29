@@ -127,6 +127,9 @@ $route['back_admin_delete_admin']             = 'back-end/Admin_ctr/delete_admin
 $route['status_team']                         = 'back-end/Team_ctr/status_team';
 $route['back_user']                           = 'back-end/User_ctr';
 $route['back_store']                          = 'back-end/Store_ctr';
+$route['back_store_a']                        = 'back-end/Store_ctr/store_a';
+$route['back_store_b']                        = 'back-end/Store_ctr/store_b';
+$route['back_store_c']                        = 'back-end/Store_ctr/store_c';
 $route['back_store_add_com']                  = 'back-end/Store_ctr/store_add_com';
 $route['delete_store']                        = 'back-end/Store_ctr/delete_store';
 $route['back_store_buy']                      = 'back-end/Store_ctr/storeForbuy';
@@ -138,10 +141,10 @@ $route['Login_admin']                         = 'back-end/Login_ctr/admin_loginM
 $route['Logout_admin']                        = 'back-end/Login_ctr/admin_logout';
 $route['backend']                             = 'back-end/Login_ctr';
 $route['back_withdraw']                       = 'back-end/withdraw_ctr';
-$route['back_withdraw_update']      = 'back-end/withdraw_ctr/withdraw_status';
+$route['back_withdraw_update']                = 'back-end/withdraw_ctr/withdraw_status';
 $route['back_upload_main_search']             = 'back-end/Store_ctr/upload_main_search';
-
-$route['pdf']                       = 'front-end/pdf';
+$route['add_to_upload_main_search']           = 'back-end/Store_ctr/add_to_upload_main_search';
+$route['pdf']                                 = 'front-end/pdf';
 
 
 

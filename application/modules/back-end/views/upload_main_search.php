@@ -72,28 +72,30 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                 </tr>
                                             </thead>
                                                 <tbody>
-                                                <?php foreach ($arrayForTable as $id => $upload_main_search) { 
-                                                        foreach ($upload_main_search as $key=>$value){
+                                                <?php 
+                                                
+                                                foreach ($arrayForTable as $id => $upload_main_search) { 
+                                                    $numName= count($upload_main_search);
+                                                    $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); 
+                                                        foreach ($upload_main_search as $key => $value){
                                                 ?>
                                                
                                                 
                                                     <tr>
                                                         <td><?php echo $value['id']; ?></td>
-                                                        <?php if($key == 0) {?>
-                                                        
-                                                        <td rowspan="<?php echo count($upload_main_search);?>">
-                                                            <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); ?>
+                                                
+                                                        <td>
+                                                          
                                                             <?php echo $store_name['username'];?>
                                                         </td>
+     
                                                        
-                                                        <?php } ?>
-
+                                                        
                                                         <td><?php echo $value['search_item']; ?></td>
                                                         <td><?php echo $value['select_item']; ?></td>
                                                         <td><?php echo $value['code']; ?></td>
                                                         <td><?php echo $value['topic']; ?></td>
                                                         <td><?php echo $value['create_at']; ?></td>    
-
                                                     </tr>
 
                                                     
@@ -102,7 +104,7 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                             }
                                                         
                                                     ?>
-                                                    <thead class="thead-light">
+                                                    <thead>
                                                         <tr>
                                                             <th scope="col"></th>
                                                             <th scope="col"></th>
