@@ -143,7 +143,7 @@ $route['backend']                             = 'back-end/Login_ctr';
 $route['back_withdraw']                       = 'back-end/withdraw_ctr';
 $route['back_withdraw_update']                = 'back-end/withdraw_ctr/withdraw_status';
 $route['back_upload_main_search']             = 'back-end/Store_ctr/upload_main_search';
-
+$route['add_to_upload_main_search']           = 'back-end/Store_ctr/add_to_upload_main_search';
 $route['pdf']                                 = 'front-end/pdf';
 
 
