@@ -68,7 +68,7 @@
                                                             <button  onclick="confirmalertunlock('<?php echo $store['id']; ?>')"  class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
                                                              del
                                                             </button>
-                                                            <button class="btn btn-primary" data-toggle="modal" data-target="#testeee<?php echo $store['id']; ?>">Upload Main Search</button>
+                                                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalUpload<?php echo $store['id']; ?>">Upload</button>
                                                             
                                                         </td>
 
@@ -119,20 +119,21 @@
                                                         </div>
 
                                                         <!-- upload -->
-                                                        <div class="modal fade" id="testeee<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="modalUpload<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">StoreFile</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
-                                                                <form action="back_store_add_com" method="POST" class="form-horizontal">
+                                                                <form action="add_to_upload_main_search" method="POST" class="form-horizontal">
                                                                     <div class="modal-body">
 
                                                                         
                                                                         <input type="hidden" class="form-control" name="id" value="<?php echo $store['id']; ?>">
+                                                                        <input type="hidden" class="form-control" name="user_id" value="<?php echo $store['userId']; ?>">
                                                                         <div class="data-items pb-3">
                                                                             <div class="data-fields px-2 mt-3">
                                                                                 <div class="row">
@@ -140,26 +141,32 @@
 
                                                                                         <div class="form-group">
                                                                                             <div class="controls">
-                                                                                                <label for="data-name">Search Item</label>
-                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                                <label for="data-name">Select Item</label>
+                                                                                                <?php $select_itemList = $this->db->get('tbl_select_item')->result_array();?>
+                                                                                                <select name="select_item_id" class="form-control" id="data-category">
+                                                                                                    <?php foreach ($select_itemList as $key => $selectItem) { ?>
+                                                                                                    <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
+                                                                                                    <?php } ?>
+                                                                                                </select>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group">
                                                                                             <div class="controls">
                                                                                                 <label for="data-name">Search Item</label>
-                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                                <input type="text" class="form-control" name="search_item" value="" required>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group">
                                                                                             <div class="controls">
                                                                                                 <label for="data-name">Code</label>
-                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                                <input type="text" class="form-control" name="code" value="" required>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group">
                                                                                             <div class="controls">
                                                                                                 <label for="data-name">Topic</label>
-                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                                <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
+                                                                                               
                                                                                             </div>
                                                                                         </div>
                                                                                         
