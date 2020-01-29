@@ -130,7 +130,7 @@
                                                                 <form action="add_to_upload_main_search" method="POST" class="form-horizontal">
                                                                     <div class="modal-body">
 
-                                                                        
+                                                                        <input type="hidden" class="form-control" name="store_check" value="b">
                                                                         <input type="hidden" class="form-control" name="id" value="<?php echo $store['id']; ?>">
                                                                         <input type="hidden" class="form-control" name="user_id" value="<?php echo $store['userId']; ?>">
                                                                         <div class="data-items pb-3">

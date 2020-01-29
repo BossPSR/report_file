@@ -200,7 +200,7 @@ class Store_ctr extends CI_Controller {
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-	
+            $store_check = $this->input->post('store_check');
             $id = $this->input->post('id');
             $user_id = $this->input->post('user_id');
             $select_item_id = $this->input->post('select_item_id');
@@ -229,7 +229,15 @@ class Store_ctr extends CI_Controller {
                 }else{
                     $this->session->set_flashdata('del_ss2','Not Successfully updated status information');
                 }
-                redirect('back_store');
+
+                if ($store_check == 'a') {
+                    redirect('back_store_a');
+                }elseif ($store_check == 'b') {
+                    redirect('back_store_b');
+                }elseif ($store_check == 'c') {
+                    redirect('back_store_c');
+                }
+                
             }
             $this->session->set_flashdata('del_ss2','Not Successfully updated status information');
             redirect('back_store');
