@@ -34,7 +34,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration">
+                                        <table class="table zero-configuration data-list-view">
                                             <thead>
                                                 <tr>
                                                     <th>Store Id</th>
@@ -57,7 +57,7 @@
                                                         <td><?php echo $store_name['username']; ?></td>
                                                         
                                                         <td><?php echo $store['file_name']; ?></td>
-                                                        <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
+                                                        <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span></td>
                                                         <?php if ($store['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
@@ -68,7 +68,8 @@
                                                             <button  onclick="confirmalertunlock('<?php echo $store['id']; ?>')"  class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
                                                              del
                                                             </button>
-                                                            <button type="button" class="btn btn-primary">Upload Main Search</button>
+                                                            <button class="btn btn-primary" data-toggle="modal" data-target="#testeee<?php echo $store['id']; ?>">Upload Main Search</button>
+                                                            
                                                         </td>
 
                                                     </tr>
@@ -113,7 +114,72 @@
                                                                     </div>
                                                                 </form>
                                                             </div>
+                                                            </div>
 
+                                                        </div>
+
+                                                        <!-- upload -->
+                                                        <div class="modal fade" id="testeee<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">StoreFile</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="back_store_add_com" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+
+                                                                        
+                                                                        <input type="hidden" class="form-control" name="id" value="<?php echo $store['id']; ?>">
+                                                                        <div class="data-items pb-3">
+                                                                            <div class="data-fields px-2 mt-3">
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12 data-field-col">
+
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Search Item</label>
+                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Search Item</label>
+                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Code</label>
+                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Topic</label>
+                                                                                                <input type="text" class="form-control" name="price_file" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
                                                         </div>
                                                         <?php endif;?>
                                                     <?php  } ?>
