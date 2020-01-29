@@ -87,14 +87,14 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <tr>
                                                             <td><?php echo $i++ ; ?></td>
                                                            
-                                                            <?php if($key == 0) {?>
+                                                           
                                                         
-                                                            <td rowspan="<?php echo count($orders);?>">
+                                                            <td>
                                                                 <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); ?>
                                                                 <?php echo $store_name['username'];?>
                                                             </td>
                                                         
-                                                            <?php } ?>
+                                                            
                                                    
                                                             <td><?php echo $order['file_name']; ?></td>
                                                             <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $order['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>

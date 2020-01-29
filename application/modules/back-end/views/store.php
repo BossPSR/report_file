@@ -52,10 +52,10 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><?php echo $store['store_id']; ?></td>
-                                                        <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $store['userId']])->result_array(); ?>
-                                                        <?php foreach ($store_name as $store_name) { ?>
-                                                            <td><?php echo $store_name['username']; ?></td>
-                                                        <?php  } ?>
+                                                        <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
+                                                        
+                                                        <td><?php echo $store_name['username']; ?></td>
+                                                        
                                                         <td><?php echo $store['file_name']; ?></td>
                                                         <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
                                                         <?php if ($store['price_file'] == '') :   ?>
@@ -68,6 +68,7 @@
                                                             <button  onclick="confirmalertunlock('<?php echo $store['id']; ?>')"  class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
                                                              del
                                                             </button>
+                                                            <button type="button" class="btn btn-primary">Upload Main Search</button>
                                                         </td>
 
                                                     </tr>
