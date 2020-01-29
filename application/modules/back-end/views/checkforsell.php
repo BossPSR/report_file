@@ -97,7 +97,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                             
                                                    
                                                             <td><?php echo $order['file_name']; ?></td>
-                                                            <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $order['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
+                                                            <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $order['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span></td>
                                                             <?php if ($order['price_file'] == '') :   ?>
                                                                 <td>-</td>
                                                             <?php else : ?>
