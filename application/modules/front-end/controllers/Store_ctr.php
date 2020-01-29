@@ -15,14 +15,12 @@ class Store_ctr extends CI_Controller
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
-          $data['userId'] = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
-          
-         
+            $data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+
             $this->load->view('options/header_login');
-            $this->load->view('store',$data);
-            $this->load->view('options/footer');      
-             
-      }
+            $this->load->view('store', $data);
+            $this->load->view('options/footer');
+        }
     }
 
     public function fileUpload_store()
@@ -57,7 +55,7 @@ class Store_ctr extends CI_Controller
                     $uploadData = $this->upload->data();
 
                     $data = array(
-                        'userId'      => $userId['id'],
+                        'userId'      => $userId,
                         // 'order_id'      => $insert_id,
                         'file_name'      => $uploadData['file_name'],
                         'path'        => 'uploads/Store/' . $uploadData['file_name'],
@@ -76,26 +74,25 @@ class Store_ctr extends CI_Controller
                         );
                         $this->session->set_userdata($delete);
                     }
-                    
                 }
             }
         }
-        
-        
 
 
-        $paypalCheck = $this->db->order_by('id','DESC')->get_where('tbl_paypal',['user_id' => $userId])->row_array();
+
+
+        $paypalCheck = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $userId])->row_array();
         $datePaypal = date("Y-m-d", strtotime($paypalCheck['start_time']));
         $checkDate = DateDiff($datePaypal, date("Y-m-d"));
 
-        if ($paypalCheck['status_drop'] == 0){
-            $start_time = date('Y-m-d H:i:s', strtotime($paypalCheck['start_time']. ' + 30 days'));
+        if ($paypalCheck['status_drop'] == 0) {
+            $start_time = date('Y-m-d H:i:s', strtotime($paypalCheck['start_time'] . ' + 30 days'));
             $this->db->where('user_id', $paypalCheck['user_id']);
-            $this->db->update('tbl_paypal',['status_drop' => 1,'start_time' => $start_time]);
+            $this->db->update('tbl_paypal', ['status_drop' => 1, 'start_time' => $start_time]);
         }
-        
-        if(empty($paypalCheck) || empty($paypalCheck['orderID']) && empty($paypalCheck['payerID'])){
-            $start_time = date('Y-m-d H:i:s',strtotime("+29 day"));
+
+        if (empty($paypalCheck) || empty($paypalCheck['orderID']) && empty($paypalCheck['payerID'])) {
+            $start_time = date('Y-m-d H:i:s', strtotime("+29 day"));
             $dataFree = [
                 'currency_code' => 'USD',
                 'user_id' => $userId,
@@ -103,14 +100,14 @@ class Store_ctr extends CI_Controller
                 'start_time' => $start_time,
                 'status_drop' => 1
             ];
-            $this->db->insert('tbl_paypal',$dataFree);
+            $this->db->insert('tbl_paypal', $dataFree);
         }
 
         if ($request == 2) {
 
             if ($paypalCheck['status_drop'] == 1) {
                 $this->db->where('user_id', $userId);
-                $this->db->update('tbl_paypal',['status_drop' => 0]);
+                $this->db->update('tbl_paypal', ['status_drop' => 0]);
             }
             $last = $this->session->userdata('last_id');
             $this->db->where('id', $last);

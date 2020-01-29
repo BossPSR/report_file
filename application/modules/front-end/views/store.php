@@ -9,13 +9,14 @@
                          <div class="col-12">
                              <div class="tab">
                                  <label for="" class="font-size-upload">You can store document. </label>
-                                 <form action="store_upload" class="dropzone" id="dropzone2">
+                                 <form action="store_upload" class="dropzone" id="dropzone2" enctype="multipart/form-data">
                                      <div class="dz-message needsclick">
                                          Drop files here or click to upload.<br>
                                          <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                          <input type="text" name="userId" value="<?php echo $userId['id']; ?>" hidden>
                                      </div>
                                  </form>
+                                 <input type="button" id='uploadfiles' value='Upload Files'>
                              </div>
                          </div>
                          <div class="col-12 text-right" style="padding-top: 10px;">
@@ -49,6 +50,18 @@
          </div>
      </div>
  </div>
+ <script type="text/javascript">
+     Dropzone.autoDiscover = false;
+
+     var myDropzone = new Dropzone(".dropzone", {
+         autoProcessQueue: false,
+         parallelUploads: 10 // Number of files process at a time (default 2)
+     });
+
+     $('#uploadfiles').click(function() {
+         myDropzone.processQueue();
+     });
+ </script>
  <!--wishlist area end -->
  <script type="text/javascript">
      $(window).on('load', function() {
