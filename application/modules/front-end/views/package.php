@@ -105,7 +105,7 @@
                 success: function(response) {
                   let dataSucces = JSON.parse(response);
                   console.log(dataSucces);
-                  window.location.href = 'my-profile';
+                  window.location.href = 'mainbuysell';
                 }
               });
 

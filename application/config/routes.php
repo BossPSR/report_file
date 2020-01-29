@@ -54,6 +54,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['main']                  = 'front-end/Main_ctr';
+$route['mainbuysell']           = 'front-end/Main_ctr/mainbuysell';
+
 
 $route['loginme']               = 'front-end/Login_ctr/loginMe';
 $route['Logout']                = 'front-end/Login_ctr/logout';
