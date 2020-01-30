@@ -35,26 +35,6 @@
      </div>
  </div>
 
- <!-- Modal -->
- <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                 </button> -->
-             </div>
-             <div class="modal-body">
-                 <input type="checkbox" name="i_accept" id="i_accept" onclick='handleClick(this);' /> ยอมรับเงื่อนไข
-             </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" name="continue_bt" id="continue_bt" data-dismiss="modal" disabled="disabled">Close</button>
-                 <!-- <button type="button" class="btn btn-primary">Understood</button> -->
-             </div>
-         </div>
-     </div>
- </div>
 
  <!-- Modal -->
  <div class="modal fade" id="staticBackdrop2" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -76,25 +56,48 @@
          </div>
      </div>
  </div>
+ <!-- Modal -->
+ <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 <input type="checkbox" name="i_accept" id="i_accept" onclick='handleClick(this);' /> ยอมรับเงื่อนไข
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" name="continue_bt" id="continue_bt" data-dismiss="modal" disabled="disabled">Close</button>
+                 <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+             </div>
+         </div>
+     </div>
+ </div>
+
  <script type="text/javascript">
      Dropzone.autoDiscover = false;
-
-     var myDropzone = new Dropzone(".dropzone", {
+     var myDropzone = new Dropzone("#dropzone2", {
          autoProcessQueue: false,
          maxFiles: 5,
+         addRemoveLinks: true,
          parallelUploads: 5, // Number of files process at a time (default 2)
-         
+
+     });
+     myDropzone.on("addedfile", function(file, res) {
+
+         if (myDropzone.files == null) {
+             $('#up_bt').prop('disabled', true);
+         } else {
+             $('#up_bt').prop('disabled', false);
+         }
+
      });
 
-     //  console.log(myDropzone);
-     //  exit();
 
-     if (myDropzone.files[1]) {
-         $('#up_bt').prop('disabled', false);
-     } else {
-         $('#up_bt').prop('disabled', true);
-     }
-
+     console.log(myDropzone.files)
      $('#uploadfiles').click(function() {
          myDropzone.processQueue();
      });

@@ -332,115 +332,30 @@
     <?php if ($this->session->flashdata('package_check')) : ?>
         swal("คำเตือน", "Package ของคุณยังไม่หมดอายุ", "error");
     <?php endif; ?>
-
 </script>
 
 <script>
     <?php if ($this->session->flashdata('package_timeOut_3_day')) : ?>
         swal("Good job!", "You clicked the button! คำเตือนอีก 3 วัน Package จะหมดอายุ", "warning");
     <?php endif; ?>
-
 </script>
 
 <script>
     <?php if ($this->session->flashdata('package_timeOut_2_day')) : ?>
         swal("Good job!", "You clicked the button! คำเตือนอีก 2 วัน Package จะหมดอายุ", "warning");
     <?php endif; ?>
-
 </script>
 
 <script>
     <?php if ($this->session->flashdata('package_timeOut_1_day')) : ?>
         swal("Good job!", "You clicked the button! คำเตือนอีก 1 วัน Package จะหมดอายุ", "warning");
     <?php endif; ?>
-
 </script>
 
-<script src="public/frontend/assets/dist/dropzone-amd-module.js"></script>
+<!-- <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script> -->
 
 <script src="public/frontend/assets/js/myscript.js"></script>
 
-<!-- Script -->
-<script type='text/javascript'>
-    // Dropzone.autoDiscover = false;
-    $(".dropzoneEdit").dropzone({
-        addRemoveLinks: true,
-        maxFiles: 1,
-        removedfile: function(file) {
-            var name = file.name;
-            var document_preview_id = document_preview_id;
-
-            $.ajax({
-                type: 'POST',
-                url: 'fileUploadEdit',
-                data: {
-                    name: name,
-                    request: 2,
-                    document_preview_id: document_preview_id
-                },
-                success: function(data) {
-                    console.log('success: ' + data);
-                },
-
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    });
-</script>
-
-<script type='text/javascript'>
-    // Dropzone.autoDiscover = false;
-    $(".dropzoneEditfull").dropzone({
-        addRemoveLinks: true,
-        maxFiles: 1,
-        removedfile: function(file) {
-            var name = file.name;
-            var document_full_id = document_full_id;
-
-            $.ajax({
-                type: 'POST',
-                url: 'fileUploadEdit',
-                data: {
-                    name: name,
-                    request: 2,
-                    document_full_id: document_full_id
-                },
-                success: function(data) {
-                    console.log('success: ' + data);
-                },
-
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    });
-</script>
-
-<!-- Script -->
-<script type='text/javascript'>
-    $(".dropzonefull").dropzone({
-        addRemoveLinks: true,
-        maxFiles: 1,
-        removedfile: function(file) {
-            var name = file.name;
-            $.ajax({
-                type: 'POST',
-                url: 'fileUploadfull',
-                data: {
-                    name: name,
-                    request: 2
-                },
-                sucess: function(data) {
-                    console.log('success: ' + data);
-                },
-
-            });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-        }
-    });
-</script>
 
 <script type='text/javascript'>
     // Dropzone.autoDiscover = false;
