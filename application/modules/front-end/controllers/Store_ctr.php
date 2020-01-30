@@ -78,9 +78,6 @@ class Store_ctr extends CI_Controller
             }
         }
 
-
-
-
         $paypalCheck = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $userId])->row_array();
         $datePaypal = date("Y-m-d", strtotime($paypalCheck['start_time']));
         $checkDate = DateDiff($datePaypal, date("Y-m-d"));

@@ -9,14 +9,19 @@
                          <div class="col-12">
                              <div class="tab">
                                  <label for="" class="font-size-upload">You can store document. </label>
-                                 <form action="store_upload" class="dropzone" id="dropzone2" enctype="multipart/form-data">
+                                 <form action="store_upload" class="dropzone" id="dropzone2">
                                      <div class="dz-message needsclick">
                                          Drop files here or click to upload.<br>
                                          <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                          <input type="text" name="userId" value="<?php echo $userId['id']; ?>" hidden>
                                      </div>
                                  </form>
-                                 <input type="button" id='uploadfiles' value='Upload Files'>
+                                 <!-- Button trigger modal -->
+                                 <br>
+                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop2" disabled="disabled" id="up_bt" name="up_bt">
+                                     Upload Files
+                                 </button>
+                                 <!-- <input type="button" id='uploadfiles' value='Upload Files'> -->
                              </div>
                          </div>
                          <div class="col-12 text-right" style="padding-top: 10px;">
@@ -50,13 +55,45 @@
          </div>
      </div>
  </div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="staticBackdrop2" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="staticBackdropLabel">Retrun confirm</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 Are you sure you want to upload documents?
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-success" id='uploadfiles' data-dismiss="modal">Confirm</button>
+             </div>
+         </div>
+     </div>
+ </div>
  <script type="text/javascript">
      Dropzone.autoDiscover = false;
 
      var myDropzone = new Dropzone(".dropzone", {
          autoProcessQueue: false,
-         parallelUploads: 10 // Number of files process at a time (default 2)
+         maxFiles: 5,
+         parallelUploads: 5, // Number of files process at a time (default 2)
+         
      });
+
+     //  console.log(myDropzone);
+     //  exit();
+
+     if (myDropzone.files[1]) {
+         $('#up_bt').prop('disabled', false);
+     } else {
+         $('#up_bt').prop('disabled', true);
+     }
 
      $('#uploadfiles').click(function() {
          myDropzone.processQueue();
