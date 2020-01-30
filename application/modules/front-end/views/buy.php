@@ -16,7 +16,7 @@
                                          <input type="text" name="userId" value="<?php echo $userId['id']; ?>" hidden>
                                      </div>
                                      <div>
-                                         <input type="date" name="date" id="" class="form-control">
+                                         <!-- <input type="date" name="date" id="" class="form-control"> -->
                                      </div>
                                  </form>
                                  <input type="button" id='uploadfiles' value='Upload Files'>
