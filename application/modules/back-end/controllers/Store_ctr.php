@@ -78,7 +78,7 @@ class Store_ctr extends CI_Controller {
      } else {
 	
         // $data['store'] = $this->Store_model->store_list();
-        $data['store'] = $this->db->get_where('tbl_upload_store',['grade' => null || '','price_file'=> null || '','status_cp'=> null || ''])->result_array();
+        $data['store'] = $this->db->get_where('tbl_upload_store',['grade' => null ,'price_file'=> null ,'status_cp'=> null ])->result_array();
 		$this->load->view('options/header');
 		$this->load->view('checkforsell',$data);
 		$this->load->view('options/footer');
