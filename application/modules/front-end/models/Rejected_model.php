@@ -27,8 +27,9 @@ class Rejected_model extends CI_Model
     function rejected2($_user)
     {
         $this->db->select('*');
-        $this->db->from('tbl_rejected');
-        $this->db->where('userId_rj', $_user);
+        $this->db->from('tbl_upload_store');
+        $this->db->where('userId', $_user);
+        $this->db->where('is_check', 1);
         $this->db->order_by('create_at', 'desc');
 
         $data = $this->db->get();

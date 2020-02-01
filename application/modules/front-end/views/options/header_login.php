@@ -206,8 +206,16 @@
                                     <li class="menu-item-has-children">
                                         <a href="order"> My order</a>
                                     </li>
-                                    <li class="menu-item-has-children">
+                                    <!-- <li class="menu-item-has-children">
                                         <a href="my-selling"> My Selling</a>
+                                    </li> -->
+                                    <li class="menu-item-has-children">
+                                        <a href="#">My Selling</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Sale</a></li>
+                                            <li><a href="my-reject">Reject</a></li>
+                                        </ul>
+
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="package">Package </a>
@@ -239,7 +247,11 @@
                                         <a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal"> My Selling</a>
+                                        <a href="#">My Selling</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
+                                        </ul>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Package </a>
@@ -420,7 +432,12 @@
                                         <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                         <li><a href="store"> ต้องการขาย </a></li>
                                         <li><a href="order"> My order </a></li>
-                                        <li><a href="my-selling"> My Selling </a></li>
+                                        <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
+                                            <ul class="sub_menu pages">
+                                                <li><a href="#">Sale</a></li>
+                                                <li><a href="my-reject">Reject</a></li>
+                                            </ul>
+                                        </li>
                                         <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                         <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
@@ -454,7 +471,12 @@
                                     <?php else : ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Selling </a></li>
+                                        <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
+                                            <ul class="sub_menu pages">
+                                                <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
+                                                <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
+                                            </ul>
+                                        </li>
                                         <li><a href="#"> Package</a></li>
                                         <li></li>
                                         <li></li>

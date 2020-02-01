@@ -1,4 +1,4 @@
-<?php $reject =  $this->db->get_where('tbl_rejected', ['userId_rj' => $user['id']])->result_array();; ?>
+<?php $reject =  $this->db->get_where('tbl_upload_store', ['userId' => $user['id'], 'is_check' => 1 ,'is_accept' => 0])->result_array();; ?>
 <!--services img area-->
 <div class="services_gallery mt-60">
     <div class="container">
@@ -119,7 +119,7 @@
 
 
 <?php foreach ($reject as $key => $reject) { ?>
-    <?php if ($reject && $reject['status'] != 1) : ?>
+    <?php if ($reject && $reject['is_check'] != 0) : ?>
         <!--wishlist area end -->
         <script type="text/javascript">
             $(window).on('load', function() {
@@ -142,7 +142,7 @@
                     url: 'accept_status',
                     data: {
                         status: 1,
-                        id: <?php echo $reject['userId_rj']; ?>
+                        id: <?php echo $reject['userId']; ?>
                     },
                     success: function(data) {
                         if (data > 0) {

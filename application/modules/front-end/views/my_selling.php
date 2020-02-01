@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">Reject</h2>
+<h2 class="text-center" style="margin-top: 15px;">My Reject</h2>
 <hr class="line_package">
 <br>
 <?php foreach ($rejected as $key => $data) {
@@ -13,21 +13,29 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
+                            <tr style="text-align:center;">
                                 <th scope="col">No.</th>
                                 <th scope="col">ชื่อเอกสาร</th>
                                 <th scope="col">รหัสออเดอร์</th>
+                                <th scope="col">Accept</th>
                                 <th scope="col">วันที่</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
                         <tbody>
                             <?php foreach ($rejected as $key => $rejected) { ?>
-                                <tr>
+                                <tr style="text-align:center;">
                                     <th scope="row"><?php echo $i++; ?></th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <td><?php echo $rejected['file_name'] ;?></td>
+                                    <td><?php echo $rejected['store_id'] ;?></td>
+                                    <td>
+                                        <?php if ($rejected['is_accept'] == 1) : ?>
+                                            <span class="badge badge-success">Accept</span>
+                                        <?php else : ?>
+                                            <span class="badge badge-danger">Reject</span>
+                                        <?php endif ;?>
+                                    </td>
+                                    <td><?php echo $rejected['create_at'] ;?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
