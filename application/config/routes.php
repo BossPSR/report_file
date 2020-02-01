@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -61,6 +61,7 @@ $route['loginme']               = 'front-end/Login_ctr/loginMe';
 $route['Logout']                = 'front-end/Login_ctr/logout';
 
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
+$route['accept_status']         = 'front-end/My_user_ctr/accept_status';
 $route['my-profile']            = 'front-end/My_user_ctr/my_profile';
 $route['my-profile_edit']       = 'front-end/My_user_ctr/profile_edit';
 $route['my-wallet']             = 'front-end/My_wallet_ctr/my_wallet';
@@ -75,6 +76,7 @@ $route['my-upload-edit']        = 'front-end/My_upload_ctr/my_upload_edit';
 
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rejected']           = 'front-end/Rejected_ctr/my_rejected';
+$route['my-selling']            = 'front-end/Rejected_ctr/my_selling';
 $route['register']              = 'front-end/Register_ctr';
 $route['register-team']         = 'front-end/Register_ctr/register_team';
 $route['register-team-success'] = 'front-end/Register_ctr/register_team_success';
@@ -145,11 +147,3 @@ $route['back_withdraw_update']                = 'back-end/withdraw_ctr/withdraw_
 $route['back_upload_main_search']             = 'back-end/Store_ctr/upload_main_search';
 $route['add_to_upload_main_search']           = 'back-end/Store_ctr/add_to_upload_main_search';
 $route['pdf']                                 = 'front-end/pdf';
-
-
-
-
-
-
-
-

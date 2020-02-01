@@ -27,7 +27,7 @@ class Login_ctr extends CI_Controller
                     'email' => $email
                 );
                 $this->session->set_userdata($user_data);
-                $this->session->set_flashdata('save_ss', TRUE);
+                $save_sss = $this->session->set_flashdata('save_ss', TRUE);
                 $user = $this->db->get_where('tbl_user',['email'=>$email])->row_array();
                 $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal',['user_id'=>$user['id']])->row_array();
                 if (!empty($packAgeCheck)) {

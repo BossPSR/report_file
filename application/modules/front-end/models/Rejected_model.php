@@ -15,13 +15,23 @@ class Rejected_model extends CI_Model
         $this->db->from('tbl_rejected');
         $this->db->join('tbl_upload_full', 'tbl_upload_full.upload_id = tbl_rejected.bookid_rj');
         $this->db->join('tbl_upload', 'tbl_upload.id = tbl_rejected.bookid_rj');
-        $this->db->where('tbl_upload_full.userId',$_user);
+        $this->db->where('tbl_upload_full.userId', $_user);
         $this->db->group_by('tbl_rejected.bookid_rj');
-        $this->db->order_by('tbl_rejected.create_at', 'asc'); 
-        
+        $this->db->order_by('tbl_rejected.create_at', 'asc');
+
         $data = $this->db->get();
 
         return $data->result_array();
     }
 
+    function rejected2($_user)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_rejected');
+        $this->db->where('userId_rj', $_user);
+        $this->db->order_by('create_at', 'desc');
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
 }

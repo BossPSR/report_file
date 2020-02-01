@@ -1,3 +1,4 @@
+<?php $reject =  $this->db->get_where('tbl_rejected', ['userId_rj' => $user['id']])->result_array();; ?>
 <!--services img area-->
 <div class="services_gallery mt-60">
     <div class="container">
@@ -11,7 +12,9 @@
                 <div class="single_services listProfile">
 
                     <div class="image_profile">
-                        <h2 class="text-center my-income"><div class="name_user m17"><i class="fa fa-user"></i> Name : <?php echo $user['username']; ?></div></h2>
+                        <h2 class="text-center my-income">
+                            <div class="name_user m17"><i class="fa fa-user"></i> Name : <?php echo $user['username']; ?></div>
+                        </h2>
                         <div class="image_PF">
                             <div class=""><?php  ?>
                                 <a href="#exampleModalCenter1" data-toggle="modal"><img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt=""></a>
@@ -86,3 +89,68 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                <h5 class="modal-title">Reject Document</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <p><input type="checkbox" name="i_accept" id="i_accept" onclick='handle(this);' /> ยอมรับเงื่อนไข</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="accept" disabled>Accept</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if ($this->session->flashdata('save_ss')) : ?>
+    <script type='text/javascript'>
+        swal("Good job!", "You clicked the button!", "success");
+    </script>
+<?php endif; ?>
+
+
+<?php foreach ($reject as $key => $reject) { ?>
+    <?php if ($reject && $reject['status'] != 1) : ?>
+        <!--wishlist area end -->
+        <script type="text/javascript">
+            $(window).on('load', function() {
+                $('#staticBackdrop').modal('show')
+            });
+        </script>
+        <script type="text/javascript">
+            $("#i_accept").click(function handle(cb) {
+                if ($(this).prop("checked") == true) {
+                    $('#accept').prop('disabled', false);
+                } else {
+                    $('#accept').prop('disabled', true);
+                }
+            });
+        </script>
+        <script type="text/javascript">
+            $('#accept').click(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: 'accept_status',
+                    data: {
+                        status: 1,
+                        id: <?php echo $reject['userId_rj']; ?>
+                    },
+                    success: function(data) {
+                        if (data > 0) {
+                            $('#staticBackdrop').modal('hide');
+                        }
+                    }
+                });
+            });
+        </script>
+    <?php endif; ?>
+<?php } ?>

@@ -36,7 +36,7 @@
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <script>
@@ -207,7 +207,7 @@
                                         <a href="order"> My order</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> Feedback</a>
+                                        <a href="my-selling"> My Selling</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="package">Package </a>
@@ -239,7 +239,7 @@
                                         <a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal"> Feedback</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> My Selling</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Package </a>
@@ -318,8 +318,8 @@
                                     <div class="search_container" style="margin-right:200px;">
                                     <?php else : ?>
                                         <!-- <div class="search_container"> -->
-                                        <?php endif ?>
-                                        <!-- <form action="get_search" method="POST">
+                                    <?php endif ?>
+                                    <!-- <form action="get_search" method="POST">
                                             <div class="search_box">
                                                 <input placeholder="Search item /Code ...." type="text" name="search">
                                             </div>
@@ -346,31 +346,31 @@
                                             </div>
                                         </form>
                                         </div> -->
-                                        <?php if ($user == true) :  
-                                            $score = $this->db->get_where('tbl_upload_store',['userId' => $user['id']])->result_array();
-                                            $scoreAll = [];
-                                            foreach ($score as $scoreNum) {
-                                                $scoreAll[] = $scoreNum['price_file'];
-                                            }
-                                            $scoreAll = array_sum($scoreAll);
-                                        ?>
-                                            <div class="middel_right_info">
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list"><?php echo $scoreAll; ?></div>
-                                                    <div>Score</div>
-                                                </div>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list">1,527</div>
-                                                    <div>My wallet</div>
-                                                </div>
-                                                <!-- <div class="mini_cart_wrapper text-center">
+                                    <?php if ($user == true) :
+                                        $score = $this->db->get_where('tbl_upload_store', ['userId' => $user['id']])->result_array();
+                                        $scoreAll = [];
+                                        foreach ($score as $scoreNum) {
+                                            $scoreAll[] = $scoreNum['price_file'];
+                                        }
+                                        $scoreAll = array_sum($scoreAll);
+                                    ?>
+                                        <div class="middel_right_info">
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo $scoreAll; ?></div>
+                                                <div>Score</div>
+                                            </div>
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list">1,527</div>
+                                                <div>My wallet</div>
+                                            </div>
+                                            <!-- <div class="mini_cart_wrapper text-center">
                                                     <div class="menu-list">47</div>
                                                     <div>Rejected</div>
                                                 </div> -->
-                                            </div>
-                                        <?php else : ?>
+                                        </div>
+                                    <?php else : ?>
 
-                                        <?php endif ?>
+                                    <?php endif ?>
                                     </div>
                             </div>
                         </div>
@@ -420,7 +420,7 @@
                                         <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                         <li><a href="store"> ต้องการขาย </a></li>
                                         <li><a href="order"> My order </a></li>
-                                        <li><a href="#"> Feedback </a></li>
+                                        <li><a href="my-selling"> My Selling </a></li>
                                         <li style="margin-right: 150px;"><a href="package"> Package</a></li>
                                         <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
@@ -454,7 +454,7 @@
                                     <?php else : ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Feedback </a></li>
+                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Selling </a></li>
                                         <li><a href="#"> Package</a></li>
                                         <li></li>
                                         <li></li>

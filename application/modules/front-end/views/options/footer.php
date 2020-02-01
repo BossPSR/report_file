@@ -219,7 +219,7 @@
 <!-- Main JS -->
 <script src="public/frontend/assets/js/main.js"></script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- <script src="assets/reponsive/js/jquery.min.js"></script>
 <script src="assets/reponsive/js/bootstrap.min.js"></script> -->
 <script src="assets/reponsive/plugins/selectator/fm.selectator.js"></script>
@@ -295,9 +295,7 @@
     <?php if ($this->session->flashdata('successtotal')) : ?>
         swal("Good job!", "Already paid Thank you for using the service.", "success");
     <?php endif; ?>
-    <?php if ($this->session->flashdata('save_ss')) : ?>
-        swal("Good job!", "You clicked the button!", "success");
-    <?php endif; ?>
+
     <?php if ($this->session->flashdata('del_ss')) : ?>
         swal("fill !", "You clicked the button!", "error");
     <?php endif; ?>
