@@ -14,14 +14,20 @@
                                          Drop files here or click to upload.<br>
                                          <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                          <input type="text" name="userId" value="<?php echo $userId['id']; ?>" hidden>
+                                         <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
                                      </div>
                                      <div>
-                                         <!-- <input type="date" name="date" id="" class="form-control"> -->
+                                         <!-- <input type="date" name="date" id="" class="form-control" onchange="myFunction()"> -->
                                      </div>
                                  </form>
                                  <br>
                                  <label for="">Choose the date to pick up the document.</label>
-                                 <input type="date" class="form-control" id="date" name="date" value="">
+                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                     <div class="row">
+                                         <input type="date" class="form-control" id="date2" name="date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" required>
+                                     </div>
+
+                                 </div>
                                  <br>
                                  <button type="button" class="btn btn-primary" id='uploadfiles'>
                                      Upload Files
@@ -40,7 +46,19 @@
  </div>
  <!--wishlist area end -->
 
+ <script>
+     $(document).ready(function() {
+         $("#date2").change(function() {
+             var value = $(this).val();
+
+             $("#date").val(value);
+         }).keyup();
+
+     });
+ </script>
+
  <script type="text/javascript">
+     var x = document.getElementById("date2").value;
      Dropzone.autoDiscover = false;
      var myDropzone = new Dropzone("#fileupload", {
              autoProcessQueue: false,
@@ -53,21 +71,15 @@
      );
 
      $('#uploadfiles').click(function() {
-         var x = document.getElementById("date").value;
-         var y = myDropzone.processQueue();
-         if (y) {
-             $.ajax({
-                 type: 'POST',
-                 url: 'buy_upload',
-                 data: {
-                     date: x
-                 },
-                 success: function(data) {
-                     if (data > 0) {
-                         console.log("SUCCESS");
-                     }
-                 }
+         myDropzone.processQueue();
+         myDropzone.on("success", function(file, res) {
+             swal("Good job!", "Upload for data successfull", "success", {
+                 button: false,
              });
-         }
+             setTimeout("location.reload(true);", 1000);
+         });
+
+
+
      });
  </script>
