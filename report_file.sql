@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-30 13:41:42
+Date: 2020-02-03 10:30:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -439,7 +439,7 @@ CREATE TABLE `tbl_paypal` (
 -- ----------------------------
 -- Records of tbl_paypal
 -- ----------------------------
-INSERT INTO `tbl_paypal` VALUES ('1', '04872538P9424894Y', 'J3GJEC9GX23VS', '10', 'USD', '4', 'John', 'Doe', '2020-01-28 16:53:19', '2020-01-28 16:53:19', '0');
+INSERT INTO `tbl_paypal` VALUES ('1', '04872538P9424894Y', 'J3GJEC9GX23VS', '10', 'USD', '4', 'John', 'Doe', '2020-01-28 16:53:19', '2020-02-27 16:53:19', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_rejected`
@@ -590,12 +590,15 @@ CREATE TABLE `tbl_upload_order` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
+  `date_required` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_order
 -- ----------------------------
+INSERT INTO `tbl_upload_order` VALUES ('1', '4', '', 'shirt-1580109491.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', null);
+INSERT INTO `tbl_upload_order` VALUES ('2', '4', '', 'shirt-1580439213.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_store`
@@ -615,11 +618,12 @@ CREATE TABLE `tbl_upload_store` (
   `status_cp` varchar(255) DEFAULT NULL,
   `status_main_search` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_store
 -- ----------------------------
+INSERT INTO `tbl_upload_store` VALUES ('1', '4', 'ST-1', 'sample-3pp.pdf', '0', '2020-01-31 10:27:53', null, 'uploads/Store/sample-3pp.pdf', null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
