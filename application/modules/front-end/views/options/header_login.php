@@ -359,20 +359,20 @@
                                         </form>
                                         </div> -->
                                     <?php if ($user == true) :
-                                        $score = $this->db->get_where('tbl_upload_store', ['userId' => $user['id']])->result_array();
-                                        $scoreAll = [];
-                                        foreach ($score as $scoreNum) {
-                                            $scoreAll[] = $scoreNum['price_file'];
-                                        }
-                                        $scoreAll = array_sum($scoreAll);
+                                        // $score = $this->db->get_where('tbl_upload_store', ['userId' => $user['id']])->result_array();
+                                        // $scoreAll = [];
+                                        // foreach ($score as $scoreNum) {
+                                        //     $scoreAll[] = $scoreNum['price_file'];
+                                        // }
+                                        // $scoreAll = array_sum($scoreAll);
                                     ?>
                                         <div class="middel_right_info">
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo $scoreAll; ?></div>
+                                                <div class="menu-list"><?php echo number_format($user['score']); ?></div>
                                                 <div>Score</div>
                                             </div>
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list">1,527</div>
+                                                <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                 <div>My wallet</div>
                                             </div>
                                             <!-- <div class="mini_cart_wrapper text-center">
@@ -438,16 +438,30 @@
                                                 <li><a href="my-reject">Reject</a></li>
                                             </ul>
                                         </li>
-                                        <li style="margin-right: 150px;"><a href="package"> Package</a></li>
+                                        <li><a href="package"> Package</a></li>
                                         <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                                 </li>
                                                 <li class="menu-item-has-children" style="margin-right: 40px;">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                        <!-- <li>
-                                            <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
-                                        </li> -->
+                                        <li>
+                                            <a>Discount : 
+                                                <?php if ($user['score'] < '100') : ?>
+                                                0%
+                                                <?php elseif($user['score'] <= '199') : ?>
+                                                10%
+                                                <?php elseif($user['score'] <= '299') : ?>
+                                                20%
+                                                <?php elseif($user['score'] <= '399') : ?>
+                                                30%
+                                                <?php elseif($user['score'] <= '499') : ?>
+                                                40%
+                                                <?php else : ?>
+                                                50%
+                                                <?php endif; ?>
+                                            </a>
+                                        </li>
                                         <li></li>
                                         <li></li>
                                     <?php elseif ($team) : ?>
