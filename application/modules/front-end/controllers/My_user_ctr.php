@@ -49,11 +49,10 @@ class My_user_ctr extends CI_Controller
 		$id = $this->input->post('id');
 
 		$data = array(
-			'status' => $status,
-			'updated_at' => date('Y-m-d H:i:s'),
+			'is_accept' => $status,
 		);
-		$this->db->where('userId_rj', $id);
-		$success = $this->db->update('tbl_rejected', $data);
+		$this->db->where('userId', $id);
+		$success = $this->db->update('tbl_upload_store', $data);
 		echo $success;
 	}
 }

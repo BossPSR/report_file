@@ -76,7 +76,7 @@ $route['my-upload-edit']        = 'front-end/My_upload_ctr/my_upload_edit';
 
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rejected']           = 'front-end/Rejected_ctr/my_rejected';
-$route['my-selling']            = 'front-end/Rejected_ctr/my_selling';
+$route['my-reject']            = 'front-end/Rejected_ctr/my_selling';
 $route['register']              = 'front-end/Register_ctr';
 $route['register-team']         = 'front-end/Register_ctr/register_team';
 $route['register-team-success'] = 'front-end/Register_ctr/register_team_success';
