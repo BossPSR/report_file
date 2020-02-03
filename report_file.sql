@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : db
+Source Server         : database
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-01-30 13:41:42
+Date: 2020-02-03 16:09:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -590,6 +590,7 @@ CREATE TABLE `tbl_upload_order` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
+  `date_required` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -614,6 +615,7 @@ CREATE TABLE `tbl_upload_store` (
   `grade` varchar(255) DEFAULT NULL,
   `status_cp` varchar(255) DEFAULT NULL,
   `status_main_search` tinyint(1) NOT NULL DEFAULT 0,
+  `is_accept` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

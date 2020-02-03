@@ -380,10 +380,11 @@
     });
 </script>
 
-<!-- Script -->
-<script type='text/javascript'>
+ <!-- Script -->
+ <script type='text/javascript'>
+
     // Dropzone.autoDiscover = false;
-    $(".dropzone").dropzone({
+    $("#fileupload").dropzone({
         addRemoveLinks: true,
         maxFiles: 5,
         removedfile: function(file) {
@@ -393,9 +394,10 @@
                 url: 'buy_upload',
                 data: {
                     name: name,
-                    request: 2
+                    request: 2,
+                    date_req: x
                 },
-                sucess: function(data) {
+                success: function(data) {
                     console.log('success: ' + data);
                 },
 
