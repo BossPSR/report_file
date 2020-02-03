@@ -62,6 +62,7 @@ class Buy_ctr extends CI_Controller
   {
     // image_lib
     $userId = $this->input->post('userId');
+    $data   =  $this->input->post('date');
 
     $target_dir = "uploads/Buy/"; // Upload directory
 
@@ -72,8 +73,6 @@ class Buy_ctr extends CI_Controller
     }
     if ($request == 1) {
       if (!empty($_FILES['file']['name'])) {
-
-
 
         // Set preference
         $config['upload_path']     = 'uploads/Buy/';
@@ -103,25 +102,15 @@ class Buy_ctr extends CI_Controller
 
             $data2 = array(
               'order_id'  => "OR-" . $last_id,
+              'date_required' => $data
             );
             $this->db->where('id', $last_id);
             $this->db->update('tbl_upload_order', $data2);
-            $delete = array(
-              'last_id' => $last_id
-            );
-            $this->session->set_userdata($delete);
+            
           }
         }
       }
     }
-
-    if ($request == 2) {
-      $last = $this->session->userdata('last_id');
-      $this->db->where('id', $last);
-      $this->db->delete('tbl_upload_order');
-      $filename = $target_dir . $_POST['name'];
-      unlink($filename);
-      exit;
-    }
   }
+ 
 }

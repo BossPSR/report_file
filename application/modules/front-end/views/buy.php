@@ -19,7 +19,13 @@
                                          <!-- <input type="date" name="date" id="" class="form-control"> -->
                                      </div>
                                  </form>
-                                 <input type="button" id='uploadfiles' value='Upload Files'>
+                                 <br>
+                                 <label for="">Choose the date to pick up the document.</label>
+                                 <input type="date" class="form-control" id="date" name="date" value="">
+                                 <br>
+                                 <button type="button" class="btn btn-primary" id='uploadfiles'>
+                                     Upload Files
+                                 </button>
                              </div>
                          </div>
                          <div class="col-12 text-right" style="padding-top: 10px;">
@@ -36,13 +42,32 @@
 
  <script type="text/javascript">
      Dropzone.autoDiscover = false;
+     var myDropzone = new Dropzone("#fileupload", {
+             autoProcessQueue: false,
+             maxFiles: 5,
+             addRemoveLinks: true,
+             parallelUploads: 5, // Number of files process at a time (default 2)
 
-     var myDropzone = new Dropzone(".dropzone", {
-         autoProcessQueue: false,
-         parallelUploads: 10 // Number of files process at a time (default 2)
-     });
+         }
+
+     );
 
      $('#uploadfiles').click(function() {
-         myDropzone.processQueue();
+         var x = document.getElementById("date").value;
+         var y = myDropzone.processQueue();
+         if (y) {
+             $.ajax({
+                 type: 'POST',
+                 url: 'buy_upload',
+                 data: {
+                     date: x
+                 },
+                 success: function(data) {
+                     if (data > 0) {
+                         console.log("SUCCESS");
+                     }
+                 }
+             });
+         }
      });
  </script>

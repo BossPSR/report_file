@@ -69,10 +69,7 @@ class Store_ctr extends CI_Controller
                         );
                         $this->db->where('id', $last_id);
                         $this->db->update('tbl_upload_store', $data2);
-                        $delete = array(
-                            'last_id' => $last_id
-                        );
-                        $this->session->set_userdata($delete);
+                    
                     }
                 }
             }
@@ -100,18 +97,6 @@ class Store_ctr extends CI_Controller
             $this->db->insert('tbl_paypal', $dataFree);
         }
 
-        if ($request == 2) {
-
-            if ($paypalCheck['status_drop'] == 1) {
-                $this->db->where('user_id', $userId);
-                $this->db->update('tbl_paypal', ['status_drop' => 0]);
-            }
-            $last = $this->session->userdata('last_id');
-            $this->db->where('id', $last);
-            $this->db->delete('tbl_upload_store');
-            $filename = $target_dir . $_POST['name'];
-            unlink($filename);
-            exit;
-        }
+      
     }
 }
