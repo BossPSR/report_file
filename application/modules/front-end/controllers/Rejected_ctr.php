@@ -25,7 +25,7 @@ class Rejected_ctr extends CI_Controller
 		}
 	}
 
-	function my_selling()
+	function my_reject()
 	{
 		if ($this->session->userdata('email') == '') {
 			redirect('home');
@@ -34,7 +34,7 @@ class Rejected_ctr extends CI_Controller
 			$_user					= $user['id'];
 			$data['rejected'] 		= $this->Rejected_model->rejected2($_user);
 			$this->load->view('options/header_login');
-			$this->load->view('my_selling', $data);
+			$this->load->view('my_reject', $data);
 			$this->load->view('options/footer');
 		}
 	}

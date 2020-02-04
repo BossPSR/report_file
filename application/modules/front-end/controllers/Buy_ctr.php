@@ -10,26 +10,26 @@ class Buy_ctr extends CI_Controller
   }
 
 
-	public function index()
-	{
-      if ($this->session->userdata('email') == '') {
-          redirect('home');
-      } else {
-        $data['userId'] = $this->db->get_where('tbl_user',['email' => $this->session->userdata('email')])->row_array();
-        $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal',['user_id' => $data['userId']['id']])->row_array();
-        if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
-            $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
-            $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-            if ($checkDate < 8 || $data['userId']['free_forever'] == 1) {
-              $this->load->view('options/header_login');
-              $this->load->view('buy',$data);
-              $this->load->view('options/footer');      
-            } else {
-              redirect('package');
-            }
-        }else{
+  public function index()
+  {
+    if ($this->session->userdata('email') == '') {
+      redirect('home');
+    } else {
+      $data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['id']])->row_array();
+      if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
+        $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
+        $checkDate = DateDiff($datePaypal, date("Y-m-d"));
+        if ($checkDate < 8 || $data['userId']['free_forever'] == 1) {
+          $this->load->view('options/header_login');
+          $this->load->view('buy', $data);
+          $this->load->view('options/footer');
+        } else {
           redirect('package');
         }
+      } else {
+        redirect('package');
+      }
     }
   }
 
@@ -61,8 +61,10 @@ class Buy_ctr extends CI_Controller
   public function fileUpload_buy()
   {
     // image_lib
-    $userId = $this->input->post('userId');
-    $data   =  $this->input->post('date');
+
+    $userId     = $this->input->post('userId');
+    $date_req   =  $this->input->post('date');
+
 
     $target_dir = "uploads/Buy/"; // Upload directory
 
@@ -72,45 +74,46 @@ class Buy_ctr extends CI_Controller
       $request = $_POST['request'];
     }
     if ($request == 1) {
-      if (!empty($_FILES['file']['name'])) {
+      // Set preference
+      $config['upload_path']     = 'uploads/Buy/';
+      // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+      $config['allowed_types']   = '*';
+      $config['max_size']        = '99999'; // max_size in kb
+      $config['file_name']     = $_FILES['file']['name'];
 
-        // Set preference
-        $config['upload_path']     = 'uploads/Buy/';
-        // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-        $config['allowed_types']   = '*';
-        $config['max_size']        = '99999'; // max_size in kb
-        $config['file_name']     = $_FILES['file']['name'];
+      //Load upload library
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
 
-        //Load upload library
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+      // File upload
+      if ($this->upload->do_upload('file')) {
+        // Get data about the file
+        $uploadData = $this->upload->data();
 
-        // File upload
-        if ($this->upload->do_upload('file')) {
-          // Get data about the file
-          $uploadData = $this->upload->data();
+        $data = array(
+          'userId'      => $userId,
+          // 'order_id'      => $insert_id,
+          'file_name'      => $uploadData['file_name'],
+          'path'        => 'uploads/Buy/' . $uploadData['file_name'],
+          'create_at'      => date('Y-m-d H:i:s'),
+        );
+        if ($this->db->insert('tbl_upload_order', $data)) {
+          $last_id = $this->db->insert_id();
 
-          $data = array(
-            'userId'      => $userId['id'],
-            // 'order_id'      => $insert_id,
-            'file_name'      => $uploadData['file_name'],
-            'path'        => 'uploads/Buy/' . $uploadData['file_name'],
-            'create_at'      => date('Y-m-d H:i:s'),
+          $data2 = array(
+            'order_id'  => "OR-" . $last_id,
+            'date_required' => $date_req
           );
-          if ($this->db->insert('tbl_upload_order', $data)) {
-            $last_id = $this->db->insert_id();
-
-            $data2 = array(
-              'order_id'  => "OR-" . $last_id,
-              'date_required' => $data
-            );
-            $this->db->where('id', $last_id);
-            $this->db->update('tbl_upload_order', $data2);
-            
-          }
+          $this->db->where('id', $last_id);
+          $this->db->update('tbl_upload_order', $data2);
         }
+        //   $user_data = array(
+        //     'last_id' => $last_id,
+        //   );
+        //   $this->session->set_userdata($user_data);
+        // }
+
       }
     }
   }
- 
 }

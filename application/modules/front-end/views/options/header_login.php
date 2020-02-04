@@ -151,35 +151,6 @@
                                 <li><a href="checkout.html"> ENG </a></li>
                             </ul>
                         </div>
-                        <!-- <div class="search_container">
-                            <form action="search">
-                                <div class="hover_category">
-                                    <select class="select_option" name="select" id="categori">
-                                        <option selected value="1">Search item</option>
-                                        <option value="2">Accessories</option>
-                                        <option value="3">Accessories & More</option>
-                                        <option value="4">Butters & Eggs</option>
-                                        <option value="5">Camera & Video </option>
-                                        <option value="6">Mornitors</option>
-                                        <option value="7">Tablets</option>
-                                        <option value="8">Laptops</option>
-                                        <option value="9">Handbags</option>
-                                        <option value="10">Headphone & Speaker</option>
-                                        <option value="11">Herbs & botanicals</option>
-                                        <option value="12">Vegetables</option>
-                                        <option value="13">Shop</option>
-                                        <option value="14">Laptops & Desktops</option>
-                                        <option value="15">Watchs</option>
-                                        <option value="16">Electronic</option>
-                                    </select>
-                                </div>
-                                <div class="search_box">
-                                    <input placeholder="Search item /Code ...." type="text">
-                                    <button type="submit">Search</button>
-                                </div>
-                            </form>
-                        </div> -->
-
                         <div class="middel_right_info">
                             <div class="header_wishlist">
                                 <!-- <a href="wishlist.html"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
@@ -212,7 +183,7 @@
                                     <li class="menu-item-has-children">
                                         <a href="#">My Selling</a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Sale</a></li>
+                                            <li><a href="my-selling">Sale</a></li>
                                             <li><a href="my-reject">Reject</a></li>
                                         </ul>
 
@@ -331,54 +302,23 @@
                                     <?php else : ?>
                                         <!-- <div class="search_container"> -->
                                     <?php endif ?>
-                                    <!-- <form action="get_search" method="POST">
-                                            <div class="search_box">
-                                                <input placeholder="Search item /Code ...." type="text" name="search">
-                                            </div>
-                                            <div class="hover_category search_box" style="width: 521px;">
-                                                <select class="select_option" name="select_item" id="categori1">
-                                                    <option selected disabled>Select item</option>
-                                                    <option value="Accessories">Accessories</option>
-                                                    <option value="Accessories & More">Accessories & More</option>
-                                                    <option value="Butters & Eggs">Butters & Eggs</option>
-                                                    <option value="Camera & Video">Camera & Video </option>
-                                                    <option value="Mornitors">Mornitors</option>
-                                                    <option value="Tablets">Tablets</option>
-                                                    <option value="Laptops">Laptops</option>
-                                                    <option value="Handbags">Handbags</option>
-                                                    <option value="Headphone & Speaker">Headphone & Speaker</option>
-                                                    <option value="Herbs & botanicals">Herbs & botanicals</option>
-                                                    <option value="Vegetables">Vegetables</option>
-                                                    <option value="Shop">Shop</option>
-                                                    <option value="Laptops & Desktops">Laptops & Desktops</option>
-                                                    <option value="Watchs">Watchs</option>
-                                                    <option value="Electronic">Electronic</option>
-                                                </select>
-                                                <button type="submit">Search</button>
-                                            </div>
-                                        </form>
-                                        </div> -->
                                     <?php if ($user == true) :
-                                        $score = $this->db->get_where('tbl_upload_store', ['userId' => $user['id']])->result_array();
-                                        $scoreAll = [];
-                                        foreach ($score as $scoreNum) {
-                                            $scoreAll[] = $scoreNum['price_file'];
-                                        }
-                                        $scoreAll = array_sum($scoreAll);
+                                        // $score = $this->db->get_where('tbl_upload_store', ['userId' => $user['id']])->result_array();
+                                        // $scoreAll = [];
+                                        // foreach ($score as $scoreNum) {
+                                        //     $scoreAll[] = $scoreNum['price_file'];
+                                        // }
+                                        // $scoreAll = array_sum($scoreAll);
                                     ?>
                                         <div class="middel_right_info">
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo $scoreAll; ?></div>
+                                                <div class="menu-list"><?php echo number_format($user['score']); ?></div>
                                                 <div>Score</div>
                                             </div>
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list">1,527</div>
+                                                <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                 <div>My wallet</div>
                                             </div>
-                                            <!-- <div class="mini_cart_wrapper text-center">
-                                                    <div class="menu-list">47</div>
-                                                    <div>Rejected</div>
-                                                </div> -->
                                         </div>
                                     <?php else : ?>
 
@@ -434,20 +374,34 @@
                                         <li><a href="order"> My order </a></li>
                                         <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
-                                                <li><a href="#">Sale</a></li>
+                                                <li><a href="my-selling">Sale</a></li>
                                                 <li><a href="my-reject">Reject</a></li>
                                             </ul>
                                         </li>
-                                        <li style="margin-right: 150px;"><a href="package"> Package</a></li>
+                                        <li><a href="package"> Package</a></li>
                                         <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                                 </li>
                                                 <li class="menu-item-has-children" style="margin-right: 40px;">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                        <!-- <li>
-                                            <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
-                                        </li> -->
+                                        <li>
+                                            <a>Discount :
+                                                <?php if ($user['score'] < '100') : ?>
+                                                    0%
+                                                <?php elseif ($user['score'] <= '199') : ?>
+                                                    10%
+                                                <?php elseif ($user['score'] <= '299') : ?>
+                                                    20%
+                                                <?php elseif ($user['score'] <= '399') : ?>
+                                                    30%
+                                                <?php elseif ($user['score'] <= '499') : ?>
+                                                    40%
+                                                <?php else : ?>
+                                                    50%
+                                                <?php endif; ?>
+                                            </a>
+                                        </li>
                                         <li></li>
                                         <li></li>
                                     <?php elseif ($team) : ?>

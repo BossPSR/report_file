@@ -2,8 +2,8 @@
  <div class="wishlist_area mt-60">
      <div class="container">
          <div class="row">
-             <div class="col-3"></div>
-             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
+             <div class="col-2"></div>
+             <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 ">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -39,7 +39,7 @@
                     </tbody>
                 </table>
              </div>
-             <div class="col-3"></div>
+             <div class="col-2"></div>
          </div>
      </div>
  </div>
