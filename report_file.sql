@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : db
+Source Server         : database
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-02-04 10:30:17
+Date: 2020-02-04 13:57:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -597,8 +597,8 @@ CREATE TABLE `tbl_upload_order` (
 -- ----------------------------
 -- Records of tbl_upload_order
 -- ----------------------------
-INSERT INTO `tbl_upload_order` VALUES ('1', '4', '', 'shirt-1580109491.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', null);
-INSERT INTO `tbl_upload_order` VALUES ('2', '4', '', 'shirt-1580439213.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', null);
+INSERT INTO `tbl_upload_order` VALUES ('1', '4', 'OR-1', 'shirt-1580109491.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', '2020-02-29');
+INSERT INTO `tbl_upload_order` VALUES ('2', '4', 'OR-2', 'shirt-1580439213.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', '2020-02-16');
 INSERT INTO `tbl_upload_order` VALUES ('3', '4', 'OR-3', '2.jpg', '1', '2020-02-03 16:11:12', null, 'uploads/Buy/2.jpg', '2020-02-14');
 
 -- ----------------------------
@@ -615,17 +615,19 @@ CREATE TABLE `tbl_upload_store` (
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   `price_file` varchar(255) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
   `grade` varchar(255) DEFAULT NULL,
   `status_cp` varchar(255) DEFAULT NULL,
   `status_main_search` tinyint(1) NOT NULL DEFAULT 0,
-  `is_accept` int(10) DEFAULT NULL,
+  `is_accept` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_store
 -- ----------------------------
-INSERT INTO `tbl_upload_store` VALUES ('1', '4', 'ST-1', 'sample-3pp.pdf', '1', '2020-01-31 10:27:53', null, 'uploads/Store/sample-3pp.pdf', null, null, null, '0', null);
+INSERT INTO `tbl_upload_store` VALUES ('1', '4', 'ST-1', 'sample-3pp.pdf', '0', '2020-01-31 10:27:53', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST', 'A', null, '0', '0');
+INSERT INTO `tbl_upload_store` VALUES ('2', '4', 'ST-2', 'sample-3pp.pdf', '0', '2020-02-04 12:17:36', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST2', 'B', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_user`
@@ -645,17 +647,17 @@ CREATE TABLE `tbl_user` (
   `free_forever` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
-INSERT INTO `tbl_user` VALUES ('1', null, '1659900740516', '0', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', null, '0', '2020-02-03 15:52:48');
-INSERT INTO `tbl_user` VALUES ('2', null, '1269900232221', '0', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-03 15:52:48');
-INSERT INTO `tbl_user` VALUES ('3', null, '123456789', '0', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '0', '2020-02-03 15:52:49');
-INSERT INTO `tbl_user` VALUES ('4', null, '4444555666112', '150', '100', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-03 15:55:20');
-INSERT INTO `tbl_user` VALUES ('5', null, '123123', '0', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '0', '2020-02-03 15:52:50');
-INSERT INTO `tbl_user` VALUES ('6', null, '987456123', '2', '0', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', null, '1', '2020-02-03 15:52:50');
+INSERT INTO `tbl_user` VALUES ('2', 'CM2', '1269900232221', '0', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-04 13:56:11');
+INSERT INTO `tbl_user` VALUES ('3', 'CM3', '123456789', '0', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '0', '2020-02-04 13:56:13');
+INSERT INTO `tbl_user` VALUES ('4', 'CM4', '4444555666112', '150', '100', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-04 13:56:15');
+INSERT INTO `tbl_user` VALUES ('5', 'CM5', '123123', '0', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '0', '2020-02-04 13:56:17');
+INSERT INTO `tbl_user` VALUES ('6', 'CM6', '987456123', '2', '0', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', null, '1', '2020-02-04 13:56:20');
+INSERT INTO `tbl_user` VALUES ('23', 'CM23', '1659900740516', '0', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', 'e10adc3949ba59abbe56e057f20f883e', null, '0', '2020-02-04 13:55:59');
 
 -- ----------------------------
 -- Table structure for `tbl_withdraw`

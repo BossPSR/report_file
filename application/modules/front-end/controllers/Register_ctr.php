@@ -59,22 +59,33 @@ class Register_ctr extends CI_Controller
 					'created_at'        => $created_at
 				);
 
-				$success = $this->db->insert('tbl_user', $data);
+				if ($this->db->insert('tbl_user', $data)) {
+					$last_id = $this->db->insert_id();
+					// echo $sumStandard;
 
-				if ($success > 0) {
-					$this->session->set_flashdata('save_ss', TRUE);
-					redirect('register', 'refresh');
-					// echo "<script>";
-					// echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
-					// echo "window.location='register';";
-					// echo "</script>";
-				} else {
-					$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอก Email หรือ Password ให้ถูกต้อง !! </div>');
-					redirect('register', 'refresh');
-					// echo "<script>";
-					// echo "alert('ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง !!!');";
-					// echo "window.location='register';";
-					// echo "</script>";
+					$data2 = array(
+						'idUser' => "CM" . $last_id
+					);
+					$this->db->where('id', $last_id);
+					$success = $this->db->update('tbl_user', $data2);
+					// print_r($success);
+					// exit();
+
+					if ($success > 0) {
+						// $this->session->set_flashdata('save_ss', TRUE);
+						// redirect('register', 'refresh');
+						echo "<script>";
+						echo "alert('สมัครสมาชิกเรียบร้อยแล้ว สามารถเข้าสู่ระบบได้เลย');";
+						echo "window.location='register';";
+						echo "</script>";
+					} else {
+						// $this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอก Email หรือ Password ให้ถูกต้อง !! </div>');
+						// redirect('register', 'refresh');
+						echo "<script>";
+						echo "alert('ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง !!!');";
+						echo "window.location='register';";
+						echo "</script>";
+					}
 				}
 			}
 		}
