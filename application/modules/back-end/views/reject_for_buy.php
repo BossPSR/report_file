@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Reject For sell</h2>
+                        <h2 class="content-header-title float-left mb-0">Reject For buy</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Reject For sell
+                                <li class="breadcrumb-item active">Reject For buy
                                 </li>
                             </ol>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Reject For sell</h4>
+                                <h4 class="card-title">Reject For buy</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -37,21 +37,22 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>Store Id</th>
+                                                    <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
                                                     <th>File</th>
                                                     <th>PriceFile</th>
+                                                    <th>Note</th>
                                                     <th>create_at</th>
-                                                    <th>tool</th>
+                                                  
                                                 </tr>
                                             </thead>
                                             <?php foreach ($store as $store) { ?>
-                                               <?php if($store['is_check']=="0"): ?>
-                                                <?php else :?>
+                                               <?php if($store['is_check']=="1"): ?>
+                                               
                                                 <tbody>
                                                     <tr>
-                                                        <td><?php echo $store['store_id']; ?></td>
+                                                        <td><?php echo $store['order_id']; ?></td>
                                                         <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $store['userId']])->result_array(); ?>
                                                         <?php foreach ($store_name as $store_name) { ?>
                                                             <td><?php echo $store_name['username']; ?></td>
@@ -63,12 +64,9 @@
                                                         <?php else : ?>
                                                             <td>$<?php echo $store['price_file']; ?></td>
                                                             <?php endif; ?>
+                                                            <td><?php echo $store['note_reject']; ?></td>
                                                         <td><?php echo $store['create_at']; ?></td>
-                                                        <td>
-                                                            <button    class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
-                                                             Reject
-                                                            </button>
-                                                        </td>
+                                                        
 
                                                     </tr>
 
@@ -92,10 +90,7 @@
                                                                                 <div class="row">
                                                                                     <div class="col-sm-12 data-field-col">
                                                                                         <div class="form-group">
-                                                                                            <div class="controls">
-                                                                                                <label for="data-name">PriceFile</label>
-                                                                                                <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" required>
-                                                                                            </div>
+                                                                                            
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -103,12 +98,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
-
-                                                                        </div>
+                                                                       
                                                                     </div>
                                                                 </form>
                                                             </div>

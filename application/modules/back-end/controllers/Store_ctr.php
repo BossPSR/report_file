@@ -71,6 +71,108 @@ class Store_ctr extends CI_Controller {
 	 }
     }
 
+    public function check_order_add_com()
+    {
+            $id = $this->input->post('id');
+
+        $data = array(
+
+            'price_file'         => $this->input->post('price_file'),
+            'Date_required'         => $this->input->post('Daterequired'),
+            'status_book'         => 1
+           
+
+        );
+                       $this->db->where('id', $id);     
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+ 
+        $data2 = array(
+
+            'id_document'                => $this->input->post('Document'),
+            'id_user'                    => $this->input->post('Customer'),
+            'id_orderBuy'                => $this->input->post('Order'), 
+            'create_at'                  => date('Y-m-d H:i:s')
+           
+
+        );
+
+                        
+        $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
+
+
+        if ($resultsedit1 > 0 && $resultsedit2 > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+        return redirect('back_store_buy');
+    }
+
+    public function check_NotSatisfired_order_add_com()
+    {
+            $id = $this->input->post('id');
+
+        $data = array(
+
+            'price_file'         => $this->input->post('price_file'),
+            'Date_required'         => $this->input->post('Daterequired'),
+            'status_book'         => 2
+           
+
+        );
+                       $this->db->where('id', $id);     
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+ 
+    
+
+
+        if ($resultsedit1 > 0 ) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+        return redirect('back_store_buy');
+    }
+
+    public function reject_order_add_com()
+    {
+            $id = $this->input->post('id');
+
+        $data = array(
+
+            'note_reject'         => $this->input->post('note'),
+            'is_check'            => 1
+           
+           
+
+        );
+                       $this->db->where('id', $id);     
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+ 
+    
+
+
+        if ($resultsedit1 > 0 ) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+        return redirect('back_store_buy');
+    }
+
+    public function reject_for_buy()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+     } else {
+	
+        $data['store'] = $this->db->get('tbl_upload_order')->result_array();
+		$this->load->view('options/header');
+		$this->load->view('reject_for_buy',$data);
+		$this->load->view('options/footer');
+	 }
+    }
+
     public function checkForsell()
 	{
 		if ($this->session->userdata('email_admin') == '') {

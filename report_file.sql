@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : database
+Source Server         : db
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-02-04 13:57:33
+Date: 2020-02-04 15:57:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -306,6 +306,24 @@ INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962
 INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-22 14:10:25', '1');
 
 -- ----------------------------
+-- Table structure for `tbl_bookmark`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_bookmark`;
+CREATE TABLE `tbl_bookmark` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` varchar(255) DEFAULT '' COMMENT 'CM0001',
+  `id_orderBuy` varchar(255) DEFAULT '' COMMENT 'OD0001',
+  `id_document` varchar(255) DEFAULT '' COMMENT 'DM001',
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_bookmark
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tbl_deposit`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_deposit`;
@@ -584,22 +602,25 @@ DROP TABLE IF EXISTS `tbl_upload_order`;
 CREATE TABLE `tbl_upload_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
+  `file_name` varchar(255) DEFAULT '',
   `order_id` varchar(110) DEFAULT '' COMMENT 'OR00001',
-  `file_name` varchar(255) DEFAULT NULL,
-  `price` int(11) NOT NULL DEFAULT 1,
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   `date_required` date DEFAULT NULL,
+  `price_file` varchar(255) DEFAULT NULL,
+  `status_book` varchar(255) DEFAULT '0' COMMENT '0// not 1//ture',
+  `is_check` varchar(255) DEFAULT '0' COMMENT '0//not 1// ture',
+  `note_reject` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_order
 -- ----------------------------
-INSERT INTO `tbl_upload_order` VALUES ('1', '4', 'OR-1', 'shirt-1580109491.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', '2020-02-29');
-INSERT INTO `tbl_upload_order` VALUES ('2', '4', 'OR-2', 'shirt-1580439213.jpg', '1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', '2020-02-16');
-INSERT INTO `tbl_upload_order` VALUES ('3', '4', 'OR-3', '2.jpg', '1', '2020-02-03 16:11:12', null, 'uploads/Buy/2.jpg', '2020-02-14');
+INSERT INTO `tbl_upload_order` VALUES ('1', '4', 'shirt-1580109491.jpg', 'OR-1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', '2020-02-05', '', '', '1', 'asdasdasdasd');
+INSERT INTO `tbl_upload_order` VALUES ('2', '4', 'shirt-1580439213.jpg', 'OR-2', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', '2020-02-16', '', '', null, null);
+INSERT INTO `tbl_upload_order` VALUES ('3', '4', '2.jpg', 'OR-3', '2020-02-03 16:11:12', null, 'uploads/Buy/2.jpg', '2020-02-14', '', '', '1', 'not work');
 
 -- ----------------------------
 -- Table structure for `tbl_upload_store`
