@@ -2,7 +2,7 @@
 <h2 class="text-center" style="margin-top: 15px;">My Reject</h2>
 <hr class="line_package">
 <br>
-<?php foreach ($rejected as $key => $data) {
+<?php foreach ($selling as $key => $data) {
 } ?>
 <?php if (!empty($data)) : ?>
     <!--wishlist area start -->
@@ -17,25 +17,31 @@
                                 <th scope="col">No.</th>
                                 <th scope="col">ชื่อเอกสาร</th>
                                 <th scope="col">รหัสออเดอร์</th>
-                                <th scope="col">Accept</th>
                                 <th scope="col">วันที่</th>
+                                <th scope="col">Grade</th>
+                                <th scope="col">Score</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
+                        <?php $e = 1; ?>
+                        <?php $m = 1; ?>
                         <tbody>
-                            <?php foreach ($rejected as $key => $rejected) { ?>
+                            <?php foreach ($selling as $key => $selling) { ?>
                                 <tr style="text-align:center;">
-                                    <th scope="row"><?php echo $i++; ?></th>
-                                    <td><?php echo $rejected['file_name'] ;?></td>
-                                    <td><?php echo $rejected['store_id'] ;?></td>
+                                    <td scope="row"><?php echo $i++; ?></td>
+                                    <td><?php echo $selling['file_name']; ?></td>
+                                    <td><?php echo $selling['store_id']; ?></td>
+                                    <td><?php echo date("d-m-y",strtotime($selling['create_at'])); ?></td>
                                     <td>
-                                        <?php if ($rejected['is_accept'] == 1) : ?>
-                                            <span class="badge badge-success">Accept</span>
-                                        <?php else : ?>
-                                            <span class="badge badge-danger">Reject</span>
-                                        <?php endif ;?>
+                                        <?php if ($selling['grade'] == "A") { ?>
+                                            <span class="badge badge-danger">Grade <?php echo $selling['grade']; ?></span>
+                                        <?php } elseif ($selling['grade'] == "B") { ?>
+                                            <span class="badge badge-warning">Grade <?php echo $selling['grade']; ?></span>
+                                        <?php } else { ?>
+                                            <span class="badge badge-secondary">Grade <?php echo $selling['grade']; ?></span>
+                                        <?php } ?>
                                     </td>
-                                    <td><?php echo $rejected['create_at'] ;?></td>
+                                    <td><?php echo number_format($selling['price_file']); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -53,7 +59,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Reject</h1>
+                        <h1>No Selling</h1>
                         <h2>Data Not Found</h2>
                     </div>
                 </div>
