@@ -101,7 +101,7 @@ class Buy_ctr extends CI_Controller
           $last_id = $this->db->insert_id();
 
           $data2 = array(
-            'order_id'  => "OR-" . $last_id,
+            'order_id'  => "OD" . $last_id,
             'date_required' => $date_req
           );
           $this->db->where('id', $last_id);

@@ -65,7 +65,7 @@ class Store_ctr extends CI_Controller
                         $last_id = $this->db->insert_id();
 
                         $data2 = array(
-                            'store_id'  => "ST-" . $last_id,
+                            'store_id'  => "ST" . $last_id,
                         );
                         $this->db->where('id', $last_id);
                         $this->db->update('tbl_upload_store', $data2);

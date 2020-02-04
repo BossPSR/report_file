@@ -9,6 +9,7 @@ class Rejected_ctr extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('Rejected_model');
+		$this->load->model('Search_model');
 	}
 
 	function my_rejected()
@@ -30,9 +31,14 @@ class Rejected_ctr extends CI_Controller
 		if ($this->session->userdata('email') == '') {
 			redirect('home');
 		} else {
+			$search_key            	= $this->input->get('search_key');
 			$user 					= $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 			$_user					= $user['id'];
-			$data['rejected'] 		= $this->Rejected_model->rejected2($_user);
+			if ($search_key == '' || $search_key == null) {
+				$data['rejected'] 		= $this->Rejected_model->rejected2($_user);
+			} else {
+				$data['rejected']		= $this->Search_model->search_date_reject($search_key, $_user);
+			}
 			$this->load->view('options/header_login');
 			$this->load->view('my_reject', $data);
 			$this->load->view('options/footer');
