@@ -80,6 +80,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     foreach ($orders as $key => $order) {
                                                 ?>
                                                         <?php if ($order['price_file'] || $order['is_check'] == '1') : ?>
+                                                        
                                                         <?php else : ?>
 
 

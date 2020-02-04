@@ -50,4 +50,29 @@ class Search_model extends CI_Model
 
         return $query->result_array();
     }
+
+    function search_date_reject($search_key, $_user)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_upload_store');
+        $this->db->where('userId', $_user);
+        $this->db->where('create_at', $search_key);
+        $this->db->where('is_check', 1);
+        $query  =   $this->db->get();
+
+        return $query->result_array();
+    }
+
+    function search_date_selling($search_key, $_user)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_upload_store');
+        $this->db->where('price_file !=', null);
+        $this->db->where('grade !=', null);
+        $this->db->where('userId', $_user);
+        $this->db->where('create_at', $search_key);
+        $query  =   $this->db->get();
+
+        return $query->result_array();
+    }
 }

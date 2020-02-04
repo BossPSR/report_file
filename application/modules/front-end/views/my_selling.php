@@ -10,6 +10,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-2"></div>
+                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                    <span style="font-size:16px;">Search for date : </span>
+                    <form action="my-selling" method="GET">
+                        <div style="display:flex; margin-bottom:1.3em;">
+                            <input type="date" name="search_key" class="form-control" style="width:70%">
+                            <button type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
                 <div class="col-xl-8 col-lg-6 col-md-12 col-sm-12 ">
                     <table class="table table-bordered">
                         <thead>
@@ -31,7 +44,7 @@
                                     <td scope="row"><?php echo $i++; ?></td>
                                     <td><?php echo $selling['file_name']; ?></td>
                                     <td><?php echo $selling['store_id']; ?></td>
-                                    <td><?php echo date("d-m-y",strtotime($selling['create_at'])); ?></td>
+                                    <td><?php echo date("d-m-y", strtotime($selling['create_at'])); ?></td>
                                     <td>
                                         <?php if ($selling['grade'] == "A") { ?>
                                             <span class="badge badge-danger">Grade <?php echo $selling['grade']; ?></span>
