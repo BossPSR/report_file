@@ -38,12 +38,12 @@ foreach ($store as $upload_main_searchDetail) {
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Checking Order</h2>
+                        <h2 class="content-header-title float-left mb-0">Store For buy </h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Checking Order
+                                <li class="breadcrumb-item active">Store For buy
                                 </li>
                             </ol>
                         </div>
@@ -60,7 +60,7 @@ foreach ($store as $upload_main_searchDetail) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Checking Order</h4>
+                                <h4 class="card-title">Store For buy</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -74,16 +74,17 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <th>File</th>
                                                     <th>PriceFile</th>
                                                     <th>create_at</th>
-
+                                                    <th>Confirmed order</th>
                                                 </tr>
                                             </thead>
                                             <?php
                                             $i = 1;
+
                                             foreach ($arrayForTable as $id => $stores) {
                                                 foreach ($stores as $key => $store) {
 
                                             ?>
-                                                    <?php if ($store['status_book'] == '1' || $store['status_book'] == '2'|| $store['is_check'] == '1'  ) : ?>
+                                                    <?php if ($store['status_book'] == '1' || $store['status_book'] == '2' || $store['is_check'] == '1') : ?>
                                                     <?php else : ?>
                                                         <tbody>
                                                             <tr>
@@ -100,16 +101,21 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     <td>$<?php echo $store['price_file']; ?></td>
                                                                 <?php endif; ?>
                                                                 <td><?php echo $store['create_at']; ?></td>
+                                                                <?php if ($key == 0) { ?>
 
+                                                                    <td rowspan="<?php echo count($stores); ?>"><button data-toggle="modal" data-target="#exampleModalcon<?php echo $store['id']; ?>" type="button" class="btn btn-success">Confirmed</button></td>
+
+                                                                <?php } else { ?>
+                                                                <?php } ?>
 
                                                             </tr>
 
                                                             </tfoot>
-                                                            <div class="modal fade" id="exampleModal<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal fade" id="exampleModalcon<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">StoreFile</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">check Order</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -132,6 +138,38 @@ foreach ($store as $upload_main_searchDetail) {
                                                                                     <!-- <span >A = 50</span> -->
                                                                                     <!-- <span >B = 20</span> -->
                                                                                 </div>
+                                                                                
+                                                                                <input type="hidden" class="form-control" name="id" value="<?php echo $store['id']; ?>">
+                                                                                <div class="data-items pb-3">
+                                                                                    <div class="data-fields px-2 mt-3">
+                                                                                        <div class="row">
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal fade" id="exampleModal<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">check Order</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="back_store_add_com" method="POST" class="form-horizontal">
+                                                                            <div class="modal-body">
+
                                                                                 <iframe src="<?php echo $store['path']; ?>" width="100%" height="500px"></iframe>
                                                                                 <input type="hidden" class="form-control" name="id" value="<?php echo $store['id']; ?>">
                                                                                 <div class="data-items pb-3">
@@ -150,150 +188,153 @@ foreach ($store as $upload_main_searchDetail) {
                                                                             </div>
                                                                         </form>
                                                                     </div>
-
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="modal fade" id="exampleModallCenter<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <form action="check_order_add_com" method="POST">
-                                                                        <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Satisfired</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body row">
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <?php $chek_book  = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $store['order_id']])->row_array(); ?>
-                                                                                            <label for="basicInput">Document ID</label>
-                                                                                            <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <?php $chek_order_user  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">Customer code</label>
-                                                                                            <input type="text" class="form-control" name="Customer" value="<?php echo $chek_order_user['idUser']; ?>" placeholder="Enter Customer code" readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">Order</label>
-                                                                                            <input type="text" class="form-control" name="Order" value="<?php echo $store['order_id']; ?>" placeholder="Enter Order" readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">price</label>
-                                                                                            <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">Date required</label>
-                                                                                            <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter Date required">
-                                                                                        </div>
+
+                                                            <div class="modal fade" id="exampleModallCenter<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="check_order_add_com" method="POST">
+                                                                    <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
+                                                                    <input type="hidden" name="orderid" value="<?php echo $store['order_id']; ?>">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Satisfired</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <?php $chek_book  = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $store['order_id']])->row_array(); ?>
+                                                                                        <label for="basicInput">Document ID</label>
+                                                                                        <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID">
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="modal-footer">
-                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                        <div class="add-data-btn mr-1">
-                                                                                            <button type="submit" class="btn btn-primary">submit</button>
-                                                                                        </div>
+                                                                                <?php $chek_order_user  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Customer code</label>
+                                                                                        <input type="text" class="form-control" name="Customer" value="<?php echo $chek_order_user['idUser']; ?>" placeholder="Enter Customer code" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Order</label>
+                                                                                        <input type="text" class="form-control" name="Order" value="<?php echo $store['order_id']; ?>" placeholder="Enter Order" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">price</label>
+                                                                                        <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Date required</label>
+                                                                                        <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter Date required">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    <div class="add-data-btn mr-1">
+                                                                                        <button type="submit" class="btn btn-primary">submit</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </form>
-                                                                </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
 
-                                                                <div class="modal fade" id="exampleModallCenterb<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal fade" id="exampleModallCenterb<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
-                                                                    <form action="check_NotSatisfired_order_add_com" method="POST">
-                                                                        <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Not Satisfired</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body row">
+                                                                <form action="check_NotSatisfired_order_add_com" method="POST">
+                                                                    <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Not Satisfired</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
 
-                                                                                    <?php $chek_order_user  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">Customer code</label>
-                                                                                            <input type="text" class="form-control" name="Customer" value="<?php echo $chek_order_user['idUser']; ?>" placeholder="Enter Customer code" readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">Order</label>
-                                                                                            <input type="text" class="form-control" name="Order" value="<?php echo $store['order_id']; ?>" placeholder="Enter Order" readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">price</label>
-                                                                                            <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">Date required</label>
-                                                                                            <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter Date required">
-                                                                                        </div>
+                                                                                <?php $chek_order_user  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Customer code</label>
+                                                                                        <input type="text" class="form-control" name="Customer" value="<?php echo $chek_order_user['idUser']; ?>" placeholder="Enter Customer code" readonly>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="modal-footer">
-                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                        <div class="add-data-btn mr-1">
-                                                                                            <button type="submit" class="btn btn-primary">submit</button>
-                                                                                        </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Order</label>
+                                                                                        <input type="text" class="form-control" name="Order" value="<?php echo $store['order_id']; ?>" placeholder="Enter Order" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">price</label>
+                                                                                        <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Date required</label>
+                                                                                        <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter Date required">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    <div class="add-data-btn mr-1">
+                                                                                        <button type="submit" class="btn btn-primary">submit</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </form>
-                                                                </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
 
-                                                                <div class="modal fade" id="exampleModallCenterc<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal fade" id="exampleModallCenterc<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
-                                                                    <form action="reject_order_add_com" method="POST">
-                                                                        <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Reject</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body row">
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group">
-                                                                                            <label for="helpInputTop">Note Reject</label>
-                                                                                            <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required></textarea>
-                                                                                            
-                                                                                        </div>
+                                                                <form action="reject_order_add_com" method="POST">
+                                                                    <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Reject</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note Reject</label>
+                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required></textarea>
+
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="modal-footer">
-                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                        <div class="add-data-btn mr-1">
-                                                                                            <button type="submit" class="btn btn-primary">submit</button>
-                                                                                        </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    <div class="add-data-btn mr-1">
+                                                                                        <button type="submit" class="btn btn-primary">submit</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </form>
-                                                                </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                           
                                                             <?php endif; ?>
                                                         <?php  } ?>
                                                         <thead class="thead-light">
