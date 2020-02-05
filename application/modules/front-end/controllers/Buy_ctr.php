@@ -7,6 +7,7 @@ class Buy_ctr extends CI_Controller
   public function __construct()
   {
     parent::__construct();
+    $this->load->model('Buy_model');
   }
 
 
@@ -64,8 +65,7 @@ class Buy_ctr extends CI_Controller
 
     $userId     = $this->input->post('userId');
     $date_req   =  $this->input->post('date');
-
-
+    
     $target_dir = "uploads/Buy/"; // Upload directory
 
     $request = 1;
@@ -79,41 +79,59 @@ class Buy_ctr extends CI_Controller
       // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
       $config['allowed_types']   = '*';
       $config['max_size']        = '99999'; // max_size in kb
-      $config['file_name']     = $_FILES['file']['name'];
+      $config['file_name']       = $_FILES['file']['name'];
 
       //Load upload library
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
-
+      $i = 1;
+      // $buyre =  $this->Buy_model->buy();
+      $buymax = $this->Buy_model->buy_max();
+      // $orf = array(
+      //   'order_main'    => "OD".rand('0','100'),
+      //   'create_at'     => date('Y-m-d H:i:s') ,
+      //   'status'        => '1'    
+      // );
+      // $this->db->insert('tbl_order_f', $orf);
+   
+    
       // File upload
-      if ($this->upload->do_upload('file')) {
+      if ($this->upload->do_upload('file')) 
+      {
         // Get data about the file
         $uploadData = $this->upload->data();
-
+        
         $data = array(
           'userId'      => $userId,
-          // 'order_id'      => $insert_id,
+          'order_id'      => $buymax->maxorder,
           'file_name'      => $uploadData['file_name'],
           'path'        => 'uploads/Buy/' . $uploadData['file_name'],
           'create_at'      => date('Y-m-d H:i:s'),
         );
-        if ($this->db->insert('tbl_upload_order', $data)) {
-          $last_id = $this->db->insert_id();
-
-          $data2 = array(
-            'order_id'  => "OD" . $last_id,
-            'date_required' => $date_req
-          );
-          $this->db->where('id', $last_id);
-          $this->db->update('tbl_upload_order', $data2);
-        }
-        //   $user_data = array(
-        //     'last_id' => $last_id,
-        //   );
-        //   $this->session->set_userdata($user_data);
-        // }
+        $this->db->insert('tbl_upload_order', $data);
+         
 
       }
     }
   }
+
+  public function order_auto()
+  {
+      $date_req   =  $this->input->post('status');
+      $orf = array(
+       
+        'create_at'     => date('Y-m-d H:i:s') ,
+        'status'        => $date_req     
+      );
+      if($this->db->insert('tbl_order_f', $orf))
+      {
+        $insert_id = $this->db->insert_id();
+        $update = array(
+          'order_main'    => 'OD'.$insert_id,
+        );
+        $this->db->where('id',$insert_id);
+        $this->db->update('tbl_order_f',$update);
+      }
+  }
+
 }

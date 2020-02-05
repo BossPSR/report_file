@@ -116,6 +116,8 @@ $route['store_upload']          = 'front-end/Store_ctr/fileUpload_store';
 $route['my_deposit_paypal']     = 'front-end/My_deposit_ctr/my_deposit_paypal';
 
 $route['order']                 = 'front-end/Order_ctr';
+$route['order_auto']            = 'front-end/Buy_ctr/order_auto';
+
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';
@@ -152,3 +154,5 @@ $route['back_withdraw_update']                = 'back-end/withdraw_ctr/withdraw_
 $route['back_upload_main_search']             = 'back-end/Store_ctr/upload_main_search';
 $route['add_to_upload_main_search']           = 'back-end/Store_ctr/add_to_upload_main_search';
 $route['pdf']                                 = 'front-end/pdf';
+$route['approved']                            = 'back-end/Approved_ctr';
+$route['not-approved']                        = 'back-end/Approved_ctr/not_approved';
