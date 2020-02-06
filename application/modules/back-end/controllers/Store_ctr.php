@@ -7,7 +7,8 @@ class Store_ctr extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model('Store_model');
-
+        $this->load->helper('form');
+        $this->load->library('email');  // เรียกใช้ email class
     }
 
 	public function index()
@@ -101,6 +102,8 @@ class Store_ctr extends CI_Controller {
                         
         $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
 
+        $bookmark_id = $this->db->insert_id();
+        $this->sendEmail($orderid,$bookmark_id);
 
         if ($resultsedit1 > 0 && $resultsedit2 > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
@@ -109,6 +112,75 @@ class Store_ctr extends CI_Controller {
         }
         return redirect('back_store_buy');
     }
+
+    private function sendEmail($orderid,$bookmark_id)
+    {
+        $upload_order =  $this->db->get_where('tbl_upload_order', ['id' => $orderid])->row_array();
+        $book_mark =  $this->db->get_where('tbl_bookmark', ['id' => $bookmark_id])->row_array();
+
+        $subject = 'test ip-soft';
+        
+        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
+        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
+        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+
+        $message .= 'Dear<br>';
+        $message .= 'Hello World';
+        $message .= 'File Name : '.$upload_order['file_name'];
+        $message .= '<br>';
+        $message .= 'Order ID : '.$upload_order['order_id'];
+        $message .= '<br>';
+        $message .= 'Price : '.$upload_order['price_file'];
+        $message .= '<br>';
+        $message .= 'Customer ID : CM'.$upload_order['userId'];
+        $message .= '<br>';
+        $message .= '<button type="button" class="btn btn-success"><a href="">Pay</a></button>';
+
+        
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+    
+        //$file_path = 'uploads/' . $file_name;
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('infinityp.soft@gmail.com');
+            $this->email->to('boss3075030750@gmail.com');
+            $this->email->subject($subject);
+            $this->email->message($message);
+            $this->email->set_mailtype('html');
+        
+                if($this->email->send()==true)
+                {
+                echo '1';
+                }
+                else
+                {
+                echo '2';
+                }
+        
+    }
+
+    // public function pay()
+    // {
+    //     if ($this->session->userdata('email_admin') == '') {
+    //         redirect('backend');
+    //     } else {
+    //         $data['store'] = $this->db->get('tbl_upload_order')->result_array();
+    //         $this->load->view('options/header');
+    //         $this->load->view('reject_for_buy',$data);
+    //         $this->load->view('options/footer');
+	//     }
+    // }
 
     public function check_NotSatisfired_order_add_com()
     {
