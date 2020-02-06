@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : db
+Source Server         : database
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-02-04 15:57:04
+Date: 2020-02-06 15:19:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -411,6 +411,24 @@ CREATE TABLE `tbl_job_position` (
 INSERT INTO `tbl_job_position` VALUES ('1', '1', '1', '2020-01-16 14:50:18', null);
 INSERT INTO `tbl_job_position` VALUES ('2', '1', '3', '2020-01-16 14:50:18', null);
 INSERT INTO `tbl_job_position` VALUES ('3', '1', '4', '2020-01-16 14:50:18', null);
+
+-- ----------------------------
+-- Table structure for `tbl_order_f`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_order_f`;
+CREATE TABLE `tbl_order_f` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_main` varchar(255) DEFAULT NULL,
+  `create_at` date DEFAULT NULL,
+  `status` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_order_f
+-- ----------------------------
+INSERT INTO `tbl_order_f` VALUES ('1', 'OD1', '2020-02-05', '1');
+INSERT INTO `tbl_order_f` VALUES ('2', 'OD2', '2020-02-05', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_package`

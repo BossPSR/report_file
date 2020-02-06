@@ -284,32 +284,6 @@
                                         </li>
                                         <li data-menu=""><a class="dropdown-item" href="back_store_b" data-toggle="dropdown" data-i18n="Thumb View"><i class="feather icon-circle"></i>Store for sell grade B</a>
 
-                                    <li data-menu=""><a class="dropdown-item" href="back_store_c" data-toggle="dropdown" data-i18n="Thumb View"><i class="feather icon-circle"></i>Store for sell grade C</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_upload_main_search") {
-                                                                            echo 'active';
-                                                                        } ?>" href="back_upload_main_search" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Upload to main search</a>
-                            </li>
-                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_buy") {
-                                                                            echo 'active';
-                                                                        } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Store For buy</a>
-                            </li>
-                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject") {
-                                                                            echo 'active';
-                                                                        } ?>" href="back_store_reject" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Reject For sell</a>
-                            </li>
-                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject_for_buy") {
-                                                                            echo 'active';
-                                                                        } ?>" href="back_store_reject_for_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Reject For buy</a>
-                            </li>
-                         
-                         
-                            
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="back_withdraw" ><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables"> Withdraw </span></a>
                                         <li data-menu=""><a class="dropdown-item" href="back_store_c" data-toggle="dropdown" data-i18n="Thumb View"><i class="feather icon-circle"></i>Store for sell grade C</a>
                                         </li>
                                     </ul>
@@ -320,7 +294,7 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_buy") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Chacking Order</a>
+                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Store For buy</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject") {
                                                                                 echo 'active';
@@ -338,7 +312,9 @@
                         <li class="nav-item"><a class="nav-link" href="back_withdraw"><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables"> Withdraw </span></a>
 
                         </li>
-                        <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Order Result</span></a>
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved") {
+                                                            echo 'active';
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Order Result</span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "approved") {
                                                                                 echo 'active';
@@ -349,6 +325,12 @@
                                                                             } ?>" href="not-approved" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Approved</a>
                                 </li>
                             </ul>
+
+                        </li>
+
+                        <li class="nav-item" <?php if ($this->uri->segment(1) == "#") {
+                                                    echo 'active';
+                                                } ?>><a class="nav-link" href="#"><i class="feather icon-shopping-cart"></i><span data-i18n="Forms &amp; Tables"> Customer order </span></a>
 
                         </li>
                         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-bar-chart-2"></i><span data-i18n="Charts &amp; Maps">Charts &amp; Maps</span></a>
