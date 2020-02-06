@@ -7,6 +7,7 @@ class Store_ctr extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Buy_model');
     }
 
 
@@ -49,28 +50,21 @@ class Store_ctr extends CI_Controller
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
 
+                $buymax = $this->Buy_model->buy_max();
+
                 // File upload
                 if ($this->upload->do_upload('file')) {
                     // Get data about the file
                     $uploadData = $this->upload->data();
 
                     $data = array(
-                        'userId'      => $userId,
-                        // 'order_id'      => $insert_id,
-                        'file_name'      => $uploadData['file_name'],
-                        'path'        => 'uploads/Store/' . $uploadData['file_name'],
-                        'create_at'      => date('Y-m-d H:i:s'),
+                        'userId'        => $userId,
+                        'store_id'      => $buymax->maxorder,
+                        'file_name'     => $uploadData['file_name'],
+                        'path'          => 'uploads/Store/' . $uploadData['file_name'],
+                        'create_at'     => date('Y-m-d H:i:s'),
                     );
-                    if ($this->db->insert('tbl_upload_store', $data)) {
-                        $last_id = $this->db->insert_id();
-
-                        $data2 = array(
-                            'store_id'  => "ST" . $last_id,
-                        );
-                        $this->db->where('id', $last_id);
-                        $this->db->update('tbl_upload_store', $data2);
-                    
-                    }
+                    $this->db->insert('tbl_upload_store', $data);
                 }
             }
         }

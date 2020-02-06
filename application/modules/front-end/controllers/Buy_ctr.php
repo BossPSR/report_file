@@ -84,7 +84,6 @@ class Buy_ctr extends CI_Controller
       //Load upload library
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
-      $i = 1;
       // $buyre =  $this->Buy_model->buy();
       $buymax = $this->Buy_model->buy_max();
       // $orf = array(
