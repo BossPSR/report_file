@@ -169,7 +169,12 @@ class Store_ctr extends CI_Controller {
         $message .= '<br>';
         $message .= '<div>Customer ID : CM'.$upload_order[0]['userId'].'</div>';
         $message .= '<br>';
-        $message .= '<button type="button" class="btn btn-success"><a href="https://www.ip-soft.co.th/ipsoft/">Pay $'.$priceDis.' To Start</a></button>';
+
+        $message .= '<button type="button" class="btn btn-success">';
+        $message .= '<a href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id='.$upload_order[0]['order_id'].'">';
+        $message .= 'Pay $'.$priceDis.' To Start';
+        $message .= '</a>';
+        $message .= '</button>';
 
         
         //config email settings
