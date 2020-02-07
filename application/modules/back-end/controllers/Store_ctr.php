@@ -82,8 +82,8 @@ class Store_ctr extends CI_Controller {
 
             'price_file'         => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
-            'status_book'         => 1
-           
+            'status_book'         => 1,
+            'update_at'                  => date('Y-m-d H:i:s')
 
         );
                        $this->db->where('order_id', $orderid);     
@@ -103,7 +103,11 @@ class Store_ctr extends CI_Controller {
         $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
 
         $bookmark_id = $this->db->insert_id();
-        $this->sendEmail($orderid,$bookmark_id);
+
+        $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
+        $book_mark =  $this->db->get_where('tbl_bookmark', ['id' => $bookmark_id])->row_array();
+
+        $this->sendEmail($upload_order,$book_mark);
 
         if ($resultsedit1 > 0 && $resultsedit2 > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
@@ -113,11 +117,31 @@ class Store_ctr extends CI_Controller {
         return redirect('back_store_buy');
     }
 
-    private function sendEmail($orderid,$bookmark_id)
+    private function sendEmail($upload_order,$book_mark)
     {
-        $upload_order =  $this->db->get_where('tbl_upload_order', ['id' => $orderid])->row_array();
-        $book_mark =  $this->db->get_where('tbl_bookmark', ['id' => $bookmark_id])->row_array();
+        $user = $this->db->get_where('tbl_user',['id' => $upload_order[0]['userId']])->row_array();
 
+        if ($user['score'] < '100'){
+            $discount = 0;
+        }elseif($user['score'] <= '199'){
+            $discount = 10;
+        }elseif ($user['score'] <= '299'){
+            $discount = 20;
+        }elseif ($user['score'] <= '399'){
+            $discount = 30;
+        }elseif ($user['score'] <= '499'){
+            $discount = 40;
+        }elseif ($user['score'] > '499'){
+            $discount = 50;
+        }
+        $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file']*$discount)/100);
+            
+        
+        $uploads = [];
+        foreach ($upload_order as $uploadOrder) {
+            $uploads[] = $uploadOrder['file_name'];
+        }
+        $end_uploads = end($uploads);
         $subject = 'test ip-soft';
         
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
@@ -126,16 +150,26 @@ class Store_ctr extends CI_Controller {
         $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
 
         $message .= 'Dear<br>';
-        $message .= 'Hello World';
-        $message .= 'File Name : '.$upload_order['file_name'];
+        $message .= '<div>Hello World</div>';
+        $message .= '<div>File Name : ';
+        foreach ($uploads as $upload) {
+            if ($upload == $end_uploads) {
+                $message .=  $upload;
+            }else{
+                $message .=  $upload.',';
+            }
+        }
+        $message .= '</div>';
         $message .= '<br>';
-        $message .= 'Order ID : '.$upload_order['order_id'];
+        $message .= '<div>Order ID : '.$upload_order[0]['order_id'].'</div>';
         $message .= '<br>';
-        $message .= 'Price : '.$upload_order['price_file'];
+        $message .= '<div>Price : '.$upload_order[0]['price_file'].'</div>';
         $message .= '<br>';
-        $message .= 'Customer ID : CM'.$upload_order['userId'];
+        $message .= '<div>Discount : '.$discount.'%</div>';
         $message .= '<br>';
-        $message .= '<button type="button" class="btn btn-success"><a href="https://www.ip-soft.co.th/ipsoft/">Pay</a></button>';
+        $message .= '<div>Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+        $message .= '<br>';
+        $message .= '<button type="button" class="btn btn-success"><a href="https://www.ip-soft.co.th/ipsoft/">Pay $'.$priceDis.' To Start</a></button>';
 
         
         //config email settings
