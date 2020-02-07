@@ -101,12 +101,10 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     <td>$<?php echo $store['price_file']; ?></td>
                                                                 <?php endif; ?>
                                                                 <td><?php echo $store['create_at']; ?></td>
-                                                                <?php if ($key == 0) { ?>
+                                                                
 
                                                                     <td rowspan="<?php echo count($stores); ?>"><button data-toggle="modal" data-target="#exampleModalcon<?php echo $store['id']; ?>" type="button" class="btn btn-success">Confirmed</button></td>
 
-                                                                <?php } else { ?>
-                                                                <?php } ?>
 
                                                             </tr>
 
