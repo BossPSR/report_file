@@ -7,7 +7,8 @@ class Store_ctr extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->model('Store_model');
-
+        $this->load->helper('form');
+        $this->load->library('email');  // เรียกใช้ email class
     }
 
 	public function index()
@@ -81,8 +82,8 @@ class Store_ctr extends CI_Controller {
 
             'price_file'         => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
-            'status_book'         => 1
-           
+            'status_book'         => 1,
+            'update_at'                  => date('Y-m-d H:i:s')
 
         );
                        $this->db->where('order_id', $orderid);     
@@ -101,6 +102,12 @@ class Store_ctr extends CI_Controller {
                         
         $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
 
+        $bookmark_id = $this->db->insert_id();
+
+        $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
+        $book_mark =  $this->db->get_where('tbl_bookmark', ['id' => $bookmark_id])->row_array();
+
+        $this->sendEmail($upload_order,$book_mark);
 
         if ($resultsedit1 > 0 && $resultsedit2 > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
@@ -109,6 +116,110 @@ class Store_ctr extends CI_Controller {
         }
         return redirect('back_store_buy');
     }
+
+    private function sendEmail($upload_order,$book_mark)
+    {
+        $user = $this->db->get_where('tbl_user',['id' => $upload_order[0]['userId']])->row_array();
+
+        if ($user['score'] < '100'){
+            $discount = 0;
+        }elseif($user['score'] <= '199'){
+            $discount = 10;
+        }elseif ($user['score'] <= '299'){
+            $discount = 20;
+        }elseif ($user['score'] <= '399'){
+            $discount = 30;
+        }elseif ($user['score'] <= '499'){
+            $discount = 40;
+        }elseif ($user['score'] > '499'){
+            $discount = 50;
+        }
+        $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file']*$discount)/100);
+            
+        
+        $uploads = [];
+        foreach ($upload_order as $uploadOrder) {
+            $uploads[] = $uploadOrder['file_name'];
+        }
+        $end_uploads = end($uploads);
+        $subject = 'test ip-soft';
+        
+        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
+        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
+        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+
+        $message .= 'Dear<br>';
+        $message .= '<div>Hello World</div>';
+        $message .= '<div>File Name : ';
+        foreach ($uploads as $upload) {
+            if ($upload == $end_uploads) {
+                $message .=  $upload;
+            }else{
+                $message .=  $upload.',';
+            }
+        }
+        $message .= '</div>';
+        $message .= '<br>';
+        $message .= '<div>Order ID : '.$upload_order[0]['order_id'].'</div>';
+        $message .= '<br>';
+        $message .= '<div>Price : '.$upload_order[0]['price_file'].'</div>';
+        $message .= '<br>';
+        $message .= '<div>Discount : '.$discount.'%</div>';
+        $message .= '<br>';
+        $message .= '<div>Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+        $message .= '<br>';
+
+        $message .= '<button type="button" class="btn btn-success">';
+        $message .= '<a href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id='.$upload_order[0]['order_id'].'">';
+        $message .= 'Pay $'.$priceDis.' To Start';
+        $message .= '</a>';
+        $message .= '</button>';
+
+        
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+    
+        //$file_path = 'uploads/' . $file_name;
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('infinityp.soft@gmail.com');
+            $this->email->to('boss3075030750@gmail.com');
+            $this->email->subject($subject);
+            $this->email->message($message);
+            $this->email->set_mailtype('html');
+        
+                if($this->email->send()==true)
+                {
+                echo '1';
+                }
+                else
+                {
+                echo '2';
+                }
+        
+    }
+
+    // public function pay()
+    // {
+    //     if ($this->session->userdata('email_admin') == '') {
+    //         redirect('backend');
+    //     } else {
+    //         $data['store'] = $this->db->get('tbl_upload_order')->result_array();
+    //         $this->load->view('options/header');
+    //         $this->load->view('reject_for_buy',$data);
+    //         $this->load->view('options/footer');
+	//     }
+    // }
 
     public function check_NotSatisfired_order_add_com()
     {

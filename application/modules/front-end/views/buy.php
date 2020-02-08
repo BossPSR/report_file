@@ -71,15 +71,22 @@
      );
 
      $('#uploadfiles').click(function() {
-         myDropzone.processQueue();
-         myDropzone.on("success", function(file, res) {
-             swal("Good job!", "Upload for data successfull", "success", {
-                 button: false,
-             });
-             setTimeout("location.reload(true);", 1000);
+         $.ajax({
+             type: 'POST',
+             url: 'order_auto',
+             data: {
+                 status: 1
+             },
+             success: function(data) {
+                 myDropzone.processQueue();
+                 myDropzone.on("success", function(file, res) {
+                     swal("Good job!", "Upload for data successfull", "success", {
+                         button: false,
+                     });
+                     setTimeout("location.reload(true);", 1000);
+                 });
+             },
+
          });
-
-
-
      });
  </script>

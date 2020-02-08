@@ -1,446 +1,515 @@
-/*
-Navicat MySQL Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Feb 07, 2020 at 06:24 PM
+-- Server version: 5.6.43
+-- PHP Version: 7.2.7
 
-Source Server         : db
-Source Server Version : 50505
-Source Host           : localhost:3306
-Source Database       : report_file
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-Target Server Type    : MYSQL
-Target Server Version : 50505
-File Encoding         : 65001
 
-Date: 2020-02-04 15:57:04
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-SET FOREIGN_KEY_CHECKS=0;
+--
+-- Database: `cp486987_report`
+--
 
--- ----------------------------
--- Table structure for `countries`
--- ----------------------------
-DROP TABLE IF EXISTS `countries`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `countries`
+--
+
 CREATE TABLE `countries` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id` int(5) NOT NULL,
   `countryCode` char(2) NOT NULL DEFAULT '',
-  `countryName` varchar(45) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=251 DEFAULT CHARSET=utf8;
+  `countryName` varchar(45) NOT NULL DEFAULT ''
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of countries
--- ----------------------------
-INSERT INTO `countries` VALUES ('1', 'AD', 'Andorra');
-INSERT INTO `countries` VALUES ('2', 'AE', 'United Arab Emirates');
-INSERT INTO `countries` VALUES ('3', 'AF', 'Afghanistan');
-INSERT INTO `countries` VALUES ('4', 'AG', 'Antigua and Barbuda');
-INSERT INTO `countries` VALUES ('5', 'AI', 'Anguilla');
-INSERT INTO `countries` VALUES ('6', 'AL', 'Albania');
-INSERT INTO `countries` VALUES ('7', 'AM', 'Armenia');
-INSERT INTO `countries` VALUES ('8', 'AO', 'Angola');
-INSERT INTO `countries` VALUES ('9', 'AQ', 'Antarctica');
-INSERT INTO `countries` VALUES ('10', 'AR', 'Argentina');
-INSERT INTO `countries` VALUES ('11', 'AS', 'American Samoa');
-INSERT INTO `countries` VALUES ('12', 'AT', 'Austria');
-INSERT INTO `countries` VALUES ('13', 'AU', 'Australia');
-INSERT INTO `countries` VALUES ('14', 'AW', 'Aruba');
-INSERT INTO `countries` VALUES ('15', 'AX', 'Åland');
-INSERT INTO `countries` VALUES ('16', 'AZ', 'Azerbaijan');
-INSERT INTO `countries` VALUES ('17', 'BA', 'Bosnia and Herzegovina');
-INSERT INTO `countries` VALUES ('18', 'BB', 'Barbados');
-INSERT INTO `countries` VALUES ('19', 'BD', 'Bangladesh');
-INSERT INTO `countries` VALUES ('20', 'BE', 'Belgium');
-INSERT INTO `countries` VALUES ('21', 'BF', 'Burkina Faso');
-INSERT INTO `countries` VALUES ('22', 'BG', 'Bulgaria');
-INSERT INTO `countries` VALUES ('23', 'BH', 'Bahrain');
-INSERT INTO `countries` VALUES ('24', 'BI', 'Burundi');
-INSERT INTO `countries` VALUES ('25', 'BJ', 'Benin');
-INSERT INTO `countries` VALUES ('26', 'BL', 'Saint Barthélemy');
-INSERT INTO `countries` VALUES ('27', 'BM', 'Bermuda');
-INSERT INTO `countries` VALUES ('28', 'BN', 'Brunei');
-INSERT INTO `countries` VALUES ('29', 'BO', 'Bolivia');
-INSERT INTO `countries` VALUES ('30', 'BQ', 'Bonaire, Sint Eustatius, and Saba');
-INSERT INTO `countries` VALUES ('31', 'BR', 'Brazil');
-INSERT INTO `countries` VALUES ('32', 'BS', 'Bahamas');
-INSERT INTO `countries` VALUES ('33', 'BT', 'Bhutan');
-INSERT INTO `countries` VALUES ('34', 'BV', 'Bouvet Island');
-INSERT INTO `countries` VALUES ('35', 'BW', 'Botswana');
-INSERT INTO `countries` VALUES ('36', 'BY', 'Belarus');
-INSERT INTO `countries` VALUES ('37', 'BZ', 'Belize');
-INSERT INTO `countries` VALUES ('38', 'CA', 'Canada');
-INSERT INTO `countries` VALUES ('39', 'CC', 'Cocos [Keeling] Islands');
-INSERT INTO `countries` VALUES ('40', 'CD', 'DR Congo');
-INSERT INTO `countries` VALUES ('41', 'CF', 'Central African Republic');
-INSERT INTO `countries` VALUES ('42', 'CG', 'Congo Republic');
-INSERT INTO `countries` VALUES ('43', 'CH', 'Switzerland');
-INSERT INTO `countries` VALUES ('44', 'CI', 'Ivory Coast');
-INSERT INTO `countries` VALUES ('45', 'CK', 'Cook Islands');
-INSERT INTO `countries` VALUES ('46', 'CL', 'Chile');
-INSERT INTO `countries` VALUES ('47', 'CM', 'Cameroon');
-INSERT INTO `countries` VALUES ('48', 'CN', 'China');
-INSERT INTO `countries` VALUES ('49', 'CO', 'Colombia');
-INSERT INTO `countries` VALUES ('50', 'CR', 'Costa Rica');
-INSERT INTO `countries` VALUES ('51', 'CU', 'Cuba');
-INSERT INTO `countries` VALUES ('52', 'CV', 'Cabo Verde');
-INSERT INTO `countries` VALUES ('53', 'CW', 'Curaçao');
-INSERT INTO `countries` VALUES ('54', 'CX', 'Christmas Island');
-INSERT INTO `countries` VALUES ('55', 'CY', 'Cyprus');
-INSERT INTO `countries` VALUES ('56', 'CZ', 'Czechia');
-INSERT INTO `countries` VALUES ('57', 'DE', 'Germany');
-INSERT INTO `countries` VALUES ('58', 'DJ', 'Djibouti');
-INSERT INTO `countries` VALUES ('59', 'DK', 'Denmark');
-INSERT INTO `countries` VALUES ('60', 'DM', 'Dominica');
-INSERT INTO `countries` VALUES ('61', 'DO', 'Dominican Republic');
-INSERT INTO `countries` VALUES ('62', 'DZ', 'Algeria');
-INSERT INTO `countries` VALUES ('63', 'EC', 'Ecuador');
-INSERT INTO `countries` VALUES ('64', 'EE', 'Estonia');
-INSERT INTO `countries` VALUES ('65', 'EG', 'Egypt');
-INSERT INTO `countries` VALUES ('66', 'EH', 'Western Sahara');
-INSERT INTO `countries` VALUES ('67', 'ER', 'Eritrea');
-INSERT INTO `countries` VALUES ('68', 'ES', 'Spain');
-INSERT INTO `countries` VALUES ('69', 'ET', 'Ethiopia');
-INSERT INTO `countries` VALUES ('70', 'FI', 'Finland');
-INSERT INTO `countries` VALUES ('71', 'FJ', 'Fiji');
-INSERT INTO `countries` VALUES ('72', 'FK', 'Falkland Islands');
-INSERT INTO `countries` VALUES ('73', 'FM', 'Micronesia');
-INSERT INTO `countries` VALUES ('74', 'FO', 'Faroe Islands');
-INSERT INTO `countries` VALUES ('75', 'FR', 'France');
-INSERT INTO `countries` VALUES ('76', 'GA', 'Gabon');
-INSERT INTO `countries` VALUES ('77', 'GB', 'United Kingdom');
-INSERT INTO `countries` VALUES ('78', 'GD', 'Grenada');
-INSERT INTO `countries` VALUES ('79', 'GE', 'Georgia');
-INSERT INTO `countries` VALUES ('80', 'GF', 'French Guiana');
-INSERT INTO `countries` VALUES ('81', 'GG', 'Guernsey');
-INSERT INTO `countries` VALUES ('82', 'GH', 'Ghana');
-INSERT INTO `countries` VALUES ('83', 'GI', 'Gibraltar');
-INSERT INTO `countries` VALUES ('84', 'GL', 'Greenland');
-INSERT INTO `countries` VALUES ('85', 'GM', 'Gambia');
-INSERT INTO `countries` VALUES ('86', 'GN', 'Guinea');
-INSERT INTO `countries` VALUES ('87', 'GP', 'Guadeloupe');
-INSERT INTO `countries` VALUES ('88', 'GQ', 'Equatorial Guinea');
-INSERT INTO `countries` VALUES ('89', 'GR', 'Greece');
-INSERT INTO `countries` VALUES ('90', 'GS', 'South Georgia and South Sandwich Islands');
-INSERT INTO `countries` VALUES ('91', 'GT', 'Guatemala');
-INSERT INTO `countries` VALUES ('92', 'GU', 'Guam');
-INSERT INTO `countries` VALUES ('93', 'GW', 'Guinea-Bissau');
-INSERT INTO `countries` VALUES ('94', 'GY', 'Guyana');
-INSERT INTO `countries` VALUES ('95', 'HK', 'Hong Kong');
-INSERT INTO `countries` VALUES ('96', 'HM', 'Heard Island and McDonald Islands');
-INSERT INTO `countries` VALUES ('97', 'HN', 'Honduras');
-INSERT INTO `countries` VALUES ('98', 'HR', 'Croatia');
-INSERT INTO `countries` VALUES ('99', 'HT', 'Haiti');
-INSERT INTO `countries` VALUES ('100', 'HU', 'Hungary');
-INSERT INTO `countries` VALUES ('101', 'ID', 'Indonesia');
-INSERT INTO `countries` VALUES ('102', 'IE', 'Ireland');
-INSERT INTO `countries` VALUES ('103', 'IL', 'Israel');
-INSERT INTO `countries` VALUES ('104', 'IM', 'Isle of Man');
-INSERT INTO `countries` VALUES ('105', 'IN', 'India');
-INSERT INTO `countries` VALUES ('106', 'IO', 'British Indian Ocean Territory');
-INSERT INTO `countries` VALUES ('107', 'IQ', 'Iraq');
-INSERT INTO `countries` VALUES ('108', 'IR', 'Iran');
-INSERT INTO `countries` VALUES ('109', 'IS', 'Iceland');
-INSERT INTO `countries` VALUES ('110', 'IT', 'Italy');
-INSERT INTO `countries` VALUES ('111', 'JE', 'Jersey');
-INSERT INTO `countries` VALUES ('112', 'JM', 'Jamaica');
-INSERT INTO `countries` VALUES ('113', 'JO', 'Jordan');
-INSERT INTO `countries` VALUES ('114', 'JP', 'Japan');
-INSERT INTO `countries` VALUES ('115', 'KE', 'Kenya');
-INSERT INTO `countries` VALUES ('116', 'KG', 'Kyrgyzstan');
-INSERT INTO `countries` VALUES ('117', 'KH', 'Cambodia');
-INSERT INTO `countries` VALUES ('118', 'KI', 'Kiribati');
-INSERT INTO `countries` VALUES ('119', 'KM', 'Comoros');
-INSERT INTO `countries` VALUES ('120', 'KN', 'St Kitts and Nevis');
-INSERT INTO `countries` VALUES ('121', 'KP', 'North Korea');
-INSERT INTO `countries` VALUES ('122', 'KR', 'South Korea');
-INSERT INTO `countries` VALUES ('123', 'KW', 'Kuwait');
-INSERT INTO `countries` VALUES ('124', 'KY', 'Cayman Islands');
-INSERT INTO `countries` VALUES ('125', 'KZ', 'Kazakhstan');
-INSERT INTO `countries` VALUES ('126', 'LA', 'Laos');
-INSERT INTO `countries` VALUES ('127', 'LB', 'Lebanon');
-INSERT INTO `countries` VALUES ('128', 'LC', 'Saint Lucia');
-INSERT INTO `countries` VALUES ('129', 'LI', 'Liechtenstein');
-INSERT INTO `countries` VALUES ('130', 'LK', 'Sri Lanka');
-INSERT INTO `countries` VALUES ('131', 'LR', 'Liberia');
-INSERT INTO `countries` VALUES ('132', 'LS', 'Lesotho');
-INSERT INTO `countries` VALUES ('133', 'LT', 'Lithuania');
-INSERT INTO `countries` VALUES ('134', 'LU', 'Luxembourg');
-INSERT INTO `countries` VALUES ('135', 'LV', 'Latvia');
-INSERT INTO `countries` VALUES ('136', 'LY', 'Libya');
-INSERT INTO `countries` VALUES ('137', 'MA', 'Morocco');
-INSERT INTO `countries` VALUES ('138', 'MC', 'Monaco');
-INSERT INTO `countries` VALUES ('139', 'MD', 'Moldova');
-INSERT INTO `countries` VALUES ('140', 'ME', 'Montenegro');
-INSERT INTO `countries` VALUES ('141', 'MF', 'Saint Martin');
-INSERT INTO `countries` VALUES ('142', 'MG', 'Madagascar');
-INSERT INTO `countries` VALUES ('143', 'MH', 'Marshall Islands');
-INSERT INTO `countries` VALUES ('144', 'MK', 'North Macedonia');
-INSERT INTO `countries` VALUES ('145', 'ML', 'Mali');
-INSERT INTO `countries` VALUES ('146', 'MM', 'Myanmar');
-INSERT INTO `countries` VALUES ('147', 'MN', 'Mongolia');
-INSERT INTO `countries` VALUES ('148', 'MO', 'Macao');
-INSERT INTO `countries` VALUES ('149', 'MP', 'Northern Mariana Islands');
-INSERT INTO `countries` VALUES ('150', 'MQ', 'Martinique');
-INSERT INTO `countries` VALUES ('151', 'MR', 'Mauritania');
-INSERT INTO `countries` VALUES ('152', 'MS', 'Montserrat');
-INSERT INTO `countries` VALUES ('153', 'MT', 'Malta');
-INSERT INTO `countries` VALUES ('154', 'MU', 'Mauritius');
-INSERT INTO `countries` VALUES ('155', 'MV', 'Maldives');
-INSERT INTO `countries` VALUES ('156', 'MW', 'Malawi');
-INSERT INTO `countries` VALUES ('157', 'MX', 'Mexico');
-INSERT INTO `countries` VALUES ('158', 'MY', 'Malaysia');
-INSERT INTO `countries` VALUES ('159', 'MZ', 'Mozambique');
-INSERT INTO `countries` VALUES ('160', 'NA', 'Namibia');
-INSERT INTO `countries` VALUES ('161', 'NC', 'New Caledonia');
-INSERT INTO `countries` VALUES ('162', 'NE', 'Niger');
-INSERT INTO `countries` VALUES ('163', 'NF', 'Norfolk Island');
-INSERT INTO `countries` VALUES ('164', 'NG', 'Nigeria');
-INSERT INTO `countries` VALUES ('165', 'NI', 'Nicaragua');
-INSERT INTO `countries` VALUES ('166', 'NL', 'Netherlands');
-INSERT INTO `countries` VALUES ('167', 'NO', 'Norway');
-INSERT INTO `countries` VALUES ('168', 'NP', 'Nepal');
-INSERT INTO `countries` VALUES ('169', 'NR', 'Nauru');
-INSERT INTO `countries` VALUES ('170', 'NU', 'Niue');
-INSERT INTO `countries` VALUES ('171', 'NZ', 'New Zealand');
-INSERT INTO `countries` VALUES ('172', 'OM', 'Oman');
-INSERT INTO `countries` VALUES ('173', 'PA', 'Panama');
-INSERT INTO `countries` VALUES ('174', 'PE', 'Peru');
-INSERT INTO `countries` VALUES ('175', 'PF', 'French Polynesia');
-INSERT INTO `countries` VALUES ('176', 'PG', 'Papua New Guinea');
-INSERT INTO `countries` VALUES ('177', 'PH', 'Philippines');
-INSERT INTO `countries` VALUES ('178', 'PK', 'Pakistan');
-INSERT INTO `countries` VALUES ('179', 'PL', 'Poland');
-INSERT INTO `countries` VALUES ('180', 'PM', 'Saint Pierre and Miquelon');
-INSERT INTO `countries` VALUES ('181', 'PN', 'Pitcairn Islands');
-INSERT INTO `countries` VALUES ('182', 'PR', 'Puerto Rico');
-INSERT INTO `countries` VALUES ('183', 'PS', 'Palestine');
-INSERT INTO `countries` VALUES ('184', 'PT', 'Portugal');
-INSERT INTO `countries` VALUES ('185', 'PW', 'Palau');
-INSERT INTO `countries` VALUES ('186', 'PY', 'Paraguay');
-INSERT INTO `countries` VALUES ('187', 'QA', 'Qatar');
-INSERT INTO `countries` VALUES ('188', 'RE', 'Réunion');
-INSERT INTO `countries` VALUES ('189', 'RO', 'Romania');
-INSERT INTO `countries` VALUES ('190', 'RS', 'Serbia');
-INSERT INTO `countries` VALUES ('191', 'RU', 'Russia');
-INSERT INTO `countries` VALUES ('192', 'RW', 'Rwanda');
-INSERT INTO `countries` VALUES ('193', 'SA', 'Saudi Arabia');
-INSERT INTO `countries` VALUES ('194', 'SB', 'Solomon Islands');
-INSERT INTO `countries` VALUES ('195', 'SC', 'Seychelles');
-INSERT INTO `countries` VALUES ('196', 'SD', 'Sudan');
-INSERT INTO `countries` VALUES ('197', 'SE', 'Sweden');
-INSERT INTO `countries` VALUES ('198', 'SG', 'Singapore');
-INSERT INTO `countries` VALUES ('199', 'SH', 'Saint Helena');
-INSERT INTO `countries` VALUES ('200', 'SI', 'Slovenia');
-INSERT INTO `countries` VALUES ('201', 'SJ', 'Svalbard and Jan Mayen');
-INSERT INTO `countries` VALUES ('202', 'SK', 'Slovakia');
-INSERT INTO `countries` VALUES ('203', 'SL', 'Sierra Leone');
-INSERT INTO `countries` VALUES ('204', 'SM', 'San Marino');
-INSERT INTO `countries` VALUES ('205', 'SN', 'Senegal');
-INSERT INTO `countries` VALUES ('206', 'SO', 'Somalia');
-INSERT INTO `countries` VALUES ('207', 'SR', 'Suriname');
-INSERT INTO `countries` VALUES ('208', 'SS', 'South Sudan');
-INSERT INTO `countries` VALUES ('209', 'ST', 'São Tomé and Príncipe');
-INSERT INTO `countries` VALUES ('210', 'SV', 'El Salvador');
-INSERT INTO `countries` VALUES ('211', 'SX', 'Sint Maarten');
-INSERT INTO `countries` VALUES ('212', 'SY', 'Syria');
-INSERT INTO `countries` VALUES ('213', 'SZ', 'Eswatini');
-INSERT INTO `countries` VALUES ('214', 'TC', 'Turks and Caicos Islands');
-INSERT INTO `countries` VALUES ('215', 'TD', 'Chad');
-INSERT INTO `countries` VALUES ('216', 'TF', 'French Southern Territories');
-INSERT INTO `countries` VALUES ('217', 'TG', 'Togo');
-INSERT INTO `countries` VALUES ('218', 'TH', 'Thailand');
-INSERT INTO `countries` VALUES ('219', 'TJ', 'Tajikistan');
-INSERT INTO `countries` VALUES ('220', 'TK', 'Tokelau');
-INSERT INTO `countries` VALUES ('221', 'TL', 'Timor-Leste');
-INSERT INTO `countries` VALUES ('222', 'TM', 'Turkmenistan');
-INSERT INTO `countries` VALUES ('223', 'TN', 'Tunisia');
-INSERT INTO `countries` VALUES ('224', 'TO', 'Tonga');
-INSERT INTO `countries` VALUES ('225', 'TR', 'Turkey');
-INSERT INTO `countries` VALUES ('226', 'TT', 'Trinidad and Tobago');
-INSERT INTO `countries` VALUES ('227', 'TV', 'Tuvalu');
-INSERT INTO `countries` VALUES ('228', 'TW', 'Taiwan');
-INSERT INTO `countries` VALUES ('229', 'TZ', 'Tanzania');
-INSERT INTO `countries` VALUES ('230', 'UA', 'Ukraine');
-INSERT INTO `countries` VALUES ('231', 'UG', 'Uganda');
-INSERT INTO `countries` VALUES ('232', 'UM', 'U.S. Minor Outlying Islands');
-INSERT INTO `countries` VALUES ('233', 'US', 'United States');
-INSERT INTO `countries` VALUES ('234', 'UY', 'Uruguay');
-INSERT INTO `countries` VALUES ('235', 'UZ', 'Uzbekistan');
-INSERT INTO `countries` VALUES ('236', 'VA', 'Vatican City');
-INSERT INTO `countries` VALUES ('237', 'VC', 'St Vincent and Grenadines');
-INSERT INTO `countries` VALUES ('238', 'VE', 'Venezuela');
-INSERT INTO `countries` VALUES ('239', 'VG', 'British Virgin Islands');
-INSERT INTO `countries` VALUES ('240', 'VI', 'U.S. Virgin Islands');
-INSERT INTO `countries` VALUES ('241', 'VN', 'Vietnam');
-INSERT INTO `countries` VALUES ('242', 'VU', 'Vanuatu');
-INSERT INTO `countries` VALUES ('243', 'WF', 'Wallis and Futuna');
-INSERT INTO `countries` VALUES ('244', 'WS', 'Samoa');
-INSERT INTO `countries` VALUES ('245', 'XK', 'Kosovo');
-INSERT INTO `countries` VALUES ('246', 'YE', 'Yemen');
-INSERT INTO `countries` VALUES ('247', 'YT', 'Mayotte');
-INSERT INTO `countries` VALUES ('248', 'ZA', 'South Africa');
-INSERT INTO `countries` VALUES ('249', 'ZM', 'Zambia');
-INSERT INTO `countries` VALUES ('250', 'ZW', 'Zimbabwe');
+--
+-- Dumping data for table `countries`
+--
 
--- ----------------------------
--- Table structure for `tbl_admin`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_admin`;
+INSERT INTO `countries` (`id`, `countryCode`, `countryName`) VALUES
+(1, 'AD', 'Andorra'),
+(2, 'AE', 'United Arab Emirates'),
+(3, 'AF', 'Afghanistan'),
+(4, 'AG', 'Antigua and Barbuda'),
+(5, 'AI', 'Anguilla'),
+(6, 'AL', 'Albania'),
+(7, 'AM', 'Armenia'),
+(8, 'AO', 'Angola'),
+(9, 'AQ', 'Antarctica'),
+(10, 'AR', 'Argentina'),
+(11, 'AS', 'American Samoa'),
+(12, 'AT', 'Austria'),
+(13, 'AU', 'Australia'),
+(14, 'AW', 'Aruba'),
+(15, 'AX', 'Åland'),
+(16, 'AZ', 'Azerbaijan'),
+(17, 'BA', 'Bosnia and Herzegovina'),
+(18, 'BB', 'Barbados'),
+(19, 'BD', 'Bangladesh'),
+(20, 'BE', 'Belgium'),
+(21, 'BF', 'Burkina Faso'),
+(22, 'BG', 'Bulgaria'),
+(23, 'BH', 'Bahrain'),
+(24, 'BI', 'Burundi'),
+(25, 'BJ', 'Benin'),
+(26, 'BL', 'Saint Barthélemy'),
+(27, 'BM', 'Bermuda'),
+(28, 'BN', 'Brunei'),
+(29, 'BO', 'Bolivia'),
+(30, 'BQ', 'Bonaire, Sint Eustatius, and Saba'),
+(31, 'BR', 'Brazil'),
+(32, 'BS', 'Bahamas'),
+(33, 'BT', 'Bhutan'),
+(34, 'BV', 'Bouvet Island'),
+(35, 'BW', 'Botswana'),
+(36, 'BY', 'Belarus'),
+(37, 'BZ', 'Belize'),
+(38, 'CA', 'Canada'),
+(39, 'CC', 'Cocos [Keeling] Islands'),
+(40, 'CD', 'DR Congo'),
+(41, 'CF', 'Central African Republic'),
+(42, 'CG', 'Congo Republic'),
+(43, 'CH', 'Switzerland'),
+(44, 'CI', 'Ivory Coast'),
+(45, 'CK', 'Cook Islands'),
+(46, 'CL', 'Chile'),
+(47, 'CM', 'Cameroon'),
+(48, 'CN', 'China'),
+(49, 'CO', 'Colombia'),
+(50, 'CR', 'Costa Rica'),
+(51, 'CU', 'Cuba'),
+(52, 'CV', 'Cabo Verde'),
+(53, 'CW', 'Curaçao'),
+(54, 'CX', 'Christmas Island'),
+(55, 'CY', 'Cyprus'),
+(56, 'CZ', 'Czechia'),
+(57, 'DE', 'Germany'),
+(58, 'DJ', 'Djibouti'),
+(59, 'DK', 'Denmark'),
+(60, 'DM', 'Dominica'),
+(61, 'DO', 'Dominican Republic'),
+(62, 'DZ', 'Algeria'),
+(63, 'EC', 'Ecuador'),
+(64, 'EE', 'Estonia'),
+(65, 'EG', 'Egypt'),
+(66, 'EH', 'Western Sahara'),
+(67, 'ER', 'Eritrea'),
+(68, 'ES', 'Spain'),
+(69, 'ET', 'Ethiopia'),
+(70, 'FI', 'Finland'),
+(71, 'FJ', 'Fiji'),
+(72, 'FK', 'Falkland Islands'),
+(73, 'FM', 'Micronesia'),
+(74, 'FO', 'Faroe Islands'),
+(75, 'FR', 'France'),
+(76, 'GA', 'Gabon'),
+(77, 'GB', 'United Kingdom'),
+(78, 'GD', 'Grenada'),
+(79, 'GE', 'Georgia'),
+(80, 'GF', 'French Guiana'),
+(81, 'GG', 'Guernsey'),
+(82, 'GH', 'Ghana'),
+(83, 'GI', 'Gibraltar'),
+(84, 'GL', 'Greenland'),
+(85, 'GM', 'Gambia'),
+(86, 'GN', 'Guinea'),
+(87, 'GP', 'Guadeloupe'),
+(88, 'GQ', 'Equatorial Guinea'),
+(89, 'GR', 'Greece'),
+(90, 'GS', 'South Georgia and South Sandwich Islands'),
+(91, 'GT', 'Guatemala'),
+(92, 'GU', 'Guam'),
+(93, 'GW', 'Guinea-Bissau'),
+(94, 'GY', 'Guyana'),
+(95, 'HK', 'Hong Kong'),
+(96, 'HM', 'Heard Island and McDonald Islands'),
+(97, 'HN', 'Honduras'),
+(98, 'HR', 'Croatia'),
+(99, 'HT', 'Haiti'),
+(100, 'HU', 'Hungary'),
+(101, 'ID', 'Indonesia'),
+(102, 'IE', 'Ireland'),
+(103, 'IL', 'Israel'),
+(104, 'IM', 'Isle of Man'),
+(105, 'IN', 'India'),
+(106, 'IO', 'British Indian Ocean Territory'),
+(107, 'IQ', 'Iraq'),
+(108, 'IR', 'Iran'),
+(109, 'IS', 'Iceland'),
+(110, 'IT', 'Italy'),
+(111, 'JE', 'Jersey'),
+(112, 'JM', 'Jamaica'),
+(113, 'JO', 'Jordan'),
+(114, 'JP', 'Japan'),
+(115, 'KE', 'Kenya'),
+(116, 'KG', 'Kyrgyzstan'),
+(117, 'KH', 'Cambodia'),
+(118, 'KI', 'Kiribati'),
+(119, 'KM', 'Comoros'),
+(120, 'KN', 'St Kitts and Nevis'),
+(121, 'KP', 'North Korea'),
+(122, 'KR', 'South Korea'),
+(123, 'KW', 'Kuwait'),
+(124, 'KY', 'Cayman Islands'),
+(125, 'KZ', 'Kazakhstan'),
+(126, 'LA', 'Laos'),
+(127, 'LB', 'Lebanon'),
+(128, 'LC', 'Saint Lucia'),
+(129, 'LI', 'Liechtenstein'),
+(130, 'LK', 'Sri Lanka'),
+(131, 'LR', 'Liberia'),
+(132, 'LS', 'Lesotho'),
+(133, 'LT', 'Lithuania'),
+(134, 'LU', 'Luxembourg'),
+(135, 'LV', 'Latvia'),
+(136, 'LY', 'Libya'),
+(137, 'MA', 'Morocco'),
+(138, 'MC', 'Monaco'),
+(139, 'MD', 'Moldova'),
+(140, 'ME', 'Montenegro'),
+(141, 'MF', 'Saint Martin'),
+(142, 'MG', 'Madagascar'),
+(143, 'MH', 'Marshall Islands'),
+(144, 'MK', 'North Macedonia'),
+(145, 'ML', 'Mali'),
+(146, 'MM', 'Myanmar'),
+(147, 'MN', 'Mongolia'),
+(148, 'MO', 'Macao'),
+(149, 'MP', 'Northern Mariana Islands'),
+(150, 'MQ', 'Martinique'),
+(151, 'MR', 'Mauritania'),
+(152, 'MS', 'Montserrat'),
+(153, 'MT', 'Malta'),
+(154, 'MU', 'Mauritius'),
+(155, 'MV', 'Maldives'),
+(156, 'MW', 'Malawi'),
+(157, 'MX', 'Mexico'),
+(158, 'MY', 'Malaysia'),
+(159, 'MZ', 'Mozambique'),
+(160, 'NA', 'Namibia'),
+(161, 'NC', 'New Caledonia'),
+(162, 'NE', 'Niger'),
+(163, 'NF', 'Norfolk Island'),
+(164, 'NG', 'Nigeria'),
+(165, 'NI', 'Nicaragua'),
+(166, 'NL', 'Netherlands'),
+(167, 'NO', 'Norway'),
+(168, 'NP', 'Nepal'),
+(169, 'NR', 'Nauru'),
+(170, 'NU', 'Niue'),
+(171, 'NZ', 'New Zealand'),
+(172, 'OM', 'Oman'),
+(173, 'PA', 'Panama'),
+(174, 'PE', 'Peru'),
+(175, 'PF', 'French Polynesia'),
+(176, 'PG', 'Papua New Guinea'),
+(177, 'PH', 'Philippines'),
+(178, 'PK', 'Pakistan'),
+(179, 'PL', 'Poland'),
+(180, 'PM', 'Saint Pierre and Miquelon'),
+(181, 'PN', 'Pitcairn Islands'),
+(182, 'PR', 'Puerto Rico'),
+(183, 'PS', 'Palestine'),
+(184, 'PT', 'Portugal'),
+(185, 'PW', 'Palau'),
+(186, 'PY', 'Paraguay'),
+(187, 'QA', 'Qatar'),
+(188, 'RE', 'Réunion'),
+(189, 'RO', 'Romania'),
+(190, 'RS', 'Serbia'),
+(191, 'RU', 'Russia'),
+(192, 'RW', 'Rwanda'),
+(193, 'SA', 'Saudi Arabia'),
+(194, 'SB', 'Solomon Islands'),
+(195, 'SC', 'Seychelles'),
+(196, 'SD', 'Sudan'),
+(197, 'SE', 'Sweden'),
+(198, 'SG', 'Singapore'),
+(199, 'SH', 'Saint Helena'),
+(200, 'SI', 'Slovenia'),
+(201, 'SJ', 'Svalbard and Jan Mayen'),
+(202, 'SK', 'Slovakia'),
+(203, 'SL', 'Sierra Leone'),
+(204, 'SM', 'San Marino'),
+(205, 'SN', 'Senegal'),
+(206, 'SO', 'Somalia'),
+(207, 'SR', 'Suriname'),
+(208, 'SS', 'South Sudan'),
+(209, 'ST', 'São Tomé and Príncipe'),
+(210, 'SV', 'El Salvador'),
+(211, 'SX', 'Sint Maarten'),
+(212, 'SY', 'Syria'),
+(213, 'SZ', 'Eswatini'),
+(214, 'TC', 'Turks and Caicos Islands'),
+(215, 'TD', 'Chad'),
+(216, 'TF', 'French Southern Territories'),
+(217, 'TG', 'Togo'),
+(218, 'TH', 'Thailand'),
+(219, 'TJ', 'Tajikistan'),
+(220, 'TK', 'Tokelau'),
+(221, 'TL', 'Timor-Leste'),
+(222, 'TM', 'Turkmenistan'),
+(223, 'TN', 'Tunisia'),
+(224, 'TO', 'Tonga'),
+(225, 'TR', 'Turkey'),
+(226, 'TT', 'Trinidad and Tobago'),
+(227, 'TV', 'Tuvalu'),
+(228, 'TW', 'Taiwan'),
+(229, 'TZ', 'Tanzania'),
+(230, 'UA', 'Ukraine'),
+(231, 'UG', 'Uganda'),
+(232, 'UM', 'U.S. Minor Outlying Islands'),
+(233, 'US', 'United States'),
+(234, 'UY', 'Uruguay'),
+(235, 'UZ', 'Uzbekistan'),
+(236, 'VA', 'Vatican City'),
+(237, 'VC', 'St Vincent and Grenadines'),
+(238, 'VE', 'Venezuela'),
+(239, 'VG', 'British Virgin Islands'),
+(240, 'VI', 'U.S. Virgin Islands'),
+(241, 'VN', 'Vietnam'),
+(242, 'VU', 'Vanuatu'),
+(243, 'WF', 'Wallis and Futuna'),
+(244, 'WS', 'Samoa'),
+(245, 'XK', 'Kosovo'),
+(246, 'YE', 'Yemen'),
+(247, 'YT', 'Mayotte'),
+(248, 'ZA', 'South Africa'),
+(249, 'ZM', 'Zambia'),
+(250, 'ZW', 'Zimbabwe');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_admin`
+--
+
 CREATE TABLE `tbl_admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `is_admin` varchar(255) DEFAULT '' COMMENT '1// admin 2// superadmin 3//administrator',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `is_admin` varchar(255) DEFAULT '' COMMENT '1// admin 2// superadmin 3//administrator'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_admin
--- ----------------------------
-INSERT INTO `tbl_admin` VALUES ('1', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', '2020-01-22 14:10:30', '2');
-INSERT INTO `tbl_admin` VALUES ('2', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 10:48:48', '3');
-INSERT INTO `tbl_admin` VALUES ('3', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 11:14:25', '3');
-INSERT INTO `tbl_admin` VALUES ('4', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-22 14:10:23', '3');
-INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', '2020-01-20 10:48:51', '2');
-INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-22 14:10:25', '1');
+--
+-- Dumping data for table `tbl_admin`
+--
 
--- ----------------------------
--- Table structure for `tbl_bookmark`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_bookmark`;
+INSERT INTO `tbl_admin` (`id`, `email`, `phone`, `username`, `password`, `created_at`, `is_admin`) VALUES
+(1, 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', '94d2be2e13cce22e63f410e98d6d59a9', '2020-01-22 07:10:30', '2'),
+(2, 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 03:48:48', '3'),
+(3, 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-20 04:14:25', '3'),
+(4, 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-22 07:10:23', '3'),
+(5, 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', '2020-01-20 03:48:51', '2'),
+(6, 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-22 07:10:25', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_bookmark`
+--
+
 CREATE TABLE `tbl_bookmark` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_user` varchar(255) DEFAULT '' COMMENT 'CM0001',
   `id_orderBuy` varchar(255) DEFAULT '' COMMENT 'OD0001',
   `id_document` varchar(255) DEFAULT '' COMMENT 'DM001',
   `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_bookmark
--- ----------------------------
+--
+-- Dumping data for table `tbl_bookmark`
+--
 
--- ----------------------------
--- Table structure for `tbl_deposit`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_deposit`;
+INSERT INTO `tbl_bookmark` (`id`, `id_user`, `id_orderBuy`, `id_document`, `create_at`, `update_at`) VALUES
+(4, 'CM4', 'OR-2', 'fdfdfd', '2020-02-07 11:50:40', NULL),
+(5, 'CM4', 'OD6', 'r', '2020-02-07 11:52:10', NULL),
+(6, 'CM4', 'OD9', 't-89', '2020-02-07 12:04:57', NULL),
+(7, 'CM4', 'OD9', 't-89', '2020-02-07 12:12:00', NULL),
+(8, 'CM4', 'OD9', 't-89', '2020-02-07 12:14:11', NULL),
+(9, 'CM4', 'OD9', 't-89', '2020-02-07 12:16:17', NULL),
+(10, 'CM4', 'OD9', 't-89', '2020-02-07 12:53:34', NULL),
+(11, 'CM4', 'OD9', 't-89', '2020-02-07 14:01:14', NULL),
+(12, 'CM4', 'OD17', 'V10000', '2020-02-07 16:23:10', NULL),
+(13, 'CM4', 'OD9', 't-80', '2020-02-07 16:56:22', NULL),
+(14, 'CM4', 'OD19', 't-80', '2020-02-07 17:32:29', NULL),
+(15, 'CM4', 'OD19', 't-80', '2020-02-07 17:45:18', NULL),
+(16, 'CM4', 'OD19', 't-80', '2020-02-07 17:47:31', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_deposit`
+--
+
 CREATE TABLE `tbl_deposit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,
   `price` varchar(255) DEFAULT NULL,
   `status` int(10) DEFAULT NULL,
   `create_at` datetime NOT NULL,
   `update_at` datetime NOT NULL,
   `note` varchar(255) DEFAULT NULL,
-  `bill_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `bill_id` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_deposit
--- ----------------------------
-INSERT INTO `tbl_deposit` VALUES ('1', '4', '100', '1', '2020-01-20 15:14:13', '2020-01-20 15:20:19', '-', 'DE-1234');
+--
+-- Dumping data for table `tbl_deposit`
+--
 
--- ----------------------------
--- Table structure for `tbl_follow`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_follow`;
+INSERT INTO `tbl_deposit` (`id`, `userId`, `price`, `status`, `create_at`, `update_at`, `note`, `bill_id`) VALUES
+(1, 4, '100', 1, '2020-01-20 15:14:13', '2020-01-20 15:20:19', '-', 'DE-1234');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_follow`
+--
+
 CREATE TABLE `tbl_follow` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `sender_userId` int(11) DEFAULT NULL,
   `receiver_userId` int(11) DEFAULT NULL,
-  `create_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `create_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_follow
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for `tbl_history`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_history`;
+--
+-- Table structure for table `tbl_history`
+--
+
 CREATE TABLE `tbl_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `user_id` varchar(255) DEFAULT NULL,
   `upload_id` varchar(255) DEFAULT NULL,
-  `created_at` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `created_at` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_history
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for `tbl_job`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_job`;
+--
+-- Table structure for table `tbl_job`
+--
+
 CREATE TABLE `tbl_job` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `job_position` varchar(255) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_job
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for `tbl_job_position`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_job_position`;
+--
+-- Table structure for table `tbl_job_position`
+--
+
 CREATE TABLE `tbl_job_position` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `id_team` int(11) DEFAULT NULL,
   `job_position` varchar(150) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_job_position
--- ----------------------------
-INSERT INTO `tbl_job_position` VALUES ('1', '1', '1', '2020-01-16 14:50:18', null);
-INSERT INTO `tbl_job_position` VALUES ('2', '1', '3', '2020-01-16 14:50:18', null);
-INSERT INTO `tbl_job_position` VALUES ('3', '1', '4', '2020-01-16 14:50:18', null);
+--
+-- Dumping data for table `tbl_job_position`
+--
 
--- ----------------------------
--- Table structure for `tbl_package`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_package`;
+INSERT INTO `tbl_job_position` (`id`, `id_team`, `job_position`, `create_at`, `update_at`) VALUES
+(1, 1, '1', '2020-01-16 14:50:18', NULL),
+(2, 1, '3', '2020-01-16 14:50:18', NULL),
+(3, 1, '4', '2020-01-16 14:50:18', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order_f`
+--
+
+CREATE TABLE `tbl_order_f` (
+  `id` int(11) NOT NULL,
+  `order_main` varchar(255) DEFAULT NULL,
+  `create_at` date DEFAULT NULL,
+  `status` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_order_f`
+--
+
+INSERT INTO `tbl_order_f` (`id`, `order_main`, `create_at`, `status`) VALUES
+(1, 'OD1', '2020-02-05', 1),
+(2, 'OD2', '2020-02-05', 1),
+(3, 'OD3', '2020-02-07', 1),
+(4, 'OD4', '2020-02-07', 1),
+(5, 'OD5', '2020-02-07', 1),
+(6, 'OD6', '2020-02-07', 1),
+(7, 'OD7', '2020-02-07', 1),
+(8, 'OD8', '2020-02-07', 1),
+(9, 'OD9', '2020-02-07', 1),
+(10, 'OD10', '2020-02-07', 1),
+(11, 'OD11', '2020-02-07', 1),
+(12, 'OD12', '2020-02-07', 1),
+(13, 'OD13', '2020-02-07', 1),
+(14, 'OD14', '2020-02-07', 1),
+(15, 'OD15', '2020-02-07', 1),
+(16, 'OD16', '2020-02-07', 1),
+(17, 'OD17', '2020-02-07', 1),
+(18, 'OD18', '2020-02-07', 1),
+(19, 'OD19', '2020-02-07', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_package`
+--
+
 CREATE TABLE `tbl_package` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title_pk` varchar(200) DEFAULT NULL,
   `price_pk` varchar(100) DEFAULT '',
-  `description_pk` text DEFAULT NULL,
+  `description_pk` text,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `userId_pk` int(11) DEFAULT NULL,
-  `status` int(2) DEFAULT 0,
-  `time_pk` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `status` int(2) DEFAULT '0',
+  `time_pk` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_package
--- ----------------------------
-INSERT INTO `tbl_package` VALUES ('1', 'Free', '0.00', 'เหมาะสำหรับเว็บไซต์ส่วนตัวเว็บบริษัทขนาดเล็ก Natus erro at congue massa commodo sit', '2020-01-06 00:00:00', null, null, '0', 'mo');
-INSERT INTO `tbl_package` VALUES ('4', 'Annual', '10.00', 'เหมาะสำหรับเว็บไซต์ส่วนตัวเว็บบริษัทขนาดเล็ก Natus erro at congue massa commodo sit', '2020-01-06 00:00:00', null, null, '0', 'mo');
+--
+-- Dumping data for table `tbl_package`
+--
 
--- ----------------------------
--- Table structure for `tbl_paypal`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_paypal`;
+INSERT INTO `tbl_package` (`id`, `title_pk`, `price_pk`, `description_pk`, `created_at`, `update_at`, `userId_pk`, `status`, `time_pk`) VALUES
+(1, 'Free', '0.00', 'เหมาะสำหรับเว็บไซต์ส่วนตัวเว็บบริษัทขนาดเล็ก Natus erro at congue massa commodo sit', '2020-01-06 00:00:00', NULL, NULL, 0, 'mo'),
+(4, 'Annual', '10.00', 'เหมาะสำหรับเว็บไซต์ส่วนตัวเว็บบริษัทขนาดเล็ก Natus erro at congue massa commodo sit', '2020-01-06 00:00:00', NULL, NULL, 0, 'mo');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_paypal`
+--
+
 CREATE TABLE `tbl_paypal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `orderID` varchar(255) NOT NULL,
   `payerID` varchar(255) NOT NULL,
   `amount` int(11) NOT NULL,
@@ -450,69 +519,98 @@ CREATE TABLE `tbl_paypal` (
   `last_name` varchar(150) NOT NULL,
   `create_time` datetime NOT NULL,
   `start_time` datetime DEFAULT NULL,
-  `status_drop` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `status_drop` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_paypal
--- ----------------------------
-INSERT INTO `tbl_paypal` VALUES ('1', '04872538P9424894Y', 'J3GJEC9GX23VS', '10', 'USD', '4', 'John', 'Doe', '2020-01-28 16:53:19', '2020-02-27 16:53:19', '1');
+--
+-- Dumping data for table `tbl_paypal`
+--
 
--- ----------------------------
--- Table structure for `tbl_rejected`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_rejected`;
+INSERT INTO `tbl_paypal` (`id`, `orderID`, `payerID`, `amount`, `currency_code`, `user_id`, `first_name`, `last_name`, `create_time`, `start_time`, `status_drop`) VALUES
+(1, '04872538P9424894Y', 'J3GJEC9GX23VS', 10, 'USD', 4, 'John', 'Doe', '2020-01-28 16:53:19', '2020-02-27 16:53:19', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_rejected`
+--
+
 CREATE TABLE `tbl_rejected` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `description` text NOT NULL,
   `bookid_rj` int(11) DEFAULT NULL,
   `userId_rj` int(11) DEFAULT NULL,
   `create_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `status` int(2) DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  `status` int(2) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_rejected
--- ----------------------------
-INSERT INTO `tbl_rejected` VALUES ('7', '', '7', '5', '2020-01-06 16:50:55', null, '1');
-INSERT INTO `tbl_rejected` VALUES ('8', '', '7', '6', '2020-01-06 16:50:55', null, '1');
-INSERT INTO `tbl_rejected` VALUES ('9', '', '7', '7', '2020-01-06 16:50:55', null, '1');
-INSERT INTO `tbl_rejected` VALUES ('10', '', '7', '8', '2020-01-06 16:50:55', null, '1');
-INSERT INTO `tbl_rejected` VALUES ('11', '', '8', '6', '2020-01-07 15:30:45', null, '1');
+--
+-- Dumping data for table `tbl_rejected`
+--
 
--- ----------------------------
--- Table structure for `tbl_select_item`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_select_item`;
+INSERT INTO `tbl_rejected` (`id`, `description`, `bookid_rj`, `userId_rj`, `create_at`, `updated_at`, `status`) VALUES
+(7, '', 7, 5, '2020-01-06 16:50:55', NULL, 1),
+(8, '', 7, 6, '2020-01-06 16:50:55', NULL, 1),
+(9, '', 7, 7, '2020-01-06 16:50:55', NULL, 1),
+(10, '', 7, 8, '2020-01-06 16:50:55', NULL, 1),
+(11, '', 8, 6, '2020-01-07 15:30:45', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_select_item`
+--
+
 CREATE TABLE `tbl_select_item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name_item` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_select_item
--- ----------------------------
-INSERT INTO `tbl_select_item` VALUES ('1', 'อาหาร', '2019-12-26 13:31:33', null);
-INSERT INTO `tbl_select_item` VALUES ('2', 'คณิตศาสตร์', '2019-12-26 18:02:22', null);
-INSERT INTO `tbl_select_item` VALUES ('3', 'ดาราศาสตร์', '2020-01-03 14:48:42', null);
-INSERT INTO `tbl_select_item` VALUES ('4', 'ภาษาไทย', '2020-01-03 14:48:48', null);
-INSERT INTO `tbl_select_item` VALUES ('5', 'อวกาศ', '2020-01-03 14:48:59', null);
-INSERT INTO `tbl_select_item` VALUES ('6', 'ดนตรี', '2020-01-03 14:49:10', null);
-INSERT INTO `tbl_select_item` VALUES ('7', 'การเมือง', '2020-01-03 14:51:22', null);
-INSERT INTO `tbl_select_item` VALUES ('8', 'รัฐบาล', '2020-01-03 14:51:31', null);
+--
+-- Dumping data for table `tbl_select_item`
+--
 
--- ----------------------------
--- Table structure for `tbl_team`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_team`;
+INSERT INTO `tbl_select_item` (`id`, `name_item`, `created_at`, `updated_at`) VALUES
+(1, 'อาหาร', '2019-12-26 13:31:33', NULL),
+(2, 'คณิตศาสตร์', '2019-12-26 18:02:22', NULL),
+(3, 'ดาราศาสตร์', '2020-01-03 14:48:42', NULL),
+(4, 'ภาษาไทย', '2020-01-03 14:48:48', NULL),
+(5, 'อวกาศ', '2020-01-03 14:48:59', NULL),
+(6, 'ดนตรี', '2020-01-03 14:49:10', NULL),
+(7, 'การเมือง', '2020-01-03 14:51:22', NULL),
+(8, 'รัฐบาล', '2020-01-03 14:51:31', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_store_for_buy_email`
+--
+
+CREATE TABLE `tbl_store_for_buy_email` (
+  `id` int(11) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `order_id` varchar(255) NOT NULL,
+  `price_file` varchar(255) NOT NULL,
+  `discount` varchar(100) NOT NULL,
+  `price_dis` varchar(255) NOT NULL,
+  `customer_id` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `update_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_team`
+--
+
 CREATE TABLE `tbl_team` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `country_id` int(11) DEFAULT NULL,
   `email` varchar(150) DEFAULT '',
   `phone` varchar(150) DEFAULT NULL,
@@ -521,21 +619,24 @@ CREATE TABLE `tbl_team` (
   `file_name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
-  `status` int(11) DEFAULT 0 COMMENT '0 == approve //  == non-approve',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `status` int(11) DEFAULT '0' COMMENT '0 == approve //  == non-approve'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_team
--- ----------------------------
-INSERT INTO `tbl_team` VALUES ('1', '218', 'famnoiii@gmail.com', '0968138751', 'Fam Worapong', 'e10adc3949ba59abbe56e057f20f883e', 'screencapture-file-G-Fam-E-backup-19-9-19-profile-profile-index-html-2020-01-06-19_08_028.png', '2020-01-16 14:50:17', null, '1');
+--
+-- Dumping data for table `tbl_team`
+--
 
--- ----------------------------
--- Table structure for `tbl_unlocks`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_unlocks`;
+INSERT INTO `tbl_team` (`id`, `country_id`, `email`, `phone`, `name`, `password`, `file_name`, `created_at`, `update_at`, `status`) VALUES
+(1, 218, 'famnoiii@gmail.com', '0968138751', 'Fam Worapong', 'e10adc3949ba59abbe56e057f20f883e', 'screencapture-file-G-Fam-E-backup-19-9-19-profile-profile-index-html-2020-01-06-19_08_028.png', '2020-01-16 14:50:17', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_unlocks`
+--
+
 CREATE TABLE `tbl_unlocks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,
   `merchant_id` int(11) NOT NULL,
   `upload_id` int(11) DEFAULT NULL,
@@ -543,64 +644,72 @@ CREATE TABLE `tbl_unlocks` (
   `create_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `ip_address` varchar(200) DEFAULT NULL,
-  `status` int(5) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `status` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- ----------------------------
--- Records of tbl_unlocks
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for `tbl_upload`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_upload`;
+--
+-- Table structure for table `tbl_upload`
+--
+
 CREATE TABLE `tbl_upload` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `select_item_id` int(11) NOT NULL,
   `search_item` varchar(255) DEFAULT '',
   `select_item` varchar(255) DEFAULT '',
-  `code` text DEFAULT NULL,
-  `topic` text DEFAULT NULL,
+  `code` text,
+  `topic` text,
   `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_upload
--- ----------------------------
-INSERT INTO `tbl_upload` VALUES ('4', '4', '1', 'อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'ZXC001', 'สำหรับคนรักการทำอาหาร', '2020-01-04 14:09:31', null);
-INSERT INTO `tbl_upload` VALUES ('5', '4', '2', 'เอกสารสำคัญ - โปรแกรม ร้าน ค้า ปลีก', 'คณิตศาสตร์', 'ZXV33', 'โปรแกรม ร้าน ค้า ปลีก', '2020-01-04 14:10:10', null);
-
--- ----------------------------
--- Table structure for `tbl_upload_main_search`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_upload_main_search`;
-CREATE TABLE `tbl_upload_main_search` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
-  `select_item_id` int(11) NOT NULL,
-  `search_item` varchar(255) DEFAULT '',
-  `select_item` varchar(255) DEFAULT '',
-  `code` text DEFAULT NULL,
-  `topic` text DEFAULT NULL,
-  `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_upload_main_search
--- ----------------------------
+--
+-- Dumping data for table `tbl_upload`
+--
 
--- ----------------------------
--- Table structure for `tbl_upload_order`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_upload_order`;
+INSERT INTO `tbl_upload` (`id`, `userId`, `select_item_id`, `search_item`, `select_item`, `code`, `topic`, `create_at`, `update_at`) VALUES
+(4, 4, 1, 'อาหารไทย เมนูอาหาร สูตรอาหารง่ายๆ สำหรับคนรักการทำอาหาร', 'อาหาร', 'ZXC001', 'สำหรับคนรักการทำอาหาร', '2020-01-04 14:09:31', NULL),
+(5, 4, 2, 'เอกสารสำคัญ - โปรแกรม ร้าน ค้า ปลีก', 'คณิตศาสตร์', 'ZXV33', 'โปรแกรม ร้าน ค้า ปลีก', '2020-01-04 14:10:10', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_upload_main_search`
+--
+
+CREATE TABLE `tbl_upload_main_search` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `select_item_id` int(11) NOT NULL,
+  `search_item` varchar(255) DEFAULT '',
+  `select_item` varchar(255) DEFAULT '',
+  `code` text,
+  `topic` text,
+  `upload_store_id` int(11) NOT NULL,
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_upload_main_search`
+--
+
+INSERT INTO `tbl_upload_main_search` (`id`, `userId`, `select_item_id`, `search_item`, `select_item`, `code`, `topic`, `upload_store_id`, `create_at`, `update_at`) VALUES
+(1, 4, 2, 'G-Shock', 'คณิตศาสตร์', 'C76JB', '-----', 8, '2020-02-07 11:22:36', '2020-02-07 11:22:36'),
+(2, 4, 3, 'T-5', 'ดาราศาสตร์', 'T-61', '---', 7, '2020-02-07 11:30:12', '2020-02-07 11:30:12'),
+(3, 4, 7, 'G-Shock', 'การเมือง', '1000', '5485778', 9, '2020-02-07 12:01:40', '2020-02-07 12:01:40'),
+(4, 4, 2, 'Y-88', 'คณิตศาสตร์', 'T88', 'wqe', 10, '2020-02-07 12:03:36', '2020-02-07 12:03:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_upload_order`
+--
+
 CREATE TABLE `tbl_upload_order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `file_name` varchar(255) DEFAULT '',
   `order_id` varchar(110) DEFAULT '' COMMENT 'OR00001',
@@ -609,29 +718,38 @@ CREATE TABLE `tbl_upload_order` (
   `path` varchar(255) DEFAULT NULL,
   `date_required` date DEFAULT NULL,
   `price_file` varchar(255) DEFAULT NULL,
-  `status_book` varchar(255) DEFAULT '0' COMMENT '0// not 1//ture',
-  `is_check` varchar(255) DEFAULT '0' COMMENT '0//not 1// ture',
-  `note_reject` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `status_book` int(11) DEFAULT '0' COMMENT '0// not 1//ture',
+  `is_check` int(11) DEFAULT '0' COMMENT '0//not 1// ture',
+  `note_reject` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_upload_order
--- ----------------------------
-INSERT INTO `tbl_upload_order` VALUES ('1', '4', 'shirt-1580109491.jpg', 'OR-1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', '2020-02-05', '', '', '1', 'asdasdasdasd');
-INSERT INTO `tbl_upload_order` VALUES ('2', '4', 'shirt-1580439213.jpg', 'OR-2', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', '2020-02-16', '', '', null, null);
-INSERT INTO `tbl_upload_order` VALUES ('3', '4', '2.jpg', 'OR-3', '2020-02-03 16:11:12', null, 'uploads/Buy/2.jpg', '2020-02-14', '', '', '1', 'not work');
+--
+-- Dumping data for table `tbl_upload_order`
+--
 
--- ----------------------------
--- Table structure for `tbl_upload_store`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_upload_store`;
+INSERT INTO `tbl_upload_order` (`id`, `userId`, `file_name`, `order_id`, `create_at`, `update_at`, `path`, `date_required`, `price_file`, `status_book`, `is_check`, `note_reject`) VALUES
+(1, 4, 'shirt-1580109491.jpg', 'OR-1', '2020-02-03 10:09:48', NULL, 'uploads/Buy/shirt-1580109491.jpg', '2020-02-05', '', 0, 1, 'asdasdasdasd'),
+(2, 4, 'shirt-1580439213.jpg', 'OR-2', '2020-02-03 10:09:48', NULL, 'uploads/Buy/shirt-1580439213.jpg', '2020-02-16', '200', 1, NULL, NULL),
+(3, 4, '2.jpg', 'OR-3', '2020-02-03 16:11:12', NULL, 'uploads/Buy/2.jpg', '2020-02-14', '', 0, 1, 'not work'),
+(4, 4, 'ใบเสร็จคุณเบิร์ด_(2).pdf', 'OD6', '2020-02-07 11:23:34', NULL, 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2).pdf', '2020-02-14', '200', 1, 0, NULL),
+(12, 4, 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25631.pdf', 'OD9', '2020-02-07 14:13:51', '2020-02-07 16:56:22', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25631.pdf', '0000-00-00', '100', 1, 0, NULL),
+(13, 4, 'ใบเสร็จคุณเบิร์ด_(2)2.pdf', 'OD9', '2020-02-07 14:13:51', '2020-02-07 16:56:22', 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2)2.pdf', '0000-00-00', '100', 1, 0, NULL),
+(14, 4, 'ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', '2020-02-08', '1000', 1, 0, NULL),
+(15, 4, 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', '2020-02-08', '1000', 1, 0, NULL),
+(16, 4, 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', 'OD19', '2020-02-07 17:32:09', '2020-02-07 17:47:31', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', '2020-02-21', '10000', 1, 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_upload_store`
+--
+
 CREATE TABLE `tbl_upload_store` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `store_id` varchar(110) DEFAULT '' COMMENT 'ST00001',
   `file_name` varchar(255) DEFAULT NULL,
-  `is_check` int(5) DEFAULT 0,
+  `is_check` int(5) DEFAULT '0',
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
@@ -639,64 +757,354 @@ CREATE TABLE `tbl_upload_store` (
   `note` varchar(255) DEFAULT NULL,
   `grade` varchar(255) DEFAULT NULL,
   `status_cp` varchar(255) DEFAULT NULL,
-  `status_main_search` tinyint(1) NOT NULL DEFAULT 0,
-  `is_accept` int(11) DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `status_main_search` tinyint(1) NOT NULL DEFAULT '0',
+  `is_accept` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_upload_store
--- ----------------------------
-INSERT INTO `tbl_upload_store` VALUES ('1', '4', 'ST-1', 'sample-3pp.pdf', '0', '2020-01-31 10:27:53', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST', 'A', null, '0', '0');
-INSERT INTO `tbl_upload_store` VALUES ('2', '4', 'ST-2', 'sample-3pp.pdf', '0', '2020-02-04 12:17:36', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST2', 'B', null, '0', '0');
+--
+-- Dumping data for table `tbl_upload_store`
+--
 
--- ----------------------------
--- Table structure for `tbl_user`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_user`;
+INSERT INTO `tbl_upload_store` (`id`, `userId`, `store_id`, `file_name`, `is_check`, `create_at`, `update_at`, `path`, `price_file`, `note`, `grade`, `status_cp`, `status_main_search`, `is_accept`) VALUES
+(1, 4, 'ST-1', 'sample-3pp.pdf', 0, '2020-01-31 10:27:53', NULL, 'uploads/Store/sample-3pp.pdf', NULL, 'TEST', 'A', NULL, 0, 1),
+(2, 4, 'ST-2', 'sample-3pp.pdf', 0, '2020-02-04 12:17:36', NULL, 'uploads/Store/sample-3pp.pdf', NULL, 'TEST2', 'B', NULL, 0, 1),
+(6, 4, 'OD3', 'UML_การทำงานระบบแจ้งเตือน.pdf', 1, '2020-02-07 11:01:54', NULL, 'uploads/Store/UML_การทำงานระบบแจ้งเตือน.pdf', NULL, NULL, NULL, NULL, 0, 1),
+(7, 4, 'OD4', 'ใบเสนอราคาline_4_1_2563_.pdf', 1, '2020-02-07 11:03:09', NULL, 'uploads/Store/ใบเสนอราคาline_4_1_2563_.pdf', '20', NULL, 'B', 'complete', 1, 0),
+(8, 4, 'OD5', 'ใบเสร็จคุณเบิร์ด2.pdf', 0, '2020-02-07 11:21:05', NULL, 'uploads/Store/ใบเสร็จคุณเบิร์ด2.pdf', '20', NULL, 'B', 'complete', 1, 0),
+(9, 4, 'OD7', 'ใบเสร็จคุณเบิร์ด_(2).pdf', 0, '2020-02-07 12:01:17', NULL, 'uploads/Store/ใบเสร็จคุณเบิร์ด_(2).pdf', '50', NULL, 'A', 'complete', 1, 0),
+(10, 4, 'OD8', 'บทนำ.pdf', 0, '2020-02-07 12:02:57', NULL, 'uploads/Store/บทนำ.pdf', '50', NULL, 'A', 'complete', 1, 0),
+(11, 4, 'OD9', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', 0, '2020-02-07 17:31:50', NULL, 'uploads/Store/ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', NULL, NULL, NULL, NULL, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_user`
+--
+
 CREATE TABLE `tbl_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `idUser` varchar(255) DEFAULT NULL,
   `passport` varchar(255) DEFAULT NULL,
-  `cash` int(11) NOT NULL DEFAULT 0,
-  `score` int(11) DEFAULT 0,
+  `cash` int(11) NOT NULL DEFAULT '0',
+  `score` int(11) DEFAULT '0',
   `email` varchar(255) DEFAULT '',
   `phone` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `file_name` varchar(255) DEFAULT NULL,
-  `free_forever` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+  `free_forever` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_user
--- ----------------------------
-INSERT INTO `tbl_user` VALUES ('2', 'CM2', '1269900232221', '0', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-04 13:56:11');
-INSERT INTO `tbl_user` VALUES ('3', 'CM3', '123456789', '0', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '0', '2020-02-04 13:56:13');
-INSERT INTO `tbl_user` VALUES ('4', 'CM4', '4444555666112', '150', '100', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-04 13:56:15');
-INSERT INTO `tbl_user` VALUES ('5', 'CM5', '123123', '0', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '0', '2020-02-04 13:56:17');
-INSERT INTO `tbl_user` VALUES ('6', 'CM6', '987456123', '2', '0', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', null, '1', '2020-02-04 13:56:20');
-INSERT INTO `tbl_user` VALUES ('23', 'CM23', '1659900740516', '0', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', 'e10adc3949ba59abbe56e057f20f883e', null, '0', '2020-02-04 13:55:59');
+--
+-- Dumping data for table `tbl_user`
+--
 
--- ----------------------------
--- Table structure for `tbl_withdraw`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_withdraw`;
+INSERT INTO `tbl_user` (`id`, `idUser`, `passport`, `cash`, `score`, `email`, `phone`, `username`, `password`, `file_name`, `free_forever`, `created_at`) VALUES
+(2, 'CM2', '1269900232221', 0, 0, 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', 0, '2020-02-04 06:56:11'),
+(3, 'CM3', '123456789', 0, 0, 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', 0, '2020-02-04 06:56:13'),
+(4, 'CM4', '4444555666112', 150, 100, 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', 1, '2020-02-07 04:03:25'),
+(5, 'CM5', '123123', 0, 0, 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', NULL, 0, '2020-02-04 06:56:17'),
+(6, 'CM6', '987456123', 2, 0, 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', NULL, 1, '2020-02-04 06:56:20'),
+(23, 'CM23', '1659900740516', 0, 0, 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', 'e10adc3949ba59abbe56e057f20f883e', NULL, 0, '2020-02-04 06:55:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_withdraw`
+--
+
 CREATE TABLE `tbl_withdraw` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,
   `price` varchar(255) DEFAULT NULL,
-  `status` int(10) DEFAULT 1 COMMENT '1 = กำลังดำเนินการ , 2 = เสร็จสิ้น , 3 = ล้มเหลว',
+  `status` int(10) DEFAULT '1' COMMENT '1 = กำลังดำเนินการ , 2 = เสร็จสิ้น , 3 = ล้มเหลว',
   `create_at` datetime NOT NULL,
   `update_at` datetime NOT NULL,
   `note` varchar(255) DEFAULT '-',
-  `bill_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `bill_id` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tbl_withdraw
--- ----------------------------
-INSERT INTO `tbl_withdraw` VALUES ('1', '4', '150', '2', '2020-01-20 15:20:23', '2020-01-20 15:20:26', '-', 'WD-321');
+--
+-- Dumping data for table `tbl_withdraw`
+--
+
+INSERT INTO `tbl_withdraw` (`id`, `userId`, `price`, `status`, `create_at`, `update_at`, `note`, `bill_id`) VALUES
+(1, 4, '150', 2, '2020-01-20 15:20:23', '2020-01-20 15:20:26', '-', 'WD-321');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_bookmark`
+--
+ALTER TABLE `tbl_bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_deposit`
+--
+ALTER TABLE `tbl_deposit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_follow`
+--
+ALTER TABLE `tbl_follow`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_history`
+--
+ALTER TABLE `tbl_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_job`
+--
+ALTER TABLE `tbl_job`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_job_position`
+--
+ALTER TABLE `tbl_job_position`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_order_f`
+--
+ALTER TABLE `tbl_order_f`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_package`
+--
+ALTER TABLE `tbl_package`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_paypal`
+--
+ALTER TABLE `tbl_paypal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_rejected`
+--
+ALTER TABLE `tbl_rejected`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_select_item`
+--
+ALTER TABLE `tbl_select_item`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_store_for_buy_email`
+--
+ALTER TABLE `tbl_store_for_buy_email`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_team`
+--
+ALTER TABLE `tbl_team`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_unlocks`
+--
+ALTER TABLE `tbl_unlocks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_upload`
+--
+ALTER TABLE `tbl_upload`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_upload_main_search`
+--
+ALTER TABLE `tbl_upload_main_search`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_upload_order`
+--
+ALTER TABLE `tbl_upload_order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_upload_store`
+--
+ALTER TABLE `tbl_upload_store`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_withdraw`
+--
+ALTER TABLE `tbl_withdraw`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+
+--
+-- AUTO_INCREMENT for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_bookmark`
+--
+ALTER TABLE `tbl_bookmark`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `tbl_deposit`
+--
+ALTER TABLE `tbl_deposit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_follow`
+--
+ALTER TABLE `tbl_follow`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_history`
+--
+ALTER TABLE `tbl_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_job`
+--
+ALTER TABLE `tbl_job`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_job_position`
+--
+ALTER TABLE `tbl_job_position`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_order_f`
+--
+ALTER TABLE `tbl_order_f`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `tbl_package`
+--
+ALTER TABLE `tbl_package`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_paypal`
+--
+ALTER TABLE `tbl_paypal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_rejected`
+--
+ALTER TABLE `tbl_rejected`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_select_item`
+--
+ALTER TABLE `tbl_select_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_store_for_buy_email`
+--
+ALTER TABLE `tbl_store_for_buy_email`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_team`
+--
+ALTER TABLE `tbl_team`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_unlocks`
+--
+ALTER TABLE `tbl_unlocks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_upload`
+--
+ALTER TABLE `tbl_upload`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_upload_main_search`
+--
+ALTER TABLE `tbl_upload_main_search`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_upload_order`
+--
+ALTER TABLE `tbl_upload_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `tbl_upload_store`
+--
+ALTER TABLE `tbl_upload_store`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `tbl_withdraw`
+--
+ALTER TABLE `tbl_withdraw`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
