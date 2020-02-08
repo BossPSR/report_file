@@ -113,6 +113,7 @@ class Store_ctr extends CI_Controller {
     public function check_NotSatisfired_order_add_com()
     {
             $id = $this->input->post('id');
+            $orderid = $this->input->post('orderid');
 
         $data = array(
 
@@ -122,7 +123,7 @@ class Store_ctr extends CI_Controller {
            
 
         );
-                       $this->db->where('id', $id);     
+                       $this->db->where('order_id', $orderid);     
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
  
     
