@@ -138,44 +138,97 @@ class Store_ctr extends CI_Controller {
             
         
         $uploads = [];
+        $numFile = 0;
         foreach ($upload_order as $uploadOrder) {
             $uploads[] = $uploadOrder['file_name'];
+            $numFile += 1;
         }
-        $end_uploads = end($uploads);
+
         $subject = 'test ip-soft';
         
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
         $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
         $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
         $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+        $message .= '<body style="background: #eee;">';
 
-        $message .= 'Dear<br>';
-        $message .= '<div>Hello World</div>';
-        $message .= '<div>File Name : ';
-        foreach ($uploads as $upload) {
-            if ($upload == $end_uploads) {
-                $message .=  $upload;
-            }else{
-                $message .=  $upload.',';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
+        $message .= '<table align="center" style="font-size: 18px;" border="1">';
+
+        $message .= '<tr>';
+        $message .= '<td rowspan="'.$numFile.'">';
+        $message .= ' File Name ';       
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' 1.'.$uploads[0].' ';       
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $num_list = 1;
+        foreach ($uploads as $numKey => $upload) {
+            if ($numKey == 0) {
+                continue;
             }
+            $num_list += 1;
+            $message .= '<tr>';
+            $message .= '<td>';
+            $message .=  ' '.$num_list.'.'.$upload.' ';
+            $message .= '</td>';
+            $message .= '</tr>';
         }
-        $message .= '</div>';
-        $message .= '<br>';
-        $message .= '<div>Order ID : '.$upload_order[0]['order_id'].'</div>';
-        $message .= '<br>';
-        $message .= '<div>Price : '.$upload_order[0]['price_file'].'</div>';
-        $message .= '<br>';
-        $message .= '<div>Discount : '.$discount.'%</div>';
-        $message .= '<br>';
-        $message .= '<div>Customer ID : CM'.$upload_order[0]['userId'].'</div>';
-        $message .= '<br>';
 
-        $message .= '<button type="button" class="btn btn-success">';
-        $message .= '<a href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id='.$upload_order[0]['order_id'].'">';
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Order ID ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['order_id'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Price ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['price_file'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Discount ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$discount.' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Customer ID ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['userId'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+        
+
+        $message .= '</table>';
+
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : '.$upload_order[0]['order_id'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+
+        $message .= '<div>';
+        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
+        $message .= '<a style="color: #000;text-decoration: none; display: block; border: 2px solid;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id='.$upload_order[0]['order_id'].'">';
         $message .= 'Pay $'.$priceDis.' To Start';
         $message .= '</a>';
-        $message .= '</button>';
-
+        $message .= '</div>';
+        $message .= '</div>';
+        $message .= '</body>';
         
         //config email settings
         $config['protocol'] = 'smtp';
@@ -224,6 +277,7 @@ class Store_ctr extends CI_Controller {
     public function check_NotSatisfired_order_add_com()
     {
             $id = $this->input->post('id');
+            $orderid = $this->input->post('orderid');
 
         $data = array(
 
@@ -233,7 +287,7 @@ class Store_ctr extends CI_Controller {
            
 
         );
-                       $this->db->where('id', $id);     
+                       $this->db->where('order_id', $orderid);     
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
  
     

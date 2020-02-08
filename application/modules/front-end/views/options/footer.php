@@ -339,8 +339,14 @@
 </script>
 
 <script>
-    <?php if ($this->session->flashdata('success_cash')) : ?>
+    <?php if ($this->session->flashdata('fail_doc')) : ?>
         swal("คำเตือน", "ท่านได้ซื้อเอกสารไปแล้ว", "error");
+    <?php endif; ?>
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('error_cash')) : ?>
+        swal("คำเตือน", "Cash ของคุณยังไม่เพียงพอ", "error");
     <?php endif; ?>
 </script>
 

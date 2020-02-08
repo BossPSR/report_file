@@ -263,6 +263,7 @@ foreach ($store as $upload_main_searchDetail) {
 
                                                                 <form action="check_NotSatisfired_order_add_com" method="POST">
                                                                     <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
+                                                                    <input type="hidden" name="orderid" value="<?php echo $store['order_id']; ?>">
                                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -327,7 +328,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <label for="helpInputTop">Note Reject</label>
-                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required></textarea>
+                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน reject</textarea>
 
                                                                                     </div>
                                                                                 </div>
