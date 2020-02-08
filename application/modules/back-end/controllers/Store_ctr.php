@@ -153,36 +153,73 @@ class Store_ctr extends CI_Controller {
         $message .= '<body style="background: #eee;">';
 
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
-        $message .= '<table align="center" style="font-size: 18px;">';
+        $message .= '<table align="center" style="font-size: 18px;" border="1">';
 
         $message .= '<tr>';
         $message .= '<td rowspan="'.$numFile.'">';
-        $message .= 'File Name : ';       
+        $message .= ' File Name ';       
         $message .= '</td>';
         $message .= '<td>';
-        $message .= $uploads[0];       
+        $message .= ' 1.'.$uploads[0].' ';       
         $message .= '</td>';
         $message .= '</tr>';
 
-        
+        $num_list = 1;
         foreach ($uploads as $numKey => $upload) {
             if ($numKey == 0) {
                 continue;
             }
+            $num_list += 1;
             $message .= '<tr>';
             $message .= '<td>';
-            $message .=  $upload;
+            $message .=  ' '.$num_list.'.'.$upload.' ';
             $message .= '</td>';
             $message .= '</tr>';
         }
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Order ID ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['order_id'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Price ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['price_file'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Discount ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$discount.' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Customer ID ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['userId'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
         
 
         $message .= '</table>';
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : '.$upload_order[0]['order_id'].'</div>';
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : '.$upload_order[0]['order_id'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
 
         $message .= '<div>';
         $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
