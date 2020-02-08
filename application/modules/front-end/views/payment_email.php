@@ -55,6 +55,7 @@
         <div class="row">
             <div class="col-12">
                 <div style="padding:100px; text-align: center; font-size: 18px;">
+                    <h2 class="form-group">ชำระเงินจากาการเอกสาร</h2>
                     <div class="form-group">File Name : <?php echo $file_name; ?></div>
                     <div class="form-group">Order ID : <?php echo $order_id; ?></div>
                     <div class="form-group">Price : <?php echo $price_file; ?></div>
@@ -80,7 +81,8 @@
         </div>
     </div>
 
-    <!-- JS  -->
+<!-- JS
+============================================ -->
 
 <!-- Plugins JS -->
 <script src="public/frontend/assets/js/plugins.js"></script>
@@ -92,12 +94,205 @@
 <!-- <script src="assets/reponsive/js/jquery.min.js"></script>
 <script src="assets/reponsive/js/bootstrap.min.js"></script> -->
 <script src="assets/reponsive/plugins/selectator/fm.selectator.js"></script>
+<script>
+    function confirmalertunlock(data, data2, data3, data4) {
+
+        swal({
+            title: "Are you sure Unloc?",
+            text: "Are you sure you want to unlock this document ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'unlock_document?upload_id=' + data + '&userId=' + data2 + '&price=' + data3 + '&merchant_id=' + data4;
+            }
+        })
+    }
+</script>
 
 <script>
-    <?php if ($this->session->flashdata('error_cash')) : ?>
-        swal("คำเตือน", "Cash ของคุณยังไม่เพียงพอ", "error");
-    <?php endif; ?>
+    function confirmalertreject(data, data2) {
+
+        swal({
+            title: "Are you sure Reject?",
+            text: "Are you sure you want to reject this document ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'reject_document?bookid=' + data + '&merchant_id=' + data2;
+            }
+        })
+    }
 </script>
+
+<script>
+    function confirmalert2(data) {
+
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'my-upload-delete?Id=' + data;
+                swal("Good job!", "You clicked the button!", "success");
+            } else {
+                swal("Your imaginary file is safe!");
+            }
+        })
+    }
+</script>
+<script>
+    function confirmalert_buy() {
+
+        swal("Good job!", "", "success");
+        setTimeout(function() {
+            window.location.reload('home');
+        }, 1000);
+        // window.location = 'buy';
+    }
+</script>
+
+<script>
+    $('#myModal2').modal('show')
+</script>
+
+
+
+<!-- <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script> -->
+
+<script src="public/frontend/assets/js/myscript.js"></script>
+
+
+<script type='text/javascript'>
+    // Dropzone.autoDiscover = false;
+    $("#dropzone2").dropzone({
+        addRemoveLinks: true,
+        maxFiles: 5,
+        removedfile: function(file) {
+            var name = file.name;
+            $.ajax({
+                type: 'POST',
+                url: 'store_upload',
+                data: {
+                    name: name,
+                    request: 2
+                },
+                success: function(data) {
+                    console.log('success: ' + data);
+                },
+
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+</script>
+
+ <!-- Script -->
+ <script type='text/javascript'>
+
+    // Dropzone.autoDiscover = false;
+    $("#fileupload").dropzone({
+        addRemoveLinks: true,
+        maxFiles: 5,
+        removedfile: function(file) {
+            var name = file.name;
+            $.ajax({
+                type: 'POST',
+                url: 'buy_upload',
+                data: {
+                    name: name,
+                    request: 2,
+                    date_req: x
+                },
+                success: function(data) {
+                    console.log('success: ' + data);
+                },
+
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        }
+    });
+</script>
+
+
+
+<script>
+    $('#password, #c_password').on('keyup', function() {
+        if ($('#password').val() == $('#c_password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
+
+<script src="public/frontend/assets/js/pdfobject.js"></script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+
+<script>
+    AOS.init();
+</script>
+
+<script>
+    var options = {
+        height: "23rem",
+        width: "19rem",
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '1'
+        },
+    };
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example1", options);
+    var options1 = {
+        height: "23rem",
+        width: "19rem",
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '2'
+        },
+    };
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example2", options1);
+    var options2 = {
+        height: "23rem",
+        width: "19rem",
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '2'
+        },
+    };
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example3", options2);
+    var options3 = {
+        height: "23rem",
+        width: "19rem",
+        pdfOpenParams: {
+            view: 'FitV',
+            page: '2'
+        },
+    };
+    PDFObject.embed("public/image/ข้อเสนอโครงการ.pdf", "#example4", options3);
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".target_menuright").click(function() {
+            $(".target_menuright").toggleClass("target_menuright_active");
+            $(".right_menu_new").slideToggle("slow");
+
+        });
+    });
+</script>>
+
+
+
 </body>
 
 </html>
