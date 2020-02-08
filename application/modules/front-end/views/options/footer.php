@@ -333,6 +333,18 @@
 </script>
 
 <script>
+    <?php if ($this->session->flashdata('success_cash')) : ?>
+        swal("Good job!", "ซื้อเอกสารเรียบร้อยแล้ว", "success");
+    <?php endif; ?>
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('success_cash')) : ?>
+        swal("คำเตือน", "ท่านได้ซื้อเอกสารไปแล้ว", "error");
+    <?php endif; ?>
+</script>
+
+<script>
     <?php if ($this->session->flashdata('package_timeOut_3_day')) : ?>
         swal("Good job!", "You clicked the button! คำเตือนอีก 3 วัน Package จะหมดอายุ", "warning");
     <?php endif; ?>

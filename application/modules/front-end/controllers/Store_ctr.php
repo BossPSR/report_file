@@ -150,7 +150,15 @@ class Store_ctr extends CI_Controller
         $email = $this->input->post('email');
         $user_id = $this->input->post('user_id');
         $user = $this->db->get_where('tbl_user',['id' => $user_id])->row_array();
+
+        $checkStore_for_buy_email = $this->db->get_where('tbl_store_for_buy_email',['order_id',$order_id])->row_array();
+        if (!empty($checkStore_for_buy_email)) {
+            $this->session->set_flashdata('error_cash', TRUE);
+            redirect('/');
+        }
+
         if ($user['cash'] < $price_dis) {
+            $this->session->set_flashdata('error_cash', TRUE);
             redirect('payment_email?order_id='.$order_id);
         }
 
@@ -166,6 +174,7 @@ class Store_ctr extends CI_Controller
             'created_at' => date('Y-m-d H:i:s')
         ];
         $this->db->insert('tbl_store_for_buy_email',$data);
+        $this->session->set_flashdata('success_cash', TRUE);
         redirect('/');
         
     }
