@@ -36,6 +36,7 @@
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
@@ -319,6 +320,12 @@
                                                 <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                 <div>My wallet</div>
                                             </div>
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
+                                                <div>My Order</div>
+                                            </div>
+                                            
+                                            
                                         </div>
                                     <?php else : ?>
 

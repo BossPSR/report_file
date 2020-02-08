@@ -5,8 +5,8 @@ class Order_ctr extends CI_Controller {
 
 	public function __construct()
     {
-		parent::__construct();
-
+      parent::__construct();
+      $this->load->model('Order_model');
     }
 
 	public function index()
@@ -20,6 +20,7 @@ class Order_ctr extends CI_Controller {
             $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
             $checkDate = DateDiff($datePaypal, date("Y-m-d"));
             if ($checkDate < 8 || $data['userId']['free_forever'] == 1) {
+              $data['buy_email'] = $this->Order_model->order_buy($data['userId']['id']);
               $this->load->view('options/header_login');
               $this->load->view('order',$data);
               $this->load->view('options/footer');      
