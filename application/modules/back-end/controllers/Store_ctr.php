@@ -63,8 +63,9 @@ class Store_ctr extends CI_Controller {
 		if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
      } else {
-	 
-        $data['store'] = $this->db->get('tbl_upload_order')->result_array();
+     
+       
+        $data['store'] =  $this->Store_model->store_row();
 
 		$this->load->view('options/header');
 		$this->load->view('storeforbuy',$data);

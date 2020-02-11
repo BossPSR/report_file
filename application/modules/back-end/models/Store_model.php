@@ -50,4 +50,26 @@ class Store_model extends CI_Model{
 
     }
 
+    public function store_row()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_upload_order');
+        $this->db->where('is_check', 0);
+        $this->db->where('status_book', 0);
+        $this->db->group_by('order_id');
+        return $this->db->get()->result_array();
+           
+    }
+
+    public function store_result()
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_upload_order');
+        $this->db->where('is_check', 0);
+        $this->db->where('status_book', 0);
+        return $this->db->get()->result_array();
+           
+    }
+
 }
