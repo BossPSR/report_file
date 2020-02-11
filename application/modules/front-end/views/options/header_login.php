@@ -12,7 +12,7 @@
 
     <!-- CSS 
     ========================= -->
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/plugins.css">
 
@@ -192,7 +192,7 @@
                                         <a href="package">Package </a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
+                                        <i class="fa fa-bell icon-bell" style="color:#fff;" aria-hidden="true"></i>
                                     </li>
                                 <?php elseif ($team) : ?>
                                     <li class="menu-item-has-children">
@@ -402,8 +402,19 @@
                                                 <?php endif; ?>
                                             </a>
                                         </li>
-                                        <li></li>
-                                        <li></li>
+                                        <li>
+                                            <div class="dropdown">
+                                                <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
+                                                <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="13" style="font-size:22px;color:#fff;"></i>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Action</a></li>
+                                                    <li><a href="#">Another action</a></li>
+                                                    <li><a href="#">Something else here</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#">Separated link</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
                                     <?php elseif ($team) : ?>
                                         <li>
                                             <a href="#"> My Stock</a>
