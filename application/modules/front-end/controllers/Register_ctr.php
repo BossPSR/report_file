@@ -14,7 +14,7 @@ class Register_ctr extends CI_Controller
 	public function index()
 	{
 		if ($this->session->userdata('email') == '') {
-			$this->load->view('options/header');
+			$this->load->view('options/header_login');
 			$this->load->view('register');
 			$this->load->view('options/footer');
 		} else {
@@ -96,7 +96,7 @@ class Register_ctr extends CI_Controller
 		$data['countries'] = $this->Countries_model->get_countries();
 
 		if ($this->session->userdata('email') == '') {
-			$this->load->view('options/header');
+			$this->load->view('options/header_login');
 			$this->load->view('register_team', $data);
 			$this->load->view('options/footer');
 		} else {
@@ -106,6 +106,12 @@ class Register_ctr extends CI_Controller
 
 	public function register_team_success()
 	{
+		$get_team			= $this->input->post('get_team');
+		$get_team_pass		= $this->input->post('get_team_pass');
+		$get_user			= $this->input->post('get_user');
+		$get_user_pass		= $this->input->post('get_user_pass');
+
+		$passport			= $this->input->post('passport');
 		$countries			= $this->input->post('countries');
 		$name				= $this->input->post('name');
 		$phone				= $this->input->post('phone');
@@ -114,9 +120,7 @@ class Register_ctr extends CI_Controller
 		$password			= $this->input->post('password');
 		$c_password			= $this->input->post('c_password');
 		$job				= $this->input->post('job');
-		$team_check			= $this->Login_model->team_check($email);
-		$user_check 		= $this->Login_model->user_check($email);
-		if ($team_check || $user_check) {
+		if ($passport == $get_team_pass || $passport == $get_user_pass || $email == $get_team || $email == $get_user) {
 			echo "<script>";
 			echo "alert('Data no must be filled out!!!');";
 			echo "window.location='register-team';";
@@ -144,6 +148,7 @@ class Register_ctr extends CI_Controller
 						// Get data about the file
 						$uploadData = $this->upload->data();
 						$data = array(
+							'passport'			=> $passport,
 							'country_id'		=> $countries,
 							'name'				=> $name,
 							'phone'				=> $phone,
