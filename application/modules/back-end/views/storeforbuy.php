@@ -243,7 +243,7 @@
                                                                             <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                 <div class="form-group">
                                                                                     <label for="helpInputTop">date required</label>
-                                                                                    <input type="text" class="form-control" name="price_file" value="<?php echo $store['date_required']; ?>" placeholder="Enter price">
+                                                                                    <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter price">
                                                                                 </div>
                                                                                 
                                                                             </div>
