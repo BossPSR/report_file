@@ -13,7 +13,7 @@
                                      <div class="dz-message needsclick">
                                          Drop files here or click to upload.<br>
                                          <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                         <input type="text" name="userId" value="<?php echo $userId['id']; ?>" hidden>
+                                         <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                          <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
                                      </div>
                                      <div>
