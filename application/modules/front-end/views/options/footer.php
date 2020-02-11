@@ -333,6 +333,24 @@
 </script>
 
 <script>
+    <?php if ($this->session->flashdata('success_cash')) : ?>
+        swal("Good job!", "ซื้อเอกสารเรียบร้อยแล้ว", "success");
+    <?php endif; ?>
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('fail_doc')) : ?>
+        swal("คำเตือน", "ท่านได้ซื้อเอกสารไปแล้ว", "error");
+    <?php endif; ?>
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('error_cash')) : ?>
+        swal("คำเตือน", "Cash ของคุณยังไม่เพียงพอ", "error");
+    <?php endif; ?>
+</script>
+
+<script>
     <?php if ($this->session->flashdata('package_timeOut_3_day')) : ?>
         swal("Good job!", "You clicked the button! คำเตือนอีก 3 วัน Package จะหมดอายุ", "warning");
     <?php endif; ?>
@@ -380,9 +398,8 @@
     });
 </script>
 
- <!-- Script -->
- <script type='text/javascript'>
-
+<!-- Script -->
+<script type='text/javascript'>
     // Dropzone.autoDiscover = false;
     $("#fileupload").dropzone({
         addRemoveLinks: true,
@@ -476,6 +493,22 @@
         });
     });
 </script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5e3e7f79a89cda5a1884d888/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 
 
 </body>

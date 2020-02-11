@@ -82,8 +82,8 @@ class Store_ctr extends CI_Controller {
 
             'price_file'         => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
-            'status_book'         => 1
-           
+            'status_book'         => 1,
+            'update_at'                  => date('Y-m-d H:i:s')
 
         );
                        $this->db->where('order_id', $orderid);     
@@ -103,7 +103,11 @@ class Store_ctr extends CI_Controller {
         $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
 
         $bookmark_id = $this->db->insert_id();
-        $this->sendEmail($orderid,$bookmark_id);
+
+        $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
+        $book_mark =  $this->db->get_where('tbl_bookmark', ['id' => $bookmark_id])->row_array();
+
+        $this->sendEmail($upload_order,$book_mark);
 
         if ($resultsedit1 > 0 && $resultsedit2 > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
@@ -113,10 +117,32 @@ class Store_ctr extends CI_Controller {
         return redirect('back_store_buy');
     }
 
-    private function sendEmail($orderid,$bookmark_id)
+    private function sendEmail($upload_order,$book_mark)
     {
-        $upload_order =  $this->db->get_where('tbl_upload_order', ['id' => $orderid])->row_array();
-        $book_mark =  $this->db->get_where('tbl_bookmark', ['id' => $bookmark_id])->row_array();
+        $user = $this->db->get_where('tbl_user',['id' => $upload_order[0]['userId']])->row_array();
+
+        if ($user['score'] < '100'){
+            $discount = 0;
+        }elseif($user['score'] <= '199'){
+            $discount = 10;
+        }elseif ($user['score'] <= '299'){
+            $discount = 20;
+        }elseif ($user['score'] <= '399'){
+            $discount = 30;
+        }elseif ($user['score'] <= '499'){
+            $discount = 40;
+        }elseif ($user['score'] > '499'){
+            $discount = 50;
+        }
+        $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file']*$discount)/100);
+            
+        
+        $uploads = [];
+        $numFile = 0;
+        foreach ($upload_order as $uploadOrder) {
+            $uploads[] = $uploadOrder['file_name'];
+            $numFile += 1;
+        }
 
         $subject = 'test ip-soft';
         
@@ -124,19 +150,85 @@ class Store_ctr extends CI_Controller {
         $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
         $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
         $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+        $message .= '<body style="background: #eee;">';
 
-        $message .= 'Dear<br>';
-        $message .= 'Hello World';
-        $message .= 'File Name : '.$upload_order['file_name'];
-        $message .= '<br>';
-        $message .= 'Order ID : '.$upload_order['order_id'];
-        $message .= '<br>';
-        $message .= 'Price : '.$upload_order['price_file'];
-        $message .= '<br>';
-        $message .= 'Customer ID : CM'.$upload_order['userId'];
-        $message .= '<br>';
-        $message .= '<button type="button" class="btn btn-success"><a href="https://www.ip-soft.co.th/ipsoft/">Pay</a></button>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
+        $message .= '<table align="center" style="font-size: 18px;" border="1">';
 
+        $message .= '<tr>';
+        $message .= '<td rowspan="'.$numFile.'">';
+        $message .= ' File Name ';       
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' 1.'.$uploads[0].' ';       
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $num_list = 1;
+        foreach ($uploads as $numKey => $upload) {
+            if ($numKey == 0) {
+                continue;
+            }
+            $num_list += 1;
+            $message .= '<tr>';
+            $message .= '<td>';
+            $message .=  ' '.$num_list.'.'.$upload.' ';
+            $message .= '</td>';
+            $message .= '</tr>';
+        }
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Order ID ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['order_id'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Price ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['price_file'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Discount ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$discount.' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Customer ID ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' '.$upload_order[0]['userId'].' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+        
+
+        $message .= '</table>';
+
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : '.$upload_order[0]['order_id'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+
+        $message .= '<div>';
+        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
+        $message .= '<a style="color: #000;text-decoration: none; display: block; border: 2px solid;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id='.$upload_order[0]['order_id'].'">';
+        $message .= 'Pay $'.$priceDis.' To Start';
+        $message .= '</a>';
+        $message .= '</div>';
+        $message .= '</div>';
+        $message .= '</body>';
         
         //config email settings
         $config['protocol'] = 'smtp';
@@ -185,6 +277,7 @@ class Store_ctr extends CI_Controller {
     public function check_NotSatisfired_order_add_com()
     {
             $id = $this->input->post('id');
+            $orderid = $this->input->post('orderid');
 
         $data = array(
 
@@ -194,7 +287,7 @@ class Store_ctr extends CI_Controller {
            
 
         );
-                       $this->db->where('id', $id);     
+                       $this->db->where('order_id', $orderid);     
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
  
     

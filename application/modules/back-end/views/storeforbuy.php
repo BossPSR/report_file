@@ -7,25 +7,34 @@
 
 $arrayForTable = [];
 foreach ($store as $upload_main_searchDetail) {
-    $temp = [];
-    $temp['id'] = $upload_main_searchDetail['id'];
-    $temp['order_id'] = $upload_main_searchDetail['order_id'];
-    $temp['file_name'] = $upload_main_searchDetail['file_name'];
-    $temp['create_at'] = $upload_main_searchDetail['create_at'];
-    $temp['path'] = $upload_main_searchDetail['path'];
-
-    $temp['price_file'] = $upload_main_searchDetail['price_file'];
-    $temp['userId'] = $upload_main_searchDetail['userId'];
-    $temp['date_required'] = $upload_main_searchDetail['date_required'];
-    $temp['status_book'] = $upload_main_searchDetail['status_book'];
-    $temp['is_check'] = $upload_main_searchDetail['is_check'];
-
-    if (!isset($arrayForTable[$upload_main_searchDetail['userId']])) {
-        $arrayForTable[$upload_main_searchDetail['userId']] = [];
+    if ($upload_main_searchDetail['is_check'] != 0){
+        continue;
     }
-    $arrayForTable[$upload_main_searchDetail['userId']][] = $temp;
-}
 
+    if ($upload_main_searchDetail['status_book'] != 0) {
+        continue;
+    }
+
+        $temp = [];
+        $temp['id'] = $upload_main_searchDetail['id'];
+        $temp['order_id'] = $upload_main_searchDetail['order_id'];
+        $temp['file_name'] = $upload_main_searchDetail['file_name'];
+        $temp['create_at'] = $upload_main_searchDetail['create_at'];
+        $temp['path'] = $upload_main_searchDetail['path'];
+
+        $temp['price_file'] = $upload_main_searchDetail['price_file'];
+        $temp['userId'] = $upload_main_searchDetail['userId'];
+        $temp['date_required'] = $upload_main_searchDetail['date_required'];
+        $temp['status_book'] = $upload_main_searchDetail['status_book'];
+        $temp['is_check'] = $upload_main_searchDetail['is_check'];
+
+        if (!isset($arrayForTable[$upload_main_searchDetail['order_id']])) {
+            $arrayForTable[$upload_main_searchDetail['order_id']] = [];
+        }
+        $arrayForTable[$upload_main_searchDetail['order_id']][] = $temp;
+
+    
+}
 
 
 ?>
@@ -82,14 +91,15 @@ foreach ($store as $upload_main_searchDetail) {
 
                                             foreach ($arrayForTable as $id => $stores) {
                                                 foreach ($stores as $key => $store) {
-
+                                                
                                             ?>
-                                                    <?php if ($store['status_book'] == '1' || $store['status_book'] == '2' || $store['is_check'] == '1') : ?>
-                                                    <?php else : ?>
+                                                    
+                                                        
+                                                      
                                                         <tbody>
                                                             <tr>
                                                                 <td><?php echo $i++; ?></td>
-                                                                <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); ?>
+                                                                <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
 
                                                                 <td><?php echo $store_name['username']; ?></td>
 
@@ -101,12 +111,11 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     <td>$<?php echo $store['price_file']; ?></td>
                                                                 <?php endif; ?>
                                                                 <td><?php echo $store['create_at']; ?></td>
-                                                                <?php if ($key == 0) { ?>
-
+                                                                
+                                                                
+                                                                <?php if($key == 0){ ?>
                                                                     <td rowspan="<?php echo count($stores); ?>"><button data-toggle="modal" data-target="#exampleModalcon<?php echo $store['id']; ?>" type="button" class="btn btn-success">Confirmed</button></td>
-
-                                                                <?php } else { ?>
-                                                                <?php } ?>
+                                                                <?php }?>
 
                                                             </tr>
 
@@ -254,6 +263,7 @@ foreach ($store as $upload_main_searchDetail) {
 
                                                                 <form action="check_NotSatisfired_order_add_com" method="POST">
                                                                     <input type="hidden" name="id" value="<?php echo $store['id']; ?>">
+                                                                    <input type="hidden" name="orderid" value="<?php echo $store['order_id']; ?>">
                                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -318,7 +328,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <label for="helpInputTop">Note Reject</label>
-                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required></textarea>
+                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน reject</textarea>
 
                                                                                     </div>
                                                                                 </div>
@@ -335,7 +345,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                 </form>
                                                             </div>
                                                            
-                                                            <?php endif; ?>
+                                                            
                                                         <?php  } ?>
                                                         <thead class="thead-light">
                                                             <tr>
@@ -349,6 +359,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                             </tr>
                                                         </thead>
                                                     <?php  } ?>
+                                                  
 
                                         </table>
                                     </div>

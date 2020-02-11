@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 07, 2020 at 06:24 PM
+-- Generation Time: Feb 08, 2020 at 02:34 PM
 -- Server version: 5.6.43
 -- PHP Version: 7.2.7
 
@@ -350,7 +350,10 @@ INSERT INTO `tbl_bookmark` (`id`, `id_user`, `id_orderBuy`, `id_document`, `crea
 (13, 'CM4', 'OD9', 't-80', '2020-02-07 16:56:22', NULL),
 (14, 'CM4', 'OD19', 't-80', '2020-02-07 17:32:29', NULL),
 (15, 'CM4', 'OD19', 't-80', '2020-02-07 17:45:18', NULL),
-(16, 'CM4', 'OD19', 't-80', '2020-02-07 17:47:31', NULL);
+(16, 'CM4', 'OD19', 't-80', '2020-02-07 17:47:31', NULL),
+(17, 'CM4', 'OD20', 'DM1', '2020-02-08 14:05:11', NULL),
+(18, 'CM4', 'OD21', 'DM2', '2020-02-08 14:17:10', NULL),
+(19, 'CM4', 'OD22', 'DM4', '2020-02-08 14:29:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -474,7 +477,10 @@ INSERT INTO `tbl_order_f` (`id`, `order_main`, `create_at`, `status`) VALUES
 (16, 'OD16', '2020-02-07', 1),
 (17, 'OD17', '2020-02-07', 1),
 (18, 'OD18', '2020-02-07', 1),
-(19, 'OD19', '2020-02-07', 1);
+(19, 'OD19', '2020-02-07', 1),
+(20, 'OD20', '2020-02-08', 1),
+(21, 'OD21', '2020-02-08', 1),
+(22, 'OD22', '2020-02-08', 1);
 
 -- --------------------------------------------------------
 
@@ -599,9 +605,19 @@ CREATE TABLE `tbl_store_for_buy_email` (
   `customer_id` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `note` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `update_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_store_for_buy_email`
+--
+
+INSERT INTO `tbl_store_for_buy_email` (`id`, `file_name`, `order_id`, `price_file`, `discount`, `price_dis`, `customer_id`, `email`, `user_id`, `status`, `note`, `created_at`, `update_at`) VALUES
+(1, 'sample-3pp1.pdf,pdf_open_parameters.pdf', 'OD20', '200', '10', '180', 'CM4', '', 4, 0, '', '2020-02-08 07:07:24', NULL),
+(2, 'ข้อเสนอโครงการ2.pdf,สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_25392.pdf', 'OD22', '400', '10', '360', 'CM4', '', 4, 0, '', '2020-02-08 07:29:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -736,7 +752,13 @@ INSERT INTO `tbl_upload_order` (`id`, `userId`, `file_name`, `order_id`, `create
 (13, 4, 'ใบเสร็จคุณเบิร์ด_(2)2.pdf', 'OD9', '2020-02-07 14:13:51', '2020-02-07 16:56:22', 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2)2.pdf', '0000-00-00', '100', 1, 0, NULL),
 (14, 4, 'ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', '2020-02-08', '1000', 1, 0, NULL),
 (15, 4, 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', '2020-02-08', '1000', 1, 0, NULL),
-(16, 4, 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', 'OD19', '2020-02-07 17:32:09', '2020-02-07 17:47:31', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', '2020-02-21', '10000', 1, 0, NULL);
+(16, 4, 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', 'OD19', '2020-02-07 17:32:09', '2020-02-07 17:47:31', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', '2020-02-21', '10000', 1, 0, NULL),
+(17, 4, 'sample-3pp1.pdf', 'OD20', '2020-02-08 14:04:14', '2020-02-08 14:05:11', 'uploads/Buy/sample-3pp1.pdf', '2020-02-08', '200', 1, 0, NULL),
+(18, 4, 'pdf_open_parameters.pdf', 'OD20', '2020-02-08 14:04:14', '2020-02-08 14:05:11', 'uploads/Buy/pdf_open_parameters.pdf', '2020-02-08', '200', 1, 0, NULL),
+(19, 4, 'ข้อเสนอโครงการ1.pdf', 'OD21', '2020-02-08 14:16:25', '2020-02-08 14:17:10', 'uploads/Buy/ข้อเสนอโครงการ1.pdf', '2020-02-10', '300', 1, 0, NULL),
+(20, 4, 'สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_25391.pdf', 'OD21', '2020-02-08 14:16:25', '2020-02-08 14:17:10', 'uploads/Buy/สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_25391.pdf', '2020-02-10', '300', 1, 0, NULL),
+(21, 4, 'ข้อเสนอโครงการ2.pdf', 'OD22', '2020-02-08 14:29:18', '2020-02-08 14:29:37', 'uploads/Buy/ข้อเสนอโครงการ2.pdf', '2020-02-11', '400', 1, 0, NULL),
+(22, 4, 'สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_25392.pdf', 'OD22', '2020-02-08 14:29:18', '2020-02-08 14:29:37', 'uploads/Buy/สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_25392.pdf', '2020-02-11', '400', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -769,11 +791,11 @@ INSERT INTO `tbl_upload_store` (`id`, `userId`, `store_id`, `file_name`, `is_che
 (1, 4, 'ST-1', 'sample-3pp.pdf', 0, '2020-01-31 10:27:53', NULL, 'uploads/Store/sample-3pp.pdf', NULL, 'TEST', 'A', NULL, 0, 1),
 (2, 4, 'ST-2', 'sample-3pp.pdf', 0, '2020-02-04 12:17:36', NULL, 'uploads/Store/sample-3pp.pdf', NULL, 'TEST2', 'B', NULL, 0, 1),
 (6, 4, 'OD3', 'UML_การทำงานระบบแจ้งเตือน.pdf', 1, '2020-02-07 11:01:54', NULL, 'uploads/Store/UML_การทำงานระบบแจ้งเตือน.pdf', NULL, NULL, NULL, NULL, 0, 1),
-(7, 4, 'OD4', 'ใบเสนอราคาline_4_1_2563_.pdf', 1, '2020-02-07 11:03:09', NULL, 'uploads/Store/ใบเสนอราคาline_4_1_2563_.pdf', '20', NULL, 'B', 'complete', 1, 0),
-(8, 4, 'OD5', 'ใบเสร็จคุณเบิร์ด2.pdf', 0, '2020-02-07 11:21:05', NULL, 'uploads/Store/ใบเสร็จคุณเบิร์ด2.pdf', '20', NULL, 'B', 'complete', 1, 0),
-(9, 4, 'OD7', 'ใบเสร็จคุณเบิร์ด_(2).pdf', 0, '2020-02-07 12:01:17', NULL, 'uploads/Store/ใบเสร็จคุณเบิร์ด_(2).pdf', '50', NULL, 'A', 'complete', 1, 0),
-(10, 4, 'OD8', 'บทนำ.pdf', 0, '2020-02-07 12:02:57', NULL, 'uploads/Store/บทนำ.pdf', '50', NULL, 'A', 'complete', 1, 0),
-(11, 4, 'OD9', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', 0, '2020-02-07 17:31:50', NULL, 'uploads/Store/ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', NULL, NULL, NULL, NULL, 0, 0);
+(7, 4, 'OD4', 'ใบเสนอราคาline_4_1_2563_.pdf', 1, '2020-02-07 11:03:09', NULL, 'uploads/Store/ใบเสนอราคาline_4_1_2563_.pdf', '20', NULL, 'B', 'complete', 1, 1),
+(8, 4, 'OD5', 'ใบเสร็จคุณเบิร์ด2.pdf', 0, '2020-02-07 11:21:05', NULL, 'uploads/Store/ใบเสร็จคุณเบิร์ด2.pdf', '20', NULL, 'B', 'complete', 1, 1),
+(9, 4, 'OD7', 'ใบเสร็จคุณเบิร์ด_(2).pdf', 0, '2020-02-07 12:01:17', NULL, 'uploads/Store/ใบเสร็จคุณเบิร์ด_(2).pdf', '50', NULL, 'A', 'complete', 1, 1),
+(10, 4, 'OD8', 'บทนำ.pdf', 0, '2020-02-07 12:02:57', NULL, 'uploads/Store/บทนำ.pdf', '50', NULL, 'A', 'complete', 1, 1),
+(11, 4, 'OD9', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', 0, '2020-02-07 17:31:50', NULL, 'uploads/Store/ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', NULL, NULL, NULL, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -803,7 +825,7 @@ CREATE TABLE `tbl_user` (
 INSERT INTO `tbl_user` (`id`, `idUser`, `passport`, `cash`, `score`, `email`, `phone`, `username`, `password`, `file_name`, `free_forever`, `created_at`) VALUES
 (2, 'CM2', '1269900232221', 0, 0, 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', 0, '2020-02-04 06:56:11'),
 (3, 'CM3', '123456789', 0, 0, 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', 0, '2020-02-04 06:56:13'),
-(4, 'CM4', '4444555666112', 150, 100, 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', 1, '2020-02-07 04:03:25'),
+(4, 'CM4', '4444555666112', 650, 100, 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', 1, '2020-02-08 07:06:54'),
 (5, 'CM5', '123123', 0, 0, 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', NULL, 0, '2020-02-04 06:56:17'),
 (6, 'CM6', '987456123', 2, 0, 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', NULL, 1, '2020-02-04 06:56:20'),
 (23, 'CM23', '1659900740516', 0, 0, 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', 'e10adc3949ba59abbe56e057f20f883e', NULL, 0, '2020-02-04 06:55:59');
@@ -830,7 +852,8 @@ CREATE TABLE `tbl_withdraw` (
 --
 
 INSERT INTO `tbl_withdraw` (`id`, `userId`, `price`, `status`, `create_at`, `update_at`, `note`, `bill_id`) VALUES
-(1, 4, '150', 2, '2020-01-20 15:20:23', '2020-01-20 15:20:26', '-', 'WD-321');
+(1, 4, '150', 2, '2020-01-20 15:20:23', '2020-01-20 15:20:26', '-', 'WD-321'),
+(2, 4, '500', 1, '2020-02-08 14:06:54', '2020-02-08 14:06:54', '-', NULL);
 
 --
 -- Indexes for dumped tables
@@ -988,7 +1011,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_bookmark`
 --
 ALTER TABLE `tbl_bookmark`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_deposit`
@@ -1024,7 +1047,7 @@ ALTER TABLE `tbl_job_position`
 -- AUTO_INCREMENT for table `tbl_order_f`
 --
 ALTER TABLE `tbl_order_f`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_package`
@@ -1054,7 +1077,7 @@ ALTER TABLE `tbl_select_item`
 -- AUTO_INCREMENT for table `tbl_store_for_buy_email`
 --
 ALTER TABLE `tbl_store_for_buy_email`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_team`
@@ -1084,7 +1107,7 @@ ALTER TABLE `tbl_upload_main_search`
 -- AUTO_INCREMENT for table `tbl_upload_order`
 --
 ALTER TABLE `tbl_upload_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_upload_store`
@@ -1102,7 +1125,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_withdraw`
 --
 ALTER TABLE `tbl_withdraw`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

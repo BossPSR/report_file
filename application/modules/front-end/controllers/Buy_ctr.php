@@ -85,7 +85,8 @@ class Buy_ctr extends CI_Controller
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
       // $buyre =  $this->Buy_model->buy();
-      $buymax = $this->Buy_model->buy_max();
+      // $buymax = $this->Buy_model->buy_max();
+      $buymax = $this->db->order_by('id','DESC')->get('tbl_order_f')->row();
       // $orf = array(
       //   'order_main'    => "OD".rand('0','100'),
       //   'create_at'     => date('Y-m-d H:i:s') ,
@@ -102,7 +103,8 @@ class Buy_ctr extends CI_Controller
         
         $data = array(
           'userId'      => $userId,
-          'order_id'      => $buymax->maxorder,
+          // 'order_id'      => $buymax->maxorder,
+          'order_id'      => $buymax->order_main,
           'file_name'      => $uploadData['file_name'],
           'path'        => 'uploads/Buy/' . $uploadData['file_name'],
           'create_at'      => date('Y-m-d H:i:s'),
