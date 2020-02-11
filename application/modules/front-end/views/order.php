@@ -35,8 +35,14 @@
                             <td><?php echo $value['order_id']; ?></td>
                             <td><?php echo $value['date_required']; ?></td>
                             <td>
+                            <?php $DateT    = date('Y-m-d');  ?>
+                            <?php $produm   = date('Y-m-d', strtotime('+5 day'. '+'.$value['update_at_buy']));?>
+                                <?php if ($DateT >= $produm) : ?>
                                 <button type="button" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
                                 <button type="button" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                <?php else: ?>
+                                    -
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
