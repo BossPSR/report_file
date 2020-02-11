@@ -22,10 +22,10 @@ $(document).ready(function() {
     var groupingTable = $('.row-grouping').DataTable({
         "columnDefs": [{
             "visible": false,
-            "targets": 2
+            "targets": 0
         }],
         "order": [
-            [2, 'asc']
+            [0, 'asc']
         ],
         "displayLength": 10,
         "drawCallback": function(settings) {
@@ -35,12 +35,12 @@ $(document).ready(function() {
             }).nodes();
             var last = null;
 
-            api.column(2, {
+            api.column(0, {
                 page: 'current'
             }).data().each(function(group, i) {
                 if (last !== group) {
                     $(rows).eq(i).before(
-                        '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                        '<tr class="group"><td colspan="6">' + group +  '</td></tr>'
                     );
 
                     last = group;
@@ -51,11 +51,11 @@ $(document).ready(function() {
 
     $('.row-grouping tbody').on('click', 'tr.group', function() {
         var currentOrder = groupingTable.order()[0];
-        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-            groupingTable.order([2, 'desc']).draw();
+        if (currentOrder[0] === 0 && currentOrder[1] === 'asc') {
+            groupingTable.order([0, 'desc']).draw();
         }
         else {
-            groupingTable.order([2, 'asc']).draw();
+            groupingTable.order([0, 'asc']).draw();
         }
     });
 

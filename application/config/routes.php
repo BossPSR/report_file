@@ -159,4 +159,7 @@ $route['add_to_upload_main_search']           = 'back-end/Store_ctr/add_to_uploa
 $route['pdf']                                 = 'front-end/pdf';
 $route['approved']                            = 'back-end/Approved_ctr';
 $route['not-approved']                        = 'back-end/Approved_ctr/not_approved';
+$route['Satisfied']                           = 'back-end/Customer_order_ctr';
+$route['Not_Satisfied']                       = 'back-end/Customer_order_ctr/not_satisfied';
+$route['Bookmark']                            = 'back-end/Customer_order_ctr/Bookmark';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

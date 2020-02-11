@@ -328,14 +328,34 @@
 
                         </li>
 
-                        <li class="nav-item" <?php if ($this->uri->segment(1) == "#") {
-                                                    echo 'active';
-                                                } ?>><a class="nav-link" href="#"><i class="feather icon-shopping-cart"></i><span data-i18n="Forms &amp; Tables"> Customer order </span></a>
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Satisfied" || $this->uri->segment(1) == "Not_Satisfied") {
+                                                            echo 'active';
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Customer Order</span></a>
+                            <ul class="dropdown-menu">
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Satisfied") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Satisfied" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Satisfied</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Not_Satisfied") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Not_Satisfied" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Satisfied</a>
+                                </li>
+                            </ul>
 
                         </li>
-                        <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-bar-chart-2"></i><span data-i18n="Charts &amp; Maps">Charts &amp; Maps</span></a>
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" ) {
+                                                            echo 'active';
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Bookmark</span></a>
+                            <ul class="dropdown-menu">
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Bookmark</a>
+                                </li>
+                               
+                            </ul>
 
                         </li>
+                      
                         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-more-horizontal"></i><span data-i18n="Others">Others</span></a>
 
                         </li>
