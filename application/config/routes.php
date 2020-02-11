@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['main']                  = 'front-end/Main_ctr';
 $route['mainbuysell']           = 'front-end/Main_ctr/mainbuysell';
-
+$route['update_session']        = 'front-end/Login_ctr/update_session';
 
 $route['loginme']               = 'front-end/Login_ctr/loginMe';
 $route['Logout']                = 'front-end/Login_ctr/logout';
@@ -123,6 +123,7 @@ $route['payment_email_success'] = 'front-end/Store_ctr/payment_email_success';
 $route['userNotify']            = 'front-end/My_user_ctr/userNotify';
 $route['read_userNotify']       = 'front-end/My_user_ctr/read_userNotify';
 
+$route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';
@@ -161,4 +162,7 @@ $route['add_to_upload_main_search']           = 'back-end/Store_ctr/add_to_uploa
 $route['pdf']                                 = 'front-end/pdf';
 $route['approved']                            = 'back-end/Approved_ctr';
 $route['not-approved']                        = 'back-end/Approved_ctr/not_approved';
+$route['Satisfied']                           = 'back-end/Customer_order_ctr';
+$route['Not_Satisfied']                       = 'back-end/Customer_order_ctr/not_satisfied';
+$route['Bookmark']                            = 'back-end/Customer_order_ctr/Bookmark';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

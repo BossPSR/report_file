@@ -28,8 +28,8 @@ class Login_ctr extends CI_Controller
                 );
                 $this->session->set_userdata($user_data);
                 $save_sss = $this->session->set_flashdata('save_ss', TRUE);
-                $user = $this->db->get_where('tbl_user',['email'=>$email])->row_array();
-                $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal',['user_id'=>$user['id']])->row_array();
+                $user = $this->db->get_where('tbl_user', ['email' => $email])->row_array();
+                $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
                 if (!empty($packAgeCheck)) {
                     $datePaypal = date("Y-m-d", strtotime($packAgeCheck['start_time']));
                     $checkDate = DateDiff($datePaypal, date("Y-m-d"));
@@ -46,9 +46,8 @@ class Login_ctr extends CI_Controller
                         $this->session->set_flashdata('package_timeOut_1_day', TRUE);
                     }
                 }
-               
+
                 redirect('my-profile');
-                   
             } elseif ($this->Login_model->login_team($email, $password)) {
 
                 $user_data = array(
@@ -56,7 +55,13 @@ class Login_ctr extends CI_Controller
                 );
                 $this->session->set_userdata($user_data);
                 $this->session->set_flashdata('save_ss', TRUE);
-                // $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+                $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+                $checkSession = array(
+                    'teamId'            => $team['id'],
+                    'status_check'      => 1,
+                    'create_at'         => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_session', $checkSession);
                 // print_r($team);
                 // exit();
                 redirect('home');
@@ -68,6 +73,18 @@ class Login_ctr extends CI_Controller
             redirect('home', 'refresh');
         }
     }
+
+    // public function update_session()
+    // {
+    //     $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+    //     $now = date('Y-m-d H:i:s');
+
+    //     $data = array(
+    //         'create'        => $now
+    //     );
+    //     $this->db->where('teamId', $team['id']);
+    //     $this->db->update('tbl_session', $data);
+    // }
 
     public function logout()
     {

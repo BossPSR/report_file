@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/plugins.css">
-
+    <link href="assets/reponsive/plugins/selectator/fm.selectator.css" rel="stylesheet">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/style.css">
     <link rel="stylesheet" href="public/frontend/assets/css/hover.css">
@@ -197,7 +197,7 @@
                                     </li>
                                 <?php elseif ($team) : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> คลังสินค้า</a>
+                                        <a href="#"> My stock</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#"> My task</a>
@@ -258,8 +258,8 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
-                            <!-- <div class="support_info">
-                                <p>Telephone Enquiry: <a href="tel:+6494461709">(012) 800 456 789 – 987</a></p>
+                            <!-- <div class="support_info ">
+                                <p><i class="fa fa-circle" aria-hidden="true" style="color:green"></i> ONLINE</p>
                             </div> -->
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -267,10 +267,23 @@
                                 <ul>
                                     <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
                                     <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
+
                                     <?php if ($user == true) :  ?>
                                         <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php elseif ($team == true) : ?>
+                                        <li>
+                                            <div class="dropdown">
+                                                <a style="color:#73c803;font-weight:bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-circle" aria-hidden="true"></i> Online
+                                                </a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li style="margin: 5px 10px;"><a href="#"><i class="fa fa-circle" style="color:#73c803;"></i> Online</a></li>
+                                                    <!-- <li style="margin: 5px 10px;"><a href="#"><i class="fa fa-circle" style="color:#f82424;"></i> Away</a></li>
+                                                    <li style="margin: 5px 10px;"><a href="#"><i class="fa fa-circle" style="color:#ffbb3f;"></i> Busy</a></li> -->
+                                                    <li style="margin: 5px 10px;"><a href="#"><i class="fa fa-circle" style="color:#b6b6b6;"></i> Offline</a></li>
+                                                </ul>
+                                        </li>
                                         <li><a href="#"> <?php echo $team['name'] ?> </a></li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php else :  ?>
@@ -324,8 +337,8 @@
                                                 <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                 <div>My Order</div>
                                             </div>
-                                            
-                                            
+
+
                                         </div>
                                     <?php else : ?>
 
@@ -439,7 +452,7 @@
                                         
                                     <?php elseif ($team) : ?>
                                         <li>
-                                            <a href="#"> My Stock</a>
+                                            <a href="My-stock"> My Stock</a>
                                         </li>
                                         <li>
                                             <a href="#"> My task</a>

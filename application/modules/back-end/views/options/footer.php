@@ -34,8 +34,8 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="public/backend/assets/js/scripts/pages/dashboard-analytics.js"></script>
     <script src="public/backend/assets/js/scripts/datatables/datatable.js"></script>
+    <script src="public/backend/assets/js/scripts/pages/dashboard-analytics.js"></script>
     <!-- END: Page JS-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
