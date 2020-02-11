@@ -16,7 +16,7 @@ class Customer_order_ctr extends CI_Controller
 
 
 
-            $data['order'] = $this->Customer_model->customer_list();
+            $data['order_main'] = $this->Customer_model->customer_main();
             $this->load->view('options/header');
             $this->load->view('satisfied',$data);
             $this->load->view('options/footer');

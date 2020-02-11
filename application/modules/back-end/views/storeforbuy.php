@@ -98,17 +98,14 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td><button data-toggle="modal" data-target="#exampleModalcon<?php echo $store['id']; ?>" type="button" class="btn btn-success">Confirmed</button></td>
-
                                                     </tr>
 
                                                     <?php $store_for = $this->db->get_where('tbl_upload_order', ['order_id' => $store['order_id']])->result_array(); ?>
-
+                                                        
                                                     <?php foreach ($store_for as $keys => $store_for) { ?>
                                                         <tr>
                                                             <td><?php echo $store_for['order_id']; ?></td>
-
                                                             <td><?php echo $store_for['userId']; ?></td>
-
                                                             <td><?php echo $store_for['file_name']; ?></td>
                                                             <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $store_for['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
                                                             <?php if ($store_for['price_file'] == '') :   ?>
@@ -118,9 +115,6 @@
                                                             <?php endif; ?>
                                                             <td><?php echo $store_for['create_at']; ?></td>
                                                             <td></td>
-                                                            
-
-
                                                         </tr>
 
                                                         <div class="modal fade" id="exampleModalcon<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
