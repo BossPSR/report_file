@@ -102,12 +102,13 @@ class Buy_ctr extends CI_Controller
         $uploadData = $this->upload->data();
         
         $data = array(
-          'userId'      => $userId,
+          'userId'        => $userId,
           // 'order_id'      => $buymax->maxorder,
           'order_id'      => $buymax->order_main,
-          'file_name'      => $uploadData['file_name'],
-          'path'        => 'uploads/Buy/' . $uploadData['file_name'],
-          'create_at'      => date('Y-m-d H:i:s'),
+          'date_required' => $date_req,
+          'file_name'     => $uploadData['file_name'],
+          'path'          => 'uploads/Buy/' . $uploadData['file_name'],
+          'create_at'     => date('Y-m-d H:i:s'),
         );
         $this->db->insert('tbl_upload_order', $data);
          
