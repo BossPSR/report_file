@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['main']                  = 'front-end/Main_ctr';
 $route['mainbuysell']           = 'front-end/Main_ctr/mainbuysell';
-
+$route['update_session']        = 'front-end/Login_ctr/update_session';
 
 $route['loginme']               = 'front-end/Login_ctr/loginMe';
 $route['Logout']                = 'front-end/Login_ctr/logout';
@@ -120,7 +120,7 @@ $route['order_auto']            = 'front-end/Buy_ctr/order_auto';
 
 $route['payment_email']         = 'front-end/Store_ctr/payment_email';
 $route['payment_email_success'] = 'front-end/Store_ctr/payment_email_success';
-
+$route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';

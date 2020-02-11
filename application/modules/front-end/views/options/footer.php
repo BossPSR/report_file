@@ -223,6 +223,9 @@
 <!-- <script src="assets/reponsive/js/jquery.min.js"></script>
 <script src="assets/reponsive/js/bootstrap.min.js"></script> -->
 <script src="assets/reponsive/plugins/selectator/fm.selectator.js"></script>
+
+
+
 <script>
     function confirmalertunlock(data, data2, data3, data4) {
 
