@@ -215,15 +215,15 @@
                                                                                 <div class="form-group">
                                                                                     <?php $chek_book  = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $store['order_id']])->row_array(); ?>
                                                                                     <label for="basicInput">Document ID</label>
-                                                                                    <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID">
+                                                                                    <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-body row">
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
-                                                                                        <?php $chek_book  = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $store['order_id']])->row_array(); ?>
-                                                                                        <label for="basicInput">Document ID</label>
-                                                                                        <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID" required>
+                                                                                        <?php $chek_name  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
+                                                                                        <label for="basicInput">Customer code</label>
+                                                                                        <input type="text" name="Document" class="form-control" value="<?php echo $chek_name['idUser']; ?>" placeholder="Enter Document ID" readonly >
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -238,12 +238,14 @@
                                                                                     <label for="helpInputTop">price</label>
                                                                                     <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price">
                                                                                 </div>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">price</label>
-                                                                                        <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price" required>
-                                                                                    </div>
+                                                                                
+                                                                            </div>
+                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                <div class="form-group">
+                                                                                    <label for="helpInputTop">date required</label>
+                                                                                    <input type="text" class="form-control" name="price_file" value="<?php echo $store['date_required']; ?>" placeholder="Enter price">
                                                                                 </div>
+                                                                                
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
