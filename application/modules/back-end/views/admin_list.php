@@ -59,8 +59,9 @@
 
                                                 </tr>
                                             </thead>
+                                            <tbody>
+
                                             <?php foreach ($admin as $admin) { ?>
-                                                <tbody>
                                                     <tr>
                                                         <td><?php echo $admin['email']; ?></td>
                                                         <td><?php echo $admin['username']; ?></td>
@@ -117,6 +118,7 @@
                                                             </td>
                                                     </tr>
                                                 <?php  } ?>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

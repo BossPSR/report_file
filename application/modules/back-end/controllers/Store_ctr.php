@@ -76,9 +76,10 @@ class Store_ctr extends CI_Controller {
     {
             $id = $this->input->post('id');
             $orderid = $this->input->post('orderid');
-            
 
-        $data = array(
+      $dm = $this->db->get_where('tbl_upload_main_search',['id_doc'=> $this->input->post('Document')])->row_array();
+        if($dm== true){
+$data = array(
 
             'price_file'         => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
@@ -89,6 +90,9 @@ class Store_ctr extends CI_Controller {
                        $this->db->where('order_id', $orderid);     
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
  
+       
+
+
         $data2 = array(
 
             'id_document'                => $this->input->post('Document'),
@@ -110,11 +114,18 @@ class Store_ctr extends CI_Controller {
         $this->sendEmail($upload_order,$book_mark);
 
         if ($resultsedit1 > 0 && $resultsedit2 > 0) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
+            $this->session->set_flashdata('save_ss2', 'Successfully Update Satisfied information !!.');
         } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update Satisfied information');
         }
         return redirect('back_store_buy');
+        }
+        else{
+            $this->session->set_flashdata('del_ss2', 'Not Successfully math id docment information');
+            return redirect('back_store_buy');
+        }
+      
+        
     }
 
     private function sendEmail($upload_order,$book_mark)
