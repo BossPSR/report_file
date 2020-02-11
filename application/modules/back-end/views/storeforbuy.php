@@ -224,11 +224,13 @@
                                                                                     <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID">
                                                                                 </div>
                                                                             </div>
-                                                                            <?php $chek_order_user  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
-                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                <div class="form-group">
-                                                                                    <label for="helpInputTop">Customer code</label>
-                                                                                    <input type="text" class="form-control" name="Customer" value="<?php echo $chek_order_user['idUser']; ?>" placeholder="Enter Customer code" readonly>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <?php $chek_book  = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $store['order_id']])->row_array(); ?>
+                                                                                        <label for="basicInput">Document ID</label>
+                                                                                        <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID" required>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-xl-12 col-md-6 col-12 mb-1">
@@ -242,11 +244,11 @@
                                                                                     <label for="helpInputTop">price</label>
                                                                                     <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price">
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                <div class="form-group">
-                                                                                    <label for="helpInputTop">Date required</label>
-                                                                                    <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter Date required">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">price</label>
+                                                                                        <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price" required>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -289,11 +291,11 @@
                                                                                     <label for="helpInputTop">Order</label>
                                                                                     <input type="text" class="form-control" name="Order" value="<?php echo $store['order_id']; ?>" placeholder="Enter Order" readonly>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                <div class="form-group">
-                                                                                    <label for="helpInputTop">price</label>
-                                                                                    <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">price</label>
+                                                                                        <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price" required>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-xl-12 col-md-6 col-12 mb-1">
