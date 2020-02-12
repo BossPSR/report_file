@@ -121,6 +121,7 @@ $route['order_auto']            = 'front-end/Buy_ctr/order_auto';
 $route['payment_email']         = 'front-end/Store_ctr/payment_email';
 $route['payment_email_success'] = 'front-end/Store_ctr/payment_email_success';
 $route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
+$route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';

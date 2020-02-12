@@ -58,7 +58,7 @@ class Store_ctr extends CI_Controller
                     $uploadData = $this->upload->data();
 
                     $data = array(
-                        'userId'        => $userId,
+                        'userId'        => "CM" . $userId,
                         'store_id'      => $buymax->maxorder,
                         'file_name'     => $uploadData['file_name'],
                         'path'          => 'uploads/Store/' . $uploadData['file_name'],
@@ -90,8 +90,6 @@ class Store_ctr extends CI_Controller
             ];
             $this->db->insert('tbl_paypal', $dataFree);
         }
-
-      
     }
 
     public function payment_email()
@@ -107,27 +105,27 @@ class Store_ctr extends CI_Controller
         foreach ($uploads as $upload) {
             if ($upload == $end_uploads) {
                 $fileName .=  $upload;
-            }else{
-                $fileName .=  $upload.',';
+            } else {
+                $fileName .=  $upload . ',';
             }
         }
 
-        $user = $this->db->get_where('tbl_user',['id' => $upload_order[0]['userId']])->row_array();
+        $user = $this->db->get_where('tbl_user', ['id' => $upload_order[0]['userId']])->row_array();
 
-        if ($user['score'] < '100'){
+        if ($user['score'] < '100') {
             $discount = 0;
-        }elseif($user['score'] <= '199'){
+        } elseif ($user['score'] <= '199') {
             $discount = 10;
-        }elseif ($user['score'] <= '299'){
+        } elseif ($user['score'] <= '299') {
             $discount = 20;
-        }elseif ($user['score'] <= '399'){
+        } elseif ($user['score'] <= '399') {
             $discount = 30;
-        }elseif ($user['score'] <= '499'){
+        } elseif ($user['score'] <= '499') {
             $discount = 40;
-        }elseif ($user['score'] > '499'){
+        } elseif ($user['score'] > '499') {
             $discount = 50;
         }
-        $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file']*$discount)/100);
+        $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
 
         $data['file_name'] = $fileName;
         $data['order_id'] = $upload_order[0]['order_id'];
@@ -135,8 +133,8 @@ class Store_ctr extends CI_Controller
         $data['discount'] = $discount;
         $data['customer_id'] = $upload_order[0]['userId'];
         $data['price_dis'] = $priceDis;
-        
-        $this->load->view('payment_email',$data);
+
+        $this->load->view('payment_email', $data);
     }
 
     public function payment_email_success()
@@ -149,9 +147,9 @@ class Store_ctr extends CI_Controller
         $customer_id = $this->input->post('customer_id');
         $email = $this->input->post('email');
         $user_id = $this->input->post('user_id');
-        $user = $this->db->get_where('tbl_user',['id' => $user_id])->row_array();
+        $user = $this->db->get_where('tbl_user', ['id' => $user_id])->row_array();
 
-        $checkStore_for_buy_email = $this->db->get_where('tbl_store_for_buy_email',['order_id',$order_id])->row_array();
+        $checkStore_for_buy_email = $this->db->get_where('tbl_store_for_buy_email', ['order_id', $order_id])->row_array();
         if (!empty($checkStore_for_buy_email)) {
             $this->session->set_flashdata('fail_doc', TRUE);
             redirect('/');
@@ -173,9 +171,8 @@ class Store_ctr extends CI_Controller
             'user_id' => $user_id,
             'created_at' => date('Y-m-d H:i:s')
         ];
-        $this->db->insert('tbl_store_for_buy_email',$data);
+        $this->db->insert('tbl_store_for_buy_email', $data);
         $this->session->set_flashdata('success_cash', TRUE);
         redirect('/');
-        
     }
 }
