@@ -221,7 +221,7 @@
                                                                             <div class="modal-body row">
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
-                                                                                        <?php $chek_name  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
+                                                                                        <?php $chek_name  = $this->db->get_where('tbl_user', ['idUser' => $store['userId']])->row_array(); ?>
                                                                                         <label for="basicInput">Customer code</label>
                                                                                         <input type="text" name="Document" class="form-control" value="<?php echo $chek_name['idUser']; ?>" placeholder="Enter Document ID" readonly >
                                                                                     </div>
@@ -275,7 +275,7 @@
                                                                         </div>
                                                                         <div class="modal-body row">
 
-                                                                            <?php $chek_order_user  = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
+                                                                            <?php $chek_order_user  = $this->db->get_where('tbl_user', ['idUser' => $store['userId']])->row_array(); ?>
                                                                             <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                 <div class="form-group">
                                                                                     <label for="helpInputTop">Customer code</label>
@@ -287,12 +287,12 @@
                                                                                     <label for="helpInputTop">Order</label>
                                                                                     <input type="text" class="form-control" name="Order" value="<?php echo $store['order_id']; ?>" placeholder="Enter Order" readonly>
                                                                                 </div>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                               
                                                                                     <div class="form-group">
                                                                                         <label for="helpInputTop">price</label>
                                                                                         <input type="text" class="form-control" name="price_file" value="<?php echo $store['price_file']; ?>" placeholder="Enter price" required>
                                                                                     </div>
-                                                                                </div>
+                                                                               
                                                                             </div>
                                                                             <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                 <div class="form-group">
