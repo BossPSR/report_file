@@ -1,11 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-<<<<<<< HEAD
-Source Server         : database
-=======
 Source Server         : db
->>>>>>> master
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : report_file
@@ -14,11 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-<<<<<<< HEAD
-Date: 2020-02-11 21:06:57
-=======
-Date: 2020-02-11 15:46:27
->>>>>>> master
+Date: 2020-02-11 21:25:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -314,44 +306,23 @@ INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962
 INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-22 14:10:25', '1');
 
 -- ----------------------------
--- Table structure for `tbl_bookmark`
+-- Table structure for `tbl_delivery`
 -- ----------------------------
-DROP TABLE IF EXISTS `tbl_bookmark`;
-CREATE TABLE `tbl_bookmark` (
+DROP TABLE IF EXISTS `tbl_delivery`;
+CREATE TABLE `tbl_delivery` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` varchar(255) DEFAULT '' COMMENT 'CM0001',
-  `id_orderBuy` varchar(255) DEFAULT '' COMMENT 'OD0001',
-  `id_document` varchar(255) DEFAULT '' COMMENT 'DM001',
-  `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
+  `order_id` varchar(255) DEFAULT NULL,
+  `userId` varchar(255) DEFAULT NULL,
+  `doc_id` varchar(255) DEFAULT NULL,
+  `price_doc` varchar(200) DEFAULT NULL,
+  `create_at` date DEFAULT NULL,
+  `update_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-=======
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
->>>>>>> master
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tbl_bookmark
+-- Records of tbl_delivery
 -- ----------------------------
-<<<<<<< HEAD
-INSERT INTO `tbl_bookmark` VALUES ('4', 'CM4', 'OR-2', 'fdfdfd', '2020-02-07 11:50:40', null);
-INSERT INTO `tbl_bookmark` VALUES ('5', 'CM4', 'OD6', 'r', '2020-02-07 11:52:10', null);
-INSERT INTO `tbl_bookmark` VALUES ('6', 'CM4', 'OD9', 't-89', '2020-02-07 12:04:57', null);
-INSERT INTO `tbl_bookmark` VALUES ('7', 'CM4', 'OD9', 't-89', '2020-02-07 12:12:00', null);
-INSERT INTO `tbl_bookmark` VALUES ('8', 'CM4', 'OD9', 't-89', '2020-02-07 12:14:11', null);
-INSERT INTO `tbl_bookmark` VALUES ('9', 'CM4', 'OD9', 't-89', '2020-02-07 12:16:17', null);
-INSERT INTO `tbl_bookmark` VALUES ('10', 'CM4', 'OD9', 't-89', '2020-02-07 12:53:34', null);
-INSERT INTO `tbl_bookmark` VALUES ('11', 'CM4', 'OD9', 't-89', '2020-02-07 14:01:14', null);
-INSERT INTO `tbl_bookmark` VALUES ('12', 'CM4', 'OD17', 'V10000', '2020-02-07 16:23:10', null);
-INSERT INTO `tbl_bookmark` VALUES ('13', 'CM4', 'OD9', 't-80', '2020-02-07 16:56:22', null);
-INSERT INTO `tbl_bookmark` VALUES ('14', 'CM4', 'OD19', 't-80', '2020-02-07 17:32:29', null);
-INSERT INTO `tbl_bookmark` VALUES ('15', 'CM4', 'OD19', 't-80', '2020-02-07 17:45:18', null);
-INSERT INTO `tbl_bookmark` VALUES ('16', 'CM4', 'OD19', 't-80', '2020-02-07 17:47:31', null);
-=======
-INSERT INTO `tbl_bookmark` VALUES ('1', 'CM4', 'OR1', 'Dm555', '2020-02-11 14:06:03', null);
-INSERT INTO `tbl_bookmark` VALUES ('2', 'CM5', 'OR2', 'Dm555', '2020-02-11 14:06:30', null);
->>>>>>> master
 
 -- ----------------------------
 -- Table structure for `tbl_deposit`
@@ -407,43 +378,6 @@ CREATE TABLE `tbl_history` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `tbl_job`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_job`;
-CREATE TABLE `tbl_job` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `job_position` varchar(255) DEFAULT NULL,
-  `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_job
--- ----------------------------
-
--- ----------------------------
--- Table structure for `tbl_job_position`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_job_position`;
-CREATE TABLE `tbl_job_position` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_team` int(11) DEFAULT NULL,
-  `job_position` varchar(150) DEFAULT NULL,
-  `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_job_position
--- ----------------------------
-INSERT INTO `tbl_job_position` VALUES ('1', '1', '1', '2020-01-16 14:50:18', null);
-<<<<<<< HEAD
-INSERT INTO `tbl_job_position` VALUES ('2', '1', '2', '2020-01-16 14:50:18', null);
-INSERT INTO `tbl_job_position` VALUES ('3', '1', '3', '2020-01-16 14:50:18', null);
-
--- ----------------------------
 -- Table structure for `tbl_order_f`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_order_f`;
@@ -453,7 +387,7 @@ CREATE TABLE `tbl_order_f` (
   `create_at` date DEFAULT NULL,
   `status` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_order_f
@@ -477,10 +411,13 @@ INSERT INTO `tbl_order_f` VALUES ('16', 'OD16', '2020-02-07', '1');
 INSERT INTO `tbl_order_f` VALUES ('17', 'OD17', '2020-02-07', '1');
 INSERT INTO `tbl_order_f` VALUES ('18', 'OD18', '2020-02-07', '1');
 INSERT INTO `tbl_order_f` VALUES ('19', 'OD19', '2020-02-07', '1');
-=======
-INSERT INTO `tbl_job_position` VALUES ('2', '1', '3', '2020-01-16 14:50:18', null);
-INSERT INTO `tbl_job_position` VALUES ('3', '1', '4', '2020-01-16 14:50:18', null);
->>>>>>> master
+INSERT INTO `tbl_order_f` VALUES ('20', 'OD20', '2020-02-08', '1');
+INSERT INTO `tbl_order_f` VALUES ('21', 'OD21', '2020-02-08', '1');
+INSERT INTO `tbl_order_f` VALUES ('22', 'OD22', '2020-02-08', '1');
+INSERT INTO `tbl_order_f` VALUES ('23', 'OD23', '2020-02-08', '1');
+INSERT INTO `tbl_order_f` VALUES ('24', 'OD24', '2020-02-11', '1');
+INSERT INTO `tbl_order_f` VALUES ('25', 'OD25', '2020-02-11', '1');
+INSERT INTO `tbl_order_f` VALUES ('26', 'OD26', '2020-02-11', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_package`
@@ -578,7 +515,6 @@ INSERT INTO `tbl_select_item` VALUES ('7', 'การเมือง', '2020-01-
 INSERT INTO `tbl_select_item` VALUES ('8', 'รัฐบาล', '2020-01-03 14:51:31', null);
 
 -- ----------------------------
-<<<<<<< HEAD
 -- Table structure for `tbl_session`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_session`;
@@ -609,18 +545,20 @@ CREATE TABLE `tbl_store_for_buy_email` (
   `customer_id` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `note` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `update_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_store_for_buy_email
 -- ----------------------------
+INSERT INTO `tbl_store_for_buy_email` VALUES ('1', 'sample-3pp1.pdf,pdf_open_parameters.pdf', 'OD20', '200', '10', '180', 'CM4', '', '4', '0', '', '2020-02-08 14:07:24', '2020-02-01 16:25:16');
+INSERT INTO `tbl_store_for_buy_email` VALUES ('2', 'ข้อเสนอโครงการ2.pdf,สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_25392.pdf', 'OD22', '400', '10', '360', 'CM4', '', '4', '0', '', '2020-02-08 14:29:58', '2020-02-16 16:25:20');
 
 -- ----------------------------
-=======
->>>>>>> master
 -- Table structure for `tbl_team`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_team`;
@@ -635,22 +573,15 @@ CREATE TABLE `tbl_team` (
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   `status` int(11) DEFAULT 0 COMMENT '0 == approve //  == non-approve',
-<<<<<<< HEAD
   `bank_account` varchar(255) DEFAULT NULL,
   `passport` varchar(255) DEFAULT NULL,
-=======
->>>>>>> master
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_team
 -- ----------------------------
-<<<<<<< HEAD
 INSERT INTO `tbl_team` VALUES ('1', '218', 'famnoiii@gmail.com', '0968138751', 'Fam Worapong', 'e10adc3949ba59abbe56e057f20f883e', 'screencapture-file-G-Fam-E-backup-19-9-19-profile-profile-index-html-2020-01-06-19_08_028.png', '2020-01-16 14:50:17', null, '1', null, '1659900740516');
-=======
-INSERT INTO `tbl_team` VALUES ('1', '218', 'famnoiii@gmail.com', '0968138751', 'Fam Worapong', 'e10adc3949ba59abbe56e057f20f883e', 'screencapture-file-G-Fam-E-backup-19-9-19-profile-profile-index-html-2020-01-06-19_08_028.png', '2020-01-16 14:50:17', null, '1');
->>>>>>> master
 
 -- ----------------------------
 -- Table structure for `tbl_unlocks`
@@ -703,39 +634,21 @@ DROP TABLE IF EXISTS `tbl_upload_main_search`;
 CREATE TABLE `tbl_upload_main_search` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
-<<<<<<< HEAD
-=======
   `id_doc` varchar(255) DEFAULT NULL,
->>>>>>> master
   `select_item_id` int(11) NOT NULL,
   `search_item` varchar(255) DEFAULT '',
   `select_item` varchar(255) DEFAULT '',
   `code` text DEFAULT NULL,
   `topic` text DEFAULT NULL,
-<<<<<<< HEAD
-  `upload_store_id` int(11) NOT NULL,
-  `create_at` datetime DEFAULT NULL,
-  `update_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-=======
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
->>>>>>> master
 
 -- ----------------------------
 -- Records of tbl_upload_main_search
 -- ----------------------------
-<<<<<<< HEAD
-INSERT INTO `tbl_upload_main_search` VALUES ('1', '4', '2', 'G-Shock', 'คณิตศาสตร์', 'C76JB', '-----', '8', '2020-02-07 11:22:36', '2020-02-07 11:22:36');
-INSERT INTO `tbl_upload_main_search` VALUES ('2', '4', '3', 'T-5', 'ดาราศาสตร์', 'T-61', '---', '7', '2020-02-07 11:30:12', '2020-02-07 11:30:12');
-INSERT INTO `tbl_upload_main_search` VALUES ('3', '4', '7', 'G-Shock', 'การเมือง', '1000', '5485778', '9', '2020-02-07 12:01:40', '2020-02-07 12:01:40');
-INSERT INTO `tbl_upload_main_search` VALUES ('4', '4', '2', 'Y-88', 'คณิตศาสตร์', 'T88', 'wqe', '10', '2020-02-07 12:03:36', '2020-02-07 12:03:36');
-=======
 INSERT INTO `tbl_upload_main_search` VALUES ('1', '0', 'Dm555', '0', '', '', null, null, null, null);
->>>>>>> master
 
 -- ----------------------------
 -- Table structure for `tbl_upload_order`
@@ -751,7 +664,6 @@ CREATE TABLE `tbl_upload_order` (
   `path` varchar(255) DEFAULT NULL,
   `date_required` date DEFAULT NULL,
   `price_file` varchar(255) DEFAULT NULL,
-<<<<<<< HEAD
   `status_book` int(11) DEFAULT 0 COMMENT '0// not 1//ture',
   `is_check` int(11) DEFAULT 0 COMMENT '0//not 1// ture',
   `note_reject` varchar(255) DEFAULT NULL,
@@ -760,18 +672,10 @@ CREATE TABLE `tbl_upload_order` (
   `is_confirm` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-=======
-  `status_book` varchar(255) DEFAULT '0' COMMENT '0// not 1//ture',
-  `is_check` varchar(255) DEFAULT '0' COMMENT '0//not 1// ture',
-  `note_reject` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
->>>>>>> master
 
 -- ----------------------------
 -- Records of tbl_upload_order
 -- ----------------------------
-<<<<<<< HEAD
 INSERT INTO `tbl_upload_order` VALUES ('1', '4', 'shirt-1580109491.jpg', 'OR-1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', '2020-02-05', '', '0', '1', 'asdasdasdasd', null, null, null);
 INSERT INTO `tbl_upload_order` VALUES ('2', '4', 'shirt-1580439213.jpg', 'OR-2', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', '2020-02-16', '200', '1', null, null, null, null, null);
 INSERT INTO `tbl_upload_order` VALUES ('3', '4', '2.jpg', 'OR-3', '2020-02-03 16:11:12', null, 'uploads/Buy/2.jpg', '2020-02-14', '', '0', '1', 'not work', null, null, null);
@@ -781,13 +685,6 @@ INSERT INTO `tbl_upload_order` VALUES ('13', '4', 'ใบเสร็จคุ�
 INSERT INTO `tbl_upload_order` VALUES ('14', '4', 'ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', '2020-02-08', '1000', '1', '0', null, null, null, null);
 INSERT INTO `tbl_upload_order` VALUES ('15', '4', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', '2020-02-08', '1000', '2', '0', null, '1', null, null);
 INSERT INTO `tbl_upload_order` VALUES ('16', '4', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', 'OD19', '2020-02-07 17:32:09', '2020-02-07 17:47:31', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', '2020-02-21', '10000', '2', '0', null, '1', null, null);
-=======
-INSERT INTO `tbl_upload_order` VALUES ('1', '4', 'shirt-1580109491.jpg', 'OR1', '2020-02-03 10:09:48', '2020-02-11 14:06:03', 'uploads/Buy/shirt-1580109491.jpg', '2020-02-04', '200', '1', '', '');
-INSERT INTO `tbl_upload_order` VALUES ('2', '4', 'shirt-1580439213.jpg', 'OR1', '2020-02-03 10:09:48', '2020-02-11 14:06:03', 'uploads/Buy/shirt-1580439213.jpg', '2020-02-04', '200', '1', null, null);
-INSERT INTO `tbl_upload_order` VALUES ('3', '4', '2.jpg', 'OR1', '2020-02-03 16:11:12', '2020-02-11 14:06:03', 'uploads/Buy/2.jpg', '2020-02-04', '200', '1', '', '');
-INSERT INTO `tbl_upload_order` VALUES ('4', '5', '2.jpg', 'OR2', '2020-02-03 16:11:12', '2020-02-11 14:06:30', 'uploads/Buy/2.jpg', '2020-02-03', '200', '1', '', '');
-INSERT INTO `tbl_upload_order` VALUES ('5', '5', 'shirt-1580439213.jpg', 'OR2', '2020-02-03 10:09:48', '2020-02-11 14:06:30', 'uploads/Buy/shirt-1580439213.jpg', '2020-02-03', '200', '1', null, null);
->>>>>>> master
 
 -- ----------------------------
 -- Table structure for `tbl_upload_store`
@@ -809,28 +706,13 @@ CREATE TABLE `tbl_upload_store` (
   `status_main_search` tinyint(1) NOT NULL DEFAULT 0,
   `is_accept` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-=======
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
->>>>>>> master
 
 -- ----------------------------
 -- Records of tbl_upload_store
 -- ----------------------------
-<<<<<<< HEAD
-INSERT INTO `tbl_upload_store` VALUES ('1', '4', 'ST-1', 'sample-3pp.pdf', '0', '2020-01-31 10:27:53', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST', 'A', null, '0', '1');
-INSERT INTO `tbl_upload_store` VALUES ('2', '4', 'ST-2', 'sample-3pp.pdf', '0', '2020-02-04 12:17:36', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST2', 'B', null, '0', '1');
-INSERT INTO `tbl_upload_store` VALUES ('6', '4', 'OD3', 'UML_การทำงานระบบแจ้งเตือน.pdf', '1', '2020-02-07 11:01:54', null, 'uploads/Store/UML_การทำงานระบบแจ้งเตือน.pdf', null, null, null, null, '0', '1');
-INSERT INTO `tbl_upload_store` VALUES ('7', '4', 'OD4', 'ใบเสนอราคาline_4_1_2563_.pdf', '1', '2020-02-07 11:03:09', null, 'uploads/Store/ใบเสนอราคาline_4_1_2563_.pdf', '20', null, 'B', 'complete', '1', '0');
-INSERT INTO `tbl_upload_store` VALUES ('8', '4', 'OD5', 'ใบเสร็จคุณเบิร์ด2.pdf', '0', '2020-02-07 11:21:05', null, 'uploads/Store/ใบเสร็จคุณเบิร์ด2.pdf', '20', null, 'B', 'complete', '1', '0');
-INSERT INTO `tbl_upload_store` VALUES ('9', '4', 'OD7', 'ใบเสร็จคุณเบิร์ด_(2).pdf', '0', '2020-02-07 12:01:17', null, 'uploads/Store/ใบเสร็จคุณเบิร์ด_(2).pdf', '50', null, 'A', 'complete', '1', '0');
-INSERT INTO `tbl_upload_store` VALUES ('10', '4', 'OD8', 'บทนำ.pdf', '0', '2020-02-07 12:02:57', null, 'uploads/Store/บทนำ.pdf', '50', null, 'A', 'complete', '1', '0');
-INSERT INTO `tbl_upload_store` VALUES ('11', '4', 'OD9', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', '0', '2020-02-07 17:31:50', null, 'uploads/Store/ใบวางบิลเว็บdeejungdelivery.com_13-01-2563.pdf', null, null, null, null, '0', '0');
-=======
 INSERT INTO `tbl_upload_store` VALUES ('1', '4', 'ST-1', 'sample-3pp.pdf', '0', '2020-01-31 10:27:53', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST', 'A', null, '0', '0');
 INSERT INTO `tbl_upload_store` VALUES ('2', '4', 'ST-2', 'sample-3pp.pdf', '0', '2020-02-04 12:17:36', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST2', 'B', null, '0', '0');
->>>>>>> master
 
 -- ----------------------------
 -- Table structure for `tbl_user`
@@ -857,11 +739,7 @@ CREATE TABLE `tbl_user` (
 -- ----------------------------
 INSERT INTO `tbl_user` VALUES ('2', 'CM2', '1269900232221', '0', '0', 'jame0925623256@gmail.com', '0925623256', 'Nattaphon Kiattikul', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-04 13:56:11');
 INSERT INTO `tbl_user` VALUES ('3', 'CM3', '123456789', '0', '0', 'infinityp.soft@gmail.com', '0618096661', 'admin@example.com', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/1.png', '0', '2020-02-04 13:56:13');
-<<<<<<< HEAD
-INSERT INTO `tbl_user` VALUES ('4', 'CM4', '4444555666112', '150', '100', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '1', '2020-02-07 11:03:25');
-=======
 INSERT INTO `tbl_user` VALUES ('4', 'CM4', '4444555666112', '150', '100', 'test@gmail.com', '0877777887', 'เทสอย่าง มีระบบ', 'e10adc3949ba59abbe56e057f20f883e', 'public/frontend/assets/img/profile/2.png', '0', '2020-02-04 13:56:15');
->>>>>>> master
 INSERT INTO `tbl_user` VALUES ('5', 'CM5', '123123', '0', '0', 'tt@gmail.com', '123123', 'a123', '202cb962ac59075b964b07152d234b70', null, '0', '2020-02-04 13:56:17');
 INSERT INTO `tbl_user` VALUES ('6', 'CM6', '987456123', '2', '0', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', null, '1', '2020-02-04 13:56:20');
 INSERT INTO `tbl_user` VALUES ('23', 'CM23', '1659900740516', '0', '0', 'famnoii2550@gmail.com', '0968138751', 'worapong srisawan', 'e10adc3949ba59abbe56e057f20f883e', null, '0', '2020-02-04 13:55:59');

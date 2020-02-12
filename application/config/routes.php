@@ -120,6 +120,9 @@ $route['order_auto']            = 'front-end/Buy_ctr/order_auto';
 
 $route['payment_email']         = 'front-end/Store_ctr/payment_email';
 $route['payment_email_success'] = 'front-end/Store_ctr/payment_email_success';
+$route['userNotify']            = 'front-end/My_user_ctr/userNotify';
+$route['read_userNotify']       = 'front-end/My_user_ctr/read_userNotify';
+
 $route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 $route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
 // /------------------------------------- back-end  ---------------------

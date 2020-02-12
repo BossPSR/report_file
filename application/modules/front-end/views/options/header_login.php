@@ -136,7 +136,7 @@
                         </div> -->
                         <div class="top_right text-right">
                             <ul>
-                                <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
+                                <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                 <?php if ($user == true) :  ?>
                                     <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
@@ -406,6 +406,33 @@
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
                                         <li>
+                                            <!-- <div id="user_notify"> -->
+                                            
+                                                <!-- <div class="dropdown"> -->
+                                                    <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
+                                                    <!-- <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff;"></i> -->
+                                                    
+                                                    <!-- <ul class="dropdown-menu" role="menu">
+                                                        <li><a>Action</a></li>
+                                                    </ul> -->
+                                                <!-- </div> -->
+
+                                               
+                                            <!-- </div> -->
+                                            <?php 
+                                                $userUpload_store = $this->db->get_where('tbl_upload_store',['userId' => $user['id'],'price_file_read' => 0])->result_array();
+                                                $userUpload_store = count($userUpload_store);
+                                            ?>
+                                            <div class="dropdown" id="user_notify">
+                                                <i class="fa fa-bell text-black-white badge-notification" onClick="read_userNotify();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="<?php echo $userUpload_store; ?>" style="font-size:22px;color:#fff; cursor: pointer;"></i>
+                                                    <ul class="dropdown-menu" style="display:none;" role="menu">
+                                                        <li>Action</li>
+                                                    </ul>
+
+                                                   
+                                            </div>
+                                        </li>
+                                        <li>
                                             <a>Discount :
                                                 <?php if ($user['score'] < '100') : ?>
                                                     0%
@@ -422,19 +449,7 @@
                                                 <?php endif; ?>
                                             </a>
                                         </li>
-                                        <li>
-                                            <div class="dropdown">
-                                                <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
-                                                <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="13" style="font-size:22px;color:#fff;"></i>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="#">Action</a></li>
-                                                    <li><a href="#">Another action</a></li>
-                                                    <li><a href="#">Something else here</a></li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="#">Separated link</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                        
                                     <?php elseif ($team) : ?>
                                         <li>
                                             <a href="My-stock"> My Stock</a>
@@ -539,3 +554,45 @@
         </div>
     </aside>
     <!--sidebar widget end-->
+
+    <script type="text/javascript">
+        // $(function(){
+        //     setInterval(function(){
+        //         $.ajax({
+        //             url:"userNotify",
+        //             success:function(getData){
+        //                 var elementNotify = '<div class="dropdown"><i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="'+getData+'" style="font-size:22px;color:#fff;" onClick="read_userNotify();"></i>';
+        //                     elementNotify += '<ul class="dropdown-menu" role="menu"><li>Action</li></ul></div>';
+        //                 document.getElementById("user_notify").innerHTML = elementNotify;
+        //             }
+        //         });    
+        //     },5000);    
+        // });
+        function read_userNotify() {
+            $.ajax({
+                url:"read_userNotify",
+                data:{
+                    user_id: <?php echo $user['id']; ?>,
+                },
+                success:function(getData){
+                    var numData= JSON.parse(getData);
+                    var dataNotify = "";
+
+                    if (numData.successfully === true) {
+                        dataNotify = '<i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff; cursor: pointer;"></i>';
+                        dataNotify += '<ul class="dropdown-menu show" role="menu">';
+                        // for (let index = 0; index < numData.dataList.list.length; index++) {
+                        //    dataNotify += '<li>'+ 1 +'</li>';
+                            
+                        // }
+                        dataNotify += '<li>'+ 1 +'</li>';
+                        dataNotify += '</ul>';
+                    }
+                        
+
+                        document.getElementById("user_notify").innerHTML = dataNotify;
+                        console.log(getData);
+                }
+            });
+        }
+    </script>
