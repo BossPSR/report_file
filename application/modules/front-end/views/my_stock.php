@@ -54,7 +54,7 @@ foreach ($sel1 as $key => $da) {
                             <?php $i = 1; ?>
 
                             <?php foreach ($sel1 as $key => $da) {
-                                $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2])->result_array(); ?>
+                                $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2, 'is_confirm' => null])->result_array(); ?>
                                 <?php foreach ($sel2 as $key => $qq) { ?>
                                     <?php $si = $this->db->get_where('tbl_select_item', ['id' => $da['job_position']])->row_array(); ?>
                                     <tr style="text-align:center;">
@@ -65,29 +65,42 @@ foreach ($sel1 as $key => $da) {
                                         <td><?php echo $qq['create_at']; ?></td>
                                         <td><?php echo $si['name_item']; ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-success" id="download">Confirmed</button>
+                                            <button type="button" class="btn btn-success" id="download<?php echo $key; ?>"> Confirmed </button>
                                         </td>
                                     </tr>
+
                                     <script>
-                                        $("#download").click(function() {
+                                        $('#download<?php echo $key; ?>').click(function() {
                                             swal({
                                                 icon: "warning",
                                                 title: "Are you sure?",
                                                 text: "Do you want confirmed document",
-                                                dangerMode: true,
+                                                closeOnEsc: true,
+                                                closeOnClickOutside: false,
                                                 buttons: {
                                                     cancel: true,
-                                                    confirm: 'Yes, I am sure!',
+                                                    confirm: true,
                                                 },
+                                            }).then(function(isConfirm) {
+                                                if (isConfirm == true) {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: 'order_isconfirm',
+                                                        data: {
+                                                            id: <?php echo $qq['id']; ?>,
+                                                            is_confirm: 1,
+                                                        },
+                                                        success: function(success) {
+                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                button: false,
+                                                            });
+                                                            setTimeout("location.reload(true);", 1000);
+                                                        }
+                                                    });
+                                                } else {
+                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                }
                                             });
-                                            // $.ajax({
-                                            //     type: 'POST',
-                                            //     url: 'my_task_status',
-                                            //     data: {
-                                            //         id = <?php echo $qq['id']; ?>
-                                            //     }
-                                            // });
-                                            
                                         });
                                     </script>
                                 <?php } ?>

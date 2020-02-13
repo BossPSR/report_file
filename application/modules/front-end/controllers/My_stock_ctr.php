@@ -20,4 +20,22 @@ class My_stock_ctr extends CI_Controller
             $this->load->view('options/footer');
         }
     }
+
+    function order_isconfirm()
+    {
+        $id             = $this->input->post('id');
+        $is_confirm     = $this->input->post('is_confirm');
+        if ($this->session->userdata('email') == '') {
+            redirect('home');
+        } else {
+            $data = array(
+                'is_confirm'        => $is_confirm,
+            );
+
+            $this->db->where('id', $id);
+            $success = $this->db->update('tbl_upload_order', $data);
+
+            echo $success;
+        }
+    }
 }
