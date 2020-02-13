@@ -15,6 +15,7 @@ foreach ($store as $upload_main_searchDetail) {
     $temp['path'] = $upload_main_searchDetail['path'];
     $temp['price_file'] = $upload_main_searchDetail['price_file'];
     $temp['status_cp'] = $upload_main_searchDetail['status_cp'];
+    $temp['userId'] = $upload_main_searchDetail['userId'];
     if (!isset($arrayForTable[$upload_main_searchDetail['userId']])) {
         $arrayForTable[$upload_main_searchDetail['userId']] = [];
     }
@@ -91,8 +92,8 @@ foreach ($store as $upload_main_searchDetail) {
 
 
                                                                 <td>
-                                                                    <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); ?>
-                                                                    <?php echo $store_name['username']; ?>
+                                                                  
+                                                                    <?php echo $order['userId']; ?>
                                                                 </td>
 
 

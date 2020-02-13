@@ -13,6 +13,8 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
     $temp['code'] = $upload_main_searchDetail['code'];
     $temp['topic'] = $upload_main_searchDetail['topic'];
     $temp['create_at'] = $upload_main_searchDetail['create_at'];
+    $temp['userId'] = $upload_main_searchDetail['userId'];
+    $temp['upload_store_id'] = $upload_main_searchDetail['upload_store_id'];
     if(!isset($arrayForTable[$upload_main_searchDetail['userId']])){
         $arrayForTable[$upload_main_searchDetail['userId']] = [];
     }
@@ -66,6 +68,7 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                     <th>User</th>
                                                     <th>Search Item</th>
                                                     <th>Select Item</th>
+                                                    <th>file</th>
                                                     <th>Code</th>
                                                     <th>Topic</th>
                                                     <th>Create Date</th>
@@ -76,8 +79,9 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                 
                                                 foreach ($arrayForTable as $id => $upload_main_search) { 
                                                     $numName= count($upload_main_search);
-                                                    $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); 
+                                                 
                                                         foreach ($upload_main_search as $key => $value){
+                                                            
                                                 ?>
                                                
                                                 
@@ -86,17 +90,56 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                 
                                                         <td>
                                                           
-                                                            <?php echo $store_name['username'];?>
+                                                            <?php echo $id;?>
                                                         </td>
      
                                                        
                                                         
                                                         <td><?php echo $value['search_item']; ?></td>
                                                         <td><?php echo $value['select_item']; ?></td>
+                                                        <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
                                                         <td><?php echo $value['code']; ?></td>
                                                         <td><?php echo $value['topic']; ?></td>
                                                         <td><?php echo $value['create_at']; ?></td>    
                                                     </tr>
+                                                    <div class="modal fade" id="exampleModal<?php echo $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload Main Search</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="back_store_add_com" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+                                                                    <?php $path  = $this->db->get_where('tbl_upload_store', ['id' => $value['upload_store_id']])->row_array(); ?>
+                                                                        <iframe src="<?php echo $path['path']; ?>" width="100%" height="400px"></iframe>
+                                                                        <input type="hidden" class="form-control" name="id" value="<?php echo $value['id']; ?>">
+                                                                        <div class="data-items pb-3">
+                                                                            <div class="data-fields px-2 mt-3">
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12 data-field-col">
+                                                                                        <div class="form-group">
+                                                                                           
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                       
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            </div>
+                                                        </div>
 
                                                     
                                                     
@@ -106,6 +149,7 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                     ?>
                                                     <thead>
                                                         <tr>
+                                                            <th scope="col"></th>
                                                             <th scope="col"></th>
                                                             <th scope="col"></th>
                                                             <th scope="col"></th>

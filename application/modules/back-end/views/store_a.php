@@ -52,9 +52,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><?php echo $store['store_id']; ?></td>
-                                                        <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $store['userId']])->row_array(); ?>
-                                                        
-                                                        <td><?php echo $store_name['username']; ?></td>
+                                                        <td><?php echo $store['userId']; ?></td>
                                                         
                                                         <td><?php echo $store['file_name']; ?></td>
                                                         <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>

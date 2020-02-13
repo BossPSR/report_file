@@ -87,10 +87,11 @@ foreach ($order as $upload_main_searchDetail) {
                                                     </tr>
 
                                                     <?php
-                                                    $this->db->select('*,tbl_upload_order.userId AS cm');
+                                                    $this->db->select('*,tbl_upload_order.userId AS cm,tbl_upload_store.path AS path_store');
                                                     $this->db->from('tbl_upload_order');
                                                     $this->db->join('tbl_bookmark', 'tbl_upload_order.order_id = tbl_bookmark.id_orderBuy');
                                                     $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document = tbl_upload_main_search.id_doc');
+                                                    $this->db->join('tbl_upload_store', 'tbl_upload_store.id = tbl_upload_main_search.upload_store_id');
                                                     $this->db->where('tbl_upload_order.status_book', 1);
                                                     $this->db->where('tbl_upload_order.order_id', $stores['order_id']);
                                                     $this->db->order_by('tbl_upload_order.date_required', 'desc');
@@ -122,7 +123,7 @@ foreach ($order as $upload_main_searchDetail) {
                                                                     </div>
                                                                     <form action="back_store_add_com" method="POST" class="form-horizontal">
                                                                         <div class="modal-body">
-                                                                            <iframe src="<?php echo $stores['path']; ?>" width="100%" height="500px"></iframe>
+                                                                            <iframe src="<?php echo $order['path_store']; ?>" width="100%" height="500px"></iframe>
                                                                             <div class="data-items pb-3">
                                                                                 <div class="data-fields px-2 mt-3">
                                                                                     <div class="row">
