@@ -58,7 +58,7 @@ class Store_ctr extends CI_Controller
                     $uploadData = $this->upload->data();
 
                     $data = array(
-                        'userId'        => "CM" . $userId,
+                        'userId'        => $userId,
                         'store_id'      => $buymax->maxorder,
                         'file_name'     => $uploadData['file_name'],
                         'path'          => 'uploads/Store/' . $uploadData['file_name'],

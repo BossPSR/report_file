@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-02-11 21:25:40
+Date: 2020-02-12 17:14:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -306,6 +306,37 @@ INSERT INTO `tbl_admin` VALUES ('5', 'tt@gmail.com', '123123', 'a123', '202cb962
 INSERT INTO `tbl_admin` VALUES ('6', 'test2@gmail.com', '0879874444', 'ทดสอบ รูปแบบที่ 2', 'e10adc3949ba59abbe56e057f20f883e', '2020-01-22 14:10:25', '1');
 
 -- ----------------------------
+-- Table structure for `tbl_bookmark`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_bookmark`;
+CREATE TABLE `tbl_bookmark` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` varchar(255) DEFAULT '' COMMENT 'CM0001',
+  `id_orderBuy` varchar(255) DEFAULT '' COMMENT 'OD0001',
+  `id_document` varchar(255) DEFAULT '' COMMENT 'DM001',
+  `create_at` datetime DEFAULT NULL,
+  `update_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_bookmark
+-- ----------------------------
+INSERT INTO `tbl_bookmark` VALUES ('4', 'CM4', 'OR-2', 'fdfdfd', '2020-02-07 11:50:40', null);
+INSERT INTO `tbl_bookmark` VALUES ('5', 'CM4', 'OD6', 'r', '2020-02-07 11:52:10', null);
+INSERT INTO `tbl_bookmark` VALUES ('6', 'CM4', 'OD9', 't-89', '2020-02-07 12:04:57', null);
+INSERT INTO `tbl_bookmark` VALUES ('7', 'CM4', 'OD9', 't-89', '2020-02-07 12:12:00', null);
+INSERT INTO `tbl_bookmark` VALUES ('8', 'CM4', 'OD9', 't-89', '2020-02-07 12:14:11', null);
+INSERT INTO `tbl_bookmark` VALUES ('9', 'CM4', 'OD9', 't-89', '2020-02-07 12:16:17', null);
+INSERT INTO `tbl_bookmark` VALUES ('10', 'CM4', 'OD9', 't-89', '2020-02-07 12:53:34', null);
+INSERT INTO `tbl_bookmark` VALUES ('11', 'CM4', 'OD9', 't-89', '2020-02-07 14:01:14', null);
+INSERT INTO `tbl_bookmark` VALUES ('12', 'CM4', 'OD17', 'V10000', '2020-02-07 16:23:10', null);
+INSERT INTO `tbl_bookmark` VALUES ('13', 'CM4', 'OD9', 't-80', '2020-02-07 16:56:22', null);
+INSERT INTO `tbl_bookmark` VALUES ('14', 'CM4', 'OD19', 't-80', '2020-02-07 17:32:29', null);
+INSERT INTO `tbl_bookmark` VALUES ('15', 'CM4', 'OD19', 't-80', '2020-02-07 17:45:18', null);
+INSERT INTO `tbl_bookmark` VALUES ('16', 'CM4', 'OD19', 't-80', '2020-02-07 17:47:31', null);
+
+-- ----------------------------
 -- Table structure for `tbl_delivery`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_delivery`;
@@ -387,7 +418,7 @@ CREATE TABLE `tbl_order_f` (
   `create_at` date DEFAULT NULL,
   `status` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_order_f
@@ -418,6 +449,8 @@ INSERT INTO `tbl_order_f` VALUES ('23', 'OD23', '2020-02-08', '1');
 INSERT INTO `tbl_order_f` VALUES ('24', 'OD24', '2020-02-11', '1');
 INSERT INTO `tbl_order_f` VALUES ('25', 'OD25', '2020-02-11', '1');
 INSERT INTO `tbl_order_f` VALUES ('26', 'OD26', '2020-02-11', '1');
+INSERT INTO `tbl_order_f` VALUES ('27', 'OD27', '2020-02-11', '1');
+INSERT INTO `tbl_order_f` VALUES ('28', 'OD28', '2020-02-11', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_package`
@@ -550,13 +583,11 @@ CREATE TABLE `tbl_store_for_buy_email` (
   `created_at` timestamp NULL DEFAULT NULL,
   `update_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_store_for_buy_email
 -- ----------------------------
-INSERT INTO `tbl_store_for_buy_email` VALUES ('1', 'sample-3pp1.pdf,pdf_open_parameters.pdf', 'OD20', '200', '10', '180', 'CM4', '', '4', '0', '', '2020-02-08 14:07:24', '2020-02-01 16:25:16');
-INSERT INTO `tbl_store_for_buy_email` VALUES ('2', 'ข้อเสนอโครงการ2.pdf,สรุป_พรบ.วิธีปฏิบัติราชการทางปกครอง_25392.pdf', 'OD22', '400', '10', '360', 'CM4', '', '4', '0', '', '2020-02-08 14:29:58', '2020-02-16 16:25:20');
 
 -- ----------------------------
 -- Table structure for `tbl_team`
@@ -643,12 +674,11 @@ CREATE TABLE `tbl_upload_main_search` (
   `create_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_main_search
 -- ----------------------------
-INSERT INTO `tbl_upload_main_search` VALUES ('1', '0', 'Dm555', '0', '', '', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_order`
@@ -656,7 +686,7 @@ INSERT INTO `tbl_upload_main_search` VALUES ('1', '0', 'Dm555', '0', '', '', nul
 DROP TABLE IF EXISTS `tbl_upload_order`;
 CREATE TABLE `tbl_upload_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
+  `userId` varchar(255) NOT NULL,
   `file_name` varchar(255) DEFAULT '',
   `order_id` varchar(110) DEFAULT '' COMMENT 'OR00001',
   `create_at` datetime DEFAULT NULL,
@@ -671,20 +701,13 @@ CREATE TABLE `tbl_upload_order` (
   `note` varchar(255) DEFAULT NULL,
   `is_confirm` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_order
 -- ----------------------------
-INSERT INTO `tbl_upload_order` VALUES ('1', '4', 'shirt-1580109491.jpg', 'OR-1', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580109491.jpg', '2020-02-05', '', '0', '1', 'asdasdasdasd', null, null, null);
-INSERT INTO `tbl_upload_order` VALUES ('2', '4', 'shirt-1580439213.jpg', 'OR-2', '2020-02-03 10:09:48', null, 'uploads/Buy/shirt-1580439213.jpg', '2020-02-16', '200', '1', null, null, null, null, null);
-INSERT INTO `tbl_upload_order` VALUES ('3', '4', '2.jpg', 'OR-3', '2020-02-03 16:11:12', null, 'uploads/Buy/2.jpg', '2020-02-14', '', '0', '1', 'not work', null, null, null);
-INSERT INTO `tbl_upload_order` VALUES ('4', '4', 'ใบเสร็จคุณเบิร์ด_(2).pdf', 'OD6', '2020-02-07 11:23:34', null, 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2).pdf', '2020-02-14', '200', '1', '0', null, '', null, null);
-INSERT INTO `tbl_upload_order` VALUES ('12', '4', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25631.pdf', 'OD9', '2020-02-07 14:13:51', '2020-02-07 16:56:22', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25631.pdf', '0000-00-00', '100', '1', '0', null, '', null, null);
-INSERT INTO `tbl_upload_order` VALUES ('13', '4', 'ใบเสร็จคุณเบิร์ด_(2)2.pdf', 'OD9', '2020-02-07 14:13:51', '2020-02-07 16:56:22', 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2)2.pdf', '0000-00-00', '100', '1', '0', null, '', null, null);
-INSERT INTO `tbl_upload_order` VALUES ('14', '4', 'ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบเสร็จคุณเบิร์ด_(2)_(2).pdf', '2020-02-08', '1000', '1', '0', null, null, null, null);
-INSERT INTO `tbl_upload_order` VALUES ('15', '4', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', 'OD17', '2020-02-07 14:22:35', '2020-02-07 16:23:10', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25632.pdf', '2020-02-08', '1000', '2', '0', null, '1', null, null);
-INSERT INTO `tbl_upload_order` VALUES ('16', '4', 'ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', 'OD19', '2020-02-07 17:32:09', '2020-02-07 17:47:31', 'uploads/Buy/ใบวางบิลเว็บdeejungdelivery.com_13-01-25633.pdf', '2020-02-21', '10000', '2', '0', null, '1', null, null);
+INSERT INTO `tbl_upload_order` VALUES ('1', 'CM4', 'sample-3pp3.pdf', 'OD28', '2020-02-11 21:41:24', null, 'uploads/Buy/sample-3pp3.pdf', '2020-02-11', null, '0', '0', null, null, null, null);
+INSERT INTO `tbl_upload_order` VALUES ('2', 'CM4', 'pdf_open_parameters3.pdf', 'OD28', '2020-02-11 21:41:24', null, 'uploads/Buy/pdf_open_parameters3.pdf', '2020-02-11', null, '0', '0', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tbl_upload_store`
@@ -706,13 +729,11 @@ CREATE TABLE `tbl_upload_store` (
   `status_main_search` tinyint(1) NOT NULL DEFAULT 0,
   `is_accept` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_upload_store
 -- ----------------------------
-INSERT INTO `tbl_upload_store` VALUES ('1', '4', 'ST-1', 'sample-3pp.pdf', '0', '2020-01-31 10:27:53', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST', 'A', null, '0', '0');
-INSERT INTO `tbl_upload_store` VALUES ('2', '4', 'ST-2', 'sample-3pp.pdf', '0', '2020-02-04 12:17:36', null, 'uploads/Store/sample-3pp.pdf', null, 'TEST2', 'B', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_user`

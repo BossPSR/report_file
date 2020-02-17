@@ -91,8 +91,8 @@ foreach ($store as $upload_main_searchDetail) {
 
 
                                                                 <td>
-                                                                    <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $id])->row_array(); ?>
-                                                                    <?php echo $store_name['username']; ?>
+                                                                    <?php $store_name   = $this->db->get_where('tbl_user', ['idUser' => $id])->row_array(); ?>
+                                                                    <?php echo $store_name['idUser']; ?>
                                                                 </td>
 
 
