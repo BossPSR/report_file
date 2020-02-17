@@ -223,7 +223,7 @@
                                                                                     <div class="form-group">
                                                                                         <?php $chek_name  = $this->db->get_where('tbl_user', ['idUser' => $store['userId']])->row_array(); ?>
                                                                                         <label for="basicInput">Customer code</label>
-                                                                                        <input type="text" name="Document" class="form-control" value="<?php echo $chek_name['idUser']; ?>" placeholder="Enter Document ID" readonly >
+                                                                                        <input type="text" name="Customer" class="form-control" value="<?php echo $chek_name['idUser']; ?>" placeholder="Enter Document ID" readonly >
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
