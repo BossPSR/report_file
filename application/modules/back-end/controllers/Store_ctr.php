@@ -404,8 +404,8 @@ class Store_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-            // $data['store'] = $this->Store_model->store_list();
-            $data['store'] = $this->db->get_where('tbl_upload_store', ['grade' => null, 'price_file' => null, 'status_cp' => null])->result_array();
+            $data['store'] = $this->Store_model->store_sell();
+            
             $this->load->view('options/header');
             $this->load->view('checkforsell', $data);
             $this->load->view('options/footer');
@@ -431,6 +431,28 @@ class Store_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
         return redirect('back_store');
+    }
+
+    public function store_section()
+    {
+
+        $id_order = $this->input->get('id_order');
+
+        $data = array(
+
+            'section'         => $this->input->get('id_section'),
+
+
+        );
+        $this->db->where('id', $id_order);
+        $resultsedit = $this->db->update('tbl_upload_store', $data);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update section information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update section information');
+        }
+        return redirect('back_store_checkForsell');
     }
 
     public function check_store_add_com()
@@ -519,6 +541,8 @@ class Store_ctr extends CI_Controller
         }
     }
 
+
+
     public function add_to_upload_main_search()
     {
         if ($this->session->userdata('email_admin') == '') {
@@ -565,5 +589,43 @@ class Store_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
             redirect('back_store');
         }
+    }
+
+
+    public function check_com()
+    {
+        $store_id = $this->input->get('id');
+        $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
+        print_r($dm)  ;
+
+        foreach ($dm as $key => $dm) {
+            if ($dm['section'] == 0) {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully Update Checking complete information');
+                return redirect('back_store_checkForsell');
+                continue;
+            }
+        }
+
+            $data = array(
+                'status_chack'                    => 1,
+            );
+       
+            $this->db->where('store_id', $store_id);
+            $resultsedit = $this->db->update('tbl_upload_store', $data);
+
+            if ($resultsedit > 0) {
+                $this->session->set_flashdata('save_ss2', 'Successfully Update Checking complete information !!.');
+            return redirect('back_store_checkForsell');
+
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully Update Checking complete information');
+            return redirect('back_store_checkForsell');
+
+            }
+        
+       
+
+            
+      
     }
 }
