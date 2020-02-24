@@ -64,7 +64,7 @@ class Store_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $data['store'] =  $this->Store_model->store_row();
+            $data['stored'] =  $this->Store_model->store_row();
             $this->load->view('options/header');
             $this->load->view('storeforbuy', $data);
             $this->load->view('options/footer');
@@ -80,9 +80,10 @@ class Store_ctr extends CI_Controller
         if ($dm == true) {
             $data = array(
 
-                'price_file'         => $this->input->post('price_file'),
+                'price_file'             => $this->input->post('price_file'),
                 'Date_required'         => $this->input->post('Daterequired'),
-                'status_book'         => 1,
+                'status_book'           => 1,
+                'note'                 => $this->input->post('note_s'),
                 'update_at'                  => date('Y-m-d H:i:s')
 
             );
@@ -337,6 +338,7 @@ class Store_ctr extends CI_Controller
 
             'price_file'         => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
+            'note'                 => $this->input->post('note_s'),
             'status_book'         => 2
 
 

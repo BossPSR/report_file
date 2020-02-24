@@ -14,8 +14,6 @@ class Customer_order_ctr extends CI_Controller
     {
         if ($this->session->userdata('email_admin') != '') {
 
-
-
             $data['order_main'] = $this->Customer_model->customer_main();
             $this->load->view('options/header');
             $this->load->view('satisfied',$data);

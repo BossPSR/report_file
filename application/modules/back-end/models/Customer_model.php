@@ -14,6 +14,7 @@ class Customer_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('tbl_upload_order');
         $this->db->where('status_book',1);
+        $this->db->where('status_pay',1);
         $this->db->group_by('order_id');
         $this->db->order_by('date_required','desc');
         return $this->db->get()->result_array();

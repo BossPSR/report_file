@@ -37,6 +37,7 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Store Id</th>
                                                     <th>UserId</th>
                                                     <th>Section</th>
@@ -49,14 +50,14 @@
 
 
                                                     <tr style="background: #ededed;">
+                                                        <td><?php echo $i++ ; ?></td>
                                                         <td><?php echo $section['store_id']; ?></td>
                                                         <td></td>
                                                         <td></td>
-                                                      
-
                                                     </tr>
                                                     <?php $check_for = $this->db->group_by('section')->get_where('tbl_upload_store', ['store_id' => $section['store_id'],'is_check' => 0])->result_array(); ?>
                                                     <tr>
+                                                        <td><?php echo $i++ ; ?></td>
                                                         <td><?php echo $section['store_id']; ?></td>
                                                         <td> <?php echo $section['userId']; ?></td>
 
@@ -130,14 +131,11 @@
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
-                                                                            </div>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal fade" id="exampleModallCenter<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
                                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
