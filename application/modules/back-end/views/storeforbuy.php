@@ -49,12 +49,15 @@
 
                                                 <?php
                                                 $i = 1;
+                                                $e = 1;
+                                                $y = 1;
                                                 foreach ($stored as $key => $stored) { 
                                                 ?>
 
 
 
                                                     <tr>
+                                                        <td><?php echo $y++ ; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
                                                         <td><?php echo $stored['file_name']; ?></td>
@@ -74,6 +77,7 @@
                                                                         <thead>
                                                                             <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
                                                                             <tr>
+                                                                                <th>#</th>
                                                                                 <th>Order_id</th>
                                                                                 <th>File_name</th>
                                                                                 <th>File</th>
@@ -83,12 +87,11 @@
                                                                         <tbody>
                                                                             <?php foreach ($order as $keys => $order) { ?>
                                                                                 <tr>
+                                                                                    <td><?php echo $e++ ; ?></td>
                                                                                     <td><?php echo $order['order_id'] ?></td>
                                                                                     <td><?php echo $order['file_name'] ?></td>
                                                                                     <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                     <td><?php echo $order['create_at'] ?></td>
-
-
                                                                                 </tr>
                                                                             <?php } ?>
                                                                         </tbody>
@@ -119,6 +122,7 @@
                                                                         <thead>
                                                                             <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
                                                                             <tr>
+                                                                                <th>#</th>
                                                                                 <th>Order_id</th>
                                                                                 <th>File_name</th>
                                                                                 <th>File</th>
@@ -128,12 +132,11 @@
                                                                         <tbody>
                                                                             <?php foreach ($order as $keys => $order) { ?>
                                                                                 <tr>
+                                                                                    <td><?php echo $i++ ; ?></td>
                                                                                     <td><?php echo $order['order_id'] ?></td>
                                                                                     <td><?php echo $order['file_name'] ?></td>
                                                                                     <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                     <td><?php echo $order['create_at'] ?></td>
-
-
                                                                                 </tr>
                                                                             <?php } ?>
                                                                         </tbody>

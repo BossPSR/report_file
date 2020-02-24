@@ -37,6 +37,7 @@
                                             <thead>
                                                 <tr>
 
+                                                    <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
@@ -48,12 +49,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($order_main as $id => $stores) { ?>
+                                                <?php 
+                                                    $i = 1 ;
+                                                    foreach ($order_main as $id => $stores) { 
+                                                ?>
 
 
 
                                                     <tr>
-                                                        <td><?php echo $stores['order_id'] ?></td>
+                                                        <td><?php echo $i++ ; ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
                                                         <td><?php echo $stores['file_name']; ?></td>
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>

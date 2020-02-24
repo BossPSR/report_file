@@ -62,6 +62,7 @@ foreach ($store as $upload_main_searchDetail) {
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Store Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
@@ -80,6 +81,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <?php else : ?>
 
                                                         <tr style="background: #ededed;">
+                                                            <th><?php echo $i++ ; ?></th>
                                                             <td><?php echo $orders['store_id']; ?></td>
                                                             <td></td>
                                                             <td></td>
@@ -97,6 +99,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <?php $check_for = $this->db->order_by('store_id','asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id']])->result_array(); ?>
                                                         <?php foreach ($check_for as $keys => $check_for) { ?>
                                                             <tr>
+                                                                <td><?php echo $i++ ; ?></td>
                                                                 <td><?php echo $orders['store_id']; ?></td>
                                                                 <td>
                                                                     <?php echo $check_for['userId']; ?>
