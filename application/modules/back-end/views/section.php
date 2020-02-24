@@ -1,28 +1,3 @@
-<!-- 
-$arrayForTable = [];
-foreach ($store as $upload_main_searchDetail) {
-    $temp = [];
-    $temp['id'] = $upload_main_searchDetail['id'];
-    $temp['store_id'] = $upload_main_searchDetail['store_id'];
-    $temp['file_name'] = $upload_main_searchDetail['file_name'];
-    $temp['is_check'] = $upload_main_searchDetail['is_check'];
-    $temp['create_at'] = $upload_main_searchDetail['create_at'];
-    $temp['path'] = $upload_main_searchDetail['path'];
-    $temp['price_file'] = $upload_main_searchDetail['price_file'];
-    $temp['status_cp'] = $upload_main_searchDetail['status_cp'];
-    $temp['userId'] = $upload_main_searchDetail['userId'];
-    $temp['status_chack'] = $upload_main_searchDetail['status_chack'];
-    $temp['section'] = $upload_main_searchDetail['section'];
-    if (!isset($arrayForTable[$upload_main_searchDetail['userId']])) {
-        $arrayForTable[$upload_main_searchDetail['userId']] = [];
-    }
-    $arrayForTable[$upload_main_searchDetail['userId']][] = $temp;
-} -->
-
-
-
-
-
 <!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -65,7 +40,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <th>Store Id</th>
                                                     <th>UserId</th>
                                                     <th>Section</th>
-                                                    <th>tool</th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -77,18 +52,19 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <td><?php echo $section['store_id']; ?></td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td></td>
+                                                      
 
                                                     </tr>
-                                                    <?php $check_for = $this->db->group_by('section')->get_where('tbl_upload_store', ['store_id' => $section['store_id']])->result_array(); ?>
-
+                                                    <?php $check_for = $this->db->group_by('section')->get_where('tbl_upload_store', ['store_id' => $section['store_id'],'is_check' => 0])->result_array(); ?>
                                                     <tr>
                                                         <td><?php echo $section['store_id']; ?></td>
                                                         <td> <?php echo $section['userId']; ?></td>
 
                                                         <td>
                                                             <?php foreach ($check_for as $keys => $check_for) { ?>
-                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#large<?php echo $check_for['id']; ?>">section <?php echo $check_for['section']; ?></button>
+
+                                                                
+                                                        <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#large<?php echo $check_for['id']; ?>">section <?php echo $check_for['section']; ?></button>
                                                                 <div class="modal fade text-left" id="large<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
@@ -99,28 +75,60 @@ foreach ($store as $upload_main_searchDetail) {
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
+                                                                                <?php if ($check_for['grade'] == '') : ?>
+                                                                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModallCenter<?php echo $check_for['id']; ?>">
+                                                                                        grade A <span class="badge badge-light">50</span>
+                                                                                        <span class="sr-only">unread messages</span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModallCenterb<?php echo $check_for['id']; ?>">
+                                                                                        grade B <span class="badge badge-light">20</span>
+                                                                                        <span class="sr-only">unread messages</span>
+                                                                                    </button>
+                                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $check_for['id']; ?>">
+                                                                                        grade C <span class="badge badge-light">10</span>
+                                                                                        <span class="sr-only">unread messages</span>
+                                                                                    </button>
+                                                                                <?php else : ?>
+                                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $check_for['id']; ?>">
+                                                                                        Upload
+                                                                                        <span class="sr-only">unread messages</span>
+                                                                                    </button>
+                                                                                <?php endif; ?>
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
-                                                                                    <?php $section_file = $this->db->get_where('tbl_upload_store', ['store_id' => $section['store_id'],'status_chack'=> 1,'section'=> $check_for['section']])->result_array(); ?>
+                                                                                        <?php $section_file = $this->db->get_where('tbl_upload_store', ['store_id' => $section['store_id'], 'status_chack' => 1, 'section' => $check_for['section']])->result_array(); ?>
                                                                                         <tr>
                                                                                             <th>Store_id</th>
                                                                                             <th>File_name</th>
                                                                                             <th>File</th>
+                                                                                            <th>grade</th>
+                                                                                            <th>Score</th>
+                                                                                            <th>CP/NCP</th>
                                                                                             <th>create</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                    <?php foreach ($section_file as $keys => $section_file) { ?>
-                                                                                        <tr> 
-                                                                                            <td><?php echo $section_file['store_id']?></td>
-                                                                                            <td><?php echo $section_file['file_name']?></td>
-                                                                                            <td><a href="<?php echo $section_file['path']?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $section_file['create_at']?></td>
-                                                                                            
-                                                                                        </tr>
-                                                                                    <?php }?>
+                                                                                        <?php foreach ($section_file as $keys => $section_file) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $section_file['store_id'] ?></td>
+                                                                                                <td><?php echo $section_file['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $section_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <?php if ($section_file['grade'] != '') : ?>
+                                                                                                    <td><?php echo $section_file['grade'] ?></td>
+                                                                                                    <td><?php echo $section_file['price_file'] ?></td>
+                                                                                                    <td><?php echo $section_file['status_cp'] ?></td>
+                                                                                                <?php else : ?>
+                                                                                                    <td>-</td>
+                                                                                                    <td>-</td>
+                                                                                                    <td>-</td>
+                                                                                                <?php endif; ?>
+                                                                                                <td><?php echo $section_file['create_at'] ?></td>
+
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
                                                                                     </tbody>
-                                                                                    </table>
+                                                                                </table>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
@@ -128,10 +136,73 @@ foreach ($store as $upload_main_searchDetail) {
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="modal fade" id="exampleModallCenter<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade A</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                                <a href="back_store_check_store_add_com?id=<?php echo $section_file['store_id']; ?>&id_section=<?php echo $section_file['section']; ?>&com=complete&grad=A&price=50" class="btn btn-success">Complete</a>
+                                                                                <!-- <button type="button" class="btn btn-danger"  data-dismiss="modal">Not Complete</button> -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="modal fade" id="exampleModallCenterb<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade B</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                                <a href="back_store_check_store_add_com?id=<?php echo $section_file['store_id']; ?>&id_section=<?php echo $section_file['section']; ?>&com=complete&grad=B&price=20" class="btn btn-success">Complete</a>
+                                                                                <a href="back_store_check_store_add_com?id=<?php echo $section_file['store_id']; ?>&id_section=<?php echo $section_file['section']; ?>&com=notcomplete&grad=B&price=20" class="btn btn-danger">Not Complete</a>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="modal fade" id="exampleModallCenterc<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade C</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                                <a href="back_store_check_store_add_com?id=<?php echo $section_file['store_id']; ?>&id_section=<?php echo $section_file['section']; ?>&com=complete&grad=C&price=10" class="btn btn-success">Complete</a>
+                                                                                <a href="back_store_check_store_add_com?id=<?php echo $section_file['store_id']; ?>&id_section=<?php echo $section_file['section']; ?>&com=notcomplete&grad=C&price=10" class="btn btn-danger">Not Complete </a>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
                                                             <?php } ?>
                                                         </td>
 
-                                                        <td> <span><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span></td>
+                                                     
                                                     </tr>
 
 

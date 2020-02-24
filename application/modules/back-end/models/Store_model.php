@@ -78,6 +78,7 @@ class Store_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('tbl_upload_store');
         $this->db->where('status_chack', 1);
+        $this->db->where('is_check', 0);
         $this->db->group_by('store_id');
         return $this->db->get()->result_array();
            

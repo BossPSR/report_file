@@ -457,7 +457,8 @@ class Store_ctr extends CI_Controller
 
     public function check_store_add_com()
     {
-        $id = $this->input->get('id');
+        $store_id = $this->input->get('id');
+        $id_section = $this->input->get('id_section');
 
         $data = array(
 
@@ -467,10 +468,11 @@ class Store_ctr extends CI_Controller
 
 
         );
-        $this->db->where('id', $id);
+        $this->db->where('store_id', $store_id);
+        $this->db->where('section', $id_section);
         $resultsedit = $this->db->update('tbl_upload_store', $data);
 
-        $uploadStore =   $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
+        $uploadStore =   $this->db->get_where('tbl_upload_store', ['id' => $store_id])->row_array();
         $this->db->where('id', $uploadStore['userId']);
         $this->db->update('tbl_user', ['free_forever' => 1]);
 
@@ -479,7 +481,7 @@ class Store_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
-        return redirect('back_store_checkForsell');
+        return redirect('Section');
     }
 
 
@@ -527,6 +529,8 @@ class Store_ctr extends CI_Controller
         return redirect('back_store_checkForsell');
     }
 
+
+   
     public function upload_main_search()
     {
         if ($this->session->userdata('email_admin') == '') {
