@@ -168,12 +168,8 @@ $route['not-approved']                        = 'back-end/Approved_ctr/not_appro
 $route['Satisfied']                           = 'back-end/Customer_order_ctr';
 $route['Not_Satisfied']                       = 'back-end/Customer_order_ctr/not_satisfied';
 $route['Bookmark']                            = 'back-end/Customer_order_ctr/Bookmark';
-<<<<<<< HEAD
-// $route['pay']                                 = 'back-end/Store_ctr/pay';
-=======
 $route['store_section']                       = 'back-end/Store_ctr/store_section';
 $route['check_com']                           = 'back-end/Store_ctr/check_com';
 $route['Section']                             = 'back-end/Section_ctr';
 $route['upload_team']                             = 'back-end/Customer_order_ctr/upload_team';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';
->>>>>>> master
