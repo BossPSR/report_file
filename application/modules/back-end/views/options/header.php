@@ -280,6 +280,9 @@
                                                                                                                                                                                                         echo 'active';
                                                                                                                                                                                                     } ?>" href="back_store" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Store for sell</a>
                                     <ul class="dropdown-menu">
+                                    
+                                    <li data-menu=""><a class="dropdown-item" href="Section" data-toggle="dropdown" data-i18n="List View"><i class="feather icon-circle"></i>Store All</a>
+                                        </li>
                                         <li data-menu=""><a class="dropdown-item" href="back_store_a" data-toggle="dropdown" data-i18n="List View"><i class="feather icon-circle"></i>Store for sell grade A</a>
                                         </li>
                                         <li data-menu=""><a class="dropdown-item" href="back_store_b" data-toggle="dropdown" data-i18n="Thumb View"><i class="feather icon-circle"></i>Store for sell grade B</a>

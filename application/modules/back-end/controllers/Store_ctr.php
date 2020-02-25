@@ -64,7 +64,7 @@ class Store_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $data['store'] =  $this->Store_model->store_row();
+            $data['stored'] =  $this->Store_model->store_row();
             $this->load->view('options/header');
             $this->load->view('storeforbuy', $data);
             $this->load->view('options/footer');
@@ -80,9 +80,10 @@ class Store_ctr extends CI_Controller
         if ($dm == true) {
             $data = array(
 
-                'price_file'         => $this->input->post('price_file'),
+                'price_file'             => $this->input->post('price_file'),
                 'Date_required'         => $this->input->post('Daterequired'),
-                'status_book'         => 1,
+                'status_book'           => 1,
+                'note'                 => $this->input->post('note_s'),
                 'update_at'                  => date('Y-m-d H:i:s')
 
             );
@@ -337,6 +338,7 @@ class Store_ctr extends CI_Controller
 
             'price_file'         => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
+            'note'                 => $this->input->post('note_s'),
             'status_book'         => 2
 
 
@@ -404,8 +406,8 @@ class Store_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-            // $data['store'] = $this->Store_model->store_list();
-            $data['store'] = $this->db->get_where('tbl_upload_store', ['grade' => null, 'price_file' => null, 'status_cp' => null])->result_array();
+            $data['store'] = $this->Store_model->store_sell();
+            
             $this->load->view('options/header');
             $this->load->view('checkforsell', $data);
             $this->load->view('options/footer');
@@ -433,9 +435,32 @@ class Store_ctr extends CI_Controller
         return redirect('back_store');
     }
 
+    public function store_section()
+    {
+
+        $id_order = $this->input->get('id_order');
+
+        $data = array(
+
+            'section'         => $this->input->get('id_section'),
+
+
+        );
+        $this->db->where('id', $id_order);
+        $resultsedit = $this->db->update('tbl_upload_store', $data);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update section information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update section information');
+        }
+        return redirect('back_store_checkForsell');
+    }
+
     public function check_store_add_com()
     {
-        $id = $this->input->get('id');
+        $store_id = $this->input->get('id');
+        $id_section = $this->input->get('id_section');
 
         $data = array(
 
@@ -445,10 +470,11 @@ class Store_ctr extends CI_Controller
 
 
         );
-        $this->db->where('id', $id);
+        $this->db->where('store_id', $store_id);
+        $this->db->where('section', $id_section);
         $resultsedit = $this->db->update('tbl_upload_store', $data);
 
-        $uploadStore =   $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
+        $uploadStore =   $this->db->get_where('tbl_upload_store', ['id' => $store_id])->row_array();
         $this->db->where('id', $uploadStore['userId']);
         $this->db->update('tbl_user', ['free_forever' => 1]);
 
@@ -457,7 +483,7 @@ class Store_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
-        return redirect('back_store_checkForsell');
+        return redirect('Section');
     }
 
 
@@ -505,6 +531,8 @@ class Store_ctr extends CI_Controller
         return redirect('back_store_checkForsell');
     }
 
+
+   
     public function upload_main_search()
     {
         if ($this->session->userdata('email_admin') == '') {
@@ -518,6 +546,8 @@ class Store_ctr extends CI_Controller
             $this->load->view('options/footer');
         }
     }
+
+
 
     public function add_to_upload_main_search()
     {
@@ -565,5 +595,43 @@ class Store_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
             redirect('back_store');
         }
+    }
+
+
+    public function check_com()
+    {
+        $store_id = $this->input->get('id');
+        $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
+        print_r($dm)  ;
+
+        foreach ($dm as $key => $dm) {
+            if ($dm['section'] == 0) {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully Update Checking complete information');
+                return redirect('back_store_checkForsell');
+                continue;
+            }
+        }
+
+            $data = array(
+                'status_chack'                    => 1,
+            );
+       
+            $this->db->where('store_id', $store_id);
+            $resultsedit = $this->db->update('tbl_upload_store', $data);
+
+            if ($resultsedit > 0) {
+                $this->session->set_flashdata('save_ss2', 'Successfully Update Checking complete information !!.');
+            return redirect('back_store_checkForsell');
+
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully Update Checking complete information');
+            return redirect('back_store_checkForsell');
+
+            }
+        
+       
+
+            
+      
     }
 }
