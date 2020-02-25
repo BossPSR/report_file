@@ -125,6 +125,8 @@ $route['read_userNotify']       = 'front-end/My_user_ctr/read_userNotify';
 
 $route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 $route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
+$route['My-task']               = 'front-end/My_stock_ctr/my_task';
+$route['My-delivery']           = 'front-end/Delivery_ctr';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';

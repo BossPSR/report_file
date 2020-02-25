@@ -1,23 +1,19 @@
 <?php
 $teamId = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
 $sel1 = $this->db->get_where('tbl_job_position', ['id_team' => $teamId['id']])->result_array();
-foreach ($sel1 as $key => $da) {
-    $sel3 = $this->db->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2])->result_array();
-}
 
-// exit();
 
 
 ?>
 <?php foreach ($sel1 as $key => $daa) {
-    $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $daa['job_position'], 'status_book' => 2])->result_array(); ?>
+    $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $daa['job_position'], 'status_book' => 2, 'is_confirm' => 1])->result_array(); ?>
     <?php foreach ($sel2 as $key => $qq) { ?>
         <?php $si = $this->db->get_where('tbl_select_item', ['id' => $daa['job_position']])->row_array(); ?>
     <?php } ?>
 <?php } ?>
 <?php if (!empty($si)) : ?>
     <br>
-    <h2 class="text-center" style="margin-top: 15px;">My Stock</h2>
+    <h2 class="text-center" style="margin-top: 15px;">My task</h2>
     <hr class="line_package">
     <br>
     <div class="wishlist_area mt-60">
@@ -44,29 +40,31 @@ foreach ($sel1 as $key => $da) {
                                 <th scope="col">No.</th>
                                 <th scope="col">Document</th>
                                 <th scope="col">ID Order</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Date Requred</th>
                                 <th scope="col">Create Date</th>
                                 <th scope="col">Select item</th>
-                                <th scope="col">Confrim</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
 
                             <?php foreach ($sel1 as $key => $da) {
-                                $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2, 'is_confirm' => null])->result_array(); ?>
+                                $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2, 'is_confirm' => 1])->result_array(); ?>
                                 <?php foreach ($sel2 as $key => $qq) { ?>
                                     <?php $si = $this->db->get_where('tbl_select_item', ['id' => $da['job_position']])->row_array(); ?>
                                     <tr style="text-align:center;">
                                         <td><?php echo $i++; ?></td>
                                         <td><?php echo $qq['file_name']; ?></td>
                                         <td><?php echo $qq['order_id']; ?></td>
+                                        <td>
+                                            <span class="badge badge-success" style="font-size:16px;">Paid</span>
+                                            <!-- <button type="button" class="btn btn-success" id="download<?php echo $key; ?>"> Confirmed </button> -->
+                                        </td>
                                         <td><?php echo $qq['date_required']; ?></td>
                                         <td><?php echo $qq['create_at']; ?></td>
                                         <td><?php echo $si['name_item']; ?></td>
-                                        <td>
-                                            <button type="button" class="btn btn-success" id="download<?php echo $key; ?>"> Confirmed </button>
-                                        </td>
+
                                     </tr>
 
                                     <script>
@@ -120,7 +118,7 @@ foreach ($sel1 as $key => $da) {
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Stock</h1>
+                        <h1>No Task</h1>
                         <h2>Data Not Found</h2>
                     </div>
                 </div>

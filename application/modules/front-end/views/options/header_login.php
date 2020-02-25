@@ -407,29 +407,29 @@
                                                 </li> -->
                                         <li>
                                             <!-- <div id="user_notify"> -->
-                                            
-                                                <!-- <div class="dropdown"> -->
-                                                    <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
-                                                    <!-- <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff;"></i> -->
-                                                    
-                                                    <!-- <ul class="dropdown-menu" role="menu">
+
+                                            <!-- <div class="dropdown"> -->
+                                            <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
+                                            <!-- <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff;"></i> -->
+
+                                            <!-- <ul class="dropdown-menu" role="menu">
                                                         <li><a>Action</a></li>
                                                     </ul> -->
-                                                <!-- </div> -->
-
-                                               
                                             <!-- </div> -->
-                                            <?php 
-                                                $userUpload_store = $this->db->get_where('tbl_upload_store',['userId' => $user['id'],'price_file_read' => 0])->result_array();
-                                                $userUpload_store = count($userUpload_store);
+
+
+                                            <!-- </div> -->
+                                            <?php
+                                            $userUpload_store = $this->db->get_where('tbl_upload_store', ['userId' => $user['id'], 'price_file_read' => 0])->result_array();
+                                            $userUpload_store = count($userUpload_store);
                                             ?>
                                             <div class="dropdown" id="user_notify">
                                                 <i class="fa fa-bell text-black-white badge-notification" onClick="read_userNotify();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="<?php echo $userUpload_store; ?>" style="font-size:22px;color:#fff; cursor: pointer;"></i>
-                                                    <ul class="dropdown-menu" style="display:none;" role="menu">
-                                                        <li>Action</li>
-                                                    </ul>
+                                                <ul class="dropdown-menu" style="display:none;" role="menu">
+                                                    <li>Action</li>
+                                                </ul>
 
-                                                   
+
                                             </div>
                                         </li>
                                         <li>
@@ -449,16 +449,16 @@
                                                 <?php endif; ?>
                                             </a>
                                         </li>
-                                        
+
                                     <?php elseif ($team) : ?>
                                         <li>
                                             <a href="My-stock"> My Stock</a>
                                         </li>
                                         <li>
-                                            <a href="#"> My task</a>
+                                            <a href="My-task"> My task</a>
                                         </li>
                                         <li>
-                                            <a href="#"> Delivery</a>
+                                            <a href="My-delivery"> Delivery</a>
                                         </li>
                                         <li>
                                             <a href="#"> My Feedback</a>
@@ -570,12 +570,12 @@
         // });
         function read_userNotify() {
             $.ajax({
-                url:"read_userNotify",
-                data:{
+                url: "read_userNotify",
+                data: {
                     user_id: <?php echo $user['id']; ?>,
                 },
-                success:function(getData){
-                    var numData= JSON.parse(getData);
+                success: function(getData) {
+                    var numData = JSON.parse(getData);
                     var dataNotify = "";
 
                     if (numData.successfully === true) {
@@ -583,15 +583,15 @@
                         dataNotify += '<ul class="dropdown-menu show" role="menu">';
                         // for (let index = 0; index < numData.dataList.list.length; index++) {
                         //    dataNotify += '<li>'+ 1 +'</li>';
-                            
+
                         // }
-                        dataNotify += '<li>'+ 1 +'</li>';
+                        dataNotify += '<li>' + 1 + '</li>';
                         dataNotify += '</ul>';
                     }
-                        
 
-                        document.getElementById("user_notify").innerHTML = dataNotify;
-                        console.log(getData);
+
+                    document.getElementById("user_notify").innerHTML = dataNotify;
+                    console.log(getData);
                 }
             });
         }
