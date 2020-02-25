@@ -108,6 +108,7 @@ $route['paypal_success']        = 'front-end/Paypal_ctr/success';
 $route['get_search']            = 'front-end/Search_ctr/get_search';
 $route['buy']                   = 'front-end/Buy_ctr';
 $route['buy_upload']            = 'front-end/Buy_ctr/fileUpload_buy';
+$route['buy_uploadGT']          = 'front-end/Buy_ctr/fileUpload_buyGT';
 $route['withdraw_cash']         = 'front-end/My_withdraw_ctr/withdraw_cash';
 
 $route['thank_for_buy']         = 'front-end/Buy_ctr/thank_for_buy';

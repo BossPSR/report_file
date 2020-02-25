@@ -65,7 +65,7 @@ class Buy_ctr extends CI_Controller
 
     $userId     = $this->input->post('userId');
     $date_req   =  $this->input->post('date');
-    
+
     $target_dir = "uploads/Buy/"; // Upload directory
 
     $request = 1;
@@ -86,21 +86,20 @@ class Buy_ctr extends CI_Controller
       $this->upload->initialize($config);
       // $buyre =  $this->Buy_model->buy();
       // $buymax = $this->Buy_model->buy_max();
-      $buymax = $this->db->order_by('id','DESC')->get('tbl_order_f')->row();
+      $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
       // $orf = array(
       //   'order_main'    => "OD".rand('0','100'),
       //   'create_at'     => date('Y-m-d H:i:s') ,
       //   'status'        => '1'    
       // );
       // $this->db->insert('tbl_order_f', $orf);
-   
-    
+
+
       // File upload
-      if ($this->upload->do_upload('file')) 
-      {
+      if ($this->upload->do_upload('file')) {
         // Get data about the file
         $uploadData = $this->upload->data();
-        
+
         $data = array(
           'userId'        => $userId,
           // 'order_id'      => $buymax->maxorder,
@@ -111,29 +110,80 @@ class Buy_ctr extends CI_Controller
           'create_at'     => date('Y-m-d H:i:s'),
         );
         $this->db->insert('tbl_upload_order', $data);
-         
+      }
+    }
+  }
 
+  public function fileUpload_buyGT()
+  {
+    // image_lib
+
+    $userId     = $this->input->post('userId');
+    $date_req   =  $this->input->post('date');
+
+    $target_dir = "uploads/Buy/"; // Upload directory
+
+    $request = 1;
+
+    if (isset($_POST['request'])) {
+      $request = $_POST['request'];
+    }
+    if ($request == 1) {
+      // Set preference
+      $config['upload_path']     = 'uploads/Buy/';
+      // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+      $config['allowed_types']   = '*';
+      $config['max_size']        = '99999'; // max_size in kb
+      $config['file_name']       = $_FILES['file']['name'];
+
+      //Load upload library
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
+      // $buyre =  $this->Buy_model->buy();
+      // $buymax = $this->Buy_model->buy_max();
+      $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
+      // $orf = array(
+      //   'order_main'    => "OD".rand('0','100'),
+      //   'create_at'     => date('Y-m-d H:i:s') ,
+      //   'status'        => '1'    
+      // );
+      // $this->db->insert('tbl_order_f', $orf);
+
+
+      // File upload
+      if ($this->upload->do_upload('file')) {
+        // Get data about the file
+        $uploadData = $this->upload->data();
+
+        $data = array(
+          'userId'        => $userId,
+          // 'order_id'      => $buymax->maxorder,
+          'order_id'      => $buymax->order_main,
+          'date_required' => $date_req,
+          'file_name_GT'     => $uploadData['file_name'],
+          'path_GT'          => 'uploads/Buy/' . $uploadData['file_name'],
+          'create_at'     => date('Y-m-d H:i:s'),
+        );
+        $this->db->insert('tbl_upload_order', $data);
       }
     }
   }
 
   public function order_auto()
   {
-      $date_req   =  $this->input->post('status');
-      $orf = array(
-       
-        'create_at'     => date('Y-m-d H:i:s') ,
-        'status'        => $date_req     
-      );
-      if($this->db->insert('tbl_order_f', $orf))
-      {
-        $insert_id = $this->db->insert_id();
-        $update = array(
-          'order_main'    => 'OD'.$insert_id,
-        );
-        $this->db->where('id',$insert_id);
-        $this->db->update('tbl_order_f',$update);
-      }
-  }
+    $date_req   =  $this->input->post('status');
+    $orf = array(
 
+      'create_at'     => date('Y-m-d H:i:s'),
+      'status'        => $date_req
+    );
+    if ($this->db->insert('tbl_order_f', $orf)) {
+      $insert_id = $this->db->insert_id();
+      $update = array(
+        'order_main'    => 'OD' . $insert_id,
+      );
+      $this->db->where('id', $insert_id);
+      $this->db->update('tbl_order_f', $update);
+    }
+  }
 }
