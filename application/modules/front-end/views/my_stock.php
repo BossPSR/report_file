@@ -68,7 +68,32 @@ foreach ($sel1 as $key => $da) {
                                             <button type="button" class="btn btn-success" id="download<?php echo $key; ?>"> Confirmed </button>
                                         </td>
                                     </tr>
-
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-6 text-center">
+                                                            <button class="btn btn-primary"><i class="fa fa-cloud-download"></i> Main Document</button>
+                                                        </div>
+                                                        <div class="col-6 text-center">
+                                                            <button class="btn btn-info"><i class="fa fa-cloud-download"></i> GT Document</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" id="close_doc">Success</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <script>
                                         $('#download<?php echo $key; ?>').click(function() {
                                             swal({
@@ -91,10 +116,23 @@ foreach ($sel1 as $key => $da) {
                                                             is_confirm: 1,
                                                         },
                                                         success: function(success) {
-                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                button: false,
+
+                                                            $('#exampleModal').modal('show')
+                                                            $("#close_doc").click(function() {
+                                                                $('#myModal').modal('hide');
+                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                    button: false,
+                                                                });
+                                                                setTimeout("location.reload(true);", 1000);
                                                             });
-                                                            setTimeout("location.reload(true);", 1000);
+                                                            // $('#close_doc').click(function() {
+                                                            //     $('#myModal').modal('hide');
+                                                            //     swal("Good job!", "Upload for data successfull", "success", {
+                                                            //         button: false,
+                                                            //     });
+                                                            //     setTimeout("location.reload(true);", 1000);
+                                                            // });
+
                                                         }
                                                     });
                                                 } else {

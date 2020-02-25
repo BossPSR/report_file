@@ -110,6 +110,9 @@ class Buy_ctr extends CI_Controller
           'create_at'     => date('Y-m-d H:i:s'),
         );
         $this->db->insert('tbl_upload_order', $data);
+        // if ($this->db->insert('tbl_upload_order', $data)) {
+        //   return redirect('buy_uploadGT', $data);
+        // }
       }
     }
   }
@@ -156,15 +159,13 @@ class Buy_ctr extends CI_Controller
         $uploadData = $this->upload->data();
 
         $data = array(
-          'userId'        => $userId,
           // 'order_id'      => $buymax->maxorder,
           'order_id'      => $buymax->order_main,
-          'date_required' => $date_req,
           'file_name_GT'     => $uploadData['file_name'],
           'path_GT'          => 'uploads/Buy/' . $uploadData['file_name'],
           'create_at'     => date('Y-m-d H:i:s'),
         );
-        $this->db->insert('tbl_upload_order', $data);
+        $this->db->insert('tbl_upload_orderGT', $data);
       }
     }
   }
