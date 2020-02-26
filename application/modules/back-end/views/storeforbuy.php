@@ -36,6 +36,7 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
