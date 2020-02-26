@@ -174,4 +174,6 @@ $route['store_section']                       = 'back-end/Store_ctr/store_sectio
 $route['check_com']                           = 'back-end/Store_ctr/check_com';
 $route['Section']                             = 'back-end/Section_ctr';
 $route['upload_team']                             = 'back-end/Customer_order_ctr/upload_team';
+$route['Stock']                             = 'back-end/Stock_ctr';
+$route['orverall']                             = 'back-end/Customer_order_ctr/orverall';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

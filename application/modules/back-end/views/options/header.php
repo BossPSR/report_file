@@ -252,7 +252,7 @@
                         </li>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">admin & Team & User</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Public</span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_admin") {
                                                                                 echo 'active';
@@ -335,6 +335,10 @@
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Customer Order</span></a>
                             <ul class="dropdown-menu">
+                            <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "orverall") {
+                                                                                echo 'active';
+                                                                            } ?>" href="orverall" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>orverall</a>
+                                </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Satisfied") {
                                                                                 echo 'active';
                                                                             } ?>" href="Satisfied" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Satisfied</a>
@@ -359,9 +363,7 @@
 
                         </li>
                       
-                        <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-more-horizontal"></i><span data-i18n="Others">Others</span></a>
-
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="Stock"><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables"> My Stock</span></a>
                 </ul>
             <?php elseif ($profile['is_admin'] == '2') : ?>
                 <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
