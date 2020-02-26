@@ -8,6 +8,8 @@ class Customer_order_ctr extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Customer_model');
+        $this->load->model('My_stock_model');
+
     }
 
     public function index()
@@ -38,18 +40,39 @@ class Customer_order_ctr extends CI_Controller
         }
     }
 
-    public function Bookmark()
+
+    public function orverall()
     {
         if ($this->session->userdata('email_admin') != '') {
 
 
+
+            $data['order_all'] = $this->Customer_model->customer_all();
             $this->load->view('options/header');
-            $this->load->view('bookmark');
+            $this->load->view('orverall',$data);
             $this->load->view('options/footer');
         } else {
             $this->load->view('login');
         }
     }
+
+
+
+
+    public function Bookmark()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+
+            $data['stock'] = $this->My_stock_model->stock();
+            $this->load->view('options/header');
+            $this->load->view('bookmark',$data);
+            $this->load->view('options/footer');
+        } else {
+            $this->load->view('login');
+        }
+    }
+
+
 
     public function upload_team()
     {
