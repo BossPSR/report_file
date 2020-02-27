@@ -68,8 +68,6 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <th>File Name</th>
                                                     <th>File</th>
                                                     <th>section</th>
-                                                   
-                                                    <th>create_at</th>
                                                     <th>tool</th>
                                                 </tr>
                                             </thead>
@@ -118,7 +116,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                 </td>
                                                                
 
-                                                                <td><?php echo $check_for['create_at']; ?></td>
+                                                               
                                                                 <td>
 
 

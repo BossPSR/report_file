@@ -39,7 +39,7 @@
                                                     <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
-                                                    <th>File Name</th>
+                                                    <th style="width:18%">File Name</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>date_required</th>
@@ -121,11 +121,11 @@
                                                                         <div class="modal-body">
                                                                         <table class="table zero-configuration">
                                                                         <thead>
-                                                                            <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
+                                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
                                                                             <tr>
                                                                                 <th>#</th>
                                                                                 <th>Order_id</th>
-                                                                                <th>File_name</th>
+                                                                                <th >File_name</th>
                                                                                 <th>File</th>
                                                                                 <th>create</th>
                                                                             </tr>
@@ -135,8 +135,8 @@
                                                                                 <tr>
                                                                                     <td><?php echo $i++ ; ?></td>
                                                                                     <td><?php echo $order['order_id'] ?></td>
-                                                                                    <td><?php echo $order['file_name'] ?></td>
-                                                                                    <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><?php echo $order['file_name_GT'] ?></td>
+                                                                                    <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                     <td><?php echo $order['create_at'] ?></td>
                                                                                 </tr>
                                                                             <?php } ?>
@@ -153,7 +153,7 @@
                                                             </div>
                                                         </td>
                                                         <td><?php echo $stored['date_required']; ?></td>
-                                                        <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['id']; ?>">
+                                                        <td> <button type="button" class="btn btn-outline-info" data-toggle="modal"  data-target="#exampleModallCenter<?php echo $stored['id']; ?>">
                                                                 Satisfired
 
                                                             </button>

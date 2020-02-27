@@ -123,7 +123,10 @@ class Buy_ctr extends CI_Controller
 
     $userId     = $this->input->post('userId');
     $date_req   =  $this->input->post('date');
-
+    $note       = $this->input->post('note');
+    $wage       = $this->input->post('wage');
+    $date_required  = $this->input->post('date_required');
+    $position       = $this->input->post('position');
     $target_dir = "uploads/Buy/"; // Upload directory
 
     $request = 1;
@@ -165,7 +168,17 @@ class Buy_ctr extends CI_Controller
           'path_GT'          => 'uploads/Buy/' . $uploadData['file_name'],
           'create_at'     => date('Y-m-d H:i:s'),
         );
-        $this->db->insert('tbl_upload_orderGT', $data);
+        if($this->db->insert('tbl_upload_orderGT', $data)){
+          $up_q = array(
+            'order_id'      => $buymax->order_main,
+            'position'      => $position,
+            'wage'          => $wage,
+            'note'          => $note,
+            'date_required' => $date_required,
+            'create_at'     => date('Y-m-d H:i:s'),
+          );
+          $this->db->insert('tbl_upload_team',$up_q);
+        }
       }
     }
   }
