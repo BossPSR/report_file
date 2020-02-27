@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Bookmark</h2>
+                        <h2 class="content-header-title float-left mb-0">My Stock</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">Bookmark
+                                <li class="breadcrumb-item active">My Stock
                                 </li>
                             </ol>
                         </div>
@@ -38,8 +38,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Bookmark</h4>
-                                <a href="back_admin_add"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Bookmark</button></a>
+                                <h4 class="card-title">My Stock</h4>
+                                <a href="back_admin_add"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Stock</button></a>
                             </div>
 
                             <div class="card-content">

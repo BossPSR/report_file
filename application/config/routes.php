@@ -109,6 +109,7 @@ $route['get_search']            = 'front-end/Search_ctr/get_search';
 $route['buy']                   = 'front-end/Buy_ctr';
 $route['buy_upload']            = 'front-end/Buy_ctr/fileUpload_buy';
 $route['buy_uploadGT']          = 'front-end/Buy_ctr/fileUpload_buyGT';
+$route['buy_downloadmain']      = 'front-end/Buy_ctr/order_download';
 $route['withdraw_cash']         = 'front-end/My_withdraw_ctr/withdraw_cash';
 
 $route['thank_for_buy']         = 'front-end/Buy_ctr/thank_for_buy';
@@ -173,4 +174,6 @@ $route['store_section']                       = 'back-end/Store_ctr/store_sectio
 $route['check_com']                           = 'back-end/Store_ctr/check_com';
 $route['Section']                             = 'back-end/Section_ctr';
 $route['upload_team']                             = 'back-end/Customer_order_ctr/upload_team';
+$route['Stock']                             = 'back-end/Stock_ctr';
+$route['orverall']                             = 'back-end/Customer_order_ctr/orverall';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

@@ -68,7 +68,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <th>File Name</th>
                                                     <th>File</th>
                                                     <th>section</th>
-                                                    <th>PriceFile</th>
+                                                   
                                                     <th>create_at</th>
                                                     <th>tool</th>
                                                 </tr>
@@ -87,7 +87,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td></td>
+                                                           
                                                             <td></td>
                                                             <td>
                                                                 <a href="check_com?id=<?php echo $orders['store_id']; ?>" class="btn btn-success " aria-haspopup="true" aria-expanded="false">
@@ -116,11 +116,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                         <option value="store_section?id_order=<?php echo $check_for['id']; ?>&id_section=5" <?php if ($check_for['section'] == 5) echo 'selected'; ?>>section5</option>
                                                                     </select>
                                                                 </td>
-                                                                <?php if ($check_for['price_file'] == '') :   ?>
-                                                                    <td>-</td>
-                                                                <?php else : ?>
-                                                                    <td>$<?php echo $check_for['price_file']; ?></td>
-                                                                <?php endif; ?>
+                                                               
 
                                                                 <td><?php echo $check_for['create_at']; ?></td>
                                                                 <td>
@@ -131,7 +127,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     </button>
                                                                 </td>
                                                             </tr>
-                                                            <div class="modal fade" id="exampleModal<?php echo $orders['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal fade" id="exampleModal<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -143,23 +139,10 @@ foreach ($store as $upload_main_searchDetail) {
                                                                         <form action="back_store_check_store_add_com" method="POST" class="form-horizontal">
                                                                             <div class="modal-body">
                                                                                 <div class="btn-group" role="group" aria-label="Basic example" style="margin: 13px 21px;">
-                                                                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModallCenter<?php echo $orders['id']; ?>">
-                                                                                        grade A <span class="badge badge-light">50</span>
-                                                                                        <span class="sr-only">unread messages</span>
-                                                                                    </button>
-                                                                                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModallCenterb<?php echo $orders['id']; ?>">
-                                                                                        grade B <span class="badge badge-light">20</span>
-                                                                                        <span class="sr-only">unread messages</span>
-                                                                                    </button>
-                                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $orders['id']; ?>">
-                                                                                        grade C <span class="badge badge-light">10</span>
-                                                                                        <span class="sr-only">unread messages</span>
-                                                                                    </button>
-                                                                                    <!-- <span >A = 50</span> -->
-                                                                                    <!-- <span >B = 20</span> -->
+                                                                                    
                                                                                 </div>
 
-                                                                                <iframe src="<?php echo $orders['path']; ?>" width="100%" height="600px"></iframe>
+                                                                                <iframe src="<?php echo $check_for['path']; ?>" width="100%" height="600px"></iframe>
                                                                                 <input type="hidden" class="form-control" name="id" value="<?php echo $orders['id']; ?>">
                                                                                 <div class="data-items pb-3">
                                                                                     <div class="data-fields px-2 mt-3">
