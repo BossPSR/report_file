@@ -37,7 +37,7 @@
     <script src="public/backend/assets/js/scripts/datatables/datatable.js"></script>
     <script src="public/backend/assets/js/scripts/pages/dashboard-analytics.js"></script>
     <!-- END: Page JS-->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="public/backend/assets/js/scripts/sweetalert.min.js"></script>
     <script>
     <?php if ($suss = $this->session->flashdata('save_ss2')) : ?>
         swal("Good job!", '<?php echo $suss; ?>', "success");

@@ -96,7 +96,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                             </td>
                                                         </tr>
 
-                                                        <?php $check_for = $this->db->order_by('store_id','asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id']])->result_array(); ?>
+                                                        <?php $check_for = $this->db->order_by('store_id','asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id'],'is_check' => '0'])->result_array(); ?>
                                                         <?php foreach ($check_for as $keys => $check_for) { ?>
                                                             <tr>
                                                                 <td><?php echo $i++ ; ?></td>
