@@ -23,8 +23,9 @@ class My_stock_ctr extends CI_Controller
 
     function order_isconfirm()
     {
-        $id             = $this->input->post('id');
+        $order_id             = $this->input->post('order_id');
         $is_confirm     = $this->input->post('is_confirm');
+
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
@@ -32,7 +33,7 @@ class My_stock_ctr extends CI_Controller
                 'is_confirm'        => $is_confirm,
             );
 
-            $this->db->where('id', $id);
+            $this->db->where('order_id', "OD".$order_id);
             $success = $this->db->update('tbl_upload_order', $data);
 
             echo $success;
