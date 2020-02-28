@@ -555,12 +555,13 @@ class Store_ctr extends CI_Controller
             redirect('backend');
         } else {
             $store_check = $this->input->post('store_check');
-            $id = $this->input->post('id');
-            $user_id = $this->input->post('user_id');
+            $store_id = $this->input->post('store_id');
+            $user_id = $this->input->post('userId');
             $select_item_id = $this->input->post('select_item_id');
             $search_item = $this->input->post('search_item');
             $code = $this->input->post('code');
             $topic = $this->input->post('topic');
+            $section = $this->input->post('section');
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
             if (!empty($select_item)) {
@@ -571,12 +572,15 @@ class Store_ctr extends CI_Controller
                     'select_item' => $select_item['name_item'],
                     'code' => $code,
                     'topic' => $topic,
-                    'upload_store_id' => $id,
+                    'upload_store_id' => $store_id,
                     'create_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),
                 ];
                 $success = $this->db->insert('tbl_upload_main_search', $data);
-                $this->db->where('id', $id);
+                $id = $this->db->insert_id();
+                $this->db->where('id',$id);
+                $this->db->update('tbl_upload_main_search', ['id_doc' => "DM".$id]);
+                $this->db->where('section', $section);
                 $this->db->update('tbl_upload_store', ['status_main_search' => 1]);
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
@@ -592,8 +596,8 @@ class Store_ctr extends CI_Controller
                     redirect('back_store_c');
                 }
             }
-            $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
-            redirect('back_store');
+            
+            redirect('Section');
         }
     }
 

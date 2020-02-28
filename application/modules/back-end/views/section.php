@@ -48,14 +48,14 @@
                                                 <?php $i = 1; ?>
                                                 <?php foreach ($section as $keys => $section) { ?>
 
-
+                                                    
                                                     <tr style="background: #ededed;">
                                                         <td><?php echo $i++ ; ?></td>
                                                         <td><?php echo $section['store_id']; ?></td>
                                                         <td></td>
                                                         <td></td>
                                                     </tr>
-                                                    <?php $check_for = $this->db->group_by('section')->get_where('tbl_upload_store', ['store_id' => $section['store_id'],'is_check' => 0])->result_array(); ?>
+                                                    <?php $check_for = $this->db->group_by('section')->get_where('tbl_upload_store', ['store_id' => $section['store_id'],'is_check' => 0 , 'status_main_search' => 0])->result_array(); ?>
                                                     <tr>
                                                         <td><?php echo $i++ ; ?></td>
                                                         <td><?php echo $section['store_id']; ?></td>
@@ -63,19 +63,31 @@
 
                                                         <td>
                                                             <?php foreach ($check_for as $keys => $check_for) { ?>
-
+                                                        
+                                                        <?php if(!empty($check_for['grade'])){ ?>        
+                                                
+                                                            <button type="button" class="btn btn-success mr-1 mb-1" data-toggle="modal" data-target="#large<?php echo $check_for['id']; ?>"><i class="fa fa-check-square-o" aria-hidden="true"></i> section <?php echo $check_for['section']; ?></button>
+                                                         
+                                                        <?php }else{ ?> 
+                                                           
+                                                            <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#large<?php echo $check_for['id']; ?>">section <?php echo $check_for['section']; ?></button>
                                                                 
-                                                        <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#large<?php echo $check_for['id']; ?>">section <?php echo $check_for['section']; ?></button>
+                                                        <?php } ?>    
                                                                 <div class="modal fade text-left" id="large<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h4 class="modal-title" id="myModalLabel17">section <?php echo $check_for['section']; ?> </h4>
+                                                                                <h4 class="badge badge-primary modal-title" id="myModalLabel17" style="font-size: 15px; margin-left: 15px;">
+                                                                                    Score : <span class="badge badge-light"><?php echo $check_for['price_file']; ?></span>         
+                                                                                </h4>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
+                                                                            
+                                                                          
                                                                                 <?php if ($check_for['grade'] == '') : ?>
                                                                                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModallCenter<?php echo $check_for['id']; ?>">
                                                                                         grade A <span class="badge badge-light">50</span>
@@ -90,10 +102,12 @@
                                                                                         <span class="sr-only">unread messages</span>
                                                                                     </button>
                                                                                 <?php else : ?>
-                                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $check_for['id']; ?>">
+                                                                                <?php if($check_for['status_main_search'] != 1){ ?>
+                                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modalUpload<?php echo $check_for['id']; ?>">
                                                                                         Upload
                                                                                         <span class="sr-only">unread messages</span>
                                                                                     </button>
+                                                                                <?php }  ?>
                                                                                 <?php endif; ?>
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
@@ -103,7 +117,6 @@
                                                                                             <th>File_name</th>
                                                                                             <th>File</th>
                                                                                             <th>grade</th>
-                                                                                            <th>Score</th>
                                                                                             <th>CP/NCP</th>
                                                                                             <th>create</th>
                                                                                         </tr>
@@ -116,7 +129,6 @@
                                                                                                 <td><a href="<?php echo $section_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <?php if ($section_file['grade'] != '') : ?>
                                                                                                     <td><?php echo $section_file['grade'] ?></td>
-                                                                                                    <td><?php echo $section_file['price_file'] ?></td>
                                                                                                     <td><?php echo $section_file['status_cp'] ?></td>
                                                                                                 <?php else : ?>
                                                                                                     <td>-</td>
@@ -124,8 +136,6 @@
                                                                                                     <td>-</td>
                                                                                                 <?php endif; ?>
                                                                                                 <td><?php echo $section_file['create_at'] ?></td>
-
-
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
@@ -196,6 +206,77 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                
+                                                        <!-- upload -->
+                                                        <div class="modal fade" id="modalUpload<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="add_to_upload_main_search" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="userId" value="<?php echo $check_for['userId'] ?>">
+                                                                        <input type="hidden" name="store_id" value="<?php echo $check_for['store_id'] ?>">
+                                                                        <input type="hidden" name="section" value="<?php echo $check_for['section'] ?>">
+                                                                        <div class="data-items pb-3">
+                                                                            <div class="data-fields px-2 mt-3">
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12 data-field-col">
+
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Select Item</label>
+                                                                                                <?php $select_itemList = $this->db->get('tbl_select_item')->result_array();?>
+                                                                                                <select name="select_item_id" class="form-control" id="data-category">
+                                                                                                    <?php foreach ($select_itemList as $key => $selectItem) { ?>
+                                                                                                    <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
+                                                                                                    <?php } ?>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Search Item</label>
+                                                                                                <input type="text" class="form-control" name="search_item" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Code</label>
+                                                                                                <input type="text" class="form-control" name="code" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Topic</label>
+                                                                                                <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
+                                                                                               
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                        </div>
 
                                                             <?php } ?>
                                                         </td>
