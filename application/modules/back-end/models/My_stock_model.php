@@ -20,6 +20,19 @@ class My_stock_model extends CI_Model{
 
     }
 
+    public function stock_Admin()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_upload_team');
+        $this->db->join('tbl_upload_order','tbl_upload_order.order_id = tbl_upload_team.order_id ');
+        $this->db->where('tbl_upload_order.status_admin',1);
+        $this->db->group_by('tbl_upload_order.order_id');
+        $this->db->order_by('tbl_upload_order.order_id','DESC');
+
+        return $this->db->get()->result_array();
+
+    }
+
     
     
     

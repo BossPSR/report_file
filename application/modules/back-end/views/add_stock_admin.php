@@ -34,7 +34,10 @@
                                     <div class="row">
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <label for="" style="font-size: 16px;"> Main File </label>
-                                            <form action="#" class="dropzone dropzone-area" id="maindropzone">
+                                            <form action="fileUpload_buy_admin" class="dropzone dropzone-area" id="maindropzone">
+                                            <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
+                                            <input type="text" id="position2" class="form-control position2" name="position" hidden>
+
                                                 <div class="dz-message" style="top: 24%;">Upload File Main</div>
                                             </form>
                                         </div>
@@ -44,7 +47,7 @@
                                                 <div class="dz-message" style="top: 24%;">Upload File GT</div>
                                                 <textarea name="note" id="note2" class="form-control" rows="10" hidden></textarea>
                                                 <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
-                                                <input type="text" id="position2" class="form-control" name="position" hidden>
+                                                <input type="text" id="position2" class="form-control position2" name="position" hidden>
                                                 <input type="number" id="wage2" name="wage" class="form-control" hidden>
                                             </form>
                                         </div>
@@ -109,7 +112,7 @@
     $("#position1")
         .change(function() {
             var value = $(this).val();
-            $("#position2").val(value);
+            $(".position2").val(value);
         })
         .change();
 
@@ -153,8 +156,27 @@
 
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
+        myDropzone.processQueue();
         myDropzone2.processQueue();
+        
+        $.ajax({
+             type: 'POST',
+             url: 'order_auto',
+             data: {
+                 status: 1
+             },
+             success: function(data) {
+                 myDropzone.processQueue();
+                 myDropzone2.processQueue();
+                 myDropzone.on("success", function(file, res) {
+                     swal("Good job!", "Upload for data successfull", "success", {
+                         button: false,
+                     });
+                    setTimeout(function(){location.href="my_stock_admin"} , 1000);
+                 });
+             },
 
+         });
         // console.log("------ START ------");
         // console.log("SUCCESS");
         // console.log("------ END ------");

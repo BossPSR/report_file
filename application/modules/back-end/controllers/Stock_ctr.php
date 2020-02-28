@@ -57,5 +57,70 @@ class Stock_ctr extends CI_Controller {
 		
 	
 	}
+
+	public function fileUpload_buy_admin()
+	{
+	  // image_lib
+	   $id_admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
+  
+	  $userId     =  $id_admin['id'];
+	  $date_req   =  $this->input->post('date_required');
+	  $position   =  $this->input->post('position');
+  
+	  $target_dir = "uploads/Buy/"; // Upload directory
+  
+	  $request = 1;
+  
+	  if (isset($_POST['request'])) {
+		$request = $_POST['request'];
+	  }
+	  if ($request == 1) {
+		// Set preference
+		$config['upload_path']     = 'uploads/Buy/';
+		// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+		$config['allowed_types']   = '*';
+		$config['max_size']        = '99999'; // max_size in kb
+		$config['file_name']       = $_FILES['file']['name'];
+  
+		//Load upload library
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		// $buyre =  $this->Buy_model->buy();
+		// $buymax = $this->Buy_model->buy_max();
+		$buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
+		// $orf = array(
+		//   'order_main'    => "OD".rand('0','100'),
+		//   'create_at'     => date('Y-m-d H:i:s') ,
+		//   'status'        => '1'    
+		// );
+		// $this->db->insert('tbl_order_f', $orf);
+  
+  
+		// File upload
+		if ($this->upload->do_upload('file')) {
+		  // Get data about the file
+		  $uploadData = $this->upload->data();
+  
+		  $data = array(
+
+			'userId'        => $userId,
+			'order_id'      => $buymax->order_main,
+			'date_required' => $date_req,
+			'select_item' 	=> $position,
+			'status_admin'  =>  1,
+			'status_book'   =>  2,
+			'status_pay'    =>  1,
+			'file_name'     => $uploadData['file_name'],
+			'path'          => 'uploads/Buy/' . $uploadData['file_name'],
+			'create_at'     => date('Y-m-d H:i:s'),
+		  );
+		  $this->db->insert('tbl_upload_order', $data);
+		  // if ($this->db->insert('tbl_upload_order', $data)) {
+		  //   return redirect('buy_uploadGT', $data);
+		  // }
+		}
+	  }
+	}
+  
 	
 }
