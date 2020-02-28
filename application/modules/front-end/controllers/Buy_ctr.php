@@ -178,14 +178,13 @@ class Buy_ctr extends CI_Controller
   public function order_download()
   {
     $order_id = $this->input->get('order_id');
-    $name = "Hello";
-    $filename = "test.php";
-    // $downloads = $this->db->get_where('tbl_upload_order', ['order_id' => "OD" . $order_id])->result_array();
-    
-    $success = force_download($filename, $name);
+    $get_list = $this->db->get_where('tbl_upload_order', ['order_id' => "OD" . $order_id])->result_array();
 
-    echo $success;
-    
+    foreach ($get_list as $key => $get_list) {
+      $success = force_download($get_list['path'], $get_list['file_name']);
+
+      echo $success;
+    }
   }
   public function order_auto()
   {
