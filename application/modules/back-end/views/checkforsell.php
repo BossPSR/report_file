@@ -81,7 +81,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <tr style="background: #ededed;">
                                                             <th><?php echo $i++ ; ?></th>
                                                             <td><?php echo $orders['store_id']; ?></td>
-                                                            <td></td>
+                                                            
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -103,7 +103,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     <?php echo $check_for['userId']; ?>
                                                                 </td>
                                                                 <td><?php echo $check_for['file_name']; ?></td>
-                                                                <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $check_for['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span></td>
+                                                                <td> <a href="<?php echo $check_for['path']; ?>" target="_blank" ><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a> </td>
                                                                 <td>
                                                                     <select class="form-control" name="id_status" onchange="location = this.value;">
                                                                         <option value="" selected disabled>Select Section</option>
