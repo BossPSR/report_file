@@ -111,7 +111,7 @@
      $('#uploadfiles').click(function() {
          $.ajax({
              type: 'POST',
-             url: 'order_auto',
+             url: 'order_auto_sell',
              data: {
                  status: 1
              },

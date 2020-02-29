@@ -197,10 +197,28 @@ class Buy_ctr extends CI_Controller
     if ($this->db->insert('tbl_order_f', $orf)) {
       $insert_id = $this->db->insert_id();
       $update = array(
-        'order_main'    => 'OD' . $insert_id,
+        'order_main'    => 'ODB' . $insert_id,
       );
       $this->db->where('id', $insert_id);
       $this->db->update('tbl_order_f', $update);
+    }
+  }
+
+  public function order_auto_sell()
+  {
+    $date_req   =  $this->input->post('status');
+    $orf = array(
+
+      'create_at'     => date('Y-m-d H:i:s'),
+      'status'        => $date_req
+    );
+    if ($this->db->insert('tbl_order_s', $orf)) {
+      $insert_id = $this->db->insert_id();
+      $update = array(
+        'order_main'    => 'ODS' . $insert_id,
+      );
+      $this->db->where('id', $insert_id);
+      $this->db->update('tbl_order_s', $update);
     }
   }
 }

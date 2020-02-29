@@ -119,6 +119,7 @@ $route['my_deposit_paypal']     = 'front-end/My_deposit_ctr/my_deposit_paypal';
 
 $route['order']                 = 'front-end/Order_ctr';
 $route['order_auto']            = 'front-end/Buy_ctr/order_auto';
+$route['order_auto_sell']       = 'front-end/Buy_ctr/order_auto_sell';
 
 $route['payment_email']         = 'front-end/Store_ctr/payment_email';
 $route['payment_email_success'] = 'front-end/Store_ctr/payment_email_success';
