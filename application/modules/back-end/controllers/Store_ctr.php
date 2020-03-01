@@ -573,6 +573,7 @@ class Store_ctr extends CI_Controller
                     'code' => $code,
                     'topic' => $topic,
                     'upload_store_id' => $store_id,
+                    'section' => $section,
                     'create_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),
                 ];

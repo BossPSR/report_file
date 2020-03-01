@@ -50,7 +50,7 @@ class Store_ctr extends CI_Controller
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
 
-                $buymax = $this->Buy_model->buy_max();
+                $buymax = $this->Buy_model->buy_max_sell();
 
                 // File upload
                 if ($this->upload->do_upload('file')) {

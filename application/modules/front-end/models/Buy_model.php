@@ -25,4 +25,12 @@ class Buy_model extends CI_Model
         $data = $this->db->get();
         return $data->row();
     }
+
+    function buy_max_sell()
+    {
+        $this->db->select('*,max(order_main) AS maxorder');
+        $this->db->from('tbl_order_s');
+        $data = $this->db->get();
+        return $data->row();
+    }
 }

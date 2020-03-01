@@ -81,11 +81,9 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <tr style="background: #ededed;">
                                                             <th><?php echo $i++ ; ?></th>
                                                             <td><?php echo $orders['store_id']; ?></td>
-                                                            
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
-                                                           
                                                             <td></td>
                                                             <td>
                                                                 <a href="check_com?id=<?php echo $orders['store_id']; ?>" class="btn btn-success " aria-haspopup="true" aria-expanded="false">

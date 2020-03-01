@@ -133,7 +133,6 @@
                                                                                                 <?php else : ?>
                                                                                                     <td>-</td>
                                                                                                     <td>-</td>
-                                                                                                    <td>-</td>
                                                                                                 <?php endif; ?>
                                                                                                 <td><?php echo $section_file['create_at'] ?></td>
                                                                                             </tr>
@@ -281,17 +280,9 @@
                                                             <?php } ?>
                                                         </td>
 
-                                                     
                                                     </tr>
 
-
-
-
-
-
                                                 <?php  } ?>
-
-
 
                                             </tbody>
 

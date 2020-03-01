@@ -1,29 +1,4 @@
-<?php
 
-
-
-
-
-$arrayForTable = [];
-foreach ($upload_main_search as $upload_main_searchDetail) {
-    $temp = [];
-    $temp['id'] = $upload_main_searchDetail['id'];
-    $temp['search_item'] = $upload_main_searchDetail['search_item'];
-    $temp['select_item'] = $upload_main_searchDetail['select_item'];
-    $temp['code'] = $upload_main_searchDetail['code'];
-    $temp['topic'] = $upload_main_searchDetail['topic'];
-    $temp['create_at'] = $upload_main_searchDetail['create_at'];
-    $temp['userId'] = $upload_main_searchDetail['userId'];
-    $temp['upload_store_id'] = $upload_main_searchDetail['upload_store_id'];
-    if(!isset($arrayForTable[$upload_main_searchDetail['userId']])){
-        $arrayForTable[$upload_main_searchDetail['userId']] = [];
-    }
-    $arrayForTable[$upload_main_searchDetail['userId']][] = $temp;
-}
-
-
-
-?>
 
 <!-- BEGIN: Content-->
 <div class="app-content content">
@@ -64,8 +39,8 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>Main Search Id</th>
-                                                    <th>User</th>
+                                                    <th>#</th>
+                                                    <th>Document</th>
                                                     <th>Search Item</th>
                                                     <th>Select Item</th>
                                                     <th>file</th>
@@ -75,94 +50,65 @@ foreach ($upload_main_search as $upload_main_searchDetail) {
                                                 </tr>
                                             </thead>
                                                 <tbody>
-                                                <?php 
-                                                
-                                                foreach ($arrayForTable as $id => $upload_main_search) { 
-                                                    $numName= count($upload_main_search);
-                                                 
-                                                        foreach ($upload_main_search as $key => $value){
-                                                            
-                                                ?>
-                                               
-                                                
+                                                <?php $i = 1 ; ?>
+                                                <?php $e = 1 ; ?>
+                                                <?php foreach ($upload_main_search as $key => $value) : ?>
+                                                    
                                                     <tr>
-                                                        <td><?php echo $value['id']; ?></td>
-                                                
-                                                        <td>
-                                                          
-                                                            <?php echo $id;?>
-                                                        </td>
-     
-                                                       
-                                                        
+                                                        <td><?php echo $i++ ; ?></td>
+                                                        <td><?php echo $value['id_doc'];;?></td>
                                                         <td><?php echo $value['search_item']; ?></td>
                                                         <td><?php echo $value['select_item']; ?></td>
-                                                        <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
+                                                        <td>
+                                                            <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModal<?php echo $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">File</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                        <table class="table zero-configuration">
+                                                                        <thead>
+                                                                            <?php $store = $this->db->get_where('tbl_upload_store', ['store_id' => $value['upload_store_id'],'section' =>  $value['section']])->result_array(); ?>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>File_name</th>
+                                                                                <th>File</th>
+                                                                                <th>create</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php foreach ($store as $keys => $store) { ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $e++ ; ?></td>
+                                                                                    <td><?php echo $store['file_name'] ?></td>
+                                                                                    <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><?php echo $store['create_at'] ?></td>
+                                                                                </tr>
+                                                                            <?php } ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td><?php echo $value['code']; ?></td>
                                                         <td><?php echo $value['topic']; ?></td>
                                                         <td><?php echo $value['create_at']; ?></td>    
                                                     </tr>
-                                                    <div class="modal fade" id="exampleModal<?php echo $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload Main Search</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="back_store_add_com" method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                    <?php $path  = $this->db->get_where('tbl_upload_store', ['id' => $value['upload_store_id']])->row_array(); ?>
-                                                                        <iframe src="<?php echo $path['path']; ?>" width="100%" height="400px"></iframe>
-                                                                        <input type="hidden" class="form-control" name="id" value="<?php echo $value['id']; ?>">
-                                                                        <div class="data-items pb-3">
-                                                                            <div class="data-fields px-2 mt-3">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 data-field-col">
-                                                                                        <div class="form-group">
-                                                                                           
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                       
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-
-                                                    
-                                                    
-                                                    <?php  
-                                                            }
-                                                        
-                                                    ?>
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col"></th>
-                                                            <th scope="col"></th>
-                                                            <th scope="col"></th>
-                                                            <th scope="col"></th>
-                                                            <th scope="col"></th>
-                                                            <th scope="col"></th>
-                                                            <th scope="col"></th>
-                                                            <th scope="col"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <?php  
-                                                            }
-                                                        
-                                                    ?>
+                                                   
+                                                    <?php endforeach; ?>
+                                                 
                                                 </tbody>      
                                                 
 
