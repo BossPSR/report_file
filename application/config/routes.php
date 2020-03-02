@@ -180,4 +180,5 @@ $route['orverall']                            = 'back-end/Customer_order_ctr/orv
 $route['my_stock_admin']                      = 'back-end/Stock_ctr/my_stock_admin';
 $route['Add_my_stock_admin']                      = 'back-end/Stock_ctr/add_my_stock_admin';
 $route['fileUpload_buy_admin']                      = 'back-end/Stock_ctr/fileUpload_buy_admin';
+$route['ready_refresh']                = 'back-end/Customer_order_ctr/ready_refresh';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

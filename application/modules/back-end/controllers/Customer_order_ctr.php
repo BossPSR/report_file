@@ -9,6 +9,7 @@ class Customer_order_ctr extends CI_Controller
         parent::__construct();
         $this->load->model('Customer_model');
         $this->load->model('My_stock_model');
+        $this->load->model('Store_model');
 
     }
 
@@ -45,8 +46,6 @@ class Customer_order_ctr extends CI_Controller
     {
         if ($this->session->userdata('email_admin') != '') {
 
-
-
             $data['order_all'] = $this->Customer_model->customer_all();
             $this->load->view('options/header');
             $this->load->view('orverall',$data);
@@ -63,13 +62,23 @@ class Customer_order_ctr extends CI_Controller
     {
         if ($this->session->userdata('email_admin') != '') {
 
-            $data['stock'] = $this->My_stock_model->stock();
+            $data['bookmark'] = $this->Store_model->bookmark_all();
             $this->load->view('options/header');
             $this->load->view('bookmark',$data);
             $this->load->view('options/footer');
         } else {
             $this->load->view('login');
         }
+    }
+
+    public function ready_refresh()
+    {
+        $data = $this->Store_model->bookmark_all();
+        $result = []; 
+		$result['successfully'] = true; 
+		$result['list'] = $data; 
+ 
+		echo json_encode($result); 
     }
 
 
