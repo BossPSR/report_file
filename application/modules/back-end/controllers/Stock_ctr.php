@@ -30,7 +30,7 @@ class Stock_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('email_admin') != '') 
 		{	
-            $data['stock'] = $this->My_stock_model->stock();
+            $data['stock'] = $this->My_stock_model->stock_Admin();
 			$this->load->view('options/header');
 			$this->load->view('my_stock_admin',$data);
 			$this->load->view('options/footer');

@@ -160,17 +160,10 @@ class Buy_ctr extends CI_Controller
           'path_GT'          => 'uploads/Buy/' . $uploadData['file_name'],
           'create_at'     => date('Y-m-d H:i:s'),
         );
-        if($this->db->insert('tbl_upload_orderGT', $data)){
-          $up_q = array(
-            'order_id'      => $buymax->order_main,
-            'position'      => $position,
-            'wage'          => $wage,
-            'note'          => $note,
-            'date_required' => $date_required,
-            'create_at'     => date('Y-m-d H:i:s'),
-          );
-          $this->db->insert('tbl_upload_team',$up_q);
-        }
+        $this->db->insert('tbl_upload_orderGT', $data);
+         
+        
+      
       }
     }
   }
@@ -178,7 +171,7 @@ class Buy_ctr extends CI_Controller
   public function order_download()
   {
     $order_id = $this->input->get('order_id');
-    $get_list = $this->db->get_where('tbl_upload_order', ['order_id' => "OD" . $order_id])->result_array();
+    $get_list = $this->db->get_where('tbl_upload_order', ['order_id' => "ODB" . $order_id])->result_array();
 
     foreach ($get_list as $key => $get_list) {
       $success = force_download($get_list['path'], $get_list['file_name']);
@@ -186,6 +179,7 @@ class Buy_ctr extends CI_Controller
       echo $success;
     }
   }
+  
   public function order_auto()
   {
     $date_req   =  $this->input->post('status');

@@ -11,10 +11,11 @@ $sel1 = $this->db->get_where('tbl_job_position', ['id_team' => $teamId['id']])->
                         <div class="col-12">
                             <div class="tab">
                                 <label for="" class="font-size-upload">You can buy document. </label>
-                                <form action="#" class="dropzone" id="dropfile">
+                                <form action="delivery_file" method="POST" class="dropzone" id="fileupload">
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                        <input type="text" id="selected2" class="position2"  name="select_items" hidden>
 
                                     </div>
                                     <div>
@@ -24,13 +25,14 @@ $sel1 = $this->db->get_where('tbl_job_position', ['id_team' => $teamId['id']])->
                                 <br>
                                 <label for="">Choose the date to pick up the document.</label>
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+
                                     <div class="row">
-                                        <select name="select_item" class="form-control">
+                                        <select name="select_item" class="form-control" id="position1">
                                             <option selected disabled>-- SELECT ITEM --</option>
                                             <?php foreach ($sel1 as $key => $daa) { ?>
-                                                <?php $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $daa['job_position'], 'status_book' => 2, 'is_confirm' => 1])->result_array(); ?>
+                                                <?php $sel2 = $this->db->group_by("order_id")->get_where('tbl_upload_order', ['select_item' => $daa['job_position'], 'status_book' => 2, 'is_confirm' => 1])->result_array(); ?>
                                                 <?php foreach ($sel2 as $key => $qq) { ?>
-                                                    <option value=""><?php echo $qq['order_id']; ?></option>
+                                                    <option value="<?php echo $qq['order_id']; ?>"><?php echo $qq['order_id']; ?></option>
                                                 <?php } ?>
                                             <?php } ?>
                                         </select>
@@ -39,7 +41,7 @@ $sel1 = $this->db->get_where('tbl_job_position', ['id_team' => $teamId['id']])->
 
                                 </div>
                                 <br>
-                                <button type="button" class="btn btn-primary" id='dropdupload'>
+                                <button type="button" class="btn btn-primary" id='uploadfiles'>
                                     Upload Files
                                 </button>
                             </div>
@@ -55,48 +57,36 @@ $sel1 = $this->db->get_where('tbl_job_position', ['id_team' => $teamId['id']])->
     </div>
 </div>
 <!--wishlist area end -->
-<!-- 
+
 <script>
-    $(document).ready(function() {
-        $("#date2").change(function() {
+    $("#position1")
+        .change(function() {
             var value = $(this).val();
-
-            $("#date").val(value);
-        }).keyup();
-
-    });
-</script> -->
+            $(".position2").val(value);
+        })
+        .change();
+</script>
 
 <script type="text/javascript">
-    var x = document.getElementById("date2").value;
+    var x = document.getElementById("selected2").value;
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone("#fileupload", {
             autoProcessQueue: false,
             maxFiles: 5,
             addRemoveLinks: true,
             parallelUploads: 5, // Number of files process at a time (default 2)
-
         }
-
     );
 
     $('#uploadfiles').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: 'order_auto',
-            data: {
-                status: 1
-            },
-            success: function(data) {
-                myDropzone.processQueue();
-                myDropzone.on("success", function(file, res) {
-                    swal("Good job!", "Upload for data successfull", "success", {
-                        button: false,
-                    });
-                    setTimeout("location.reload(true);", 1000);
-                });
-            },
-
+    
+        myDropzone.processQueue();
+        myDropzone.on("success", function(file, res) {
+            swal("Good job!", "Upload for data successfull", "success", {
+                button: false,
+            });
+            setTimeout("location.reload(true);", 1000);
         });
+           
     });
 </script>

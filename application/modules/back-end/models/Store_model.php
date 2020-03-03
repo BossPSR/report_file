@@ -87,15 +87,29 @@ class Store_model extends CI_Model{
 
     public function bookmark_all()
     {
-        $this->db->select('*');
+        $this->db->select('*,tbl_upload_order.userId AS user_name,tbl_upload_order.file_name AS file_order');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_bookmark','tbl_upload_order.order_id=tbl_bookmark.id_orderBuy','left');
         $this->db->join('tbl_upload_main_search','tbl_bookmark.id_document=tbl_upload_main_search.id_doc','left');
         $this->db->join('tbl_upload_store','tbl_upload_main_search.upload_store_id=tbl_upload_store.store_id','left');
+        $this->db->join('tbl_upload_team','tbl_upload_order.order_id=tbl_upload_team.order_id','left');
         $this->db->group_by('tbl_upload_order.order_id');
         return $this->db->get()->result_array();
            
     }
+
+    
+    public function bookmark_upload($DM)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_upload_main_search');
+        $this->db->join('tbl_upload_store','tbl_upload_store.store_id=tbl_upload_main_search.upload_store_id','left');
+        $this->db->where('tbl_upload_main_search.id_doc',$DM);
+
+        return $this->db->get()->row_array();
+           
+    }
+
 
 
  

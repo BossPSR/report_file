@@ -156,8 +156,7 @@
 
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
-        myDropzone.processQueue();
-        myDropzone2.processQueue();
+      
         
         $.ajax({
              type: 'POST',

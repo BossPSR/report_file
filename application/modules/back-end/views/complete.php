@@ -1,0 +1,149 @@
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">Complete</h2>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="Complete">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item active">Complete 
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="content-body">
+
+            <!-- Zero configuration table -->
+            <section id="basic-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Complete</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body card-dashboard">
+                                    <div class="table-responsive">
+                                        <table class="table zero-configuration">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Order Id</th>
+                                                    <th>TeamId</th>
+                                                    <th style="width:18%">File Name</th>
+                                                    <th>Team File</th>
+                                                    <th>date_required</th>
+                                                    <th>Tool</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <?php
+                                                $i = 1;
+                                                $e = 1;
+                                               
+                                                foreach ($complete as $key => $complete) { 
+                                                ?>
+
+
+
+                                                    <tr>
+                                                        <td><?php echo $i++ ; ?></td>
+                                                        <td><?php echo $complete['order_id']; ?></td>
+                                                        <td><?php echo $complete['teamId']; ?></td>
+                                                        <td><?php echo $complete['file_name']; ?></td>
+                                                        <td> 
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $complete['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $complete['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                        <table class="table zero-configuration">
+                                                                        <thead>
+                                                                            <?php $order = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'],'teamId'=>$complete['teamId']])->result_array(); ?>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Order_id</th>
+                                                                                <th>File_name</th>
+                                                                                <th>File</th>
+                                                                                <th>create</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php foreach ($order as $keys => $order) { ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $e++ ; ?></td>
+                                                                                    <td><?php echo $order['order_id'] ?></td>
+                                                                                    <td><?php echo $order['file_name'] ?></td>
+                                                                                    <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><?php echo $order['create_at'] ?></td>
+                                                                                </tr>
+                                                                            <?php } ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                      
+                                                        <td><?php echo $complete['date_required']; ?></td>
+                                                        <td> <button type="button" class="btn btn-outline-info" data-toggle="modal"  data-target="#exampleModallCenter<?php echo $complete['id']; ?>">
+                                                            delivery
+
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModallCenterb<?php echo $complete['id']; ?>">
+                                                              Bookmark
+
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $complete['id']; ?>">
+                                                              Feedback
+
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
+                                                    
+                                                   
+                                                
+
+                                                <?php  } ?>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+
+
+        </div>
+    </div>
+</div>
+<!-- END: Content-->

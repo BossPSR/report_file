@@ -163,7 +163,7 @@ foreach ($sel1 as $key => $da) {
                                         </td>
                                         <td><?php echo $si['name_item']; ?></td>
                                         <td>
-                                            <?php $exq = substr($qq['order_id'], 2); ?>
+                                            <?php $exq = substr($qq['order_id'], 3); ?>
                                             <button type="button" class="btn btn-success" id="download<?php echo $exq; ?>"> Confirmed </button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -181,7 +181,7 @@ foreach ($sel1 as $key => $da) {
                                                                 <div class="col-6 text-center">
 
                                                                     <button class="btn btn-primary" id="mainload<?php echo $exq; ?>"><i class="fa fa-cloud-download"></i> Main Document</button>
-                                                      
+
                                                                 </div>
                                                                 <div class="col-6 text-center">
                                                                     <button class="btn btn-info"><i class="fa fa-cloud-download"></i> GT Document</button>
@@ -202,6 +202,8 @@ foreach ($sel1 as $key => $da) {
                                                         url: 'buy_downloadmain',
                                                         data: {
                                                             order_id: <?php echo $exq; ?>,
+                                                            is_confirm: 1,
+
                                                         },
                                                         success: function(success) {
                                                             console.log("------- SUCCESS -------");

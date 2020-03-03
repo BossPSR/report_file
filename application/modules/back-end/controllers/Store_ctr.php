@@ -607,7 +607,7 @@ class Store_ctr extends CI_Controller
     {
         $store_id = $this->input->get('id');
         $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
-        print_r($dm)  ;
+   
 
         foreach ($dm as $key => $dm) {
             if ($dm['section'] == 0) {

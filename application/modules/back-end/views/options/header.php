@@ -348,9 +348,15 @@
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Bookmark</span></a>
                             <ul class="dropdown-menu">
-                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") {
-                                                                                echo 'active';
-                                                                            } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Bookmark</a>
+                                <li data-menu="">
+                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") { echo 'active'; } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email">
+                                        <i class="feather icon-check-circle"></i>Bookmark
+                                    </a>
+                                </li>
+                                <li data-menu="">
+                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Complete") { echo 'active'; } ?>" href="Complete" data-toggle="dropdown" data-i18n="Email">
+                                        <i class="feather icon-check-circle"></i>Complete
+                                    </a>
                                 </li>
 
                             </ul>
