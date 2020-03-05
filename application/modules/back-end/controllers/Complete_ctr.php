@@ -43,7 +43,7 @@ class Complete_ctr extends CI_Controller
 
 
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $order['order_id'] . '</div>';
-        $message .= '<a href="'. $order['path'].' target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>';
+        $message .= '<a href="http://ip-soft.co.th/ipsoft/'. $order['path'].' target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>';
 
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
