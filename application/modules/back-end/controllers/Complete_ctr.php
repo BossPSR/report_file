@@ -86,5 +86,81 @@ class Complete_ctr extends CI_Controller
             echo '2';
         }
     }
+
+    public function book_complete_add_com()
+    {
+ 
+
+        $data = array(
+
+            'id_orderBuy'         => $this->input->get('id'),
+            'id_user'   => $this->input->get('userid'),
+            'create_at'     => date('Y-m-d H:i:s')
+
+        );
+
+        $resultsedit = $this->db->insert('tbl_bookmark', $data);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Add bookmark information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Add bookmark information');
+        }
+        return redirect('Complete');
+    }
+
+    public function add_feedback()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+           
+            $this->load->view('options/header');
+            $this->load->view('add_feedback');
+            $this->load->view('options/footer');
+        } else {
+            $this->load->view('login');
+        }
+    }
    
+     
+    public function fileUpload_feedback()
+    {
+        // image_lib
+        $id = $this->input->post('id');
+        $cmid = $this->input->post('cmid'); 
+        $descriptions = $this->input->post('descriptions'); 
+      
+
+        
+
+           $target_dir = "uploads/Feedback/"; // Upload directory
+            if (!empty($_FILES['file']['name'])) {
+
+                // Set preference
+                $config['upload_path']     = 'uploads/Feedback/';
+                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+                $config['allowed_types']   = '*';
+                $config['max_size']        = '99999'; // max_size in kb
+                $config['file_name']     = $_FILES['file']['name'];
+
+                //Load upload library
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                // File upload
+                if ($this->upload->do_upload('file')) {
+                    // Get data about the file
+                    $uploadData = $this->upload->data();
+
+                    $data = array(
+                        'feedback_detail'      => $descriptions,
+                        'file_name'     => $uploadData['file_name'],
+                        'order_id' => $id,
+                        'userId' => $cmid,
+                        'path'          => 'uploads/Feedback/' . $uploadData['file_name'],
+                        'create_at'     => date('Y-m-d H:i:s'),
+                    );
+                    $this->db->insert('tbl_feedback', $data);
+                }
+            }
+        
+    }
 }

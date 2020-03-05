@@ -112,14 +112,25 @@
                                                             delivery
 
                                                             </button>
-                                                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModallCenterb<?php echo $complete['id']; ?>">
+                                                            <?php $bookmark = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $complete['order_id']])->row_array(); ?>
+                                                            <?php if($bookmark== true): ?>
+                                                            <a  class="btn btn-outline-secondary">
                                                               Bookmark
 
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $complete['id']; ?>">
-                                                              Feedback
+                                                            </a>
+                                                            <?php else:?>
+                                                            <a href="book_complete_add_com?id=<?php echo $complete['order_id']; ?>&userid=<?php echo $complete['userId']; ?>" class="btn btn-outline-success">
+                                                              Bookmark
 
+                                                            </a>
+                                                            <?php endif;?>
+
+                                                              <a href="Add_feedback?id=<?php echo $complete['order_id']; ?>&cmid=<?php echo $complete['userId']; ?>" class="btn btn-outline-danger">
+                                                              Feedback
+                                                              </a>                           
                                                             </button>
+
+                                                            
                                                         </td>
                                                     </tr>
 

@@ -52,6 +52,7 @@ class Approved_ctr extends CI_Controller
             $topic = $this->input->post('topic');
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
+            $upload_team = $this->db->get_where('tbl_upload_order_team', ['order_id' => $order_id])->result_array();
             if (!empty($select_item)) {
                 $data = [
                     'userId' => $user_id,
@@ -65,12 +66,28 @@ class Approved_ctr extends CI_Controller
                     'create_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),
                 ];
-                $success = $this->db->insert('tbl_upload_main_search', $data);
+                 $this->db->insert('tbl_upload_main_search', $data);
+
                 $id = $this->db->insert_id();
                 $this->db->where('id',$id);
                 $this->db->update('tbl_upload_main_search', ['id_doc' => "DM".$id]);
                 $this->db->where('order_id ',$order_id);
-                $this->db->update('tbl_upload_order_team', ['status_approved_upload' => 1]);
+
+                if($this->db->update('tbl_upload_order_team', ['status_approved_upload' => 1]))
+                foreach ($upload_team as $key => $upload_team) {
+               $data1 = [
+                    'userId' => $user_id,
+                    'store_id' => $order_id,
+                    'file_name' => $upload_team['file_name'],
+                    'path' => $upload_team['path'],
+                    'status_main_search' => 1,
+                    'status_chack' => 1,
+                    'create_at' => date('Y-m-d H:i:s'),
+                    
+                ];
+
+                $success = $this->db->insert('tbl_upload_store', $data1);
+            }
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
                 } else {

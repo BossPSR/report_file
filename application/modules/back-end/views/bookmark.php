@@ -62,7 +62,7 @@
                                             <tbody>
                                                 <?php foreach ($bookmark as $keyBook => $bookmark) { ?>
                                                     <tr>
-                                                        <td><?php echo $bookmark['order_id'] ?></td>
+                                                        <td><?php echo $bookmark['orderby'] ?></td>
                                                         <td><?php echo $bookmark['user_name'] ?></td>
                                                         <td>
                                                         <?php if($bookmark['id_document']==''):?>
@@ -218,7 +218,7 @@
 
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td><?php echo $bookmark['date_required'] ?></td>
+                                                        <td><?php echo $bookmark['date_re'] ?></td>
 
                                                         <td id="test<?php echo $keyBook; ?>">
                                                             <?php if ($bookmark['status_pay'] == 0) : ?>

@@ -187,4 +187,7 @@ $route['fileUpload_store_book']               = 'back-end/Book_ctr/fileUpload_st
 $route['Complete']                            = 'back-end/Complete_ctr';
 $route['add_to_upload_main_search_not_approved']    = 'back-end/Approved_ctr/add_to_upload_main_search_not_approved';
 $route['sendEmail_delivery']                 = 'back-end/Complete_ctr/sendEmail_delivery';
+$route['book_complete_add_com']                 = 'back-end/Complete_ctr/book_complete_add_com';
+$route['Add_feedback']                       = 'back-end/Complete_ctr/add_feedback';
+$route['fileUpload_feedback']                 = 'back-end/Complete_ctr/fileUpload_feedback';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';
