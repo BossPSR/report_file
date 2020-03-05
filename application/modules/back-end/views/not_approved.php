@@ -39,18 +39,144 @@
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Document name</th>
+                                                    <th>File_name</th>
                                                     <th>Order id</th>
-                                                    <th>Date</th>
+                                                    <th>Date_required</th>
+                                                    <th>Tool</th>
+
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
                                             <tbody>
+                                            <?php foreach ($not_Approved as $key => $not_Approved) { ?>
                                                 <tr>
                                                     <td><?php echo $i++; ?></td>
-                                                    <td>ExportServlet.pdf</td>
-                                                    <td>OD5</td>
-                                                    <td><?php echo date("Y-m-d"); ?></td>
+                                                    <td><?php echo $not_Approved['file_name'] ?></td>
+                                                    <td><span data-toggle="modal" data-target="#exampleModala<?php echo $not_Approved['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $not_Approved['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Main File</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <table class="table zero-configuration">
+                                                                                <thead>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['order_id']])->result_array(); ?>
+                                                                                    <tr>
+                                                                                        <th>Order_id</th>
+                                                                                        <th>File_name</th>
+                                                                                        <th>File</th>
+                                                                                        <th>create</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <tr>
+                                                                                            <td><?php echo $order['order_id'] ?></td>
+                                                                                            <td><?php echo $order['file_name'] ?></td>
+                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $order['create_at'] ?></td>
+
+
+                                                                                        </tr>
+                                                                                    <?php } ?>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div></td>
+                                                    <td><?php echo $not_Approved['order_id'] ?></td>
+                                                    <td><?php echo $not_Approved['date_required'] ?></td>
+
+                                                    <td>
+                                                    <?php if($not_Approved['status_approved_upload']==0):?>
+                                                        <button type="button" class="btn btn-primary mr-1 mb-1"  data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['order_id']; ?>" >Upload</button>
+                                                    <?php else:?>
+                                                        <div class="badge badge-success">Success</div>
+                                                    <?php endif;?>
+                                                    </td>
+                                                    <div class="modal fade" id="modalUpload<?php echo $not_Approved['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="add_to_upload_main_search_not_approved" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="userId" value="<?php echo $not_Approved['userId'] ?>">
+                                                                        <input type="hidden" name="teamId" value="<?php echo $not_Approved['teamId'] ?>">
+                                                                        <input type="hidden" name="order_id" value="<?php echo $not_Approved['order_id'] ?>">
+                                                                        <div class="data-items pb-3">
+                                                                            <div class="data-fields px-2 mt-3">
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12 data-field-col">
+
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Select Item</label>
+                                                                                                <?php $select_itemList = $this->db->get('tbl_select_item')->result_array();?>
+                                                                                                <select name="select_item_id" class="form-control" id="data-category">
+                                                                                                    <?php foreach ($select_itemList as $key => $selectItem) { ?>
+                                                                                                    <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
+                                                                                                    <?php } ?>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Search Item</label>
+                                                                                                <input type="text" class="form-control" name="search_item" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Code</label>
+                                                                                                <input type="text" class="form-control" name="code" value="" required>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="controls">
+                                                                                                <label for="data-name">Topic</label>
+                                                                                                <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
+                                                                                               
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                        </div>
+
                                                 </tr>
+                                            <?php }?>
                                                 </tfoot>
                                         </table>
                                     </div>

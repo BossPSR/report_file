@@ -40,17 +40,19 @@
                                                     <th>No.</th>
                                                     <th>Document name</th>
                                                     <th>Order id</th>
-                                                    <th>Date</th>
+                                                    <th>Date_required</th>
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
                                             <tbody>
+                                                <?php foreach ($Approved as $key => $Approved) {?>
                                                 <tr>
                                                     <td><?php echo $i++; ?></td>
-                                                    <td>ExportServlet.pdf</td>
-                                                    <td>OD5</td>
-                                                    <td><?php echo date("Y-m-d"); ?></td>
+                                                    <td><?php echo $Approved['file_name'] ?></td>
+                                                    <td><?php echo $Approved['order_id'] ?></td>
+                                                    <td><?php echo $Approved['date_required']  ?></td>
                                                 </tr>
+                                                <?php }?>
                                                 </tfoot>
                                         </table>
                                     </div>

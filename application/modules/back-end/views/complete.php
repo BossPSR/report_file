@@ -108,7 +108,7 @@
                                                         </td>
                                                       
                                                         <td><?php echo $complete['date_required']; ?></td>
-                                                        <td> <button type="button" class="btn btn-outline-info" data-toggle="modal"  data-target="#exampleModallCenter<?php echo $complete['id']; ?>">
+                                                        <td><button onclick="confirmalertunlock_upload_de('<?php echo $complete['order_id']; ?>','<?php echo $complete['userId']; ?>')" type="button" class="btn btn-outline-info">
                                                             delivery
 
                                                             </button>

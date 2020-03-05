@@ -70,6 +70,23 @@
         })
     }
 </script>
+
+<script>
+    function confirmalertunlock_upload_de(data1,data2) {
+
+        swal({
+            title: "Are you sure Unloc?",
+            text: "Are you sure you want to unlock this document ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'sendEmail_delivery?id=' + data1 + '&email=' + data2 ;
+            }
+        })
+    }
+</script>
 </body>
 <!-- END: Body-->
 
