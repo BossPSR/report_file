@@ -29,7 +29,7 @@ class Complete_ctr extends CI_Controller
         $id =$this->input->get('id');
         $email =$this->input->get('email');
         $user = $this->db->get_where('tbl_user', ['id' => $email])->row_array();
-        $order = $this->db->get_where('tbl_upload_order_team', ['order_id' => $id])->row_array();
+        $order = $this->db->get_where('tbl_upload_order_team', ['order_id' => $id])->result_array();
 
         $subject = 'test ip-soft';
 
@@ -42,8 +42,12 @@ class Complete_ctr extends CI_Controller
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
 
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $order['order_id'] . '</div>';
-        $message .= '<a href="http://ip-soft.co.th/ipsoft/'. $order['path'].' target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $order[0]['order_id'] . '</div>';
+        foreach ($order as $order) {
+
+        $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$order['path'].'">'.$order['file_name'].'</a>';
+        $message .= '<br>';
+        }
 
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
