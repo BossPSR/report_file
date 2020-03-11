@@ -21,8 +21,6 @@ foreach ($store as $upload_main_searchDetail) {
 
 
 
-
-
 <!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -48,13 +46,26 @@ foreach ($store as $upload_main_searchDetail) {
         </div>
         <div class="content-body">
 
+            <?php
+            $this->db->where('status_chack', 0);
+            $this->db->from('tbl_upload_store');
+            $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+            ?>
+
             <!-- Zero configuration table -->
             <section id="basic-datatable">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Check For sell</h4>
+                            <div class="row card-header">
+                                <div class="col-10">
+                                    <h4 class="card-title">Check For sell</h4>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                    <h3 class="check_list_not"> จำนวนที่ต้องเช็ค </h3>
+                                </div>
+                              
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -79,7 +90,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <?php else : ?>
 
                                                         <tr style="background: #ededed;">
-                                                            <th><?php echo $i++ ; ?></th>
+                                                            <th><?php echo $i++; ?></th>
                                                             <td><?php echo $orders['store_id']; ?></td>
                                                             <td></td>
                                                             <td></td>
@@ -92,16 +103,16 @@ foreach ($store as $upload_main_searchDetail) {
                                                             </td>
                                                         </tr>
 
-                                                        <?php $check_for = $this->db->order_by('store_id','asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id'],'is_check' => '0'])->result_array(); ?>
+                                                        <?php $check_for = $this->db->order_by('store_id', 'asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id'], 'is_check' => '0'])->result_array(); ?>
                                                         <?php foreach ($check_for as $keys => $check_for) { ?>
                                                             <tr>
-                                                                <td><?php echo $i++ ; ?></td>
+                                                                <td><?php echo $i++; ?></td>
                                                                 <td><?php echo $orders['store_id']; ?></td>
                                                                 <td>
                                                                     <?php echo $check_for['userId']; ?>
                                                                 </td>
                                                                 <td><?php echo $check_for['file_name']; ?></td>
-                                                                <td> <a href="<?php echo $check_for['path']; ?>" target="_blank" ><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a> </td>
+                                                                <td> <a href="<?php echo $check_for['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a> </td>
                                                                 <td>
                                                                     <select class="form-control" name="id_status" onchange="location = this.value;">
                                                                         <option value="" selected disabled>Select Section</option>
@@ -112,9 +123,9 @@ foreach ($store as $upload_main_searchDetail) {
                                                                         <option value="store_section?id_order=<?php echo $check_for['id']; ?>&id_section=5" <?php if ($check_for['section'] == 5) echo 'selected'; ?>>section5</option>
                                                                     </select>
                                                                 </td>
-                                                               
 
-                                                               
+
+
                                                                 <td>
 
 
@@ -135,7 +146,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                         <form action="back_store_check_store_add_com" method="POST" class="form-horizontal">
                                                                             <div class="modal-body">
                                                                                 <div class="btn-group" role="group" aria-label="Basic example" style="margin: 13px 21px;">
-                                                                                    
+
                                                                                 </div>
 
                                                                                 <iframe src="<?php echo $check_for['path']; ?>" width="100%" height="600px"></iframe>

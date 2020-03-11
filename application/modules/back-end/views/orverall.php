@@ -20,6 +20,15 @@
             </div>
 
         </div>
+
+        <?php
+        // $this->db->where('status_admin', 1);
+        
+        $this->db->group_by('order_id');
+        $this->db->from('tbl_upload_order');
+        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+        ?>
+
         <div class="content-body">
 
             <!-- Zero configuration table -->
@@ -27,8 +36,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">All Satisfied and Not Satisfied</h4>
+                            <div class="row card-header">
+                                <div class="col-10">
+                                    <h4 class="card-title">All Satisfied and Not Satisfied</h4>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                    <h3 class="check_list_not"> จำนวนออเดอร์ทั้งหมด </h3>
+                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">

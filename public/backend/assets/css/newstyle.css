@@ -1,0 +1,19 @@
+.check_count {
+    padding: 12px;
+    color: #7367f0;
+    margin-left: 20px;
+    border-radius: 50%;
+    border: 1px solid;
+    font-size: 25px;
+}
+
+.check_list {
+    margin-left: 13px;
+    color: #b6b6b6;
+    font-size: 15px;
+}
+
+.check_list_not {
+    color: #b6b6b6;
+    font-size: 16px;
+}

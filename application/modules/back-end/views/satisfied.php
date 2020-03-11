@@ -20,6 +20,15 @@
             </div>
 
         </div>
+
+        <?php
+        $this->db->where('status_book', 1);
+        $this->db->where('status_pay', 1);
+        $this->db->from('tbl_upload_order');
+        $this->db->group_by('order_id');
+        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+        ?>
+
         <div class="content-body">
 
             <!-- Zero configuration table -->
@@ -27,8 +36,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Satisfied</h4>
+                            <div class="row card-header">
+                                <div class="col-10">
+                                    <h4 class="card-title">Satisfied</h4>
+                                </div>
+                                <div class="col-1 text-center">
+                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                    <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
+                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -50,15 +65,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php 
-                                                    $i = 1 ;
-                                                    foreach ($order_main as $id => $stores) { 
+                                                <?php
+                                                $i = 1;
+                                                foreach ($order_main as $id => $stores) {
                                                 ?>
 
 
 
                                                     <tr>
-                                                        <td><?php echo $i++ ; ?></td>
+                                                        <td><?php echo $i++; ?></td>
                                                         <td><?php echo $stores['order_id']; ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
                                                         <td><?php echo $stores['topic']; ?></td>
@@ -161,7 +176,7 @@
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
 
-                                                        <td><span  class="badge badge-pill badge-success">Successful payment</button></td>
+                                                        <td><span class="badge badge-pill badge-success">Successful payment</button></td>
                                                     </tr>
 
                                                     <div class="modal fade" id="exampleModal<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
