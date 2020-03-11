@@ -469,6 +469,7 @@ class Store_ctr extends CI_Controller
             'status_cp'           => $this->input->get('com'),
             'grade'               => $this->input->get('grad'),
             'price_file'          => $this->input->get('price'),
+            'notify_user'         => 0
         );
         $this->db->where('store_id', $store_id);
         $this->db->where('section', $id_section);
@@ -486,6 +487,7 @@ class Store_ctr extends CI_Controller
 
 
         if ($resultsedit > 0) {
+            
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');

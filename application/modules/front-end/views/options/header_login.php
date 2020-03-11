@@ -312,18 +312,12 @@
                         <div class="col-lg-10 col-md-6">
                             <div class="middel_right">
                                 <?php if ($user == false) :  ?>
-                                    <div class="search_container" style="margin-right:200px;">
-                                    <?php else : ?>
-                                        <!-- <div class="search_container"> -->
+                                    <div class="search_container">
+                                    <?php elseif ($team == true) : ?>
+                                        <div class="search_container">
+                                        <?php else :?>
                                     <?php endif ?>
-                                    <?php if ($user == true) :
-                                        // $score = $this->db->get_where('tbl_upload_store', ['userId' => $user['id']])->result_array();
-                                        // $scoreAll = [];
-                                        // foreach ($score as $scoreNum) {
-                                        //     $scoreAll[] = $scoreNum['price_file'];
-                                        // }
-                                        // $scoreAll = array_sum($scoreAll);
-                                    ?>
+                                    <?php if ($user == true) : ?>
                                         <div class="middel_right_info">
 
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
@@ -353,10 +347,26 @@
                                                 <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                 <div>My Wallet</div>
                                             </div>
-
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
+                                                <div>My Order</div>
+                                            </div>
                                         </div>
-                                    <?php else : ?>
-
+                                    <?php elseif ($team == true) : ?>
+                                        <div class="middel_right_info">
+                                            <!-- <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
+                                                <div>Score</div>
+                                            </div> -->
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
+                                                <div>My Jobs</div>
+                                            </div>
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format(rand(1, 1000000)); ?></div>
+                                                <div>My Income</div>
+                                            </div>
+                                        </div>
                                     <?php endif ?>
                                     </div>
                             </div>
@@ -434,18 +444,7 @@
 
 
                                             <!-- </div> -->
-                                            <?php
-                                            $userUpload_store = $this->db->get_where('tbl_upload_store', ['userId' => $user['id'], 'price_file_read' => 0])->result_array();
-                                            $userUpload_store = count($userUpload_store);
-                                            ?>
-                                            <div class="dropdown" id="user_notify">
-                                                <i class="fa fa-bell text-black-white badge-notification" onClick="read_userNotify();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="<?php echo $userUpload_store; ?>" style="font-size:22px;color:#fff; cursor: pointer;"></i>
-                                                <ul class="dropdown-menu" style="display:none;" role="menu">
-                                                    <li>Action</li>
-                                                </ul>
-
-
-                                            </div>
+                                            <?php $this->load->view('options/notify_user'); ?>
                                         </li>
                                         <li> </li>
 
@@ -553,45 +552,3 @@
         </div>
     </aside>
     <!--sidebar widget end-->
-
-    <script type="text/javascript">
-        // $(function(){
-        //     setInterval(function(){
-        //         $.ajax({
-        //             url:"userNotify",
-        //             success:function(getData){
-        //                 var elementNotify = '<div class="dropdown"><i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="'+getData+'" style="font-size:22px;color:#fff;" onClick="read_userNotify();"></i>';
-        //                     elementNotify += '<ul class="dropdown-menu" role="menu"><li>Action</li></ul></div>';
-        //                 document.getElementById("user_notify").innerHTML = elementNotify;
-        //             }
-        //         });    
-        //     },5000);    
-        // });
-        function read_userNotify() {
-            $.ajax({
-                url: "read_userNotify",
-                data: {
-                    user_id: <?php echo $user['id']; ?>,
-                },
-                success: function(getData) {
-                    var numData = JSON.parse(getData);
-                    var dataNotify = "";
-
-                    if (numData.successfully === true) {
-                        dataNotify = '<i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff; cursor: pointer;"></i>';
-                        dataNotify += '<ul class="dropdown-menu show" role="menu">';
-                        // for (let index = 0; index < numData.dataList.list.length; index++) {
-                        //    dataNotify += '<li>'+ 1 +'</li>';
-
-                        // }
-                        dataNotify += '<li>' + 1 + '</li>';
-                        dataNotify += '</ul>';
-                    }
-
-
-                    document.getElementById("user_notify").innerHTML = dataNotify;
-                    console.log(getData);
-                }
-            });
-        }
-    </script>
