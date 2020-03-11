@@ -75,7 +75,7 @@ class Complete_ctr extends CI_Controller
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to('mikiboy004@gmail.com');
+        $this->email->to('infinityp.soft@gmail.com');
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->set_mailtype('html');
