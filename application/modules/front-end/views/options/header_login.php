@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Junko - shop fullwidth</title>
+    <title>Report File</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -319,13 +319,33 @@
                                     <?php endif ?>
                                     <?php if ($user == true) : ?>
                                         <div class="middel_right_info">
+
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list">
+                                                <?php if ($user['score'] < '100') : ?>
+                                                    0%
+                                                <?php elseif ($user['score'] <= '199') : ?>
+                                                    10%
+                                                <?php elseif ($user['score'] <= '299') : ?>
+                                                    20%
+                                                <?php elseif ($user['score'] <= '399') : ?>
+                                                    30%
+                                                <?php elseif ($user['score'] <= '499') : ?>
+                                                    40%
+                                                <?php else : ?>
+                                                    50%
+                                                <?php endif; ?>
+                                                </div>
+                                                <div>Discount</div>
+                                            </div>
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                 <div class="menu-list"><?php echo number_format($user['score']); ?></div>
                                                 <div>Score</div>
                                             </div>
+
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                 <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
-                                                <div>My wallet</div>
+                                                <div>My Wallet</div>
                                             </div>
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                 <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
@@ -437,23 +457,7 @@
 
                                             </div>
                                         </li>
-                                        <li>
-                                            <a>Discount :
-                                                <?php if ($user['score'] < '100') : ?>
-                                                    0%
-                                                <?php elseif ($user['score'] <= '199') : ?>
-                                                    10%
-                                                <?php elseif ($user['score'] <= '299') : ?>
-                                                    20%
-                                                <?php elseif ($user['score'] <= '399') : ?>
-                                                    30%
-                                                <?php elseif ($user['score'] <= '499') : ?>
-                                                    40%
-                                                <?php else : ?>
-                                                    50%
-                                                <?php endif; ?>
-                                            </a>
-                                        </li>
+                                        <li> </li>
 
                                     <?php elseif ($team) : ?>
                                         <li>

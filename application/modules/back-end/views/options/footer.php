@@ -34,7 +34,7 @@
 <script src="public/backend/assets/js/scripts/datatables/datatable.js"></script>
 <script src="public/backend/assets/js/scripts/pages/dashboard-analytics.js"></script>
 <!-- END: Page JS-->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="public/backend/assets/js/scripts/sweetalert.min.js"></script>
 
 
 <script>
@@ -45,6 +45,7 @@
         swal("Fail !", '<?php echo $error; ?>', "error");
     <?php endif; ?>
 </script>
+
 <script>
     $('#password, #c_password').on('keyup', function() {
         if ($('#password').val() == $('#c_password').val()) {

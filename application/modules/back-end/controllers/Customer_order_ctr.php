@@ -85,8 +85,6 @@ class Customer_order_ctr extends CI_Controller
 
     public function upload_team()
     {
-      
-
         $data = array(
 
             'order_id'                         => $this->input->post('order_id'),
@@ -95,7 +93,6 @@ class Customer_order_ctr extends CI_Controller
             'note'                             => $this->input->post('note'),
             'date_required'                    => $this->input->post('Daterequired'),
             'create_at'                        => date('Y-m-d H:i:s')
-
 
         );
       
