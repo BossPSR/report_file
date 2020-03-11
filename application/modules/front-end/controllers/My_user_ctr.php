@@ -59,36 +59,34 @@ class My_user_ctr extends CI_Controller
 	public function read_userNotify()
 	{
 		$user_id = $this->input->get('user_id');
-		$this->db->where('userId',$user_id);
-		$this->db->update('tbl_upload_store',['price_file_read' => 1,'reject_read' => 1]);
+		$user = $this->db->get_where('tbl_user',['id' => $user_id])->row_array();
+		$upload_store_id = $this->input->get('upload_store_id');
+		foreach ($upload_store_id as $key => $upload_storeId) {
+			
+			$this->db->where('id',$upload_storeId);
+			$this->db->update('tbl_upload_store',['notify_user' => 1]);
 
-		$this->db->where('userId',$user_id);
-		$this->db->update('tbl_upload_order',['reject_read' => 1]);
-
-
-		$dataList = [];
-
-		$storeList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_store',['userId' => $user_id])->result_array();
-		$orderList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_order',['userId' => $user_id])->result_array();
-
-		foreach ($storeList as $key => $storeDetail) {
-			$dataList['storeList'][$key] = $storeDetail['update_at'];
 		}
-
-		foreach ($orderList as $key => $orderDetail) {
-			$dataList['orderList'][$key] = $orderDetail['update_at'];
-		}
+		// $this->db->where('userId',$user_id);
+		// $this->db->update('tbl_upload_order',['reject_read' => 1]);
 
 
-		
-		
-		
+		// $dataList = [];
+
+		// $storeList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_store',['userId' => $user_id])->result_array();
+		// $orderList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_order',['userId' => $user_id])->result_array();
+
+		// foreach ($storeList as $key => $storeDetail) {
+		// 	$dataList['storeList'][$key] = $storeDetail['update_at'];
+		// }
+
+		// foreach ($orderList as $key => $orderDetail) {
+		// 	$dataList['orderList'][$key] = $orderDetail['update_at'];
+		// }
 
 		$result = [];
 		$result['successfully'] = true;
-		// $result['storePrice_file_readList'] = $storePrice_file_readList;
-		// $result['storeRejectList'] = $storeRejectList;
-		$result['list'] = $dataList;
+		$result['message'] = "read successfully";
 
 		echo json_encode($result);
 	}
