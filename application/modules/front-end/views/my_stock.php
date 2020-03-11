@@ -1,24 +1,7 @@
-<?php
-$teamId = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
-$sel1 = $this->db->get_where('tbl_job_position', ['id_team' => $teamId['id']])->result_array();
-foreach ($sel1 as $key => $da) {
-    $sel3 = $this->db->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2])->result_array();
-}
-
-// exit();
-
-
-?>
-<?php foreach ($sel1 as $key => $daa) {
-    $sel2 = $this->db->get_where('tbl_upload_order', ['select_item' => $daa['job_position'], 'status_book' => 2])->result_array(); ?>
-    <?php foreach ($sel2 as $key => $qq) { ?>
-        <?php $si = $this->db->get_where('tbl_select_item', ['id' => $daa['job_position']])->row_array(); ?>
-    <?php } ?>
-<?php } ?>
-<?php if (!empty($si)) : ?>
-    <br>
-    <h2 class="text-center" style="margin-top: 15px;">My Stock</h2>
-    <hr class="line_package">
+<br>
+<h2 class="text-center" style="margin-top: 15px;">My Stock</h2>
+<hr class="line_package">
+<?php if (!empty($stock)) { ?>
     <br>
     <div class="wishlist_area mt-60">
         <div class="container">
@@ -52,209 +35,225 @@ foreach ($sel1 as $key => $da) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1; ?>
-                            <?php $e = 1; ?>
-                            <?php $k = 1; ?>
-                            <?php $p = 1; ?>
-                            <?php $r = 1; ?>
-
-                            <?php foreach ($sel1 as $key => $da) {
-                                $sel2 = $this->db->order_by('date_required', 'ASC')->group_by('order_id')->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2, 'is_confirm' => null])->result_array(); ?>
-                                <?php foreach ($sel2 as $key => $qq) { ?>
-                                    <?php $si = $this->db->get_where('tbl_select_item', ['id' => $da['job_position']])->row_array(); ?>
-                                    <tr style="text-align:center;">
-                                        <td><?php echo $i++; ?></td>
-                                        <!-- <td><?php echo $qq['file_name']; ?></td> -->
-                                        <td><?php echo $qq['order_id']; ?></td>
-                                        <td><?php echo $qq['date_required']; ?></td>
-                                        <td>
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                            <?php $up_or  = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $qq['order_id']])->result_array(); ?>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalMain<?php echo $k++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <?php $n = 1; ?>
-                                                        <div class="modal-body">
-                                                            <?php if (!empty($up_or)) { ?>
-                                                                <table class="table table-bordered">
-                                                                    <thead>
+                            <?php
+                            $q = 1;
+                            $w = 1;
+                            $e = 1;
+                            $r = 1;
+                            ?>
+                            <?php foreach ($stock as $stock) { ?>
+                                <tr style="text-align:center;">
+                                    <td><?php echo $stock['file_name']; ?></td>
+                                    <td><?php echo $stock['order_id']; ?></td>
+                                    <td><?php echo $stock['or_date']; ?></td>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $q++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalMain<?php echo $w++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                        <?php $t = 1; ?>
+                                                        <?php if (!empty($stockmain)) { ?>
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr style="text-align:center;">
+                                                                        <th scope="col">No.</th>
+                                                                        <th scope="col">File</th>
+                                                                        <th scope="col">ID Order</th>
+                                                                        <th scope="col">Date Requred</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($stockmain as $stockmain) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">No.</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">Date Requred</th>
+                                                                            <td><?php echo $t++; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
+                                                                            <td><?php echo $stockmain['order_id']; ?></td>
+                                                                            <td><?php echo $stock['or_date']; ?></td>
                                                                         </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php foreach ($up_or as $key => $up_or) { ?>
-                                                                            <tr style="text-align:center;">
-                                                                                <td><?php echo $n++; ?></td>
-                                                                                <td><a href="<?php echo $up_or['path']; ?>"><?php echo $up_or['file_name']; ?></a></td>
-                                                                                <td><?php echo $up_or['order_id']; ?></td>
-                                                                                <td><?php echo $up_or['date_required']; ?></td>
-                                                                            </tr>
-                                                                        <?php } ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            <?php } else { ?>
-                                                                <h1 style="color:blue;">Data Not Found</h1>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                                                        </div>
+                                                                    <?php } ?>
+                                                                </tbody>
+                                                            </table>
+                                                        <?php } else { ?>
+                                                            <h1 style="color:blue;">Data Not Found</h1>
+                                                        <?php } ?>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
+                                        </div>
+                                    </td>
 
-                                        <td>
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                            <?php $up_orGT  = $this->db->order_by('create_at')->get_where('tbl_upload_orderGT', ['order_id' => $qq['order_id']])->result_array(); ?>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalGT<?php echo $k++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <?php if (!empty($up_orGT)) { ?>
-                                                                <table class="table table-bordered">
-                                                                    <thead>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                        <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <?php $z = 1; ?>
+                                                    <?php $stockGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                    <div class="modal-body">
+                                                        <?php if (!empty($stockGT)) { ?>
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr style="text-align:center;">
+                                                                        <th scope="col">No.</th>
+                                                                        <th scope="col">File</th>
+                                                                        <th scope="col">ID Order</th>
+                                                                        <th scope="col">Date Requred</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($stockGT as $key => $stockGT) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">No.</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">Date Requred</th>
+                                                                            <td><?php echo $z++; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $stockGT['file_name_GT']; ?></td>
+                                                                            <td><?php echo $stockGT['order_id']; ?></td>
+                                                                            <td><?php echo $stock['or_date']; ?></td>
                                                                         </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php foreach ($up_orGT as $key => $up_orGT) { ?>
-                                                                            <tr style="text-align:center;">
-                                                                                <td><?php echo $n++; ?></td>
-                                                                                <td><a href="<?php echo $up_orGT['path_GT']; ?>"><?php echo $up_orGT['file_name_GT']; ?></a></td>
-                                                                                <td><?php echo $up_orGT['order_id']; ?></td>
-                                                                                <td><?php echo $qq['date_required']; ?></td>
-                                                                            </tr>
-                                                                        <?php } ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            <?php } else { ?>
-                                                                <h1 style="color:blue;">Data Not Found</h1>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                                                        </div>
+                                                                    <?php } ?>
+                                                                </tbody>
+                                                            </table>
+                                                        <?php } else { ?>
+                                                            <h1 style="color:blue;">Data Not Found</h1>
+                                                        <?php } ?>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td><?php echo $si['name_item']; ?></td>
-                                        <td>
-                                            <?php $exq = substr($qq['order_id'], 3); ?>
-                                            <button type="button" class="btn btn-success" id="download<?php echo $exq; ?>"> Confirmed </button>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <?php $main = $this->db->get_where('tbl_upload_order', ['select_item' => $da['job_position'], 'status_book' => 2, 'is_confirm' => null])->result_array(); ?>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="col-6 text-center">
+                                        </div>
+                                    </td>
+                                    <td><?php echo $stock['name_item']; ?></td>
+                                    <td>
+                                        <?php $sub_order = substr($stock['order_id'], 3); ?>
+                                        <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCF" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Document</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h3>Main Document</h3>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr style="text-align:center;">
+                                                                    <th scope="col">File</th>
+                                                                    <th scope="col">ID Order</th>
+                                                                    <th scope="col">Download</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $stockmain2 = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                                <?php foreach ($stockmain2 as $stockmain_Download) { ?>
+                                                                    <tr style="text-align:center;">
+                                                                        <td><?php echo $stockmain_Download['order_id']; ?></td>
+                                                                        <td><?php echo $stockmain_Download['file_name']; ?></td>
+                                                                        <td>
+                                                                            <a href="<?php echo $stockmain_Download['path']; ?>" class="btn btn-primary" download>
+                                                                                <i class="fa fa-download"></i> Download
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </tbody>
+                                                        </table>
 
-                                                                    <button class="btn btn-primary" id="mainload<?php echo $exq; ?>"><i class="fa fa-cloud-download"></i> Main Document</button>
-
-                                                                </div>
-                                                                <div class="col-6 text-center">
-                                                                    <button class="btn btn-info"><i class="fa fa-cloud-download"></i> GT Document</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success" id="close_doc">Success</button>
-                                                        </div>
+                                                        <h3>GT Document</h3>
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr style="text-align:center;">
+                                                                    <th scope="col">File</th>
+                                                                    <th scope="col">ID Order</th>
+                                                                    <th scope="col">Download</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $stockGT2 = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                                <?php foreach ($stockGT2 as $stockGT_Download) { ?>
+                                                                    <tr style="text-align:center;">
+                                                                        <td><?php echo $stockGT_Download['order_id']; ?></td>
+                                                                        <td><?php echo $stockGT_Download['file_name_GT']; ?></td>
+                                                                        <td>
+                                                                            <a href="<?php echo $stockGT_Download['path_GT']; ?>" class="btn btn-primary" download>
+                                                                                <i class="fa fa-download"></i> Download
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-success" id="close_doc">Success</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <script>
-                                                <?php $up_or2  = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $qq['order_id']])->result_array(); ?>
-                                                $('#mainload<?php echo $exq; ?>').click(function() {
-                                                    $.ajax({
-                                                        type: 'get',
-                                                        url: 'buy_downloadmain',
-                                                        data: {
-                                                            order_id: <?php echo $exq; ?>,
-                                                            is_confirm: 1,
+                                        </div>
+                                        <script>
+                                            $('#cf<?php echo $sub_order; ?>').click(function() {
+                                                swal({
+                                                    icon: "warning",
+                                                    title: "Are you sure?",
+                                                    text: "Do you want confirmed document",
+                                                    closeOnEsc: true,
+                                                    closeOnClickOutside: false,
+                                                    buttons: {
+                                                        cancel: true,
+                                                        confirm: true,
+                                                    },
+                                                }).then(function(isConfirm) {
+                                                    if (isConfirm == true) {
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: 'order_isconfirm',
+                                                            data: {
+                                                                order_id: <?php echo $sub_order; ?>,
+                                                                is_confirm: 1,
+                                                            },
+                                                            success: function(success) {
 
-                                                        },
-                                                        success: function(success) {
-                                                            console.log("------- SUCCESS -------");
-                                                        }
-                                                    });
-                                                });
-                                            </script>
-                                            <script>
-                                                $('#download<?php echo $exq; ?>').click(function() {
-                                                    swal({
-                                                        icon: "warning",
-                                                        title: "Are you sure?",
-                                                        text: "Do you want confirmed document",
-                                                        closeOnEsc: true,
-                                                        closeOnClickOutside: false,
-                                                        buttons: {
-                                                            cancel: true,
-                                                            confirm: true,
-                                                        },
-                                                    }).then(function(isConfirm) {
-                                                        if (isConfirm == true) {
-                                                            $.ajax({
-                                                                type: 'POST',
-                                                                url: 'order_isconfirm',
-                                                                data: {
-                                                                    order_id: <?php echo $exq; ?>,
-                                                                    is_confirm: 1,
-                                                                },
-                                                                success: function(success) {
-
-                                                                    $('#exampleModal').modal('show')
-                                                                    $("#close_doc").click(function() {
-                                                                        $('#myModal').modal('hide');
-                                                                        swal("Good job!", "Upload for data successfull", "success", {
-                                                                            button: false,
-                                                                        });
-                                                                        setTimeout("location.reload(true);", 1000);
+                                                                $('#exampleModalCF').modal('show')
+                                                                $("#close_doc").click(function() {
+                                                                    $('#myModal').modal('hide');
+                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                        button: false,
                                                                     });
-                                                                }
-                                                            });
-                                                        } else {
-                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                        }
-                                                    });
+                                                                    setTimeout("location.reload(true);", 1000);
+                                                                });
+                                                            }
+                                                        });
+                                                    } else {
+                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                    }
                                                 });
-                                            </script>
-                                        </td>
-                                    </tr>
+                                            });
+                                        </script>
+                                    </td>
+                                </tr>
 
-
-                                <?php } ?>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -263,8 +262,8 @@ foreach ($sel1 as $key => $da) {
             </div>
         </div>
     </div>
+<?php } else { ?>
     <!--wishlist area end -->
-<?php else : ?>
     <!--error section area start-->
     <div class="error_section">
         <div class="container">
@@ -279,4 +278,4 @@ foreach ($sel1 as $key => $da) {
         </div>
     </div>
     <!--error section area end-->
-<?php endif; ?>
+<?php } ?>

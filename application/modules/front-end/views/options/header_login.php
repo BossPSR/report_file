@@ -312,18 +312,12 @@
                         <div class="col-lg-10 col-md-6">
                             <div class="middel_right">
                                 <?php if ($user == false) :  ?>
-                                    <div class="search_container" style="margin-right:200px;">
-                                    <?php else : ?>
-                                        <!-- <div class="search_container"> -->
+                                    <div class="search_container">
+                                    <?php elseif ($team == true) : ?>
+                                        <div class="search_container">
+                                        <?php else :?>
                                     <?php endif ?>
-                                    <?php if ($user == true) :
-                                        // $score = $this->db->get_where('tbl_upload_store', ['userId' => $user['id']])->result_array();
-                                        // $scoreAll = [];
-                                        // foreach ($score as $scoreNum) {
-                                        //     $scoreAll[] = $scoreNum['price_file'];
-                                        // }
-                                        // $scoreAll = array_sum($scoreAll);
-                                    ?>
+                                    <?php if ($user == true) : ?>
                                         <div class="middel_right_info">
 
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
@@ -353,10 +347,26 @@
                                                 <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                 <div>My Wallet</div>
                                             </div>
-
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
+                                                <div>My Order</div>
+                                            </div>
                                         </div>
-                                    <?php else : ?>
-
+                                    <?php elseif ($team == true) : ?>
+                                        <div class="middel_right_info">
+                                            <!-- <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
+                                                <div>Score</div>
+                                            </div> -->
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
+                                                <div>My Jobs</div>
+                                            </div>
+                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="menu-list"><?php echo number_format(rand(1, 1000000)); ?></div>
+                                                <div>My Income</div>
+                                            </div>
+                                        </div>
                                     <?php endif ?>
                                     </div>
                             </div>
