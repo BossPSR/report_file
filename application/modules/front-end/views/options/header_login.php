@@ -148,8 +148,8 @@
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                     <li><a href="register"> Sign up </a></li>
                                 <?php endif  ?>
-                                <li><a href="checkout.html"> TH </a></li>
-                                <li><a href="checkout.html"> ENG </a></li>
+                                <li><a href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>"> TH </a></li>
+                                <li><a href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>"> ENG </a></li>
                             </ul>
                         </div>
                         <div class="middel_right_info">
@@ -166,6 +166,9 @@
                                 <!--mini cart end-->
                             </div>
                         </div>
+                        <?php echo anchor('Home_ctr/home/en','en'); ?>
+                    
+                    <?php echo $english_lang;?>
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
@@ -286,8 +289,8 @@
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
                                         <li><a href="main"> Sign up </a></li>
                                     <?php endif  ?>
-                                    <li><a href="#"> TH </a></li>
-                                    <li><a href="#"> ENG </a></li>
+                                    <li><a href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>"> TH </a></li>
+                                    <li><a href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>"> ENG </a></li>
                                 </ul>
                             </div>
                         </div>

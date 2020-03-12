@@ -37,7 +37,8 @@
 
              <div class="col-lg-6 col-md-6 text-center">
                  <div class="section_title">
-                     <h2>Highest score</h2>
+                     <h2><?=$this->lang->line("Highestscore");?>   </h2>
+                 
                  </div>
                  <br>
                  <div class="single_banner mb-30">

@@ -42,6 +42,7 @@
                                                     <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Cash</th>
+                                                    <th>Score</th>
                                                     <th>package</th>
                                                 </tr>
                                             </thead>
@@ -54,6 +55,7 @@
                                                         <td><?php echo $user_list['email']; ?></td>
                                                         <td><?php echo $user_list['phone']; ?></td>
                                                         <td>$<?php echo $user_list['cash']; ?></td>
+                                                        <td><?php echo $user_list['score']; ?></td>
                                                         <?php if ($user_list['user_id'] == '') :  ?>
                                                             <td>Not package</td>
                                                         <?php else :  ?>

@@ -16,7 +16,8 @@ class My_user_ctr extends CI_Controller
 		} else {
 			$data['user'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 			// $data['reject'] = $this->db->get_where('tbl_rejected', ['userId_rj' => $data['user']['id']])->row_array();
-
+			$lang= $this->session->userdata("lang")==null?"english":$this->session->userdata("lang");
+			$this->lang->load($lang,$lang);
 			$this->load->view('options/header_login');
 			$this->load->view('my_profile', $data);
 			$this->load->view('options/footer');
@@ -67,26 +68,38 @@ class My_user_ctr extends CI_Controller
 			$this->db->update('tbl_upload_store',['notify_user' => 1]);
 
 		}
-		// $this->db->where('userId',$user_id);
-		// $this->db->update('tbl_upload_order',['reject_read' => 1]);
+
+		$upload_order_id = $this->input->get('upload_order_id');
+		foreach ($upload_order_id as $key => $upload_orderId) {
+			
+			$this->db->where('id',$upload_orderId);
+			$this->db->update('tbl_upload_order',['notify_user' => 1]);
+
+		}
+		
+		$upload_store_reject_id = $this->input->get('upload_store_reject_id');
+		foreach ($upload_store_reject_id as $key => $upload_store_rejectId) {
+			
+			$this->db->where('id',$upload_store_rejectId);
+			$this->db->update('tbl_upload_store',['notify_user' => 1]);
+
+		}
+
+		$upload_order_reject_id = $this->input->get('upload_order_reject_id');
+		foreach ($upload_order_reject_id as $key => $upload_order_rejectId) {
+			
+			$this->db->where('id',$upload_order_rejectId);
+			$this->db->update('tbl_upload_order',['notify_user' => 1]);
+
+		}
 
 
-		// $dataList = [];
-
-		// $storeList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_store',['userId' => $user_id])->result_array();
-		// $orderList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_order',['userId' => $user_id])->result_array();
-
-		// foreach ($storeList as $key => $storeDetail) {
-		// 	$dataList['storeList'][$key] = $storeDetail['update_at'];
-		// }
-
-		// foreach ($orderList as $key => $orderDetail) {
-		// 	$dataList['orderList'][$key] = $orderDetail['update_at'];
-		// }
+		
 
 		$result = [];
 		$result['successfully'] = true;
 		$result['message'] = "read successfully";
+		$result['count'] = 0;
 
 		echo json_encode($result);
 	}

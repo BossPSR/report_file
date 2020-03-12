@@ -1,6 +1,9 @@
 <?php
 
 // Heading
-$lang['Searchitemcode'] =     ' ค้นหารายการ/รหัส';
+$lang['Highestscore'] =     ' คะแนนสูงสุด';
 $lang['Selectitem']     =     ' เลือก / รายการ';
+$lang['name']     =     'ชื่อ-สกุล';
 
+
+?>
