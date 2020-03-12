@@ -1,7 +1,7 @@
 <?php
 
 // Heading
-$lang['Searchitemcode'] = ' Search item / code';
+$lang['Highestscore'] = ' Highest score';
 $lang['Selectitem'] = ' Select/item';
-
+$lang['name']     =     'Name';
 ?>

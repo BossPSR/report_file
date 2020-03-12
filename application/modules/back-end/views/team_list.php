@@ -52,6 +52,7 @@
                                                     <th>country</th>
                                                     <th>email</th>
                                                     <th>phone</th>
+                                                    <th>postion</th>
                                                     <th>status</th>
 
                                                 </tr>
@@ -67,48 +68,59 @@
                                                         <?php  } ?>
                                                         <td><?php echo $team['email']; ?></td>
                                                         <td><?php echo $team['phone']; ?></td>
+                                                      
+                                                            <td>
+                                                            <?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['id']])->result_array(); ?>
+                                                        <?php foreach ($position as $position) { ?>
+                                                            <?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $position['job_position']])->result_array(); ?>
+                                                            <?php foreach ($name_position as $name_position) { ?>
+                                                               <br> <?php echo $name_position['name_item']; ?>
+                                                               <?php } ?>
+                                                        <?php } ?>
+                                                            </td>
+                                                     
                                                         <?php if ($team['status'] == 0) : ?>
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Pending approval
+                                                                        Pending approval
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
-                                                                      
+
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                              
-                                                        <?php elseif($team['status'] == 1) : ?>
+
+                                                        <?php elseif ($team['status'] == 1) : ?>
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    approve
+                                                                        approve
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
-                                                                      
+
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            
-                                                       <?php else : ?>
+
+                                                        <?php else : ?>
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Not approved
+                                                                        Not approved
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
-                                                                       
+
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            
+
                                                         <?php endif; ?>
 
                                                     </tr>

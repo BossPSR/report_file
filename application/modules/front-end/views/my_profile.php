@@ -13,7 +13,7 @@
 
                     <div class="image_profile">
                         <h2 class="text-center my-income">
-                            <div class="name_user m17"><i class="fa fa-user"></i> Name : <?php echo $user['username']; ?></div>
+                            <div class="name_user m17"><i class="fa fa-user"></i><?=$this->lang->line("name");?> : <?php echo $user['username']; ?></div>
                         </h2>
                         <div class="image_PF">
                             <div class=""><?php  ?>

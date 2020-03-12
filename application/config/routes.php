@@ -52,7 +52,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'front-end/Home_ctr';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
+$route['Home']                  = 'front-end/Home_ctr';
+$route['change']                = 'front-end/Home_ctr/change';
 $route['main']                  = 'front-end/Main_ctr';
 $route['mainbuysell']           = 'front-end/Main_ctr/mainbuysell';
 $route['update_session']        = 'front-end/Login_ctr/update_session';

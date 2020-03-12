@@ -16,7 +16,8 @@ class My_user_ctr extends CI_Controller
 		} else {
 			$data['user'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 			// $data['reject'] = $this->db->get_where('tbl_rejected', ['userId_rj' => $data['user']['id']])->row_array();
-
+			$lang= $this->session->userdata("lang")==null?"english":$this->session->userdata("lang");
+			$this->lang->load($lang,$lang);
 			$this->load->view('options/header_login');
 			$this->load->view('my_profile', $data);
 			$this->load->view('options/footer');
