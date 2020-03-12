@@ -199,15 +199,11 @@
                                     <li class="menu-item-has-children">
                                         <a href="#"> My stock</a>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#"> My task</a>
-                                    </li>
+                                   
                                     <li class="menu-item-has-children">
                                         <a href="upload"> Delivery</a>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="upload"> Delivery</a>
-                                    </li>
+                                  
                                     <li class="menu-item-has-children">
                                         <a href="#"> My Feedback</a>
                                     </li>
@@ -346,10 +342,6 @@
                                             <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                 <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                 <div>My Wallet</div>
-                                            </div>
-                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
-                                                <div>My Order</div>
                                             </div>
                                         </div>
                                     <?php elseif ($team == true) : ?>
