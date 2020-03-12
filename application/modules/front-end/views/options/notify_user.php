@@ -10,24 +10,28 @@ $userUpload_store_num = $this->db->get_where('tbl_upload_store', ['userId' => $u
 $notify += count($userUpload_store_num);
 foreach ($userUpload_store as $key => $userUploadStore) {
     $upload_store_id[] = $userUploadStore['id'];
-    $notify_message_store[$userUploadStore['create_at']]['order_id'] = null;
-    $notify_message_store[$userUploadStore['create_at']]['store_id'] = $userUploadStore['store_id'];
-    $notify_message_store[$userUploadStore['create_at']]['price_file'] = $userUploadStore['price_file'];
+    $notify_message_store[$userUploadStore['update_at']]['order_id'] = null;
+    $notify_message_store[$userUploadStore['update_at']]['store_id'] = $userUploadStore['store_id'];
+    $notify_message_store[$userUploadStore['update_at']]['price_file'] = $userUploadStore['price_file'];
 }
 
 $notify_message_order  = [];
 $this->db->where_in('notify_user', [0,1]);
 $userUpload_order = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser']])->result_array();
-$userUpload_order_num = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'], 'notify_user' => 0])->result_array();
+$userUpload_order_num = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['userId' => $user['idUser']])->result_array();
 $notify += count($userUpload_order_num);
 $upload_order_id = [];
 foreach ($userUpload_order as $key => $userUploadOrder) {
     $upload_order_id[] = $userUploadOrder['id'];
-    $notify_message_order[$userUploadOrder['create_at']]['store_id'] = null;
-    $notify_message_order[$userUploadOrder['create_at']]['order_id'] = $userUploadOrder['order_id'];
-    $notify_message_order[$userUploadOrder['create_at']]['price_file'] = $userUploadOrder['price_file'];
+    $notify_message_order[$userUploadOrder['update_at']]['store_id'] = null;
+    $notify_message_order[$userUploadOrder['update_at']]['order_id'] = $userUploadOrder['order_id'];
+    $notify_message_order[$userUploadOrder['update_at']]['price_file'] = $userUploadOrder['price_file'];
 
 }
+
+
+
+
 $notify_message = array_merge($notify_message_store,$notify_message_order);
 krsort($notify_message);
 
