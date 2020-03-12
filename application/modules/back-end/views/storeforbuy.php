@@ -220,7 +220,7 @@
                                                         <form action="check_order_add_com" method="POST">
                                                             <input type="hidden" name="id" value="<?php echo $stored['id']; ?>">
                                                             <input type="hidden" name="orderid" value="<?php echo $stored['order_id']; ?>">
-                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalCenterTitle">Satisfired</h5>
@@ -291,7 +291,7 @@
                                                         <form action="check_NotSatisfired_order_add_com" method="POST">
                                                             <input type="hidden" name="id" value="<?php echo $stored['id']; ?>">
                                                             <input type="hidden" name="orderid" value="<?php echo $stored['order_id']; ?>">
-                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalCenterTitle">Not Satisfired</h5>
@@ -350,7 +350,7 @@
 
                                                         <form action="reject_order_add_com" method="POST">
                                                             <input type="hidden" name="id" value="<?php echo $stored['id']; ?>">
-                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-dialog " role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalCenterTitle">Reject</h5>
