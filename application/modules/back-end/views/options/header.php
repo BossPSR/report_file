@@ -33,6 +33,9 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/themes/dark-layout.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/themes/semi-dark-layout.css">
 
+    <link rel="stylesheet" type="text/css" href="public/backend/assets/css/newstyle.css">
+
+
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/core/menu/menu-types/horizontal-menu.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/core/colors/palette-gradient.css">

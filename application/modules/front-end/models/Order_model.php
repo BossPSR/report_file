@@ -15,7 +15,6 @@ class Order_model extends CI_Model
         $this->db->from('tbl_order_f');
         $data = $this->db->get();
         return $data->row();
-        
     }
     public function order_buy($userId)
     {
@@ -23,9 +22,27 @@ class Order_model extends CI_Model
         $this->db->from('tbl_store_for_buy_email');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_store_for_buy_email.order_id');
         $this->db->where('tbl_store_for_buy_email.user_id', $userId);
-        
+        $this->db->group_by('tbl_upload_order.order_id');
+
         $data = $this->db->get();
         return $data->result_array();
-        
+    }
+
+    public function my_stock($as)
+    {
+        $this->db->select('*,tbl_upload_order.date_required as or_date');
+        $this->db->from('tbl_upload_order');
+        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
+        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id');
+        $this->db->where('tbl_upload_order.status_book', 2);
+        $this->db->where('tbl_upload_order.status_pay', 1);
+        $this->db->where('tbl_upload_order.is_confirm', 0);
+        $this->db->or_where('tbl_upload_order.is_confirm', NULL);
+        $this->db->where('tbl_upload_team.position', $as);
+        $this->db->group_by('tbl_upload_order.order_id');
+
+        $data = $this->db->get();
+        return $data->result_array();
     }
 }

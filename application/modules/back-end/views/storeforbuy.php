@@ -20,6 +20,14 @@
             </div>
 
         </div>
+
+        <?php
+        $this->db->where('status_book', 0);
+        $this->db->from('tbl_upload_order');
+        $this->db->group_by('order_id');
+        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+        ?>
+
         <div class="content-body">
 
             <!-- Zero configuration table -->
@@ -27,8 +35,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Store For buy</h4>
+                            <div class="row card-header">
+                                <div class="col-10">
+                                    <h4 class="card-title">Store For buy</h4>
+                                </div>
+                                <div class="col-1 text-center">
+                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                    <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
+                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -52,17 +66,17 @@
                                                 $i = 1;
                                                 $e = 1;
                                                 $y = 1;
-                                                foreach ($stored as $key => $stored) { 
+                                                foreach ($stored as $key => $stored) {
                                                 ?>
 
 
 
                                                     <tr>
-                                                        <td><?php echo $y++ ; ?></td>
+                                                        <td><?php echo $y++; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
                                                         <td><?php echo $stored['file_name']; ?></td>
-                                                        <td> 
+                                                        <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $stored['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stored['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -74,29 +88,29 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                        <table class="table zero-configuration">
-                                                                        <thead>
-                                                                            <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
-                                                                            <tr>
-                                                                                <th>#</th>
-                                                                                <th>Order_id</th>
-                                                                                <th>File_name</th>
-                                                                                <th>File</th>
-                                                                                <th>create</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <?php foreach ($order as $keys => $order) { ?>
-                                                                                <tr>
-                                                                                    <td><?php echo $e++ ; ?></td>
-                                                                                    <td><?php echo $order['order_id'] ?></td>
-                                                                                    <td><?php echo $order['file_name'] ?></td>
-                                                                                    <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                    <td><?php echo $order['create_at'] ?></td>
-                                                                                </tr>
-                                                                            <?php } ?>
-                                                                        </tbody>
-                                                                    </table>
+                                                                            <table class="table zero-configuration">
+                                                                                <thead>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
+                                                                                    <tr>
+                                                                                        <th>#</th>
+                                                                                        <th>Order_id</th>
+                                                                                        <th>File_name</th>
+                                                                                        <th>File</th>
+                                                                                        <th>create</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <tr>
+                                                                                            <td><?php echo $e++; ?></td>
+                                                                                            <td><?php echo $order['order_id'] ?></td>
+                                                                                            <td><?php echo $order['file_name'] ?></td>
+                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                        </tr>
+                                                                                    <?php } ?>
+                                                                                </tbody>
+                                                                            </table>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -107,7 +121,7 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td> 
+                                                        <td>
                                                             <span data-toggle="modal" data-target="#exampleModalb<?php echo $stored['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModalb<?php echo $stored['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -119,29 +133,29 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                        <table class="table zero-configuration">
-                                                                        <thead>
-                                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
-                                                                            <tr>
-                                                                                <th>#</th>
-                                                                                <th>Order_id</th>
-                                                                                <th >File_name</th>
-                                                                                <th>File</th>
-                                                                                <th>create</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <?php foreach ($order as $keys => $order) { ?>
-                                                                                <tr>
-                                                                                    <td><?php echo $i++ ; ?></td>
-                                                                                    <td><?php echo $order['order_id'] ?></td>
-                                                                                    <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                    <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                    <td><?php echo $order['create_at'] ?></td>
-                                                                                </tr>
-                                                                            <?php } ?>
-                                                                        </tbody>
-                                                                    </table>
+                                                                            <table class="table zero-configuration">
+                                                                                <thead>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
+                                                                                    <tr>
+                                                                                        <th>#</th>
+                                                                                        <th>Order_id</th>
+                                                                                        <th>File_name</th>
+                                                                                        <th>File</th>
+                                                                                        <th>create</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <tr>
+                                                                                            <td><?php echo $i++; ?></td>
+                                                                                            <td><?php echo $order['order_id'] ?></td>
+                                                                                            <td><?php echo $order['file_name_GT'] ?></td>
+                                                                                            <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                        </tr>
+                                                                                    <?php } ?>
+                                                                                </tbody>
+                                                                            </table>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -153,7 +167,7 @@
                                                             </div>
                                                         </td>
                                                         <td><?php echo $stored['date_required']; ?></td>
-                                                        <td> <button type="button" class="btn btn-outline-info" data-toggle="modal"  data-target="#exampleModallCenter<?php echo $stored['id']; ?>">
+                                                        <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['id']; ?>">
                                                                 Satisfired
 
                                                             </button>
@@ -168,8 +182,8 @@
                                                         </td>
                                                     </tr>
 
-                                                    
-                                                   
+
+
                                                     <div class="modal fade" id="exampleModal<?php echo $stored['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -254,11 +268,11 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Note</label>
-                                                                                <textarea  class="form-control" name="note_s" value="<?php echo $stored['date_required']; ?>"  rows="5"  placeholder="Enter Note"></textarea>
+                                                                                <textarea class="form-control" name="note_s" value="<?php echo $stored['date_required']; ?>" rows="5" placeholder="Enter Note"></textarea>
                                                                             </div>
 
                                                                         </div>
-                                                                     
+
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -315,7 +329,7 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Note</label>
-                                                                                <textarea  class="form-control" name="note_s" value="<?php echo $stored['date_required']; ?>"  rows="5"  placeholder="Enter Note"></textarea>
+                                                                                <textarea class="form-control" name="note_s" value="<?php echo $stored['date_required']; ?>" rows="5" placeholder="Enter Note"></textarea>
                                                                             </div>
 
                                                                         </div>

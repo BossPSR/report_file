@@ -20,6 +20,15 @@
             </div>
 
         </div>
+
+        <?php
+        $this->db->where('status_book', 2);
+        $this->db->where('status_pay', 1);
+        $this->db->from('tbl_upload_order');
+        $this->db->group_by('order_id');
+        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+        ?>
+
         <div class="content-body">
 
             <!-- Zero configuration table -->
@@ -27,9 +36,16 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Not Satisfied</h4>
+                            <div class="row card-header">
+                                <div class="col-10">
+                                    <h4 class="card-title">Not Satisfied</h4>
+                                </div>
+                                <div class="col-1 text-center">
+                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                    <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
+                                </div>
                             </div>
+
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
@@ -160,11 +176,11 @@
                                                         <?php endif; ?>
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['order_id']])->row_array(); ?>
                                                         <td>
-                                                            <?php if($team == true):?>
-                                                                <span  class="badge badge-pill badge-Info">Waiting for team</span>
-                                                            <?php else:?>
-                                                            <button data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>" type="button" class="btn btn-success">Upload to team</button>
-                                                                <?php endif?>
+                                                            <?php if ($team == true) : ?>
+                                                                <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                            <?php else : ?>
+                                                                <button data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>" type="button" class="btn btn-success">Upload to team</button>
+                                                            <?php endif ?>
                                                         </td>
 
 

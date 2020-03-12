@@ -160,37 +160,44 @@ class Register_ctr extends CI_Controller
 						);
 						if ($this->db->insert('tbl_team', $data)) {
 							$team_id = $this->db->insert_id();
-							foreach ($job as $key => $job) {
-								$data2 = array(
-									'id_team'			=> $team_id,
-									'job_position'		=> $job,
-									'create_at'		=> date('Y-m-d H:i:s'),
-								);
-								$saveData = $this->db->insert('tbl_job_position', $data2);
-							}
-							if ($saveData > 0) {
-								echo "<script>";
-								echo "alert('Thank for send register team.');";
-								echo "window.location='home';";
-								echo "</script>";
+							$dataTM = array(
+								'IdTeam'		=> "TM" . $team_id,
+							);
+							$this->db->where('id', $team_id);
+							if ($this->db->update('tbl_team', $dataTM)) {
+
+								foreach ($job as $key => $job) {
+									$data2 = array(
+										'id_team'			=> $team_id,
+										'job_position'		=> $job,
+										'create_at'		=> date('Y-m-d H:i:s'),
+									);
+									$saveData = $this->db->insert('tbl_job_position', $data2);
+								}
+								if ($saveData > 0) {
+									echo "<script>";
+									echo "alert('Thank for send register team.');";
+									echo "window.location='home';";
+									echo "</script>";
+								} else {
+									echo "<script>";
+									echo "alert('Error for send resume. Plase try agian !!');";
+									echo "window.location='register-team';";
+									echo "</script>";
+								}
 							} else {
 								echo "<script>";
-								echo "alert('Error for send resume. Plase try agian !!');";
+								echo "alert('Data no must be filled out!!!');";
 								echo "window.location='register-team';";
 								echo "</script>";
 							}
-						} else {
-							echo "<script>";
-							echo "alert('Data no must be filled out!!!');";
-							echo "window.location='register-team';";
-							echo "</script>";
 						}
+					} else {
+						echo "<script>";
+						echo "alert('Resume no must be filled out!!!');";
+						echo "window.location='register-team';";
+						echo "</script>";
 					}
-				} else {
-					echo "<script>";
-					echo "alert('Resume no must be filled out!!!');";
-					echo "window.location='register-team';";
-					echo "</script>";
 				}
 			}
 		}
