@@ -126,6 +126,7 @@ $route['payment_email_success'] = 'front-end/Store_ctr/payment_email_success';
 $route['userNotify']            = 'front-end/My_user_ctr/userNotify';
 $route['read_userNotify']       = 'front-end/My_user_ctr/read_userNotify';
 
+
 $route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 $route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
 $route['My-task']               = 'front-end/My_stock_ctr/my_task';

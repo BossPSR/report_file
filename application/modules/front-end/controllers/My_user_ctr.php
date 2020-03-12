@@ -67,26 +67,20 @@ class My_user_ctr extends CI_Controller
 			$this->db->update('tbl_upload_store',['notify_user' => 1]);
 
 		}
-		// $this->db->where('userId',$user_id);
-		// $this->db->update('tbl_upload_order',['reject_read' => 1]);
 
+		$upload_order_id = $this->input->get('upload_order_id');
+		foreach ($upload_order_id as $key => $upload_orderId) {
+			
+			$this->db->where('id',$upload_orderId);
+			$this->db->update('tbl_upload_order',['notify_user' => 1]);
 
-		// $dataList = [];
-
-		// $storeList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_store',['userId' => $user_id])->result_array();
-		// $orderList = $this->db->order_by('update_at','DESC')->get_where('tbl_upload_order',['userId' => $user_id])->result_array();
-
-		// foreach ($storeList as $key => $storeDetail) {
-		// 	$dataList['storeList'][$key] = $storeDetail['update_at'];
-		// }
-
-		// foreach ($orderList as $key => $orderDetail) {
-		// 	$dataList['orderList'][$key] = $orderDetail['update_at'];
-		// }
+		}
+		
 
 		$result = [];
 		$result['successfully'] = true;
 		$result['message'] = "read successfully";
+		$result['count'] = 0;
 
 		echo json_encode($result);
 	}
