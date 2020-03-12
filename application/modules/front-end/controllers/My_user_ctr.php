@@ -77,12 +77,23 @@ class My_user_ctr extends CI_Controller
 		}
 		
 		$upload_store_reject_id = $this->input->get('upload_store_reject_id');
-		foreach ($upload_store_reject_id as $key => $upload_order_rejectId) {
+		foreach ($upload_store_reject_id as $key => $upload_store_rejectId) {
 			
-			$this->db->where('id',$upload_order_rejectId);
+			$this->db->where('id',$upload_store_rejectId);
 			$this->db->update('tbl_upload_store',['notify_user' => 1]);
 
 		}
+
+		$upload_order_reject_id = $this->input->get('upload_order_reject_id');
+		foreach ($upload_order_reject_id as $key => $upload_order_rejectId) {
+			
+			$this->db->where('id',$upload_order_rejectId);
+			$this->db->update('tbl_upload_order',['notify_user' => 1]);
+
+		}
+
+
+		
 
 		$result = [];
 		$result['successfully'] = true;

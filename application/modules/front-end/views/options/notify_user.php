@@ -17,8 +17,8 @@ foreach ($userUpload_store as $key => $userUploadStore) {
 
 $notify_message_order  = [];
 $this->db->where_in('notify_user', [0,1]);
-$userUpload_order = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser']])->result_array();
-$userUpload_order_num = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['userId' => $user['idUser'],'notify_user' => 0])->result_array();
+$userUpload_order = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'],'is_check' => 0])->result_array();
+$userUpload_order_num = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['userId' => $user['idUser'],'notify_user' => 0,'is_check' => 0])->result_array();
 $notify += count($userUpload_order_num);
 $upload_order_id = [];
 foreach ($userUpload_order as $key => $userUploadOrder) {
@@ -29,6 +29,7 @@ foreach ($userUpload_order as $key => $userUploadOrder) {
 
 }
 
+// Store โดน Reject
 $notify_message_store_reject = [];
 $this->db->where_in('notify_user', [0,1]);
 $userUpload_store_reject = $this->db->get_where('tbl_upload_store', ['userId' => $user['idUser'],'is_check' => 1])->result_array();
@@ -42,6 +43,21 @@ foreach ($userUpload_store_reject as $key => $userUploadStore_reject) {
     $notify_message_store_reject[$userUploadStore_reject['update_at']]['price_file'] = $userUploadStore_reject['price_file'];
 }
 
+// Order โดน Reject
+$notify_message_order_reject  = [];
+$this->db->where_in('notify_user', [0,1]);
+$userUpload_order_reject = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'],'is_check' => 1])->result_array();
+$userUpload_order_reject_num = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['userId' => $user['idUser'],'notify_user' => 0,'is_check' => 1])->result_array();
+$notify += count($userUpload_order_reject_num);
+$upload_order_reject_id = [];
+foreach ($userUpload_order_reject as $key => $userUploadOrder_reject) {
+    $upload_order_reject_id[] = $userUploadOrder_reject['id'];
+    $notify_message_order_reject[$userUploadOrder_reject['update_at']]['store_id'] = "reject";
+    $notify_message_order_reject[$userUploadOrder_reject['update_at']]['order_id'] = $userUploadOrder_reject['order_id'];
+    $notify_message_order_reject[$userUploadOrder_reject['update_at']]['price_file'] = $userUploadOrder_reject['price_file'];
+
+}
+
 
 $notify_message = array_merge($notify_message_store,$notify_message_order,$notify_message_store_reject);
 krsort($notify_message);
@@ -50,9 +66,12 @@ krsort($notify_message);
 <div class="dropdown lineti">
 <i class="fa fa-bell text-black-white badge-notification" id="user_notify" onClick="read_userNotify();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="<?php echo $notify; ?>" style="font-size:22px;color:#fff; cursor: pointer;"></i>
     <ul class="dropdown-menu" role="menu">
-
+        <?php $i = 0; ?>
         <?php foreach ($notify_message as $key => $notifyMessage) { 
-           
+            $i += 1;
+            if($i == 7){
+                break;
+            } 
         ?>
             <?php if ($notifyMessage['order_id'] == null) { ?>
             <li>
@@ -75,8 +94,17 @@ krsort($notify_message);
                 <span>Stordที่คุณถูก Reject : <?php echo $notifyMessage['price_file']; ?></span>
             </li>
             <hr>
+
+            <!-- Order โดน Reject -->
+            <?php }elseif ($notifyMessage['store_id'] == "reject") { ?>
+            <li>
+                <span>Order ID : <?php echo $notifyMessage['order_id']; ?></span>
+                <span>Orderที่คุณถูก Reject : <?php echo $notifyMessage['price_file']; ?></span>
+            </li>
+            <hr>
             
             <?php } ?>
+
         <?php } ?>
 
 
@@ -85,11 +113,16 @@ krsort($notify_message);
 
 </div>
 
+<audio id="myAudio">
+  <source src="uploads/me-too.ogg" type="audio/ogg">
+  <source src="uploads/me-too.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
 
-    
 <script type="text/javascript">
        
         function read_userNotify() {
+
             var upload_store_id = [];
             <?php foreach ($upload_store_id as $key => $upload_storeId) { ?>
                 upload_store_id[<?php echo $key; ?>] = <?php echo $upload_storeId; ?> ;
@@ -105,6 +138,11 @@ krsort($notify_message);
                 upload_store_reject_id[<?php echo $key; ?>] = <?php echo $upload_store_rejectId; ?> ;
             <?php } ?>
 
+            var upload_order_reject_id = [];
+            <?php foreach ($upload_order_reject_id as $key => $upload_order_rejectId) { ?>
+                upload_order_reject_id[<?php echo $key; ?>] = <?php echo $upload_order_rejectId; ?> ;
+            <?php } ?>
+
             $.ajax({
                 url: "read_userNotify",
                 data: {
@@ -112,6 +150,7 @@ krsort($notify_message);
                     upload_store_id: upload_store_id,
                     upload_order_id: upload_order_id,
                     upload_store_reject_id:upload_store_reject_id,
+                    upload_order_reject_id:upload_order_reject_id,
                 },
                 success: function(getData) {
                     var numData = JSON.parse(getData);
@@ -125,6 +164,15 @@ krsort($notify_message);
 
         }
 
+       
+        function sound_notify(){
+            var x = document.getElementById("myAudio"); 
+            x.play(); 
+        }
+        window.onload = sound_notify;
+
+
     </script>
+
 
 
