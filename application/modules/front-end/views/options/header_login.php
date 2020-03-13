@@ -38,7 +38,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    
+    <link rel="stylesheet" href="public/frontend/assets/css/animation.min.css">
 
     <script>
         // Render the PayPal button into #paypal-button-container

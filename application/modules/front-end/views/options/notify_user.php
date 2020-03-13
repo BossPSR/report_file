@@ -64,7 +64,7 @@ krsort($notify_message);
 
 ?>
 <div class="dropdown lineti">
-<i class="fa fa-bell text-black-white badge-notification" id="user_notify" onClick="read_userNotify();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="<?php echo $notify; ?>" style="font-size:22px;color:#fff; cursor: pointer;"></i>
+<i class="fa fa-bell text-black-white badge-notification <?php if($notify >= 1){ echo "animated shake" ;} ?>" id="user_notify" onClick="read_userNotify();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="<?php echo $notify; ?>" style="font-size:22px;color:#fff; cursor: pointer;"></i>
     <ul class="dropdown-menu" role="menu">
         <?php $i = 0; ?>
         <?php foreach ($notify_message as $key => $notifyMessage) { 
@@ -169,8 +169,9 @@ krsort($notify_message);
             var x = document.getElementById("myAudio"); 
             x.play(); 
         }
-        window.onload = sound_notify;
-
+        <?php if($notify >= 1){ ?>
+            window.onload = sound_notify;
+        <?php } ?>
 
     </script>
 
