@@ -52,9 +52,10 @@
                      <h2>Poster </h2>
                  </div>
                  <br>
+                 <?php $poster = $this->db->get('tbl_poster')->row_array();?>
                  <div class="single_banner mb-30">
                      <div class="banner_thumb">
-                         <a href="#"><img src="public/image/24619-[Converted].png" alt=""></a>
+                         <a href="#"><img src="uploads/poster/<?php echo $poster['file_name'] ?>" alt=""></a>
                      </div>
                  </div>
              </div>
