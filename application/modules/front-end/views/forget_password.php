@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <!--login area start-->
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-2 col-md-2">
 
             </div>
             <!--login area start-->
@@ -24,6 +24,9 @@
                 </div>
             </div>
             <!--register area end-->
+            <div class="col-lg-2 col-md-2">
+
+            </div>
         </div>
     </div>
 </div>

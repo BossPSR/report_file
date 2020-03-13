@@ -230,7 +230,7 @@ class Register_ctr extends CI_Controller
 	public function forgot_passwordProcess()
 	{
 		$email = $this->input->post('email');
-		$username_check      = $this->Login_model->check_usre($email);
+		$username_check      = $this->Login_model->forgot_check_usre($email);
 
 		if ($username_check) {
 
@@ -241,10 +241,10 @@ class Register_ctr extends CI_Controller
 
 			$this->sendEmail($email, $emailDetail, $token);
 			$this->session->set_flashdata('save_ss2', 'ทางเราได้รับ E-mail ของท่านแล้ว กรุณาตรวจสอบ E-mail ของท่านค่ะ');
-			redirect('Login');
+			echo 1;
 		} else {
 			$this->session->set_flashdata('del_ss2', 'ไม่พบ E-mail ที่ท่านกรอกมา กรุณาตรวจสอบใหม่ค่ะ!!');
-			redirect('Login', 'refresh');
+			echo 12;
 		}
 	}
 
