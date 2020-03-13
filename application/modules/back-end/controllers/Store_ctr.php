@@ -75,9 +75,13 @@ class Store_ctr extends CI_Controller
     {
         $id = $this->input->post('id');
         $orderid = $this->input->post('orderid');
+        $Document = [];
+        $Document = $this->input->post('DocumentResult');
+        $Document = explode(",",$Document[0]);
+        $Document = array_unique($Document);
 
-        $dm = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $this->input->post('Document')])->row_array();
-        if ($dm == true) {
+        // $dm = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $this->input->post('Document')])->row_array();
+        // if ($dm == true) {
             $data = array(
 
                 'price_file'             => $this->input->post('price_file'),
@@ -85,30 +89,30 @@ class Store_ctr extends CI_Controller
                 'status_book'           => 1,
                 'note'                 => $this->input->post('note_s'),
                 'update_at'                  => date('Y-m-d H:i:s'),
-                'notify_user'                => 0
+                'notify_user'                => 0,
+                'status_cp'                => $this->input->post('status_cp')
             );
             $this->db->where('order_id', $orderid);
             $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+           
+            foreach ($Document as $Document) {
 
             $data2 = array(
 
-                'id_document'                => $this->input->post('Document'),
+                'id_document'                => $Document,
                 'id_user'                    => $this->input->post('Customer'),
                 'id_orderBuy'                => $this->input->post('Order'),
                 'create_at'                  => date('Y-m-d H:i:s')
 
 
             );
+              $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
+        }
 
-
-            $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
-
-            $bookmark_id = $this->db->insert_id();
-
+        
             $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
-            $book_mark =  $this->db->get_where('tbl_bookmark', ['id' => $bookmark_id])->row_array();
 
-            $this->sendEmail($upload_order, $book_mark);
+            $this->sendEmail($upload_order);
 
             if ($resultsedit1 > 0 && $resultsedit2 > 0) {
                 $this->session->set_flashdata('save_ss2', 'Successfully Update Satisfied information !!.');
@@ -116,13 +120,13 @@ class Store_ctr extends CI_Controller
                 $this->session->set_flashdata('del_ss2', 'Not Successfully Update Satisfied information');
             }
             return redirect('back_store_buy');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully math id docment information');
-            return redirect('back_store_buy');
-        }
+        // } else {
+        //     $this->session->set_flashdata('del_ss2', 'Not Successfully math id docment information');
+        //     return redirect('back_store_buy');
+        // }
     }
 
-    private function sendEmail($upload_order, $book_mark)
+    private function sendEmail($upload_order)
     {
         $user = $this->db->get_where('tbl_user', ['id' => $upload_order[0]['userId']])->row_array();
 

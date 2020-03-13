@@ -228,17 +228,30 @@
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
-                                                                    <div class="modal-body row">
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <?php $chek_book  = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stored['order_id']])->row_array(); ?>
-                                                                                <label for="basicInput">Document ID</label>
-                                                                                <input type="text" name="Document" class="form-control" value="<?php echo $chek_book['id_document']; ?>" placeholder="Enter Document ID" required>
+                                                                    <div class="modal-body">
+                                                                        <div class="row" id="first_goal">
+                                                                            <div class="col-xl-9 col-md-6 col-9 mb-1">
+                                                                                    <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
+                                                                                    <label for="basicInput">Document ID</label>
+                                                                                    <select name="Document[]" onClick="add_select(this);" class="form-control">
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                            <?php foreach ($chek_book as $key => $chek_book) {?>
+                                                                                        <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>
+                                                                                            <?php }?>
+                                                                                    </select>
+                                                                                    <input type="hidden" id="DocumentResult" name="DocumentResult[]">
+                                                                            </div>
+                                                                            <div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;">
+                                                                                <button type="button" class="btn btn-info" onclick="add_goal(this);">เพิ่ม</button>
                                                                             </div>
                                                                         </div>
+
+                                                                       
                                                                         <div class="modal-body row">
                                                                             <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                 <div class="form-group">
+                                                                                <label for="basicInput"></label>
+
                                                                                     <?php $chek_name  = $this->db->get_where('tbl_user', ['idUser' => $stored['userId']])->row_array(); ?>
                                                                                     <label for="basicInput">Customer code</label>
                                                                                     <input type="text" name="Customer" class="form-control" value="<?php echo $chek_name['idUser']; ?>" placeholder="Enter Document ID" readonly>
@@ -254,14 +267,25 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">price</label>
-                                                                                <input type="text" class="form-control" name="price_file" value="<?php echo $stored['price_file']; ?>" placeholder="Enter price">
+                                                                                <input type="text" class="form-control" name="price_file" value="<?php echo $stored['price_file']; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $stored['date_required']; ?>" placeholder="Enter price">
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $stored['date_required']; ?>" placeholder="Enter price" required>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                            <label for="helpInputTop">Quality File</label>
+                                                                                <select name="status_cp" class="form-control" required>
+                                                                                   <option value="" selected disabled>select</option>
+                                                                                    <option value="complete">Complete</option>
+                                                                                    <option value="notcomplete">NotComplete</option>
+                                                                                </select>
                                                                             </div>
 
                                                                         </div>
@@ -393,9 +417,38 @@
             </section>
             <!--/ Zero configuration table -->
 
-
+            <textarea id="textareaObservation"></textarea>
 
         </div>
     </div>
 </div>
+
+<script>
+    function add_goal(e) {
+          $('#first_goal').after('<div class="row" id="first_indic"><div class="col-xl-9 col-md-6 col-9 mb-1" id="first_goal"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select name="Document[]" onClick="add_select(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) {?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php }?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic(this);">ลบ</button></div></div>');
+      }
+
+      function remove_indic(e) {
+            $(e).parents('#first_indic').remove();
+      }
+
+      var data_select = [];
+
+      function add_select(e){
+          var select = $(e).val();
+              if (select != null) {
+                data_select.push(select);
+                $('#DocumentResult').val(data_select);
+              } 
+      }
+
+
+    //   $("select[name='Document[]']").change(function () {
+    //         var selectedOptions = [];
+    //         $("select[name='Document[]'] option:selected").each(function(){
+    //             selectedOptions.push($(this).text());
+    //         });
+    //         $("#textareaObservation").html(selectedOptions.join(' '));
+    //   });
+</script>
 <!-- END: Content-->

@@ -21,6 +21,21 @@ class Book_ctr extends CI_Controller
             $this->load->view('login');
         }
     }
+
+    public function  bookmark_notpay()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+  
+            $data['bookmark_all_not'] = $this->Store_model->bookmark_all_not();
+            
+            $this->load->view('options/header');
+            $this->load->view('bookmark_notpay',$data);
+            $this->load->view('options/footer');
+        } else {
+            $this->load->view('login');
+        }
+    }
+   
     
     public function fileUpload_store_book()
     {
