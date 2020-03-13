@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/extensions/shepherd-theme-default.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
-
+    <link href="public/backend/assets/fileupload/css/uploads.css" rel="stylesheet" type="text/css" />
     <!-- BEGIN: Theme CSS-->
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/bootstrap-extended.css">
@@ -256,7 +256,7 @@
                                             } ?>">
                             <a href="back_dashboard"><i class="feather icon-home"></i><span data-i18n="Dashboard">Dashboard</span></a>
                         </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin" || $this->uri->segment(1) ==  "back_poster"|| $this->uri->segment(1) ==  "back_vdo") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Public</span></a>
                             <ul class="dropdown-menu">
@@ -272,6 +272,14 @@
                                                                                 echo 'active';
                                                                             } ?>" href="back_user" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-message-square"></i>User List</a>
                                 </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_poster") {
+                                                                                echo 'active';
+                                                                            } ?>" href="back_poster" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-camera"></i>Poster List</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_vdo") {
+                                                                                echo 'active';
+                                                                            } ?>" href="back_vdo" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-instagram"></i>Vdo List</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store_reject_for_buy" ||  $this->uri->segment(1) ==  "Section" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell" ||  $this->uri->segment(1) ==  "back_store_reject" ||  $this->uri->segment(1) ==  "back_upload_main_search") {
@@ -284,23 +292,23 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Section") {
                                                                                 echo 'active';
-                                                                            } ?>" href="Section" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Store for sell</a>
+                                                                            } ?>" href="Section" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-layers"></i>Store for sell</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_upload_main_search") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_upload_main_search" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Upload to main search</a>
+                                                                            } ?>" href="back_upload_main_search" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-upload-cloud"></i>Upload to main search</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_buy") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Store For buy</a>
+                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-package"></i>Store For buy</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_reject" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Reject For sell</a>
+                                                                            } ?>" href="back_store_reject" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-square"></i>Reject For sell</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject_for_buy") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_reject_for_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Reject For buy</a>
+                                                                            } ?>" href="back_store_reject_for_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Reject For buy</a>
                                 </li>
 
 
@@ -347,16 +355,16 @@
                         </li>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Bookmark</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark</span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu="">
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") { echo 'active'; } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-check-circle"></i>Bookmark
+                                        <i class="feather icon-book"></i>Bookmark
                                     </a>
                                 </li>
                                 <li data-menu="">
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Complete") { echo 'active'; } ?>" href="Complete" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-check-circle"></i>Complete
+                                        <i class="feather icon-check"></i>Complete
                                     </a>
                                 </li>
 
@@ -365,11 +373,11 @@
                         </li>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Stock" || $this->uri->segment(1) == "my_stock_admin") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">My Stock</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-inbox"></i><span data-i18n="Order Result">My Stock</span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Stock") {
                                                                                 echo 'active';
-                                                                            } ?>" href="Stock" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>My Stock</a>
+                                                                            } ?>" href="Stock" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-credit-card"></i>My Stock</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "my_stock_admin") {
                                                                                 echo 'active';

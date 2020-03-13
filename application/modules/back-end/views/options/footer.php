@@ -23,7 +23,8 @@
 <!-- END: Page Vendor JS-->
 
 <!-- <script src="public/backend/assets/vendors/js/extensions/dropzone.min.js"></script> -->
-
+<script src="public/backend/assets/fileupload/global.js" type="text/javascript"></script>
+<script src="public/backend/assets/fileupload/js/uploadslider.js" type="text/javascript"></script>
 <!-- BEGIN: Theme JS-->
 <script src="public/backend/assets/js/core/app-menu.js"></script>
 <script src="public/backend/assets/js/core/app.js"></script>
@@ -88,6 +89,8 @@
         })
     }
 </script>
+ <!-- uploadslider -->
+
 </body>
 <!-- END: Body-->
 
