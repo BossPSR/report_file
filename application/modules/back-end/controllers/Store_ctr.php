@@ -84,8 +84,8 @@ class Store_ctr extends CI_Controller
                 'Date_required'         => $this->input->post('Daterequired'),
                 'status_book'           => 1,
                 'note'                 => $this->input->post('note_s'),
-                'update_at'                  => date('Y-m-d H:i:s')
-
+                'update_at'                  => date('Y-m-d H:i:s'),
+                'notify_user'                => 0
             );
             $this->db->where('order_id', $orderid);
             $resultsedit1 = $this->db->update('tbl_upload_order', $data);
@@ -96,6 +96,7 @@ class Store_ctr extends CI_Controller
                 'id_user'                    => $this->input->post('Customer'),
                 'id_orderBuy'                => $this->input->post('Order'),
                 'create_at'                  => date('Y-m-d H:i:s')
+
 
             );
 
@@ -339,7 +340,9 @@ class Store_ctr extends CI_Controller
             'price_file'         => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
             'note'                 => $this->input->post('note_s'),
-            'status_book'         => 2
+            'status_book'         => 2,
+            'update_at'                  => date('Y-m-d H:i:s'),
+            'notify_user'                => 0
 
 
         );
@@ -365,8 +368,9 @@ class Store_ctr extends CI_Controller
         $data = array(
 
             'note_reject'         => $this->input->post('note'),
-            'is_check'            => 1
-
+            'is_check'            => 1,
+            'update_at'                  => date('Y-m-d H:i:s'),
+            'notify_user'                => 0
 
 
         );
@@ -469,6 +473,7 @@ class Store_ctr extends CI_Controller
             'status_cp'           => $this->input->get('com'),
             'grade'               => $this->input->get('grad'),
             'price_file'          => $this->input->get('price'),
+            'update_at'                  => date('Y-m-d H:i:s'),
             'notify_user'         => 0
         );
         $this->db->where('store_id', $store_id);
@@ -530,7 +535,7 @@ class Store_ctr extends CI_Controller
         $id = $this->input->get('id');
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_upload_store', ['is_check' => 1]);
+        $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'),'is_check' => 1,'notify_user' => 0]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');

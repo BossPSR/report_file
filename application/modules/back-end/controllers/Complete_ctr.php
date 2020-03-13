@@ -31,6 +31,8 @@ class Complete_ctr extends CI_Controller
         $user = $this->db->get_where('tbl_user', ['id' => $email])->row_array();
         $order = $this->db->get_where('tbl_upload_order_team', ['order_id' => $id])->result_array();
 
+        $this->db->where('order_id',$id);
+        $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'is_confirm' => 1,'notify_user' => 0]);
         $subject = 'test ip-soft';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
