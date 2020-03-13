@@ -38,7 +38,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
     <link rel="stylesheet" href="public/frontend/assets/css/animation.min.css">
 
     <script>
@@ -97,12 +97,7 @@
                                     <input type="password" name="password">
                                 </p>
                                 <div class="login_submit">
-                                    <a href="#">Lost your password?</a>
-                                    <!-- <label for="remember">
-                                        <input id="remember" type="checkbox">
-                                        Remember me
-                                    </label> -->
-
+                                    <a href="forget_password">Lost your password?</a>
                                 </div>
                                 <div class="login_submit">
                                     <button type="submit">login</button>
@@ -167,9 +162,9 @@
                                 <!--mini cart end-->
                             </div>
                         </div>
-                        <?php echo anchor('Home_ctr/home/en','en'); ?>
-                    
-                    <?php echo $english_lang;?>
+                        <?php echo anchor('Home_ctr/home/en', 'en'); ?>
+
+                        <?php echo $english_lang; ?>
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
@@ -203,11 +198,11 @@
                                     <li class="menu-item-has-children">
                                         <a href="#"> My stock</a>
                                     </li>
-                                   
+
                                     <li class="menu-item-has-children">
                                         <a href="upload"> Delivery</a>
                                     </li>
-                                  
+
                                     <li class="menu-item-has-children">
                                         <a href="#"> My Feedback</a>
                                     </li>
@@ -315,182 +310,182 @@
                                     <div class="search_container">
                                     <?php elseif ($team == true) : ?>
                                         <div class="search_container">
-                                        <?php else :?>
-                                    <?php endif ?>
-                                    <?php if ($user == true) : ?>
-                                        <div class="middel_right_info">
+                                        <?php else : ?>
+                                        <?php endif ?>
+                                        <?php if ($user == true) : ?>
+                                            <div class="middel_right_info">
 
-                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list">
-                                                <?php if ($user['score'] < '100') : ?>
-                                                    0%
-                                                <?php elseif ($user['score'] <= '199') : ?>
-                                                    10%
-                                                <?php elseif ($user['score'] <= '299') : ?>
-                                                    20%
-                                                <?php elseif ($user['score'] <= '399') : ?>
-                                                    30%
-                                                <?php elseif ($user['score'] <= '499') : ?>
-                                                    40%
-                                                <?php else : ?>
-                                                    50%
-                                                <?php endif; ?>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                    <div class="menu-list">
+                                                        <?php if ($user['score'] < '100') : ?>
+                                                            0%
+                                                        <?php elseif ($user['score'] <= '199') : ?>
+                                                            10%
+                                                        <?php elseif ($user['score'] <= '299') : ?>
+                                                            20%
+                                                        <?php elseif ($user['score'] <= '399') : ?>
+                                                            30%
+                                                        <?php elseif ($user['score'] <= '499') : ?>
+                                                            40%
+                                                        <?php else : ?>
+                                                            50%
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div>Discount</div>
                                                 </div>
-                                                <div>Discount</div>
-                                            </div>
-                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo number_format($user['score']); ?></div>
-                                                <div>Score</div>
-                                            </div>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                    <div class="menu-list"><?php echo number_format($user['score']); ?></div>
+                                                    <div>Score</div>
+                                                </div>
 
-                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
-                                                <div>My Wallet</div>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                    <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
+                                                    <div>My Wallet</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    <?php elseif ($team == true) : ?>
-                                        <div class="middel_right_info">
-                                            <!-- <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                        <?php elseif ($team == true) : ?>
+                                            <div class="middel_right_info">
+                                                <!-- <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                 <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
                                                 <div>Score</div>
                                             </div> -->
-                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
-                                                <div>My Jobs</div>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                    <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
+                                                    <div>My Jobs</div>
+                                                </div>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                    <div class="menu-list"><?php echo number_format(rand(1, 1000000)); ?></div>
+                                                    <div>My Income</div>
+                                                </div>
                                             </div>
-                                            <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo number_format(rand(1, 1000000)); ?></div>
-                                                <div>My Income</div>
-                                            </div>
+                                        <?php endif ?>
                                         </div>
-                                    <?php endif ?>
                                     </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--header middel end-->
+            <!--header middel end-->
 
-        <!--header bottom satrt-->
-        <div class="main_menu_area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-12">
-                        <div class="categories_menu">
-                            <div class="categories_title">
-                                <h2 class="categori_toggle">Category</h2>
-                            </div>
-                            <div class="categories_menu_toggle">
-                                <ul>
-                                    <?php if ($user) :  ?>
-                                        <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                        <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
-                                        <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
-                                        <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
-                                        <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                        <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
-                                        <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
-                                    <?php else : ?>
-                                        <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                        <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
-                                        <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
-                                        <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                        <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
-                                        <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
-                                    <?php endif ?>
-                                </ul>
+            <!--header bottom satrt-->
+            <div class="main_menu_area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-12">
+                            <div class="categories_menu">
+                                <div class="categories_title">
+                                    <h2 class="categori_toggle">Category</h2>
+                                </div>
+                                <div class="categories_menu_toggle">
+                                    <ul>
+                                        <?php if ($user) :  ?>
+                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                        <?php else : ?>
+                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                        <?php endif ?>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-9 col-md-12">
-                        <div class="main_menu menu_position">
-                            <nav>
-                                <ul>
-                                    <?php if ($user) :  ?>
-                                        <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
-                                        <li><a href="store"> ต้องการขาย </a></li>
-                                        <li><a href="order"> My order </a></li>
-                                        <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="my-selling">Sale</a></li>
-                                                <li><a href="my-reject">Reject</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="package"> Package</a></li>
-                                        <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
+                        <div class="col-lg-9 col-md-12">
+                            <div class="main_menu menu_position">
+                                <nav>
+                                    <ul>
+                                        <?php if ($user) :  ?>
+                                            <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                            <li><a href="store"> ต้องการขาย </a></li>
+                                            <li><a href="order"> My order </a></li>
+                                            <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
+                                                <ul class="sub_menu pages">
+                                                    <li><a href="my-selling">Sale</a></li>
+                                                    <li><a href="my-reject">Reject</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="package"> Package</a></li>
+                                            <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                                 </li>
                                                 <li class="menu-item-has-children" style="margin-right: 40px;">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                        <li>
-                                            <!-- <div id="user_notify"> -->
+                                            <li>
+                                                <!-- <div id="user_notify"> -->
 
-                                            <!-- <div class="dropdown"> -->
-                                            <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
-                                            <!-- <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff;"></i> -->
+                                                <!-- <div class="dropdown"> -->
+                                                <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
+                                                <!-- <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff;"></i> -->
 
-                                            <!-- <ul class="dropdown-menu" role="menu">
+                                                <!-- <ul class="dropdown-menu" role="menu">
                                                         <li><a>Action</a></li>
                                                     </ul> -->
-                                            <!-- </div> -->
+                                                <!-- </div> -->
 
 
-                                            <!-- </div> -->
-                                            <?php $this->load->view('options/notify_user'); ?>
-                                        </li>
-                                        <li> </li>
+                                                <!-- </div> -->
+                                                <?php $this->load->view('options/notify_user'); ?>
+                                            </li>
+                                            <li> </li>
 
-                                    <?php elseif ($team) : ?>
-                                        <li>
-                                            <a href="My-stock"> My Stock</a>
-                                        </li>
-                                        <li>
-                                            <a href="My-task"> My task</a>
-                                        </li>
-                                        <li>
-                                            <a href="My-delivery"> Delivery</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> My Feedback</a>
-                                        </li>
-                                        <!-- <li>
+                                        <?php elseif ($team) : ?>
+                                            <li>
+                                                <a href="My-stock"> My Stock</a>
+                                            </li>
+                                            <li>
+                                                <a href="My-task"> My task</a>
+                                            </li>
+                                            <li>
+                                                <a href="My-delivery"> Delivery</a>
+                                            </li>
+                                            <li>
+                                                <a href="#"> My Feedback</a>
+                                            </li>
+                                            <!-- <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
                                         </li> -->
-                                        <li></li>
-                                        <li></li>
-                                    <?php else : ?>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
-                                        <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
-                                                <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#"> Package</a></li>
-                                        <li></li>
-                                        <li></li>
-                                        <!-- <li class="menu-item-has-children">
+                                            <li></li>
+                                            <li></li>
+                                        <?php else : ?>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
+                                            <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
+                                                <ul class="sub_menu pages">
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#"> Package</a></li>
+                                            <li></li>
+                                            <li></li>
+                                            <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                        <!-- <li class="menu-item-has-children">
+                                            <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                    <?php endif ?>
-                                </ul>
+                                        <?php endif ?>
+                                    </ul>
 
 
-                            </nav>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--header bottom end-->
+            <!--header bottom end-->
         </div>
     </header>
     <!--header area end-->

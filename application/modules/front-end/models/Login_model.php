@@ -22,6 +22,17 @@ class Login_model extends CI_Model
         }
     }
 
+    public function forgot_check_usre($email)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_user');
+        $this->db->where('email', $email);
+
+        $data = $this->db->get();
+
+        return $data->row_array();
+    }
+
     public function login_team($email, $password)
     {
         $this->db->where('email', $email);
@@ -68,7 +79,7 @@ class Login_model extends CI_Model
         return $data->row_array();
     }
 
-    public function user_check($email,$passport)
+    public function user_check($email, $passport)
     {
         $this->db->select('*');
         $this->db->from('tbl_user');
