@@ -60,7 +60,11 @@ $route['update_session']        = 'front-end/Login_ctr/update_session';
 
 $route['loginme']               = 'front-end/Login_ctr/loginMe';
 $route['Logout']                = 'front-end/Login_ctr/logout';
-
+$route['forget_password']       = 'front-end/Register_ctr/forget_password';
+$route['forget_reset']           = 'front-end/Register_ctr/forget_sendemail';
+$route['forget_step1']          = 'front-end/Register_ctr/forgot_passwordProcess';
+$route['forget_step2']          = 'front-end/Register_ctr/sendEmail';
+$route['forget_step3']          = 'front-end/Register_ctr/reset_passwordProcess';
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['accept_status']         = 'front-end/My_user_ctr/accept_status';
 $route['my-profile']            = 'front-end/My_user_ctr/my_profile';
