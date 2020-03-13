@@ -7,15 +7,20 @@ class Delivery_ctr extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Order_model');
     }
 
     public function index()
     {
+        $ses = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); 
+        $sessi = $ses['IdTeam'];
+
+        $data['delivery'] = $this->Order_model->delivery_team($sessi);
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
             $this->load->view('options/header_login');
-            $this->load->view('delivery');
+            $this->load->view('delivery',$data);
             $this->load->view('options/footer');
         }
     }

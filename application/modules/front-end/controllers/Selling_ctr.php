@@ -19,7 +19,7 @@ class Selling_ctr extends CI_Controller
         } else {
             $search_key                     = $this->input->get('search_key');
             $user                           = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-            $_user                          = $user['id'];
+            $_user                          = $user['idUser'];
             if ($search_key == '' || $search_key == null) {
                 $data['selling']                = $this->Selling_model->my_selling($_user);
             } else {

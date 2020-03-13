@@ -16,6 +16,7 @@ class Selling_model extends CI_Model
         $this->db->where('userId', $_user);
         $this->db->where('price_file !=', '');
         $this->db->where('grade !=', '');
+        $this->db->group_by('store_id');
         $this->db->order_by('create_at', 'desc');
 
         $data = $this->db->get();

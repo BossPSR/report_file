@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Reject</h2>
+<h2 class="text-center" style="margin-top: 15px;">My Sale</h2>
 <hr class="line_package">
 <br>
 <?php foreach ($selling as $key => $data) {
@@ -28,10 +28,8 @@
                         <thead>
                             <tr style="text-align:center;">
                                 <th scope="col">No.</th>
-                                <th scope="col">ชื่อเอกสาร</th>
                                 <th scope="col">รหัสออเดอร์</th>
                                 <th scope="col">วันที่</th>
-                                <th scope="col">Grade</th>
                                 <th scope="col">Score</th>
                             </tr>
                         </thead>
@@ -42,18 +40,8 @@
                             <?php foreach ($selling as $key => $selling) { ?>
                                 <tr style="text-align:center;">
                                     <td scope="row"><?php echo $i++; ?></td>
-                                    <td><?php echo $selling['file_name']; ?></td>
                                     <td><?php echo $selling['store_id']; ?></td>
                                     <td><?php echo date("d-m-y", strtotime($selling['create_at'])); ?></td>
-                                    <td>
-                                        <?php if ($selling['grade'] == "A") { ?>
-                                            <span class="badge badge-danger">Grade <?php echo $selling['grade']; ?></span>
-                                        <?php } elseif ($selling['grade'] == "B") { ?>
-                                            <span class="badge badge-warning">Grade <?php echo $selling['grade']; ?></span>
-                                        <?php } else { ?>
-                                            <span class="badge badge-secondary">Grade <?php echo $selling['grade']; ?></span>
-                                        <?php } ?>
-                                    </td>
                                     <td><?php echo number_format($selling['price_file']); ?></td>
                                 </tr>
                             <?php } ?>

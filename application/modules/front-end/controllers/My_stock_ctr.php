@@ -38,13 +38,13 @@ class My_stock_ctr extends CI_Controller
             redirect('home');
         } else {
             $data = array(
-                'is_confirm'        => $is_confirm,
+                'status_confirmed_team'        => $is_confirm,
             );
 
             $this->db->where('order_id', "ODB" . $order_id);
             if ($this->db->update('tbl_upload_order', $data)) {
                 $data_team = array(
-                    'teamId' => $team->passport
+                    'teamId' => $team->IdTeam
                 );
                 $this->db->where('order_id', "ODB" . $order_id);
                 $success =  $this->db->update('tbl_upload_team', $data_team);
@@ -55,11 +55,16 @@ class My_stock_ctr extends CI_Controller
 
     function my_task()
     {
+        $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
+            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id']])->row_array();
+            $as = $get_sess['job_position'];
+            $see = $sess['IdTeam'];
+            $data['task'] = $this->Order_model->my_task($as,$see);
             $this->load->view('options/header_login');
-            $this->load->view('my_task');
+            $this->load->view('my_task',$data);
             $this->load->view('options/footer');
         }
     }

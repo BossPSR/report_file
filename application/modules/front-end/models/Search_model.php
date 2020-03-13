@@ -47,7 +47,6 @@ class Search_model extends CI_Model
         $this->db->group_end();
         $query  =   $this->db->get();
 
-
         return $query->result_array();
     }
 
@@ -67,12 +66,16 @@ class Search_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_store');
-        $this->db->where('price_file !=', null);
-        $this->db->where('grade !=', null);
+        $this->db->like('create_at',$search_key);
         $this->db->where('userId', $_user);
-        $this->db->where('create_at', $search_key);
-        $query  =   $this->db->get();
+        $this->db->where('price_file !=', '');
+        $this->db->where('grade !=', '');
+        $this->db->group_by('store_id');
+        $this->db->order_by('create_at', 'desc');
 
-        return $query->result_array();
+        $data = $this->db->get();
+        return $data->result_array();
     }
+
+    
 }
