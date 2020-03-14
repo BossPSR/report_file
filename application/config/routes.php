@@ -79,7 +79,7 @@ $route['my-folder']             = 'front-end/My_upload_ctr/my_upload_folder';
 $route['my-upload']             = 'front-end/My_upload_ctr/my_upload';
 $route['my-upload-delete']      = 'front-end/My_upload_ctr/delete_file';
 $route['my-upload-edit']        = 'front-end/My_upload_ctr/my_upload_edit';
-
+$route['my-feedback']           = 'front-end/My_feedback_ctr/my_feedback';
 
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rejected']           = 'front-end/Rejected_ctr/my_rejected';

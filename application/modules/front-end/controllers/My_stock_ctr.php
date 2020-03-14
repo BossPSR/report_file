@@ -17,12 +17,14 @@ class My_stock_ctr extends CI_Controller
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
-            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id']])->row_array();
-            $as = $get_sess['job_position'];
+            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id']])->result_array();
+            foreach ($get_sess as $get_sess) {
+                $as[] = $get_sess['job_position'];
+            }
             $data['stock'] = $this->Order_model->my_stock($as);
 
             $this->load->view('options/header_login');
-            $this->load->view('my_stock',$data);
+            $this->load->view('my_stock', $data);
             $this->load->view('options/footer');
         }
     }
@@ -59,12 +61,14 @@ class My_stock_ctr extends CI_Controller
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
-            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id']])->row_array();
-            $as = $get_sess['job_position'];
+            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id']])->result_array();
             $see = $sess['IdTeam'];
-            $data['task'] = $this->Order_model->my_task($as,$see);
+            foreach ($get_sess as $get_sess) {
+                $as[] = $get_sess['job_position'];
+            }
+            $data['task'] = $this->Order_model->my_task($as, $see);
             $this->load->view('options/header_login');
-            $this->load->view('my_task',$data);
+            $this->load->view('my_task', $data);
             $this->load->view('options/footer');
         }
     }
