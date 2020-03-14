@@ -1,23 +1,23 @@
 <?php 
     $team = $this->db->get_where('tbl_team',['email' => $this->session->userdata('email')])->row_array();
     $notify = 0;
-    $this->db->select('*');
+    $this->db->select('*,tbl_feedback.id AS feed_back_id , tbl_feedback.order_id AS feed_backOrderId');
     $this->db->from('tbl_feedback');
     $this->db->join('tbl_upload_order_team','tbl_feedback.order_id = tbl_upload_order_team.order_id');
     $feed_back = $this->db->get()->result_array();
     $notify_message_feed_back = [];
     $feed_back_id = [];
-    // foreach ($feed_back as $feed_back) {
-    //     $feed_back_id[] = $feed_back['id'];
-    //     if ($feed_back['notify_team'] == 0) {
-    //         $notify += 1;
-    //     }
-    //     $notify_message_feed_back[$feed_back['update_at']]['order_id'] = $feed_back['order_id'];
-    // }
+    foreach ($feed_back as $feed_back) {
+         $feed_back_id[] = $feed_back['feed_back_id'];
+        if ($feed_back['notify_team'] == 0) {
+            $notify += 1;
+        }
+        $notify_message_feed_back[$feed_back['update_at']]['order_id'] = $feed_back['feed_backOrderId'];
+    }
      
     // $notify_message = array_merge($notify_message_feed_back);
     // krsort($notify_message);
-    //print_r($feed_back);
+    echo json_encode($notify_message_feed_back);
 
 ?>
 
