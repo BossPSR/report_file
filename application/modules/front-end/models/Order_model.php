@@ -37,11 +37,8 @@ class Order_model extends CI_Model
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 0);
-        
-            $this->db->where_in('tbl_upload_team.position', $as);
-            
+        $this->db->where_in('tbl_upload_team.position', $as);
         $this->db->or_where('tbl_upload_order.status_confirmed_team', NULL);
-        
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'DESC');
         $data = $this->db->get();
@@ -59,9 +56,7 @@ class Order_model extends CI_Model
         $this->db->where('tbl_upload_order.status_book', 2);
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 1);
-        foreach ($as as $as2) {
-            $this->db->or_where('tbl_upload_team.position', $as2);
-        }
+        $this->db->where_in('tbl_upload_team.position', $as);
         $this->db->where('tbl_upload_team.teamId', $see);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'DESC');
