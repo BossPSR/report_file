@@ -318,7 +318,7 @@
                         <li class="nav-item"><a class="nav-link" href="back_withdraw"><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables"> Withdraw </span></a>
 
                         </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved" || $this->uri->segment(1) == "Delivery") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Order Result</span></a>
                             <ul class="dropdown-menu">
@@ -329,6 +329,10 @@
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "not-approved") {
                                                                                 echo 'active';
                                                                             } ?>" href="not-approved" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Approved</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Delivery") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Delivery" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Delivery</a>
                                 </li>
                             </ul>
 
