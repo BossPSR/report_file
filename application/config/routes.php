@@ -61,6 +61,7 @@ $route['loginme']               = 'front-end/Login_ctr/loginMe';
 $route['Logout']                = 'front-end/Login_ctr/logout';
 $route['forget_password']       = 'front-end/Register_ctr/forget_password';
 $route['forget_reset']           = 'front-end/Register_ctr/forget_sendemail';
+$route['forget_resetTeam']      = 'front-end/Register_ctr/forget_sendemailTeam';
 $route['forget_step1']          = 'front-end/Register_ctr/forgot_passwordProcess';
 $route['forget_step2']          = 'front-end/Register_ctr/sendEmail';
 $route['forget_step3']          = 'front-end/Register_ctr/reset_passwordProcess';
