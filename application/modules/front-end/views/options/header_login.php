@@ -456,7 +456,7 @@
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
                                         </li> -->
                                             <li></li>
-                                            <li></li>
+                                            <li><?php $this->load->view('options/notify_team'); ?></li>
                                         <?php else : ?>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
@@ -475,6 +475,7 @@
                                             <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
+                                                
                                         <?php endif ?>
                                     </ul>
 

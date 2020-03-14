@@ -159,6 +159,8 @@ class Complete_ctr extends CI_Controller
                         'userId' => $cmid,
                         'path'          => 'uploads/Feedback/' . $uploadData['file_name'],
                         'create_at'     => date('Y-m-d H:i:s'),
+                        'update_at'     => date('Y-m-d H:i:s'),
+                        'notify_team'   => 0
                     );
                     $this->db->insert('tbl_feedback', $data);
                 }
