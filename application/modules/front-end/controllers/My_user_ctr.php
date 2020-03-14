@@ -116,6 +116,20 @@ class My_user_ctr extends CI_Controller
 
 	public function read_teamNotify()
 	{
+
+		$team_id = $this->input->get('team_id');
+		$team = $this->db->get_where('tbl_team',['id' => $team_id])->row_array();
+
+		$feed_back_id = $this->input->get('feed_back_id');
+		if (!empty($feed_back_id)) {
+			foreach ($feed_back_id as $key => $feed_backId) {
+				
+				$this->db->where('id',$feed_backId);
+				$this->db->update('tbl_feedback',['notify_team' => 1]);
+
+			}
+		}
+
 		$result = [];
 		$result['successfully'] = true;
 		$result['message'] = "read successfully";
