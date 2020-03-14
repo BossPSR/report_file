@@ -417,7 +417,7 @@
             </section>
             <!--/ Zero configuration table -->
 
-            <textarea id="textareaObservation"></textarea>
+           
 
         </div>
     </div>
