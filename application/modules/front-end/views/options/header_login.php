@@ -196,7 +196,7 @@
                                     </li>
                                 <?php elseif ($team) : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My stock</a>
+                                        <a href="My-stock"> My stock</a>
                                     </li>
 
                                     <li class="menu-item-has-children">
@@ -204,7 +204,7 @@
                                     </li>
 
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My Feedback</a>
+                                        <a href="my-feedback"> My Feedback</a>
                                     </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
@@ -450,13 +450,13 @@
                                                 <a href="My-delivery"> Delivery</a>
                                             </li>
                                             <li>
-                                                <a href="#"> My Feedback</a>
+                                                <a href="my-feedback"> My Feedback</a>
                                             </li>
                                             <!-- <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
                                         </li> -->
                                             <li></li>
-                                            <li></li>
+                                            <li><?php $this->load->view('options/notify_team'); ?></li>
                                         <?php else : ?>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
@@ -475,6 +475,7 @@
                                             <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
+                                                
                                         <?php endif ?>
                                     </ul>
 

@@ -112,4 +112,15 @@ class My_user_ctr extends CI_Controller
 		echo json_encode($result);
 	
 	}
+
+
+	public function read_teamNotify()
+	{
+		$result = [];
+		$result['successfully'] = true;
+		$result['message'] = "read successfully";
+		$result['count'] = 0;
+
+		echo json_encode($result);
+	}
 }
