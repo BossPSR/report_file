@@ -27,14 +27,11 @@
         </div>
 
         <?php
-        $this->db->select('count(*) AS testcount');
-        $this->db->from('tbl_bookmark'); 
-        $this->db->join('tbl_upload_order','tbl_upload_order.order_id=tbl_bookmark.id_orderBuy','left');
-        $this->db->where('tbl_upload_order.status_pay',1);
-        $this->db->group_by('tbl_bookmark.id_orderBuy');
-    
-       
-        $count_all = $this->db->get()->row_array(); // Produces an integer, like 17
+         $this->db->from('tbl_bookmark');
+         $this->db->group_by('id_orderBuy');    
+         $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+         // Produces an integer, like 17
+        ?>
         ?>
 
         <div class="content-body">

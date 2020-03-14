@@ -27,14 +27,11 @@
         </div>
 
         <?php
-        $this->db->select('count(*) AS testcount');
-        $this->db->from('tbl_bookmark'); 
-        $this->db->join('tbl_upload_order','tbl_upload_order.order_id=tbl_bookmark.id_orderBuy','left');
-        $this->db->where('tbl_upload_order.status_pay',0);
-        $this->db->group_by('tbl_bookmark.id_orderBuy');
-    
-       
-        $count_all = $this->db->get()->row_array(); // Produces an integer, like 17
+         $this->db->from('tbl_bookmark');
+     
+         $this->db->group_by('tbl_bookmark.id_orderBuy');    
+         $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+         // Produces an integer, like 17
         ?>
 
         <div class="content-body">
@@ -52,7 +49,11 @@
                                     <h4 class="card-title">bookmark_all_not</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <h3 class="card-title "><?php echo $count_all['testcount']; ?></h3>
+                                    <?php if($count_all ==''):?>
+                                    <h3 class="card-title ">0</h3>
+                                  <?php else:?>
+                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                  <?php endif;?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                             </div>
@@ -73,7 +74,7 @@
                                                     <th>Date_Required</th>
                                                     <th>Status</th>
                                                     <th>position</th>
-                                                    <th>tool</th>
+                                                    <!-- <th>tool</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -91,8 +92,8 @@
 
                                                         </td>
                                                       
-                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark_all_not['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $bookmark_all_not['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark_all_not['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $bookmark_all_not['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -104,7 +105,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark_all_not['order_id']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark_all_not['orderby']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -133,8 +134,8 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark_all_not['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $bookmark_all_not['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark_all_not['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $bookmark_all_not['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -146,7 +147,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark_all_not['order_id']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark_all_not['orderby']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -254,7 +255,7 @@
                                                             <?php } ?>
 
                                                         </td>
-                                                        <td><a href="Add_bookmake?id=<?php echo $bookmark_all_not['id_document'] ?>"><button type="button" class="btn btn-primary mr-1 mb-1">+ Drop file</button></a></td>
+                                                        <!-- <td><a href="Add_bookmake?id=<?php echo $bookmark_all_not['id_document'] ?>"><button type="button" class="btn btn-primary mr-1 mb-1">+ Drop file</button></a></td> -->
                                                     </tr>
 
                                                 <?php } ?>

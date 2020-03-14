@@ -87,7 +87,7 @@
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=2">Not approved</a>
 
                                                                     </div>
                                                                 </div>
@@ -101,7 +101,7 @@
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Not approved</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Ban User</a>
 
                                                                     </div>
                                                                 </div>
