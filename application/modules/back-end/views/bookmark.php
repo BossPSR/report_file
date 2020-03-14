@@ -27,11 +27,14 @@
         </div>
 
         <?php
-         $this->db->from('tbl_bookmark');
-         $this->db->group_by('id_orderBuy');    
-         $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-         // Produces an integer, like 17
-        ?>
+        $this->db->select('*');
+        $this->db->from('tbl_bookmark');
+        $this->db->join('tbl_upload_order','tbl_upload_order.order_id=tbl_bookmark.id_orderBuy');
+        $this->db->where('tbl_upload_order.status_pay',1);
+        $this->db->group_by('tbl_bookmark.id_orderBuy');
+        
+        $datata = $this->db->get()->result_array();
+         
         ?>
 
         <div class="content-body">
@@ -49,7 +52,16 @@
                                     <h4 class="card-title">Bookmark</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <h3 class="card-title "><?php echo $count_all['testcount']; ?></h3>
+                                    <?php if($datata ==''):?>
+                                    <h3 class="card-title ">0</h3>
+                                  <?php else:?>
+                                    <?php $e = 0; ?>
+                                    <?php foreach ($datata as $key => $datata) {
+                                        $e++ ;
+                                      
+                                    } ?>
+                                    <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                  <?php endif;?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                             </div>

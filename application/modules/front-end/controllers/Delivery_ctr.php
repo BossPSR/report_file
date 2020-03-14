@@ -51,7 +51,7 @@ class Delivery_ctr extends CI_Controller
             $uploadData = $this->upload->data();
 
             $data = array(
-            'teamId'        => $team->passport,
+            'teamId'        => $team->IdTeam,
             'order_id'      => $order_id,
             'file_name'     => $uploadData['file_name'],
             'path'          => 'uploads/Team/' . $uploadData['file_name'],
