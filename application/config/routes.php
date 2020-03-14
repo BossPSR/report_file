@@ -206,4 +206,5 @@ $route['back_vdo']                          = 'back-end/Vdo_ctr';
 $route['vdo_add_com']                          = 'back-end/Vdo_ctr/vdo_add_com';
 $route['vdo_edit_com']                          = 'back-end/Vdo_ctr/vdo_edit_com';
 $route['delete_vdo']                          = 'back-end/Vdo_ctr/delete_vdo';
+$route['Bookmark_notpay']                          = 'back-end/Book_ctr/bookmark_notpay';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

@@ -61,38 +61,46 @@ class My_user_ctr extends CI_Controller
 	{
 		$user_id = $this->input->get('user_id');
 		$user = $this->db->get_where('tbl_user',['id' => $user_id])->row_array();
+
 		$upload_store_id = $this->input->get('upload_store_id');
-		foreach ($upload_store_id as $key => $upload_storeId) {
-			
-			$this->db->where('id',$upload_storeId);
-			$this->db->update('tbl_upload_store',['notify_user' => 1]);
+		if (!empty($upload_store_id)) {
+			foreach ($upload_store_id as $key => $upload_storeId) {
+				
+				$this->db->where('id',$upload_storeId);
+				$this->db->update('tbl_upload_store',['notify_user' => 1]);
 
+			}
 		}
-
+		
 		$upload_order_id = $this->input->get('upload_order_id');
-		foreach ($upload_order_id as $key => $upload_orderId) {
-			
-			$this->db->where('id',$upload_orderId);
-			$this->db->update('tbl_upload_order',['notify_user' => 1]);
+		if (!empty($upload_order_id)) {
+			foreach ($upload_order_id as $key => $upload_orderId) {
+				
+				$this->db->where('id',$upload_orderId);
+				$this->db->update('tbl_upload_order',['notify_user' => 1]);
 
+			}
 		}
 		
 		$upload_store_reject_id = $this->input->get('upload_store_reject_id');
-		foreach ($upload_store_reject_id as $key => $upload_store_rejectId) {
-			
-			$this->db->where('id',$upload_store_rejectId);
-			$this->db->update('tbl_upload_store',['notify_user' => 1]);
+		if (!empty($upload_store_reject_id)) {
+			foreach ($upload_store_reject_id as $key => $upload_store_rejectId) {
+				
+				$this->db->where('id',$upload_store_rejectId);
+				$this->db->update('tbl_upload_store',['notify_user' => 1]);
 
+			}
 		}
 
 		$upload_order_reject_id = $this->input->get('upload_order_reject_id');
-		foreach ($upload_order_reject_id as $key => $upload_order_rejectId) {
-			
-			$this->db->where('id',$upload_order_rejectId);
-			$this->db->update('tbl_upload_order',['notify_user' => 1]);
+		if (!empty($upload_order_reject_id)) {
+			foreach ($upload_order_reject_id as $key => $upload_order_rejectId) {
+				
+				$this->db->where('id',$upload_order_rejectId);
+				$this->db->update('tbl_upload_order',['notify_user' => 1]);
 
+		 	}
 		}
-
 
 		
 
@@ -102,5 +110,6 @@ class My_user_ctr extends CI_Controller
 		$result['count'] = 0;
 
 		echo json_encode($result);
+	
 	}
 }

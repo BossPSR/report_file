@@ -353,13 +353,18 @@
                             </ul>
 
                         </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark</span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu="">
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") { echo 'active'; } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-book"></i>Bookmark
+                                        <i class="feather icon-book"></i>Pay
+                                    </a>
+                                </li>
+                                <li data-menu="">
+                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark_notpay") { echo 'active'; } ?>" href="Bookmark_notpay" data-toggle="dropdown" data-i18n="Email">
+                                        <i class="feather icon-book"></i>Not Pay
                                     </a>
                                 </li>
                                 <li data-menu="">
