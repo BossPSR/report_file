@@ -430,7 +430,7 @@ class Register_ctr extends CI_Controller
 			$resultPassword = md5($confirm_new_password);
 
 			$this->db->where('id', $id);
-			$this->db->update('tbl_user', ['password' => $resultPassword]);
+			$this->db->update('tbl_team', ['password' => $resultPassword]);
 
 			echo "<script>";
 			echo "alert('ยินดีด้วยค่ะ คุณตั้งค่ารหัสผ่านใหม่สำเร็จแล้วค่ะ');";

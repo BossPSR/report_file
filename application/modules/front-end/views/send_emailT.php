@@ -14,7 +14,7 @@
             <div class="col-lg-8 col-md-8">
                 <div class="account_form register">
                     <h2>Forget Password</h2>
-                    <form action="forget_step3" method="post">
+                    <form action="forget_step3Team" method="post">
                         <p>
                             <label>New Password <span class="red">*</span></label>
                             <input type="password" name="new_password" required>

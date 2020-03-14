@@ -1,5 +1,4 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -65,6 +64,8 @@ $route['forget_reset']           = 'front-end/Register_ctr/forget_sendemail';
 $route['forget_step1']          = 'front-end/Register_ctr/forgot_passwordProcess';
 $route['forget_step2']          = 'front-end/Register_ctr/sendEmail';
 $route['forget_step3']          = 'front-end/Register_ctr/reset_passwordProcess';
+
+$route['forget_step3Team']      = 'front-end/Register_ctr/reset_passwordProcessTeam';
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['accept_status']         = 'front-end/My_user_ctr/accept_status';
 $route['my-profile']            = 'front-end/My_user_ctr/my_profile';
@@ -206,5 +207,4 @@ $route['back_vdo']                          = 'back-end/Vdo_ctr';
 $route['vdo_add_com']                          = 'back-end/Vdo_ctr/vdo_add_com';
 $route['vdo_edit_com']                          = 'back-end/Vdo_ctr/vdo_edit_com';
 $route['delete_vdo']                          = 'back-end/Vdo_ctr/delete_vdo';
-$route['Bookmark_notpay']                          = 'back-end/Book_ctr/bookmark_notpay';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';
