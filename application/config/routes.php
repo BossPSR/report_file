@@ -1,5 +1,4 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -62,9 +61,12 @@ $route['loginme']               = 'front-end/Login_ctr/loginMe';
 $route['Logout']                = 'front-end/Login_ctr/logout';
 $route['forget_password']       = 'front-end/Register_ctr/forget_password';
 $route['forget_reset']           = 'front-end/Register_ctr/forget_sendemail';
+$route['forget_resetTeam']      = 'front-end/Register_ctr/forget_sendemailTeam';
 $route['forget_step1']          = 'front-end/Register_ctr/forgot_passwordProcess';
 $route['forget_step2']          = 'front-end/Register_ctr/sendEmail';
 $route['forget_step3']          = 'front-end/Register_ctr/reset_passwordProcess';
+
+$route['forget_step3Team']      = 'front-end/Register_ctr/reset_passwordProcessTeam';
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['accept_status']         = 'front-end/My_user_ctr/accept_status';
 $route['my-profile']            = 'front-end/My_user_ctr/my_profile';
@@ -77,7 +79,7 @@ $route['my-folder']             = 'front-end/My_upload_ctr/my_upload_folder';
 $route['my-upload']             = 'front-end/My_upload_ctr/my_upload';
 $route['my-upload-delete']      = 'front-end/My_upload_ctr/delete_file';
 $route['my-upload-edit']        = 'front-end/My_upload_ctr/my_upload_edit';
-
+$route['my-feedback']           = 'front-end/My_feedback_ctr/my_feedback';
 
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rejected']           = 'front-end/Rejected_ctr/my_rejected';
@@ -206,5 +208,4 @@ $route['back_vdo']                          = 'back-end/Vdo_ctr';
 $route['vdo_add_com']                          = 'back-end/Vdo_ctr/vdo_add_com';
 $route['vdo_edit_com']                          = 'back-end/Vdo_ctr/vdo_edit_com';
 $route['delete_vdo']                          = 'back-end/Vdo_ctr/delete_vdo';
-$route['Bookmark_notpay']                          = 'back-end/Book_ctr/bookmark_notpay';
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

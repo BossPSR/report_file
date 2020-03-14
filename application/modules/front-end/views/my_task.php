@@ -25,7 +25,7 @@
                         <thead>
                             <tr style="text-align:center;">
                                 <th scope="col">No.</th>
-                                <!-- <th scope="col">Document</th> -->
+                                <th scope="col">Document</th>
                                 <th scope="col">ID Order</th>
                                 <th scope="col">Date Requred</th>
                                 <th scope="col">Main Doc</th>
@@ -45,6 +45,7 @@
                                 <tr style="text-align:center;">
                                     <td><?php echo $p++; ?></td>
                                     <td><?php echo $task['file_name']; ?></td>
+                                    <td><?php echo $task['order_id']; ?></td>
                                     <td><?php echo $task['date_required']; ?></td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $o++; ?>"><i class="fa fa-file-text-o"></i></a>

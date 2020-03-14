@@ -33,6 +33,17 @@ class Login_model extends CI_Model
         return $data->row_array();
     }
 
+    public function forgot_check_team($email)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_team');
+        $this->db->where('email', $email);
+
+        $data = $this->db->get();
+
+        return $data->row_array();
+    }
+
     public function login_team($email, $password)
     {
         $this->db->where('email', $email);

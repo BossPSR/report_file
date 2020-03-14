@@ -453,7 +453,7 @@
                                                 <a href="#"> Delivery</a>
                                             </li>
                                             <li>
-                                                <a href="#"> My Feedback</a>
+                                                <a href="my-feedback"> My Feedback</a>
                                             </li>
                                             <!-- <li>
                                                 <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>

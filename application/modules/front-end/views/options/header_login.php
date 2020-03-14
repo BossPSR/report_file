@@ -196,7 +196,7 @@
                                     </li>
                                 <?php elseif ($team) : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My stock</a>
+                                        <a href="My-stock"> My stock</a>
                                     </li>
 
                                     <li class="menu-item-has-children">
@@ -204,7 +204,7 @@
                                     </li>
 
                                     <li class="menu-item-has-children">
-                                        <a href="#"> My Feedback</a>
+                                        <a href="my-feedback"> My Feedback</a>
                                     </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
@@ -450,7 +450,7 @@
                                                 <a href="My-delivery"> Delivery</a>
                                             </li>
                                             <li>
-                                                <a href="#"> My Feedback</a>
+                                                <a href="my-feedback"> My Feedback</a>
                                             </li>
                                             <!-- <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>
