@@ -146,8 +146,15 @@ class Store_ctr extends CI_Controller
         $price_dis = $this->input->post('price_dis');
         $customer_id = $this->input->post('customer_id');
         $email = $this->input->post('email');
-        $user_id = $this->input->post('user_id');
-        $user = $this->db->get_where('tbl_user', ['id' => $user_id])->row_array();
+
+        $user = $this->db->get_where('tbl_user', ['idUser' => $customer_id])->row_array();
+        if ($user['cash'] < $price_dis) {
+            $this->session->set_flashdata('error_cash', TRUE);
+            redirect('/');
+        }
+        $price_result = $user['cash'] - $price_dis;
+        $this->db->where('idUser',$customer_id);
+        $this->db->update('tbl_user',['cash' => $price_result]);
 
         $checkStore_for_buy_email = $this->db->get_where('tbl_store_for_buy_email', ['order_id', $order_id])->row_array();
         if (!empty($checkStore_for_buy_email)) {
@@ -155,10 +162,9 @@ class Store_ctr extends CI_Controller
             redirect('/');
         }
 
-        if ($user['cash'] < $price_dis) {
-            $this->session->set_flashdata('error_cash', TRUE);
-            redirect('/');
-        }
+        $this->db->where('order_id', $order_id);
+        $this->db->update('tbl_upload_order',['status_pay' => 1]);
+        
 
         $data = [
             'file_name' => $file_name,
@@ -168,7 +174,6 @@ class Store_ctr extends CI_Controller
             'price_dis' => $price_dis,
             'customer_id' => $customer_id,
             'email' => $email,
-            'user_id' => $user_id,
             'created_at' => date('Y-m-d H:i:s')
         ];
         $this->db->insert('tbl_store_for_buy_email', $data);
