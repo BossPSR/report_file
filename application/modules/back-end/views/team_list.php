@@ -106,6 +106,22 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
+                                                            <?php elseif ($team['status'] == 3) : ?>
+                                                            <td>
+                                                                <div class="dropdown ">
+                                                                    <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Ban User
+                                                                    </button>
+                                                                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=2">Not approved</a>
+                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Ban User</a>
+
+                                                                    </div> -->
+                                                                </div>
+                                                            </td>
+
 
                                                         <?php else : ?>
                                                             <td>
@@ -141,3 +157,20 @@
     </div>
 </div>
 <!-- END: Content-->
+<SCRIPT language="JavaScript">
+function timerefresh(t)
+{
+
+if(t==0)
+{
+window.location.reload();
+}
+else
+{
+t--;
+}
+window.setTimeout("timerefresh('"+t+"')",2000)
+}
+
+timerefresh(5);
+</script>

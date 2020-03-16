@@ -7,6 +7,7 @@ class Admin_ctr extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Customer_model');
     }
 
     public function index()
@@ -22,6 +23,9 @@ class Admin_ctr extends CI_Controller
             $this->load->view('options/footer');
         }
     }
+
+
+
     public function add_admin()
     {
 
