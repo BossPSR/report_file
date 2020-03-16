@@ -109,6 +109,7 @@ class Complete_ctr extends CI_Controller
         
         $order_id =$this->input->post('order_id'); 
         $order_team =$this->input->post('order_team');
+      
         $id =$this->input->post('id');
 
         $this->db->where('order_id',$id);
@@ -180,6 +181,6 @@ class Complete_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
         }
 
-        return redirect('Bookmark');
+        return redirect('Complete');
     }
 }

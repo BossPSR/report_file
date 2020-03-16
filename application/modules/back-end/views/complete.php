@@ -350,7 +350,7 @@
                                                                                         <?php foreach ($orderss as $keys => $orderss) { ?>
                                                                                             <tr>
                                                                                                 <td><label class="container">
-                                                                                                    <input type="checkbox" class="checkmark" name="order_team[]" value="<?php echo $complete['id'] ?>">
+                                                                                                    <input type="checkbox" class="checkmark" name="order_team[]" value="<?php echo $orderss['id'] ?>">
                                                                                                     <span class="checkmark"></span>
                                                                                                 </label>
                                                                                             </td>

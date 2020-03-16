@@ -162,7 +162,12 @@
                                                         <td><?php echo $bookmark['orderby'] ?></td>
                                                         <td><?php echo $bookmark['user_name'] ?></td>
                                                         <td>
+                                                            <?php if (empty($show_dm)):?>
+                                                                -
+                                                            <?php else:?>
+                                                          
                                                         <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
+                                                            
                                                             <?php if ($show_dm['id_document'] == '') : ?>
                                                                 -
                                                             <?php else : ?>
@@ -170,7 +175,7 @@
                                                             <?php endif; ?>
 
                                                             <?php } ?>
-
+                                                            <?php endif;?>
                                                         </td>
 
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
