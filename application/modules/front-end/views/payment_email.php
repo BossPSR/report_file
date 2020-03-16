@@ -60,14 +60,14 @@
                     <div class="form-group">Order ID : <?php echo $order_id; ?></div>
                     <div class="form-group">Price : <?php echo $price_file; ?></div>
                     <div class="form-group">Discount : <?php echo $discount; ?>%</div>
-                    <div>Customer ID: CM<?php echo $customer_id; ?></div>
+                    <div>Customer ID: <?php echo $customer_id; ?></div>
                     <form action="payment_email_success" method="POST">
                         <input type="hidden" name="file_name" value="<?php echo $file_name; ?>">
                         <input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
                         <input type="hidden" name="price_file" value="<?php echo $price_file; ?>">
                         <input type="hidden" name="discount" value="<?php echo $discount; ?>">
-                        <input type="hidden" name="customer_id" value="CM<?php echo $customer_id; ?>">
-                        <input type="hidden" name="user_id" value="<?php echo $customer_id; ?>">
+                        <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
+
                         <div style="margin:15px 0;">
                             <label for="">E-mail : </label>
                             <input type="email" name="email">

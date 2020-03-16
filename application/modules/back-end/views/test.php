@@ -1,54 +1,4 @@
-<div class="app-content content">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-        <div class="content-header row">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">All Satisfied and Not Satisfied</h2>
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
-                                </li>
-                                <li class="breadcrumb-item active">All Satisfied and Not Satisfied
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <?php
-        // $this->db->where('status_admin', 1);
-        
-        $this->db->group_by('order_id');
-        $this->db->from('tbl_upload_order');
-        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-        ?>
-
-        <div class="content-body">
-
-            <!-- Zero configuration table -->
-            <section id="basic-datatable">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="row card-header">
-                                <div class="col-10">
-                                    <h4 class="card-title">All Satisfied and Not Satisfied</h4>
-                                </div>
-                                <div class="col-2 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
-                                    <h3 class="check_list_not"> จำนวนออเดอร์ทั้งหมด </h3>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body card-dashboard">
-                                    <div class="table-responsive">
-                                        <table class="table zero-configuration">
+<table class="table zero-configuration">
                                             <thead>
                                                 <tr>
 
@@ -205,20 +155,3 @@
                                                 <?php  } ?>
                                             </tbody>
                                         </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!--/ Zero configuration table -->
-
-
-
-        </div>
-    </div>
-</div>
-
-<!-- END: Content-->

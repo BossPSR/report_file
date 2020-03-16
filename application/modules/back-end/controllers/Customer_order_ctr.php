@@ -63,6 +63,8 @@ class Customer_order_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') != '') {
 
             $data['bookmark'] = $this->Store_model->bookmark_all();
+            $data['dm'] = $this->Store_model->bookmark_dm();
+            $data['show_dm'] = $this->Store_model->bookmark_show_dm();
             $this->load->view('options/header');
             $this->load->view('bookmark',$data);
             $this->load->view('options/footer');

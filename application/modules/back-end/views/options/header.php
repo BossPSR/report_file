@@ -90,7 +90,7 @@
                                 <ul class="search-list search-list-main"></ul>
                             </div>
                         </li>
-                        <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span class="badge badge-pill badge-primary badge-up">5</span></a>
+                        <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span class="badge badge-pill badge-primary badge-up">5</span></a>
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 <li class="dropdown-menu-header">
                                     <div class="dropdown-header m-0 p-2">
@@ -140,7 +140,7 @@
                                     </a></li>
                                 <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center" href="javascript:void(0)">Read all notifications</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John Doe</span><span class="user-status">Available</span></div><span><img class="round" src="public/backend/assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
                             </a>
@@ -282,9 +282,18 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php 
+                            $notify_myStore = 0;
+                            $uploadOrder = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
+                            foreach($uploadOrder as $upload_order){
+                                if ($upload_order['notify_admin'] == 0) {
+                                    $notify_myStore += 1;
+                                }
+                            }
+                        ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store_reject_for_buy" ||  $this->uri->segment(1) ==  "Section" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell" ||  $this->uri->segment(1) ==  "back_store_reject" ||  $this->uri->segment(1) ==  "back_upload_main_search") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store <span style="margin-left:5px; background:red; padding: 5px 5px; border-radius: 50%;"><?php echo $notify_myStore; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_checkForsell") {
                                                                                 echo 'active';
@@ -300,7 +309,7 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_buy") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-package"></i>Store For buy</a>
+                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-package"></i>Store For buy <span style="margin-left:5px; background:red; padding: 5px 5px; border-radius: 50%;"><?php echo $notify_myStore; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject") {
                                                                                 echo 'active';
@@ -318,7 +327,7 @@
                         <li class="nav-item"><a class="nav-link" href="back_withdraw"><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables"> Withdraw </span></a>
 
                         </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved" || $this->uri->segment(1) == "Delivery") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Order Result</span></a>
                             <ul class="dropdown-menu">
@@ -329,6 +338,10 @@
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "not-approved") {
                                                                                 echo 'active';
                                                                             } ?>" href="not-approved" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Approved</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Delivery") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Delivery" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Delivery</a>
                                 </li>
                             </ul>
 
