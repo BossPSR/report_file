@@ -90,7 +90,7 @@ class Book_ctr extends CI_Controller
      
       
         $this->db->where('order_id',$id);
-        $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'status_delivery' => 1]);
+        $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'status_delivery' => 1 ,'notify_team' => 0 ,'notify_user' => 0]);
         $subject = 'test ip-soft';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
@@ -104,7 +104,7 @@ class Book_ctr extends CI_Controller
 
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $id . '</div>';
         foreach ($order_id as $key => $order_id) {
-            $order = $this->db->get_where('tbl_upload_order', ['id' => $order_id])->row_array();
+            $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
             $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$order['path'].'">'.$order['file_name'].'</a>';
             $message .= '<br>';
        }
