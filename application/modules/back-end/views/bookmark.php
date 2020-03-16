@@ -162,11 +162,11 @@
                                                         <td><?php echo $bookmark['orderby'] ?></td>
                                                         <td><?php echo $bookmark['user_name'] ?></td>
                                                         <td>
-                                                            <?php if (empty($show_dm)):?>
+                                                            <?php if (empty($bookmark['id_document'])):?>
                                                                 -
                                                             <?php else:?>
                                                           
-                                                        <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
+                                                         <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
                                                             
                                                             <?php if ($show_dm['id_document'] == '') : ?>
                                                                 -
