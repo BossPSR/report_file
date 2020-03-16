@@ -155,5 +155,7 @@ class Book_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
         }
+
+        return redirect('Bookmark');
     }
 }
