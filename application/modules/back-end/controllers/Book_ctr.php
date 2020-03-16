@@ -87,10 +87,16 @@ class Book_ctr extends CI_Controller
 
 
       
-        $order = $this->db->get_where('tbl_upload_order', ['id' => $order_id])->result_array();
+     
+        foreach ($order_id as $key => $order_id) {
+             $order = $this->db->get_where('tbl_upload_order', ['id' => $order_id])->result_array();
+        }
 
-        $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->result_array();
+        foreach ($order_team as $key => $order_team) {
+            $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->result_array();
 
+       }
+      
         $this->db->where('order_id',$order[0]['order_id']);
         $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'status_delivery' => 1]);
         $subject = 'test ip-soft';
