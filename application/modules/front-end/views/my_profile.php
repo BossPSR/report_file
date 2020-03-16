@@ -1,4 +1,4 @@
-<?php $reject =  $this->db->get_where('tbl_upload_store', ['userId' => $user['id'], 'is_check' => 1 ,'is_accept' => 0])->result_array();; ?>
+<?php $reject =  $this->db->get_where('tbl_upload_store', ['userId' => $user['id'], 'is_check' => 1, 'is_accept' => 0])->result_array();; ?>
 <!--services img area-->
 <div class="services_gallery mt-60">
     <div class="container">
@@ -13,7 +13,7 @@
 
                     <div class="image_profile">
                         <h2 class="text-center my-income">
-                            <div class="name_user m17"><i class="fa fa-user"></i><?=$this->lang->line("name");?> : <?php echo $user['username']; ?></div>
+                            <div class="name_user m17"><i class="fa fa-user"></i><?= $this->lang->line("name"); ?> : <?php echo $user['username']; ?></div>
                         </h2>
                         <div class="image_PF">
                             <div class=""><?php  ?>
@@ -27,16 +27,51 @@
                     <div class="single_banner menu_profileList">
                         <div class="menu_profileRow">
                             <div class="result_list_menu">
-                                <div class="result_menu"><?php echo number_format("145201"); ?></div>
+                                <div class="result_menu"><?php echo number_format($user['score']); ?></div>
                                 <div class="list_menu">Score</div>
                             </div>
                             <div class="result_list_menu">
-                                <div class="result_menu"><?php echo number_format("1527"); ?></div>
+                                <div class="result_menu">
+                                    <?php if ($user['score'] < '100') : ?>
+                                        0%
+                                    <?php elseif ($user['score'] <= '199') : ?>
+                                        10%
+                                    <?php elseif ($user['score'] <= '299') : ?>
+                                        20%
+                                    <?php elseif ($user['score'] <= '399') : ?>
+                                        30%
+                                    <?php elseif ($user['score'] <= '499') : ?>
+                                        40%
+                                    <?php else : ?>
+                                        50%
+                                    <?php endif; ?>
+                                </div>
                                 <div class="list_menu">Discount</div>
                             </div>
+                            <?php
+                            $this->db->select('*,COUNT(userId) as co');
+                            $this->db->from('tbl_upload_order');
+                            $this->db->where('userId', $user['idUser']);
+                            $this->db->group_by('order_id');
+
+                            $coup = $this->db->get()->row_array();
+                            ?>
                             <div class="result_list_menu">
-                                <div class="result_menu"><?php echo number_format("150"); ?></div>
+                                <div class="result_menu"><?php echo number_format($coup['co']); ?></div>
                                 <div class="list_menu">Upload</div>
+                            </div>
+                            <?php
+                            $numCost = 0;
+                            $cost = $this->db->group_by('store_id')->get_where('tbl_upload_store',['userId' => $user['idUser']])->result_array();
+                            foreach ($cost as $cost) {
+                                if (isset($cost['grade'])) {
+                                    $numCost += 1;
+                                }
+                            }
+                            ?>
+                            <div class="result_list_menu">
+                                <div class="result_menu"><?php echo number_format($numCost); ?></div>
+                                <div class="list_menu">Seller</div>
                             </div>
                         </div>
                         <!-- <div class="menu_profileRow"></div>  -->
