@@ -130,6 +130,16 @@ class My_user_ctr extends CI_Controller
 			}
 		}
 
+		$upload_order_delivery_id = $this->input->get('upload_order_delivery_id');
+		if (!empty($upload_order_delivery_id)) {
+			foreach ($upload_order_delivery_id as $key => $upload_order_deliveryId) {
+				
+				$this->db->where('id',$upload_order_deliveryId);
+				$this->db->update('tbl_upload_order',['notify_team' => 1]);
+
+			}
+		}
+
 		$result = [];
 		$result['successfully'] = true;
 		$result['message'] = "read successfully";
