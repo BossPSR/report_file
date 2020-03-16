@@ -51,7 +51,7 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
     <!-- END: Custom CSS-->
-    
+
     <script src="public/backend/assets/vendors/js/vendors.min.js"></script>
 </head>
 <!-- END: Head-->
@@ -80,7 +80,8 @@
 
                     </div>
                     <ul class="nav navbar-nav float-right">
-                      
+                        <li> <a href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>">TH</a> <a href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>">EN</a></li>
+
                         <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
                         <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
                             <div class="search-input">
@@ -254,9 +255,9 @@
                         <li class="nav-item <?php if ($this->uri->segment(1) == "back_dashboard") {
                                                 echo 'active';
                                             } ?>">
-                            <a href="back_dashboard"><i class="feather icon-home"></i><span data-i18n="Dashboard">Dashboard</span></a>
+                            <a href="back_dashboard"><i class="feather icon-home"></i><span data-i18n="Dashboard"><?= $this->lang->line("Dashboard"); ?></span></a>
                         </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin" || $this->uri->segment(1) ==  "back_poster"|| $this->uri->segment(1) ==  "back_vdo") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin" || $this->uri->segment(1) ==  "back_poster" || $this->uri->segment(1) ==  "back_vdo") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Public</span></a>
                             <ul class="dropdown-menu">
@@ -379,44 +380,67 @@
                             </ul>
 
                         </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark</span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu="">
-                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") { echo 'active'; } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email">
+                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") {
+                                                                echo 'active';
+                                                            } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email">
                                         <i class="feather icon-book"></i>Pay
                                     </a>
                                 </li>
                                 <li data-menu="">
-                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark_notpay") { echo 'active'; } ?>" href="Bookmark_notpay" data-toggle="dropdown" data-i18n="Email">
+                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark_notpay") {
+                                                                echo 'active';
+                                                            } ?>" href="Bookmark_notpay" data-toggle="dropdown" data-i18n="Email">
                                         <i class="feather icon-book"></i>Not Pay
                                     </a>
                                 </li>
                                 <li data-menu="">
-                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Complete") { echo 'active'; } ?>" href="Complete" data-toggle="dropdown" data-i18n="Email">
+                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "Complete") {
+                                                                echo 'active';
+                                                            } ?>" href="Complete" data-toggle="dropdown" data-i18n="Email">
                                         <i class="feather icon-check"></i>Complete
                                     </a>
                                 </li>
+                                <li data-menu="">
 
-                            </ul>
 
-                        </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Stock" || $this->uri->segment(1) == "my_stock_admin") {
-                                                            echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-inbox"></i><span data-i18n="Order Result">My Stock</span></a>
-                            <ul class="dropdown-menu">
-                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Stock") {
-                                                                                echo 'active';
-                                                                            } ?>" href="Stock" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-credit-card"></i>My Stock</a>
+                                <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "Feedback" || $this->uri->segment(1) == "Feedback_team") {
+                                                                echo 'active';
+                                                            } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>Feedback</a>
+                                    <ul class="dropdown-menu ">
+                                        <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "Feedback") {
+                                                                echo 'active';
+                                                            } ?>" href="Feedback" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Feedback</a>
+                                        </li>
+                                        <li data-menu=""><a class="dropdown-item" href="Feedback_team" data-toggle="dropdown" data-i18n="Chartjs"><i class="feather icon-circle"></i>Feedback Team</a>
+                                        </li>
+                                      
+                                    </ul>
                                 </li>
-                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "my_stock_admin") {
-                                                                                echo 'active';
-                                                                            } ?>" href="my_stock_admin" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>My StockAdmin</a>
-                                </li>
-                            </ul>
-
                         </li>
+
+                </ul>
+
+                </li>
+                <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Stock" || $this->uri->segment(1) == "my_stock_admin") {
+                                                    echo 'active';
+                                                } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-inbox"></i><span data-i18n="Order Result">My Stock</span></a>
+                    <ul class="dropdown-menu">
+                        <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Stock") {
+                                                                        echo 'active';
+                                                                    } ?>" href="Stock" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-credit-card"></i>My Stock</a>
+                        </li>
+                        <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "my_stock_admin") {
+                                                                        echo 'active';
+                                                                    } ?>" href="my_stock_admin" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>My StockAdmin</a>
+                        </li>
+                    </ul>
+
+                </li>
 
                 </ul>
             <?php elseif ($profile['is_admin'] == '2') : ?>

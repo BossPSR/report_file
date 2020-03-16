@@ -346,15 +346,24 @@
                                         <?php elseif ($team == true) : ?>
                                             <div class="middel_right_info">
                                                 <!-- <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
+                                                <div class="menu-list"></div>
                                                 <div>Score</div>
                                             </div> -->
+                                                <?php
+                                                $this->db->select('*,sum(tbl_upload_order.status_delivery) as sum_delivery');
+                                                $this->db->from('tbl_upload_team');
+                                                $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+                                                $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+                                                $this->db->where('tbl_upload_order.status_delivery', 1);
+
+                                                $sm_del = $this->db->get()->row_array();
+                                                ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list"><?php echo number_format(rand(1, 300)); ?></div>
+                                                    <div class="menu-list"><?php echo $sm_del['sum_delivery']; ?></div>
                                                     <div>My Jobs</div>
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list"><?php echo number_format(rand(1, 1000000)); ?></div>
+                                                    <div class="menu-list"><?php echo number_format($team['income']); ?></div>
                                                     <div>My Income</div>
                                                 </div>
                                             </div>
@@ -475,7 +484,7 @@
                                             <!-- <li class="menu-item-has-children">
                                                     <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
                                                 </li> -->
-                                                
+
                                         <?php endif ?>
                                     </ul>
 

@@ -10,7 +10,7 @@ class Complete_model extends CI_Model{
 
     public function complete()
     {
-        $this->db->select('*,tbl_upload_order_team.order_id AS order_id_t,tbl_upload_order.date_required AS date_required_t');
+        $this->db->select('*,tbl_upload_order_team.order_id AS order_id_t,tbl_upload_order.date_required AS date_required_t,tbl_upload_order.userId AS user_m');
         $this->db->from('tbl_upload_order_team');
         $this->db->join('tbl_bookmark','tbl_upload_order_team.order_id=tbl_bookmark.id_orderBuy','left');
         $this->db->join('tbl_upload_order','tbl_upload_order_team.order_id=tbl_upload_order.order_id','left');

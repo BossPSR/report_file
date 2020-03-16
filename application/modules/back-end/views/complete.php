@@ -383,13 +383,13 @@
 
                                                             </a>
                                                             <?php else:?>
-                                                            <a href="book_complete_add_com?id=<?php echo $complete['order_id']; ?>&userid=<?php echo $complete['userId']; ?>" class="btn btn-outline-success">
+                                                            <a href="book_complete_add_com?id=<?php echo $complete['order_id']; ?>&userid=<?php echo $complete['user_m']; ?>" class="btn btn-outline-success">
                                                               Bookmark
 
                                                             </a>
                                                             <?php endif;?>
 
-                                                              <a href="Add_feedback?id=<?php echo $complete['order_id']; ?>&cmid=<?php echo $complete['userId']; ?>" class="btn btn-outline-danger">
+                                                              <a href="Add_feedback?id=<?php echo $complete['order_id']; ?>&cmid=<?php echo $complete['user_m']; ?>" class="btn btn-outline-danger">
                                                               Feedback
                                                               </a>                           
                                                             </button>

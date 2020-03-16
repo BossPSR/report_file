@@ -24,10 +24,9 @@
                     <thead>
                         <tr style="text-align:center;">
                             <th scope="col">No.</th>
-                            <!-- <th scope="col">Document</th> -->
                             <th scope="col">ID Order</th>
-                            <th scope="col">Document name</th>
-                            <th scope="col">Document</th>
+                            <th scope="col">Feedback Document</th>
+                            <th scope="col">Date required</th>
                             <th scope="col">Select item</th>
                         </tr>
                     </thead>
@@ -38,60 +37,67 @@
                         $i = 1;
                         $y = 1;
                         $r = 1;
+                        $z = 1;
                         ?>
 
-                        <tr style="text-align:center;">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="#" data-toggle="modal" data-target="#exampleModalMain"><i class="fa fa-file-text-o"></i></a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalMain" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
+                        <?php foreach ($feedback as $feedback) { ?>
+                            <tr style="text-align:center;">
+                                <td><?= $i++; ?></td>
+                                <td><?= $feedback['order_id']; ?></td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalFeed<?php echo $r++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalFeed<?php echo $y++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                    <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
 
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr style="text-align:center;">
-                                                            <th scope="col">No.</th>
-                                                            <th scope="col">File</th>
-                                                            <th scope="col">ID Order</th>
-                                                            <th scope="col">Date Requred</th>
-                                                            <th scope="col">Downloads</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                                <div class="modal-body">
 
-                                                        <tr style="text-align:center;">
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr style="text-align:center;">
+                                                                <th scope="col">File</th>
+                                                                <th scope="col">ID Order</th>
+                                                                <th scope="col">Date Requred</th>
+                                                                <th scope="col">Downloads</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php $feedback_doc = $this->db->get_where('tbl_feedback', ['order_id' => $feedback['order_id']])->result_array(); ?>
+                                                            <?php foreach ($feedback_doc as $feedback_doc) { ?>
+                                                                <tr style="text-align:center;">
+                                                                    
+                                                                    <td><?= $feedback_doc['file_name']; ?></td>
+                                                                    <td><?= $feedback['order_id']; ?></td>
+                                                                    <td><?= $feedback['date_required']; ?></td>
+                                                                    <td>
+                                                                        <a href="<?php echo $feedback['file_name'] ?>" class="btn btn-info" download><i class="fa fa-download"></i> Download</a>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <!-- <h1 style="color:blue;">Data Not Found</h1> -->
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
-                            </td>
-                            <td></td>
-                        </tr>
+                                </td>
+                                <td><?= $feedback['date_required']; ?></td>
+                                <td><?= $feedback['name_item']; ?></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
