@@ -84,9 +84,6 @@ class Book_ctr extends CI_Controller
         $order_id =$this->input->post('order_id'); 
         $order_team =$this->input->post('order_team');
 
-        print_r($order_id);
-        print_r($order_team);
-        exit;
 
 
       
