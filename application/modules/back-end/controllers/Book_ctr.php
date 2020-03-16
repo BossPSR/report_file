@@ -83,21 +83,13 @@ class Book_ctr extends CI_Controller
         
         $order_id =$this->input->post('order_id'); 
         $order_team =$this->input->post('order_team');
+        $id =$this->input->post('id');
 
-
-
+       
       
      
-        foreach ($order_id as $key => $order_id) {
-             $order = $this->db->get_where('tbl_upload_order', ['id' => $order_id])->result_array();
-        }
-
-        foreach ($order_team as $key => $order_team) {
-            $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->result_array();
-
-       }
       
-        $this->db->where('order_id',$order[0]['order_id']);
+        $this->db->where('order_id',$id);
         $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'status_delivery' => 1]);
         $subject = 'test ip-soft';
 
@@ -110,20 +102,22 @@ class Book_ctr extends CI_Controller
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
 
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $order[0]['order_id'] . '</div>';
-        foreach ($order as $order) {
-
-
-        $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$order['path'].'">'.$order['file_name'].'</a>';
-        $message .= '<br>';
-        }
-
-        foreach ($orderT as $orderT) {
-            
-
-            $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$orderT['path'].'">'.$orderT['file_name'].'</a>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $id . '</div>';
+        foreach ($order_id as $key => $order_id) {
+            $order = $this->db->get_where('tbl_upload_order', ['id' => $order_id])->row_array();
+            $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$order['path'].'">'.$order['file_name'].'</a>';
             $message .= '<br>';
-            }
+       }
+
+       foreach ($order_team as $key => $order_team) {
+           $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
+           $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$orderT['path'].'">'.$orderT['file_name'].'</a>';
+           $message .= '<br>';
+
+      }
+     
+
+
 
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';

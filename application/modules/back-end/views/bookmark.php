@@ -397,6 +397,7 @@
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title" id="exampleModalLabel">Document_File <?php echo $bookmark['store_id'] ?></h5>
+                                                                                
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -404,6 +405,7 @@
                                                                             <div class="modal-body">
                                                                             <h3><p>Document File </p></h3>
                                                                             <form action="sendEmail_delivery_pay" method="POST">
+                                                                         <input type="hidden"  name="id" value="<?php echo $bookmark['order_id']; ?>">
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
                                                                                         <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $bookmark['store_id']])->result_array(); ?>
