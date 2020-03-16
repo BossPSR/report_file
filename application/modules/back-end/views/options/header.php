@@ -283,6 +283,16 @@
                             </ul>
                         </li>
                         <?php 
+                            $notify = 0;
+
+                            $notify_checkFor_sell = 0;
+                            $uploadStore = $this->db->group_by('store_id')->get_where('tbl_upload_store' , ['notify_admin' => 0])->result_array();
+                            foreach($uploadStore as $upload_store){
+                                if ($upload_store['notify_admin'] == 0) {
+                                    $notify_checkFor_sell += 1;
+                                }
+                            }
+
                             $notify_myStore = 0;
                             $uploadOrder = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
                             foreach($uploadOrder as $upload_order){
@@ -290,14 +300,17 @@
                                     $notify_myStore += 1;
                                 }
                             }
+
+                            $notify += $notify_checkFor_sell;
+                            $notify += $notify_myStore;
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store_reject_for_buy" ||  $this->uri->segment(1) ==  "Section" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell" ||  $this->uri->segment(1) ==  "back_store_reject" ||  $this->uri->segment(1) ==  "back_upload_main_search") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store <span style="margin-left:5px; background:red; padding: 5px 5px; border-radius: 50%;"><?php echo $notify_myStore; ?></span></span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store <span class="badge badge badge-warning badge-pill" style="<?php if($notify == 0){ echo "display:none";} ?>"><?php echo $notify; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_checkForsell") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_checkForsell" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Chack for sell</a>
+                                                                            } ?>" href="back_store_checkForsell" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Chack for sell <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_checkFor_sell == 0){ echo "display:none";} ?>"><?php echo $notify_checkFor_sell; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Section") {
                                                                                 echo 'active';
@@ -309,7 +322,7 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_buy") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-package"></i>Store For buy <span style="margin-left:5px; background:red; padding: 5px 5px; border-radius: 50%;"><?php echo $notify_myStore; ?></span></a>
+                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-package"></i>Store For buy <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_myStore == 0){ echo "display:none";} ?>"><?php echo $notify_myStore; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject") {
                                                                                 echo 'active';

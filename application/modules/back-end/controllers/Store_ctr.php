@@ -90,7 +90,8 @@ class Store_ctr extends CI_Controller
                 'note'                 => $this->input->post('note_s'),
                 'update_at'                  => date('Y-m-d H:i:s'),
                 'notify_user'                => 0,
-                'status_cp'                => $this->input->post('status_cp')
+                'status_cp'                => $this->input->post('status_cp'),
+                'notify_admin'                => 1,
             );
             $this->db->where('order_id', $orderid);
             $resultsedit1 = $this->db->update('tbl_upload_order', $data);
@@ -346,7 +347,8 @@ class Store_ctr extends CI_Controller
             'note'                 => $this->input->post('note_s'),
             'status_book'         => 2,
             'update_at'                  => date('Y-m-d H:i:s'),
-            'notify_user'                => 0
+            'notify_user'                => 0,
+            'notify_admin'                => 1
 
 
         );
@@ -374,7 +376,8 @@ class Store_ctr extends CI_Controller
             'note_reject'         => $this->input->post('note'),
             'is_check'            => 1,
             'update_at'                  => date('Y-m-d H:i:s'),
-            'notify_user'                => 0
+            'notify_user'                => 0,
+            'notify_admin'                => 1
 
 
         );
@@ -539,7 +542,7 @@ class Store_ctr extends CI_Controller
         $id = $this->input->get('id');
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'),'is_check' => 1,'notify_user' => 0]);
+        $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'),'is_check' => 1,'notify_user' => 0,'notify_user' => 1]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
@@ -625,7 +628,7 @@ class Store_ctr extends CI_Controller
     {
         $store_id = $this->input->get('id');
         $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
-
+        
 
         foreach ($dm as $key => $dm) {
             if ($dm['section'] == 0) {
@@ -637,6 +640,7 @@ class Store_ctr extends CI_Controller
 
         $data = array(
             'status_chack'                    => 1,
+            'notify_admin'                    => 1
         );
 
         $this->db->where('store_id', $store_id);

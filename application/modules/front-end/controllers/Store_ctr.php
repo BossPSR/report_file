@@ -63,6 +63,7 @@ class Store_ctr extends CI_Controller
                         'file_name'     => $uploadData['file_name'],
                         'path'          => 'uploads/Store/' . $uploadData['file_name'],
                         'create_at'     => date('Y-m-d H:i:s'),
+                        'notify_admin'  => 0
                     );
                     $this->db->insert('tbl_upload_store', $data);
                 }
