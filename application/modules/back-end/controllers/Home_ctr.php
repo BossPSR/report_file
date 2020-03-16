@@ -13,6 +13,8 @@ class Home_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('email_admin') != '') 
 		{	
+			$lang= $this->session->userdata("lang")==null?"english":$this->session->userdata("lang");
+		    $this->lang->load($lang,$lang);
 			$this->load->view('options/header');
 			$this->load->view('index');
 			$this->load->view('options/footer');
@@ -22,6 +24,15 @@ class Home_ctr extends CI_Controller {
 		 
 		
 	
+	}
+	
+	public function change()
+	{  
+		$type	= $this->input->get('type');
+		$uri     = $this->input->get('uri');
+		$this->session->set_userdata('lang',$type);
+		redirect($uri);
+		
 	}
 	
 	

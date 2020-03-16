@@ -213,6 +213,8 @@ $route['Delivery']                          = 'back-end/delivery_ctr';
 $route['upload_delivery']                          = 'back-end/delivery_ctr/upload_delivery';
 $route['sendEmail_delivery_pay']               = 'back-end/Book_ctr/sendEmail_delivery_pay';
 $route['sendEmail_delivery_complete']               = 'back-end/Complete_ctr/sendEmail_delivery_complete';
+$route['Feedback']                           = 'back-end/Feedback_ctr';
+$route['Feedback_team']                           = 'back-end/Feedback_ctr/feedback_team';
 
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';
