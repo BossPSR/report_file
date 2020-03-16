@@ -151,9 +151,9 @@ class Book_ctr extends CI_Controller
         $this->email->set_mailtype('html');
 
         if ($this->email->send() == true) {
-            echo '1';
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
         } else {
-            echo '2';
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
         }
     }
 }
