@@ -27,6 +27,23 @@
                     <div class="single_banner menu_profileList">
                         <div class="menu_profileRow">
                             <div class="result_list_menu">
+                                <div class="list_menu" style="font-weight:bold;;font-size:18px;margin-top:-20px;margin-bottom:20px;">
+                                    <?php echo $user['idUser']; ?>
+                                </div>
+                                <div class="result_menu">
+                                    <?php echo $user['email']; ?>
+                                </div>
+                                <div class="list_menu">
+                                    <a class="btn btn-warning" style="color:#fff;" data-toggle="modal" data-target="#exampleModalUser">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_banner menu_profileList">
+                        <div class="menu_profileRow">
+                            <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($user['score']); ?></div>
                                 <div class="list_menu">Score</div>
                             </div>
@@ -62,7 +79,7 @@
                             </div>
                             <?php
                             $numCost = 0;
-                            $cost = $this->db->group_by('store_id')->get_where('tbl_upload_store',['userId' => $user['idUser']])->result_array();
+                            $cost = $this->db->group_by('store_id')->get_where('tbl_upload_store', ['userId' => $user['idUser']])->result_array();
                             foreach ($cost as $cost) {
                                 if (isset($cost['grade'])) {
                                     $numCost += 1;
@@ -146,6 +163,54 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalUser" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="My-profile-update" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                        <input type="text" class="form-control" name="name" value="<?php echo $user['username']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Passport</label>
+                        <input type="text" class="form-control" name="passport" value="<?php echo $user['passport']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Phone</label>
+                        <input type="text" class="form-control" name="phone" value="<?php echo $user['phone']; ?>" required>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" class="form-control" name="password" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Confirm Password</label>
+                        <input type="password" class="form-control" name="c_password" value="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 <?php if ($this->session->flashdata('save_ss')) : ?>
     <script type='text/javascript'>
         swal("Good job!", "You clicked the button!", "success");

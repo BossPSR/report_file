@@ -279,7 +279,7 @@
                                                     <li style="margin: 5px 10px;"><a href="#"><i class="fa fa-circle" style="color:#b6b6b6;"></i> Offline</a></li>
                                                 </ul>
                                         </li>
-                                        <li><a href="#"> <?php echo $team['name'] ?> </a></li>
+                                        <li><a href="My-profile_team"> <?php echo $team['name'] ?> </a></li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php else :  ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
@@ -359,7 +359,13 @@
                                                 $sm_del = $this->db->get()->row_array();
                                                 ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list"><?php echo $sm_del['sum_delivery']; ?></div>
+                                                    <div class="menu-list">
+                                                        <?php if (empty($sm_del['sum_delivery'])) { ?>
+                                                            0
+                                                        <?php } else { ?>
+                                                            <?php echo $sm_del['sum_delivery']; ?>
+                                                        <?php } ?>
+                                                    </div>
                                                     <div>My Jobs</div>
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">

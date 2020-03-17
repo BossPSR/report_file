@@ -139,6 +139,11 @@ $route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
 $route['My-task']               = 'front-end/My_stock_ctr/my_task';
 $route['My-delivery']           = 'front-end/Delivery_ctr';
 $route['delivery_file']           = 'front-end/Delivery_ctr/delivery_file';
+$route['My-profile_team']       = 'front-end/My_team_ctr/my_profile_team';
+$route['My-profile-team-update']       = 'front-end/My_team_ctr/my_profile_team_update';
+$route['My-profile-update']     = 'front-end/My_user_ctr/profile_user_update';
+$route['My-profile_team_edit']  = 'front-end/My_team_ctr/profile_team_edit';
+$route['order_approverd']       = 'front-end/Order_ctr/order_approved';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';
