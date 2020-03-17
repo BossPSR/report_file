@@ -284,7 +284,7 @@
                             </ul>
                         </li>
                         <?php 
-                            $notify = 0;
+                            $notifyMystore = 0;
 
                             $notify_checkFor_sell = 0;
                             $uploadStore = $this->db->group_by('store_id')->get_where('tbl_upload_store' , ['notify_admin' => 0])->result_array();
@@ -302,12 +302,12 @@
                                 }
                             }
 
-                            $notify += $notify_checkFor_sell;
-                            $notify += $notify_myStore;
+                            $notifyMystore += $notify_checkFor_sell;
+                            $notifyMystore += $notify_myStore;
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store_reject_for_buy" ||  $this->uri->segment(1) ==  "Section" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell" ||  $this->uri->segment(1) ==  "back_store_reject" ||  $this->uri->segment(1) ==  "back_upload_main_search") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store <span class="badge badge badge-warning badge-pill" style="<?php if($notify == 0){ echo "display:none";} ?>"><?php echo $notify; ?></span></span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store <span class="badge badge badge-warning badge-pill" style="<?php if($notifyMystore == 0){ echo "display:none";} ?>"><?php echo $notifyMystore; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_checkForsell") {
                                                                                 echo 'active';
@@ -380,15 +380,28 @@
                             </ul>
 
                         </li>
+                        <?php 
+                            $notifyBookmark = 0;
+                            $notify_pay = 0;
+                            $bookmarkPay = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
+                            foreach ($bookmarkPay as $bookmark_pay) {
+                                
+                                if ($bookmark_pay['status_pay'] == 1) {
+                                    $notify_pay += 1;
+                                }
+                            }
+                            $notifyBookmark += $notify_pay;
+                           
+                        ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark <span class="badge badge badge-warning badge-pill" style="<?php if($notifyBookmark == 0){ echo "display:none";} ?>"><?php echo $notifyBookmark; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu="">
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") {
                                                                 echo 'active';
                                                             } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-book"></i>Pay
+                                        <i class="feather icon-book"></i>Pay <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_pay == 0){ echo "display:none";} ?>"><?php echo $notify_pay; ?></span>
                                     </a>
                                 </li>
                                 <li data-menu="">
