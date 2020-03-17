@@ -36,5 +36,23 @@ class Feedback_ctr extends CI_Controller
             $this->load->view('login');
         }
     }
+
+    public function status_Feedback()
+    {
+        $id = $this->input->get('id');
+        $tid = $this->input->get('tid');
+
+      
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'),'teamId' => $tid,'notify_team' => 0,'status_c_feedack_team' => 1]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated Feedback information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated Feedback information');
+        }
+        return redirect('Feedback_team');
+    }
     
 }

@@ -21,7 +21,7 @@ class Feedback_model extends CI_Model{
     
     public function feedback_team()
     {
-        $this->db->select('*');
+        $this->db->select('*,tbl_feedback.id AS id_num');
         $this->db->from('tbl_feedback');
         $this->db->join('tbl_upload_team','tbl_feedback.order_id=tbl_upload_team.order_id');
 

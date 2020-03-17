@@ -1,6 +1,6 @@
 <!-- BEGIN: Content-->
 <?php $id = $this->input->get('id'); ?>
-<?php $book = $this->db->get_where('tbl_bookmark',['id_document'=>$id])->row_array();?>
+<?php $book = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $id])->row_array(); ?>
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -37,23 +37,28 @@
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <label for="" style="font-size: 16px;">File Document </label>
                                             <form action="fileUpload_store_book" class="dropzone dropzone-area" id="maindropzone">
-                                            <input type="text" id="DM2" class="form-control " name="DM" value="<?php echo $book['id_document']?>" hidden>
+                                                <input type="text" id="DM2" class="form-control " name="DM" value="<?php echo $book['id_document'] ?>" hidden>
 
                                                 <div class="dz-message" style="top: 24%;">Upload Document</div>
                                             </form>
                                         </div>
-                                   
-                                      
+
+
 
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> DM </label>
-                                            <input type="text" id="DM1" name="DM" class="form-control" value="<?php echo $book['id_document']?>"  required disabled>
-
+                                    
+                                            <?php $book1 = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $id])->result_array(); ?>
+                                            <select   class="form-control" name="DM" id="DM1">
+                                            <?php foreach ($book1 as $key => $book1) {?>
+                                                <option value="<?php echo $book1['id_document'] ?>"><?php echo $book1['id_document'] ?></option>
+                                            <?php }?>
+                                            </select>
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;"></div>
 
-                                      
+
 
                                         <div class="col-xl-12 col-md-12 col-12" style="margin-top: 25px;">
                                             <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1"> Add Admin</button>
@@ -71,14 +76,12 @@
     </div>
 </div>
 <script>
-   $("#DM1")
-        .keyup(function() {
+    $("#DM1")
+        .change(function() {
             var value = $(this).val();
             $("#DM2").val(value);
         })
-        .keyup();
-
-   
+        .change();
 </script>
 <script>
     var x = document.getElementById("DM1").value;
@@ -92,17 +95,18 @@
 
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
-      
-              
-                 myDropzone.processQueue();
-                 myDropzone.on("success", function(file, res) {
-                     swal("Good job!", "Upload for data successfull", "success", {
-                         button: false,
-                     });
-                    setTimeout(function(){location.href="Bookmark"} , 1000);
-                 });
-             
 
-         });
- 
+
+        myDropzone.processQueue();
+        myDropzone.on("success", function(file, res) {
+            swal("Good job!", "Upload for data successfull", "success", {
+                button: false,
+            });
+            setTimeout(function() {
+                location.href = "Bookmark"
+            }, 1000);
+        });
+
+
+    });
 </script>

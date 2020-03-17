@@ -141,14 +141,14 @@
                                         <table class="table zero-configuration" id="loading_img_spin">
                                             <thead>
                                                 <tr>
-                                                    <th>order_id</th>
-                                                    <th>User_id</th>
+                                                    <th>order Id</th>
+                                                    <th>User Id</th>
                                                     <th>DM</th>
-                                                    <th>Main_file</th>
-                                                    <th>GT_File</th>
-                                                    <th>Document_File</th>
-                                                    <th>Team_File</th>
-                                                    <th>Date_Required</th>
+                                                    <th>Main File</th>
+                                                    <th>GT File</th>
+                                                    <th>Document File</th>
+                                                    <th>Team File</th>
+                                                    <th>Date Required</th>
                                                     <th>Status</th>
                                                     <th>position</th>
                                                     <th>tool</th>
@@ -156,26 +156,26 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($bookmark as $keyBook => $bookmark) { ?>
-                                               
-                                                    
+
+
                                                     <tr>
                                                         <td><?php echo $bookmark['orderby'] ?></td>
                                                         <td><?php echo $bookmark['user_name'] ?></td>
                                                         <td>
-                                                            <?php if (empty($bookmark['id_document'])):?>
-                                                                -
-                                                            <?php else:?>
-                                                          
-                                                         <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
-                                                            
-                                                            <?php if ($show_dm['id_document'] == '') : ?>
+                                                            <?php if (empty($bookmark['id_document'])) : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <br><?php echo $show_dm['id_document'] ?>
-                                                            <?php endif; ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->result_array(); ?>
+                                                                <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
 
-                                                            <?php } ?>
-                                                            <?php endif;?>
+                                                                    <?php if ($show_dm['id_document'] == '') : ?>
+                                                                        -
+                                                                    <?php else : ?>
+                                                                        <br><?php echo $show_dm['id_document'] ?>
+                                                                    <?php endif; ?>
+
+                                                                <?php } ?>
+                                                            <?php endif; ?>
                                                         </td>
 
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -193,8 +193,8 @@
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark['orderby']])->result_array(); ?>
                                                                                     <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
+                                                                                        <th>Order Id</th>
+                                                                                        <th>File Name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -235,8 +235,8 @@
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $bookmark['orderby']])->result_array(); ?>
                                                                                     <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
+                                                                                        <th>Order Id</th>
+                                                                                        <th>File Name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -269,50 +269,62 @@
                                                             <?php if ($bookmark['status_book'] == '1') : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['store_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalc<?php echo $bookmark['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Document_File </h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Document_File</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                          
-                                                                                <?php foreach ($dm as $key =>$dm) {?>
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm['store_id']])->result_array(); ?>
-                                                                                        <tr>
-                                                                                            <th>Relive</th>
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                            <tr>
 
-                                                                                                <td>
-                                                                                                    <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                        -
-                                                                                                    <?php else : ?>
-                                                                                                        <div class="badge badge-primary">Relive</div>
-                                                                                                    <?php endif ?>
-                                                                                                </td>
-                                                                                                <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderss['create_at'] ?></td>
+                                                                                <?php foreach ($dm as $key => $dm) { ?>
+                                                                                    <?php if (!empty($dm['id_document'])) : ?>
+                                                                                        <p><b>
+                                                                                                <h3><?php echo $dm['id_document']; ?></h3>
+                                                                                            </b></p>
+                                                                                        <table class="table ">
+                                                                                            <thead>
+
+                                                                                                <?php 
+                                                                                                $this->db->order_by("create_at", "desc");
+                                                                                                $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm['store_id']])->result_array(); 
+                                                                                                ?>
+                                                                                                <tr>
+                                                                                                    <th>Relive</th>
+                                                                                                    <th>Store Id</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                                    <tr>
+
+                                                                                                        <td>
+                                                                                                            <?php if ($orderss['relive_status'] == '0') : ?>
+                                                                                                                -
+                                                                                                            <?php else : ?>
+                                                                                                                <div class="badge badge-primary">Relive</div>
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $orderss['store_id'] ?></td>
+                                                                                                        <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $orderss['create_at'] ?></td>
 
 
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                                    <?php }?>
+                                                                                                    </tr>
+                                                                                                <?php } ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
+
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -336,7 +348,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Team File <?php echo $bookmark['id_orderBuy'] ?></h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Team File </h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -347,8 +359,8 @@
                                                                                     <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $bookmark['id_orderBuy']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Relive</th>
-                                                                                        <th>Store_id</th>
-                                                                                        <th>File_name</th>
+                                                                                        <th>Store Id</th>
+                                                                                        <th>File Name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -401,17 +413,29 @@
                                                             <?php } ?>
 
                                                         </td>
-                                                        <td><a href="Add_bookmake?id=<?php echo $bookmark['id_document'] ?>"><button type="button" class="btn btn-primary mr-1 mb-1">+ Drop file</button></a>
+                                                        <td>   
+                                                 
+                                                        <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->row_array(); ?>
+                                                          
+                                                        <?php $show_dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $show_dm_c['id_document']])->row_array(); ?>
+                                                        
+                                                        <?php  $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'],'status_check_drop' => '11'])->row_array(); ?>
+                                                            <?php if($show_dm_c2 == true):?>
+                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
+                                                            <?php else:?>
+                                                            
+                                                           <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
+                                                            <?php endif;?>
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
-                                                                <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target="#exampleModal">+ delivery file</button>
+                                                                <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target="#exampleModal"><i class="feather icon-navigation"></i> delivery file</button>
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['store_id']; ?>">+ delivery file</button>
+                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['order_save']; ?>"><i class="feather icon-navigation"></i> delivery file</button>
                                                             <?php endif; ?>
-                                                            <div class="modal fade" id="exampleModalu<?php echo $bookmark['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                            <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Document_File <?php echo $bookmark['store_id'] ?></h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">delivery file</h5>
 
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
@@ -419,52 +443,61 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <h3>
-                                                                                <p>Document File </p>
+                                                                                <p>delivery file </p>
                                                                             </h3>
                                                                             <form action="sendEmail_delivery_pay" method="POST">
-                                                                                <input type="hidden" name="id" value="<?php echo $bookmark['order_id']; ?>">
-                                                                         
+                                                                                <input type="hidden" name="id" value="<?php echo $bookmark['order_save']; ?>">
 
-                                                                
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $bookmark['store_id'],])->result_array(); ?>
-                                                                                        <tr>
-                                                                                            <th>Select</th>
-                                                                                            <th>Relive</th>
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                            <tr>
-                                                                                                <td>
-                                                                                                    <label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" name="order_id[]" value="<?php echo $orderss['id'] ?>">
-                                                                                                        <span class="checkmark"></span>
-                                                                                                    </label>
-                                                                                                </td>
+                                                                                <?php foreach ($dm1 as $key => $dm1) { ?>
+                                                                                    <?php if (!empty($dm1['id_document'])) : ?>
+                                                                                        <p><b>
+                                                                                                <h3><?php echo $dm1['id_document']; ?></h3>
+                                                                                            </b></p>
 
-                                                                                                <td>
-                                                                                                    <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                        -
-                                                                                                    <?php else : ?>
-                                                                                                        <div class="badge badge-primary">Relive</div>
-                                                                                                    <?php endif ?>
-                                                                                                </td>
-                                                                                                <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderss['create_at'] ?></td>
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm1['store_id'],])->result_array(); ?>
+
+                                                                                                <tr>
+                                                                                                    <th>Select</th>
+                                                                                                    <th>Relive</th>
+                                                                                                    <th>Store Id</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <label class="container">
+                                                                                                                <input type="checkbox" class="checkmark" name="order_id[]" value="<?php echo $orderss['id'] ?>">
+                                                                                                                <span class="checkmark"></span>
+                                                                                                            </label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <?php if ($orderss['relive_status'] == '0') : ?>
+                                                                                                                -
+                                                                                                            <?php else : ?>
+                                                                                                                <div class="badge badge-primary">Relive</div>
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $orderss['store_id'] ?></td>
+                                                                                                        <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $orderss['create_at'] ?></td>
 
 
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                                    </tr>
+                                                                                                <?php } ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
                                                                                 <h3>
                                                                                     <p>Team file</p>
                                                                                 </h3>
@@ -474,8 +507,8 @@
                                                                                         <tr>
                                                                                             <th>Select</th>
 
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
+                                                                                            <th>Order Id</th>
+                                                                                            <th>File Name</th>
                                                                                             <th>File</th>
                                                                                             <th>create</th>
                                                                                         </tr>

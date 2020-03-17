@@ -27,11 +27,9 @@
         </div>
 
         <?php
-        $this->db->select('*');
-        $this->db->from('tbl_bookmark');
-        $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy');
-        $this->db->where('tbl_upload_order.status_pay', 0);
-        $this->db->group_by('tbl_bookmark.id_orderBuy');
+       $this->db->select('*,tbl_feedback.id AS id_num');
+       $this->db->from('tbl_feedback');
+       $this->db->join('tbl_upload_team','tbl_feedback.order_id=tbl_upload_team.order_id');
 
         $datata = $this->db->get()->result_array();
 
@@ -132,6 +130,17 @@
                                                         </td>
                                                         <td><?php echo $feedback_team['feedback_detail'] ?></td>
                                                         <td><?php echo $feedback_team['create_at'] ?></td>
+                                                        <td> 
+                                                            <?php if ($feedback_team['status_c_feedack_team']=='0'):?>
+                                                        <button onclick="confirmalertunlock_upload_Feedback('<?php echo $feedback_team['teamId']; ?>','<?php echo $feedback_team['id_num']; ?>')" class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
+                                                                        Feedback
+                                                        </button>       
+                                                        <?php else:?>     
+                                                            <button onclick="('<?php echo $feedback_team['teamId']; ?>','<?php echo $feedback_team['id_num']; ?>')" class="btn btn-secondary" type="button" aria-haspopup="true" aria-expanded="false">
+                                                                        Feedback
+                                                        </button>  
+                                                        <?php endif;?>  
+                                                        </td>
                                                     </tr>
 
                                                 <?php } ?>
