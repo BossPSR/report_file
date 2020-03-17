@@ -25,6 +25,7 @@
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($buy_email as $value) : ?>
+                                <?php $sub_order = substr($value['order_id'], 3); ?>
                                 <tr style="text-align:center;">
                                     <th style="text-align: center;font-size: 39px;">
                                         <?php if ($value['status'] == 0) : ?>
@@ -48,7 +49,7 @@
                                                         </button>
                                                     </div>
                                                     <?php $zz = 1; ?>
-                                                    <?php $order_main = $this->db->get_where('tbl_upload_order', ['order_id' => $value['order_id']])->result_array(); ?>
+                                                    <?php $order_main = $this->db->get_where('tbl_upload_order', ['order_id' => $value['order_id'], 'status_approved !=' => 0])->result_array(); ?>
                                                     <div class="modal-body">
                                                         <?php if (!empty($order_main)) { ?>
                                                             <table class="table table-bordered">
@@ -131,14 +132,48 @@
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php $produm   = date('Y-m-d', strtotime('+5 day' . '+' . $value['update_at_buy'])); ?>
                                         <?php if ($DateT >= $produm) : ?>
-                                            <button type="button" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-success" id="approved<?php echo $sub_order; ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-danger" id="not_approved"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                         <?php else : ?>
                                             -
                                         <?php endif; ?>
                                     </td>
                                 </tr>
-
+                                <script type='text/javascript'>
+                                    $('#approved<?php echo $sub_order ?>').click(function() {
+                                        swal({
+                                            icon: "success",
+                                            title: "Are you sure?",
+                                            text: "Do you want Approvend document",
+                                            closeOnEsc: true,
+                                            closeOnClickOutside: false,
+                                            buttons: {
+                                                cancel: true,
+                                                confirm: true,
+                                            },
+                                        }).then(function(isConfirm) {
+                                            if (isConfirm == true) {
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: 'order_approverd',
+                                                    data: {
+                                                        order_id: <?php echo $sub_order; ?>,
+                                                        status_approved: 1,
+                                                    },
+                                                    success: function(success) {
+                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                            button: false,
+                                                        });
+                                                        setTimeout("location.reload(true);", 1000);
+                                                    }
+                                                });
+                                            } else {
+                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                            }
+                                        });
+                                    });
+                                </script>
                             <?php endforeach; ?>
 
                         </tbody>
