@@ -215,6 +215,7 @@ $route['sendEmail_delivery_pay']               = 'back-end/Book_ctr/sendEmail_de
 $route['sendEmail_delivery_complete']               = 'back-end/Complete_ctr/sendEmail_delivery_complete';
 $route['Feedback']                           = 'back-end/Feedback_ctr';
 $route['Feedback_team']                           = 'back-end/Feedback_ctr/feedback_team';
+$route['Status_Feedback']                           = 'back-end/Feedback_ctr/status_Feedback';
 
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

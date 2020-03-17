@@ -83,7 +83,7 @@ class Store_model extends CI_Model
 
     public function bookmark_all()
     {
-        $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re');
+        $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re ,tbl_upload_order.order_id AS order_save');
         $this->db->from('tbl_bookmark');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document=tbl_upload_main_search.id_doc', 'left');
@@ -94,8 +94,17 @@ class Store_model extends CI_Model
         $this->db->group_by('tbl_bookmark.id_orderBuy');
         $this->db->order_by('tbl_bookmark.id', 'ASC');
 
-        return $this->db->get()->result_array();
+        return  $this->db->get()->result_array();
+
+        
+
+        
     }
+
+   
+
+
+
 
     public function bookmark_all_not()
     {
@@ -138,6 +147,25 @@ class Store_model extends CI_Model
         $this->db->order_by('tbl_bookmark.id', 'ASC');
         return $this->db->get()->result_array();
     }
+
+    public function bookmark_dm1()
+    {
+        $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re');
+        $this->db->from('tbl_bookmark');
+        $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
+        $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document=tbl_upload_main_search.id_doc', 'left');
+        $this->db->join('tbl_upload_store', 'tbl_upload_main_search.upload_store_id=tbl_upload_store.store_id', 'left');
+        $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id=tbl_upload_team.order_id', 'left');
+        $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
+        $this->db->where('tbl_upload_order.status_pay', 1);
+        $this->db->group_by('tbl_bookmark.id_document');
+        $this->db->order_by('tbl_bookmark.id', 'ASC');
+        return $this->db->get()->result_array();
+    }
+
+  
+
+
     public function bookmark_show_dm()
     {
         $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re');
@@ -152,4 +180,7 @@ class Store_model extends CI_Model
         $this->db->order_by('tbl_bookmark.id', 'ASC');
         return $this->db->get()->result_array();
     }
+
+
+
 }

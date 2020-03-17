@@ -69,6 +69,7 @@ class Book_ctr extends CI_Controller
                         'status_chack' => 1,
                         'relive_status' => 1,
                         'path'          => 'uploads/Store/' . $uploadData['file_name'],
+                        'status_check_drop' => 11,
                         'create_at'     => date('Y-m-d H:i:s'),
                     );
                     $this->db->insert('tbl_upload_store', $data);
@@ -85,10 +86,8 @@ class Book_ctr extends CI_Controller
         $order_team =$this->input->post('order_team');
         $id =$this->input->post('id');
 
-       
       
-     
-      
+
         $this->db->where('order_id',$id);
         $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'status_delivery' => 1 ,'notify_team' => 0 ,'notify_user' => 0]);
         $subject = 'test ip-soft';

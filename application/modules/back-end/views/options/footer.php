@@ -89,6 +89,23 @@
         })
     }
 </script>
+
+<script>
+    function confirmalertunlock_upload_Feedback(data3,data4) {
+
+        swal({
+            title: "Are you sure Feedback?",
+            text: "Are you sure you want to unlock this document ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'Status_Feedback?tid=' + data3 + '&id=' + data4 ;
+            }
+        })
+    }
+</script>
  <!-- uploadslider -->
 
 </body>

@@ -53,6 +53,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>Status Sell</th>
                                                     <th>Document</th>
                                                     <th>Search Item</th>
                                                     <th>Select Item</th>
@@ -69,6 +70,7 @@
                                                     
                                                     <tr>
                                                         <td><?php echo $i++ ; ?></td>
+                                                        <td></td>
                                                         <td><?php echo $value['id_doc'];;?></td>
                                                         <td><?php echo $value['search_item']; ?></td>
                                                         <td><?php echo $value['select_item']; ?></td>

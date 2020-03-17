@@ -56,7 +56,7 @@
                                                     <th style="width:18%">File Name</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
-                                                    <th>date_required</th>
+                                                    <th>Date Required</th>
                                                     <th>Confirmed order</th>
                                                 </tr>
                                             </thead>
@@ -93,8 +93,8 @@
                                                                                     <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>#</th>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
+                                                                                        <th>Order Id</th>
+                                                                                        <th>File Name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -138,8 +138,8 @@
                                                                                     <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>#</th>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
+                                                                                        <th>Order Id</th>
+                                                                                        <th>File Name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -231,33 +231,31 @@
                                                                     <div class="modal-body">
                                                                         <div class="row" id="first_goal">
                                                                             <div class="col-xl-9 col-md-6 col-9 mb-1">
-                                                                                    <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
-                                                                                    <label for="basicInput">Document ID</label>
-                                                                                    <select name="Document[]" onClick="add_select(this);" class="form-control">
+                                                                                <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
+                                                                                <label for="basicInput">Document ID</label>
+                                                                                <select name="Document[]" onClick="add_select(this);" class="form-control">
                                                                                     <option value="" selected disabled>select</option>
-                                                                                            <?php foreach ($chek_book as $key => $chek_book) {?>
+                                                                                    <?php foreach ($chek_book as $key => $chek_book) { ?>
                                                                                         <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>
-                                                                                            <?php }?>
-                                                                                    </select>
-                                                                                    <input type="hidden" id="DocumentResult" name="DocumentResult[]">
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                                <input type="hidden" id="DocumentResult" name="DocumentResult[]">
                                                                             </div>
                                                                             <div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;">
                                                                                 <button type="button" class="btn btn-info" onclick="add_goal(this);">เพิ่ม</button>
                                                                             </div>
                                                                         </div>
 
-                                                                       
-                                                                        <div class="modal-body row">
-                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                <div class="form-group">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
                                                                                 <label for="basicInput"></label>
 
-                                                                                    <?php $chek_name  = $this->db->get_where('tbl_user', ['idUser' => $stored['userId']])->row_array(); ?>
-                                                                                    <label for="basicInput">Customer code</label>
-                                                                                    <input type="text" name="Customer" class="form-control" value="<?php echo $chek_name['idUser']; ?>" placeholder="Enter Document ID" readonly>
-                                                                                </div>
+                                                                                <?php $chek_name  = $this->db->get_where('tbl_user', ['idUser' => $stored['userId']])->row_array(); ?>
+                                                                                <label for="basicInput">Customer code</label>
+                                                                                <input type="text" name="Customer" class="form-control" value="<?php echo $chek_name['idUser']; ?>" placeholder="Enter Document ID" readonly>
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Order</label>
@@ -280,9 +278,9 @@
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                            <label for="helpInputTop">Quality File</label>
+                                                                                <label for="helpInputTop">Quality File</label>
                                                                                 <select name="status_cp" class="form-control" required>
-                                                                                   <option value="" selected disabled>select</option>
+                                                                                    <option value="" selected disabled>select</option>
                                                                                     <option value="complete">Complete</option>
                                                                                     <option value="notcomplete">NotComplete</option>
                                                                                 </select>
@@ -299,11 +297,11 @@
 
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
+
+                                                                        <div class="add-data-btn mr-1">
+                                                                            <button type="submit" class="btn btn-primary">submit</button>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -337,7 +335,8 @@
                                                                                 <label for="helpInputTop">Order</label>
                                                                                 <input type="text" class="form-control" name="Order" value="<?php echo $stored['order_id']; ?>" placeholder="Enter Order" readonly>
                                                                             </div>
-
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">price</label>
                                                                                 <input type="text" class="form-control" name="price_file" value="<?php echo $stored['price_file']; ?>" placeholder="Enter price" required>
@@ -359,11 +358,11 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
+
+                                                                        <div class="add-data-btn mr-1">
+                                                                            <button type="submit" class="btn btn-primary">submit</button>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -392,11 +391,11 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
+
+                                                                        <div class="add-data-btn mr-1">
+                                                                            <button type="submit" class="btn btn-primary">submit</button>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -417,7 +416,7 @@
             </section>
             <!--/ Zero configuration table -->
 
-           
+
 
         </div>
     </div>
@@ -425,22 +424,22 @@
 
 <script>
     function add_goal(e) {
-          $('#first_goal').after('<div class="row" id="first_indic"><div class="col-xl-9 col-md-6 col-9 mb-1" id="first_goal"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select name="Document[]" onClick="add_select(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) {?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php }?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic(this);">ลบ</button></div></div>');
-      }
+        $('#first_goal').after('<div class="row" id="first_indic"><div class="col-xl-9 col-md-6 col-9 mb-1" id="first_goal"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select name="Document[]" onClick="add_select(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic(this);">ลบ</button></div></div>');
+    }
 
-      function remove_indic(e) {
-            $(e).parents('#first_indic').remove();
-      }
+    function remove_indic(e) {
+        $(e).parents('#first_indic').remove();
+    }
 
-      var data_select = [];
+    var data_select = [];
 
-      function add_select(e){
-          var select = $(e).val();
-              if (select != null) {
-                data_select.push(select);
-                $('#DocumentResult').val(data_select);
-              } 
-      }
+    function add_select(e) {
+        var select = $(e).val();
+        if (select != null) {
+            data_select.push(select);
+            $('#DocumentResult').val(data_select);
+        }
+    }
 
 
     //   $("select[name='Document[]']").change(function () {
