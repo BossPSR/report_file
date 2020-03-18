@@ -405,7 +405,7 @@
                             $notifyBookmark += $notify_pay;
                            
                         ?>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" ||$this->uri->segment(1) == "More_File"|| $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark <span class="badge badge badge-warning badge-pill" style="<?php if($notifyBookmark == 0){ echo "display:none";} ?>"><?php echo $notifyBookmark; ?></span></span></a>
                             <ul class="dropdown-menu">
@@ -446,6 +446,24 @@
                                       
                                     </ul>
                                 </li>
+                                <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "More_File" || $this->uri->segment(1) == "More_File_team") {
+                                                                echo 'active';
+                                                            } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>More File</a>
+                                    <ul class="dropdown-menu ">
+                                        <li data-menu="">
+                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "More_File") {
+                                                                echo 'active';
+                                                            } ?>" href="More_File" data-toggle="dropdown" data-i18n="Email">
+                                        <i class="feather icon-circle"></i>More File
+                                    </a>
+                                </li>
+                                        <li data-menu=""><a class="dropdown-item" href="More_File_team" data-toggle="dropdown" data-i18n="Chartjs"><i class="feather icon-circle"></i>More File Team</a>
+                                        </li>
+                                      
+                                    </ul>
+                                </li>
+
+                              
                         </li>
 
                 </ul>
