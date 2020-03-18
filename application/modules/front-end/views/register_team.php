@@ -22,13 +22,11 @@
     <div class="container">
         <div class="row">
             <!--login area start-->
-            <div class="col-lg-3 col-md-3">
-
-            </div>
+            <div class="col-lg-1 col-md-1"></div>
             <!--login area start-->
 
             <!--register area start-->
-            <div class="col-lg-8 col-md-8">
+            <div class="col-lg-10 col-md-10">
                 <div class="account_form register">
                     <h2>Sign Up for team</h2>
                     <form action="register-team-success" method="POST" enctype="multipart/form-data">
@@ -129,7 +127,11 @@
                     </form>
                 </div>
             </div>
+            
             <!--register area end-->
+             <!--login area start-->
+             <div class="col-lg-1 col-md-1"></div>
+            <!--login area start-->
         </div>
     </div>
 </div>

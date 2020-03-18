@@ -22,13 +22,11 @@
         <div class="container">
             <div class="row">
                 <!--login area start-->
-                <div class="col-lg-3 col-md-3">
-
-                </div>
+                <div class="col-lg-1 col-md-3"></div>
                 <!--login area start-->
 
                 <!--register area start-->
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-10 col-md-8">
                     <div class="account_form register">
                         <h2>Sign Up</h2>
                         <form action="register_success" method="POST">
@@ -74,6 +72,7 @@
                         </form>
                     </div>
                 </div>
+                <div class="col-lg-1 col-md-3"></div>
                 <!--register area end-->
             </div>
         </div>
