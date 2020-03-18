@@ -257,9 +257,21 @@
                                             } ?>">
                             <a href="back_dashboard"><i class="feather icon-home"></i><span data-i18n="Dashboard"><?= $this->lang->line("Dashboard"); ?></span></a>
                         </li>
+                        <?php 
+                            $notify_public = 0;
+                            $notifyTeam = 0;
+                            $teamList = $this->db->get_where('tbl_team',['notify_admin' => 0])->result_array();
+                            foreach($teamList as $team_list){
+                                if ($team_list['notify_admin'] == 0) {
+                                    $notifyTeam += 1;
+                                }
+                               
+                            }
+                            $notify_public += $notifyTeam;
+                        ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin" || $this->uri->segment(1) ==  "back_poster" || $this->uri->segment(1) ==  "back_vdo") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Public</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Public <span class="badge badge badge-warning badge-pill" style="<?php if($notify_public == 0){ echo "display:none";} ?>"><?php echo $notify_public ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_admin") {
                                                                                 echo 'active';
@@ -267,7 +279,7 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_team") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_team" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Team List</a>
+                                                                            } ?>" href="back_team" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Team List <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notifyTeam == 0){ echo "display:none";} ?>"><?php echo $notifyTeam ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_user") {
                                                                                 echo 'active';

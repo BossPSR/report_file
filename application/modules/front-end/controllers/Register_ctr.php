@@ -158,6 +158,7 @@ class Register_ctr extends CI_Controller
 							'password'			=> md5($password),
 							'file_name'			=> $uploadData['file_name'],
 							'created_at'		=> date('Y-m-d H:i:s'),
+							'notify_admin'      => 0
 						);
 						if ($this->db->insert('tbl_team', $data)) {
 							$team_id = $this->db->insert_id();
