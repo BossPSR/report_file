@@ -29,7 +29,7 @@ class Team_ctr extends CI_Controller {
         $status = $this->input->get('status');
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_team',['status' => $status]);
+        $resultsedit = $this->db->update('tbl_team',['status' => $status,'notify_admin' => 1]);
         $team = $this->db->get_where('tbl_team',['id',$id])->row_array();
         $this->sendEmail_reject($team,$status);
 
