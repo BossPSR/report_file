@@ -156,8 +156,6 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($bookmark as $keyBook => $bookmark) { ?>
-
-
                                                     <tr>
                                                         <td><?php echo $bookmark['orderby'] ?></td>
                                                         <td><?php echo $bookmark['user_name'] ?></td>
@@ -171,7 +169,7 @@
                                                                     <?php if ($show_dm['id_document'] == '') : ?>
                                                                         -
                                                                     <?php else : ?>
-                                                                        <br><?php echo $show_dm['id_document'] ?>
+                                                                        <?php echo $show_dm['id_document'] ?><br>
                                                                     <?php endif; ?>
 
                                                                 <?php } ?>
