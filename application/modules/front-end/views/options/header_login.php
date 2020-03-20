@@ -194,7 +194,7 @@
                                     </li>
                                 <?php elseif ($team) : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="My-stock"> My stock</a>
+                                        <a href="My-stock-Item"> My stock</a>
                                     </li>
 
                                     <li class="menu-item-has-children">
@@ -454,7 +454,7 @@
 
                                         <?php elseif ($team) : ?>
                                             <li>
-                                                <a href="My-stock"> My Stock</a>
+                                                <a href="My-stock-Item"> My Stock</a>
                                             </li>
                                             <li>
                                                 <a href="My-task"> My task</a>

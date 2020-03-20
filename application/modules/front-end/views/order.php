@@ -132,9 +132,15 @@
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php $produm   = date('Y-m-d', strtotime('+5 day' . '+' . $value['update_at_buy'])); ?>
                                         <?php if ($DateT >= $produm) : ?>
-                                            <button type="button" class="btn btn-success" id="approved<?php echo $sub_order; ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-danger" id="not_approved"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                            <?php if ($value['status_approved'] == 1) { ?>
+
+                                            <?php } elseif ($value['status_approved'] == 2) { ?>
+
+                                            <?php } else { ?>
+                                                <button type="button" class="btn btn-success" id="approved<?php echo $sub_order; ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-danger" id="not_approved<?php echo $sub_order; ?>"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <?php } ?>
+                                            <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                         <?php else : ?>
                                             -
                                         <?php endif; ?>
@@ -160,6 +166,40 @@
                                                     data: {
                                                         order_id: <?php echo $sub_order; ?>,
                                                         status_approved: 1,
+                                                    },
+                                                    success: function(success) {
+                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                            button: false,
+                                                        });
+                                                        setTimeout("location.reload(true);", 1000);
+                                                    }
+                                                });
+                                            } else {
+                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                            }
+                                        });
+                                    });
+                                </script>
+                                <script type='text/javascript'>
+                                    $('#not_approved<?php echo $sub_order ?>').click(function() {
+                                        swal({
+                                            icon: "warning",
+                                            title: "Are you sure?",
+                                            text: "Do you want Approvend document",
+                                            closeOnEsc: true,
+                                            closeOnClickOutside: false,
+                                            buttons: {
+                                                cancel: true,
+                                                confirm: true,
+                                            },
+                                        }).then(function(isConfirm) {
+                                            if (isConfirm == true) {
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: 'order_not_approved',
+                                                    data: {
+                                                        order_id: <?php echo $sub_order; ?>,
+                                                        status_approved: 2,
                                                     },
                                                     success: function(success) {
                                                         swal("Good job!", "Upload for data successfull", "success", {

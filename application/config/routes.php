@@ -133,7 +133,7 @@ $route['payment_email_success'] = 'front-end/Store_ctr/payment_email_success';
 $route['userNotify']            = 'front-end/My_user_ctr/userNotify';
 $route['read_userNotify']       = 'front-end/My_user_ctr/read_userNotify';
 $route['read_teamNotify']       = 'front-end/My_user_ctr/read_teamNotify';
-
+$route['My-stock-Item']         = 'front-end/My_stock_ctr/my_stock_item';
 $route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 $route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
 $route['My-task']               = 'front-end/My_stock_ctr/my_task';
@@ -144,6 +144,7 @@ $route['My-profile-team-update']       = 'front-end/My_team_ctr/my_profile_team_
 $route['My-profile-update']     = 'front-end/My_user_ctr/profile_user_update';
 $route['My-profile_team_edit']  = 'front-end/My_team_ctr/profile_team_edit';
 $route['order_approverd']       = 'front-end/Order_ctr/order_approved';
+$route['order_not_approved']       = 'front-end/Order_ctr/order_not_approved';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';

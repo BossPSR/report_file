@@ -11,7 +11,7 @@ class My_stock_ctr extends CI_Controller
         $this->load->model('Order_model');
     }
 
-    function my_stock()
+    function my_stock_item()
     {
         $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
         if ($this->session->userdata('email') == '') {
@@ -21,7 +21,24 @@ class My_stock_ctr extends CI_Controller
             foreach ($get_sess as $get_sess) {
                 $as[] = $get_sess['job_position'];
             }
-            $data['stock'] = $this->Order_model->my_stock($as);
+
+            $data['item']       = $this->Order_model->my_stock_item($as);
+            // $data['stock']      = $this->Order_model->my_stock($as);
+
+            $this->load->view('options/header_login');
+            $this->load->view('my_stock_item', $data);
+            $this->load->view('options/footer');
+        }
+    }
+
+    function my_stock()
+    {
+        $item_id = base64_decode($this->input->get('item'));
+        $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        if ($this->session->userdata('email') == '') {
+            redirect('home');
+        } else {
+            $data['stock'] = $this->Order_model->my_stock($item_id);
 
             $this->load->view('options/header_login');
             $this->load->view('my_stock', $data);
