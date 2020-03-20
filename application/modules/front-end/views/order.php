@@ -141,11 +141,100 @@
                                                 <button type="button" class="btn btn-danger" id="not_approved<?php echo $sub_order; ?>"><i class="fa fa-times" aria-hidden="true"></i></button>
                                             <?php } ?>
                                             <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalMainFeed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Reject Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body" style="text-align:left;">
+                                                            <label for="" class="font-size-upload">You can drop Document. </label>
+                                                            <form action="my-order-feedback" class="dropzone" id="fileuploadFeed">
+                                                                <div class="dz-message needsclick">
+                                                                    Drop files here or click to upload.<br>
+                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                    <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
+                                                                    <input type="date" name="create_at" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
+                                                                    <textarea name="detail" id="detail2" class="form-control" rows="5" hidden></textarea>
+                                                                    <input type="date" name="dated" id="dated2" class="form-control" value="" min="<?php echo date('Y-m-d'); ?>" style="width:30%" hidden>
+
+                                                                </div>
+                                                            </form>
+                                                            <br>
+                                                            <label for="" class="font-size-upload">Detail :</label>
+                                                            <textarea id="detail1" class="form-control" rows="5" required></textarea>
+                                                            <br>
+
+                                                            <label for="" class="font-size-upload">Date :</label>
+                                                            <input type="date" name="dated1" id="dated1" class="form-control" value="" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="SubmitFeed" class="btn btn-success">Success</button>
+                                                            <button type=" button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <?php else : ?>
                                             -
                                         <?php endif; ?>
                                     </td>
                                 </tr>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#dated1").change(function() {
+                                            var value = $(this).val();
+
+                                            $("#dated2").val(value);
+                                        }).keyup();
+
+                                    });
+                                </script>
+                                <script type='text/javascript'>
+                                    $(document).ready(function() {
+                                        $("#detail1").keyup(function() {
+                                            var value = $(this).val();
+
+                                            $("#detail2").val(value);
+                                        }).keyup();
+
+                                    });
+
+                                    Dropzone.autoDiscover = false;
+                                    var myDropzone = new Dropzone("#fileuploadFeed", {
+                                        autoProcessQueue: false,
+                                        maxFiles: 5,
+                                        addRemoveLinks: true,
+                                        parallelUploads: 5, // Number of files process at a time (default 2)
+                                    });
+                                    $('#SubmitFeed').click(function() {
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: 'my-order-feedback',
+                                            data: {
+                                                order_id: <?php echo $value['order_id']; ?>,
+                                            },
+                                            success: function(data) {
+                                                myDropzone.processQueue();
+                                                myDropzone.on("success", function(file, res) {
+                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                        button: false,
+                                                    });
+                                                    setTimeout("location.reload(true);", 1000);
+                                                });
+                                            },
+
+                                        });
+
+                                    });
+                                </script>
                                 <script type='text/javascript'>
                                     $('#approved<?php echo $sub_order ?>').click(function() {
                                         swal({
