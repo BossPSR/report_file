@@ -11,6 +11,18 @@ class My_stock_ctr extends CI_Controller
         $this->load->model('Order_model');
     }
 
+    function my_stock_item()
+    {
+
+        if ($this->session->userdata('email') == '') {
+            redirect('home');
+        } else {
+            $this->load->view('options/header_login');
+            $this->load->view('my_stock_item');
+            $this->load->view('options/footer');
+        }
+    }
+
     function my_stock()
     {
         $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();

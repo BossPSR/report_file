@@ -52,4 +52,23 @@ class Order_ctr extends CI_Controller
       echo $success;
     }
   }
+
+  public function order_not_approved()
+  {
+    $order_id             = $this->input->post('order_id');
+    $is_confirm     = $this->input->post('status_approved');
+
+    if ($this->session->userdata('email') == '') {
+      redirect('home');
+    } else {
+      $data = array(
+        'status_approved'        => $is_confirm,
+      );
+
+      $this->db->where('order_id', "ODB" . $order_id);
+      $success = $this->db->update('tbl_upload_order', $data);
+
+      echo $success;
+    }
+  }
 }

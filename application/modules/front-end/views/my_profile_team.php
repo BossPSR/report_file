@@ -33,9 +33,7 @@
                                 </div>
                                 <div class="result_menu">
                                     <?php echo $team['email']; ?>
-                                </div>
-                                <div class="list_menu">
-                                    <a class="btn btn-warning" style="color:#fff;" data-toggle="modal" data-target="#exampleModalTeam">
+                                    <a class="btn btn-warning" style="color:#fff;margin-left:10px;" data-toggle="modal" data-target="#exampleModalTeam">
                                         <i class="fa fa-wrench"></i>
                                     </a>
                                 </div>
