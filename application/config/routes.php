@@ -222,6 +222,8 @@ $route['sendEmail_delivery_complete']               = 'back-end/Complete_ctr/sen
 $route['Feedback']                           = 'back-end/Feedback_ctr';
 $route['Feedback_team']                           = 'back-end/Feedback_ctr/feedback_team';
 $route['Status_Feedback']                           = 'back-end/Feedback_ctr/status_Feedback';
+$route['More_File']                           = 'back-end/More_file_ctr';
+$route['More_File_team']                           = 'back-end/More_file_ctr/more_file_team';
 
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

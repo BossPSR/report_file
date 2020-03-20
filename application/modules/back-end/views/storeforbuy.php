@@ -230,7 +230,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="row" id="first_goal">
-                                                                            <div class="col-xl-9 col-md-6 col-9 mb-1">
+                                                                            <div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;">
                                                                                 <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
                                                                                 <label for="basicInput">Document ID</label>
                                                                                 <select name="Document[]" onClick="add_select(this);" class="form-control">
@@ -424,7 +424,7 @@
 
 <script>
     function add_goal(e) {
-        $('#first_goal').after('<div class="row" id="first_indic"><div class="col-xl-9 col-md-6 col-9 mb-1" id="first_goal"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select name="Document[]" onClick="add_select(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic(this);">ลบ</button></div></div>');
+        $('#first_goal').after('<div class="row" id="first_indic"><div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;" id="first_goal"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select name="Document[]" onClick="add_select(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic(this);">ลบ</button></div></div>');
     }
 
     function remove_indic(e) {

@@ -162,9 +162,7 @@
                                 <!--mini cart end-->
                             </div>
                         </div>
-                        <?php echo anchor('Home_ctr/home/en', 'en'); ?>
-
-                        <?php echo $english_lang; ?>
+                    
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>

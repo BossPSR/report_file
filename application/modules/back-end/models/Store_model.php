@@ -55,6 +55,7 @@ class Store_model extends CI_Model
         $this->db->where('is_check', 0);
         $this->db->where('status_book', 0);
         $this->db->group_by('order_id');
+        $this->db->order_by('date_required', 'DESC');
         return $this->db->get()->result_array();
     }
 
@@ -92,7 +93,7 @@ class Store_model extends CI_Model
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->group_by('tbl_bookmark.id_orderBuy');
-        $this->db->order_by('tbl_bookmark.id', 'ASC');
+        $this->db->order_by('tbl_upload_order.date_required', 'DESC');
 
         return  $this->db->get()->result_array();
 

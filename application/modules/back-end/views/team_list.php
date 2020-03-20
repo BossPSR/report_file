@@ -158,19 +158,19 @@
 </div>
 <!-- END: Content-->
 <SCRIPT language="JavaScript">
-function timerefresh(t)
-{
+// function timerefresh(t)
+// {
 
-if(t==0)
-{
-window.location.reload();
-}
-else
-{
-t--;
-}
-window.setTimeout("timerefresh('"+t+"')",2000)
-}
+// if(t==0)
+// {
+// window.location.reload();
+// }
+// else
+// {
+// t--;
+// }
+// window.setTimeout("timerefresh('"+t+"')",2000)
+// }
 
-timerefresh(5);
+// timerefresh(5);
 </script>

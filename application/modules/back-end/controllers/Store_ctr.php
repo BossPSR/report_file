@@ -154,24 +154,21 @@ class Store_ctr extends CI_Controller
             $numFile += 1;
         }
 
-        $subject = 'test ip-soft';
+        $subject = 'เอกสารการชำระเงิน จาก www.Report-file.com ';
 
-        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
-        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
-        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
-        $message .= '<body style="background: #eee;">';
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
-        $message .= '<table align="center" style="font-size: 18px;" border="1">';
+        
+        $message  = '<body style="background: #eee;">';
+     
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> เอกสารการชำระเงิน จาก www.Report-file.com  </div>';
+        $message .= '<table align="center" style="font-size: 20px;border-collapse: separate!important; border-style: dotted;background: white;"  border="0">';
 
         $message .= '<tr>';
-        $message .= '<td rowspan="' . $numFile . '">';
-        $message .= ' File Name ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' 1.' . $uploads[0] . ' ';
-        $message .= '</td>';
+            $message .= '<td rowspan="' . $numFile . '">';
+                $message .= ' File Name : ';
+            $message .= '</td>';
+            $message .= '<td>';
+                $message .= ' 1.' . $uploads[0] . ' ';
+            $message .= '</td>';
         $message .= '</tr>';
 
         $num_list = 1;
@@ -181,48 +178,47 @@ class Store_ctr extends CI_Controller
             }
             $num_list += 1;
             $message .= '<tr>';
-            $message .= '<td>';
-            $message .=  ' ' . $num_list . '.' . $upload . ' ';
-            $message .= '</td>';
+                $message .= '<td>';
+                $message .=  ' ' . $num_list . '.' . $upload . ' ';
+                $message .= '</td>';
             $message .= '</tr>';
         }
 
         $message .= '<tr>';
+            $message .= '<td>';
+                $message .= ' Order ID : ';
+            $message .= '</td>';
+            $message .= '<td>';
+                $message .= ' ' . $upload_order[0]['order_id'] . ' ';
+            $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
         $message .= '<td>';
-        $message .= ' Order ID ';
+        $message .= ' Price :';
         $message .= '</td>';
         $message .= '<td>';
-        $message .= ' ' . $upload_order[0]['order_id'] . ' ';
+        $message .= ' $' . $upload_order[0]['price_file'] . ' ';
         $message .= '</td>';
         $message .= '</tr>';
 
         $message .= '<tr>';
         $message .= '<td>';
-        $message .= ' Price ';
+        $message .= ' Discount : ';
         $message .= '</td>';
         $message .= '<td>';
-        $message .= ' ' . $upload_order[0]['price_file'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
-
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Discount ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $discount . ' ';
+        $message .= ' ' . $discount . '% ';
         $message .= '</td>';
         $message .= '</tr>';
 
         $message .= '<tr>';
         $message .= '<td>';
-        $message .= ' Customer ID ';
+        $message .= ' Customer ID : ';
         $message .= '</td>';
         $message .= '<td>';
         $message .= ' ' . $upload_order[0]['userId'] . ' ';
         $message .= '</td>';
         $message .= '</tr>';
-
 
         $message .= '</table>';
 
@@ -232,8 +228,8 @@ class Store_ctr extends CI_Controller
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
 
         $message .= '<div>';
-        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
-        $message .= '<a style="color: #000;text-decoration: none; display: block; border: 2px solid;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order[0]['order_id'] . '">';
+        $message .= '<div style="text-align: center; margin:15px auto; font-size:25px;    padding-bottom: 22px;">';
+        $message .= '<a class="btn btn-info" style="     text-decoration: none;   padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #ffffff;background-color: #05786d;border: 1px solid #05786d;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order[0]['order_id'] . '">';
         $message .= 'Pay $' . $priceDis . ' To Start';
         $message .= '</a>';
         $message .= '</div>';
