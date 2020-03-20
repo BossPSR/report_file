@@ -4,16 +4,18 @@
 <br>
 <div class="wishlist_area mt-60">
     <div class="container">
-        <div class="row">
-            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
-                <button class="btn btn-info">ITEM1</button>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
-                <button class="btn btn-info">ITEM1</button>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
-                <button class="btn btn-info">ITEM1</button>
-            </div>
+        <div class="row text-center">
+            <?php foreach ($item as $item) { ?>
+                <?php if ($item >= 2) : ?>
+                    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                        <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
+                    </div>
+                <?php else : ?>
+                    <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
+                        <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
+                    </div>
+                <?php endif; ?>
+            <?php } ?>
         </div>
     </div>
 </div>
