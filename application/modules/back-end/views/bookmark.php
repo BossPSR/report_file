@@ -175,7 +175,7 @@
                                                                     <?php if ($show_dm['id_document'] == '') : ?>
                                                                         -
                                                                     <?php else : ?>
-                                                                        <br><?php echo $show_dm['id_document'] ?>
+                                                                        <?php echo $show_dm['id_document'] ?><br>
                                                                     <?php endif; ?>
 
                                                                 <?php } ?>

@@ -80,7 +80,8 @@ $route['my-upload']             = 'front-end/My_upload_ctr/my_upload';
 $route['my-upload-delete']      = 'front-end/My_upload_ctr/delete_file';
 $route['my-upload-edit']        = 'front-end/My_upload_ctr/my_upload_edit';
 $route['my-feedback']           = 'front-end/My_feedback_ctr/my_feedback';
-
+$route['my-order-feedback']     = 'front-end/My_feedback_ctr/my_order_feedback';
+$route['my-order-feedAuto']     = 'front-end/My_feedback_ctr/order_auto_feedback';
 $route['my-rewards']            = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rejected']           = 'front-end/Rejected_ctr/my_rejected';
 $route['my-reject']             = 'front-end/Rejected_ctr/my_reject';
@@ -137,6 +138,7 @@ $route['My-stock-Item']         = 'front-end/My_stock_ctr/my_stock_item';
 $route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 $route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
 $route['My-task']               = 'front-end/My_stock_ctr/my_task';
+$route['My-stock-item-add']     = 'front-end/My_stock_ctr/my_stock_item_add';
 $route['My-delivery']           = 'front-end/Delivery_ctr';
 $route['delivery_file']           = 'front-end/Delivery_ctr/delivery_file';
 $route['My-profile_team']       = 'front-end/My_team_ctr/my_profile_team';

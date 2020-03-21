@@ -19,18 +19,19 @@
                 <div class="col-2"></div>
             </div>
             <div class="row">
-                <div class="col-2"></div>
-                <div class="col-xl-8 col-lg-6 col-md-12 col-sm-12 ">
+                <div class="col-1"></div>
+                <div class="col-xl-10 col-lg-6 col-md-12 col-sm-12 ">
                     <table class="table table-bordered">
                         <thead>
                             <tr style="text-align:center;">
+                                <th scope="col">ID Order</th>
                                 <th scope="col">No.</th>
                                 <!-- <th scope="col">Document</th> -->
-                                <th scope="col">ID Order</th>
                                 <th scope="col">Date Requred</th>
                                 <th scope="col">Main Doc</th>
                                 <th scope="col">GT Doc</th>
                                 <th scope="col">Select item</th>
+                                <th scope="col">Wage</th>
                                 <th scope="col">Confrim</th>
                             </tr>
                         </thead>
@@ -43,8 +44,8 @@
                             ?>
                             <?php foreach ($stock as $stock) { ?>
                                 <tr style="text-align:center;">
+                                    <td><?php echo $stock['or_1']; ?></td>
                                     <td><?php echo $stock['file_name']; ?></td>
-                                    <td><?php echo $stock['order_id']; ?></td>
                                     <td><?php echo $stock['or_date']; ?></td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $q++; ?>"><i class="fa fa-file-text-o"></i></a>
@@ -142,6 +143,7 @@
                                         </div>
                                     </td>
                                     <td><?php echo $stock['name_item']; ?></td>
+                                    <td><span class="badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span></td>
                                     <td>
                                         <?php $sub_order = substr($stock['order_id'], 3); ?>
                                         <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
@@ -258,7 +260,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-2"></div>
+                <div class="col-1"></div>
             </div>
         </div>
     </div>
