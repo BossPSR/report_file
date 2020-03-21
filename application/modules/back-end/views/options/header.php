@@ -277,9 +277,23 @@
                                                                                 echo 'active';
                                                                             } ?>" href="back_admin" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>admin List</a>
                                 </li>
-                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_team") {
-                                                                                echo 'active';
-                                                                            } ?>" href="back_team" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-mail"></i>Team List <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notifyTeam == 0){ echo "display:none";} ?>"><?php echo $notifyTeam ?></span></a>
+
+                                <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "back_team" ) {
+                                                                echo 'active';
+                                                            } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>Team List</a>
+                                    <ul class="dropdown-menu ">
+                                    <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "back_team") {
+                                                                echo 'active';
+                                                            } ?>" href="back_team" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Team List</a>
+                                        </li>
+                                    
+                                        <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "T3_online") {
+                                                                echo 'active';
+                                                            } ?>" href="T3_online" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>T3 online Request</a>
+                                        </li>
+                                       
+                                      
+                                    </ul>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_user") {
                                                                                 echo 'active';

@@ -76,9 +76,9 @@
                                                     <th>order_id</th>
                                                     <th>User_id</th>
                                                     <th>DM</th>
-                                                    <th>Main_file</th>
-                                                    <th>GT_File</th>
-                                                    <th>Document_File</th>
+                                                    <th>Main File</th>
+                                                    <th>GT File</th>
+                                                    <th>DM File</th>
                                                     <th>Date_Required</th>
                                                     <th>Status</th>
                                                     <th>position</th>
@@ -115,8 +115,8 @@
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark_all_not['orderby']])->result_array(); ?>
                                                                                     <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
+                                                                                        <th>Order id</th>
+                                                                                        <th>File Name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -157,8 +157,8 @@
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark_all_not['orderby']])->result_array(); ?>
                                                                                     <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
+                                                                                        <th>Order id</th>
+                                                                                        <th>File Name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -205,8 +205,8 @@
                                                                                         <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $bookmark_all_not['store_id']])->result_array(); ?>
                                                                                         <tr>
                                                                                             <th>Relive</th>
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
+                                                                                            <th>Store id</th>
+                                                                                            <th>File Name</th>
                                                                                             <th>File</th>
                                                                                             <th>create</th>
                                                                                         </tr>

@@ -146,7 +146,7 @@
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
-                                                    <th>Document File</th>
+                                                    <th>DM</th>
                                                     <th>Team File</th>
                                                     <th>Date Required</th>
                                                     <th>Status</th>
@@ -156,7 +156,11 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($bookmark as $keyBook => $bookmark) { ?>
+                                                    <?php if ($bookmark['status_delivery'] == '1') : ?>
 
+                                                    <?php else:?>
+
+                                                    
 
                                                     <tr>
                                                         <td><?php echo $bookmark['orderby'] ?></td>
@@ -447,6 +451,7 @@
                                                                             </h3>
                                                                             <form action="sendEmail_delivery_pay" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $bookmark['order_save']; ?>">
+                                                                                <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
 
                                                                                 <?php foreach ($dm1 as $key => $dm1) { ?>
                                                                                     <?php if (!empty($dm1['id_document'])) : ?>
@@ -547,7 +552,7 @@
 
                                                         </td>
                                                     </tr>
-
+                                                    <?php endif;?>
                                                 <?php } ?>
                                             </tbody>
                                         </table>

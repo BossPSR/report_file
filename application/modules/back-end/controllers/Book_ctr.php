@@ -84,12 +84,19 @@ class Book_ctr extends CI_Controller
         
         $order_id =$this->input->post('order_id'); 
         $order_team =$this->input->post('order_team');
-        $id =$this->input->post('id');
+        $id =$this->input->post('id');       
+        $dm_id =$this->input->post('dm_id');        
 
       
 
         $this->db->where('order_id',$id);
         $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'status_delivery' => 1 ,'notify_team' => 0 ,'notify_user' => 0]);
+        foreach ($dm_id as $key =>$dm_id) {
+         
+    
+        $this->db->where('id_doc',$dm_id);
+        $this->db->update('tbl_upload_main_search',['update_at' => date('Y-m-d H:i:s')]);
+  }
         $subject = 'test ip-soft';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
