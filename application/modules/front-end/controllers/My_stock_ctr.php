@@ -17,7 +17,7 @@ class My_stock_ctr extends CI_Controller
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
-            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id']])->result_array();
+            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id'], 'status_approve' => 1])->result_array();
             foreach ($get_sess as $get_sess) {
                 $as[] = $get_sess['job_position'];
             }
@@ -28,6 +28,33 @@ class My_stock_ctr extends CI_Controller
             $this->load->view('options/header_login');
             $this->load->view('my_stock_item', $data);
             $this->load->view('options/footer');
+        }
+    }
+
+    function my_stock_item_add()
+    {
+
+        if ($this->session->userdata('email') == '') {
+            redirect('home');
+        } else {
+            $idTeam             = $this->input->post('idTeam');
+            $position           = $this->input->post('position');
+            $create_at          = date('Y-m-d H:i:s');
+
+            $data = array(
+                'id_team'           => $idTeam,
+                'job_position'      => $position,
+                'status_approve'    => 0,
+                'create_at'         => $create_at
+            );
+
+            if ($this->db->insert('tbl_job_position', $data)) {
+                $this->session->set_flashdata('success_addItemT', TRUE);
+                redirect('My-stock-Item', 'refresh');
+            } else {
+                $this->session->set_flashdata('success_addItemF', TRUE);
+                redirect('My-stock-Item', 'refresh');
+            }
         }
     }
 

@@ -14,16 +14,18 @@
                             <tr style="text-align:center;">
                                 <th scope="col">Status</th>
                                 <th scope="col">#</th>
+                                <th scope="col">รหัสออเดอร์</th>
                                 <th scope="col">ชื่อเอกสาร</th>
                                 <th scope="col">Main Document</th>
                                 <th scope="col">GT Document</th>
-                                <th scope="col">รหัสออเดอร์</th>
                                 <th scope="col">วันที่</th>
                                 <th scope="col">Tool</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
+                            <?php $OP = 1; ?>
+                            <?php $OPE = 1; ?>
                             <?php foreach ($buy_email as $value) : ?>
                                 <?php $sub_order = substr($value['order_id'], 3); ?>
                                 <tr style="text-align:center;">
@@ -35,6 +37,7 @@
                                         <?php endif; ?>
                                     </th>
                                     <th scope="row"><?php echo $i++; ?></th>
+                                    <td><?php echo $value['order_id']; ?></td>
                                     <td style="text-align:left;"><?php echo $value['file_name']; ?></td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#exampleModalMain"><i class="fa fa-file-text-o"></i></a>
@@ -67,7 +70,7 @@
                                                                             <td><?php echo $zz++; ?></td>
                                                                             <td><?php echo $order_main['order_id']; ?></td>
                                                                             <td><?php echo $order_main['file_name']; ?></td>
-                                                                            <td><a href="<?php echo $order_main['path']; ?>"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <td><a href="<?php echo $order_main['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -113,7 +116,7 @@
                                                                         <td><?php echo $kk++; ?></td>
                                                                         <td><?php echo $order_GT['order_id']; ?></td>
                                                                         <td><?php echo $order_GT['file_name_GT']; ?></td>
-                                                                        <td><a href="<?php echo $order_GT['path_GT']; ?>"><i class="fa fa-file-text-o"></i></a></td>
+                                                                        <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                     </tr>
                                                                 <?php } ?>
                                                             </tbody>
@@ -126,7 +129,6 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><?php echo $value['order_id']; ?></td>
                                     <td><?php echo $value['date_required']; ?></td>
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
@@ -140,9 +142,17 @@
                                                 <button type="button" class="btn btn-success" id="approved<?php echo $sub_order; ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
                                                 <button type="button" class="btn btn-danger" id="not_approved<?php echo $sub_order; ?>"><i class="fa fa-times" aria-hidden="true"></i></button>
                                             <?php } ?>
-                                            <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+
+                                            <?php $this->db->select('count(order_id) as c_order'); ?>
+                                            <?php $c_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['order_id']])->row_array(); ?>
+                                            <?php if ($c_feed['c_order'] >= 3) { ?>
+                                                <button type="button" class="btn btn-secondary" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                            <?php } else { ?>
+                                                <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                            <?php } ?>
+
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalMainFeed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="exampleModalMainFeed<?php echo $OPE++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -158,25 +168,23 @@
                                                                 <div class="dz-message needsclick">
                                                                     Drop files here or click to upload.<br>
                                                                     <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                    <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
-                                                                    <input type="date" name="create_at" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
-                                                                    <textarea name="detail" id="detail2" class="form-control" rows="5" hidden></textarea>
-                                                                    <input type="date" name="dated" id="dated2" class="form-control" value="" min="<?php echo date('Y-m-d'); ?>" style="width:30%" hidden>
-
                                                                 </div>
                                                             </form>
                                                             <br>
+                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
                                                             <label for="" class="font-size-upload">Detail :</label>
-                                                            <textarea id="detail1" class="form-control" rows="5" required></textarea>
+                                                            <textarea id="detail1" name="detail" class="form-control" rows="5" required></textarea>
                                                             <br>
 
                                                             <label for="" class="font-size-upload">Date :</label>
-                                                            <input type="date" name="dated1" id="dated1" class="form-control" value="" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
-
+                                                            <input type="date" name="dated" id="dated" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
+                                                            <input type="text" name="order_id" id="order_id" value="<?php echo $value['order_id']; ?>" hidden>
+                                                            <input type="text" name="userId" id="userId" value="<?php echo $userId['idUser']; ?>" hidden>
+                                                            <!-- </form> -->
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" id="SubmitFeed" class="btn btn-success">Success</button>
-                                                            <button type=" button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -186,26 +194,7 @@
                                         <?php endif; ?>
                                     </td>
                                 </tr>
-                                <script>
-                                    $(document).ready(function() {
-                                        $("#dated1").change(function() {
-                                            var value = $(this).val();
-
-                                            $("#dated2").val(value);
-                                        }).keyup();
-
-                                    });
-                                </script>
                                 <script type='text/javascript'>
-                                    $(document).ready(function() {
-                                        $("#detail1").keyup(function() {
-                                            var value = $(this).val();
-
-                                            $("#detail2").val(value);
-                                        }).keyup();
-
-                                    });
-
                                     Dropzone.autoDiscover = false;
                                     var myDropzone = new Dropzone("#fileuploadFeed", {
                                         autoProcessQueue: false,
@@ -213,26 +202,35 @@
                                         addRemoveLinks: true,
                                         parallelUploads: 5, // Number of files process at a time (default 2)
                                     });
+
                                     $('#SubmitFeed').click(function() {
+                                        var x = document.getElementById("detail1").value;
+                                        var y = document.getElementById("dated").value;
+                                        var z = document.getElementById("order_id").value;
+                                        var c = document.getElementById("userId").value;
 
                                         $.ajax({
                                             type: 'POST',
-                                            url: 'my-order-feedback',
+                                            url: 'my-order-feedAuto',
                                             data: {
-                                                order_id: <?php echo $value['order_id']; ?>,
+                                                detail: x,
+                                                dated: y,
+                                                order_id: z,
+                                                userId: c,
                                             },
-                                            success: function(data) {
+                                            success: function(success) {
                                                 myDropzone.processQueue();
-                                                myDropzone.on("success", function(file, res) {
-                                                    swal("Good job!", "Upload for data successfull", "success", {
-                                                        button: false,
-                                                    });
-                                                    setTimeout("location.reload(true);", 1000);
+                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                    button: true,
+                                                }).then(function(isConfirm) {
+                                                    if (isConfirm == true) {
+                                                        setTimeout("location.reload(true);", 1000);
+                                                    } else {
+                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                    }
                                                 });
-                                            },
-
+                                            }
                                         });
-
                                     });
                                 </script>
                                 <script type='text/javascript'>

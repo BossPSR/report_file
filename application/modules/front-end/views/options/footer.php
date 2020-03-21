@@ -295,6 +295,12 @@
 </script>
 
 <script>
+    <?php if ($this->session->flashdata('success_addItem')) : ?>
+        swal("Good job!", "Add for data successfull.", "success");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success_addItemF')) : ?>
+        swal("Good job!", "Error for add . Please try again later.!", "error");
+    <?php endif; ?>
     <?php if ($this->session->flashdata('successtotal')) : ?>
         swal("Good job!", "Already paid Thank you for using the service.", "success");
     <?php endif; ?>

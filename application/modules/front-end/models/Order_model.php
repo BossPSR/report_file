@@ -40,7 +40,7 @@ class Order_model extends CI_Model
 
     public function my_stock($item_id)
     {
-        $this->db->select('*,tbl_upload_order.date_required as or_date');
+        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');

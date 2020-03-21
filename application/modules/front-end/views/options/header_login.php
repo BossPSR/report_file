@@ -162,15 +162,15 @@
                                 <!--mini cart end-->
                             </div>
                         </div>
-                    
+
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
                                     <li class="menu-item-has-children">
-                                        <a href="buy"> ต้องการซื้อ</a>
+                                        <a href="buy"> My Buy</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="store"> ต้องการขาย</a>
+                                        <a href="store"> My Sell</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="order"> My order</a>
@@ -194,7 +194,7 @@
                                     </li>
                                 <?php elseif ($team) : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="My-stock-Item"> My stock</a>
+                                        <a href="My-stock-Item"> Order List</a>
                                     </li>
 
                                     <li class="menu-item-has-children">
@@ -206,10 +206,10 @@
                                     </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> My Buy</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย</a>
+                                        <a href="#exampleModalCenter" data-toggle="modal"> My Sell</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">My Selling</a>
@@ -418,8 +418,8 @@
                                 <nav>
                                     <ul>
                                         <?php if ($user) :  ?>
-                                            <li><a href="buy"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
-                                            <li><a href="store"> ต้องการขาย </a></li>
+                                            <li><a href="buy"> My buy <div class="arrow_box"></div></a></li>
+                                            <li><a href="store"> My Sell </a></li>
                                             <li><a href="order"> My order </a></li>
                                             <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
@@ -454,7 +454,7 @@
 
                                         <?php elseif ($team) : ?>
                                             <li>
-                                                <a href="My-stock-Item"> My Stock</a>
+                                                <a href="My-stock-Item"> Order List</a>
                                             </li>
                                             <li>
                                                 <a href="My-task"> My task</a>
@@ -471,8 +471,8 @@
                                             <li></li>
                                             <li><?php $this->load->view('options/notify_team'); ?></li>
                                         <?php else : ?>
-                                            <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการซื้อ <div class="arrow_box"></div></a></li>
-                                            <li><a href="#exampleModalCenter" data-toggle="modal"> ต้องการขาย </a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> My Buy <div class="arrow_box"></div></a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> My Sell </a></li>
                                             <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>

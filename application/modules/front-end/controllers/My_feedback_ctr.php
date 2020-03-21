@@ -33,20 +33,22 @@ class My_feedback_ctr extends CI_Controller
         } else {
 
             // image_lib
-
-            $userId     = $this->input->post('userId');
-            $create_at   =  $this->input->post('create_at');
-            $detail     = $this->input->post('detail2');
-            $dated2     = $this->input->post('dated2');
+            $order_id       = $this->input->post('order_id');
+            $userId         = $this->input->post('userId');
+            $create_at      =  $this->input->post('create_at');
+            $detail         = $this->input->post('detail');
+            $dated2         = $this->input->post('dated');
 
             $target_dir = "uploads/Feedback/"; // Upload directory
 
             $request = 1;
 
-            if (isset($_POST['request'])) {
-                $request = $_POST['request'];
-            }
+
             if ($request == 1) {
+
+                if (isset($_POST['request'])) {
+                    $request = $_POST['request'];
+                }
                 // Set preference
                 $config['upload_path']     = 'uploads/Feedback/';
                 // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
@@ -57,37 +59,41 @@ class My_feedback_ctr extends CI_Controller
                 //Load upload library
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
-                // $buyre =  $this->Buy_model->buy();
-                // $buymax = $this->Buy_model->buy_max();
-                // $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
-                // $orf = array(
-                //   'order_main'    => "OD".rand('0','100'),
-                //   'create_at'     => date('Y-m-d H:i:s') ,
-                //   'status'        => '1'    
-                // );
-                // $this->db->insert('tbl_order_f', $orf);
 
 
+                $feedmax = $this->db->order_by('id', 'DESC')->get('tbl_feedback')->row();
                 // File upload
                 if ($this->upload->do_upload('file')) {
                     // Get data about the file
                     $uploadData = $this->upload->data();
-
-                    $data = array(
-                        'userId'        => $userId,
-                        'feedback_detail'   => $detail,
-                        'dated'         => $dated2,
-                        // 'order_id'      => $buymax->maxorder,
-                        // 'order_id'      => $buymax->order_main,
-                        'file_name'     => $uploadData['file_name'],
-                        'path'          => 'uploads/Feedback/' . $uploadData['file_name'],
-                        'create_at'     => $create_at,
-                        'notify_admin'  => 0
+                    $data2 = array(
+                        // 'id_feedback'       => $feedmax->id,
+                        'file_name'         => $uploadData['file_name'],
+                        'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
+                        'create_at'         => date('Y-m-d H:i:s'),
                     );
-                    $success = $this->db->insert('tbl_feedback', $data);
-                    echo $success;
+
+                    $success = $this->db->insert('tbl_feedback_file', $data2);
                 }
+                echo $success;
             }
         }
+    }
+
+    public function order_auto_feedback()
+    {
+        $dated      =  $this->input->post('dated');
+        $detail     = $this->input->post('detail');
+        $order_id   = $this->input->post('order_id');
+        $userId     = $this->input->post('userId');
+        $orf = array(
+            'feedback_detail'   => $detail,
+            'order_id'          => $order_id,
+            'userId'            => $userId,
+            'create_at'         => date('Y-m-d H:i:s'),
+            'dated'             => $dated,
+        );
+        $success = $this->db->insert('tbl_feedback', $orf);
+        echo $success;
     }
 }
