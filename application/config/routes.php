@@ -228,7 +228,9 @@ $route['More_File']                           = 'back-end/More_file_ctr';
 $route['More_File_team']                           = 'back-end/More_file_ctr/more_file_team';
 $route['T3_online']                           = 'back-end/Team_ctr/T3';
 $route['status_team_t3']                           = 'back-end/Team_ctr/status_team_t3';
-$route['fileUpload_team_email']                           = 'back-end/Team_ctr/fileUpload_team_email';
+$route['fileUpload_team_email']                       = 'back-end/Team_ctr/fileUpload_team_email';
+$route['bookmark_notpay_edit']                       = 'back-end/Book_ctr/bookmark_notpay_edit';
+$route['NotificationBan']                       = 'back-end/Team_ctr/NotificationBan';
 
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

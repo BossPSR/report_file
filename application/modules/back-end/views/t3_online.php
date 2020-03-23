@@ -186,7 +186,7 @@
                                                                             </form>
                                                                         </div>
 
-                                                                        <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1"> Add Admin</button>
+                                                                        <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1"style="MARGIN: auto;"> Send email</button>
                                                                        
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -242,7 +242,7 @@
                 button: false,
             });
             setTimeout(function() {
-                location.href = "Bookmark"
+                location.href = "T3_online"
             }, 1000);
         });
 

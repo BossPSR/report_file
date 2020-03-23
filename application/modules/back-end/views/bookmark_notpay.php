@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">bookmark_all_not</h2>
+                        <h2 class="content-header-title float-left mb-0">bookmark All Not</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">bookmark_all_not
+                                <li class="breadcrumb-item active">bookmark All Not
                                 </li>
                             </ol>
                         </div>
@@ -73,16 +73,16 @@
                                         <table class="table zero-configuration" id="loading_img_spin">
                                             <thead>
                                                 <tr>
-                                                    <th>order_id</th>
-                                                    <th>User_id</th>
+                                                    <th>order id</th>
+                                                    <th>User id</th>
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>DM File</th>
-                                                    <th>Date_Required</th>
+                                                    <th>Date Required</th>
                                                     <th>Status</th>
                                                     <th>position</th>
-                                                    <!-- <th>tool</th> -->
+                                                    <th>tool</th> 
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -263,7 +263,51 @@
                                                             <?php } ?>
 
                                                         </td>
-                                                        <!-- <td><a href="Add_bookmake?id=<?php echo $bookmark_all_not['id_document'] ?>"><button type="button" class="btn btn-primary mr-1 mb-1">+ Drop file</button></a></td> -->
+                                                        <td>
+                                                        <button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $bookmark_all_not['orderby']; ?>" class="btn btn-primary mr-1 mb-1">Edit</button>
+                                                            <div class="modal fade" id="exampleModalk<?php echo $bookmark_all_not['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Edit </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                      <form action="bookmark_notpay_edit" method="POST">
+                                                                      <input type="text" value="<?php echo $bookmark_all_not['orderby']; ?>" name="id_order" hidden>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Order</label>
+                                                                                <input type="text" class="form-control" name="Order" value="<?php echo $bookmark_all_not['orderby']; ?>" placeholder="Enter Order" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">price</label>
+                                                                                <input type="text" class="form-control" name="price_file" value="<?php echo $bookmark_all_not['pricr_f']; ?>" placeholder="Enter price" required>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">date required</label>
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo date($bookmark_all_not['date_re']); ?>" placeholder="Enter price" required>
+                                                                            </div>
+
+                                                                        </div>
+                                                                      
+                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1"style="MARGIN: 15px;">Edit</button>
+                                                                       
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        </td> 
                                                     </tr>
 
                                                 <?php } ?>

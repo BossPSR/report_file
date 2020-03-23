@@ -63,11 +63,11 @@ class Team_ctr extends CI_Controller {
         $team_id = $this->input->post('team_id');
 
        
-           $target_dir = "uploads/Store/"; // Upload directory
+           $target_dir = "uploads/T3/"; // Upload directory
             if (!empty($_FILES['file']['name'])) {
 
                 // Set preference
-                $config['upload_path']     = 'uploads/Store/';
+                $config['upload_path']     = 'uploads/T3/';
                 // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
                 $config['allowed_types']   = '*';
                 $config['max_size']        = '99999'; // max_size in kb
@@ -84,18 +84,18 @@ class Team_ctr extends CI_Controller {
                     $data = array(
                         'id_team'       => $team_id,
                         'file_name'     => $uploadData['file_name'],
-                        'path'          => 'uploads/Store/' . $uploadData['file_name'],
+                        'path'          => 'uploads/T3/' . $uploadData['file_name'],
                         'create_at'     => date('Y-m-d H:i:s'),
                     );
                     $this->db->insert('tbl_send_email_team', $data);
-                    $team_id = $this->db->get_where('tbl_team',['IdTeam',$team_id])->row_array();
-                    $this->sendEmail_reject($team_id);
+                    $team_id_send = $this->db->get_where('tbl_team',['IdTeam'=>$team_id])->row_array();
+                    $this->sendEmail_team($team_id_send);
                 }
             }
         
     }
 
-    private function sendEmail_team($team_id)
+    private function sendEmail_team($team_id_send)
     {
         
       
@@ -114,7 +114,7 @@ class Team_ctr extends CI_Controller {
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
       
 
-           $team = $this->db->get_where('tbl_send_email_team', ['id_team' => $team_id])->row_array();
+           $team = $this->db->get_where('tbl_send_email_team', ['id_team' => $team_id_send['IdTeam']])->row_array();
            $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$team['path'].'">'.$team['file_name'].'</a>';
            $message .= '<br>';
 
@@ -266,6 +266,100 @@ class Team_ctr extends CI_Controller {
             echo '2';
         }
     }
-	
+
+
+    public function NotificationBan()
+    {
+        $id = $this->input->post('id');
+
+        $data = array(
+
+           
+            'notification_ban'                      => $this->input->post('note_ban'),
+            'status_notification_ban'       => 1,
+            'update_at'                        => date('Y-m-d H:i:s')
+
+        );
+                       $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_team', $data);
+        $team = $this->db->get_where('tbl_team',['id',$id])->row_array();
+        $this->sendEmail_Notification_Ban($team);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+        }
+        return redirect('back_team');
+    }
+
+
+	private function sendEmail_Notification_Ban($team)
+    {
+        
+      
+        $subject = 'test ip-soft';
+
+        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
+        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
+        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+        $message .= '<body style="background: #eee;">';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
+
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
+      
+
+           $team = $this->db->get_where('tbl_team', ['id' => $team['id']])->row_array();
+           $message .= ''.$team['notification_ban'].'';
+           $message .= '<br>';
+
+      
+     
+
+
+
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+        $message .= '<div>';
+        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
+        $message .= 'Reject';
+        $message .= '</div>';
+        $message .= '</div>';
+        $message .= '</body>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to('infinityp.soft@gmail.com');
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
+        }
+
+        return redirect('back_team');
+    }
+   
 	
 }

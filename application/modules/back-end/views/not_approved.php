@@ -39,7 +39,7 @@
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Document name</th>
-                                                    <th>File_name</th>
+                                                    <th>File Name</th>
                                                     <th>Order id</th>
                                                     <th>Date_required</th>
                                                     <th>Tool</th>
