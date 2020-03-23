@@ -17,18 +17,18 @@ class Complete_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') != '') {
             $data['complete'] = $this->Complete_model->complete();
             $this->load->view('options/header');
-            $this->load->view('complete',$data);
+            $this->load->view('complete', $data);
             $this->load->view('options/footer');
         } else {
             $this->load->view('login');
         }
     }
 
-   
+
 
     public function book_complete_add_com()
     {
- 
+
 
         $data = array(
 
@@ -51,7 +51,7 @@ class Complete_ctr extends CI_Controller
     public function add_feedback()
     {
         if ($this->session->userdata('email_admin') != '') {
-           
+
             $this->load->view('options/header');
             $this->load->view('add_feedback');
             $this->load->view('options/footer');
@@ -59,61 +59,73 @@ class Complete_ctr extends CI_Controller
             $this->load->view('login');
         }
     }
-   
-     
+
+
     public function fileUpload_feedback()
     {
-        // image_lib
-        $id = $this->input->post('id');
-        $cmid = $this->input->post('cmid'); 
-        $descriptions = $this->input->post('descriptions'); 
-      
+        $target_dir = "uploads/Feedback/"; // Upload directory
+        if (!empty($_FILES['file']['name'])) {
 
-        
+            // Set preference
+            $config['upload_path']     = 'uploads/Feedback/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
 
-           $target_dir = "uploads/Feedback/"; // Upload directory
-            if (!empty($_FILES['file']['name'])) {
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
 
-                // Set preference
-                $config['upload_path']     = 'uploads/Feedback/';
-                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-                $config['allowed_types']   = '*';
-                $config['max_size']        = '99999'; // max_size in kb
-                $config['file_name']     = $_FILES['file']['name'];
+            $feedmax = $this->db->order_by('id', 'DESC')->get('tbl_feedback')->row();
 
-                //Load upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
-                // File upload
-                if ($this->upload->do_upload('file')) {
-                    // Get data about the file
-                    $uploadData = $this->upload->data();
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
 
-                    $data = array(
-                        'feedback_detail'      => $descriptions,
-                        'file_name'     => $uploadData['file_name'],
-                        'order_id' => $id,
-                        'userId' => $cmid,
-                        'path'          => 'uploads/Feedback/' . $uploadData['file_name'],
-                        'create_at'     => date('Y-m-d H:i:s'),
-                        'update_at'     => date('Y-m-d H:i:s'),
-                        'notify_team'   => 0
-                    );
-                    $this->db->insert('tbl_feedback', $data);
-                }
+                $data = array(
+                    'id_feedback'       => $feedmax->id,
+                    'file_name'         => $uploadData['file_name'],
+                    'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
+                    'create_at'     => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_feedback_file', $data);
             }
-        
+        }
     }
+
+    public function order_auto_feedback()
+    {
+        $order_id   = $this->input->post('order_id');
+        $team = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
+        $cmid       = $this->input->post('cmid');
+        $DM         = $this->input->post('DM');
+        $dated      = $this->input->post('dated');
+        $orf = array(
+            'teamId'            => $team['teamId'],
+            'feedback_detail'   => $DM,
+            'order_id'          => $order_id,
+            'userId'            => $cmid,
+            'create_at'         => date('Y-m-d H:i:s'),
+            'dated'             => $dated,
+        );
+        $success = $this->db->insert('tbl_feedback', $orf);
+        echo $success;
+    }
+
+
+
     public function sendEmail_delivery_complete()
     {
-        
-        $order_id =$this->input->post('order_id'); 
-        $order_team =$this->input->post('order_team');
-      
-        $id =$this->input->post('id');
 
-        $this->db->where('order_id',$id);
-        $this->db->update('tbl_upload_order',['update_at' => date('Y-m-d H:i:s'),'status_delivery' => 1  ,'notify_team' => 0 ,'notify_user' => 0]);
+        $order_id = $this->input->post('order_id');
+        $order_team = $this->input->post('order_team');
+
+        $id = $this->input->post('id');
+
+        $this->db->where('order_id', $id);
+        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
         $subject = 'test ip-soft';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
@@ -126,21 +138,20 @@ class Complete_ctr extends CI_Controller
 
 
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $id . '</div>';
-        if(!empty($order_id)){
-        foreach ($order_id as $key => $order_id) {
-            $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
-            $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$order['path'].'">'.$order['file_name'].'</a>';
+        if (!empty($order_id)) {
+            foreach ($order_id as $key => $order_id) {
+                $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
+                $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $order['path'] . '">' . $order['file_name'] . '</a>';
+                $message .= '<br>';
+            }
+        }
+
+        foreach ($order_team as $key => $order_team) {
+            $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
+            $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $orderT['path'] . '">' . $orderT['file_name'] . '</a>';
             $message .= '<br>';
-       }
-    }
+        }
 
-       foreach ($order_team as $key => $order_team) {
-           $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
-           $message .= '<a href="http://ip-soft.co.th/ipsoft/'.$orderT['path'].'">'.$orderT['file_name'].'</a>';
-           $message .= '<br>';
-
-      }
-     
 
 
 

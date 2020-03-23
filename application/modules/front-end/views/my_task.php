@@ -19,8 +19,8 @@
                 <div class="col-2"></div>
             </div>
             <div class="row">
-                <div class="col-2"></div>
-                <div class="col-xl-8 col-lg-6 col-md-12 col-sm-12 ">
+                <div class="col-1"></div>
+                <div class="col-xl-10 col-lg-6 col-md-12 col-sm-12 ">
                     <table class="table table-bordered">
                         <thead>
                             <tr style="text-align:center;">
@@ -31,6 +31,7 @@
                                 <th scope="col">Main Doc</th>
                                 <th scope="col">GT Doc</th>
                                 <th scope="col">Select item</th>
+                                <th scope="col">Withdraw</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +46,7 @@
                                 <tr style="text-align:center;">
                                     <td><?php echo $p++; ?></td>
                                     <td><?php echo $task['file_name']; ?></td>
-                                    <td><?php echo $task['order_id']; ?></td>
+                                    <td><?php echo $task['or_id']; ?></td>
                                     <td><?php echo $task['date_required']; ?></td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $o++; ?>"><i class="fa fa-file-text-o"></i></a>
@@ -60,7 +61,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['order_id']])->result_array(); ?>
+                                                        <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
                                                         <?php $t = 1; ?>
                                                         <?php if (!empty($taskmain)) { ?>
                                                             <table class="table table-bordered">
@@ -113,7 +114,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <?php $taskGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['order_id']])->result_array(); ?>
+                                                        <?php $taskGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id']])->result_array(); ?>
                                                         <?php $t = 1; ?>
                                                         <?php if (!empty($taskGT)) { ?>
                                                             <table class="table table-bordered">
@@ -154,6 +155,7 @@
                                         </div>
                                     </td>
                                     <td><?php echo $task['name_item']; ?></td>
+                                    <td><button class="btn btn-info"><i class="fa fa-money"></i> Withdraw</button></td>
                                 </tr>
                             <?php } ?>
                             <script>
@@ -193,7 +195,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-2"></div>
+                <div class="col-1"></div>
             </div>
         </div>
     </div>

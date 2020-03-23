@@ -147,6 +147,7 @@ $route['My-profile-update']     = 'front-end/My_user_ctr/profile_user_update';
 $route['My-profile_team_edit']  = 'front-end/My_team_ctr/profile_team_edit';
 $route['order_approverd']       = 'front-end/Order_ctr/order_approved';
 $route['order_not_approved']       = 'front-end/Order_ctr/order_not_approved';
+$route['Not_approved']          = 'front-end/My_feedback_ctr/order_auto_feedback_notApp';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';
@@ -226,6 +227,6 @@ $route['Feedback_team']                           = 'back-end/Feedback_ctr/feedb
 $route['Status_Feedback']                           = 'back-end/Feedback_ctr/status_Feedback';
 $route['More_File']                           = 'back-end/More_file_ctr';
 $route['More_File_team']                           = 'back-end/More_file_ctr/more_file_team';
-
+$route['feedback_ajax']                     = 'back-end/Complete_ctr/order_auto_feedback';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

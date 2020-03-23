@@ -14,7 +14,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="Complete">Feedback</a>
                                 </li>
-                                
+
                             </ol>
                         </div>
                     </div>
@@ -36,25 +36,26 @@
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                             <label for="" style="font-size: 16px;">File Document </label>
                                             <form action="fileUpload_feedback" class="dropzone dropzone-area" id="maindropzone">
-                                            <input type="text"  class="form-control " name="id" value="<?php echo $id ?>" hidden>
-                                            <input type="text"  class="form-control " name="cmid" value="<?php echo $cmid ?>" hidden>
-                                            <input type="text"  class="form-control " id="DM2"  name="descriptions" value="" hidden>
-
                                                 <div class="dz-message" style="top: 24%;">Upload Document</div>
                                             </form>
                                         </div>
-                                   
-                                      
+
+
 
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Descriptions </label>
-                                            <textarea name="descriptions" class="form-control" id="DM1"  rows="5" style="width: 100%"></textarea>
+                                            <textarea name="descriptions" class="form-control" id="DM1" rows="5" style="width: 100%"></textarea>
 
+
+                                            <input type="text" class="form-control" id="order_id" name="id" value="<?php echo $id ?>" hidden>
+                                            <input type="text" class="form-control" id="cmid" name="cmid" value="<?php echo $cmid ?>" hidden>
                                         </div>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;"></div>
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                            <input type="date" class="form-control" id="dated" name="dated" min="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>">
+                                        </div>
 
-                                      
+
 
                                         <div class="col-xl-12 col-md-12 col-12" style="margin-top: 25px;">
                                             <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1"> Add Admin</button>
@@ -72,17 +73,6 @@
     </div>
 </div>
 <script>
-   $("#DM1")
-        .keyup(function() {
-            var value = $(this).val();
-            $("#DM2").val(value);
-        })
-        .keyup();
-
-   
-</script>
-<script>
-    var x = document.getElementById("DM1").value;
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone("#maindropzone", {
         autoProcessQueue: false,
@@ -93,17 +83,43 @@
 
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
-      
-              
-                 myDropzone.processQueue();
-                 myDropzone.on("success", function(file, res) {
-                     swal("Good job!", "Upload for data successfull", "success", {
-                         button: false,
-                     });
-                    setTimeout(function(){location.href="Complete"} , 1000);
-                 });
-             
 
-         });
- 
+        var v = document.getElementById("dated").value;
+        var x = document.getElementById("order_id").value;
+        var y = document.getElementById("cmid").value;
+        var z = document.getElementById("DM1").value;
+        $.ajax({
+            type: 'POST',
+            url: 'feedback_ajax',
+            data: {
+                order_id: x,
+                cmid: y,
+                DM: z,
+                dated: v,
+            },
+            success: function(success) {
+                myDropzone.processQueue();
+                swal("Good job!", "Upload for data successfull", "success", {
+                    button: true,
+                }).then(function(isConfirm) {
+                    if (isConfirm == true) {
+                        setTimeout("location.reload(true);", 1000);
+                    } else {
+                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    }
+                });
+            }
+        });
+        // myDropzone.processQueue();
+        // myDropzone.on("success", function(file, res) {
+        //     swal("Good job!", "Upload for data successfull", "success", {
+        //         button: false,
+        //     });
+        //     setTimeout(function() {
+        //         location.href = "Complete"
+        //     }, 1000);
+        // });
+
+
+    });
 </script>

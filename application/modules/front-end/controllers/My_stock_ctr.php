@@ -102,15 +102,12 @@ class My_stock_ctr extends CI_Controller
     function my_task()
     {
         $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        $see = $sess['IdTeam'];
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
-            $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id']])->result_array();
-            $see = $sess['IdTeam'];
-            foreach ($get_sess as $get_sess) {
-                $as[] = $get_sess['job_position'];
-            }
-            $data['task'] = $this->Order_model->my_task($as, $see);
+
+            $data['task'] = $this->Order_model->my_task($see);
             $this->load->view('options/header_login');
             $this->load->view('my_task', $data);
             $this->load->view('options/footer');

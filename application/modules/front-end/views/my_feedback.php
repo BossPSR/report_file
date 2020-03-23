@@ -70,7 +70,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php $feedback_doc = $this->db->get_where('tbl_feedback', ['order_id' => $feedback['order_id']])->result_array(); ?>
+                                                                <?php $feedback_doc = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $feedback['id_feed']])->result_array(); ?>
                                                                 <?php foreach ($feedback_doc as $feedback_doc) { ?>
                                                                     <tr style="text-align:center;">
 
@@ -78,7 +78,7 @@
                                                                         <td><?= $feedback['order_id']; ?></td>
                                                                         <td><?= $feedback['date_required']; ?></td>
                                                                         <td>
-                                                                            <a href="<?php echo $feedback['file_name'] ?>" class="btn btn-info" download><i class="fa fa-download"></i> Download</a>
+                                                                            <a href="<?php echo $feedback_doc['file_name'] ?>" class="btn btn-info" download><i class="fa fa-download"></i> Download</a>
                                                                         </td>
                                                                     </tr>
                                                                 <?php } ?>
