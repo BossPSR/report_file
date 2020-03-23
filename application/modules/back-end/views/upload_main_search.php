@@ -76,11 +76,13 @@
                                              
                                                     <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_document' => $value['id_doc']])->row_array(); ?> 
                                                     <?php  $show_dm_c2 = $this->db->get_where('tbl_upload_order', ['order_id' => $show_dm_c['id_orderBuy'],'status_delivery' => '1'])->row_array(); ?>
+                                                    <?php  $prosum = date('Y-m-d', strtotime('+30 day'. '+'.$value['update_at']));?>
+                                                    <?php  $data = date('Y-m-d')?>
                                                         
-                                                    <?php if($show_dm_c2 == true):?>
-                                                        <a href=""><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> ห้ามจำหน่าย</button></a>
+                                                    <?php if($show_dm_c2 == true && $data<=$prosum):?>
+                                                        <a href=""><button type="button" class="btn btn-danger mr-1 mb-1"><i class="feather icon-download-cloud"></i> ห้ามจำหน่าย</button></a>
                                                         <?php else:?>
-                                                        <a href=""><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i>ยังไม่ได้จำหน่าย</button></a>
+                                                        <a href=""><button type="button" class="btn btn-info mr-1 mb-1"><i class="feather icon-download-cloud"></i>ยังไม่ได้จำหน่าย</button></a>
                                                         <?php endif;?>
                                                     </td>
 

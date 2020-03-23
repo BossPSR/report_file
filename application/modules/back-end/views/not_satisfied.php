@@ -176,11 +176,16 @@
                                                         <?php endif; ?>
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['order_id']])->row_array(); ?>
                                                         <td>
-                                                            <?php if ($team == true) : ?>
-                                                                <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                            <?php else : ?>
+                                                            <?php if ($team == false) : ?>
                                                                 <button data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>" type="button" class="btn btn-success">Upload to team</button>
+                                                            <?php else : ?>
+                                                                <?php if ($team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-Info">Done</span>
+                                                                <?php else : ?>
+                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                <?php endif ?>
                                                             <?php endif ?>
+
                                                         </td>
 
 
@@ -227,7 +232,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">wage</label>
 
-                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $store['price_file']*10/100; ?>" placeholder="Enter wage" readonly>
+                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $store['price_file'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">

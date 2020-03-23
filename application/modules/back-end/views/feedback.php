@@ -27,11 +27,12 @@
         </div>
 
         <?php
-        $this->db->select('*');
-        $this->db->from('tbl_bookmark');
-        $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy');
-        $this->db->where('tbl_upload_order.status_pay', 0);
-        $this->db->group_by('tbl_bookmark.id_orderBuy');
+         $this->db->select('*,tbl_feedback.order_id AS order_feed,tbl_feedback.create_at AS time,tbl_feedback.id AS id_f');
+         $this->db->from('tbl_feedback');
+         $this->db->join('tbl_upload_team','tbl_feedback.order_id=tbl_upload_team.order_id','left');
+         $this->db->join('tbl_feedback_file','tbl_feedback.id=tbl_feedback_file.id','left');
+         $this->db->group_by('tbl_feedback_file.id_feedback');
+         
 
         $datata = $this->db->get()->result_array();
 
@@ -74,7 +75,7 @@
                                                 <tr>
                                                     <th>order_id</th>
                                                     <th>User_id</th>
-                                                    <th>File Name</th>
+                                                    
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
                                                     <th>Create_at</th>
@@ -89,9 +90,9 @@
                                                         <tr>
                                                             <td><?php echo $feedback['order_feed'] ?></td>
                                                             <td><?php echo $feedback['userId'] ?></td>
-                                                            <td><?php echo $feedback['file_name'] ?></td>
-                                                            <td><span data-toggle="modal" data-target="#exampleModala<?php echo $feedback['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModala<?php echo $feedback['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            
+                                                            <td><span data-toggle="modal" data-target="#exampleModala<?php echo $feedback['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModala<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -103,21 +104,20 @@
                                                                             <div class="modal-body">
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
-                                                                                        <?php $order = $this->db->get_where('tbl_feedback', ['order_id' => $feedback['order_id']])->result_array(); ?>
+                                                                                        <?php $feedback_file = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $feedback['id_f']])->result_array(); ?>
                                                                                         <tr>
-                                                                                            <th>Order_id</th>
+                                                                                           
                                                                                             <th>File_name</th>
                                                                                             <th>File</th>
                                                                                             <th>create</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <?php foreach ($feedback_file as $feedback_file) { ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $order['order_id'] ?></td>
-                                                                                                <td><?php echo $order['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $order['create_at'] ?></td>
+                                                                                                <td><?php echo $feedback_file['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $feedback_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $feedback_file['create_at'] ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>

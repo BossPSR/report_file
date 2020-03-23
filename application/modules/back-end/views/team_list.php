@@ -54,6 +54,7 @@
                                                     <th>phone</th>
                                                     <th>postion</th>
                                                     <th>status</th>
+                                                    <th>Notification Ban</th>
 
                                                 </tr>
                                             </thead>
@@ -138,7 +139,42 @@
                                                             </td>
 
                                                         <?php endif; ?>
+                                                            <td>
+                                                          <?php if($team['status_notification_ban']==1):?>
+                                                            <button type="button" data-toggle="modal" data-target="#" class="btn btn btn-danger mr-1 mb-1">Notification Ban</button>
+                                                          <?php else:?>
 
+                                                            <button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['id']; ?>" class="btn btn-warning mr-1 mb-1">Notification Ban</button>
+                                                          <?php endif;?>
+                                                            <div class="modal fade" id="exampleModalk<?php echo $team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Notification Ban </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                      <form action="NotificationBan" method="POST">
+                                                                      <input type="text" value="<?php echo $team['id']; ?>" name="id" hidden>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note</label>
+                                                                                <textarea name="note_ban"  cols="20" rows="5" class="form-control"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                      
+                                                                      
+                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1"style="MARGIN: 15px;">Notification Ban</button>
+                                                                       
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            </td>
                                                     </tr>
                                                 <?php  } ?>
                                         </table>
