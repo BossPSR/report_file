@@ -60,7 +60,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                        <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['mms']])->result_array(); ?>
                                                         <?php $t = 1; ?>
                                                         <?php if (!empty($stockmain)) { ?>
                                                             <table class="table table-bordered">
@@ -108,7 +108,7 @@
                                                         </button>
                                                     </div>
                                                     <?php $z = 1; ?>
-                                                    <?php $stockGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                    <?php $stockGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
                                                     <div class="modal-body">
                                                         <?php if (!empty($stockGT)) { ?>
                                                             <table class="table table-bordered">
@@ -145,7 +145,7 @@
                                     <td><?php echo $stock['name_item']; ?></td>
                                     <td><span class="badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span></td>
                                     <td>
-                                        <?php $sub_order = substr($stock['order_id'], 3); ?>
+                                        <?php $sub_order = substr($stock['mms'], 3); ?>
                                         <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModalCF" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -168,7 +168,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php $stockmain2 = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                                <?php $stockmain2 = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['mms']])->result_array(); ?>
                                                                 <?php foreach ($stockmain2 as $stockmain_Download) { ?>
                                                                     <tr style="text-align:center;">
                                                                         <td><?php echo $stockmain_Download['order_id']; ?></td>
@@ -193,7 +193,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php $stockGT2 = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                                <?php $stockGT2 = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
                                                                 <?php foreach ($stockGT2 as $stockGT_Download) { ?>
                                                                     <tr style="text-align:center;">
                                                                         <td><?php echo $stockGT_Download['order_id']; ?></td>

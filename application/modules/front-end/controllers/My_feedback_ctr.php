@@ -67,10 +67,11 @@ class My_feedback_ctr extends CI_Controller
                     // Get data about the file
                     $uploadData = $this->upload->data();
                     $data2 = array(
-                        // 'id_feedback'       => $feedmax->id,
+                        'id_feedback'       => $feedmax->id,
                         'file_name'         => $uploadData['file_name'],
                         'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
                         'create_at'         => date('Y-m-d H:i:s'),
+                        
                     );
 
                     $success = $this->db->insert('tbl_feedback_file', $data2);
@@ -94,6 +95,30 @@ class My_feedback_ctr extends CI_Controller
             'dated'             => $dated,
         );
         $success = $this->db->insert('tbl_feedback', $orf);
+        echo $success;
+    }
+
+    public function order_auto_feedback_notApp()
+    {
+        $dated      =  $this->input->post('dated');
+        $detail     = $this->input->post('detail');
+        $order_id   = $this->input->post('order_id');
+        $userId     = $this->input->post('userId');
+        $orf = array(
+            'feedback_detail'   => $detail,
+            'order_id'          => $order_id,
+            'userId'            => $userId,
+            'create_at'         => date('Y-m-d H:i:s'),
+            'dated'             => $dated,
+            'check_status'      => 1
+        );
+        if ($this->db->insert('tbl_feedback', $orf)) {
+            $appro = array(
+                'status_approved' => 2
+            );
+            $this->db->where('order_id',$order_id);
+            $success = $this->db->update('tbl_upload_order',$appro);
+        }
         echo $success;
     }
 }
