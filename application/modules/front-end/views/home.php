@@ -4,7 +4,7 @@
     <?php if ($userId == true) { ?>
         <?php $order = $this->db->get_where('tbl_upload_order', ['userId' => $userId['idUser'], 'status_delivery' => 1])->row_array(); ?>
     <?php } else { ?>
-
+        <?php $daliver = $this->db->get_where('tbl_feedback', ['teamId' => $teamId['IdTeam']])->row_array(); ?>
     <?php } ?>
 <?php } else { ?>
 
@@ -40,6 +40,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="feedback" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="feedback" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            </div>
+            <div class="modal-body">
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <br>
+                <center>
+                    <button class="btn btn-primary" id="status_feed">MY FEEDBACK</button>
+                </center>
             </div>
         </div>
     </div>
@@ -107,5 +127,41 @@
             </script>
         <?php } ?>
     <?php } ?>
+    <?php if ($teamId == true) { ?>
+        <?php if ($daliver['status_feedback_read'] == 0) { ?>
+            <!--wishlist area end -->
+            <script type="text/javascript">
+                $(window).on('load', function() {
+                    $('#feedback').modal({
+                        'show': true,
+                        keyboard: false
+                    });
 
+                });
+            </script>
+            <?php $sb = substr($teamId['IdTeam'], 2); ?>
+            <script type="text/javascript">
+                $('#status_feed').click(function() {
+                    swal("Good job!", "Got it.", "success", {
+                        button: false,
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'check_c_feed',
+                        data: {
+                            teamId: <?= $sb; ?>,
+                            status_feedback_read: 1,
+                        },
+                        success: function(success) {
+
+                            setTimeout(function() {
+                                location.href = "my-feedback"
+                            }, 1000);
+                        }
+                    });
+                });
+            </script>
+        <?php } ?>
+    <?php } ?>
 <?php } ?>
