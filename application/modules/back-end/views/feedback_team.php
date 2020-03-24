@@ -72,7 +72,6 @@
                                                 <tr>
                                                     <th>order_id</th>
                                                     <th>User_id</th>
-                                                    <th>File Name</th>
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
                                                     <th>Create_at</th>
@@ -85,7 +84,6 @@
                                                     <tr>
                                                         <td><?php echo $feedback_team['order_id'] ?></td>
                                                         <td><?php echo $feedback_team['userId'] ?></td>
-                                                        <td><?php echo $feedback_team['file_name'] ?></td>
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $feedback_team['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $feedback_team['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -99,21 +97,21 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_feedback', ['order_id' => $feedback_team['order_id']])->result_array(); ?>
+                                                                                <?php $feedback_file = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $feedback_team['id_f']])->result_array(); ?>
                                                                                     <tr>
-                                                                                        <th>Order_id</th>
+                                                                                     
                                                                                         <th>File_name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                    <?php foreach ($feedback_file as $keys => $feedback_file) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                           
+                                                                                            <td><?php echo $feedback_file['file_name'] ?></td>
+                                                                                            <td><a href="<?php echo $feedback_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $feedback_file['create_at'] ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -132,7 +130,7 @@
                                                         <td><?php echo $feedback_team['create_at'] ?></td>
                                                         <td> 
                                                             <?php if ($feedback_team['status_c_feedack_team']=='0'):?>
-                                                        <button onclick="confirmalertunlock_upload_Feedback('<?php echo $feedback_team['teamId']; ?>','<?php echo $feedback_team['id_num']; ?>')" class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
+                                                        <button data-toggle="modal" data-target="#exampleModal<?php echo $feedback_team['teamId']; ?>" class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
                                                                         Feedback
                                                         </button>       
                                                         <?php else:?>     
@@ -140,6 +138,72 @@
                                                                         Feedback
                                                         </button>  
                                                         <?php endif;?>  
+
+
+                                                        <div class="modal fade" id="exampleModal<?php echo $feedback_team['teamId']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="upload_team_book" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Order</label>
+                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $bookmark['orderby']; ?>" placeholder="Enter Order" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">date required</label>
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $bookmark['date_re']; ?>" placeholder="Enter price">
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">position</label>
+                                                                                <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
+                                                                                <select name="position" class="form-control">
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <?php foreach ($select_postion as $keys => $select_postion) { ?>
+                                                                                        <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">wage</label>
+
+                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $bookmark['price_save'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note</label>
+                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                 
+                                                                    <!-- <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                         </td>
                                                     </tr>
 

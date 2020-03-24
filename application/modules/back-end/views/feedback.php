@@ -75,7 +75,6 @@
                                                 <tr>
                                                     <th>order_id</th>
                                                     <th>User_id</th>
-                                                    
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
                                                     <th>Create_at</th>

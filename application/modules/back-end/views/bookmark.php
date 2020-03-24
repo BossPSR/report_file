@@ -430,11 +430,14 @@
                                                             
                                                            <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
                                                             <?php endif;?>
+                                                          
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
                                                                 <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target="#exampleModal"><i class="feather icon-navigation"></i> delivery file</button>
                                                             <?php else : ?>
                                                                 <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['order_save']; ?>"><i class="feather icon-navigation"></i> delivery file</button>
                                                             <?php endif; ?>
+                                                            <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['id']; ?>"> Upload To team</button>
+                                                            
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -549,10 +552,76 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="modal fade" id="exampleModal<?php echo $bookmark['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="upload_team_book" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Order</label>
+                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $bookmark['orderby']; ?>" placeholder="Enter Order" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">date required</label>
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $bookmark['date_re']; ?>" placeholder="Enter price">
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">position</label>
+                                                                                <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
+                                                                                <select name="position" class="form-control">
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <?php foreach ($select_postion as $keys => $select_postion) { ?>
+                                                                                        <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">wage</label>
+
+                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $bookmark['price_save'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note</label>
+                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1"style="MARGIN: 15px;">Upload to team</button>
+                                                                    <!-- <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                         </td>
                                                     </tr>
                                                     <?php endif;?>
+                                                    
+                                                   
                                                 <?php } ?>
                                             </tbody>
                                         </table>

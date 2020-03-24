@@ -231,6 +231,7 @@ $route['status_team_t3']                           = 'back-end/Team_ctr/status_t
 $route['fileUpload_team_email']                       = 'back-end/Team_ctr/fileUpload_team_email';
 $route['bookmark_notpay_edit']                       = 'back-end/Book_ctr/bookmark_notpay_edit';
 $route['NotificationBan']                       = 'back-end/Team_ctr/NotificationBan';
+$route['upload_team_book']                       = 'back-end/Book_ctr/upload_team_book';
 
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

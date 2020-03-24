@@ -88,8 +88,8 @@
                                             <tbody>
                                                 <?php foreach ($bookmark_all_not as $keyBook => $bookmark_all_not) { ?>
                                                     <tr>
-                                                        <td><?php echo $bookmark_all_not['orderby'] ?></td>
-                                                        <td><?php echo $bookmark_all_not['user_name'] ?></td>
+                                                        <td><?php echo $bookmark_all_not['order_upload'] ?></td>
+                                                        <td><?php echo $bookmark_all_not['user_upload'] ?></td>
                                                         <td>
                                                             <?php if ($bookmark_all_not['id_document'] == '') : ?>
                                                                 -
@@ -264,8 +264,8 @@
 
                                                         </td>
                                                         <td>
-                                                        <button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $bookmark_all_not['orderby']; ?>" class="btn btn-primary mr-1 mb-1">Edit</button>
-                                                            <div class="modal fade" id="exampleModalk<?php echo $bookmark_all_not['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $bookmark_all_not['order_upload']; ?>" class="btn btn-primary mr-1 mb-1">Edit</button>
+                                                            <div class="modal fade" id="exampleModalk<?php echo $bookmark_all_not['order_upload']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -276,11 +276,11 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                       <form action="bookmark_notpay_edit" method="POST">
-                                                                      <input type="text" value="<?php echo $bookmark_all_not['orderby']; ?>" name="id_order" hidden>
+                                                                      <input type="text" value="<?php echo $bookmark_all_not['order_upload']; ?>" name="id_order" hidden>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Order</label>
-                                                                                <input type="text" class="form-control" name="Order" value="<?php echo $bookmark_all_not['orderby']; ?>" placeholder="Enter Order" readonly>
+                                                                                <input type="text" class="form-control" name="Order" value="<?php echo $bookmark_all_not['order_upload']; ?>" placeholder="Enter Order" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">

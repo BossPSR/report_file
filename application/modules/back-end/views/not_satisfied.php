@@ -182,7 +182,7 @@
                                                                 <?php if ($team['teamId'] != '') : ?>
                                                                     <span class="badge badge-pill badge-Info">Done</span>
                                                                 <?php else : ?>
-                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span><div class=""></div>
                                                                 <?php endif ?>
                                                             <?php endif ?>
 
