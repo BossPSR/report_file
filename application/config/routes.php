@@ -234,5 +234,6 @@ $route['fileUpload_team_email']                       = 'back-end/Team_ctr/fileU
 $route['bookmark_notpay_edit']                       = 'back-end/Book_ctr/bookmark_notpay_edit';
 $route['NotificationBan']                       = 'back-end/Team_ctr/NotificationBan';
 $route['feedback_ajax']                     = 'back-end/Complete_ctr/order_auto_feedback';
+$route['upload_team_book']                       = 'back-end/Book_ctr/upload_team_book';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

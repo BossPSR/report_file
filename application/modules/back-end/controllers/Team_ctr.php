@@ -312,8 +312,8 @@ class Team_ctr extends CI_Controller {
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
       
 
-           $team = $this->db->get_where('tbl_team', ['id' => $team['id']])->row_array();
-           $message .= ''.$team['notification_ban'].'';
+           $teamsend = $this->db->get_where('tbl_team', ['id' => $team['id']])->row_array();
+           $message .= ''.$teamsend['notification_ban'].'';
            $message .= '<br>';
 
       

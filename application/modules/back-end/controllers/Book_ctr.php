@@ -325,4 +325,28 @@ class Book_ctr extends CI_Controller
 
         return redirect('Bookmark');
     }
+
+    public function upload_team_book()
+    {
+        $data = array(
+
+            'order_id'                         => $this->input->post('order_id'),
+            'position'                         => $this->input->post('position'),
+            'wage'                             => $this->input->post('wage'),
+            'note'                             => $this->input->post('note'),
+            'date_required'                    => $this->input->post('Daterequired'),
+            'create_at'                        => date('Y-m-d H:i:s')
+
+        );
+      
+        $resultsedit = $this->db->insert('tbl_upload_team', $data);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+        }
+        return redirect('Bookmark');
+    }
+
 }
