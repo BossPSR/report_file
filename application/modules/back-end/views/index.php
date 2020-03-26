@@ -1,4 +1,5 @@
 <!-- BEGIN: Content-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -6,6 +7,8 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
+
+       
             <!-- Dashboard Analytics Start -->
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -77,51 +80,93 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="mb-0">Item</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="table-responsive mt-1">
+                                    <table class="table table-hover-animation mb-0" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                               
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myBody">
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="mb-0">Order</h4>
                             </div>
                             <div class="card-content">
                                 <div class="table-responsive mt-1">
-                                    <table class="table table-hover-animation mb-0">
+                                    <table class="table table-hover-animation mb-0" id="myTable1">
                                         <thead>
                                             <tr>
-                                                <th>Item</th>
-                                                <th>Amount</th>
-                                                <th>Availble</th>
-                                                <th>Online Now Available</th>
+                                               
+                                                <th>Order</th>
+                                               
 
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="myBody1">
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="mb-0">Confirmed</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="table-responsive mt-1">
+                                    <table class="table table-hover-animation mb-0" id="myTable2">
+                                        <thead>
                                             <tr>
-                                                <td>#879985</td>
-                                                <td><i class="fa fa-circle font-small-3 text-success mr-50"></i>Moving</td>
-                                                <td class="p-1">
-                                                    <ul class="list-unstyled users-list m-0  d-flex align-items-center">
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Vinnie Mostowy" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-5.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Elicia Rieske" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-7.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Julee Rossignol" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-10.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Darcey Nooner" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-8.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                    </ul>
-                                                </td>
                                               
-                                                <td>
-                                                    <span>130 km</span>
-                                                    <div class="progress progress-bar-success mt-1 mb-0">
-                                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
+                                                <th>Confirmed</th>
+                                                
                                             </tr>
+                                        </thead>
+                                        <tbody id="myBody2">
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="mb-0">Availble</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="table-responsive mt-1">
+                                    <table class="table table-hover-animation mb-0" id="myTable3">
+                                        <thead>
+                                            <tr>
+                                               
+                                                <th>Availble</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myBody3">
+                                          
                                         </tbody>
                                     </table>
                                 </div>
@@ -129,6 +174,7 @@
                         </div>
                     </div>
                 </div>
+
             </section>
             <!-- Dashboard Analytics end -->
 
@@ -136,6 +182,72 @@
     </div>
 </div>
 <!-- END: Content-->
+<script>
+function getDataFromDb()
+{
+	$.ajax({ 
+				url: "realtime_data" ,
+				type: "POST",
+				data: ''
+			})
+			.success(function(result) { 
+				var obj = jQuery.parseJSON(result);
+					if(obj != '')
+					{
+						  //$("#myTable tbody tr:not(:first-child)").remove();
+						  $("#myBody").empty();
+						  $.each(obj, function(key, val) {
+                           
+									var tr = "<tr>";
+                                    tr = tr + "<td>" + val["name_item"] + "</td>";
+                                   
+                                   
+									tr = tr + "</tr>";
+									$('#myTable > tbody:last').append(tr);
+						  });
+					}
 
-<div class="sidenav-overlay"></div>
-<div class="drag-target"></div>
+			});
+
+}
+
+setInterval(getDataFromDb, 1000);   // 1000 = 1 second
+</script> 
+
+<script>
+function getDataFromDb()
+{
+	$.ajax({ 
+				url: "realtime_data1" ,
+				type: "POST",
+				data: ''
+			})
+			.success(function(result) { 
+				var obj = jQuery.parseJSON(result);
+					if(obj != '')
+					{
+						  //$("#myTable tbody tr:not(:first-child)").remove();
+						  $("#myBody1").empty();
+						  $.each(obj, function(key, val) {
+                            var data =  val["position_number"];
+
+									var tr = "<tr>";
+                                    if(data==null ){
+                                    tr = tr + "<td>" + 0 + "</td>";
+                                }else{
+                                    tr = tr + "<td>" + data + "</td>";
+                                }
+                                   
+									tr = tr + "</tr>";
+									$('#myTable1 > tbody:last').append(tr);
+						  });
+					}
+
+			});
+
+}
+
+setInterval(getDataFromDb, 1000);   // 1000 = 1 second
+</script> 
+
+

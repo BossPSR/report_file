@@ -21,6 +21,21 @@ class Withdraw_ctr extends CI_Controller {
         }
     }
 
+    public function withdraw_realtime()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+            $data['withdraw_team'] = $this->Withdraw_model->withdraw_list_team();
+            $this->load->view('options/header');
+            $this->load->view('withdraw_team',$data);
+            $this->load->view('options/footer');
+            
+        }
+    }
+
+ 
+
     public function withdraw_status()
     {
         if ($this->session->userdata('email_admin') == '') {
@@ -41,6 +56,30 @@ class Withdraw_ctr extends CI_Controller {
                 $this->session->set_flashdata('del_ss2', 'Not Successfully Update withdraw ');
             }
             return redirect('back_withdraw');
+            
+        }
+    }
+
+    public function withdraw_status_team()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+
+            $id = $this->input->get('id');
+            $data = array(
+                'status' => $this->input->get('status')
+            );
+
+            $this->db->where('id', $id);   
+            $resultsedit = $this->db->update('tbl_withdraw_team', $data);
+
+            if ($resultsedit > 0) {
+                $this->session->set_flashdata('save_ss2', 'Successfully Update withdraw  !!.');
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully Update withdraw ');
+            }
+            return redirect('withdraw_realtime');
             
         }
     }

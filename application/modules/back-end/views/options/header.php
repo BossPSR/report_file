@@ -53,6 +53,7 @@
     <!-- END: Custom CSS-->
 
     <script src="public/backend/assets/vendors/js/vendors.min.js"></script>
+   
 </head>
 <!-- END: Head-->
 
@@ -364,9 +365,23 @@
 
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="back_withdraw"><i class="feather icon-edit-2"></i><span data-i18n="Forms &amp; Tables"> Withdraw </span></a>
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_withdraw" || $this->uri->segment(1) == "withdraw_realtime" ) {
+                                                            echo 'active';
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Withdraw</span></a>
+                            <ul class="dropdown-menu">
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_withdraw") {
+                                                                                echo 'active';
+                                                                            } ?>" href="back_withdraw" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Withdraw</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_realtime") {
+                                                                                echo 'active';
+                                                                            } ?>" href="withdraw_realtime" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Withdraw Team</a>
+                                </li>
+                                
+                            </ul>
 
                         </li>
+                        
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved" || $this->uri->segment(1) == "Delivery") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Order Result</span></a>

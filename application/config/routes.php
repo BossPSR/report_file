@@ -238,5 +238,10 @@ $route['upload_team_book']                       = 'back-end/Book_ctr/upload_tea
 $route['order_auto_feedback_team']                       = 'back-end/Feedback_ctr/order_auto_feedback_team';
 $route['fileUpload_feedback_team']                       = 'back-end/Feedback_ctr/fileUpload_feedback_team';
 $route['Deduct_Money']                          = 'back-end/Feedback_ctr/Deduct_Money';
+$route['realtime_data']                          = 'back-end/Home_ctr/realtime_data';
+$route['withdraw_realtime']                          = 'back-end/Withdraw_ctr/withdraw_realtime';
+$route['withdraw_realtime_data']                          = 'back-end/Withdraw_ctr/withdraw_realtime_data';
+$route['withdraw_status_team']                          = 'back-end/Withdraw_ctr/withdraw_status_team';
+$route['realtime_data1']                          = 'back-end/Home_ctr/realtime_data1';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';
