@@ -282,7 +282,7 @@ class Team_ctr extends CI_Controller {
         );
                        $this->db->where('id', $id);
         $resultsedit = $this->db->update('tbl_team', $data);
-        $team = $this->db->get_where('tbl_team',['id',$id])->row_array();
+        $team = $this->db->get_where('tbl_team',['id'=> $id])->row_array();
         $this->sendEmail_Notification_Ban($team);
 
         if ($resultsedit > 0) {
