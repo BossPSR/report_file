@@ -23,4 +23,15 @@ class Feedback_model extends CI_Model
         $data = $this->db->get();
         return $data->result_array();
     }
+
+    public function feedback_c_read($as)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_feedback');
+        $this->db->where('status_feedback_read', 0);
+        $this->db->where('teamId', $as);
+
+        $data = $this->db->get();
+        return $data->row_array();
+    }
 }

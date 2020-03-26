@@ -402,9 +402,20 @@
 
                         </li>
 
+                        <?php 
+                            $notifyCustomer_order = 0;
+                            $notifyNot_satisfied = 0;
+                            $customer_order = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
+                             foreach ($customer_order as $customerOrder) {
+                                 if ($customerOrder['notify_admin'] == 0 && $customerOrder['status_book'] == 2 && $customerOrder['status_pay'] == 1) {
+                                     $notifyNot_satisfied += 1;
+                                 }
+                             }
+                            $notifyCustomer_order += $notifyNot_satisfied;
+                        ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Satisfied" || $this->uri->segment(1) == "Not_Satisfied") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Customer Order</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Customer Order <span class="badge badge badge-warning badge-pill" style="<?php if($notifyCustomer_order == 0){ echo "display:none";} ?>"><?php echo $notifyCustomer_order; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "orverall") {
                                                                                 echo 'active';
@@ -416,7 +427,7 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Not_Satisfied") {
                                                                                 echo 'active';
-                                                                            } ?>" href="Not_Satisfied" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Satisfied</a>
+                                                                            } ?>" href="Not_Satisfied" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Satisfied <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notifyNot_satisfied == 0){ echo "display:none";} ?>"><?php echo $notifyNot_satisfied; ?></span></a>
                                 </li>
                             </ul>
 
@@ -431,7 +442,7 @@
                                 if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_book'] == 1 && $bookmark_pay['status_pay'] == 1) {
                                     $notify_pay += 1;
                                 }
-                                if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_book'] == 2 && $bookmark_pay['status_pay'] == 0) {
+                                if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_pay'] == 0) {
                                     $notify_not_pay += 1;
                                 }
                             }

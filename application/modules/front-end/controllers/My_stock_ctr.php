@@ -113,4 +113,32 @@ class My_stock_ctr extends CI_Controller
             $this->load->view('options/footer');
         }
     }
+
+    function my_task_withdraw()
+    {
+        $order_id               = $this->input->post('order_id');
+        $teamId                 = $this->input->post('teamId');
+        $price                  = $this->input->post('price');
+        $status                 = 1;
+        $create_at              = date('Y-m-d H:i:s');
+
+        $data = array(
+            'order_id'          => "ODB" . $order_id,
+            'teamId'            => "TM" . $teamId,
+            'price'             => $price,
+            'status'            => $status,
+            'create_at'         => $create_at
+        );
+        if ($this->db->insert('tbl_withdraw_team', $data)) {
+            $maxId = $this->db->insert_id();
+
+            $data2 = array(
+                'bill_id'       => "BILL" . "-" . $maxId,
+            );
+            $this->db->where('id', $maxId);
+            $success = $this->db->update('tbl_withdraw_team', $data2);
+
+            echo $success;
+        }
+    }
 }

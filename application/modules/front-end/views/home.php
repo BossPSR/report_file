@@ -118,7 +118,7 @@
 
 <?php if (!empty($this->session->userdata('email'))) { ?>
     <?php if ($userId == true) { ?>
-        <?php if ($order['status_approved'] == 0) { ?>
+        <?php if ($order) { ?>
             <!--wishlist area end -->
             <script type="text/javascript">
                 $(window).on('load', function() {
@@ -128,7 +128,7 @@
         <?php } ?>
     <?php } ?>
     <?php if ($teamId == true) { ?>
-        <?php if ($daliver['status_feedback_read'] == 0) { ?>
+        <?php if ($check_read) { ?>
             <!--wishlist area end -->
             <script type="text/javascript">
                 $(window).on('load', function() {
