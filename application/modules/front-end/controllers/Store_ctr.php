@@ -164,7 +164,7 @@ class Store_ctr extends CI_Controller
         }
 
         $this->db->where('order_id', $order_id);
-        $this->db->update('tbl_upload_order',['status_pay' => 1]);
+        $this->db->update('tbl_upload_order',['status_pay' => 1 , 'status_book' => 1]);
         
 
         $data = [

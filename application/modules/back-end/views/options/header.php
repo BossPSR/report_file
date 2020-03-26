@@ -323,7 +323,7 @@
                             $notify_myStore = 0;
                             $uploadOrder = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
                             foreach($uploadOrder as $upload_order){
-                                if ($upload_order['notify_admin'] == 0) {
+                                if ($upload_order['notify_admin'] == 0 && $upload_order['status_book'] == 0) {
                                     $notify_myStore += 1;
                                 }
                             }
@@ -409,14 +409,19 @@
                         <?php 
                             $notifyBookmark = 0;
                             $notify_pay = 0;
+                            $notify_not_pay = 0;
                             $bookmarkPay = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
                             foreach ($bookmarkPay as $bookmark_pay) {
                                 
-                                if ($bookmark_pay['status_pay'] == 1) {
+                                if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_book'] == 1 && $bookmark_pay['status_pay'] == 1) {
                                     $notify_pay += 1;
+                                }
+                                if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_book'] == 2 && $bookmark_pay['status_pay'] == 0) {
+                                    $notify_not_pay += 1;
                                 }
                             }
                             $notifyBookmark += $notify_pay;
+                            $notifyBookmark += $notify_not_pay;
                            
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" ||$this->uri->segment(1) == "More_File"|| $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
@@ -434,7 +439,7 @@
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark_notpay") {
                                                                 echo 'active';
                                                             } ?>" href="Bookmark_notpay" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-book"></i>Not Pay
+                                        <i class="feather icon-book"></i>Not Pay <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_not_pay == 0){ echo "display:none";} ?>"><?php echo $notify_not_pay; ?></span>
                                     </a>
                                 </li>
                                 <li data-menu="">

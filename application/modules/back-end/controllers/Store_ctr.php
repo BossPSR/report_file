@@ -91,7 +91,7 @@ class Store_ctr extends CI_Controller
                 'update_at'                  => date('Y-m-d H:i:s'),
                 'notify_user'                => 0,
                 'status_cp'                => $this->input->post('status_cp'),
-                'notify_admin'                => 1,
+                'notify_admin'                => 0,
             );
             $this->db->where('order_id', $orderid);
             $resultsedit1 = $this->db->update('tbl_upload_order', $data);
@@ -344,7 +344,7 @@ class Store_ctr extends CI_Controller
             'status_book'         => 2,
             'update_at'                  => date('Y-m-d H:i:s'),
             'notify_user'                => 0,
-            'notify_admin'                => 1
+            'notify_admin'                => 0
 
 
         );
@@ -373,7 +373,7 @@ class Store_ctr extends CI_Controller
             'is_check'            => 1,
             'update_at'                  => date('Y-m-d H:i:s'),
             'notify_user'                => 0,
-            'notify_admin'                => 1
+            'notify_admin'                => 0
 
 
         );
