@@ -28,6 +28,10 @@
                             <?php $OPE = 1; ?>
                             <?php $BNAP = 1; ?>
                             <?php $NAP = 1; ?>
+                            <?php $zz = 1; ?>
+                            <?php $xx = 1; ?>
+                            <?php $cc = 1; ?>
+                            <?php $bb = 1; ?>
                             <?php foreach ($buy_email as $value) : ?>
                                 <?php $sub_order = substr($value['order_id'], 3); ?>
                                 <tr style="text-align:center;">
@@ -39,12 +43,12 @@
                                         <?php endif; ?>
                                     </th>
                                     <th scope="row"><?php echo $i++; ?></th>
-                                    <td><?php echo $value['order_id']; ?></td>
+                                    <td><?php echo $value['ORD']; ?></td>
                                     <td style="text-align:left;"><?php echo $value['file_name']; ?></td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalMain"><i class="fa fa-file-text-o"></i></a>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalMain<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalMain" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModalMain<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -54,7 +58,7 @@
                                                         </button>
                                                     </div>
                                                     <?php $zz = 1; ?>
-                                                    <?php $order_main = $this->db->get_where('tbl_upload_order', ['order_id' => $value['order_id'], 'status_approved !=' => 0])->result_array(); ?>
+                                                    <?php $order_main = $this->db->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
                                                     <div class="modal-body">
                                                         <?php if (!empty($order_main)) { ?>
                                                             <table class="table table-bordered">
@@ -89,9 +93,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalMainGT"><i class="fa fa-file-text-o"></i></a>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalMainGT<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalMainGT" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModalMainGT<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -101,28 +105,32 @@
                                                         </button>
                                                     </div>
                                                     <?php $kk = 1; ?>
-                                                    <?php $order_GT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $value['order_id']])->result_array(); ?>
+                                                    <?php $order_GT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
                                                     <div class="modal-body">
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr style="text-align:center;">
-                                                                    <th scope="col">No.</th>
-                                                                    <th scope="col">ID Order</th>
-                                                                    <th scope="col">File</th>
-                                                                    <th scope="col">Tool</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php foreach ($order_GT as $order_GT) { ?>
+                                                        <?php if (!empty($order_GT)) { ?>
+                                                            <table class="table table-bordered">
+                                                                <thead>
                                                                     <tr style="text-align:center;">
-                                                                        <td><?php echo $kk++; ?></td>
-                                                                        <td><?php echo $order_GT['order_id']; ?></td>
-                                                                        <td><?php echo $order_GT['file_name_GT']; ?></td>
-                                                                        <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                        <th scope="col">No.</th>
+                                                                        <th scope="col">ID Order</th>
+                                                                        <th scope="col">File</th>
+                                                                        <th scope="col">Tool</th>
                                                                     </tr>
-                                                                <?php } ?>
-                                                            </tbody>
-                                                        </table>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($order_GT as $order_GT) { ?>
+                                                                        <tr style="text-align:center;">
+                                                                            <td><?php echo $kk++; ?></td>
+                                                                            <td><?php echo $order_GT['order_id']; ?></td>
+                                                                            <td><?php echo $order_GT['file_name_GT']; ?></td>
+                                                                            <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                        </tr>
+                                                                    <?php } ?>
+                                                                </tbody>
+                                                            </table>
+                                                        <?php } else { ?>
+                                                            <h1 style="color:blue;">Data Not Found</h1>
+                                                        <?php } ?>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -145,7 +153,7 @@
                                                 <?php
                                                 $this->db->select('count(order_id) as N_order');
                                                 ?>
-                                                <?php $N_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['order_id'], 'check_status' => 1])->row_array(); ?>
+                                                <?php $N_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD'], 'check_status' => 1])->row_array(); ?>
                                                 <?php if ($N_feed['N_order'] >= 3) { ?>
                                                     <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
                                                 <?php } else { ?>
@@ -154,7 +162,7 @@
                                                 <button type="button" class="btn btn-secondary"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                             <?php } else { ?>
                                                 <?php $this->db->select('count(order_id) as c_order'); ?>
-                                                <?php $c_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['order_id']])->row_array(); ?>
+                                                <?php $c_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD']])->row_array(); ?>
                                                 <?php if ($c_feed['c_order'] >= 3) { ?>
                                                     <button type="button" class="btn btn-secondary" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                                 <?php } else { ?>
@@ -188,7 +196,7 @@
 
                                                                 <label for="" class="font-size-upload">Date :</label>
                                                                 <input type="date" name="dated" id="dated" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
-                                                                <input type="text" name="order_id" id="order_id" value="<?php echo $value['order_id']; ?>" hidden>
+                                                                <input type="text" name="order_id" id="order_id" value="<?php echo $value['ORD']; ?>" hidden>
                                                                 <input type="text" name="userId" id="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                                 <!-- </form> -->
                                                             </div>

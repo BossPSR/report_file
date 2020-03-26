@@ -479,7 +479,7 @@
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#"> Package</a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> Package</a></li>
                                             <li></li>
                                             <li></li>
                                             <!-- <li class="menu-item-has-children">
@@ -514,34 +514,37 @@
             <div class="widget_list widget_categories">
                 <div class="show_sign">
                     <ul class="list_sign_login">
-                        <a href="<?php echo ($user) ? 'my-wallet' : '#exampleModalCenter'; ?>" <?php echo ($user) ? '' : 'data-toggle="modal"'; ?>>
-                            <li>
-                                <span>
-                                    <i class="fa fa-google-wallet" aria-hidden="true"></i>
-                                    <br>
-                                    My wallet
-                                </span>
-                            </li>
-                        </a>
-                        <a href="<?php echo ($user) ? 'my-deposit' : '#exampleModalCenter'; ?>">
-                            <li>
-                                <span>
-                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                    <br>
-                                    Deposit
-                                </span>
-                            </li>
-                        </a>
-                        <a href="<?php echo ($user) ? 'my-withdraw' : '#exampleModalCenter'; ?>">
-                            <li>
-                                <span>
-                                    <i class="fa fa-minus-square" aria-hidden="true"></i>
-                                    <br>
-                                    Withdraw
-                                </span>
-                            </li>
-                        </a>
-                        <a href="<?php echo ($user) ? 'my-slip' : '#exampleModalCenter'; ?>">
+                        <?php if ($user) { ?>
+                            <a href="<?php echo ($user) ? 'my-wallet' : '#exampleModalCenter'; ?>" <?php echo ($user) ? '' : 'data-toggle="modal"'; ?>>
+                                <li>
+                                    <span>
+                                        <i class="fa fa-google-wallet" aria-hidden="true"></i>
+                                        <br>
+                                        My wallet
+                                    </span>
+                                </li>
+                            </a>
+                            <a href="<?php echo ($user) ? 'my-deposit' : '#exampleModalCenter'; ?>" <?php echo ($user) ? '' : 'data-toggle="modal"'; ?>>
+                                <li>
+                                    <span>
+                                        <i class="fa fa-money" aria-hidden="true"></i>
+                                        <br>
+                                        Deposit
+                                    </span>
+                                </li>
+                            </a>
+
+                            <a href="<?php echo ($user) ? 'my-withdraw' : '#exampleModalCenter'; ?>" <?php echo ($user) ? '' : 'data-toggle="modal"'; ?>>
+                                <li>
+                                    <span>
+                                        <i class="fa fa-minus-square" aria-hidden="true"></i>
+                                        <br>
+                                        Withdraw
+                                    </span>
+                                </li>
+                            </a>
+                        <?php } ?>
+                        <a href="<?php echo ($user || $team) ? 'my-slip' : '#exampleModalCenter'; ?>" <?php echo ($user || $team) ? '' : 'data-toggle="modal"'; ?>>
                             <li>
                                 <span>
                                     <i class="fa fa-file-text-o" aria-hidden="true"></i>

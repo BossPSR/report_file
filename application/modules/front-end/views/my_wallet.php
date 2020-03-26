@@ -1,53 +1,38 @@
+<?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array(); ?>
+<?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
+<br>
+<h2 class="text-center" style="margin-top: 15px;">My wallet</h2>
+<hr class="line_package">
+<br>
 <!--services img area-->
 <div class="services_gallery mt-30">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-1 col-md-1"></div>
+            <div class="col-lg-10 col-md-10">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 wall-center shadow-b hight-100 " style=" padding-right: 0px; padding-left: 0px;">
-                        <div class="p-15 text-center header-profile">
-                            โปรไฟล์ของฉัน
-                        </div>
-                        <div class="p-15 text-center">
-                            <img class="profile-small" src="public/image/man.png" alt="">
-                        </div>
-                        <div class="p-15 text-center font18">
-                            User001
-                        </div>
-                        <div class="ptw-5 text-center font17">
-                            เอกสารของฉัน : 11 ฉบับ
-                        </div>
-                        <div class="pw-5 text-center font17">
-                            ยอดคงเหลือ : ฿<?php echo number_format("487515"); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-9 col-md-9">
-                <div class="row">
-                    <div class="col-lg-11 col-md-11 wall-center shadow-b ml-20">
+                    <div class="col-lg-12 col-md-12 wall-center shadow-b ml-20">
                         <div class="p-30 text-center color-w">
-                            ยอดคงเหลือในบัญชี
+                            Account balance
                         </div>
                         <div class="p-15 text-center color-p">
-                            ฿0
+                            $ <?php echo number_format($user['cash']); ?>
                         </div>
                         <div class="pb-18 text-center">
-                            <button type="button" class="btn btn-primary button-p">เติมเงิน</button>
-                            <button type="button" class="btn btn-outline-dark button-100">ถอนเงิน</button>
+                            <button type="button" class="btn btn-primary button-p">Top-up</button>
+                            <button type="button" class="btn btn-outline-dark button-100">Withdraw</button>
                         </div>
                     </div>
 
 
-                    <div class="col-lg-11 col-md-11 wall-center shadow-b mtp-20">
+                    <div class="col-lg-12 col-md-12 wall-center shadow-b mtp-20">
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">ประวัติการเติมเงิน</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Top-up History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ประวัติการถอนเงิน</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">History Withdraw</a>
                             </li>
                             <!-- <li class="nav-item">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">ประวัติการใช้จ่าย</a>
@@ -58,31 +43,31 @@
                                 <table class="table mt-15">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">ยอดการโอนเงิน</th>
-                                            <th scope="col">เลขที่บิล</th>
-                                            <th scope="col" class="text-center">สถานะ</th>
-                                            <th scope="col">เวลาอัปเดต</th>
-                                            <th scope="col">หมายเหตุ</th>
+                                            <th scope="col">Transfer amount</th>
+                                            <th scope="col">Bill</th>
+                                            <th scope="col" class="text-center">Status</th>
+                                            <th scope="col">Update Time</th>
+                                            <th scope="col">Note</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($deposit as $key => $deposit) : ?>
-                                        <tr>
-                                            <th scope="row">฿<?php echo $deposit['price']; ?></th>
-                                            <td><?php echo $deposit['bill_id']; ?></td>
-                                            <td class="text-center">
-                                                <?php if ($deposit['status'] == 1) : ?>
-                                                <span class="badge badge-pill badge-warning" >กำลังดำเนินงาน</span>
-                                                <?php elseif($deposit['status'] == 2) : ?>
-                                                <span class="badge badge-pill badge-success" >เสร็จสิ้น</span>
-                                                <?php else : ?>
-                                                <span class="badge badge-pill badge-danger" >ล้มเหลว</span>
-                                                <?php endif ; ?>
-                                            </td>
-                                            <td><?php echo $deposit['create_at']; ?></td>
-                                            <td><?php echo $deposit['note']; ?></td>
-                                        </tr>
-                                    <?php endforeach ; ?>
+                                        <?php foreach ($deposit as $key => $deposit) : ?>
+                                            <tr>
+                                                <th scope="row">฿<?php echo $deposit['price']; ?></th>
+                                                <td><?php echo $deposit['bill_id']; ?></td>
+                                                <td class="text-center">
+                                                    <?php if ($deposit['status'] == 1) : ?>
+                                                        <span class="badge badge-pill badge-warning">Wait</span>
+                                                    <?php elseif ($deposit['status'] == 2) : ?>
+                                                        <span class="badge badge-pill badge-success">Success</span>
+                                                    <?php else : ?>
+                                                        <span class="badge badge-pill badge-danger">Failed</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td><?php echo $deposit['create_at']; ?></td>
+                                                <td><?php echo $deposit['note']; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -90,29 +75,29 @@
                                 <table class="table mt-15">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">ยอดเงินที่ต้องการจะถอน</th>
-                                            <th scope="col">เลขที่บิล</th>
-                                            <th scope="col" class="text-center">สถานะ</th>
-                                            <th scope="col">เวลาอัปเดต</th>
+                                            <th scope="col">Transfer amount</th>
+                                            <th scope="col">Bill</th>
+                                            <th scope="col" class="text-center">Status</th>
+                                            <th scope="col">Update Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($withdraw as $key => $withdraw) : ?>
-                                        <tr>
-                                            <th scope="row">฿<?php echo $withdraw['price']; ?></th>
-                                            <td><?php echo $withdraw['bill_id']; ?></td>
-                                            <td class="text-center">
-                                                <?php if ($withdraw['status'] == 1) : ?>
-                                                <span class="badge badge-pill badge-warning" >กำลังดำเนินงาน</span>
-                                                <?php elseif($withdraw['status'] == 2) : ?>
-                                                <span class="badge badge-pill badge-success" >เสร็จสิ้น</span>
-                                                <?php else : ?>
-                                                <span class="badge badge-pill badge-danger" >ล้มเหลว</span>
-                                                <?php endif ; ?>
-                                            </td>
-                                            <td><?php echo $withdraw['create_at']; ?></td>
-                                        </tr>
-                                        <?php endforeach ; ?>
+                                            <tr>
+                                                <th scope="row">฿<?php echo $withdraw['price']; ?></th>
+                                                <td><?php echo $withdraw['bill_id']; ?></td>
+                                                <td class="text-center">
+                                                    <?php if ($withdraw['status'] == 1) : ?>
+                                                        <span class="badge badge-pill badge-warning">Wait</span>
+                                                    <?php elseif ($withdraw['status'] == 2) : ?>
+                                                        <span class="badge badge-pill badge-success">Success</span>
+                                                    <?php else : ?>
+                                                        <span class="badge badge-pill badge-danger">Failed</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td><?php echo $withdraw['create_at']; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -120,11 +105,11 @@
                                 <table class="table mt-15">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col">ประเภทบัญชี</th>
-                                            <th scope="col">รายรับรายจ่าย</th>
-                                            <th scope="col">จำนวนเงินที่เกิดขึ้น</th>
-                                            <th scope="col">ยอดคงเหลือทั้งหมดในปัจจุบัน</th>
-                                            <th scope="col">ยอดเงินที่สามารถใช้ได้ในปัจจุบัน</th>
+                                            <th scope="col">Account type</th>
+                                            <th scope="col">Income-Expense</th>
+                                            <th scope="col">Amount of money</th>
+                                            <th scope="col">All current balances</th>
+                                            <th scope="col">The amount that is currently available</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -142,6 +127,7 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-1 col-md-1"></div>
         </div>
     </div>
 </div>

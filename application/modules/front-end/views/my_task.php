@@ -160,10 +160,21 @@
                                         <span class="badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
                                     </td>
                                     <td><?php echo $task['name_item']; ?></td>
-                                    <?php if ($task['status_approved'] == 0) { ?>
-                                        <td><button class="btn btn-secondary"><i class="fa fa-money"></i> Withdraw</button></td>
+                                    <?php if ($task['status_approved'] == 1) { ?>
+                                        <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
+
+                                        <?php if (empty($withh)) { ?>
+                                            <td><button class="btn btn-info" id="cf_draw<?php echo $z++; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
+                                        <?php } elseif ($withh['status'] == 1) { ?>
+                                            <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for admin</span></td>
+                                        <?php } elseif ($withh['status'] == 2) { ?>
+                                            <td><span class="badge badge-success" style="font-size:16px;">Success</span></td>
+                                        <?php } else { ?>
+                                            <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
+                                        <?php } ?>
+
                                     <?php } else { ?>
-                                        <td><button class="btn btn-info" id="cf_draw<?php echo $z++; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
+                                        <td><button class="btn btn-secondary"><i class="fa fa-money"></i> Withdraw</button></td>
                                     <?php } ?>
                                     <?php $or_sub = substr($task['order_id'], 3); ?>
                                     <?php $te_sub = substr($team['IdTeam'], 2); ?>

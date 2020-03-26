@@ -124,7 +124,7 @@ class My_stock_ctr extends CI_Controller
 
         $data = array(
             'order_id'          => "ODB" . $order_id,
-            'teamId'            => $teamId,
+            'teamId'            => "TM" . $teamId,
             'price'             => $price,
             'status'            => $status,
             'create_at'         => $create_at

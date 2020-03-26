@@ -15,20 +15,23 @@ class Home_ctr extends CI_Controller
 
 
 		$lang = $this->session->userdata("lang") == null ? "english" : $this->session->userdata("lang");
-		$this->lang->load($lang, $lang);
-		if ($this->session->userdata('email') == '') {
-		} else {
-			$sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+		$sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+
+		if ($sess == true) {
 			$as = $sess['IdTeam'];
 			$data['check_read'] = $this->Feedback_model->feedback_c_read($as);
+		} else {
 		}
 
 
+		$this->lang->load($lang, $lang);
+
+
 		$this->load->view('options/header_login');
-		if ($this->session->userdata('email') == '') {
-			$this->load->view('home');
-		} else {
+		if ($sess == true) {
 			$this->load->view('home', $data);
+		} else {
+			$this->load->view('home');
 		}
 		$this->load->view('options/footer');
 	}
