@@ -104,6 +104,8 @@ class Customer_order_ctr extends CI_Controller
         );
       
         $resultsedit = $this->db->insert('tbl_upload_team', $data);
+        $this->db->where('order_id',$this->input->post('order_id'));
+        $this->db->update('tbl_upload_order',['notify_admin' => 1]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
