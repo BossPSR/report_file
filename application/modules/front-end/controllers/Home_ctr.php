@@ -7,6 +7,7 @@ class Home_ctr extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Feedback_model');
 	}
 
 	public function index()
@@ -15,8 +16,20 @@ class Home_ctr extends CI_Controller
 
 		$lang = $this->session->userdata("lang") == null ? "english" : $this->session->userdata("lang");
 		$this->lang->load($lang, $lang);
+		if ($this->session->userdata('email') == '') {
+		} else {
+			$sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+			$as = $sess['IdTeam'];
+			$data['check_read'] = $this->Feedback_model->feedback_c_read($as);
+		}
+
+
 		$this->load->view('options/header_login');
-		$this->load->view('home');
+		if ($this->session->userdata('email') == '') {
+			$this->load->view('home');
+		} else {
+			$this->load->view('home', $data);
+		}
 		$this->load->view('options/footer');
 	}
 

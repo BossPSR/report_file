@@ -17,8 +17,8 @@ class My_feedback_ctr extends CI_Controller
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
-
-            $data['feedback'] = $this->Feedback_model->feedback($as);
+            $data['check_read'] = $this->Feedback_model->feedback_c_read($as);
+            $data['feedback']   = $this->Feedback_model->feedback($as);
 
             $this->load->view('options/header_login');
             $this->load->view('my_feedback', $data);
@@ -71,7 +71,7 @@ class My_feedback_ctr extends CI_Controller
                         'file_name'         => $uploadData['file_name'],
                         'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
                         'create_at'         => date('Y-m-d H:i:s'),
-                        
+
                     );
 
                     $success = $this->db->insert('tbl_feedback_file', $data2);
@@ -116,8 +116,8 @@ class My_feedback_ctr extends CI_Controller
             $appro = array(
                 'status_approved' => 2
             );
-            $this->db->where('order_id',$order_id);
-            $success = $this->db->update('tbl_upload_order',$appro);
+            $this->db->where('order_id', $order_id);
+            $success = $this->db->update('tbl_upload_order', $appro);
         }
         echo $success;
     }

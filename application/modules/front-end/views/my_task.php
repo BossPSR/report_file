@@ -1,3 +1,4 @@
+<?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php if (!empty($task)) { ?>
     <br>
     <h2 class="text-center" style="margin-top: 15px;">My task</h2>
@@ -25,11 +26,11 @@
                         <thead>
                             <tr style="text-align:center;">
                                 <th scope="col">No.</th>
-                                <th scope="col">Document</th>
                                 <th scope="col">ID Order</th>
                                 <th scope="col">Date Requred</th>
                                 <th scope="col">Main Doc</th>
                                 <th scope="col">GT Doc</th>
+                                <th scope="col">Wage</th>
                                 <th scope="col">Select item</th>
                                 <th scope="col">Withdraw</th>
                             </tr>
@@ -41,11 +42,12 @@
                             $i = 1;
                             $y = 1;
                             $r = 1;
+                            $z = 1;
+                            $j = 1;
                             ?>
                             <?php foreach ($task as $task) { ?>
                                 <tr style="text-align:center;">
                                     <td><?php echo $p++; ?></td>
-                                    <td><?php echo $task['file_name']; ?></td>
                                     <td><?php echo $task['or_id']; ?></td>
                                     <td><?php echo $task['date_required']; ?></td>
                                     <td>
@@ -154,8 +156,53 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td>
+                                        <span class="badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
+                                    </td>
                                     <td><?php echo $task['name_item']; ?></td>
-                                    <td><button class="btn btn-info"><i class="fa fa-money"></i> Withdraw</button></td>
+                                    <?php if ($task['status_approved'] == 0) { ?>
+                                        <td><button class="btn btn-secondary"><i class="fa fa-money"></i> Withdraw</button></td>
+                                    <?php } else { ?>
+                                        <td><button class="btn btn-info" id="cf_draw<?php echo $z++; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
+                                    <?php } ?>
+                                    <?php $or_sub = substr($task['order_id'], 3); ?>
+                                    <?php $te_sub = substr($team['IdTeam'], 2); ?>
+                                    <script>
+                                        $('#cf_draw<?php echo $j++; ?>').click(function() {
+                                            swal({
+                                                icon: "warning",
+                                                title: "Are you sure?",
+                                                text: "Do you want confirmed document",
+                                                closeOnEsc: true,
+                                                closeOnClickOutside: false,
+                                                buttons: {
+                                                    cancel: true,
+                                                    confirm: true,
+                                                },
+                                            }).then(function(isConfirm) {
+                                                if (isConfirm == true) {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: 'My-task-withdraw',
+                                                        data: {
+                                                            order_id: <?= $or_sub; ?>,
+                                                            teamId: <?= $te_sub; ?>,
+                                                            price: <?= $task['wage']; ?>,
+                                                        },
+                                                        success: function(success) {
+                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                button: false,
+                                                            });
+                                                            setTimeout("location.reload(true);", 1000);
+                                                            console.log(success);
+                                                        }
+                                                    });
+                                                } else {
+                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                }
+                                            });
+                                        });
+                                    </script>
                                 </tr>
                             <?php } ?>
                             <script>
@@ -192,6 +239,7 @@
                                     });
                                 });
                             </script>
+
                         </tbody>
                     </table>
                 </div>

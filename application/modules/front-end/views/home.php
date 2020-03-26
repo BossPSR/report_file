@@ -128,7 +128,7 @@
         <?php } ?>
     <?php } ?>
     <?php if ($teamId == true) { ?>
-        <?php if ($daliver['status_feedback_read'] == 0) { ?>
+        <?php if ($check_read) { ?>
             <!--wishlist area end -->
             <script type="text/javascript">
                 $(window).on('load', function() {
