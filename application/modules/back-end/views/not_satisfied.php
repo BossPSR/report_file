@@ -211,7 +211,7 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter price">
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>
@@ -219,7 +219,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">position</label>
                                                                                 <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
-                                                                                <select name="position" class="form-control">
+                                                                                <select name="position" class="form-control" required>
                                                                                     <option value="" selected disabled>select</option>
                                                                                     <?php foreach ($select_postion as $keys => $select_postion) { ?>
                                                                                         <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>

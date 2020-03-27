@@ -15,6 +15,15 @@ class Withdraw_model extends CI_Model{
         return $this->db->get()->result_array();
 
     }
+
+    public function withdraw_list_team()
+    {
+        $this->db->select('*,tbl_withdraw_team.id AS idW,tbl_withdraw_team.status AS status_id');
+        $this->db->from('tbl_withdraw_team');
+        $this->db->join('tbl_team','tbl_team.IdTeam = tbl_withdraw_team.teamId');
+        return $this->db->get()->result_array();
+
+    }
    
 
 

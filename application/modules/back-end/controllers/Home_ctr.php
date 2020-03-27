@@ -6,6 +6,7 @@ class Home_ctr extends CI_Controller {
 	public function __construct()
     {
 		parent::__construct();
+		$this->load->model('home_model');
 
     }
 
@@ -14,7 +15,8 @@ class Home_ctr extends CI_Controller {
 		if ($this->session->userdata('email_admin') != '') 
 		{	
 			$lang= $this->session->userdata("lang")==null?"english":$this->session->userdata("lang");
-		    $this->lang->load($lang,$lang);
+			$this->lang->load($lang,$lang);
+		
 			$this->load->view('options/header');
 			$this->load->view('index');
 			$this->load->view('options/footer');
@@ -25,6 +27,39 @@ class Home_ctr extends CI_Controller {
 		
 	
 	}
+	public function realtime_data()
+	{
+		if ($this->session->userdata('email_admin') != '') 
+		{	
+		$data = $this->home_model->order_list();
+	    
+		echo json_encode($data);
+
+		}else{
+			$this->load->view('login');
+		}
+		 
+		
+	
+	}
+
+	public function realtime_data1()
+	{
+		if ($this->session->userdata('email_admin') != '') 
+		{	
+		$data1 = $this->home_model->order_list1();
+	    
+		echo json_encode($data1);
+
+		}else{
+			$this->load->view('login');
+		}
+		 
+		
+	
+	}
+	
+
 	
 	public function change()
 	{  
