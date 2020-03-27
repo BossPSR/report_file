@@ -38,17 +38,51 @@ class Order_model extends CI_Model
         return $data->result_array();
     }
 
-    public function my_stock($item_id)
+    public function my_stock($item_id, $sess)
     {
-        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms');
+        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
-        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id','left');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 0);
         $this->db->where('tbl_upload_team.position', $item_id);
         $this->db->or_where('tbl_upload_order.status_confirmed_team', NULL);
+        $this->db->where_in('tbl_upload_team.teamId', $sess);
+        $this->db->group_by('tbl_upload_order.order_id');
+        $this->db->order_by('tbl_upload_order.date_required', 'DESC');
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+
+    public function my_stock_row($sess)
+    {
+        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id');
+        $this->db->from('tbl_upload_order');
+        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
+        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->where('tbl_upload_order.status_pay', 1);
+        $this->db->where('tbl_upload_order.status_delivery', 0);
+        $this->db->where_in('tbl_upload_team.teamId', $sess);
+        $this->db->group_by('tbl_upload_order.order_id');
+        $this->db->order_by('tbl_upload_order.date_required', 'DESC');
+        $data = $this->db->get();
+        return $data->row_array();
+    }
+
+    public function my_stock_count($sess)
+    {
+        $this->db->select('*,count(tbl_upload_order.status_approved) as c_app');
+        $this->db->from('tbl_upload_order');
+        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
+        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->where('tbl_upload_order.status_pay', 1);
+        $this->db->where('tbl_upload_order.status_delivery', 1);
+        $this->db->where('tbl_upload_order.status_approved', 2);
+        $this->db->where_in('tbl_upload_team.teamId', $sess);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'DESC');
         $data = $this->db->get();
@@ -61,7 +95,7 @@ class Order_model extends CI_Model
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_upload_order', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
-        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id','LEFT');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'LEFT');
         $this->db->where('tbl_upload_order.status_book', 2);
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 1);

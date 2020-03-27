@@ -146,7 +146,19 @@
                                     <td><span class="badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span></td>
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
-                                        <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
+
+                                        <?php if ($stock_row == true) { ?>
+                                            <button type="button" class="btn btn-secondery"> Confirmed</button>
+                                        <?php } elseif ($stock_row == false) { ?>
+                                            <?php if ($c_app >= 2) { ?>
+                                                <button type="button" class="btn btn-secondery"> Confirmed</button>
+                                            <?php } else { ?>
+                                                <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
+                                        <?php } ?>
+
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModalCF" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
