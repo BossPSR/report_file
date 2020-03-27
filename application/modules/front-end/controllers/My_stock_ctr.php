@@ -90,7 +90,8 @@ class My_stock_ctr extends CI_Controller
             $this->db->where('order_id', "ODB" . $order_id);
             if ($this->db->update('tbl_upload_order', $data)) {
                 $data_team = array(
-                    'teamId' => $team->IdTeam
+                    'teamId' => $team->IdTeam,
+                    'status_dashboard' => 1,
                 );
                 $this->db->where('order_id', "ODB" . $order_id);
                 $success =  $this->db->update('tbl_upload_team', $data_team);
