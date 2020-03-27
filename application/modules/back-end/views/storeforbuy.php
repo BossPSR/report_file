@@ -233,7 +233,7 @@
                                                                             <div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;">
                                                                                 <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
                                                                                 <label for="basicInput">Document ID</label>
-                                                                                <select name="Document[]" onClick="add_select(this);" class="form-control">
+                                                                                <select name="Document[]" onClick="add_select(this);" class="form-control" required>
                                                                                     <option value="" selected disabled>select</option>
                                                                                     <?php foreach ($chek_book as $key => $chek_book) { ?>
                                                                                         <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>

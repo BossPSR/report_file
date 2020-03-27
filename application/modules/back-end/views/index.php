@@ -215,7 +215,7 @@ setInterval(getDataFromDb, 1000);   // 1000 = 1 second
 </script> 
 
 <script>
-function getDataFromDb()
+function getDataFromDb1()
 {
 	$.ajax({ 
 				url: "realtime_data1" ,
@@ -247,7 +247,82 @@ function getDataFromDb()
 
 }
 
-setInterval(getDataFromDb, 1000);   // 1000 = 1 second
+setInterval(getDataFromDb1, 1000);   // 1000 = 1 second
+</script> 
+
+
+<script>
+function getDataFromDb2()
+{
+	$.ajax({ 
+				url: "realtime_data2" ,
+				type: "POST",
+				data: ''
+			})
+			.success(function(result) { 
+				var obj = jQuery.parseJSON(result);
+					if(obj != '')
+					{
+						  //$("#myTable tbody tr:not(:first-child)").remove();
+						  $("#myBody2").empty();
+						  $.each(obj, function(key, val) {
+                            var data =  val["status_desbroad"];
+									var tr = "<tr>";
+                                    if(data==1 ){
+                                        tr = tr + "<td>" + val["team_number"]; + "</td>";
+                            
+                                    }else{
+                                        tr = tr + "<td>" + 0 + "</td>";
+                                    }
+                                   
+									tr = tr + "</tr>";
+									$('#myTable2 > tbody:last').append(tr);
+						  });
+					}
+                    console.log(obj);
+
+			});
+
+}
+
+setInterval(getDataFromDb2, 1000);   // 1000 = 1 second
+</script> 
+<script>
+function getDataFromDb3()
+{
+	$.ajax({ 
+				url: "realtime_data3" ,
+				type: "POST",
+				data: ''
+			})
+			.success(function(result) { 
+				var obj = jQuery.parseJSON(result);
+					if(obj != '')
+					{
+						  //$("#myTable tbody tr:not(:first-child)").remove();
+						  $("#myBody3").empty();
+						  $.each(obj, function(key, val) {
+                            var data =  val["status_desbroad"];
+									var tr = "<tr>";
+                                    if(data==0 ){
+                                        tr = tr + "<td>" + val["team_number"]; + "</td>";
+                                    }else{
+                                       
+                                         tr = tr + "<td>" + 0 + "</td>";
+                                    }
+                                   
+                                   
+									tr = tr + "</tr>";
+									$('#myTable3 > tbody:last').append(tr);
+						  });
+					}
+                    console.log(obj);
+
+			});
+
+}
+
+setInterval(getDataFromDb3, 1000);   // 1000 = 1 second
 </script> 
 
 
