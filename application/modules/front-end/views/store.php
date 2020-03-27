@@ -22,7 +22,7 @@
                                 </form>
                                 <!-- Button trigger modal -->
                                 <br>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop2" disabled="disabled" id="up_bt" name="up_bt">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop2">
                                     Upload Files
                                 </button>
                                 <!-- <input type="button" id='uploadfiles' value='Upload Files'> -->
@@ -129,14 +129,5 @@
 <script type="text/javascript">
     $(window).on('load', function() {
         $('#staticBackdrop').modal('show');
-    });
-</script>
-<script type="text/javascript">
-    $("#i_accept").click(function handleClick(cb) {
-        if ($(this).prop("checked") == true) {
-            $('#continue_bt').prop('disabled', false);
-        } else {
-            $('#continue_bt').prop('disabled', true);
-        }
     });
 </script>
