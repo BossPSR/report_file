@@ -58,6 +58,37 @@ class Home_ctr extends CI_Controller {
 		
 	
 	}
+
+	public function realtime_data2()
+	{
+		if ($this->session->userdata('email_admin') != '') 
+		{	
+		$data2 = $this->home_model->order_list2();
+	    
+		echo json_encode($data2);
+
+		}else{
+			$this->load->view('login');
+		}
+		 
+		
+	
+	}public function realtime_data3()
+	{
+		if ($this->session->userdata('email_admin') != '') 
+		{	
+		$data3 = $this->home_model->order_list3();
+	    
+		echo json_encode($data3);
+
+		}else{
+			$this->load->view('login');
+		}
+		 
+		
+	
+	}
+	
 	
 
 	
