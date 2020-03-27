@@ -246,5 +246,6 @@ $route['withdraw_status_team']                          = 'back-end/Withdraw_ctr
 $route['realtime_data1']                          = 'back-end/Home_ctr/realtime_data1';
 $route['realtime_data2']                          = 'back-end/Home_ctr/realtime_data2';
 $route['realtime_data3']                          = 'back-end/Home_ctr/realtime_data3';
+$route['check_dm']                                 = 'back-end/Store_ctr/check_dm';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

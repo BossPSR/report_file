@@ -176,6 +176,17 @@ class Store_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function check_dm($Document)
+    {
+      
+     $this->db->select('count(*) AS check_dm1');
+    $this->db->from('tbl_bookmark');
+    //$this->db->join('tbl_upload_order','tbl_upload_order.order_id = tbl_bookmark.id_orderBuy');
+   // $this->db->where('tbl_upload_order.status_delivery',0);
+    $this->db->where_in('id_document',$Document);
+    return $this->db->get()->row_array();
+    }
+
 
 
 }

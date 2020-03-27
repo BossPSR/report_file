@@ -71,6 +71,23 @@ class Store_ctr extends CI_Controller
         }
     }
 
+    public function check_dm()
+    {
+        $Document = $this->input->post('DocumentResult');
+        $Document = array_unique($Document);
+
+        // $check_dm = $this->db->get('tbl_bookmark')->result_array();
+        $num = 0;
+        foreach ($Document as $Document) {
+            $check_dm = $this->db->get_where('tbl_bookmark',['id_document'=>$Document])->row_array();
+            if (!empty($check_dm)) {
+                $num += 1;
+            }
+        }
+    
+    echo $num;
+    }
+
     public function check_order_add_com()
     {
         $id = $this->input->post('id');
@@ -82,6 +99,8 @@ class Store_ctr extends CI_Controller
 
         // $dm = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $this->input->post('Document')])->row_array();
         // if ($dm == true) {
+          
+           
             $data = array(
 
                 'price_file'             => $this->input->post('price_file'),
@@ -109,6 +128,7 @@ class Store_ctr extends CI_Controller
             );
               $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
         }
+
 
         
             $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
