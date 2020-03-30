@@ -60,7 +60,7 @@
                                                         </button>
                                                     </div>
                                                     <?php $zz = 1; ?>
-                                                    <?php $order_main = $this->db->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
+                                                    <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
                                                     <div class="modal-body">
                                                         <?php if (!empty($order_main)) { ?>
                                                             <table class="table table-bordered">
@@ -101,13 +101,13 @@
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <?php $kk = 1; ?>
-                                                    <?php $order_GT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
+                                                    <?php $order_GT = $this->db->order_by('create_at')->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
                                                     <div class="modal-body">
                                                         <?php if (!empty($order_GT)) { ?>
                                                             <table class="table table-bordered">
@@ -124,8 +124,14 @@
                                                                         <tr style="text-align:center;">
                                                                             <td><?php echo $kk++; ?></td>
                                                                             <td><?php echo $order_GT['order_id']; ?></td>
-                                                                            <td><?php echo $order_GT['file_name_GT']; ?></td>
-                                                                            <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <td>
+                                                                                <?php if ($order_GT['status_more_file'] == 1) { ?>
+                                                                                    <span class="badge badge-danger">New</span>
+                                                                                <?php } ?>
+                                                                                <?php echo $order_GT['file_name_GT']; ?>
+                                                                            </td>
+                                                                            <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a>
+                                                                            </td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
