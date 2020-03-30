@@ -266,7 +266,7 @@ function getDataFromDb2()
 						  //$("#myTable tbody tr:not(:first-child)").remove();
 						  $("#myBody2").empty();
 						  $.each(obj, function(key, val) {
-                            var data =  val["status_desbroad"];
+                            var data =  val["status_dashboard"];
 									var tr = "<tr>";
                                     if(data==1 ){
                                         tr = tr + "<td>" + val["team_number"]; + "</td>";
@@ -287,6 +287,7 @@ function getDataFromDb2()
 
 setInterval(getDataFromDb2, 1000);   // 1000 = 1 second
 </script> 
+
 <script>
 function getDataFromDb3()
 {
@@ -302,7 +303,7 @@ function getDataFromDb3()
 						  //$("#myTable tbody tr:not(:first-child)").remove();
 						  $("#myBody3").empty();
 						  $.each(obj, function(key, val) {
-                            var data =  val["status_desbroad"];
+                            var data =  val["status_dashboard"];
 									var tr = "<tr>";
                                     if(data==0 ){
                                         tr = tr + "<td>" + val["team_number"]; + "</td>";

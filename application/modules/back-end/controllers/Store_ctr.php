@@ -91,7 +91,7 @@ class Store_ctr extends CI_Controller
     public function check_order_add_com()
     {
         $id = $this->input->post('id');
-        $orderid = $this->input->post('orderid');
+        $orderid = $this->input->post('Order');
         $Document = [];
         $Document = $this->input->post('DocumentResult');
         $Document = explode(",",$Document[0]);
@@ -133,14 +133,9 @@ class Store_ctr extends CI_Controller
         
             $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
 
-            $this->sendEmail($upload_order);
-
-            if ($resultsedit1 > 0 && $resultsedit2 > 0) {
-                $this->session->set_flashdata('save_ss2', 'Successfully Update Satisfied information !!.');
-            } else {
-                $this->session->set_flashdata('del_ss2', 'Not Successfully Update Satisfied information');
-            }
-            return redirect('back_store_buy');
+            $success =  $this->sendEmail($upload_order);
+            echo  $success;
+          
         // } else {
         //     $this->session->set_flashdata('del_ss2', 'Not Successfully math id docment information');
         //     return redirect('back_store_buy');

@@ -264,8 +264,8 @@
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                                <label for="helpInputTop">price</label>
-                                                                                <input type="text" class="form-control" name="price_file" id="price_file" value="<?php echo $stored['price_file']; ?>" placeholder="Enter price" required>
+                                                                                <label for="helpInputTop">price test</label>
+                                                                                <input type="text" class="form-control" name="price_file" id="price_fileSatisfired" value="<?php echo $stored['price_file']; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>
@@ -452,63 +452,147 @@
 </script>
 
 <script>
-   
     var x = document.getElementById("Customer").value;
     var y = document.getElementById("Order").value;
-    var z = document.getElementById("price_file").value;
+    
     var a = document.getElementById("Daterequired").value;
     var b = document.getElementById("status_cp").value;
     var c = document.getElementById("note_s").value;
-    
+
+
     $('#Dm_c').click(function() {
         var v = document.getElementsByName("Document[]");
         var t = [];
-        v.forEach((element,key) => {
+        var z = document.getElementById("price_fileSatisfired").value;
+        v.forEach((element, key) => {
             t.push(element.value);
         });
-      
 
-        //console.log(t)
-        $.ajax({
-            type: 'POST',
-            url: 'check_dm',
-            data: {
-                DocumentResult: t,
+        if (z == "") {
+            swal({
+                    icon: "warning",
+                    title: "Are you sure?",
+                    text: "กรุณาใส่ Price ด้วยนะ",
+                    closeOnEsc: true,
+                    closeOnClickOutside: false,
+                    buttons: {
+                        cancel: true,
+                        confirm: true,
+                    },
 
-            },
+            })
+        }else{
+            $.ajax({
+                type: 'POST',
+                url: 'check_dm',
+                data: {
+                    DocumentResult: t,
 
-            success: function(check_dm) {
-                 console.log(check_dm);
+                },
 
-                if (check_dm > 0) {
-                    swal({
-                        icon: "warning",
-                        title: "Are you sure?",
-                        text: "แน่ใจใช่ไหม เพราะ dm ซ้ำ",
-                        closeOnEsc: true,
-                        closeOnClickOutside: false,
-                        buttons: {
-                            cancel: true,
-                            confirm: true,
-                        },
-                    });
-                } else {
-                    swal({
-                        icon: "warning",
-                        title: "Are you sure?",
-                        text: "ไม่ซ้ำ",
-                        closeOnEsc: true,
-                        closeOnClickOutside: false,
-                        buttons: {
-                            cancel: true,
-                            confirm: true,
-                        },
-                    });
+                success: function(check_dm) {
+                    if (check_dm > 0) {
+                        swal({
+                            icon: "warning",
+                            title: "Are you sure?",
+                            text: "แน่ใจใช่ไหม เพราะ dm ซ้ำ",
+                            closeOnEsc: true,
+                            closeOnClickOutside: false,
+                            buttons: {
+                                cancel: true,
+                                confirm: true,
+                            },
+
+                        }).then(function(isConfirm) {
+                            if (isConfirm == true) {
+                                var x = document.getElementById("Customer").value;
+                                var y = document.getElementById("Order").value;
+                                var z = document.getElementById("price_file").value;
+                                var a = document.getElementById("Daterequired").value;
+                                var b = document.getElementById("status_cp").value;
+                                var c = document.getElementById("note_s").value;
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'check_order_add_com',
+                                    data: {
+                                        DocumentResult: t,
+                                        Customer: x,
+                                        Order: y,
+                                        price_file: z,
+                                        Daterequired: a,
+                                        status_cp: b,
+                                        note_s: c,
+                                    },
+                                    success: function(success) {
+                                        swal("Good job!", "Upload for data successfull", "success", {
+                                            button: false,
+
+                                        });
+                                        setTimeout("location.reload(true);", 1000);
+                                    }
+                                });
+                                
+                            } else {
+                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                            }
+                        });
+
+                    }
+                    else {
+                        swal({
+                            icon: "warning",
+                            title: "Are you sure?",
+                            text: "ไม่ซ้ำ",
+                            closeOnEsc: true,
+                            closeOnClickOutside: false,
+                            buttons: {
+                                cancel: true,
+                                confirm: true,
+                            },
+                        }).then(function(isConfirm) {
+                            if (isConfirm == true) {
+                                var x = document.getElementById("Customer").value;
+                                var y = document.getElementById("Order").value;
+                                var z = document.getElementById("price_file").value;
+                                var a = document.getElementById("Daterequired").value;
+                                var b = document.getElementById("status_cp").value;
+                                var c = document.getElementById("note_s").value;
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'check_order_add_com',
+                                    data: {
+                                        DocumentResult: t,
+                                        Customer: x,
+                                        Order: y,
+                                        price_file: z,
+                                        Daterequired: a,
+                                        status_cp: b,
+                                        note_s: c,
+                                    },
+                                    success: function(success) {
+                                        swal("Good job!", "Upload for data successfull", "success", {
+                                            button: false,
+
+                                        });
+                                        setTimeout("location.reload(true);", 1000);
+                                    }
+                                });
+                                
+                            } else {
+                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                            }
+                        });
+
+                    }
+                
 
                 }
 
-            }
-        });
+            });
+        }
+
+
+       
 
     }); // .then(function(isConfirm) {
     //     if (isConfirm) {
