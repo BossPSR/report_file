@@ -25,6 +25,8 @@
                         <tbody>
                             <?php $i = 1; ?>
                             <?php $OP = 1; ?>
+                            <?php $bbb = 1; ?>
+                            <?php $vvv = 1; ?>
                             <?php $OPE = 1; ?>
                             <?php $BNAP = 1; ?>
                             <?php $NAP = 1; ?>
@@ -167,6 +169,7 @@
                                                     <button type="button" class="btn btn-secondary" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                                 <?php } else { ?>
                                                     <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                                    <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $bbb++; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                                                 <?php } ?>
 
                                                 <!-- Modal -->
@@ -174,7 +177,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Reject Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback Document</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -202,6 +205,43 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" id="SubmitFeed" class="btn btn-success">Success</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="gtdoc<?php echo $vvv++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="modal-body" style="text-align:left;">
+                                                                <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                <form action="oder-morefile-upload" class="dropzone" id="fileuploadmorefile">
+                                                                    <div class="dz-message needsclick">
+                                                                        Drop files here or click to upload.<br>
+                                                                        <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                    </div>
+                                                                    <input type="text" name="order_id" id="order_id" value="<?php echo $value['ORD']; ?>" hidden>
+                                                                    <!-- <input type="text" name="userId" id="userId" value="<?php echo $userId['idUser']; ?>" hidden> -->
+                                                                </form>
+                                                                <br>
+                                                                <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                                <!-- <label for="" class="font-size-upload">Detail :</label>
+                                                                <textarea id="detail1" name="detail" class="form-control" rows="5" required></textarea>
+                                                                <br> -->
+
+                                                                <!-- </form> -->
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" id="Submitgtdoc" class="btn btn-success">Success</button>
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
@@ -296,6 +336,23 @@
                                     });
                                 </script>
 
+                                <script type='text/javascript'>
+                                    Dropzone.autoDiscover = false;
+                                    var myDropzone = new Dropzone("#fileuploadmorefile", {
+                                        autoProcessQueue: false,
+                                        maxFiles: 5,
+                                        addRemoveLinks: true,
+                                        parallelUploads: 5, // Number of files process at a time (default 2)
+                                    });
+
+                                    $('#Submitgtdoc').click(function() {
+                                        myDropzone.processQueue();
+                                        swal("Good job!", "Upload for data successfull", "success", {
+                                            button: false,
+                                        });
+                                        setTimeout("location.reload(true);", 1000);
+                                    });
+                                </script>
 
                                 <script type='text/javascript'>
                                     $('#approved<?php echo $sub_order ?>').click(function() {

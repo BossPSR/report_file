@@ -150,6 +150,7 @@ $route['My-profile_team_edit']  = 'front-end/My_team_ctr/profile_team_edit';
 $route['order_approverd']       = 'front-end/Order_ctr/order_approved';
 $route['order_not_approved']       = 'front-end/Order_ctr/order_not_approved';
 $route['Not_approved']          = 'front-end/My_feedback_ctr/order_auto_feedback_notApp';
+$route['oder-morefile-upload']  = 'front-end/Order_ctr/order_uploadmorefile';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                      = 'back-end/Home_ctr';
