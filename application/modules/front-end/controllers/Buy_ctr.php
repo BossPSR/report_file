@@ -128,7 +128,7 @@ class Buy_ctr extends CI_Controller
     $wage       = $this->input->post('wage');
     $date_required  = $this->input->post('date_required');
     $position       = $this->input->post('position');
-    $target_dir = "uploads/Buy/"; // Upload directory
+    $target_dir = "uploads/Buy/GT/"; // Upload directory
 
     $request = 1;
 
@@ -137,7 +137,7 @@ class Buy_ctr extends CI_Controller
     }
     if ($request == 1) {
       // Set preference
-      $config['upload_path']     = 'uploads/Buy/';
+      $config['upload_path']     = 'uploads/Buy/GT/';
       // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
       $config['allowed_types']   = '*';
       $config['max_size']        = '99999'; // max_size in kb
@@ -158,7 +158,7 @@ class Buy_ctr extends CI_Controller
           // 'order_id'      => $buymax->maxorder,
           'order_id'      => $buymax->order_main,
           'file_name_GT'     => $uploadData['file_name'],
-          'path_GT'          => 'uploads/Buy/' . $uploadData['file_name'],
+          'path_GT'          => 'uploads/Buy/GT/' . $uploadData['file_name'],
           'create_at'     => date('Y-m-d H:i:s'),
         );
         $this->db->insert('tbl_upload_orderGT', $data);

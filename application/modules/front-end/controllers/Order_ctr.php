@@ -71,4 +71,39 @@ class Order_ctr extends CI_Controller
       echo $success;
     }
   }
+
+  public function order_uploadmorefile()
+  {
+    // image_lib
+
+    $order_id     = $this->input->post('order_id');
+
+    $request = 1;
+    // Set preference
+    $config['upload_path']     = 'uploads/Buy/GT/';
+    // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+    $config['allowed_types']   = '*';
+    $config['max_size']        = '99999'; // max_size in kb
+    $config['file_name']       = $_FILES['file']['name'];
+
+    //Load upload library
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
+
+
+    // File upload
+    if ($this->upload->do_upload('file')) {
+      // Get data about the file
+      $uploadData = $this->upload->data();
+
+      $data = array(
+        'order_id'          => $order_id,
+        'file_name_GT'      => $uploadData['file_name'],
+        'path_GT'           => 'uploads/Buy/GT/' . $uploadData['file_name'],
+        'status_more_file'  => 1,
+        'create_at'         => date('Y-m-d H:i:s'),
+      );
+      $this->db->insert('tbl_upload_orderGT', $data);
+    }
+  }
 }
