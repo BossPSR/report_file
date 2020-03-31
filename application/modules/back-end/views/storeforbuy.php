@@ -105,7 +105,16 @@
                                                                                             <td><?php echo $e++; ?></td>
                                                                                             <td><?php echo $order['order_id'] ?></td>
                                                                                             <td><?php echo $order['file_name'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <?php 
+                                                                                            $PDF =  explode(".",$order['path']);
+                                                                                            ?>
+                                                                                            <td> 
+                                                                                            <?php if($PDF[1]=='pdf'):?>
+                                                                                            <a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                            <?php else :?>
+                                                                                                <a href="https://view.officeapps.live.com/op/view.aspx?src=<?php echo base_url($order['path'])  ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                            <?php endif;?>
+                                                                                            </td>
                                                                                             <td><?php echo $order['create_at'] ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
@@ -507,7 +516,7 @@
                             if (isConfirm == true) {
                                 var x = document.getElementById("Customer").value;
                                 var y = document.getElementById("Order").value;
-                                var z = document.getElementById("price_file").value;
+                                var z = document.getElementById("price_fileSatisfired").value;
                                 var a = document.getElementById("Daterequired").value;
                                 var b = document.getElementById("status_cp").value;
                                 var c = document.getElementById("note_s").value;
@@ -550,10 +559,11 @@
                                 confirm: true,
                             },
                         }).then(function(isConfirm) {
+
                             if (isConfirm == true) {
                                 var x = document.getElementById("Customer").value;
                                 var y = document.getElementById("Order").value;
-                                var z = document.getElementById("price_file").value;
+                                var z = document.getElementById("price_fileSatisfired").value;
                                 var a = document.getElementById("Daterequired").value;
                                 var b = document.getElementById("status_cp").value;
                                 var c = document.getElementById("note_s").value;
@@ -578,7 +588,8 @@
                                     }
                                 });
                                 
-                            } else {
+                            } 
+                            else {
                                 swal("Cancelled", "Your imaginary file is safe :)", "error");
                             }
                         });
@@ -600,4 +611,6 @@
     //     }
     // })
 </script>
+
+
 <!-- END: Content-->
