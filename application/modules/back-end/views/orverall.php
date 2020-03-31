@@ -21,13 +21,7 @@
 
         </div>
 
-        <?php
-        // $this->db->where('status_admin', 1);
-        
-        $this->db->group_by('order_id');
-        $this->db->from('tbl_upload_order');
-        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-        ?>
+     
 
         <div class="content-body">
 
@@ -41,8 +35,17 @@
                                     <h4 class="card-title">All Satisfied and Not Satisfied</h4>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
-                                    <h3 class="check_list_not"> จำนวนออเดอร์ทั้งหมด </h3>
+                                <?php if($order_all ==''):?>
+                                    <h3 class="card-title ">0</h3>
+                                  <?php else:?>
+                                    <?php $e = 0; ?>
+                                    <?php foreach ($order_all as $key => $datata) {
+                                        $e++ ;
+                                      
+                                    } ?>
+                                    <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                  <?php endif;?>
+                                    <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                             </div>
                             <div class="card-content">

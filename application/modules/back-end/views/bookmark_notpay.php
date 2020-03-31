@@ -26,17 +26,7 @@
             </div>
         </div>
 
-        <?php
-        $this->db->select('*');
-        $this->db->from('tbl_bookmark');
-        $this->db->join('tbl_upload_order','tbl_upload_order.order_id=tbl_bookmark.id_orderBuy');
-        $this->db->where('tbl_upload_order.status_pay',0);
-        $this->db->group_by('tbl_bookmark.id_orderBuy');
-        
-        $datata = $this->db->get()->result_array();
-         
-        ?>
-
+   
         <div class="content-body">
             <div class="row">
 
@@ -52,11 +42,11 @@
                                     <h4 class="card-title">bookmark_all_not</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <?php if($datata ==''):?>
+                                    <?php if($bookmark_all_not ==''):?>
                                     <h3 class="card-title ">0</h3>
                                   <?php else:?>
                                     <?php $e = 0; ?>
-                                    <?php foreach ($datata as $key => $datata) {
+                                    <?php foreach ($bookmark_all_not as $key => $datata) {
                                         $e++ ;
                                       
                                     } ?>
@@ -79,6 +69,7 @@
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>DM File</th>
+                                                    <th>price File</th>
                                                     <th>Date Required</th>
                                                     <th>Status</th>
                                                     <th>position</th>
@@ -247,6 +238,7 @@
 
                                                             <?php endif; ?>
                                                         </td>
+                                                        <td><?php echo $bookmark_all_not['pricr_f'] ?></td>
                                                         <td><?php echo $bookmark_all_not['date_re'] ?></td>
 
                                                         <td id="test<?php echo $keyBook; ?>">
