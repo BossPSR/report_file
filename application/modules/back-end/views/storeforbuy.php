@@ -112,6 +112,7 @@
                                                                                             <?php if($PDF[1]=='pdf'):?>
                                                                                             <a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                                             <?php else :?>
+                                                                                                
                                                                                                 <a href="https://view.officeapps.live.com/op/view.aspx?src=<?php echo base_url($order['path'])  ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                                             <?php endif;?>
                                                                                             </td>
@@ -611,6 +612,5 @@
     //     }
     // })
 </script>
-
 
 <!-- END: Content-->

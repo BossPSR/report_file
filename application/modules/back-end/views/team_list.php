@@ -47,7 +47,7 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>image</th>
+                                                    <th>Resume</th>
                                                     <th>Name</th>
                                                     <th>country</th>
                                                     <th>email</th>
@@ -61,7 +61,16 @@
                                             <?php foreach ($team as $team) { ?>
                                                 <tbody>
                                                     <tr>
-                                                        <td><img src="uploads/resume/<?php echo $team['file_name']; ?>" alt="" style="width: 250px"></td>
+                                                    <?php 
+                                                            $img =  explode(".",$team['file_name']);
+                                                        ?>
+                                                        <td>
+                                                       <?php if($img[1]=='pdf'):?>
+                                                        <a href="uploads/resume/<?php echo $team['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                       <?php else :?>
+                                                        <a href="uploads/resume/<?php echo $team['file_name']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                       <?php endif;?>
+                                                        </td>
                                                         <td><?php echo $team['name']; ?></td>
                                                         <?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
                                                         <?php foreach ($country as $country) { ?>
