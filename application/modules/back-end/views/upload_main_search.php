@@ -24,9 +24,10 @@
 
         </div>
         <?php
-            $this->db->where('status_main_search', 1);
             $this->db->from('tbl_upload_store');
-            $count_all = $this->db->count_all_results(); // Produces an integer, like 17
+            $this->db->where('status_main_search', 1);
+            $this->db->group_by('section');       
+            $datata = $this->db->get()->result_array();
             ?>
         <div class="content-body">
 
@@ -40,7 +41,15 @@
                                     <h4 class="card-title">Upload Main Search</h4>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                    <?php if ($datata == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($datata as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนเอกสาร </h3>
                                 </div>
                               
