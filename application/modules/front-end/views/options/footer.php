@@ -295,6 +295,12 @@
 </script>
 
 <script>
+    <?php if ($this->session->flashdata('success_regis_team')) : ?>
+        swal("Good job!", "Register successfull.", "success");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('fail_regis_team')) : ?>
+        swal("fill !", "Register successfull.", "error");
+    <?php endif; ?>
     <?php if ($this->session->flashdata('success_addItem')) : ?>
         swal("Good job!", "Add for data successfull.", "success");
     <?php endif; ?>
