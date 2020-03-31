@@ -97,7 +97,7 @@
 
     });
 
-    myDropzone.on("success", function(file, res) {
+    myDropzone.on("queuecomplete", function(file, res) {
         swal("Good job!", "Upload for data successfull", "success", {
             button: false,
         });
@@ -113,7 +113,7 @@
             },
             success: function(data) {
                 myDropzone.processQueue();
-                myDropzone.on("success", function(file, res) {
+                myDropzone.on("queuecomplete", function(file, res) {
                     swal("Good job!", "Upload for data successfull", "success", {
                         button: false,
                     });
