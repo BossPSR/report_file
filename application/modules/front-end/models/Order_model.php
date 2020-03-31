@@ -22,6 +22,7 @@ class Order_model extends CI_Model
         $this->db->from('tbl_store_for_buy_email');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_store_for_buy_email.order_id');
         $this->db->where('tbl_store_for_buy_email.customer_id', $userId);
+        $this->db->where('tbl_upload_order.status_approved !=', 1);
         $this->db->group_by('tbl_upload_order.order_id');
 
         $data = $this->db->get();

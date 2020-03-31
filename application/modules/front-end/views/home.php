@@ -2,7 +2,7 @@
 <?php $teamId = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php if (!empty($this->session->userdata('email'))) { ?>
     <?php if ($userId == true) { ?>
-        <?php $order = $this->db->get_where('tbl_upload_order', ['userId' => $userId['idUser'], 'status_delivery' => 1])->row_array(); ?>
+        <?php $order = $this->db->get_where('tbl_upload_order', ['userId' => $userId['idUser'], 'status_delivery' => 1, 'status_approved' => 2])->row_array(); ?>
     <?php } else { ?>
         <?php $daliver = $this->db->get_where('tbl_feedback', ['teamId' => $teamId['IdTeam']])->row_array(); ?>
     <?php } ?>

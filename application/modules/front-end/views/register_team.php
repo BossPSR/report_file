@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <p>
-                                    <?php $select_it = $this->db->get('tbl_select_item')->result_array() ;?>
+                                    <?php $select_it = $this->db->get('tbl_item_position')->result_array() ;?>
                                     <label>Job <span class="red">*</span></label>
                                     <select id="multiple" class="form-control" name="job[]" style="width: 100%" multiple>
                                     <?php foreach ($select_it as $key => $si) { ?>
