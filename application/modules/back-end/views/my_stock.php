@@ -164,7 +164,7 @@
                                                         <?php if($stock['status']==0): ?>
                                                         <div class="badge badge-warning">รอการรับของทีมงาน</div>
                                                     <?php else:?>
-                                                        <div class="badge badge-success">ทีมงานรับงานไปแล้ว</div>
+                                                        <div class="badge badge-success">รับออเดอร์แล้ว</div>
                                                         <?php endif?> 
                                                     </td>
                                                 </tr>

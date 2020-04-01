@@ -1,6 +1,8 @@
 <!-- BEGIN: Content-->
 <?php $id = $this->input->get('id'); ?>
 <?php $cmid = $this->input->get('cmid'); ?>
+<?php $date = $this->db->get_where('tbl_upload_order',['order_id'=>$id],['userId'=>$cmid])->row_array(); ?>
+
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -42,7 +44,7 @@
 
 
 
-                                        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Descriptions </label>
                                             <textarea name="descriptions" class="form-control" id="DM1" rows="5" style="width: 100%"></textarea>
 
@@ -52,7 +54,8 @@
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
-                                            <input type="date" class="form-control" id="dated" name="dated" min="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>">
+                                        <label for="" style="font-size: 16px;"> Date required </label>
+                                            <input type="date" class="form-control" id="dated" name="dated" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $date['date_required'] ?>">
                                         </div>
 
 

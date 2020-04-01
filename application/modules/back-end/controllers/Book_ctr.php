@@ -257,7 +257,16 @@ class Book_ctr extends CI_Controller
     
         $this->db->where('id_doc',$dm_id);
         $this->db->update('tbl_upload_main_search',['update_at' => date('Y-m-d H:i:s')]);
+
+
+
+        
+
   }
+       $user_email = $this->db->get_where('tbl_upload_order',['order_id'=> $order_id])->row_array();
+       $user_email_send  = $this->db->get_where('tbl_user',['order_id'=> $user_email['userId']])->row_array();
+      
+
         $subject = 'test ip-soft';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
@@ -312,7 +321,7 @@ class Book_ctr extends CI_Controller
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to('infinityp.soft@gmail.com');
+        $this->email->to($user_email_send['email']);
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->set_mailtype('html');

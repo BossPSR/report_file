@@ -432,12 +432,15 @@
                                                             <?php endif;?>
                                                           
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
-                                                                <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target="#exampleModal"><i class="feather icon-navigation"></i> delivery file</button>
+                                                                <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target="#exampleModal"><i class="feather icon-navigation"></i> delivery</button>
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['order_save']; ?>"><i class="feather icon-navigation"></i> delivery file</button>
+                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['order_save']; ?>"><i class="feather icon-navigation"></i> delivery </button>
                                                             <?php endif; ?>
+                                                            <?php if ($bookmark['status_book'] == '2') : ?>
+
+                                                             <?php else : ?>
                                                             <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['id']; ?>"> Upload To team</button>
-                                                            
+                                                            <?php endif; ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -604,7 +607,9 @@
 
                                                                         </div>
                                                                     </div>
-                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1"style="MARGIN: 15px;">Upload to team</button>
+                                                                 
+                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1"style="MARGIN: 15px;">Upload to team</button>
+                                                                   
                                                                     <!-- <div class="modal-footer">
                                                                         <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
                                                                             <div class="add-data-btn mr-1">
