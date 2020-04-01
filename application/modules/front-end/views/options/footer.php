@@ -295,6 +295,16 @@
 </script>
 
 <script>
+    <?php if ($this->session->flashdata('success_pro')) : ?>
+        swal("Good job!", "Successfull.Change for my profile.", "success");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('error_pro')) : ?>
+        swal("Error!", "Error for Change my profile.", "error");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('error_pass')) : ?>
+        swal("Error!", "Password incorrect.Try again!!.", "error");
+    <?php endif; ?>
+
     <?php if ($this->session->flashdata('success_regis_team')) : ?>
         swal("Good job!", "Register successfull.", "success");
     <?php endif; ?>
