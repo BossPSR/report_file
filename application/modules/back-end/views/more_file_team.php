@@ -21,13 +21,7 @@
 
         </div>
 
-        <?php
-        $this->db->where('status_book', 2);
-        $this->db->where('status_pay', 1);
-        $this->db->from('tbl_upload_order');
-        $this->db->group_by('order_id');
-        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-        ?>
+      
 
         <div class="content-body">
 
@@ -41,7 +35,15 @@
                                     <h4 class="card-title">More File Team</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                <?php if ($more_file == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($more_file as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                             </div>

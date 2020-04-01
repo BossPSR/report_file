@@ -230,7 +230,7 @@
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                                <label for="helpInputTop">wage</label>
+                                                                                <label for="helpInputTop">wage(10%)</label>
 
                                                                                 <input type="text" class="form-control" name="wage" value="<?php echo $store['price_file'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
                                                                             </div>

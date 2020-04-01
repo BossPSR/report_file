@@ -137,8 +137,12 @@
                                                         <td><?php echo $feedback_team['time'] ?></td>
                                                         <td>
 
+                                                            <?php if ($feedback_team['team'] != '') : ?>
 
-                                                            <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $feedback_team['id_f']; ?>" class="btn btn-danger mr-1 mb-1">Feedback</button>
+                                                                <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $feedback_team['id_f']; ?>" class="btn btn-danger mr-1 mb-1">Feedback</button>
+                                                            <?php else : ?>
+                                                                <button type="button" data-toggle="modal" data-target="" class="btn btn-secondary mr-1 mb-1">Feedback</button>
+                                                            <?php endif; ?>
                                                             <div class="modal fade" id="exampleModalb<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -167,7 +171,7 @@
 
                                                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                                                                 <label for="" style="font-size: 16px;"> Date Required </label>
-                                                                                <input type="date" class="form-control" id="dated<?php echo $feedback_team['id_f']; ?>" name="dated" min="<?php echo date('Y-m-d'); ?>" value="<?php echo date('Y-m-d'); ?>">
+                                                                                <input type="date" class="form-control" id="dated<?php echo $feedback_team['id_f']; ?>" name="dated" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $feedback_team['dated']; ?>">
                                                                             </div>
 
 
@@ -237,8 +241,11 @@
                                                                 });
                                                             </script>
                                     </div>
-
+                                    <?php if($feedback_team['team']!=''):?>
                                     <button type="button" data-toggle="modal" data-target="#exampleModalbu<?php echo $feedback_team['id_f']; ?>" class="btn btn-info mr-1 mb-1">Deduct money</button>
+                                    <?php else:?>
+                                    <button type="button" data-toggle="modal" data-target="" class="btn btn-secondary mr-1 mb-1">Deduct money</button>
+                                    <?php endif;?>
                                     <div class="modal fade" id="exampleModalbu<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                             <div class="modal-content">
@@ -249,35 +256,35 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                 <form action="Deduct_Money" method="post">
-                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                        <div class="form-group">
-                                                            <label for="helpInputTop">Income</label>
-                                                            <?php $team_money = $this->db->get_where('tbl_team', ['IdTeam' => $feedback_team['teamId']])->result_array(); ?>
-                                                            <?php foreach ($team_money as $keys => $team_money) { ?>
-                                                                <input type="text" class="form-control" name="income" value="<?php echo $team_money['income'] ?>" placeholder="Enter wage" readonly>
-                                                            <?php } ?>
-                                                            <input type="text" name="team_id" value="<?php echo $feedback_team['teamId'] ?>" hidden>
-                                                            <input type="text" name="order_id" value="<?php echo $feedback_team['order_id'] ?>" hidden>
+                                                    <form action="Deduct_Money" method="post">
+                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                            <div class="form-group">
+                                                                <label for="helpInputTop">Income</label>
+                                                                <?php $team_money = $this->db->get_where('tbl_team', ['IdTeam' => $feedback_team['teamId']])->result_array(); ?>
+                                                                <?php foreach ($team_money as $keys => $team_money) { ?>
+                                                                    <input type="text" class="form-control" name="income" value="<?php echo $team_money['income'] ?>" placeholder="Enter wage" readonly>
+                                                                <?php } ?>
+                                                                <input type="text" name="team_id" value="<?php echo $feedback_team['teamId'] ?>" hidden>
+                                                                <input type="text" name="order_id" value="<?php echo $feedback_team['order_id'] ?>" hidden>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                   
-                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                        <div class="form-group">
-                                                            <label for="helpInputTop">Deduct money</label>
-                                                            <input type="number" id="quantity" name="price_deductmoney" min="1" max="100" class="form-control">
+
+                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                            <div class="form-group">
+                                                                <label for="helpInputTop">Deduct money</label>
+                                                                <input type="number" id="quantity" name="price_deductmoney" min="1" max="100" class="form-control">
 
 
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                        <div class="form-group">
-                                                            <label for="helpInputTop">Note</label>
-                                                            <textarea name="node_deductmoney"  cols="30" rows="10" class="form-control"></textarea>
+                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                            <div class="form-group">
+                                                                <label for="helpInputTop">Note</label>
+                                                                <textarea name="node_deductmoney" cols="30" rows="10" class="form-control"></textarea>
 
 
+                                                            </div>
                                                         </div>
-                                                    </div>
 
 
                                                 </div>

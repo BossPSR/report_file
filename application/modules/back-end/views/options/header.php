@@ -143,8 +143,9 @@
                                 <li class="dropdown-menu-footer"><a class="dropdown-item p-1 text-center" href="javascript:void(0)">Read all notifications</a></li>
                             </ul>
                         </li> -->
+                        <?php $profile = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array(); ?>
                         <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John Doe</span><span class="user-status">Available</span></div><span><img class="round" src="public/backend/assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
+                                <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600"><?php echo $profile['email'];?></span><span class="user-status"><?php echo $profile['username'];?></span></div><span><img class="round" src="public/backend/assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item" href="Logout_admin"><i class="feather icon-power"></i> Logout</a>
@@ -272,7 +273,7 @@
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin" || $this->uri->segment(1) ==  "back_poster" || $this->uri->segment(1) ==  "back_vdo") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Public <span class="badge badge badge-warning badge-pill" style="<?php if($notify_public == 0){ echo "display:none";} ?>"><?php echo $notify_public ?></span></span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">Tool Admin <span class="badge badge badge-warning badge-pill" style="<?php if($notify_public == 0){ echo "display:none";} ?>"><?php echo $notify_public ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_admin") {
                                                                                 echo 'active';

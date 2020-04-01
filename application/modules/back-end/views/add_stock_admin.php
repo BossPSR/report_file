@@ -85,7 +85,7 @@
 
                                         <div class="col-xl-12 col-md-12 col-12" style="margin-top: 25px;">
                                             <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1"> Add Admin</button>
-                                            <a href="back_admin" class="btn btn-secondary mr-1 mb-1">Cancel</a>
+                                            <a href="my_stock_admin" class="btn btn-secondary mr-1 mb-1">Cancel</a>
                                         </div>
 
                                     </div>
