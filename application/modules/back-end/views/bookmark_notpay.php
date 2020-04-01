@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">bookmark All Not</h2>
+                        <h2 class="content-header-title float-left mb-0">Bookmark Not Pay</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">bookmark All Not
+                                <li class="breadcrumb-item active">Bookmark Not Pay
                                 </li>
                             </ol>
                         </div>
@@ -39,7 +39,7 @@
            
                             <div class="row card-header">
                                 <div class="col-10">
-                                    <h4 class="card-title">bookmark_all_not</h4>
+                                    <h4 class="card-title">Bookmark Not Pay</h4>
                                 </div>
                                 <div class="col-1 text-center">
                                     <?php if($bookmark_all_not ==''):?>
@@ -256,8 +256,8 @@
 
                                                         </td>
                                                         <td>
-                                                        <button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $bookmark_all_not['order_upload']; ?>" class="btn btn-primary mr-1 mb-1">Edit</button>
-                                                            <div class="modal fade" id="exampleModalk<?php echo $bookmark_all_not['order_upload']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <button type="button" data-toggle="modal" data-target="#exampleModall<?php echo $bookmark_all_not['order_upload']; ?>" class="btn btn-primary mr-1 mb-1">Edit</button>
+                                                            <div class="modal fade" id="exampleModall<?php echo $bookmark_all_not['order_upload']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
