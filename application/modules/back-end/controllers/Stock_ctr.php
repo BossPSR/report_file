@@ -106,7 +106,6 @@ class Stock_ctr extends CI_Controller {
 			'userId'        => $userId,
 			'order_id'      => $buymax->order_main,
 			'date_required' => $date_req,
-			'select_item' 	=> $position,
 			'status_admin'  =>  1,
 			'status_book'   =>  2,
 			'status_pay'    =>  1,
@@ -114,7 +113,23 @@ class Stock_ctr extends CI_Controller {
 			'path'          => 'uploads/Buy/' . $uploadData['file_name'],
 			'create_at'     => date('Y-m-d H:i:s'),
 		  );
-		  $this->db->insert('tbl_upload_order', $data);
+		  if($this->db->insert('tbl_upload_order', $data));
+		  
+		  $data = array(
+
+			'order_id'      => $buymax->order_main,
+			'date_required' => $date_req,
+			'position' 	    => $position,
+			'wage'          =>  $this->input->post('wage'),
+			'note'           =>  $this->input->post('note'),
+			'create_at'     => date('Y-m-d H:i:s'),
+		  );
+
+		  $this->db->insert('tbl_upload_team', $data);
+
+
+
+
 		  // if ($this->db->insert('tbl_upload_order', $data)) {
 		  //   return redirect('buy_uploadGT', $data);
 		  // }

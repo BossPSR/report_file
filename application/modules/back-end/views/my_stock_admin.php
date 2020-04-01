@@ -21,11 +21,7 @@
             </div>
         
         </div>
-        <?php
-        $this->db->where('status_admin', 1);
-        $this->db->from('tbl_upload_order');
-        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-        ?>
+       
         <div class="content-body">
             <div class="row">
 
@@ -40,11 +36,19 @@
                                     <h4 class="card-title">My StockAdmin</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                <?php if ($stock == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($stock as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                                 <div class="col-2 text-right">
-                                    <a href="Add_my_stock_admin"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Stock</button></a> 
+                                    <a href="Add_my_stock_admin"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Stock Admin</button></a> 
                                 </div>
                             </div>
 
