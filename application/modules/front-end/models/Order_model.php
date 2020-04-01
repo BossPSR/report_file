@@ -39,6 +39,16 @@ class Order_model extends CI_Model
         return $data->result_array();
     }
 
+    public function my_stock_item_not($as)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_item_position');
+        $this->db->where_not_in('id', $as);
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+
     public function my_stock($item_id, $sess)
     {
         $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id');

@@ -17,7 +17,6 @@
                         <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
                     </div>
                 <?php endif; ?>
-                <?php $POS = $this->db->get_where('tbl_item_position', ['id !=' => $item['id']])->result_array(); ?>
             <?php } ?>
         </div>
     </div>
@@ -41,8 +40,8 @@
                         <label>Position</label>
                         <select class="form-control" name="position">
                             <option selected disabled>--- SELECT ---</option>
-                            <?php foreach ($POS as $POS) { ?>
-                                <option value="<?php echo $POS['id']; ?>"><?php echo $POS['name_item']; ?></option>
+                            <?php foreach ($item_loop as $item_loop) { ?>
+                                <option value="<?php echo $item_loop['id']; ?>"><?php echo $item_loop['name_item']; ?></option>
                             <?php } ?>
                         </select>
                     </div>

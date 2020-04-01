@@ -22,7 +22,8 @@ class My_stock_ctr extends CI_Controller
                 $as[] = $get_sess['job_position'];
             }
 
-            $data['item']       = $this->Order_model->my_stock_item($as);
+            $data['item']               = $this->Order_model->my_stock_item($as);
+            $data['item_loop']          = $this->Order_model->my_stock_item_not($as);
             // $data['stock']      = $this->Order_model->my_stock($as);
 
             $this->load->view('options/header_login');
@@ -72,7 +73,7 @@ class My_stock_ctr extends CI_Controller
             foreach ($stock_capp as $stock_capp) {
                 $i++;
             }
-            $data['c_app'] = $i+= 0;
+            $data['c_app'] = $i += 0;
 
             $this->load->view('options/header_login');
             $this->load->view('my_stock', $data);
