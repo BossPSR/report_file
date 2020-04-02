@@ -91,11 +91,7 @@
 
         </div>
 
-        <?php
-        $this->db->from('tbl_upload_order_team');
-        $this->db->group_by('order_id');    
-        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-        ?>
+      
 
         <div class="content-body">
 
@@ -110,7 +106,15 @@
                                     <h4 class="card-title">Complete</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                <?php if ($complete == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($complete as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                             </div>
@@ -136,10 +140,9 @@
                                                 $i = 1;
                                                 $e = 1;
                                                
-                                                foreach ($complete as $key => $complete) { 
-                                                ?>
+                                                foreach ($complete as $key => $complete) { ?>
 
-
+                                                 
 
                                                     <tr>
                                                         <td><?php echo $i++ ; ?></td>
@@ -401,7 +404,7 @@
                                                     
                                                    
                                                 
-
+                                                
                                                 <?php  } ?>
 
                                             </tbody>

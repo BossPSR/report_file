@@ -248,5 +248,6 @@ $route['realtime_data1']                          = 'back-end/Home_ctr/realtime_
 $route['realtime_data2']                          = 'back-end/Home_ctr/realtime_data2';
 $route['realtime_data3']                          = 'back-end/Home_ctr/realtime_data3';
 $route['check_dm']                                 = 'back-end/Store_ctr/check_dm';
+$route['status_more_file_team']                       = 'back-end/More_file_ctr/status_more_file_team';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

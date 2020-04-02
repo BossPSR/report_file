@@ -106,6 +106,23 @@
         })
     }
 </script>
+
+<script>
+    function confirmalertunlock_upload_morefile(data5) {
+
+        swal({
+            title: "Are you sure upload_morefile?",
+            text: "Are you sure you this upload_morefile ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'status_more_file_team?id=' + data5  ;
+            }
+        })
+    }
+</script>
  <!-- uploadslider -->
 
 </body>
