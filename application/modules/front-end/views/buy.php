@@ -102,23 +102,30 @@
 
     );
     $('#uploadfiles').click(function() {
-        $.ajax({
-            type: 'POST',
-            url: 'order_auto',
-            data: {
-                status: 1
-            },
-            success: function(data) {
-                myDropzone.processQueue();
-                myDropzone2.processQueue();
-                myDropzone.on("queuecomplete", function(file, res) {
-                    swal("Good job!", "Upload for data successfull", "success", {
-                        button: false,
+        if (myDropzone.files == 0) {
+            swal("Warning!", "Can not be document Empty", "warning", {
+                button: true,
+            });
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: 'order_auto',
+                data: {
+                    status: 1
+                },
+                success: function(data) {
+                    myDropzone.processQueue();
+                    myDropzone2.processQueue();
+                    myDropzone.on("queuecomplete", function(file, res) {
+                        swal("Good job!", "Upload for data successfull", "success", {
+                            button: false,
+                        });
+                        setTimeout("location.reload(true);", 1000);
                     });
-                    setTimeout("location.reload(true);", 1000);
-                });
-            },
+                },
 
-        });
+            });
+        }
+
     });
 </script>

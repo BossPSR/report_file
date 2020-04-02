@@ -53,7 +53,7 @@
     <!-- END: Custom CSS-->
 
     <script src="public/backend/assets/vendors/js/vendors.min.js"></script>
-   
+
 </head>
 <!-- END: Head-->
 
@@ -81,8 +81,13 @@
 
                     </div>
                     <ul class="nav navbar-nav float-right">
-                        <li> <a href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>">TH</a> <a href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>">EN</a></li>
-
+                         <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-flag">
+                                <a class="dropdown-item" href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>" ><i class="flag-icon flag-icon-fr"></i> English</a>
+                                <a class="dropdown-item" href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>" ><i class="flag-icon flag-icon-us"></i> Thailand</a>
+                            </div>
+                        </li>
+          
                         <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
                         <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
                             <div class="search-input">
@@ -259,17 +264,16 @@
                                             } ?>">
                             <a href="back_dashboard"><i class="feather icon-home"></i><span data-i18n="Dashboard"><?= $this->lang->line("Dashboard"); ?></span></a>
                         </li>
-                        <?php 
-                            $notify_public = 0;
-                            $notifyTeam = 0;
-                            $teamList = $this->db->get_where('tbl_team',['notify_admin' => 0])->result_array();
-                            foreach($teamList as $team_list){
-                                if ($team_list['notify_admin'] == 0) {
-                                    $notifyTeam += 1;
-                                }
-                               
+                        <?php
+                        $notify_public = 0;
+                        $notifyTeam = 0;
+                        $teamList = $this->db->get_where('tbl_team', ['notify_admin' => 0])->result_array();
+                        foreach ($teamList as $team_list) {
+                            if ($team_list['notify_admin'] == 0 && $team_list['status'] == 0) {
+                                $notifyTeam += 1;
                             }
-                            $notify_public += $notifyTeam;
+                        }
+                        $notify_public += $notifyTeam;
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_team" || $this->uri->segment(1) ==  "back_user" || $this->uri->segment(1) ==  "back_admin" || $this->uri->segment(1) ==  "back_poster" || $this->uri->segment(1) ==  "back_vdo") {
                                                             echo 'active';
@@ -280,21 +284,21 @@
                                                                             } ?>" href="back_admin" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>admin List</a>
                                 </li>
 
-                                <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "back_team" ) {
-                                                                echo 'active';
-                                                            } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>Team List</a>
+                                <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "back_team") {
+                                                                            echo 'active';
+                                                                        } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>Team List</a>
                                     <ul class="dropdown-menu ">
-                                    <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "back_team") {
-                                                                echo 'active';
-                                                            } ?>" href="back_team" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Team List</a>
+                                        <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "back_team") {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="back_team" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Team List <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notifyTeam == 0) {echo "display:none";} ?>"><?php echo $notifyTeam; ?></span></a>
                                         </li>
-                                    
+
                                         <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "T3_online") {
-                                                                echo 'active';
-                                                            } ?>" href="T3_online" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>T3 online Request</a>
+                                                                                        echo 'active';
+                                                                                    } ?>" href="T3_online" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>T3 online Request</a>
                                         </li>
-                                       
-                                      
+
+
                                     </ul>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_user") {
@@ -311,39 +315,48 @@
                                 </li>
                             </ul>
                         </li>
-                        <?php 
-                            $notifyMystore = 0;
+                        <?php
+                        $notifyMystore = 0;
 
-                            $notify_checkFor_sell = 0;
-                            $uploadStore = $this->db->group_by('store_id')->get_where('tbl_upload_store' , ['notify_admin' => 0])->result_array();
-                            foreach($uploadStore as $upload_store){
-                                if ($upload_store['notify_admin'] == 0) {
-                                    $notify_checkFor_sell += 1;
-                                }
+                        $notify_checkFor_sell = 0;
+                        $notify_storeFor_sell = 0;
+                        $uploadStore = $this->db->group_by('store_id')->get_where('tbl_upload_store', ['notify_admin' => 0])->result_array();
+                        foreach ($uploadStore as $upload_store) {
+                            if ($upload_store['notify_admin'] == 0 && $upload_store['status_chack'] == 0) {
+                                $notify_checkFor_sell += 1;
                             }
-
-                            $notify_myStore = 0;
-                            $uploadOrder = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
-                            foreach($uploadOrder as $upload_order){
-                                if ($upload_order['notify_admin'] == 0 && $upload_order['status_book'] == 0) {
-                                    $notify_myStore += 1;
-                                }
+                            if ($upload_store['notify_admin'] == 0 && $upload_store['status_chack'] == 1) {
+                                $notify_storeFor_sell += 1;
                             }
+                        }
 
-                            $notifyMystore += $notify_checkFor_sell;
-                            $notifyMystore += $notify_myStore;
+                        $notify_myStore = 0;
+                        $uploadOrder = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['notify_admin' => 0])->result_array();
+                        foreach ($uploadOrder as $upload_order) {
+                            if ($upload_order['notify_admin'] == 0 && $upload_order['status_book'] == 0) {
+                                $notify_myStore += 1;
+                            }
+                        }
+
+                        $notifyMystore += $notify_checkFor_sell;
+                        $notifyMystore += $notify_storeFor_sell;
+                        $notifyMystore += $notify_myStore;
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store_reject_for_buy" ||  $this->uri->segment(1) ==  "Section" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell" ||  $this->uri->segment(1) ==  "back_store_reject" ||  $this->uri->segment(1) ==  "back_upload_main_search") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store <span class="badge badge badge-warning badge-pill" style="<?php if($notifyMystore == 0){ echo "display:none";} ?>"><?php echo $notifyMystore; ?></span></span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-package"></i><span data-i18n="Apps">My Store <span class="badge badge badge-warning badge-pill" style="<?php if ($notifyMystore == 0) {
+                                                                                                                                                                                                                                                                                            echo "display:none";
+                                                                                                                                                                                                                                                                                        } ?>"><?php echo $notifyMystore; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_checkForsell") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_checkForsell" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Chack for sell <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_checkFor_sell == 0){ echo "display:none";} ?>"><?php echo $notify_checkFor_sell; ?></span></a>
+                                                                            } ?>" href="back_store_checkForsell" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Check for sell <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_checkFor_sell == 0) {
+                                                                                                                                                                                                                                                                                                    echo "display:none";
+                                                                                                                                                                                                                                                                                                } ?>"><?php echo $notify_checkFor_sell; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Section") {
                                                                                 echo 'active';
-                                                                            } ?>" href="Section" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-layers"></i>Store for sell</a>
+                                                                            } ?>" href="Section" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-layers"></i>Store for sell <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_storeFor_sell == 0) {echo "display:none";} ?>"><?php echo $notify_storeFor_sell; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_upload_main_search") {
                                                                                 echo 'active';
@@ -351,7 +364,9 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_buy") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-package"></i>Store For buy <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_myStore == 0){ echo "display:none";} ?>"><?php echo $notify_myStore; ?></span></a>
+                                                                            } ?>" href="back_store_buy" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-package"></i>Store For buy <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_myStore == 0) {
+                                                                                                                                                                                                                                                                                    echo "display:none";
+                                                                                                                                                                                                                                                                                } ?>"><?php echo $notify_myStore; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_reject") {
                                                                                 echo 'active';
@@ -366,7 +381,7 @@
 
                             </ul>
                         </li>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_withdraw" || $this->uri->segment(1) == "withdraw_realtime" ) {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_withdraw" || $this->uri->segment(1) == "withdraw_realtime") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Withdraw</span></a>
                             <ul class="dropdown-menu">
@@ -378,11 +393,11 @@
                                                                                 echo 'active';
                                                                             } ?>" href="withdraw_realtime" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Withdraw Team</a>
                                 </li>
-                                
+
                             </ul>
 
                         </li>
-                        
+
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved" || $this->uri->segment(1) == "Delivery") {
                                                             echo 'active';
                                                         } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Order Result</span></a>
@@ -403,20 +418,22 @@
 
                         </li>
 
-                        <?php 
-                            $notifyCustomer_order = 0;
-                            $notifyNot_satisfied = 0;
-                            $customer_order = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
-                             foreach ($customer_order as $customerOrder) {
-                                 if ($customerOrder['notify_admin'] == 0 && $customerOrder['status_book'] == 2 && $customerOrder['status_pay'] == 1) {
-                                     $notifyNot_satisfied += 1;
-                                 }
-                             }
-                            $notifyCustomer_order += $notifyNot_satisfied;
+                        <?php
+                        $notifyCustomer_order = 0;
+                        $notifyNot_satisfied = 0;
+                        $customer_order = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['notify_admin' => 0])->result_array();
+                        foreach ($customer_order as $customerOrder) {
+                            if ($customerOrder['notify_admin'] == 0 && $customerOrder['status_book'] == 2 && $customerOrder['status_pay'] == 1) {
+                                $notifyNot_satisfied += 1;
+                            }
+                        }
+                        $notifyCustomer_order += $notifyNot_satisfied;
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Satisfied" || $this->uri->segment(1) == "Not_Satisfied") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Customer Order <span class="badge badge badge-warning badge-pill" style="<?php if($notifyCustomer_order == 0){ echo "display:none";} ?>"><?php echo $notifyCustomer_order; ?></span></span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Order Result">Customer Order <span class="badge badge badge-warning badge-pill" style="<?php if ($notifyCustomer_order == 0) {
+                                                                                                                                                                                                                                                                                                        echo "display:none";
+                                                                                                                                                                                                                                                                                                    } ?>"><?php echo $notifyCustomer_order; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "orverall") {
                                                                                 echo 'active';
@@ -428,45 +445,53 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Not_Satisfied") {
                                                                                 echo 'active';
-                                                                            } ?>" href="Not_Satisfied" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Satisfied <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notifyNot_satisfied == 0){ echo "display:none";} ?>"><?php echo $notifyNot_satisfied; ?></span></a>
+                                                                            } ?>" href="Not_Satisfied" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Satisfied <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notifyNot_satisfied == 0) {
+                                                                                                                                                                                                                                                                                    echo "display:none";
+                                                                                                                                                                                                                                                                                } ?>"><?php echo $notifyNot_satisfied; ?></span></a>
                                 </li>
                             </ul>
 
                         </li>
-                        <?php 
-                            $notifyBookmark = 0;
-                            $notify_pay = 0;
-                            $notify_not_pay = 0;
-                            $bookmarkPay = $this->db->group_by('order_id')->get_where('tbl_upload_order' , ['notify_admin' => 0])->result_array();
-                            foreach ($bookmarkPay as $bookmark_pay) {
-                                
-                                if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_book'] == 1 && $bookmark_pay['status_pay'] == 1) {
-                                    $notify_pay += 1;
-                                }
-                                if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_pay'] == 0) {
-                                    $notify_not_pay += 1;
-                                }
+                        <?php
+                        $notifyBookmark = 0;
+                        $notify_pay = 0;
+                        $notify_not_pay = 0;
+                        $bookmarkPay = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['notify_admin' => 0])->result_array();
+                        foreach ($bookmarkPay as $bookmark_pay) {
+
+                            if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_book'] == 1 && $bookmark_pay['status_pay'] == 1) {
+                                $notify_pay += 1;
                             }
-                            $notifyBookmark += $notify_pay;
-                            $notifyBookmark += $notify_not_pay;
-                           
+                            if ($bookmark_pay['notify_admin'] == 0 && $bookmark_pay['status_pay'] == 0) {
+                                $notify_not_pay += 1;
+                            }
+                        }
+                        $notifyBookmark += $notify_pay;
+                        $notifyBookmark += $notify_not_pay;
+
                         ?>
-                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" ||$this->uri->segment(1) == "More_File"|| $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
+                        <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "More_File" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark <span class="badge badge badge-warning badge-pill" style="<?php if($notifyBookmark == 0){ echo "display:none";} ?>"><?php echo $notifyBookmark; ?></span></span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-server"></i><span data-i18n="Order Result">Bookmark <span class="badge badge badge-warning badge-pill" style="<?php if ($notifyBookmark == 0) {
+                                                                                                                                                                                                                                                                                                echo "display:none";
+                                                                                                                                                                                                                                                                                            } ?>"><?php echo $notifyBookmark; ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu="">
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark") {
                                                                 echo 'active';
                                                             } ?>" href="Bookmark" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-book"></i>Pay <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_pay == 0){ echo "display:none";} ?>"><?php echo $notify_pay; ?></span>
+                                        <i class="feather icon-book"></i>Pay <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_pay == 0) {
+                                                                                                                                                            echo "display:none";
+                                                                                                                                                        } ?>"><?php echo $notify_pay; ?></span>
                                     </a>
                                 </li>
                                 <li data-menu="">
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Bookmark_notpay") {
                                                                 echo 'active';
                                                             } ?>" href="Bookmark_notpay" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-book"></i>Not Pay <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if($notify_not_pay == 0){ echo "display:none";} ?>"><?php echo $notify_not_pay; ?></span>
+                                        <i class="feather icon-book"></i>Not Pay <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_not_pay == 0) {
+                                                                                                                                                                echo "display:none";
+                                                                                                                                                            } ?>"><?php echo $notify_not_pay; ?></span>
                                     </a>
                                 </li>
                                 <li data-menu="">
@@ -480,36 +505,36 @@
 
 
                                 <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "Feedback" || $this->uri->segment(1) == "Feedback_team") {
-                                                                echo 'active';
-                                                            } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>Feedback</a>
+                                                                            echo 'active';
+                                                                        } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>Feedback</a>
                                     <ul class="dropdown-menu ">
                                         <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "Feedback") {
-                                                                echo 'active';
-                                                            } ?>" href="Feedback" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Feedback</a>
+                                                                                        echo 'active';
+                                                                                    } ?>" href="Feedback" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Feedback</a>
                                         </li>
                                         <li data-menu=""><a class="dropdown-item" href="Feedback_team" data-toggle="dropdown" data-i18n="Chartjs"><i class="feather icon-circle"></i>Feedback Team</a>
                                         </li>
-                                      
+
                                     </ul>
                                 </li>
                                 <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "More_File" || $this->uri->segment(1) == "More_File_team") {
-                                                                echo 'active';
-                                                            } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>More File</a>
+                                                                            echo 'active';
+                                                                        } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>More File</a>
                                     <ul class="dropdown-menu ">
                                         <li data-menu="">
-                                    <a class="dropdown-item <?php if ($this->uri->segment(1) == "More_File") {
-                                                                echo 'active';
-                                                            } ?>" href="More_File" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-circle"></i>More File
-                                    </a>
-                                </li>
+                                            <a class="dropdown-item <?php if ($this->uri->segment(1) == "More_File") {
+                                                                        echo 'active';
+                                                                    } ?>" href="More_File" data-toggle="dropdown" data-i18n="Email">
+                                                <i class="feather icon-circle"></i>More File
+                                            </a>
+                                        </li>
                                         <li data-menu=""><a class="dropdown-item" href="More_File_team" data-toggle="dropdown" data-i18n="Chartjs"><i class="feather icon-circle"></i>More File Team</a>
                                         </li>
-                                      
+
                                     </ul>
                                 </li>
 
-                              
+
                         </li>
 
                 </ul>

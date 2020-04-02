@@ -651,7 +651,7 @@ class Store_ctr extends CI_Controller
 
         $data = array(
             'status_chack'                    => 1,
-            'notify_admin'                    => 1
+            'notify_admin'                    => 0
         );
 
         $this->db->where('store_id', $store_id);
