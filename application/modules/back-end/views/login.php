@@ -92,7 +92,7 @@
                                                                             <i class="vs-icon feather icon-check"></i>
                                                                         </span>
                                                                     </span>
-                                                                    <span class="">Remember me</span>
+                                                                  
                                                                 </div>
                                                             </fieldset>
                                                         </div>

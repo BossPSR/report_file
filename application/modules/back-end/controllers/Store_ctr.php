@@ -398,7 +398,7 @@ class Store_ctr extends CI_Controller
         $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid['order_id']])->result_array();
         $book_mark = null;
-        $this->sendEmail($upload_order, $book_mark);
+        $this->sendEmail_reject($upload_order, $book_mark);
 
 
         if ($resultsedit1 > 0) {
