@@ -63,7 +63,6 @@
 </script>
 
 <script type="text/javascript">
-    var x = document.getElementById("selected2").value;
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone("#fileupload", {
         autoProcessQueue: false,
@@ -73,14 +72,19 @@
     });
 
     $('#uploadfiles').click(function() {
-
-        myDropzone.processQueue();
-        myDropzone.on("queuecomplete", function(file, res) {
-            swal("Good job!", "Upload for data successfull", "success", {
+        var x = document.getElementById("selected2").value;
+        if (myDropzone.files === 0 || x == '') {
+            swal("Warning!", "Please fill out the information.", "error", {
                 button: false,
             });
-            setTimeout("location.reload(true);", 1000);
-        });
-
+        } else {
+            myDropzone.processQueue();
+            myDropzone.on("queuecomplete", function(file, res) {
+                swal("Good job!", "Upload for data successfull", "success", {
+                    button: false,
+                });
+                setTimeout("location.reload(true);", 1000);
+            });
+        }
     });
 </script>

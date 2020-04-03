@@ -166,6 +166,8 @@
                                                     <span class="badge badge-info">Red</span>
                                                 <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
                                                     <span class="badge badge-warning" style="color:#fff;">Wait for admin</span>
+                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
+                                                    <span class="badge badge-success">Success</span>
                                                 <?php } ?>
                                             <?php } ?>
                                         </td>
