@@ -295,6 +295,15 @@
 </script>
 
 <script>
+    <?php if ($this->session->flashdata('fail_login_status')) : ?>
+        swal("Error!", "Please wait for approval. !!", "error");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('fail_regis_teamResum')) : ?>
+        swal("Error!", "Error for send resume. Plase try agian !!", "error");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('fail_regis_teamData')) : ?>
+        swal("Error!", "Data no must be filled out!!", "error");
+    <?php endif; ?>
     <?php if ($this->session->flashdata('success_pro')) : ?>
         swal("Good job!", "Successfull.Change for my profile.", "success");
     <?php endif; ?>
@@ -322,7 +331,7 @@
     <?php endif; ?>
 
     <?php if ($this->session->flashdata('del_ss')) : ?>
-        swal("fill !", "You clicked the button!", "error");
+        swal("fill !", "Please enter the Email or Password correctly !!", "error");
     <?php endif; ?>
     <?php if ($this->session->flashdata('nomoney')) : ?>
         swal("fill !", "Your money is not enough to withdraw money.", "error");

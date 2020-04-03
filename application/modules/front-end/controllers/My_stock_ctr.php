@@ -150,4 +150,10 @@ class My_stock_ctr extends CI_Controller
             echo $success;
         }
     }
+
+    public function show_pdf()
+    {
+        $data['dcnumber'] = base64_decode($this->input->get('dcnumber'));
+        $this->load->view('show_pdf', $data);
+    }
 }

@@ -291,7 +291,7 @@
 
                                                             <div class="modal-body" style="text-align:left;">
                                                                 <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                <form action="my-order-feedback" class="dropzone" id="fileuploadFeed">
+                                                                <form action="my-order-feedback" class="dropzone" id="fileuploadFeed<?php echo $value['ORD']; ?>">
                                                                     <div class="dz-message needsclick">
                                                                         Drop files here or click to upload.<br>
                                                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
@@ -300,24 +300,84 @@
                                                                 <br>
                                                                 <!-- <form action="my-order-feedAuto" method="POST"> -->
                                                                 <label for="" class="font-size-upload">Detail :</label>
-                                                                <textarea id="detail1" name="detail" class="form-control" rows="5" required></textarea>
+                                                                <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
                                                                 <br>
 
                                                                 <label for="" class="font-size-upload">Date :</label>
-                                                                <input type="date" name="dated" id="dated" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
-                                                                <input type="text" name="order_id" id="order_id" value="<?php echo $value['ORD']; ?>" hidden>
-                                                                <input type="text" name="userId" id="userId" value="<?php echo $userId['idUser']; ?>" hidden>
+                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo $value['date_required']; ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
+                                                                <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
+                                                                <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
                                                                 <!-- </form> -->
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" id="SubmitFeed" class="btn btn-success">Success</button>
+                                                                <button type="button" id="SubmitFeed<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <script type='text/javascript'>
+                                                    Dropzone.autoDiscover = false;
+                                                    var myDropzone = new Dropzone("#fileuploadFeed<?php echo $value['ORD']; ?>", {
+                                                        autoProcessQueue: false,
+                                                        maxFiles: 5,
+                                                        addRemoveLinks: true,
+                                                        parallelUploads: 5, // Number of files process at a time (default 2)
+                                                    });
+
+                                                    $('#SubmitFeed<?php echo $value['ORD']; ?>').click(function() {
+                                                        var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
+                                                        var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
+                                                        var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
+                                                        var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
+
+                                                        if (myDropzone.files == 0 && x == '') {
+                                                            swal("Warning!", "Can not be document Empty", "warning", {
+                                                                button: true,
+                                                            });
+                                                        } else {
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: 'my-order-feedAuto',
+                                                                data: {
+                                                                    detail: x,
+                                                                    dated: y,
+                                                                    order_id: z,
+                                                                    userId: c,
+                                                                },
+                                                                success: function(success) {
+                                                                    if (myDropzone.files != 0) {
+                                                                        myDropzone.processQueue();
+                                                                        myDropzone.on("queuecomplete", function(file, res) {
+                                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                                button: true,
+                                                                            }).then(function(isConfirm) {
+                                                                                if (isConfirm == true) {
+                                                                                    setTimeout("location.reload(true);", 1000);
+                                                                                } else {
+                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                }
+                                                                            });
+                                                                        });
+                                                                    } else {
+                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                            button: true,
+                                                                        }).then(function(isConfirm) {
+                                                                            if (isConfirm == true) {
+                                                                                setTimeout("location.reload(true);", 1000);
+                                                                            } else {
+                                                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                            }
+                                                                        });
+                                                                    }
+
+                                                                }
+                                                            });
+                                                        }
 
 
+                                                    });
+                                                </script>
 
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="gtdoc<?php echo $vvv++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -332,7 +392,7 @@
 
                                                             <div class="modal-body" style="text-align:left;">
                                                                 <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                <form action="oder-morefile-upload" class="dropzone" id="fileuploadmorefile">
+                                                                <form action="oder-morefile-upload" class="dropzone" id="fileuploadmorefile<?php echo $value['ORD']; ?>">
                                                                     <div class="dz-message needsclick">
                                                                         Drop files here or click to upload.<br>
                                                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
@@ -349,12 +409,37 @@
                                                                 <!-- </form> -->
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" id="Submitgtdoc" class="btn btn-success">Success</button>
+                                                                <button type="button" id="Submitgtdoc<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <script type='text/javascript'>
+                                                    Dropzone.autoDiscover = false;
+                                                    var myDropzone = new Dropzone("#fileuploadmorefile<?php echo $value['ORD']; ?>", {
+                                                        autoProcessQueue: false,
+                                                        maxFiles: 5,
+                                                        addRemoveLinks: true,
+                                                        parallelUploads: 5, // Number of files process at a time (default 2)
+                                                    });
+
+                                                    $('#Submitgtdoc<?php echo $value['ORD']; ?>').click(function() {
+                                                        if (myDropzone.files == 0) {
+                                                            swal("Warning!", "Can not be document Empty", "warning", {
+                                                                button: true,
+                                                            });
+                                                        } else {
+                                                            myDropzone.processQueue();
+                                                            myDropzone.on("queuecomplete", function(file, res) {
+                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                    button: false,
+                                                                });
+                                                            });
+                                                            setTimeout("location.reload(true);", 1000);
+                                                        }
+                                                    });
+                                                </script>
                                             <?php } ?>
                                         <?php else : ?>
                                             -
@@ -363,88 +448,9 @@
                                 </tr>
 
 
-                                <script type='text/javascript'>
-                                    Dropzone.autoDiscover = false;
-                                    var myDropzone = new Dropzone("#fileuploadFeed", {
-                                        autoProcessQueue: false,
-                                        maxFiles: 5,
-                                        addRemoveLinks: true,
-                                        parallelUploads: 5, // Number of files process at a time (default 2)
-                                    });
-
-                                    $('#SubmitFeed').click(function() {
-                                        var x = document.getElementById("detail1").value;
-                                        var y = document.getElementById("dated").value;
-                                        var z = document.getElementById("order_id").value;
-                                        var c = document.getElementById("userId").value;
-
-                                        if (myDropzone.files == 0 && x == '') {
-                                            swal("Warning!", "Can not be document Empty", "warning", {
-                                                button: true,
-                                            });
-                                        } else {
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: 'my-order-feedAuto',
-                                                data: {
-                                                    detail: x,
-                                                    dated: y,
-                                                    order_id: z,
-                                                    userId: c,
-                                                },
-                                                success: function(success) {
-                                                    if (myDropzone.files != 0) {
-                                                        myDropzone.processQueue();
-                                                        myDropzone.on("queuecomplete", function(file, res) {
-                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                button: true,
-                                                            }).then(function(isConfirm) {
-                                                                if (isConfirm == true) {
-                                                                    setTimeout("location.reload(true);", 1000);
-                                                                } else {
-                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                }
-                                                            });
-                                                        });
-                                                    } else {
-                                                        swal("Good job!", "Upload for data successfull", "success", {
-                                                            button: true,
-                                                        }).then(function(isConfirm) {
-                                                            if (isConfirm == true) {
-                                                                setTimeout("location.reload(true);", 1000);
-                                                            } else {
-                                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                            }
-                                                        });
-                                                    }
-
-                                                }
-                                            });
-                                        }
 
 
-                                    });
-                                </script>
 
-                                <script type='text/javascript'>
-                                    Dropzone.autoDiscover = false;
-                                    var myDropzone = new Dropzone("#fileuploadmorefile", {
-                                        autoProcessQueue: false,
-                                        maxFiles: 5,
-                                        addRemoveLinks: true,
-                                        parallelUploads: 5, // Number of files process at a time (default 2)
-                                    });
-
-                                    $('#Submitgtdoc').click(function() {
-                                        myDropzone.processQueue();
-                                        myDropzone.on("queuecomplete", function(file, res) {
-                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                button: false,
-                                            });
-                                        });
-                                        setTimeout("location.reload(true);", 1000);
-                                    });
-                                </script>
 
                                 <script type='text/javascript'>
                                     $('#approved<?php echo $sub_order ?>').click(function() {

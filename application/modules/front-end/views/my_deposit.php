@@ -139,7 +139,10 @@ $sm_del = $this->db->get()->row_array();
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
-        alert('Transaction completed by ' + details.payer.name.given_name);
+        swal("Good job!", "Transaction completed by" + details.payer.name.given_name, "success", {
+          button: false,
+        });
+        // alert('Transaction completed by ' + details.payer.name.given_name);
         // Call your server to save the transaction
         // return fetch('/ss', {
         //   method: 'post',

@@ -65,6 +65,9 @@ class Login_ctr extends CI_Controller
                 // print_r($team);
                 // exit();
                 redirect('home');
+            } elseif ($this->Login_model->login_team_c($email, $password)) {
+                $this->session->set_flashdata('fail_login_status', TRUE);
+                redirect('home');
             } else {
                 $this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอก Email หรือ Password ให้ถูกต้อง !! </div>');
                 redirect('home', 'refresh');
