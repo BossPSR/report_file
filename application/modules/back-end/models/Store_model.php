@@ -55,7 +55,7 @@ class Store_model extends CI_Model
         $this->db->where('is_check', 0);
         $this->db->where('status_book', 0);
         $this->db->group_by('order_id');
-        $this->db->order_by('date_required', 'DESC');
+        $this->db->order_by('date_required', 'ACC');
         return $this->db->get()->result_array();
     }
 

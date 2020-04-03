@@ -47,12 +47,12 @@
 
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> DM </label>
-                                    
+
                                             <?php $book1 = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $id])->result_array(); ?>
-                                            <select   class="form-control" name="DM" id="DM1">
-                                            <?php foreach ($book1 as $key => $book1) {?>
-                                                <option value="<?php echo $book1['id_document'] ?>"><?php echo $book1['id_document'] ?></option>
-                                            <?php }?>
+                                            <select class="form-control" name="DM" id="DM1">
+                                                <?php foreach ($book1 as $key => $book1) { ?>
+                                                    <option value="<?php echo $book1['id_document'] ?>"><?php echo $book1['id_document'] ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
 
@@ -95,10 +95,16 @@
 
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
+        if (myDropzone.files == 0) {
 
+            swal("Warning!", "Can not be document Empty", "warning", {
+                button: true,
+            });
+
+        }
 
         myDropzone.processQueue();
-        myDropzone.on("success", function(file, res) {
+        myDropzone.on("queuecomplete", function(file, res) {
             swal("Good job!", "Upload for data successfull", "success", {
                 button: false,
             });

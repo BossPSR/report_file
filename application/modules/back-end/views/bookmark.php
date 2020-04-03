@@ -156,8 +156,8 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($bookmark as $keyBook => $bookmark) { ?>
-                                                   
-                                                    
+
+
 
                                                     <tr>
                                                         <td><?php echo $bookmark['orderby'] ?></td>
@@ -288,9 +288,9 @@
                                                                                         <table class="table ">
                                                                                             <thead>
 
-                                                                                                <?php 
+                                                                                                <?php
                                                                                                 $this->db->order_by("create_at", "desc");
-                                                                                                $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm['store_id']])->result_array(); 
+                                                                                                $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm['store_id']])->result_array();
                                                                                                 ?>
                                                                                                 <tr>
                                                                                                     <th>Relive</th>
@@ -414,20 +414,20 @@
                                                             <?php } ?>
 
                                                         </td>
-                                                        <td>   
-                                                 
-                                                        <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->row_array(); ?>
-                                                          
-                                                        <?php $show_dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $show_dm_c['id_document']])->row_array(); ?>
-                                                        
-                                                        <?php  $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'],'status_check_drop' => '11'])->row_array(); ?>
-                                                            <?php if($show_dm_c2 == true):?>
+                                                        <td>
+
+                                                            <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->row_array(); ?>
+
+                                                            <?php $show_dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $show_dm_c['id_document']])->row_array(); ?>
+
+                                                            <?php $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'], 'status_check_drop' => '11'])->row_array(); ?>
+                                                            <?php if ($show_dm_c2 == true) : ?>
                                                                 <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
-                                                            <?php else:?>
-                                                            
-                                                           <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
-                                                            <?php endif;?>
-                                                          
+                                                            <?php else : ?>
+
+                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
+                                                            <?php endif; ?>
+
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
                                                                 <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target="#exampleModal"><i class="feather icon-navigation"></i> delivery</button>
                                                             <?php else : ?>
@@ -435,13 +435,13 @@
                                                             <?php endif; ?>
                                                             <?php if ($bookmark['status_book'] == '2') : ?>
 
-                                                             <?php else : ?>
-                                                              <?php if($bookmark['status_bookmark_upload_to_team']== '1'):?>
+                                                            <?php else : ?>
+                                                                <?php if ($bookmark['status_bookmark_upload_to_team'] == '1') : ?>
 
-                                                            <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To team</button>
-                                                              <?php else:?>
-                                                            <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['id']; ?>"> Upload To team</button>
-                                                            <?php endif; ?>
+                                                                    <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To team</button>
+                                                                <?php else : ?>
+                                                                    <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['order_save']; ?>"> Upload To team</button>
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
@@ -457,7 +457,7 @@
                                                                             <h3>
                                                                                 <p>delivery file </p>
                                                                             </h3>
-                                                                            <form action="sendEmail_delivery_pay" method="POST">
+                                                                            <form name="frm_test" onsubmit="doSubmit(this)" action="sendEmail_delivery_pay" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $bookmark['order_save']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
 
@@ -485,7 +485,7 @@
                                                                                                     <tr>
                                                                                                         <td>
                                                                                                             <label class="container">
-                                                                                                                <input type="checkbox" class="checkmark" name="order_id[]" value="<?php echo $orderss['id'] ?>">
+                                                                                                                <input type="checkbox" class="checkmark" id="delivery<?php echo $orderss['id'].'-'. $orderss['store_id']; ?>" name="order_id[]" value="<?php echo $orderss['id'] ?>" onclick="numCheck<?php echo $orderss['id'].'-'. $orderss['store_id']; ?>();">
                                                                                                                 <span class="checkmark"></span>
                                                                                                             </label>
                                                                                                         </td>
@@ -504,6 +504,12 @@
 
 
                                                                                                     </tr>
+                                                                                                    <script>
+                                                                                                        function numCheck<?php echo $orderss['id'].'-'. $orderss['store_id']; ?>(){
+                                                                                                            var checkBox = document.getElementById("delivery<?php echo $orderss['id'].'-'. $orderss['store_id']; ?>");
+                                                                                                                console.log(checkBox.checked)
+                                                                                                        }
+                                                                                                    </script>
                                                                                                 <?php } ?>
                                                                                             </tbody>
                                                                                         </table>
@@ -516,7 +522,7 @@
                                                                                 </h3>
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
-                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $bookmark['order_id']])->result_array(); ?>
+                                                                                        <?php $orderss_team = $this->db->get_where('tbl_upload_order_team', ['order_id' => $bookmark['order_id']])->result_array(); ?>
                                                                                         <tr>
                                                                                             <th>Select</th>
 
@@ -527,18 +533,18 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                        <?php foreach ($orderss_team as $keys => $orderss_team) { ?>
                                                                                             <tr>
                                                                                                 <td><label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" name="order_team[]" value="<?php echo $orderss['id'] ?>">
+                                                                                                        <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>">
                                                                                                         <span class="checkmark"></span>
                                                                                                     </label>
                                                                                                 </td>
 
-                                                                                                <td><?php echo $orderss['order_id'] ?></td>
-                                                                                                <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderss['create_at'] ?></td>
+                                                                                                <td><?php echo $orderss_team['order_id'] ?></td>
+                                                                                                <td><?php echo $orderss_team['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderss_team['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderss_team['create_at'] ?></td>
 
 
                                                                                             </tr>
@@ -549,85 +555,88 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
+                                                                                <button type="button" id="upload_de" class="btn btn-primary mr-1 mb-1">Submit</button>
                                                                             </div>
                                                                         </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            
+                                                            
+                                                            
 
-                                                            <div class="modal fade" id="exampleModal<?php echo $bookmark['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="upload_team_book" method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Order</label>
-                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $bookmark['orderby']; ?>" placeholder="Enter Order" readonly>
-                                                                            </div>
+                                                            <div class="modal fade" id="exampleModal<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
                                                                         </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $bookmark['date_re']; ?>" placeholder="Enter price">
+                                                                        <form action="upload_team_book" method="POST" class="form-horizontal">
+                                                                            <div class="modal-body">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Order</label>
+                                                                                        <input type="text" class="form-control" name="order_id" value="<?php echo $bookmark['order_save']; ?>" placeholder="Enter Order" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">date required</label>
+                                                                                        <input type="date" class="form-control" name="Daterequired" value="<?php echo $bookmark['date_re']; ?>" placeholder="Enter price" required>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">position</label>
+                                                                                        <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
+                                                                                        <select name="position" class="form-control" required>
+                                                                                            <option value="" selected disabled>select</option>
+                                                                                            <?php foreach ($select_postion as $keys => $select_postion) { ?>
+                                                                                                <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">wage</label>
+
+                                                                                        <input type="text" class="form-control" name="wage" value="<?php echo $bookmark['price_save'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note</label>
+                                                                                        <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                                    </div>
+
+                                                                                </div>
                                                                             </div>
 
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">position</label>
-                                                                                <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
-                                                                                <select name="position" class="form-control">
-                                                                                    <option value="" selected disabled>select</option>
-                                                                                    <?php foreach ($select_postion as $keys => $select_postion) { ?>
-                                                                                        <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Upload to team</button>
 
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">wage</label>
-
-                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $bookmark['price_save'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Note</label>
-                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                 
-                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1"style="MARGIN: 15px;">Upload to team</button>
-                                                                   
-                                                                    <!-- <div class="modal-footer">
+                                                                            <!-- <div class="modal-footer">
                                                                         <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
                                                                             <div class="add-data-btn mr-1">
                                                                                 <button type="submit" class="btn btn-primary">submit</button>
                                                                             </div>
                                                                         </div>
                                                                     </div> -->
-                                                                </form>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
 
                                                         </td>
                                                     </tr>
-                                                 
-                                                   
+
+
                                                 <?php } ?>
                                             </tbody>
                                         </table>
@@ -646,6 +655,32 @@
     </div>
 </div>
 
+
+<script>
+   
+        
+
+                                      document.getElementById("upload_de").addEventListener("click", function() {
+                                                                    var x = document.getElementById("delivery").length;
+
+
+                                                                    if (x == '') {
+                                                                        swal("Warning!", "Can not be  Not Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    } else {
+                                                                        function doTestClick() {
+                                                                            frm_test.submit(); // submit form ด้วย Javascript
+                                                                        };
+                                                                    }
+
+                                                                    //  if (x != true || y != true ) {
+                                                                    //     swal("Warning!", "Can not be  Not Empty", "warning", {
+                                                                    //                 button: true,
+                                                                    //             });
+                                                                    //             } else {}
+                                                                });
+</script>
 <!-- <script type="text/javascript">
     function getDataFromDb() {
         $.ajax({
