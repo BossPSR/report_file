@@ -311,7 +311,7 @@
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_vdo") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_vdo" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-instagram"></i>Vdo List</a>
+                                                                            } ?>" href="back_vdo" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-instagram"></i>Video List</a>
                                 </li>
                             </ul>
                         </li>

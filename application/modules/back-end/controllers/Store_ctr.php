@@ -548,6 +548,31 @@ class Store_ctr extends CI_Controller
         }
     }
 
+    public function status_reject_del()
+    {
+        $id = $this->input->get('id');
+
+     
+        $reject_del =  $this->db->get_where('tbl_upload_store',['id'=>$id])->row_array();
+
+        unlink($reject_del['path']);
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->delete('tbl_upload_store', ['id' => $id]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
+        }
+        return redirect('back_store_checkForsell');
+    }
+
+
+
+
+
+
     public function status_reject()
     {
         $id = $this->input->get('id');

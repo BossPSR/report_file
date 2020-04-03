@@ -44,32 +44,32 @@
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <fieldset class="form-group">
                                                 <label for="basicInput">Email</label>
-                                                <input type="text" name="email"  class="form-control" placeholder="Enter email">
+                                                <input type="text" name="email"  class="form-control" placeholder="Enter email" required>
                                             </fieldset>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <fieldset class="form-group">
                                                 <label for="helpInputTop">Username</label>
-                                                <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                                                <input type="text" class="form-control" name="username" placeholder="Enter Username"required>
                                             </fieldset>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <fieldset class="form-group">
                                                 <label for="disabledInput">Tel.</label>
-                                                <input type="text" class="form-control" name="phone" placeholder="Enter Tel.">
+                                                <input type="text" class="form-control" name="phone" placeholder="Enter Tel."required>
                                             </fieldset>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12">
                                             <fieldset class="form-group">
                                                 <label for="helperText">Password</label>
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password"required>
 
                                             </fieldset>
                                         </div>
                                         <div class="col-xl-4 col-md-6 col-12">
                                             <fieldset class="form-group">
                                                 <label for="disabledInput">Confirm Password</label>
-                                                <input type="password" class="form-control" id="c_password" name="c_password" placeholder="Enter Confirm Password">
+                                                <input type="password" class="form-control" id="c_password" name="c_password" placeholder="Enter Confirm Password"required>
                                             </fieldset>
                                             <span id="message"></span>
                                         </div>
@@ -77,7 +77,7 @@
                                         <div class="col-xl-4 col-md-6 col-12">
                                             <fieldset class="form-group">
                                                 <label for="disabledInput">Status Admin</label>
-                                                <select class="form-control" name="is_admin">
+                                                <select class="form-control" name="is_admin" required>
                                                     <option value="" selected disabled>Status Admin</option>
                                                     <option value="1">Admin</option>selected
                                                     <option value="2">super Admin</option>

@@ -86,4 +86,6 @@ class Vdo_ctr extends CI_Controller
         }
         return redirect('back_vdo');
     }
+
+    
 }

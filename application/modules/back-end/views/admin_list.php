@@ -113,7 +113,7 @@
                                                         <?php endif; ?>
                                                             <td>
                                                             <a href="back_admin_edit?id=<?php echo $admin['id']; ?>"><i class="feather icon-edit" style="font-size: 25px;"></i></a>
-                                                            <a href="back_admin_delete_admin?id=<?php echo $admin['id']; ?>"><i class="feather icon-trash" style="font-size: 25px;"></i></a>
+                                                            <a onclick="confirmalertunlock_del_admin('<?php echo $admin['id']; ?>')"><i class="feather icon-trash" style="font-size: 25px;"></i></a>
 
                                                             </td>
                                                     </tr>

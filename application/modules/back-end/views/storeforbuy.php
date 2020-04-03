@@ -103,16 +103,16 @@
                                                                                             <td><?php echo $e++; ?></td>
                                                                                             <td><?php echo $order['order_id'] ?></td>
                                                                                             <td><?php echo $order['file_name'] ?></td>
-                                                                                            <?php 
-                                                                                            $PDF =  explode(".",$order['path']);
+                                                                                            <?php
+                                                                                            $PDF =  explode(".", $order['path']);
                                                                                             ?>
-                                                                                            <td> 
-                                                                                            <?php if($PDF[1]=='pdf'):?>
-                                                                                            <a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-                                                                                            <?php else :?>
-                                                                                                
-                                                                                                <a href="https://view.officeapps.live.com/op/view.aspx?src=<?php echo base_url($order['path'])  ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-                                                                                            <?php endif;?>
+                                                                                            <td>
+                                                                                                <?php if ($PDF[1] == 'pdf') : ?>
+                                                                                                    <a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                <?php else : ?>
+
+                                                                                                    <a href="https://view.officeapps.live.com/op/view.aspx?src=<?php echo base_url($order['path'])  ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                <?php endif; ?>
                                                                                             </td>
                                                                                             <td><?php echo $order['create_at'] ?></td>
                                                                                         </tr>
@@ -237,11 +237,11 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <div class="row" id="first_goal">
+                                                                        <div class="row" id="first_goal<?php echo $stored['id'];?>">
                                                                             <div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;">
                                                                                 <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
                                                                                 <label for="basicInput">Document ID</label>
-                                                                                <select name="Document[]" id="test" onClick="add_select(this);" class="form-control" id="Document" required>
+                                                                                <select name="Document[]" id="test" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control" id="Document" required>
                                                                                     <option value="" selected disabled>select</option>
                                                                                     <?php foreach ($chek_book as $key => $chek_book) { ?>
                                                                                         <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>
@@ -249,8 +249,8 @@
                                                                                 </select>
                                                                                 <input type="hidden" id="DocumentResult" name="DocumentResult[]">
                                                                             </div>
-                                                                            <div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;">
-                                                                                <button type="button" class="btn btn-info" onclick="add_goal(this);">เพิ่ม</button>
+                                                                            <div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal<?php echo $stored['id'];?>" style=" margin-top: 19px;">
+                                                                                <button type="button" class="btn btn-info" onclick="add_goal<?php echo $stored['id'];?>(this);">เพิ่ม</button>
                                                                             </div>
                                                                         </div>
 
@@ -410,6 +410,35 @@
                                                         </form>
                                                     </div>
 
+                                                    <script>
+                                                        function add_goal<?php echo $stored['id'];?>(e) {
+                                                            $('#first_goal<?php echo $stored['id'];?>').after('<div class="row" id="first_indic<?php echo $stored['id'];?>"><div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;" id="first_goal<?php echo $stored['id'];?>"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select id="test" name="Document[]" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal<?php echo $stored['id'];?>" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic<?php echo $stored['id'];?>(this);">ลบ</button></div></div>');
+                                                        }
+
+                                                        function remove_indic<?php echo $stored['id'];?>(e) {
+                                                            $(e).parents('#first_indic<?php echo $stored['id'];?>').remove();
+                                                        }
+
+                                                        var data_select<?php echo $stored['id'];?> = [];
+
+                                                        function add_select<?php echo $stored['id'];?>(e) {
+                                                            var select = $(e).val();
+                                                            if (select != null) {
+                                                                data_select<?php echo $stored['id'];?>.push(select);
+                                                                $('#DocumentResult').val(data_select<?php echo $stored['id'];?>);
+                                                            }
+                                                        }
+
+
+                                                        //   $("select[name='Document[]']").change(function () {
+                                                        //         var selectedOptions = [];
+                                                        //         $("select[name='Document[]'] option:selected").each(function(){
+                                                        //             selectedOptions.push($(this).text());
+                                                        //         });
+                                                        //         $("#textareaObservation").html(selectedOptions.join(' '));
+                                                        //   });
+                                                    </script>
+
                                                 <?php  } ?>
 
                                             </tbody>
@@ -430,39 +459,12 @@
     </div>
 </div>
 
-<script>
-    function add_goal(e) {
-        $('#first_goal').after('<div class="row" id="first_indic"><div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;" id="first_goal"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select id="test" name="Document[]" onClick="add_select(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic(this);">ลบ</button></div></div>');
-    }
 
-    function remove_indic(e) {
-        $(e).parents('#first_indic').remove();
-    }
-
-    var data_select = [];
-
-    function add_select(e) {
-        var select = $(e).val();
-        if (select != null) {
-            data_select.push(select);
-            $('#DocumentResult').val(data_select);
-        }
-    }
-
-
-    //   $("select[name='Document[]']").change(function () {
-    //         var selectedOptions = [];
-    //         $("select[name='Document[]'] option:selected").each(function(){
-    //             selectedOptions.push($(this).text());
-    //         });
-    //         $("#textareaObservation").html(selectedOptions.join(' '));
-    //   });
-</script>
 
 <script>
     var x = document.getElementById("Customer").value;
     var y = document.getElementById("Order").value;
-    
+
     var a = document.getElementById("Daterequired").value;
     var b = document.getElementById("status_cp").value;
     var c = document.getElementById("note_s").value;
@@ -478,18 +480,18 @@
 
         if (z == "") {
             swal({
-                    icon: "warning",
-                    title: "Are you sure?",
-                    text: "กรุณาใส่ Price ด้วยนะ",
-                    closeOnEsc: true,
-                    closeOnClickOutside: false,
-                    buttons: {
-                        cancel: true,
-                        confirm: true,
-                    },
+                icon: "warning",
+                title: "Are you sure?",
+                text: "กรุณาใส่ Price ด้วยนะ",
+                closeOnEsc: true,
+                closeOnClickOutside: false,
+                buttons: {
+                    cancel: true,
+                    confirm: true,
+                },
 
             })
-        }else{
+        } else {
             $.ajax({
                 type: 'POST',
                 url: 'check_dm',
@@ -539,14 +541,13 @@
                                         setTimeout("location.reload(true);", 1000);
                                     }
                                 });
-                                
+
                             } else {
                                 swal("Cancelled", "Your imaginary file is safe :)", "error");
                             }
                         });
 
-                    }
-                    else {
+                    } else {
                         swal({
                             icon: "warning",
                             title: "Are you sure?",
@@ -586,15 +587,14 @@
                                         setTimeout("location.reload(true);", 1000);
                                     }
                                 });
-                                
-                            } 
-                            else {
+
+                            } else {
                                 swal("Cancelled", "Your imaginary file is safe :)", "error");
                             }
                         });
 
                     }
-                
+
 
                 }
 
@@ -602,7 +602,7 @@
         }
 
 
-       
+
 
     }); // .then(function(isConfirm) {
     //     if (isConfirm) {
