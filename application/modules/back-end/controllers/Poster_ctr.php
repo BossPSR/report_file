@@ -155,7 +155,11 @@ class Poster_ctr extends CI_Controller {
     public function  delete_poster()
     {
         $id = $this->input->get('id');
-       
+        
+        $upload =  'uploads/poster/';
+        $upload_del =  $this->db->get_where('tbl_poster',['id'=>$id])->row_array();
+
+        unlink($upload.$upload_del['file_name']);
 
         $this->db->where('id', $id);
         $resultsedit = $this->db->delete('tbl_poster', ['id' => $id]);

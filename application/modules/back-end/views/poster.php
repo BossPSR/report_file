@@ -52,11 +52,12 @@
                                                 <?php foreach ($poster as $key => $poster) { ?>
                                                     <tr>
                                                         <td><?php echo $i++ ?></td>
-                                                        <td><img src="uploads/poster/<?php echo $poster['file_name']; ?>" style="width: 30%"  alt=""></td>
+                                                        <td><img src="uploads/poster/<?php echo $poster['file_name']; ?>" style="width: 30%" alt=""></td>
                                                         <td><?php echo $poster['name_file']; ?></td>
-                                                        <td>     
+                                                        <td>
                                                             <a href="poster_Edit?id=<?php echo $poster['id']; ?>"><i class="feather icon-edit" style="font-size: 25px;"></i></a>
-                                                            <a href="delete_poster?id=<?php echo $poster['id']; ?>"><i class="feather icon-trash" style="font-size: 25px;"></i></a>
+
+                                                            <a onclick="confirmalertunlock_del_vdo('<?php echo $poster['id']; ?>')"><i class="feather icon-trash" style="font-size: 25px;"></i></a>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>

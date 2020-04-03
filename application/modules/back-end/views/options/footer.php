@@ -124,6 +124,74 @@
     }
 </script>
 
+<script>
+    function confirmalertunlock_del_vdo(data6) {
+
+        swal({
+            title: "Are you sure delete?",
+            text: "Are you sure you delete Video ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_poster?id=' + data6  ;
+            }
+        })
+    }
+</script>
+
+<script>
+    function confirmalertunlock_del_poster(data7) {
+
+        swal({
+            title: "Are you sure poster?",
+            text: "Are you sure you delete poster ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_poster?id=' + data7  ;
+            }
+        })
+    }
+</script>
+
+<script>
+    function confirmalertunlock_del_admin(data8) {
+
+        swal({
+            title: "Are you sure Admin?",
+            text: "Are you sure you delete Admin ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'back_admin_delete_admin?id=' + data8  ;
+            }
+        })
+    }
+</script>
+
+<script>
+    function confirmalertunlock_del_reject_for_sell(data9) {
+
+        swal({
+            title: "Are you sure reject_for_sell",
+            text: "Are you sure you delete reject_for_sell",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'status_reject_del?id=' + data9  ;
+            }
+        })
+    }
+</script>
+
 
  <!-- uploadslider -->
 

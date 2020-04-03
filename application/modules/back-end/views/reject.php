@@ -61,7 +61,7 @@
                                                        
                                                         <td><?php echo $store['create_at']; ?></td>
                                                         <td>
-                                                            <button    class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
+                                                            <button onclick="confirmalertunlock_del_admin('<?php echo $store['id']; ?>')"   class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
                                                              Reject
                                                             </button>
                                                         </td>

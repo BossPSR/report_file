@@ -66,12 +66,12 @@
                                                                     <div class="modal-body">
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                                <label for="helpInputTop">Vdo</label>
+                                                                                <label for="helpInputTop">Video</label>
                                                                                 <div>  
                                                                                 <input type="hidden"  name="id"   value="<?php echo $vdo['id'] ?>">
                                                                                 <input type="hidden"  name="link"   value="https://www.youtube.com/embed/">
                                                                                 <input type="text" class="form-control" name="link" value="https://www.youtube.com/embed/" placeholder="Enter Vdo" style="width: 60%;display: inline-block;" disabled>
-                                                                                <input type="text" class="form-control" name="vdo" value="<?php echo $vdo['vdo'] ?>" placeholder="Enter Vdo" style="width: 35%;display: inline-block;">
+                                                                                <input type="text" class="form-control" name="vdo" value="<?php echo $vdo['vdo'] ?>" placeholder="Enter Vdo" style="width: 35%;display: inline-block;" required>
                                                                                </div>
                                                                             </div>
                                                                         </div>
@@ -89,8 +89,10 @@
                                                         </div>
                                                     </div>
 
-
-                                                            <a href="delete_vdo?id=<?php echo $vdo['id']; ?>" class="btn btn-danger"><i class="feather icon-trash" style="font-size: 25px;"></i>delete Video</a>
+                                                    <button onclick="confirmalertunlock_del_vdo('<?php echo $vdo['id']; ?>')" class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false"><i class="feather icon-trash" style="font-size: 25px;"></i>
+                                                    delete Video
+                                                    </button>       
+                                                    
                                                             
                                                         </td>
 
@@ -112,7 +114,7 @@
                                                                                 <div>
                                                                                 <input type="text" class="form-control" value="https://www.youtube.com/embed/"  style="width: 60%;display: inline-block;" disabled>
                                                                                     <input type="hidden"  name="link"   value="https://www.youtube.com/embed/">
-                                                                                <input type="text" class="form-control" name="vdo"  placeholder="Enter Vdo" style="width: 35%;display: inline-block;">
+                                                                                <input type="text" class="form-control" name="vdo"  placeholder="Enter Vdo" style="width: 35%;display: inline-block;" required>
                                                                                </div>
                                                                             </div>
                                                                         </div>
