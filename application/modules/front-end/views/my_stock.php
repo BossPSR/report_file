@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Stock</h2>
+<h2 class="text-center" style="margin-top: 15px;">Order List</h2>
 <hr class="line_package">
 <?php if (!empty($stock)) { ?>
     <br>
@@ -70,16 +70,16 @@
                                                                         <th scope="col">No.</th>
                                                                         <th scope="col">File</th>
                                                                         <th scope="col">ID Order</th>
-                                                                        <th scope="col">Date Requred</th>
+                                                                        <th scope="col">Info</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php foreach ($stockmain as $stockmain) { ?>
                                                                         <tr style="text-align:center;">
                                                                             <td><?php echo $t++; ?></td>
-                                                                            <td style="text-align:left;"><a href="show-pdf?dcnumber=<?= base64_encode($stockmain['path']); ?>"><?php echo $stockmain['file_name']; ?></a></td>
+                                                                            <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
                                                                             <td><?php echo $stockmain['order_id']; ?></td>
-                                                                            <td><?php echo $stock['or_date']; ?></td>
+                                                                            <td><a href="show-pdf?dcnumber=<?= base64_encode($stockmain['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -118,7 +118,7 @@
                                                                         <th scope="col">No.</th>
                                                                         <th scope="col">File</th>
                                                                         <th scope="col">ID Order</th>
-                                                                        <th scope="col">Date Requred</th>
+                                                                        <th scope="col">Info</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -127,7 +127,7 @@
                                                                             <td><?php echo $z++; ?></td>
                                                                             <td style="text-align:left;"><?php echo $stockGT['file_name_GT']; ?></td>
                                                                             <td><?php echo $stockGT['order_id']; ?></td>
-                                                                            <td><?php echo $stock['or_date']; ?></td>
+                                                                            <td><a href="show-pdf?dcnumber=<?= base64_encode($stockGT['path_GT']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -145,6 +145,7 @@
                                     </td>
                                     <td>
                                         <a href="#" data-toggle="modal" data-target="#DMFILE<?php echo $h++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                        <?php $zss = 1; ?>
                                         <?php $DM = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?>
 
                                         <!-- Modal -->
@@ -165,15 +166,19 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
+                                                                        <th scope="col">No.</th>
+                                                                        <th scope="col">File</th>
                                                                         <th scope="col">ID Order</th>
-                                                                        <th scope="col">DM Document</th>
+                                                                        <th scope="col">Info</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php foreach ($DM as $DM) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?= $stock['or_date'];; ?></td>
+                                                                            <td><?= $zss++; ?></td>
                                                                             <td><?= $DM['file_name']; ?></td>
+                                                                            <td><?= $stock['or_1'];; ?></td>
+                                                                            <td><a href="show-pdf?dcnumber=<?= base64_encode($DM['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -330,7 +335,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Stock</h1>
+                        <h1>No Order</h1>
                         <h2>Data Not Found</h2>
                     </div>
                 </div>

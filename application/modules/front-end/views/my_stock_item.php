@@ -1,6 +1,6 @@
 <?php $Team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Stock</h2>
+<h2 class="text-center" style="margin-top: 15px;">Order List</h2>
 <hr class="line_package">
 <br>
 <h2 class="text-center" style="margin-bottom:15px;"><a class="btn btn-success" data-toggle="modal" data-target="#exampleModalPosition"><i class="fa fa-plus-circle"></i> ADD POSITION</a></h2>
