@@ -124,8 +124,22 @@ class Complete_ctr extends CI_Controller
 
         $id = $this->input->post('id');
 
+        $feedback = $this->db->get_where('tbl_feedback',['order_id'=> $order_id])->row_array();
+
+        if ($feedback==true){
         $this->db->where('order_id', $id);
         $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+
+        $this->db->where('order_id', $id);
+        $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
+
+
+        }else{
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+        }
+
+
         $subject = 'test ip-soft';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';

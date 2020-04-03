@@ -113,6 +113,8 @@ class Store_model extends CI_Model
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 0);
         $this->db->where('tbl_upload_order.is_check', 0);
+        $this->db->where('tbl_upload_order.status_book ', 2);
+        $this->db->or_where('tbl_upload_order.status_book ', 1);
         $this->db->group_by('tbl_bookmark.id_orderBuy');
         $this->db->order_by('tbl_bookmark.id', 'ASC');
 

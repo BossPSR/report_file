@@ -35,8 +35,8 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <label for="" style="font-size: 16px;"> Main File </label>
                                             <form action="fileUpload_buy_admin" class="dropzone dropzone-area" id="maindropzone">
-                                            <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
-                                            <input type="text" id="position2" class="form-control position2" name="position" hidden>
+                                                <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
+                                                <input type="text" id="position2" class="form-control position2" name="position" hidden>
 
                                                 <div class="dz-message" style="top: 24%;">Upload File Main</div>
                                             </form>
@@ -62,18 +62,20 @@
                                                     <option value="<?php echo $item->id; ?>"> <?php echo $item->name_item; ?> </option>
                                                 <?php endforeach; ?>
                                             </select>
+                                            <p class="message"></p>
 
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Wage </label>
                                             <input type="number" id="wage1" name="wage" class="form-control" value="0" required>
+                                            <p class="message"></p>
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Date required </label>
                                             <input type="date" id="date1" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" required>
-
+                                            <p class="message"></p>
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;"></div>
@@ -81,6 +83,7 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Note </label>
                                             <textarea name="note" id="note1" class="form-control" rows="10"></textarea>
+                                           
                                         </div>
 
                                         <div class="col-xl-12 col-md-12 col-12" style="margin-top: 25px;">
@@ -138,7 +141,6 @@
         .keyup();
 </script>
 <script>
-    var x = document.getElementById("date2").value;
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone("#maindropzone", {
         autoProcessQueue: false,
@@ -155,27 +157,57 @@
     });
 
     document.getElementById("uploadsfile").addEventListener("click", function() {
-        // myDropzone.processQueue();
-      
-        
-        $.ajax({
-             type: 'POST',
-             url: 'order_auto',
-             data: {
-                 status: 1
-             },
-             success: function(data) {
-                 myDropzone.processQueue();
-                 myDropzone2.processQueue();
-                 myDropzone.on("success", function(file, res) {
-                     swal("Good job!", "Upload for data successfull", "success", {
-                         button: false,
-                     });
-                    setTimeout(function(){location.href="my_stock_admin"} , 1000);
-                 });
-             },
+        var x = document.getElementById("date1").value;
+        var y = document.getElementById("position1").value;
+        var z = document.getElementById("wage1").value;
 
-         });
+        // myDropzone.processQueue();
+
+        if (myDropzone.files == 0 ) {
+            swal("Warning!", "Can not be document Empty", "warning", {
+                button: true,
+            });
+        } else {
+            if (x == '') {
+                $('.message').html('Not Empty ').css('color', 'red');
+            } else {}
+            if (y == '') {
+                $('.message').html('Not Empty ').css('color', 'red');
+            } else {}
+            if (z == '') {
+                $('.message').html('Not Empty ').css('color', 'red');
+            } else {}
+            if(x != '' && y != '' && z != ''){
+                $.ajax({
+                type: 'POST',
+                url: 'order_auto',
+                data: {
+                    status: 1
+                },
+                success: function(data) {
+                    myDropzone.processQueue();
+                    myDropzone2.processQueue();
+                    myDropzone.on("queuecomplete", function(file, res) {
+                        swal("Good job!", "Upload for data successfull", "success", {
+                            button: false,
+                        });
+                        setTimeout(function() {
+                            location.href = "my_stock_admin"
+                        }, 1000);
+                    });
+                },
+
+            });
+            }
+            else{
+                swal("Warning!", "Can not be  Not Empty", "warning", {
+                button: true,
+            });
+            }
+          
+        }
+
+
         // console.log("------ START ------");
         // console.log("SUCCESS");
         // console.log("------ END ------");

@@ -58,7 +58,7 @@
                                                             <td><?php echo $store_name['username']; ?></td>
                                                         <?php  } ?>
                                                         <td><?php echo $store['file_name']; ?></td>
-                                                        <td> <span data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span></td>
+                                                        <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                         <?php if ($store['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
@@ -71,39 +71,7 @@
                                                     </tr>
 
                                                     </tfoot>
-                                                    <div class="modal fade" id="exampleModal<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">StoreFile</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="back_store_add_com" method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-
-                                                                        <iframe src="<?php echo $store['path']; ?>" width="100%" height="400px"></iframe>
-                                                                        <input type="hidden" class="form-control" name="id" value="<?php echo $store['id']; ?>">
-                                                                        <div class="data-items pb-3">
-                                                                            <div class="data-fields px-2 mt-3">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 data-field-col">
-                                                                                        <div class="form-group">
-                                                                                            
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                       
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-
-                                                        </div>
+                                                 
                                                         <?php endif;?>
                                                     <?php  } ?>
                                                       

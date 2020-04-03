@@ -53,7 +53,6 @@
                                                     <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
-                                                    <th style="width:18%">File Name</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>Date Required</th>
@@ -75,7 +74,6 @@
                                                         <td><?php echo $y++; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
-                                                        <td><?php echo $stored['file_name']; ?></td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $stored['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stored['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

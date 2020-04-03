@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Vdo List</h2>
+                        <h2 class="content-header-title float-left mb-0">Video List</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Vdo List
+                                <li class="breadcrumb-item active">Video List
                                 </li>
                             </ol>
                         </div>
@@ -29,8 +29,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Vdo</h4>
-                                <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-primary">+ Add Vdo</button>
+                                <h4 class="card-title">Video</h4>
+                                <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-primary">+ Add Video</button>
 
                             </div>
                             <div class="card-content">
@@ -39,7 +39,7 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>Vdo</th>
+                                                    <th>Video</th>
                                                     <th>tool</th>
 
                                                 </tr>
@@ -52,12 +52,12 @@
 
                                                         <td>
 
-                                                        <button data-toggle="modal" data-target="#exampleModala<?php echo $vdo['id']; ?>" type="button" class="btn btn-warning"><i class="feather icon-edit" style="font-size: 25px;"></i> edit Vdo</button>
+                                                        <button data-toggle="modal" data-target="#exampleModala<?php echo $vdo['id']; ?>" type="button" class="btn btn-warning"><i class="feather icon-edit" style="font-size: 25px;"></i> edit Video</button>
                                                             <div class="modal fade" id="exampleModala<?php echo $vdo['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">link Vdo</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">link Video</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -90,7 +90,7 @@
                                                     </div>
 
 
-                                                            <a href="delete_vdo?id=<?php echo $vdo['id']; ?>" class="btn btn-danger"><i class="feather icon-trash" style="font-size: 25px;"></i>delete Vdo</a>
+                                                            <a href="delete_vdo?id=<?php echo $vdo['id']; ?>" class="btn btn-danger"><i class="feather icon-trash" style="font-size: 25px;"></i>delete Video</a>
                                                             
                                                         </td>
 
@@ -99,7 +99,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">link Vdo</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">link Video</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -108,7 +108,7 @@
                                                                     <div class="modal-body">
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                                <label for="helpInputTop">Vdo</label>
+                                                                                <label for="helpInputTop">Video</label>
                                                                                 <div>
                                                                                 <input type="text" class="form-control" value="https://www.youtube.com/embed/"  style="width: 60%;display: inline-block;" disabled>
                                                                                     <input type="hidden"  name="link"   value="https://www.youtube.com/embed/">

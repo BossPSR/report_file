@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Admin</h2>
+                        <h2 class="content-header-title float-left mb-0">Poster</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="back_admin">Admin</a>
+                                <li class="breadcrumb-item"><a href="back_admin">Poster</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Add Admin</a>
+                                <li class="breadcrumb-item"><a href="#">Add Poster</a>
                                 </li>
                             </ol>
                         </div>
@@ -35,7 +35,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add Admin</h4>
+                                <h4 class="card-title">Add Poster</h4>
                             </div>
                             <form action="Poster_add_com" method="POST" enctype="multipart/form-data" >
                             <div class="card-content">

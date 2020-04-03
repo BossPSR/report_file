@@ -46,11 +46,7 @@ foreach ($store as $upload_main_searchDetail) {
         </div>
         <div class="content-body">
 
-            <?php
-            $this->db->where('status_chack', 0);
-            $this->db->from('tbl_upload_store');
-            $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-            ?>
+           
 
             <!-- Zero configuration table -->
             <section id="basic-datatable">
@@ -62,8 +58,16 @@ foreach ($store as $upload_main_searchDetail) {
                                     <h4 class="card-title">Check For sell</h4>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
-                                    <h3 class="check_list_not"> จำนวนที่ต้องเช็ค </h3>
+                                <?php if ($store == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($store as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
+                                    <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                               
                             </div>
