@@ -269,7 +269,7 @@
                         $notifyTeam = 0;
                         $teamList = $this->db->get_where('tbl_team', ['notify_admin' => 0])->result_array();
                         foreach ($teamList as $team_list) {
-                            if ($team_list['notify_admin'] == 0) {
+                            if ($team_list['notify_admin'] == 0 && $team_list['status'] == 0) {
                                 $notifyTeam += 1;
                             }
                         }
@@ -290,7 +290,7 @@
                                     <ul class="dropdown-menu ">
                                         <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "back_team") {
                                                                                         echo 'active';
-                                                                                    } ?>" href="back_team" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Team List</a>
+                                                                                    } ?>" href="back_team" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Team List <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notifyTeam == 0) {echo "display:none";} ?>"><?php echo $notifyTeam; ?></span></a>
                                         </li>
 
                                         <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "T3_online") {
@@ -319,10 +319,14 @@
                         $notifyMystore = 0;
 
                         $notify_checkFor_sell = 0;
+                        $notify_storeFor_sell = 0;
                         $uploadStore = $this->db->group_by('store_id')->get_where('tbl_upload_store', ['notify_admin' => 0])->result_array();
                         foreach ($uploadStore as $upload_store) {
-                            if ($upload_store['notify_admin'] == 0) {
+                            if ($upload_store['notify_admin'] == 0 && $upload_store['status_chack'] == 0) {
                                 $notify_checkFor_sell += 1;
+                            }
+                            if ($upload_store['notify_admin'] == 0 && $upload_store['status_chack'] == 1) {
+                                $notify_storeFor_sell += 1;
                             }
                         }
 
@@ -335,6 +339,7 @@
                         }
 
                         $notifyMystore += $notify_checkFor_sell;
+                        $notifyMystore += $notify_storeFor_sell;
                         $notifyMystore += $notify_myStore;
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_store_buy" ||  $this->uri->segment(1) ==  "back_store_reject_for_buy" ||  $this->uri->segment(1) ==  "Section" ||  $this->uri->segment(1) ==  "back_store" ||  $this->uri->segment(1) ==  "back_store_checkForsell" ||  $this->uri->segment(1) ==  "back_store_reject" ||  $this->uri->segment(1) ==  "back_upload_main_search") {
@@ -345,13 +350,13 @@
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_store_checkForsell") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_store_checkForsell" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Chack for sell <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_checkFor_sell == 0) {
+                                                                            } ?>" href="back_store_checkForsell" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-square"></i>Check for sell <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_checkFor_sell == 0) {
                                                                                                                                                                                                                                                                                                     echo "display:none";
                                                                                                                                                                                                                                                                                                 } ?>"><?php echo $notify_checkFor_sell; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Section") {
                                                                                 echo 'active';
-                                                                            } ?>" href="Section" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-layers"></i>Store for sell</a>
+                                                                            } ?>" href="Section" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-layers"></i>Store for sell <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_storeFor_sell == 0) {echo "display:none";} ?>"><?php echo $notify_storeFor_sell; ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_upload_main_search") {
                                                                                 echo 'active';

@@ -156,10 +156,7 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($bookmark as $keyBook => $bookmark) { ?>
-                                                    <?php if ($bookmark['status_delivery'] == '1') : ?>
-
-                                                    <?php else:?>
-
+                                                   
                                                     
 
                                                     <tr>
@@ -439,7 +436,12 @@
                                                             <?php if ($bookmark['status_book'] == '2') : ?>
 
                                                              <?php else : ?>
+                                                              <?php if($bookmark['status_bookmark_upload_to_team']== '1'):?>
+
+                                                            <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To team</button>
+                                                              <?php else:?>
                                                             <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['id']; ?>"> Upload To team</button>
+                                                            <?php endif; ?>
                                                             <?php endif; ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
@@ -624,8 +626,7 @@
 
                                                         </td>
                                                     </tr>
-                                                    <?php endif;?>
-                                                    
+                                                 
                                                    
                                                 <?php } ?>
                                             </tbody>

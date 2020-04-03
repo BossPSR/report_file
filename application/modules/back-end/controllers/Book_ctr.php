@@ -259,6 +259,9 @@ class Book_ctr extends CI_Controller
         $this->db->update('tbl_upload_main_search',['update_at' => date('Y-m-d H:i:s')]);
 
 
+       
+
+
 
         
 
@@ -348,7 +351,18 @@ class Book_ctr extends CI_Controller
 
         );
       
-        $resultsedit = $this->db->insert('tbl_upload_team', $data);
+        if ($this->db->insert('tbl_upload_team', $data))
+        
+
+
+        $data2 = array(
+
+            'status_bookmark_upload_to_team'      => 1,
+            'update_at'                        => date('Y-m-d H:i:s')
+
+        );
+                       $this->db->where('order_id',$this->input->post('order_id'));
+        $resultsedit = $this->db->update('tbl_upload_order', $data2);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');

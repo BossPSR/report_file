@@ -72,9 +72,9 @@ class Poster_ctr extends CI_Controller {
                 $gamber     = $this->upload->data();
                 $data = array(
 
-                    'name_file'     => $this->input->post('name_file'),
-                    'file_name'     => $gamber['file_name'],
-                    'create_at'     => date('Y-m-d H:i:s'),
+                    'name_file'     => $this->input->post('name_file') ,
+                    'file_name'     => $gamber['file_name'] ,
+                    'create_at'     => date('Y-m-d H:i:s') ,
                   
                 );
                 $resultsedit = $this->db->insert('tbl_poster', $data);
@@ -83,7 +83,7 @@ class Poster_ctr extends CI_Controller {
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Add poster information !!.');
         } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Add Admin information');
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Add poster information');
         }
         return redirect('back_poster');
     }

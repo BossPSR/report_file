@@ -35,11 +35,11 @@
                                     <h4 class="card-title">More File Team</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                <?php if ($more_file == '') : ?>
+                                <?php if ($more_file_team == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
                                         <?php $e = 0; ?>
-                                        <?php foreach ($more_file as $key => $datata) {
+                                        <?php foreach ($more_file_team as $key => $datata) {
                                             $e++;
                                         } ?>
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>
@@ -68,18 +68,18 @@
 
                                                 $i = 1;
 
-                                                foreach ($more_file as $key => $more_file) {
+                                                foreach ($more_file_team as $key => $more_file_team) {
 
                                                 ?>
 
                                                     <tr>
                                                         <td><?php echo $i++ ?></td>
-                                                        <td><?php echo $more_file['orderGT'] ?></td>
-                                                        <td><?php echo $more_file['userId']; ?></td>
+                                                        <td><?php echo $more_file_team['orderGT'] ?></td>
+                                                        <td><?php echo $more_file_team['userId']; ?></td>
                                                     
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $more_file['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $more_file['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $more_file_team['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $more_file_team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -91,7 +91,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $more_file['orderGT']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $more_file_team['orderGT']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -124,11 +124,19 @@
                                                         </td>
                                                         
 
-                                                        <td><?php echo $more_file['create_at']; ?></td>
+                                                        <td><?php echo $more_file_team['create_at']; ?></td>
                                                         <td>
-                                                        <button onclick="confirmalertunlock_upload_Feedback('<?php echo $more_file['orderGT']; ?>')" class="btn btn-info " type="button" aria-haspopup="true" aria-expanded="false">
+                                                            <?php if($more_file_team['teamId']==""):?>
+
+                                                        <button onclick="" class="btn btn-secondary " type="button" aria-haspopup="true" aria-expanded="false">
+                                                                        More File
+                                                        </button>     
+                                                        <?php else:?>
+                                                        <button onclick="confirmalertunlock_upload_morefile('<?php echo $more_file_team['orderGT']; ?>')" class="btn btn-info " type="button" aria-haspopup="true" aria-expanded="false">
                                                                         More File
                                                         </button>       
+                                                        <?php endif;?>
+                                                                        
                                                                                         
                                                         </td>
 
