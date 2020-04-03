@@ -439,28 +439,6 @@
                                                         //   });
                                                     </script>
 
-                                                <?php  } ?>
-
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!--/ Zero configuration table -->
-
-
-
-        </div>
-    </div>
-</div>
-
-
-
 <script>
     var x = document.getElementById("Customer").value;
     var y = document.getElementById("Order").value;
@@ -610,5 +588,29 @@
     //     }
     // })
 </script>
+
+                                                <?php  } ?>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Zero configuration table -->
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <!-- END: Content-->

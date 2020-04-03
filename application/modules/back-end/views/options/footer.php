@@ -135,7 +135,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'delete_poster?id=' + data6  ;
+                window.location = 'delete_vdo?id=' + data6  ;
             }
         })
     }
