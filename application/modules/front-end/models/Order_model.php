@@ -110,7 +110,10 @@ class Order_model extends CI_Model
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_upload_order', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
-        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'LEFT');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
+        $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');
         $this->db->where('tbl_upload_order.status_book', 2);
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 1);
