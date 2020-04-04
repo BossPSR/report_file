@@ -21,12 +21,7 @@
 
         </div>
 
-        <?php
-        $this->db->where('status_book', 0);
-        $this->db->from('tbl_upload_order');
-        $this->db->group_by('order_id');
-        $count_all = $this->db->count_all_results(); // Produces an integer, like 17
-        ?>
+      
 
         <div class="content-body">
 
@@ -40,7 +35,15 @@
                                     <h4 class="card-title">Store For buy</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <h3 class="card-title "><?php echo $count_all; ?></h3>
+                                <?php if ($stored == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($stored as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                             </div>
@@ -241,13 +244,13 @@
                                                                             <div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;">
                                                                                 <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
                                                                                 <label for="basicInput">Document ID</label>
-                                                                                <select name="Document[]<?php echo $stored['id'];?>" id="test" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control" id="Document" required>
-                                                                                    <option value="" selected disabled>select</option>
+                                                                                <select name="Document[]" id="test" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control" id="Document" required>
+                                                                                    <option value="" selected disabled id="selected_check">select</option>
                                                                                     <?php foreach ($chek_book as $key => $chek_book) { ?>
-                                                                                        <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>
+                                                                                        <option value="<?php echo $chek_book['id_doc'] ?>" class="numDocument<?php echo $stored['id']; ?>"><?php echo $chek_book['id_doc'] ?></option>
                                                                                     <?php } ?>
                                                                                 </select>
-                                                                                <input type="hidden" id="DocumentResult" name="DocumentResult[]">
+                                                                                <input type="hidden" id="DocumentResult<?php echo $stored['id'];?>" name="DocumentResult[]">
                                                                             </div>
                                                                             <div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal<?php echo $stored['id'];?>" style=" margin-top: 19px;">
                                                                                 <button type="button" class="btn btn-info" onclick="add_goal<?php echo $stored['id'];?>(this);">เพิ่ม</button>
@@ -413,6 +416,8 @@
                                                     </div>
 
                                                     <script>
+                                                        var ttt<?php echo $stored['id']; ?> = document.getElementsByClassName('numDocument<?php echo $stored['id']; ?>').length;
+                                                        
                                                         function add_goal<?php echo $stored['id'];?>(e) {
                                                             $('#first_goal<?php echo $stored['id'];?>').after('<div class="row" id="first_indic<?php echo $stored['id'];?>"><div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;" id="first_goal<?php echo $stored['id'];?>"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select id="test" name="Document<?php echo $stored['id'];?>[]" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal<?php echo $stored['id'];?>" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic<?php echo $stored['id'];?>(this);">ลบ</button></div></div>');
                                                         }
@@ -424,11 +429,14 @@
                                                         var data_select<?php echo $stored['id'];?> = [];
 
                                                         function add_select<?php echo $stored['id'];?>(e) {
+                                                            
                                                             var select = $(e).val();
+
                                                             if (select != null) {
                                                                 data_select<?php echo $stored['id'];?>.push(select);
-                                                                $('#DocumentResult').val(data_select<?php echo $stored['id'];?>);
+                                                                $('#DocumentResult<?php echo $stored['id'];?>').val(data_select<?php echo $stored['id'];?>);
                                                             }
+                                                            
                                                         }
 
 
@@ -453,12 +461,14 @@
 
 
                                                         //$('#Dm_c').click(function() {
-                                                            var v = document.getElementsByName("Document[]<?php echo $stored['id'];?>");
+                                                            var v = document.getElementById("DocumentResult<?php echo $stored['id']; ?>").value;
                                                             var t = [];
                                                             var z = document.getElementById("price_fileSatisfired<?php echo $stored['id'];?>").value;
-                                                            v.forEach((element, key) => {
-                                                                t.push(element.value);
-                                                            });
+                                                                t.push(v);
+                                                                
+                                                            
+                                                            
+                                                            
 
                                                             if (z == "") {
                                                                 swal({
@@ -483,6 +493,7 @@
                                                                     },
 
                                                                     success: function(check_dm) {
+                                                                        
                                                                         if (check_dm > 0) {
                                                                             swal({
                                                                                 icon: "warning",
@@ -494,6 +505,7 @@
                                                                                     cancel: true,
                                                                                     confirm: true,
                                                                                 },
+                                                                                
 
                                                                             }).then(function(isConfirm) {
                                                                                 if (isConfirm == true) {
@@ -528,7 +540,19 @@
                                                                                     });
 
                                                                                 } else {
-                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                    
+                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error").then(function(e){
+                                                                                        if (e === true) {
+                                                                                            document.getElementById("test").selectedIndex = "0";
+                                                                                            document.getElementById("DocumentResult<?php echo $stored['id'];?>").value = "";
+                                                                                            data_select<?php echo $stored['id'];?> = [];
+                                                                                        }
+                                                                                        
+                                                                                        console.log(e);
+                                                                                    });
+
+                                                                                    
+                                                                                    
                                                                                 }
                                                                             });
 
@@ -577,7 +601,18 @@
                                                                                     });
 
                                                                                 } else {
-                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error").then(function(e){
+                                                                                        if (e === true) {
+                                                                                            document.getElementById("test").selectedIndex = "0";
+                                                                                            document.getElementById("DocumentResult<?php echo $stored['id'];?>").value = "";
+                                                                                            data_select<?php echo $stored['id'];?> = [];
+
+                                                                                        }
+                                                                                        
+                                                                                        console.log(e);
+                                                                                    });
+                                                                                   
+                                                                                                     
                                                                                 }
                                                                             });
 
@@ -592,7 +627,7 @@
 
 
 
-                                                        //}); // .then(function(isConfirm) {
+                                                        // }); // .then(function(isConfirm) {
                                                         //     if (isConfirm) {
 
                                                         //     }

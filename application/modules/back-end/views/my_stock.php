@@ -52,10 +52,11 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>order_id</th>
-                                                    <th>Flie_name</th>
-                                                    <th>Main_file</th>
-                                                    <th>GT_File</th>
+                                                    <th>order id</th>
+                                                    <th>Flie Name</th>
+                                                    <th>Main File</th>
+                                                    <th>GT File</th>
+                                                    <th>DM File</th>
                                                     <th>Date_Required</th>
                                                     <th>position</th>
                                                     <th>Status</th>
@@ -109,8 +110,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div></td>
-                                                    <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <td><span data-toggle="modal" data-target="#exampleModalb<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModalb<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -152,6 +153,67 @@
                                                                     </div>
                                                                 </div>
                                                             </div></td>
+
+                                                            <td>
+                                                            <?php if ($stock['status_book'] == '1') : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $stock['store_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalc<?php echo $stock['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Document_File <?php echo $stock['store_id'] ?></h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['store_id']])->result_array(); ?>
+                                                                                        <tr>
+                                                                                            <th>Relive</th>
+                                                                                            <th>Store id</th>
+                                                                                            <th>File Name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                            <tr>
+
+                                                                                                <td>
+                                                                                                    <?php if ($orderss['relive_status'] == '0') : ?>
+                                                                                                        -
+                                                                                                    <?php else : ?>
+                                                                                                        <div class="badge badge-primary">Relive</div>
+                                                                                                    <?php endif ?>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderss['store_id'] ?></td>
+                                                                                                <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderss['create_at'] ?></td>
+
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+
+                                                                -
+
+                                                            <?php endif; ?>
+                                                        </td>
                                                     <td><?php echo $stock['date_required'] ?></td>
 
                                                     <td>

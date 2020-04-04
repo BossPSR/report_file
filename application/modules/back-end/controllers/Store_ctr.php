@@ -74,12 +74,13 @@ class Store_ctr extends CI_Controller
     public function check_dm()
     {
         $Document = $this->input->post('DocumentResult');
-        $Document = array_unique($Document);
+        $DocumentCut = explode(',',$Document[0]);
+        $document_arr = array_unique($DocumentCut);
 
-        // $check_dm = $this->db->get('tbl_bookmark')->result_array();
+
         $num = 0;
-        foreach ($Document as $Document) {
-            $check_dm = $this->db->get_where('tbl_bookmark',['id_document'=>$Document])->row_array();
+        foreach ($document_arr as $document_arr_detail) {
+            $check_dm = $this->db->get_where('tbl_bookmark',['id_document'=>$document_arr_detail])->row_array();
             if (!empty($check_dm)) {
                 $num += 1;
             }
@@ -263,19 +264,20 @@ class Store_ctr extends CI_Controller
         $config['smtp_crypto'] = 'tls';
         $config['newline'] = "\r\n";
 
+
         //$file_path = 'uploads/' . $file_name;
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->set_mailtype('html');
 
         if ($this->email->send() == true) {
-            echo '1';
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
         } else {
-            echo '2';
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
         }
     }
 
@@ -334,15 +336,15 @@ class Store_ctr extends CI_Controller
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to('boss3075030750@gmail.com');
+        $this->email->to($user['email']);
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->set_mailtype('html');
 
         if ($this->email->send() == true) {
-            echo '1';
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email Reject information !!.');
         } else {
-            echo '2';
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email information');
         }
     }
 
