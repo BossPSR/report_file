@@ -250,5 +250,9 @@ $route['realtime_data2']                          = 'back-end/Home_ctr/realtime_
 $route['realtime_data3']                          = 'back-end/Home_ctr/realtime_data3';
 $route['check_dm']                                 = 'back-end/Store_ctr/check_dm';
 $route['status_more_file_team']                       = 'back-end/More_file_ctr/status_more_file_team';
+$route['Position']                                = 'back-end/Position_ctr';
+$route['position_Add']                                = 'back-end/Position_ctr/position_Add';
+$route['position_edit']                                = 'back-end/Position_ctr/position_edit';
+$route['delete_Position']                                = 'back-end/Position_ctr/delete_position';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

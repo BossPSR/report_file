@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/themes/semi-dark-layout.css">
 
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/newstyle.css">
-
+    <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/forms/select/select2.min.css">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/core/menu/menu-types/horizontal-menu.css">
@@ -313,6 +313,12 @@
                                                                                 echo 'active';
                                                                             } ?>" href="back_vdo" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-instagram"></i>Video List</a>
                                 </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Position") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Position" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-layers"></i>Position List</a>
+                                </li>
+
+                                
                             </ul>
                         </li>
                         <?php

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 <!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -254,7 +255,7 @@
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Select Item</label>
                                                                                                             <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
-                                                                                                            <select name="select_item_id" class="form-control" id="data-category">
+                                                                                                            <select name="select_item_id" class="form-control selectpicker" id="select-testing" data-live-search="true" >
                                                                                                                 <?php foreach ($select_itemList as $key => $selectItem) { ?>
                                                                                                                     <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
                                                                                                                 <?php } ?>
@@ -279,6 +280,19 @@
                                                                                                             <label for="data-name">Topic</label>
                                                                                                             <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
 
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <?php
+                                                                                                          $this->db->order_by('id','DESC');
+                                                                                                    $Dm = $this->db->get('tbl_upload_main_search')->row_array();
+                                                                                                    
+                                                                                                  
+                                                                                                     ?>
+                                                                                                    <div class="form-group">
+                                                                                                        <div class="controls">
+                                                                                                            <label for="data-name">Id Document</label>
+                                                                                                            <input type="text" class="form-control" value="DM<?php echo $Dm['id']+1 ?>"  readonly>
                                                                                                         </div>
                                                                                                     </div>
 
@@ -330,3 +344,9 @@
     </div>
 </div>
 <!-- END: Content-->
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>

@@ -37,6 +37,10 @@
 <!-- END: Page JS-->
 <script src="public/backend/assets/js/scripts/sweetalert.min.js"></script>
 
+<script src="public/backend/assets/vendors/js/forms/select/select2.full.min.js"></script>
+
+
+<script src="public/backend/assets/js/scripts/forms/select/form-select2.js"></script>
 
 <script>
     <?php if ($suss = $this->session->flashdata('save_ss2')) : ?>
@@ -191,6 +195,24 @@
         })
     }
 </script>
+<script>
+    function confirmalertunlock_delete_position(data10) {
+
+        swal({
+            title: "Are you sure delete Position",
+            text: "Are you sure you delete delete Position",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_Position?id=' + data10  ;
+            }
+        })
+    }
+</script>
+
+
 
 
  <!-- uploadslider -->

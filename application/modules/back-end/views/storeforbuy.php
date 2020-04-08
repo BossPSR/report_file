@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -244,7 +245,7 @@
                                                                             <div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;">
                                                                                 <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
                                                                                 <label for="basicInput">Document ID</label>
-                                                                                <select name="Document[]" id="test" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control" id="Document" required>
+                                                                                <select name="Document[]" id="test" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control selectpicker"  data-live-search="true"  required>
                                                                                     <option value="" selected disabled id="selected_check">select</option>
                                                                                     <?php foreach ($chek_book as $key => $chek_book) { ?>
                                                                                         <option value="<?php echo $chek_book['id_doc'] ?>" class="numDocument<?php echo $stored['id']; ?>"><?php echo $chek_book['id_doc'] ?></option>
@@ -419,7 +420,7 @@
                                                         var ttt<?php echo $stored['id']; ?> = document.getElementsByClassName('numDocument<?php echo $stored['id']; ?>').length;
                                                         
                                                         function add_goal<?php echo $stored['id'];?>(e) {
-                                                            $('#first_goal<?php echo $stored['id'];?>').after('<div class="row" id="first_indic<?php echo $stored['id'];?>"><div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;" id="first_goal<?php echo $stored['id'];?>"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select id="test" name="Document<?php echo $stored['id'];?>[]" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control"><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal<?php echo $stored['id'];?>" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic<?php echo $stored['id'];?>(this);">ลบ</button></div></div>');
+                                                            $('#first_goal<?php echo $stored['id'];?>').after('<div class="row" id="first_indic<?php echo $stored['id'];?>"><div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;" id="first_goal<?php echo $stored['id'];?>"><?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?><label for="basicInput">Document ID</label><select id="test" name="Document<?php echo $stored['id'];?>[]" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control "><option value="" selected disabled>select</option><?php foreach ($chek_book as $key => $chek_book) { ?><option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option><?php } ?></select></div><div class="col-xl-3 col-md-6 col-3 mb-1" id="first_goal<?php echo $stored['id'];?>" style=" margin-top: 19px;"><button type="button"  class="btn btn-danger" onclick="remove_indic<?php echo $stored['id'];?>(this);">ลบ</button></div></div>');
                                                         }
 
                                                         function remove_indic<?php echo $stored['id'];?>(e) {
@@ -656,6 +657,12 @@
         </div>
     </div>
 </div>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
 
 
 
