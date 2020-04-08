@@ -191,6 +191,22 @@
         })
     }
 </script>
+<script>
+    function confirmalertunlock_delete_position(data10) {
+
+        swal({
+            title: "Are you sure delete Position",
+            text: "Are you sure you delete delete Position",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_Position?id=' + data10  ;
+            }
+        })
+    }
+</script>
 
 
  <!-- uploadslider -->

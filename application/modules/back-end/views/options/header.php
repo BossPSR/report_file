@@ -313,6 +313,12 @@
                                                                                 echo 'active';
                                                                             } ?>" href="back_vdo" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-instagram"></i>Video List</a>
                                 </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Position") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Position" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-layers"></i>Position List</a>
+                                </li>
+
+                                
                             </ul>
                         </li>
                         <?php
