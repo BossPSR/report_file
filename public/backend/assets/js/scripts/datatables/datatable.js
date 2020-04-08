@@ -15,6 +15,12 @@ $(document).ready(function() {
 
     $('.zero-configuration').DataTable();
 
+    $('.zero-configuration2').DataTable({
+        "order": [
+            [7, 'asc']
+        ]
+    });
+
     /********************************************
      *        js of Order by the grouping        *
      ********************************************/

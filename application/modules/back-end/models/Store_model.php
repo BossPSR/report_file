@@ -94,7 +94,7 @@ class Store_model extends CI_Model
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_delivery', 0);
         $this->db->group_by('tbl_bookmark.id_orderBuy');
-        $this->db->order_by('tbl_upload_order.date_required', 'DESC');
+        $this->db->order_by('tbl_upload_order.date_required', 'ASC');
 
         return  $this->db->get()->result_array();
 

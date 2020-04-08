@@ -9,12 +9,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Admin</h2>
+                        <h2 class="content-header-title float-left mb-0">Add Drop Document</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="Bookmark">Admin_bookmark</a>
+                                <li class="breadcrumb-item"><a href="Bookmark">Bookmark</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Add Admin_bookmark</a>
+                                <li class="breadcrumb-item"><a href="#">Add Drop Document</a>
                                 </li>
                             </ol>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                Add Admin Document
+                                Add Drop Document
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
