@@ -84,17 +84,7 @@
                                                     </fieldset>
                                                     <div class="form-group d-flex justify-content-between align-items-center">
                                                         <div class="text-left">
-                                                            <fieldset class="checkbox">
-                                                                <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                    <input type="checkbox">
-                                                                    <span class="vs-checkbox">
-                                                                        <span class="vs-checkbox--check">
-                                                                            <i class="vs-icon feather icon-check"></i>
-                                                                        </span>
-                                                                    </span>
-                                                                  
-                                                                </div>
-                                                            </fieldset>
+                                                           
                                                         </div>
                                                         <div class="text-right"><a href="auth-forgot-password.html" class="card-link">Forgot Password?</a></div>
                                                     </div>
