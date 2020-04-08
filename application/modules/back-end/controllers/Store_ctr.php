@@ -145,7 +145,7 @@ class Store_ctr extends CI_Controller
 
     private function sendEmail($upload_order)
     {
-        $user = $this->db->get_where('tbl_user', ['id' => $upload_order[0]['userId']])->row_array();
+        $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
         if ($user['score'] < '100') {
             $discount = 0;
