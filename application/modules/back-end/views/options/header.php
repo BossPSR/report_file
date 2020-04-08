@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/themes/semi-dark-layout.css">
 
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/newstyle.css">
-
+    <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/forms/select/select2.min.css">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/core/menu/menu-types/horizontal-menu.css">
