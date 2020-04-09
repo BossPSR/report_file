@@ -129,7 +129,7 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration" id="loading_img_spin">
+                                        <table class="table zero-configuration2" id="loading_img_spin">
                                             <thead>
                                                 <tr>
                                                     <th>order Id</th>
@@ -137,7 +137,7 @@
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
-                                                    <th>DM</th>
+                                                    <th>DM File</th>
                                                     <th>Team File</th>
                                                     <th>Date Required</th>
                                                     <th>Status</th>
@@ -404,9 +404,9 @@
 
                                                         <td id="test<?php echo $keyBook; ?>">
                                                             <?php if ($bookmark['status_pay'] == 0) : ?>
-                                                                <div class="badge badge-warning">ยังไม่ได้ชำระเงิน</div>
+                                                                <div class="badge badge-warning">NOT PAY</div>
                                                             <?php else : ?>
-                                                                <div class="badge badge-success">ชำระเงินเรียบร้อยแล้ว</div>
+                                                                <div class="badge badge-success">PAY</div>
                                                             <?php endif ?>
                                                         </td>
                                                         <td>
@@ -424,10 +424,10 @@
 
                                                             <?php $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'], 'status_check_drop' => '11'])->row_array(); ?>
                                                             <?php if ($show_dm_c2 == true) : ?>
-                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
+                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop</button></a>
                                                             <?php else : ?>
 
-                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
+                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop</button></a>
                                                             <?php endif; ?>
 
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
@@ -440,9 +440,9 @@
                                                             <?php else : ?>
                                                                 <?php if ($bookmark['status_bookmark_upload_to_team'] == '1') : ?>
 
-                                                                    <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To team</button>
+                                                                    <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To T3</button>
                                                                 <?php else : ?>
-                                                                    <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['order_save']; ?>"> Upload To team</button>
+                                                                    <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['order_save']; ?>"> Upload To T3</button>
                                                                 <?php endif; ?>
                                                             <?php endif; ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -594,7 +594,7 @@
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Upload To T3</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -643,7 +643,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Upload to team</button>
+                                                                            <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Upload To T3</button>
 
                                                                             <!-- <div class="modal-footer">
                                                                         <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
