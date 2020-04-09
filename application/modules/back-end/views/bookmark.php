@@ -463,21 +463,30 @@
                                                                                 <input type="hidden" name="id" value="<?php echo $bookmark['order_save']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
 
-                                                                                <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->row_array(); ?>
+                                                                                <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->result_array(); ?>
+                                                                                <?php foreach ($dm_c as $key => $dm_c) { ?>
+                                                                                    <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
+                                                                                    
+                                                                                    <?php 
+                                                                                          
+                                                                                           $this->db->where('store_id',$dm_c1['upload_store_id']);
+                                                                                       
+                                                                                    $orderss = $this->db->get('tbl_upload_store')->result_array();
+                                                                                   
+                                                                                     ?>
+                                                                                  
 
-                                                                                <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
 
-                                                                                <?php $dm1 = $this->db->get_where('tbl_upload_store', ['store_id' => $dm_c1['upload_store_id'],])->result_array(); ?>
-
-                                                                                <?php foreach ($dm1 as $key => $dm1) { ?>
-                                                                                    <?php if (!empty($dm1['id_document'])) : ?>
+                                                                                    <?php if (!empty($dm_c['id_document'])) : ?>
                                                                                         <p><b>
-                                                                                                <h3><?php echo $dm1['id_document']; ?></h3>
+                                                                                                <h3><?php echo $dm_c['id_document']; ?></h3>
                                                                                             </b></p>
 
                                                                                         <table class="table zero-configuration">
                                                                                             <thead>
-                                                                                                <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm1['store_id'],])->result_array(); ?>
+
+                                                                                            
+                                                                                               
 
                                                                                                 <tr>
                                                                                                     <th>Select</th>
@@ -490,6 +499,10 @@
                                                                                             </thead>
                                                                                             <tbody>
                                                                                                 <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                                    <?php if($orderss['section'] == $dm_c1['section'] || $orderss['section'] == 0){
+                                                                                                        
+                                                                                                    
+                                                                                                        ?>
                                                                                                     <tr>
                                                                                                         <td>
                                                                                                             <label class="container">
@@ -518,7 +531,10 @@
                                                                                                             console.log(checkBox.checked)
                                                                                                         }
                                                                                                     </script>
-                                                                                                <?php } ?>
+                                                                                                <?php }
+                                                                                            
+                                                                                                    } 
+                                                                                                ?>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     <?php else : ?>
@@ -544,7 +560,7 @@
                                                                                         <?php foreach ($orderss_team as $keys => $orderss_team) { ?>
                                                                                             <tr>
                                                                                                 <td><label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>">
+                                                                                                        <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>" >
                                                                                                         <span class="checkmark"></span>
                                                                                                     </label>
                                                                                                 </td>
