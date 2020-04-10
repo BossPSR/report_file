@@ -72,9 +72,9 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
-                                                                        <th scope="col">File</th>
                                                                         <th scope="col">ID Order</th>
+
+                                                                        <th scope="col">File</th>
                                                                         <th scope="col">Info</th>
                                                                         <th scope="col">Downloads</th>
                                                                     </tr>
@@ -82,9 +82,8 @@
                                                                 <tbody>
                                                                     <?php foreach ($taskmain as $taskmain) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $t++; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $taskmain['file_name']; ?></td>
                                                                             <td><?php echo $taskmain['order_id']; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $taskmain['file_name']; ?></td>
                                                                             <td><a href="<?php echo $taskmain['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                             <td>
                                                                                 <a href="<?php echo $taskmain['path']; ?>" class="btn btn-primary" download>
@@ -125,7 +124,6 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
                                                                         <th scope="col">Info</th>
@@ -135,7 +133,6 @@
                                                                 <tbody>
                                                                     <?php foreach ($taskGT as $taskGT) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $t++; ?></td>
                                                                             <td><?php echo $taskGT['order_id']; ?></td>
                                                                             <td style="text-align:left;"><?php echo $taskGT['file_name_GT']; ?></td>
                                                                             <td><a href="<?php echo $taskGT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
@@ -156,7 +153,6 @@
                                                                 <table class="table table-bordered">
                                                                     <thead>
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">No.</th>
                                                                             <th scope="col">ID Order</th>
                                                                             <th scope="col">File</th>
                                                                             <th scope="col">Info</th>
@@ -166,7 +162,6 @@
                                                                     <tbody>
                                                                         <?php foreach ($taskGTMORE as $taskGTMORE) { ?>
                                                                             <tr style="text-align:center;">
-                                                                                <td><?php echo $t++; ?></td>
                                                                                 <td><?php echo $taskGTMORE['order_id']; ?></td>
                                                                                 <td style="text-align:left;"><?php echo $taskGTMORE['file_name_GT']; ?></td>
                                                                                 <td><a href="<?php echo $taskGTMORE['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
@@ -201,7 +196,7 @@
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -213,9 +208,8 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
-                                                                        <th scope="col">File</th>
                                                                         <th scope="col">ID Order</th>
+                                                                        <th scope="col">File</th>
                                                                         <th scope="col">Info</th>
                                                                         <th scope="col">Downloads</th>
                                                                     </tr>
@@ -223,9 +217,8 @@
                                                                 <tbody>
                                                                     <?php foreach ($DMfile as $DMfile) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $mn++; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $DMfile['file_name']; ?></td>
                                                                             <td><?php echo $task['or_id']; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $DMfile['file_name']; ?></td>
                                                                             <td>
                                                                                 <a href="<?php echo $DMfile['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a>
                                                                             </td>
