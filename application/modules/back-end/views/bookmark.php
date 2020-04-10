@@ -466,15 +466,15 @@
                                                                                 <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->result_array(); ?>
                                                                                 <?php foreach ($dm_c as $key => $dm_c) { ?>
                                                                                     <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
-                                                                                    
-                                                                                    <?php 
-                                                                                          
-                                                                                           $this->db->where('store_id',$dm_c1['upload_store_id']);
-                                                                                       
+
+                                                                                    <?php
+
+                                                                                    $this->db->where('store_id', $dm_c1['upload_store_id']);
+
                                                                                     $orderss = $this->db->get('tbl_upload_store')->result_array();
-                                                                                   
-                                                                                     ?>
-                                                                                  
+
+                                                                                    ?>
+
 
 
                                                                                     <?php if (!empty($dm_c['id_document'])) : ?>
@@ -485,8 +485,8 @@
                                                                                         <table class="table zero-configuration">
                                                                                             <thead>
 
-                                                                                            
-                                                                                               
+
+
 
                                                                                                 <tr>
                                                                                                     <th>Select</th>
@@ -499,41 +499,40 @@
                                                                                             </thead>
                                                                                             <tbody>
                                                                                                 <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                                    <?php if($orderss['section'] == $dm_c1['section'] || $orderss['section'] == 0){
-                                                                                                        
-                                                                                                    
-                                                                                                        ?>
-                                                                                                    <tr>
-                                                                                                        <td>
-                                                                                                            <label class="container">
-                                                                                                                <input type="checkbox" class="checkmark" id="delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>" name="order_id[]" value="<?php echo $orderss['id'] ?>" onclick="numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>();">
-                                                                                                                <span class="checkmark"></span>
-                                                                                                            </label>
-                                                                                                        </td>
-
-                                                                                                        <td>
-                                                                                                            <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                                -
-                                                                                                            <?php else : ?>
-                                                                                                                <div class="badge badge-primary">Relive</div>
-                                                                                                            <?php endif ?>
-                                                                                                        </td>
-                                                                                                        <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                        <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                        <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                        <td><?php echo $orderss['create_at'] ?></td>
+                                                                                                    <?php if ($orderss['section'] == $dm_c1['section'] || $orderss['section'] == 0) {
 
 
-                                                                                                    </tr>
-                                                                                                    <script>
-                                                                                                        function numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>() {
-                                                                                                            var checkBox = document.getElementById("delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>");
-                                                                                                            console.log(checkBox.checked)
-                                                                                                        }
-                                                                                                    </script>
+                                                                                                    ?>
+                                                                                                        <tr>
+                                                                                                            <td>
+                                                                                                                <label class="container">
+                                                                                                                    <input type="checkbox" class="checkmark" id="delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>" name="order_id[]" value="<?php echo $orderss['id'] ?>" onclick="numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>();">
+                                                                                                                    <span class="checkmark"></span>
+                                                                                                                </label>
+                                                                                                            </td>
+
+                                                                                                            <td>
+                                                                                                                <?php if ($orderss['relive_status'] == '0') : ?>
+                                                                                                                    -
+                                                                                                                <?php else : ?>
+                                                                                                                    <div class="badge badge-primary">Relive</div>
+                                                                                                                <?php endif ?>
+                                                                                                            </td>
+                                                                                                            <td><?php echo $orderss['store_id'] ?></td>
+                                                                                                            <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                            <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                            <td><?php echo $orderss['create_at'] ?></td>
+
+
+                                                                                                        </tr>
+                                                                                                        <script>
+                                                                                                            function numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>() {
+                                                                                                                var checkBox = document.getElementById("delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>");
+                                                                                                                console.log(checkBox.checked)
+                                                                                                            }
+                                                                                                        </script>
                                                                                                 <?php }
-                                                                                            
-                                                                                                    } 
+                                                                                                }
                                                                                                 ?>
                                                                                             </tbody>
                                                                                         </table>
@@ -560,7 +559,7 @@
                                                                                         <?php foreach ($orderss_team as $keys => $orderss_team) { ?>
                                                                                             <tr>
                                                                                                 <td><label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>" >
+                                                                                                        <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>">
                                                                                                         <span class="checkmark"></span>
                                                                                                     </label>
                                                                                                 </td>
