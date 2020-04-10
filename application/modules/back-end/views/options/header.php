@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/themes/semi-dark-layout.css">
 
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/newstyle.css">
-
+    <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/forms/select/select2.min.css">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/core/menu/menu-types/horizontal-menu.css">
@@ -313,6 +313,12 @@
                                                                                 echo 'active';
                                                                             } ?>" href="back_vdo" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-instagram"></i>Video List</a>
                                 </li>
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Position") {
+                                                                                echo 'active';
+                                                                            } ?>" href="Position" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-layers"></i>Position List</a>
+                                </li>
+
+                                
                             </ul>
                         </li>
                         <?php
@@ -454,7 +460,7 @@
                         $notifyBookmark = 0;
                         $notify_pay = 0;
                         $notify_not_pay = 0;
-                        $bookmarkPay = 
+                        $notify_con = 0;
 
                         $this->db->select('*');
                         $this->db->from('tbl_upload_order');
@@ -478,8 +484,25 @@
                                 $notify_not_pay += 1;
                             }
                         }
+
+                        $this->db->select('*,tbl_upload_order.is_check AS rej');
+                        $this->db->from('tbl_upload_order_team');
+                        $this->db->join('tbl_upload_order','tbl_upload_order_team.order_id=tbl_upload_order.order_id','left');
+                        $this->db->where('tbl_upload_order_team.status_admin',0);
+                        $this->db->where('tbl_upload_order.status_delivery',0);
+                        $this->db->group_by('tbl_upload_order_team.order_id');
+                        $Complete = $this->db->get()->result_array();
+
+                        foreach ($Complete as $Complete) {
+
+                            if ($Complete['status_book'] != 0 && $Complete['status_pay'] == 1 && $Complete['rej'] == 0 && $Complete['status_delivery'] == 0) {
+                                $notify_con += 1;
+                            }
+                        }
+
                         $notifyBookmark += $notify_pay;
                         $notifyBookmark += $notify_not_pay;
+                        $notifyBookmark += $notify_con;
 
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "More_File" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
@@ -510,7 +533,9 @@
                                     <a class="dropdown-item <?php if ($this->uri->segment(1) == "Complete") {
                                                                 echo 'active';
                                                             } ?>" href="Complete" data-toggle="dropdown" data-i18n="Email">
-                                        <i class="feather icon-check"></i>Complete
+                                        <i class="feather icon-check"></i>Complete <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_con == 0) {
+                                                                                                                                                            echo "display:none";
+                                                                                                                                                        } ?>"><?php echo $notify_con; ?></span>
                                     </a>
                                 </li>
                                 <li data-menu="">

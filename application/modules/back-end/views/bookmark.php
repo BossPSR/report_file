@@ -129,7 +129,7 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration" id="loading_img_spin">
+                                        <table class="table zero-configuration2" id="loading_img_spin">
                                             <thead>
                                                 <tr>
                                                     <th>order Id</th>
@@ -137,7 +137,7 @@
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
-                                                    <th>DM</th>
+                                                    <th>DM File</th>
                                                     <th>Team File</th>
                                                     <th>Date Required</th>
                                                     <th>Status</th>
@@ -404,9 +404,9 @@
 
                                                         <td id="test<?php echo $keyBook; ?>">
                                                             <?php if ($bookmark['status_pay'] == 0) : ?>
-                                                                <div class="badge badge-warning">ยังไม่ได้ชำระเงิน</div>
+                                                                <div class="badge badge-warning">NOT PAY</div>
                                                             <?php else : ?>
-                                                                <div class="badge badge-success">ชำระเงินเรียบร้อยแล้ว</div>
+                                                                <div class="badge badge-success">PAY</div>
                                                             <?php endif ?>
                                                         </td>
                                                         <td>
@@ -424,10 +424,10 @@
 
                                                             <?php $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'], 'status_check_drop' => '11'])->row_array(); ?>
                                                             <?php if ($show_dm_c2 == true) : ?>
-                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
+                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop</button></a>
                                                             <?php else : ?>
 
-                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop file</button></a>
+                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop</button></a>
                                                             <?php endif; ?>
 
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
@@ -440,9 +440,9 @@
                                                             <?php else : ?>
                                                                 <?php if ($bookmark['status_bookmark_upload_to_team'] == '1') : ?>
 
-                                                                    <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To team</button>
+                                                                    <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To T3</button>
                                                                 <?php else : ?>
-                                                                    <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['order_save']; ?>"> Upload To team</button>
+                                                                    <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['order_save']; ?>"> Upload To T3</button>
                                                                 <?php endif; ?>
                                                             <?php endif; ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -463,21 +463,30 @@
                                                                                 <input type="hidden" name="id" value="<?php echo $bookmark['order_save']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
 
-                                                                                <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->row_array(); ?>
+                                                                                <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->result_array(); ?>
+                                                                                <?php foreach ($dm_c as $key => $dm_c) { ?>
+                                                                                    <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
 
-                                                                                <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
+                                                                                    <?php
 
-                                                                                <?php $dm1 = $this->db->get_where('tbl_upload_store', ['store_id' => $dm_c1['upload_store_id'],])->result_array(); ?>
+                                                                                    $this->db->where('store_id', $dm_c1['upload_store_id']);
 
-                                                                                <?php foreach ($dm1 as $key => $dm1) { ?>
-                                                                                    <?php if (!empty($dm1['id_document'])) : ?>
+                                                                                    $orderss = $this->db->get('tbl_upload_store')->result_array();
+
+                                                                                    ?>
+
+
+
+                                                                                    <?php if (!empty($dm_c['id_document'])) : ?>
                                                                                         <p><b>
-                                                                                                <h3><?php echo $dm1['id_document']; ?></h3>
+                                                                                                <h3><?php echo $dm_c['id_document']; ?></h3>
                                                                                             </b></p>
 
                                                                                         <table class="table zero-configuration">
                                                                                             <thead>
-                                                                                                <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm1['store_id'],])->result_array(); ?>
+
+
+
 
                                                                                                 <tr>
                                                                                                     <th>Select</th>
@@ -490,35 +499,41 @@
                                                                                             </thead>
                                                                                             <tbody>
                                                                                                 <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                                    <tr>
-                                                                                                        <td>
-                                                                                                            <label class="container">
-                                                                                                                <input type="checkbox" class="checkmark" id="delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>" name="order_id[]" value="<?php echo $orderss['id'] ?>" onclick="numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>();">
-                                                                                                                <span class="checkmark"></span>
-                                                                                                            </label>
-                                                                                                        </td>
-
-                                                                                                        <td>
-                                                                                                            <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                                -
-                                                                                                            <?php else : ?>
-                                                                                                                <div class="badge badge-primary">Relive</div>
-                                                                                                            <?php endif ?>
-                                                                                                        </td>
-                                                                                                        <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                        <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                        <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                        <td><?php echo $orderss['create_at'] ?></td>
+                                                                                                    <?php if ($orderss['section'] == $dm_c1['section'] || $orderss['section'] == 0) {
 
 
-                                                                                                    </tr>
-                                                                                                    <script>
-                                                                                                        function numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>() {
-                                                                                                            var checkBox = document.getElementById("delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>");
-                                                                                                            console.log(checkBox.checked)
-                                                                                                        }
-                                                                                                    </script>
-                                                                                                <?php } ?>
+                                                                                                    ?>
+                                                                                                        <tr>
+                                                                                                            <td>
+                                                                                                                <label class="container">
+                                                                                                                    <input type="checkbox" class="checkmark" id="delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>" name="order_id[]" value="<?php echo $orderss['id'] ?>" onclick="numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>();">
+                                                                                                                    <span class="checkmark"></span>
+                                                                                                                </label>
+                                                                                                            </td>
+
+                                                                                                            <td>
+                                                                                                                <?php if ($orderss['relive_status'] == '0') : ?>
+                                                                                                                    -
+                                                                                                                <?php else : ?>
+                                                                                                                    <div class="badge badge-primary">Relive</div>
+                                                                                                                <?php endif ?>
+                                                                                                            </td>
+                                                                                                            <td><?php echo $orderss['store_id'] ?></td>
+                                                                                                            <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                            <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                            <td><?php echo $orderss['create_at'] ?></td>
+
+
+                                                                                                        </tr>
+                                                                                                        <script>
+                                                                                                            function numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>() {
+                                                                                                                var checkBox = document.getElementById("delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>");
+                                                                                                                console.log(checkBox.checked)
+                                                                                                            }
+                                                                                                        </script>
+                                                                                                <?php }
+                                                                                                }
+                                                                                                ?>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     <?php else : ?>
@@ -578,7 +593,7 @@
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Upload To T3</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -627,7 +642,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Upload to team</button>
+                                                                            <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Upload To T3</button>
 
                                                                             <!-- <div class="modal-footer">
                                                                         <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
