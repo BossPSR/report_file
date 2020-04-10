@@ -306,7 +306,7 @@ class Store_ctr extends CI_Controller
 
     private function sendEmail_reject($upload_order, $book_mark)
     {
-        $user = $this->db->get_where('tbl_user', ['id' => $upload_order[0]['userId']])->row_array();
+        $user = $this->db->get_where('tbl_user', ['id' => $upload_order['userId']])->row_array();
 
         $subject = 'test ip-soft';
 
@@ -319,7 +319,7 @@ class Store_ctr extends CI_Controller
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
 
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $upload_order[0]['order_id'] . '</div>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $upload_order['order_id'] . '</div>';
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
         //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
@@ -409,7 +409,7 @@ class Store_ctr extends CI_Controller
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
 
         $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
-        $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid['order_id']])->result_array();
+        $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid['order_id']])->row_array();
         $book_mark = null;
         $this->sendEmail_reject($upload_order, $book_mark);
 
