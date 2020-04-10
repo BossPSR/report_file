@@ -186,7 +186,7 @@ class Team_ctr extends CI_Controller {
     private function sendEmail_reject($team,$status=false,$status_position=false)
     {
 
-        $team1 = $this->db->get_where('tbl_team',['id',$team])->row_array();
+        $team1 = $this->db->get_where('tbl_team',['id',$team['id']])->row_array();
 
         $text = "";
         if ($status == 1) {
