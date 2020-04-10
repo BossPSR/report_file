@@ -373,7 +373,7 @@ class Store_ctr extends CI_Controller
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order['userId']])->row_array();
 
-        $subject = 'test ip-soft';
+        $subject = 'Your document has been rejected.';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
         $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
