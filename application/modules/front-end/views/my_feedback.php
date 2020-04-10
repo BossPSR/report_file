@@ -83,8 +83,8 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php foreach ($doc_old as $doc_old) { ?>
-                                                                        <td><?= $doc_old['order_id']; ?></td>
                                                                         <tr style="text-align:center;">
+                                                                            <td><?= $doc_old['order_id']; ?></td>
                                                                             <td>
                                                                                 <?= $doc_old['file_name']; ?>
                                                                             </td>
@@ -114,7 +114,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Feedback Document</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -127,7 +127,7 @@
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
-                                                                        <th scope="col">Date Requred</th>
+                                                                        <th scope="col">Document</th>
                                                                         <th scope="col">Downloads</th>
                                                                     </tr>
                                                                 </thead>
@@ -138,7 +138,7 @@
 
                                                                             <td><?= $feedback['order_id']; ?></td>
                                                                             <td><?= $feedback_doc['file_name']; ?></td>
-                                                                            <td><?= $feedback['date_required']; ?></td>
+                                                                            <td><a href="<?= $feedback_doc['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                             <td>
                                                                                 <a href="<?php echo $feedback_doc['file_name'] ?>" class="btn btn-info" download><i class="fa fa-download"></i> Download</a>
                                                                             </td>
