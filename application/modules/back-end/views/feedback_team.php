@@ -242,9 +242,9 @@
                                                             </script>
                                     </div>
                                     <?php if($feedback_team['team']!=''):?>
-                                    <button type="button" data-toggle="modal" data-target="#exampleModalbu<?php echo $feedback_team['id_f']; ?>" class="btn btn-info mr-1 mb-1">Deduct money</button>
+                                    <!-- <button type="button" data-toggle="modal" data-target="#exampleModalbu<?php echo $feedback_team['id_f']; ?>" class="btn btn-info mr-1 mb-1">Deduct money</button> -->
                                     <?php else:?>
-                                    <button type="button" data-toggle="modal" data-target="" class="btn btn-secondary mr-1 mb-1">Deduct money</button>
+                                    <!-- <button type="button" data-toggle="modal" data-target="" class="btn btn-secondary mr-1 mb-1">Deduct money</button> -->
                                     <?php endif;?>
                                     <div class="modal fade" id="exampleModalbu<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">

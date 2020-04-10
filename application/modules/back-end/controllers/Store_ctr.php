@@ -304,60 +304,7 @@ class Store_ctr extends CI_Controller
     //     }
     // }
 
-    private function sendEmail_reject($upload_order, $book_mark)
-    {
-        $user = $this->db->get_where('tbl_user', ['id' => $upload_order['userId']])->row_array();
-
-        $subject = 'test ip-soft';
-
-        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
-        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
-        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
-        $message .= '<body style="background: #eee;">';
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
-
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $upload_order['order_id'] . '</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
-
-        $message .= '<div>';
-        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
-        $message .= 'Reject';
-        $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</body>';
-
-        //config email settings
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'smtp.gmail.com';
-        $config['smtp_port'] = '2002';
-        $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
-        $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
-        $config['wordwrap'] = 'TRUE';
-        $config['smtp_crypto'] = 'tls';
-        $config['newline'] = "\r\n";
-
-        //$file_path = 'uploads/' . $file_name;
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to($user['email']);
-        $this->email->subject($subject);
-        $this->email->message($message);
-        $this->email->set_mailtype('html');
-
-        if ($this->email->send() == true) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update email Reject information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email information');
-        }
-    }
+  
 
     public function check_NotSatisfired_order_add_com()
     {
@@ -410,8 +357,8 @@ class Store_ctr extends CI_Controller
 
         $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid['order_id']])->row_array();
-        $book_mark = null;
-        $this->sendEmail_reject($upload_order, $book_mark);
+      
+        $this->sendEmail_reject($upload_order);
 
 
         if ($resultsedit1 > 0) {
@@ -420,6 +367,61 @@ class Store_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
         return redirect('back_store_buy');
+    }
+
+    private function sendEmail_reject($upload_order)
+    {
+        $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order['userId']])->row_array();
+
+        $subject = 'Your document has been rejected.';
+
+        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
+        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
+        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+        $message .= '<body style="background: #eee;">';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
+
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $upload_order['order_id'] . '</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+
+        $message .= '<div>';
+        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
+        $message .= 'Reject';
+        $message .= '</div>';
+        $message .= '</div>';
+        $message .= '</body>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email Reject information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email information');
+        }
     }
 
     public function reject_for_buy()

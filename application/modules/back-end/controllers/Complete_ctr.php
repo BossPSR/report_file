@@ -125,6 +125,8 @@ class Complete_ctr extends CI_Controller
         $id = $this->input->post('id');
 
         $feedback = $this->db->get_where('tbl_feedback',['order_id'=> $order_id])->row_array();
+        $user_order = $this->db->get_where('tbl_upload_order',['idUser'=> $order_id])->row_array();
+        $user = $this->db->get_where('tbl_upload_order',['idUser'=> $user_order['userId']])->row_array();
 
         if ($feedback==true){
         $this->db->where('order_id', $id);
@@ -195,7 +197,7 @@ class Complete_ctr extends CI_Controller
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->set_mailtype('html');

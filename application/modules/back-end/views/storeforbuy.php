@@ -245,7 +245,7 @@
                                                                             <div class="col-xl-9 col-md-6 col-9 mb-1" style="padding-left: 28px;">
                                                                                 <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
                                                                                 <label for="basicInput">Document ID</label>
-                                                                                <select name="Document[]" id="test" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control selectpicker"  data-live-search="true"  required>
+                                                                                <select name="Document[]" id="test" onClick="add_select<?php echo $stored['id'];?>(this);" class="form-control "   required>
                                                                                     <option value="" selected disabled id="selected_check">select</option>
                                                                                     <?php foreach ($chek_book as $key => $chek_book) { ?>
                                                                                         <option value="<?php echo $chek_book['id_doc'] ?>" class="numDocument<?php echo $stored['id']; ?>"><?php echo $chek_book['id_doc'] ?></option>

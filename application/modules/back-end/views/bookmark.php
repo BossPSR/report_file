@@ -266,8 +266,8 @@
                                                         <td>
 
                                                             <?php if ($bookmark['status_book'] == '1') : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['store_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModalc<?php echo $bookmark['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['order_save']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalc<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -278,19 +278,24 @@
                                                                             </div>
                                                                             <div class="modal-body">
 
-                                                                                <?php foreach ($dm as $key => $dm) { ?>
-                                                                                    <?php if (!empty($dm['id_document'])) : ?>
-                                                                                        <p><b>
-                                                                                                <h3><?php echo $dm['id_document']; ?></h3>
-                                                                                            </b></p>
-                                                                                        <table class="table ">
-                                                                                            <thead>
+                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->result_array(); ?>
+                                                                                <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_cc['id_document']])->row_array(); ?>
 
-                                                                                                <?php
-                                                                                                $this->db->order_by("create_at", "desc");
-                                                                                                $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $dm['store_id']])->result_array();
-                                                                                                ?>
+                                                                                    <?php
+                                                                                    $this->db->where('store_id', $dm_c11['upload_store_id']);
+
+                                                                                    $orderssc = $this->db->get('tbl_upload_store')->result_array();
+                                                                                    ?>
+                                                                                    <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                        <p><b>
+                                                                                                <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                            </b></p>
+
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
                                                                                                 <tr>
+
                                                                                                     <th>Relive</th>
                                                                                                     <th>Store Id</th>
                                                                                                     <th>File Name</th>
@@ -299,24 +304,32 @@
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
-                                                                                                <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                                    <tr>
-
-                                                                                                        <td>
-                                                                                                            <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                                -
-                                                                                                            <?php else : ?>
-                                                                                                                <div class="badge badge-primary">Relive</div>
-                                                                                                            <?php endif ?>
-                                                                                                        </td>
-                                                                                                        <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                        <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                        <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                        <td><?php echo $orderss['create_at'] ?></td>
+                                                                                                <?php foreach ($orderssc as $keys => $orderssc) { ?>
+                                                                                                    <?php if ($orderssc['section'] == $dm_c11['section'] || $orderssc['section'] == 0) {
 
 
-                                                                                                    </tr>
-                                                                                                <?php } ?>
+                                                                                                    ?>
+                                                                                                        <tr>
+
+
+                                                                                                            <td>
+                                                                                                                <?php if ($orderssc['relive_status'] == '0') : ?>
+                                                                                                                    -
+                                                                                                                <?php else : ?>
+                                                                                                                    <div class="badge badge-primary">Relive</div>
+                                                                                                                <?php endif ?>
+                                                                                                            </td>
+                                                                                                            <td><?php echo $orderssc['store_id'] ?></td>
+                                                                                                            <td><?php echo $orderssc['file_name'] ?></td>
+                                                                                                            <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                            <td><?php echo $orderssc ['create_at'] ?></td>
+
+
+                                                                                                        </tr>
+
+                                                                                                <?php }
+                                                                                                }
+                                                                                                ?>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     <?php else : ?>
@@ -459,7 +472,7 @@
                                                                             <h3>
                                                                                 <p>delivery file </p>
                                                                             </h3>
-                                                                            <form name="frm_test" onsubmit="doSubmit(this)" action="sendEmail_delivery_pay" method="POST">
+                                                                            <form  action="sendEmail_delivery_pay" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $bookmark['order_save']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
 
@@ -578,7 +591,7 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                <button type="button" id="upload_de" class="btn btn-primary mr-1 mb-1">Submit</button>
+                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
                                                                             </div>
                                                                         </div>
                                                                         </form>
