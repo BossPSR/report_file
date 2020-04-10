@@ -140,70 +140,77 @@
                                                             <?php if ($feedback_team['team'] != '') : ?>
 
                                                                 <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $feedback_team['id_f']; ?>" class="btn btn-danger mr-1 mb-1">Feedback</button>
+
+
                                                             <?php else : ?>
                                                                 <button type="button" data-toggle="modal" data-target="" class="btn btn-secondary mr-1 mb-1">Feedback</button>
                                                             <?php endif; ?>
-                                                            <div class="modal fade" id="exampleModalb<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <label for="" style="font-size: 16px;">File Document </label>
-                                                                            <form action="fileUpload_feedback_team" class="dropzone dropzone-area " id="maindropzoneFeedback<?php echo $feedback_team['id_f']; ?>">
-
-
-
-                                                                                <div class="dz-message" style="top: 24%;">Upload Document</div>
-                                                                            </form>
-                                                                            <input type="text" id="order_id" class="form-control " name="order_id" value="<?php echo $feedback_team['order_id']; ?>" hidden>
-                                                                            <input type="text" id="cmid" class="form-control " name="cmid" value="<?php echo $feedback_team['userId']; ?>" hidden>
-
-                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
-                                                                                <label for="" style="font-size: 16px;"> Descriptions </label>
-                                                                                <textarea name="descriptions" class="form-control" id="DM1<?php echo $feedback_team['id_f']; ?>" rows="5" style="width: 100%"></textarea>
-
-                                                                            </div>
-
-                                                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
-                                                                                <label for="" style="font-size: 16px;"> Date Required </label>
-                                                                                <input type="date" class="form-control" id="dated<?php echo $feedback_team['id_f']; ?>" name="dated" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $feedback_team['dated']; ?>">
-                                                                            </div>
-
-
-
-                                                                        </div>
-                                                                        <button type="button" id="uploadsfile<?php echo $feedback_team['id_f']; ?>" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Feedback</button>
-                                                                    </div>
-
-                                                                    <div class="modal-footer">
-
-
-                                                                    </div>
+                                                        </td>
+                                                    </tr>
+                                                    <div class="modal fade" id="exampleModalb<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
                                                                 </div>
+                                                                <div class="modal-body">
+                                                                    <label for="" style="font-size: 16px;">File Document </label>
+                                                                    <form action="fileUpload_feedback_team" class="dropzone dropzone-area " id="maindropzoneFeedback<?php echo $feedback_team['id_f']; ?>">
+                                                                        <!-- <div class="dz-message" style="top: 24%;">Upload Document </div>      -->
+                                                                    </form>
+
+                                                                    <input type="text" id="order_id<?php echo $feedback_team['id_f']; ?>" class="form-control " name="order_id" value="<?php echo $feedback_team['order_id']; ?>" hidden>
+                                                                    <input type="text" id="cmid<?php echo $feedback_team['id_f']; ?>" class="form-control " name="cmid" value="<?php echo $feedback_team['userId']; ?>" hidden>
+                                                                    
+
+                                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                                                        <label for="" style="font-size: 16px;"> Descriptions </label>
+                                                                        <textarea name="descriptions" class="form-control" id="DM1<?php echo $feedback_team['id_f']; ?>" rows="5" style="width: 100%"></textarea>
+                                                                    </div>
+
+                                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                                                        <label for="" style="font-size: 16px;"> Date Required </label>
+                                                                        <input type="date" class="form-control" id="dated<?php echo $feedback_team['id_f']; ?>" name="dated" min="<?php echo date('Y-m-d'); ?>" value="<?php echo $feedback_team['dated']; ?>">
+                                                                        
+                                                                    </div>
+
+
+
+                                                                </div>
+                                                                <button type="button" id="uploadsfile<?php echo $feedback_team['id_f']; ?>" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Feedback</button>
                                                             </div>
 
-                                                            <script>
-                                                                Dropzone.autoDiscover = false;
-                                                                var myDropzone = new Dropzone("#maindropzoneFeedback<?php echo $feedback_team['id_f']; ?>", {
-                                                                    autoProcessQueue: false,
-                                                                    maxFiles: 5,
-                                                                    addRemoveLinks: true,
-                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                            <div class="modal-footer">
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <script>
+                                                        Dropzone.autoDiscover = false;
+                                                        var myDropzone = new Dropzone("#maindropzoneFeedback<?php echo $feedback_team['id_f']; ?>", {
+                                                            autoProcessQueue: false,
+                                                            maxFiles: 5,
+                                                            addRemoveLinks: true,
+                                                            parallelUploads: 5, // Number of files process at a time (default 2)
+                                                        });
+
+                                                        document.getElementById("uploadsfile<?php echo $feedback_team['id_f']; ?>").addEventListener("click", function() {
+                                                            // myDropzone.processQueue();
+
+                                                            var v = document.getElementById("dated<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var x = document.getElementById("order_id<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var y = document.getElementById("cmid<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var z = document.getElementById("DM1<?php echo $feedback_team['id_f']; ?>").value;
+                                                            if (myDropzone.files < 1) {
+                                                                swal("Warning!", "Can not be document Empty", "warning", {
+                                                                    button: true,
                                                                 });
-
-                                                                document.getElementById("uploadsfile<?php echo $feedback_team['id_f']; ?>").addEventListener("click", function() {
-                                                                    // myDropzone.processQueue();
-
-                                                                    var v = document.getElementById("dated<?php echo $feedback_team['id_f']; ?>").value;
-                                                                    var x = document.getElementById("order_id").value;
-                                                                    var y = document.getElementById("cmid").value;
-                                                                    var z = document.getElementById("DM1<?php echo $feedback_team['id_f']; ?>").value;
-
+                                                            } else {
+                                                                if (x != '' && y != '' && v != '') {
                                                                     $.ajax({
                                                                         type: 'POST',
                                                                         url: 'order_auto_feedback_team',
@@ -215,109 +222,39 @@
                                                                         },
                                                                         success: function(success) {
                                                                             myDropzone.processQueue();
-                                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                                button: true,
-                                                                            }).then(function(isConfirm) {
-                                                                                if (isConfirm == true) {
-                                                                                    setTimeout("location.reload(true);", 1000);
-                                                                                } else {
-                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                                }
+                                                                            myDropzone.on("queuecomplete", function(file, res) {
+
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: true,
+                                                                                }).then(function(isConfirm) {
+                                                                                    if (isConfirm == true) {
+                                                                                        setTimeout("location.reload(true);", 500);
+                                                                                    } else {
+                                                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                    }
+                                                                                });
                                                                             });
                                                                         }
                                                                     });
+                                                                } else {
+                                                                    swal("Warning!", "Can not be  Not Empty", "warning", {
+                                                                        button: true,
+                                                                    });
+                                                                }
+                                                            }
 
-                                                                    // myDropzone.processQueue();
-                                                                    // myDropzone.on("success", function(file, res) {
-                                                                    //     swal("Good job!", "Upload for data successfull", "success", {
-                                                                    //         button: false,
-                                                                    //     });
-                                                                    //     setTimeout(function() {
-                                                                    //         location.href = "Complete"
-                                                                    //     }, 1000);
-                                                                    // });
-
-
-                                                                });
-                                                            </script>
+                                                        });
+                                                    </script>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <?php if($feedback_team['team']!=''):?>
-                                    <!-- <button type="button" data-toggle="modal" data-target="#exampleModalbu<?php echo $feedback_team['id_f']; ?>" class="btn btn-info mr-1 mb-1">Deduct money</button> -->
-                                    <?php else:?>
-                                    <!-- <button type="button" data-toggle="modal" data-target="" class="btn btn-secondary mr-1 mb-1">Deduct money</button> -->
-                                    <?php endif;?>
-                                    <div class="modal fade" id="exampleModalbu<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Deduct Money</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="Deduct_Money" method="post">
-                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                            <div class="form-group">
-                                                                <label for="helpInputTop">Income</label>
-                                                                <?php $team_money = $this->db->get_where('tbl_team', ['IdTeam' => $feedback_team['teamId']])->result_array(); ?>
-                                                                <?php foreach ($team_money as $keys => $team_money) { ?>
-                                                                    <input type="text" class="form-control" name="income" value="<?php echo $team_money['income'] ?>" placeholder="Enter wage" readonly>
-                                                                <?php } ?>
-                                                                <input type="text" name="team_id" value="<?php echo $feedback_team['teamId'] ?>" hidden>
-                                                                <input type="text" name="order_id" value="<?php echo $feedback_team['order_id'] ?>" hidden>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                            <div class="form-group">
-                                                                <label for="helpInputTop">Deduct money</label>
-                                                                <input type="number" id="quantity" name="price_deductmoney" min="1" max="100" class="form-control">
-
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                            <div class="form-group">
-                                                                <label for="helpInputTop">Note</label>
-                                                                <textarea name="node_deductmoney" cols="30" rows="10" class="form-control"></textarea>
-
-
-                                                            </div>
-                                                        </div>
-
-
-                                                </div>
-                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Feedback</button>
-                                            </div>
-
-                                            <div class="modal-footer">
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </form>
-
                                 </div>
-
-                                </td>
-                                </tr>
-
-                            <?php } ?>
-                            </tbody>
-                            </table>
                             </div>
                         </div>
                     </div>
-                </div>
+            </section>
+            <!--/ Zero configuration table -->
         </div>
     </div>
-    </section>
-    <!--/ Zero configuration table -->
-
-
-
-</div>
-</div>
 </div>
