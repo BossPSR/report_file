@@ -35,6 +35,9 @@ class Register_ctr extends CI_Controller
 		$username_check      = $this->Login_model->check_usre($passport, $email);
 		$check_usre2         = $this->Login_model->check_usre2($username);
 
+		$Y = substr(date('Y'), 2);
+		$M = date('m');
+
 		if ($username_check || $check_usre2) {
 			$this->session->set_flashdata('del_ss', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> ขออภัย Email หรือ passport หรือ username  นี้มีผู้อื่นใช้แล้ว กรุณาลองใหม่อีกครั้ง !!! </div>');
 			redirect('register', 'refresh');
@@ -65,7 +68,7 @@ class Register_ctr extends CI_Controller
 					// echo $sumStandard;
 
 					$data2 = array(
-						'idUser' => "CM" . $last_id
+						'idUser' => "CM" . $Y . $M . "00" . $last_id
 					);
 					$this->db->where('id', $last_id);
 					$success = $this->db->update('tbl_user', $data2);

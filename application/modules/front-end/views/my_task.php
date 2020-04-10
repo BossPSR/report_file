@@ -257,9 +257,11 @@
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
                                         <?php if (empty($withh)) { ?>
-                                            <td><button class="btn btn-info" id="cf_draw<?php echo $z++; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
+                                            <?php $or_sub = substr($task['or_id'], 3); ?>
+                                            <?php $te_sub = substr($team['IdTeam'], 2); ?>
+                                            <td><button class="btn btn-info" id="cf_draw<?php echo $or_sub; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
                                             <script>
-                                                $('#cf_draw<?php echo $j++; ?>').click(function() {
+                                                $('#cf_draw<?php echo $or_sub; ?>').click(function() {
                                                     swal({
                                                         icon: "warning",
                                                         title: "Are you sure?",
@@ -305,8 +307,7 @@
                                     <?php } else { ?>
                                         <td><button class="btn btn-secondary"><i class="fa fa-money"></i> Withdraw</button></td>
                                     <?php } ?>
-                                    <?php $or_sub = substr($task['order_id'], 3); ?>
-                                    <?php $te_sub = substr($team['IdTeam'], 2); ?>
+
 
                                 </tr>
                             <?php } ?>
