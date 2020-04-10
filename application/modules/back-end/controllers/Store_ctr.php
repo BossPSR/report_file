@@ -74,19 +74,19 @@ class Store_ctr extends CI_Controller
     public function check_dm()
     {
         $Document = $this->input->post('DocumentResult');
-        $DocumentCut = explode(',',$Document[0]);
+        $DocumentCut = explode(',', $Document[0]);
         $document_arr = array_unique($DocumentCut);
 
 
         $num = 0;
         foreach ($document_arr as $document_arr_detail) {
-            $check_dm = $this->db->get_where('tbl_bookmark',['id_document'=>$document_arr_detail])->row_array();
+            $check_dm = $this->db->get_where('tbl_bookmark', ['id_document' => $document_arr_detail])->row_array();
             if (!empty($check_dm)) {
                 $num += 1;
             }
         }
-    
-    echo $num;
+
+        echo $num;
     }
 
     public function check_order_add_com()
@@ -95,28 +95,28 @@ class Store_ctr extends CI_Controller
         $orderid = $this->input->post('Order');
         $Document = [];
         $Document = $this->input->post('DocumentResult');
-        $Document = explode(",",$Document[0]);
+        $Document = explode(",", $Document[0]);
         $Document = array_unique($Document);
 
         // $dm = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $this->input->post('Document')])->row_array();
         // if ($dm == true) {
-          
-           
-            $data = array(
 
-                'price_file'             => $this->input->post('price_file'),
-                'Date_required'         => $this->input->post('Daterequired'),
-                'status_book'           => 1,
-                'note'                 => $this->input->post('note_s'),
-                'update_at'                  => date('Y-m-d H:i:s'),
-                'notify_user'                => 0,
-                'status_cp'                => $this->input->post('status_cp'),
-                'notify_admin'                => 0,
-            );
-            $this->db->where('order_id', $orderid);
-            $resultsedit1 = $this->db->update('tbl_upload_order', $data);
-           
-            foreach ($Document as $Document) {
+
+        $data = array(
+
+            'price_file'             => $this->input->post('price_file'),
+            'Date_required'         => $this->input->post('Daterequired'),
+            'status_book'           => 1,
+            'note'                 => $this->input->post('note_s'),
+            'update_at'                  => date('Y-m-d H:i:s'),
+            'notify_user'                => 0,
+            'status_cp'                => $this->input->post('status_cp'),
+            'notify_admin'                => 0,
+        );
+        $this->db->where('order_id', $orderid);
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+
+        foreach ($Document as $Document) {
 
             $data2 = array(
 
@@ -127,16 +127,16 @@ class Store_ctr extends CI_Controller
 
 
             );
-              $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
+            $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
         }
 
 
-        
-            $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
 
-            $success =  $this->sendEmail($upload_order);
-            echo  $success;
-          
+        $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
+
+        $success =  $this->sendEmail($upload_order);
+        echo  $success;
+
         // } else {
         //     $this->session->set_flashdata('del_ss2', 'Not Successfully math id docment information');
         //     return redirect('back_store_buy');
@@ -170,21 +170,31 @@ class Store_ctr extends CI_Controller
             $numFile += 1;
         }
 
-        $subject = 'เอกสารการชำระเงิน จาก www.Report-file.com ';
+        $subject = 'เอกสารการชำระเงิน จาก www.report-file.com ';
+        $message .= '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Your order has been placed';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $upload_order[0]['order_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order details ("' . $upload_order[0]['order_id'] . '")</p>';
 
-        
-        $message  = '<body style="background: #eee;">';
-     
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> เอกสารการชำระเงิน จาก www.Report-file.com  </div>';
-        $message .= '<table align="center" style="font-size: 20px;border-collapse: separate!important; border-style: dotted;background: white;"  border="0">';
+
+        $message .= '<table style="font-size: 14px;border="0">';
 
         $message .= '<tr>';
-            $message .= '<td rowspan="' . $numFile . '">';
-                $message .= ' File Name : ';
-            $message .= '</td>';
-            $message .= '<td>';
-                $message .= ' 1.' . $uploads[0] . ' ';
-            $message .= '</td>';
+        $message .= '<td rowspan="' . $numFile . '">';
+        $message .= ' File Name : ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' 1.' . $uploads[0] . ' ';
+        $message .= '</td>';
         $message .= '</tr>';
 
         $num_list = 1;
@@ -194,19 +204,19 @@ class Store_ctr extends CI_Controller
             }
             $num_list += 1;
             $message .= '<tr>';
-                $message .= '<td>';
-                $message .=  ' ' . $num_list . '.' . $upload . ' ';
-                $message .= '</td>';
+            $message .= '<td>';
+            $message .=  ' ' . $num_list . '.' . $upload . ' ';
+            $message .= '</td>';
             $message .= '</tr>';
         }
 
         $message .= '<tr>';
-            $message .= '<td>';
-                $message .= ' Order ID : ';
-            $message .= '</td>';
-            $message .= '<td>';
-                $message .= ' ' . $upload_order[0]['order_id'] . ' ';
-            $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' Order ID : ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' ' . $upload_order[0]['order_id'] . ' ';
+        $message .= '</td>';
         $message .= '</tr>';
 
         $message .= '<tr>';
@@ -250,7 +260,8 @@ class Store_ctr extends CI_Controller
         $message .= '</a>';
         $message .= '</div>';
         $message .= '</div>';
-        $message .= '</body>';
+        $message .= '</div>';
+        $message .= '</center>';
 
         //config email settings
         $config['protocol'] = 'smtp';
@@ -512,7 +523,7 @@ class Store_ctr extends CI_Controller
 
 
         if ($resultsedit > 0) {
-            
+
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
@@ -554,8 +565,8 @@ class Store_ctr extends CI_Controller
     {
         $id = $this->input->get('id');
 
-     
-        $reject_del =  $this->db->get_where('tbl_upload_store',['id'=>$id])->row_array();
+
+        $reject_del =  $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
 
         unlink($reject_del['path']);
 
@@ -580,7 +591,7 @@ class Store_ctr extends CI_Controller
         $id = $this->input->get('id');
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'),'is_check' => 1,'notify_user' => 0,'notify_user' => 1]);
+        $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'), 'is_check' => 1, 'notify_user' => 0, 'notify_user' => 1]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
@@ -666,7 +677,7 @@ class Store_ctr extends CI_Controller
     {
         $store_id = $this->input->get('id');
         $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
-        
+
 
         foreach ($dm as $key => $dm) {
             if ($dm['section'] == 0) {

@@ -258,6 +258,42 @@
 
                                         <?php if (empty($withh)) { ?>
                                             <td><button class="btn btn-info" id="cf_draw<?php echo $z++; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
+                                            <script>
+                                                $('#cf_draw<?php echo $j++; ?>').click(function() {
+                                                    swal({
+                                                        icon: "warning",
+                                                        title: "Are you sure?",
+                                                        text: "Do you want confirmed document",
+                                                        closeOnEsc: true,
+                                                        closeOnClickOutside: false,
+                                                        buttons: {
+                                                            cancel: true,
+                                                            confirm: true,
+                                                        },
+                                                    }).then(function(isConfirm) {
+                                                        if (isConfirm == true) {
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: 'My-task-withdraw',
+                                                                data: {
+                                                                    order_id: <?= $or_sub; ?>,
+                                                                    teamId: <?= $te_sub; ?>,
+                                                                    price: <?= $task['wage']; ?>,
+                                                                },
+                                                                success: function(success) {
+                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                        button: false,
+                                                                    });
+                                                                    setTimeout("location.reload(true);", 1000);
+                                                                    console.log(success);
+                                                                }
+                                                            });
+                                                        } else {
+                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                        }
+                                                    });
+                                                });
+                                            </script>
                                         <?php } elseif ($withh['status'] == 1) { ?>
                                             <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for admin</span></td>
                                         <?php } elseif ($withh['status'] == 2) { ?>
@@ -271,42 +307,7 @@
                                     <?php } ?>
                                     <?php $or_sub = substr($task['order_id'], 3); ?>
                                     <?php $te_sub = substr($team['IdTeam'], 2); ?>
-                                    <script>
-                                        $('#cf_draw<?php echo $j++; ?>').click(function() {
-                                            swal({
-                                                icon: "warning",
-                                                title: "Are you sure?",
-                                                text: "Do you want confirmed document",
-                                                closeOnEsc: true,
-                                                closeOnClickOutside: false,
-                                                buttons: {
-                                                    cancel: true,
-                                                    confirm: true,
-                                                },
-                                            }).then(function(isConfirm) {
-                                                if (isConfirm == true) {
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: 'My-task-withdraw',
-                                                        data: {
-                                                            order_id: <?= $or_sub; ?>,
-                                                            teamId: <?= $te_sub; ?>,
-                                                            price: <?= $task['wage']; ?>,
-                                                        },
-                                                        success: function(success) {
-                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                button: false,
-                                                            });
-                                                            setTimeout("location.reload(true);", 1000);
-                                                            console.log(success);
-                                                        }
-                                                    });
-                                                } else {
-                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                }
-                                            });
-                                        });
-                                    </script>
+
                                 </tr>
                             <?php } ?>
                             <script>
