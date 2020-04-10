@@ -170,14 +170,11 @@
                                         <a href="buy"> My Buy</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="store"> My Sell</a>
-                                    </li>
-                                    <li class="menu-item-has-children">
                                         <a href="order"> My order</a>
                                     </li>
-                                    <!-- <li class="menu-item-has-children">
-                                        <a href="my-selling"> My Selling</a>
-                                    </li> -->
+                                    <li class="menu-item-has-children">
+                                        <a href="store"> My Sell</a>
+                                    </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">My Selling</a>
                                         <ul class="sub-menu">
@@ -262,7 +259,7 @@
                                     <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 
                                     <?php if ($user == true) :  ?>
-                                        <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                        <li><a href="my-profile"> <?php echo $user['idUser'] ?> </a></li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php elseif ($team == true) : ?>
                                         <li>
@@ -419,8 +416,8 @@
                                     <ul>
                                         <?php if ($user) :  ?>
                                             <li><a href="buy"> My buy <div class="arrow_box"></div></a></li>
-                                            <li><a href="store"> My Sell </a></li>
                                             <li><a href="order"> My order </a></li>
+                                            <li><a href="store"> My Sell </a></li>
                                             <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="my-selling">Sale</a></li>

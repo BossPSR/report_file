@@ -1,5 +1,8 @@
 <br>
+
+
 <h2 class="text-center" style="margin-top: 15px;"> My Sell</h2>
+
 <hr class="line_package">
 <br>
 <!--wishlist area start -->
@@ -67,25 +70,7 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-            </div>
-            <div class="modal-body">
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-            </div>
-        </div>
-    </div>
-</div>
 
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
@@ -130,12 +115,5 @@
             });
         }
 
-    });
-</script>
-
-<!--wishlist area end -->
-<script type="text/javascript">
-    $(window).on('load', function() {
-        $('#staticBackdrop').modal('show');
     });
 </script>

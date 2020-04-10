@@ -67,18 +67,16 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
-                                                                        <th scope="col">File</th>
                                                                         <th scope="col">ID Order</th>
+                                                                        <th scope="col">File</th>
                                                                         <th scope="col">Info</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php foreach ($stockmain as $stockmain) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $t++; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
                                                                             <td><?php echo $stockmain['order_id']; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
                                                                             <td><a href="show-pdf?dcnumber=<?= base64_encode($stockmain['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
