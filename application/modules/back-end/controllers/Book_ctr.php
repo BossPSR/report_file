@@ -185,16 +185,17 @@ class Book_ctr extends CI_Controller
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->set_mailtype('html');
 
         if ($this->email->send() == true) {
-            echo '1';
+            $this->session->set_flashdata('save_ss2', 'Successfully send Not Pay Edit information !!.');
         } else {
-            echo '2';
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send Not Pay Edit information');
         }
+
     }
 
     

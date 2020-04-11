@@ -163,8 +163,8 @@ class Register_ctr extends CI_Controller
 							'email'				=> $email,
 							'bank_account'		=> $bank_account,
 							'password'			=> md5($password),
-							'file_name'			=> 'public/frontend/assets/img/profile/9.jpg',
-							'resume_file'			=> $uploadData['file_name'],
+							'file_name'			=> 'uploads/resume/'.$uploadData['file_name'],
+							'resume_file'		=> $uploadData['file_name'],
 							'created_at'		=> date('Y-m-d H:i:s'),
 							'notify_admin'      => 0
 						);

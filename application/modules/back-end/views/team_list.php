@@ -66,9 +66,9 @@
                                                         ?>
                                                         <td>
                                                        <?php if($img[1]=='pdf'):?>
-                                                        <a href="uploads/resume/<?php echo $team['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                        <a href="<?php echo $team['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                        <?php else :?>
-                                                        <a href="uploads/resume/<?php echo $team['file_name']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                        <a href="<?php echo $team['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                        <?php endif;?>
                                                         </td>
                                                         <td><?php echo $team['name']; ?></td>

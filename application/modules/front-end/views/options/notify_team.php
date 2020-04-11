@@ -47,10 +47,23 @@
 
     // exit();
 ?>
-
+<style>
+.bell-style{
+    position: absolute;
+    padding: 20px;
+    width: 350px;
+    will-change: transform;
+    border: 0px;
+    box-shadow: rgb(208, 208, 208) 0px 0px 7px 0px;
+    top: 0px;
+    left: 0px;
+    transform: translate3d(-322px, 26px, 0px) !important;
+    
+}
+</style>
 <div class="dropdown lineti">
 <i class="fa fa-bell text-black-white badge-notification <?php if($notify >= 1){ echo "animated shake" ;} ?>" id="team_notify" onClick="read_teamNotify();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="<?php echo $notify;?>" style="font-size:22px;color:#fff; cursor: pointer;"></i>
-    <ul class="dropdown-menu" role="menu">
+    <ul class="dropdown-menu bell-style" role="menu">
         <?php $i = 0; ?>
         <?php foreach ($notify_message as $key => $notifyMessage) { 
             $i += 1;

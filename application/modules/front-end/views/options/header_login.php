@@ -363,8 +363,18 @@
                                                     </div>
                                                     <div>My Jobs</div>
                                                 </div>
+
+                                                <?php
+                                                $this->db->select('*,sum(tbl_upload_team.wage) as sumWage');
+                                                $this->db->from('tbl_upload_team');
+                                                $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+                                                $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+                                                $this->db->where('tbl_upload_order.status_delivery', 1);
+
+                                                $sm_de2 = $this->db->get()->row_array();
+                                                ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list"><?php echo number_format($team['income']); ?></div>
+                                                    <div class="menu-list"><?php echo $sm_de2['sumWage']; ?></div>
                                                     <div>My Income</div>
                                                 </div>
                                             </div>

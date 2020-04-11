@@ -42,8 +42,23 @@
                     </div>
                     <div class="single_banner menu_profileList">
                         <div class="menu_profileRow">
+                            <?php
+                            $this->db->select('*,sum(tbl_upload_order.status_delivery) as sum_delivery');
+                            $this->db->from('tbl_upload_team');
+                            $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+                            $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+                            $this->db->where('tbl_upload_order.status_delivery', 1);
+
+                            $sm_del = $this->db->get()->row_array();
+                            ?>
                             <div class="result_list_menu">
-                                <div class="result_menu">0</div>
+                                <div class="result_menu">
+                                    <?php if (empty($sm_del['sum_delivery'])) { ?>
+                                        0
+                                    <?php } else { ?>
+                                        <?php echo $sm_del['sum_delivery']; ?>
+                                    <?php } ?>
+                                </div>
                                 <div class="list_menu">My Job</div>
                             </div>
                             <?php
