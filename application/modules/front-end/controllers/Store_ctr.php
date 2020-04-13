@@ -50,7 +50,7 @@ class Store_ctr extends CI_Controller
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
 
-                $buymax = $this->Buy_model->buy_max_sell();
+                $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_s')->row();
 
                 // File upload
                 if ($this->upload->do_upload('file')) {
@@ -59,7 +59,7 @@ class Store_ctr extends CI_Controller
 
                     $data = array(
                         'userId'        => $userId,
-                        'store_id'      => $buymax->maxorder,
+                        'store_id'      => $buymax->order_main,
                         'file_name'     => $uploadData['file_name'],
                         'path'          => 'uploads/Store/' . $uploadData['file_name'],
                         'create_at'     => date('Y-m-d H:i:s'),

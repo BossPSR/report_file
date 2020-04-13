@@ -72,14 +72,6 @@
                                             <tbody>
                                                 <?php $i = 1; ?>
                                                 <?php foreach ($section as $keys => $section) { ?>
-
-
-                                                    <tr style="background: #ededed;">
-                                                        <td><?php echo $i++; ?></td>
-                                                        <td><?php echo $section['store_id']; ?></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
                                                     <?php $check_for = $this->db->group_by('section')->get_where('tbl_upload_store', ['store_id' => $section['store_id'], 'is_check' => 0, 'status_main_search' => 0])->result_array(); ?>
                                                     <tr>
                                                         <td><?php echo $i++; ?></td>

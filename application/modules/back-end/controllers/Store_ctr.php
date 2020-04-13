@@ -678,7 +678,7 @@ class Store_ctr extends CI_Controller
     public function check_com()
     {
         $store_id = $this->input->get('id');
-        $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
+        $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id , 'is_check' => '0'])->result_array();
 
 
         foreach ($dm as $key => $dm) {

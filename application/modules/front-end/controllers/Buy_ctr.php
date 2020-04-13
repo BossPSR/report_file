@@ -84,15 +84,8 @@ class Buy_ctr extends CI_Controller
       //Load upload library
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
-      // $buyre =  $this->Buy_model->buy();
-      // $buymax = $this->Buy_model->buy_max();
+
       $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
-      // $orf = array(
-      //   'order_main'    => "OD".rand('0','100'),
-      //   'create_at'     => date('Y-m-d H:i:s') ,
-      //   'status'        => '1'    
-      // );
-      // $this->db->insert('tbl_order_f', $orf);
 
 
       // File upload
@@ -102,7 +95,6 @@ class Buy_ctr extends CI_Controller
 
         $data = array(
           'userId'        => $userId,
-          // 'order_id'      => $buymax->maxorder,
           'order_id'      => $buymax->order_main,
           'date_required' => $date_req,
           'file_name'     => $uploadData['file_name'],
