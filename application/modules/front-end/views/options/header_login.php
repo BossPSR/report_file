@@ -374,7 +374,13 @@
                                                 $sm_de2 = $this->db->get()->row_array();
                                                 ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
-                                                    <div class="menu-list"><?php echo $sm_de2['sumWage']; ?></div>
+                                                    <div class="menu-list">
+                                                    <?php if($sm_de2['sumWage']) : ?>
+                                                        <?php echo $sm_de2['sumWage']; ?>
+                                                        <?php else: ?>
+                                                        0
+                                                        <?php endif; ?>
+                                                    </div>
                                                     <div>My Income</div>
                                                 </div>
                                             </div>

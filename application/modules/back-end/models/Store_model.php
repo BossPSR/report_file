@@ -66,6 +66,7 @@ class Store_model extends CI_Model
         $this->db->where('status_chack', 0);
         $this->db->where('is_check', 0);
         $this->db->group_by('store_id');
+        $this->db->order_by('id','DESC');
         return $this->db->get()->result_array();
     }
 
