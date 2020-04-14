@@ -54,21 +54,23 @@
                                     <td><?php echo $task['or_id']; ?></td>
                                     <td><?php echo $task['date_required']; ?></td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $o++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalMain<?php echo $i++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
-                                                        <?php $t = 1; ?>
-                                                        <?php if (!empty($taskmain)) { ?>
+                                        <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
+
+                                        <?php if (!empty($taskmain)) { ?>
+
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $o++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalMain<?php echo $i++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <?php $t = 1; ?>
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
@@ -94,33 +96,35 @@
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
-                                                        <?php } else { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <?php $taskGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id']])->result_array(); ?>
-                                                        <?php $t = 1; ?>
-                                                        <?php if (!empty($taskGT)) { ?>
+                                        <?php $taskGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id']])->result_array(); ?>
+                                        <?php if (!empty($taskGT)) { ?>
+
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <?php $t = 1; ?>
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
@@ -178,33 +182,35 @@
 
                                                             <?php } ?>
 
-                                                        <?php } else { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#DMDOC<?php echo $ooo++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="DMDOC<?php echo $ooo2++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <?php $DMfile = $this->db->get_where('tbl_upload_store', ['store_id' => $task['upload_store_id']])->result_array(); ?>
-                                                        <?php $mn = 1; ?>
-                                                        <?php if (!empty($DMfile)) { ?>
+                                        <?php $DMfile = $this->db->get_where('tbl_upload_store', ['store_id' => $task['upload_store_id']])->result_array(); ?>
+                                        <?php if (!empty($DMfile)) { ?>
+
+                                            <a href="#" data-toggle="modal" data-target="#DMDOC<?php echo $ooo++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="DMDOC<?php echo $ooo2++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <?php $mn = 1; ?>
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr style="text-align:center;">
@@ -231,16 +237,17 @@
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
-                                                        <?php } else { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td>
                                         <span class="badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
