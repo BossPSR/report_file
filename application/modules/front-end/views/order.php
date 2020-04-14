@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 ">
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table">
+                        <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <th scope="col">Status</th>
                                 <th scope="col">#</th>
@@ -64,10 +64,9 @@
                                                     <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
                                                     <div class="modal-body">
                                                         <?php if (!empty($order_main)) { ?>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
                                                                         <th scope="col">Tool</th>
@@ -76,7 +75,6 @@
                                                                 <tbody>
                                                                     <?php foreach ($order_main as $order_main) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $zz++; ?></td>
                                                                             <td><?php echo $order_main['order_id']; ?></td>
                                                                             <td><?php echo $order_main['file_name']; ?></td>
                                                                             <td><a href="<?php echo $order_main['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
@@ -111,10 +109,9 @@
                                                     <?php $order_GT = $this->db->order_by('create_at')->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
                                                     <div class="modal-body">
                                                         <?php if (!empty($order_GT)) { ?>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
                                                                         <th scope="col">Tool</th>
@@ -123,7 +120,6 @@
                                                                 <tbody>
                                                                     <?php foreach ($order_GT as $order_GT) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $kk++; ?></td>
                                                                             <td><?php echo $order_GT['order_id']; ?></td>
                                                                             <td>
                                                                                 <?php if ($order_GT['status_more_file'] == 1) { ?>
@@ -152,7 +148,7 @@
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php $produm   = date('Y-m-d', strtotime('+5 day' . '+' . $value['update_at_buy'])); ?>
-                                        <?php if ($DateT >= $produm) : ?>
+                                   
                                             <?php if ($value['status_approved'] == 1) { ?>
                                                 <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true"></i></button>
                                                 <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -166,7 +162,8 @@
                                                 <?php if ($N_feed['N_order'] >= 3) { ?>
                                                     <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
                                                 <?php } else { ?>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-times" aria-hidden="true"></i></button>
+
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="exampleModalNotApprove<?php echo $xxl++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
@@ -267,15 +264,17 @@
                                                         });
                                                     </script>
                                                 <?php } ?>
-                                                <button type="button" class="btn btn-secondary"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+
+                                                <a  class="btn btn-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a>
+
                                             <?php } else { ?>
                                                 <?php $this->db->select('count(order_id) as c_order'); ?>
                                                 <?php $c_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD']])->row_array(); ?>
                                                 <?php if ($c_feed['c_order'] >= 3) { ?>
                                                     <button type="button" class="btn btn-secondary" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                                 <?php } else { ?>
-                                                    <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
-                                                    <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $bbb++; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                                    <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
+                                                    <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
                                                 <?php } ?>
 
                                                 <!-- Modal -->
@@ -380,7 +379,7 @@
                                                 </script>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="gtdoc<?php echo $vvv++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -417,7 +416,7 @@
                                                 </div>
                                                 <script type='text/javascript'>
                                                     Dropzone.autoDiscover = false;
-                                                    var myDropzone = new Dropzone("#fileuploadmorefile<?php echo $value['ORD']; ?>", {
+                                                    var myDropzone<?php echo $value['ORD']; ?> = new Dropzone("#fileuploadmorefile<?php echo $value['ORD']; ?>", {
                                                         autoProcessQueue: false,
                                                         maxFiles: 5,
                                                         addRemoveLinks: true,
@@ -425,13 +424,13 @@
                                                     });
 
                                                     $('#Submitgtdoc<?php echo $value['ORD']; ?>').click(function() {
-                                                        if (myDropzone.files == 0) {
+                                                        if (myDropzone<?php echo $value['ORD']; ?>.files < 1) {
                                                             swal("Warning!", "Can not be document Empty", "warning", {
                                                                 button: true,
                                                             });
                                                         } else {
-                                                            myDropzone.processQueue();
-                                                            myDropzone.on("queuecomplete", function(file, res) {
+                                                            myDropzone<?php echo $value['ORD']; ?>.processQueue();
+                                                            myDropzone<?php echo $value['ORD']; ?>.on("queuecomplete", function(file, res) {
                                                                 swal("Good job!", "Upload for data successfull", "success", {
                                                                     button: false,
                                                                 });
@@ -441,9 +440,7 @@
                                                     });
                                                 </script>
                                             <?php } ?>
-                                        <?php else : ?>
-                                            -
-                                        <?php endif; ?>
+                                     
                                     </td>
                                 </tr>
 

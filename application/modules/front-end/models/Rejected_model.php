@@ -11,13 +11,12 @@ class Rejected_model extends CI_Model
 
     public function rejected($_user)
     {
-        $this->db->select('*,COUNT(bookid_rj) as total , tbl_rejected.create_at AS create_rj');
-        $this->db->from('tbl_rejected');
-        $this->db->join('tbl_upload_full', 'tbl_upload_full.upload_id = tbl_rejected.bookid_rj');
-        $this->db->join('tbl_upload', 'tbl_upload.id = tbl_rejected.bookid_rj');
-        $this->db->where('tbl_upload_full.userId', $_user);
-        $this->db->group_by('tbl_rejected.bookid_rj');
-        $this->db->order_by('tbl_rejected.create_at', 'asc');
+        $this->db->select('*');
+        $this->db->from('tbl_upload_store');
+        $this->db->where('is_check', 1);
+        $this->db->where('userId', $_user);
+        $this->db->group_by('tbl_upload_store.store_id');
+        $this->db->order_by('tbl_upload_store.store_id', 'desc');
 
         $data = $this->db->get();
 

@@ -55,11 +55,12 @@ class Search_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_upload_store');
         $this->db->where('userId', $_user);
-        $this->db->where('create_at', $search_key);
         $this->db->where('is_check', 1);
-        $query  =   $this->db->get();
+        $this->db->like('create_at', $search_key);
+        $this->db->order_by('create_at', 'desc');
 
-        return $query->result_array();
+        $data = $this->db->get();
+        return $data->result_array();
     }
 
     function search_date_selling($search_key, $_user)

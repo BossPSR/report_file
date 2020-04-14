@@ -104,7 +104,7 @@
                         <div class="form-group row">
                             <label class="col-3 text-right ss" for="">E-mail : </label> 
                             <div class="col-8">
-                                <input type="email" class="form-control" name="email">
+                                <input type="email" class="form-control" name="email" value=" <?php echo $this->session->userdata('email'); ?>">
                             </div>
                         </div>
                         <div class="form-group row">

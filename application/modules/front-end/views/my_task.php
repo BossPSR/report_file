@@ -22,8 +22,8 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-xl-10 col-lg-6 col-md-12 col-sm-12 ">
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table">
+                        <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <th scope="col">No.</th>
                                 <th scope="col">ID Order</th>
@@ -71,8 +71,8 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <?php $t = 1; ?>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
 
@@ -125,8 +125,8 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <?php $t = 1; ?>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
@@ -211,8 +211,8 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <?php $mn = 1; ?>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>

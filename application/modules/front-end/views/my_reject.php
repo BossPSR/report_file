@@ -2,9 +2,8 @@
 <h2 class="text-center" style="margin-top: 15px;">My Reject</h2>
 <hr class="line_package">
 <br>
-<?php foreach ($rejected as $key => $data) {
-} ?>
-<?php if (!empty($data)) : ?>
+
+<?php if (!empty($rejected)) : ?>
     <!--wishlist area start -->
     <div class="wishlist_area mt-60">
         <div class="container">
@@ -27,12 +26,12 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr style="text-align:center;">
-                                <th scope="col">No.</th>
+                                <!-- <th scope="col">No.</th> -->
                                 <th scope="col">ชื่อเอกสาร</th>
                                 <th scope="col">รหัสออเดอร์</th>
                                 <th scope="col">Accept</th>
                                 <th scope="col">วันที่</th>
-                                <th scope="col">เหตุผล</th>
+                                <!-- <th scope="col">เหตุผล</th> -->
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
@@ -41,7 +40,7 @@
                         <tbody>
                             <?php foreach ($rejected as $key => $rejected) { ?>
                                 <tr style="text-align:center;">
-                                    <th scope="row"><?php echo $i++; ?></th>
+                                    <!-- <th scope="row"><?php echo $i++; ?></th> -->
                                     <td><?php echo $rejected['file_name']; ?></td>
                                     <td><?php echo $rejected['store_id']; ?></td>
                                     <td>
@@ -52,14 +51,14 @@
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $rejected['create_at']; ?></td>
-                                    <td>
+                                    <!-- <td>
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop3<?php echo $e++; ?>">
                                             <i class="fa fa-file-text"></i>
                                         </button>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop3<?php echo $m++; ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <!-- <div class="modal fade" id="staticBackdrop3<?php echo $m++; ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -76,7 +75,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             <?php } ?>
                         </tbody>
                     </table>

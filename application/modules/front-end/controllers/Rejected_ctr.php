@@ -18,7 +18,7 @@ class Rejected_ctr extends CI_Controller
 			redirect('home');
 		} else {
 			$user 					= $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-			$_user					= $user['id'];
+			$_user					= $user['idUser'];
 			$data['rejected'] 		= $this->Rejected_model->rejected($_user);
 			$this->load->view('options/header_login');
 			$this->load->view('rejected', $data);
@@ -33,7 +33,7 @@ class Rejected_ctr extends CI_Controller
 		} else {
 			$search_key            	= $this->input->get('search_key');
 			$user 					= $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-			$_user					= $user['id'];
+			$_user					= $user['idUser'];
 			if ($search_key == '' || $search_key == null) {
 				$data['rejected'] 		= $this->Rejected_model->rejected2($_user);
 			} else {

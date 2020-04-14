@@ -24,8 +24,8 @@
                 <div class="col-1"></div>
                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 ">
 
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table">
+                        <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <th scope="col">No.</th>
                                 <th scope="col">ID Order</th>
@@ -72,8 +72,8 @@
                                                         <?php $doc_old = $this->db->get_where('tbl_upload_order_team', ['order_id' => $feedback['orIdd']])->result_array(); ?>
                                                         <div class="modal-body">
 
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
@@ -122,8 +122,8 @@
 
                                                         <div class="modal-body">
 
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
