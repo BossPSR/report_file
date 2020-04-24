@@ -49,23 +49,23 @@
                                     <td><?php echo $stock['or_1']; ?></td>
                                     <td><?php echo $stock['or_date']; ?></td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $q++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalMain<?php echo $w++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['mms']])->result_array(); ?>
-                                                        <?php $t = 1; ?>
-                                                        <?php if (!empty($stockmain)) { ?>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                        <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['mms']])->result_array(); ?>
+                                        <?php if (!empty($stockmain)) { ?>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $q++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalMain<?php echo $w++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <?php $t = 1; ?>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
@@ -82,36 +82,38 @@
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
-                                                        <?php } else { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
 
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <?php $z = 1; ?>
-                                                    <?php $stockGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
-                                                    <div class="modal-body">
-                                                        <?php if (!empty($stockGT)) { ?>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                        <?php $stockGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
+                                        <?php if (!empty($stockGT)) { ?>
+
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <?php $z = 1; ?>
+                                                        <div class="modal-body">
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">No.</th>
                                                                         <th scope="col">File</th>
@@ -130,39 +132,40 @@
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
-                                                        <?php } else { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#DMFILE<?php echo $h++; ?>"><i class="fa fa-file-text-o"></i></a>
                                         <?php $zss = 1; ?>
                                         <?php $DM = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?>
+                                        <?php if (!empty($DM)) { ?>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="DMFILE<?php echo $k++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <?php if (empty($DM)) { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } else { ?>
+                                            <a href="#" data-toggle="modal" data-target="#DMFILE<?php echo $h++; ?>"><i class="fa fa-file-text-o"></i></a>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="DMFILE<?php echo $k++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
                                                             <h3>DM Document</h3>
-                                                            <table class="table table-bordered">
-                                                                <thead>
+                                                            <table class="table">
+                                                                <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">No.</th>
                                                                         <th scope="col">File</th>
@@ -182,14 +185,16 @@
                                                                 </tbody>
                                                             </table>
 
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-success" id="close_doc3">Success</button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-success" id="close_doc3">Success</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td><?php echo $stock['name_item']; ?></td>
                                     <td><span class="badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span></td>

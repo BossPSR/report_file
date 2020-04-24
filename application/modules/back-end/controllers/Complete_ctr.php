@@ -124,8 +124,8 @@ class Complete_ctr extends CI_Controller
 
         $id = $this->input->post('id');
 
-        $feedback = $this->db->get_where('tbl_feedback',['order_id'=> $order_id])->row_array();
-        $user_order = $this->db->get_where('tbl_upload_order',['order_id'=> $order_id])->row_array();
+        $feedback = $this->db->get_where('tbl_feedback',['order_id'=> $id])->row_array();
+        $user_order = $this->db->get_where('tbl_upload_order',['order_id'=> $id])->row_array();
         $user = $this->db->get_where('tbl_upload_order',['userId'=> $user_order['userId']])->row_array();
 
         if ($feedback==true){
