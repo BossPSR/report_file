@@ -13,6 +13,7 @@
     <!-- CSS 
     ========================= -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&display=swap" rel="stylesheet">
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="public/frontend/assets/css/plugins.css">
     <link href="assets/reponsive/plugins/selectator/fm.selectator.css" rel="stylesheet">
@@ -296,7 +297,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6">
                             <div class="logo">
-                                <a href="home"><img src="public/frontend/assets/img/logo/logo.png" alt=""></a>
+                                <a href="home"><img src="public/frontend/assets/img/logo/logo4.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-6">
@@ -399,7 +400,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-12">
-                            <div class="categories_menu">
+                            <div class="categories_menu" style="padding-bottom: 8px;">
                                 <div class="categories_title">
                                     <h2 class="categori_toggle">Category</h2>
                                 </div>
