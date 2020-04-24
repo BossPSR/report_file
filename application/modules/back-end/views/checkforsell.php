@@ -46,7 +46,7 @@ foreach ($store as $upload_main_searchDetail) {
         </div>
         <div class="content-body">
 
-           
+
 
             <!-- Zero configuration table -->
             <section id="basic-datatable">
@@ -58,7 +58,7 @@ foreach ($store as $upload_main_searchDetail) {
                                     <h4 class="card-title">Check For sell</h4>
                                 </div>
                                 <div class="col-2 text-center">
-                                <?php if ($store == '') : ?>
+                                    <?php if ($store == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
                                         <?php $e = 0; ?>
@@ -69,7 +69,7 @@ foreach ($store as $upload_main_searchDetail) {
                                     <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
-                              
+
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -82,6 +82,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <th>User</th>
                                                     <th>File Name</th>
                                                     <th>File</th>
+                                                    <th>create_at</th>
                                                     <th>section</th>
                                                     <th>tool</th>
                                                 </tr>
@@ -96,6 +97,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <tr style="background: #ededed;">
                                                             <th><?php echo $i++; ?></th>
                                                             <td><?php echo $orders['store_id']; ?></td>
+                                                            <td></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -117,6 +119,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                 </td>
                                                                 <td><?php echo $check_for['file_name']; ?></td>
                                                                 <td> <a href="<?php echo $check_for['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a> </td>
+                                                                <td><?php echo $orders['create_at']; ?></td>
                                                                 <td>
                                                                     <select class="form-control" name="id_status" onchange="location = this.value;">
                                                                         <option value="" selected disabled>Select Section</option>
@@ -131,11 +134,53 @@ foreach ($store as $upload_main_searchDetail) {
 
 
                                                                 <td>
-
-
                                                                     <button onclick="confirmalertunlock('<?php echo $check_for['id']; ?>')" class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
                                                                         Reject
                                                                     </button>
+                                                                    <button class="btn btn-info" data-toggle="modal" data-target="#exampleModallCenter2<?php echo $check_for['id']; ?>" type="button" aria-haspopup="true" aria-expanded="false">
+                                                                        dedug
+                                                                    </button>
+
+                                                                    <div class="modal fade" id="exampleModallCenter2<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Dedug</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">CM</label>
+
+                                                                                            <input type="text" class="form-control" name="CM" value="<?php echo $check_for['userId']; ?>" placeholder="Enter score" readonly>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">Order Id</label>
+
+                                                                                            <input type="text" class="form-control" name="Order" value="<?php echo $check_for['store_id']; ?>" placeholder="Enter score" readonly>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">score</label>
+
+                                                                                            <input type="text" class="form-control" name="wage" value="" placeholder="Enter score" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </td>
                                                             </tr>
                                                             <div class="modal fade" id="exampleModal<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -50,7 +50,7 @@
                                             <tbody>
                                                 <?php foreach ($user_list as $user_list) { ?>
                                                     <tr>
-                                                        <td><?php echo $user_list['username']; ?></td>
+                                                        <td><?php echo $user_list['idUser']; ?></td>
                                                         <td><?php echo $user_list['passport']; ?></td>
                                                         <td><?php echo $user_list['email']; ?></td>
                                                         <td><?php echo $user_list['phone']; ?></td>

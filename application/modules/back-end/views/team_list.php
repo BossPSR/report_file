@@ -149,12 +149,10 @@
 
                                                         <?php endif; ?>
                                                             <td>
-                                                          <?php if($team['status_notification_ban']==1):?>
-                                                            <button type="button" data-toggle="modal" data-target="#" class="btn btn btn-danger mr-1 mb-1">Notification Ban</button>
-                                                          <?php else:?>
+                                                        
 
                                                             <button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['id']; ?>" class="btn btn-warning mr-1 mb-1">Notification Ban</button>
-                                                          <?php endif;?>
+                                                          
                                                             <div class="modal fade" id="exampleModalk<?php echo $team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
