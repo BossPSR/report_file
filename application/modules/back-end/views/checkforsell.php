@@ -77,7 +77,7 @@ foreach ($store as $upload_main_searchDetail) {
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                   
                                                     <th>Store Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
@@ -95,7 +95,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <?php else : ?>
 
                                                         <tr style="background: #ededed;">
-                                                            <th><?php echo $i++; ?></th>
+                                                            
                                                             <td><?php echo $orders['store_id']; ?></td>
                                                             <td></td>
                                                             <td></td>
@@ -112,7 +112,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <?php $check_for = $this->db->order_by('store_id', 'asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id'], 'is_check' => '0'])->result_array(); ?>
                                                         <?php foreach ($check_for as $keys => $check_for) { ?>
                                                             <tr>
-                                                                <td><?php echo $i++; ?></td>
+                                                                
                                                                 <td><?php echo $orders['store_id']; ?></td>
                                                                 <td>
                                                                     <?php echo $check_for['userId']; ?>
@@ -142,16 +142,18 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     </button>
 
                                                                     <div class="modal fade" id="exampleModallCenter2<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
+                                                                    <form action="status_cut_score" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                            <div class="modal-content">
+                                                                            
+                                                                                <input type="hidden" name="id" value="<?php echo $check_for['id']; ?>">
+                                                                        <div class="modal-content">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="exampleModalCenterTitle">Dedug</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                         <span aria-hidden="true">&times;</span>
                                                                                     </button>
                                                                                 </div>
-                                                                                <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                                <div class="modal-body row" style="text-align: center;margin: 45px 0;">
                                                                                     <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">CM</label>
@@ -166,19 +168,30 @@ foreach ($store as $upload_main_searchDetail) {
                                                                                             <input type="text" class="form-control" name="Order" value="<?php echo $check_for['store_id']; ?>" placeholder="Enter score" readonly>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class=" col-xl-6 col-md-6 col-6 mb-1">
+                                                                                        
                                                                                         <div class="form-group" style="text-align: left;">
-                                                                                            <label for="helpInputTop">score</label>
-
-                                                                                            <input type="text" class="form-control" name="wage" value="" placeholder="Enter score" >
+                                                                                            <label for="helpInputTop">Latest score</label>
+                                                                                            <?php $user_score = $this->db->get_where('tbl_user',['idUser' => $check_for['userId']])->row_array();?>
+                                                                                            <input type="text" class="form-control" name="" value="<?php  echo $user_score['score'];?>" placeholder="Enter score" readonly>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="col-xl-6 col-md-6 col-6 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">cut Score</label>
+                                                                                            <input type="number" class="form-control" name="score" value="" placeholder="Enter score" >
+                                                                                        </div>
+                                                                                      
+                                                                                    </div>
+                                                                                   
                                                                                 </div>
                                                                                 <div class="modal-footer">
-
+                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
                                                                                 </div>
                                                                             </div>
+                                                                           
                                                                         </div>
+                                                                        </form>
                                                                     </div>
 
                                                                 </td>
@@ -210,7 +223,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
+                                                                                    
 
                                                                                 </div>
                                                                             </div>
