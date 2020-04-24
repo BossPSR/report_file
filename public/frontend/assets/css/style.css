@@ -31,7 +31,7 @@
     
 
 -----------------------------------------------------------------------------------*/
-@import url("https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i");
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
 * {
 	box-sizing: border-box;
 }
@@ -62,7 +62,7 @@ body {
 	font-style: normal;
 	font-weight: 400;
 	visibility: visible;
-	font-family: "Rubik", sans-serif;
+	font-family: 'Kanit', sans-serif;
 	color: #242424;
 }
 
@@ -167,7 +167,7 @@ figure {
     - Common Classes
 -----------------------------------------*/
 a.bn_e {
-	font-family: "Rubik", sans-serif;
+	font-family: 'Kanit', sans-serif;
 	display: inline-block;
 	padding: 20px 40px;
 	text-decoration: none;
@@ -183,7 +183,7 @@ a.bn_e {
 }
 
 a.bn_e:hover {
-	font-family: "Rubik", sans-serif;
+	font-family: 'Kanit', sans-serif;
 	box-shadow: inset -2px -2px 8px rgba(255, 255, 255, 1),
 		inset -2px -2px 12px rgba(255, 255, 255, 0.5),
 		inset 2px 2px 4px rgba(255, 255, 255, 0.1),
@@ -191,7 +191,7 @@ a.bn_e:hover {
 }
 
 a.bn_e:hover span {
-	font-family: "Rubik", sans-serif;
+	font-family: 'Kanit', sans-serif;
 	display: inline-block;
 	transform: scale(0.98);
 }
@@ -1028,7 +1028,7 @@ textarea:-ms-input-placeholder {
 /*header top css end*/
 /* 2.2 header middel css here */
 .logo a img {
-	max-width: 162px;
+	max-width: 270px;
 }
 @media only screen and (max-width: 767px) {
 	.logo a img {
@@ -1849,7 +1849,7 @@ textarea:-ms-input-placeholder {
 	padding: 0 30px;
 	position: relative;
 	cursor: pointer;
-	height: 44px;
+	height: 47px;
 	line-height: 48px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
