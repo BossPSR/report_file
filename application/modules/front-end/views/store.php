@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="tab">
-                                <label for="" class="font-size-upload">You can store document. </label>
+                                <label for="" class="font-size-upload">You can store document.  <span style="color:red">( Can select more than 1 file )</span></label>
                                 <form action="store_upload" class="dropzone" id="dropzone2">
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
