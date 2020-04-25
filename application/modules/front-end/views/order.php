@@ -49,21 +49,23 @@
                                     <td><?php echo $value['ORD']; ?></td>
                                     <td style="text-align:left;"><?php echo $value['file_name']; ?></td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalMain<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalMain<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <?php $zz = 1; ?>
-                                                    <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
-                                                    <div class="modal-body">
-                                                        <?php if (!empty($order_main)) { ?>
+                                        <?php $zz = 1; ?>
+                                        <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
+                                        <?php if (!empty($order_main)) { ?>
+
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalMain<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalMain<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
@@ -82,33 +84,36 @@
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
-                                                        <?php } else { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#exampleModalMainGT<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModalMainGT<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <?php $kk = 1; ?>
-                                                    <?php $order_GT = $this->db->order_by('create_at')->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
-                                                    <div class="modal-body">
-                                                        <?php if (!empty($order_GT)) { ?>
+                                        <?php $kk = 1; ?>
+                                        <?php $order_GT = $this->db->order_by('create_at')->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
+                                        <?php if (!empty($order_GT)) { ?>
+
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalMainGT<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalMainGT<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
@@ -133,156 +138,44 @@
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
-                                                        <?php } else { ?>
-                                                            <h1 style="color:blue;">Data Not Found</h1>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td><?php echo $value['date_required']; ?></td>
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php $produm   = date('Y-m-d', strtotime('+5 day' . '+' . $value['update_at_buy'])); ?>
-                                   
-                                            <?php if ($value['status_approved'] == 1) { ?>
-                                                <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true"></i></button>
+
+                                        <?php if ($value['status_approved'] == 1) { ?>
+                                            <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-secondary"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                        <?php } elseif ($value['status_approved'] == 2 || $value['status_delivery'] == 1) { ?>
+                                            <button type="button" class="btn btn-success" id="approved<?php echo $sub_order ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <?php
+                                            $this->db->select('count(order_id) as N_order');
+                                            ?>
+                                            <?php $N_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD'], 'check_status' => 1])->row_array(); ?>
+                                            <?php if ($N_feed['N_order'] >= 3) { ?>
                                                 <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                                <button type="button" class="btn btn-secondary"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
-                                            <?php } elseif ($value['status_approved'] == 2 || $value['status_delivery'] == 1) { ?>
-                                                <button type="button" class="btn btn-success" id="approved<?php echo $sub_order ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                                <?php
-                                                $this->db->select('count(order_id) as N_order');
-                                                ?>
-                                                <?php $N_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD'], 'check_status' => 1])->row_array(); ?>
-                                                <?php if ($N_feed['N_order'] >= 3) { ?>
-                                                    <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                                <?php } else { ?>
-
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModalNotApprove<?php echo $xxl++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Not Approvend Document</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-
-                                                                <div class="modal-body" style="text-align:left;">
-                                                                    <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                    <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprove<?php echo $value['ORD']; ?>">
-                                                                        <div class="dz-message needsclick">
-                                                                            Drop files here or click to upload.<br>
-                                                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                        </div>
-                                                                    </form>
-                                                                    <br>
-                                                                    <!-- <form action="my-order-feedAuto" method="POST"> -->
-                                                                    <label for="" class="font-size-upload">Detail :</label>
-                                                                    <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
-                                                                    <br>
-
-                                                                    <label for="" class="font-size-upload">Date :</label>
-                                                                    <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
-                                                                    <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
-                                                                    <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
-                                                                    <!-- </form> -->
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
-                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <script type='text/javascript'>
-                                                        Dropzone.autoDiscover = false;
-                                                        var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
-                                                            autoProcessQueue: false,
-                                                            maxFiles: 5,
-                                                            addRemoveLinks: true,
-                                                            parallelUploads: 5, // Number of files process at a time (default 2)
-                                                        });
-
-                                                        $('#SubmitNotApp<?php echo $value['ORD']; ?>').click(function() {
-                                                            var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
-                                                            var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
-                                                            var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
-                                                            var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
-
-                                                            if (myDropzone2.files == 0 && x == '') {
-                                                                swal("Warning!", "Can not be document Empty", "warning", {
-                                                                    button: true,
-                                                                });
-                                                            } else {
-                                                                $.ajax({
-                                                                    type: 'POST',
-                                                                    url: 'Not_approved',
-                                                                    data: {
-                                                                        detail: x,
-                                                                        dated: y,
-                                                                        order_id: z,
-                                                                        userId: c,
-                                                                    },
-                                                                    success: function(success) {
-                                                                        if (myDropzone2.files != 0) {
-                                                                            myDropzone2.processQueue();
-                                                                            myDropzone2.on("queuecomplete", function(file, res) {
-                                                                                swal("Good job!", "Upload for data successfull", "success", {
-                                                                                    button: true,
-                                                                                }).then(function(isConfirm) {
-                                                                                    if (isConfirm == true) {
-                                                                                        setTimeout("location.reload(true);", 1000);
-                                                                                    } else {
-                                                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                                    }
-                                                                                });
-                                                                            });
-                                                                        } else {
-                                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                                button: true,
-                                                                            }).then(function(isConfirm) {
-                                                                                if (isConfirm == true) {
-                                                                                    setTimeout("location.reload(true);", 1000);
-                                                                                } else {
-                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                                }
-                                                                            });
-                                                                        }
-
-                                                                    }
-                                                                });
-                                                            }
-
-                                                        });
-                                                    </script>
-                                                <?php } ?>
-
-                                                <a  class="btn btn-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a>
-
                                             <?php } else { ?>
-                                                <?php $this->db->select('count(order_id) as c_order'); ?>
-                                                <?php $c_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD']])->row_array(); ?>
-                                                <?php if ($c_feed['c_order'] >= 3) { ?>
-                                                    <button type="button" class="btn btn-secondary" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
-                                                <?php } else { ?>
-                                                    <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
-                                                    <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-                                                <?php } ?>
 
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalMainFeed<?php echo $OPE++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModalNotApprove<?php echo $xxl++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Not Approvend Document</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -290,7 +183,7 @@
 
                                                             <div class="modal-body" style="text-align:left;">
                                                                 <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                <form action="my-order-feedback" class="dropzone" id="fileuploadFeed<?php echo $value['ORD']; ?>">
+                                                                <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprove<?php echo $value['ORD']; ?>">
                                                                     <div class="dz-message needsclick">
                                                                         Drop files here or click to upload.<br>
                                                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
@@ -303,13 +196,13 @@
                                                                 <br>
 
                                                                 <label for="" class="font-size-upload">Date :</label>
-                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo $value['date_required']; ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
+                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
                                                                 <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
                                                                 <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
                                                                 <!-- </form> -->
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" id="SubmitFeed<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
+                                                                <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
@@ -317,27 +210,27 @@
                                                 </div>
                                                 <script type='text/javascript'>
                                                     Dropzone.autoDiscover = false;
-                                                    var myDropzone = new Dropzone("#fileuploadFeed<?php echo $value['ORD']; ?>", {
+                                                    var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
                                                         autoProcessQueue: false,
                                                         maxFiles: 5,
                                                         addRemoveLinks: true,
                                                         parallelUploads: 5, // Number of files process at a time (default 2)
                                                     });
 
-                                                    $('#SubmitFeed<?php echo $value['ORD']; ?>').click(function() {
+                                                    $('#SubmitNotApp<?php echo $value['ORD']; ?>').click(function() {
                                                         var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
                                                         var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
                                                         var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
                                                         var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
 
-                                                        if (myDropzone.files == 0 && x == '') {
+                                                        if (myDropzone2.files == 0 && x == '') {
                                                             swal("Warning!", "Can not be document Empty", "warning", {
                                                                 button: true,
                                                             });
                                                         } else {
                                                             $.ajax({
                                                                 type: 'POST',
-                                                                url: 'my-order-feedAuto',
+                                                                url: 'Not_approved',
                                                                 data: {
                                                                     detail: x,
                                                                     dated: y,
@@ -345,9 +238,9 @@
                                                                     userId: c,
                                                                 },
                                                                 success: function(success) {
-                                                                    if (myDropzone.files != 0) {
-                                                                        myDropzone.processQueue();
-                                                                        myDropzone.on("queuecomplete", function(file, res) {
+                                                                    if (myDropzone2.files != 0) {
+                                                                        myDropzone2.processQueue();
+                                                                        myDropzone2.on("queuecomplete", function(file, res) {
                                                                             swal("Good job!", "Upload for data successfull", "success", {
                                                                                 button: true,
                                                                             }).then(function(isConfirm) {
@@ -374,73 +267,186 @@
                                                             });
                                                         }
 
-
-                                                    });
-                                                </script>
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-
-                                                            <div class="modal-body" style="text-align:left;">
-                                                                <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                <form action="oder-morefile-upload" class="dropzone" id="fileuploadmorefile<?php echo $value['ORD']; ?>">
-                                                                    <div class="dz-message needsclick">
-                                                                        Drop files here or click to upload.<br>
-                                                                        <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                    </div>
-                                                                    <input type="text" name="order_id" id="order_id" value="<?php echo $value['ORD']; ?>" hidden>
-                                                                    <!-- <input type="text" name="userId" id="userId" value="<?php echo $userId['idUser']; ?>" hidden> -->
-                                                                </form>
-                                                                <br>
-                                                                <!-- <form action="my-order-feedAuto" method="POST"> -->
-                                                                <!-- <label for="" class="font-size-upload">Detail :</label>
-                                                                <textarea id="detail1" name="detail" class="form-control" rows="5" required></textarea>
-                                                                <br> -->
-
-                                                                <!-- </form> -->
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" id="Submitgtdoc<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <script type='text/javascript'>
-                                                    Dropzone.autoDiscover = false;
-                                                    var myDropzone<?php echo $value['ORD']; ?> = new Dropzone("#fileuploadmorefile<?php echo $value['ORD']; ?>", {
-                                                        autoProcessQueue: false,
-                                                        maxFiles: 5,
-                                                        addRemoveLinks: true,
-                                                        parallelUploads: 5, // Number of files process at a time (default 2)
-                                                    });
-
-                                                    $('#Submitgtdoc<?php echo $value['ORD']; ?>').click(function() {
-                                                        if (myDropzone<?php echo $value['ORD']; ?>.files < 1) {
-                                                            swal("Warning!", "Can not be document Empty", "warning", {
-                                                                button: true,
-                                                            });
-                                                        } else {
-                                                            myDropzone<?php echo $value['ORD']; ?>.processQueue();
-                                                            myDropzone<?php echo $value['ORD']; ?>.on("queuecomplete", function(file, res) {
-                                                                swal("Good job!", "Upload for data successfull", "success", {
-                                                                    button: false,
-                                                                });
-                                                            });
-                                                            setTimeout("location.reload(true);", 1000);
-                                                        }
                                                     });
                                                 </script>
                                             <?php } ?>
-                                     
+
+                                            <a class="btn btn-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a>
+
+                                        <?php } else { ?>
+                                            <?php $this->db->select('count(order_id) as c_order'); ?>
+                                            <?php $c_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD']])->row_array(); ?>
+                                            <?php if ($c_feed['c_order'] >= 3) { ?>
+                                                <button type="button" class="btn btn-secondary" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                            <?php } else { ?>
+                                                <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
+                                                <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                            <?php } ?>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalMainFeed<?php echo $OPE++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Feedback Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body" style="text-align:left;">
+                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                            <form action="my-order-feedback" class="dropzone" id="fileuploadFeed<?php echo $value['ORD']; ?>">
+                                                                <div class="dz-message needsclick">
+                                                                    Drop files here or click to upload.<br>
+                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                </div>
+                                                            </form>
+                                                            <br>
+                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                            <label for="" class="font-size-upload">Detail :</label>
+                                                            <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
+                                                            <br>
+
+                                                            <label for="" class="font-size-upload">Date :</label>
+                                                            <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo $value['date_required']; ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
+                                                            <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
+                                                            <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
+                                                            <!-- </form> -->
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="SubmitFeed<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script type='text/javascript'>
+                                                Dropzone.autoDiscover = false;
+                                                var myDropzone = new Dropzone("#fileuploadFeed<?php echo $value['ORD']; ?>", {
+                                                    autoProcessQueue: false,
+                                                    maxFiles: 5,
+                                                    addRemoveLinks: true,
+                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                });
+
+                                                $('#SubmitFeed<?php echo $value['ORD']; ?>').click(function() {
+                                                    var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
+                                                    var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
+                                                    var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
+                                                    var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
+
+                                                    if (myDropzone.files == 0 && x == '') {
+                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                            button: true,
+                                                        });
+                                                    } else {
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: 'my-order-feedAuto',
+                                                            data: {
+                                                                detail: x,
+                                                                dated: y,
+                                                                order_id: z,
+                                                                userId: c,
+                                                            },
+                                                            success: function(success) {
+                                                                if (myDropzone.files != 0) {
+                                                                    myDropzone.processQueue();
+                                                                    myDropzone.on("queuecomplete", function(file, res) {
+                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                            button: true,
+                                                                        }).then(function(isConfirm) {
+                                                                            if (isConfirm == true) {
+                                                                                setTimeout("location.reload(true);", 1000);
+                                                                            } else {
+                                                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                } else {
+                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                        button: true,
+                                                                    }).then(function(isConfirm) {
+                                                                        if (isConfirm == true) {
+                                                                            setTimeout("location.reload(true);", 1000);
+                                                                        } else {
+                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                        }
+                                                                    });
+                                                                }
+
+                                                            }
+                                                        });
+                                                    }
+
+
+                                                });
+                                            </script>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body" style="text-align:left;">
+                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                            <form action="oder-morefile-upload" class="dropzone" id="fileuploadmorefile<?php echo $value['ORD']; ?>">
+                                                                <div class="dz-message needsclick">
+                                                                    Drop files here or click to upload.<br>
+                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                </div>
+                                                                <input type="text" name="order_id" id="order_id" value="<?php echo $value['ORD']; ?>" hidden>
+                                                                <!-- <input type="text" name="userId" id="userId" value="<?php echo $userId['idUser']; ?>" hidden> -->
+                                                            </form>
+                                                            <br>
+                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                            <!-- <label for="" class="font-size-upload">Detail :</label>
+                                                                <textarea id="detail1" name="detail" class="form-control" rows="5" required></textarea>
+                                                                <br> -->
+
+                                                            <!-- </form> -->
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="Submitgtdoc<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script type='text/javascript'>
+                                                Dropzone.autoDiscover = false;
+                                                var myDropzone<?php echo $value['ORD']; ?> = new Dropzone("#fileuploadmorefile<?php echo $value['ORD']; ?>", {
+                                                    autoProcessQueue: false,
+                                                    maxFiles: 5,
+                                                    addRemoveLinks: true,
+                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                });
+
+                                                $('#Submitgtdoc<?php echo $value['ORD']; ?>').click(function() {
+                                                    if (myDropzone<?php echo $value['ORD']; ?>.files < 1) {
+                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                            button: true,
+                                                        });
+                                                    } else {
+                                                        myDropzone<?php echo $value['ORD']; ?>.processQueue();
+                                                        myDropzone<?php echo $value['ORD']; ?>.on("queuecomplete", function(file, res) {
+                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                button: false,
+                                                            });
+                                                        });
+                                                        setTimeout("location.reload(true);", 1000);
+                                                    }
+                                                });
+                                            </script>
+                                        <?php } ?>
+
                                     </td>
                                 </tr>
 
