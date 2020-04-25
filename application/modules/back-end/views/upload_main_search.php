@@ -23,12 +23,7 @@
             </div>
 
         </div>
-        <?php
-            $this->db->from('tbl_upload_store');
-            $this->db->where('status_main_search', 1);
-            $this->db->group_by('section');       
-            $datata = $this->db->get()->result_array();
-            ?>
+       
         <div class="content-body">
 
             <!-- Zero configuration table -->
@@ -41,11 +36,11 @@
                                     <h4 class="card-title">Upload Main Search</h4>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <?php if ($datata == '') : ?>
+                                <?php if ($upload_main_search == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
                                         <?php $e = 0; ?>
-                                        <?php foreach ($datata as $key => $datata) {
+                                        <?php foreach ($upload_main_search as $key => $datata) {
                                             $e++;
                                         } ?>
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>

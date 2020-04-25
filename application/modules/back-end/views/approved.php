@@ -28,9 +28,24 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Order Result for Approved</h4>
+                        <div class="row card-header">
+                                <div class="col-10">
+                                    <h4 class="card-title">Order Result for Approved</h4>
+                                </div>
+                                <div class="col-1 text-center">
+                                    <?php if ($Approved == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($Approved as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
+                                    <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
+                                </div>
                             </div>
+                        
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">

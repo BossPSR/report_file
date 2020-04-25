@@ -53,10 +53,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><?php echo $store['order_id']; ?></td>
-                                                        <?php $store_name   = $this->db->get_where('tbl_user', ['id' => $store['userId']])->result_array(); ?>
-                                                        <?php foreach ($store_name as $store_name) { ?>
-                                                            <td><?php echo $store_name['username']; ?></td>
-                                                        <?php  } ?>
+                                                        <td><?php echo $store['userId']; ?></td>
                                                         <td><?php echo $store['file_name']; ?></td>
                                                         <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                         <?php if ($store['price_file'] == '') :   ?>

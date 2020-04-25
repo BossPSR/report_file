@@ -256,5 +256,7 @@ $route['position_edit']                                = 'back-end/Position_ctr/
 $route['delete_Position']                                = 'back-end/Position_ctr/delete_position';
 $route['status_cut_score']                                = 'back-end/Store_ctr/status_cut_score';
 $route['edit_date_required']                                = 'back-end/Store_ctr/edit_date_required';
+$route['edit_date_required_Satisfied']                      = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
+$route['edit_date_required_Not_Satisfied']                      = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';
