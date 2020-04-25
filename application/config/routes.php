@@ -254,5 +254,7 @@ $route['Position']                                = 'back-end/Position_ctr';
 $route['position_Add']                                = 'back-end/Position_ctr/position_Add';
 $route['position_edit']                                = 'back-end/Position_ctr/position_edit';
 $route['delete_Position']                                = 'back-end/Position_ctr/delete_position';
+$route['status_cut_score']                                = 'back-end/Store_ctr/status_cut_score';
+$route['edit_date_required']                                = 'back-end/Store_ctr/edit_date_required';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

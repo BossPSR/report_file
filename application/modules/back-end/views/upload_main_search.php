@@ -64,6 +64,7 @@
                                                     <th>#</th>
                                                     <th>Status Sell</th>
                                                     <th>Document</th>
+                                                    <th>CM</th>
                                                     <th>Search Item</th>
                                                     <th>Select Item</th>
                                                     <th>file</th>
@@ -96,6 +97,7 @@
                                                     </td>
 
                                                         <td><?php echo $value['id_doc'];;?></td>
+                                                        <td><?php echo $value['userId'];;?></td>
                                                         <td><?php echo $value['search_item']; ?></td>
                                                         <td><?php echo $value['select_item']; ?></td>
                                                         <td>

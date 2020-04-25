@@ -59,6 +59,7 @@
                                                     <th>User</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
+                                                    <th>create Order</th>
                                                     <th>Date Required</th>
                                                     <th>Confirmed order</th>
                                                 </tr>
@@ -178,7 +179,43 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td><?php echo $stored['date_required']; ?></td>
+                                                        <td><?php echo $stored['create_at']; ?></td>
+                                                        <td>
+                                                            <a  href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stored['id']; ?>"><?php echo $stored['date_required']; ?>  <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                            <div class="modal fade" id="exampleModaldate<?php echo $stored['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                    <form action="edit_date_required" method="POST">
+                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                            
+                                                                                <input type="hidden" name="order_id" value="<?php echo $stored['order_id']; ?>">
+                                                                        <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+                                                                                    
+                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">Date Required</label>
+                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stored['date_required']; ?>" placeholder="Enter score" >
+                                                                                        </div>
+                                                                                      
+                                                                                    </div>
+                                                                                   
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                           
+                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                    
+                                                        </td>
                                                         <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['id']; ?>">
                                                                 Satisfired
 

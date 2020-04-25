@@ -705,4 +705,109 @@ class Store_ctr extends CI_Controller
             return redirect('back_store_checkForsell');
         }
     }
+
+
+    public function status_cut_score()
+    {
+        $id = $this->input->post('id');
+        $CM = $this->input->post('CM');
+        $Order = $this->input->post('Order');
+        $score = $this->input->post('score');
+
+        $user = $this->db->get_where('tbl_user', ['idUser' => $CM])->row_array();
+        $user_cut =$user['score']-$score;
+        $this->db->where('idUser',$CM);
+        $resultsedit = $this->db->update('tbl_user', [ 'score' => $user_cut]);
+
+
+        $path_del =  $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
+        unlink($path_del['path']);
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->delete('tbl_upload_store');
+        $this->sendEmail_cut_score($Order,$score,$CM);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated status cut score information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated status cut score information');
+        }
+        return redirect('back_store_checkForsell');
+    }
+
+    private function sendEmail_cut_score($Order,$score,$CM)
+    {
+        $user = $this->db->get_where('tbl_user', ['idUser' => $CM])->row_array();
+
+        $subject = 'Your document has been rejected.';
+
+        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
+        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
+        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+        $message .= '<body style="background: #eee;">';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
+
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">รหัส : ' . $CM .  'order'.$Order.' โดนหัก '.$score.'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+
+        $message .= '<div>';
+        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
+        $message .= 'Reject';
+        $message .= '</div>';
+        $message .= '</div>';
+        $message .= '</body>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email cut Score information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email cut Score information');
+        }
+    }
+
+    public function edit_date_required()
+    {
+        $order_id = $this->input->post('order_id');
+        $date_required = $this->input->post('date_required');
+
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'date_required' => $date_required]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated edit_date_required information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated edit_date_required information');
+        }
+        return redirect('back_store_buy');
+    }
+
+
+
+
+
+
 }

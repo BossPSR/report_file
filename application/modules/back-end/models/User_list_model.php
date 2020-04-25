@@ -12,6 +12,7 @@ class User_list_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('tbl_user');
         $this->db->join('tbl_paypal','tbl_user.id=tbl_paypal.user_id','left');
+        $this->db->group_by('tbl_user.idUser');
         return $this->db->get()->result_array();
 
     }
