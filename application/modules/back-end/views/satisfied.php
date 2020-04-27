@@ -57,6 +57,7 @@
                                                     <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>DM</th>
                                                     <th>Item</th>
                                                     <th>Code</th>
                                                     <th>Main File</th>
@@ -79,6 +80,22 @@
                                                         <td><?php echo $i++; ?></td>
                                                         <td><?php echo $stores['order_id']; ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
+                                                        <td>
+                                                            <?php if (empty($stores['id_document'])) : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $stores['order_id']])->result_array(); ?>
+                                                                <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
+
+                                                                    <?php if ($show_dm['id_document'] == '') : ?>
+                                                                        -
+                                                                    <?php else : ?>
+                                                                        <?php echo $show_dm['id_document'] ?><br>
+                                                                    <?php endif; ?>
+
+                                                                <?php } ?>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td><?php echo $stores['topic']; ?></td>
                                                         <td><?php echo $stores['code']; ?></td>
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>

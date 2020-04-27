@@ -63,6 +63,7 @@
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
                                                     <th>Price</th>
+                                                    <th>Wage</th>
                                                     <th>Upload to team</th>
                                                 </tr>
                                             </thead>
@@ -221,6 +222,7 @@
                                                         <?php else : ?>
                                                             <td>$<?php echo $store['price_file']; ?></td>
                                                         <?php endif; ?>
+                                                        <td><?php echo $store['wage']; ?></td>
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['order_id']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>

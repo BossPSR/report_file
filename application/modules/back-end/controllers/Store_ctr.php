@@ -806,6 +806,24 @@ class Store_ctr extends CI_Controller
     }
 
 
+    public function  status_reject_forbey()
+    {
+        $id = $this->input->get('id');
+      
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'),'is_check' => 0]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated Clover File information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated Clover File information');
+        }
+        return redirect('back_store_reject_for_buy');
+    }
+    
+
+
 
 
 

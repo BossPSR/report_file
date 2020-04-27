@@ -211,7 +211,22 @@
         })
     }
 </script>
+<script>
+    function confirmalertunlock_reject(data11) {
 
+        swal({
+            title: "Are you sure clover File?",
+            text: "Are you sure you this clover File ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'status_reject_forbey?id=' + data11  ;
+            }
+        })
+    }
+</script>
 
 
 
