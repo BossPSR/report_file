@@ -31,9 +31,10 @@
                                 <th scope="col">Main Doc</th>
                                 <th scope="col">GT Doc</th>
                                 <th scope="col">DM Doc</th>
+                                <th scope="col">Team File</th>
                                 <th scope="col">Wage</th>
                                 <th scope="col">Select item</th>
-                                <th scope="col">Withdraw</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -194,6 +195,7 @@
                                             -
                                         <?php } ?>
                                     </td>
+                                    <td><a href="#" data-toggle="modal" data-target="#TEAMFILE"><i class="fa fa-file-text-o"></i></a></td>
                                     <td>
                                         <?php $DMfile = $this->db->get_where('tbl_upload_store', ['store_id' => $task['upload_store_id']])->result_array(); ?>
                                         <?php if (!empty($DMfile)) { ?>
@@ -252,8 +254,12 @@
                                     <td>
                                         <span class="badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
                                     </td>
+
+                                    <?php $data = date('Y-m-d') ?>
+                                    <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $task['up_order'])); ?>
+
                                     <td><?php echo $task['name_item']; ?></td>
-                                    <?php if ($task['status_approved'] == 1) { ?>
+                                    <?php if ($task['status_approved'] == 1 || date('Y-m-d') >= $prosum && $task['up_order'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
                                         <?php if (empty($withh)) { ?>
@@ -297,18 +303,22 @@
                                                 });
                                             </script>
                                         <?php } elseif ($withh['status'] == 1) { ?>
-                                            <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for admin</span></td>
+                                            <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for withdraw</span></td>
                                         <?php } elseif ($withh['status'] == 2) { ?>
                                             <td><span class="badge badge-success" style="font-size:16px;">Success</span></td>
                                         <?php } else { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
                                         <?php } ?>
 
-                                    <?php } else { ?>
-                                        <td><button class="btn btn-secondary"><i class="fa fa-money"></i> Withdraw</button></td>
+                                    <?php } elseif ($task['status_approved'] == 0) { ?>
+                                        <?php if ($task['c_status'] == 0) { ?>
+                                            <td><span class="badge badge-warinig" style="font-size:16px;">Processing</span></td>
+                                        <?php } elseif ($task['c_status'] == 1) { ?>
+                                            <td><span class="badge badge-success" style="font-size:16px;">Complete</span></td>
+                                        <?php } elseif ($task['c_status'] == 2) { ?>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">Feedback</span></td>
+                                        <?php } ?>
                                     <?php } ?>
-
-
                                 </tr>
                             <?php } ?>
                             <script>

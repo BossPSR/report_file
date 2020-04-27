@@ -73,7 +73,7 @@
 
     $('#uploadfiles').click(function() {
         var x = document.getElementById("selected2").value;
-        if (myDropzone.files === 0 || x == '') {
+        if (myDropzone.files < 1 || x == '') {
             swal("Warning!", "Please fill out the information.", "error", {
                 button: false,
             });

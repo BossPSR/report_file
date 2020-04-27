@@ -83,7 +83,7 @@
                     </button>
                 </div>
                 <div class="row text-center">
-                    <div class="col-md-12"><img style="width: 100px;" src="public/frontend/assets/img/logo/logo.png" alt=""></div>
+                    <div class="col-md-12"><img style="width: 250px;" src="public/frontend/assets/img/logo/logo4.png" alt=""></div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">

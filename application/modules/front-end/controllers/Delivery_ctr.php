@@ -58,19 +58,20 @@ class Delivery_ctr extends CI_Controller
                 'path'          => 'uploads/Team/' . $uploadData['file_name'],
                 'create_at'     => date('Y-m-d H:i:s'),
             );
-            $this->db->insert('tbl_upload_order_team', $data);
+            if ($this->db->insert('tbl_upload_order_team', $data)) {
+                $data3 = array(
+                    'status'        => 1,
+                );
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_team', $data3);
+            }
             if ($feed == true) {
                 $data2 = array(
                     'check_feedback_dalivery'   => 1
                 );
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_feedback', $data2);
-            } else {
             }
-            // if ($this->db->insert('tbl_upload_order', $data)) {
-            //   return redirect('buy_uploadGT', $data);
-            // }
-
         }
     }
 }
