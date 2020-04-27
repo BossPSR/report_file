@@ -258,5 +258,6 @@ $route['status_cut_score']                                = 'back-end/Store_ctr/
 $route['edit_date_required']                                = 'back-end/Store_ctr/edit_date_required';
 $route['edit_date_required_Satisfied']                      = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']                      = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
+$route['status_reject_forbey']                              = 'back-end/Store_ctr/status_reject_forbey';
 
 // $route['pay']                                 = 'back-end/Store_ctr/pay';

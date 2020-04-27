@@ -44,6 +44,7 @@
                                                     <th>PriceFile</th>
                                                     <th>Note</th>
                                                     <th>create_at</th>
+                                                    <th>Tool</th>
                                                   
                                                 </tr>
                                             </thead>
@@ -63,7 +64,8 @@
                                                             <?php endif; ?>
                                                             <td><?php echo $store['note_reject']; ?></td>
                                                         <td><?php echo $store['create_at']; ?></td>
-                                                        
+                                                        <td><button type="button" class="btn btn-outline-info" onclick="confirmalertunlock_reject('<?php echo $store['id']; ?>')">Clover</button></td>
+                                                          
 
                                                     </tr>
 
