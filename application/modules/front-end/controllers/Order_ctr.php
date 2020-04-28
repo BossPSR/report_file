@@ -16,7 +16,7 @@ class Order_ctr extends CI_Controller
       redirect('home');
     } else {
       $data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['id']])->row_array();
+      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['idUser']])->row_array();
       if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
         $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
         $checkDate = DateDiff($datePaypal, date("Y-m-d"));
@@ -56,7 +56,7 @@ class Order_ctr extends CI_Controller
   public function order_not_approved()
   {
     $order_id             = $this->input->post('order_id');
-    $is_confirm     = $this->input->post('status_approved');
+    $is_confirm           = $this->input->post('status_approved');
 
     if ($this->session->userdata('email') == '') {
       redirect('home');
@@ -77,6 +77,7 @@ class Order_ctr extends CI_Controller
     // image_lib
 
     $order_id     = $this->input->post('order_id');
+    $detail       = $this->input->post('detail');
 
     $request = 1;
     // Set preference
@@ -98,6 +99,7 @@ class Order_ctr extends CI_Controller
 
       $data = array(
         'order_id'          => $order_id,
+        'detail'            => $detail,
         'file_name_GT'      => $uploadData['file_name'],
         'path_GT'           => 'uploads/Buy/GT/' . $uploadData['file_name'],
         'status_more_file'  => 1,
@@ -105,5 +107,10 @@ class Order_ctr extends CI_Controller
       );
       $this->db->insert('tbl_upload_orderGT', $data);
     }
+  }
+
+  public function order_notAppOr()
+  {
+
   }
 }

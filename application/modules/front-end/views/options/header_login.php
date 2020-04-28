@@ -376,10 +376,10 @@
                                                 ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;">
                                                     <div class="menu-list">
-                                                    <?php if($sm_de2['sumWage']) : ?>
-                                                        <?php echo $sm_de2['sumWage']; ?>
-                                                        <?php else: ?>
-                                                        0
+                                                        <?php if ($sm_de2['sumWage']) : ?>
+                                                            <?php echo $sm_de2['sumWage']; ?>
+                                                        <?php else : ?>
+                                                            0
                                                         <?php endif; ?>
                                                     </div>
                                                     <div>My Income</div>
@@ -413,7 +413,10 @@
                                             <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                             <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
-                                            <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                            <li>
+                                                <a href="#"> User manual <i class="fa fa-angle-right"></i></a>
+                                            </li>
+                                            
                                         <?php else : ?>
                                             <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                             <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
@@ -421,7 +424,16 @@
                                             <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
-                                            <li><a href="#"> User manual <i class="fa fa-angle-right"></i></a></li>
+                                            <li>
+                                                <a href="#"> User manual <i class="fa fa-angle-right"></i></a>
+                                                <ul class="categorie_sub_menu">
+                                                    <li><a href="">Coats Jackets </a></li>
+                                                    <li><a href="">Raincoats</a></li>
+                                                    <li><a href="">Jackets</a></li>
+                                                    <li><a href="">T-shirts</a></li>
+                                                </ul>
+                                            </li>
+
                                         <?php endif ?>
                                     </ul>
                                 </div>
@@ -442,28 +454,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="package"> Package</a></li>
-                                            <!-- <li class="menu-item-has-children" style="margin-right: 15px;">
-                                                    <i class="fa fa-commenting-o icon-bell" aria-hidden="true"></i>
-                                                </li>
-                                                <li class="menu-item-has-children" style="margin-right: 40px;">
-                                                    <i class="fa fa-bell icon-bell" aria-hidden="true"></i>
-                                                </li> -->
-                                            <li>
-                                                <!-- <div id="user_notify"> -->
-
-                                                <!-- <div class="dropdown"> -->
-                                                <!-- <div class="material-icons text-black-secondary badge-notification " data-badge="13">account_box</div> -->
-                                                <!-- <i class="fa fa-bell text-black-white badge-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-badge="0" style="font-size:22px;color:#fff;"></i> -->
-
-                                                <!-- <ul class="dropdown-menu" role="menu">
-                                                        <li><a>Action</a></li>
-                                                    </ul> -->
-                                                <!-- </div> -->
-
-
-                                                <!-- </div> -->
-                                                <?php $this->load->view('options/notify_user'); ?>
-                                            </li>
+                                            <li><?php $this->load->view('options/notify_user'); ?></li>
                                             <li> </li>
 
                                         <?php elseif ($team) : ?>

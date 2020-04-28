@@ -197,7 +197,7 @@
                                     </td>
                                     <td>
 
-                                        <?php echo $task['upload_store_id']; ?>
+
                                         <?php $DMfile = $this->db->get_where('tbl_upload_store', ['store_id' => $task['upload_store_id']])->result_array(); ?>
                                         <?php if (!empty($DMfile)) { ?>
 
@@ -253,7 +253,7 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <?php echo $task['upload_store_id']; ?>
+
                                         <?php $teamfile = $this->db->get_where('tbl_upload_order_team', ['order_id' => $task['or_id']])->result_array(); ?>
                                         <?php if (!empty($teamfile)) { ?>
 
@@ -263,7 +263,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>

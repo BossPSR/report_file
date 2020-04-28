@@ -114,7 +114,7 @@ class My_feedback_ctr extends CI_Controller
         );
         if ($this->db->insert('tbl_feedback', $orf)) {
             $appro = array(
-                'status_approved' => 2
+                'status_approved' => 3
             );
             $this->db->where('order_id', $order_id);
             $success = $this->db->update('tbl_upload_order', $appro);

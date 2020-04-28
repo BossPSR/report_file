@@ -18,7 +18,8 @@
                                 <th scope="col">Document</th>
                                 <th scope="col">Main Document</th>
                                 <th scope="col">GT Document</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Date Required</th>
                                 <th scope="col">Tool</th>
                             </tr>
                         </thead>
@@ -38,11 +39,19 @@
                             <?php foreach ($buy_email as $value) : ?>
                                 <?php $sub_order = substr($value['order_id'], 3); ?>
                                 <tr style="text-align:center;">
-                                    <th style="text-align: center;font-size: 39px;">
-                                        <?php if ($value['status_delivery'] == 1) : ?>
-                                            <i class="fa fa-check-square-o" style="color: #28a745;" aria-hidden="true"></i>
-                                        <?php else : ?>
-                                            <i class="fa fa-minus-square-o" style="color: #cbcbcb;" aria-hidden="true"></i>
+                                    <th style="text-align: center;">
+                                        <?php if ($value['status_pay'] == 1 && $value['status_delivery'] == 0) : ?>
+                                            <span class="badge badge-warning" style="color:#fff;">Processing</span>
+                                            <!-- <i class="fa fa-check-square-o" style="color: #28a745;" aria-hidden="true"></i> -->
+                                        <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 0) : ?>
+                                            <span class="badge badge-success" style="color:#fff;">Complete</span>
+                                            <!-- <i class="fa fa-minus-square-o" style="color: #cbcbcb;" aria-hidden="true"></i> -->
+                                        <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 1) : ?>
+                                            <span class="badge badge-info" style="color:#fff;">Approved</span>
+                                        <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 2) : ?>
+                                            <span class="badge badge-danger" style="color:#fff;">Not Approved</span>
+                                        <?php elseif ($value['status_approved'] == 3) : ?>
+                                            <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
                                         <?php endif; ?>
                                     </th>
                                     <th scope="row"><?php echo $i++; ?></th>
@@ -119,6 +128,7 @@
                                                                     <tr style="text-align:center;">
                                                                         <th scope="col">ID Order</th>
                                                                         <th scope="col">File</th>
+                                                                        <th scope="col" class="text-left">Detail</th>
                                                                         <th scope="col">Tool</th>
                                                                     </tr>
                                                                 </thead>
@@ -126,14 +136,19 @@
                                                                     <?php foreach ($order_GT as $order_GT) { ?>
                                                                         <tr style="text-align:center;">
                                                                             <td><?php echo $order_GT['order_id']; ?></td>
-                                                                            <td>
+                                                                            <td class="text-left">
                                                                                 <?php if ($order_GT['status_more_file'] == 1) { ?>
                                                                                     <span class="badge badge-danger">New</span>
                                                                                 <?php } ?>
                                                                                 <?php echo $order_GT['file_name_GT']; ?>
                                                                             </td>
-                                                                            <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a>
-                                                                            </td>
+                                                                            <?php if (!empty($order_GT['detail'])) { ?>
+                                                                                <td class="text-left"><?= $order_GT['detail']; ?></td>
+                                                                            <?php } else { ?>
+                                                                                <td class="text-center"> - </td>
+                                                                            <?php } ?>
+
+                                                                            <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -150,16 +165,15 @@
                                             -
                                         <?php } ?>
                                     </td>
-                                    <td><?php echo $value['date_required']; ?></td>
+                                    <td><?php echo date("d F Y", strtotime($value['created_at'])); ?></td>
+                                    <td><?php echo date("d F Y", strtotime($value['date_required'])); ?></td>
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php $produm   = date('Y-m-d', strtotime('+5 day' . '+' . $value['update_at_buy'])); ?>
 
-                                        <?php if ($value['status_approved'] == 1) { ?>
-                                            <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-secondary"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
-                                        <?php } elseif ($value['status_approved'] == 2 || $value['status_delivery'] == 1) { ?>
+                                        <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
+                                            -
+                                        <?php } elseif ($value['status_approved'] == 3 || $value['status_delivery'] == 1) { ?>
                                             <button type="button" class="btn btn-success" id="approved<?php echo $sub_order ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <?php
                                             $this->db->select('count(order_id) as N_order');
@@ -270,8 +284,43 @@
                                                     });
                                                 </script>
                                             <?php } ?>
+                                            <?php $ord_s = substr($value['ORD'], 3); ?>
+                                            <a class="btn btn-danger" id="order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                            <script type='text/javascript'>
+                                                $('#order_not_approved<?php echo $value['ORD']; ?>').click(function() {
 
-                                            <a class="btn btn-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></a>
+                                                    swal({
+                                                        icon: "warning",
+                                                        title: "Are you sure?",
+                                                        text: "Do you want Not Approvend document",
+                                                        closeOnEsc: true,
+                                                        closeOnClickOutside: false,
+                                                        buttons: {
+                                                            cancel: true,
+                                                            confirm: true,
+                                                        },
+                                                    }).then(function(isConfirm) {
+                                                        if (isConfirm == true) {
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: 'order_not_approved',
+                                                                data: {
+                                                                    order_id: <?= $ord_s ?>,
+                                                                    status_approved: 2,
+                                                                },
+                                                                success: function(success) {
+                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                        button: false,
+                                                                    });
+                                                                    setTimeout("location.reload(true);", 1000);
+                                                                }
+                                                            });
+                                                        } else {
+                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                        }
+                                                    });
+                                                });
+                                            </script>
 
                                         <?php } else { ?>
                                             <?php $this->db->select('count(order_id) as c_order'); ?>
@@ -403,13 +452,13 @@
                                                                     <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                                                 </div>
                                                                 <input type="text" name="order_id" id="order_id" value="<?php echo $value['ORD']; ?>" hidden>
-                                                                <!-- <input type="text" name="userId" id="userId" value="<?php echo $userId['idUser']; ?>" hidden> -->
+                                                                <textarea id="detailshow" name="detail" class="form-control detailshow" rows="5" hidden></textarea>
                                                             </form>
                                                             <br>
                                                             <!-- <form action="my-order-feedAuto" method="POST"> -->
-                                                            <!-- <label for="" class="font-size-upload">Detail :</label>
-                                                                <textarea id="detail1" name="detail" class="form-control" rows="5" required></textarea>
-                                                                <br> -->
+                                                            <label for="" class="font-size-upload">Detail :</label>
+                                                            <textarea id="detailkey" class="form-control" rows="5"></textarea>
+                                                            <br>
 
                                                             <!-- </form> -->
                                                         </div>
@@ -421,6 +470,12 @@
                                                 </div>
                                             </div>
                                             <script type='text/javascript'>
+                                                $("#detailkey")
+                                                    .keyup(function() {
+                                                        var value = $(this).val();
+                                                        $(".detailshow").val(value);
+                                                    })
+                                                    .keyup();
                                                 Dropzone.autoDiscover = false;
                                                 var myDropzone<?php echo $value['ORD']; ?> = new Dropzone("#fileuploadmorefile<?php echo $value['ORD']; ?>", {
                                                     autoProcessQueue: false,
@@ -449,12 +504,6 @@
 
                                     </td>
                                 </tr>
-
-
-
-
-
-
                                 <script type='text/javascript'>
                                     $('#approved<?php echo $sub_order ?>').click(function() {
                                         swal({

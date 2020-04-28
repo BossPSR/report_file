@@ -17,7 +17,7 @@ class Buy_ctr extends CI_Controller
       redirect('home');
     } else {
       $data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['id']])->row_array();
+      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['idUser']])->row_array();
       if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
         $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
         $checkDate = DateDiff($datePaypal, date("Y-m-d"));
@@ -42,7 +42,7 @@ class Buy_ctr extends CI_Controller
 
       $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
       $data['userId'] = $user;
-      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
+      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $user['idUser']])->row_array();
       if (!empty($paypal)) {
         $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
         $checkDate = DateDiff($datePaypal, date("Y-m-d"));
