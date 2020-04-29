@@ -55,9 +55,9 @@
                                                 <tr>
                                                     <th>Order Id</th>
                                                     <th>User</th>
-                                                    <th>DM</th>
                                                     <th>Item</th>
                                                     <th>Code</th>
+                                                    <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>DM File</th>
