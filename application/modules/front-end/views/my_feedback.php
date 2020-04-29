@@ -157,7 +157,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><?= $feedback['date_required']; ?></td>
+                                        <td><?= date('d F Y', strtotime($feedback['date_required'])); ?></td>
                                         <td>
                                             <?php if ($feedback['status_feedback_read'] == 0) { ?>
                                                 <span class="badge badge-danger">Not Read</span>

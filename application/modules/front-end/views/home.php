@@ -64,6 +64,27 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="check_morefile" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="check_morefile" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+
+                <h5 class="modal-title" id="staticBackdropLabel">More File </h5>
+            </div>
+            <div class="modal-body">
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <br>
+                <center>
+                    <button class="btn btn-primary" id="status_morefile">ACCEPT</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="slider_section slider_section_four mb-70 mt-30">
     <div class="container">
         <div class="row">
@@ -114,6 +135,35 @@
         </div>
     </div>
 </div>
+<?php if ($check_morefile) { ?>
+    <?php $moreT = substr($check_morefile['teamId'], 2); ?>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#check_morefile').modal('show');
+        });
+    </script>
+    <script type="text/javascript">
+        $('#status_morefile').click(function() {
+            // console.log(<?php echo $moreT; ?>);
+
+            $.ajax({
+                type: 'POST',
+                url: 'update_see_more_file',
+                data: {
+                    teamId: <?php echo $moreT; ?>,
+                },
+                success: function(success) {
+                    swal("Good job!", "Got it.", "success", {
+                        button: false,
+                    });
+                    setTimeout(function() {
+                        location.href = "My-task"
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+<?php } ?>
 
 
 <?php if (!empty($this->session->userdata('email'))) { ?>
