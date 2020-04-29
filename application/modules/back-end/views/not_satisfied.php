@@ -21,7 +21,7 @@
 
         </div>
 
-    
+
 
         <div class="content-body">
 
@@ -54,7 +54,6 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
@@ -64,7 +63,7 @@
                                                     <th>Date required</th>
                                                     <th>Price</th>
                                                     <th>Wage</th>
-                                                    <th>Upload to team</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -77,8 +76,7 @@
                                                 ?>
 
                                                     <tr>
-                                                        <td><?php echo $i++ ?></td>
-                                                        <td><?php echo $store['order_id'] ?></td>
+                                                        <td><?php echo $store['orderNOT'] ?></td>
                                                         <td><?php echo $store['userId']; ?></td>
                                                         <td><?php echo $store['file_name']; ?></td>
                                                         <td>
@@ -177,18 +175,18 @@
                                                             <?php endif; ?>
                                                         </td>
 
-                                                        <td><?php echo $store['create_at']; ?></td>
+                                                        <td><?php echo $store['createNOT']; ?></td>
                                                         <td>
-                                                        <?php if($store['status_delivery']== '1'):?>
-                                                                <?php echo $store['date_required']; ?>
-                                                            <?php else:?>
-                                                            <a  href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $store['id']; ?>"><?php echo $store['date_required']; ?>  <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                            <div class="modal fade" id="exampleModaldate<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <?php if ($store['status_delivery'] == '1') : ?>
+                                                                <?php echo $store['dateNOT']; ?>
+                                                            <?php else : ?>
+                                                                <a href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $store['id']; ?>"><?php echo $store['dateNOT']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="exampleModaldate<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_date_required_Not_Satisfied" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                            
-                                                                        <input type="hidden" name="order_id" value="<?php echo $store['order_id']; ?>">
-                                                                        <div class="modal-content">
+
+                                                                            <input type="hidden" name="order_id" value="<?php echo $store['order_id']; ?>">
+                                                                            <div class="modal-content">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -196,33 +194,39 @@
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-                                                                                    
+
                                                                                     <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">Date Required</label>
-                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $store['date_required']; ?>" placeholder="Enter score" >
+                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $store['dateNOT']; ?>" placeholder="Enter score">
                                                                                         </div>
-                                                                                      
+
                                                                                     </div>
-                                                                                   
+
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
                                                                                 </div>
                                                                             </div>
-                                                                           
+
                                                                         </div>
-                                                                        </form>
-                                                                    </div>
-                                                                    <?php endif;?>
-                                                    
+                                                                    </form>
+                                                                </div>
+                                                            <?php endif; ?>
+
                                                         </td>
                                                         <?php if ($store['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
                                                             <td>$<?php echo $store['price_file']; ?></td>
                                                         <?php endif; ?>
-                                                        <td><?php echo $store['wage']; ?></td>
+                                                        <td>
+                                                            <?php if ($store['wage'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php echo $store['wage']; ?>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['order_id']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>
