@@ -9,7 +9,18 @@ class Users_model extends CI_Model
         parent::__construct();
     }
 
-    //    public function get_upload_order($sel1){
+    function check_GT($as)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_upload_team');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_team.order_id');
+        $this->db->where('tbl_upload_team.teamId', $as);
+        $this->db->where('tbl_upload_orderGT.status_more_file', 1);
+        $this->db->where('tbl_upload_orderGT.status_see_more_file_team !=', 11);
 
-    //    }
+        $data = $this->db->get();
+        return $data->row_array();
+    }
+
+    
 }
