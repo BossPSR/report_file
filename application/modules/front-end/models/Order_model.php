@@ -79,9 +79,12 @@ class Order_model extends CI_Model
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
+        $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->where('tbl_feedback.check_feedback_order', 1);
+        $this->db->where('tbl_upload_team.status', 1);
         $this->db->where('tbl_upload_order.status_pay', 1);
-        $this->db->where('tbl_upload_order.status_delivery', 0);
+        // $this->db->where('tbl_upload_order.status_delivery', 0);
         $this->db->where_in('tbl_upload_team.teamId', $sess);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'DESC');
@@ -150,6 +153,7 @@ class Order_model extends CI_Model
         $this->db->where('tbl_feedback.check_feedback_dalivery', 0);
         $this->db->where('tbl_upload_team.status', 1);
         $this->db->where('tbl_upload_team.teamId', $sessi);
+        $this->db->group_by('tbl_feedback.order_id');
         $this->db->order_by('tbl_upload_team.order_id', 'DESC');
 
         $data = $this->db->get();

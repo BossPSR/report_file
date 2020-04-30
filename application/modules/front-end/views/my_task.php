@@ -53,7 +53,7 @@
                                 <tr style="text-align:center;">
                                     <td><?php echo $p++; ?></td>
                                     <td><?php echo $task['or_id']; ?></td>
-                                    <td><?php echo $task['date_required']; ?></td>
+                                    <td><?php echo date('d F Y',strtotime($task['date_required'])); ?></td>
                                     <td>
                                         <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
 

@@ -31,7 +31,7 @@
                                                 <option value="<?php echo $delivery['order_id']; ?>"><?php echo $delivery['order_id']; ?></option>
                                             <?php } ?>
                                             <?php foreach ($delivery_feed as $delivery_feed) { ?>
-                                                <option value="<?php echo $delivery_feed['order_feed']; ?>"><?php echo $delivery_feed['order_feed'] . ' ' . "(Feed back)"; ?></option>
+                                                <option value="<?php echo $delivery_feed['order_feed']; ?>"><?php echo $delivery_feed['order_feed'] . ' ' . "(Feedback)"; ?></option>
                                             <?php } ?>
                                         </select>
 

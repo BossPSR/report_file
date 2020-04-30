@@ -66,6 +66,7 @@ class My_stock_ctr extends CI_Controller
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
+
             $data['stock']          = $this->Order_model->my_stock($item_id, $sess['IdTeam']);
             $data['stock_row']      = $this->Order_model->my_stock_row($sess['IdTeam']);
             $stock_capp             = $this->Order_model->my_stock_count($sess['IdTeam']);

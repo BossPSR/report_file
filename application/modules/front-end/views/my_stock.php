@@ -233,17 +233,12 @@
                                     </td>
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
-
-                                        <?php if ($stock_row == true) { ?>
-                                            <button type="button" class="btn btn-secondery"> Confirmed</button>
-                                        <?php } elseif ($stock_row == false) { ?>
-                                            <?php if ($c_app >= 2) { ?>
-                                                <button type="button" class="btn btn-secondery"> Confirmed</button>
-                                            <?php } else { ?>
-                                                <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
-                                            <?php } ?>
-                                        <?php } else { ?>
+                                   
+                                        <?php if ($stock_row == true ) { ?>
                                             <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
+                                            
+                                        <?php } else { ?>
+                                            <button type="button" class="btn btn-secondery"> Confirmed</button>
                                         <?php } ?>
 
                                         <!-- Modal -->
