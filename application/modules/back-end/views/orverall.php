@@ -21,7 +21,7 @@
 
         </div>
 
-     
+
 
         <div class="content-body">
 
@@ -35,16 +35,15 @@
                                     <h4 class="card-title">All Satisfied and Not Satisfied</h4>
                                 </div>
                                 <div class="col-2 text-center">
-                                <?php if($order_all ==''):?>
-                                    <h3 class="card-title ">0</h3>
-                                  <?php else:?>
-                                    <?php $e = 0; ?>
-                                    <?php foreach ($order_all as $key => $datata) {
-                                        $e++ ;
-                                      
-                                    } ?>
-                                    <h3 class="card-title "><?php echo $e += 0; ?></h3>
-                                  <?php endif;?>
+                                    <?php if ($order_all == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $e = 0; ?>
+                                        <?php foreach ($order_all as $key => $datata) {
+                                            $e++;
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $e += 0; ?></h3>
+                                    <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                             </div>
@@ -54,28 +53,28 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-
-                                                    <th>#</th>
+                                                    <th>Step</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
-                                                    <th>File Name</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
+                                                    <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>PriceFile</th>
-                                                    <!-- <th>Confirmed order</th> -->
+                                                    <th>Delivered</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php 
-                                                    $i = 1 ;
-                                                    foreach ($order_all as $id => $stores) { 
+                                                <?php
+                                                $i = 1;
+                                                foreach ($order_all as $id => $stores) {
                                                 ?>
                                                     <tr>
-                                                        <td><?php echo $i++ ; ?></td>
+                                                        <td><button class="btn btn-primary">0</button></td>
                                                         <td><?php echo $stores['order_id'] ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
-                                                        <td><?php echo $stores['file_name']; ?></td>
+
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -104,8 +103,6 @@
                                                                                             <td><?php echo $order['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td><?php echo $order['create_at'] ?></td>
-
-
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -149,8 +146,6 @@
                                                                                             <td><?php echo $order['file_name_GT'] ?></td>
                                                                                             <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td><?php echo $order['create_at'] ?></td>
-
-
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -167,12 +162,34 @@
 
 
                                                         </td>
+                                                        <td><?php echo $stores['create_at']; ?></td>
                                                         <td><?php echo $stores['date_required']; ?></td>
                                                         <?php if ($stores['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
+                                                        <td>
+                                                            <?php if ($stores['status_delivery'] == 0) :?>
+                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
+                                                            <?php else : ?>
+                                                                <span class="badge badge-pill badge-success">Delivered</span>
+                                                            <?php endif ; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') :?>
+                                                            <span class="badge badge-pill badge-success">Original</span>
+                                                            <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete'  && $stores['status_admin'] == '0') : ?>
+                                                            <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0' ) : ?>
+                                                            <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($stores['status_admin'] == '1' ) : ?>
+                                                            <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
 
                                                         <!-- <td><span  class="badge badge-pill badge-success">Successful payment</button></td> -->
                                                     </tr>

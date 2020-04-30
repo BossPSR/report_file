@@ -414,10 +414,10 @@
                                                                                 echo 'active';
                                                                             } ?>" href="not-approved" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Not Approved</a>
                                 </li>
-                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Delivery") {
+                                <!-- <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Delivery") {
                                                                                 echo 'active';
                                                                             } ?>" href="Delivery" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Delivery</a>
-                                </li>
+                                </li> -->
                             </ul>
 
                         </li>
@@ -581,10 +581,10 @@
                                                     echo 'active';
                                                 } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-inbox"></i><span data-i18n="Order Result">My Stock</span></a>
                     <ul class="dropdown-menu">
-                        <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Stock") {
+                        <!-- <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Stock") {
                                                                         echo 'active';
                                                                     } ?>" href="Stock" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-credit-card"></i>My Stock</a>
-                        </li>
+                        </li> -->
                         <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "my_stock_admin") {
                                                                         echo 'active';
                                                                     } ?>" href="my_stock_admin" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>My StockAdmin</a>

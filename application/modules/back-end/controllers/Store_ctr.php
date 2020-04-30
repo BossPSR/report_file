@@ -313,13 +313,13 @@ class Store_ctr extends CI_Controller
 
         $data = array(
 
-            'price_file'         => $this->input->post('price_file'),
-            'Date_required'         => $this->input->post('Daterequired'),
-            'note'                 => $this->input->post('note_s'),
+            'price_file'          => $this->input->post('price_file'),
+            'Date_required'       => $this->input->post('Daterequired'),
+            'note'                => $this->input->post('note_s'),
             'status_book'         => 2,
-            'update_at'                  => date('Y-m-d H:i:s'),
-            'notify_user'                => 0,
-            'notify_admin'                => 0
+            'update_at'           => date('Y-m-d H:i:s'),
+            'notify_user'         => 0,
+            'notify_admin'        => 0
 
 
         );
@@ -346,9 +346,9 @@ class Store_ctr extends CI_Controller
 
             'note_reject'         => $this->input->post('note'),
             'is_check'            => 1,
-            'update_at'                  => date('Y-m-d H:i:s'),
-            'notify_user'                => 0,
-            'notify_admin'                => 0
+            'update_at'           => date('Y-m-d H:i:s'),
+            'notify_user'         => 0,
+            'notify_admin'         => 0
 
 
         );
