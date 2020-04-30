@@ -16,6 +16,7 @@ class Delivery_ctr extends CI_Controller
         $sessi = $ses['IdTeam'];
 
         $data['delivery'] = $this->Order_model->delivery_team($sessi);
+        $data['delivery_feed'] = $this->Order_model->delivery_team_feed($sessi);
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {

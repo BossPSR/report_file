@@ -27,7 +27,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">MY ORDER</h5>
             </div>
             <div class="modal-body">
                 <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
@@ -35,7 +35,7 @@
                 <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
                 <br>
                 <center>
-                    <a href="order" class="btn btn-primary">MY ORDER</a>
+                    <a href="order" class="btn btn-primary">ACCEPT</a>
                 </center>
             </div>
             <div class="modal-footer">
@@ -50,7 +50,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">MY FEEDBACK</h5>
             </div>
             <div class="modal-body">
                 <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
@@ -58,7 +58,7 @@
                 <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
                 <br>
                 <center>
-                    <button class="btn btn-primary" id="status_feed">MY FEEDBACK</button>
+                    <button class="btn btn-primary" id="status_feed">ACCEPT</button>
                 </center>
             </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
 
-                <h5 class="modal-title" id="staticBackdropLabel">More File </h5>
+                <h5 class="modal-title" id="staticBackdropLabel">MORE FILE</h5>
             </div>
             <div class="modal-body">
                 <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>

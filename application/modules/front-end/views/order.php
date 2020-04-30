@@ -169,46 +169,51 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="Teamfile<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
+                                        <?php $teamF = $this->db->get_where('tbl_upload_order_team', ['order_id' =>  $value['ORDT']])->result_array(); ?>
+                                        <?php if (!empty($teamF)) { ?>
+                                            <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
 
-                                                    <div class="modal-body">
-                                                        <table class="table">
-                                                            <thead class="thead-light">
-                                                                <tr style="text-align:center;">
-                                                                    <th scope="col">ID Order</th>
-                                                                    <th scope="col">File</th>
-                                                                    <th scope="col" class="text-left">Detail</th>
-                                                                    <th scope="col">Tool</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="Teamfile<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
 
-                                                                <tr style="text-align:center;">
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td></td>
-                                                                    <td><a href="#" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                        <div class="modal-body">
+                                                            <table class="table">
+                                                                <thead class="thead-light">
+                                                                    <tr style="text-align:center;">
+                                                                        <th scope="col">ID Order</th>
+                                                                        <th scope="col">File</th>
+                                                                        <th scope="col">Tool</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($teamF as $teamF) { ?>
+                                                                        <tr style="text-align:center;">
+                                                                            <td><?= $teamF['order_id']; ?></td>
+                                                                            <td><?= $teamF['file_name']; ?></td>
+                                                                            <td><a href="<?= $teamF['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                        </tr>
+                                                                    <?php } ?>
+                                                                </tbody>
+                                                            </table>
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
                                     </td>
                                     <td><?php echo date("d F Y", strtotime($value['created_at'])); ?></td>
                                     <td><?php echo date("d F Y", strtotime($value['date_required'])); ?></td>
