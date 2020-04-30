@@ -80,8 +80,8 @@
                                                         <td><?php echo $store['userId']; ?></td>
                                                         <td><?php echo $store['file_name']; ?></td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -93,7 +93,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $store['order_id']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $store['orderNOT']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -125,11 +125,11 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $store['order_id']])->result_array(); ?>
+                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $store['orderNOT']])->result_array(); ?>
 
                                                             <?php if ($order == true) : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModalb<?php echo $store['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModalb<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#exampleModalb<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalb<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -180,12 +180,12 @@
                                                             <?php if ($store['status_delivery'] == '1') : ?>
                                                                 <?php echo $store['dateNOT']; ?>
                                                             <?php else : ?>
-                                                                <a href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $store['id']; ?>"><?php echo $store['dateNOT']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                                <div class="modal fade" id="exampleModaldate<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <a href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $store['orderNOT']; ?>"><?php echo $store['dateNOT']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="exampleModaldate<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_date_required_Not_Satisfied" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
 
-                                                                            <input type="hidden" name="order_id" value="<?php echo $store['order_id']; ?>">
+                                                                            <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
@@ -208,12 +208,10 @@
                                                                                     <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
                                                                                 </div>
                                                                             </div>
-
                                                                         </div>
                                                                     </form>
                                                                 </div>
                                                             <?php endif; ?>
-
                                                         </td>
                                                         <?php if ($store['price_file'] == '') :   ?>
                                                             <td>-</td>
@@ -224,13 +222,43 @@
                                                             <?php if ($store['wage'] == '') : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <?php echo $store['wage']; ?>
+                                                                <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $store['orderNOT']; ?>"><?php echo $store['wage']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="exampleModalwage<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                    <form action="edit_date_required_Not_Satisfied" method="POST">
+                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                                                                            <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Wage</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+
+                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">wage</label>
+                                                                                            <input type="text" class="form-control" name="date_required" value="<?php echo $store['wage']; ?>" placeholder="Enter wage">
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
                                                             <?php endif; ?>
                                                         </td>
-                                                        <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['order_id']])->row_array(); ?>
+                                                        <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['orderNOT']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>
-                                                                <button data-toggle="modal" data-target="#exampleModal<?php echo $store['id']; ?>" type="button" class="btn btn-success">Upload to team</button>
+                                                                <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $store['orderNOT']; ?>" type="button" class="btn btn-success">Upload to team</button>
                                                             <?php else : ?>
                                                                 <?php if ($team['teamId'] != '') : ?>
                                                                     <span class="badge badge-pill badge-Info">Done</span>
@@ -245,7 +273,7 @@
 
                                                     </tr>
 
-                                                    <div class="modal fade" id="exampleModal<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="exampleModalUpload<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -259,13 +287,13 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Order</label>
-                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $store['order_id']; ?>" placeholder="Enter Order" readonly>
+                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $store['orderNOT']; ?>" placeholder="Enter Order" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['date_required']; ?>" placeholder="Enter price" required>
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['dateNOT']; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>
@@ -286,7 +314,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">wage(10%)</label>
 
-                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $store['price_file'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
+                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $store['price_file'] * 10 / 100; ?>" placeholder="Enter wage" >
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">

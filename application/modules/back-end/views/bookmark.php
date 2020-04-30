@@ -582,7 +582,6 @@
                                                                                                 <td><a href="<?php echo $orderss_team['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $orderss_team['create_at'] ?></td>
 
-
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
