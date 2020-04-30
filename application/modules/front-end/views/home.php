@@ -135,34 +135,38 @@
         </div>
     </div>
 </div>
-<?php if ($check_morefile) { ?>
-    <?php $moreT = substr($check_morefile['teamId'], 2); ?>
-    <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#check_morefile').modal('show');
-        });
-    </script>
-    <script type="text/javascript">
-        $('#status_morefile').click(function() {
-            // console.log(<?php echo $moreT; ?>);
-
-            $.ajax({
-                type: 'POST',
-                url: 'update_see_more_file',
-                data: {
-                    teamId: <?php echo $moreT; ?>,
-                },
-                success: function(success) {
-                    swal("Good job!", "Got it.", "success", {
-                        button: false,
-                    });
-                    setTimeout(function() {
-                        location.href = "My-task"
-                    }, 1000);
-                }
+<?php if (!empty($teamId)) { ?>
+    <?php if ($check_morefile) { ?>
+        <?php $moreT = substr($check_morefile['teamId'], 2); ?>
+        <script type="text/javascript">
+            $(window).on('load', function() {
+                $('#check_morefile').modal('show');
             });
-        });
-    </script>
+        </script>
+        <script type="text/javascript">
+            $('#status_morefile').click(function() {
+                // console.log(<?php echo $moreT; ?>);
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'update_see_more_file',
+                    data: {
+                        teamId: <?php echo $moreT; ?>,
+                    },
+                    success: function(success) {
+                        swal("Good job!", "Got it.", "success", {
+                            button: false,
+                        });
+                        setTimeout(function() {
+                            location.href = "My-task"
+                        }, 1000);
+                    }
+                });
+            });
+        </script>
+
+    <?php } ?>
+
 <?php } ?>
 
 

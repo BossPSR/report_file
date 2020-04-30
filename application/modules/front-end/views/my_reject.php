@@ -50,7 +50,7 @@
                                             <span class="badge badge-danger">Reject</span>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?php echo $rejected['create_at']; ?></td>
+                                    <td><?php echo date('d F Y', strtotime($rejected['create_at'])); ?></td>
                                     <!-- <td>
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop3<?php echo $e++; ?>">
                                             <i class="fa fa-file-text"></i>

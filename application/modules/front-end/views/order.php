@@ -16,8 +16,10 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Order</th>
                                 <th scope="col">Document</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Main Document</th>
                                 <th scope="col">GT Document</th>
+                                <th scope="col">Team File</th>
                                 <th scope="col">Order Date</th>
                                 <th scope="col">Date Required</th>
                                 <th scope="col">Tool</th>
@@ -57,6 +59,7 @@
                                     <th scope="row"><?php echo $i++; ?></th>
                                     <td><?php echo $value['ORD']; ?></td>
                                     <td style="text-align:left;"><?php echo $value['file_name']; ?></td>
+                                    <td>$<?php echo $value['price_file']; ?></td>
                                     <td>
                                         <?php $zz = 1; ?>
                                         <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
@@ -165,22 +168,64 @@
                                             -
                                         <?php } ?>
                                     </td>
+                                    <td>
+                                        <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="Teamfile<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <table class="table">
+                                                            <thead class="thead-light">
+                                                                <tr style="text-align:center;">
+                                                                    <th scope="col">ID Order</th>
+                                                                    <th scope="col">File</th>
+                                                                    <th scope="col" class="text-left">Detail</th>
+                                                                    <th scope="col">Tool</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                <tr style="text-align:center;">
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td><a href="#" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td><?php echo date("d F Y", strtotime($value['created_at'])); ?></td>
                                     <td><?php echo date("d F Y", strtotime($value['date_required'])); ?></td>
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
-                                        <?php $produm   = date('Y-m-d', strtotime('+5 day' . '+' . $value['update_at_buy'])); ?>
+                                        <?php $produm   = date('Y-m-d', strtotime('+60 day' . '+' . $value['update_at_buy'])); ?>
 
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
                                             -
                                         <?php } elseif ($value['status_approved'] == 3 || $value['status_delivery'] == 1) { ?>
-                                            <button type="button" class="btn btn-success" id="approved<?php echo $sub_order ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
+
                                             <?php
                                             $this->db->select('count(order_id) as N_order');
                                             ?>
                                             <?php $N_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD'], 'check_status' => 1])->row_array(); ?>
-                                            <?php if ($N_feed['N_order'] >= 3) { ?>
-                                                <button type="button" class="btn btn-secondary"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <?php if ($N_feed['N_order'] >= 3 || $DateT > $produm) { ?>
+
                                             <?php } else { ?>
 
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
@@ -284,44 +329,47 @@
                                                     });
                                                 </script>
                                             <?php } ?>
+                                            <button type="button" class="btn btn-success" id="approved<?php echo $sub_order ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <?php $ord_s = substr($value['ORD'], 3); ?>
-                                            <a class="btn btn-danger" id="order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-                                            <script type='text/javascript'>
-                                                $('#order_not_approved<?php echo $value['ORD']; ?>').click(function() {
+                                            <?php if ($N_feed['N_order'] >= 3 || $DateT > $produm) { ?>
+                                                <a class="btn btn-danger" id="order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                                <script type='text/javascript'>
+                                                    $('#order_not_approved<?php echo $value['ORD']; ?>').click(function() {
 
-                                                    swal({
-                                                        icon: "warning",
-                                                        title: "Are you sure?",
-                                                        text: "Do you want Not Approvend document",
-                                                        closeOnEsc: true,
-                                                        closeOnClickOutside: false,
-                                                        buttons: {
-                                                            cancel: true,
-                                                            confirm: true,
-                                                        },
-                                                    }).then(function(isConfirm) {
-                                                        if (isConfirm == true) {
-                                                            $.ajax({
-                                                                type: 'POST',
-                                                                url: 'order_not_approved',
-                                                                data: {
-                                                                    order_id: <?= $ord_s ?>,
-                                                                    status_approved: 2,
-                                                                },
-                                                                success: function(success) {
-                                                                    swal("Good job!", "Upload for data successfull", "success", {
-                                                                        button: false,
-                                                                    });
-                                                                    setTimeout("location.reload(true);", 1000);
-                                                                }
-                                                            });
-                                                        } else {
-                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                        }
+                                                        swal({
+                                                            icon: "warning",
+                                                            title: "Are you sure?",
+                                                            text: "Do you want Not Approvend document",
+                                                            closeOnEsc: true,
+                                                            closeOnClickOutside: false,
+                                                            buttons: {
+                                                                cancel: true,
+                                                                confirm: true,
+                                                            },
+                                                        }).then(function(isConfirm) {
+                                                            if (isConfirm == true) {
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    url: 'order_not_approved',
+                                                                    data: {
+                                                                        order_id: <?= $ord_s ?>,
+                                                                        status_approved: 2,
+                                                                    },
+                                                                    success: function(success) {
+                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                            button: false,
+                                                                        });
+                                                                        setTimeout("location.reload(true);", 1000);
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                            }
+                                                        });
                                                     });
-                                                });
-                                            </script>
-
+                                                </script>
+                                            <?php } else { ?>
+                                            <?php } ?>
                                         <?php } else { ?>
                                             <?php $this->db->select('count(order_id) as c_order'); ?>
                                             <?php $c_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD']])->row_array(); ?>
