@@ -64,6 +64,7 @@
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
                                                     <th>Price</th>
+                                                    <th>Wage</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -76,8 +77,8 @@
 
 
                                                     <tr>
-                                                        <td><?php echo $stores['order_id']; ?></td>
-                                                        <td><?php echo $stores['userId']; ?></td>
+                                                        <td><?php echo $stores['orderST']; ?></td>
+                                                        <td><?php echo $stores['userOR']; ?></td>
                                                         
                                                         <td><?php echo $stores['topic']; ?></td>
                                                         <td><?php echo $stores['code']; ?></td>
@@ -85,7 +86,7 @@
                                                             <?php if (empty($stores['id_document'])) : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $stores['order_id']])->result_array(); ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
                                                                 <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
 
                                                                     <?php if ($show_dm['id_document'] == '') : ?>
@@ -97,8 +98,8 @@
                                                                 <?php } ?>
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -110,7 +111,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stores['order_id']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stores['orderST']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -142,8 +143,10 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModalb<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['orderST']])->result_array(); ?>
+                                                            <?php if (!empty($order)) : ?>
+                                                            <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModalb<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -155,7 +158,6 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['order_id']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -185,12 +187,15 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif ; ?>
                                                         </td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stores['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModalbDM<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stores['upload_store_id']])->result_array(); ?>
+                                                            <?php if (!empty($orderStore)) : ?>
+                                                            <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModalbDM<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -202,7 +207,6 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stores['upload_store_id']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order id</th>
                                                                                         <th>File name</th>
@@ -231,20 +235,23 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif ; ?>
 
 
                                                         </td>
-                                                        <td><?php echo $stores['create_at']; ?></td>
+                                                        <td><?php echo $stores['createST']; ?></td>
                                                         <td>
                                                             <?php if($stores['status_delivery']== '1'):?>
-                                                                <?php echo $stores['date_required']; ?>
+                                                                <?php echo $stores['dateREST']; ?>
                                                             <?php else:?>
-                                                            <a  href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stores['order_id']; ?>"><?php echo $stores['date_required']; ?>  <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                            <div class="modal fade" id="exampleModaldate<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <a  href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stores['orderST']; ?>"><?php echo $stores['date_required']; ?>  <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                            <div class="modal fade" id="exampleModaldate<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_date_required_Satisfied" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                                                                             
-                                                                        <input type="hidden" name="order_id" value="<?php echo $stores['order_id']; ?>">
+                                                                        <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
                                                                         <div class="modal-content">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
@@ -257,7 +264,7 @@
                                                                                     <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">Date Required</label>
-                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stores['date_required']; ?>" placeholder="Enter score" >
+                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter score" >
                                                                                         </div>
                                                                                       
                                                                                     </div>
@@ -279,6 +286,13 @@
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
+                                                        <td>
+                                                        <?php if ($stores['wage'] == '') :   ?>
+                                                            -
+                                                        <?php else : ?>
+                                                            $<?php echo $stores['wage']; ?>
+                                                        <?php endif; ?>
+                                                        </td>
 
                                                         <td>
                                                             <?php if ($stores['status_delivery'] == 0) : ?>
@@ -290,7 +304,7 @@
 
                                                     </tr>
 
-                                                    <div class="modal fade" id="exampleModal<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="exampleModal<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
