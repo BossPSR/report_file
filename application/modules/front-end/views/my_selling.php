@@ -51,7 +51,7 @@
                                 <tr style="text-align:center;">
                                     <td scope="row"><?php echo $i++; ?></td>
                                     <td><?php echo $selling['store_id']; ?></td>
-                                    <td><?php echo date("d-m-y", strtotime($selling['create_at'])); ?></td>
+                                    <td><?php echo date("d F Y", strtotime($selling['create_at'])); ?></td>
                                     <td><?php echo number_format($selling['price_file']); ?></td>
                                 </tr>
                             <?php } ?>

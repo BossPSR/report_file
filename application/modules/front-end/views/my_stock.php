@@ -50,7 +50,7 @@
                             <?php foreach ($stock as $stock) { ?>
                                 <tr style="text-align:center;">
                                     <td><?php echo $stock['or_1']; ?></td>
-                                    <td><?php echo $stock['or_date']; ?></td>
+                                    <td><?php echo date('d F Y', strtotime($stock['or_date'])); ?></td>
                                     <td>
                                         <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['mms']])->result_array(); ?>
                                         <?php if (!empty($stockmain)) { ?>

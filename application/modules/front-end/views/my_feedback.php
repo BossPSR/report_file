@@ -163,9 +163,9 @@
                                                 <span class="badge badge-danger">Not Read</span>
                                             <?php } else { ?>
                                                 <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
-                                                    <span class="badge badge-info">Red</span>
+                                                    <span class="badge badge-info">Read</span>
                                                 <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
-                                                    <span class="badge badge-warning" style="color:#fff;">Wait for admin</span>
+                                                    <span class="badge badge-primary" style="color:#fff;">Complete</span>
                                                 <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
                                                     <span class="badge badge-success">Success</span>
                                                 <?php } ?>
@@ -188,7 +188,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">MY Feedback</h5>
                 </div>
                 <div class="modal-body">
                     <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
@@ -196,7 +196,7 @@
                     <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
                     <br>
                     <center>
-                        <button class="btn btn-primary" id="status_feed">GOT IT</button>
+                        <button class="btn btn-primary" id="status_feed">ACCEPT</button>
                     </center>
                 </div>
             </div>

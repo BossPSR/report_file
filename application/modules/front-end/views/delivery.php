@@ -21,7 +21,7 @@
                                     </div>
                                 </form>
                                 <br>
-                                <label for="">Choose the date to pick up the document.</label>
+                                <label for="">Choose the order to pick up the document.</label>
                                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
 
                                     <div class="row">
@@ -29,6 +29,9 @@
                                             <option selected disabled>-- SELECT ITEM --</option>
                                             <?php foreach ($delivery as $delivery) { ?>
                                                 <option value="<?php echo $delivery['order_id']; ?>"><?php echo $delivery['order_id']; ?></option>
+                                            <?php } ?>
+                                            <?php foreach ($delivery_feed as $delivery_feed) { ?>
+                                                <option value="<?php echo $delivery_feed['order_feed']; ?>"><?php echo $delivery_feed['order_feed'] . ' ' . "(Feed back)"; ?></option>
                                             <?php } ?>
                                         </select>
 

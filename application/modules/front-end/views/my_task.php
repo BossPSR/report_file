@@ -369,7 +369,7 @@
 
                                     <?php } elseif ($task['status_approved'] == 0) { ?>
                                         <?php if ($task['c_status'] == 0) { ?>
-                                            <td><span class="badge badge-warinig" style="font-size:16px;">Processing</span></td>
+                                            <td><span class="badge badge-warning" style="font-size:16px;">Processing</span></td>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
                                             <td><span class="badge badge-success" style="font-size:16px;">Complete</span></td>
                                         <?php } elseif ($task['c_status'] == 2) { ?>

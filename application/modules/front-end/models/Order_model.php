@@ -18,10 +18,12 @@ class Order_model extends CI_Model
     }
     public function order_buy($userId)
     {
-        $this->db->select('*,tbl_store_for_buy_email.update_at AS update_at_buy,tbl_upload_order.order_id as ORD');
+        $this->db->select('*,tbl_upload_order.update_at AS update_at_buy,tbl_upload_order.order_id as ORD,tbl_upload_team.order_id as ORDT');
         $this->db->from('tbl_store_for_buy_email');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_store_for_buy_email.order_id');
+        $this->db->join('tbl_upload_team', 'tbl_store_for_buy_email.order_id = tbl_upload_team.order_id');
         $this->db->where('tbl_store_for_buy_email.customer_id', $userId);
+        $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.is_check', 0);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_store_for_buy_email.order_id', 'asc');
@@ -132,8 +134,23 @@ class Order_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_team');
+        $this->db->where('status', 0);
         $this->db->where('teamId', $sessi);
         $this->db->order_by('order_id', 'DESC');
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+
+    public function delivery_team_feed($sessi)
+    {
+        $this->db->select('*,tbl_feedback.order_id as order_feed');
+        $this->db->from('tbl_upload_team');
+        $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_team.order_id', 'left');
+        $this->db->where('tbl_feedback.check_feedback_dalivery', 0);
+        $this->db->where('tbl_upload_team.status', 1);
+        $this->db->where('tbl_upload_team.teamId', $sessi);
+        $this->db->order_by('tbl_upload_team.order_id', 'DESC');
 
         $data = $this->db->get();
         return $data->result_array();

@@ -15,7 +15,7 @@
 
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">You can buy Document.  <span style="color:red">( Can select more than 1 file )</span></label>
+                                        <label for="" class="font-size-upload">You can buy Document. <span style="color:red">( Can select more than 1 file )</span></label>
                                         <form action="buy_upload" class="dropzone" id="fileupload" style="margin-bottom:10px;">
                                             <div class="dz-message needsclick">
                                                 Drop files here or click to upload.<br>
@@ -29,7 +29,7 @@
                                         </form>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">You can buy GT Document.  <span style="color:red">( Can select more than 1 file )</span></label>
+                                        <label for="" class="font-size-upload">You can buy GT Document. <span style="color:red">( Can select more than 1 file )</span></label>
                                         <form action="buy_uploadGT" class="dropzone" id="fileuploadGT">
                                             <div class="dz-message needsclick">
                                                 Drop files here or click to upload.<br>
@@ -117,10 +117,12 @@
                     myDropzone.processQueue();
                     myDropzone2.processQueue();
                     myDropzone.on("queuecomplete", function(file, res) {
-                        swal("Good job!", "Upload for data successfull", "success", {
-                            button: false,
+                        myDropzone2.on("queuecomplete", function(file, res) {
+                            swal("Good job!", "Upload for data successfull", "success", {
+                                button: false,
+                            });
+                            setTimeout("location.reload(true);", 1000);
                         });
-                        setTimeout("location.reload(true);", 1000);
                     });
                 },
 
