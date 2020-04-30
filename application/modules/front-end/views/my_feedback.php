@@ -164,7 +164,7 @@
                                             <?php } else { ?>
                                                 <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
                                                     <span class="badge badge-info">Read</span>
-                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
+                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1 ) { ?>
                                                     <span class="badge badge-primary" style="color:#fff;">Complete</span>
                                                 <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
                                                     <span class="badge badge-success">Success</span>
