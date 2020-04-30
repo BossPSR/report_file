@@ -111,6 +111,10 @@ class Complete_ctr extends CI_Controller
             'dated'             => $dated,
         );
         $success = $this->db->insert('tbl_feedback', $orf);
+        if ($success) {
+            $this->db->where('teamId',$team['teamId']);
+            $this->db->update('tbl_feedback', ['check_feedback_order' => '0'] );
+        }
         echo $success;
     }
 
