@@ -326,7 +326,9 @@
 
                         $notify_checkFor_sell = 0;
                         $notify_storeFor_sell = 0;
-                        $uploadStore = $this->db->group_by('store_id')->get_where('tbl_upload_store', ['notify_admin' => 0])->result_array();
+                        $this->db->where('notify_admin', 0);
+                        $this->db->group_by('store_id');
+                        $uploadStore = $this->db->get('tbl_upload_store')->result_array();
                         foreach ($uploadStore as $upload_store) {
                             if ($upload_store['status_chack'] == 0) {
                                 $notify_checkFor_sell += 1;
@@ -335,7 +337,9 @@
                         }
 
                         $notify_myStore = 0;
-                        $uploadOrder = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['notify_admin' => 0])->result_array();
+                        $this->db->where('notify_admin', 0);
+                        $this->db->group_by('order_id');
+                        $uploadOrder = $this->db->get('tbl_upload_order')->result_array();
                         foreach ($uploadOrder as $upload_order) {
                             if ($upload_order['status_book'] == 0 && $upload_order['is_check'] == 0 ) {
                                 $notify_myStore += 1;
@@ -425,7 +429,9 @@
                         <?php
                         $notifyCustomer_order = 0;
                         $notifyNot_satisfied = 0;
-                        $customer_order = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['notify_admin' => 0])->result_array();
+                        $this->db->where('notify_admin', 0);
+                        $this->db->group_by('order_id');
+                        $customer_order = $this->db->get('tbl_upload_order')->result_array();
                         foreach ($customer_order as $customerOrder) {
                             if ($customerOrder['notify_admin'] == 0 && $customerOrder['status_book'] == 2 && $customerOrder['status_pay'] == 1) {
                                 $notifyNot_satisfied += 1;
@@ -477,7 +483,9 @@
                         
                         }
 
-                        $bookmarkPay2 = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['notify_admin' => 0])->result_array();
+                        $this->db->where('notify_admin', 0);
+                        $this->db->group_by('order_id');
+                        $bookmarkPay2 = $this->db->get('tbl_upload_order')->result_array();
                         foreach ($bookmarkPay2 as $bookmark_pay2) {
 
                             if ($bookmark_pay2['status_book'] != 0 && $bookmark_pay2['status_pay'] == 0 && $bookmark_pay2['is_check'] == 0) {
