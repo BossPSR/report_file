@@ -130,7 +130,8 @@
                                                     <th>Main_file</th>
                                                     <th>GT_File</th>
                                                     <th>Team File</th>
-                                                    <th>date_required</th>
+													<th>Date Required</th>
+													<th>Date Order</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -280,7 +281,8 @@
                                                             </div>
                                                         </td>
                                                       
-                                                        <td><?php echo $complete['date_required_t']; ?></td>
+														<td><?php echo $complete['date_required_t']; ?></td>
+														<td><?php echo $complete['create_at']; ?></td>
                                                         <td><button data-toggle="modal" data-target="#exampleModalu<?php echo $complete['order_id_t']; ?>" type="button" class="btn btn-outline-info">
                                                             delivery
                                                             </button>

@@ -141,7 +141,8 @@
                                                     <th>Team File</th>
                                                     <th>Date Required</th>
                                                     <th>Status</th>
-                                                    <th>position</th>
+													<th>position</th>
+													<th>Team Id</th>
                                                     <th>tool</th>
                                                 </tr>
                                             </thead>
@@ -416,10 +417,10 @@
                                                         <td><?php echo $bookmark['date_re'] ?></td>
 
                                                         <td id="test<?php echo $keyBook; ?>">
-                                                            <?php if ($bookmark['status_pay'] == 0) : ?>
-                                                                <div class="badge badge-warning">NOT PAY</div>
+                                                            <?php if ($bookmark['status_cp'] == "notcomplete") : ?>
+                                                                <div class="badge badge-warning">Rewrite</div>
                                                             <?php else : ?>
-                                                                <div class="badge badge-success">PAY</div>
+                                                                -
                                                             <?php endif ?>
                                                         </td>
                                                         <td>
@@ -428,7 +429,14 @@
                                                                 <?php echo $position_name['name_item'] ?>
                                                             <?php } ?>
 
-                                                        </td>
+														</td>
+														<td>
+															<?php if(empty($bookmark['teamT3'])){ ?>
+																-
+															<?php }else{ ?>
+																<?php echo $bookmark['teamT3']; ?>
+															<?php } ?>
+														</td>
                                                         <td>
 
                                                             <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->row_array(); ?>
