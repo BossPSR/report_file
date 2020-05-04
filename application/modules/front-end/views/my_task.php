@@ -53,7 +53,7 @@
                                 <tr style="text-align:center;">
                                     <td><?php echo $p++; ?></td>
                                     <td><?php echo $task['or_id']; ?></td>
-                                    <td><?php echo date('d F Y',strtotime($task['date_required'])); ?></td>
+                                    <td><?php echo date('d F Y', strtotime($task['date_required'])); ?></td>
                                     <td>
                                         <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
 
@@ -368,20 +368,18 @@
                                         <?php } ?>
 
                                     <?php } elseif ($task['status_approved'] == 2) { ?>
-                                   
-                                            <td><span class="badge badge-danger" style="font-size:16px;">Not Appovre</span></td>
-                                        
-                                     <?php } elseif ($task['status_approved'] == 3) { ?>
-                                   
-                                   <td><span class="badge badge-warning" style="font-size:16px;">Feedback</span></td>
+
+                                        <td><span class="badge badge-danger" style="font-size:16px;">Not Appovre</span></td>
+
+                                    <?php } elseif ($task['status_approved'] == 3 && $task['check_feedback_dalivery'] == 0) { ?>
+
+                                        <td><span class="badge badge-warning" style="font-size:16px;">Feedback</span></td>
 
                                     <?php } else { ?>
-                                        <?php if ($task['c_status'] == 0) { ?>
+                                        <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
                                             <td><span class="badge badge-warning" style="font-size:16px;">Processing</span></td>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
                                             <td><span class="badge badge-info" style="font-size:16px;">Complete</span></td>
-                                        <?php } elseif ($task['c_status'] == 2) { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;">Feedback</span></td>
                                         <?php } ?>
                                     <?php } ?>
                                 </tr>

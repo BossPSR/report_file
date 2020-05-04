@@ -160,14 +160,14 @@
                                         <td><?= date('d F Y', strtotime($feedback['date_required'])); ?></td>
                                         <td>
                                             <?php if ($feedback['status_feedback_read'] == 0) { ?>
-                                                <span class="badge badge-danger">Not Read</span>
+                                                <span class="badge badge-danger"  style="font-size:16px;">Not Read</span>
                                             <?php } else { ?>
                                                 <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
-                                                    <span class="badge badge-info">Read</span>
+                                                    <span class="badge badge-info"  style="font-size:16px;">Read</span>
                                                 <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1 ) { ?>
-                                                    <span class="badge badge-primary" style="color:#fff;">Complete</span>
+                                                    <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
                                                 <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
-                                                    <span class="badge badge-success">Success</span>
+                                                    <span class="badge badge-success"  style="font-size:16px;">Success</span>
                                                 <?php } ?>
                                             <?php } ?>
                                         </td>
