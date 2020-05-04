@@ -80,6 +80,10 @@
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
                                                         <td>
+														<?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
+														<?php if(empty($order)){ ?>
+																-
+														<?php }else{ ?>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $stored['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stored['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -93,7 +97,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
+                                                                                   
                                                                                     <tr>
                                                                                         <th>#</th>
                                                                                         <th>Order Id</th>
@@ -132,9 +136,14 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+															</div>
+															<?php } ?>
                                                         </td>
                                                         <td>
+															<?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
+															<?php if(empty($order)){ ?>
+																	-
+															<?php }else{ ?>
                                                             <span data-toggle="modal" data-target="#exampleModalb<?php echo $stored['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModalb<?php echo $stored['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -148,7 +157,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
+                                                                                    
                                                                                     <tr>
                                                                                         <th>#</th>
                                                                                         <th>Order Id</th>
@@ -177,7 +186,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+															</div>
+															<?php } ?>
                                                         </td>
                                                         <td><?php echo $stored['create_at']; ?></td>
                                                         <td>
