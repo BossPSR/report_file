@@ -70,9 +70,9 @@
                                                     <th>GT File</th>
                                                     <th>DM File</th>
                                                     <th>price File</th>
-                                                    <th>Date Required</th>
+													<th>Date Required</th>
+													<th>Date Order</th>
                                                     <th>Status</th>
-                                                    <th>position</th>
                                                     <th>tool</th> 
                                                 </tr>
                                             </thead>
@@ -239,7 +239,8 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td><?php echo $bookmark_all_not['pricr_f'] ?></td>
-                                                        <td><?php echo $bookmark_all_not['date_re'] ?></td>
+														<td><?php echo $bookmark_all_not['date_re'] ?></td>
+														<td><?php echo $bookmark_all_not['upload_order_create_at'] ?></td>
 
                                                         <td id="test<?php echo $keyBook; ?>">
                                                             <?php if ($bookmark_all_not['status_pay'] == 0) : ?>
@@ -248,13 +249,7 @@
                                                                 <div class="badge badge-success">ชำระเงินเรียบร้อยแล้ว</div>
                                                             <?php endif ?>
                                                         </td>
-                                                        <td>
-                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $bookmark_all_not['position']])->result_array(); ?>
-                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
-                                                                <?php echo $position_name['name_item'] ?>
-                                                            <?php } ?>
-
-                                                        </td>
+                                                        
                                                         <td>
                                                         <button type="button" data-toggle="modal" data-target="#exampleModall<?php echo $bookmark_all_not['order_upload']; ?>" class="btn btn-primary mr-1 mb-1">Edit</button>
                                                             <div class="modal fade" id="exampleModall<?php echo $bookmark_all_not['order_upload']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

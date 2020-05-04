@@ -6,7 +6,8 @@ class Team_ctr extends CI_Controller
 
     public function __construct()
     {
-        parent::__construct();
+		parent::__construct();
+		$this->load->model('Team_model');
     }
 
     public function index()
@@ -15,7 +16,7 @@ class Team_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-            $data['team'] = $this->db->get('tbl_team')->result_array();
+            $data['team'] = $this->Team_model->teamOrder();
 
             $this->load->view('options/header');
             $this->load->view('team_list', $data);
@@ -359,18 +360,16 @@ class Team_ctr extends CI_Controller
     public function NotificationBan()
     {
         $id = $this->input->post('id');
+		$team = $this->db->get_where('tbl_team', ['id' => $id])->row_array();
+		$data_notification = [
+			'IdTeam' => $team['IdTeam'],
+			'notification_detail' => $this->input->post('note_ban'),
+			'create_at' => date('Y-m-d H:i:s'),
+			'update_at' => date('Y-m-d H:i:s'),
+		];
+		$resultsedit = $this->db->insert('tbl_notification',$data_notification);
 
-        $data = array(
-
-
-            'notification_ban'                      => $this->input->post('note_ban'),
-            'status_notification_ban'       => 1,
-            'update_at'                        => date('Y-m-d H:i:s')
-
-        );
-        $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_team', $data);
-        $team = $this->db->get_where('tbl_team', ['id' => $id])->row_array();
+		
         $this->sendEmail_Notification_Ban($team);
 
         if ($resultsedit > 0) {

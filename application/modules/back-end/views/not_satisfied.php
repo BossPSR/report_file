@@ -63,7 +63,8 @@
                                                     <th>Date required</th>
                                                     <th>Price</th>
                                                     <th>Wage</th>
-                                                    <th>Delivery</th>
+													<th>Delivery</th>
+													<th>Position</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -309,6 +310,13 @@
                                                             <?php else : ?>
                                                             <span class="badge badge-pill badge-success">Delivered</span>
                                                             <?php endif; ?>
+														</td>
+														<td>
+                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $store['position']])->result_array(); ?>
+                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
+                                                                <?php echo $position_name['name_item'] ?>
+                                                            <?php } ?>
+
                                                         </td>
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['orderNOT']])->row_array(); ?>
                                                         <td>
