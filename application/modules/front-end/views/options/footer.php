@@ -295,6 +295,9 @@
 </script>
 
 <script>
+    <?php if ($this->session->flashdata('error_pay')) : ?>
+        swal("Error!", "Incorrect transaction !!", "error");
+    <?php endif; ?>
     <?php if ($this->session->flashdata('fail_login_status')) : ?>
         swal("Error!", "Please wait for approval. !!", "error");
     <?php endif; ?>

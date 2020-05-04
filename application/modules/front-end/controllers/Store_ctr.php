@@ -147,38 +147,43 @@ class Store_ctr extends CI_Controller
         $price_dis = $this->input->post('price_dis');
         $customer_id = $this->input->post('customer_id');
         $email = $this->input->post('email');
+        $upload_order = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
+        if ($upload_order['status_pay'] == 1) {
+            $this->session->set_flashdata('error_pay', TRUE);
+            redirect('home');
+        } else {
+            $user = $this->db->get_where('tbl_user', ['idUser' => $customer_id])->row_array();
+            if ($user['cash'] < $price_dis) {
+                $this->session->set_flashdata('error_cash', TRUE);
+                redirect('/');
+            }
+            $price_result = $user['cash'] - $price_dis;
+            $this->db->where('idUser', $customer_id);
+            $this->db->update('tbl_user', ['cash' => $price_result]);
 
-        $user = $this->db->get_where('tbl_user', ['idUser' => $customer_id])->row_array();
-        if ($user['cash'] < $price_dis) {
-            $this->session->set_flashdata('error_cash', TRUE);
+            $checkStore_for_buy_email = $this->db->get_where('tbl_store_for_buy_email', ['order_id', $order_id])->row_array();
+            if (!empty($checkStore_for_buy_email)) {
+                $this->session->set_flashdata('fail_doc', TRUE);
+                redirect('/');
+            }
+
+            $this->db->where('order_id', $order_id);
+            $this->db->update('tbl_upload_order', ['status_pay' => 1]);
+
+
+            $data = [
+                'file_name' => $file_name,
+                'order_id' => $order_id,
+                'price_file' => $price_file,
+                'discount' => $discount,
+                'price_dis' => $price_dis,
+                'customer_id' => $customer_id,
+                'email' => $email,
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+            $this->db->insert('tbl_store_for_buy_email', $data);
+            $this->session->set_flashdata('success_cash', TRUE);
             redirect('/');
         }
-        $price_result = $user['cash'] - $price_dis;
-        $this->db->where('idUser',$customer_id);
-        $this->db->update('tbl_user',['cash' => $price_result]);
-
-        $checkStore_for_buy_email = $this->db->get_where('tbl_store_for_buy_email', ['order_id', $order_id])->row_array();
-        if (!empty($checkStore_for_buy_email)) {
-            $this->session->set_flashdata('fail_doc', TRUE);
-            redirect('/');
-        }
-
-        $this->db->where('order_id', $order_id);
-        $this->db->update('tbl_upload_order',['status_pay' => 1]);
-        
-
-        $data = [
-            'file_name' => $file_name,
-            'order_id' => $order_id,
-            'price_file' => $price_file,
-            'discount' => $discount,
-            'price_dis' => $price_dis,
-            'customer_id' => $customer_id,
-            'email' => $email,
-            'created_at' => date('Y-m-d H:i:s')
-        ];
-        $this->db->insert('tbl_store_for_buy_email', $data);
-        $this->session->set_flashdata('success_cash', TRUE);
-        redirect('/');
     }
 }
