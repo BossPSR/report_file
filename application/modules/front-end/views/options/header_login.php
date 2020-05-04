@@ -351,6 +351,7 @@
                                                 $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                                                 $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                                                 $this->db->where('tbl_upload_order.status_delivery', 1);
+                                                $this->db->where('tbl_upload_order.status_approved', 1);
 
                                                 $sm_del = $this->db->get()->row_array();
                                                 ?>
@@ -416,7 +417,7 @@
                                             <li>
                                                 <a href="#"> User manual <i class="fa fa-angle-right"></i></a>
                                             </li>
-                                            
+
                                         <?php else : ?>
                                             <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                             <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->

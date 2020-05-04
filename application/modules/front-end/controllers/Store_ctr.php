@@ -157,9 +157,9 @@ class Store_ctr extends CI_Controller
                 $this->session->set_flashdata('error_cash', TRUE);
                 redirect('/');
             }
-            $price_result = $user['cash'] - $price_dis;
-            $this->db->where('idUser', $customer_id);
-            $this->db->update('tbl_user', ['cash' => $price_result]);
+            // $price_result = $user['cash'] - $price_dis;
+            // $this->db->where('idUser', $customer_id);
+            // $this->db->update('tbl_user', ['cash' => $price_result]);
 
             $checkStore_for_buy_email = $this->db->get_where('tbl_store_for_buy_email', ['order_id', $order_id])->row_array();
             if (!empty($checkStore_for_buy_email)) {

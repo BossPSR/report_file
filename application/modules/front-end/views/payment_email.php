@@ -54,14 +54,14 @@
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
-<?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array(); ?>
+<?php $user = $this->db->get_where('tbl_user', ['idUser' => $customer_id])->row_array(); ?>
 
 <body class="horizontal-layout horizontal-menu 2-columns  navbar-floating footer-static  " style="font-size: 17px;" data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div style="padding: 40px;margin-top: 100px;text-align: center;background: white;">
-                   
+
                     <h2 class="form-group">ชำระเงินเอกสาร</h2>
                     <hr>
 
@@ -102,13 +102,13 @@
                         <input type="hidden" name="discount" value="<?php echo $discount; ?>">
                         <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
                         <div class="form-group row">
-                            <label class="col-3 text-right ss" for="">E-mail : </label> 
+                            <label class="col-3 text-right ss" for="">E-mail : </label>
                             <div class="col-8">
-                                <input type="email" class="form-control" name="email" value=" <?php echo $this->session->userdata('email'); ?>">
+                                <input type="email" class="form-control" name="email" value="<?php echo $user['email']; ?>">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-3 text-right ss" for=""></label> 
+                            <label class="col-3 text-right ss" for=""></label>
                             <div class="col-8 text-left" style="color:red">
                                 * ถ้าลูกค้าทำการเปลี่ยน Email สามารถกรอกใหม่ได้
                             </div>

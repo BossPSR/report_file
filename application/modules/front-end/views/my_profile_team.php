@@ -48,6 +48,7 @@
                             $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                             $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                             $this->db->where('tbl_upload_order.status_delivery', 1);
+                            $this->db->where('tbl_upload_order.status_approved', 1);
 
                             $sm_del = $this->db->get()->row_array();
                             ?>
@@ -62,16 +63,22 @@
                                 <div class="list_menu">My Job</div>
                             </div>
                             <?php
-                            $this->db->select('*,sum(tbl_upload_order.status_delivery) as sum_delivery');
+                            $this->db->select('*,sum(tbl_upload_team.wage) as sumWage');
                             $this->db->from('tbl_upload_team');
                             $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                             $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                             $this->db->where('tbl_upload_order.status_delivery', 1);
 
-                            $sm_del = $this->db->get()->row_array();
+                            $sm_de2 = $this->db->get()->row_array();
                             ?>
                             <div class="result_list_menu">
-                                <div class="result_menu"><?php echo number_format($team['income']); ?></div>
+                                <div class="result_menu">
+                                    <?php if ($sm_de2['sumWage']) : ?>
+                                        <?php echo $sm_de2['sumWage']; ?>
+                                    <?php else : ?>
+                                        0
+                                    <?php endif; ?>
+                                </div>
                                 <div class="list_menu">Income</div>
                             </div>
                         </div>
