@@ -6,7 +6,7 @@ class Home_ctr extends CI_Controller {
 	public function __construct()
     {
 		parent::__construct();
-		$this->load->model('home_model');
+		$this->load->model('Home_model');
 
     }
 
@@ -31,7 +31,7 @@ class Home_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('email_admin') != '') 
 		{	
-		$data = $this->home_model->order_list();
+		$data = $this->Home_model->order_list();
 	    
 		echo json_encode($data);
 
@@ -47,7 +47,7 @@ class Home_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('email_admin') != '') 
 		{	
-		$data1 = $this->home_model->order_list1();
+		$data1 = $this->Home_model->order_list1();
 	    
 		echo json_encode($data1);
 
@@ -63,7 +63,7 @@ class Home_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('email_admin') != '') 
 		{	
-		$data2 = $this->home_model->order_list2();
+		$data2 = $this->Home_model->order_list2();
 	    
 		echo json_encode($data2);
 
@@ -77,7 +77,7 @@ class Home_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('email_admin') != '') 
 		{	
-		$data3 = $this->home_model->order_list3();
+		$data3 = $this->Home_model->order_list3();
 	    
 		echo json_encode($data3);
 

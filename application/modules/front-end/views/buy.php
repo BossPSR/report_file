@@ -117,13 +117,12 @@
                     myDropzone.processQueue();
                     myDropzone2.processQueue();
                     myDropzone.on("queuecomplete", function(file, res) {
-                        myDropzone2.on("queuecomplete", function(file, res) {
+                        
                             swal("Good job!", "Upload for data successfull", "success", {
                                 button: false,
                             });
                             setTimeout("location.reload(true);", 1000);
                         });
-                    });
                 },
 
             });

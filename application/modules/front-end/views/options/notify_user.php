@@ -18,7 +18,12 @@ foreach ($userUpload_store as $key => $userUploadStore) {
 $notify_message_order  = [];
 $this->db->where_in('notify_user', [0,1]);
 $userUpload_order = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'],'is_check' => 0])->result_array();
-$userUpload_order_num = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['userId' => $user['idUser'],'notify_user' => 0,'is_check' => 0])->result_array();
+
+$this->db->where('userId', $user['idUser']);
+$this->db->where('notify_user', 0);
+$this->db->where('is_check', 0);
+$this->db->group_by('order_id');
+$userUpload_order_num = $this->db->get('tbl_upload_order')->result_array();
 $notify += count($userUpload_order_num);
 $upload_order_id = [];
 foreach ($userUpload_order as $key => $userUploadOrder) {
@@ -47,7 +52,12 @@ foreach ($userUpload_store_reject as $key => $userUploadStore_reject) {
 $notify_message_order_reject  = [];
 $this->db->where_in('notify_user', [0,1]);
 $userUpload_order_reject = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'],'is_check' => 1])->result_array();
-$userUpload_order_reject_num = $this->db->group_by('order_id')->get_where('tbl_upload_order', ['userId' => $user['idUser'],'notify_user' => 0,'is_check' => 1])->result_array();
+
+$this->db->where('userId', $user['idUser']);
+$this->db->where('notify_user', 0);
+$this->db->where('is_check', 1);
+$this->db->group_by('order_id');
+$userUpload_order_reject_num = $this->db->get('tbl_upload_order')->result_array();
 $notify += count($userUpload_order_reject_num);
 $upload_order_reject_id = [];
 foreach ($userUpload_order_reject as $key => $userUploadOrder_reject) {
@@ -90,7 +100,7 @@ krsort($notify_message);
             <?php if ($notifyMessage['order_id'] == null) { ?>
             <li>
                 <span>Stord ID : <?php echo $notifyMessage['store_id']; ?></span>
-                <span>Scoreที่คุณได้ : <?php echo $notifyMessage['price_file']; ?></span>
+                <span>Score ที่คุณได้ : <?php echo $notifyMessage['price_file']; ?></span>
             </li>
             <hr>
 

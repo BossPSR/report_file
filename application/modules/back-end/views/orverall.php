@@ -61,7 +61,7 @@
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>PriceFile</th>
-                                                    <th>Delivered</th>
+                                                    <th>Delivery</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>

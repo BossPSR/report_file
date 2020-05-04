@@ -65,6 +65,7 @@
                                                     <th>Date required</th>
                                                     <th>Price</th>
                                                     <th>Wage</th>
+                                                    <th>Delivery</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -246,7 +247,7 @@
                                                             <?php if($stores['status_delivery']== '1'):?>
                                                                 <?php echo $stores['dateREST']; ?>
                                                             <?php else:?>
-                                                            <a  href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stores['orderST']; ?>"><?php echo $stores['date_required']; ?>  <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                            <a  href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stores['orderST']; ?>"><?php echo $stores['dateREST']; ?>  <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
                                                             <div class="modal fade" id="exampleModaldate<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_date_required_Satisfied" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -281,17 +282,49 @@
                                                             <?php endif;?>
                                                     
                                                         </td>
+
                                                         <?php if ($stores['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
+
                                                         <td>
-                                                        <?php if ($stores['wage'] == '') :   ?>
-                                                            -
-                                                        <?php else : ?>
-                                                            $<?php echo $stores['wage']; ?>
-                                                        <?php endif; ?>
+                                                            <?php if ($stores['wage'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $stores['orderST']; ?>"><?php echo $stores['wage']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="exampleModalwage<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                    <form action="edit_wage_Not_Satisfied" method="POST">
+                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                                                                            <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Wage</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+
+                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">wage</label>
+                                                                                            <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage">
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            <?php endif; ?>
                                                         </td>
 
                                                         <td>
@@ -299,6 +332,19 @@
                                                             <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
                                                             <span class="badge badge-pill badge-success">Delivered</span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') :?>
+                                                            <span class="badge badge-pill badge-success">Original</span>
+                                                            <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete'  && $stores['status_admin'] == '0') : ?>
+                                                            <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0' ) : ?>
+                                                            <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($stores['status_admin'] == '1' ) : ?>
+                                                            <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php else : ?>
+                                                                -
                                                             <?php endif; ?>
                                                         </td>
 
