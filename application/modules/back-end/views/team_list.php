@@ -83,8 +83,8 @@
 												<tr>
 													<th>TeamId</th>
 													<th>Resume</th>
-													<!-- <th>Name</th> -->
 													<th>Order</th>
+													<th>Name</th>
 													<th>country</th>
 													<th>email</th>
 													<th>phone</th>
@@ -108,7 +108,9 @@
 																<a href="<?php echo $team['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
 															<?php endif; ?>
 														</td>
-														<td><?php echo $team['orders']; ?></td>
+														<td><?php echo $team['countT'] ; ?></td>
+
+														<td><?php echo $team['name'] ; ?></td>
 														
 														<?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
 														<?php foreach ($country as $country) { ?>
@@ -118,7 +120,7 @@
 														<td><?php echo $team['phone']; ?></td>
 
 														<td>
-															<?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['id']])->result_array(); ?>
+															<?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['idT']])->result_array(); ?>
 															<?php foreach ($position as $position) { ?>
 																<?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $position['job_position']])->result_array(); ?>
 																<?php foreach ($name_position as $name_position) { ?>
@@ -134,8 +136,8 @@
 																		Pending approval
 																	</button>
 																	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																		<a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
-																		<a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=2">Not approved</a>
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=1">approve</a>
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=2">Not approved</a>
 
 																	</div>
 																</div>
@@ -149,7 +151,7 @@
 																	</button>
 																	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-																		<a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Ban User</a>
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=3">Ban User</a>
 
 																	</div>
 																</div>
@@ -178,7 +180,7 @@
 																		Not approved
 																	</button>
 																	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																		<a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=1">approve</a>
 
 
 																	</div>
@@ -191,9 +193,9 @@
 															<?php
 																$notification = $this->db->get_where('tbl_notification', ['IdTeam' => $team['IdTeam']])->result_array();
 															?>
-															<button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['id']; ?>" class="btn btn-warning mr-1 mb-1">Notification Ban  <span class="badge badge badge-danger badge-pill"><?php echo count($notification); ?></span></button>
+															<button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['idT']; ?>" class="btn btn-warning mr-1 mb-1">Notification Ban  <span class="badge badge badge-danger badge-pill"><?php echo count($notification); ?></span></button>
 
-															<div class="modal fade" id="exampleModalk<?php echo $team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+															<div class="modal fade" id="exampleModalk<?php echo $team['idT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 																<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
 																	<div class="modal-content">
 																		<div class="modal-header">
@@ -205,7 +207,7 @@
 																		</div>
 																		<div class="modal-body">
 																			<form action="NotificationBan" method="POST">
-																				<input type="text" value="<?php echo $team['id']; ?>" name="id" hidden>
+																				<input type="text" value="<?php echo $team['idT']; ?>" name="id" hidden>
 																				<div class="col-xl-12 col-md-6 col-12 mb-1">
 																					<div class="form-group">
 																						<label for="helpInputTop">Note</label>

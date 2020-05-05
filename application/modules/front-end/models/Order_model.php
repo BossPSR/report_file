@@ -21,7 +21,7 @@ class Order_model extends CI_Model
         $this->db->select('*,tbl_upload_order.update_at AS update_at_buy,tbl_upload_order.order_id as ORD,tbl_upload_team.order_id as ORDT');
         $this->db->from('tbl_store_for_buy_email');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_store_for_buy_email.order_id');
-        $this->db->join('tbl_upload_team', 'tbl_store_for_buy_email.order_id = tbl_upload_team.order_id');
+        $this->db->join('tbl_upload_team', 'tbl_store_for_buy_email.order_id = tbl_upload_team.order_id','left');
         $this->db->where('tbl_store_for_buy_email.customer_id', $userId);
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.is_check', 0);

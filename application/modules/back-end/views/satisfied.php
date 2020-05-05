@@ -55,8 +55,6 @@
                                                 <tr>
                                                     <th>Order Id</th>
                                                     <th>User</th>
-                                                    <th>Item</th>
-                                                    <th>Code</th>
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
@@ -81,8 +79,6 @@
                                                         <td><?php echo $stores['orderST']; ?></td>
                                                         <td><?php echo $stores['userOR']; ?></td>
                                                         
-                                                        <td><?php echo $stores['topic']; ?></td>
-                                                        <td><?php echo $stores['code']; ?></td>
                                                         <td>
                                                             <?php if (empty($stores['id_document'])) : ?>
                                                                 -

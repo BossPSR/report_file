@@ -234,7 +234,7 @@
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
                                    
-                                        <?php if ($stock_row == true ) { ?>
+                                        <?php if ($stock_row == true || $stock_row['t_id'] == '' ) { ?>
                                             <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
                                             
                                         <?php } else { ?>
