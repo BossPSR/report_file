@@ -98,7 +98,7 @@ class Complete_ctr extends CI_Controller
     public function order_auto_feedback()
     {
         $order_id   = $this->input->post('order_id');
-        $team = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
+        $team       = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
         $cmid       = $this->input->post('cmid');
         $DM         = $this->input->post('DM');
         $dated      = $this->input->post('dated');
@@ -113,7 +113,12 @@ class Complete_ctr extends CI_Controller
         $success = $this->db->insert('tbl_feedback', $orf);
         if ($success) {
             $this->db->where('teamId',$team['teamId']);
-            $this->db->update('tbl_feedback', ['check_feedback_order' => '0'] );
+            $updateFeed = $this->db->update('tbl_feedback', ['check_feedback_order' => '0'] );
+            if ($updateFeed) {
+                $this->db->where('order_id',$order_id);
+                $updateFeed = $this->db->update('tbl_upload_team', ['status' => '2'] );
+            }
+            
         }
         echo $success;
     }
