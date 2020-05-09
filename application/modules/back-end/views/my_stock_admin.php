@@ -19,9 +19,9 @@
                     </div>
                 </div>
             </div>
-        
+
         </div>
-       
+
         <div class="content-body">
             <div class="row">
 
@@ -36,7 +36,7 @@
                                     <h4 class="card-title">My StockAdmin</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                <?php if ($stock == '') : ?>
+                                    <?php if ($stock == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
                                         <?php $e = 0; ?>
@@ -48,7 +48,7 @@
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
                                 <div class="col-2 text-right">
-                                    <a href="Add_my_stock_admin"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Stock Admin</button></a> 
+                                    <a href="Add_my_stock_admin"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Stock Admin</button></a>
                                 </div>
                             </div>
 
@@ -66,14 +66,15 @@
                                                     <th>Date_Required</th>
                                                     <th>position</th>
                                                     <th>Status</th>
+                                                    <th>Tool</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php foreach ($stock as $stock) { ?>
-                                                <tr>
-                                                    <td><?php echo $stock['order_id'] ?></td>
-                                                    <td><?php echo $stock['file_name'] ?></td>
-                                                    <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                <?php foreach ($stock as $stock) { ?>
+                                                    <tr>
+                                                        <td><?php echo $stock['order_id'] ?></td>
+                                                        <td><?php echo $stock['file_name'] ?></td>
+                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -115,8 +116,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div></td>
-                                                    <td><span data-toggle="modal" data-target="#exampleModalGT<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            </div>
+                                                        </td>
+                                                        <td><span data-toggle="modal" data-target="#exampleModalGT<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModalGT<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -158,24 +160,31 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div></td>
-                                                    <td><?php echo $stock['date_required'] ?></td>
+                                                            </div>
+                                                        </td>
+                                                        <td><?php echo $stock['date_required'] ?></td>
 
-                                                    <td>
-                                                    <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $stock['position']])->result_array(); ?>
-                                                    <?php foreach ($position_name as $keys => $position_name) { ?>
-                                                        <?php echo $position_name['name_item'] ?>
-                                                    <?php }?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if($stock['status']==0): ?>
-                                                        <div class="badge badge-warning">รอการรับของทีมงาน</div>
-                                                    <?php else:?>
-                                                        <div class="badge badge-success">ทีมงานรับงานไปแล้ว</div>
-                                                        <?php endif?> 
-                                                    </td>
-                                                </tr>
-                                            <?php }?>
+                                                        <td>
+                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $stock['position']])->result_array(); ?>
+                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
+                                                                <?php echo $position_name['name_item'] ?>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($stock['status'] == 0) : ?>
+                                                                <div class="badge badge-warning">รอการรับของทีมงาน</div>
+                                                            <?php else : ?>
+                                                                <div class="badge badge-success">ทีมงานรับงานไปแล้ว</div>
+                                                            <?php endif ?>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary"><i class="feather icon-plus-square"></i></button>
+                                                            <button type="button" class="btn btn-warning"><i class="feather icon-plus-square"></i></button>
+                                                            <button type="button" class="btn btn-success"><i class="feather icon-plus-square"></i></button>
+                                                            <button type="button" class="btn btn-danger"><i class="feather icon-plus-square"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>

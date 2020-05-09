@@ -59,15 +59,34 @@
                                     <h4 class="card-title">Employee Information</h4>
                                 </div>
 								<div class="col-1 text-center">
-									<h3 class="card-title "><?php echo count($team); ?></h3>
+									<h3 class="card-title ">
+										<?php if (!empty($team)) : ?>
+										<?php echo count($team); ?>
+										<?php else : ?>
+											0
+										<?php endif ; ?>
+									</h3>
 									<h3 class="check_list_not">ทีมงานทั้งหมด</h3>
 								</div>
 								<div class="col-1 text-center">
-									<h3 class="card-title "><?php echo $count_setion['total']; ?></h3>
+									<h3 class="card-title ">
+									<?php if (!empty($count_setion['total'])) : ?>
+										<?php echo $count_setion['total']; ?>
+									<?php else : ?>
+											0
+									<?php endif ; ?>
+									</h3>
 									<h3 class="check_list_not">ชำระเงิน</h3>
 								</div>
 								<div class="col-1 text-center">
-									<h3 class="card-title "><?php echo $count_note['total']; ?></h3>
+
+									<h3 class="card-title ">
+									<?php if (!empty($count_setion['total'])) : ?>
+										<?php echo $count_note['total']; ?>
+									<?php else : ?>
+											0
+									<?php endif ; ?>
+									</h3>
 									<h3 class="check_list_not">ค้างชำระเงิน</h3>
 								</div>
 							

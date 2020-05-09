@@ -56,6 +56,7 @@
                                                     <th>Step</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>T3</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>Order Date</th>
@@ -72,8 +73,15 @@
                                                 ?>
                                                     <tr>
                                                         <td><button class="btn btn-primary">0</button></td>
-                                                        <td><?php echo $stores['order_id'] ?></td>
+                                                        <td><?php echo $stores['order'] ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
+                                                        <td>
+                                                            <?php if (!empty($stores['teamId'])) : ?>
+                                                            <?php echo $stores['teamId']; ?>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif ; ?>
+                                                        </td>
 
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,6 +126,8 @@
                                                             </div>
                                                         </td>
                                                         <td>
+                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['order_id']])->result_array(); ?>
+                                                            <?php if (!empty($order)) : ?>
                                                             <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModalb<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -131,7 +141,6 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['order_id']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -159,7 +168,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
 
                                                         </td>
                                                         <td><?php echo $stores['create_at']; ?></td>
