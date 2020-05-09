@@ -253,7 +253,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <h3>Main Document</h3>
-                                                        <table class="table table-bordered">
+                                                        <table class="table">
                                                             <thead>
                                                                 <tr style="text-align:center;">
                                                                     <th scope="col">File</th>

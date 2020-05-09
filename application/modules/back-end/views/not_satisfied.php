@@ -185,7 +185,7 @@
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -194,10 +194,10 @@
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>Order_id</th>
+                                                                                            <th>Order id</th>
                                                                                             <th>File_name</th>
                                                                                             <th>File</th>
-                                                                                            <th>create</th>
+                                                                                            <th>Create</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
@@ -321,7 +321,7 @@
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['orderNOT']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>
-                                                                <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $store['orderNOT']; ?>" type="button" class="btn btn-success">Upload to team</button>
+                                                                <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $store['orderNOT']; ?>" type="button" class="btn btn-success">Upload T3</button>
                                                             <?php else : ?>
                                                                 <?php if ($team['teamId'] != '') : ?>
                                                                     <span class="badge badge-pill badge-success" style="font-size: 14px;"><?php echo $store['teamId']; ?></span>
@@ -340,7 +340,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload To Team</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>

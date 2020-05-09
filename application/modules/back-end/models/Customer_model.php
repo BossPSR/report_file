@@ -41,7 +41,7 @@ class Customer_model extends CI_Model{
 
     public function customer_all()
     {
-        $this->db->select('*,tbl_upload_order.order_id AS order ');
+        $this->db->select('*,tbl_upload_order.order_id AS order ,tbl_upload_order.create_at AS createOr ,  tbl_upload_order.date_required AS requiredOr  ');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1 );

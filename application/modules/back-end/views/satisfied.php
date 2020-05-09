@@ -21,7 +21,7 @@
 
         </div>
 
-        
+
 
         <div class="content-body">
 
@@ -59,12 +59,14 @@
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>DM File</th>
+                                                    <th>T3 File</th>
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
                                                     <th>Price</th>
                                                     <th>Wage</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
+                                                    <th>Status T3</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -73,12 +75,10 @@
                                                 foreach ($order_main as $id => $stores) {
                                                 ?>
 
-
-
                                                     <tr>
                                                         <td><?php echo $stores['orderST']; ?></td>
                                                         <td><?php echo $stores['userOR']; ?></td>
-                                                        
+
                                                         <td>
                                                             <?php if (empty($stores['id_document'])) : ?>
                                                                 -
@@ -142,114 +142,165 @@
                                                         <td>
                                                             <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['orderST']])->result_array(); ?>
                                                             <?php if (!empty($order)) : ?>
-                                                            <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModalb<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <table class="table zero-configuration">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
-                                                                                        <th>File</th>
-                                                                                        <th>create</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalb<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
                                                                                         <tr>
-                                                                                            <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
-
-
+                                                                                            <th>Order_id</th>
+                                                                                            <th>File_name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
                                                                                         </tr>
-                                                                                    <?php } ?>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($order as $keys => $order) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $order['order_id'] ?></td>
+                                                                                                <td><?php echo $order['file_name_GT'] ?></td>
+                                                                                                <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $order['create_at'] ?></td>
 
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                             <?php else : ?>
                                                                 -
-                                                            <?php endif ; ?>
+                                                            <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                        <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stores['upload_store_id']])->result_array(); ?>
+                                                            <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stores['upload_store_id']])->result_array(); ?>
                                                             <?php if (!empty($orderStore)) : ?>
-                                                            <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModalbDM<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">DM File</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <table class="table zero-configuration">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Order id</th>
-                                                                                        <th>File name</th>
-                                                                                        <th>File</th>
-                                                                                        <th>create</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php foreach ($orderStore as $keys => $orderStore) { ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalbDM<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">DM File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
                                                                                         <tr>
-                                                                                            <td><?php echo $orderStore['store_id'] ?></td>
-                                                                                            <td><?php echo $orderStore['file_name'] ?></td>
-                                                                                            <td><a href="<?php echo $orderStore['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $orderStore['create_at'] ?></td>
-
+                                                                                            <th>Order id</th>
+                                                                                            <th>File name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
                                                                                         </tr>
-                                                                                    <?php } ?>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderStore as $keys => $orderStore) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $orderStore['store_id'] ?></td>
+                                                                                                <td><?php echo $orderStore['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderStore['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderStore['create_at'] ?></td>
 
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                             <?php else : ?>
                                                                 -
-                                                            <?php endif ; ?>
+                                                            <?php endif; ?>
 
 
                                                         </td>
+                                                        <td>
+                                                            <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stores['orderST']])->result_array(); ?>
+
+                                                            <?php if ($orderT == true) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalT3<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalT3<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Order id</th>
+                                                                                            <th>File_name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>Create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderT as $keys => $orderT) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $orderT['order_id'] ?></td>
+                                                                                                <td><?php echo $orderT['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderT['create_at'] ?></td>
+
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        
                                                         <td><?php echo $stores['createST']; ?></td>
                                                         <td>
-                                                            <?php if($stores['status_delivery']== '1'):?>
+                                                            <?php if ($stores['status_delivery'] == '1') : ?>
                                                                 <?php echo $stores['dateREST']; ?>
-                                                            <?php else:?>
-                                                            <a  href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stores['orderST']; ?>"><?php echo $stores['dateREST']; ?>  <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                            <div class="modal fade" id="exampleModaldate<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <?php else : ?>
+                                                                <a href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stores['orderST']; ?>"><?php echo $stores['dateREST']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="exampleModaldate<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_date_required_Satisfied" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                            
-                                                                        <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
-                                                                        <div class="modal-content">
+
+                                                                            <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
+                                                                            <div class="modal-content">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -257,26 +308,26 @@
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-                                                                                    
+
                                                                                     <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">Date Required</label>
-                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter score" >
+                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter score">
                                                                                         </div>
-                                                                                      
+
                                                                                     </div>
-                                                                                   
+
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
                                                                                 </div>
                                                                             </div>
-                                                                           
+
                                                                         </div>
-                                                                        </form>
-                                                                    </div>
-                                                            <?php endif;?>
-                                                    
+                                                                    </form>
+                                                                </div>
+                                                            <?php endif; ?>
+
                                                         </td>
 
                                                         <?php if ($stores['price_file'] == '') :   ?>
@@ -291,7 +342,7 @@
                                                             <?php else : ?>
                                                                 <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $stores['orderST']; ?>"><?php echo $stores['wage']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
                                                                 <div class="modal fade" id="exampleModalwage<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <form action="edit_wage_Not_Satisfied" method="POST">
+                                                                    <form action="edit_wage_Satisfied" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
 
                                                                             <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
@@ -325,26 +376,42 @@
 
                                                         <td>
                                                             <?php if ($stores['status_delivery'] == 0) : ?>
-                                                            <span class="badge badge-pill badge-warning">Not Delivered</span>
+                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
-                                                            <span class="badge badge-pill badge-success">Delivered</span>
+                                                                <span class="badge badge-pill badge-success">Delivered</span>
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') :?>
-                                                            <span class="badge badge-pill badge-success">Original</span>
+                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-success">Original</span>
                                                             <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete'  && $stores['status_admin'] == '0') : ?>
-                                                            <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0' ) : ?>
-                                                            <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($stores['status_admin'] == '1' ) : ?>
-                                                            <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($stores['status_admin'] == '1') : ?>
+                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+                                                        <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['orderST']])->row_array(); ?>
+                                                        <td>
+                                                            <?php if ($team == false) : ?>
+                                                                <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['orderST']; ?>" type="button" class="btn btn-success">Upload T3</button>
+                                                            <?php else : ?>
+                                                                <?php if ($team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-success" style="font-size: 14px;"><?php echo $stores['teamId']; ?></span>
+                                                                <?php else : ?>
+                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                    <div class=""></div>
+                                                                <?php endif ?>
+                                                            <?php endif ?>
+
+                                                        </td>
 
                                                     </tr>
+
+
 
                                                     <div class="modal fade" id="exampleModal<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -368,6 +435,70 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <div class="add-data-footer d-flex justify-content-around px-3 mt-2"></div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal fade" id="exampleModalUpload<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="upload_team_ST" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Order</label>
+                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $stores['orderST']; ?>" placeholder="Enter Order" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">date required</label>
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter price" required>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">position</label>
+                                                                                <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
+                                                                                <select name="position" class="form-control" required>
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <?php foreach ($select_postion as $keys => $select_postion) { ?>
+                                                                                        <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">wage(10%)</label>
+
+                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $stores['price_file'] * 10 / 100; ?>" placeholder="Enter wage">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note</label>
+                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </form>
                                                             </div>

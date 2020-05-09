@@ -173,8 +173,8 @@
                                                         <?php endif; ?>
 
                                                         </td>
-                                                        <td><?php echo $stores['create_at']; ?></td>
-                                                        <td><?php echo $stores['date_required']; ?></td>
+                                                        <td><?php echo $stores['createOr']; ?></td>
+                                                        <td><?php echo $stores['requiredOr']; ?></td>
                                                         <?php if ($stores['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>

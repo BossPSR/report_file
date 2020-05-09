@@ -112,14 +112,47 @@ class Complete_ctr extends CI_Controller
         );
         $success = $this->db->insert('tbl_feedback', $orf);
         if ($success) {
-            $this->db->where('teamId',$team['teamId']);
-            $updateFeed = $this->db->update('tbl_feedback', ['check_feedback_order' => '0'] );
+            $this->db->where('teamId', $team['teamId']);
+            $updateFeed = $this->db->update('tbl_feedback', ['check_feedback_order' => '0']);
             if ($updateFeed) {
-                $this->db->where('order_id',$order_id);
-                $updateFeed = $this->db->update('tbl_upload_team', ['status' => '2'] );
+                $this->db->where('order_id', $order_id);
+                $updateFeed = $this->db->update('tbl_upload_team', ['status' => '2']);
             }
-            
         }
+        echo $success;
+    }
+
+    public function order_auto_stock_admin()
+    {
+
+        $buymax     =  $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
+        $position   =  $this->input->post('position');
+        $date_req   =  $this->input->post('date');
+        $DM         =  $this->input->post('DM');
+
+        $data = array(
+
+            'order_id'      => $buymax->order_main,
+            'date_required' => $date_req,
+            'position'      => $position,
+            'wage'          => $this->input->post('wage'),
+            'note'          => $this->input->post('note'),
+            'create_at'     => date('Y-m-d H:i:s'),
+        );
+
+        $success =  $this->db->insert('tbl_upload_team', $data);
+        if ($success) {
+            foreach ($DM as $DM) {
+                $datedm = array(
+
+                    'id_orderBuy'   => $buymax->order_main,
+                    'id_document'   => $DM,
+                    'create_at'     => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_bookmark', $datedm);
+            }
+        }
+
         echo $success;
     }
 
@@ -133,19 +166,17 @@ class Complete_ctr extends CI_Controller
 
         $id = $this->input->post('id');
 
-        $feedback = $this->db->get_where('tbl_feedback',['order_id'=> $id])->row_array();
-        $user_order = $this->db->get_where('tbl_upload_order',['order_id'=> $id])->row_array();
-        $user = $this->db->get_where('tbl_upload_order',['userId'=> $user_order['userId']])->row_array();
+        $feedback = $this->db->get_where('tbl_feedback', ['order_id' => $id])->row_array();
+        $user_order = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
+        $user = $this->db->get_where('tbl_upload_order', ['userId' => $user_order['userId']])->row_array();
 
-        if ($feedback==true){
-        $this->db->where('order_id', $id);
-        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+        if ($feedback == true) {
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
-        $this->db->where('order_id', $id);
-        $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
-
-
-        }else{
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
+        } else {
             $this->db->where('order_id', $id);
             $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
         }

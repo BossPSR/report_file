@@ -414,8 +414,8 @@
                                                         </td>
                                                         <td><?php echo $bookmark['date_re'] ?></td>
 
-                                                        <td id="test<?php echo $keyBook; ?>">
-                                                            <?php if ($bookmark['status_cp'] == "notcomplete") : ?>
+                                                        <td >
+                                                            <?php if ($bookmark['statusB'] == "notcomplete") : ?>
                                                                 <div class="badge badge-primary">Rewrite</div>
                                                             <?php else : ?>
                                                                 <div class="badge badge-success">Original</div>
@@ -442,21 +442,12 @@
                                                             <?php else : ?>
                                                                 <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['order_save']; ?>"><i class="feather icon-navigation"></i> delivery </button>
                                                             <?php endif; ?>
-                                                            <?php if ($bookmark['status_book'] == '2') : ?>
-
-                                                            <?php else : ?>
-                                                                <?php if ($bookmark['status_bookmark_upload_to_team'] == '1') : ?>
-
-                                                                    <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target=""> Upload To T3</button>
-                                                                <?php else : ?>
-                                                                    <button type="button" class="btn btn-info mr-1 mb-1" data-toggle="modal" data-target="#exampleModal<?php echo $bookmark['order_save']; ?>"> Upload To T3</button>
-                                                                <?php endif; ?>
-                                                            <?php endif; ?>
+                                                      
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">delivery file</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Delivery File</h5>
 
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
@@ -481,8 +472,6 @@
                                                                                     $orderss = $this->db->get('tbl_upload_store')->result_array();
 
                                                                                     ?>
-
-
 
                                                                                     <?php if (!empty($dm_c['id_document'])) : ?>
                                                                                         <p><b>
@@ -591,7 +580,7 @@
 
 
 
-                                                            <div class="modal fade" id="exampleModal<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <!-- <div class="modal fade" id="exampleModal<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -646,17 +635,11 @@
 
                                                                             <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Upload To T3</button>
 
-                                                                            <!-- <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> -->
+                                                                          
                                                                         </form>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
 
                                                         </td>
                                                     </tr>

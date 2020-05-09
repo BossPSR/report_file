@@ -60,9 +60,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>order_id</th>
-                                                    <th>Flie_name</th>
+                                                    <th>Name</th>
                                                     <th>Main_file</th>
                                                     <th>GT_File</th>
+                                                    <th>DM File</th>
+                                                    <th>T3 File</th>
                                                     <th>Date_Required</th>
                                                     <th>position</th>
                                                     <th>Status</th>
@@ -73,7 +75,13 @@
                                                 <?php foreach ($stock as $stock) { ?>
                                                     <tr>
                                                         <td><?php echo $stock['order_id'] ?></td>
-                                                        <td><?php echo $stock['file_name'] ?></td>
+                                                        <td>
+                                                            <?php if (!empty($stock['Username'])) : ?>
+                                                                <?php echo $stock['Username'] ?>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -118,7 +126,8 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td><span data-toggle="modal" data-target="#exampleModalGT<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                        <td>
+                                                            <span data-toggle="modal" data-target="#exampleModalGT<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModalGT<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -131,7 +140,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                                                    <?php $orderGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -140,14 +149,12 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                    <?php foreach ($orderGT as $keys => $orderGT) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
-
-
+                                                                                            <td><?php echo $orderGT['order_id'] ?></td>
+                                                                                            <td><?php echo $orderGT['file_name_GT'] ?></td>
+                                                                                            <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $orderGT['create_at'] ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -162,6 +169,106 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                        <td>
+                                                            <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?>
+                                                            <?php if (!empty($orderStore)) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stock['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalbDM<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">DM File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Order id</th>
+                                                                                            <th>File name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderStore as $keys => $orderStore) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $orderStore['store_id'] ?></td>
+                                                                                                <td><?php echo $orderStore['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderStore['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderStore['create_at'] ?></td>
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
+
+                                                        </td>
+                                                        <td>
+                                                            <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stock['orderST']])->result_array(); ?>
+
+                                                            <?php if ($orderT == true) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalT3<?php echo $stock['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalT3<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Order id</th>
+                                                                                            <th>File_name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>Create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderT as $keys => $orderT) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $orderT['order_id'] ?></td>
+                                                                                                <td><?php echo $orderT['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderT['create_at'] ?></td>
+
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td><?php echo $stock['date_required'] ?></td>
 
                                                         <td>
@@ -171,17 +278,23 @@
                                                             <?php } ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($stock['status'] == 0) : ?>
-                                                                <div class="badge badge-warning">รอการรับของทีมงาน</div>
+                                                            <?php if ($stock['status_book'] == '1' && $stock['status_cp'] == 'complete' && $stock['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-success">Original</span>
+                                                            <?php elseif ($stock['status_book'] == '1' && $stock['status_cp'] == 'notcomplete'  && $stock['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($stock['status_book'] == '2'  && $stock['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($stock['status_admin'] == '1') : ?>
+                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
                                                             <?php else : ?>
-                                                                <div class="badge badge-success">ทีมงานรับงานไปแล้ว</div>
-                                                            <?php endif ?>
+                                                                -
+                                                            <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-primary"><i class="feather icon-plus-square"></i></button>
-                                                            <button type="button" class="btn btn-warning"><i class="feather icon-plus-square"></i></button>
-                                                            <button type="button" class="btn btn-success"><i class="feather icon-plus-square"></i></button>
-                                                            <button type="button" class="btn btn-danger"><i class="feather icon-plus-square"></i></button>
+                                                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
+                                                            <button type="button" class="btn btn-warning"><i class="fa fa-exclamation-triangle"></i></button>
+                                                            <button type="button" class="btn btn-success"><i class="fa fa-check"></i></button>
+                                                            <button type="button" class="btn btn-danger"><i class="fa fa-times"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>

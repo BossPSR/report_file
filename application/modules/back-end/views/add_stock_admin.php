@@ -36,8 +36,7 @@
                                             <label for="" style="font-size: 16px;"> Main File </label>
                                             <form action="fileUpload_buy_admin" class="dropzone dropzone-area" id="maindropzone">
                                                 <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
-                                                <input type="text" id="position2" class="form-control position2" name="position" hidden>
-
+                                                <input type="text" id="name2" name="name" class="form-control" hidden>
                                                 <div class="dz-message" style="top: 24%;">Upload File Main</div>
                                             </form>
                                         </div>
@@ -45,11 +44,28 @@
                                             <label for="" style="font-size: 16px;"> GT File </label>
                                             <form action="buy_uploadGT" class="dropzone dropzone-area" id="GTdropzone">
                                                 <div class="dz-message" style="top: 24%;">Upload File GT</div>
-                                                <textarea name="note" id="note2" class="form-control" rows="10" hidden></textarea>
-                                                <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
-                                                <input type="text" id="position2" class="form-control position2" name="position" hidden>
-                                                <input type="number" id="wage2" name="wage" class="form-control" hidden>
+
                                             </form>
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                            <label for="" style="font-size: 16px;"> Name </label>
+                                            <input type="text" id="names" name="names" class="form-control" value="" required>
+                                            <p class="message"></p>
+                                        </div>
+
+                                        <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                            <label for="" style="font-size: 16px;"> DM </label>
+                                            <div class="form-group">
+                                                <select name="DM[]" id="DM" class="select2 form-control" multiple="multiple">
+                                                    <?php foreach ($chek_book as $key => $chek_book) { ?>
+                                                        <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+
                                         </div>
 
                                         <?php $item = $this->db->get('tbl_item_position')->result(); ?>
@@ -83,7 +99,7 @@
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Note </label>
                                             <textarea name="note" id="note1" class="form-control" rows="10"></textarea>
-                                           
+
                                         </div>
 
                                         <div class="col-xl-12 col-md-12 col-12" style="margin-top: 25px;">
@@ -112,20 +128,6 @@
     });
 </script> -->
 <script>
-    $("#position1")
-        .change(function() {
-            var value = $(this).val();
-            $(".position2").val(value);
-        })
-        .change();
-
-    $("#wage1")
-        .keyup(function() {
-            var value = $(this).val();
-            $("#wage2").val(value);
-        })
-        .keyup();
-
     $("#date1")
         .change(function() {
             var value = $(this).val();
@@ -133,10 +135,10 @@
         })
         .change();
 
-    $("#note1")
+    $("#names")
         .keyup(function() {
             var value = $(this).val();
-            $("#note2").text(value);
+            $("#name2").val(value);
         })
         .keyup();
 </script>
@@ -160,10 +162,16 @@
         var x = document.getElementById("date1").value;
         var y = document.getElementById("position1").value;
         var z = document.getElementById("wage1").value;
-
+        var p = document.getElementById("names").value;
+        var n = document.getElementById("note1").value;
+        var dm = [];
+        $('#DM :selected').each(function(i, selected) {
+            dm[i] = $(selected).val();
+        }); 
+        
         // myDropzone.processQueue();
 
-        if (myDropzone.files == 0 ) {
+        if (myDropzone.files == 0) {
             swal("Warning!", "Can not be document Empty", "warning", {
                 button: true,
             });
@@ -177,34 +185,55 @@
             if (z == '') {
                 $('.message').html('Not Empty ').css('color', 'red');
             } else {}
-            if(x != '' && y != '' && z != ''){
+            if (p == '') {
+                $('.message').html('Not Empty ').css('color', 'red');
+            } else {}
+            if (x != '' && y != '' && z != '' && p != '') {
                 $.ajax({
-                type: 'POST',
-                url: 'order_auto',
-                data: {
-                    status: 1
-                },
-                success: function(data) {
-                    myDropzone.processQueue();
-                    myDropzone2.processQueue();
-                    myDropzone.on("queuecomplete", function(file, res) {
-                        swal("Good job!", "Upload for data successfull", "success", {
-                            button: false,
-                        });
-                        setTimeout(function() {
-                            location.href = "my_stock_admin"
-                        }, 1000);
-                    });
-                },
+                    type: 'POST',
+                    url: 'order_auto',
+                    data: {
+                        status: 1
+                    },
+                    success: function(data) {
 
-            });
-            }
-            else{
+                        $.ajax({
+                            type: 'POST',
+                            url: 'order_auto_stock_admin',
+                            data: {
+                                date: x,
+                                position: y,
+                                wage: z,
+                                names: p,
+                                note: n,
+                                DM: dm,
+                            },
+                            success: function(success) {
+                                myDropzone.processQueue();
+                                myDropzone2.processQueue();
+                                swal("Good job!", "Upload for data successfull", "success", {
+                                    button: true,
+                                }).then(function(isConfirm) {
+                                    if (isConfirm == true) {
+                                        setTimeout(function() {
+                                            location.href = "my_stock_admin"
+                                        }, 1000);
+                                    } else {
+                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                    }
+                                });
+                            }
+                        });
+
+                    },
+
+                });
+            } else {
                 swal("Warning!", "Can not be  Not Empty", "warning", {
-                button: true,
-            });
+                    button: true,
+                });
             }
-          
+
         }
 
 
@@ -212,12 +241,4 @@
         // console.log("SUCCESS");
         // console.log("------ END ------");
     });
-
-    // $('#upfiles').click(function() {
-    //     console.log("------ SUCCESS ------");
-    // });
-
-    // $("#upfiles").click(function() {
-    //     alert("Handler for .click() called.");
-    // });
 </script>
