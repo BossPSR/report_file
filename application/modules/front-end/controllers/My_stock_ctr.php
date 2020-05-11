@@ -157,4 +157,27 @@ class My_stock_ctr extends CI_Controller
         $data['dcnumber'] = base64_decode($this->input->get('dcnumber'));
         $this->load->view('show_pdf', $data);
     }
+
+    public function my_task_cancel()
+    {
+        $order_id           = $this->input->post('order_id');
+        $status_cf_team     = $this->input->post('status_cf_team');
+        $teamId             = $this->input->post('teamId');
+        $status             = $this->input->post('status');
+
+        $data = array(
+            'status_confirmed_team'         => $status_cf_team,
+            'update_at'                     => date('Y-m-d H:i:s'),
+        );
+        $this->db->where('order_id', 'ODB' . $order_id);
+        if ($this->db->update('tbl_upload_order', $data)) {
+            $data2 = array(
+                'teamId'                    => $teamId,
+                'status'                    => $status,
+            );
+            $this->db->where('order_id', 'ODB' . $order_id);
+            $success = $this->db->update('tbl_upload_team', $data2);
+            echo $success;
+        }
+    }
 }

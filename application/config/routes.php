@@ -139,6 +139,7 @@ $route['My-stock-Item']         = 'front-end/My_stock_ctr/my_stock_item';
 $route['My-stock']              = 'front-end/My_stock_ctr/my_stock';
 $route['order_isconfirm']       = 'front-end/My_stock_ctr/order_isconfirm';
 $route['My-task']               = 'front-end/My_stock_ctr/my_task';
+$route['My-task-cancel']        = 'front-end/My_stock_ctr/my_task_cancel';
 $route['My-task-withdraw']      = 'front-end/My_stock_ctr/my_task_withdraw';
 $route['My-stock-item-add']     = 'front-end/My_stock_ctr/my_stock_item_add';
 $route['My-delivery']           = 'front-end/Delivery_ctr';
