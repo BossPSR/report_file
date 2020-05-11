@@ -75,10 +75,10 @@ class Order_model extends CI_Model
 
     public function my_stock_row($sess)
     {
-        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id');
+        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,tbl_upload_team.status as up_status');
         $this->db->from('tbl_upload_order');
-        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
-        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
+        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id','left');
+        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id','left');
         $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->where('tbl_feedback.check_feedback_order', 1);
@@ -152,7 +152,7 @@ class Order_model extends CI_Model
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_feedback.check_feedback_dalivery', 0);
-        $this->db->where('tbl_upload_team.status', 1);
+        $this->db->where('tbl_upload_team.status', 2);
         $this->db->where('tbl_upload_team.teamId', $sessi);
         $this->db->group_by('tbl_feedback.order_id');
         $this->db->order_by('tbl_upload_team.order_id', 'DESC');

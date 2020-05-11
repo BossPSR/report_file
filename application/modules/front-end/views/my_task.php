@@ -25,7 +25,6 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">No.</th>
                                 <th scope="col">ID Order</th>
                                 <th scope="col">Date Requred</th>
                                 <th scope="col">Main Doc</th>
@@ -35,6 +34,7 @@
                                 <th scope="col">Wage</th>
                                 <th scope="col">Select item</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Option</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,6 @@
                             ?>
                             <?php foreach ($task as $task) { ?>
                                 <tr style="text-align:center;">
-                                    <td><?php echo $p++; ?></td>
                                     <td><?php echo $task['or_id']; ?></td>
                                     <td><?php echo date('d F Y', strtotime($task['date_required'])); ?></td>
                                     <td>
@@ -314,14 +313,14 @@
 
                                     <?php $data = date('Y-m-d') ?>
                                     <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $task['up_order'])); ?>
-
+                                    <?php $or_sub = substr($task['or_id'], 3); ?>
+                                    <?php $te_sub = substr($team['IdTeam'], 2); ?>
                                     <td><?php echo $task['name_item']; ?></td>
                                     <?php if ($task['status_approved'] == 1 || date('Y-m-d') >= $prosum && $task['up_order'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
                                         <?php if (empty($withh)) { ?>
-                                            <?php $or_sub = substr($task['or_id'], 3); ?>
-                                            <?php $te_sub = substr($team['IdTeam'], 2); ?>
+
                                             <td><button class="btn btn-info" id="cf_draw<?php echo $or_sub; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
                                             <script>
                                                 $('#cf_draw<?php echo $or_sub; ?>').click(function() {
@@ -383,10 +382,52 @@
                                         <?php } elseif ($task['c_status'] == 2) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Feedback</span></td>
                                         <?php } ?>
-    
+
+                                    <?php } ?>
+                                    <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
+                                        <td><button type="button" class="btn btn-danger" id="cancel_task<?php echo $or_sub; ?>"><i class="fa fa-times-circle"></i></button></td>
+                                        <script type="text/javascript">
+                                            $('#cancel_task<?php echo $or_sub; ?>').click(function() {
+                                                swal({
+                                                    icon: "warning",
+                                                    title: "Are you sure?",
+                                                    text: "Do you want cancel document",
+                                                    closeOnEsc: true,
+                                                    closeOnClickOutside: false,
+                                                    buttons: {
+                                                        cancel: true,
+                                                        confirm: true,
+                                                    },
+                                                }).then(function(isConfirm) {
+                                                    if (isConfirm == true) {
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: 'My-task-cancel',
+                                                            data: {
+                                                                order_id: <?php echo $or_sub; ?>,
+                                                                status_cf_team: 0,
+                                                                teamId: null,
+                                                                status: 0,
+                                                            },
+                                                            success: function(success) {
+                                                                swal("Good job!", "Cancel for data successfull", "success", {
+                                                                    button: false,
+                                                                });
+                                                                setTimeout("location.reload(true);", 1000);
+                                                            }
+                                                        });
+                                                    } else {
+                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                    <?php } else { ?>
+                                        <td><button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button></td>
                                     <?php } ?>
                                 </tr>
                             <?php } ?>
+
                             <script>
                                 $('#download<?php echo $key; ?>').click(function() {
                                     swal({
