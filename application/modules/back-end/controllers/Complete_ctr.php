@@ -168,7 +168,7 @@ class Complete_ctr extends CI_Controller
 
         $feedback = $this->db->get_where('tbl_feedback', ['order_id' => $id])->row_array();
         $user_order = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
-        $user = $this->db->get_where('tbl_upload_order', ['userId' => $user_order['userId']])->row_array();
+        $user = $this->db->get_where('tbl_user', ['idUser' => $user_order['userId']])->row_array();
 
         if ($feedback == true) {
             $this->db->where('order_id', $id);
@@ -182,18 +182,23 @@ class Complete_ctr extends CI_Controller
         }
 
 
-        $subject = 'test ip-soft';
+        $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
 
-        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
-        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
-        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
-        $message .= '<body style="background: #eee;">';
+        $message .= '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Send all your documents successfully.';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user['user'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order details ("' . $id  . '")</p>';
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
 
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $id . '</div>';
         if (!empty($order_id)) {
             foreach ($order_id as $key => $order_id) {
                 $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
@@ -208,18 +213,7 @@ class Complete_ctr extends CI_Controller
             $message .= '<br>';
         }
 
-
-
-
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
-        $message .= '<div>';
-        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
-        $message .= 'Reject';
-        $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</body>';
+        $message .= '</center>';
 
         //config email settings
         $config['protocol'] = 'smtp';

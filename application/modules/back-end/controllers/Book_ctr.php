@@ -260,7 +260,7 @@ class Book_ctr extends CI_Controller
         $user_email_send  = $this->db->get_where('tbl_user', ['idUser' => $user_email['userId']])->row_array();
 
 
-        $subject = 'เอกสารการชำระเงิน จาก www.report-file.com ';
+        $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
 
         $message .= '<center>';
         $message .= '<div style="max-width:800px;">';

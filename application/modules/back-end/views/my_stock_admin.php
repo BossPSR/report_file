@@ -59,13 +59,14 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>order_id</th>
+                                                    <th>Order id</th>
                                                     <th>Name</th>
-                                                    <th>Main_file</th>
-                                                    <th>GT_File</th>
+                                                    <th style="width:100px;">DM</th>
+                                                    <th>Main file</th>
+                                                    <th>GT File</th>
                                                     <th>DM File</th>
                                                     <th>T3 File</th>
-                                                    <th>Date_Required</th>
+                                                    <th>Date Required</th>
                                                     <th>position</th>
                                                     <th>Status</th>
                                                     <th>Tool</th>
@@ -81,6 +82,12 @@
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php $book_dm = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stock['order_id'] ])->result_array(); ?>
+                                                            <?php foreach ($book_dm as $key => $book_dm) { ?>
+                                                                <span class="badge badge-primary"><?php echo $book_dm['id_document']; ?></span>
+                                                            <?php } ?>
                                                         </td>
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
