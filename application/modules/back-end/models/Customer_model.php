@@ -41,11 +41,12 @@ class Customer_model extends CI_Model{
 
     public function customer_all()
     {
-        $this->db->select('*');
+        $this->db->select('*,tbl_upload_order.order_id AS order ,tbl_upload_order.create_at AS createOr ,  tbl_upload_order.date_required AS requiredOr  ');
         $this->db->from('tbl_upload_order');
-        $this->db->where('status_pay', 1 );
-        $this->db->group_by('order_id');
-        $this->db->order_by('date_required','desc');
+        $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
+        $this->db->where('tbl_upload_order.status_pay', 1 );
+        $this->db->group_by('tbl_upload_order.order_id');
+        $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();
 
     }

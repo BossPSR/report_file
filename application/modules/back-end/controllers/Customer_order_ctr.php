@@ -115,6 +115,31 @@ class Customer_order_ctr extends CI_Controller
         return redirect('Not_Satisfied');
     }
 
+    public function upload_team_ST()
+    {
+        $data = array(
+
+            'order_id'                         => $this->input->post('order_id'),
+            'position'                         => $this->input->post('position'),
+            'wage'                             => $this->input->post('wage'),
+            'note'                             => $this->input->post('note'),
+            'date_required'                    => $this->input->post('Daterequired'),
+            'create_at'                        => date('Y-m-d H:i:s')
+
+        );
+      
+        $resultsedit = $this->db->insert('tbl_upload_team', $data);
+        $this->db->where('order_id',$this->input->post('order_id'));
+        $this->db->update('tbl_upload_order',['notify_admin' => 1]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+        }
+        return redirect('Satisfied');
+    }
+
     public function edit_date_required_Satisfied()
     {
         $order_id = $this->input->post('order_id');
@@ -127,6 +152,22 @@ class Customer_order_ctr extends CI_Controller
             $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Date Required Satisfied information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Date Required Satisfied information');
+        }
+        return redirect('Satisfied');
+    }
+
+    public function edit_wage_Satisfied()
+    {
+        $order_id = $this->input->post('order_id');
+        $wage = $this->input->post('wage');
+
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Wage Not Satisfied information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Wage Not Satisfied information');
         }
         return redirect('Satisfied');
     }

@@ -65,7 +65,8 @@ class Stock_ctr extends CI_Controller {
   
 	  $userId     =  $id_admin['id'];
 	  $date_req   =  $this->input->post('date_required');
-	  $position   =  $this->input->post('position');
+	  $name      =  $this->input->post('name');
+
   
 	  $target_dir = "uploads/Buy/"; // Upload directory
   
@@ -85,17 +86,9 @@ class Stock_ctr extends CI_Controller {
 		//Load upload library
 		$this->load->library('upload', $config);
 		$this->upload->initialize($config);
-		// $buyre =  $this->Buy_model->buy();
-		// $buymax = $this->Buy_model->buy_max();
+
 		$buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
-		// $orf = array(
-		//   'order_main'    => "OD".rand('0','100'),
-		//   'create_at'     => date('Y-m-d H:i:s') ,
-		//   'status'        => '1'    
-		// );
-		// $this->db->insert('tbl_order_f', $orf);
-  
-  
+
 		// File upload
 		if ($this->upload->do_upload('file')) {
 		  // Get data about the file
@@ -106,6 +99,7 @@ class Stock_ctr extends CI_Controller {
 			'userId'        => $userId,
 			'order_id'      => $buymax->order_main,
 			'date_required' => $date_req,
+			'Username'      => $name,
 			'status_admin'  =>  1,
 			'status_book'   =>  2,
 			'status_pay'    =>  1,
@@ -113,26 +107,9 @@ class Stock_ctr extends CI_Controller {
 			'path'          => 'uploads/Buy/' . $uploadData['file_name'],
 			'create_at'     => date('Y-m-d H:i:s'),
 		  );
-		  if($this->db->insert('tbl_upload_order', $data));
+		  $this->db->insert('tbl_upload_order', $data);
 		  
-		  $data = array(
 
-			'order_id'      => $buymax->order_main,
-			'date_required' => $date_req,
-			'position' 	    => $position,
-			'wage'          =>  $this->input->post('wage'),
-			'note'           =>  $this->input->post('note'),
-			'create_at'     => date('Y-m-d H:i:s'),
-		  );
-
-		  $this->db->insert('tbl_upload_team', $data);
-
-
-
-
-		  // if ($this->db->insert('tbl_upload_order', $data)) {
-		  //   return redirect('buy_uploadGT', $data);
-		  // }
 		}
 	  }
 	}

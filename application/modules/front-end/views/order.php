@@ -13,7 +13,6 @@
                         <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <th scope="col">Status</th>
-                                <th scope="col">#</th>
                                 <th scope="col">Order</th>
                                 <th scope="col">Document</th>
                                 <th scope="col">Price</th>
@@ -56,7 +55,6 @@
                                             <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
                                         <?php endif; ?>
                                     </th>
-                                    <th scope="row"><?php echo $i++; ?></th>
                                     <td><?php echo $value['ORD']; ?></td>
                                     <td style="text-align:left;"><?php echo $value['file_name']; ?></td>
                                     <td>$<?php echo $value['price_file']; ?></td>
@@ -216,7 +214,7 @@
                                         <?php } ?>
                                     </td>
                                     <td><?php echo date("d F Y", strtotime($value['created_at'])); ?></td>
-                                    <td><?php echo date("d F Y", strtotime($value['date_required'])); ?></td>
+                                    <td><?php echo date("d F Y", strtotime($value['Drequired'])); ?></td>
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php $produm   = date('Y-m-d', strtotime('+60 day' . '+' . $value['update_at_buy'])); ?>
