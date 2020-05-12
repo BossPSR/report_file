@@ -427,12 +427,7 @@
                                             <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                             <li>
                                                 <a href="#"> User manual <i class="fa fa-angle-right"></i></a>
-                                                <ul class="categorie_sub_menu">
-                                                    <li><a href="">Coats Jackets </a></li>
-                                                    <li><a href="">Raincoats</a></li>
-                                                    <li><a href="">Jackets</a></li>
-                                                    <li><a href="">T-shirts</a></li>
-                                                </ul>
+                                                
                                             </li>
 
                                         <?php endif ?>

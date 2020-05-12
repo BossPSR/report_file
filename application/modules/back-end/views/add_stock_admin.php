@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Admin</h2>
+                        <h2 class="content-header-title float-left mb-0">Add My StockAdmin</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="back_admin">Admin</a>
+                                <li class="breadcrumb-item"><a href="back_admin">My StockAdmin</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Add Admin</a>
+                                <li class="breadcrumb-item"><a href="#">Add My StockAdmin</a>
                                 </li>
                             </ol>
                         </div>
@@ -37,6 +37,7 @@
                                             <form action="fileUpload_buy_admin" class="dropzone dropzone-area" id="maindropzone">
                                                 <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
                                                 <input type="text" id="name2" name="name" class="form-control" hidden>
+                                                <input type="email" id="email2" name="email" class="form-control" hidden>
                                                 <div class="dz-message" style="top: 24%;">Upload File Main</div>
                                             </form>
                                         </div>
@@ -46,6 +47,12 @@
                                                 <div class="dz-message" style="top: 24%;">Upload File GT</div>
 
                                             </form>
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                            <label for="" style="font-size: 16px;"> Email </label>
+                                            <input type="email" id="email" name="email" class="form-control" value="" required>
+                                            <p class="message"></p>
                                         </div>
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
@@ -94,7 +101,7 @@
                                             <p class="message"></p>
                                         </div>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;"></div>
+                       
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Note </label>
@@ -139,6 +146,13 @@
         .keyup(function() {
             var value = $(this).val();
             $("#name2").val(value);
+        })
+        .keyup();
+
+        $("#email")
+        .keyup(function() {
+            var value = $(this).val();
+            $("#email2").val(value);
         })
         .keyup();
 </script>

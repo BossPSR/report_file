@@ -65,7 +65,8 @@ class Stock_ctr extends CI_Controller {
   
 	  $userId     =  $id_admin['id'];
 	  $date_req   =  $this->input->post('date_required');
-	  $name      =  $this->input->post('name');
+	  $name       =  $this->input->post('name');
+	  $email      =  $this->input->post('email');
 
   
 	  $target_dir = "uploads/Buy/"; // Upload directory
@@ -100,6 +101,7 @@ class Stock_ctr extends CI_Controller {
 			'order_id'      => $buymax->order_main,
 			'date_required' => $date_req,
 			'Username'      => $name,
+			'email'      	=> $email,
 			'status_admin'  =>  1,
 			'status_book'   =>  2,
 			'status_pay'    =>  1,

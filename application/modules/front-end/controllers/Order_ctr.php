@@ -46,7 +46,7 @@ class Order_ctr extends CI_Controller
         'status_approved'        => $is_confirm,
       );
 
-      $this->db->where('order_id', "ODB" . $order_id);
+      $this->db->where('order_id', $order_id);
       $success = $this->db->update('tbl_upload_order', $data);
 
       echo $success;
@@ -65,7 +65,7 @@ class Order_ctr extends CI_Controller
         'status_approved'        => $is_confirm,
       );
 
-      $this->db->where('order_id', "ODB" . $order_id);
+      $this->db->where('order_id', $order_id);
       $success = $this->db->update('tbl_upload_order', $data);
 
       echo $success;

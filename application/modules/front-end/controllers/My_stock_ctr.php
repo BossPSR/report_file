@@ -99,8 +99,9 @@ class My_stock_ctr extends CI_Controller
             $this->db->where('order_id', "ODB" . $order_id);
             if ($this->db->update('tbl_upload_order', $data)) {
                 $data_team = array(
-                    'teamId' => $team->IdTeam,
-                    'status_dashboard' => 1,
+                    'teamId'            => $team->IdTeam,
+                    'status_dashboard'  => 1,
+                    'update_confirm'    => date('Y-m-d H:i:s')
                 );
                 $this->db->where('order_id', "ODB" . $order_id);
                 $success =  $this->db->update('tbl_upload_team', $data_team);
@@ -169,11 +170,12 @@ class My_stock_ctr extends CI_Controller
             'status_confirmed_team'         => $status_cf_team,
             'update_at'                     => date('Y-m-d H:i:s'),
         );
-        $this->db->where('order_id', 'ODB' . $order_id);
+            $this->db->where('order_id', 'ODB' . $order_id);
         if ($this->db->update('tbl_upload_order', $data)) {
             $data2 = array(
                 'teamId'                    => $teamId,
                 'status'                    => $status,
+                'update_confirm'            => null,
             );
             $this->db->where('order_id', 'ODB' . $order_id);
             $success = $this->db->update('tbl_upload_team', $data2);

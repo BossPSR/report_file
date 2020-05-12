@@ -471,6 +471,7 @@
                         $this->db->select('*');
                         $this->db->from('tbl_upload_order');
                         $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id');
+                        $this->db->where('tbl_upload_order.status_admin',0);
                         // $this->db->where('tbl_upload_order.notify_admin', 0);
                         $this->db->group_by('tbl_upload_order.order_id');
                         $bookmarkPay = $this->db->get()->result_array();

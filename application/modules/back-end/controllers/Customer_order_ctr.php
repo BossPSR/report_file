@@ -156,6 +156,22 @@ class Customer_order_ctr extends CI_Controller
         return redirect('Satisfied');
     }
 
+    public function edit_wage_stockadmin()
+    {
+        $order_id = $this->input->post('order_id');
+        $wage = $this->input->post('wage');
+
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Wage Not Satisfied information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Wage Not Satisfied information');
+        }
+        return redirect('my_stock_admin');
+    }
+
     public function edit_wage_Satisfied()
     {
         $order_id = $this->input->post('order_id');

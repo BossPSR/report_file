@@ -162,7 +162,7 @@
                                                                     <?php if ($show_dm['id_document'] == '') : ?>
                                                                         -
                                                                     <?php else : ?>
-                                                                        <?php echo $show_dm['id_document'] ?><br>
+                                                                        <span class="badge badge-primary"><?php echo $show_dm['id_document'] ?></span>
                                                                     <?php endif; ?>
 
                                                                 <?php } ?>

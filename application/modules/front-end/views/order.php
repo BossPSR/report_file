@@ -55,7 +55,7 @@
                                             <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
                                         <?php endif; ?>
                                     </th>
-                                    <td><?php echo $value['ORD']; ?></td>
+                                    <td data-order="<?php echo $value['ORD'] ?>"><?php echo $value['ORD']; ?></td>
                                     <td style="text-align:left;"><?php echo $value['file_name']; ?></td>
                                     <td>$<?php echo $value['price_file']; ?></td>
                                     <td>
@@ -237,7 +237,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Not Approvend Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -351,11 +351,12 @@
                                                             },
                                                         }).then(function(isConfirm) {
                                                             if (isConfirm == true) {
+                                                                var order = $("td").attr("data-order");
                                                                 $.ajax({
                                                                     type: 'POST',
                                                                     url: 'order_not_approved',
                                                                     data: {
-                                                                        order_id: <?= $ord_s ?>,
+                                                                        order_id: order,
                                                                         status_approved: 2,
                                                                     },
                                                                     success: function(success) {
@@ -463,11 +464,12 @@
                                             },
                                         }).then(function(isConfirm) {
                                             if (isConfirm == true) {
+                                                var order = $("td").attr("data-order");
                                                 $.ajax({
                                                     type: 'POST',
                                                     url: 'order_approverd',
                                                     data: {
-                                                        order_id: <?php echo $sub_order; ?>,
+                                                        order_id: order,
                                                         status_approved: 1,
                                                     },
                                                     success: function(success) {
