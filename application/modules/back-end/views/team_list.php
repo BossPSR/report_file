@@ -34,64 +34,64 @@
 			</div>
 			<!-- Zero configuration table -->
 			<?php
-				$this->db->select('* ,sum(tbl_upload_team.wage )  AS total');
-				$this->db->from('tbl_withdraw_team');
-				$this->db->join('tbl_upload_team','tbl_upload_team.order_id = tbl_withdraw_team.order_id','left');
-				$this->db->where('tbl_withdraw_team.status', 2);
-				$query = $this->db->get(); // Produces an integer, like 17
-				$count_setion = $query->row_array();
-            ?>
+			$this->db->select('* ,sum(tbl_upload_team.wage )  AS total');
+			$this->db->from('tbl_withdraw_team');
+			$this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_withdraw_team.order_id', 'left');
+			$this->db->where('tbl_withdraw_team.status', 2);
+			$query = $this->db->get(); // Produces an integer, like 17
+			$count_setion = $query->row_array();
+			?>
 			<?php
-				$this->db->select('* ,sum(tbl_upload_team.wage )  AS total');
-				$this->db->from('tbl_withdraw_team');
-				$this->db->join('tbl_upload_team','tbl_upload_team.order_id = tbl_withdraw_team.order_id','left');
-				$this->db->where('tbl_withdraw_team.status', 1);
-				$query = $this->db->get(); // Produces an integer, like 17
-				$count_note = $query->row_array();
-            ?>
+			$this->db->select('* ,sum(tbl_upload_team.wage )  AS total');
+			$this->db->from('tbl_withdraw_team');
+			$this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_withdraw_team.order_id', 'left');
+			$this->db->where('tbl_withdraw_team.status', 1);
+			$query = $this->db->get(); // Produces an integer, like 17
+			$count_note = $query->row_array();
+			?>
 			<section id="basic-datatable">
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
 							<div class="row card-header">
-								
+
 								<div class="col-9">
-                                    <h4 class="card-title">Employee Information</h4>
-                                </div>
+									<h4 class="card-title">Employee Information</h4>
+								</div>
 								<div class="col-1 text-center">
 									<h3 class="card-title ">
 										<?php if (!empty($team)) : ?>
-										<?php echo count($team); ?>
+											<?php echo count($team); ?>
 										<?php else : ?>
 											0
-										<?php endif ; ?>
+										<?php endif; ?>
 									</h3>
 									<h3 class="check_list_not">ทีมงานทั้งหมด</h3>
 								</div>
 								<div class="col-1 text-center">
 									<h3 class="card-title ">
-									<?php if (!empty($count_setion['total'])) : ?>
-										<?php echo $count_setion['total']; ?>
-									<?php else : ?>
+										<?php if (!empty($count_setion['total'])) : ?>
+											<?php echo $count_setion['total']; ?>
+										<?php else : ?>
 											0
-									<?php endif ; ?>
+										<?php endif; ?>
 									</h3>
 									<h3 class="check_list_not">ชำระเงิน</h3>
 								</div>
 								<div class="col-1 text-center">
 
 									<h3 class="card-title ">
-									<?php if (!empty($count_setion['total'])) : ?>
-										<?php echo $count_note['total']; ?>
-									<?php else : ?>
+										<?php if (!empty($count_setion['total'])) : ?>
+											<?php echo $count_note['total']; ?>
+										<?php else : ?>
 											0
-									<?php endif ; ?>
+										<?php endif; ?>
 									</h3>
 									<h3 class="check_list_not">ค้างชำระเงิน</h3>
 								</div>
-							
-                              
-								
+
+
+
 							</div>
 							<div class="card-content">
 								<div class="card-body card-dashboard">
@@ -127,10 +127,10 @@
 																<a href="<?php echo $team['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
 															<?php endif; ?>
 														</td>
-														<td><?php echo $team['countT'] ; ?></td>
+														<td><?php echo $team['countT']; ?></td>
 
-														<td><?php echo $team['name'] ; ?></td>
-														
+														<td><?php echo $team['name']; ?></td>
+
 														<?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
 														<?php foreach ($country as $country) { ?>
 															<td><?php echo $country['countryName']; ?></td>
@@ -148,7 +148,7 @@
 															<?php } ?>
 														</td>
 
-														<?php if ($team['status'] == 0) : ?>
+														<?php if ($team['Tstatus'] == 0) : ?>
 															<td>
 																<div class="dropdown ">
 																	<button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -162,7 +162,7 @@
 																</div>
 															</td>
 
-														<?php elseif ($team['status'] == 1) : ?>
+														<?php elseif ($team['Tstatus'] == 1) : ?>
 															<td>
 																<div class="dropdown ">
 																	<button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -175,44 +175,45 @@
 																	</div>
 																</div>
 															</td>
-														<?php elseif ($team['status'] == 3) : ?>
+														<?php elseif ($team['Tstatus'] == 2) : ?>
+															<td>
+																<div class="dropdown ">
+																	<button class="btn btn-info dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		Not approve
+																	</button>
+																	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=1">approve</a>
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=3">Ban User</a>
+																	</div>
+																</div>
+															</td>
+														<?php elseif ($team['Tstatus'] == 3) : ?>
 															<td>
 																<div class="dropdown ">
 																	<button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																		Ban User
 																	</button>
-																	<!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=0">Pending approval</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=1">approve</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=2">Not approved</a>
-                                                                        <a class="dropdown-item" href="status_team?id=<?php echo $team['id']; ?>&status=3">Ban User</a>
+																	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=1">approve</a>
+																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=2">Not approved</a>
 
-                                                                    </div> -->
+																	</div>
 																</div>
 															</td>
 
 
 														<?php else : ?>
 															<td>
-																<div class="dropdown ">
-																	<button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		Not approved
-																	</button>
-																	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=1">approve</a>
-
-
-																	</div>
-																</div>
+																-
 															</td>
 
 														<?php endif; ?>
 														<td>
 
 															<?php
-																$notification = $this->db->get_where('tbl_notification', ['IdTeam' => $team['IdTeam']])->result_array();
+															$notification = $this->db->get_where('tbl_notification', ['IdTeam' => $team['IdTeam']])->result_array();
 															?>
-															<button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['idT']; ?>" class="btn btn-warning mr-1 mb-1">Notification Ban  <span class="badge badge badge-danger badge-pill"><?php echo count($notification); ?></span></button>
+															<button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['idT']; ?>" class="btn btn-warning mr-1 mb-1">Notification Ban <span class="badge badge badge-danger badge-pill"><?php echo count($notification); ?></span></button>
 
 															<div class="modal fade" id="exampleModalk<?php echo $team['idT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 																<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">

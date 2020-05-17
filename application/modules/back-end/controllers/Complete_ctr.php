@@ -88,7 +88,7 @@ class Complete_ctr extends CI_Controller
                     'id_feedback'       => $feedmax->id,
                     'file_name'         => $uploadData['file_name'],
                     'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
-                    'create_at'     => date('Y-m-d H:i:s'),
+                    'create_at'         => date('Y-m-d H:i:s'),
                 );
                 $this->db->insert('tbl_feedback_file', $data);
             }

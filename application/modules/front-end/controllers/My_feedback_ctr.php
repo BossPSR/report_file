@@ -26,60 +26,6 @@ class My_feedback_ctr extends CI_Controller
         }
     }
 
-    function my_order_feedback()
-    {
-        if ($this->session->userdata('email') == '') {
-            redirect('home');
-        } else {
-
-            // image_lib
-            $order_id       = $this->input->post('order_id');
-            $userId         = $this->input->post('userId');
-            $create_at      =  $this->input->post('create_at');
-            $detail         = $this->input->post('detail');
-            $dated2         = $this->input->post('dated');
-
-            $target_dir = "uploads/Feedback/"; // Upload directory
-
-            $request = 1;
-
-
-            if ($request == 1) {
-
-                if (isset($_POST['request'])) {
-                    $request = $_POST['request'];
-                }
-                // Set preference
-                $config['upload_path']     = 'uploads/Feedback/';
-                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-                $config['allowed_types']   = '*';
-                $config['max_size']        = '99999'; // max_size in kb
-                $config['file_name']       = $_FILES['file']['name'];
-
-                //Load upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
-
-
-                $feedmax = $this->db->order_by('id', 'DESC')->get('tbl_feedback')->row();
-                // File upload
-                if ($this->upload->do_upload('file')) {
-                    // Get data about the file
-                    $uploadData = $this->upload->data();
-                    $data2 = array(
-                        'id_feedback'       => $feedmax->id,
-                        'file_name'         => $uploadData['file_name'],
-                        'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
-                        'create_at'         => date('Y-m-d H:i:s'),
-
-                    );
-
-                    $success = $this->db->insert('tbl_feedback_file', $data2);
-                }
-                echo $success;
-            }
-        }
-    }
 
     public function order_auto_feedback()
     {
@@ -104,9 +50,12 @@ class My_feedback_ctr extends CI_Controller
         $detail     = $this->input->post('detail');
         $order_id   = $this->input->post('order_id');
         $userId     = $this->input->post('userId');
+        $teamId     = $this->input->post('teamId');
+
         $orf = array(
             'feedback_detail'   => $detail,
             'order_id'          => $order_id,
+            'teamId'            => $teamId,
             'userId'            => $userId,
             'create_at'         => date('Y-m-d H:i:s'),
             'dated'             => $dated,

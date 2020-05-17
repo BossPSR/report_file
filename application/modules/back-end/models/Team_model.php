@@ -10,7 +10,7 @@ class Team_model extends CI_Model{
 
     public function teamOrder()
     {
-		$this->db->select('*,tbl_team.id AS idT, count(tbl_upload_team.teamId) AS countT');
+		$this->db->select('*,tbl_team.id AS idT, tbl_team.status AS Tstatus , count(tbl_upload_team.teamId) AS countT');
         $this->db->from('tbl_team');
         $this->db->join('tbl_upload_team','tbl_upload_team.teamId = tbl_team.IdTeam','left');
         $this->db->group_by('tbl_team.IdTeam');

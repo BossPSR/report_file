@@ -2647,7 +2647,7 @@ textarea:-ms-input-placeholder {
 	}
 }
 .slider_section_four .single_slider {
-	height: 410px;
+	height: 500px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.slider_section_four .single_slider {

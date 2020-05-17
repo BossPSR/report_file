@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <p>
-                                    <label for="">Bank account number</label>
+                                    <label for="">Paypal</label>
                                     <input type="text" class="form-control" name="bank_account" value="" required>
                                 </p>
                             </div>

@@ -65,6 +65,7 @@ class Store_ctr extends CI_Controller
             redirect('backend');
         } else {
             $data['stored'] =  $this->Store_model->store_row();
+            $data['ts']     =  $this->Store_model->team_select();
             $this->load->view('options/header');
             $this->load->view('storeforbuy', $data);
             $this->load->view('options/footer');
@@ -91,56 +92,69 @@ class Store_ctr extends CI_Controller
 
     public function check_order_add_com()
     {
-        $id = $this->input->post('id');
-        $orderid = $this->input->post('Order');
-        $Document = [];
-        $Document = $this->input->post('DocumentResult');
-        $Document = explode(",", $Document[0]);
-        $Document = array_unique($Document);
-
-        // $dm = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $this->input->post('Document')])->row_array();
-        // if ($dm == true) {
-
+        $id         = $this->input->post('id');
+        $orderid    = $this->input->post('Order');
+        $Document   = $this->input->post('DM');
+        $team       = $this->input->post('team');
+        $wage       = $this->input->post('wage');
+        $Position   = $this->input->post('Position');
+        if ($team) {
+            $cf = '1';
+        } else {
+            $cf = '0';
+        }
+        // $Document = [];
+        // $Document = explode(",", $Document[0]);
+        // $Document = array_unique($Document);
 
         $data = array(
 
-            'price_file'             => $this->input->post('price_file'),
+            'price_file'            => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
             'status_book'           => 1,
-            'note'                 => $this->input->post('note_s'),
-            'update_at'                  => date('Y-m-d H:i:s'),
-            'notify_user'                => 0,
-            'status_cp'                => $this->input->post('status_cp'),
-            'notify_admin'                => 0,
+            'note'                  => $this->input->post('note_s'),
+            'update_at'             => date('Y-m-d H:i:s'),
+            'notify_user'           => 0,
+            'status_cp'             => $this->input->post('status_cp'),
+            'status_confirmed_team' => $cf,
+            'notify_admin'          => 0,
         );
         $this->db->where('order_id', $orderid);
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+        if ($resultsedit1) {
+            foreach ($Document as $Document) {
 
-        foreach ($Document as $Document) {
+                $data2 = array(
 
-            $data2 = array(
+                    'id_document'                => $Document,
+                    'id_user'                    => $this->input->post('Customer'),
+                    'id_orderBuy'                => $this->input->post('Order'),
+                    'create_at'                  => date('Y-m-d H:i:s')
 
-                'id_document'                => $Document,
-                'id_user'                    => $this->input->post('Customer'),
-                'id_orderBuy'                => $this->input->post('Order'),
-                'create_at'                  => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_bookmark', $data2);
+            }
 
+            if ($team) {
+                $data3 = array(
 
-            );
-            $resultsedit2 = $this->db->insert('tbl_bookmark', $data2);
+                    'order_id'       => $orderid,
+                    'date_required'  => $this->input->post('Daterequired'),
+                    'teamId'         => $team,
+                    'wage'           => $wage,
+                    'position'       => $Position,
+                    'create_at'      => date('Y-m-d H:i:s')
+
+                );
+                $this->db->insert('tbl_upload_team', $data3);
+            }
         }
-
-
 
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
 
-        $success =  $this->sendEmail($upload_order);
-        echo  $success;
+        $this->sendEmail($upload_order);
 
-        // } else {
-        //     $this->session->set_flashdata('del_ss2', 'Not Successfully math id docment information');
-        //     return redirect('back_store_buy');
-        // }
+        return redirect('back_store_buy');
     }
 
     private function sendEmail($upload_order)
@@ -170,8 +184,8 @@ class Store_ctr extends CI_Controller
             $numFile += 1;
         }
 
-        $subject = 'เอกสารการชำระเงิน จาก www.report-file.com ';
-        $message .= '<center>';
+        $subject  = 'เอกสารการชำระเงิน จาก www.report-file.com ';
+        $message  = '<center>';
         $message .= '<div style="max-width:800px;">';
         $message .= '<div class="content" >';
         $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
@@ -292,49 +306,55 @@ class Store_ctr extends CI_Controller
         }
     }
 
-    // public function pay()
-    // {
-    //     if ($this->session->userdata('email_admin') == '') {
-    //         redirect('backend');
-    //     } else {
-    //         $data['store'] = $this->db->get('tbl_upload_order')->result_array();
-    //         $this->load->view('options/header');
-    //         $this->load->view('reject_for_buy',$data);
-    //         $this->load->view('options/footer');
-    //     }
-    // }
 
-  
 
     public function check_NotSatisfired_order_add_com()
     {
-        $id = $this->input->post('id');
-        $orderid = $this->input->post('orderid');
+        $id         = $this->input->post('id');
+        $orderid    = $this->input->post('orderid');
+        $team       = $this->input->post('team');
+        $wage       = $this->input->post('wage');
+        $Position   = $this->input->post('Position');
+        if ($team) {
+            $cf = '1';
+        } else {
+            $cf = '0';
+        }
 
         $data = array(
 
-            'price_file'          => $this->input->post('price_file'),
-            'Date_required'       => $this->input->post('Daterequired'),
-            'note'                => $this->input->post('note_s'),
-            'status_book'         => 2,
-            'update_at'           => date('Y-m-d H:i:s'),
-            'notify_user'         => 0,
-            'notify_admin'        => 0
-
+            'price_file'                => $this->input->post('price_file'),
+            'Date_required'             => $this->input->post('Daterequired'),
+            'note'                      => $this->input->post('note_s'),
+            'status_book'               => 2,
+            'update_at'                 => date('Y-m-d H:i:s'),
+            'status_confirmed_team'     => $cf,
+            'notify_user'               => 0,
+            'notify_admin'              => 0
 
         );
         $this->db->where('order_id', $orderid);
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
 
+        if ($team) {
+            $data3 = array(
+
+                'order_id'       => $orderid,
+                'date_required'  => $this->input->post('Daterequired'),
+                'teamId'         => $team,
+                'wage'           => $wage,
+                'position'       => $Position,
+                'create_at'      => date('Y-m-d H:i:s')
+
+            );
+            $this->db->insert('tbl_upload_team', $data3);
+        }
+
+
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
         $book_mark = null;
         $this->sendEmail($upload_order, $book_mark);
 
-        if ($resultsedit1 > 0) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
-        }
         return redirect('back_store_buy');
     }
 
@@ -348,7 +368,7 @@ class Store_ctr extends CI_Controller
             'is_check'            => 1,
             'update_at'           => date('Y-m-d H:i:s'),
             'notify_user'         => 0,
-            'notify_admin'         => 0
+            'notify_admin'        => 0
 
 
         );
@@ -356,45 +376,36 @@ class Store_ctr extends CI_Controller
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
 
         $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
-        $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid['order_id']])->row_array();
-      
-        $this->sendEmail_reject($upload_order);
 
+        $this->sendEmail_reject($orderid);
 
-        if ($resultsedit1 > 0) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
-        }
         return redirect('back_store_buy');
     }
 
-    private function sendEmail_reject($upload_order)
+
+    private function sendEmail_reject($orderid)
     {
-        $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order['userId']])->row_array();
+        $user = $this->db->get_where('tbl_user', ['idUser' => $orderid['userId']])->row_array();
 
         $subject = 'Your document has been rejected.';
 
-        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
-        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
-        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
-        $message .= '<body style="background: #eee;">';
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
-
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $upload_order['order_id'] . '</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
-
-        $message .= '<div>';
-        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
-        $message .= 'Reject';
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Your order has been placed';
         $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</body>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $orderid['order_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order details ("' . $orderid['order_id'] . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $orderid['order_id'] . '</div>';
+
+        $message .= '</center>';
 
         //config email settings
         $config['protocol'] = 'smtp';
@@ -593,8 +604,13 @@ class Store_ctr extends CI_Controller
         $id = $this->input->get('id');
 
         $this->db->where('id', $id);
+        
         $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'), 'is_check' => 1, 'notify_user' => 0, 'notify_user' => 1]);
+        
+        $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
 
+        $this->sendEmail_reject($orderid);
+        
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
         } else {
@@ -678,7 +694,7 @@ class Store_ctr extends CI_Controller
     public function check_com()
     {
         $store_id = $this->input->get('id');
-        $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id , 'is_check' => '0'])->result_array();
+        $dm = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id, 'is_check' => '0'])->result_array();
 
 
         foreach ($dm as $key => $dm) {
@@ -709,22 +725,33 @@ class Store_ctr extends CI_Controller
 
     public function status_cut_score()
     {
-        $id = $this->input->post('id');
-        $CM = $this->input->post('CM');
-        $Order = $this->input->post('Order');
-        $score = $this->input->post('score');
+        $id         = $this->input->post('id');
+        $CM         = $this->input->post('CM');
+        $Order      = $this->input->post('Order');
+        $score      = $this->input->post('score');
+        $user       = $this->db->get_where('tbl_user', ['idUser' => $CM])->row_array();
+        $path_del   = $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
 
-        $user = $this->db->get_where('tbl_user', ['idUser' => $CM])->row_array();
-        $user_cut =$user['score']-$score;
-        $this->db->where('idUser',$CM);
-        $resultsedit = $this->db->update('tbl_user', [ 'score' => $user_cut]);
+        $insert = array(
+            'userId' => $CM,
+            'order_id' => $Order,
+            'deduct' => $score,
+            'create_at' => date('Y-m-d H:i:s')
+        );
+        $success = $this->db->insert('tbl_deduct', $insert);
 
+        if ($success) {
 
-        $path_del =  $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
-        unlink($path_del['path']);
-        $this->db->where('id', $id);
-        $resultsedit = $this->db->delete('tbl_upload_store');
-        $this->sendEmail_cut_score($Order,$score,$CM);
+            $user_cut = $user['score'] - $score;
+            $this->db->where('idUser', $CM);
+            $this->db->update('tbl_user', ['score' => $user_cut]);
+
+            unlink($path_del['path']);
+            $this->db->where('id', $id);
+            $resultsedit = $this->db->delete('tbl_upload_store');
+        }
+
+        $this->sendEmail_cut_score($Order, $score, $CM);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated status cut score information !!.');
@@ -734,32 +761,29 @@ class Store_ctr extends CI_Controller
         return redirect('back_store_checkForsell');
     }
 
-    private function sendEmail_cut_score($Order,$score,$CM)
+    private function sendEmail_cut_score($Order, $score, $CM)
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $CM])->row_array();
 
         $subject = 'Your document has been rejected.';
 
-        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
-        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
-        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
-        $message .= '<body style="background: #eee;">';
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
-
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">รหัส : ' . $CM .  'order'.$Order.' โดนหัก '.$score.'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
-
-        $message .= '<div>';
-        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
-        $message .= 'Reject';
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Your order has been placed';
         $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</body>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $Order . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order details ("' . $Order . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">รหัส : ' . $CM .  'order' . $Order . ' โดนหัก ' . $score . '</div>';
+
+        $message .= '</center>';
 
         //config email settings
         $config['protocol'] = 'smtp';
@@ -809,10 +833,10 @@ class Store_ctr extends CI_Controller
     public function  status_reject_forbey()
     {
         $id = $this->input->get('id');
-      
+
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'),'is_check' => 0]);
+        $resultsedit = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'is_check' => 0]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated Clover File information !!.');
@@ -821,11 +845,4 @@ class Store_ctr extends CI_Controller
         }
         return redirect('back_store_reject_for_buy');
     }
-    
-
-
-
-
-
-
 }

@@ -91,7 +91,7 @@
             <div class="col-lg-12  col-ld-12">
                 <div class="slider_area owl-carousel">
                     <div class="single_slider d-flex align-items-center justify-content-center">
-                        <iframe width="900" height="440" src="https://www.youtube.com/embed/rdzdbNKs0fQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe width="1000" height="500" src="https://www.youtube.com/embed/rdzdbNKs0fQ?autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
                     </div>
                 </div>
 
@@ -107,8 +107,8 @@
     <div class="container">
 
         <div class="row">
-
-            <div class="col-lg-6 col-md-6 text-center">
+            <div class="col-lg-1 col-md-1 text-center"></div>
+            <div class="col-lg-5 col-md-5 text-center">
                 <div class="section_title">
                     <h2><?= $this->lang->line("Highestscore"); ?> </h2>
 
@@ -116,11 +116,11 @@
                 <br>
                 <div class="single_banner mb-30">
                     <div class="banner_thumb">
-                        <a href="#"><img src="public/image/24610-[Converted].png" alt=""></a>
+                        <a href="#"><img src="public/image/9786167897561l.jpg" alt=""></a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 text-center">
+            <div class="col-lg-5 col-md-5 text-center">
                 <div class="section_title">
                     <h2>Poster </h2>
                 </div>
@@ -132,6 +132,8 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-1 col-md-1 text-center"></div>
+
         </div>
     </div>
 </div>

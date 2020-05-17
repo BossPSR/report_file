@@ -128,6 +128,9 @@ class Register_ctr extends CI_Controller
 		$password			= $this->input->post('password');
 		$c_password			= $this->input->post('c_password');
 		$job				= $this->input->post('job');
+		$Y = substr(date('Y'), 2);
+		$M = date('m');
+
 		if ($passport == $get_team_pass || $passport == $get_user_pass || $email == $get_team || $email == $get_user) {
 			echo "<script>";
 			echo "alert('Data no must be filled out!!!');";
@@ -171,7 +174,7 @@ class Register_ctr extends CI_Controller
 						if ($this->db->insert('tbl_team', $data)) {
 							$team_id = $this->db->insert_id();
 							$dataTM = array(
-								'IdTeam'		=> "TM" . $team_id,
+								'IdTeam'		=> "TM" . $Y . $M . "00" . $team_id,
 							);
 							$this->db->where('id', $team_id);
 							if ($this->db->update('tbl_team', $dataTM)) {
@@ -180,7 +183,7 @@ class Register_ctr extends CI_Controller
 									$data2 = array(
 										'id_team'			=> $team_id,
 										'job_position'		=> $job,
-										'create_at'		=> date('Y-m-d H:i:s'),
+										'create_at'			=> date('Y-m-d H:i:s'),
 									);
 									$saveData = $this->db->insert('tbl_job_position', $data2);
 								}

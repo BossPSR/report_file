@@ -83,6 +83,15 @@ class Store_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function team_select()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_team');
+        $this->db->where('status', 1);
+      
+        return $this->db->get()->result_array();
+    }
+
     public function bookmark_all()
     {
         $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re ,tbl_upload_order.order_id AS order_save,tbl_upload_order.price_file AS price_save , tbl_upload_team.teamId AS teamT3 ,tbl_upload_order.status_cp AS statusB');

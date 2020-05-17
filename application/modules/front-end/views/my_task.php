@@ -52,7 +52,13 @@
                             <?php foreach ($task as $task) { ?>
                                 <tr style="text-align:center;">
                                     <td><?php echo $task['or_id']; ?></td>
-                                    <td><?php echo date('d F Y', strtotime($task['date_required'])); ?></td>
+                                    <td>
+                                        <?php if ($task['date_required'] <= date("Y-m-d")) : ?>
+                                            <span class="badge badge-danger">หมดเวลา</span>
+                                        <?php else : ?>
+                                            <div data-countdown="<?php echo  $task['date_required']; ?>"></div>
+                                        <?php endif; ?>
+                                    </td>
                                     <td>
                                         <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
 

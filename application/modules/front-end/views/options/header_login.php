@@ -180,6 +180,7 @@
                                         <a href="#">My Selling</a>
                                         <ul class="sub-menu">
                                             <li><a href="my-selling">Sale</a></li>
+                                            <li><a href="my-deduct">Deduct</a></li>
                                             <li><a href="my-reject">Reject</a></li>
                                         </ul>
 
@@ -213,6 +214,7 @@
                                         <a href="#">My Selling</a>
                                         <ul class="sub-menu">
                                             <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal">Deduct</a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
                                         </ul>
                                     </li>
@@ -446,6 +448,7 @@
                                             <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="my-selling">Sale</a></li>
+                                                    <li><a href="my-deduct">Deduct</a></li>
                                                     <li><a href="my-reject">Reject</a></li>
                                                 </ul>
                                             </li>
@@ -477,6 +480,7 @@
                                             <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Deduct</a></li>
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
                                                 </ul>
                                             </li>
