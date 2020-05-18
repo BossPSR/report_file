@@ -48,5 +48,30 @@ class Login_ctr extends CI_Controller
         $this->session->sess_destroy(); //ล้างsession
 
         redirect('backend'); //กลับไปหน้า Login
-    }
+	}
+	
+	public function checkStatus_admin()
+	{
+		$status_team = $this->db->get('tbl_status_team')->result_array();
+		foreach ($status_team as $statusTeam) {
+			$date = date('Y-m-d H:i:s');
+			$statusTeam_date = $statusTeam['update_date'];
+			$date_result = $this->diff_time($statusTeam_date,$date);
+			if ($date_result > 3) {
+				$this->db->where('id',$statusTeam['id']);
+				$this->db->delete('tbl_status_team');
+			}
+			
+		}
+		echo 'success';
+
+	}
+
+	private function diff_time($date1s,$date2s)
+	{
+		$now = new DateTime($date2s);
+		$future = new DateTime($date1s);
+		$diffSeconds = $now->getTimestamp() - $future->getTimestamp();
+		return $diffSeconds;
+	}
 }

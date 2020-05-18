@@ -101,6 +101,7 @@
 											<thead>
 												<tr>
 													<th>TeamId</th>
+													<th>TeamId</th>
 													<th>Resume</th>
 													<th>Order</th>
 													<th>Name</th>
@@ -116,6 +117,36 @@
 											<?php foreach ($team as $team) { ?>
 												<tbody>
 													<tr>
+
+														<td id="statusTeam<?php echo $team['IdTeam']; ?>">
+															<?php $statusTeam = $this->db->get_where('tbl_status_team', ['IdTeam' => $team['IdTeam']])->row_array(); ?>
+															<?php
+															if (isset($statusTeam)) {
+																echo "<div class='btn btn-success'>Online</div>";
+															} else {
+																echo "<div class='btn btn-danger'>Offline</div>";
+															}
+															?>
+														</td>
+														<script>
+															setInterval(function() {
+																checkStatus<?php echo $team['IdTeam']; ?>();
+															}, 10000);
+
+															function checkStatus<?php echo $team['IdTeam']; ?>() {
+																$.ajax({
+																	url: 'checkStatus_admin',
+																	data: {
+																		IdTeam: '<?php echo $team['IdTeam']; ?>'
+																	},
+																	success: function(getData) {
+
+																		console.log(getData);
+																		$('#statusTeam<?php echo $team['IdTeam']; ?>').load(' #statusTeam<?php echo $team['IdTeam']; ?>');
+																	}
+																});
+															}
+														</script>
 														<td><?php echo $team['IdTeam']; ?></td>
 														<?php
 														$img =  explode(".", $team['file_name']);
@@ -262,6 +293,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- END: Content-->
 <SCRIPT language="JavaScript">
 	// function timerefresh(t)
