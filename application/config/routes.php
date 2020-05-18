@@ -155,6 +155,10 @@ $route['oder-morefile-upload']      = 'front-end/Order_ctr/order_uploadmorefile'
 $route['show-pdf']                  = 'front-end/My_stock_ctr/show_pdf';
 $route['update_see_more_file']      = 'front-end/Home_ctr/check_see_more_file';
 $route['my-deduct']                 = 'front-end/Deduct_ctr/my_deduct';
+
+$route['checkStatus']               = 'front-end/Login_ctr/checkStatus';
+$route['teamOnline']                = 'front-end/Login_ctr/teamOnline';
+$route['teamOffline']               = 'front-end/Login_ctr/teamOffline';
 // /------------------------------------- back-end  ---------------------
 
 $route['back_dashboard']                            = 'back-end/Home_ctr';
@@ -268,4 +272,4 @@ $route['edit_wage_Satisfied']                       = 'back-end/Customer_order_c
 $route['edit_wage_stockadmin']                       = 'back-end/Customer_order_ctr/edit_wage_stockadmin';
 $route['status_reject_forbey']                      = 'back-end/Store_ctr/status_reject_forbey';
 
-// $route['pay']   = 'back-end/Store_ctr/pay';
+$route['checkStatus_admin']               			= 'back-end/Login_ctr/checkStatus_admin';

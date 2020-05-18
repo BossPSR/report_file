@@ -56,14 +56,20 @@ class Login_ctr extends CI_Controller
                 $this->session->set_userdata($user_data);
                 $this->session->set_flashdata('save_ss', TRUE);
                 $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
-                $checkSession = array(
-                    'teamId'            => $team['id'],
-                    'status_check'      => 1,
-                    'create_at'         => date('Y-m-d H:i:s')
-                );
-                $this->db->insert('tbl_session', $checkSession);
-                // print_r($team);
-                // exit();
+                // $checkSession = array(
+                //     'teamId'            => $team['id'],
+                //     'status_check'      => 1,
+                //     'create_at'         => date('Y-m-d H:i:s')
+                // );
+                // $this->db->insert('tbl_session', $checkSession);
+				
+				$check_status = array(
+                    'IdTeam'            => $team['IdTeam'],
+                    'update_date'         => date('Y-m-d H:i:s')
+				);
+
+				$this->db->insert('tbl_status_team', $check_status);
+				
                 redirect('home');
             } elseif ($this->Login_model->login_team_c($email, $password)) {
                 $this->session->set_flashdata('fail_login_status', TRUE);
@@ -91,8 +97,53 @@ class Login_ctr extends CI_Controller
 
     public function logout()
     {
+		$team = $this->input->get('team');
+		if(isset($team)){
+			$team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+			$this->db->where('IdTeam',$team['IdTeam']);
+			$this->db->delete('tbl_status_team');
+		}
+		
         $this->session->sess_destroy(); //ล้างsession
 
         redirect('home'); //กลับไปหน้า Login
-    }
+	}
+	
+	public function checkStatus()
+	{
+		$IdTeam = $this->input->get('IdTeam');
+		$this->db->where('IdTeam',$IdTeam);
+		$this->db->update('tbl_status_team',['update_date' => date('Y-m-d H:i:s')]);
+
+		echo 'success';
+	}
+
+	public function teamOnline()
+	{
+		$team = $this->db->get_where('tbl_team',['email' => $this->session->userdata('email')])->row_array();
+		$status_team = $this->db->get_where('tbl_status_team',['IdTeam' => $team['IdTeam']])->row_array();
+		if (!empty($status_team)) {
+			redirect('/home');
+		}else{
+			$check_status = array(
+				'IdTeam'            => $team['IdTeam'],
+				'update_date'         => date('Y-m-d H:i:s')
+			);
+			$this->db->insert('tbl_status_team', $check_status);
+			redirect('/home');
+		}
+	}
+
+	public function teamOffline()
+	{
+		$team = $this->db->get_where('tbl_team',['email' => $this->session->userdata('email')])->row_array();
+		$status_team = $this->db->get_where('tbl_status_team',['IdTeam' => $team['IdTeam']])->row_array();
+		if (!empty($status_team)) {
+			$this->db->where('IdTeam',$team['IdTeam']);
+			$this->db->delete('tbl_status_team');
+			redirect('/home');
+		}else{
+			redirect('/home');
+		}
+	}
 }
