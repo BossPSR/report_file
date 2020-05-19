@@ -13,18 +13,19 @@ class Package_ctr extends CI_Controller
 	{
 		$data['userId'] 	= $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['package'] 	= $this->db->get('tbl_package')->result_array();
-
-		$paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['id']])->row_array();
+		
+		$paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['idUser']])->row_array();
 		if (!empty($paypal)) {
 			$datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
-			$checkDate = DateDiff($datePaypal, date("Y-m-d"));
+			$checkDate = DateDiff($datePaypal,date("Y-m-d"));
 
 			if ($data['userId']['free_forever'] == 1) {
 				$this->session->set_flashdata('package_check', TRUE);
 				redirect('home');
 			}
 
-			if ($checkDate > 7 || empty($paypal)) {
+
+			if ($checkDate >= 0 || empty($paypal)) {
 				$this->load->view('options/header_login');
 				$this->load->view('package', $data);
 				$this->load->view('options/footer');
