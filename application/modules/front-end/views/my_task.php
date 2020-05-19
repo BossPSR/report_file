@@ -56,7 +56,13 @@
                                         <?php if ($task['date_required'] <= date("Y-m-d")) : ?>
                                             <span class="badge badge-danger">หมดเวลา</span>
                                         <?php else : ?>
-                                            <div data-countdown="<?php echo  $task['date_required']; ?>"></div>
+											<?php 
+												$checkDate_num = DateDiff(date("Y-m-d"),$task['date_required']); 
+												$checkDate = $checkDate_num / 2;	
+												$checkDate = floor($checkDate);
+												$dateRequired = date ("Y-m-d", strtotime("-".$checkDate." day", strtotime($task['date_required'])));
+											?>
+                                            <div data-countdown="<?php echo $dateRequired; ?>"></div>
                                         <?php endif; ?>
                                     </td>
                                     <td>
