@@ -20,7 +20,7 @@ class Order_ctr extends CI_Controller
       if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
         $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
         $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-        if ($checkDate < 8 || $data['userId']['free_forever'] == 1) {
+        if ($checkDate < 0 || $data['userId']['free_forever'] == 1) {
           $data['buy_email'] = $this->Order_model->order_buy($data['userId']['idUser']);
           $this->load->view('options/header_login');
           $this->load->view('order', $data);
