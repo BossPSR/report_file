@@ -135,8 +135,7 @@
     });
 </script> -->
 <script>
-    $("#date1")
-        .change(function() {
+    $("#date1").change(function() {
             var value = $(this).val();
             $("#date2").val(value);
         })

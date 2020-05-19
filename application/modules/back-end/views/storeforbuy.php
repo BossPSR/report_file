@@ -189,7 +189,7 @@
                                                         </td>
                                                         <td><?php echo $stored['create_at']; ?></td>
                                                         <td>
-                                                            <input type="date" class="form-control" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $stored['date_required']; ?>">
+                                                            <input type="date" class="form-control dateread<?php echo $stored['order_id']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $stored['date_required']; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                         </td>
                                                         <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['order_id']; ?>">
                                                                 Satisfired
@@ -290,7 +290,7 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" id="Daterequired<?php echo $stored['order_id']; ?>" value="<?php echo $stored['date_required']; ?>" placeholder="Enter price" required>
+                                                                                <input type="date" class="form-control dr<?php echo $stored['order_id']; ?>" name="Daterequired" id="Daterequired" value="<?php echo $stored['date_required']; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>
@@ -367,6 +367,7 @@
                                                         </form>
                                                     </div>
 
+                                                    
 
                                                     <div class="modal fade" id="exampleModallCenterb<?php echo $stored['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
@@ -406,7 +407,7 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="Date">Date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $stored['date_required']; ?>" placeholder="Enter Date required">
+                                                                                <input type="date" class="form-control dr<?php echo $stored['order_id']; ?>" name="Daterequired" value="<?php echo $stored['date_required']; ?>" placeholder="Enter Date required">
                                                                             </div>
                                                                         </div>
 
@@ -473,6 +474,13 @@
                                                             </div>
                                                         </form>
                                                     </div>
+
+                                                    <script>
+                                                        $(".dateread<?php echo $stored['order_id']; ?>").change(function() {
+                                                            var value = $(this).val();
+                                                            $(".dr<?php echo $stored['order_id']; ?>").val(value);
+                                                        }).change();
+                                                    </script>
 
                                                     <div class="modal fade" id="exampleModallCenterc<?php echo $stored['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
@@ -568,11 +576,11 @@
                 type: 'POST',
                 data: {
                     date: $(this).val(),
-                    order: c
+                    order: date
                 },
-                url: 'store_section',
+                url: 'edit_date_required',
                 success: function(data) {
-                    toastr.info('Success', 'Save to Setion.');
+                    toastr.info('Success', 'Save to Date Required.');
                 }
             });
             return false;
