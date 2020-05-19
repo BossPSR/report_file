@@ -37,6 +37,8 @@
 <!-- END: Page JS-->
 <script src="public/backend/assets/js/scripts/sweetalert.min.js"></script>
 
+<script src="public/backend/assets/vendors/js/extensions/toastr.min.js"></script>
+
 <script src="public/backend/assets/vendors/js/forms/select/select2.full.min.js"></script>
 
 

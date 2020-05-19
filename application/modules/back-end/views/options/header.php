@@ -42,6 +42,8 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/pages/dashboard-analytics.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/pages/card-analytics.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/plugins/tour/tour.css">
+    <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/extensions/toastr.css">
+    <link rel="stylesheet" type="text/css" href="public/backend/assets/css/plugins/extensions/toastr.css">
 
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
 

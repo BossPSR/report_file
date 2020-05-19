@@ -77,7 +77,7 @@ foreach ($store as $upload_main_searchDetail) {
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                   
+
                                                     <th>Store Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
@@ -95,7 +95,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <?php else : ?>
 
                                                         <tr style="background: #ededed;">
-                                                            
+
                                                             <td><?php echo $orders['store_id']; ?></td>
                                                             <td></td>
                                                             <td></td>
@@ -112,7 +112,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <?php $check_for = $this->db->order_by('store_id', 'asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id'], 'is_check' => '0'])->result_array(); ?>
                                                         <?php foreach ($check_for as $keys => $check_for) { ?>
                                                             <tr>
-                                                                
+
                                                                 <td><?php echo $orders['store_id']; ?></td>
                                                                 <td>
                                                                     <?php echo $check_for['userId']; ?>
@@ -121,13 +121,13 @@ foreach ($store as $upload_main_searchDetail) {
                                                                 <td> <a href="<?php echo $check_for['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a> </td>
                                                                 <td><?php echo $orders['create_at']; ?></td>
                                                                 <td>
-                                                                    <select class="form-control" name="id_status" onchange="location = this.value;">
+                                                                    <select class="form-control" name="id_status" id="categories" data-catagory="<?php echo $check_for['id']; ?>">
                                                                         <option value="" selected disabled>Select Section</option>
-                                                                        <option value="store_section?id_order=<?php echo $check_for['id']; ?>&id_section=1" <?php if ($check_for['section'] == 1) echo 'selected'; ?>>section1</option>
-                                                                        <option value="store_section?id_order=<?php echo $check_for['id']; ?>&id_section=2" <?php if ($check_for['section'] == 2) echo 'selected'; ?>>section2</option>
-                                                                        <option value="store_section?id_order=<?php echo $check_for['id']; ?>&id_section=3" <?php if ($check_for['section'] == 3) echo 'selected'; ?>>section3</option>
-                                                                        <option value="store_section?id_order=<?php echo $check_for['id']; ?>&id_section=4" <?php if ($check_for['section'] == 4) echo 'selected'; ?>>section4</option>
-                                                                        <option value="store_section?id_order=<?php echo $check_for['id']; ?>&id_section=5" <?php if ($check_for['section'] == 5) echo 'selected'; ?>>section5</option>
+                                                                        <option value="1" <?php if ($check_for['section'] == 1) echo 'selected'; ?>>section1</option>
+                                                                        <option value="2" <?php if ($check_for['section'] == 2) echo 'selected'; ?>>section2</option>
+                                                                        <option value="3" <?php if ($check_for['section'] == 3) echo 'selected'; ?>>section3</option>
+                                                                        <option value="4" <?php if ($check_for['section'] == 4) echo 'selected'; ?>>section4</option>
+                                                                        <option value="5" <?php if ($check_for['section'] == 5) echo 'selected'; ?>>section5</option>
                                                                     </select>
                                                                 </td>
 
@@ -142,55 +142,55 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     </button>
 
                                                                     <div class="modal fade" id="exampleModallCenter2<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <form action="status_cut_score" method="POST">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                            
+                                                                        <form action="status_cut_score" method="POST">
+                                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
                                                                                 <input type="hidden" name="id" value="<?php echo $check_for['id']; ?>">
-                                                                        <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Dedug</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                            <label for="helpInputTop">CM</label>
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Dedug</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+                                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                            <div class="form-group" style="text-align: left;">
+                                                                                                <label for="helpInputTop">CM</label>
 
-                                                                                            <input type="text" class="form-control" name="CM" value="<?php echo $check_for['userId']; ?>" placeholder="Enter score" readonly>
+                                                                                                <input type="text" class="form-control" name="CM" value="<?php echo $check_for['userId']; ?>" placeholder="Enter score" readonly>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                            <label for="helpInputTop">Order Id</label>
+                                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                            <div class="form-group" style="text-align: left;">
+                                                                                                <label for="helpInputTop">Order Id</label>
 
-                                                                                            <input type="text" class="form-control" name="Order" value="<?php echo $check_for['store_id']; ?>" placeholder="Enter score" readonly>
+                                                                                                <input type="text" class="form-control" name="Order" value="<?php echo $check_for['store_id']; ?>" placeholder="Enter score" readonly>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class=" col-xl-6 col-md-6 col-6 mb-1">
-                                                                                        
-                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                            <label for="helpInputTop">Latest score</label>
-                                                                                            <?php $user_score = $this->db->get_where('tbl_user',['idUser' => $check_for['userId']])->row_array();?>
-                                                                                            <input type="text" class="form-control" name="" value="<?php  echo $user_score['score'];?>" placeholder="Enter score" readonly>
+                                                                                        <div class=" col-xl-6 col-md-6 col-6 mb-1">
+
+                                                                                            <div class="form-group" style="text-align: left;">
+                                                                                                <label for="helpInputTop">Latest score</label>
+                                                                                                <?php $user_score = $this->db->get_where('tbl_user', ['idUser' => $check_for['userId']])->row_array(); ?>
+                                                                                                <input type="text" class="form-control" name="" value="<?php echo $user_score['score']; ?>" placeholder="Enter score" readonly>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class="col-xl-6 col-md-6 col-6 mb-1">
-                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                            <label for="helpInputTop">cut Score</label>
-                                                                                            <input type="number" class="form-control" name="score" value="" placeholder="Enter score" >
+                                                                                        <div class="col-xl-6 col-md-6 col-6 mb-1">
+                                                                                            <div class="form-group" style="text-align: left;">
+                                                                                                <label for="helpInputTop">cut Score</label>
+                                                                                                <input type="number" class="form-control" name="score" value="" placeholder="Enter score">
+                                                                                            </div>
+
                                                                                         </div>
-                                                                                      
+
                                                                                     </div>
-                                                                                   
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="modal-footer">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
-                                                                                </div>
+
                                                                             </div>
-                                                                           
-                                                                        </div>
                                                                         </form>
                                                                     </div>
 
@@ -223,7 +223,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                    
+
 
                                                                                 </div>
                                                                             </div>
@@ -318,9 +318,28 @@ foreach ($store as $upload_main_searchDetail) {
             </section>
             <!--/ Zero configuration table -->
 
-
-
         </div>
     </div>
 </div>
 <!-- END: Content-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('body').on('change','#categories', function() {
+            var c = $(this).data('catagory');
+            console.log($(this).val());
+            $.ajax({
+                type: 'POST',
+                data: {
+                    section: $(this).val() ,
+                    updateId: c
+                },
+                url: 'store_section',
+                success: function(data) {
+                    toastr.info('Success', 'Save to Setion.');
+                }
+            });
+            return false;
+        });
+    });
+</script>

@@ -247,7 +247,7 @@
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Select Item</label>
                                                                                                             <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
-                                                                                                            <select name="select_item_id" class="form-control selectpicker" id="select-testing" data-live-search="true" >
+                                                                                                            <select name="select_item_id" class="form-control select2" id="" >
                                                                                                                 <?php foreach ($select_itemList as $key => $selectItem) { ?>
                                                                                                                     <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
                                                                                                                 <?php } ?>

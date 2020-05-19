@@ -189,40 +189,7 @@
                                                         </td>
                                                         <td><?php echo $stored['create_at']; ?></td>
                                                         <td>
-                                                            <a href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stored['order_id']; ?>"><?php echo $stored['date_required']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                            <div class="modal fade" id="exampleModaldate<?php echo $stored['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                <form action="edit_date_required" method="POST">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-
-                                                                        <input type="hidden" name="order_id" value="<?php echo $stored['order_id']; ?>">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-
-                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
-                                                                                    <div class="form-group" style="text-align: left;">
-                                                                                        <label for="helpInputTop">Date Required</label>
-                                                                                        <input type="date" class="form-control" name="date_required" value="<?php echo $stored['date_required']; ?>" placeholder="Enter score">
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-
-
+                                                            <input type="date" class="form-control" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $stored['date_required']; ?>">
                                                         </td>
                                                         <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['order_id']; ?>">
                                                                 Satisfired
@@ -353,14 +320,14 @@
                                                                             </div>
                                                                         </div>
 
-                                                                       
+
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1" id="teambox<?php echo $stored['order_id']; ?>" style="display: none">
                                                                             <div class="form-group">
                                                                                 <label for="team">Team Id</label>
                                                                                 <select class="select2 form-control" name="team" id="team<?php echo $stored['order_id']; ?>">
                                                                                     <option disabled selected> -- Select Team -- </option>
-                                                                                    <?php foreach ($ts as $tsM) {?>
-                                                                                    <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
+                                                                                    <?php foreach ($ts as $tsM) { ?>
+                                                                                        <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
                                                                                     <?php } ?>
                                                                                 </select>
                                                                             </div>
@@ -464,8 +431,8 @@
                                                                                 <label for="team">Team Id</label>
                                                                                 <select class="select2 form-control" name="team" id="teamNot<?php echo $stored['order_id']; ?>">
                                                                                     <option disabled selected> -- Select Team -- </option>
-                                                                                    <?php foreach ($ts as $tsNot) {?>
-                                                                                    <option value="<?php echo $tsNot['IdTeam']; ?>"><?php echo $tsNot['IdTeam']; ?></option>
+                                                                                    <?php foreach ($ts as $tsNot) { ?>
+                                                                                        <option value="<?php echo $tsNot['IdTeam']; ?>"><?php echo $tsNot['IdTeam']; ?></option>
                                                                                     <?php } ?>
                                                                                 </select>
                                                                             </div>
@@ -590,6 +557,26 @@
             $("#wageNot" + st).prop('required', false);
             $("#positionNot" + st).prop('required', false);
         }
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('body').on('change', '#datenow', function() {
+            var date = $(this).data('datenow');
+            $.ajax({
+                type: 'POST',
+                data: {
+                    date: $(this).val(),
+                    order: c
+                },
+                url: 'store_section',
+                success: function(data) {
+                    toastr.info('Success', 'Save to Setion.');
+                }
+            });
+            return false;
+        });
     });
 </script>
 

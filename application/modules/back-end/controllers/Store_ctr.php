@@ -486,23 +486,17 @@ class Store_ctr extends CI_Controller
     public function store_section()
     {
 
-        $id_order = $this->input->get('id_order');
+        $section    = $this->input->post('section');
+        $updateId   = $this->input->post('updateId');
 
         $data = array(
 
-            'section'         => $this->input->get('id_section'),
-
-
+            'section'         => $section,
         );
-        $this->db->where('id', $id_order);
-        $resultsedit = $this->db->update('tbl_upload_store', $data);
+        $this->db->where('id', $updateId);
+        $data = $this->db->update('tbl_upload_store', $data);
 
-        if ($resultsedit > 0) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update section information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update section information');
-        }
-        return redirect('back_store_checkForsell');
+       
     }
 
     public function check_store_add_com()
@@ -642,14 +636,14 @@ class Store_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $store_check = $this->input->post('store_check');
-            $store_id = $this->input->post('store_id');
-            $user_id = $this->input->post('userId');
+            $store_check    = $this->input->post('store_check');
+            $store_id       = $this->input->post('store_id');
+            $user_id        = $this->input->post('userId');
             $select_item_id = $this->input->post('select_item_id');
-            $search_item = $this->input->post('search_item');
-            $code = $this->input->post('code');
-            $topic = $this->input->post('topic');
-            $section = $this->input->post('section');
+            $search_item    = $this->input->post('search_item');
+            $code           = $this->input->post('code');
+            $topic          = $this->input->post('topic');
+            $section        = $this->input->post('section');
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
             if (!empty($select_item)) {
@@ -667,10 +661,14 @@ class Store_ctr extends CI_Controller
                 ];
                 $success = $this->db->insert('tbl_upload_main_search', $data);
                 $id = $this->db->insert_id();
+
                 $this->db->where('id', $id);
                 $this->db->update('tbl_upload_main_search', ['id_doc' => "DM" . $id]);
+
                 $this->db->where('section', $section);
+                $this->db->where('store_id', $store_id);
                 $this->db->update('tbl_upload_store', ['status_main_search' => 1]);
+                
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
                 } else {
@@ -851,18 +849,12 @@ class Store_ctr extends CI_Controller
 
     public function edit_date_required()
     {
-        $order_id = $this->input->post('order_id');
-        $date_required = $this->input->post('date_required');
+        $order  = $this->input->post('order');
+        $date   = $this->input->post('date');
 
-        $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'date_required' => $date_required]);
-
-        if ($resultsedit > 0) {
-            $this->session->set_flashdata('save_ss2', ' Successfully updated edit_date_required information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully updated edit_date_required information');
-        }
-        return redirect('back_store_buy');
+        $this->db->where('order_id', $order);
+        $data = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'date_required' => $date]);
+        echo $data ;
     }
 
 
