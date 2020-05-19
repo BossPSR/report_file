@@ -66,7 +66,7 @@ class Store_model extends CI_Model
         $this->db->where('status_chack', 0);
         $this->db->where('is_check', 0);
         $this->db->group_by('store_id');
-        $this->db->order_by('id','DESC');
+        $this->db->order_by('id', 'DESC');
         return $this->db->get()->result_array();
     }
 
@@ -88,7 +88,7 @@ class Store_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_team');
         $this->db->where('status', 1);
-      
+
         return $this->db->get()->result_array();
     }
 
@@ -108,7 +108,6 @@ class Store_model extends CI_Model
         $this->db->order_by('tbl_upload_order.date_required', 'ASC');
 
         return  $this->db->get()->result_array();
-     
     }
 
 
@@ -175,7 +174,7 @@ class Store_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
-  
+
 
 
     public function bookmark_show_dm()
@@ -195,15 +194,18 @@ class Store_model extends CI_Model
 
     public function check_dm($Document)
     {
-      
-     $this->db->select('count(*) AS check_dm1');
-    $this->db->from('tbl_bookmark');
-    //$this->db->join('tbl_upload_order','tbl_upload_order.order_id = tbl_bookmark.id_orderBuy');
-   // $this->db->where('tbl_upload_order.status_delivery',0);
-    $this->db->where_in('id_document',$Document);
-    return $this->db->get()->row_array();
+
+        $this->db->select('count(*) AS check_dm1');
+        $this->db->from('tbl_bookmark');
+        //$this->db->join('tbl_upload_order','tbl_upload_order.order_id = tbl_bookmark.id_orderBuy');
+        // $this->db->where('tbl_upload_order.status_delivery',0);
+        $this->db->where_in('id_document', $Document);
+        return $this->db->get()->row_array();
     }
 
-
-
+    public function admin_id($emailadmin)
+    {
+        $this->db->where('email', $emailadmin);
+        return $this->db->get('tbl_admin')->row_array();
+    }
 }

@@ -170,86 +170,188 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Upload To Main Search</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="add_to_upload_main_search" method="POST" class="form-horizontal">
-                <div class="modal-body">
-                    <div class="data-items pb-3">
-                        <div class="data-fields px-2 mt-3">
-                            <div class="row">
-                                <div class="col-sm-12 data-field-col">
-
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label for="data-name">CP/NCP</label>
-                                            <select name="select_item_id" class="form-control selectpicker" id="select-testing" data-live-search="true">
-                                                <option value="complete">Complete</option>
-                                                <option value="notcomplete">Not Complete</option>
-                                            </select>
-                                        </div>
+            <div class="modal-body">
+                <div class="data-items pb-3">
+                    <div class="data-fields px-2 mt-3">
+                        <div class="row">
+                            <div class="col-sm-12 data-field-col">
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label for="" style="font-size: 16px;">File Document </label>
+                                        <form action="fileUpload_search_main" class="dropzone dropzone-area" id="maindropzone">
+                                            <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                        </form>
                                     </div>
-
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label for="data-name">Select Item</label>
-                                            <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
-                                            <select name="select_item_id" class="form-control selectpicker" id="select-testing" data-live-search="true">
-                                                <?php foreach ($select_itemList as $key => $selectItem) { ?>
-                                                    <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label for="data-name">Search Item</label>
-                                            <input type="text" class="form-control" name="search_item" value="" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label for="data-name">Code</label>
-                                            <input type="text" class="form-control" name="code" value="" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label for="data-name">Topic</label>
-                                            <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
-
-                                        </div>
-                                    </div>
-
-                                    <?php
-                                    $this->db->order_by('id', 'DESC');
-                                    $Dm = $this->db->get('tbl_upload_main_search')->row_array();
-                                    ?>
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <label for="data-name">Id Document</label>
-                                            <input type="text" class="form-control" value="DM<?php echo $Dm['id'] + 1 ?>" readonly>
-                                        </div>
-                                    </div>
-
                                 </div>
+
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label for="data-name">CP/NCP</label>
+                                        <select name="complete" class="form-control" id="complete">
+                                            <option value="complete">Complete</option>
+                                            <option value="notcomplete">Not Complete</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label for="data-name">Select Item</label>
+                                        <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
+                                        <select name="select_item_id" class="form-control selectpicker" id="select-testing" data-live-search="true">
+                                            <?php foreach ($select_itemList as $key => $selectItem) { ?>
+                                                <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label for="data-name">Search Item</label>
+                                        <input type="text" class="form-control" name="search_item" id="search_item" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label for="data-name">Code</label>
+                                        <input type="text" class="form-control" name="code" value="" id="code">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label for="data-name">Topic</label>
+                                        <textarea class="form-control" name="topic" cols="30" rows="10" id="topic"></textarea>
+
+                                    </div>
+                                </div>
+
+                                <?php
+                                $this->db->order_by('id', 'DESC');
+                                $Dm = $this->db->get('tbl_upload_main_search')->row_array();
+                                ?>
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <label for="data-name">Id Document</label>
+                                        <input type="text" class="form-control" value="DM<?php echo $Dm['id'] + 1 ?>" readonly>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                        <div class="add-data-btn mr-1">
-                            <button type="submit" class="btn btn-primary">submit</button>
-                        </div>
-
+            </div>
+            <div class="modal-footer">
+                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                    <div class="add-data-btn mr-1">
+                        <button type="submit" id="uploadsfile" class="btn btn-primary">submit</button>
                     </div>
+
                 </div>
-            </form>
+            </div>
         </div>
 
     </div>
 </div>
+
+<script>
+    Dropzone.autoDiscover = false;
+    var myDropzoneS = new Dropzone("#maindropzone", {
+        autoProcessQueue: false,
+        maxFiles: 5,
+        addRemoveLinks: true,
+        parallelUploads: 5, // Number of files process at a time (default 2)
+    });
+
+    document.getElementById("uploadsfile").addEventListener("click", function() {
+        // myDropzone.processQueue();
+
+        var v       = document.getElementById("complete").value;
+        var x       = document.getElementById("select-testing").value;
+        var y       = document.getElementById("search_item").value;
+        var code    = document.getElementById("code").value;
+        var topic   = document.getElementById("topic").value;
+
+        if (myDropzoneS.files == 0) {
+            swal("Warning!", "Can not be document Empty", "warning", {
+                button: true,
+            });
+        } else {
+
+            if (v == '') {
+                swal("Cancelled", "Please fill in information Complete :)", "error");
+            }
+            if (x == '') {
+                swal("Cancelled", "Please fill in information Select Item :)", "error");
+                return false;
+            }
+            if (y == '') {
+                swal("Cancelled", "Please fill in information Search Item :)", "error");
+                return false;
+            }
+            if (code == '') {
+                swal("Cancelled", "Please fill in information Code :)", "error");
+                return false;
+            }
+            if (topic == '') {
+                swal("Cancelled", "Please fill in information Topic :)", "error");
+                return false;
+            }
+
+
+            if (x != '' && y != '' && v != '' && code != '' && topic != '') {
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'order_auto_sell',
+                    data: {
+                        status: 1
+                    },
+                    success: function(success) {
+                        myDropzoneS.processQueue();
+                        myDropzoneS.on("queuecomplete", function(file, res) {
+                            $.ajax({
+                                type: 'POST',
+                                url: 'upload_main_searc_ouject',
+                                data: {
+                                    com: v,
+                                    select: x,
+                                    search: y,
+                                    code: code,
+                                    topic: topic,
+                                },
+                                success: function(success) {
+                                    swal("Good job!", "Upload for data successfull", "success", {
+                                        button: true,
+                                    }).then(function(isConfirm) {
+                                        if (isConfirm == true) {
+                                            setTimeout(function() {
+                                                location.href = "back_upload_main_search"
+                                            }, 1000);
+                                        } else {
+                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    },
+
+                });
+
+            } else {
+                swal("Warning!", "Can not be  Not Empty", "warning", {
+                    button: true,
+                });
+            }
+
+        }
+
+    });
+</script>

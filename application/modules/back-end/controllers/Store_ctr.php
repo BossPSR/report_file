@@ -604,13 +604,13 @@ class Store_ctr extends CI_Controller
         $id = $this->input->get('id');
 
         $this->db->where('id', $id);
-        
+
         $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'), 'is_check' => 1, 'notify_user' => 0, 'notify_user' => 1]);
-        
+
         $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
 
         $this->sendEmail_reject($orderid);
-        
+
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
         } else {
@@ -687,6 +687,42 @@ class Store_ctr extends CI_Controller
             }
 
             redirect('Section');
+        }
+    }
+
+    public function upload_main_searc_ouject()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+            $com        = $this->input->post('com');
+            $select     = $this->input->post('select');
+            $search     = $this->input->post('search');
+            $code       = $this->input->post('code');
+            $topic      = $this->input->post('topic');
+            $emailadmin = $this->session->userdata('email_admin');
+            $e          = $this->Store_model->admin_id($emailadmin);
+
+            $select_item = $this->db->get_where('tbl_select_item', ['id' => $select])->row_array();
+            $buymax      = $this->db->order_by('id', 'DESC')->get('tbl_order_s')->row();
+            $dm      = $this->db->order_by('id', 'DESC')->get('tbl_upload_main_search')->row();
+            $dmplus  = $dm->id + 1 ;
+            if (!empty($select_item)) {
+                $data = [
+                    'userId' => $e['adminId'],
+                    'id_doc' => 'DM' . $dmplus,
+                    'select_item_id' => $select,
+                    'search_item' => $search,
+                    'select_item' => $select_item['name_item'],
+                    'code' => $code,
+                    'topic' => $topic,
+                    'upload_store_id' => $buymax->order_main,
+                    'create_at' => date('Y-m-d H:i:s'),
+                    'update_at' => date('Y-m-d H:i:s'),
+                ];
+                $success = $this->db->insert('tbl_upload_main_search', $data);
+                echo $success;
+            }
         }
     }
 
@@ -834,7 +870,6 @@ class Store_ctr extends CI_Controller
     {
         $id = $this->input->get('id');
 
-
         $this->db->where('id', $id);
         $resultsedit = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'is_check' => 0]);
 
@@ -844,5 +879,51 @@ class Store_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully updated Clover File information');
         }
         return redirect('back_store_reject_for_buy');
+    }
+
+    public function fileUpload_search_main()
+    {
+        $emailadmin = $this->session->userdata('email_admin');
+        $e = $this->Store_model->admin_id($emailadmin);
+
+        $request = 1;
+
+        if (isset($_POST['request'])) {
+            $request = $_POST['request'];
+        }
+        if ($request == 1) {
+            if (!empty($_FILES['file']['name'])) {
+
+                // Set preference
+                $config['upload_path']     = 'uploads/Store/';
+                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+                $config['allowed_types']   = '*';
+                $config['max_size']        = '99999'; // max_size in kb
+                $config['file_name']     = $_FILES['file']['name'];
+
+                //Load upload library
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_s')->row();
+
+                // File upload
+                if ($this->upload->do_upload('file')) {
+                    // Get data about the file
+                    $uploadData = $this->upload->data();
+
+                    $data = array(
+                        'userId'                => $e['adminId'],
+                        'store_id'              => $buymax->order_main,
+                        'file_name'             => $uploadData['file_name'],
+                        'path'                  => 'uploads/Store/' . $uploadData['file_name'],
+                        'create_at'             => date('Y-m-d H:i:s'),
+                        'notify_admin'          => 0,
+                        'status_main_search'    => 1
+                    );
+                    $this->db->insert('tbl_upload_store', $data);
+                }
+            }
+        }
     }
 }

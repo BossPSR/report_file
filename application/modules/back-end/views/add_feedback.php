@@ -42,8 +42,6 @@
                                             </form>
                                         </div>
 
-
-
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Descriptions </label>
                                             <textarea name="descriptions" class="form-control" id="DM1" rows="5" style="width: 100%"></textarea>

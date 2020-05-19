@@ -205,7 +205,8 @@ class Buy_ctr extends CI_Controller
         'order_main'    => 'ODS' . $insert_id,
       );
       $this->db->where('id', $insert_id);
-      $this->db->update('tbl_order_s', $update);
+      $success = $this->db->update('tbl_order_s', $update);
+      echo $success;
     }
   }
 }
