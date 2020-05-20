@@ -89,17 +89,7 @@
 									</h3>
 									<h3 class="check_list_not">ทีมงานออฟไลน์</h3>
 								</div>
-								<script>
-									setInterval(function() {
-										checkStatus();
-									}, 10000);
-
-									function checkStatus() {
-										
-										$('#statusTeam_count').load(' #statusTeam_count');
-										$('#team_count_num').load(' #team_count_num');
-									}
-								</script>
+								
 								<div class="col-1 text-center">
 									<h3 class="card-title ">
 										<?php if (!empty($count_setion['total'])) : ?>
@@ -162,6 +152,7 @@
 														</td>
 														<script>
 															setInterval(function() {
+																checkStatus();
 																checkStatus<?php echo $team['IdTeam']; ?>();
 															}, 10000);
 
@@ -177,6 +168,11 @@
 																		$('#statusTeam<?php echo $team['IdTeam']; ?>').load(' #statusTeam<?php echo $team['IdTeam']; ?>');
 																	}
 																});
+															}
+															function checkStatus() {
+										
+																$('#statusTeam_count').load(' #statusTeam_count');
+																$('#team_count_num').load(' #team_count_num');
 															}
 														</script>
 														<td><?php echo $team['IdTeam']; ?></td>
