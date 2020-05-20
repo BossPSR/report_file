@@ -55,7 +55,7 @@
 						<div class="card">
 							<div class="row card-header">
 
-								<div class="col-9">
+								<div class="col-7">
 									<h4 class="card-title">Employee Information</h4>
 								</div>
 								<div class="col-1 text-center">
@@ -68,6 +68,38 @@
 									</h3>
 									<h3 class="check_list_not">ทีมงานทั้งหมด</h3>
 								</div>
+								<div class="col-1 text-center">
+
+									<h3 class="card-title" id="statusTeam_count">
+										<?php $statusTeam_count = $this->db->get('tbl_status_team')->result_array();
+										$team_count = $this->db->get('tbl_team')->result_array();
+										echo count($statusTeam_count);
+										?>
+
+									</h3>
+									<h3 class="check_list_not">ทีมงานออนไลน์</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title " id="team_count_num">
+										<?php
+										$team_count = count($team_count);
+										$team_count_num = $team_count - count($statusTeam_count);
+										echo $team_count_num;
+										?>
+									</h3>
+									<h3 class="check_list_not">ทีมงานออฟไลน์</h3>
+								</div>
+								<script>
+									setInterval(function() {
+										checkStatus();
+									}, 10000);
+
+									function checkStatus() {
+										
+										$('#statusTeam_count').load(' #statusTeam_count');
+										$('#team_count_num').load(' #team_count_num');
+									}
+								</script>
 								<div class="col-1 text-center">
 									<h3 class="card-title ">
 										<?php if (!empty($count_setion['total'])) : ?>
