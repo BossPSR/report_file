@@ -6,12 +6,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">All Satisfied and Not Satisfied</h2>
+                        <h2 class="content-header-title float-left mb-0">Over All</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">All Satisfied and Not Satisfied
+                                <li class="breadcrumb-item active">Over All
                                 </li>
                             </ol>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="card">
                             <div class="row card-header">
                                 <div class="col-10">
-                                    <h4 class="card-title">All Satisfied and Not Satisfied</h4>
+                                    <h4 class="card-title">Over All</h4>
                                 </div>
                                 <div class="col-2 text-center">
                                     <?php if ($order_all == '') : ?>
@@ -57,8 +57,8 @@
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>T3</th>
-                                                    <th>Main File</th>
-                                                    <th>GT File</th>
+                                                    <!-- <th>Main File</th>
+                                                    <th>GT File</th> -->
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>PriceFile</th>
@@ -83,7 +83,8 @@
                                                             <?php endif ; ?>
                                                         </td>
 
-                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                        <!-- <td>
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -172,7 +173,7 @@
                                                             -
                                                         <?php endif; ?>
 
-                                                        </td>
+                                                        </td> -->
                                                         <td><?php echo $stores['createOr']; ?></td>
                                                         <td><?php echo $stores['requiredOr']; ?></td>
                                                         <?php if ($stores['price_file'] == '') :   ?>

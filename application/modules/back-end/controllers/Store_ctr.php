@@ -360,11 +360,12 @@ class Store_ctr extends CI_Controller
 
     public function reject_order_add_com()
     {
-        $id = $this->input->post('id');
+        $id   = $this->input->post('id');
+        $note = $this->input->post('note');
 
         $data = array(
 
-            'note_reject'         => $this->input->post('note'),
+            'note_reject'         => $note,
             'is_check'            => 1,
             'update_at'           => date('Y-m-d H:i:s'),
             'notify_user'         => 0,
@@ -372,18 +373,18 @@ class Store_ctr extends CI_Controller
 
 
         );
-        $this->db->where('id', $id);
+        $this->db->where('order_id', $id);
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
 
-        $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
+        $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
 
-        $this->sendEmail_reject($orderid);
+        $this->sendEmail_reject($orderid,$note);
 
         return redirect('back_store_buy');
     }
 
 
-    private function sendEmail_reject($orderid)
+    private function sendEmail_reject($orderid,$note)
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $orderid['userId']])->row_array();
 
@@ -393,7 +394,7 @@ class Store_ctr extends CI_Controller
         $message .= '<div style="max-width:800px;">';
         $message .= '<div class="content" >';
         $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-        $message .= 'Your order has been placed';
+        $message .= 'Your document has been rejected';
         $message .= '</div>';
         $message .= '<div class="row">';
         $message .= '<p>Hey "' . $user['username'] . '",</p>';
@@ -401,9 +402,9 @@ class Store_ctr extends CI_Controller
         $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
         $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
         $message .= '<p>Check below for your order details.</p><hr>';
-        $message .= '<p>Order details ("' . $orderid['order_id'] . '")</p>';
+        $message .= '<p>Order Details ("' . $orderid['order_id'] . '")</p>';
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : ' . $orderid['order_id'] . '</div>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">Rejected Order ID : ' . $orderid['order_id'] . ' ' .$note .' </div>';
 
         $message .= '</center>';
 

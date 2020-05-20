@@ -25,8 +25,8 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">ID Order</th>
                                 <th scope="col">Date Requred</th>
+                                <th scope="col">ID Order</th>
                                 <th scope="col">Main Doc</th>
                                 <th scope="col">GT Doc</th>
                                 <th scope="col">DM Doc</th>
@@ -51,20 +51,20 @@
                             ?>
                             <?php foreach ($task as $task) { ?>
                                 <tr style="text-align:center;">
-                                    <td><?php echo $task['or_id']; ?></td>
                                     <td>
                                         <?php if ($task['date_required'] <= date("Y-m-d")) : ?>
                                             <span class="badge badge-danger">หมดเวลา</span>
                                         <?php else : ?>
-											<?php 
-												$checkDate_num = DateDiff(date("Y-m-d"),$task['date_required']); 
-												$checkDate = $checkDate_num / 2;	
-												$checkDate = floor($checkDate);
-												$dateRequired = date ("Y-m-d", strtotime("-".$checkDate." day", strtotime($task['date_required'])));
-											?>
+                                            <?php
+                                            $checkDate_num = DateDiff(date("Y-m-d"), $task['date_required']);
+                                            $checkDate = $checkDate_num / 2;
+                                            $checkDate = floor($checkDate);
+                                            $dateRequired = date("Y-m-d", strtotime("-" . $checkDate . " day", strtotime($task['date_required'])));
+                                            ?>
                                             <div data-countdown="<?php echo $dateRequired; ?>"></div>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?php echo $task['or_id']; ?></td>
                                     <td>
                                         <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
 

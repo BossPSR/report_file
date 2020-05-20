@@ -27,26 +27,16 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">No.</th>
                                 <th scope="col">ID Order</th>
-                                <th scope="col">Team File</th>
-                                <th scope="col">Feedback Document</th>
                                 <th scope="col">Date required</th>
+                                <th scope="col">Team File</th>
+                                <th scope="col">Feedback File</th>
+                                <th scope="col">Note</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Select item</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $p = 1;
-                            $o = 1;
-                            $i = 1;
-                            $y = 1;
-                            $r = 1;
-                            $z = 1;
-                            $aa = 1;
-                            $bb = 1;
-                            ?>
 
                             <?php foreach ($feedback as $feedback) { ?>
                                 <?php $upder = $this->db->get_where('tbl_upload_order', ['order_id' => $feedback['order_id']])->row_array(); ?>
@@ -55,12 +45,12 @@
                                 <?php } else { ?>
 
                                     <tr style="text-align:center;">
-                                        <td><?= $i++; ?></td>
                                         <td><?= $feedback['orIdd']; ?></td>
+                                        <td><?= date('d F Y', strtotime($feedback['date_required'])); ?></td>
                                         <td>
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalold<?php echo $aa++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalold<?= $feedback['orIdd']; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalold<?php echo $bb++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="exampleModalold<?= $feedback['orIdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -108,9 +98,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalFeed<?php echo $r++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalFeed<?= $feedback['id_feed']; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalFeed<?php echo $y++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="exampleModalFeed<?= $feedback['id_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -157,19 +147,46 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><?= date('d F Y', strtotime($feedback['date_required'])); ?></td>
+                                        <td>
+                                            <?php if (!empty($feedback['feedback_detail'])) { ?>
+                                                <a href="#" data-toggle="modal" data-target="#NOTE<?= $feedback['orIdd']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="NOTE<?= $feedback['orIdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <p style="font-size:16px;font-weight:bold;"><?= $feedback['feedback_detail']; ?></p>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
+                                    </td>
                                         <td>
                                             <?php if ($feedback['status_feedback_read'] == 0) { ?>
-                                                <span class="badge badge-danger"  style="font-size:16px;">Not Read</span>
-                                            <?php } else { ?>
-                                                <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
-                                                    <span class="badge badge-info"  style="font-size:16px;">Read</span>
-                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1 ) { ?>
-                                                    <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
-                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
-                                                    <span class="badge badge-success"  style="font-size:16px;">Success</span>
-                                                <?php } ?>
-                                            <?php } ?>
+                                                <span class=" badge badge-danger" style="font-size:16px;">Not Read</span>
+                                                                <?php } else { ?>
+                                                                    <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
+                                                                        <span class="badge badge-info" style="font-size:16px;">Read</span>
+                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
+                                                                        <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
+                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
+                                                                        <span class="badge badge-success" style="font-size:16px;">Success</span>
+                                                                    <?php } ?>
+                                                                <?php } ?>
                                         </td>
                                         <td><?= $feedback['name_item']; ?></td>
                                     </tr>

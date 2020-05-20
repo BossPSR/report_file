@@ -34,6 +34,9 @@ class Delivery_ctr extends CI_Controller
         $feed       = $this->db->get_where('tbl_feedback', ['order_id' => $order_id])->row_array();
 
         $target_dir = "uploads/Team/"; // Upload directory
+        $this->db->where('order_id', $order_id);
+        $this->db->delete('tbl_upload_order_team');
+        unlink($feed['path']);
 
         // Set preference
         $config['upload_path']     = 'uploads/Team/';
