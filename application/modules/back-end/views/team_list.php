@@ -122,7 +122,7 @@
 										<table class="table zero-configuration">
 											<thead>
 												<tr>
-													<th>TeamId</th>
+													<th>Online</th>
 													<th>TeamId</th>
 													<th>Resume</th>
 													<th>Order</th>

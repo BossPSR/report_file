@@ -31,10 +31,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="row card-header">
-                                <div class="col-10">
+                                <div class="col-7">
                                     <h4 class="card-title">Over All</h4>
                                 </div>
-                                <div class="col-2 text-center">
+                                <div class="col-1 text-center">
                                     <?php if ($order_all == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
@@ -45,6 +45,11 @@
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>
                                     <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
+                                </div>
+
+                                <div class="col-3 text-right">
+                                    <a href="orvernotwork" class="btn btn-success mr-1 mb-1">No Work <span class="badge badge-pill badge-warning">0</span></a>
+                                    <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">Not Submit <span class="badge badge-pill badge-success">0</span></a>
                                 </div>
                             </div>
                             <div class="card-content">
@@ -77,10 +82,10 @@
                                                         <td><?php echo $stores['userId']; ?></td>
                                                         <td>
                                                             <?php if (!empty($stores['teamId'])) : ?>
-                                                            <?php echo $stores['teamId']; ?>
+                                                                <?php echo $stores['teamId']; ?>
                                                             <?php else : ?>
                                                                 -
-                                                            <?php endif ; ?>
+                                                            <?php endif; ?>
                                                         </td>
 
                                                         <!-- <td>
@@ -182,21 +187,21 @@
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
                                                         <td>
-                                                            <?php if ($stores['status_delivery'] == 0) :?>
+                                                            <?php if ($stores['status_delivery'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
                                                                 <span class="badge badge-pill badge-success">Delivered</span>
-                                                            <?php endif ; ?>
+                                                            <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') :?>
-                                                            <span class="badge badge-pill badge-success">Original</span>
+                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-success">Original</span>
                                                             <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete'  && $stores['status_admin'] == '0') : ?>
-                                                            <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0' ) : ?>
-                                                            <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($stores['status_admin'] == '1' ) : ?>
-                                                            <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($stores['status_admin'] == '1') : ?>
+                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>

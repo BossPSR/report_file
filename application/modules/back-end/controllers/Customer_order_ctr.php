@@ -55,6 +55,32 @@ class Customer_order_ctr extends CI_Controller
         }
     }
 
+    public function orvernotwork()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+
+            $data['order_notwork'] = $this->Customer_model->customer_notwork();
+            $this->load->view('options/header');
+            $this->load->view('orverall_notwork',$data);
+            $this->load->view('options/footer');
+        } else {
+            $this->load->view('login');
+        }
+    }
+
+    public function orvernotsubmit()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+
+            $data['order_all'] = $this->Customer_model->customer_all();
+            $this->load->view('options/header');
+            $this->load->view('orverall_notsubmit',$data);
+            $this->load->view('options/footer');
+        } else {
+            $this->load->view('login');
+        }
+    }
+
 
 
 

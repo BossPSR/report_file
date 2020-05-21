@@ -28,12 +28,10 @@ class Complete_ctr extends CI_Controller
 
     public function book_complete_add_com()
     {
-
-
         $data = array(
 
-            'id_orderBuy'         => $this->input->get('id'),
-            'id_user'   => $this->input->get('userid'),
+            'id_orderBuy'   => $this->input->get('id'),
+            'id_user'       => $this->input->get('userid'),
             'create_at'     => date('Y-m-d H:i:s')
 
         );
@@ -124,14 +122,13 @@ class Complete_ctr extends CI_Controller
 
     public function order_auto_stock_admin()
     {
-
+        $admin      = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
         $buymax     =  $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
         $position   =  $this->input->post('position');
         $date_req   =  $this->input->post('date');
         $DM         =  $this->input->post('DM');
 
         $data = array(
-
             'order_id'      => $buymax->order_main,
             'date_required' => $date_req,
             'position'      => $position,
@@ -147,6 +144,7 @@ class Complete_ctr extends CI_Controller
 
                     'id_orderBuy'   => $buymax->order_main,
                     'id_document'   => $DM,
+                    'id_user'       => $admin['adminId'],
                     'create_at'     => date('Y-m-d H:i:s'),
                 );
                 $this->db->insert('tbl_bookmark', $datedm);
@@ -161,59 +159,90 @@ class Complete_ctr extends CI_Controller
     public function sendEmail_delivery_complete()
     {
 
-        $order_id = $this->input->post('order_id');
+        $order_id   = $this->input->post('order_id');
         $order_team = $this->input->post('order_team');
 
-        $id = $this->input->post('id');
+        $id         = $this->input->post('id');
 
-        $feedback = $this->db->get_where('tbl_feedback', ['order_id' => $id])->row_array();
+        $feedback   = $this->db->get_where('tbl_feedback', ['order_id' => $id])->row_array();
         $user_order = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
-        $user = $this->db->get_where('tbl_user', ['idUser' => $user_order['userId']])->row_array();
+        $user       = $this->db->get_where('tbl_user', ['idUser' => $user_order['userId']])->row_array();
 
-        if ($feedback == true) {
-            $this->db->where('order_id', $id);
-            $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+        if ($user['cash'] >= $user_order['price_file']) {
 
-            $this->db->where('order_id', $id);
-            $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
-        } else {
-            $this->db->where('order_id', $id);
-            $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
-        }
+            if ($feedback == true) {
+                $this->db->where('order_id', $id);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
+                $this->db->where('order_id', $id);
+                $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
 
-        $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
+                $this->db->where('idUser', $user_order['userId']);
+                $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'] , 'score' => $user['score'] - 100 ]);
+            } else {
+                $this->db->where('order_id', $id);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
-        $message .= '<center>';
-        $message .= '<div style="max-width:800px;">';
-        $message .= '<div class="content" >';
-        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-        $message .= 'Send all your documents successfully.';
-        $message .= '</div>';
-        $message .= '<div class="row">';
-        $message .= '<p>Hey "' . $user['user'] . '",</p>';
-        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
-        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
-        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
-        $message .= '<p>Check below for your order details.</p><hr>';
-        $message .= '<p>Order details ("' . $id  . '")</p>';
+                $this->db->where('idUser', $user_order['userId']);
+                $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'] , 'score' => $user['score'] - 100 ]);
+            }
 
 
-        if (!empty($order_id)) {
-            foreach ($order_id as $key => $order_id) {
-                $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
-                $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $order['path'] . '">' . $order['file_name'] . '</a>';
+            $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
+
+            $message .= '<center>';
+            $message .= '<div style="max-width:800px;">';
+            $message .= '<div class="content" >';
+            $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+            $message .= 'Send all your documents successfully.';
+            $message .= '</div>';
+            $message .= '<div class="row">';
+            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+            $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
+            $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+            $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+            $message .= '<p>Check below for your order details.</p><hr>';
+            $message .= '<p>Order details ("' . $id  . '")</p>';
+
+
+            if (!empty($order_id)) {
+                foreach ($order_id as $key => $order_id) {
+                    $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
+                    $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $order['path'] . '">' . $order['file_name'] . '</a>';
+                    $message .= '<br>';
+                }
+            }
+
+            foreach ($order_team as $key => $order_team) {
+                $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
+                $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $orderT['path'] . '">' . $orderT['file_name'] . '</a>';
                 $message .= '<br>';
             }
-        }
 
-        foreach ($order_team as $key => $order_team) {
-            $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
-            $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $orderT['path'] . '">' . $orderT['file_name'] . '</a>';
-            $message .= '<br>';
-        }
+            $message .= '</center>';
 
-        $message .= '</center>';
+        } else {
+
+            $subject = '(แจ้งเตือน) เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ยอดเงินของคุณไม่เพียงพอให้หักค่าเอกสาร กรุณาเติมเงินด้วยค่ะ  ';
+
+            $message .= '<center>';
+            $message .= '<div style="max-width:800px;">';
+            $message .= '<div class="content" >';
+            $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+            $message .= 'ยอดเงินของคุณไม่เพียงพอ.';
+            $message .= '</div>';
+            $message .= '<div class="row">';
+            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+            $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
+            $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+            $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+            $message .= '<p>Check below for your order details.</p><hr>';
+            $message .= '<p>Order details ("' . $id  . '")</p>';
+            $message .= '<p>You can top up into the system here.</p>';
+            $message .= '<p style="color: #0063d1;">http://www.ip-soft.co.th/ipsoft/my-deposit</p><br />';
+
+            $message .= '</center>';
+        }
 
         //config email settings
         $config['protocol'] = 'smtp';

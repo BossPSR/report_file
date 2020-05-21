@@ -141,63 +141,16 @@
                                                 $e = 1;
 
                                                 foreach ($complete as $key => $complete) { ?>
-
-
-
-                                                    <tr>
-                                                        <td><?php echo $complete['order_id_t']; ?></td>
-                                                        <td><?php echo $complete['teamId']; ?></td>
-                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $complete['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $complete['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Main File</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <table class="table zero-configuration">
-                                                                                <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $complete['order_id']])->result_array(); ?>
-                                                                                    <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
-                                                                                        <th>File</th>
-                                                                                        <th>create</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php foreach ($order as $keys => $order) { ?>
-                                                                                        <tr>
-                                                                                            <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
-                                                                                        </tr>
-                                                                                    <?php } ?>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $complete['order_id']])->result_array(); ?>
-                                                            <?php if (!empty($order)) : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModala<?php echo $complete['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModala<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <?php if (empty($complete['id_orderBuy'])) : ?>
+                                                        <tr>
+                                                            <td><?php echo $complete['order_id_t']; ?></td>
+                                                            <td><?php echo $complete['teamId']; ?></td>
+                                                            <td><span data-toggle="modal" data-target="#exampleModala<?php echo $complete['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModala<?php echo $complete['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Main File</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -205,7 +158,7 @@
                                                                             <div class="modal-body">
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
-
+                                                                                        <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $complete['order_id']])->result_array(); ?>
                                                                                         <tr>
                                                                                             <th>Order_id</th>
                                                                                             <th>File_name</th>
@@ -217,8 +170,8 @@
                                                                                         <?php foreach ($order as $keys => $order) { ?>
                                                                                             <tr>
                                                                                                 <td><?php echo $order['order_id'] ?></td>
-                                                                                                <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                                <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $order['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $order['create_at'] ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
@@ -233,309 +186,344 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            <?php else : ?>
-                                                                -
-                                                            <?php endif; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId']])->result_array(); ?>
-                                                            <?php if (!empty($orderT)) : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModalz<?php echo $complete['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModalz<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            </td>
+                                                            <td>
+                                                                <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $complete['order_id']])->result_array(); ?>
+                                                                <?php if (!empty($order)) : ?>
+                                                                    <span data-toggle="modal" data-target="#exampleModala<?php echo $complete['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                    <div class="modal fade" id="exampleModala<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <table class="table zero-configuration">
+                                                                                        <thead>
+
+                                                                                            <tr>
+                                                                                                <th>Order_id</th>
+                                                                                                <th>File_name</th>
+                                                                                                <th>File</th>
+                                                                                                <th>create</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <?php foreach ($order as $keys => $order) { ?>
+                                                                                                <tr>
+                                                                                                    <td><?php echo $order['order_id'] ?></td>
+                                                                                                    <td><?php echo $order['file_name_GT'] ?></td>
+                                                                                                    <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $order['create_at'] ?></td>
+                                                                                                </tr>
+                                                                                            <?php } ?>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId']])->result_array(); ?>
+                                                                <?php if (!empty($orderT)) : ?>
+                                                                    <span data-toggle="modal" data-target="#exampleModalz<?php echo $complete['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                    <div class="modal fade" id="exampleModalz<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <table class="table zero-configuration">
+                                                                                        <thead>
+
+                                                                                            <tr>
+                                                                                                <th>#</th>
+                                                                                                <th>Order_id</th>
+                                                                                                <th>File_name</th>
+                                                                                                <th>File</th>
+                                                                                                <th>create</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <?php foreach ($orderT as $keys => $orderT) { ?>
+                                                                                                <tr>
+                                                                                                    <td><?php echo $orderT['order_id'] ?></td>
+                                                                                                    <td><?php echo $orderT['file_name'] ?></td>
+                                                                                                    <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $orderT['create_at'] ?></td>
+                                                                                                </tr>
+                                                                                            <?php } ?>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+                                                            </td>
+
+                                                            <td><?php echo $complete['date_required_t']; ?></td>
+
+                                                            <td>
+                                                                <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $complete['position']])->result_array(); ?>
+                                                                <?php foreach ($position_name as $keys => $position_name) { ?>
+                                                                    <?php echo $position_name['name_item'] ?>
+                                                                <?php } ?>
+
+                                                            </td>
+
+                                                            <td>
+                                                                <?php if ($complete['status_book'] == '1' && $complete['status_cp'] == 'complete' && $complete['status_admin'] == '0') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                <?php elseif ($complete['status_book'] == '1' && $complete['status_cp'] == 'notcomplete'  && $complete['status_admin'] == '0') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                <?php elseif ($complete['status_book'] == '2'  && $complete['status_admin'] == '0') : ?>
+                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                                <?php elseif ($complete['status_admin'] == '1') : ?>
+                                                                    <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+                                                            </td>
+
+                                                            <td>
+                                                                <button data-toggle="modal" data-target="#exampleModalu<?php echo $complete['order_id_t']; ?>" type="button" class="btn btn-outline-info">
+                                                                    delivery
+                                                                </button>
+                                                                <div class="modal fade" id="exampleModalu<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Document_File </h5>
+
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-
-                                                                                        <tr>
-                                                                                            <th>#</th>
-                                                                                            <th>Order_id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderT as $keys => $orderT) { ?>
+                                                                                <h3>
+                                                                                    <p>Document File </p>
+                                                                                </h3>
+                                                                                <form action="sendEmail_delivery_complete" method="POST">
+                                                                                    <input type="hidden" name="id" value="<?php echo $complete['order_id_t']; ?>">
+                                                                                    <table class="table zero-configuration">
+                                                                                        <thead>
+                                                                                            <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $complete['store_id']])->result_array(); ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $orderT['order_id'] ?></td>
-                                                                                                <td><?php echo $orderT['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderT['create_at'] ?></td>
+                                                                                                <th>Select</th>
+                                                                                                <th>Relive</th>
+                                                                                                <th>Store_id</th>
+                                                                                                <th>File_name</th>
+                                                                                                <th>File</th>
+                                                                                                <th>create</th>
                                                                                             </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                                <tr>
+                                                                                                    <td>
+                                                                                                        <label class="container">
+                                                                                                            <input type="checkbox" class="checkmark" name="order_id[]" value="<?php echo $orderss['id'] ?>">
+                                                                                                            <span class="checkmark"></span>
+                                                                                                        </label>
+                                                                                                    </td>
+
+                                                                                                    <td>
+                                                                                                        <?php if ($orderss['relive_status'] == '0') : ?>
+                                                                                                            -
+                                                                                                        <?php else : ?>
+                                                                                                            <div class="badge badge-primary">Relive</div>
+                                                                                                        <?php endif ?>
+                                                                                                    </td>
+                                                                                                    <td><?php echo $orderss['store_id'] ?></td>
+                                                                                                    <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                    <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $orderss['create_at'] ?></td>
+
+
+                                                                                                </tr>
+                                                                                            <?php } ?>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    <h3>
+                                                                                        <p>Team file</p>
+                                                                                    </h3>
+                                                                                    <table class="table zero-configuration">
+                                                                                        <thead>
+                                                                                            <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id']])->result_array(); ?>
+                                                                                            <tr>
+                                                                                                <th>Select</th>
+                                                                                                <th>Store_id</th>
+                                                                                                <th>File_name</th>
+                                                                                                <th>File</th>
+                                                                                                <th>create</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                                <tr>
+                                                                                                    <td><label class="container">
+                                                                                                            <input type="checkbox" class="checkmark" name="order_team[]" value="<?php echo $orderss['id'] ?>">
+                                                                                                            <span class="checkmark"></span>
+                                                                                                        </label>
+                                                                                                    </td>
+
+                                                                                                    <td><?php echo $orderss['order_id'] ?></td>
+                                                                                                    <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                    <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $orderss['create_at'] ?></td>
+
+
+                                                                                                </tr>
+                                                                                            <?php } ?>
+                                                                                        </tbody>
+                                                                                    </table>
+
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
+                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1">delivery</button>
                                                                                 </div>
                                                                             </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            <?php else : ?>
-                                                                -
-                                                            <?php endif; ?>
-                                                        </td>
 
-                                                        <td><?php echo $complete['date_required_t']; ?></td>
-
-                                                        <td>
-                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $complete['position']])->result_array(); ?>
-                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
-                                                                <?php echo $position_name['name_item'] ?>
-                                                            <?php } ?>
-
-                                                        </td>
-
-                                                        <td>
-                                                            <?php if ($complete['status_book'] == '1' && $complete['status_cp'] == 'complete' && $complete['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-success">Original</span>
-                                                            <?php elseif ($complete['status_book'] == '1' && $complete['status_cp'] == 'notcomplete'  && $complete['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($complete['status_book'] == '2'  && $complete['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($complete['status_admin'] == '1') : ?>
-                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
-                                                            <?php else : ?>
-                                                                -
-                                                            <?php endif; ?>
-                                                        </td>
-
-                                                        <td><button data-toggle="modal" data-target="#exampleModalu<?php echo $complete['order_id_t']; ?>" type="button" class="btn btn-outline-info">
-                                                                delivery
-                                                            </button>
-                                                            <div class="modal fade" id="exampleModalu<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Document_File </h5>
-
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <h3>
-                                                                                <p>Document File </p>
-                                                                            </h3>
-                                                                            <form action="sendEmail_delivery_complete" method="POST">
-                                                                                <input type="hidden" name="id" value="<?php echo $complete['order_id_t']; ?>">
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $complete['store_id']])->result_array(); ?>
-                                                                                        <tr>
-                                                                                            <th>Select</th>
-                                                                                            <th>Relive</th>
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                            <tr>
-                                                                                                <td>
-                                                                                                    <label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" name="order_id[]" value="<?php echo $orderss['id'] ?>">
-                                                                                                        <span class="checkmark"></span>
-                                                                                                    </label>
-                                                                                                </td>
-
-                                                                                                <td>
-                                                                                                    <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                        -
-                                                                                                    <?php else : ?>
-                                                                                                        <div class="badge badge-primary">Relive</div>
-                                                                                                    <?php endif ?>
-                                                                                                </td>
-                                                                                                <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderss['create_at'] ?></td>
-
-
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                <h3>
-                                                                                    <p>Team file</p>
-                                                                                </h3>
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id']])->result_array(); ?>
-                                                                                        <tr>
-                                                                                            <th>Select</th>
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                            <tr>
-                                                                                                <td><label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" name="order_team[]" value="<?php echo $orderss['id'] ?>">
-                                                                                                        <span class="checkmark"></span>
-                                                                                                    </label>
-                                                                                                </td>
-
-                                                                                                <td><?php echo $orderss['order_id'] ?></td>
-                                                                                                <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderss['create_at'] ?></td>
-
-
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
-
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1">delivery</button>
-                                                                            </div>
-                                                                        </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <?php $bookmark = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $complete['order_id']])->row_array(); ?>
-                                                            <?php if ($bookmark == true) : ?>
-                                                                <a class="btn btn-outline-secondary">
-                                                                    Bookmark
-
-                                                                </a>
-                                                            <?php else : ?>
                                                                 <a href="book_complete_add_com?id=<?php echo $complete['order_id']; ?>&userid=<?php echo $complete['user_m']; ?>" class="btn btn-outline-success">
                                                                     Bookmark
-
                                                                 </a>
-                                                            <?php endif; ?>
 
-                                                            <!-- <a href="Add_feedback?id=<?php echo $complete['order_id']; ?>&cmid=<?php echo $complete['user_m']; ?>" class="btn btn-outline-danger">
-                                                                Feedback
-                                                            </a> -->
-                                                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $complete['order_id']; ?>" style="padding: 0.9rem 1rem;">Feedback</button>
 
-                                                            <!-- Modal Feedback -->
-                                                            <div class="modal fade" id="exampleModalNotApprove<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Feedback (<?php echo $complete['order_id']; ?>)</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
+                                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $complete['order_id']; ?>" style="padding: 0.9rem 1rem;">Feedback</button>
 
-                                                                        <div class="modal-body" style="text-align:left;">
-                                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                            <form action="fileUpload_feedback" class="dropzone" id="fileuploadnotApprove<?php echo $complete['order_id']; ?>">
-                                                                                <div class="dz-message needsclick">
-                                                                                    Drop files here or click to upload.<br>
-                                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                                </div>
-                                                                            </form>
-                                                                            <br>
-                                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
-                                                                            <label for="" class="font-size-upload">Detail :</label>
-                                                                            <textarea id="detail1<?php echo $complete['order_id']; ?>" name="descriptions" class="form-control" rows="5" required></textarea>
-                                                                            <br>
+                                                                <!-- Modal Feedback -->
+                                                                <div class="modal fade" id="exampleModalNotApprove<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback (<?php echo $complete['order_id']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
 
-                                                                            <label for="" class="font-size-upload">Date : <span style="color: red;">* Can choose the high date as specified by the customer</span></label>
-                                                                            <input type="date" name="dated" id="dated<?php echo $complete['order_id']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo $complete['date_required_t']; ?>" style="width:30%" required>
-                                                                            <input type="text" name="order_id" id="order_id<?php echo $complete['order_id']; ?>" value="<?php echo $complete['order_id']; ?>" hidden>
-                                                                            <input type="text" name="userId" id="userId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['user_m']; ?>" hidden>
-                                                                            <input type="text" name="teamId" id="teamId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['teamId']; ?>" hidden>
-                                                                            <!-- </form> -->
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" id="SubmitNotApp<?php echo $complete['order_id']; ?>" class="btn btn-success">Success</button>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            <div class="modal-body" style="text-align:left;">
+                                                                                <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                                <form action="fileUpload_feedback" class="dropzone" id="fileuploadnotApprove<?php echo $complete['order_id']; ?>">
+                                                                                    <div class="dz-message needsclick">
+                                                                                        Drop files here or click to upload.<br>
+                                                                                        <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                                    </div>
+                                                                                </form>
+                                                                                <br>
+                                                                                <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                                                <label for="" class="font-size-upload">Detail :</label>
+                                                                                <textarea id="detail1<?php echo $complete['order_id']; ?>" name="descriptions" class="form-control" rows="5" required></textarea>
+                                                                                <br>
+
+                                                                                <label for="" class="font-size-upload">Date : <span style="color: red;">* Can choose the high date as specified by the customer</span></label>
+                                                                                <input type="date" name="dated" id="dated<?php echo $complete['order_id']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo $complete['date_required_t']; ?>" style="width:30%" required>
+                                                                                <input type="text" name="order_id" id="order_id<?php echo $complete['order_id']; ?>" value="<?php echo $complete['order_id']; ?>" hidden>
+                                                                                <input type="text" name="userId" id="userId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['user_m']; ?>" hidden>
+                                                                                <input type="text" name="teamId" id="teamId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['teamId']; ?>" hidden>
+                                                                                <!-- </form> -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" id="SubmitNotApp<?php echo $complete['order_id']; ?>" class="btn btn-success">Success</button>
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <script type='text/javascript'>
-                                                                Dropzone.autoDiscover = false;
-                                                                var myDropzone2<?php echo $complete['order_id']; ?> = new Dropzone("#fileuploadnotApprove<?php echo $complete['order_id']; ?>", {
-                                                                    autoProcessQueue: false,
-                                                                    maxFiles: 5,
-                                                                    addRemoveLinks: true,
-                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
-                                                                });
+                                                                <script type='text/javascript'>
+                                                                    Dropzone.autoDiscover = false;
+                                                                    var myDropzone2<?php echo $complete['order_id']; ?> = new Dropzone("#fileuploadnotApprove<?php echo $complete['order_id']; ?>", {
+                                                                        autoProcessQueue: false,
+                                                                        maxFiles: 5,
+                                                                        addRemoveLinks: true,
+                                                                        parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                    });
 
-                                                                $('#SubmitNotApp<?php echo $complete['order_id']; ?>').click(function() {
-                                                                    var x = document.getElementById("detail1<?php echo $complete['order_id']; ?>").value;
-                                                                    var y = document.getElementById("dated<?php echo $complete['order_id']; ?>").value;
-                                                                    var z = document.getElementById("order_id<?php echo $complete['order_id']; ?>").value;
-                                                                    var c = document.getElementById("userId<?php echo $complete['order_id']; ?>").value;
-                                                                    var team = document.getElementById("teamId<?php echo $complete['order_id']; ?>").value;
+                                                                    $('#SubmitNotApp<?php echo $complete['order_id']; ?>').click(function() {
+                                                                        var x = document.getElementById("detail1<?php echo $complete['order_id']; ?>").value;
+                                                                        var y = document.getElementById("dated<?php echo $complete['order_id']; ?>").value;
+                                                                        var z = document.getElementById("order_id<?php echo $complete['order_id']; ?>").value;
+                                                                        var c = document.getElementById("userId<?php echo $complete['order_id']; ?>").value;
+                                                                        var team = document.getElementById("teamId<?php echo $complete['order_id']; ?>").value;
 
-                                                                    if (x == '') {
-                                                                        swal("Warning!", "Can not be document Empty", "warning", {
-                                                                            button: true,
-                                                                        });
-                                                                    } else {
-                                                                        $.ajax({
-                                                                            type: 'POST',
-                                                                            url: 'feedback_ajax',
-                                                                            data: {
-                                                                                DM: x,
-                                                                                dated: y,
-                                                                                order_id: z,
-                                                                                cmid: c,
-                                                                                teamId: team,
-                                                                            },
-                                                                            success: function(success) {
-                                                                                if (myDropzone2<?php echo $complete['order_id']; ?>.files != 0) {
-                                                                                    myDropzone2<?php echo $complete['order_id']; ?>.processQueue();
-                                                                                    myDropzone2<?php echo $complete['order_id']; ?>.on("queuecomplete", function(file, res) {
-                                                                                        swal("Good job!", "Upload for data success Feedback", "success", {
-                                                                                            button: false,
+                                                                        if (x == '') {
+                                                                            swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                button: true,
+                                                                            });
+                                                                        } else {
+                                                                            $.ajax({
+                                                                                type: 'POST',
+                                                                                url: 'feedback_ajax',
+                                                                                data: {
+                                                                                    DM: x,
+                                                                                    dated: y,
+                                                                                    order_id: z,
+                                                                                    cmid: c,
+                                                                                    teamId: team,
+                                                                                },
+                                                                                success: function(success) {
+                                                                                    if (myDropzone2<?php echo $complete['order_id']; ?>.files != 0) {
+                                                                                        myDropzone2<?php echo $complete['order_id']; ?>.processQueue();
+                                                                                        myDropzone2<?php echo $complete['order_id']; ?>.on("queuecomplete", function(file, res) {
+                                                                                            swal("Good job!", "Upload for data success Feedback", "success", {
+                                                                                                button: false,
+                                                                                            });
                                                                                         });
-                                                                                    });
-                                                                                    setTimeout("location.reload(true);", 1000);
-                                                                                } else {
-                                                                                    swal("Good job!", "Upload for data successfull", "success", {
-                                                                                        button: true,
-                                                                                    }).then(function(isConfirm) {
-                                                                                        if (isConfirm == true) {
-                                                                                            setTimeout("location.reload(true);", 1000);
-                                                                                        } else {
-                                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                                        }
-                                                                                    });
+                                                                                        setTimeout("location.reload(true);", 1000);
+                                                                                    } else {
+                                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                                            button: true,
+                                                                                        }).then(function(isConfirm) {
+                                                                                            if (isConfirm == true) {
+                                                                                                setTimeout("location.reload(true);", 1000);
+                                                                                            } else {
+                                                                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                            }
+                                                                                        });
+                                                                                    }
+
                                                                                 }
+                                                                            });
+                                                                        }
 
-                                                                            }
-                                                                        });
-                                                                    }
+                                                                    });
+                                                                </script>
 
-                                                                });
-                                                            </script>
+                                                            </td>
+                                                        </tr>
+                                                    <?php else : ?>
 
-                                                        </td>
-                                                    </tr>
-
-
-
-
+                                                    <?php endif; ?>
 
                                                 <?php  } ?>
 

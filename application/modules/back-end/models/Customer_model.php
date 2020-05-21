@@ -50,6 +50,19 @@ class Customer_model extends CI_Model{
         return $this->db->get()->result_array();
 
     }
+
+    public function customer_notwork()
+    {
+        $this->db->select('*,tbl_upload_order.order_id AS order ,tbl_upload_order.create_at AS createOr ,  tbl_upload_order.date_required AS requiredOr  ');
+        $this->db->from('tbl_upload_order');
+        $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
+        $this->db->where('tbl_upload_order.status_pay', 1 );
+        $this->db->where('tbl_upload_order.status_confirmed_team', 0 );
+        $this->db->group_by('tbl_upload_order.order_id');
+        $this->db->order_by('tbl_upload_order.date_required','desc');
+        return $this->db->get()->result_array();
+
+    }
     
 
 }
