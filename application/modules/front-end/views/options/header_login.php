@@ -267,20 +267,20 @@
                                     <?php elseif ($team == true) : ?>
                                         <li>
                                             <div class="dropdown">
-												<?php 
-													$status_team = $this->db->get_where('tbl_status_team',['IdTeam' => $team['IdTeam']])->row_array();
-												?>
-												<?php 
-													if (isset($status_team)) {
-												?>
-                                                <a style="color:#73c803;font-weight:bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-circle" aria-hidden="true"></i> Online
-												</a>
-												<?php }else{ ?>
-												<a style="color:#b6b6b6;font-weight:bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-circle" aria-hidden="true"></i> Offline
-												</a>
-												<?php } ?>
+                                                <?php
+                                                $status_team = $this->db->get_where('tbl_status_team', ['IdTeam' => $team['IdTeam']])->row_array();
+                                                ?>
+                                                <?php
+                                                if (isset($status_team)) {
+                                                ?>
+                                                    <a style="color:#73c803;font-weight:bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-circle" aria-hidden="true"></i> Online
+                                                    </a>
+                                                <?php } else { ?>
+                                                    <a style="color:#b6b6b6;font-weight:bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-circle" aria-hidden="true"></i> Offline
+                                                    </a>
+                                                <?php } ?>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li style="margin: 5px 10px;"><a href="teamOnline"><i class="fa fa-circle" style="color:#73c803;"></i> Online</a></li>
                                                     <!-- <li style="margin: 5px 10px;"><a href="#"><i class="fa fa-circle" style="color:#f82424;"></i> Away</a></li>
@@ -428,10 +428,10 @@
                                             <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                             <li>
-                                                <a href="#"> User manual <i class="fa fa-angle-right"></i></a>
+                                                <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
                                             </li>
 
-                                        <?php else : ?>
+                                        <?php elseif ($team) : ?>
                                             <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                             <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
                                             <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
@@ -439,10 +439,19 @@
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                             <li>
-                                                <a href="#"> User manual <i class="fa fa-angle-right"></i></a>
-                                                
-                                            </li>
+                                                <a href="user-manual"> Team manual <i class="fa fa-angle-right"></i></a>
 
+                                            </li>
+                                        <?php else : ?>
+                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
+                                            <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li>
+                                                <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
+                                            </li>
                                         <?php endif ?>
                                     </ul>
                                 </div>
@@ -576,24 +585,24 @@
         </div>
     </aside>
     <!--sidebar widget end-->
-<script>
-	<?php if($team == true){ ?>
-		setInterval(function(){
-			checkStatus();
-		},3000);
+    <script>
+        <?php if ($team == true) { ?>
+            setInterval(function() {
+                checkStatus();
+            }, 3000);
 
-		function checkStatus() {
-			$.ajax({
-				url:'checkStatus',
-				data:{
-					IdTeam:'<?php echo $team['IdTeam']; ?>'
-				},
-				success: function(getData) {
-                   
-                    console.log(getData);
+            function checkStatus() {
+                $.ajax({
+                    url: 'checkStatus',
+                    data: {
+                        IdTeam: '<?php echo $team['IdTeam']; ?>'
+                    },
+                    success: function(getData) {
 
-                }
-			});
-		}
-	<?php } ?>
-</script>
+                        console.log(getData);
+
+                    }
+                });
+            }
+        <?php } ?>
+    </script>
