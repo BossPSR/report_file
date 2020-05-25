@@ -51,10 +51,16 @@ class Stock_ctr extends CI_Controller
 		// image_lib
 		$id_admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
 
-		$userId     =  $id_admin['id'];
+		$userId     =  $id_admin['adminId'];
 		$date_req   =  $this->input->post('date_required');
 		$name       =  $this->input->post('name');
 		$email      =  $this->input->post('email');
+		$DMCheck    =  $this->input->post('DMCheck');
+		if (!empty($DMCheck)) {
+			$num = 1 ;
+		}else{
+			$num = 2 ;
+		}
 
 
 		$target_dir = "uploads/Buy/"; // Upload directory
@@ -91,7 +97,7 @@ class Stock_ctr extends CI_Controller
 					'Username'      => $name,
 					'email'      	=> $email,
 					'status_admin'  =>  1,
-					'status_book'   =>  2,
+					'status_book'   =>  $num,
 					'status_pay'    =>  1,
 					'file_name'     => $uploadData['file_name'],
 					'path'          => 'uploads/Buy/' . $uploadData['file_name'],

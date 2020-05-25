@@ -233,10 +233,10 @@
                                     </td>
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
-                                   
-                                        <?php if ($stock_row == true || $stock_row['t_id'] == '' ) { ?>
+
+                                        <?php if ($stock_row == true || $stock_row['t_id'] == '') { ?>
                                             <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
-                                            
+
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-secondery"> Confirmed</button>
                                         <?php } ?>
@@ -278,29 +278,33 @@
                                                         </table>
 
                                                         <h3>GT Document</h3>
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr style="text-align:center;">
-                                                                    <th scope="col">File</th>
-                                                                    <th scope="col">ID Order</th>
-                                                                    <th scope="col">Download</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php $stockGT2 = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
-                                                                <?php foreach ($stockGT2 as $stockGT_Download) { ?>
+                                                        <?php $stockGT2 = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
+                                                        <?php if (!empty($stockGT2)) : ?>
+                                                            <table class="table table-bordered">
+                                                                <thead>
                                                                     <tr style="text-align:center;">
-                                                                        <td><?php echo $stockGT_Download['order_id']; ?></td>
-                                                                        <td><?php echo $stockGT_Download['file_name_GT']; ?></td>
-                                                                        <td>
-                                                                            <a href="<?php echo $stockGT_Download['path_GT']; ?>" class="btn btn-primary" download>
-                                                                                <i class="fa fa-download"></i> Download
-                                                                            </a>
-                                                                        </td>
+                                                                        <th scope="col">File</th>
+                                                                        <th scope="col">ID Order</th>
+                                                                        <th scope="col">Download</th>
                                                                     </tr>
-                                                                <?php } ?>
-                                                            </tbody>
-                                                        </table>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($stockGT2 as $stockGT_Download) { ?>
+                                                                        <tr style="text-align:center;">
+                                                                            <td><?php echo $stockGT_Download['order_id']; ?></td>
+                                                                            <td><?php echo $stockGT_Download['file_name_GT']; ?></td>
+                                                                            <td>
+                                                                                <a href="<?php echo $stockGT_Download['path_GT']; ?>" class="btn btn-primary" download>
+                                                                                    <i class="fa fa-download"></i> Download
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php } ?>
+                                                                </tbody>
+                                                            </table>
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-success" id="close_doc">Success</button>

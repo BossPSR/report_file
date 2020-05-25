@@ -121,7 +121,7 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <?php $taskGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id']])->result_array(); ?>
+                                        <?php $taskGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id']])->row_array(); ?>
                                         <?php if (!empty($taskGT)) { ?>
 
                                             <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
@@ -136,6 +136,9 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
+                                                        <?php $taskOrg = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 0])->result_array(); ?>
+                                                            <?php if (!empty($taskGTMORE)) { ?>
+
                                                             <?php $t = 1; ?>
                                                             <table class="table">
                                                                 <thead class="thead-light">
@@ -147,13 +150,13 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php foreach ($taskGT as $taskGT) { ?>
+                                                                    <?php foreach ($taskOrg as $taskOrg) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $taskGT['order_id']; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $taskGT['file_name_GT']; ?></td>
-                                                                            <td><a href="<?php echo $taskGT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <td><?php echo $taskOrg['order_id']; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $taskOrg['file_name_GT']; ?></td>
+                                                                            <td><a href="<?php echo $taskOrg['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                             <td>
-                                                                                <a href="<?php echo $taskGT['path_GT']; ?>" class="btn btn-primary" download>
+                                                                                <a href="<?php echo $taskOrg['path_GT']; ?>" class="btn btn-primary" download>
                                                                                     <i class="fa fa-download"></i> Download
                                                                                 </a>
                                                                             </td>
@@ -161,8 +164,13 @@
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
+                                                            <?php } else { ?>
+                                                               -
+                                                            <?php } ?>
+
                                                             <?php $taskGTMORE = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 1, 'status_see_more_file_team' => 1])->result_array(); ?>
                                                             <?php if (!empty($taskGTMORE)) { ?>
+                                                                <br>
                                                                 <h5 style="text-align:left;">More Document</h5>
                                                                 <hr>
 
@@ -191,7 +199,10 @@
                                                                     </tbody>
                                                                 </table>
                                                             <?php } else { ?>
-
+                                                                <br>
+                                                                <h5 style="text-align:left;">More Document <span style="color: red;">* รอ Admin ทำการอนุมัติข้อมูลเอกสารเพิ่มเติมจากลูกค้า</span></h5> 
+                                                                <hr>
+                                                                -
                                                             <?php } ?>
 
 

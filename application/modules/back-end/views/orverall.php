@@ -48,8 +48,14 @@
                                 </div>
 
                                 <div class="col-3 text-right">
-                                    <a href="orvernotwork" class="btn btn-success mr-1 mb-1">No Work <span class="badge badge-pill badge-warning">0</span></a>
-                                    <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">Not Submit <span class="badge badge-pill badge-success">0</span></a>
+                                    <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
+                                        No Work <span class="badge badge-pill badge-warning" id="refresh_nw"><?php $no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
+                                                                                                                echo count($no_work); ?></span>
+                                    </a>
+                                    <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">
+                                        Not Submit <span class="badge badge-pill badge-success" id="refresh_ns"><?php $not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
+                                                                                                                echo count($not_submit); ?></span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="card-content">
@@ -259,3 +265,34 @@
 </div>
 
 <!-- END: Content-->
+
+
+<!-- END: Content-->
+<script>
+    setInterval(function() {
+        refresh_nw();
+        refresh_ns();
+    }, 5000);
+
+    function refresh_nw() {
+
+        $.ajax({
+            url: 'refresh_nw',
+            success: function(getData) {
+                $('#refresh_nw').text(getData);
+            }
+        });
+
+    }
+
+    function refresh_ns() {
+
+        $.ajax({
+            url: 'refresh_ns',
+            success: function(getData) {
+                $('#refresh_ns').text(getData);
+            }
+        });
+
+    }
+</script>

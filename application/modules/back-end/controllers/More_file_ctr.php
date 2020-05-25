@@ -52,6 +52,22 @@ class More_file_ctr extends CI_Controller
         }
         return redirect('More_File_team');
     }
+
+    public function  more_file_update_detail()
+    {
+        $orderid    = $this->input->post('orderid');
+        $detail     = $this->input->post('detail');
+
+        $this->db->where('order_id', $orderid);
+        $resultsedit = $this->db->update('tbl_upload_orderGT', ['detail' => $detail]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated detail information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated detail information');
+        }
+        return redirect('More_File');
+    }
     
 
    

@@ -27,17 +27,23 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                Add Admin
+                                Add Stock Admin
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
+                                        <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                             <label for="" style="font-size: 16px;"> Main File </label>
                                             <form action="fileUpload_buy_admin" class="dropzone dropzone-area" id="maindropzone">
                                                 <input type="date" id="date2" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" hidden>
                                                 <input type="text" id="name2" name="name" class="form-control" hidden>
                                                 <input type="email" id="email2" name="email" class="form-control" hidden>
+                                                <select name="DMCheck" id="DMTs" class="form-control" hidden>
+                                                    <?php foreach ($chek_book as $key => $chek_book2) { ?>
+                                                        <option value="<?php echo $chek_book2['id_doc'] ?>"><?php echo $chek_book2['id_doc'] ?></option>
+                                                    <?php } ?>
+                                                </select>
                                                 <div class="dz-message" style="top: 24%;">Upload File Main</div>
                                             </form>
                                         </div>
@@ -61,7 +67,7 @@
                                             <p class="message"></p>
                                         </div>
 
-                                        <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
+
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> DM </label>
@@ -101,7 +107,7 @@
                                             <p class="message"></p>
                                         </div>
 
-                       
+
 
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> Note </label>
@@ -135,9 +141,9 @@
     });
 </script> -->
 <script>
-    $("#date1").change(function() {
+    $("#DM").change(function() {
             var value = $(this).val();
-            $("#date2").val(value);
+            $("#DMTs").val(value);
         })
         .change();
 
@@ -148,12 +154,18 @@
         })
         .keyup();
 
-        $("#email")
+    $("#email")
         .keyup(function() {
             var value = $(this).val();
             $("#email2").val(value);
         })
         .keyup();
+
+        $("#date1").change(function() {
+            var value = $(this).val();
+            $("#date2").val(value);
+        })
+        .change();
 </script>
 <script>
     Dropzone.autoDiscover = false;
@@ -180,8 +192,8 @@
         var dm = [];
         $('#DM :selected').each(function(i, selected) {
             dm[i] = $(selected).val();
-        }); 
-        
+        });
+
         // myDropzone.processQueue();
 
         if (myDropzone.files == 0) {

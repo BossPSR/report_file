@@ -317,7 +317,6 @@
                                                             <?php foreach ($position_name as $keys => $position_name) { ?>
                                                                 <?php echo $position_name['name_item'] ?>
                                                             <?php } ?>
-
                                                         </td>
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['orderNOT']])->row_array(); ?>
                                                         <td>

@@ -449,7 +449,7 @@
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "orverall") {
                                                                                 echo 'active';
-                                                                            } ?>" href="orverall" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>orverall</a>
+                                                                            } ?>" href="orverall" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Orverall</a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "Satisfied") {
                                                                                 echo 'active';
@@ -469,6 +469,19 @@
                         $notify_pay = 0;
                         $notify_not_pay = 0;
                         $notify_con = 0;
+                        $notify_GT = 0;
+
+                        $this->db->select('*');
+                        $this->db->from('tbl_upload_orderGT');
+                        $this->db->where('status_more_file',1);
+                        $this->db->where('status_see_more_file_team',0);
+                        $this->db->group_by('tbl_upload_orderGT.order_id');
+                        $bookmarkGT = $this->db->get()->result_array();
+                        
+                        foreach ($bookmarkGT as $bookmarkGT) {
+
+                                $notify_GT += 1;
+                        }
 
                         $this->db->select('*');
                         $this->db->from('tbl_upload_order');
@@ -514,6 +527,7 @@
                         $notifyBookmark += $notify_pay;
                         $notifyBookmark += $notify_not_pay;
                         $notifyBookmark += $notify_con;
+                        $notifyBookmark += $notify_GT;
 
                         ?>
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "Bookmark" || $this->uri->segment(1) == "More_File" || $this->uri->segment(1) == "Bookmark_notpay" || $this->uri->segment(1) == "Complete" || $this->uri->segment(1) == "Feedback") {
@@ -565,21 +579,10 @@
 
                                     </ul>
                                 </li>
-                                <li class="dropdown dropdown-submenu  <?php if ($this->uri->segment(1) == "More_File" || $this->uri->segment(1) == "More_File_team") {
-                                                                            echo 'active';
-                                                                        } ?>" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Charts"><i class="feather icon-pie-chart"></i>More File</a>
-                                    <ul class="dropdown-menu ">
-                                        <li data-menu="">
-                                            <a class="dropdown-item <?php if ($this->uri->segment(1) == "More_File") {
-                                                                        echo 'active';
-                                                                    } ?>" href="More_File" data-toggle="dropdown" data-i18n="Email">
-                                                <i class="feather icon-circle"></i>More File
-                                            </a>
-                                        </li>
-                                        <li data-menu=""><a class="dropdown-item" href="More_File_team" data-toggle="dropdown" data-i18n="Chartjs"><i class="feather icon-circle"></i>More File Team</a>
-                                        </li>
-
-                                    </ul>
+                                <li class="<?php if ($this->uri->segment(1) == "More_File" ) {  echo 'active'; } ?>" ><a class="dropdown-item " href="More_File" ><i class="feather icon-pie-chart"></i>More File <span class="badge badge badge-warning badge-pill" style="margin-left:5px; <?php if ($notify_con == 0) {
+                                                                                                                                                            echo "display:none";
+                                                                                                                                                        } ?>"><?php echo $notify_GT; ?></span></a>
+                                
                                 </li>
 
 
@@ -605,6 +608,7 @@
                 </li>
 
                 </ul>
+                
             <?php elseif ($profile['is_admin'] == '2') : ?>
                 <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
 
