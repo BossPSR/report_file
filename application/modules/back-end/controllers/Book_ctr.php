@@ -64,19 +64,13 @@ class Book_ctr extends CI_Controller
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
-        if ($user['score'] < '100') {
-            $discount = 0;
-        } elseif ($user['score'] <= '199') {
+        if ($user['score'] >= '100') {
             $discount = 10;
-        } elseif ($user['score'] <= '299') {
-            $discount = 20;
-        } elseif ($user['score'] <= '399') {
-            $discount = 30;
-        } elseif ($user['score'] <= '499') {
-            $discount = 40;
-        } elseif ($user['score'] > '499') {
-            $discount = 50;
+        } else {
+            $discount = 0;
         }
+        
+
         $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
 
 
@@ -87,13 +81,24 @@ class Book_ctr extends CI_Controller
             $numFile += 1;
         }
 
-        $subject = 'เอกสารการชำระเงิน จาก www.Report-file.com ';
+        $subject  = 'เอกสารแจ้งชำระเงิน การแเปลี่ยนแปลงออเดอร์ จาก www.report-file.com ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Your order has been placed';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $upload_order[0]['order_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order details ("' . $upload_order[0]['order_id'] . '")</p>';
 
 
-        $message  = '<body style="background: #eee;">';
-
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> เอกสารการชำระเงิน จาก www.Report-file.com  </div>';
-        $message .= '<table align="center" style="font-size: 20px;border-collapse: separate!important; border-style: dotted;background: white;"  border="0">';
+        $message .= '<table style="font-size: 14px;border="0">';
 
         $message .= '<tr>';
         $message .= '<td rowspan="' . $numFile . '">';
@@ -155,10 +160,6 @@ class Book_ctr extends CI_Controller
 
         $message .= '</table>';
 
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Order ID : '.$upload_order[0]['order_id'].'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
 
         $message .= '<div>';
         $message .= '<div style="text-align: center; margin:15px auto; font-size:25px;    padding-bottom: 22px;">';
@@ -167,7 +168,8 @@ class Book_ctr extends CI_Controller
         $message .= '</a>';
         $message .= '</div>';
         $message .= '</div>';
-        $message .= '</body>';
+        $message .= '</div>';
+        $message .= '</center>';
 
         //config email settings
         $config['protocol'] = 'smtp';
