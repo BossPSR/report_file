@@ -70,15 +70,17 @@ class Customer_order_ctr extends CI_Controller
 
     public function orvernotsubmit()
     {
+
         if ($this->session->userdata('email_admin') != '') {
 
-            $data['order_all'] = $this->Customer_model->customer_all();
+            $data['order_notsum'] = $this->Customer_model->customer_notsubmit();
             $this->load->view('options/header');
             $this->load->view('orverall_notsubmit',$data);
             $this->load->view('options/footer');
         } else {
             $this->load->view('login');
         }
+
     }
 
 

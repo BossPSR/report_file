@@ -65,12 +65,9 @@
                                                     <th>User</th>
                                                     <th>Email</th>
                                                     <th>T3</th>
-                                                    <!-- <th>Main File</th>
-                                                    <th>GT File</th> -->
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>PriceFile</th>
-                                                    <th>Delivery</th>
                                                     <th>Status</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -93,97 +90,6 @@
                                                             <?php endif; ?>
                                                         </td>
 
-                                                        <!-- <td>
-                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Main File</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <table class="table zero-configuration">
-                                                                                <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stores['order_id']])->result_array(); ?>
-                                                                                    <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
-                                                                                        <th>File</th>
-                                                                                        <th>create</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php foreach ($order as $keys => $order) { ?>
-                                                                                        <tr>
-                                                                                            <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
-                                                                                        </tr>
-                                                                                    <?php } ?>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['order_id']])->result_array(); ?>
-                                                            <?php if (!empty($order)) : ?>
-                                                            <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModalb<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <table class="table zero-configuration">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Order_id</th>
-                                                                                        <th>File_name</th>
-                                                                                        <th>File</th>
-                                                                                        <th>create</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php foreach ($order as $keys => $order) { ?>
-                                                                                        <tr>
-                                                                                            <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
-                                                                                        </tr>
-                                                                                    <?php } ?>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        <?php else : ?>
-                                                            -
-                                                        <?php endif; ?>
-
-                                                        </td> -->
                                                         <td><?php echo $stores['createOr']; ?></td>
                                                         <td><?php echo $stores['requiredOr']; ?></td>
                                                         <?php if ($stores['price_file'] == '') :   ?>
@@ -191,13 +97,7 @@
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
-                                                        <td>
-                                                            <?php if ($stores['status_delivery'] == 0) : ?>
-                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
-                                                            <?php else : ?>
-                                                                <span class="badge badge-pill badge-success">Delivered</span>
-                                                            <?php endif; ?>
-                                                        </td>
+                                                
                                                         <td>
                                                             <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
