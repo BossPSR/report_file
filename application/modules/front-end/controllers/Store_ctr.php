@@ -111,48 +111,41 @@ class Store_ctr extends CI_Controller
             }
         }
 
-        $user = $this->db->get_where('tbl_user', ['id' => $upload_order[0]['userId']])->row_array();
+        $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
-        if ($user['score'] < '100') {
-            $discount = 0;
-        } elseif ($user['score'] <= '199') {
+        if ($user['score'] >= '100') {
             $discount = 10;
-        } elseif ($user['score'] <= '299') {
-            $discount = 20;
-        } elseif ($user['score'] <= '399') {
-            $discount = 30;
-        } elseif ($user['score'] <= '499') {
-            $discount = 40;
-        } elseif ($user['score'] > '499') {
-            $discount = 50;
+        } else {
+            $discount = 0;
         }
+
         $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
 
-        $data['file_name'] = $fileName;
-        $data['order_id'] = $upload_order[0]['order_id'];
-        $data['price_file'] = $upload_order[0]['price_file'];
-        $data['discount'] = $discount;
+        $data['file_name']   = $fileName;
+        $data['order_id']    = $upload_order[0]['order_id'];
+        $data['price_file']  = $upload_order[0]['price_file'];
+        $data['discount']    = $discount;
         $data['customer_id'] = $upload_order[0]['userId'];
-        $data['price_dis'] = $priceDis;
+        $data['price_dis']   = $priceDis;
 
         $this->load->view('payment_email', $data);
     }
 
     public function payment_email_success()
     {
-        $file_name = $this->input->post('file_name');
-        $order_id = $this->input->post('order_id');
-        $price_file = $this->input->post('price_file');
-        $discount = $this->input->post('discount');
-        $price_dis = $this->input->post('price_dis');
-        $customer_id = $this->input->post('customer_id');
-        $email = $this->input->post('email');
-        $upload_order = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
+        $file_name      = $this->input->post('file_name');
+        $order_id       = $this->input->post('order_id');
+        $price_file     = $this->input->post('price_file');
+        $discount       = $this->input->post('discount');
+        $price_dis      = $this->input->post('price_dis');
+        $customer_id    = $this->input->post('customer_id');
+        $email          = $this->input->post('email');
+        $upload_order   = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
         if ($upload_order['status_pay'] == 1) {
             $this->session->set_flashdata('error_pay', TRUE);
             redirect('home');
         } else {
-            $user = $this->db->get_where('tbl_user', ['idUser' => $customer_id])->row_array();
+            $user       = $this->db->get_where('tbl_user', ['idUser' => $customer_id])->row_array();
             if ($user['cash'] < $price_dis) {
                 $this->session->set_flashdata('error_cash', TRUE);
                 redirect('/');
@@ -168,18 +161,18 @@ class Store_ctr extends CI_Controller
             }
 
             $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', ['status_pay' => 1]);
+            $this->db->update('tbl_upload_order', ['status_pay' => 1 , 'price_dis_order' => $price_dis , 'score_user' => $discount ]);
 
 
             $data = [
-                'file_name' => $file_name,
-                'order_id' => $order_id,
-                'price_file' => $price_file,
-                'discount' => $discount,
-                'price_dis' => $price_dis,
-                'customer_id' => $customer_id,
-                'email' => $email,
-                'created_at' => date('Y-m-d H:i:s')
+                'file_name'     => $file_name,
+                'order_id'      => $order_id,
+                'price_file'    => $price_file,
+                'discount'      => $discount,
+                'price_dis'     => $price_dis,
+                'customer_id'   => $customer_id,
+                'email'         => $email,
+                'created_at'    => date('Y-m-d H:i:s')
             ];
             $this->db->insert('tbl_store_for_buy_email', $data);
             $this->session->set_flashdata('success_cash', TRUE);

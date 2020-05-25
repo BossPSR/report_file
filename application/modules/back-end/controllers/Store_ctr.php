@@ -161,19 +161,12 @@ class Store_ctr extends CI_Controller
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
-        if ($user['score'] < '100') {
-            $discount = 0;
-        } elseif ($user['score'] <= '199') {
+        if ($user['score'] >= '100') {
             $discount = 10;
-        } elseif ($user['score'] <= '299') {
-            $discount = 20;
-        } elseif ($user['score'] <= '399') {
-            $discount = 30;
-        } elseif ($user['score'] <= '499') {
-            $discount = 40;
-        } elseif ($user['score'] > '499') {
-            $discount = 50;
+        } else {
+            $discount = 0;
         }
+        
         $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
 
 
@@ -358,6 +351,116 @@ class Store_ctr extends CI_Controller
         return redirect('back_store_buy');
     }
 
+    public function delete_order_st()
+    {
+        $id   = $this->input->post('order_id');
+        $note = $this->input->post('note');
+
+        $data = array(
+
+            'note_reject'         => $note,
+            'is_check'            => 1,
+            'update_at'           => date('Y-m-d H:i:s'),
+            'notify_user'         => 0,
+            'notify_admin'        => 0
+
+        );
+        $this->db->where('order_id', $id);
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+
+        $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
+
+        $this->sendEmail_cancel_st($orderid, $note);
+
+        return redirect('Satisfied');
+    }
+
+    
+    public function delete_order_notst()
+    {
+        $id   = $this->input->post('order_id');
+        $note = $this->input->post('note');
+
+        $data = array(
+
+            'note_reject'         => $note,
+            'is_check'            => 1,
+            'update_at'           => date('Y-m-d H:i:s'),
+            'notify_user'         => 0,
+            'notify_admin'        => 0
+
+        );
+        $this->db->where('order_id', $id);
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+
+        $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
+
+        $this->sendEmail_cancel_st($orderid, $note);
+
+        return redirect('Not_Satisfied');
+    }
+
+
+    private function sendEmail_cancel_st($orderid, $note)
+    {
+        $user = $this->db->get_where('tbl_user', ['idUser' => $orderid['userId']])->row_array();
+
+        $subject = 'Order cancellation email.';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Your document has been cancel';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        if (empty($orderid['email'])) {
+            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        } else {
+            $message .= '<p>Hey "' . $orderid['Username'] . '",</p>';
+        }
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $orderid['order_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $orderid['order_id'] . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">Cancel Order ID : ' . $orderid['order_id'] . ' ' . $note . ' </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        if (empty($orderid['email'])) {
+            $this->email->to($user['email']);
+        } else {
+            $this->email->to($orderid['email']);
+        }
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email cancel information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email information');
+        }
+    }
+
     public function reject_order_add_com()
     {
         $id   = $this->input->post('id');
@@ -378,13 +481,13 @@ class Store_ctr extends CI_Controller
 
         $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
 
-        $this->sendEmail_reject($orderid,$note);
+        $this->sendEmail_reject($orderid, $note);
 
         return redirect('back_store_buy');
     }
 
 
-    private function sendEmail_reject($orderid,$note)
+    private function sendEmail_reject($orderid, $note)
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $orderid['userId']])->row_array();
 
@@ -404,7 +507,7 @@ class Store_ctr extends CI_Controller
         $message .= '<p>Check below for your order details.</p><hr>';
         $message .= '<p>Order Details ("' . $orderid['order_id'] . '")</p>';
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">Rejected Order ID : ' . $orderid['order_id'] . ' ' .$note .' </div>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">Rejected Order ID : ' . $orderid['order_id'] . ' ' . $note . ' </div>';
 
         $message .= '</center>';
 
@@ -496,8 +599,6 @@ class Store_ctr extends CI_Controller
         );
         $this->db->where('id', $updateId);
         $data = $this->db->update('tbl_upload_store', $data);
-
-       
     }
 
     public function check_store_add_com()
@@ -597,6 +698,7 @@ class Store_ctr extends CI_Controller
     public function status_reject()
     {
         $id = $this->input->get('id');
+        $note = $this->input->post('note');
 
         $this->db->where('id', $id);
 
@@ -604,7 +706,7 @@ class Store_ctr extends CI_Controller
 
         $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
 
-        $this->sendEmail_reject($orderid);
+        $this->sendEmail_reject($orderid,$note);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
@@ -669,7 +771,7 @@ class Store_ctr extends CI_Controller
                 $this->db->where('section', $section);
                 $this->db->where('store_id', $store_id);
                 $this->db->update('tbl_upload_store', ['status_main_search' => 1]);
-                
+
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
                 } else {
@@ -705,7 +807,7 @@ class Store_ctr extends CI_Controller
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select])->row_array();
             $buymax      = $this->db->order_by('id', 'DESC')->get('tbl_order_s')->row();
             $dm      = $this->db->order_by('id', 'DESC')->get('tbl_upload_main_search')->row();
-            $dmplus  = $dm->id + 1 ;
+            $dmplus  = $dm->id + 1;
             if (!empty($select_item)) {
                 $data = [
                     'userId' => $e['adminId'],
@@ -855,7 +957,7 @@ class Store_ctr extends CI_Controller
 
         $this->db->where('order_id', $order);
         $data = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'date_required' => $date]);
-        echo $data ;
+        echo $data;
     }
 
 

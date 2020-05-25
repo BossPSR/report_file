@@ -63,9 +63,10 @@
                                                     <th>Date required</th>
                                                     <th>Price</th>
                                                     <th>Wage</th>
-													<th>Delivery</th>
-													<th>Position</th>
+                                                    <th>Delivery</th>
+                                                    <th>Position</th>
                                                     <th>Status</th>
+                                                    <th>Tool</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -306,12 +307,12 @@
                                                         </td>
                                                         <td>
                                                             <?php if ($store['status_delivery'] == 0) : ?>
-                                                            <span class="badge badge-pill badge-warning">Not Delivered</span>
+                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
-                                                            <span class="badge badge-pill badge-success">Delivered</span>
+                                                                <span class="badge badge-pill badge-success">Delivered</span>
                                                             <?php endif; ?>
-														</td>
-														<td>
+                                                        </td>
+                                                        <td>
                                                             <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $store['position']])->result_array(); ?>
                                                             <?php foreach ($position_name as $keys => $position_name) { ?>
                                                                 <?php echo $position_name['name_item'] ?>
@@ -331,6 +332,40 @@
                                                                 <?php endif ?>
                                                             <?php endif ?>
 
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $store['orderNOT']; ?>"><i class="feather icon-delete"></i></button>
+                                                            <div class="modal fade" id="exampleModallCenterc<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="delete_order_notst" method="POST">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
+                                                                    <div class="modal-dialog " role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $store['orderNOT']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note Cancel</label>
+                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </td>
 
 

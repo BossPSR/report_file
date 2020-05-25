@@ -18,6 +18,7 @@ class Customer_model extends CI_Model{
         $this->db->join('tbl_upload_team','tbl_upload_order.order_id =tbl_upload_team.order_id ' , 'left');
         $this->db->where('tbl_upload_order.status_book',1);
         $this->db->where('tbl_upload_order.status_pay',1);
+        $this->db->where('tbl_upload_order.is_check',0);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();
@@ -33,6 +34,7 @@ class Customer_model extends CI_Model{
         $this->db->join('tbl_upload_team','tbl_upload_order.order_id =tbl_upload_team.order_id ' , 'left');
         $this->db->where('tbl_upload_order.status_book', 2 );
         $this->db->where('tbl_upload_order.status_pay', 1 );
+        $this->db->where('tbl_upload_order.is_check',0);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();
@@ -45,6 +47,7 @@ class Customer_model extends CI_Model{
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1 );
+        $this->db->where('tbl_upload_order.is_check',0);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();
@@ -58,6 +61,7 @@ class Customer_model extends CI_Model{
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1 );
         $this->db->where('tbl_upload_order.status_confirmed_team', 0 );
+        $this->db->where('tbl_upload_order.is_check',0);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();

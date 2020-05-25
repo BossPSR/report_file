@@ -172,6 +172,7 @@ $route['back_admin_status_Admin']                   = 'back-end/Admin_ctr/status
 $route['back_admin_delete_admin']                   = 'back-end/Admin_ctr/delete_admin';
 $route['status_team']                               = 'back-end/Team_ctr/status_team';
 $route['back_user']                                 = 'back-end/User_ctr';
+
 $route['back_store']                                = 'back-end/Store_ctr';
 $route['back_store_a']                              = 'back-end/Store_ctr/store_a';
 $route['back_store_b']                              = 'back-end/Store_ctr/store_b';
@@ -187,6 +188,10 @@ $route['back_store_reject']                         = 'back-end/Store_ctr/reject
 $route['back_store_reject_for_buy']                 = 'back-end/Store_ctr/reject_for_buy';
 $route['reject_order_add_com']                      = 'back-end/Store_ctr/reject_order_add_com';
 $route['back_store_status_reject']                  = 'back-end/Store_ctr/status_reject';
+$route['delete_order_st']                           = 'back-end/Store_ctr/delete_order_st';
+$route['delete_order_notst']                           = 'back-end/Store_ctr/delete_order_notst';
+
+
 $route['Login_admin']                               = 'back-end/Login_ctr/admin_loginMe';
 $route['Logout_admin']                              = 'back-end/Login_ctr/admin_logout';
 $route['backend']                                   = 'back-end/Login_ctr';
@@ -273,7 +278,7 @@ $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_c
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
 $route['edit_wage_Not_Satisfied']                   = 'back-end/Customer_order_ctr/edit_wage_Not_Satisfied';
 $route['edit_wage_Satisfied']                       = 'back-end/Customer_order_ctr/edit_wage_Satisfied';
-$route['edit_wage_stockadmin']                       = 'back-end/Customer_order_ctr/edit_wage_stockadmin';
+$route['edit_wage_stockadmin']                      = 'back-end/Customer_order_ctr/edit_wage_stockadmin';
 $route['status_reject_forbey']                      = 'back-end/Store_ctr/status_reject_forbey';
 
 $route['checkStatus_admin']               			= 'back-end/Login_ctr/checkStatus_admin';

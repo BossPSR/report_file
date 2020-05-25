@@ -66,7 +66,8 @@
                                                     <th>Wage</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
-                                                    <th>Status T3</th>
+                                                    <th style="    width: 85px;">Status T3</th>
+                                                    <th>Tool</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -288,7 +289,7 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                        
+
                                                         <td><?php echo $stores['createST']; ?></td>
                                                         <td>
                                                             <?php if ($stores['status_delivery'] == '1') : ?>
@@ -397,7 +398,7 @@
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['orderST']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>
-                                                                <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['orderST']; ?>" type="button" class="btn btn-success">Upload T3</button>
+                                                                <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['orderST']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
                                                             <?php else : ?>
                                                                 <?php if ($team['teamId'] != '') : ?>
                                                                     <span class="badge badge-pill badge-success" style="font-size: 14px;"><?php echo $stores['teamId']; ?></span>
@@ -407,6 +408,40 @@
                                                                 <?php endif ?>
                                                             <?php endif ?>
 
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $stores['orderST']; ?>"><i class="feather icon-delete"></i></button>
+                                                            <div class="modal fade" id="exampleModallCenterc<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="delete_order_st" method="POST">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
+                                                                    <div class="modal-dialog " role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $stores['orderST']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note Cancel</label>
+                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </td>
 
                                                     </tr>

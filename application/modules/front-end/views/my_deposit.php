@@ -81,7 +81,7 @@ $sm_del = $this->db->get()->row_array();
             </div>
             <div class="row text-center wall-center mtb-20">
               <div class="col-md-4">
-                <div id="paypal-button-containers" style="width: 300px"></div>
+                <div id="paypal-button-containers" ></div>
               </div>
             </div>
           </div>
