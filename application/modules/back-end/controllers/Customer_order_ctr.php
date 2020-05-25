@@ -248,7 +248,17 @@ class Customer_order_ctr extends CI_Controller
         return redirect('Not_Satisfied');
     }
 
+    public function refresh_nw()
+	{
+		$no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
+		echo count($no_work);
+	}
 
-    
+	public function refresh_ns()
+	{
+		$not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
+		echo count($not_submit);
+	}
+
    
 }

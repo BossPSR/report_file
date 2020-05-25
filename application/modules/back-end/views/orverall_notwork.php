@@ -118,91 +118,119 @@
                                                         </td>
 
 
-                                                        <!-- <td><span  class="badge badge-pill badge-success">Successful payment</button></td> -->
-                                                    </tr>
+														<!-- <td><span  class="badge badge-pill badge-success">Successful payment</button></td> -->
+													</tr>
 
-                                                    <div class="modal fade" id="exampleModalUpload<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload To Team</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="upload_team" method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Order</label>
-                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $stores['order_id']; ?>" placeholder="Enter Order" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $stores['order_id']; ?>" placeholder="Enter price" required>
-                                                                            </div>
+													<div class="modal fade" id="exampleModalUpload<?php echo $stores['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Upload To Team</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<form action="upload_team" method="POST" class="form-horizontal">
+																	<div class="modal-body">
+																		<div class="col-xl-12 col-md-6 col-12 mb-1">
+																			<div class="form-group">
+																				<label for="helpInputTop">Order</label>
+																				<input type="text" class="form-control" name="order_id" value="<?php echo $stores['order_id']; ?>" placeholder="Enter Order" readonly>
+																			</div>
+																		</div>
+																		<div class="col-xl-12 col-md-6 col-12 mb-1">
+																			<div class="form-group">
+																				<label for="helpInputTop">date required</label>
+																				<input type="date" class="form-control" name="Daterequired" value="<?php echo $stores['order_id']; ?>" placeholder="Enter price" required>
+																			</div>
 
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">position</label>
-                                                                                <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
-                                                                                <select name="position" class="form-control" required>
-                                                                                    <option value="" selected disabled>select</option>
-                                                                                    <?php foreach ($select_postion as $keys => $select_postion) { ?>
-                                                                                        <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
+																		</div>
+																		<div class="col-xl-12 col-md-6 col-12 mb-1">
+																			<div class="form-group">
+																				<label for="helpInputTop">position</label>
+																				<?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
+																				<select name="position" class="form-control" required>
+																					<option value="" selected disabled>select</option>
+																					<?php foreach ($select_postion as $keys => $select_postion) { ?>
+																						<option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
+																					<?php } ?>
+																				</select>
+																			</div>
 
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">wage(10%)</label>
+																		</div>
+																		<div class="col-xl-12 col-md-6 col-12 mb-1">
+																			<div class="form-group">
+																				<label for="helpInputTop">wage(10%)</label>
 
-                                                                                <input type="text" class="form-control" name="wage" value="" placeholder="Enter wage">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Note</label>
-                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
-                                                                            </div>
+																				<input type="text" class="form-control" name="wage" value="" placeholder="Enter wage">
+																			</div>
+																		</div>
+																		<div class="col-xl-12 col-md-6 col-12 mb-1">
+																			<div class="form-group">
+																				<label for="helpInputTop">Note</label>
+																				<textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+																			</div>
 
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                <?php  } ?>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!--/ Zero configuration table -->
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+																			<div class="add-data-btn mr-1">
+																				<button type="submit" class="btn btn-primary">submit</button>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
 
 
+												<?php  } ?>
+											</tbody>
+										</table>
 
-        </div>
-    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--/ Zero configuration table -->
+
+
+
+		</div>
+	</div>
 </div>
 
 <!-- END: Content-->
+<script>
+	setInterval(function() {
+		refresh_nw();
+		refresh_ns();
+	}, 5000);
+
+	function refresh_nw() {
+
+		$.ajax({
+			url: 'refresh_nw',
+			success: function(getData) {
+				$('#refresh_nw').text(getData);
+			}
+		});
+
+	}
+
+	function refresh_ns() {
+
+		$.ajax({
+			url: 'refresh_ns',
+			success: function(getData) {
+				$('#refresh_ns').text(getData);
+			}
+		});
+
+	}
+</script>

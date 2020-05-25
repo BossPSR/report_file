@@ -282,3 +282,5 @@ $route['edit_wage_stockadmin']                      = 'back-end/Customer_order_c
 $route['status_reject_forbey']                      = 'back-end/Store_ctr/status_reject_forbey';
 
 $route['checkStatus_admin']               			= 'back-end/Login_ctr/checkStatus_admin';
+$route['refresh_nw']               			    	= 'back-end/Customer_order_ctr/refresh_nw';
+$route['refresh_ns']               			    	= 'back-end/Customer_order_ctr/refresh_ns';
