@@ -14,7 +14,6 @@
                             <tr style="text-align:center;">
                                 <th scope="col">Status</th>
                                 <th scope="col">Order</th>
-                                <th scope="col">Document</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Main Document</th>
                                 <th scope="col">GT Document</th>
@@ -56,7 +55,6 @@
                                         <?php endif; ?>
                                     </th>
                                     <td data-order="<?php echo $value['ORD'] ?>"><?php echo $value['ORD']; ?></td>
-                                    <td style="text-align:left;"><?php echo $value['file_name']; ?></td>
                                     <td>$<?php echo $value['price_file']; ?></td>
                                     <td>
                                         <?php $zz = 1; ?>
@@ -237,7 +235,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback (<?php echo $value['ORD']; ?>)</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -258,7 +256,7 @@
                                                                 <br>
 
                                                                 <label for="" class="font-size-upload">Date :</label>
-                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" style="width:30%" required>
+                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo $value['Drequired']; ?>" style="width:30%" required>
                                                                 <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
                                                                 <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
                                                                 <!-- </form> -->

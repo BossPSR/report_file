@@ -572,9 +572,9 @@
                                     <ul class="dropdown-menu ">
                                         <li data-menu=""><a class="dropdown-item  <?php if ($this->uri->segment(1) == "Feedback") {
                                                                                         echo 'active';
-                                                                                    } ?>" href="Feedback" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Feedback</a>
+                                                                                    } ?>" href="Feedback" data-toggle="dropdown" data-i18n="Apex"><i class="feather icon-circle"></i>Feedback Notification</a>
                                         </li>
-                                        <li data-menu=""><a class="dropdown-item" href="Feedback_team" data-toggle="dropdown" data-i18n="Chartjs"><i class="feather icon-circle"></i>Feedback Team</a>
+                                        <li data-menu=""><a class="dropdown-item" href="Feedback_team" data-toggle="dropdown" data-i18n="Chartjs"><i class="feather icon-circle"></i>Feedback All</a>
                                         </li>
 
                                     </ul>

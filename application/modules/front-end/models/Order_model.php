@@ -82,7 +82,6 @@ class Order_model extends CI_Model
         $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->where('tbl_feedback.check_feedback_order', 1);
-        $this->db->where('tbl_upload_team.status', 1);
         $this->db->where('tbl_upload_order.status_pay', 1);
         // $this->db->where('tbl_upload_order.status_delivery', 0);
         $this->db->where_in('tbl_upload_team.teamId', $sess);

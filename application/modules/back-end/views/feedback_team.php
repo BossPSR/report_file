@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Feedback Team</h2>
+                        <h2 class="content-header-title float-left mb-0">Feedback All</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">Feedback Team
+                                <li class="breadcrumb-item active">Feedback All
                                 </li>
                             </ol>
                         </div>
@@ -47,7 +47,7 @@
 
                             <div class="row card-header">
                                 <div class="col-10">
-                                    <h4 class="card-title">Feedback Team</h4>
+                                    <h4 class="card-title">Feedback All</h4>
                                 </div>
                                 <div class="col-1 text-center">
                                     <?php if ($datata == '') : ?>
@@ -70,13 +70,13 @@
                                         <table class="table zero-configuration" id="loading_img_spin">
                                             <thead>
                                                 <tr>
-                                                    <th>order_id</th>
-                                                    <th>User_id</th>
+                                                    <th>order id</th>
+                                                    <th>User id</th>
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
                                                     <th>Team id</th>
                                                     <th>date</th>
-                                                    <th>Create_at</th>
+                                                    <th>Create at</th>
                                                     <th>Tool</th>
                                                     <!-- <th>tool</th> -->
                                                 </tr>

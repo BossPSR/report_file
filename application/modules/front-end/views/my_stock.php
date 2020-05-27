@@ -229,16 +229,14 @@
                                         <?php } ?>
                                     </td>
                                     <td><?php echo $stock['name_item']; ?></td>
-                                    <td><span class=" badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span>
-                                    </td>
+                                    <td><span class=" badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span></td>
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
 
-                                        <?php if ($stock_row == true || $stock_row['t_id'] == '') { ?>
-                                            <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
-
-                                        <?php } else { ?>
+                                        <?php if ($stock_row['up_status'] == '2') { ?>
                                             <button type="button" class="btn btn-secondery"> Confirmed</button>
+                                        <?php } else { ?>
+                                            <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>
                                         <?php } ?>
 
                                         <!-- Modal -->

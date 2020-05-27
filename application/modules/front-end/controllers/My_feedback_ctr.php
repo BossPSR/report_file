@@ -70,4 +70,38 @@ class My_feedback_ctr extends CI_Controller
         }
         echo $success;
     }
+
+    public function my_order_feedback()
+    {
+        $target_dir = "uploads/Feedback/"; // Upload directory
+        if (!empty($_FILES['file']['name'])) {
+
+            // Set preference
+            $config['upload_path']     = 'uploads/Feedback/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
+
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            $feedmax = $this->db->order_by('id', 'DESC')->get('tbl_feedback')->row();
+
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
+
+                $data = array(
+                    'id_feedback'       => $feedmax->id,
+                    'file_name'         => $uploadData['file_name'],
+                    'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
+                    'create_at'         => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_feedback_file', $data);
+            }
+        }
+    }
 }

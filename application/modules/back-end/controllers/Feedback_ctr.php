@@ -108,6 +108,22 @@ class Feedback_ctr extends CI_Controller
         echo $success;
     }
 
+    public function feedback_file_update_detail()
+    {
+        $id    = $this->input->post('id');
+        $detail     = $this->input->post('detail');
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_feedback', ['feedback_detail' => $detail]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated detail information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated detail information');
+        }
+        return redirect('Feedback');
+    }
+
     public function Deduct_Money()
     {
       
@@ -160,10 +176,6 @@ class Feedback_ctr extends CI_Controller
      
 
 
-
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
-        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
         $message .= '<div>';
         $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
         $message .= 'Reject';
