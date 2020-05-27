@@ -13,10 +13,10 @@ class Feedback_ctr extends CI_Controller
     public function index()
     {
         if ($this->session->userdata('email_admin') != '') {
-            
+
             $data['feedback'] = $this->Feedback_model->feedback();
             $this->load->view('options/header');
-            $this->load->view('feedback',$data);
+            $this->load->view('feedback_notification', $data);
             $this->load->view('options/footer');
         } else {
             $this->load->view('login');
@@ -24,13 +24,13 @@ class Feedback_ctr extends CI_Controller
     }
 
 
-    public function feedback_team()
+    public function feedback_all()
     {
         if ($this->session->userdata('email_admin') != '') {
-            
+
             $data['feedback_team'] = $this->Feedback_model->feedback_team();
             $this->load->view('options/header');
-            $this->load->view('feedback_team',$data);
+            $this->load->view('feedback_all', $data);
             $this->load->view('options/footer');
         } else {
             $this->load->view('login');
@@ -42,19 +42,35 @@ class Feedback_ctr extends CI_Controller
         $id = $this->input->get('id');
         $tid = $this->input->get('tid');
 
-      
+
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'),'teamId' => $tid,'notify_team' => 0,'status_c_feedack_team' => 1]);
+        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'teamId' => $tid, 'notify_team' => 0, 'status_c_feedack_team' => 1]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated Feedback information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully updated Feedback information');
         }
-        return redirect('Feedback_team');
+        return redirect('feedback_all');
     }
-    
+
+    public function status_feedback_now()
+    {
+        $id = $this->input->get('id');
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'notify_team' => 0, 'status_c_feedack_team' => 1]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated Feedback information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated Feedback information');
+        }
+        return redirect('feedback_all');
+    }
+
+
     public function fileUpload_feedback_team()
     {
         $target_dir = "uploads/Feedback/"; // Upload directory
@@ -88,7 +104,7 @@ class Feedback_ctr extends CI_Controller
             }
         }
     }
-    
+
     public function order_auto_feedback_team()
     {
         $order_id   = $this->input->post('order_id');
@@ -110,8 +126,8 @@ class Feedback_ctr extends CI_Controller
 
     public function feedback_file_update_detail()
     {
-        $id    = $this->input->post('id');
-        $detail     = $this->input->post('detail');
+        $id     = $this->input->post('id');
+        $detail = $this->input->post('detail');
 
         $this->db->where('id', $id);
         $resultsedit = $this->db->update('tbl_feedback', ['feedback_detail' => $detail]);
@@ -121,12 +137,28 @@ class Feedback_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully updated detail information');
         }
-        return redirect('Feedback');
+        return redirect('feedback_notification');
+    }
+
+    public function feedback_all_detail()
+    {
+        $id     = $this->input->post('id');
+        $detail = $this->input->post('detail');
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_feedback', ['feedback_detail' => $detail]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated detail information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated detail information');
+        }
+        return redirect('feedback_all');
     }
 
     public function Deduct_Money()
     {
-      
+
 
         $data = array(
 
@@ -140,20 +172,20 @@ class Feedback_ctr extends CI_Controller
         );
 
         $resultsedit = $this->db->insert('tbl_deductmoney', $data);
-        $Deduct_Money = $this->db->get_where('tbl_deductmoney',['team_id'=> $this->input->post('team_id')])->row_array();
+        $Deduct_Money = $this->db->get_where('tbl_deductmoney', ['team_id' => $this->input->post('team_id')])->row_array();
         $this->sendEmail_Notification_Deduct_Money($Deduct_Money);
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Add Admin information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Add Admin information');
         }
-        return redirect('Feedback_team');
+        return redirect('feedback_all');
     }
 
     private function sendEmail_Notification_Deduct_Money($Deduct_Money)
     {
-        
-      
+
+
         $subject = 'test ip-soft';
 
         $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
@@ -166,15 +198,11 @@ class Feedback_ctr extends CI_Controller
 
 
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
-      
 
-           $Deduct_Money = $this->db->get_where('tbl_deductmoney', ['team_id' => $Deduct_Money['team_id']])->row_array();
-           $message .= 'โดนหักเงิน'.$Deduct_Money['price_deductmoney'].'สาเหตุของการหัก'.$Deduct_Money['node_deductmoney'];
-           $message .= '<br>';
 
-      
-     
-
+        $Deduct_Money = $this->db->get_where('tbl_deductmoney', ['team_id' => $Deduct_Money['team_id']])->row_array();
+        $message .= 'โดนหักเงิน' . $Deduct_Money['price_deductmoney'] . 'สาเหตุของการหัก' . $Deduct_Money['node_deductmoney'];
+        $message .= '<br>';
 
         $message .= '<div>';
         $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
@@ -212,6 +240,4 @@ class Feedback_ctr extends CI_Controller
 
         return redirect('back_team');
     }
-   
-
 }

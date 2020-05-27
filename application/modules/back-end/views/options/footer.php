@@ -96,7 +96,7 @@
     }
 </script>
 
-<script>
+<!-- <script>
     function confirmalertunlock_upload_Feedback(data3,data4) {
 
         swal({
@@ -111,7 +111,7 @@
             }
         })
     }
-</script>
+</script> -->
 
 <script>
     function confirmalertunlock_upload_morefile(data5) {
@@ -125,6 +125,22 @@
         }).then(function(isConfirm) {
             if (isConfirm) {
                 window.location = 'status_more_file_team?id=' + data5  ;
+            }
+        })
+    }
+</script>
+
+<script>
+    function confileFeedback_team(data) {
+
+        swal({
+            title: "Are you sure upload Feedback to Team ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'status_feedback_now?id=' + data  ;
             }
         })
     }

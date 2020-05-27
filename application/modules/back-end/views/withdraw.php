@@ -55,37 +55,94 @@
                                                         <td><?php echo $withdraw['phone']; ?></td>
                                                         <td>
                                                             <?php if ($withdraw['status'] == 1) : ?>
-                                                            <div class="dropdown ">
-                                                                <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                กำลังดำเนินการ
-                                                                </button>
-                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
-                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                <div class="dropdown ">
+                                                                    <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        กำลังดำเนินการ
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" type="button" data-toggle="modal" data-target="#drop<?php echo $withdraw['idW']; ?>" href="#">ชำระเงินแล้ว</a>
+                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <?php elseif ($withdraw['status'] == 2): ?>
-                                                            <div class="dropdown ">
-                                                                <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                ชำระเงินแล้ว
-                                                                </button>
-                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
-                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                            <?php elseif ($withdraw['status'] == 2) : ?>
+                                                                <div class="dropdown ">
+                                                                    <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        ชำระเงินแล้ว
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
+                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <?php else: ?>
-                                                            <div class="dropdown ">
-                                                                <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                ยกเลิก
-                                                                </button>
-                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
-                                                                    <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                            <?php else : ?>
+                                                                <div class="dropdown ">
+                                                                    <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        ยกเลิก
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
+                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Modal Feedback -->
+                                                        <div class="modal fade" id="drop<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Withdraw (<?php echo $withdraw['idW']; ?>)</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="modal-body" style="text-align:left;">
+                                                                        <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                        <form action="img_withdraw_user" class="dropzone" id="fileuploadW<?php echo $withdraw['idW']; ?>">
+                                                                            <div class="dz-message needsclick"></div>
+                                                                            <input type="text" name="id" value="<?php echo $withdraw['idW']; ?>" >
+                                                                        </form>
+                                                                        <br>
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" id="SubmitW<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <script type='text/javascript'>
+                                                            Dropzone.autoDiscover = false;
+                                                            var myDropzone2<?php echo $withdraw['idW']; ?> = new Dropzone("#fileuploadW<?php echo $withdraw['idW']; ?>", {
+                                                                autoProcessQueue: false,
+                                                                maxFiles: 1,
+                                                                addRemoveLinks: true,
+                                                                parallelUploads: 5, // Number of files process at a time (default 2)
+                                                            });
+
+                                                            $('#SubmitW<?php echo $withdraw['idW']; ?>').click(function() {
+
+                                                                if (myDropzone2<?php echo $withdraw['idW']; ?>.files != 0) {
+                                                                    myDropzone2<?php echo $withdraw['idW']; ?>.processQueue();
+                                                                    myDropzone2<?php echo $withdraw['idW']; ?>.on("queuecomplete", function(file, res) {
+                                                                        swal("Good job!", "Upload for data success Feedback", "success", {
+                                                                            button: false,
+                                                                        });
+                                                                    });
+                                                                    setTimeout("location.reload(true);", 1000);
+                                                                } else {
+                                                                    swal("Good job!", "Upload for data successfull", "success" );
+                                                                }
+
+                                                            });
+
+                                                        </script>
+
                                                     </tr>
                                                 </tbody>
                                             <?php  } ?>

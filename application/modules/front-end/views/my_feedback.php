@@ -149,9 +149,9 @@
                                         </td>
                                         <td>
                                             <?php if (!empty($feedback['feedback_detail'])) { ?>
-                                                <a href="#" data-toggle="modal" data-target="#NOTE<?= $feedback['orIdd']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
+                                                <a href="#" data-toggle="modal" data-target="#NOTE<?= $feedback['id_feed']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="NOTE<?= $feedback['orIdd']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                <div class="modal fade" id="NOTE<?= $feedback['id_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -178,15 +178,15 @@
                                         <td>
                                             <?php if ($feedback['status_feedback_read'] == 0) { ?>
                                                 <span class=" badge badge-danger" style="font-size:16px;">Not Read</span>
-                                                                <?php } else { ?>
-                                                                    <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
-                                                                        <span class="badge badge-info" style="font-size:16px;">Read</span>
-                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
-                                                                        <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
-                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
-                                                                        <span class="badge badge-success" style="font-size:16px;">Success</span>
-                                                                    <?php } ?>
-                                                                <?php } ?>
+                                            <?php } else { ?>
+                                                <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
+                                                    <span class="badge badge-info" style="font-size:16px;">Read</span>
+                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
+                                                    <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
+                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
+                                                    <span class="badge badge-success" style="font-size:16px;">Success</span>
+                                                <?php } ?>
+                                            <?php } ?>
                                         </td>
                                         <td><?= $feedback['name_item']; ?></td>
                                     </tr>
