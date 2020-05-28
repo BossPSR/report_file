@@ -116,7 +116,16 @@ class Customer_order_ctr extends CI_Controller
 		echo json_encode($result); 
     }
 
+    public function edit_date_required_All()
+    {
+        $order  = $this->input->post('order');
+        $date   = $this->input->post('date');
 
+        $this->db->where('order_id', $order);
+        $data = $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'date_required' => $date]);
+        echo $data;
+    }
+    
 
     public function upload_team()
     {

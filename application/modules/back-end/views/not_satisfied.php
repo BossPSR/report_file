@@ -63,9 +63,10 @@
                                                     <th>Date required</th>
                                                     <th>Price</th>
                                                     <th>Wage</th>
-                                                    <th>Delivery</th>
                                                     <th>Position</th>
+                                                    <th>Delivery</th>
                                                     <th>Status</th>
+                                                    <th>Status T3</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -230,39 +231,13 @@
 
                                                         <td><?php echo $store['createNOT']; ?></td>
                                                         <td>
-
-                                                            <a href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $store['orderNOT']; ?>"><?php echo $store['dateNOT']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                            <div class="modal fade" id="exampleModaldate<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                <form action="edit_date_required_Not_Satisfied" method="POST">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-
-                                                                        <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-
-                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
-                                                                                    <div class="form-group" style="text-align: left;">
-                                                                                        <label for="helpInputTop">Date Required</label>
-                                                                                        <input type="date" class="form-control" name="date_required" value="<?php echo $store['dateNOT']; ?>" placeholder="Enter score">
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
+                                                            <?php if ($store['status_delivery'] == '1') : ?>
+                                                                <?php echo $store['dateNOT']; ?>
+                                                            <?php else : ?>
+                                                                <input type="date" class="form-control" name="date_required" id="datenow" data-datenow="<?php echo $store['orderNOT']; ?>" value="<?php echo $store['dateNOT']; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                            <?php endif; ?>
                                                         </td>
+
                                                         <?php if ($store['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
@@ -306,6 +281,12 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
+                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $store['position']])->result_array(); ?>
+                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
+                                                                <?php echo $position_name['name_item'] ?>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td>
                                                             <?php if ($store['status_delivery'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
@@ -313,11 +294,19 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $store['position']])->result_array(); ?>
-                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
-                                                                <?php echo $position_name['name_item'] ?>
-                                                            <?php } ?>
+                                                            <?php if ($store['status_book'] == '1' && $store['status_cp'] == 'complete' && $store['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-success">Original</span>
+                                                            <?php elseif ($store['status_book'] == '1' && $store['status_cp'] == 'notcomplete'  && $store['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($store['status_book'] == '2'  && $store['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($store['status_admin'] == '1') : ?>
+                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
                                                         </td>
+                                                        
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['orderNOT']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>
@@ -448,9 +437,29 @@
             </section>
             <!--/ Zero configuration table -->
 
-
-
         </div>
     </div>
 </div>
 <!-- END: Content-->
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('body').on('change', '#datenow', function() {
+            var date = $(this).data('datenow');
+            $.ajax({
+                type: 'POST',
+                data: {
+                    date: $(this).val(),
+                    order: date
+                },
+                url: 'edit_date_required_All',
+                success: function(data) {
+                    toastr.info('Success', 'Save to Date Required.');
+                }
+            });
+            return false;
+        });
+    });
+</script>

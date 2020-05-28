@@ -41,6 +41,7 @@
                                                     <th>Email</th>
                                                     <th>Username</th>
                                                     <th>Withdraw</th>
+                                                    <th>Total</th>
                                                     <th>Telephone</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -52,6 +53,7 @@
                                                         <td><?php echo $withdraw['email']; ?></td>
                                                         <td><?php echo $withdraw['username']; ?></td>
                                                         <td><?php echo $withdraw['price']; ?></td>
+                                                        <td><?php echo $withdraw['cash']; ?></td>
                                                         <td><?php echo $withdraw['phone']; ?></td>
                                                         <td>
                                                             <?php if ($withdraw['status'] == 1) : ?>
@@ -70,7 +72,6 @@
                                                                         ชำระเงินแล้ว
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
                                                                         <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
                                                                     </div>
                                                                 </div>
@@ -79,42 +80,41 @@
                                                                     <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         ยกเลิก
                                                                     </button>
-                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=2">ชำระเงินแล้ว</a>
-                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
-                                                                    </div>
+                                                                    
                                                                 </div>
                                                             <?php endif; ?>
-                                                        </td>
+                                                            <!-- Modal Feedback -->
+                                                            <div class="modal fade" id="drop<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Withdraw (<?php echo $withdraw['idW']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
 
-                                                        <!-- Modal Feedback -->
-                                                        <div class="modal fade" id="drop<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Withdraw (<?php echo $withdraw['idW']; ?>)</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
+                                                                        <div class="modal-body" style="text-align:left;">
+                                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                            <form action="img_withdraw_user" class="dropzone" id="fileuploadW<?php echo $withdraw['idW']; ?>">
+                                                                                <div class="dz-message needsclick">
+                                                                                    Drop files here or click to upload.<br>
+                                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                                    <input type="hidden" name="id" value="<?php echo $withdraw['idW']; ?>">
+                                                                                </div>
+                                                                            </form>
+
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="SubmitW<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                        </div>
+
                                                                     </div>
-
-                                                                    <div class="modal-body" style="text-align:left;">
-                                                                        <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                        <form action="img_withdraw_user" class="dropzone" id="fileuploadW<?php echo $withdraw['idW']; ?>">
-                                                                            <div class="dz-message needsclick"></div>
-                                                                            <input type="text" name="id" value="<?php echo $withdraw['idW']; ?>" >
-                                                                        </form>
-                                                                        <br>
-                                                                    </div>
-
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" id="SubmitW<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
-                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                    </div>
-
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </td>
 
                                                         <script type='text/javascript'>
                                                             Dropzone.autoDiscover = false;
@@ -136,11 +136,10 @@
                                                                     });
                                                                     setTimeout("location.reload(true);", 1000);
                                                                 } else {
-                                                                    swal("Good job!", "Upload for data successfull", "success" );
+                                                                    swal("Good job!", "Upload for data successfull", "success");
                                                                 }
 
                                                             });
-
                                                         </script>
 
                                                     </tr>

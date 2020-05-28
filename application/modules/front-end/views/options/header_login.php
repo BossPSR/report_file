@@ -310,7 +310,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6">
                             <div class="logo">
-                                <a href="home"><img src="public/frontend/assets/img/logo/logo4.png" alt=""></a>
+                                <a href="home"><img src="public/frontend/assets/img/logo/1.jpg" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-6">

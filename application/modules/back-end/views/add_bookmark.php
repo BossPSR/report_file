@@ -47,7 +47,6 @@
 
                                         <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-top: 25px;">
                                             <label for="" style="font-size: 16px;"> DM </label>
-
                                             <?php $book1 = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $id])->result_array(); ?>
                                             <select class="form-control" name="DM" id="DM1">
                                                 <?php foreach ($book1 as $key => $book1) { ?>

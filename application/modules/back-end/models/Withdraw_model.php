@@ -11,7 +11,7 @@ class Withdraw_model extends CI_Model{
     {
         $this->db->select('*,tbl_withdraw.id AS idW');
         $this->db->from('tbl_withdraw');
-        $this->db->join('tbl_user','tbl_user.id = tbl_withdraw.userId');
+        $this->db->join('tbl_user','tbl_user.idUser = tbl_withdraw.userId');
         return $this->db->get()->result_array();
 
     }

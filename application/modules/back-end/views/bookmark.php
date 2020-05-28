@@ -265,19 +265,19 @@
                                                         <td>
 
                                                             <?php if ($bookmark['status_book'] == '1') : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['order_save']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModalc<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalc<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Document_File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Document File</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
 
-                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->result_array(); ?>
+                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->result_array(); ?>
                                                                                 <?php foreach ($dm_cc as $key => $dm_cc) { ?>
                                                                                     <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_cc['id_document']])->row_array(); ?>
 
@@ -321,7 +321,7 @@
                                                                                                             <td><?php echo $orderssc['store_id'] ?></td>
                                                                                                             <td><?php echo $orderssc['file_name'] ?></td>
                                                                                                             <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                            <td><?php echo $orderssc ['create_at'] ?></td>
+                                                                                                            <td><?php echo $orderssc['create_at'] ?></td>
 
 
                                                                                                         </tr>
@@ -414,36 +414,35 @@
                                                         </td>
                                                         <td><?php echo $bookmark['date_re'] ?></td>
 
-                                                        <td >
+                                                        <td>
                                                             <?php if ($bookmark['statusB'] == "notcomplete") : ?>
                                                                 <div class="badge badge-primary">Rewrite</div>
                                                             <?php else : ?>
                                                                 <div class="badge badge-success">Original</div>
                                                             <?php endif ?>
                                                         </td>
-                
-														
+
+
                                                         <td>
 
-                                                            <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->row_array(); ?>
+                                                            <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->row_array(); ?>
 
                                                             <?php $show_dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $show_dm_c['id_document']])->row_array(); ?>
 
                                                             <?php $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'], 'status_check_drop' => '11'])->row_array(); ?>
                                                             <?php if ($show_dm_c2 == true) : ?>
-                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-success mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop</button></a>
+                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-success "><i class="feather icon-download-cloud"></i> Drop</a>
                                                             <?php else : ?>
-
-                                                                <a href="Add_bookmake?id=<?php echo $bookmark['order_save'] ?> "><button type="button" class="btn btn-primary mr-1 mb-1"><i class="feather icon-download-cloud"></i> Drop</button></a>
+                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-primary "><i class="feather icon-download-cloud"></i> Drop</a>
                                                             <?php endif; ?>
 
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
-                                                                <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal" data-target="#exampleModal"><i class="feather icon-navigation"></i> delivery</button>
+                                                                -
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['order_save']; ?>"><i class="feather icon-navigation"></i> delivery </button>
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['orderby']; ?>"><i class="feather icon-navigation"></i> delivery </button>
                                                             <?php endif; ?>
-                                                      
-                                                            <div class="modal fade" id="exampleModalu<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                            <div class="modal fade" id="exampleModalu<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -457,11 +456,11 @@
                                                                             <h3>
                                                                                 <p>delivery file </p>
                                                                             </h3>
-                                                                            <form  action="sendEmail_delivery_pay" method="POST">
-                                                                                <input type="hidden" name="id" value="<?php echo $bookmark['order_save']; ?>">
+                                                                            <form action="sendEmail_delivery_pay" method="POST">
+                                                                                <input type="hidden" name="id" value="<?php echo $bookmark['orderby']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
 
-                                                                                <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['order_save']])->result_array(); ?>
+                                                                                <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->result_array(); ?>
                                                                                 <?php foreach ($dm_c as $key => $dm_c) { ?>
                                                                                     <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
 
@@ -568,8 +567,8 @@
 
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
+                                                                            <div class="add-data-footer d-flex justify-content-around">
+                                                                                <button type="submit" class="btn btn-primary">Submit</button>
                                                                             </div>
                                                                         </div>
                                                                         </form>
@@ -577,73 +576,88 @@
                                                                 </div>
                                                             </div>
 
-
-
-
-                                                            <!-- <div class="modal fade" id="exampleModal<?php echo $bookmark['order_save']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal fade" id="dropW<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Upload To T3</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Add Drop Document (<?php echo $bookmark['orderby']; ?>)</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <form action="upload_team_book" method="POST" class="form-horizontal">
-                                                                            <div class="modal-body">
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">Order</label>
-                                                                                        <input type="text" class="form-control" name="order_id" value="<?php echo $bookmark['order_save']; ?>" placeholder="Enter Order" readonly>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">date required</label>
-                                                                                        <input type="date" class="form-control" name="Daterequired" value="<?php echo $bookmark['date_re']; ?>" placeholder="Enter price" required>
-                                                                                    </div>
 
-                                                                                </div>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">position</label>
-                                                                                        <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
-                                                                                        <select name="position" class="form-control" required>
-                                                                                            <option value="" selected disabled>select</option>
-                                                                                            <?php foreach ($select_postion as $keys => $select_postion) { ?>
-                                                                                                <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
-                                                                                            <?php } ?>
-                                                                                        </select>
-                                                                                    </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <label for="" style="font-size: 16px;">File Document </label>
+                                                                                <form action="fileUpload_store_book" class="dropzone dropzone-area" id="maindropzone<?php echo $bookmark['orderby']; ?>">
+                                                                                    <input type="text" id="DM2<?php echo $bookmark['orderby']; ?>" class="form-control " name="DM" value="<?php echo $bookmark['id_document'] ?>" hidden>
 
-                                                                                </div>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">wage</label>
+                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <br>
+                                                                            
 
-                                                                                        <input type="text" class="form-control" name="wage" value="<?php echo $bookmark['price_save'] * 10 / 100; ?>" placeholder="Enter wage" readonly>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">Note</label>
-                                                                                        <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
-                                                                                    </div>
-
-                                                                                </div>
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <label for=""> DM </label>
+                                                                                <?php $book1 = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->result_array(); ?>
+                                                                                <select class="form-control" name="DM" id="DM1<?php echo $bookmark['orderby']; ?>">
+                                                                                    <?php foreach ($book1 as $key => $book1) { ?>
+                                                                                        <option value="<?php echo $book1['id_document'] ?>"><?php echo $book1['id_document'] ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
                                                                             </div>
 
-                                                                            <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Upload To T3</button>
+                                                                        </div>
 
-                                                                          
-                                                                        </form>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around">
+                                                                                <button type="submit" id="uploadsfile<?php echo $bookmark['orderby']; ?>" class="btn btn-primary">Submit</button>
+                                                                            </div>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
-                                                            </div> -->
+                                                            </div>
+
+                                                            <script>
+                                                                $("#DM1<?php echo $bookmark['orderby']; ?>").change(function() {
+                                                                        var value = $(this).val();
+                                                                        $("#DM2<?php echo $bookmark['orderby']; ?>").val(value);
+                                                                    }).change();
+                                                            </script>
+                                                            <script>
+                                                                var x = document.getElementById("DM1<?php echo $bookmark['orderby']; ?>").value;
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzone<?php echo $bookmark['orderby']; ?> = new Dropzone("#maindropzone<?php echo $bookmark['orderby']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                document.getElementById("uploadsfile<?php echo $bookmark['orderby']; ?>").addEventListener("click", function() {
+                                                                    // myDropzone.processQueue();
+                                                                    if (myDropzone<?php echo $bookmark['orderby']; ?>.files == 0) {
+
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    }
+                                                                    myDropzone<?php echo $bookmark['orderby']; ?>.processQueue();
+                                                                    myDropzone<?php echo $bookmark['orderby']; ?>.on("queuecomplete", function(file, res) {
+                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                            button: false,
+                                                                        });
+                                                                        setTimeout(function() {
+                                                                            location.href = "Bookmark"
+                                                                        }, 1000);
+                                                                    });
+                                                                });
+                                                            </script>
 
                                                         </td>
                                                     </tr>
-
 
                                                 <?php } ?>
                                             </tbody>
@@ -679,11 +693,6 @@
             };
         }
 
-        //  if (x != true || y != true ) {
-        //     swal("Warning!", "Can not be  Not Empty", "warning", {
-        //                 button: true,
-        //             });
-        //             } else {}
     });
 </script>
 <!-- <script type="text/javascript">

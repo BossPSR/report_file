@@ -62,18 +62,18 @@
                                                     <th>Order id</th>
                                                     <th>Email</th>
                                                     <th>Name</th>
-                                                    <th style="width:100px;">DM</th>
+                                                    <th>DM</th>
                                                     <th>Main file</th>
                                                     <th>GT File</th>
                                                     <th>DM File</th>
                                                     <th>T3 File</th>
-                                                    <th>Date Required</th>
                                                     <th>Update Confirm</th>
+                                                    <th>Date Required</th>
                                                     <!-- <th>Position</th> -->
                                                     <th>Wage</th>
                                                     <th>T3</th>
                                                     <th>Status</th>
-                                                    <th style="width:100px;">Tool</th>
+                                                    <th >Tool</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -294,12 +294,20 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td><?php echo $stock['date_required'] ?></td>
+
                                                         <td>
                                                             <?php if ($stock['update_confirm'] != '') : ?>
                                                                 <?php echo $stock['update_confirm'] ?>
                                                             <?php else : ?>
                                                                 -
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <td>
+                                                            <?php if ($stock['status_delivery'] == '1') : ?>
+                                                                <?php echo $stock['dateREST']; ?>
+                                                            <?php else : ?>
+                                                                <input type="date" class="form-control" name="date_required" id="datenow" data-datenow="<?php echo $stock['orderST']; ?>" value="<?php echo $stock['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                             <?php endif; ?>
                                                         </td>
 
@@ -366,7 +374,7 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td>
+                                                        <td style="width:10%;">
                                                             <?php if ($stock['status_approved'] == 1) : ?>
                                                                 <span class="badge badge-pill badge-success">Approved</span>
                                                             <?php elseif ($stock['status_approved'] == 2) : ?>
@@ -642,3 +650,24 @@
 </div>
 
 <!-- END: Content-->
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('body').on('change', '#datenow', function() {
+            var date = $(this).data('datenow');
+            $.ajax({
+                type: 'POST',
+                data: {
+                    date: $(this).val(),
+                    order: date
+                },
+                url: 'edit_date_required_All',
+                success: function(data) {
+                    toastr.info('Success', 'Save to Date Required.');
+                }
+            });
+            return false;
+        });
+    });
+</script>

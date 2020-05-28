@@ -32,7 +32,7 @@ class My_withdraw_ctr extends CI_Controller
 		else
 		{
 			$data = array(
-				'userId' 	=> $user['id'],
+				'userId' 	=> $user['idUser'],
 				'price' 	=> $this->input->post('number'),
 				'create_at' => date('Y-m-d H:i:s'),
 				'update_at' => date('Y-m-d H:i:s'),

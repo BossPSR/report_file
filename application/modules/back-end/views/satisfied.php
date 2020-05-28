@@ -64,6 +64,7 @@
                                                     <th>Date required</th>
                                                     <th>Price</th>
                                                     <th>Wage</th>
+                                                    <th>position</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
                                                     <th style="    width: 85px;">Status T3</th>
@@ -295,38 +296,7 @@
                                                             <?php if ($stores['status_delivery'] == '1') : ?>
                                                                 <?php echo $stores['dateREST']; ?>
                                                             <?php else : ?>
-                                                                <a href="" data-toggle="modal" data-target="#exampleModaldate<?php echo $stores['orderST']; ?>"><?php echo $stores['dateREST']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                                <div class="modal fade" id="exampleModaldate<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <form action="edit_date_required_Satisfied" method="POST">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-
-                                                                            <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Date Required</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-
-                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
-                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                            <label for="helpInputTop">Date Required</label>
-                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter score">
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
+                                                                <input type="date" class="form-control" name="date_required" id="datenow" data-datenow="<?php echo $stores['orderST']; ?>" value="<?php echo $stores['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                             <?php endif; ?>
 
                                                         </td>
@@ -374,7 +344,12 @@
                                                                 </div>
                                                             <?php endif; ?>
                                                         </td>
-
+                                                        <td>
+                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $stores['position']])->result_array(); ?>
+                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
+                                                                <?php echo $position_name['name_item'] ?>
+                                                            <?php } ?>
+                                                        </td>
                                                         <td>
                                                             <?php if ($stores['status_delivery'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning">Not Delivered</span>
@@ -559,3 +534,24 @@
     </div>
 </div>
 <!-- END: Content-->
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('body').on('change', '#datenow', function() {
+            var date = $(this).data('datenow');
+            $.ajax({
+                type: 'POST',
+                data: {
+                    date: $(this).val(),
+                    order: date
+                },
+                url: 'edit_date_required_All',
+                success: function(data) {
+                    toastr.info('Success', 'Save to Date Required.');
+                }
+            });
+            return false;
+        });
+    });
+</script>
