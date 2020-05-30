@@ -305,12 +305,12 @@
             <!--header top start-->
 
             <!--header middel start-->
-            <div class="header_middle">
+            <div class="header_middle" style="background: #2b286f;">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-6">
                             <div class="logo">
-                                <a href="home"><img src="public/frontend/assets/img/logo/1.jpg" alt=""></a>
+                                <a href="home"><img src="public/frontend/assets/img/logo/3.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-6">
@@ -324,7 +324,7 @@
                                         <?php if ($user == true) : ?>
                                             <div class="middel_right_info">
 
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
                                                         <?php if ($user['score'] < '100') : ?>
                                                             0%
@@ -342,12 +342,12 @@
                                                     </div>
                                                     <div>Discount</div>
                                                 </div>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['score']); ?></div>
                                                     <div>Score</div>
                                                 </div>
 
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                     <div>My Wallet</div>
                                                 </div>
@@ -368,7 +368,7 @@
 
                                                 $sm_del = $this->db->get()->row_array();
                                                 ?>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
                                                         <?php if (empty($sm_del['sum_delivery'])) { ?>
                                                             0
@@ -388,7 +388,7 @@
 
                                                 $sm_de2 = $this->db->get()->row_array();
                                                 ?>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;">
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
                                                         <?php if ($sm_de2['sumWage']) : ?>
                                                             <?php echo $sm_de2['sumWage']; ?>
@@ -410,12 +410,12 @@
             <!--header middel end-->
 
             <!--header bottom satrt-->
-            <div class="main_menu_area">
+            <div class="main_menu_area" style="background: #2b286f;border-top: 1px solid white;">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-12">
                             <div class="categories_menu" style="padding-bottom: 8px;">
-                                <div class="categories_title">
+                                <div class="categories_title" style="    background: #2b286f;">
                                     <h2 class="categori_toggle">Category</h2>
                                 </div>
                                 <div class="categories_menu_toggle">

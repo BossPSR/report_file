@@ -54,7 +54,7 @@ class Order_model extends CI_Model
 
     public function my_stock($item_id, $sess)
     {
-        $this->db->select('*,tbl_upload_order.file_name as file_or ,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,tbl_upload_team.note as uptnote');
+        $this->db->select('*,tbl_upload_order.file_name as file_or ,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,tbl_upload_team.note as uptnote , tbl_upload_team.status as up_status2');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
@@ -79,13 +79,10 @@ class Order_model extends CI_Model
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id','left');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id','left');
-        $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
-        $this->db->where('tbl_feedback.check_feedback_order', 1);
         $this->db->where('tbl_upload_order.status_pay', 1);
-        // $this->db->where('tbl_upload_order.status_delivery', 0);
+        $this->db->where('tbl_upload_team.status', 2);
         $this->db->where_in('tbl_upload_team.teamId', $sess);
-        $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'DESC');
         $data = $this->db->get();
         return $data->row_array();
@@ -119,12 +116,9 @@ class Order_model extends CI_Model
         $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
         $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');
         $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_team.order_id', 'left');
-        $this->db->where('tbl_upload_order.status_book', 2);
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 1);
-        // $this->db->where_in('tbl_upload_team.position', $as);
         $this->db->where('tbl_upload_team.teamId', $see);
-        $this->db->or_where('tbl_upload_order.status_book', 1);
 
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'DESC');

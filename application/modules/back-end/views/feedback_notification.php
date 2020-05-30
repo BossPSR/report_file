@@ -53,11 +53,11 @@
                                     <h4 class="card-title">Feedback Notification</h4>
                                 </div>
                                 <div class="col-1 text-center">
-                                    <?php if ($datata == '') : ?>
+                                    <?php if ($feedback == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
                                         <?php $e = 0; ?>
-                                        <?php foreach ($datata as $key => $datata) {
+                                        <?php foreach ($feedback as $key => $datata) {
                                             $e++;
                                         } ?>
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>
@@ -88,7 +88,6 @@
                                             <tbody>
 
                                                 <?php foreach ($feedback as $keyBook => $feedback) { ?>
-                                                    <?php if ($feedback['teamId'] == NULL) : ?>
                                                         <tr>
                                                             <td><?php echo $feedback['order_feed'] ?></td>
                                                             <td><?php echo $feedback['userId'] ?></td>
@@ -206,9 +205,7 @@
                                                                 </button>
                                                             </td>
                                                         </tr>
-                                                    <?php else : ?>
-
-                                                    <?php endif; ?>
+                                                   
                                                 <?php } ?>
 
                                             </tbody>

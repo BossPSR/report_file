@@ -141,7 +141,6 @@
                                                 $e = 1;
 
                                                 foreach ($complete as $key => $complete) { ?>
-                                                    <?php if (empty($complete['id_orderBuy'])) : ?>
                                                         <tr>
                                                             <td><?php echo $complete['order_id_t']; ?></td>
                                                             <td><?php echo $complete['teamId']; ?></td>
@@ -490,6 +489,7 @@
                                                                                     order_id: z,
                                                                                     cmid: c,
                                                                                     teamId: team,
+                                                                                    confirm: 1,
                                                                                 },
                                                                                 success: function(success) {
                                                                                     if (myDropzone2<?php echo $complete['order_id']; ?>.files != 0) {
@@ -521,10 +521,7 @@
 
                                                             </td>
                                                         </tr>
-                                                    <?php else : ?>
-
-                                                    <?php endif; ?>
-
+                                                  
                                                 <?php  } ?>
 
                                             </tbody>

@@ -233,7 +233,7 @@
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
 
-                                        <?php if ($stock_row['up_status'] == '2') { ?>
+                                        <?php if ($stock_row == true) { ?>
                                             <button type="button" class="btn btn-secondery"> Confirmed</button>
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-success" id="cf<?php echo $sub_order; ?>"> Confirmed</button>

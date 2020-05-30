@@ -100,13 +100,15 @@ class Complete_ctr extends CI_Controller
         $cmid       = $this->input->post('cmid');
         $DM         = $this->input->post('DM');
         $dated      = $this->input->post('dated');
+        $confirm    = $this->input->post('confirm');
         $orf = array(
-            'teamId'            => $team['teamId'],
-            'feedback_detail'   => $DM,
-            'order_id'          => $order_id,
-            'userId'            => $cmid,
-            'create_at'         => date('Y-m-d H:i:s'),
-            'dated'             => $dated,
+            'teamId'                => $team['teamId'],
+            'feedback_detail'       => $DM,
+            'order_id'              => $order_id,
+            'userId'                => $cmid,
+            'create_at'             => date('Y-m-d H:i:s'),
+            'dated'                 => $dated,
+            'status_c_feedack_team' => $confirm
         );
         $success = $this->db->insert('tbl_feedback', $orf);
         if ($success) {

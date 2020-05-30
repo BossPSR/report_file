@@ -994,7 +994,7 @@ textarea:-ms-input-placeholder {
 	content: "";
 	width: 1px;
 	height: 12px;
-	background: #1b1b1b;
+	background: #1f1f1f;
 	top: 50%;
 	right: 0px;
 	transform: translatey(-50%);
@@ -1003,7 +1003,7 @@ textarea:-ms-input-placeholder {
 	display: none;
 }
 .top_right > ul > li > a {
-	color: #242424;
+	color: #1f1f1f;
 	text-transform: capitalize;
 	line-height: 43px;
 	cursor: pointer;
