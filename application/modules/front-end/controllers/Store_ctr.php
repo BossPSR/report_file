@@ -150,6 +150,8 @@ class Store_ctr extends CI_Controller
                 $this->session->set_flashdata('error_cash', TRUE);
                 redirect('/');
             }
+
+            
             // $price_result = $user['cash'] - $price_dis;
             // $this->db->where('idUser', $customer_id);
             // $this->db->update('tbl_user', ['cash' => $price_result]);
@@ -158,6 +160,12 @@ class Store_ctr extends CI_Controller
             if (!empty($checkStore_for_buy_email)) {
                 $this->session->set_flashdata('fail_doc', TRUE);
                 redirect('/');
+            }
+
+            if ($user['score'] > ($discount * 10)) {
+                $rescore = $user['score'] - 100;
+                $this->db->where('idUser', $customer_id);
+                $this->db->update('tbl_user', ['score_user' => $rescore ]);
             }
 
             $this->db->where('order_id', $order_id);

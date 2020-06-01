@@ -52,9 +52,8 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>No.</th>
-                                                    <th>Document name</th>
                                                     <th>Order id</th>
+                                                    <th>Document name</th>
                                                     <th>Date_required</th>
                                                 </tr>
                                             </thead>
@@ -62,9 +61,8 @@
                                             <tbody>
                                                 <?php foreach ($Approved as $key => $Approved) {?>
                                                 <tr>
-                                                    <td><?php echo $i++; ?></td>
-                                                    <td><?php echo $Approved['file_name'] ?></td>
                                                     <td><?php echo $Approved['order_id'] ?></td>
+                                                    <td><?php echo $Approved['file_name'] ?></td>
                                                     <td><?php echo $Approved['date_required']  ?></td>
                                                 </tr>
                                                 <?php }?>

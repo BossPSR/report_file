@@ -141,7 +141,7 @@ $route['back_store_reject_for_buy']                 = 'back-end/Store_ctr/reject
 $route['reject_order_add_com']                      = 'back-end/Store_ctr/reject_order_add_com';
 $route['back_store_status_reject']                  = 'back-end/Store_ctr/status_reject';
 $route['delete_order_st']                           = 'back-end/Store_ctr/delete_order_st';
-$route['delete_order_notst']                           = 'back-end/Store_ctr/delete_order_notst';
+$route['delete_order_notst']                        = 'back-end/Store_ctr/delete_order_notst';
 
 
 $route['Login_admin']                               = 'back-end/Login_ctr/admin_loginMe';
@@ -152,7 +152,7 @@ $route['back_withdraw_update']                      = 'back-end/withdraw_ctr/wit
 $route['back_upload_main_search']                   = 'back-end/Store_ctr/upload_main_search';
 $route['add_to_upload_main_search']                 = 'back-end/Store_ctr/add_to_upload_main_search';
 $route['upload_main_searc_ouject']                  = 'back-end/Store_ctr/upload_main_searc_ouject';
-$route['fileUpload_search_main']                  = 'back-end/Store_ctr/fileUpload_search_main';
+$route['fileUpload_search_main']                    = 'back-end/Store_ctr/fileUpload_search_main';
 $route['pdf']                                       = 'front-end/pdf';
 $route['approved']                                  = 'back-end/Approved_ctr';
 $route['not-approved']                              = 'back-end/Approved_ctr/not_approved';
@@ -237,7 +237,9 @@ $route['edit_date_required']                        = 'back-end/Store_ctr/edit_d
 $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
 $route['edit_wage_Not_Satisfied']                   = 'back-end/Customer_order_ctr/edit_wage_Not_Satisfied';
-$route['edit_wage_Satisfied']                       = 'back-end/Customer_order_ctr/edit_wage_Satisfied';
+$route['edit_info_Satisfied']                       = 'back-end/Customer_order_ctr/edit_info_Satisfied';
+$route['edit_info_Not_Satisfied']                   = 'back-end/Customer_order_ctr/edit_info_Not_Satisfied';
+$route['edit_info_stockadmin']                      = 'back-end/Customer_order_ctr/edit_info_stockadmin';
 $route['edit_wage_stockadmin']                      = 'back-end/Customer_order_ctr/edit_wage_stockadmin';
 $route['status_reject_forbey']                      = 'back-end/Store_ctr/status_reject_forbey';
 

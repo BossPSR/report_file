@@ -8,6 +8,7 @@ class Stock_ctr extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('My_stock_model');
+		$this->load->model('Store_model');
 	}
 
 	public function index()
@@ -25,7 +26,8 @@ class Stock_ctr extends CI_Controller
 	public function my_stock_admin()
 	{
 		if ($this->session->userdata('email_admin') != '') {
-			$data['stock'] = $this->My_stock_model->stock_Admin();
+			$data['stock'] 	= $this->My_stock_model->stock_Admin();
+			$data['ts']     = $this->Store_model->team_select();
 			$this->load->view('options/header');
 			$this->load->view('my_stock_admin', $data);
 			$this->load->view('options/footer');

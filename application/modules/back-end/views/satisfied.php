@@ -63,8 +63,7 @@
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
                                                     <th>Price</th>
-                                                    <th>Wage</th>
-                                                    <th>position</th>
+                                                    <th>info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
                                                     <th style="    width: 85px;">Status T3</th>
@@ -171,7 +170,6 @@
                                                                                                 <td><?php echo $order['file_name_GT'] ?></td>
                                                                                                 <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $order['create_at'] ?></td>
-
 
                                                                                             </tr>
                                                                                         <?php } ?>
@@ -308,47 +306,86 @@
                                                         <?php endif; ?>
 
                                                         <td>
-                                                            <?php if ($stores['wage'] == '') : ?>
-                                                                -
+                                                            <?php if ($stores['teamId'] == '') : ?>
+                                                                - |
                                                             <?php else : ?>
-                                                                <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $stores['orderST']; ?>"><?php echo $stores['wage']; ?> <i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                                <div class="modal fade" id="exampleModalwage<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                    <form action="edit_wage_Satisfied" method="POST">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-
-                                                                            <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Wage</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-
-                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
-                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                            <label for="helpInputTop">wage</label>
-                                                                                            <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage">
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
+                                                                <?php echo $stores['teamId']; ?> |
                                                             <?php endif; ?>
-                                                        </td>
-                                                        <td>
+
+                                                            <?php if ($stores['wage'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                $<?php echo $stores['wage']; ?> |
+                                                            <?php endif; ?>
+
                                                             <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $stores['position']])->result_array(); ?>
-                                                            <?php foreach ($position_name as $keys => $position_name) { ?>
+                                                            <?php foreach ($position_name as $position_name) { ?>
                                                                 <?php echo $position_name['name_item'] ?>
                                                             <?php } ?>
+
+                                                            <?php if ($stores['teamId'] == '' && $stores['wage'] == '' && $stores['position'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $stores['orderST']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                            <?php endif; ?>
+
+
+                                                            <div class="modal fade" id="exampleModalwage<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="edit_info_Satisfied" method="POST">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                                                                        <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Info (<?php echo $stores['orderST']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+                                                
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="Team">Team ID</label>
+                                                                                        <select class="select2 form-control" name="teamid" required>
+                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                            <?php foreach ($ts as $tsM) { ?>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $stores['teamId'] ? 'selected' : '' ; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Position</label>
+                                                                                        <select name="position" class="form-control" required>
+                                                                                            <option selected disabled> ---- Select ---- </option>
+
+                                                                                            <?php foreach ($positionX as $positionX) { ?>
+                                                                                                <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $stores['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">wage</label>
+                                                                                        <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <?php if ($stores['status_delivery'] == 0) : ?>
@@ -375,11 +412,14 @@
                                                             <?php if ($team == false) : ?>
                                                                 <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['orderST']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
                                                             <?php else : ?>
-                                                                <?php if ($team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-success" style="font-size: 14px;"><?php echo $stores['teamId']; ?></span>
-                                                                <?php else : ?>
+                                                                <?php if ($team['teamId'] == '') : ?>
                                                                     <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                    <div class=""></div>
+                                                                <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-warning">processing</span>
+                                                                <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-success">complete</span>
+                                                                <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-danger">feedback</span>
                                                                 <?php endif ?>
                                                             <?php endif ?>
 

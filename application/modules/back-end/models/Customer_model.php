@@ -19,6 +19,8 @@ class Customer_model extends CI_Model{
         $this->db->where('tbl_upload_order.status_book',1);
         $this->db->where('tbl_upload_order.status_pay',1);
         $this->db->where('tbl_upload_order.is_check',0);
+        $this->db->where('tbl_upload_order.status_approved',0);
+        $this->db->or_where('tbl_upload_order.status_approved',3);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();
@@ -32,9 +34,10 @@ class Customer_model extends CI_Model{
         $this->db->select('*,tbl_upload_order.order_id AS orderNOT,tbl_upload_team.order_id AS orderT3,tbl_upload_order.create_at AS createNOT ,tbl_upload_order.date_required AS dateNOT');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team','tbl_upload_order.order_id =tbl_upload_team.order_id ' , 'left');
-        $this->db->where('tbl_upload_order.status_book', 2 );
+        $this->db->where('tbl_upload_order.status_book',2);
         $this->db->where('tbl_upload_order.status_pay', 1 );
         $this->db->where('tbl_upload_order.is_check',0);
+        $this->db->where_in('tbl_upload_order.status_approved', ['0','3']);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();
