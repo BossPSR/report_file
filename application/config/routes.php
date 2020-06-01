@@ -244,3 +244,4 @@ $route['status_reject_forbey']                      = 'back-end/Store_ctr/status
 $route['checkStatus_admin']               			= 'back-end/Login_ctr/checkStatus_admin';
 $route['refresh_nw']               			    	= 'back-end/Customer_order_ctr/refresh_nw';
 $route['refresh_ns']               			    	= 'back-end/Customer_order_ctr/refresh_ns';
+$route['click_step']								= 'back-end/Customer_order_ctr/click_step';

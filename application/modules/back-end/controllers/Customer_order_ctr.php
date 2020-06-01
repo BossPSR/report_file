@@ -53,7 +53,7 @@ class Customer_order_ctr extends CI_Controller
         } else {
             $this->load->view('login');
         }
-    }
+	}
 
     public function orvernotwork()
     {
@@ -268,6 +268,26 @@ class Customer_order_ctr extends CI_Controller
 		$not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
 		echo count($not_submit);
 	}
+   	
+	public function click_step()
+	{
+		$order_id = $this->input->post('order_id');
+		
+		$uploadOrder = $this->db->get_where('tbl_upload_order',['order_id' => $order_id])->result_array();
+		foreach ($uploadOrder as $upload_order) {
+			$click_step = $upload_order['click_step'] + 1;
+			if ($click_step >= 4) {
+				$click_step = 0;
+			}
+			$this->db->where('id',$upload_order['id']);
+			$this->db->update('tbl_upload_order',['click_step' => $click_step]);
+			
+		}
 
-   
+		$clickStep = $this->db->get_where('tbl_upload_order',['order_id' => $order_id])->row_array();
+
+		echo $clickStep['click_step'];
+
+		
+	}
 }
