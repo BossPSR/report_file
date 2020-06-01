@@ -267,17 +267,19 @@
 
 <!-- END: Content-->
 <script>
-	function click_step(order_id){
-		$.ajax({
-			url: 'click_step',
-			method: "POST",
-			data:{ order_id:order_id},
-			success:function(getData){
+    function click_step(order_id) {
+        $.ajax({
+            url: 'click_step',
+            method: "POST",
+            data: {
+                order_id: order_id
+            },
+            success: function(getData) {
 
-				$('#click_step'+order_id).text(getData);
-			}
-		});
-	}
+                $('#click_step' + order_id).text(getData);
+            }
+        });
+    }
 </script>
 
 <!-- END: Content-->

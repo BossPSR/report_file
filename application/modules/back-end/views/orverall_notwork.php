@@ -84,7 +84,7 @@
                                                 foreach ($order_notwork as $id => $stores) {
                                                 ?>
                                                     <tr>
-                                                        <td><button class="btn btn-primary">0</button></td>
+                                                        <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
                                                         <td><?php echo $stores['order'] ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
                                                         <td><?php echo $stores['email']; ?></td>
@@ -212,6 +212,22 @@
 </div>
 
 <!-- END: Content-->
+<script>
+    function click_step(order_id) {
+        $.ajax({
+            url: 'click_step',
+            method: "POST",
+            data: {
+                order_id: order_id
+            },
+            success: function(getData) {
+
+                $('#click_step' + order_id).text(getData);
+            }
+        });
+    }
+</script>
+
 <script>
     setInterval(function() {
         refresh_nw();
