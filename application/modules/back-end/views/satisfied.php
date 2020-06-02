@@ -96,7 +96,8 @@
                                                                 <?php } ?>
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                        <td>
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -343,14 +344,14 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-                                                
+
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
-                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $stores['teamId'] ? 'selected' : '' ; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $stores['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>

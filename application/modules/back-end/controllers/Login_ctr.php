@@ -32,9 +32,14 @@ class Login_ctr extends CI_Controller
                 $user_data = array(
                     'email_admin' => $email
                 );
-
                 $this->session->set_userdata($user_data);
                 $this->session->set_flashdata('save_ss2', 'ล็อกอินเรียบร้อยแล้ว');
+
+                if ($this->session->userdata('email_admin')) {
+                    $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
+                    $this->db->insert('tbl_session_admin', ['create_at' => date("Y-m-d H:i:s"), 'detail' => 'Login', 'adminId' => $admin['adminId']]);
+                }
+                
                 redirect('back_dashboard');
             } else {
                 $this->session->set_flashdata('del_ss2', 'รหัสผ่านผิดกรุณา ตรวจสอบ!!');
@@ -45,33 +50,36 @@ class Login_ctr extends CI_Controller
 
     public function admin_logout()
     {
+        if ($this->session->userdata('email_admin')) {
+            $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
+            $this->db->insert('tbl_session_admin', ['create_at' => date("Y-m-d H:i:s"), 'detail' => 'Logout', 'adminId' => $admin['adminId']]);
+        }
+
         $this->session->sess_destroy(); //ล้างsession
 
         redirect('backend'); //กลับไปหน้า Login
-	}
-	
-	public function checkStatus_admin()
-	{
-		$status_team = $this->db->get('tbl_status_team')->result_array();
-		foreach ($status_team as $statusTeam) {
-			$date = date('Y-m-d H:i:s');
-			$statusTeam_date = $statusTeam['update_date'];
-			$date_result = $this->diff_time($statusTeam_date,$date);
-			if ($date_result > 3) {
-				$this->db->where('id',$statusTeam['id']);
-				$this->db->delete('tbl_status_team');
-			}
-			
-		}
-		echo 'success';
+    }
 
-	}
+    public function checkStatus_admin()
+    {
+        $status_team = $this->db->get('tbl_status_team')->result_array();
+        foreach ($status_team as $statusTeam) {
+            $date = date('Y-m-d H:i:s');
+            $statusTeam_date = $statusTeam['update_date'];
+            $date_result = $this->diff_time($statusTeam_date, $date);
+            if ($date_result > 3) {
+                $this->db->where('id', $statusTeam['id']);
+                $this->db->delete('tbl_status_team');
+            }
+        }
+        echo 'success';
+    }
 
-	private function diff_time($date1s,$date2s)
-	{
-		$now = new DateTime($date2s);
-		$future = new DateTime($date1s);
-		$diffSeconds = $now->getTimestamp() - $future->getTimestamp();
-		return $diffSeconds;
-	}
+    private function diff_time($date1s, $date2s)
+    {
+        $now = new DateTime($date2s);
+        $future = new DateTime($date1s);
+        $diffSeconds = $now->getTimestamp() - $future->getTimestamp();
+        return $diffSeconds;
+    }
 }

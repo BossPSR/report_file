@@ -397,22 +397,63 @@
 
                             </ul>
                         </li>
+
+                        <?php
+                        $notifywithdraw = 0;
+                        $notify_notifywithdraw = 0;
+                        $notify_notifywithdraw_team = 0;
+
+                        $this->db->select('*');
+                        $this->db->from('tbl_withdraw');
+                        $this->db->where('status', 1);
+                        $ws = $this->db->get()->result_array();
+
+                        foreach ($ws as $ws) {
+
+                            if ($ws) {
+                                $notify_notifywithdraw += 1;
+                            }
+                        }
+
+                        $this->db->select('*');
+                        $this->db->from('tbl_withdraw_team');
+                        $this->db->where('status', 1);
+                        $wst = $this->db->get()->result_array();
+
+                        foreach ($wst as $wst) {
+
+                            if ($wst) {
+                                $notify_notifywithdraw_team += 1;
+                            }
+                        }
+
+                        $notifywithdraw += $notify_notifywithdraw;
+                        $notifywithdraw += $notify_notifywithdraw_team;
+                        ?>
+
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "back_withdraw" || $this->uri->segment(1) == "withdraw_realtime") {
                                                             echo 'active';
-                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Withdraw</span></a>
+                                                        } ?>" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-file"></i><span data-i18n="Order Result">Withdraw <span class="badge badge badge-warning badge-pill" style="<?php if ($notifywithdraw == 0) {
+                                                                                                                                                                                                                                                                                                echo "display:none";
+                                                                                                                                                                                                                                                                                            } ?>"><?php echo $notifywithdraw ?></span></span></a>
                             <ul class="dropdown-menu">
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_withdraw") {
                                                                                 echo 'active';
-                                                                            } ?>" href="back_withdraw" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Withdraw</a>
+                                                                            } ?>" href="back_withdraw" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Withdraw <span class="badge badge badge-warning badge-pill" style="<?php if ($notify_notifywithdraw == 0) {
+                                                                                                                                                                                                                                                                echo "display:none";
+                                                                                                                                                                                                                                                            } ?>"><?php echo $notify_notifywithdraw ?></span></a>
                                 </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_realtime") {
                                                                                 echo 'active';
-                                                                            } ?>" href="withdraw_realtime" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Withdraw Team</a>
+                                                                            } ?>" href="withdraw_realtime" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Withdraw Team <span class="badge badge badge-warning badge-pill" style="<?php if ($notify_notifywithdraw_team == 0) {
+                                                                                                                                                                                                                                                                        echo "display:none";
+                                                                                                                                                                                                                                                                    } ?>"><?php echo $notify_notifywithdraw_team ?></span></a>
                                 </li>
 
                             </ul>
 
                         </li>
+
 
                         <li class="dropdown nav-item <?php if ($this->uri->segment(1) == "approved" || $this->uri->segment(1) == "not-approved" || $this->uri->segment(1) == "Delivery") {
                                                             echo 'active';

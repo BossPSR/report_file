@@ -46,19 +46,23 @@ class Customer_order_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') != '') {
 
             $data['order_all'] = $this->Customer_model->customer_all();
+            $data['no_work']        = $this->Customer_model->customer_notwork_count();
+            $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
             $this->load->view('options/header');
             $this->load->view('orverall', $data);
             $this->load->view('options/footer');
         } else {
             $this->load->view('login');
         }
-	}
+    }
 
     public function orvernotwork()
     {
         if ($this->session->userdata('email_admin') != '') {
 
-            $data['order_notwork'] = $this->Customer_model->customer_notwork();
+            $data['order_notwork']  = $this->Customer_model->customer_notwork();
+            $data['no_work']        = $this->Customer_model->customer_notwork_count();
+            $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
             $this->load->view('options/header');
             $this->load->view('orverall_notwork', $data);
             $this->load->view('options/footer');
@@ -73,6 +77,8 @@ class Customer_order_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') != '') {
 
             $data['order_notsum'] = $this->Customer_model->customer_notsubmit();
+            $data['no_work']        = $this->Customer_model->customer_notwork_count();
+            $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
             $this->load->view('options/header');
             $this->load->view('orverall_notsubmit', $data);
             $this->load->view('options/footer');
@@ -218,7 +224,7 @@ class Customer_order_ctr extends CI_Controller
         $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
         if ($resultsedit) {
             $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', [ 'status_confirmed_team' => 1]);
+            $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
         }
 
         if ($resultsedit > 0) {
@@ -238,10 +244,10 @@ class Customer_order_ctr extends CI_Controller
 
         $this->db->where('order_id', $order_id);
         $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
-        
+
         if ($resultsedit) {
             $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', [ 'status_confirmed_team' => 1]);
+            $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
         }
 
         if ($resultsedit > 0) {
@@ -261,10 +267,10 @@ class Customer_order_ctr extends CI_Controller
 
         $this->db->where('order_id', $order_id);
         $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
-        
+
         if ($resultsedit) {
             $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', [ 'status_confirmed_team' => 1]);
+            $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
         }
 
         if ($resultsedit > 0) {
@@ -309,35 +315,32 @@ class Customer_order_ctr extends CI_Controller
 
     public function refresh_nw()
     {
-        $no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
+        $no_work      = $this->Customer_model->customer_notwork_count();
         echo count($no_work);
     }
 
-	public function refresh_ns()
-	{
-		$not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
-		echo count($not_submit);
-	}
-   	
-	public function click_step()
-	{
-		$order_id = $this->input->post('order_id');
-		
-		$uploadOrder = $this->db->get_where('tbl_upload_order',['order_id' => $order_id])->result_array();
-		foreach ($uploadOrder as $upload_order) {
-			$click_step = $upload_order['click_step'] + 1;
-			if ($click_step >= 4) {
-				$click_step = 0;
-			}
-			$this->db->where('id',$upload_order['id']);
-			$this->db->update('tbl_upload_order',['click_step' => $click_step]);
-			
-		}
+    public function refresh_ns()
+    {
+        $not_submit     = $this->Customer_model->customer_notsubmit_count();
+        echo count($not_submit);
+    }
 
-		$clickStep = $this->db->get_where('tbl_upload_order',['order_id' => $order_id])->row_array();
+    public function click_step()
+    {
+        $order_id = $this->input->post('order_id');
 
-		echo $clickStep['click_step'];
+        $uploadOrder = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->result_array();
+        foreach ($uploadOrder as $upload_order) {
+            $click_step = $upload_order['click_step'] + 1;
+            if ($click_step >= 4) {
+                $click_step = 0;
+            }
+            $this->db->where('id', $upload_order['id']);
+            $this->db->update('tbl_upload_order', ['click_step' => $click_step]);
+        }
 
-		
-	}
+        $clickStep = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
+
+        echo $clickStep['click_step'];
+    }
 }

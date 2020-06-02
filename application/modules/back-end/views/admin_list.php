@@ -42,7 +42,7 @@
                                 <a href="back_admin_add"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Admin</button></a>
 
                             </div>
-                          
+
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
 
@@ -51,17 +51,16 @@
                                             <thead>
                                                 <tr>
                                                     <th>email</th>
-                                                    <th>UserName</th>                                      
+                                                    <th>UserName</th>
                                                     <th>phone</th>
                                                     <th>created_at</th>
                                                     <th>status</th>
                                                     <th>Tool</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                            <?php foreach ($admin as $admin) { ?>
+                                                <?php foreach ($admin as $admin) { ?>
                                                     <tr>
                                                         <td><?php echo $admin['email']; ?></td>
                                                         <td><?php echo $admin['username']; ?></td>
@@ -71,51 +70,92 @@
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Admin
+                                                                        Admin
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=2">Superadmin</a>
                                                                         <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=3">Administrator</a>
-                                                                      
+
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                              
-                                                        <?php elseif($admin['is_admin'] == 2) : ?>
+
+                                                        <?php elseif ($admin['is_admin'] == 2) : ?>
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Superadmin
+                                                                        Superadmin
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=1">Admin</a>
                                                                         <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=3">Administrator</a>
-                                                                      
+
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            
-                                                       <?php else : ?>
+
+                                                        <?php else : ?>
                                                             <td>
                                                                 <div class="dropdown ">
                                                                     <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Administrator
+                                                                        Administrator
                                                                     </button>
                                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=1">Admin</a>
                                                                         <a class="dropdown-item" href="back_admin_status_Admin?id=<?php echo $admin['id']; ?>&status=2">Superadmin</a>
-                                                                       
+
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            
-                                                            
                                                         <?php endif; ?>
-                                                            <td>
+
+                                                        <td>
+                                                            <a href="#" data-toggle="modal" data-target="#exampleModala<?php echo $admin['id']; ?>"><i class="feather icon-eye" style="font-size: 25px;"></i></a>
                                                             <a href="back_admin_edit?id=<?php echo $admin['id']; ?>"><i class="feather icon-edit" style="font-size: 25px;"></i></a>
                                                             <a onclick="confirmalertunlock_del_admin('<?php echo $admin['id']; ?>')"><i class="feather icon-trash" style="font-size: 25px;"></i></a>
 
-                                                            </td>
+                                                            <div class="modal fade" id="exampleModala<?php echo $admin['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <?php
+                                                                            $this->db->order_by('create_at', 'desc');
+                                                                            $admin = $this->db->get_where('tbl_session_admin', ['adminId' => $admin['adminId']])->result_array();
+                                                                        ?>
+                                                                        <div class="modal-body">
+                                                                            <table class="table zero-configuration">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Admin id</th>
+                                                                                        <th>Detail</th>
+                                                                                        <th>Create</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($admin as $keys => $admin) { ?>
+                                                                                        <tr>
+                                                                                            <td><?php echo $admin['adminId'] ?></td>
+                                                                                            <td><?php echo $admin['detail'] ?></td>
+                                                                                            <td><?php echo $admin['create_at'] ?></td>
+                                                                                        </tr>
+                                                                                    <?php } ?>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 <?php  } ?>
                                             </tbody>
@@ -128,9 +168,6 @@
                 </div>
             </section>
             <!--/ Zero configuration table -->
-
-
-
         </div>
     </div>
 </div>
