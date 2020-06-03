@@ -182,9 +182,9 @@
                                                     <td scope="row"><span class="badge badge-primary" style="font-size:16px;">$ <?php echo $slip_team['price']; ?></span></td>
                                                     <td><?php echo $slip_team['order_id']; ?></td>
 
-                                                    <?php if ($slip_team['status'] == 1) { ?>
+                                                    <?php if ($slip_team['st2'] == 1) { ?>
                                                         <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for admin</span></td>
-                                                    <?php } elseif ($slip_team['status'] == 2) { ?>
+                                                    <?php } elseif ($slip_team['st2'] == 2) { ?>
                                                         <td><span class="badge badge-success" style="font-size:16px;">Success</span></td>
                                                     <?php } else { ?>
                                                         <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>

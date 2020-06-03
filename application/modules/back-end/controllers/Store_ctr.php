@@ -166,7 +166,7 @@ class Store_ctr extends CI_Controller
         } else {
             $discount = 0;
         }
-        
+
         $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
 
 
@@ -372,7 +372,7 @@ class Store_ctr extends CI_Controller
         return redirect('Satisfied');
     }
 
-    
+
     public function delete_order_notst()
     {
         $id   = $this->input->post('order_id');
@@ -695,22 +695,66 @@ class Store_ctr extends CI_Controller
     public function status_reject()
     {
         $id = $this->input->get('id');
-        $note = $this->input->post('note');
 
         $this->db->where('id', $id);
-
         $resultsedit = $this->db->update('tbl_upload_store', ['update_at' => date('Y-m-d H:i:s'), 'is_check' => 1, 'notify_user' => 0, 'notify_user' => 1]);
 
-        $orderid = $this->db->get_where('tbl_upload_order', ['id' => $id])->row_array();
+        $this->sendEmail_reject_check($id);
 
-        $this->sendEmail_reject($orderid,$note);
-
-        if ($resultsedit > 0) {
-            $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
-        }
         return redirect('back_store_checkForsell');
+    }
+
+    private function sendEmail_reject_check($id)
+    {
+        $store = $this->db->get_where('tbl_upload_store', ['id' => $id])->row_array();
+        $user  = $this->db->get_where('tbl_user', ['idUser' => $store['userId']])->row_array();
+
+        $subject = 'Your document has been rejected.';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Your document has been rejected';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $store['userId'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $store['store_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $store['store_id'] . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">Rejected Order ID : ' . $store['store_id'] . '  Sorry for the inconvenience from the team.</div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email Reject information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email Reject information');
+        }
     }
 
 

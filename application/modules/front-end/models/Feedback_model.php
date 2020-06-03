@@ -18,7 +18,7 @@ class Feedback_model extends CI_Model
         $this->db->where('tbl_feedback.teamId', $as);
         $this->db->where('tbl_feedback.status_c_feedack_team', 1);
         
-        $this->db->order_by('tbl_upload_team.date_required');
+        $this->db->order_by('tbl_feedback.dated');
         $data = $this->db->get();
         return $data->result_array();
     }

@@ -168,16 +168,16 @@
                                                                -
                                                             <?php } ?>
 
-                                                            <?php $taskGTMORE = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 1, 'status_see_more_file_team' => 1])->result_array(); ?>
+                                                            <?php $taskGTMORE = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 1, 'status_see_more_file_team' => 11])->result_array(); ?>
                                                             <?php if (!empty($taskGTMORE)) { ?>
                                                                 <br>
                                                                 <h5 style="text-align:left;">More Document</h5>
                                                                 <hr>
 
-                                                                <table class="table table-bordered">
-                                                                    <thead>
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">Order ID</th>
                                                                             <th scope="col">File</th>
                                                                             <th scope="col">Info</th>
                                                                             <th scope="col">Downloads</th>

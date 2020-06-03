@@ -46,7 +46,7 @@
 
                                     <tr style="text-align:center;">
                                         <td><?= $feedback['orIdd']; ?></td>
-                                        <td><?= date('d F Y', strtotime($feedback['date_required'])); ?></td>
+                                        <td><?= date('d F Y', strtotime($feedback['dated'])); ?></td>
                                         <td>
                                             <a href="#" data-toggle="modal" data-target="#exampleModalold<?= $feedback['orIdd']; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
