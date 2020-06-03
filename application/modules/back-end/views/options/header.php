@@ -334,6 +334,8 @@
                         $notify_checkFor_sell = 0;
                         $notify_storeFor_sell = 0;
                         $this->db->where('notify_admin', 0);
+                        $this->db->where('is_check', 0);
+                        $this->db->where('status_chack', 0);
                         $this->db->group_by('store_id');
                         $uploadStore = $this->db->get('tbl_upload_store')->result_array();
                         foreach ($uploadStore as $upload_store) {

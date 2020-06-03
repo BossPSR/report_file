@@ -165,7 +165,9 @@ class Store_ctr extends CI_Controller
             if ($user['score'] > ($discount * 10)) {
                 $rescore = $user['score'] - 100;
                 $this->db->where('idUser', $customer_id);
-                $this->db->update('tbl_user', ['score_user' => $rescore ]);
+                $this->db->update('tbl_user', ['score' => $rescore ]);
+            }else{
+                
             }
 
             $this->db->where('order_id', $order_id);

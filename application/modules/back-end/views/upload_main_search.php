@@ -58,7 +58,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Status Sell</th>
+                                                    <th style="width: 10%;">Status Sell</th>
                                                     <th>Document</th>
                                                     <th>CM</th>
                                                     <th>Search Item</th>
@@ -67,6 +67,7 @@
                                                     <th>Code</th>
                                                     <th>Topic</th>
                                                     <th>Create Date</th>
+                                                    <th>Tool</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -78,22 +79,18 @@
                                                         <td><?php echo $i++; ?></td>
 
                                                         <td>
-
-
-                                                            <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_document' => $value['id_doc']])->row_array(); ?>
-                                                            <?php $show_dm_c2 = $this->db->get_where('tbl_upload_order', ['order_id' => $show_dm_c['id_orderBuy'], 'status_delivery' => '1'])->row_array(); ?>
-                                                            <?php $prosum = date('Y-m-d', strtotime('+30 day' . '+' . $value['update_at'])); ?>
+                                                            <?php $prosum = date('Y-m-d', strtotime('+30 day' . '+' . $value['update_atMain'])); ?>
                                                             <?php $data = date('Y-m-d') ?>
 
-                                                            <?php if ($show_dm_c2 == true && $data <= $prosum) : ?>
-                                                                <a href=""><button type="button" class="btn btn-danger mr-1 mb-1"><i class="feather icon-download-cloud"></i> ห้ามจำหน่าย</button></a>
+                                                            <?php if ($value['status_delivery'] == '1' && $data <= $prosum) : ?>
+                                                                <button type="button" class="btn btn-danger mr-1 mb-1"><i class="feather icon-download-cloud"></i> Sold</button>
                                                             <?php else : ?>
-                                                                <a href=""><button type="button" class="btn btn-info mr-1 mb-1"><i class="feather icon-download-cloud"></i>ยังไม่ได้จำหน่าย</button></a>
+                                                                <button type="button" class="btn btn-info mr-1 mb-1"><i class="feather icon-download-cloud"></i> Not Sold</button>
                                                             <?php endif; ?>
                                                         </td>
 
-                                                        <td><?php echo $value['id_doc'];; ?></td>
-                                                        <td><?php echo $value['userId'];; ?></td>
+                                                        <td><?php echo $value['id_doc']; ?></td>
+                                                        <td><?php echo $value['userMain']; ?></td>
                                                         <td><?php echo $value['search_item']; ?></td>
                                                         <td><?php echo $value['select_item']; ?></td>
                                                         <td>
@@ -141,7 +138,8 @@
                                                         </td>
                                                         <td><?php echo $value['code']; ?></td>
                                                         <td><?php echo $value['topic']; ?></td>
-                                                        <td><?php echo $value['create_at']; ?></td>
+                                                        <td><?php echo $value['create_atMain']; ?></td>
+                                                        <td><a href="" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a></td>
                                                     </tr>
 
                                                 <?php endforeach; ?>

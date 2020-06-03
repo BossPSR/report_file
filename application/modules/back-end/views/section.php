@@ -278,13 +278,12 @@
                                                                                                     <?php
                                                                                                           $this->db->order_by('id','DESC');
                                                                                                     $Dm = $this->db->get('tbl_upload_main_search')->row_array();
-                                                                                                    
                                                                                                   
                                                                                                      ?>
                                                                                                     <div class="form-group">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Id Document</label>
-                                                                                                            <input type="text" class="form-control" value="DM<?php echo $Dm['id']+1 ?>"  readonly>
+                                                                                                            <input type="text" class="form-control" value="DM<?php echo $Dm == false ? '1' : $Dm['id'] + 1 ;  ?>"  readonly>
                                                                                                         </div>
                                                                                                     </div>
 

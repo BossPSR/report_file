@@ -8,6 +8,7 @@ class Store_ctr extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Store_model');
+        $this->load->model('Upload_main_model');
         $this->load->helper('form');
         $this->load->library('email');  // เรียกใช้ email class
     }
@@ -602,6 +603,7 @@ class Store_ctr extends CI_Controller
     {
         $store_id       = $this->input->get('id');
         $id_section     = $this->input->get('id_section');
+        $price          = $this->input->get('price');
         $uploadStore    = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->row_array();
         $user           = $this->db->get_where('tbl_user', ['idUser' => $uploadStore['userId']])->row_array();
 
@@ -626,15 +628,60 @@ class Store_ctr extends CI_Controller
             $resultsedit = $this->db->update('tbl_user', $data2);
         }
 
+        $this->sendEmail_Grade($user,$price,$store_id);
+        
+        return redirect('Section');
+    }
 
+    private function sendEmail_Grade($user,$price,$store_id)
+    {
 
-        if ($resultsedit > 0) {
+        $subject = 'Congratulations! Your documents can be purchased from Fileback help. ';
 
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Congratulations! Your documents can be purchased from Fileback help.';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $store_id . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $store_id . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> Your documents, orders at : ' . $store_id . ' , totaling $' . $price . ' .</div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
-        return redirect('Section');
     }
 
 
@@ -765,7 +812,8 @@ class Store_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-            $data['upload_main_search'] = $this->db->get('tbl_upload_main_search')->result_array();
+            $data['upload_main_search'] = $this->Upload_main_model->upload_list();
+
 
             $this->load->view('options/header');
             $this->load->view('upload_main_search', $data);

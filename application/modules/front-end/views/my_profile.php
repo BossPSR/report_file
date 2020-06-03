@@ -65,20 +65,25 @@
                                 <div class="list_menu">Discount</div>
                             </div>
                             <?php
-                            $this->db->select('*,COUNT(userId) as co');
+                            $numUp = 0 ;
+                            $this->db->select('*');
                             $this->db->from('tbl_upload_order');
                             $this->db->where('userId', $user['idUser']);
                             $this->db->group_by('order_id');
+                            $coup = $this->db->get()->result_array();
+                            foreach ($coup as $coup) {
+                                $numUp += 0 ;
+                            }
 
-                            $coup = $this->db->get()->row_array();
                             ?>
                             <div class="result_list_menu">
-                                <div class="result_menu"><?php echo number_format($coup['co']); ?></div>
+                                <div class="result_menu"><?php echo number_format($numUp); ?></div>
                                 <div class="list_menu">Upload</div>
                             </div>
                             <?php
                             $numCost = 0;
-                            $cost = $this->db->group_by('store_id')->get_where('tbl_upload_store', ['userId' => $user['idUser']])->result_array();
+                                    $this->db->group_by('store_id');
+                            $cost = $this->db->get_where('tbl_upload_store', ['userId' => $user['idUser']])->result_array();
                             foreach ($cost as $cost) {
                                 if (isset($cost['grade'])) {
                                     $numCost += 1;
