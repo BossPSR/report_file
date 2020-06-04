@@ -145,6 +145,15 @@ class My_user_ctr extends CI_Controller
 			}
 		}
 
+		$upload_deliver_id = $this->input->get('upload_deliver_id');
+		if (!empty($upload_deliver_id)) {
+			foreach ($upload_deliver_id as $key => $upload_deliver_id) {
+
+				$this->db->where('id', $upload_deliver_id);
+				$this->db->update('tbl_upload_order', ['notify_user' => 1]);
+			}
+		}
+
 
 
 		$result = [];

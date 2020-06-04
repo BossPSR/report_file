@@ -132,7 +132,6 @@ class Complete_ctr extends CI_Controller
 
         $data = array(
             'order_id'      => $buymax->order_main,
-            'date_required' => $date_req,
             'position'      => $position,
             'wage'          => $this->input->post('wage'),
             'note'          => $this->input->post('note'),

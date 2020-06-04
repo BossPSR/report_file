@@ -72,7 +72,6 @@
                                             </thead>
                                             <tbody>
                                                 <?php $i = 1; ?>
-                                                <?php $e = 1; ?>
                                                 <?php foreach ($upload_main_search as $key => $value) : ?>
 
                                                     <tr>
@@ -109,7 +108,6 @@
                                                                                 <thead>
                                                                                     <?php $store = $this->db->get_where('tbl_upload_store', ['store_id' => $value['upload_store_id'], 'section' =>  $value['section']])->result_array(); ?>
                                                                                     <tr>
-                                                                                        <th>#</th>
                                                                                         <th>File_name</th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
@@ -118,7 +116,6 @@
                                                                                 <tbody>
                                                                                     <?php foreach ($store as $keys => $store) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $e++; ?></td>
                                                                                             <td><?php echo $store['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td><?php echo $store['create_at'] ?></td>
@@ -139,7 +136,71 @@
                                                         <td><?php echo $value['code']; ?></td>
                                                         <td><?php echo $value['topic']; ?></td>
                                                         <td><?php echo $value['create_atMain']; ?></td>
-                                                        <td><a href="" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a></td>
+                                                        <td>
+                                                            <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['id_doc']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                            <div class="modal fade" id="dropW<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Add Drop Document (<?php echo $value['id_doc']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="modal-body">
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <label for="" style="font-size: 16px;">File Document </label>
+                                                                                <form action="fileUpload_main" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['id_doc']; ?>">
+                                                                                    <input type="hidden" id="DM2<?php echo $value['id_doc']; ?>" class="form-control " name="DM" value="<?php echo $value['id_doc'] ?>" >
+                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <br>
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around">
+                                                                                <button type="submit" id="uploadsfileEx<?php echo $value['id_doc']; ?>" class="btn btn-primary">Submit</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <script>
+
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzone<?php echo $value['id_doc']; ?> = new Dropzone("#maindropzoneEx<?php echo $value['id_doc']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                document.getElementById("uploadsfileEx<?php echo $value['id_doc']; ?>").addEventListener("click", function() {
+                                                                    // myDropzone.processQueue();
+                                                                    if (myDropzone<?php echo $value['id_doc']; ?>.files == 0) {
+
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    }
+                                                                    myDropzone<?php echo $value['id_doc']; ?>.processQueue();
+                                                                    myDropzone<?php echo $value['id_doc']; ?>.on("queuecomplete", function(file, res) {
+                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                            button: false,
+                                                                        });
+                                                                        setTimeout(function() {
+                                                                            location.href = "back_upload_main_search"
+                                                                        }, 1000);
+                                                                    });
+                                                                });
+
+                                                            </script>
+
+                                                        </td>
                                                     </tr>
 
                                                 <?php endforeach; ?>
@@ -270,11 +331,11 @@
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
 
-        var v       = document.getElementById("complete").value;
-        var x       = document.getElementById("select-testing").value;
-        var y       = document.getElementById("search_item").value;
-        var code    = document.getElementById("code").value;
-        var topic   = document.getElementById("topic").value;
+        var v = document.getElementById("complete").value;
+        var x = document.getElementById("select-testing").value;
+        var y = document.getElementById("search_item").value;
+        var code = document.getElementById("code").value;
+        var topic = document.getElementById("topic").value;
 
         if (myDropzoneS.files == 0) {
             swal("Warning!", "Can not be document Empty", "warning", {

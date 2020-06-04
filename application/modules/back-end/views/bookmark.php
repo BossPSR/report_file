@@ -431,15 +431,15 @@
 
                                                             <?php $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'], 'status_check_drop' => '11'])->row_array(); ?>
                                                             <?php if ($show_dm_c2 == true) : ?>
-                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-success "><i class="feather icon-download-cloud"></i> Drop</a>
+                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-icon btn-success "><i class="feather icon-download-cloud"></i></a>
                                                             <?php else : ?>
-                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-primary "><i class="feather icon-download-cloud"></i> Drop</a>
+                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-icon btn-primary "><i class="feather icon-download-cloud"></i></a>
                                                             <?php endif; ?>
 
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['orderby']; ?>"><i class="feather icon-navigation"></i> delivery </button>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['orderby']; ?>"><i class="feather icon-navigation"></i></button>
                                                             <?php endif; ?>
 
                                                             <div class="modal fade" id="exampleModalu<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -596,7 +596,7 @@
                                                                                 </form>
                                                                             </div>
                                                                             <br>
-                                                                            
+
 
                                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                                                 <label for=""> DM </label>
@@ -622,9 +622,9 @@
 
                                                             <script>
                                                                 $("#DM1<?php echo $bookmark['orderby']; ?>").change(function() {
-                                                                        var value = $(this).val();
-                                                                        $("#DM2<?php echo $bookmark['orderby']; ?>").val(value);
-                                                                    }).change();
+                                                                    var value = $(this).val();
+                                                                    $("#DM2<?php echo $bookmark['orderby']; ?>").val(value);
+                                                                }).change();
                                                             </script>
                                                             <script>
                                                                 var x = document.getElementById("DM1<?php echo $bookmark['orderby']; ?>").value;

@@ -138,7 +138,7 @@ class Store_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_main_search');
-        $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id=tbl_upload_main_search.upload_store_id', 'left');
+        $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');
         $this->db->where('tbl_upload_main_search.id_doc', $DM);
 
         return $this->db->get()->row_array();

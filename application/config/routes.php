@@ -175,6 +175,7 @@ $route['fileUpload_buy_admin']                      = 'back-end/Stock_ctr/fileUp
 $route['ready_refresh']                             = 'back-end/Customer_order_ctr/ready_refresh';
 $route['Add_bookmake']                              = 'back-end/Book_ctr';
 $route['fileUpload_store_book']                     = 'back-end/Book_ctr/fileUpload_store_book';
+$route['fileUpload_main']                           = 'back-end/Book_ctr/fileUpload_main';
 $route['Complete']                                  = 'back-end/Complete_ctr';
 $route['add_to_upload_main_search_not_approved']    = 'back-end/Approved_ctr/add_to_upload_main_search_not_approved';
 $route['sendEmail_delivery']                        = 'back-end/Complete_ctr/sendEmail_delivery';

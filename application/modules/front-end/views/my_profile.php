@@ -64,22 +64,25 @@
                                 </div>
                                 <div class="list_menu">Discount</div>
                             </div>
+
                             <?php
                             $numUp = 0 ;
                             $this->db->select('*');
                             $this->db->from('tbl_upload_order');
                             $this->db->where('userId', $user['idUser']);
+                            $this->db->where('is_check',0);
                             $this->db->group_by('order_id');
                             $coup = $this->db->get()->result_array();
                             foreach ($coup as $coup) {
-                                $numUp += 0 ;
+                                $numUp += 1 ;
                             }
-
                             ?>
+
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($numUp); ?></div>
                                 <div class="list_menu">Upload</div>
                             </div>
+
                             <?php
                             $numCost = 0;
                                     $this->db->group_by('store_id');
@@ -90,6 +93,7 @@
                                 }
                             }
                             ?>
+
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($numCost); ?></div>
                                 <div class="list_menu">Seller</div>

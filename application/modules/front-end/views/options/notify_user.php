@@ -31,7 +31,6 @@ foreach ($userUpload_order as $key => $userUploadOrder) {
     $notify_message_order[$userUploadOrder['update_at']]['store_id'] = null;
     $notify_message_order[$userUploadOrder['update_at']]['order_id'] = $userUploadOrder['order_id'];
     $notify_message_order[$userUploadOrder['update_at']]['price_file'] = $userUploadOrder['price_file'];
-
 }
 
 // Store โดน Reject
@@ -46,6 +45,20 @@ foreach ($userUpload_store_reject as $key => $userUploadStore_reject) {
     $notify_message_store_reject[$userUploadStore_reject['update_at']]['order_id'] = "reject";
     $notify_message_store_reject[$userUploadStore_reject['update_at']]['store_id'] = $userUploadStore_reject['store_id'];
     $notify_message_store_reject[$userUploadStore_reject['update_at']]['price_file'] = $userUploadStore_reject['price_file'];
+}
+
+// _deliver
+$notify_message_deliver = [];
+$userUpload_deliver = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'],'status_delivery' => 1])->result_array();
+$upload_deliver_id = [];
+$this->db->group_by('order_id');
+$userUpload_deliver_num = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'],'notify_user' => 0,'status_delivery' => 1])->result_array();
+$notify += count($userUpload_deliver_num);
+foreach ($userUpload_deliver as $key => $userUpload_deliver) {
+    $upload_deliver_id[] = $userUpload_deliver['id'];
+    $notify_message_deliver[$userUpload_deliver['update_at']]['store_id']   = "deliver";
+    $notify_message_deliver[$userUpload_deliver['update_at']]['order_id']   = $userUpload_deliver['order_id'];
+    $notify_message_deliver[$userUpload_deliver['update_at']]['price_file'] = $userUpload_deliver['price_file'];
 }
 
 // Order โดน Reject
@@ -69,7 +82,7 @@ foreach ($userUpload_order_reject as $key => $userUploadOrder_reject) {
 }
 
 
-$notify_message = array_merge($notify_message_store,$notify_message_order,$notify_message_store_reject);
+$notify_message = array_merge($notify_message_store,$notify_message_order,$notify_message_store_reject,$notify_message_deliver);
 krsort($notify_message);
 
 ?>
@@ -114,8 +127,8 @@ krsort($notify_message);
             <!-- Store โดน Reject -->
             <?php }elseif ($notifyMessage['order_id'] == "reject") { ?>
             <li>
-                <span>Stord ID : <?php echo $notifyMessage['store_id']; ?></span>
-                <span>Stordที่คุณถูก Reject : <?php echo $notifyMessage['price_file']; ?></span>
+                <span>Store ID : <?php echo $notifyMessage['store_id']; ?></span>
+                <span>Store ที่คุณถูก Reject : <?php echo $notifyMessage['price_file']; ?></span>
             </li>
             <hr>
 
@@ -123,7 +136,15 @@ krsort($notify_message);
             <?php }elseif ($notifyMessage['store_id'] == "reject") { ?>
             <li>
                 <span>Order ID : <?php echo $notifyMessage['order_id']; ?></span>
-                <span>Orderที่คุณถูก Reject : <?php echo $notifyMessage['price_file']; ?></span>
+                <span>Order ที่คุณถูก Reject : <?php echo $notifyMessage['price_file']; ?></span>
+            </li>
+            <hr>
+
+            <!-- Order Deriler -->
+            <?php }elseif ($notifyMessage['store_id'] == "deliver") { ?>
+            <li>
+                <span>Order ID : <?php echo $notifyMessage['order_id']; ?></span>
+                <span>ถูก delivery ไปที่ Email เรียบร้อยแล้ว.</span>
             </li>
             <hr>
             
@@ -166,6 +187,11 @@ krsort($notify_message);
             <?php foreach ($upload_order_reject_id as $key => $upload_order_rejectId) { ?>
                 upload_order_reject_id[<?php echo $key; ?>] = <?php echo $upload_order_rejectId; ?> ;
             <?php } ?>
+            
+            var upload_deliver_id = [];
+            <?php foreach ($upload_deliver_id as $key => $upload_deliver_idS) { ?>
+                upload_deliver_id[<?php echo $key; ?>] = <?php echo $upload_deliver_idS; ?> ;
+            <?php } ?>
 
             $.ajax({
                 url: "read_userNotify",
@@ -175,6 +201,7 @@ krsort($notify_message);
                     upload_order_id: upload_order_id,
                     upload_store_reject_id:upload_store_reject_id,
                     upload_order_reject_id:upload_order_reject_id,
+                    upload_deliver_id:upload_deliver_id,
                 },
                 success: function(getData) {
                     var numData = JSON.parse(getData);
