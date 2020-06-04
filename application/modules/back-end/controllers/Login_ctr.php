@@ -38,7 +38,14 @@ class Login_ctr extends CI_Controller
                 if ($this->session->userdata('email_admin')) {
                     $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
                     $this->db->insert('tbl_session_admin', ['create_at' => date("Y-m-d H:i:s"), 'detail' => 'Login', 'adminId' => $admin['adminId']]);
-                }
+				}
+				
+				$check_status = array(
+                    'IdAdmin'            => $admin['adminId'],
+                    'update_date'         => date('Y-m-d H:i:s')
+				);
+
+				$this->db->insert('tbl_status_admin', $check_status);
                 
                 redirect('back_dashboard');
             } else {
@@ -53,7 +60,12 @@ class Login_ctr extends CI_Controller
         if ($this->session->userdata('email_admin')) {
             $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
             $this->db->insert('tbl_session_admin', ['create_at' => date("Y-m-d H:i:s"), 'detail' => 'Logout', 'adminId' => $admin['adminId']]);
-        }
+			
+			$this->db->where('IdAdmin',$admin['adminId']);
+			$this->db->delete('tbl_status_admin');
+		}
+		
+		
 
         $this->session->sess_destroy(); //ล้างsession
 
@@ -73,7 +85,31 @@ class Login_ctr extends CI_Controller
             }
         }
         echo 'success';
-    }
+	}
+	
+	public function checkStatus_admin_admin()
+	{
+		$status_admin = $this->db->get('tbl_status_admin')->result_array();
+        foreach ($status_admin as $statusAdmin) {
+            $date = date('Y-m-d H:i:s');
+            $statusAdmin_date = $statusAdmin['update_date'];
+            $date_result = $this->diff_time($statusAdmin_date, $date);
+            if ($date_result > 3) {
+                $this->db->where('id', $statusAdmin['id']);
+                $this->db->delete('tbl_status_admin');
+            }
+        }
+        echo 'success';
+	}
+
+	public function checkStatusAdmin()
+	{
+		$IdAdmin = $this->input->get('IdAdmin');
+		$this->db->where('IdAdmin',$IdAdmin);
+		$this->db->update('tbl_status_admin',['update_date' => date('Y-m-d H:i:s')]);
+
+		echo 'success';
+	}
 
     private function diff_time($date1s, $date2s)
     {

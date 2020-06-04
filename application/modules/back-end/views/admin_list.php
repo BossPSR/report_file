@@ -38,9 +38,44 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Admin Information</h4>
+								<div class="col-7">
+									<h4 class="card-title">Admin Information</h4>
+								</div>
                                 <a href="back_admin_add"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Admin</button></a>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php if (!empty($admin)) : ?>
+											<?php echo count($admin); ?>
+										<?php else : ?>
+											0
+										<?php endif; ?>
+									</h3>
+									<h3 class="check_list_not">แอดมินทั้งหมด</h3>
+								</div>
+								<div class="col-1 text-center">
 
+									<h3 class="card-title" id="statusAdmin_count">
+										<?php $statusAdmin_count = $this->db->get('tbl_status_admin')->result_array();
+										$admin_count = $this->db->get('tbl_admin')->result_array();
+										echo count($statusAdmin_count);
+										?>
+
+									</h3>
+									<h3 class="check_list_not">แอดมินออนไลน์</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title " id="admin_count_num">
+										<?php
+										$admin_count = count($admin_count);
+										$admin_count_num = $admin_count - count($statusAdmin_count);
+										echo $admin_count_num;
+										?>
+									</h3>
+									<h3 class="check_list_not">แอดมินออฟไลน์</h3>
+								</div>
+
+								
+								
                             </div>
 
                             <div class="card-content">
@@ -50,6 +85,7 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
+													<th>Online</th>
                                                     <th>email</th>
                                                     <th>UserName</th>
                                                     <th>phone</th>
@@ -62,6 +98,42 @@
 
                                                 <?php foreach ($admin as $admin) { ?>
                                                     <tr>
+														<td id="statusAdmin<?php echo $admin['adminId']; ?>">
+															<?php $statusAdmin = $this->db->get_where('tbl_status_admin', ['IdAdmin' => $admin['adminId']])->row_array(); ?>
+															<?php
+																if (isset($statusAdmin)) {
+																	echo "<div class='btn btn-success'>Online</div>";
+																} else {
+																	echo "<div class='btn btn-danger'>Offline</div>";
+																}
+															?>
+														</td>
+														<script>
+															setInterval(function() {
+																checkStatus();
+																checkStatus<?php echo $admin['adminId']; ?>();
+															}, 10000);
+
+															function checkStatus<?php echo $admin['adminId']; ?>() {
+																$.ajax({
+																	url: 'checkStatus_admin_admin',
+																	data: {
+																		IdTeam: '<?php echo $admin['adminId']; ?>'
+																	},
+																	success: function(getData) {
+
+																		console.log(getData);
+																		$('#statusAdmin<?php echo $admin['adminId']; ?>').load(' #statusAdmin<?php echo $admin['adminId']; ?>');
+																	}
+																});
+															}
+
+															function checkStatus() {
+
+																$('#statusAdmin_count').load(' #statusAdmin_count');
+																$('#admin_count_num').load(' #admin_count_num');
+															}
+														</script>
                                                         <td><?php echo $admin['email']; ?></td>
                                                         <td><?php echo $admin['username']; ?></td>
                                                         <td><?php echo $admin['phone']; ?></td>
