@@ -248,3 +248,5 @@ $route['checkStatus_admin']               			= 'back-end/Login_ctr/checkStatus_a
 $route['refresh_nw']               			    	= 'back-end/Customer_order_ctr/refresh_nw';
 $route['refresh_ns']               			    	= 'back-end/Customer_order_ctr/refresh_ns';
 $route['click_step']								= 'back-end/Customer_order_ctr/click_step';
+$route['checkStatus_admin_admin']                   = 'back-end/Login_ctr/checkStatus_admin_admin';
+$route['checkStatusAdmin']                   		= 'back-end/Login_ctr/checkStatusAdmin';

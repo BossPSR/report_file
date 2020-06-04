@@ -720,4 +720,26 @@
             </div>
         </div>
     </div>
-    <!-- END: Main Menu-->
+	<!-- END: Main Menu-->
+	<?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email')])->row_array(); ?>
+	<script>
+        <?php if ($admin == true) { ?>
+            setInterval(function() {
+                checkStatus();
+            }, 3000);
+
+            function checkStatus() {
+                $.ajax({
+                    url: 'checkStatusAdmin',
+                    data: {
+                        IdAdmin: '<?php echo $admin['adminId']; ?>'
+                    },
+                    success: function(getData) {
+
+                        console.log(getData);
+
+                    }
+                });
+            }
+        <?php } ?>
+	</script>
