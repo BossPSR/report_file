@@ -330,7 +330,9 @@
                                                     });
                                                 </script>
                                             <?php } ?>
-                                            <button type="button" class="btn btn-success" id="approved<?php echo $sub_order ?>"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-success" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS"><i class="fa fa-check" aria-hidden="true"></i></button>
+
+
                                             <?php $ord_s = substr($value['ORD'], 3); ?>
                                             <?php if ($N_feed['N_order'] >= 3 || $DateT > $produm) { ?>
                                                 <a class="btn btn-danger" id="order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
@@ -373,10 +375,10 @@
                                             <?php } else { ?>
                                             <?php } ?>
                                         <?php } else { ?>
-                                          
+
                                             <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
                                             <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-             
+
                                             <!-- Modal -->
                                             <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -448,41 +450,7 @@
 
                                     </td>
                                 </tr>
-                                <script type='text/javascript'>
-                                    $('#approved<?php echo $sub_order ?>').click(function() {
-                                        swal({
-                                            icon: "success",
-                                            title: "Are you sure?",
-                                            text: "Do you want Approvend document",
-                                            closeOnEsc: true,
-                                            closeOnClickOutside: false,
-                                            buttons: {
-                                                cancel: true,
-                                                confirm: true,
-                                            },
-                                        }).then(function(isConfirm) {
-                                            if (isConfirm == true) {
-                                                var order = $("td").attr("data-order");
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: 'order_approverd',
-                                                    data: {
-                                                        order_id: order,
-                                                        status_approved: 1,
-                                                    },
-                                                    success: function(success) {
-                                                        swal("Good job!", "Upload for data successfull", "success", {
-                                                            button: false,
-                                                        });
-                                                        setTimeout("location.reload(true);", 1000);
-                                                    }
-                                                });
-                                            } else {
-                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                            }
-                                        });
-                                    });
-                                </script>
+
 
                             <?php endforeach; ?>
 
@@ -508,3 +476,39 @@
         </div>
     </div>
 <?php endif ?>
+
+<script type='text/javascript'>
+    $('body').on('click', '#approvedS', function() {
+        var order = $(this).data("orderq");
+        swal({
+            icon: "success",
+            title: "Are you sure?",
+            text: "Do you want Approvend document",
+            closeOnEsc: true,
+            closeOnClickOutside: false,
+            buttons: {
+                cancel: true,
+                confirm: true,
+            },
+        }).then(function(isConfirm) {
+            if (isConfirm == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'order_approverd',
+                    data: {
+                        order_id: order,
+                        status_approved: 1,
+                    },
+                    success: function(success) {
+                        swal("Good job!", "Upload for data successfull", "success", {
+                            button: false,
+                        });
+                        setTimeout("location.reload(true);", 1000);
+                    }
+                });
+            } else {
+                swal("Cancelled", "Your imaginary file is safe :)", "error");
+            }
+        });
+    });
+</script>

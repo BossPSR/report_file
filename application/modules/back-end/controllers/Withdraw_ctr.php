@@ -1,40 +1,40 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Withdraw_ctr extends CI_Controller {
+class Withdraw_ctr extends CI_Controller
+{
 
-	public function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->model('Withdraw_model');
     }
 
-	public function index()
-	{
-		if ($this->session->userdata('email_admin') == '') {
+    public function index()
+    {
+        if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
             $data['withdraw'] = $this->Withdraw_model->withdraw_list();
             $this->load->view('options/header');
-            $this->load->view('withdraw',$data);
+            $this->load->view('withdraw', $data);
             $this->load->view('options/footer');
         }
     }
 
     public function withdraw_realtime()
-	{
-		if ($this->session->userdata('email_admin') == '') {
+    {
+        if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
             $data['withdraw_team'] = $this->Withdraw_model->withdraw_list_team();
             $this->load->view('options/header');
-            $this->load->view('withdraw_team',$data);
+            $this->load->view('withdraw_team', $data);
             $this->load->view('options/footer');
-            
         }
     }
 
- 
+
 
     public function withdraw_status()
     {
@@ -47,7 +47,7 @@ class Withdraw_ctr extends CI_Controller {
                 'status' => $this->input->get('status')
             );
 
-            $this->db->where('id', $id);   
+            $this->db->where('id', $id);
             $resultsedit = $this->db->update('tbl_withdraw', $data);
 
             if ($resultsedit > 0) {
@@ -56,7 +56,6 @@ class Withdraw_ctr extends CI_Controller {
                 $this->session->set_flashdata('del_ss2', 'Not Successfully Update withdraw ');
             }
             return redirect('back_withdraw');
-            
         }
     }
 
@@ -71,7 +70,7 @@ class Withdraw_ctr extends CI_Controller {
                 'status' => $this->input->get('status')
             );
 
-            $this->db->where('id', $id);   
+            $this->db->where('id', $id);
             $resultsedit = $this->db->update('tbl_withdraw_team', $data);
 
             if ($resultsedit > 0) {
@@ -80,7 +79,6 @@ class Withdraw_ctr extends CI_Controller {
                 $this->session->set_flashdata('del_ss2', 'Not Successfully Update withdraw ');
             }
             return redirect('withdraw_realtime');
-            
         }
     }
 
@@ -110,7 +108,7 @@ class Withdraw_ctr extends CI_Controller {
                     'file_name'         => $uploadData['file_name'],
                     'path'              => 'uploads/money/' . $uploadData['file_name'],
                     'create_at'         => date('Y-m-d H:i:s'),
-                    'status'            => '2' ,
+                    'status'            => '2',
                 );
 
                 $this->db->where('id', $id);
@@ -146,7 +144,7 @@ class Withdraw_ctr extends CI_Controller {
                     'file_name'         => $uploadData['file_name'],
                     'path'              => 'uploads/money/team/' . $uploadData['file_name'],
                     'create_at'         => date('Y-m-d H:i:s'),
-                    'status'            => '2' ,
+                    'status'            => '2',
                 );
 
                 $this->db->where('id', $id);
@@ -154,6 +152,53 @@ class Withdraw_ctr extends CI_Controller {
             }
         }
     }
-    
-	
+
+    public function sendEmail_withdraw()
+    {
+        $id         = $this->input->post('id');
+        $textemail  = $this->input->post('textemail');
+        $withdraw   = $this->db->get_where('tbl_withdraw', ['id' => $id])->row_array();
+        $user       = $this->db->get_where('tbl_user', ['idUser' => $withdraw['userId']])->row_array();
+
+        $subject = 'Notify from admin About withdrawing money.';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Notify from admin About withdrawing money';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your withdrawing details.</p><hr>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> ' . $textemail . ' </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($user['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+        $this->email->send();
+        
+    }
 }

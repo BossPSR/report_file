@@ -229,6 +229,15 @@ class Store_ctr extends CI_Controller
 
         $message .= '<tr>';
         $message .= '<td>';
+        $message .= ' Date required : ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' ' . $upload_order[0]['date_required'] . ' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
         $message .= ' Price :';
         $message .= '</td>';
         $message .= '<td>';

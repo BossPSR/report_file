@@ -94,7 +94,10 @@ class Store_model extends CI_Model
 
     public function bookmark_all()
     {
-        $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re ,tbl_upload_order.order_id AS order_save,tbl_upload_order.price_file AS price_save , tbl_upload_team.teamId AS teamT3 ,tbl_upload_order.status_cp AS statusB');
+        $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,
+        tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re ,tbl_upload_order.order_id AS order_save
+        ,tbl_upload_order.price_file AS price_save , tbl_upload_team.teamId AS teamT3 ,tbl_upload_order.status_cp AS statusB
+        ,tbl_upload_team.wage AS wageT');
         $this->db->from('tbl_bookmark');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document=tbl_upload_main_search.id_doc', 'left');

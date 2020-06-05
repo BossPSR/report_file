@@ -140,6 +140,8 @@
                                                     <th>DM File</th>
                                                     <th>Team File</th>
                                                     <th>Date Required</th>
+                                                    <th>Price</th>
+                                                    <th>Wage</th>
                                                     <th>Status</th>
                                                     <th>tool</th>
                                                 </tr>
@@ -413,7 +415,14 @@
 
                                                         </td>
                                                         <td><?php echo $bookmark['date_re'] ?></td>
-
+                                                        <td><?php echo $bookmark['price_save'] ?></td>
+                                                        <td>
+                                                            <?php if ($bookmark['wageT']) { ?>
+                                                                <?php echo $bookmark['wageT'] ?>
+                                                            <?php }else{ ?>
+                                                                -
+                                                            <?php } ?>
+                                                        </td>
                                                         <td>
                                                             <?php if ($bookmark['statusB'] == "notcomplete") : ?>
                                                                 <div class="badge badge-primary">Rewrite</div>

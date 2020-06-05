@@ -334,8 +334,13 @@
     <?php endif; ?>
 
     <?php if ($this->session->flashdata('del_ss')) : ?>
-        swal("fill !", "Please enter the Email or Password correctly !!", "error");
+        swal("fill !", "Please enter the Passwords do not match. !!", "error");
     <?php endif; ?>
+
+    <?php if ($this->session->flashdata('email_ss')) : ?>
+        swal("fill !", "Please enter the Email correctly !!", "error");
+    <?php endif; ?>
+
     <?php if ($this->session->flashdata('nomoney')) : ?>
         swal("fill !", "Your money is not enough to withdraw money.", "error");
     <?php endif; ?>
@@ -356,10 +361,10 @@
 </script>
 <script>
     <?php if ($suss = $this->session->flashdata('save_ss2')) : ?>
-        swal("Good job!", '<?php echo $suss; ?>', "success");
+        swal("Good job!", "<?php echo $suss; ?>", "success");
     <?php endif; ?>
-    <?php if ($error = $this->session->flashdata('del_ss2')) : ?>
-        swal("Fail !", '<?php echo $error; ?>', "error");
+    <?php if ($errors = $this->session->flashdata('del_ss2')) : ?>
+        swal("Fail !", "<?php echo $errors; ?>", "error");
     <?php endif; ?>
 </script>
 
@@ -531,6 +536,23 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        $("#show_hide_password a").on('click', function(event) {
+            event.preventDefault();
+            if ($('#show_hide_password input').attr("type") == "text") {
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass("fa-eye-slash");
+                $('#show_hide_password i').removeClass("fa-eye");
+            } else if ($('#show_hide_password input').attr("type") == "password") {
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass("fa-eye-slash");
+                $('#show_hide_password i').addClass("fa-eye");
+            }
+        });
+    });
+</script>
+
 <!--Start of Tawk.to Script-->
 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
@@ -538,8 +560,12 @@
 <?php if ($team == true) : ?>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
+        var Tawk_API = Tawk_API || {};
+        Tawk_API.visitor = {
+            name: '<?php echo $team['idTeam']; ?>' ,
+            email : '<?php echo $team['email']; ?>'
+        };
+        Tawk_LoadStart = new Date();
         (function() {
             var s1 = document.createElement("script"),
                 s0 = document.getElementsByTagName("script")[0];
@@ -556,8 +582,12 @@
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
+        var Tawk_API = Tawk_API || {};
+        Tawk_API.visitor = {
+            name: '<?php echo $user['idUser']; ?>' ,
+            email : '<?php echo $user['email']; ?>'
+        };
+        Tawk_LoadStart = new Date();
         (function() {
             var s1 = document.createElement("script"),
                 s0 = document.getElementsByTagName("script")[0];

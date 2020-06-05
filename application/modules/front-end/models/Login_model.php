@@ -72,11 +72,10 @@ class Login_model extends CI_Model
         }
     }
 
-    public function check_usre($passport, $email)
+    public function check_usre($email)
     {
         $this->db->select('*');
         $this->db->from('tbl_user');
-        $this->db->where('passport', $passport);
         $this->db->where('email', $email);
         $data = $this->db->get();
 

@@ -41,11 +41,9 @@ class Book_ctr extends CI_Controller
         $id_order = $this->input->post('id_order');
 
         $data = array(
-
-            'price_file'                         => $this->input->post('price_file'),
-            'date_required'                      => $this->input->post('Daterequired'),
-            'update_at'                        => date('Y-m-d H:i:s')
-
+            'price_file'       => $this->input->post('price_file'),
+            'date_required'    => $this->input->post('Daterequired'),
+            'update_at'        => date('Y-m-d H:i:s')
         );
         $this->db->where('order_id', $id_order);
         $resultsedit = $this->db->update('tbl_upload_order', $data);
@@ -55,7 +53,7 @@ class Book_ctr extends CI_Controller
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
         } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+            $this->session->set_flashdata('del_ss2' , 'Not Successfully Update to team information');
         }
         return redirect('Bookmark_notpay');
     }
@@ -128,6 +126,15 @@ class Book_ctr extends CI_Controller
         $message .= '</td>';
         $message .= '<td>';
         $message .= ' ' . $upload_order[0]['order_id'] . ' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Order ID : ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' ' . $upload_order[0]['date_required'] . ' ';
         $message .= '</td>';
         $message .= '</tr>';
 

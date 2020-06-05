@@ -36,7 +36,7 @@ class Order_ctr extends CI_Controller
 
   public function order_approved()
   {
-    $order_id             = $this->input->post('order_id');
+    $order_id       = $this->input->post('order_id');
     $is_confirm     = $this->input->post('status_approved');
 
     if ($this->session->userdata('email') == '') {

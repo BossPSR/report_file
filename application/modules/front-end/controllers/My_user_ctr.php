@@ -51,42 +51,34 @@ class My_user_ctr extends CI_Controller
 		} else {
 			$id 			= $this->input->post('id');
 			$username		= $this->input->post('name');
-			$passport		= $this->input->post('passport');
 			$phone			= $this->input->post('phone');
-
 			$password		= $this->input->post('password');
 			$c_password		= $this->input->post('c_password');
 
 			if ($password == '' && $c_password == '') {
 				$data = array(
 					'username'			=> $username,
-					'passport'			=> $passport,
 					'phone'				=> $phone,
 				);
 			} elseif ($password == $c_password) {
 				$data = array(
 					'username'			=> $username,
-					'passport'			=> $passport,
 					'phone'				=> $phone,
 					'password'			=> md5($password)
 				);
 			} else {
-				echo "<script>";
-				echo "alert('Password incorrect.Try again!!');";
-				echo "window.location='my-profile';";
-				echo "</script>";
+				$this->session->set_flashdata('del_ss2', 'Password incorrect.Try again!!');
+				redirect('my-profile');
 			}
 			$this->db->where('id', $id);
 			if ($this->db->update('tbl_user', $data)) {
-				echo "<script>";
-				echo "alert('Successfull!!.Change for my profile.');";
-				echo "window.location='my-profile';";
-				echo "</script>";
+				$this->session->set_flashdata('save_ss2', 'Successfull!!.Change for my profile.');
+				redirect('my-profile');
+				
 			} else {
-				echo "<script>";
-				echo "alert('Error for Change my profile.');";
-				echo "window.location='my-profile';";
-				echo "</script>";
+				$this->session->set_flashdata('del_ss2', 'Error for Change my profile.');
+				redirect('my-profile');
+				
 			}
 		}
 	}

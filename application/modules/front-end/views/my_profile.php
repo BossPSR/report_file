@@ -190,10 +190,7 @@
                         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                         <input type="text" class="form-control" name="name" value="<?php echo $user['username']; ?>" required>
                     </div>
-                    <div class="form-group">
-                        <label for="">Passport</label>
-                        <input type="text" class="form-control" name="passport" value="<?php echo $user['passport']; ?>" required>
-                    </div>
+                   
                     <div class="form-group">
                         <label for="">Phone</label>
                         <input type="text" class="form-control" name="phone" value="<?php echo $user['phone']; ?>" required>
@@ -216,14 +213,6 @@
         </div>
     </div>
 </div>
-
-
-
-<?php if ($this->session->flashdata('save_ss')) : ?>
-    <script type='text/javascript'>
-        swal("Good job!", "You clicked the button!", "success");
-    </script>
-<?php endif; ?>
 
 
 <?php foreach ($reject as $key => $reject) { ?>

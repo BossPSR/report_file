@@ -37,7 +37,6 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>Passport</th>
                                                     <th>Email</th>
                                                     <th>Username</th>
                                                     <th>Withdraw</th>
@@ -49,15 +48,17 @@
                                             <?php foreach ($withdraw as $withdraw) { ?>
                                                 <tbody>
                                                     <tr>
-                                                        <td><?php echo $withdraw['passport']; ?></td>
                                                         <td><?php echo $withdraw['email']; ?></td>
                                                         <td><?php echo $withdraw['username']; ?></td>
                                                         <td><?php echo $withdraw['price']; ?></td>
                                                         <td><?php echo $withdraw['cash']; ?></td>
                                                         <td><?php echo $withdraw['phone']; ?></td>
                                                         <td>
+                                                            <button class="btn btn-icon btn-info" data-toggle="modal" data-target="#emailsand<?php echo $withdraw['idW']; ?>" type="button">
+                                                                <i class="feather icon-mail"></i>
+                                                            </button>
                                                             <?php if ($withdraw['status'] == 1) : ?>
-                                                                <div class="dropdown ">
+                                                                <div class="dropdown " style="display: contents;">
                                                                     <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         กำลังดำเนินการ
                                                                     </button>
@@ -67,7 +68,7 @@
                                                                     </div>
                                                                 </div>
                                                             <?php elseif ($withdraw['status'] == 2) : ?>
-                                                                <div class="dropdown ">
+                                                                <div class="dropdown " style="display: contents;">
                                                                     <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         ชำระเงินแล้ว
                                                                     </button>
@@ -76,11 +77,11 @@
                                                                     </div>
                                                                 </div>
                                                             <?php else : ?>
-                                                                <div class="dropdown ">
+                                                                <div class="dropdown " style="display: contents;">
                                                                     <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         ยกเลิก
                                                                     </button>
-                                                                    
+
                                                                 </div>
                                                             <?php endif; ?>
                                                             <!-- Modal Feedback -->
@@ -114,6 +115,33 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <!-- Modal Feedback -->
+                                                            <div class="modal fade" id="emailsand<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Report a problem (<?php echo $withdraw['idW']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="" id="frmMain<?php echo $withdraw['idW']; ?>" method="POST">
+
+                                                                            <div class="modal-body" style="text-align:left;">
+                                                                                <input type="hidden" name="id" value="<?php echo $withdraw['idW']; ?>">
+                                                                                <label for="Details" class="font-size F-upload">Details notice. </label>
+                                                                                <textarea name="textemail" class="form-control" rows="10"></textarea>
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" id="SubmitSend<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
 
                                                         <script type='text/javascript'>
@@ -138,6 +166,28 @@
                                                                 } else {
                                                                     swal("Good job!", "Upload for data successfull", "success");
                                                                 }
+
+                                                            });
+                                                        </script>
+
+                                                        <script type="text/javascript">
+                                                            $(document).ready(function() {
+
+                                                                $("#SubmitSend<?php echo $withdraw['idW']; ?>").click(function() {
+
+                                                                    $.ajax({
+                                                                        type: "POST",
+                                                                        url: "sendEmail_withdraw",
+                                                                        data: $("#frmMain<?php echo $withdraw['idW']; ?>").serialize(),
+                                                                        success: function(data) {
+                                                                            swal("Good job!", "Upload for data successfull", "success");
+                                                                            setTimeout(function() {
+                                                                                location.href = "back_withdraw"
+                                                                            }, 1000);
+                                                                        }
+                                                                    });
+
+                                                                });
 
                                                             });
                                                         </script>

@@ -62,7 +62,7 @@
                                         <table class="table zero-configuration" id="loading_img_spin">
                                             <thead>
                                                 <tr>
-                                                    <th>order id</th>
+                                                    <th>Order id</th>
                                                     <th>User id</th>
                                                     <th>DM</th>
                                                     <th>Main File</th>

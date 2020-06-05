@@ -91,12 +91,15 @@
                             <form action="loginme" method="post">
                                 <p>
                                     <label>Email <span>*</span></label>
-                                    <input type="email" name="email">
+                                    <input type="email" name="email" required>
                                 </p>
-                                <p>
-                                    <label>Passwords <span>*</span></label>
-                                    <input type="password" name="password">
-                                </p>
+                                <label>Password</label>
+                                <div class="input-group mb-3" id="show_hide_password">
+                                    <input type="password" class="form-control" name="password" aria-describedby="basic-addon1" required>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                    </div>
+                                </div>
                                 <div class="login_submit">
                                     <a href="forget_password">Lost your password?</a>
                                 </div>
