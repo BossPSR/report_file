@@ -136,10 +136,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <?php
                                                 $e = 1;
-
                                                 foreach ($complete as $key => $complete) { ?>
                                                         <tr>
                                                             <td><?php echo $complete['order_id_t']; ?></td>

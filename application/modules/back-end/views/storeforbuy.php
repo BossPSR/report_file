@@ -57,6 +57,7 @@
                                                     <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>Note</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>create Order</th>
@@ -77,6 +78,34 @@
                                                         <td><?php echo $y++; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
+                                                        <td>
+
+                                                            <?php if (!empty($stored['note_user'])) { ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note<?php echo $stored['order_id']; ?>"><i class="feather icon-search"></i></a>
+                                                                <div class="modal fade" id="note<?php echo $stored['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <form action="" method="POST">
+                                                                                <div class="modal-body">
+                                                                                <?= $stored['note_user']; ?>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php } else { ?>
+                                                                -
+                                                            <?php } ?>
+                                                        </td>
                                                         <td>
                                                             <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $stored['order_id']])->result_array(); ?>
                                                             <?php if (empty($order)) { ?>

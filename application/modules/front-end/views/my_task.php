@@ -54,6 +54,8 @@
                                     <td>
                                         <?php if ($task['date_required'] <= date("Y-m-d")) : ?>
                                             <span class="badge badge-danger">หมดเวลา</span>
+                                        <?php elseif ($task['status_approved'] == 1) : ?>
+                                            <span class="badge badge-success">Success</span>
                                         <?php else : ?>
                                             <?php
                                             $checkDate_num = DateDiff(date("Y-m-d"), $task['date_required']);
@@ -136,36 +138,36 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                        <?php $taskOrg = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 0])->result_array(); ?>
+                                                            <?php $taskOrg = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 0])->result_array(); ?>
                                                             <?php if (!empty($taskGTMORE)) { ?>
 
-                                                            <?php $t = 1; ?>
-                                                            <table class="table">
-                                                                <thead class="thead-light">
-                                                                    <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Info</th>
-                                                                        <th scope="col">Downloads</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($taskOrg as $taskOrg) { ?>
+                                                                <?php $t = 1; ?>
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $taskOrg['order_id']; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $taskOrg['file_name_GT']; ?></td>
-                                                                            <td><a href="<?php echo $taskOrg['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
-                                                                            <td>
-                                                                                <a href="<?php echo $taskOrg['path_GT']; ?>" class="btn btn-primary" download>
-                                                                                    <i class="fa fa-download"></i> Download
-                                                                                </a>
-                                                                            </td>
+                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">File</th>
+                                                                            <th scope="col">Info</th>
+                                                                            <th scope="col">Downloads</th>
                                                                         </tr>
-                                                                    <?php } ?>
-                                                                </tbody>
-                                                            </table>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($taskOrg as $taskOrg) { ?>
+                                                                            <tr style="text-align:center;">
+                                                                                <td><?php echo $taskOrg['order_id']; ?></td>
+                                                                                <td style="text-align:left;"><?php echo $taskOrg['file_name_GT']; ?></td>
+                                                                                <td><a href="<?php echo $taskOrg['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                                <td>
+                                                                                    <a href="<?php echo $taskOrg['path_GT']; ?>" class="btn btn-primary" download>
+                                                                                        <i class="fa fa-download"></i> Download
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
                                                             <?php } else { ?>
-                                                               -
+                                                                -
                                                             <?php } ?>
 
                                                             <?php $taskGTMORE = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 1, 'status_see_more_file_team' => 11])->result_array(); ?>
@@ -200,7 +202,7 @@
                                                                 </table>
                                                             <?php } else { ?>
                                                                 <br>
-                                                                <h5 style="text-align:left;">More Document <span style="color: red;">* รอ Admin ทำการอนุมัติข้อมูลเอกสารเพิ่มเติมจากลูกค้า</span></h5> 
+                                                                <h5 style="text-align:left;">More Document <span style="color: red;">* รอ Admin ทำการอนุมัติข้อมูลเอกสารเพิ่มเติมจากลูกค้า</span></h5>
                                                                 <hr>
                                                                 -
                                                             <?php } ?>

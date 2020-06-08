@@ -22,10 +22,10 @@
                                                 <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
+                                                <textarea name="detail" id="detail" hidden></textarea>
+
                                             </div>
-                                            <div>
-                                                <!-- <input type="date" name="date" id="" class="form-control" onchange="myFunction()"> -->
-                                            </div>
+                                           
                                         </form>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -37,15 +37,21 @@
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
                                             </div>
-                                            <div>
-                                                <!-- <input type="date" name="date" id="" class="form-control" onchange="myFunction()"> -->
-                                            </div>
+                                            
                                         </form>
                                     </div>
                                 </div>
                                 <br>
+                                <label for="">More details.</label>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <textarea name="detail" class="form-control" id="detail2" rows="5"></textarea>
+                                    </div>
+
+                                </div>
+                                <br>
                                 <label for="">Choose the date to pick up the document.</label>
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                     <div class="row">
                                         <input type="date" class="form-control" id="date2" name="date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
@@ -74,6 +80,17 @@
             var value = $(this).val();
 
             $("#date").val(value);
+        }).keyup();
+
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#detail2").change(function() {
+            var value = $(this).val();
+
+            $("#detail").val(value);
         }).keyup();
 
     });

@@ -307,12 +307,8 @@
                                                                                             <tbody>
                                                                                                 <?php foreach ($orderssc as $keys => $orderssc) { ?>
                                                                                                     <?php if ($orderssc['section'] == $dm_c11['section'] || $orderssc['section'] == 0) {
-
-
                                                                                                     ?>
                                                                                                         <tr>
-
-
                                                                                                             <td>
                                                                                                                 <?php if ($orderssc['relive_status'] == '0') : ?>
                                                                                                                     -
@@ -324,10 +320,7 @@
                                                                                                             <td><?php echo $orderssc['file_name'] ?></td>
                                                                                                             <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                             <td><?php echo $orderssc['create_at'] ?></td>
-
-
                                                                                                         </tr>
-
                                                                                                 <?php }
                                                                                                 }
                                                                                                 ?>
@@ -434,7 +427,7 @@
 
                                                         <td>
 
-                                                            <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->row_array(); ?>
+                                                            <!-- <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->row_array(); ?>
 
                                                             <?php $show_dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $show_dm_c['id_document']])->row_array(); ?>
 
@@ -443,7 +436,7 @@
                                                                 <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-icon btn-success "><i class="feather icon-download-cloud"></i></a>
                                                             <?php else : ?>
                                                                 <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-icon btn-primary "><i class="feather icon-download-cloud"></i></a>
-                                                            <?php endif; ?>
+                                                            <?php endif; ?> -->
 
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
                                                                 -
@@ -585,7 +578,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="modal fade" id="dropW<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <!-- <div class="modal fade" id="dropW<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -627,7 +620,7 @@
 
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
 
                                                             <script>
                                                                 $("#DM1<?php echo $bookmark['orderby']; ?>").change(function() {
@@ -635,6 +628,7 @@
                                                                     $("#DM2<?php echo $bookmark['orderby']; ?>").val(value);
                                                                 }).change();
                                                             </script>
+
                                                             <script>
                                                                 var x = document.getElementById("DM1<?php echo $bookmark['orderby']; ?>").value;
                                                                 Dropzone.autoDiscover = false;

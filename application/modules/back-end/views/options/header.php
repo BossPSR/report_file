@@ -332,7 +332,6 @@
                         $notifyMystore = 0;
 
                         $notify_checkFor_sell = 0;
-                        $notify_storeFor_sell = 0;
                         $this->db->where('notify_admin', 0);
                         $this->db->where('is_check', 0);
                         $this->db->where('status_chack', 0);
@@ -342,6 +341,19 @@
                             if ($upload_store['status_chack'] == 0) {
                                 $notify_checkFor_sell += 1;
                             }
+                        }
+
+                        $notify_storeFor_sell = 0;
+                        $this->db->where('is_check', 0);
+                        $this->db->where('status_chack', 1);
+                        $this->db->where('grade', null);
+                        $this->db->where('status_check_drop', null);
+                        $this->db->group_by('store_id');
+                        $uploadStoreFor = $this->db->get('tbl_upload_store')->result_array();
+                        foreach ($uploadStoreFor as $uploadStoreFor) {
+                           
+                                $notify_storeFor_sell += 1;
+                            
                         }
 
                         $notify_myStore = 0;

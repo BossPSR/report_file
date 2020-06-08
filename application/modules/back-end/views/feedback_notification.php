@@ -133,9 +133,10 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <a href="#" data-toggle="modal" data-target="#note<?php echo $feedback['id_f']; ?>"><i class="feather icon-search"></i></a>
 
                                                                 <?php if (!empty($feedback['feedback_detail'])) { ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note<?php echo $feedback['id_f']; ?>"><i class="feather icon-search"></i></a>
+
 
                                                                     <div class="modal fade" id="note<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg" role="document">
@@ -152,7 +153,7 @@
                                                                                         <textarea name="detail" id="" rows="6" class="form-control"><?= $feedback['feedback_detail']; ?></textarea>
                                                                                     </div>
                                                                                     <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">Close</button>
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
                                                                                         <button type=" submit" class="btn btn-success">Save</button>
                                                                                     </div>
                                                                                 </form>

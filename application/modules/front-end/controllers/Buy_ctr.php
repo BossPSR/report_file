@@ -67,6 +67,7 @@ class Buy_ctr extends CI_Controller
 
     $userId     = $this->input->post('userId');
     $date_req   =  $this->input->post('date');
+    $detail     =  $this->input->post('detail');
 
     $target_dir = "uploads/Buy/"; // Upload directory
 
@@ -98,6 +99,7 @@ class Buy_ctr extends CI_Controller
         $data = array(
           'userId'        => $userId,
           'order_id'      => $buymax->order_main,
+          'note_user'     => $detail,
           'date_required' => $date_req,
           'file_name'     => $uploadData['file_name'],
           'path'          => 'uploads/Buy/' . $uploadData['file_name'],

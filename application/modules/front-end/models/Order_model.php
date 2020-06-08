@@ -131,9 +131,12 @@ class Order_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_team');
-        $this->db->where('status', 0);
-        $this->db->where('teamId', $sessi);
-        $this->db->order_by('order_id', 'DESC');
+        $this->db->join('tbl_upload_order', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->where('tbl_upload_team.status', 0);
+        $this->db->where('tbl_upload_team.teamId', $sessi);
+        $this->db->where('tbl_upload_order.status_approved',0);
+        $this->db->group_by('tbl_upload_team.order_id');
+        $this->db->order_by('tbl_upload_team.order_id', 'DESC');
 
         $data = $this->db->get();
         return $data->result_array();

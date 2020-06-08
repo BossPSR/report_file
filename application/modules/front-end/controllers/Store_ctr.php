@@ -28,6 +28,7 @@ class Store_ctr extends CI_Controller
     {
         // image_lib
         $userId = $this->input->post('userId');
+        $detail = $this->input->post('detail');
 
         $target_dir = "uploads/Store/"; // Upload directory
 
@@ -60,6 +61,7 @@ class Store_ctr extends CI_Controller
                     $data = array(
                         'userId'        => $userId,
                         'store_id'      => $buymax->order_main,
+                        'note'          => $detail,
                         'file_name'     => $uploadData['file_name'],
                         'path'          => 'uploads/Store/' . $uploadData['file_name'],
                         'create_at'     => date('Y-m-d H:i:s'),

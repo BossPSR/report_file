@@ -81,6 +81,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                     <th>Store Id</th>
                                                     <th>User</th>
                                                     <th>File Name</th>
+                                                    <th>Note</th>
                                                     <th>File</th>
                                                     <th>create_at</th>
                                                     <th>section</th>
@@ -102,6 +103,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
+                                                            <td></td>
                                                             <td>
                                                                 <a href="check_com?id=<?php echo $orders['store_id']; ?>" class="btn btn-success " aria-haspopup="true" aria-expanded="false">
                                                                     Done <?php echo $orders['store_id']; ?>
@@ -112,12 +114,38 @@ foreach ($store as $upload_main_searchDetail) {
                                                         <?php $check_for = $this->db->order_by('store_id', 'asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id'], 'is_check' => '0'])->result_array(); ?>
                                                         <?php foreach ($check_for as $keys => $check_for) { ?>
                                                             <tr>
-
                                                                 <td><?php echo $orders['store_id']; ?></td>
                                                                 <td>
                                                                     <?php echo $check_for['userId']; ?>
                                                                 </td>
                                                                 <td><?php echo $check_for['file_name']; ?></td>
+                                                                <td>
+                                                                    <?php if (!empty($check_for['note'])) { ?>
+                                                                        <a href="#" data-toggle="modal" data-target="#note<?php echo $check_for['store_id']; ?>"><i class="feather icon-search"></i></a>
+                                                                        <div class="modal fade" id="note<?php echo $check_for['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                        <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <form action="" method="POST">
+                                                                                        <div class="modal-body">
+                                                                                            <?= $check_for['note']; ?>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php } else { ?>
+                                                                        -
+                                                                    <?php } ?>
+                                                                </td>
                                                                 <td> <a href="<?php echo $check_for['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a> </td>
                                                                 <td><?php echo $orders['create_at']; ?></td>
                                                                 <td>
@@ -325,13 +353,13 @@ foreach ($store as $upload_main_searchDetail) {
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('body').on('change','#categories', function() {
+        $('body').on('change', '#categories', function() {
             var c = $(this).data('catagory');
             console.log($(this).val());
             $.ajax({
                 type: 'POST',
                 data: {
-                    section: $(this).val() ,
+                    section: $(this).val(),
                     updateId: c
                 },
                 url: 'store_section',

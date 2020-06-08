@@ -562,7 +562,7 @@
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};
         Tawk_API.visitor = {
-            name: '<?php echo $team['idTeam']; ?>' ,
+            name: '<?php echo $team['IdTeam']; ?>' ,
             email : '<?php echo $team['email']; ?>'
         };
         Tawk_LoadStart = new Date();

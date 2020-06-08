@@ -65,6 +65,7 @@
                                                     <th>#</th>
                                                     <th>Store Id</th>
                                                     <th>UserId</th>
+                                                    <th>Note</th>
                                                     <th>Section</th>
 
                                                 </tr>
@@ -77,6 +78,31 @@
                                                         <td><?php echo $i++; ?></td>
                                                         <td><?php echo $section['store_id']; ?></td>
                                                         <td> <?php echo $section['userId']; ?></td>
+                                                        <td>
+                                                            <?php if (!empty($section['note'])) { ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note<?php echo $section['store_id']; ?>"><i class="feather icon-search"></i></a>
+                                                                <div class="modal fade" id="note<?php echo $section['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?= $section['note']; ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php } else { ?>
+                                                                -
+                                                            <?php } ?>
+                                                        </td>
 
                                                         <td>
                                                             <?php foreach ($check_for as $keys => $check_for) { ?>
@@ -247,7 +273,7 @@
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Select Item</label>
                                                                                                             <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
-                                                                                                            <select name="select_item_id" class="form-control select2" id="" >
+                                                                                                            <select name="select_item_id" class="form-control select2" id="">
                                                                                                                 <?php foreach ($select_itemList as $key => $selectItem) { ?>
                                                                                                                     <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
                                                                                                                 <?php } ?>
@@ -276,14 +302,14 @@
                                                                                                     </div>
 
                                                                                                     <?php
-                                                                                                          $this->db->order_by('id','DESC');
+                                                                                                    $this->db->order_by('id', 'DESC');
                                                                                                     $Dm = $this->db->get('tbl_upload_main_search')->row_array();
-                                                                                                  
-                                                                                                     ?>
+
+                                                                                                    ?>
                                                                                                     <div class="form-group">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Id Document</label>
-                                                                                                            <input type="text" class="form-control" value="DM<?php echo $Dm == false ? '1' : $Dm['id'] + 1 ;  ?>"  readonly>
+                                                                                                            <input type="text" class="form-control" value="DM<?php echo $Dm == false ? '1' : $Dm['id'] + 1;  ?>" readonly>
                                                                                                         </div>
                                                                                                     </div>
 
