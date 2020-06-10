@@ -46,7 +46,7 @@ class My_feedback_ctr extends CI_Controller
 
     public function order_auto_feedback_notApp()
     {
-        $dated      =  $this->input->post('dated');
+        $dated      = $this->input->post('dated');
         $detail     = $this->input->post('detail');
         $order_id   = $this->input->post('order_id');
         $userId     = $this->input->post('userId');

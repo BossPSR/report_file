@@ -52,9 +52,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
+                                                    <th>Order id</th>
                                                     <th>Document name</th>
                                                     <th>File Name</th>
-                                                    <th>Order id</th>
                                                     <th>Date_required</th>
                                                     <th>Tool</th>
 
@@ -65,9 +65,10 @@
                                             <?php foreach ($not_Approved as $key => $not_Approved) { ?>
                                                 <tr>
                                                     <td><?php echo $i++; ?></td>
-                                                    <td><?php echo $not_Approved['file_name'] ?></td>
-                                                    <td><span data-toggle="modal" data-target="#exampleModala<?php echo $not_Approved['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $not_Approved['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <td><?php echo $not_Approved['or'] ?></td>
+                                                    <td><?php echo $not_Approved['fa'] ?></td>
+                                                    <td><span data-toggle="modal" data-target="#exampleModala<?php echo $not_Approved['or']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -79,7 +80,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['order_id']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['or']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -94,8 +95,6 @@
                                                                                             <td><?php echo $order['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td><?php echo $order['create_at'] ?></td>
-
-
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -109,17 +108,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div></td>
-                                                    <td><?php echo $not_Approved['order_id'] ?></td>
                                                     <td><?php echo $not_Approved['date_required'] ?></td>
 
                                                     <td>
                                                     <?php if($not_Approved['status_approved_upload']==0):?>
-                                                        <button type="button" class="btn btn-primary mr-1 mb-1"  data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['order_id']; ?>" >Upload</button>
+                                                        <button type="button" class="btn btn-primary mr-1 mb-1"  data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>" >Upload</button>
                                                     <?php else:?>
                                                         <div class="badge badge-success">Success</div>
                                                     <?php endif;?>
                                                     </td>
-                                                    <div class="modal fade" id="modalUpload<?php echo $not_Approved['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="modalUpload<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -132,7 +130,7 @@
                                                                     <div class="modal-body">
                                                                         <input type="hidden" name="userId" value="<?php echo $not_Approved['userId'] ?>">
                                                                         <input type="hidden" name="teamId" value="<?php echo $not_Approved['teamId'] ?>">
-                                                                        <input type="hidden" name="order_id" value="<?php echo $not_Approved['order_id'] ?>">
+                                                                        <input type="hidden" name="order_id" value="<?php echo $not_Approved['or'] ?>">
                                                                         <div class="data-items pb-3">
                                                                             <div class="data-fields px-2 mt-3">
                                                                                 <div class="row">

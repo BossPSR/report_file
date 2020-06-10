@@ -240,4 +240,39 @@ class Feedback_ctr extends CI_Controller
 
         return redirect('back_team');
     }
+
+    public function order_auto_feedback_Stockadmin()
+    {
+        $dated      = $this->input->post('dated');
+        $detail     = $this->input->post('detail');
+        $order_id   = $this->input->post('order_id');
+        $userId     = $this->input->post('userId');
+        $teamId     = $this->input->post('teamId');
+
+        $orf = array(
+            'feedback_detail'           => $detail,
+            'order_id'                  => $order_id,
+            'teamId'                    => $teamId,
+            'userId'                    => $userId,
+            'create_at'                 => date('Y-m-d H:i:s'),
+            'dated'                     => $dated,
+            'check_status'              => 1,
+            'status_c_feedack_team'     => 1
+        );
+        if ($this->db->insert('tbl_feedback', $orf)) {
+            $appro = array(
+                'status_approved' => 3
+            );
+            $this->db->where('order_id', $order_id);
+            $success = $this->db->update('tbl_upload_order', $appro);
+            if ($success) {
+                $updateT = array(
+                    'status' => 2
+                );
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_team', $updateT);
+            }
+        }
+        echo $success;
+    }
 }

@@ -81,7 +81,7 @@ class Buy_ctr extends CI_Controller
       $config['upload_path']     = 'uploads/Buy/';
       // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
       $config['allowed_types']   = '*';
-      $config['max_size']        = '99999'; // max_size in kb
+      $config['max_size']        = 0; // max_size in kb
       $config['file_name']       = $_FILES['file']['name'];
 
       //Load upload library

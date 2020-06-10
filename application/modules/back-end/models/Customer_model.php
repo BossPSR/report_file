@@ -19,8 +19,7 @@ class Customer_model extends CI_Model{
         $this->db->where('tbl_upload_order.status_book',1);
         $this->db->where('tbl_upload_order.status_pay',1);
         $this->db->where('tbl_upload_order.is_check',0);
-        $this->db->where('tbl_upload_order.status_approved',0);
-        $this->db->or_where('tbl_upload_order.status_approved',3);
+        $this->db->where_in('tbl_upload_order.status_approved',array(0,3));
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required','desc');
         return $this->db->get()->result_array();

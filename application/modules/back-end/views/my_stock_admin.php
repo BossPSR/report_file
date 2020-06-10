@@ -77,7 +77,7 @@
                                             <tbody>
                                                 <?php foreach ($stock as $stock) { ?>
                                                     <tr>
-                                                        <td data-order="<?php echo $stock['orderST'] ?>"><?php echo $stock['orderST'] ?></td>
+                                                        <td><?php echo $stock['orderST'] ?></td>
                                                         <td>
                                                             <?php if (!empty($stock['email'])) : ?>
                                                                 <?php echo $stock['email'] ?>
@@ -409,10 +409,14 @@
                                                             <?php elseif ($stock['status_approved'] == 2) : ?>
                                                                 <span class="badge badge-pill badge-danger">Not Approved</span>
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>" style="padding: 0.9rem 1rem;"><i class="fa fa-plus-circle"></i></button>
-                                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>" style="padding: 0.9rem 1rem;"><i class="fa fa-exclamation-triangle"></i></button>
-                                                                <button type="button" class="btn btn-success" id="approved<?php echo $stock['orderST']; ?>" style="padding: 0.9rem 1rem;"><i class="fa fa-check"></i></button>
-                                                                <button type="button" class="btn btn-danger" id="order_not_approved<?php echo $stock['orderST']; ?>" style="padding: 0.9rem 1rem;"><i class="fa fa-times"></i></button>
+                                                                <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>" ><i class="fa fa-plus-circle"></i></button>
+                                                                <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
+                                                                    <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>" ><i class="fa fa-exclamation-triangle"></i></button>
+                                                                <?php else : ?>
+                                                                    <button type="button" class="btn btn-secondary btn-icon" ><i class="fa fa-exclamation-triangle"></i></button>
+                                                                <?php endif; ?>
+                                                                <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="approved<?php echo $stock['orderST']; ?>" ><i class="fa fa-check"></i></button>
+                                                                <button type="button" class="btn btn-danger btn-icon"  data-order="<?php echo $stock['orderST'] ?>" id="order_not_approved<?php echo $stock['orderST']; ?>" ><i class="fa fa-times"></i></button>
                                                             <?php endif; ?>
 
                                                             <!-- Modal Feedback -->
@@ -471,14 +475,14 @@
                                                                     var c = document.getElementById("userId<?php echo $stock['orderST']; ?>").value;
                                                                     var team = document.getElementById("teamId<?php echo $stock['orderST']; ?>").value;
 
-                                                                    if (x == '') {
+                                                                    if (myDropzone2<?php echo $stock['orderST']; ?>.files == 0) {
                                                                         swal("Warning!", "Can not be document Empty", "warning", {
                                                                             button: true,
                                                                         });
                                                                     } else {
                                                                         $.ajax({
                                                                             type: 'POST',
-                                                                            url: 'Not_approved',
+                                                                            url: 'order_auto_feedback_Stockadmin',
                                                                             data: {
                                                                                 detail: x,
                                                                                 dated: y,
@@ -487,26 +491,13 @@
                                                                                 teamId: team,
                                                                             },
                                                                             success: function(success) {
-                                                                                if (myDropzone2<?php echo $stock['orderST']; ?>.files != 0) {
-                                                                                    myDropzone2<?php echo $stock['orderST']; ?>.processQueue();
-                                                                                    myDropzone2<?php echo $stock['orderST']; ?>.on("queuecomplete", function(file, res) {
-                                                                                        swal("Good job!", "Upload for data success Feedback", "success", {
-                                                                                            button: false,
-                                                                                        });
+                                                                                myDropzone2<?php echo $stock['orderST']; ?>.processQueue();
+                                                                                myDropzone2<?php echo $stock['orderST']; ?>.on("queuecomplete", function(file, res) {
+                                                                                    swal("Good job!", "Upload for data success Feedback", "success", {
+                                                                                        button: false,
                                                                                     });
-                                                                                    setTimeout("location.reload(true);", 1000);
-                                                                                } else {
-                                                                                    swal("Good job!", "Upload for data successfull", "success", {
-                                                                                        button: true,
-                                                                                    }).then(function(isConfirm) {
-                                                                                        if (isConfirm == true) {
-                                                                                            setTimeout("location.reload(true);", 1000);
-                                                                                        } else {
-                                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                                        }
-                                                                                    });
-                                                                                }
-
+                                                                                });
+                                                                                setTimeout("location.reload(true);", 1000);
                                                                             }
                                                                         });
                                                                     }
@@ -601,10 +592,10 @@
                                                                         },
                                                                     }).then(function(isConfirm) {
                                                                         if (isConfirm == true) {
-                                                                            var order = $("td").attr("data-order");
+                                                                            var order = $(this).data('order');
                                                                             $.ajax({
                                                                                 type: 'POST',
-                                                                                url: 'order_approverd',
+                                                                                url: 'order_approved_admin',
                                                                                 data: {
                                                                                     order_id: order,
                                                                                     status_approved: 1,
@@ -625,7 +616,7 @@
 
                                                             <script type='text/javascript'>
                                                                 $('#order_not_approved<?php echo $stock['orderST']; ?>').click(function() {
-
+                                                                    var order = $(this).data('order');
                                                                     swal({
                                                                         icon: "warning",
                                                                         title: "Are you sure?",
@@ -638,10 +629,10 @@
                                                                         },
                                                                     }).then(function(isConfirm) {
                                                                         if (isConfirm == true) {
-                                                                            var order = $("td").attr("data-order");
+                                                                            
                                                                             $.ajax({
                                                                                 type: 'POST',
-                                                                                url: 'order_not_approved',
+                                                                                url: 'order_not_approved_admin',
                                                                                 data: {
                                                                                     order_id: order,
                                                                                     status_approved: 2,

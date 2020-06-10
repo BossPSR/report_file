@@ -191,7 +191,9 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($feedback_team['team'] != '') : ?>
+                                                            <?php if ($feedback_team['status_c_feedack_team'] == '1') : ?>
+                                                                <span class="badge badge-pill badge-success">complete</span>
+                                                            <?php elseif ($feedback_team['team'] != '') : ?>
                                                                 <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $feedback_team['id_f']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-alert-circle"></i></button>
                                                                 <button onclick="confileFeedback_team('<?php echo $feedback_team['id_f']; ?>')" class="btn btn-icon btn-success " type="button" aria-haspopup="true" aria-expanded="false">
                                                                     <i class="feather icon-log-out"></i>

@@ -25,7 +25,7 @@
                                                 <textarea name="detail" id="detail" hidden></textarea>
 
                                             </div>
-                                           
+
                                         </form>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -37,7 +37,7 @@
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
                                             </div>
-                                            
+
                                         </form>
                                     </div>
                                 </div>
@@ -132,14 +132,22 @@
                 },
                 success: function(data) {
                     myDropzone.processQueue();
-                    myDropzone2.processQueue();
+
                     myDropzone.on("queuecomplete", function(file, res) {
-                        
+                        if (myDropzone2.processQueue()) {
+                            myDropzone2.on("queuecomplete", function(file, res) {
+                                swal("Good job!", "Upload for data successfull", "success", {
+                                    button: false,
+                                });
+                                setTimeout("location.reload(true);", 1000);
+                            });
+                        } else {
                             swal("Good job!", "Upload for data successfull", "success", {
                                 button: false,
                             });
                             setTimeout("location.reload(true);", 1000);
-                        });
+                        }
+                    });
                 },
 
             });

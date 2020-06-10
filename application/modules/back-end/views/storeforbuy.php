@@ -93,7 +93,7 @@
                                                                             </div>
                                                                             <form action="" method="POST">
                                                                                 <div class="modal-body">
-                                                                                <?= $stored['note_user']; ?>
+                                                                                    <?= $stored['note_user']; ?>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
@@ -182,8 +182,8 @@
                                                             <?php } ?>
                                                         </td>
                                                         <td>
-                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
-                                                            <?php if (empty($order)) { ?>
+                                                            <?php $orderGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stored['order_id']])->result_array(); ?>
+                                                            <?php if (empty($orderGT)) { ?>
                                                                 -
                                                             <?php } else { ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalb<?php echo $stored['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -201,7 +201,6 @@
                                                                                     <thead>
 
                                                                                         <tr>
-                                                                                            <th>#</th>
                                                                                             <th>Order Id</th>
                                                                                             <th>File Name</th>
                                                                                             <th>File</th>
@@ -209,14 +208,38 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <?php foreach ($orderGT as $keys => $orderGT) { ?>
+                                                                                            <?php
+                                                                                            $file_nameGT = $orderGT['file_name_GT'];
+                                                                                            $infoGT = pathinfo($file_nameGT, PATHINFO_EXTENSION);
+
+                                                                                            ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $i++; ?></td>
-                                                                                                <td><?php echo $order['order_id'] ?></td>
-                                                                                                <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                                <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $order['create_at'] ?></td>
+                                                                                                <td><?php echo $orderGT['order_id'] ?></td>
+                                                                                                <td><?php echo $orderGT['file_name_GT'] ?></td>
+                                                                                                <td>
+                                                                                                    <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'png') : ?>
+                                                                                                        <a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                    <?php else : ?>
+                                                                                                        <a href="" id="officeviewer2<?php echo $orderGT['id']; ?>" data-file="<?php echo $orderGT['file_name_GT']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                    <?php endif; ?>
+
+                                                                                                </td>
+                                                                                                <td><?php echo $orderGT['create_at'] ?></td>
                                                                                             </tr>
+                                                                                            <script type="text/javascript">
+                                                                                                $(function() {
+                                                                                                    $("#officeviewer2<?php echo $orderGT['id']; ?>").on("click", function() {
+                                                                                                        var f = $(this).data('file');
+                                                                                                        var viewerAgent = 'https://view.officeapps.live.com/op/view.aspx?src=';
+                                                                                                        var fileUrl = '<?php echo base_url() ?>uploads/Buy/GT/';
+                                                                                                        var fileData = $(this).data('file'); // ได้ชื่อไฟล์ที่เรากำหนดใน data-file
+                                                                                                        var fullPathFile = viewerAgent + fileUrl + fileData;
+                                                                                                        console.log(fullPathFile);
+                                                                                                        $("#officeviewer2<?php echo $orderGT['id']; ?>").attr("href", fullPathFile);
+                                                                                                    });
+                                                                                                });
+                                                                                            </script>
                                                                                         <?php } ?>
                                                                                     </tbody>
                                                                                 </table>

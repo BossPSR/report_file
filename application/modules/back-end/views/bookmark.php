@@ -266,7 +266,7 @@
                                                         </td>
                                                         <td>
 
-                                                            <?php if ($bookmark['status_book'] == '1') : ?>
+                                                            <?php if (!empty($bookmark['id_document'])) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalc<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document">

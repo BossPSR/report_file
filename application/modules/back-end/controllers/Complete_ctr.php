@@ -28,15 +28,23 @@ class Complete_ctr extends CI_Controller
 
     public function book_complete_add_com()
     {
+        $id = $this->input->get('id');
         $data = array(
 
-            'id_orderBuy'   => $this->input->get('id'),
+            'id_orderBuy'   => $id,
             'id_user'       => $this->input->get('userid'),
             'create_at'     => date('Y-m-d H:i:s')
 
         );
-
         $resultsedit = $this->db->insert('tbl_bookmark', $data);
+        
+        if ($resultsedit) {
+            $check = array(
+                'check_bookmark' => '1'
+            );
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_upload_order_team', $check);
+        }
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Add bookmark information !!.');

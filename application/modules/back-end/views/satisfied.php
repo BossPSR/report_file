@@ -63,11 +63,11 @@
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
                                                     <th>Price</th>
-                                                    <th>info</th>
+                                                    <th style="width: 240px;">info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
-                                                    <th style="    width: 85px;">Status T3</th>
-                                                    <th>Tool</th>
+                                                    <th style="width: 85px;">Status T3</th>
+                                                    <th style="width: 80px;">Tool</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

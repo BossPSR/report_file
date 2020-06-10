@@ -59,9 +59,9 @@ class Stock_ctr extends CI_Controller
 		$email      =  $this->input->post('email');
 		$DMCheck    =  $this->input->post('DMCheck');
 		if (!empty($DMCheck)) {
-			$num = 1 ;
-		}else{
-			$num = 2 ;
+			$num = 1;
+		} else {
+			$num = 2;
 		}
 
 
@@ -164,6 +164,44 @@ class Stock_ctr extends CI_Controller
 				);
 				$this->db->insert('tbl_upload_order', $data);
 			}
+		}
+	}
+
+	public function order_approved_admin()
+	{
+		$order_id       = $this->input->post('order_id');
+		$is_confirm     = $this->input->post('status_approved');
+
+		if ($this->session->userdata('email_admin') == '') {
+			redirect('home');
+		} else {
+			$data = array(
+				'status_approved'        => $is_confirm,
+			);
+
+			$this->db->where('order_id', $order_id);
+			$success = $this->db->update('tbl_upload_order', $data);
+
+			echo $success;
+		}
+	}
+
+	public function order_not_approved_admin()
+	{
+		$order_id             = $this->input->post('order_id');
+		$is_confirm           = $this->input->post('status_approved');
+
+		if ($this->session->userdata('email_admin') == '') {
+			redirect('home');
+		} else {
+			$data = array(
+				'status_approved'        => $is_confirm,
+			);
+
+			$this->db->where('order_id', $order_id);
+			$success = $this->db->update('tbl_upload_order', $data);
+
+			echo $success;
 		}
 	}
 }

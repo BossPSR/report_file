@@ -78,7 +78,7 @@
                                                         <td><?php echo $i++; ?></td>
 
                                                         <td>
-                                                            <?php $prosum = date('Y-m-d', strtotime('+30 day' . '+' . $value['update_atMain'])); ?>
+                                                            <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $value['update_atMain'])); ?>
                                                             <?php $data = date('Y-m-d') ?>
 
                                                             <?php if ($value['status_delivery'] == '1' && $data <= $prosum) : ?>

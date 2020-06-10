@@ -38,7 +38,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>UserName</th>
-                                                    <th>Passport</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>Cash</th>
@@ -51,7 +50,6 @@
                                                 <?php foreach ($user_list as $user_list) { ?>
                                                     <tr>
                                                         <td><?php echo $user_list['idUser']; ?></td>
-                                                        <td><?php echo $user_list['passport']; ?></td>
                                                         <td><?php echo $user_list['email']; ?></td>
                                                         <td><?php echo $user_list['phone']; ?></td>
                                                         <td>$<?php echo $user_list['cash']; ?></td>
