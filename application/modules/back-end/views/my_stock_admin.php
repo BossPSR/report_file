@@ -409,14 +409,17 @@
                                                             <?php elseif ($stock['status_approved'] == 2) : ?>
                                                                 <span class="badge badge-pill badge-danger">Not Approved</span>
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>" ><i class="fa fa-plus-circle"></i></button>
+                                                                <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>"><i class="fa fa-plus-circle"></i></button>
                                                                 <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
-                                                                    <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>" ><i class="fa fa-exclamation-triangle"></i></button>
+                                                                    <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                    <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="approved<?php echo $stock['orderST']; ?>"><i class="fa fa-check"></i></button>
+                                                                    <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="order_not_approved<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
                                                                 <?php else : ?>
-                                                                    <button type="button" class="btn btn-secondary btn-icon" ><i class="fa fa-exclamation-triangle"></i></button>
+                                                                    <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                    <button type="button" class="btn btn-secondary btn-icon" ><i class="fa fa-check"></i></button>
+                                                                <button type="button" class="btn btn-secondary btn-icon" ><i class="fa fa-times"></i></button>
                                                                 <?php endif; ?>
-                                                                <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="approved<?php echo $stock['orderST']; ?>" ><i class="fa fa-check"></i></button>
-                                                                <button type="button" class="btn btn-danger btn-icon"  data-order="<?php echo $stock['orderST'] ?>" id="order_not_approved<?php echo $stock['orderST']; ?>" ><i class="fa fa-times"></i></button>
+
                                                             <?php endif; ?>
 
                                                             <!-- Modal Feedback -->
@@ -629,7 +632,7 @@
                                                                         },
                                                                     }).then(function(isConfirm) {
                                                                         if (isConfirm == true) {
-                                                                            
+
                                                                             $.ajax({
                                                                                 type: 'POST',
                                                                                 url: 'order_not_approved_admin',

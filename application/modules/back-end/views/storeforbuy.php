@@ -338,7 +338,7 @@
                                                                                 </select>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                        <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <fieldset>
                                                                                     <div class="vs-checkbox-con vs-checkbox-primary">
@@ -381,7 +381,7 @@
                                                                                     <?php endforeach; ?>
                                                                                 </select>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Note</label>
@@ -445,7 +445,7 @@
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                        <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <fieldset>
                                                                                     <div class="vs-checkbox-con vs-checkbox-primary">
@@ -487,7 +487,7 @@
                                                                                     <?php endforeach; ?>
                                                                                 </select>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> -->
 
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">

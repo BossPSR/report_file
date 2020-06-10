@@ -107,20 +107,23 @@ class Feedback_ctr extends CI_Controller
 
     public function order_auto_feedback_team()
     {
+        $id   = $this->input->post('id');
         $order_id   = $this->input->post('order_id');
         $team = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
         $cmid       = $this->input->post('cmid');
         $DM         = $this->input->post('DM');
         $dated      = $this->input->post('dated');
         $orf = array(
-            'teamId'            => $team['teamId'],
-            'feedback_detail'   => $DM,
-            'order_id'          => $order_id,
-            'userId'            => $cmid,
-            'create_at'         => date('Y-m-d H:i:s'),
-            'dated'             => $dated,
+            'teamId'                => $team['teamId'],
+            'feedback_detail'       => $DM,
+            'order_id'              => $order_id,
+            'userId'                => $cmid,
+            'update_at'             => date('Y-m-d H:i:s'),
+            'dated'                 => $dated,
+            'status_c_feedack_team' => '1',
         );
-        $success = $this->db->insert('tbl_feedback', $orf);
+        $this->db->where('id', $id);
+        $success = $this->db->update('tbl_feedback', $orf);
         echo $success;
     }
 

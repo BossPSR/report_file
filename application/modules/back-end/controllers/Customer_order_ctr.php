@@ -221,11 +221,22 @@ class Customer_order_ctr extends CI_Controller
         $this->db->where('order_id', $order_id);
         $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
         if ($resultsedit) {
-            $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
-        }
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Team All information');
+                }
+            } else {
 
-        $this->sendEmail_all($teamid,$order_id);
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
 
         return redirect('Satisfied');
     }
@@ -241,11 +252,24 @@ class Customer_order_ctr extends CI_Controller
         $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
 
         if ($resultsedit) {
-            $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Team All information');
+                }
+            } else {
+
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
         }
 
-        $this->sendEmail_all($teamid,$order_id);
+
 
         return redirect('Not_Satisfied');
     }
@@ -261,12 +285,23 @@ class Customer_order_ctr extends CI_Controller
         $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
 
         if ($resultsedit) {
-            $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Team All information');
+                }
+            } else {
+
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
         }
 
-        $this->sendEmail_all($teamid,$order_id);
-        
         return redirect('my_stock_admin');
     }
 
@@ -334,7 +369,7 @@ class Customer_order_ctr extends CI_Controller
     }
 
 
-    private function sendEmail_all($teamid,$order_id)
+    private function sendEmail_all($teamid, $order_id)
     {
         $team  = $this->db->get_where('tbl_team', ['idTeam' => $teamid])->row_array();
 

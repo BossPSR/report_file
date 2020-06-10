@@ -218,13 +218,14 @@
                                                                         <!-- <div class="dz-message" style="top: 24%;">Upload Document </div>      -->
                                                                     </form>
 
+                                                                    <input type="text" id="id<?php echo $feedback_team['id_f']; ?>" class="form-control " name="id" value="<?php echo $feedback_team['id_f']; ?>" hidden>
                                                                     <input type="text" id="order_id<?php echo $feedback_team['id_f']; ?>" class="form-control " name="order_id" value="<?php echo $feedback_team['order_id']; ?>" hidden>
                                                                     <input type="text" id="cmid<?php echo $feedback_team['id_f']; ?>" class="form-control " name="cmid" value="<?php echo $feedback_team['userId']; ?>" hidden>
 
 
                                                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
                                                                         <label for="" style="font-size: 16px;"> Descriptions </label>
-                                                                        <textarea name="descriptions" class="form-control" id="DM1<?php echo $feedback_team['id_f']; ?>" rows="5" style="width: 100%"></textarea>
+                                                                        <textarea name="descriptions" class="form-control" id="DM1<?php echo $feedback_team['id_f']; ?>" rows="5" style="width: 100%"><?= $feedback_team['feedback_detail']; ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
@@ -257,10 +258,11 @@
                                                         document.getElementById("uploadsfile<?php echo $feedback_team['id_f']; ?>").addEventListener("click", function() {
                                                             // myDropzone.processQueue();
 
-                                                            var v = document.getElementById("dated<?php echo $feedback_team['id_f']; ?>").value;
-                                                            var x = document.getElementById("order_id<?php echo $feedback_team['id_f']; ?>").value;
-                                                            var y = document.getElementById("cmid<?php echo $feedback_team['id_f']; ?>").value;
-                                                            var z = document.getElementById("DM1<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var v  = document.getElementById("dated<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var fi = document.getElementById("id<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var x  = document.getElementById("order_id<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var y  = document.getElementById("cmid<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var z  = document.getElementById("DM1<?php echo $feedback_team['id_f']; ?>").value;
                                                             if (myDropzone.files < 1) {
                                                                 swal("Warning!", "Can not be document Empty", "warning", {
                                                                     button: true,
@@ -271,6 +273,7 @@
                                                                         type: 'POST',
                                                                         url: 'order_auto_feedback_team',
                                                                         data: {
+                                                                            id: fi,
                                                                             order_id: x,
                                                                             cmid: y,
                                                                             DM: z,

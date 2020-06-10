@@ -380,6 +380,7 @@
                                                                                         <label for="Team">Team ID</label>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
+                                                                                            <option value="" > All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
                                                                                                 <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $stores['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
@@ -610,7 +611,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team (<?php echo $stores['orderST']; ?>)</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -648,6 +649,32 @@
                                                                                 <label for="helpInputTop">wage(10%)</label>
 
                                                                                 <input type="text" class="form-control" name="wage" value="<?php echo $stores['price_file'] * 10 / 100; ?>" placeholder="Enter wage">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <fieldset>
+                                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                        <input type="checkbox" class="ckeck<?php echo $stores['order_id']; ?>" data-order="<?php echo $stores['order_id']; ?>">
+                                                                                        <span class="vs-checkbox">
+                                                                                            <span class="vs-checkbox--check">
+                                                                                                <i class="vs-icon feather icon-check"></i>
+                                                                                            </span>
+                                                                                        </span>
+                                                                                        <span class="">Add Team</span>
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1" id="teambox<?php echo $stores['order_id']; ?>" style="display: none">
+                                                                            <div class="form-group">
+                                                                                <label for="team">Team Id</label>
+                                                                                <select class="select2 form-control" name="team" id="team<?php echo $stores['order_id']; ?>">
+                                                                                    <option disabled selected> -- Select Team -- </option>
+                                                                                    <?php foreach ($ts as $tsM) { ?>
+                                                                                        <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
@@ -690,6 +717,23 @@
 </div>
 <!-- END: Content-->
 
+<script type="text/javascript">
+    $('body').on('change', 'input[type="checkbox"]', function() {
+        var o = $(this).data('order');
+
+        if ($('.ckeck' + o).is(":checked")) {
+            $("#teambox" + o).fadeIn("slow");
+            $("#team" + o).prop('required', true);
+            $("#wage" + o).prop('required', true);
+            $("#position" + o).prop('required', true);
+        } else {
+            $("#teambox" + o).fadeOut("slow");
+            $("#team" + o).prop('required', false);
+            $("#wage" + o).prop('required', false);
+            $("#position" + o).prop('required', false);
+        }
+    });
+</script>
 
 <script type="text/javascript">
     $(document).ready(function() {
