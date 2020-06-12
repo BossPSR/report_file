@@ -397,16 +397,16 @@
                                                                     Drop files here or click to upload.<br>
                                                                     <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                                                 </div>
-                                                                <input type="text" name="order_id" id="order_id" value="<?php echo $value['ORD']; ?>" hidden>
-                                                                <textarea id="detailshow" name="detail" class="form-control detailshow" rows="5" hidden></textarea>
+                                                                <input type="text" name="order_id" id="order_idS<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
                                                             </form>
                                                             <br>
                                                             <!-- <form action="my-order-feedAuto" method="POST"> -->
                                                             <label for="" class="font-size-upload">Detail :</label>
-                                                            <textarea id="detailkey" class="form-control" rows="5"></textarea>
+                                                            <textarea id="detailkey<?php echo $value['ORD']; ?>" class="form-control" rows="5"></textarea>
                                                             <br>
 
                                                             <!-- </form> -->
+                                                            <input type="text" name="userId" id="userIdS<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" id="Submitgtdoc<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
@@ -431,18 +431,35 @@
                                                 });
 
                                                 $('#Submitgtdoc<?php echo $value['ORD']; ?>').click(function() {
+                                                    var x = document.getElementById("detailkey<?php echo $value['ORD']; ?>").value;
+                                                    var z = document.getElementById("order_idS<?php echo $value['ORD']; ?>").value;
+                                                    var c = document.getElementById("userIdS<?php echo $value['ORD']; ?>").value;
+
                                                     if (myDropzone<?php echo $value['ORD']; ?>.files < 1) {
                                                         swal("Warning!", "Can not be document Empty", "warning", {
                                                             button: true,
                                                         });
                                                     } else {
-                                                        myDropzone<?php echo $value['ORD']; ?>.processQueue();
-                                                        myDropzone<?php echo $value['ORD']; ?>.on("queuecomplete", function(file, res) {
-                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                button: false,
-                                                            });
+
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: 'order_auto_morefile',
+                                                            data: {
+                                                                detail: x,
+                                                                order_id: z,
+                                                                userId: c,
+                                                            },
+                                                            success: function(success) {
+                                                                myDropzone<?php echo $value['ORD']; ?>.processQueue();
+                                                                myDropzone<?php echo $value['ORD']; ?>.on("queuecomplete", function(file, res) {
+                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                        button: false,
+                                                                    });
+                                                                });
+                                                                setTimeout("location.reload(true);", 1000);
+                                                            }
                                                         });
-                                                        setTimeout("location.reload(true);", 1000);
+
                                                     }
                                                 });
                                             </script>

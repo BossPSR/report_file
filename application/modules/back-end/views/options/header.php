@@ -533,10 +533,10 @@
                         $notify_GT = 0;
 
                         $this->db->select('*');
-                        $this->db->from('tbl_upload_orderGT');
+                        $this->db->from('tbl_morefile_GT');
                         $this->db->where('status_more_file', 1);
                         $this->db->where('status_see_more_file_team', 0);
-                        $this->db->group_by('tbl_upload_orderGT.order_id');
+                        $this->db->group_by('order_id');
                         $bookmarkGT = $this->db->get()->result_array();
 
                         foreach ($bookmarkGT as $bookmarkGT) {

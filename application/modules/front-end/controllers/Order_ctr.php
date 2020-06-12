@@ -77,7 +77,6 @@ class Order_ctr extends CI_Controller
     // image_lib
 
     $order_id     = $this->input->post('order_id');
-    $detail       = $this->input->post('detail');
 
     $request = 1;
     // Set preference
@@ -91,6 +90,7 @@ class Order_ctr extends CI_Controller
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
 
+    $moremax = $this->db->order_by('id', 'DESC')->get('tbl_morefile_GT')->row();
 
     // File upload
     if ($this->upload->do_upload('file')) {
@@ -98,19 +98,33 @@ class Order_ctr extends CI_Controller
       $uploadData = $this->upload->data();
 
       $data = array(
+        'more_id'           => $moremax->id,
         'order_id'          => $order_id,
-        'detail'            => $detail,
         'file_name_GT'      => $uploadData['file_name'],
         'path_GT'           => 'uploads/Buy/GT/' . $uploadData['file_name'],
-        'status_more_file'  => 1,
         'create_at'         => date('Y-m-d H:i:s'),
       );
       $this->db->insert('tbl_upload_orderGT', $data);
     }
   }
 
-  public function order_notAppOr()
+  public function order_auto_morefile()
   {
+    $detail     = $this->input->post('detail');
+    $order_id   = $this->input->post('order_id');
+    $userId     = $this->input->post('userId');
+
+    $orf = array(
+      'more_detail'       => $detail,
+      'order_id'          => $order_id,
+      'userId'            => $userId,
+      'create_at'         => date('Y-m-d H:i:s'),
+      'status_more_file'  => 1
+    );
+    $success = $this->db->insert('tbl_morefile_GT', $orf);
+    
+    echo $success;
 
   }
+
 }

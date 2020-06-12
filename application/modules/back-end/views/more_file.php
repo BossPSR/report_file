@@ -79,8 +79,8 @@
                                                         <td><?php echo $more_file['userId']; ?></td>
 
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $more_file['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $more_file['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $more_file['idM']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $more_file['idM']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -92,7 +92,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $more_file['orderGT']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['more_id' => $more_file['idM']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -143,8 +143,8 @@
                                                                                     <textarea name="detail" id="" rows="6" class="form-control"><?= $more_file['detail']; ?></textarea>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">Close</button>
-                                                                                <button type="submit" class="btn btn-success">Save</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                                <button type=" submit" class="btn btn-success">Save</button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
@@ -157,8 +157,8 @@
 
                                                         <td><?php echo $more_file['create_at']; ?></td>
                                                         <td>
-                                                            <?php if (!empty($more_file['teamId'])) : ?>
-                                                                <?php echo $more_file['teamId']; ?>
+                                                            <?php if (!empty($more_file['TM'])) : ?>
+                                                                <?php echo $more_file['TM']; ?>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif;  ?>
@@ -186,15 +186,55 @@
                                                         </td>
 
                                                         <td>
-                                                            <?php if ($more_file['teamId'] == "") : ?>
+                                                            <?php if ($more_file['TM'] == "") : ?>
 
+                                                                <button onclick="" class="btn btn-icon btn-secondary " type="button" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="feather icon-alert-circle"></i>
+                                                                </button>
                                                                 <button onclick="" class="btn btn-icon btn-secondary " type="button" aria-haspopup="true" aria-expanded="false">
                                                                     <i class="feather icon-corner-up-right"></i>
                                                                 </button>
                                                             <?php else : ?>
+                                                                <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $more_file['idM']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-alert-circle"></i></button>
                                                                 <button onclick="confirmalertunlock_upload_morefile('<?php echo $more_file['orderGT']; ?>')" class="btn btn-icon btn-info " type="button" aria-haspopup="true" aria-expanded="false">
                                                                     <i class="feather icon-corner-up-right"></i>
                                                                 </button>
+
+                                                                <div class="modal fade" id="exampleModalb<?php echo $more_file['idM']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Morefile (<?php echo $more_file['order_id'] ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <label for="" style="font-size: 16px;">File Document </label>
+                                                                                <form action="fileUpload_feedback_team" class="dropzone dropzone-area " id="maindropzoneFeedback<?php echo $more_file['id']; ?>">
+                                                                                    <!-- <div class="dz-message" style="top: 24%;">Upload Document </div>      -->
+                                                                                </form>
+
+                                                                                <input type="text" id="id<?php echo $more_file['idM']; ?>" class="form-control " name="id" value="<?php echo $more_file['id']; ?>" hidden>
+                                                                                <input type="text" id="order_id<?php echo $more_file['idM']; ?>" class="form-control " name="order_id" value="<?php echo $more_file['order_id']; ?>" hidden>
+                                                                                <input type="text" id="cmid<?php echo $more_file['idM']; ?>" class="form-control " name="cmid" value="<?php echo $more_file['userId']; ?>" hidden>
+
+
+                                                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                                                                    <label for="" style="font-size: 16px;"> Descriptions </label>
+                                                                                    <textarea name="descriptions" class="form-control" id="DM1<?php echo $more_file['id']; ?>" rows="5" style="width: 100%"><?= $more_file['more_detail']; ?></textarea>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <button type="button" id="uploadsfile<?php echo $more_file['idM']; ?>" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Morefile</button>
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             <?php endif; ?>
                                                         </td>
 
