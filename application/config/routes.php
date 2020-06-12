@@ -255,3 +255,5 @@ $route['refresh_ns']               			    	= 'back-end/Customer_order_ctr/refres
 $route['click_step']								= 'back-end/Customer_order_ctr/click_step';
 $route['checkStatus_admin_admin']                   = 'back-end/Login_ctr/checkStatus_admin_admin';
 $route['checkStatusAdmin']                   		= 'back-end/Login_ctr/checkStatusAdmin';
+
+$route['add_team_informal']                   		= 'back-end/Informal_ctr/add_team_informal';

@@ -13,9 +13,10 @@ class Customer_model extends CI_Model{
     {
         $this->db->select('*,tbl_upload_order.userId AS userOR,tbl_upload_order.order_id AS orderST ,tbl_upload_order.create_at AS createST ,tbl_upload_order.date_required AS dateREST');
         $this->db->from('tbl_upload_order');
-        $this->db->join('tbl_bookmark','tbl_upload_order.order_id =tbl_bookmark.id_orderBuy ' , 'left');
+        $this->db->join('tbl_bookmark','tbl_upload_order.order_id = tbl_bookmark.id_orderBuy ' , 'left');
         $this->db->join('tbl_upload_main_search','tbl_bookmark.id_document = tbl_upload_main_search.id_doc ' , 'left');
-        $this->db->join('tbl_upload_team','tbl_upload_order.order_id =tbl_upload_team.order_id ' , 'left');
+        $this->db->join('tbl_upload_team','tbl_upload_order.order_id = tbl_upload_team.order_id ' , 'left');
+        $this->db->join('tbl_informal','tbl_upload_order.order_id = tbl_informal.order_id ' , 'left');
         $this->db->where('tbl_upload_order.status_book',1);
         $this->db->where('tbl_upload_order.status_pay',1);
         $this->db->where('tbl_upload_order.is_check',0);
