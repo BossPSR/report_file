@@ -43,6 +43,7 @@
                                                     <th>Cash</th>
                                                     <th>Score</th>
                                                     <th>package</th>
+                                                    <th>Tool</th>
                                                 </tr>
                                             </thead>
 
@@ -59,6 +60,40 @@
                                                         <?php else :  ?>
                                                             <td>have package </td>
                                                         <?php endif  ?>
+                                                        <td>
+                                                            <button type="button" class="btn btn-icon btn-warning" data-toggle="modal" data-target="#infor<?php echo $user_list['idUser']; ?>">
+                                                                <i class="feather icon-alert-triangle"></i>
+                                                            </button>
+                                                            <div class="modal fade" id="infor<?php echo $user_list['idUser']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Add Score (<?php echo $user_list['idUser']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="modal-body ">
+                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                <div class="form-group">
+                                                                                    <label for="name">Score</label>
+                                                                                    <input type="number" class="form-control" name="Score" value="" required>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around">
+                                                                                <button type="submit" id="uploadsfile<?php echo $user_list['idUser']; ?>" class="btn btn-primary">Submit</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 <?php  } ?>
                                             </tbody>

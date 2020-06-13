@@ -90,7 +90,7 @@
                                                                     <?php if ($show_dm['id_document'] == '') : ?>
                                                                         -
                                                                     <?php else : ?>
-                                                                        <?php echo $show_dm['id_document'] ?><br>
+                                                                        <span class="badge badge-primary"><?php echo $show_dm['id_document'] ?></span>
                                                                     <?php endif; ?>
 
                                                                 <?php } ?>
@@ -538,7 +538,7 @@
 
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
-                                                                                        <label for="name">Wage</label>
+                                                                                        <label for="Wage">Wage</label>
                                                                                         <input type="text" class="form-control" name="Wage" value="" required>
                                                                                     </div>
                                                                                 </div>

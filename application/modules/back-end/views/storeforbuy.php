@@ -334,7 +334,8 @@
                                                                                 <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
                                                                                     <option value="" selected disabled>select</option>
                                                                                     <option value="complete">Complete</option>
-                                                                                    <option value="notcomplete">NotComplete</option>
+                                                                                    <option value="notcomplete">Not Complete</option>
+                                                                                    <option value="relife">Relife</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>

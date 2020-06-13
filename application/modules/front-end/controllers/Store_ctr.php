@@ -153,7 +153,7 @@ class Store_ctr extends CI_Controller
                 redirect('/');
             }
 
-            
+
             // $price_result = $user['cash'] - $price_dis;
             // $this->db->where('idUser', $customer_id);
             // $this->db->update('tbl_user', ['cash' => $price_result]);
@@ -164,16 +164,15 @@ class Store_ctr extends CI_Controller
                 redirect('/');
             }
 
-            if ($user['score'] > ($discount * 10)) {
+            if ($discount != '0') {
                 $rescore = $user['score'] - 100;
                 $this->db->where('idUser', $customer_id);
-                $this->db->update('tbl_user', ['score' => $rescore ]);
-            }else{
-                
+                $this->db->update('tbl_user', ['score' => $rescore]);
             }
 
+
             $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', ['status_pay' => 1 , 'price_dis_order' => $price_dis , 'score_user' => $discount ]);
+            $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => $price_dis, 'score_user' => $discount]);
 
 
             $data = [
