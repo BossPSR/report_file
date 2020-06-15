@@ -41,7 +41,7 @@
                                 <?php } ?>
                                 <?php foreach ($get_user as $key => $get_user) { ?>
                                     <input type="text" name="get_user" value="<?php echo $get_user['email']; ?>" class="form-control" required hidden>
-                                    <input type="text" name="get_user_pass" value="<?php echo $get_user['passport']; ?>" class="form-control" required hidden>
+                                
                                 <?php } ?>
                                 <p>
                                     <label>Passport No. <span class="red">*</span></label>

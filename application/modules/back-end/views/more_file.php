@@ -62,6 +62,7 @@
                                                     <th>T3</th>
                                                     <th>Position</th>
                                                     <th>Status</th>
+                                                    <th>Prossing</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -84,7 +85,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Main File</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Main file</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -124,11 +125,9 @@
 
 
                                                         <td>
-                                                            <a href="#" data-toggle="modal" data-target="#note<?php echo $more_file['orderGT']; ?>"><i class="feather icon-search"></i></a>
-
-                                                            <?php if (!empty($more_file['detail'])) { ?>
-
-                                                                <div class="modal fade" id="note<?php echo $more_file['orderGT']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                            <?php if (!empty($more_file['more_detail'])) { ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note<?php echo $more_file['idM']; ?>"><i class="feather icon-search"></i></a>
+                                                                <div class="modal fade" id="note<?php echo $more_file['idM']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -138,9 +137,9 @@
                                                                                 </button>
                                                                             </div>
                                                                             <form action="more_file_update_detail" method="POST">
-                                                                                <input type="hidden" name="orderid" value="<?php echo $more_file['orderGT']; ?>">
+                                                                                <input type="hidden" name="id" value="<?php echo $more_file['idM']; ?>">
                                                                                 <div class="modal-body">
-                                                                                    <textarea name="detail" id="" rows="6" class="form-control"><?= $more_file['detail']; ?></textarea>
+                                                                                    <textarea name="detail" id="" rows="6" class="form-control"><?= $more_file['more_detail']; ?></textarea>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
@@ -186,35 +185,57 @@
                                                         </td>
 
                                                         <td>
+                                                            <?php if ($more_file['Tstatus'] == 0 && $more_file['teamId'] == '') : ?>
+                                                                <span class="badge badge-pill badge-primary">waiting for team </span>
+                                                            <?php elseif ($more_file['Tstatus'] == 0 && $more_file['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-warning">Processing </span>
+                                                            <?php elseif ($more_file['Tstatus'] == 1 && $more_file['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-success">Complete </span>
+                                                            <?php elseif ($more_file['Tstatus'] == 2 && $more_file['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback </span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
 
-                                                            <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $more_file['idM']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-alert-circle"></i></button>
-                                                            <button onclick="confirmalertunlock_upload_morefile('<?php echo $more_file['orderGT']; ?>')" class="btn btn-icon btn-info " type="button" aria-haspopup="true" aria-expanded="false">
-                                                                <i class="feather icon-corner-up-right"></i>
-                                                            </button>
+                                                        <td>
+                                                            <?php if ($more_file['status_see_more_file_team'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-success">complete</span>
+
+                                                            <?php else : ?>
+                                                                <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $more_file['idM']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-alert-circle"></i></button>
+                                                                <button onclick="confirmalertunlock_upload_morefile('<?php echo $more_file['idM']; ?>' , '<?php echo $more_file['orderGT']; ?>')" class="btn btn-icon btn-info " type="button" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="feather icon-corner-up-right"></i>
+                                                                </button>
+                                                            <?php endif; ?>
 
                                                             <div class="modal fade" id="exampleModalb<?php echo $more_file['idM']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Morefile (<?php echo $more_file['order_id'] ?>)</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">More file (<?php echo $more_file['order_id'] ?>)</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <label for="" style="font-size: 16px;">File Document </label>
-                                                                            <form action="fileUpload_feedback_team" class="dropzone dropzone-area " id="maindropzoneFeedback<?php echo $more_file['id']; ?>">
-                                                                                <!-- <div class="dz-message" style="top: 24%;">Upload Document </div>      -->
-                                                                            </form>
-
-                                                                            <input type="text" id="id<?php echo $more_file['idM']; ?>" class="form-control " name="id" value="<?php echo $more_file['id']; ?>" hidden>
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                                                                <form action="more_file_file" class="dropzone" id="maindropzonemore<?php echo $more_file['idM']; ?>">
+                                                                                    <div class="dz-message needsclick">
+                                                                                        Drop files here or click to upload.<br>
+                                                                                        <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                                    </div>
+                                                                                    <input type="hidden" name="id" value="<?php echo $more_file['idM']; ?>">
+                                                                                    <input type="hidden" name="order" value="<?php echo $more_file['order_id']; ?>">
+                                                                                </form>
+                                                                            </div>
+                                                                            <input type="text" id="id<?php echo $more_file['idM']; ?>" class="form-control " name="id" value="<?php echo $more_file['idM']; ?>" hidden>
                                                                             <input type="text" id="order_id<?php echo $more_file['idM']; ?>" class="form-control " name="order_id" value="<?php echo $more_file['order_id']; ?>" hidden>
-                                                                            <input type="text" id="cmid<?php echo $more_file['idM']; ?>" class="form-control " name="cmid" value="<?php echo $more_file['userId']; ?>" hidden>
-
 
                                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" style="margin-top: 25px;">
                                                                                 <label for="" style="font-size: 16px;"> Descriptions </label>
-                                                                                <textarea name="descriptions" class="form-control" id="DM1<?php echo $more_file['id']; ?>" rows="5" style="width: 100%"><?= $more_file['more_detail']; ?></textarea>
+                                                                                <textarea name="descriptions" class="form-control" id="text<?php echo $more_file['idM']; ?>" rows="5" style="width: 100%"><?= $more_file['more_detail']; ?></textarea>
                                                                             </div>
 
                                                                         </div>
@@ -227,6 +248,53 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <script>
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzone<?php echo $more_file['idM']; ?> = new Dropzone("#maindropzonemore<?php echo $more_file['idM']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                document.getElementById("uploadsfile<?php echo $more_file['idM']; ?>").addEventListener("click", function() {
+                                                                    // myDropzone.processQueue();
+                                                                    var fi = document.getElementById("id<?php echo $more_file['idM']; ?>").value;
+                                                                    var x = document.getElementById("order_id<?php echo $more_file['idM']; ?>").value;
+                                                                    var text = document.getElementById("text<?php echo $more_file['idM']; ?>").value;
+                                                                    if (myDropzone<?php echo $more_file['idM']; ?>.files < 1) {
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    } else {
+                                                                        $.ajax({
+                                                                            type: 'POST',
+                                                                            url: 'more_file_other',
+                                                                            data: {
+                                                                                id: fi,
+                                                                                order_id: x,
+                                                                                textarea: text,
+                                                                            },
+                                                                            success: function(success) {
+                                                                                myDropzone<?php echo $more_file['idM']; ?>.processQueue();
+                                                                                myDropzone<?php echo $more_file['idM']; ?>.on("queuecomplete", function(file, res) {
+                                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                                        button: true,
+                                                                                    }).then(function(isConfirm) {
+                                                                                        if (isConfirm == true) {
+                                                                                            setTimeout("location.reload(true);", 500);
+                                                                                        } else {
+                                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                        }
+                                                                                    });
+                                                                                });
+                                                                            }
+                                                                        });
+
+                                                                    }
+
+                                                                });
+                                                            </script>
                                                         </td>
 
                                                     </tr>

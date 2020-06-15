@@ -50,43 +50,124 @@
                                             <tbody>
                                                 <?php foreach ($user_list as $user_list) { ?>
                                                     <tr>
-                                                        <td><?php echo $user_list['idUser']; ?></td>
+                                                        <td><?php echo $user_list['Us']; ?></td>
                                                         <td><?php echo $user_list['email']; ?></td>
                                                         <td><?php echo $user_list['phone']; ?></td>
                                                         <td>$<?php echo $user_list['cash']; ?></td>
                                                         <td><?php echo $user_list['score']; ?></td>
-                                                        <?php if ($user_list['user_id'] == '') :  ?>
+                                                        <?php if ($user_list['Us'] == '') :  ?>
                                                             <td>Not package</td>
                                                         <?php else :  ?>
                                                             <td>have package </td>
                                                         <?php endif  ?>
                                                         <td>
-                                                            <button type="button" class="btn btn-icon btn-warning" data-toggle="modal" data-target="#infor<?php echo $user_list['idUser']; ?>">
-                                                                <i class="feather icon-alert-triangle"></i>
+                                                            <button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#infor<?php echo $user_list['Us']; ?>">
+                                                                <i class="feather icon-more-horizontal"></i>
                                                             </button>
-                                                            <div class="modal fade" id="infor<?php echo $user_list['idUser']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal fade" id="infor<?php echo $user_list['Us']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Add Score (<?php echo $user_list['idUser']; ?>)</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Rating user tool (<?php echo $user_list['Us']; ?>)</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
 
                                                                         <div class="modal-body ">
-                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                <div class="form-group">
-                                                                                    <label for="name">Score</label>
-                                                                                    <input type="number" class="form-control" name="Score" value="" required>
+                                                                            <div class="card-content">
+                                                                                <div class="card-body">
+                                                                                    <ul class="nav nav-tabs nav-fill ">
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link active" id="base-pill31" data-toggle="pill" href="#pill31" aria-expanded="true">
+                                                                                                score
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link" id="base-pill32" data-toggle="pill" href="#pill32" aria-expanded="false">Deduct score</a>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link" id="base-pill33" data-toggle="pill" href="#pill33" aria-expanded="false">Cashback</a>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link" id="base-pill34" data-toggle="pill" href="#pill34" aria-expanded="false">Deduct Cashback</a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                    <div class="tab-content">
+                                                                                        <div role="tabpanel" class="tab-pane active" id="pill31" aria-expanded="true" aria-labelledby="base-pill31">
+                                                                                            <form action="add_score" method="POST">
+                                                                                                <input type="hidden" name="id" value="<?php echo $user_list['Us']; ?>">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-8">
+                                                                                                        <label for="">Add score</label>
+                                                                                                        <input type="number" name="add" class="form-control">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <label for="">score user</label>
+                                                                                                        <div><?php echo $user_list['score']; ?></div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-12" style="margin-top: 15px;">
+                                                                                                        <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        <div class="tab-pane" id="pill32" aria-labelledby="base-pill32">
+                                                                                            <form action="deduct_score" method="POST">
+                                                                                                <input type="hidden" name="id" value="<?php echo $user_list['Us']; ?>">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-8">
+                                                                                                        <label for="">Deduct score</label>
+                                                                                                        <input type="number" name="deduct" class="form-control">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <label for="">score user</label>
+                                                                                                        <div><?php echo $user_list['score']; ?></div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-12" style="margin-top: 15px;">
+                                                                                                        <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        <div class="tab-pane" id="pill33" aria-labelledby="base-pill33">
+                                                                                            <form action="cash_score" method="POST">
+                                                                                                <input type="hidden" name="id" value="<?php echo $user_list['Us']; ?>">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-8">
+                                                                                                        <label for="">Add cashback</label>
+                                                                                                        <input type="number" name="cashback" class="form-control">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <label for="">Cashback user</label>
+                                                                                                        <div><?php echo $user_list['cashback']; ?></div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-12" style="margin-top: 15px;">
+                                                                                                        <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        <div class="tab-pane" id="pill34" aria-labelledby="base-pill34">
+                                                                                            <form action="deduct_cash_score" method="POST">
+                                                                                                <input type="hidden" name="id" value="<?php echo $user_list['Us']; ?>">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-8">
+                                                                                                        <label for="">Deduct cashback</label>
+                                                                                                        <input type="number" name="cashback" class="form-control">
+                                                                                                    </div>
+                                                                                                    <div class="col-md-4">
+                                                                                                        <label for="">Cashback user</label>
+                                                                                                        <div><?php echo $user_list['cashback']; ?></div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-12" style="margin-top: 15px;">
+                                                                                                        <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around">
-                                                                                <button type="submit" id="uploadsfile<?php echo $user_list['idUser']; ?>" class="btn btn-primary">Submit</button>
                                                                             </div>
                                                                         </div>
 

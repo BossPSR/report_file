@@ -59,13 +59,13 @@
                                             </thead>
                                             <?php $i = 1; ?>
                                             <tbody>
-                                                <?php foreach ($Approved as $key => $Approved) {?>
+                                                <?php foreach ($Approved as $key => $Approved) { ?>
                                                 <tr>
                                                     <td><?php echo $Approved['order_id'] ?></td>
                                                     <td><?php echo $Approved['file_name'] ?></td>
                                                     <td><?php echo $Approved['date_required']  ?></td>
                                                 </tr>
-                                                <?php }?>
+                                                <?php } ?>
                                                 </tfoot>
                                         </table>
                                     </div>

@@ -39,23 +39,31 @@ class More_file_ctr extends CI_Controller
 
     public function  status_more_file_team()
     {
-        $id = $this->input->get('id');
-
-        $this->db->where('order_id', $id);
-        $resultsedit = $this->db->update('tbl_upload_orderGT', ['update_at' => date('Y-m-d H:i:s'), 'status_see_more_file_team' => 1]);
+        $id     = $this->input->get('id');
+        $order  = $this->input->get('order');
+        $teamT   = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
         
-        if ($resultsedit > 0) {
-            $this->sendEmail_more($id);
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_morefile_GT', ['update_at' => date('Y-m-d H:i:s'), 'status_see_more_file_team' => 1]);
+
+        if ($resultsedit) {
+            $this->db->where('order_id',$order);
+            $success = $this->db->update('tbl_morefile_GT', ['teamId' => $teamT['teamId']]);
+        }
+        
+        if ($teamT['teamId'] != '') {
+            $this->sendEmail_more($order);
         } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully updated More File information');
+            $this->session->set_flashdata('save_ss2', 'Successfully updated More File information');
         }
         return redirect('More_File');
     }
 
 
-    private function sendEmail_more($id)
+    private function sendEmail_more($order)
     {
-        $team = $this->db->get_where('tbl_upload_team', ['order_id' => $id])->row_array();
+        $team = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
         $emailT = $this->db->get_where('tbl_team', ['IdTeam' => $team['teamId']])->row_array();
 
         $subject = 'Additional documents from the admin.';
@@ -107,15 +115,13 @@ class More_file_ctr extends CI_Controller
     }
 
 
-
-
     public function  more_file_update_detail()
     {
-        $orderid    = $this->input->post('orderid');
+        $id         = $this->input->post('id');
         $detail     = $this->input->post('detail');
 
-        $this->db->where('order_id', $orderid);
-        $resultsedit = $this->db->update('tbl_upload_orderGT', ['detail' => $detail]);
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_morefile_GT', ['more_detail' => $detail]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated detail information !!.');
@@ -123,6 +129,58 @@ class More_file_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully updated detail information');
         }
         return redirect('More_File');
+    }
+
+    public function  more_file_other()
+    {
+        $id         = $this->input->post('id');
+        $order_id   = $this->input->post('order_id');
+        $textarea   = $this->input->post('textarea');
+        $team       = $this->db->get_where('tbl_upload_team',['order_id' => $order_id])->row_array();
+        
+
+        $this->db->where('id',$id);
+        $gt = $this->db->update('tbl_morefile_GT', ['more_detail' => $textarea , 'status_see_more_file_team' => '1']);
+        if ($gt) {
+            $this->db->where('order_id',$order_id);
+            $success = $this->db->update('tbl_morefile_GT', ['teamId' => $team['teamId']]);
+        }
+
+        echo $success;
+        
+    }
+
+    public function more_file_file()
+    {
+        $target_dir = "uploads/Buy/GT/"; // Upload directory
+        if (!empty($_FILES['file']['name'])) {
+
+            // Set preference
+            $config['upload_path']     = 'uploads/Buy/GT/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
+
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
+
+                $data = array(
+                    'more_id'       => $this->input->post('id'),
+                    'order_id'      => $this->input->post('order'),
+                    'file_name_GT'  => $uploadData['file_name'],
+                    'path_GT'       => 'uploads/Buy/GT/' . $uploadData['file_name'],
+                    'create_at'     => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_upload_orderGT', $data);
+            }
+        }
     }
 
 }

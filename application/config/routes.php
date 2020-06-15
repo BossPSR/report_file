@@ -112,7 +112,10 @@ $route['my-deduct']                 = 'front-end/Deduct_ctr/my_deduct';
 $route['checkStatus']               = 'front-end/Login_ctr/checkStatus';
 $route['teamOnline']                = 'front-end/Login_ctr/teamOnline';
 $route['teamOffline']               = 'front-end/Login_ctr/teamOffline';
+
+
 // /------------------------------------- back-end  ---------------------
+
 
 $route['back_dashboard']                            = 'back-end/Home_ctr';
 $route['back_team']                                 = 'back-end/Team_ctr';
@@ -207,9 +210,14 @@ $route['Status_Feedback']                           = 'back-end/Feedback_ctr/sta
 $route['feedback_file_update_detail']               = 'back-end/Feedback_ctr/feedback_file_update_detail';
 $route['feedback_all_detail']                       = 'back-end/Feedback_ctr/feedback_all_detail';
 $route['status_feedback_now']                       = 'back-end/Feedback_ctr/status_feedback_now';
+
 $route['More_File']                                 = 'back-end/More_file_ctr';
 $route['More_File_team']                            = 'back-end/More_file_ctr/more_file_team';
 $route['more_file_update_detail']                   = 'back-end/More_file_ctr/more_file_update_detail';
+$route['more_file_other']                   		= 'back-end/More_file_ctr/more_file_other';
+$route['status_more_file_team']                     = 'back-end/More_file_ctr/status_more_file_team';
+$route['more_file_file']                            = 'back-end/More_file_ctr/more_file_file';
+
 $route['T3_online']                                 = 'back-end/Team_ctr/T3';
 $route['status_team_t3']                            = 'back-end/Team_ctr/status_team_t3';
 $route['fileUpload_team_email']                     = 'back-end/Team_ctr/fileUpload_team_email';
@@ -233,13 +241,15 @@ $route['realtime_data1']                            = 'back-end/Home_ctr/realtim
 $route['realtime_data2']                            = 'back-end/Home_ctr/realtime_data2';
 $route['realtime_data3']                            = 'back-end/Home_ctr/realtime_data3';
 $route['check_dm']                                  = 'back-end/Store_ctr/check_dm';
-$route['status_more_file_team']                     = 'back-end/More_file_ctr/status_more_file_team';
 $route['Position']                                  = 'back-end/Position_ctr';
 $route['position_Add']                              = 'back-end/Position_ctr/position_Add';
 $route['position_edit']                             = 'back-end/Position_ctr/position_edit';
 $route['delete_Position']                           = 'back-end/Position_ctr/delete_position';
 $route['status_cut_score']                          = 'back-end/Store_ctr/status_cut_score';
 $route['edit_date_required']                        = 'back-end/Store_ctr/edit_date_required';
+$route['fileUpload_t3_other']                       = 'back-end/Store_ctr/fileUpload_t3_other';
+$route['sendEmail_delivery_teamother']              = 'back-end/Store_ctr/sendEmail_delivery_teamother';
+
 $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
 $route['edit_wage_Not_Satisfied']                   = 'back-end/Customer_order_ctr/edit_wage_Not_Satisfied';
@@ -257,3 +267,12 @@ $route['checkStatus_admin_admin']                   = 'back-end/Login_ctr/checkS
 $route['checkStatusAdmin']                   		= 'back-end/Login_ctr/checkStatusAdmin';
 
 $route['add_team_informal']                   		= 'back-end/Informal_ctr/add_team_informal';
+$route['add_score']                   		        = 'back-end/User_ctr/add_score';
+$route['deduct_score']                   		    = 'back-end/User_ctr/deduct_score';
+$route['cash_score']                   		        = 'back-end/User_ctr/cash_score';
+$route['deduct_cash_score']                   	    = 'back-end/User_ctr/deduct_cash_score';
+
+$route['deduct_income']                   		    = 'back-end/Team_ctr/deduct_income';
+$route['add_score_team']                   		    = 'back-end/Team_ctr/add_score_team';
+$route['deduct_score_team']                   		= 'back-end/Team_ctr/deduct_score_team';
+

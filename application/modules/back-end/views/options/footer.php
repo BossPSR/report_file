@@ -114,17 +114,17 @@
 </script> -->
 
 <script>
-    function confirmalertunlock_upload_morefile(data5) {
+    function confirmalertunlock_upload_morefile(data5,data6) {
 
         swal({
-            title: "Are you sure upload_morefile?",
-            text: "Are you sure you this upload_morefile ?",
+            title: "Are you sure upload morefile?",
+            text: "Are you sure you this upload morefile ?",
             icon: "warning",
             buttons: true,
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'status_more_file_team?id=' + data5  ;
+                window.location = 'status_more_file_team?id=' + data5 + '&order=' + data6  ;
             }
         })
     }

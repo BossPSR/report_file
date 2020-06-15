@@ -111,9 +111,6 @@
 									</h3>
 									<h3 class="check_list_not">ค้างชำระเงิน</h3>
 								</div>
-								
-
-
 
 							</div>
 							<div class="card-content">
@@ -134,6 +131,7 @@
 													<th>postion</th>
 													<th>status</th>
 													<th>Notification Ban</th>
+													<th>Tool</th>
 
 												</tr>
 											</thead>
@@ -145,9 +143,9 @@
 															<?php $statusTeam = $this->db->get_where('tbl_status_team', ['IdTeam' => $team['IdTeam']])->row_array(); ?>
 															<?php
 															if (isset($statusTeam)) {
-																echo "<div class='btn btn-success'>Online</div>";
+																echo "<div class='badge badge-pill badge-glow badge-success mr-1 mb-1'>Online</div>";
 															} else {
-																echo "<div class='btn btn-danger'>Offline</div>";
+																echo "<div class='badge badge-pill badge-glow badge-danger mr-1 mb-1'>offline</div>";
 															}
 															?>
 														</td>
@@ -262,32 +260,29 @@
 																</div>
 															</td>
 
-
 														<?php else : ?>
-															<td>
-																-
-															</td>
-
+															<td> - </td>
 														<?php endif; ?>
 														<td>
-
 															<?php
 															$notification = $this->db->get_where('tbl_notification', ['IdTeam' => $team['IdTeam']])->result_array();
 															?>
-															<button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['idT']; ?>" class="btn btn-warning mr-1 mb-1">Notification Ban <span class="badge badge badge-danger badge-pill"><?php echo count($notification); ?></span></button>
+															<button type="button" data-toggle="modal" data-target="#exampleModalk<?php echo $team['IdTeam']; ?>" class="btn btn-icon btn-warning">
+																Admonish
+																<span class="badge badge badge-danger badge-pill"><?php echo count($notification); ?></span>
+															</button>
 
-															<div class="modal fade" id="exampleModalk<?php echo $team['idT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-																<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-																	<div class="modal-content">
-																		<div class="modal-header">
-
-																			<h5 class="modal-title" id="exampleModalLabel">Notification Ban</h5>
-																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																				<span aria-hidden="true">&times;</span>
-																			</button>
-																		</div>
-																		<div class="modal-body">
-																			<form action="NotificationBan" method="POST">
+															<form action="NotificationBan" method="POST">
+																<div class="modal fade" id="exampleModalk<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																	<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title" id="exampleModalLabel">Admonish</h5>
+																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																					<span aria-hidden="true">&times;</span>
+																				</button>
+																			</div>
+																			<div class="modal-body">
 																				<input type="text" value="<?php echo $team['idT']; ?>" name="id" hidden>
 																				<div class="col-xl-12 col-md-6 col-12 mb-1">
 																					<div class="form-group">
@@ -295,13 +290,113 @@
 																						<textarea name="note_ban" cols="20" rows="5" class="form-control"></textarea>
 																					</div>
 																				</div>
-																				<button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Notification Ban</button>
+																			</div>
+																			<div class="modal-footer">
+																				<div class="add-data-footer d-flex justify-content-around">
+																					<button type="submit" class="btn btn-primary">Submit</button>
+																				</div>
+																			</div>
 																		</div>
-
 																	</div>
-																	</form>
+																</div>
+															</form>
+
+															<div class="modal fade" id="score<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog " role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">Rating team tool</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+																		<div class="modal-body">
+																			<div class="card-content">
+																				<div class="card-body">
+																					<ul class="nav nav-tabs nav-fill ">
+																						<li class="nav-item">
+																							<a class="nav-link active" id="base-pill31" data-toggle="pill" href="#pill31" aria-expanded="true">
+																								Deduct Income
+																							</a>
+																						</li>
+																						<li class="nav-item">
+																							<a class="nav-link" id="base-pill32" data-toggle="pill" href="#pill32" aria-expanded="false">Add Score</a>
+																						</li>
+																						<li class="nav-item">
+																							<a class="nav-link" id="base-pill33" data-toggle="pill" href="#pill33" aria-expanded="false">Deduct Score</a>
+																						</li>
+																					</ul>
+																					<div class="tab-content">
+																						<div role="tabpanel" class="tab-pane active" id="pill31" aria-expanded="true" aria-labelledby="base-pill31">
+																							<form action="deduct_income" method="POST">
+																								<div class="row">
+																									<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
+																									<div class="col-md-8">
+																										<label for="">Deduct Income</label>
+																										<input type="number" name="income" class="form-control">
+																									</div>
+																									<div class="col-md-4">
+																										<label for="">Income team</label>
+																										<div><?php echo $team['income']; ?></div>
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
+																										<button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+																									</div>
+																								</div>
+																							</form>
+																						</div>
+																						<div class="tab-pane" id="pill32" aria-labelledby="base-pill32">
+																							<form action="add_score_team" method="POST">
+																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
+																								<div class="row">
+																									<div class="col-md-8">
+																										<label for="">Add Score</label>
+																										<input type="number" name="score" class="form-control">
+																									</div>
+																									<div class="col-md-4">
+																										<label for="">score team</label>
+																										<div><?php echo $team['team_score']; ?></div>
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
+																										<button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+																									</div>
+																								</div>
+																							</form>
+																						</div>
+																						<div class="tab-pane" id="pill33" aria-labelledby="base-pill33">
+																							<form action="deduct_score_team" method="POST">
+																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
+																								<div class="row">
+																									<div class="col-md-8">
+																										<label for="">Deduct Score</label>
+																										<input type="number" name="deduct" class="form-control">
+																									</div>
+																									<div class="col-md-4">
+																										<label for="">score team</label>
+																										<div><?php echo $team['team_score']; ?></div>
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
+																										<button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+																									</div>
+																								</div>
+																							</form>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="modal-footer">
+
+																		</div>
+																	</div>
 																</div>
 															</div>
+
+														</td>
+														<td>
+															<button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#score<?php echo $team['IdTeam']; ?>">
+																<i class="feather icon-more-horizontal"></i>
+															</button>
 														</td>
 													</tr>
 												<?php  } ?>

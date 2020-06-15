@@ -249,9 +249,7 @@
                                 });
                             }
                         });
-
                     },
-
                 });
             } else {
                 swal("Warning!", "Can not be  Not Empty", "warning", {

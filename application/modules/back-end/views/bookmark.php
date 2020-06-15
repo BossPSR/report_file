@@ -455,9 +455,7 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <h3>
-                                                                                <p>delivery file </p>
-                                                                            </h3>
+                                                                            
                                                                             <form action="sendEmail_delivery_pay" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $bookmark['orderby']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
@@ -533,6 +531,7 @@
 
                                                                                     <?php endif; ?>
                                                                                 <?php } ?>
+                                                                                <hr>
                                                                                 <h3>
                                                                                     <p>Team file</p>
                                                                                 </h3>

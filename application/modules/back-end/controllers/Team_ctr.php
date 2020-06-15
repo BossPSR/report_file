@@ -6,8 +6,8 @@ class Team_ctr extends CI_Controller
 
     public function __construct()
     {
-		parent::__construct();
-		$this->load->model('Team_model');
+        parent::__construct();
+        $this->load->model('Team_model');
     }
 
     public function index()
@@ -199,13 +199,13 @@ class Team_ctr extends CI_Controller
 
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
 
-            $team = $this->db->get_where('tbl_send_email_team', ['id_team' => $team_id_send['IdTeam']])->result_array();
+        $team = $this->db->get_where('tbl_send_email_team', ['id_team' => $team_id_send['IdTeam']])->result_array();
 
-            foreach ($team as $key => $team) {
-                $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $team['path'] . '">' . $team['file_name'] . '</a>';
-                $message .= '<br>';
-            }
-        
+        foreach ($team as $key => $team) {
+            $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $team['path'] . '">' . $team['file_name'] . '</a>';
+            $message .= '<br>';
+        }
+
 
 
 
@@ -360,16 +360,16 @@ class Team_ctr extends CI_Controller
     public function NotificationBan()
     {
         $id = $this->input->post('id');
-		$team = $this->db->get_where('tbl_team', ['id' => $id])->row_array();
-		$data_notification = [
-			'IdTeam' => $team['IdTeam'],
-			'notification_detail' => $this->input->post('note_ban'),
-			'create_at' => date('Y-m-d H:i:s'),
-			'update_at' => date('Y-m-d H:i:s'),
-		];
-		$resultsedit = $this->db->insert('tbl_notification',$data_notification);
+        $team = $this->db->get_where('tbl_team', ['id' => $id])->row_array();
+        $data_notification = [
+            'IdTeam' => $team['IdTeam'],
+            'notification_detail' => $this->input->post('note_ban'),
+            'create_at' => date('Y-m-d H:i:s'),
+            'update_at' => date('Y-m-d H:i:s'),
+        ];
+        $resultsedit = $this->db->insert('tbl_notification', $data_notification);
 
-		
+
         $this->sendEmail_Notification_Ban($team);
 
         if ($resultsedit > 0) {
@@ -446,5 +446,96 @@ class Team_ctr extends CI_Controller
         }
 
         return redirect('back_team');
+    }
+
+    public function deduct_income()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+
+            $income       = $this->input->post('income');
+            $idteam       = $this->input->post('idteam');
+
+            $team = $this->db->get_where('tbl_team', ['IdTeam' => $idteam])->row_array();
+            $sum  = $team['income'] - $income;
+
+            if ($sum < 0) {
+                $this->session->set_flashdata('del_ss2', 'Out of balance can not be deducted.');
+                redirect('back_team');
+            } else {
+                $data = [
+                    'income'        => $sum,
+                    'update_at'     => date('Y-m-d H:i:s'),
+                ];
+                $this->db->where('IdTeam', $idteam);
+                $success = $this->db->update('tbl_team', $data);
+                if ($success > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully updated deduct income !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated deduct income');
+                }
+                redirect('back_team');
+            }
+        }
+    }
+
+    public function add_score_team()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+
+            $score      = $this->input->post('score');
+            $idteam     = $this->input->post('idteam');
+
+            $team = $this->db->get_where('tbl_team', ['IdTeam' => $idteam])->row_array();
+
+
+            $data = [
+                'team_score'     => $team['team_score'] + $score,
+                'update_at'     => date('Y-m-d H:i:s'),
+            ];
+
+            $this->db->where('IdTeam', $idteam);
+            $success = $this->db->update('tbl_team', $data);
+            if ($success > 0) {
+                $this->session->set_flashdata('save_ss2', ' Successfully updated add score !!.');
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully updated add score');
+            }
+            redirect('back_team');
+        }
+    }
+
+    public function deduct_score_team()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+
+            $deduct       = $this->input->post('deduct');
+            $idteam       = $this->input->post('idteam');
+
+            $team = $this->db->get_where('tbl_team', ['IdTeam' => $idteam])->row_array();
+            $sum = $team['team_score'] - $deduct;
+            if ($sum < 0) {
+                $this->session->set_flashdata('del_ss2', 'Out of balance can not be deducted.');
+                redirect('back_team');
+            } else {
+                $data = [
+                    'team_score'    => $sum,
+                    'update_at'     => date('Y-m-d H:i:s'),
+                ];
+                $this->db->where('IdTeam', $idteam);
+                $success = $this->db->update('tbl_team', $data);
+                if ($success > 0) {
+                    $this->session->set_flashdata('save_ss2', 'Successfully updated deduct income !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated deduct income');
+                }
+                redirect('back_team');
+            }
+        }
     }
 }

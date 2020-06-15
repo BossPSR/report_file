@@ -289,7 +289,6 @@ class Book_ctr extends CI_Controller
 
     public function sendEmail_delivery_pay()
     {
-
         $order_id = $this->input->post('order_id');
         $order_team = $this->input->post('order_team');
         $id = $this->input->post('id');
@@ -310,7 +309,7 @@ class Book_ctr extends CI_Controller
 
         $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
 
-        $message .= '<center>';
+        $message  = '<center>';
         $message .= '<div style="max-width:800px;">';
         $message .= '<div class="content" >';
         $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
