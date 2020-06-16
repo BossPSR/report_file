@@ -136,19 +136,6 @@ class Store_ctr extends CI_Controller
                 $this->db->insert('tbl_bookmark', $data2);
             }
 
-            if ($team) {
-                $data3 = array(
-
-                    'order_id'       => $orderid,
-                    'date_required'  => $this->input->post('Daterequired'),
-                    'teamId'         => $team,
-                    'wage'           => $wage,
-                    'position'       => $Position,
-                    'create_at'      => date('Y-m-d H:i:s')
-
-                );
-                $this->db->insert('tbl_upload_team', $data3);
-            }
         }
 
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();

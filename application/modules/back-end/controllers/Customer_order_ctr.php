@@ -45,7 +45,7 @@ class Customer_order_ctr extends CI_Controller
     {
         if ($this->session->userdata('email_admin') != '') {
 
-            $data['order_all'] = $this->Customer_model->customer_all();
+            $data['order_all']      = $this->Customer_model->customer_all();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
             $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
             $this->load->view('options/header');
@@ -63,6 +63,7 @@ class Customer_order_ctr extends CI_Controller
             $data['order_notwork']  = $this->Customer_model->customer_notwork();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
             $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
+            $data['ts']         = $this->Store_model->team_select();
             $this->load->view('options/header');
             $this->load->view('orverall_notwork', $data);
             $this->load->view('options/footer');
@@ -76,9 +77,10 @@ class Customer_order_ctr extends CI_Controller
 
         if ($this->session->userdata('email_admin') != '') {
 
-            $data['order_notsum'] = $this->Customer_model->customer_notsubmit();
+            $data['order_notsum']   = $this->Customer_model->customer_notsubmit();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
             $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
+            $data['ts']             = $this->Store_model->team_select();
             $this->load->view('options/header');
             $this->load->view('orverall_notsubmit', $data);
             $this->load->view('options/footer');
@@ -157,25 +159,87 @@ class Customer_order_ctr extends CI_Controller
 
     public function upload_team_ST()
     {
+        $teamid  = $this->input->post('team');
+        $order_id = $this->input->post('order_id');
+
         $data = array(
 
-            'order_id'                         => $this->input->post('order_id'),
+            'order_id'                         => $order_id,
             'position'                         => $this->input->post('position'),
             'wage'                             => $this->input->post('wage'),
+            'teamId'                           => $teamid,
             'note'                             => $this->input->post('note'),
             'create_at'                        => date('Y-m-d H:i:s')
 
         );
 
+
         $resultsedit = $this->db->insert('tbl_upload_team', $data);
+
         $this->db->where('order_id', $this->input->post('order_id'));
         $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired')]);
 
-        if ($resultsedit > 0) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+        if ($resultsedit) {
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully Update to team information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+                }
+            } else {
+
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
         }
+
+        return redirect('Satisfied');
+    }
+
+    public function upload_team_not_work()
+    {
+        $teamid     = $this->input->post('team');
+        $order_id   = $this->input->post('order_id');
+
+        $data = array(
+
+            'order_id'                         => $order_id,
+            'position'                         => $this->input->post('position'),
+            'wage'                             => $this->input->post('wage'),
+            'teamId'                           => $teamid,
+            'note'                             => $this->input->post('note'),
+            'create_at'                        => date('Y-m-d H:i:s')
+
+        );
+
+
+        $resultsedit = $this->db->insert('tbl_upload_team', $data);
+
+        $this->db->where('order_id', $this->input->post('order_id'));
+        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired')]);
+
+        if ($resultsedit) {
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully Update to team information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+                }
+            } else {
+
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
+
         return redirect('Satisfied');
     }
 

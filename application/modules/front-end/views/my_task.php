@@ -123,9 +123,8 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <?php $taskGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id']])->row_array(); ?>
-                                        <?php if (!empty($taskGT)) { ?>
-
+                                        <?php $GTS = $this->db->get_where('tbl_morefile_GT', ['order_id' => $task['or_id']])->row_array(); ?>
+                                        <?php if ($GTS) : ?>
                                             <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -138,75 +137,6 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <?php $taskOrg = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 0])->result_array(); ?>
-                                                            <?php if (!empty($taskGTMORE)) { ?>
-
-                                                                <?php $t = 1; ?>
-                                                                <table class="table">
-                                                                    <thead class="thead-light">
-                                                                        <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Info</th>
-                                                                            <th scope="col">Downloads</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php foreach ($taskOrg as $taskOrg) { ?>
-                                                                            <tr style="text-align:center;">
-                                                                                <td><?php echo $taskOrg['order_id']; ?></td>
-                                                                                <td style="text-align:left;"><?php echo $taskOrg['file_name_GT']; ?></td>
-                                                                                <td><a href="<?php echo $taskOrg['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
-                                                                                <td>
-                                                                                    <a href="<?php echo $taskOrg['path_GT']; ?>" class="btn btn-primary" download>
-                                                                                        <i class="fa fa-download"></i> Download
-                                                                                    </a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        <?php } ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            <?php } else { ?>
-                                                                -
-                                                            <?php } ?>
-
-                                                            <?php $taskGTMORE = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $task['or_id'], 'status_more_file' => 1, 'status_see_more_file_team' => 11])->result_array(); ?>
-                                                            <?php if (!empty($taskGTMORE)) { ?>
-                                                                <br>
-                                                                <h5 style="text-align:left;">More Document</h5>
-                                                                <hr>
-
-                                                                <table class="table">
-                                                                    <thead class="thead-light">
-                                                                        <tr style="text-align:center;">
-                                                                            <th scope="col">Order ID</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Info</th>
-                                                                            <th scope="col">Downloads</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php foreach ($taskGTMORE as $taskGTMORE) { ?>
-                                                                            <tr style="text-align:center;">
-                                                                                <td><?php echo $taskGTMORE['order_id']; ?></td>
-                                                                                <td style="text-align:left;"><?php echo $taskGTMORE['file_name_GT']; ?></td>
-                                                                                <td><a href="<?php echo $taskGTMORE['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
-                                                                                <td>
-                                                                                    <a href="<?php echo $taskGTMORE['path_GT']; ?>" class="btn btn-primary" download>
-                                                                                        <i class="fa fa-download"></i> Download
-                                                                                    </a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        <?php } ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            <?php } else { ?>
-                                                                <br>
-                                                                <h5 style="text-align:left;">More Document <span style="color: red;">* รอ Admin ทำการอนุมัติข้อมูลเอกสารเพิ่มเติมจากลูกค้า</span></h5>
-                                                                <hr>
-                                                                -
-                                                            <?php } ?>
-
 
                                                         </div>
                                                         <div class="modal-footer">
@@ -215,9 +145,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } else { ?>
+                                        <?php else : ?>
                                             -
-                                        <?php } ?>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
 

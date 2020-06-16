@@ -612,8 +612,6 @@
                                                                                                             <td><?php echo $orderss['file_name'] ?></td>
                                                                                                             <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                             <td><?php echo $orderss['create_at'] ?></td>
-
-
                                                                                                         </tr>
                                                                                                         <script>
                                                                                                             function numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>() {
@@ -983,7 +981,7 @@
                                                                             <div class="form-group">
                                                                                 <fieldset>
                                                                                     <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                        <input type="checkbox" class="ckeck<?php echo $stores['order_id']; ?>" data-order="<?php echo $stores['order_id']; ?>">
+                                                                                        <input type="checkbox" class="ckeck<?php echo $stores['orderST']; ?>" data-order="<?php echo $stores['orderST']; ?>">
                                                                                         <span class="vs-checkbox">
                                                                                             <span class="vs-checkbox--check">
                                                                                                 <i class="vs-icon feather icon-check"></i>
@@ -994,10 +992,10 @@
                                                                                 </fieldset>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1" id="teambox<?php echo $stores['order_id']; ?>" style="display: none">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1" id="teambox<?php echo $stores['orderST']; ?>" style="display: none">
                                                                             <div class="form-group">
                                                                                 <label for="team">Team Id</label>
-                                                                                <select class="select2 form-control" name="team" id="team<?php echo $stores['order_id']; ?>">
+                                                                                <select class="select2 form-control" name="team" id="team<?php echo $stores['orderST']; ?>">
                                                                                     <option disabled selected> -- Select Team -- </option>
                                                                                     <?php foreach ($ts as $tsM) { ?>
                                                                                         <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>

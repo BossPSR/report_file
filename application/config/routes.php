@@ -169,6 +169,7 @@ $route['store_section']                             = 'back-end/Store_ctr/store_
 $route['check_com']                                 = 'back-end/Store_ctr/check_com';
 $route['Section']                                   = 'back-end/Section_ctr';
 $route['upload_team']                               = 'back-end/Customer_order_ctr/upload_team';
+$route['upload_team_not_work']                      = 'back-end/Customer_order_ctr/upload_team_not_work';
 $route['upload_team_ST']                            = 'back-end/Customer_order_ctr/upload_team_ST';
 $route['Stock']                                     = 'back-end/Stock_ctr';
 $route['orverall']                                  = 'back-end/Customer_order_ctr/orverall';
@@ -275,4 +276,8 @@ $route['deduct_cash_score']                   	    = 'back-end/User_ctr/deduct_c
 $route['deduct_income']                   		    = 'back-end/Team_ctr/deduct_income';
 $route['add_score_team']                   		    = 'back-end/Team_ctr/add_score_team';
 $route['deduct_score_team']                   		= 'back-end/Team_ctr/deduct_score_team';
+
+$route['send_not_work']                   		    = 'back-end/Overall_ctr/send_not_work';
+$route['edit_info_over']                            = 'back-end/Overall_ctr/edit_info_over';
+
 

@@ -94,7 +94,7 @@ class Order_model extends CI_Model
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
-        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_morefile_GT', 'tbl_morefile_GT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_delivery', 1);
         $this->db->where('tbl_upload_order.status_approved', 2);
@@ -107,11 +107,12 @@ class Order_model extends CI_Model
 
     public function my_task($see)
     {
-        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_id,tbl_upload_team.status as c_status,tbl_upload_order.update_at as up_order');
+        $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_id
+        ,tbl_upload_team.status as c_status,tbl_upload_order.update_at as up_order');
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_upload_order', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
-        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+        // $this->db->join('tbl_morefile_GT', 'tbl_morefile_GT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
         $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');

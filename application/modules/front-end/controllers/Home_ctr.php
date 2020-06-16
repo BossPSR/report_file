@@ -62,18 +62,16 @@ class Home_ctr extends CI_Controller
 
 	function check_see_more_file()
 	{
-		$teamId 						= $this->input->post('teamId');
-
-		$TM			 	= $this->db->get_where('tbl_upload_team', ['teamId' => 'TM' . $teamId])->result_array();
+		$teamId 	= $this->input->post('teamId');
+		$TM			= $this->db->get_where('tbl_upload_team', ['teamId' => 'TM' . $teamId])->result_array();
 		foreach ($TM as $TM) {
-			$orderGT 		= $this->db->get_where('tbl_upload_orderGT', ['order_id' => $TM['order_id']])->row_array();
-
+			$orderGT 	= $this->db->get_where('tbl_morefile_GT', ['order_id' => $TM['order_id']])->row_array();
 			$data = array(
 				'status_see_more_file_team'	=> 11,
 			);
 			$this->db->where('order_id', $orderGT['order_id']);
 			$this->db->where('status_more_file', '1');
-			$success = $this->db->update('tbl_upload_orderGT', $data);
+			$success = $this->db->update('tbl_morefile_GT', $data);
 			echo $success;
 		}
 	}
