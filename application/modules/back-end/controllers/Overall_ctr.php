@@ -39,6 +39,84 @@ class Overall_ctr extends CI_Controller
         return redirect('orvernotwork');
     }
 
+    public function edit_info_over_ns()
+    {
+        $order_id   = $this->input->post('order_id');
+        $wage       = $this->input->post('wage');
+        $teamid     = $this->input->post('teamid');
+        $position   = $this->input->post('position');
+
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
+        if ($resultsedit) {
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Team All information');
+                }
+            } else {
+
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
+
+        return redirect('orvernotsubmit');
+    }
+
+    public function delete_order_nw()
+    {
+        $id   = $this->input->post('order_id');
+        $note = $this->input->post('note');
+
+        $data = array(
+
+            'note_reject'         => $note,
+            'is_check'            => 1,
+            'update_at'           => date('Y-m-d H:i:s'),
+            'notify_user'         => 0,
+            'notify_admin'        => 0
+
+        );
+        $this->db->where('order_id', $id);
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+
+        $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
+
+        $this->sendEmail_cancel_nw($orderid, $note);
+
+        return redirect('orvernotwork');
+    }
+
+    public function delete_order_ns()
+    {
+        $id   = $this->input->post('order_id');
+        $note = $this->input->post('note');
+
+        $data = array(
+
+            'note_reject'         => $note,
+            'is_check'            => 1,
+            'update_at'           => date('Y-m-d H:i:s'),
+            'notify_user'         => 0,
+            'notify_admin'        => 0
+
+        );
+        $this->db->where('order_id', $id);
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+
+        $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
+
+        $this->sendEmail_cancel_nw($orderid, $note);
+
+        return redirect('orvernotsubmit');
+    }
+
     public function send_not_work()
     {
         $note       = $this->input->post('note');
@@ -103,6 +181,70 @@ class Overall_ctr extends CI_Controller
         return redirect('orvernotwork');
     }
 
+    public function send_not_submit()
+    {
+        $note       = $this->input->post('note');
+        $order_id   = $this->input->post('order_id');
+        $order      = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
+        $user       = $this->db->get_where('tbl_user', ['idUser' => $order['userId']])->row_array();
+
+        $subject = 'More details from the system.';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'More details from the system';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        if (empty($order['email'])) {
+            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        } else {
+            $message .= '<p>Hey "' . $order['Username'] . '",</p>';
+        }
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order['order_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $order['order_id'] . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">' . $note . ' </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        if (empty($order['email'])) {
+            $this->email->to($user['email']);
+        } else {
+            $this->email->to($order['email']);
+        }
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email detail !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email detail ');
+        }
+        return redirect('orvernotsubmit');
+    }
+
     private function sendEmail_all($teamid, $order_id)
     {
         $team  = $this->db->get_where('tbl_team', ['idTeam' => $teamid])->row_array();
@@ -152,6 +294,66 @@ class Overall_ctr extends CI_Controller
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+    }
+
+    private function sendEmail_cancel_nw($orderid, $note)
+    {
+        $user = $this->db->get_where('tbl_user', ['idUser' => $orderid['userId']])->row_array();
+
+        $subject = 'Order cancellation email.';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Your document has been cancel';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        if (empty($orderid['email'])) {
+            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        } else {
+            $message .= '<p>Hey "' . $orderid['Username'] . '",</p>';
+        }
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $orderid['order_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $orderid['order_id'] . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">Cancel Order ID : ' . $orderid['order_id'] . ' ' . $note . ' </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        if (empty($orderid['email'])) {
+            $this->email->to($user['email']);
+        } else {
+            $this->email->to($orderid['email']);
+        }
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email cancel information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email information');
         }
     }
 }

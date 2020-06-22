@@ -91,7 +91,7 @@
                                                         <td><?php echo $value['id_doc']; ?></td>
                                                         <td><?php echo $value['userMain']; ?></td>
                                                         <td><?php echo $value['search_item']; ?></td>
-                                                        <td><?php echo $value['select_item']; ?></td>
+                                                        <td><?php echo $value['name_item']; ?></td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModal<?php echo $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

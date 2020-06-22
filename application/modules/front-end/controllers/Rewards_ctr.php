@@ -19,4 +19,14 @@ class Rewards_ctr extends CI_Controller
 			$this->load->view('options/footer');
 		}
 	}
+	function my_rewards_team()
+	{
+		if ($this->session->userdata('email') == '') { 
+			redirect('home');
+		} else {
+			$this->load->view('options/header_login');
+			$this->load->view('my_rewards_team');
+			$this->load->view('options/footer');
+		}
+	}
 }

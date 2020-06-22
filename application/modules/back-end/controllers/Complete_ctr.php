@@ -38,14 +38,7 @@ class Complete_ctr extends CI_Controller
         );
         $resultsedit = $this->db->insert('tbl_bookmark', $data);
         
-        if ($resultsedit) {
-            $check = array(
-                'check_bookmark' => '1'
-            );
-            $this->db->where('order_id', $id);
-            $this->db->update('tbl_upload_order_team', $check);
-        }
-
+     
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Add bookmark information !!.');
         } else {

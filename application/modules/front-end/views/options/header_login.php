@@ -425,33 +425,20 @@
                                     <ul>
                                         <?php if ($user) :  ?>
                                             <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                            <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
-                                            <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
-                                            <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                             <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                             <li>
                                                 <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
                                             </li>
 
                                         <?php elseif ($team) : ?>
                                             <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
-                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
-                                            <!-- <li><a href="#exampleModalCenter" data-toggle="modal"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
-                                            <li><a href="#exampleModalCenter" data-toggle="modal"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
+                                            <li><a href="my-rewards-team"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <li>
                                                 <a href="user-manual"> Team manual <i class="fa fa-angle-right"></i></a>
-
                                             </li>
                                         <?php else : ?>
                                             <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
-                                            <!-- <li><a href="Bookmarked"> Bookmarked <i class="fa fa-angle-right"></i></a></li> -->
-                                            <!-- <li><a href="Recently-Accessed"> Recently Accessed <i class="fa fa-angle-right"></i></a></li> -->
-                                            <!-- <li><a href="my-rejected"> Rejected <i class="fa fa-angle-right"></i></a></li> -->
                                             <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
-                                            <!-- <li><a href="#"> Bins <i class="fa fa-angle-right"></i></a></li> -->
                                             <li>
                                                 <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
                                             </li>

@@ -46,7 +46,7 @@ class Login_ctr extends CI_Controller
                         $this->session->set_flashdata('package_timeOut_1_day', TRUE);
                     }
                 }
-
+                $this->session->set_flashdata('save_ss2', 'Welcome to the website.');
                 redirect('my-profile');
             } elseif ($this->Login_model->login_team($email, $password)) {
 
@@ -69,7 +69,7 @@ class Login_ctr extends CI_Controller
 				);
 
 				$this->db->insert('tbl_status_team', $check_status);
-				
+				$this->session->set_flashdata('save_ss2', 'Welcome to the website.');
                 redirect('home');
             } elseif ($this->Login_model->login_team_c($email, $password)) {
                 $this->session->set_flashdata('fail_login_status', TRUE);

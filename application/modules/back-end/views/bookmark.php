@@ -417,11 +417,20 @@
                                                             <?php } ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($bookmark['statusB'] == "notcomplete") : ?>
-                                                                <div class="badge badge-primary">Rewrite</div>
+
+                                                            <?php if ($bookmark['status_book'] == '1' && $bookmark['statusB'] == 'complete' && $bookmark['statusAdmin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-success">Original</span>
+                                                            <?php elseif ($bookmark['status_book'] == '1' && $bookmark['statusB'] == 'notcomplete' && $bookmark['statusAdmin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-primary">Not complete</span>
+                                                            <?php elseif ($bookmark['status_book'] == '1' && $bookmark['statusB'] == 'rewrite') : ?>
+                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($bookmark['status_book'] == '2'  && $bookmark['statusAdmin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($bookmark['statusAdmin'] == '1') : ?>
+                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
                                                             <?php else : ?>
-                                                                <div class="badge badge-success">Original</div>
-                                                            <?php endif ?>
+                                                                -
+                                                            <?php endif; ?>
                                                         </td>
 
 
@@ -491,7 +500,6 @@
                                                                                             <tbody>
                                                                                                 <?php foreach ($orderss as $keys => $orderss) { ?>
                                                                                                     <?php if ($orderss['section'] == $dm_c1['section'] || $orderss['section'] == 0) {
-
 
                                                                                                     ?>
                                                                                                         <tr>

@@ -40,12 +40,10 @@ class Register_ctr extends CI_Controller
 		if ($username_check || $check_usre2) {
 			$this->session->set_flashdata('email_ss', true);
 			redirect('register', 'refresh');
-			
 		} else {
 			if ($password != $c_password) {
 				$this->session->set_flashdata('del_ss', true);
 				redirect('register', 'refresh');
-				
 			} else {
 				$data = array(
 					'email'             => $email,
@@ -68,11 +66,11 @@ class Register_ctr extends CI_Controller
 					// exit();
 
 					if ($success > 0) {
+						$this->sendEmail_success($email);
 						$this->session->set_flashdata('success_regis_team', TRUE);
 						redirect('home');
-						
 					} else {
-						
+
 						$this->session->set_flashdata('fail_regis_team', TRUE);
 						redirect('home');
 					}
@@ -97,11 +95,7 @@ class Register_ctr extends CI_Controller
 	public function register_team_success()
 	{
 		$get_team			= $this->input->post('get_team');
-		$get_team_pass		= $this->input->post('get_team_pass');
 		$get_user			= $this->input->post('get_user');
-		$get_user_pass		= $this->input->post('get_user_pass');
-
-		$passport			= $this->input->post('passport');
 		$countries			= $this->input->post('countries');
 		$name				= $this->input->post('name');
 		$phone				= $this->input->post('phone');
@@ -113,17 +107,17 @@ class Register_ctr extends CI_Controller
 		$Y = substr(date('Y'), 2);
 		$M = date('m');
 
-		if ($passport == $get_team_pass || $passport == $get_user_pass || $email == $get_team || $email == $get_user) {
-			echo "<script>";
-			echo "alert('Data no must be filled out!!!');";
-			echo "window.location='register-team';";
-			echo "</script>";
+		if ($email == $get_team || $email == $get_user) {
+
+			$this->session->set_flashdata('del_ss2', 'Data no must be filled out!!');
+			redirect('register-team');
+
 		} else {
 			if ($password != $c_password) {
-				echo "<script>";
-				echo "alert('Passwords do not match !!!');";
-				echo "window.location='register-team';";
-				echo "</script>";
+
+				$this->session->set_flashdata('del_ss2', 'Passwords do not match !!');
+				redirect('register-team');
+
 			} else {
 				if (!empty($_FILES['file_name']['name'])) {
 
@@ -141,14 +135,13 @@ class Register_ctr extends CI_Controller
 						// Get data about the file
 						$uploadData = $this->upload->data();
 						$data = array(
-							'passport'			=> $passport,
 							'country_id'		=> $countries,
 							'name'				=> $name,
 							'phone'				=> $phone,
 							'email'				=> $email,
 							'bank_account'		=> $bank_account,
 							'password'			=> md5($password),
-							'file_name'			=> 'uploads/resume/'.$uploadData['file_name'],
+							'file_name'			=> 'uploads/resume/' . $uploadData['file_name'],
 							'resume_file'		=> $uploadData['file_name'],
 							'created_at'		=> date('Y-m-d H:i:s'),
 							'notify_admin'      => 0
@@ -254,7 +247,8 @@ class Register_ctr extends CI_Controller
 			$this->db->update('tbl_user', ['forgot_password' => $token, 'time_forgot_password' => date('Y-m-d H:i:s')]);
 
 			$this->sendEmail($email, $emailDetail, $token);
-			$this->session->set_flashdata('save_ss2', 'ยืนยัน Email เรียบร้อยแล้ว.กรุณาตั้งค่ารหัสผ่านใหม่ของท่าน');
+			$this->session->set_flashdata('save_ss2', 'ยืนยัน Email เรียบร้อยแล้วกรุณาเช็ค Email ของท่าน.');
+			redirect('forget_password');
 		} elseif ($team_check) {
 			$emailDetail = $this->db->get_where('tbl_team', ['email' => $email])->row_array();
 			$token = md5(uniqid(rand(), true));
@@ -262,10 +256,50 @@ class Register_ctr extends CI_Controller
 			$this->db->update('tbl_team', ['forgot_password' => $token, 'time_forgot_password' => date('Y-m-d H:i:s')]);
 
 			$this->sendEmailTeam($email, $emailDetail, $token);
-			$this->session->set_flashdata('save_ss2', 'ยืนยัน Email เรียบร้อยแล้ว.กรุณาตั้งค่ารหัสผ่านใหม่ของท่าน');
+			$this->session->set_flashdata('save_ss2', 'ยืนยัน Email เรียบร้อยแล้วกรุณาเช็ค Email ของท่าน.');
+			redirect('forget_password');
 		} else {
 			$this->session->set_flashdata('del_ss2', 'ไม่พบ E-mail ที่ท่านกรอกมา กรุณาตรวจสอบใหม่ค่ะ!!');
+			redirect('forget_password');
 		}
+	}
+
+	private function sendEmail_success($email)
+	{
+		$subject = 'Welcome to Fileback Help. ';
+
+		$message  = '<center>';
+		$message .= '<div style="max-width:800px;">';
+		$message .= '<div class="content" >';
+		$message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+		$message .= 'Welcome to Fileback Help.';
+		$message .= '</div>';
+		$message .= '<div class="row">';
+		$message .= '<p> You can enter the website here : https://www.ip-soft.co.th/ipsoft</p>';
+		$message .= '</div>';
+		$message .= '</center>';
+
+		//config email settings
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'smtp.gmail.com';
+		$config['smtp_port'] = '2002';
+		$config['smtp_user'] = 'infinityp.soft@gmail.com';
+		$config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+		$config['mailtype'] = 'html';
+		$config['charset'] = 'utf-8';
+		$config['wordwrap'] = 'TRUE';
+		$config['smtp_crypto'] = 'tls';
+		$config['newline'] = "\r\n";
+
+		//$file_path = 'uploads/' . $file_name;
+		$this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+		$this->email->from('infinityp.soft@gmail.com');
+		$this->email->to($email);
+		$this->email->subject($subject);
+		$this->email->message($message);
+		$this->email->set_mailtype('html');
+		$this->email->send();
 	}
 
 
@@ -303,11 +337,8 @@ class Register_ctr extends CI_Controller
 		$this->email->subject($subject);
 		$this->email->message($message);
 		$this->email->set_mailtype('html');
-		if ($this->email->send() == true) {
-			echo 'Done. Please confirm yourself in the email.';
-		} else {
-			echo 'There was an error confirming identity.';
-		}
+		$this->email->send();
+		
 	}
 
 	private function sendEmailTeam($userEmail, $emailDetail, $token)
@@ -344,11 +375,7 @@ class Register_ctr extends CI_Controller
 		$this->email->subject($subject);
 		$this->email->message($message);
 		$this->email->set_mailtype('html');
-		if ($this->email->send() == true) {
-			echo 'Done. Please confirm yourself in the email.';
-		} else {
-			echo 'There was an error confirming identity.';
-		}
+		$this->email->send();
 	}
 
 	public function reset_passwordProcess()

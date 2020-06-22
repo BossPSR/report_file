@@ -18,9 +18,7 @@
                 <img src="uploads/popup/374879-PBNFLV-999.jpg" style="width:100%">
             </center>
         </div>
-
     </div>
-
 </div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">

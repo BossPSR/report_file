@@ -53,13 +53,21 @@ class My_user_ctr extends CI_Controller
 			$username		= $this->input->post('name');
 			$phone			= $this->input->post('phone');
 			$password		= $this->input->post('password');
+			$oldpassword	= $this->input->post('oldpassword');
 			$c_password		= $this->input->post('c_password');
+
+			$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 
 			if ($password == '' && $c_password == '') {
 				$data = array(
 					'username'			=> $username,
 					'phone'				=> $phone,
 				);
+			} elseif (md5($oldpassword) != $user['password']) {
+
+				$this->session->set_flashdata('del_ss2', 'Your password does not match the old password.');
+				redirect('my-profile');
+
 			} elseif ($password == $c_password) {
 				$data = array(
 					'username'			=> $username,
@@ -74,11 +82,9 @@ class My_user_ctr extends CI_Controller
 			if ($this->db->update('tbl_user', $data)) {
 				$this->session->set_flashdata('save_ss2', 'Successfull!!.Change for my profile.');
 				redirect('my-profile');
-				
 			} else {
 				$this->session->set_flashdata('del_ss2', 'Error for Change my profile.');
 				redirect('my-profile');
-				
 			}
 		}
 	}

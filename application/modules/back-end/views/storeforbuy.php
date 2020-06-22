@@ -301,6 +301,30 @@
 
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
+                                                                                <label for="helpInputTop">Status Upload</label>
+                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <option value="complete">Original</option>
+                                                                                    <option value="notcomplete">Not Complete</option>
+                                                                                    <option value="rewrite">Rewrite</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Status</label>
+                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <option value="complete">Original</option>
+                                                                                    <option value="notcomplete">Not Complete</option>
+                                                                                    <option value="rewrite">Rewrite</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
                                                                                 <label for="basicInput"></label>
                                                                                 <?php $chek_name  = $this->db->get_where('tbl_user', ['idUser' => $stored['userId']])->row_array(); ?>
                                                                                 <label for="basicInput">Customer code</label>
@@ -328,17 +352,7 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Quality File</label>
-                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
-                                                                                    <option value="" selected disabled>select</option>
-                                                                                    <option value="complete">Complete</option>
-                                                                                    <option value="notcomplete">Not Complete</option>
-                                                                                    <option value="relife">Relife</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+                                                                        
                                                                         <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <fieldset>

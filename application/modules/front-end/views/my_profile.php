@@ -36,7 +36,7 @@
                                         <i class="fa fa-wrench"></i>
                                     </a>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -66,31 +66,30 @@
                             </div>
 
                             <?php
-                            $numUp = 0 ;
+                            $numUp = 0;
                             $this->db->select('*');
                             $this->db->from('tbl_upload_order');
                             $this->db->where('userId', $user['idUser']);
-                            $this->db->where('is_check',0);
+                            $this->db->where('is_check', 0);
                             $this->db->group_by('order_id');
                             $coup = $this->db->get()->result_array();
                             foreach ($coup as $coup) {
-                                $numUp += 1 ;
+                                $numUp += 1;
                             }
                             ?>
 
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($numUp); ?></div>
-                                <div class="list_menu">Upload</div>
+                                <div class="list_menu">Order</div>
                             </div>
 
                             <?php
                             $numCost = 0;
-                                    $this->db->group_by('store_id');
+                            $this->db->where('is_check', 0);
+                            $this->db->group_by('store_id');
                             $cost = $this->db->get_where('tbl_upload_store', ['userId' => $user['idUser']])->result_array();
                             foreach ($cost as $cost) {
-                                if (isset($cost['grade'])) {
-                                    $numCost += 1;
-                                }
+                                $numCost += 1;
                             }
                             ?>
 
@@ -190,18 +189,22 @@
                         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                         <input type="text" class="form-control" name="name" value="<?php echo $user['username']; ?>" required>
                     </div>
-                   
+
                     <div class="form-group">
                         <label for="">Phone</label>
                         <input type="text" class="form-control" name="phone" value="<?php echo $user['phone']; ?>" required>
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label for="">Password</label>
+                        <label for="">Old Password</label>
+                        <input type="password" class="form-control" name="oldpassword" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">New Password</label>
                         <input type="password" class="form-control" name="password" value="">
                     </div>
                     <div class="form-group">
-                        <label for="">Confirm Password</label>
+                        <label for="">Confirm New Password</label>
                         <input type="password" class="form-control" name="c_password" value="">
                     </div>
                 </div>

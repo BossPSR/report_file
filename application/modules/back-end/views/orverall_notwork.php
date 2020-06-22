@@ -33,7 +33,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="row card-header">
-                                <div class="col-7">
+                                <div class="col-8">
                                     <h4 class="card-title">No Work</h4>
                                 </div>
                                 <div class="col-1 text-center">
@@ -49,7 +49,7 @@
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
 
-                                <div class="col-3 text-right">
+                                <div class="col-3 text-right" style="max-width: 20%;">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
                                         No Work <span class="badge badge-pill badge-warning" id="refresh_nw">
                                             <?php
@@ -64,8 +64,6 @@
                                                 }
                                             }
                                             echo $e;
-
-
                                             ?>
                                         </span>
                                     </a>
@@ -115,15 +113,15 @@
                                                             <td>
                                                                 <button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button>
                                                             </td>
-                                                            <td><?php echo $stores['order'] ?></td>
+                                                            <td> <?php echo $stores['order'] ?></td>
                                                             <td><?php echo $stores['userId']; ?></td>
                                                             <td>
                                                                 <?php if ($stores['emailOt'] == '') : ?>
                                                                     -
                                                                 <?php else : ?>
-                                                                    <?php echo $stores['emailOt']; ?> 
+                                                                    <?php echo $stores['emailOt']; ?>
                                                                 <?php endif; ?>
-                                                                
+
                                                             </td>
                                                             <td><?php echo $stores['createOr']; ?></td>
                                                             <td><?php echo $stores['requiredOr']; ?></td>
@@ -242,7 +240,7 @@
                                                             <td>
 
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $stores['order']; ?>"><i class="feather icon-navigation"></i> </button>
-                                                                <a href="" class="btn btn-icon btn-danger"><i class="feather icon-delete"></i></a>
+                                                                <button type="button" data-toggle="modal" data-target="#Cancel<?php echo $stores['order']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-delete"></i></button>
                                                             </td>
 
                                                             <!-- <td><span  class="badge badge-pill badge-success">Successful payment</button></td> -->
@@ -278,6 +276,38 @@
                                                                     </form>
                                                                 </div>
                                                             </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="Cancel<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <form action="delete_order_nw" method="POST">
+                                                                <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
+                                                                <div class="modal-dialog " role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $stores['order']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body row">
+                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                <div class="form-group">
+                                                                                    <label for="helpInputTop">Note Cancel</label>
+                                                                                    <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
 
                                                         <div class="modal fade" id="exampleModalUpload<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

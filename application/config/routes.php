@@ -21,6 +21,7 @@ $route['forget_step3']              = 'front-end/Register_ctr/reset_passwordProc
 
 $route['forget_step3Team']          = 'front-end/Register_ctr/reset_passwordProcessTeam';
 $route['my-rewards']                = 'front-end/Rewards_ctr/my_rewards';
+$route['my-rewards-team']                = 'front-end/Rewards_ctr/my_rewards_team';
 $route['accept_status']             = 'front-end/My_user_ctr/accept_status';
 $route['my-profile']                = 'front-end/My_user_ctr/my_profile';
 $route['my-profile_edit']           = 'front-end/My_user_ctr/profile_edit';
@@ -35,7 +36,6 @@ $route['my-upload-edit']            = 'front-end/My_upload_ctr/my_upload_edit';
 $route['my-feedback']               = 'front-end/My_feedback_ctr/my_feedback';
 $route['my-order-feedback']         = 'front-end/My_feedback_ctr/my_order_feedback';
 $route['my-order-feedAuto']         = 'front-end/My_feedback_ctr/order_auto_feedback';
-$route['my-rewards']                = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rejected']               = 'front-end/Rejected_ctr/my_rejected';
 $route['my-reject']                 = 'front-end/Rejected_ctr/my_reject';
 $route['my-selling']                = 'front-end/Selling_ctr/my_selling';
@@ -279,5 +279,9 @@ $route['deduct_score_team']                   		= 'back-end/Team_ctr/deduct_scor
 
 $route['send_not_work']                   		    = 'back-end/Overall_ctr/send_not_work';
 $route['edit_info_over']                            = 'back-end/Overall_ctr/edit_info_over';
+$route['edit_info_over_ns']                         = 'back-end/Overall_ctr/edit_info_over_ns';
+$route['delete_order_nw']                           = 'back-end/Overall_ctr/delete_order_nw';
+$route['delete_order_ns']                           = 'back-end/Overall_ctr/delete_order_ns';
+$route['send_not_submit']                           = 'back-end/Overall_ctr/send_not_submit';
 
 

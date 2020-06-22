@@ -18,6 +18,7 @@ class Upload_main_model extends CI_Model
         $this->db->from('tbl_upload_main_search');
         $this->db->join('tbl_bookmark', 'tbl_bookmark.id_document = tbl_upload_main_search.id_doc', 'left');
         $this->db->join('tbl_upload_order', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_select_item', 'tbl_select_item.id = tbl_upload_main_search.select_item_id', 'left');
         $this->db->group_by('tbl_upload_main_search.id_doc');
         return $this->db->get()->result_array();
     }

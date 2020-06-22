@@ -41,7 +41,6 @@
 								<div class="col-7">
 									<h4 class="card-title">Admin Information</h4>
 								</div>
-                                <a href="back_admin_add"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Admin</button></a>
 								<div class="col-1 text-center">
 									<h3 class="card-title ">
 										<?php if (!empty($admin)) : ?>
@@ -73,7 +72,7 @@
 									</h3>
 									<h3 class="check_list_not">แอดมินออฟไลน์</h3>
 								</div>
-
+                                <a href="back_admin_add"><button type="button" class="btn btn-primary mr-1 mb-1">+ Add Admin</button></a>
 								
 								
                             </div>
@@ -102,10 +101,10 @@
 															<?php $statusAdmin = $this->db->get_where('tbl_status_admin', ['IdAdmin' => $admin['adminId']])->row_array(); ?>
 															<?php
 																if (isset($statusAdmin)) {
-																	echo "<div class='btn btn-success'>Online</div>";
-																} else {
-																	echo "<div class='btn btn-danger'>Offline</div>";
-																}
+                                                                    echo "<div class='badge badge-pill badge-glow badge-success mr-1 mb-1'>Online</div>";
+                                                                } else {
+                                                                    echo "<div class='badge badge-pill badge-glow badge-danger mr-1 mb-1'>offline</div>";
+                                                                }
 															?>
 														</td>
 														<script>

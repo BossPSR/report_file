@@ -172,10 +172,7 @@
                         <input type="hidden" name="id" value="<?php echo $team['id']; ?>">
                         <input type="text" class="form-control" name="name" value="<?php echo $team['name']; ?>" required>
                     </div>
-                    <div class="form-group">
-                        <label for="">Passport</label>
-                        <input type="text" class="form-control" name="passport" value="<?php echo $team['passport']; ?>" required>
-                    </div>
+                   
                     <div class="form-group">
                         <label for="">Phone</label>
                         <input type="text" class="form-control" name="phone" value="<?php echo $team['phone']; ?>" required>
@@ -191,7 +188,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="">Bank Account</label>
+                        <label for="">PayPal</label>
                         <input type="text" class="form-control" name="bank_account" value="<?php echo $team['bank_account']; ?>">
                     </div>
                     <hr>

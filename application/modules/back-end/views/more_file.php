@@ -56,6 +56,10 @@
                                                 <tr>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>DM</th>
+                                                    <th>Main File</th>
+                                                    <th>GT File</th>
+                                                    <th>DM File</th>
                                                     <th>More File</th>
                                                     <th>Detail</th>
                                                     <th>create at</th>
@@ -74,10 +78,201 @@
                                                 foreach ($more_file as $key => $more_file) {
 
                                                 ?>
-
                                                     <tr>
                                                         <td><?php echo $more_file['orderGT'] ?></td>
                                                         <td><?php echo $more_file['userId']; ?></td>
+                                                        <td>
+                                                            <?php if (empty($more_file['id_document'])) : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php
+                                                                           $this->db->group_by('id_document');
+                                                                $show_dm = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $more_file['orderGT']])->result_array();
+                                                                ?>
+                                                                <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
+
+                                                                    <?php if ($show_dm['id_document'] == '') : ?>
+                                                                        -
+                                                                    <?php else : ?>
+                                                                        <span class="badge badge-primary"><?php echo $show_dm['id_document'] ?></span>
+                                                                    <?php endif; ?>
+
+                                                                <?php } ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $more_file['orderGT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $more_file['orderGT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Main File</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <table class="table zero-configuration">
+                                                                                <thead>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $more_file['orderGT']])->result_array(); ?>
+                                                                                    <tr>
+                                                                                        <th>Order_id</th>
+                                                                                        <th>File_name</th>
+                                                                                        <th>File</th>
+                                                                                        <th>create</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <tr>
+                                                                                            <td><?php echo $order['order_id'] ?></td>
+                                                                                            <td><?php echo $order['file_name'] ?></td>
+                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $order['create_at'] ?></td>
+
+
+                                                                                        </tr>
+                                                                                    <?php } ?>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $more_file['orderGT']])->result_array(); ?>
+                                                            <?php if (!empty($order)) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalb<?php echo $more_file['orderGT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalb<?php echo $more_file['orderGT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Order_id</th>
+                                                                                            <th>File_name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($order as $keys => $order) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $order['order_id'] ?></td>
+                                                                                                <td><?php echo $order['file_name_GT'] ?></td>
+                                                                                                <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $order['create_at'] ?></td>
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $more_file['upload_store_id']])->result_array(); ?>
+                                                            <?php if (!empty($orderStore)) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $more_file['orderGT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalbDM<?php echo $more_file['orderGT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">DM File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $more_file['orderGT']])->result_array(); ?>
+                                                                                <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_cc['id_document']])->row_array(); ?>
+
+                                                                                    <?php
+                                                                                    $this->db->where('store_id', $dm_c11['upload_store_id']);
+
+                                                                                    $orderssc = $this->db->get('tbl_upload_store')->result_array();
+                                                                                    ?>
+                                                                                    <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                        <p><b>
+                                                                                                <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                            </b></p>
+
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Relive</th>
+                                                                                                    <th>Store Id</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($orderssc as $keys => $orderssc) { ?>
+                                                                                                    <?php if ($orderssc['section'] == $dm_c11['section'] || $orderssc['section'] == 0) {
+                                                                                                    ?>
+                                                                                                        <tr>
+                                                                                                            <td>
+                                                                                                                <?php if ($orderssc['relive_status'] == '0') : ?>
+                                                                                                                    -
+                                                                                                                <?php else : ?>
+                                                                                                                    <div class="badge badge-primary">Relive</div>
+                                                                                                                <?php endif ?>
+                                                                                                            </td>
+                                                                                                            <td><?php echo $orderssc['store_id'] ?></td>
+                                                                                                            <td><?php echo $orderssc['file_name'] ?></td>
+                                                                                                            <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                            <td><?php echo $orderssc['create_at'] ?></td>
+                                                                                                        </tr>
+                                                                                                <?php }
+                                                                                                }
+                                                                                                ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
+
+                                                        </td>
 
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $more_file['idM']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -85,7 +280,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Main file</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">More file</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
