@@ -45,13 +45,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php foreach ($withdraw_list_team_history as $key => $withdraw_list_team_history) {?>
                                                 <tr>
-                                                    <td>email</td>
-                                                    <td>username</td>
-                                                    <td>price</td>
-                                                    <td>cash</td>
-                                                    <td>phone</td>
+                                                    <td><?php echo  $withdraw_list_history['email']?></td>
+                                                    <td><?php echo  $withdraw_list_history['username']?></td>
+                                                    <td><?php echo  $withdraw_list_history['price']?></td>
+                                                    <td><?php echo  $withdraw_list_history['cash']?></td>
+                                                    <td><?php echo  $withdraw_list_history['phone']?></td>
                                                 </tr>
+                                            <?php }?>
                                             </tbody>
                                         </table>
                                     </div>

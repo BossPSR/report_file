@@ -257,7 +257,7 @@ $route['sendEmail_delivery_teamother']              = 'back-end/Store_ctr/sendEm
 $route['price_mangement']                           = 'back-end/Price_ctr';
 $route['Edit_Modify_fee']                           = 'back-end/Price_ctr/Edit_Modify_fee';
 $route['Edit_ModifyCashback']                           = 'back-end/Price_ctr/Edit_ModifyCashback';
-$route['Edit_ModifyScoreTeam']                           = 'back-end/Price_ctr/Edit_ModifyScoreTeam';
+$route['Edit_ModifyScoreTeam']                           = 'back-end/Price_ctr/ ';
 
 $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';

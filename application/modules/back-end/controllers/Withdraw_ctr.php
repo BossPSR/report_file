@@ -39,7 +39,7 @@ class Withdraw_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $data['withdraw_team'] = $this->Withdraw_model->withdraw_list_team();
+            $data['withdraw_list_history'] = $this->Withdraw_model->withdraw_list_history();
             $this->load->view('options/header');
             $this->load->view('withdraw_history', $data);
             $this->load->view('options/footer');
@@ -51,7 +51,7 @@ class Withdraw_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $data['withdraw_team'] = $this->Withdraw_model->withdraw_list_team();
+            $data['withdraw_list_team_history'] = $this->Withdraw_model->withdraw_list_team_history();
             $this->load->view('options/header');
             $this->load->view('withdraw_team_history', $data);
             $this->load->view('options/footer');
@@ -225,4 +225,6 @@ class Withdraw_ctr extends CI_Controller
         $this->email->send();
         
     }
+
+
 }
