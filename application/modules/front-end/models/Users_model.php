@@ -11,7 +11,7 @@ class Users_model extends CI_Model
 
     function check_GT($as)
     {
-        $this->db->select('*');
+        $this->db->select('* , tbl_upload_team.teamid ti');
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_morefile_GT', 'tbl_morefile_GT.order_id = tbl_upload_team.order_id');
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.more_id = tbl_morefile_GT.id');

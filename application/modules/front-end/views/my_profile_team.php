@@ -3,12 +3,12 @@
 <div class="services_gallery mt-60">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-0">
+            <div class="col-lg-2 col-md-0">
                 <div class="single_services">
 
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-8 col-md-12">
                 <div class="single_services listProfile">
 
                     <div class="image_profile">
@@ -42,50 +42,141 @@
                     </div>
                     <div class="single_banner menu_profileList">
                         <div class="menu_profileRow">
+
                             <?php
-                            $this->db->select('*,sum(tbl_upload_order.status_delivery) as sum_delivery');
+                            $this->db->select('* , tbl_upload_team.wage wg');
+                            $this->db->from('tbl_upload_team');
+                            $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+                            $this->db->join('tbl_withdraw_team', 'tbl_withdraw_team.order_id = tbl_upload_team.order_id', 'left');
+                            $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+                            $this->db->where('tbl_upload_order.status_delivery', 1);
+                            $this->db->where('tbl_withdraw_team.order_id', null);
+                            $this->db->or_where('tbl_withdraw_team.status !=', '2');
+                            $this->db->group_by('tbl_upload_order.order_id');
+
+
+                            $sm_de2 = $this->db->get()->result_array();
+                            $sumto = 0;
+                            foreach ($sm_de2 as $key => $sm_de2) {
+                                $sumto = $sm_de2['wg'];
+                            }
+                            ?>
+
+                            <div class="result_list_menu">
+                                <div class="result_menu">
+                                    <?= $sumto ?>
+                                </div>
+                                <div class="list_menu">My Income</div>
+                            </div>
+
+                            <?php
+                            $this->db->select('*');
                             $this->db->from('tbl_upload_team');
                             $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                             $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                             $this->db->where('tbl_upload_order.status_delivery', 1);
-                            $this->db->where('tbl_upload_order.status_approved', 1);
+                            $this->db->group_by('tbl_upload_order.order_id');
 
-                            $sm_del = $this->db->get()->row_array();
+
+                            $sm_del = $this->db->get()->result_array();
+                            $sumto2 = 0;
+                            foreach ($sm_del as $key => $sm_del) {
+                                $sumto2 += 1;
+                            }
                             ?>
                             <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?php if (empty($sm_del['sum_delivery'])) { ?>
-                                        0
-                                    <?php } else { ?>
-                                        <?php echo $sm_del['sum_delivery']; ?>
-                                    <?php } ?>
+                                    <?= $sumto2 ?>
                                 </div>
                                 <div class="list_menu">My Job</div>
                             </div>
+
                             <?php
-                            $this->db->select('*,sum(tbl_upload_team.wage) as sumWage');
+                            $this->db->select('*');
                             $this->db->from('tbl_upload_team');
                             $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                             $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
-                            $this->db->where('tbl_upload_order.status_delivery', 1);
+                            $this->db->where('tbl_upload_order.status_approved', 1);
+                            $this->db->group_by('tbl_upload_order.order_id');
 
-                            $sm_de2 = $this->db->get()->row_array();
+                            $sm_de3 = $this->db->get()->result_array();
+                            $sumto3 = 0;
+                            foreach ($sm_de3 as $key => $sm_de3) {
+                                $sumto3 += 1;
+                            }
                             ?>
                             <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?php if ($sm_de2['sumWage']) : ?>
-                                        <?php echo $sm_de2['sumWage']; ?>
+                                    <?= $sumto3 ?>
+                                </div>
+                                <div class="list_menu">My Appover</div>
+                            </div>
+
+                            <?php
+                            $this->db->select('* , tbl_upload_team.status ts');
+                            $this->db->from('tbl_upload_team');
+                            $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+                            $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+                            $this->db->where('tbl_upload_team.status', 2);
+
+                            $sm_de4 = $this->db->get()->result_array();
+                            $sumto4 = 0;
+                            foreach ($sm_de4 as $key => $sm_de4) {
+                                $sumto4 += 1;
+                            }
+                            ?>
+                            <div class="result_list_menu">
+                                <div class="result_menu">
+                                    <?= $sumto4 ?>
+                                </div>
+                                <div class="list_menu">My feedback</div>
+                            </div>
+
+                            <?php
+
+                            $this->db->from('tbl_team');
+                            $sm_de5 = $this->db->get()->row_array();
+
+                            ?>
+                            <div class="result_list_menu">
+                                <div class="result_menu">
+                                    <?php if ($sm_de5['team_score']) : ?>
+                                        <?php echo $sm_de5['team_score']; ?>
                                     <?php else : ?>
                                         0
                                     <?php endif; ?>
                                 </div>
-                                <div class="list_menu">Income</div>
+                                <div class="list_menu">My Score</div>
                             </div>
+
+                            <?php
+                            $this->db->select('*,tbl_upload_team.wage wg');
+                            $this->db->from('tbl_upload_team');
+                            $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+                            $this->db->join('tbl_withdraw_team', 'tbl_withdraw_team.order_id = tbl_upload_team.order_id', 'left');
+                            $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+                            $this->db->where('tbl_upload_order.status_delivery', 1);
+                            $this->db->where('tbl_withdraw_team.status', '2' );
+                            $this->db->group_by('tbl_upload_order.order_id');
+
+                            $sm_de6 = $this->db->get()->result_array();
+                            $sumto6 = 0;
+                            foreach ($sm_de6 as $key => $sm_de6) {
+                                $sumto6 = $sm_de6['wg'];
+                            }
+                            ?>
+                            <div class="result_list_menu">
+                                <div class="result_menu">
+                                    <?= $sumto6; ?>
+                                </div>
+                                <div class="list_menu">My withdraw</div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-2 col-md-6">
                 <div class="single_services">
 
                 </div>
@@ -172,7 +263,7 @@
                         <input type="hidden" name="id" value="<?php echo $team['id']; ?>">
                         <input type="text" class="form-control" name="name" value="<?php echo $team['name']; ?>" required>
                     </div>
-                   
+
                     <div class="form-group">
                         <label for="">Phone</label>
                         <input type="text" class="form-control" name="phone" value="<?php echo $team['phone']; ?>" required>

@@ -69,7 +69,7 @@
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
 
-                <h5 class="modal-title" id="staticBackdropLabel">MORE FILE</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">MORE FILE S</h5>
             </div>
             <div class="modal-body">
                 <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
@@ -77,7 +77,7 @@
                 <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
                 <br>
                 <center>
-                    <button class="btn btn-primary" id="status_morefile">ACCEPT</button>
+                    <button class="btn btn-primary" type="button" id="status_morefile">ACCEPT</button>
                 </center>
             </div>
         </div>
@@ -137,7 +137,8 @@
 </div>
 <?php if (!empty($teamId)) { ?>
     <?php if ($check_morefile) { ?>
-        <?php $moreT = substr($check_morefile['teamId'], 2); ?>
+        <?php $moreT = substr($check_morefile['ti'], 2); ?>
+        <?php echo $moreT; ?>
         <script type="text/javascript">
             $(window).on('load', function() {
                 $('#check_morefile').modal('show');
@@ -145,7 +146,7 @@
         </script>
         <script type="text/javascript">
             $('#status_morefile').click(function() {
-                // console.log(<?php echo $moreT; ?>);
+                console.log(<?php echo $moreT; ?>);
 
                 $.ajax({
                     type: 'POST',

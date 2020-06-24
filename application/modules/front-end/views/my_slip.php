@@ -2,13 +2,21 @@
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php if ($team) { ?>
     <?php
-    $this->db->select('*,sum(tbl_upload_order.status_delivery) as sum_delivery');
+    $this->db->select('*,tbl_upload_team.wage wg');
     $this->db->from('tbl_upload_team');
     $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+    $this->db->join('tbl_withdraw_team', 'tbl_withdraw_team.order_id = tbl_upload_team.order_id', 'left');
     $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
     $this->db->where('tbl_upload_order.status_delivery', 1);
+    $this->db->where('tbl_withdraw_team.status', '2' );
+    $this->db->group_by('tbl_upload_order.order_id');
 
-    $sm_del = $this->db->get()->row_array();
+    $sm_del = $this->db->get()->result_array();
+    $sumto = 0;
+    foreach ($sm_del as $key => $sm_del) {
+        $sumto = $sumto['wg'];
+    }
+
     ?>
 <?php } else { ?>
     <?php
@@ -46,14 +54,14 @@
                         </div>
                         <div class="ptw-5 text-center font17">
                             <?php if ($team) { ?>
-                                My Job : <?= $sm_del['sum_delivery']; ?>
+                                My withdraw : <?= $sumto; ?>
                             <?php } else { ?>
                                 My order : <?= $sm_del2['sum_delivery']; ?>
                             <?php } ?>
                         </div>
                         <div class="pw-5 text-center font17">
                             <?php if ($team) { ?>
-                                My Income : $ <?php echo number_format($team['income']); ?>
+
                             <?php } else { ?>
                                 My waller : $ <?= number_format($user['cash']); ?>
                             <?php } ?>

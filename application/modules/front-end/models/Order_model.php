@@ -21,7 +21,7 @@ class Order_model extends CI_Model
         $this->db->select('*,tbl_upload_order.update_at AS update_at_buy,tbl_upload_order.order_id as ORD,tbl_upload_team.order_id as ORDT ,tbl_upload_order.date_required as Drequired');
         $this->db->from('tbl_store_for_buy_email');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_store_for_buy_email.order_id');
-        $this->db->join('tbl_upload_team', 'tbl_store_for_buy_email.order_id = tbl_upload_team.order_id','left');
+        $this->db->join('tbl_upload_team', 'tbl_store_for_buy_email.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_store_for_buy_email.customer_id', $userId);
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.is_check', 0);
@@ -62,6 +62,8 @@ class Order_model extends CI_Model
         $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
         $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');
+        $this->db->where('tbl_upload_order.date_required >=', date('Y-m-d'));
+        $this->db->where('tbl_upload_order.date_required <=', 'tbl_upload_order.date_required');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 0);
         $this->db->where('tbl_upload_team.position', $item_id);
@@ -77,8 +79,8 @@ class Order_model extends CI_Model
     {
         $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,tbl_upload_team.status as up_status');
         $this->db->from('tbl_upload_order');
-        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id','left');
-        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id','left');
+        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id', 'left');
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_team.status', 2);
@@ -135,7 +137,7 @@ class Order_model extends CI_Model
         $this->db->join('tbl_upload_order', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
         $this->db->where('tbl_upload_team.status', 0);
         $this->db->where('tbl_upload_team.teamId', $sessi);
-        $this->db->where('tbl_upload_order.status_approved',0);
+        $this->db->where('tbl_upload_order.status_approved', 0);
         $this->db->group_by('tbl_upload_team.order_id');
         $this->db->order_by('tbl_upload_team.order_id', 'DESC');
 
