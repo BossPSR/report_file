@@ -38,7 +38,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
-                                                    <th>Passport</th>
                                                     <th>Team Id</th>
                                                     <th>Email</th>
                                                     <th>Username</th>
@@ -51,7 +50,6 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><?php echo $withdraw_team['order_id']; ?></td>
-                                                        <td><?php echo $withdraw_team['passport']; ?></td>
                                                         <td><?php echo $withdraw_team['teamId']; ?></td>
                                                         <td><?php echo $withdraw_team['email']; ?></td>
                                                         <td><?php echo $withdraw_team['name']; ?></td>

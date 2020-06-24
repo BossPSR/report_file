@@ -34,6 +34,30 @@ class Withdraw_ctr extends CI_Controller
         }
     }
 
+    public function withdraw_history()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+            $data['withdraw_team'] = $this->Withdraw_model->withdraw_list_team();
+            $this->load->view('options/header');
+            $this->load->view('withdraw_history', $data);
+            $this->load->view('options/footer');
+        }
+    }
+
+    public function withdraw_team_history()
+    {
+        if ($this->session->userdata('email_admin') == '') {
+            redirect('backend');
+        } else {
+            $data['withdraw_team'] = $this->Withdraw_model->withdraw_list_team();
+            $this->load->view('options/header');
+            $this->load->view('withdraw_team_history', $data);
+            $this->load->view('options/footer');
+        }
+    }
+
 
 
     public function withdraw_status()

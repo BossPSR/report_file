@@ -444,17 +444,29 @@
                                                                                                                                                                                                                                                                                                 echo "display:none";
                                                                                                                                                                                                                                                                                             } ?>"><?php echo $notifywithdraw ?></span></span></a>
                             <ul class="dropdown-menu">
+
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "back_withdraw") {
                                                                                 echo 'active';
                                                                             } ?>" href="back_withdraw" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Withdraw <span class="badge badge badge-warning badge-pill" style="<?php if ($notify_notifywithdraw == 0) {
                                                                                                                                                                                                                                                                 echo "display:none";
                                                                                                                                                                                                                                                             } ?>"><?php echo $notify_notifywithdraw ?></span></a>
                                 </li>
+
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_realtime") {
                                                                                 echo 'active';
                                                                             } ?>" href="withdraw_realtime" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Withdraw Team <span class="badge badge badge-warning badge-pill" style="<?php if ($notify_notifywithdraw_team == 0) {
                                                                                                                                                                                                                                                                         echo "display:none";
                                                                                                                                                                                                                                                                     } ?>"><?php echo $notify_notifywithdraw_team ?></span></a>
+                                </li>
+
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_history") {
+                                                                                echo 'active';
+                                                                            } ?>" href="withdraw_history" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Withdraw history </a>
+                                </li>
+
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_team_history") {
+                                                                                echo 'active';
+                                                                            } ?>" href="withdraw_team_history" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Withdraw Team history </a>
                                 </li>
 
                             </ul>
