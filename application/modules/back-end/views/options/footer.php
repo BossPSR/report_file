@@ -246,6 +246,23 @@
     }
 </script>
 
+<script>
+    function Edit_Modify_fee(data12) {
+
+        swal({
+            title: "Are you sure Edit Modify fee?",
+            text: "Are you sure you this Edit_Modify_fee ?",
+            icon: "warning",
+            buttons: true,
+            successMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'Edit_Modify_fee?id=' + data12   ;
+            }
+        })
+    }
+</script>
+
 
 
  <!-- uploadslider -->
