@@ -24,6 +24,29 @@ class Withdraw_model extends CI_Model{
         return $this->db->get()->result_array();
 
     }
+
+
+    public function withdraw_list_history()
+    {
+        $this->db->select('*,tbl_withdraw.id AS idW');
+        $this->db->from('tbl_withdraw');
+        $this->db->join('tbl_user','tbl_user.idUser = tbl_withdraw.userId');
+        $this->db->where('tbl_withdraw.status',2);
+        return $this->db->get()->result_array();
+
+    }
+
+    
+    public function withdraw_list_team_history()
+    {
+        $this->db->select('*,tbl_withdraw_team.id AS idW,tbl_withdraw_team.status AS status_id');
+        $this->db->from('tbl_withdraw_team');
+        $this->db->join('tbl_team','tbl_team.IdTeam = tbl_withdraw_team.teamId');
+        $this->db->where('tbl_withdraw_team.status',2);
+
+        return $this->db->get()->result_array();
+
+    }
    
 
 
