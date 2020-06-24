@@ -21,7 +21,7 @@ $route['forget_step3']              = 'front-end/Register_ctr/reset_passwordProc
 
 $route['forget_step3Team']          = 'front-end/Register_ctr/reset_passwordProcessTeam';
 $route['my-rewards']                = 'front-end/Rewards_ctr/my_rewards';
-$route['my-rewards-team']                = 'front-end/Rewards_ctr/my_rewards_team';
+$route['my-rewards-team']           = 'front-end/Rewards_ctr/my_rewards_team';
 $route['accept_status']             = 'front-end/My_user_ctr/accept_status';
 $route['my-profile']                = 'front-end/My_user_ctr/my_profile';
 $route['my-profile_edit']           = 'front-end/My_user_ctr/profile_edit';
@@ -250,6 +250,8 @@ $route['status_cut_score']                          = 'back-end/Store_ctr/status
 $route['edit_date_required']                        = 'back-end/Store_ctr/edit_date_required';
 $route['fileUpload_t3_other']                       = 'back-end/Store_ctr/fileUpload_t3_other';
 $route['sendEmail_delivery_teamother']              = 'back-end/Store_ctr/sendEmail_delivery_teamother';
+
+$route['price_mangement']                           = 'back-end/Price_ctr';
 
 $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';

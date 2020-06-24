@@ -90,15 +90,6 @@
                             </div>
                         </li>
 
-                        <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon feather icon-maximize"></i></a></li>
-                        <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon feather icon-search"></i></a>
-                            <div class="search-input">
-                                <div class="search-input-icon"><i class="feather icon-search primary"></i></div>
-                                <input class="input" type="text" placeholder="Explore Vuexy..." tabindex="-1" data-search="template-list">
-                                <div class="search-input-close"><i class="feather icon-x"></i></div>
-                                <ul class="search-list search-list-main"></ul>
-                            </div>
-                        </li>
                         <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span class="badge badge-pill badge-primary badge-up">5</span></a>
                             <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                                 <li class="dropdown-menu-header">
@@ -324,7 +315,10 @@
                                                                                 echo 'active';
                                                                             } ?>" href="Position" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-layers"></i>Position List</a>
                                 </li>
-
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "price_mangement") {
+                                                                                echo 'active';
+                                                                            } ?>" href="price_mangement" data-toggle="dropdown" data-i18n="Chat"><i class="feather icon-layers"></i>Price management</a>
+                                </li>
 
                             </ul>
                         </li>
@@ -351,9 +345,8 @@
                         $this->db->group_by('store_id');
                         $uploadStoreFor = $this->db->get('tbl_upload_store')->result_array();
                         foreach ($uploadStoreFor as $uploadStoreFor) {
-                           
-                                $notify_storeFor_sell += 1;
-                            
+
+                            $notify_storeFor_sell += 1;
                         }
 
                         $notify_myStore = 0;
@@ -732,9 +725,9 @@
             </div>
         </div>
     </div>
-	<!-- END: Main Menu-->
-	<?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email')])->row_array(); ?>
-	<script>
+    <!-- END: Main Menu-->
+    <?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email')])->row_array(); ?>
+    <script>
         <?php if ($admin == true) { ?>
             setInterval(function() {
                 checkStatus();
@@ -754,4 +747,4 @@
                 });
             }
         <?php } ?>
-	</script>
+    </script>
