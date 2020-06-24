@@ -251,7 +251,11 @@ $route['edit_date_required']                        = 'back-end/Store_ctr/edit_d
 $route['fileUpload_t3_other']                       = 'back-end/Store_ctr/fileUpload_t3_other';
 $route['sendEmail_delivery_teamother']              = 'back-end/Store_ctr/sendEmail_delivery_teamother';
 
+
 $route['price_mangement']                           = 'back-end/Price_ctr';
+$route['Edit_Modify_fee']                           = 'back-end/Price_ctr/Edit_Modify_fee';
+$route['Edit_ModifyCashback']                           = 'back-end/Price_ctr/Edit_ModifyCashback';
+$route['Edit_ModifyScoreTeam']                           = 'back-end/Price_ctr/Edit_ModifyScoreTeam';
 
 $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
@@ -285,5 +289,6 @@ $route['edit_info_over_ns']                         = 'back-end/Overall_ctr/edit
 $route['delete_order_nw']                           = 'back-end/Overall_ctr/delete_order_nw';
 $route['delete_order_ns']                           = 'back-end/Overall_ctr/delete_order_ns';
 $route['send_not_submit']                           = 'back-end/Overall_ctr/send_not_submit';
+
 
 
