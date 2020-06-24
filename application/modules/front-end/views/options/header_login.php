@@ -206,6 +206,14 @@
                                     <li class="menu-item-has-children">
                                         <a href="my-feedback"> My Feedback</a>
                                     </li>
+
+                                    <li class="menu-item-has-children">
+                                        <a href="#">My History</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="">Score</a></li>
+                                            <li><a href="">Income</a></li>
+                                        </ul>
+                                    </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
                                         <a href="#exampleModalCenter" data-toggle="modal"> My Buy</a>
@@ -478,6 +486,13 @@
                                             </li>
                                             <li>
                                                 <a href="my-feedback"> My Feedback</a>
+                                            </li>
+                                          
+                                            <li><a href="#">My History<i class="fa fa-angle-down"></i></a>
+                                                <ul class="sub_menu pages">
+                                                    <li><a href="">Score</a></li>
+                                                    <li><a href="">Income</a></li>
+                                                </ul>
                                             </li>
                                             <!-- <li>
                                             <a href="package">My Income : $<?php echo $user['cash']; ?></a></li>

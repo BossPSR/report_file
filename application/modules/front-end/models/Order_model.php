@@ -159,4 +159,14 @@ class Order_model extends CI_Model
         $data = $this->db->get();
         return $data->result_array();
     }
+
+    public function delete_feedback($order_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_feedback');
+        $this->db->where('tbl_feedback.order_id', $order_id);
+      
+        $data = $this->db->get();
+        return $data->result_array();
+    }
 }
