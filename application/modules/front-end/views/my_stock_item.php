@@ -3,24 +3,32 @@
 <h2 class="text-center" style="margin-top: 15px;">Order List</h2>
 <hr class="line_package">
 <br>
-<h2 class="text-center" style="margin-bottom:15px;"><a class="btn btn-success" data-toggle="modal" data-target="#exampleModalPosition"><i class="fa fa-plus-circle"></i> ADD POSITION</a></h2>
-<div class="wishlist_area mt-60">
-    <div class="container">
-        <div class="row text-center">
-            <?php foreach ($item as $item) { ?>
-                <?php if ($item >= 2) : ?>
-                    <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12" style="margin-bottom:100px;">
-                        <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
-                    </div>
-                <?php else : ?>
-                    <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
-                        <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
-                    </div>
-                <?php endif; ?>
-            <?php } ?>
+<?php $dd; ?>
+<?php $cc = $countcancel['ccancel']; ?>
+<?php $ti = $countcancel['teamid']; ?>
+<?php if ($dd > date("Y-m-d") && $cc >= '2') : ?>
+    <div class="text-center wishlist_area"> <span style="color:red;font-size: 24px;"> ท่านยกเลิกออเดอร์เกิน 2 ครั้ง คุณไม่สามารถรับ Order ได้จนถึงวันที่ <?= $dd; ?> </span> </div>
+<?php else : ?>
+    <h2 class="text-center" style="margin-bottom:15px;"><a class="btn btn-success" data-toggle="modal" data-target="#exampleModalPosition"><i class="fa fa-plus-circle"></i> ADD POSITION</a></h2>
+    <div class="wishlist_area mt-60">
+        <div class="container">
+            <div class="row text-center">
+                <?php foreach ($item as $item) { ?>
+                    <?php if ($item >= 2) : ?>
+                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12" style="margin-bottom:100px;">
+                            <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
+                        </div>
+                    <?php else : ?>
+                        <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
+                            <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
+                        </div>
+                    <?php endif; ?>
+                <?php } ?>
+            </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalPosition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-center" role="document">
@@ -33,7 +41,6 @@
             </div>
             <form action="My-stock-item-add" method="POST">
                 <div class="modal-body">
-
 
                     <div class="form-group">
                         <input type="text" name="idTeam" value="<?php echo $Team['id']; ?>" hidden>
@@ -57,3 +64,28 @@
         </div>
     </div>
 </div>
+
+<?php if ($cc >= '2') : ?>
+    <script>
+        function getDatacancel() {
+            $.ajax({
+                    url: "cancel_auto",
+                    type: "POST",
+                    data: {
+                        team: '<?php echo $countcancel['teamid']; ?>' ,
+                        date: '<?php echo $dd; ?>' ,
+                    }
+                })
+                .success(function(result) {
+                    console.log(result);
+                    location.href = "My-stock-Item"
+                });
+
+        }
+
+        setInterval(getDatacancel, 50000 ); // 1000 = 1 second
+    </script>
+
+<?php else : ?>
+
+<?php endif; ?>

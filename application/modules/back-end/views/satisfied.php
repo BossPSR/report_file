@@ -325,7 +325,7 @@
                                                             <?php if ($stores['status_delivery'] == '1') : ?>
                                                                 <?php echo $stores['dateREST']; ?>
                                                             <?php else : ?>
-                                                                <input type="date" class="form-control" name="date_required" id="datenow" data-datenow="<?php echo $stores['orderST']; ?>" value="<?php echo $stores['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                                <input type="date" class="form-control  dateread<?php echo $stores['orderST']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stores['orderST']; ?>" value="<?php echo $stores['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                             <?php endif; ?>
 
                                                         </td>
@@ -955,7 +955,7 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter price" required>
+                                                                                <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control dr<?php echo $stores['orderST']; ?>" name="Daterequired" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>
@@ -1024,6 +1024,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <script>
+                                                        $(".dateread<?php echo  $stores['orderST']; ?>").change(function() {
+                                                            var value = $(this).val();
+                                                            $(".dr<?php echo  $stores['orderST']; ?>").val(value);
+                                                        }).change();
+                                                    </script>
 
 
 

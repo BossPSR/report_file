@@ -284,11 +284,15 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label for="">Password</label>
+                        <label for="">Old Password</label>
+                        <input type="password" class="form-control" name="oldpassword" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">New Password</label>
                         <input type="password" class="form-control" name="password" value="">
                     </div>
                     <div class="form-group">
-                        <label for="">Confirm Password</label>
+                        <label for="">Confirm New Password</label>
                         <input type="password" class="form-control" name="c_password" value="">
                     </div>
                 </div>

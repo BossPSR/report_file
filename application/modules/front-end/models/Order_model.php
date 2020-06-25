@@ -169,4 +169,15 @@ class Order_model extends CI_Model
         $data = $this->db->get();
         return $data->result_array();
     }
+
+    public function my_cancel($team)
+    {
+        $this->db->select('* , count(teamid) ccancel');
+        $this->db->from('tbl_cancel');
+        $this->db->where('teamid', $team);
+        $this->db->order_by('id', 'desc');
+      
+        $data = $this->db->get();
+        return $data->row_array();
+    }
 }

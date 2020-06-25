@@ -31,25 +31,28 @@ class My_team_ctr extends CI_Controller
 		} else {
 			$id 			= $this->input->post('id');
 			$name			= $this->input->post('name');
-			$passport		= $this->input->post('passport');
 			$phone			= $this->input->post('phone');
 			$country		= $this->input->post('country');
 			$bank_account	= $this->input->post('bank_account');
-
 			$password		= $this->input->post('password');
+			$oldpassword	= $this->input->post('oldpassword');
 			$c_password		= $this->input->post('c_password');
+
+			$team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
 
 			if ($password == '' && $c_password == '') {
 				$data = array(
-					'passport'			=> $passport,
 					'name'				=> $name,
 					'phone'				=> $phone,
 					'country_id'		=> $country,
 					'bank_account'		=> $bank_account,
 				);
+			} elseif (md5($oldpassword) != $team['password']) {
+
+				$this->session->set_flashdata('del_ss2', 'Your password does not match the old password.');
+				redirect('My-profile_team');
 			} elseif ($password == $c_password) {
 				$data = array(
-					'passport'			=> $passport,
 					'phone'				=> $phone,
 					'name'				=> $name,
 					'country_id'		=> $country,
@@ -59,21 +62,13 @@ class My_team_ctr extends CI_Controller
 			} else {
 				$this->session->set_flashdata('error_pass', 'Password incorrect.Try again!!.');
 				redirect('My-profile_team');
-				// echo "<script>";
-				// // echo "swal('Error!', 'Password incorrect.Try again!!', 'error');";
-				// // echo "alert('Password incorrect.Try again!!');";
-				// echo "window.location='My-profile_team';";
-				// echo "</script>";
+				
 			}
 			$this->db->where('id', $id);
 			if ($this->db->update('tbl_team', $data)) {
 				$this->session->set_flashdata('success_pro', 'Successfull.Change for my profile.');
 				redirect('My-profile_team');
-				// echo "<script>";
-				// // echo "swal('Good job!', 'Successfull!!.Change for my profile', 'success');";
-				// // echo "alert('Successfull!!.Change for my profile.');";
-				// echo "window.location='My-profile_team';";
-				// echo "</script>";
+				
 			} else {
 				$this->session->set_flashdata('error_pro', 'Error for Change my profile.');
 				redirect('My-profile_team');

@@ -94,6 +94,7 @@ $route['My-task']                   = 'front-end/My_stock_ctr/my_task';
 $route['My-task-cancel']            = 'front-end/My_stock_ctr/my_task_cancel';
 $route['My-task-withdraw']          = 'front-end/My_stock_ctr/my_task_withdraw';
 $route['My-stock-item-add']         = 'front-end/My_stock_ctr/my_stock_item_add';
+$route['cancel_auto']               = 'front-end/My_stock_ctr/cancel_auto';
 $route['My-delivery']               = 'front-end/Delivery_ctr';
 $route['delivery_file']             = 'front-end/Delivery_ctr/delivery_file';
 $route['My-profile_team']           = 'front-end/My_team_ctr/my_profile_team';

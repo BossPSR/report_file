@@ -3,11 +3,13 @@
 <hr class="line_package">
 <?php if (!empty($stock)) { ?>
     <br>
-    <div class="wishlist_area mt-60">
+
+    <div class="wishlist_area mt-10">
         <div class="container">
             <div class="row">
-                <div class="col-2"></div>
-                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                <div class="col-1"></div>
+                <div class="col-xl-10 col-lg-6 col-md-12 col-sm-12">
+
                     <!-- <span style="font-size:16px;">Search for date : </span>
                     <form action="my-selling" method="GET">
                         <div style="display:flex; margin-bottom:1.3em;">
@@ -16,7 +18,7 @@
                         </div>
                     </form> -->
                 </div>
-                <div class="col-2"></div>
+                <div class="col-1"></div>
             </div>
             <div class="row">
                 <div class="col-1"></div>
@@ -50,7 +52,13 @@
                             <?php foreach ($stock as $stock) { ?>
                                 <tr style="text-align:center;">
                                     <td><?php echo $stock['or_1']; ?></td>
-                                    <td><?php echo date('d F Y', strtotime($stock['or_date'])); ?></td>
+                                    <?php
+                                    $checkDate_num = DateDiff(date("Y-m-d"), $stock['or_date']);
+                                    $checkDate = $checkDate_num / 2;
+                                    $checkDate = floor($checkDate);
+                                    $dateRequired = date("Y-m-d", strtotime("-" . $checkDate . " day", strtotime($stock['or_date'])));
+                                    ?>
+                                    <td><?php echo date('d F Y', strtotime($dateRequired)); ?></td>
                                     <td>
                                         <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['mms']])->result_array(); ?>
                                         <?php if (!empty($stockmain)) { ?>
@@ -229,7 +237,8 @@
                                         <?php } ?>
                                     </td>
                                     <td><?php echo $stock['name_item']; ?></td>
-                                    <td><span class=" badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span></td>
+                                    <td><span class=" badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span>
+                                    </td>
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
 

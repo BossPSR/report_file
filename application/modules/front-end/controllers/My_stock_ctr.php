@@ -17,13 +17,16 @@ class My_stock_ctr extends CI_Controller
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
+
             $get_sess = $this->db->get_where('tbl_job_position', ['id_team' => $sess['id'], 'status_approve' => 1])->result_array();
             foreach ($get_sess as $get_sess) {
                 $as[] = $get_sess['job_position'];
             }
 
-            $data['item']               = $this->Order_model->my_stock_item($as);
-            $data['item_loop']          = $this->Order_model->my_stock_item_not($as);
+            $data['countcancel']    = $this->Order_model->my_cancel($sess['IdTeam']);
+            $data['dd']             = date('Y-m-d', strtotime('+30 day' . '+' . $data['countcancel']['create_at']));
+            $data['item']           = $this->Order_model->my_stock_item($as);
+            $data['item_loop']      = $this->Order_model->my_stock_item_not($as);
             // $data['stock']      = $this->Order_model->my_stock($as);
 
             $this->load->view('options/header_login');
@@ -62,14 +65,14 @@ class My_stock_ctr extends CI_Controller
     function my_stock()
     {
         $item_id = base64_decode($this->input->get('item'));
-        $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
-
+            $sess                   = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
             $data['stock']          = $this->Order_model->my_stock($item_id, $sess['IdTeam']);
             $data['stock_row']      = $this->Order_model->my_stock_row($sess['IdTeam']);
             $stock_capp             = $this->Order_model->my_stock_count($sess['IdTeam']);
+
             $i = 0;
             foreach ($stock_capp as $stock_capp) {
                 $i++;
@@ -161,25 +164,52 @@ class My_stock_ctr extends CI_Controller
 
     public function my_task_cancel()
     {
-        $order_id           = $this->input->post('order_id');
-        $status_cf_team     = $this->input->post('status_cf_team');
-        $teamId             = $this->input->post('teamId');
-        $status             = $this->input->post('status');
+        if ($this->session->userdata('email') == '') {
+            redirect('home');
+        } else {
+            $order_id           = $this->input->post('order_id');
+            $status_cf_team     = $this->input->post('status_cf_team');
+            $teamId             = $this->input->post('teamId');
+            $status             = $this->input->post('status');
+            $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data = array(
-            'status_confirmed_team'         => $status_cf_team,
-            'update_at'                     => date('Y-m-d H:i:s'),
-        );
-            $this->db->where('order_id', 'ODB' . $order_id);
-        if ($this->db->update('tbl_upload_order', $data)) {
-            $data2 = array(
-                'teamId'                    => $teamId,
-                'status'                    => $status,
-                'update_confirm'            => null,
+
+            $data = array(
+                'status_confirmed_team'         => $status_cf_team,
+                'update_at'                     => date('Y-m-d H:i:s'),
             );
             $this->db->where('order_id', 'ODB' . $order_id);
-            $success = $this->db->update('tbl_upload_team', $data2);
+            if ($this->db->update('tbl_upload_order', $data)) {
+                $data2 = array(
+                    'teamId'                    => $teamId,
+                    'status'                    => $status,
+                    'update_confirm'            => null,
+                );
+                $this->db->where('order_id', 'ODB' . $order_id);
+                if ($this->db->update('tbl_upload_team', $data2)) {
+                    $data3 = array(
+                        'order_id'         => 'ODB' . $order_id,
+                        'history'          => 'Cancel Order',
+                        'teamid'           => $team['IdTeam'],
+                        'create_at'        => date('Y-m-d H:i:s'),
+                        'status'           => '1',
+                    );
+
+                    $success = $this->db->insert('tbl_cancel', $data3);
+                }
+            }
             echo $success;
         }
+    }
+
+    function cancel_auto()
+    {
+        $team   = $this->input->post('team');
+        $dd     = $this->input->post('date');
+        if ($dd <= date("Y-m-d")) {
+            $this->db->where('teamid', $team);
+            $result = $this->db->delete('tbl_cancel');
+        }
+        echo $result;
     }
 }

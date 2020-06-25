@@ -20,8 +20,7 @@
                 <div class="col-2"></div>
             </div>
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-xl-10 col-lg-6 col-md-12 col-sm-12 ">
+                <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 ">
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
@@ -33,6 +32,7 @@
                                 <th scope="col">Team File</th>
                                 <th scope="col">Wage</th>
                                 <th scope="col">Select item</th>
+                                <th scope="col">Date confirm</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Option</th>
                             </tr>
@@ -52,10 +52,12 @@
                             <?php foreach ($task as $task) { ?>
                                 <tr style="text-align:center;">
                                     <td>
-                                        <?php if ($task['date_required'] <= date("Y-m-d")) : ?>
-                                            <span class="badge badge-danger">หมดเวลา</span>
-                                        <?php elseif ($task['status_approved'] == 1) : ?>
+                                        <?php if ($task['status_approved'] == 1) : ?>
                                             <span class="badge badge-success">Success</span>
+                                        <?php elseif ($task['c_status'] == 1) : ?>
+                                            <span class="badge badge-info">Complete</span>
+                                        <?php elseif ($task['date_required'] <= date("Y-m-d")) : ?>
+                                            <span class="badge badge-danger">หมดเวลา</span>
                                         <?php else : ?>
                                             <?php
                                             $checkDate_num = DateDiff(date("Y-m-d"), $task['date_required']);
@@ -271,6 +273,7 @@
                                     <?php $or_sub = substr($task['or_id'], 3); ?>
                                     <?php $te_sub = substr($team['IdTeam'], 2); ?>
                                     <td><?php echo $task['name_item']; ?></td>
+                                    <td><?php echo date('d F Y', strtotime($task['update_confirm'])); ?></td>
                                     <?php if ($task['status_approved'] == 1 || date('Y-m-d') >= $prosum && $task['up_order'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
@@ -421,7 +424,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-1"></div>
             </div>
         </div>
     </div>
