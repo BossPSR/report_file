@@ -144,6 +144,10 @@
                                                                                         grade C <span class="badge badge-light">10</span>
                                                                                         <span class="sr-only">unread messages</span>
                                                                                     </button>
+                                                                                    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#exampleModallCenterno<?php echo $check_for['id']; ?>">
+                                                                                        No grade <span class="badge badge-light">0</span>
+                                                                                        <span class="sr-only">unread messages</span>
+                                                                                    </button>
                                                                                 <?php else : ?>
                                                                                     <?php if ($check_for['status_main_search'] != 1) { ?>
                                                                                         <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modalUpload<?php echo $check_for['id']; ?>">
@@ -249,6 +253,27 @@
                                                                     </div>
                                                                 </div>
 
+                                                                <div class="modal fade" id="exampleModallCenterno<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete no grade</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                                <a href="back_store_check_store_add_com?id=<?php echo $section_file['store_id']; ?>&id_section=<?php echo $section_file['section']; ?>&com=complete&grad=no&price=0" class="btn btn-success">Complete</a>
+                                                                                <a href="back_store_check_store_add_com?id=<?php echo $section_file['store_id']; ?>&id_section=<?php echo $section_file['section']; ?>&com=notcomplete&grad=no&price=0" class="btn btn-danger">Not Complete </a>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
                                                                 <!-- upload -->
                                                                 <div class="modal fade" id="modalUpload<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
@@ -269,7 +294,7 @@
                                                                                             <div class="row">
                                                                                                 <div class="col-sm-12 data-field-col">
 
-                                                                                                    <div class="form-group">
+                                                                                                    <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Select Item</label>
                                                                                                             <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
@@ -281,19 +306,19 @@
                                                                                                         </div>
                                                                                                     </div>
 
-                                                                                                    <div class="form-group">
+                                                                                                    <!-- <div class="form-group">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Search Item</label>
                                                                                                             <input type="text" class="form-control" name="search_item" value="" required>
                                                                                                         </div>
-                                                                                                    </div>
-                                                                                                    <div class="form-group">
+                                                                                                    </div> -->
+                                                                                                    <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Code</label>
                                                                                                             <input type="text" class="form-control" name="code" value="" required>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <div class="form-group">
+                                                                                                    <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Topic</label>
                                                                                                             <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
@@ -304,12 +329,41 @@
                                                                                                     <?php
                                                                                                     $this->db->order_by('id', 'DESC');
                                                                                                     $Dm = $this->db->get('tbl_upload_main_search')->row_array();
-
                                                                                                     ?>
-                                                                                                    <div class="form-group">
+                                                                                                    <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Id Document</label>
                                                                                                             <input type="text" class="form-control" value="DM<?php echo $Dm == false ? '1' : $Dm['id'] + 1;  ?>" readonly>
+                                                                                                        </div>
+                                                                                                    </div>
+
+
+                                                                                                    <div class="form-group">
+                                                                                                        <fieldset>
+                                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                                                <input type="checkbox" class="ckeck<?php echo $check_for['store_id']; ?>" data-order="<?php echo $check_for['store_id']; ?>">
+                                                                                                                <span class="vs-checkbox">
+                                                                                                                    <span class="vs-checkbox--check">
+                                                                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                                                                    </span>
+                                                                                                                </span>
+                                                                                                                <span class="">Add DM</span>
+                                                                                                            </div>
+                                                                                                        </fieldset>
+                                                                                                    </div>
+
+                                                                                                    <?php
+                                                                                                    $this->db->order_by('id', 'DESC');
+                                                                                                    $Dm = $this->db->get('tbl_upload_main_search')->result_array();
+                                                                                                    ?>
+                                                                                                    <div class="form-group teambox<?php echo $check_for['store_id']; ?>"  style="display: none">
+                                                                                                        <div class="controls">
+                                                                                                            <label for="data-name">Id Document</label>
+                                                                                                            <select name="Documentid" class="form-control select2" id="">
+                                                                                                                <?php foreach ($Dm as $key => $Dm) { ?>
+                                                                                                                    <option value="<?php echo $Dm['id_doc']; ?>"><?php echo $Dm['id_doc']; ?></option>
+                                                                                                                <?php } ?>
+                                                                                                            </select>
                                                                                                         </div>
                                                                                                     </div>
 
@@ -341,10 +395,7 @@
 
                                             </tbody>
 
-
-
                                         </table>
-
 
                                     </div>
                                 </div>
@@ -367,3 +418,23 @@
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
+
+<script type="text/javascript">
+    $('body').on('change', 'input[type="checkbox"]', function() {
+        var o = $(this).data('order');
+        if ($('.ckeck' + o).is(":checked")) {
+            $(".teambox" + o).fadeIn("slow");
+            $("#team" + o).prop('required', true);
+          
+
+            $(".hiddens" + o).fadeOut("slow");
+        } else {
+            $(".teambox" + o).fadeOut("slow");
+            $("#team" + o).prop('required', false);
+          
+            $(".hiddens" + o).fadeIn("slow");
+        }
+
+
+    });
+</script>

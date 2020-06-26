@@ -490,8 +490,8 @@
                                           
                                             <li><a href="#">My History<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
-                                                    <li><a href="">Score</a></li>
-                                                    <li><a href="">Income</a></li>
+                                                    <li><a href="my_store_team">Score</a></li>
+                                                    <li><a href="my_income">Income</a></li>
                                                 </ul>
                                             </li>
                                             <!-- <li>

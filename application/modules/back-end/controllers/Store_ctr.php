@@ -828,7 +828,7 @@ class Store_ctr extends CI_Controller
             $store_id       = $this->input->post('store_id');
             $user_id        = $this->input->post('userId');
             $select_item_id = $this->input->post('select_item_id');
-            $search_item    = $this->input->post('search_item');
+            // $search_item    = $this->input->post('search_item');
             $code           = $this->input->post('code');
             $topic          = $this->input->post('topic');
             $section        = $this->input->post('section');
@@ -838,7 +838,6 @@ class Store_ctr extends CI_Controller
                 $data = [
                     'userId' => $user_id,
                     'select_item_id' => $select_item_id,
-                    'search_item' => $search_item,
                     'select_item' => $select_item['name_item'],
                     'code' => $code,
                     'topic' => $topic,
@@ -881,24 +880,23 @@ class Store_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $com        = $this->input->post('com');
-            $select     = $this->input->post('select');
-            $search     = $this->input->post('search');
-            $code       = $this->input->post('code');
-            $topic      = $this->input->post('topic');
-            $emailadmin = $this->session->userdata('email_admin');
-            $e          = $this->Store_model->admin_id($emailadmin);
+            $com         = $this->input->post('com');
+            $select      = $this->input->post('select');
+            // $search     = $this->input->post('search');
+            $code        = $this->input->post('code');
+            $topic       = $this->input->post('topic');
+            $emailadmin  = $this->session->userdata('email_admin');
+            $e           = $this->Store_model->admin_id($emailadmin);
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select])->row_array();
             $buymax      = $this->db->order_by('id', 'DESC')->get('tbl_order_s')->row();
-            $dm      = $this->db->order_by('id', 'DESC')->get('tbl_upload_main_search')->row();
-            $dmplus  = $dm->id + 1;
+            $dm          = $this->db->order_by('id', 'DESC')->get('tbl_upload_main_search')->row();
+            $dmplus      = $dm->id + 1;
             if (!empty($select_item)) {
                 $data = [
                     'userId' => $e['adminId'],
                     'id_doc' => 'DM' . $dmplus,
                     'select_item_id' => $select,
-                    'search_item' => $search,
                     'select_item' => $select_item['name_item'],
                     'code' => $code,
                     'topic' => $topic,

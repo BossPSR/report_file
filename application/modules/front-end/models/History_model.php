@@ -9,30 +9,47 @@ class History_model extends CI_Model
         parent::__construct();
     }
 
-    function my_store($_user)
+    function my_store($_team)
     {
         $this->db->select('*');
-        $this->db->from('tbl_upload_store');
-        $this->db->where('userId', $_user);
-        $this->db->where('price_file !=', '');
-        $this->db->where('grade !=', '');
-        $this->db->group_by('store_id');
-        $this->db->order_by('create_at', 'desc');
+        $this->db->from('tbl_store_team');
+        $this->db->where('teamid', $_team);
+        $this->db->order_by('id', 'desc');
 
         $data = $this->db->get();
         return $data->result_array();
     }
 
-    function search_store($search_key, $_user)
+    function search_store($search_key, $_team)
     {
         $this->db->select('*');
-        $this->db->from('tbl_upload_store');
+        $this->db->from('tbl_store_team');
         $this->db->like('create_at',$search_key);
-        $this->db->where('userId', $_user);
-        $this->db->where('price_file !=', '');
-        $this->db->where('grade !=', '');
-        $this->db->group_by('store_id');
-        $this->db->order_by('create_at', 'desc');
+        $this->db->where('teamid', $_team);
+        $this->db->order_by('id', 'desc');
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+
+    function my_income($_team)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_income_team');
+        $this->db->where('teamid', $_team);
+        $this->db->order_by('id', 'desc');
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+
+    function search_income($search_key, $_team)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_income_team');
+        $this->db->like('create_at',$search_key);
+        $this->db->where('teamid', $_team);
+        $this->db->order_by('id', 'desc');
 
         $data = $this->db->get();
         return $data->result_array();

@@ -30,10 +30,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="row card-header">
-                                <div class="col-9 col-sm-9">
+                                <div class="col-lg-9 col-sm-12">
                                     <h4 class="card-title">Upload Main Search</h4>
                                 </div>
-                                <div class="col-1 col-sm-1 text-center">
+                                <div class="col-lg-1 col-sm-12 text-center">
                                     <?php if ($upload_main_search == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
@@ -45,7 +45,7 @@
                                     <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนเอกสาร </h3>
                                 </div>
-                                <div class="col-2 col-sm-2 text-right" style="max-width: 11.66667%;">
+                                <div class="col-lg-2 col-sm-12 text-right" style="max-width: 11.66667%;">
                                     <button type="button" data-toggle="modal" data-target="#modalUpload" class="btn btn-primary mr-1 mb-1">+ Upload</button>
                                 </div>
 
@@ -61,8 +61,7 @@
                                                     <th style="width: 10%;">Status Sell</th>
                                                     <th>Document</th>
                                                     <th>CM</th>
-                                                    <th>Search Item</th>
-                                                    <th>Select Item</th>
+                                                    <th>Item</th>
                                                     <th>file</th>
                                                     <th>Code</th>
                                                     <th>Topic</th>
@@ -90,12 +89,11 @@
 
                                                         <td><?php echo $value['id_doc']; ?></td>
                                                         <td><?php echo $value['userMain']; ?></td>
-                                                        <td><?php echo $value['search_item']; ?></td>
                                                         <td><?php echo $value['name_item']; ?></td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModal<?php echo $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                            <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModal<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">File</h5>
@@ -108,17 +106,57 @@
                                                                                 <thead>
                                                                                     <?php $store = $this->db->get_where('tbl_upload_store', ['store_id' => $value['upload_store_id'], 'section' =>  $value['section']])->result_array(); ?>
                                                                                     <tr>
-                                                                                        <th>File_name</th>
-                                                                                        <th>File</th>
-                                                                                        <th>create</th>
+                                                                                        <th>DM</th>
+                                                                                        <th>Status upload</th>
+                                                                                        <th>File name</th>
+                                                                                        <th>Icon file</th>
+                                                                                        <th>Drop</th>
+                                                                                        <th>Approved</th>
+                                                                                        <th>Not Approved</th>
+                                                                                        <th>Removed</th>
+                                                                                        <th>TM</th>
+                                                                                        <!-- <th>create</th> -->
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
+                                                                                    <tr style="background: #ededed;">
+
+                                                                                        <td><?php echo $value['id_doc']; ?></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td>1</td>
+                                                                                        <td>2</td>
+                                                                                        <td><a href="" class="btn btn-icon btn-danger"><i class="feather icon-x"></i></a></td>
+                                                                                        <td>TM1</td>
+                                                                                    </tr>
                                                                                     <?php foreach ($store as $keys => $store) { ?>
                                                                                         <tr>
+                                                                                            <td></td>
+                                                                                            <td>
+                                                                                                <?php if ($value['status_book'] == '1' && $value['status_cp'] == 'complete' && $value['status_admin'] == '0') : ?>
+                                                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                                                <?php elseif ($value['status_book'] == '1' && $value['status_cp'] == 'notcomplete' && $value['status_admin'] == '0') : ?>
+                                                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
+                                                                                                <?php elseif ($value['status_book'] == '1' && $value['status_cp'] == 'rewrite') : ?>
+                                                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                                                <?php elseif ($value['status_book'] == '2'  && $value['status_admin'] == '0') : ?>
+                                                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                                                                <?php elseif ($value['status_admin'] == '1') : ?>
+                                                                                                    <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                                                                <?php else : ?>
+                                                                                                    -
+                                                                                                <?php endif; ?>
+                                                                                            </td>
                                                                                             <td><?php echo $store['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $store['create_at'] ?></td>
+                                                                                            <td><a href="" data-toggle="modal" data-target="#dropW<?php echo $value['id_doc']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a></td>
+                                                                                            <td></td>
+                                                                                            <td></td>
+                                                                                            <td></td>
+                                                                                            <td></td>
+                                                                                            <!-- <td><?php echo $store['create_at'] ?></td> -->
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -152,7 +190,7 @@
                                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                                                 <label for="" style="font-size: 16px;">File Document </label>
                                                                                 <form action="fileUpload_main" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['id_doc']; ?>">
-                                                                                    <input type="hidden" id="DM2<?php echo $value['id_doc']; ?>" class="form-control " name="DM" value="<?php echo $value['id_doc'] ?>" >
+                                                                                    <input type="hidden" id="DM2<?php echo $value['id_doc']; ?>" class="form-control " name="DM" value="<?php echo $value['id_doc'] ?>">
                                                                                     <div class="dz-message" style="top: 24%;">Upload Document</div>
                                                                                 </form>
                                                                             </div>
@@ -170,7 +208,6 @@
                                                             </div>
 
                                                             <script>
-
                                                                 Dropzone.autoDiscover = false;
                                                                 var myDropzone<?php echo $value['id_doc']; ?> = new Dropzone("#maindropzoneEx<?php echo $value['id_doc']; ?>", {
                                                                     autoProcessQueue: false,
@@ -197,7 +234,6 @@
                                                                         }, 1000);
                                                                     });
                                                                 });
-
                                                             </script>
 
                                                         </td>
@@ -270,12 +306,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <div class="controls">
                                         <label for="data-name">Search Item</label>
                                         <input type="text" class="form-control" name="search_item" id="search_item" value="">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <div class="controls">
                                         <label for="data-name">Code</label>
@@ -333,7 +369,7 @@
 
         var v = document.getElementById("complete").value;
         var x = document.getElementById("select-testing").value;
-        var y = document.getElementById("search_item").value;
+        // var y = document.getElementById("search_item").value;
         var code = document.getElementById("code").value;
         var topic = document.getElementById("topic").value;
 
@@ -381,7 +417,6 @@
                                 data: {
                                     com: v,
                                     select: x,
-                                    search: y,
                                     code: code,
                                     topic: topic,
                                 },

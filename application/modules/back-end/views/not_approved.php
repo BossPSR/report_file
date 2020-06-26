@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Order Result for Not Approved</h2>
+                        <h2 class="content-header-title float-left mb-0">Not Approved</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Order Result for Not Approved
+                                <li class="breadcrumb-item active">Not Approved
                                 </li>
                             </ol>
                         </div>
@@ -28,9 +28,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                        <div class="row card-header">
-                                <div class="col-10">
-                                    <h4 class="card-title">Order Result for Not Approved</h4>
+                            <div class="row card-header">
+                                <div class="col-9">
+                                    <h4 class="card-title"> Not Approved</h4>
                                 </div>
                                 <div class="col-1 text-center">
                                     <?php if ($not_Approved == '') : ?>
@@ -43,6 +43,9 @@
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>
                                     <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
+                                </div>
+                                <div class="col-lg-2 col-sm-12 text-right" style="max-width: 11.66667%;">
+                                    <button type="button" data-toggle="modal" data-target="#modalUpload" class="btn btn-primary mr-1 mb-1">+ Upload</button>
                                 </div>
                             </div>
                             <div class="card-content">
@@ -57,17 +60,16 @@
                                                     <th>File Name</th>
                                                     <th>Date_required</th>
                                                     <th>Tool</th>
-
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
                                             <tbody>
-                                            <?php foreach ($not_Approved as $key => $not_Approved) { ?>
-                                                <tr>
-                                                    <td><?php echo $i++; ?></td>
-                                                    <td><?php echo $not_Approved['or'] ?></td>
-                                                    <td><?php echo $not_Approved['fa'] ?></td>
-                                                    <td><span data-toggle="modal" data-target="#exampleModala<?php echo $not_Approved['or']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                <?php foreach ($not_Approved as $key => $not_Approved) { ?>
+                                                    <tr>
+                                                        <td><?php echo $i++; ?></td>
+                                                        <td><?php echo $not_Approved['or'] ?></td>
+                                                        <td><?php echo $not_Approved['fa'] ?></td>
+                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $not_Approved['or']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -107,88 +109,89 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div></td>
-                                                    <td><?php echo $not_Approved['date_required'] ?></td>
+                                                            </div>
+                                                        </td>
+                                                        <td><?php echo $not_Approved['date_required'] ?></td>
 
-                                                    <td>
-                                                    <?php if($not_Approved['status_approved_upload']==0):?>
-                                                        <button type="button" class="btn btn-primary mr-1 mb-1"  data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>" >Upload</button>
-                                                    <?php else:?>
-                                                        <div class="badge badge-success">Success</div>
-                                                    <?php endif;?>
-                                                    </td>
-                                                    <div class="modal fade" id="modalUpload<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="add_to_upload_main_search_not_approved" method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                        <input type="hidden" name="userId" value="<?php echo $not_Approved['userId'] ?>">
-                                                                        <input type="hidden" name="teamId" value="<?php echo $not_Approved['teamId'] ?>">
-                                                                        <input type="hidden" name="order_id" value="<?php echo $not_Approved['or'] ?>">
-                                                                        <div class="data-items pb-3">
-                                                                            <div class="data-fields px-2 mt-3">
-                                                                                <div class="row">
-                                                                                    <div class="col-sm-12 data-field-col">
+                                                        <td>
+                                                            <?php if ($not_Approved['status_approved_upload'] == 0) : ?>
+                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>">Upload</button>
+                                                            <?php else : ?>
+                                                                <div class="badge badge-success">Success</div>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <div class="modal fade" id="modalUpload<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <form action="add_to_upload_main_search_not_approved" method="POST" class="form-horizontal">
+                                                                        <div class="modal-body">
+                                                                            <input type="hidden" name="userId" value="<?php echo $not_Approved['userId'] ?>">
+                                                                            <input type="hidden" name="teamId" value="<?php echo $not_Approved['teamId'] ?>">
+                                                                            <input type="hidden" name="order_id" value="<?php echo $not_Approved['or'] ?>">
+                                                                            <div class="data-items pb-3">
+                                                                                <div class="data-fields px-2 mt-3">
+                                                                                    <div class="row">
+                                                                                        <div class="col-sm-12 data-field-col">
 
-                                                                                        <div class="form-group">
-                                                                                            <div class="controls">
-                                                                                                <label for="data-name">Select Item</label>
-                                                                                                <?php $select_itemList = $this->db->get('tbl_select_item')->result_array();?>
-                                                                                                <select name="select_item_id" class="form-control" id="data-category">
-                                                                                                    <?php foreach ($select_itemList as $key => $selectItem) { ?>
-                                                                                                    <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
-                                                                                                    <?php } ?>
-                                                                                                </select>
+                                                                                            <div class="form-group">
+                                                                                                <div class="controls">
+                                                                                                    <label for="data-name">Select Item</label>
+                                                                                                    <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
+                                                                                                    <select name="select_item_id" class="form-control" id="data-category">
+                                                                                                        <?php foreach ($select_itemList as $key => $selectItem) { ?>
+                                                                                                            <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
+                                                                                                        <?php } ?>
+                                                                                                    </select>
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        
-                                                                                        <div class="form-group">
-                                                                                            <div class="controls">
-                                                                                                <label for="data-name">Search Item</label>
-                                                                                                <input type="text" class="form-control" name="search_item" value="" required>
+
+                                                                                            <div class="form-group">
+                                                                                                <div class="controls">
+                                                                                                    <label for="data-name">Search Item</label>
+                                                                                                    <input type="text" class="form-control" name="search_item" value="" required>
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="form-group">
-                                                                                            <div class="controls">
-                                                                                                <label for="data-name">Code</label>
-                                                                                                <input type="text" class="form-control" name="code" value="" required>
+                                                                                            <div class="form-group">
+                                                                                                <div class="controls">
+                                                                                                    <label for="data-name">Code</label>
+                                                                                                    <input type="text" class="form-control" name="code" value="" required>
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                        <div class="form-group">
-                                                                                            <div class="controls">
-                                                                                                <label for="data-name">Topic</label>
-                                                                                                <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
-                                                                                               
+                                                                                            <div class="form-group">
+                                                                                                <div class="controls">
+                                                                                                    <label for="data-name">Topic</label>
+                                                                                                    <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
+
+                                                                                                </div>
                                                                                             </div>
+
                                                                                         </div>
-                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+
                                                                             </div>
-
                                                                         </div>
-                                                                    </div>
-                                                                </form>
+                                                                    </form>
+                                                                </div>
+
                                                             </div>
-
-                                                        </div>
                                                         </div>
 
-                                                </tr>
-                                            <?php }?>
+                                                    </tr>
+                                                <?php } ?>
                                                 </tfoot>
                                         </table>
                                     </div>

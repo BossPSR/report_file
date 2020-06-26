@@ -114,6 +114,9 @@ $route['checkStatus']               = 'front-end/Login_ctr/checkStatus';
 $route['teamOnline']                = 'front-end/Login_ctr/teamOnline';
 $route['teamOffline']               = 'front-end/Login_ctr/teamOffline';
 
+$route['my_store_team']             = 'front-end/My_history_ctr/my_store_team';
+$route['my_income']                  = 'front-end/My_history_ctr/my_income';
+
 
 // /------------------------------------- back-end  ---------------------
 

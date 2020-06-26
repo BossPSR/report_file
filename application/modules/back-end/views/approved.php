@@ -7,12 +7,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Order Result for Approved</h2>
+                        <h2 class="content-header-title float-left mb-0">Approved</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Order Result for Approved
+                                <li class="breadcrumb-item active"> Approved
                                 </li>
                             </ol>
                         </div>
@@ -29,10 +29,10 @@
                     <div class="col-12">
                         <div class="card">
                         <div class="row card-header">
-                                <div class="col-10">
-                                    <h4 class="card-title">Order Result for Approved</h4>
+                                <div class="col-lg-9 col-sm-12">
+                                    <h4 class="card-title"> Approved</h4>
                                 </div>
-                                <div class="col-1 text-center">
+                                <div class="col-lg-1 col-sm-12 text-center">
                                     <?php if ($Approved == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
@@ -43,6 +43,9 @@
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>
                                     <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
+                                </div>
+                                <div class="col-lg-2 col-sm-12 text-right" style="max-width: 11.66667%;">
+                                    <button type="button" data-toggle="modal" data-target="#modalUpload" class="btn btn-primary mr-1 mb-1">+ Upload</button>
                                 </div>
                             </div>
                         
