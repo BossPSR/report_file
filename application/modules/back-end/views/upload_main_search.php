@@ -131,9 +131,10 @@
                                                                                         <td><a href="" class="btn btn-icon btn-danger"><i class="feather icon-x"></i></a></td>
                                                                                         <td>TM1</td>
                                                                                     </tr>
+                                                                                    <?php $ii = 1; ?>
                                                                                     <?php foreach ($store as $keys => $store) { ?>
                                                                                         <tr>
-                                                                                            <td></td>
+                                                                                            <td><?php echo $value['id_doc']; ?>.<?= $store['id']; ?></td>
                                                                                             <td>
                                                                                                 <?php if ($value['status_book'] == '1' && $value['status_cp'] == 'complete' && $value['status_admin'] == '0') : ?>
                                                                                                     <span class="badge badge-pill badge-success">Original</span>
@@ -151,7 +152,68 @@
                                                                                             </td>
                                                                                             <td><?php echo $store['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><a href="" data-toggle="modal" data-target="#dropW<?php echo $value['id_doc']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a></td>
+                                                                                            <td>
+                                                                                                <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['id_doc']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                                                                <div class="modal fade" id="dropedit<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                    <div class="modal-dialog" role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Change Drop Document </h5>
+                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                </button>
+                                                                                                            </div>
+
+                                                                                                            <div class="modal-body">
+                                                                                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                                                    <label for="" style="font-size: 16px;">File Document </label>
+                                                                                                                    <form action="fileUpload_main" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['id_doc']; ?>">
+                                                                                                                        <input type="hidden" id="DM2<?php echo $value['id_doc']; ?>" class="form-control " name="DM" value="<?php echo $value['id_doc'] ?>">
+                                                                                                                        <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                                                    </form>
+                                                                                                                </div>
+                                                                                                                <br>
+                                                                                                            </div>
+
+                                                                                                            <div class="modal-footer">
+                                                                                                                <div class="add-data-footer d-flex justify-content-around">
+                                                                                                                    <button type="submit" id="uploadschange<?php echo $value['id_doc']; ?>" class="btn btn-primary">Submit</button>
+                                                                                                                </div>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <script>
+                                                                                                    Dropzone.autoDiscover = false;
+                                                                                                    var myDropzone<?php echo $value['id_doc']; ?> = new Dropzone("#maindropzoneEx<?php echo $value['id_doc']; ?>", {
+                                                                                                        autoProcessQueue: false,
+                                                                                                        maxFiles: 5,
+                                                                                                        addRemoveLinks: true,
+                                                                                                        parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                                                    });
+
+                                                                                                    document.getElementById("uploadschange<?php echo $value['id_doc']; ?>").addEventListener("click", function() {
+                                                                                                        // myDropzone.processQueue();
+                                                                                                        if (myDropzone<?php echo $value['id_doc']; ?>.files == 0) {
+
+                                                                                                            swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                                                button: true,
+                                                                                                            });
+                                                                                                        }
+                                                                                                        myDropzone<?php echo $value['id_doc']; ?>.processQueue();
+                                                                                                        myDropzone<?php echo $value['id_doc']; ?>.on("queuecomplete", function(file, res) {
+                                                                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                button: false,
+                                                                                                            });
+                                                                                                            setTimeout(function() {
+                                                                                                                location.href = "back_upload_main_search"
+                                                                                                            }, 1000);
+                                                                                                        });
+                                                                                                    });
+                                                                                                </script>
+                                                                                            </td>
                                                                                             <td></td>
                                                                                             <td></td>
                                                                                             <td></td>

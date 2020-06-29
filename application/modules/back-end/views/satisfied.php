@@ -190,7 +190,7 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stores['upload_store_id']])->result_array(); ?>
+                                                            <!-- <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stores['upload_store_id']])->result_array(); ?> -->
                                                             <?php if (!empty($orderStore)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalbDM<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -204,15 +204,11 @@
                                                                             </div>
                                                                             <div class="modal-body">
 
-                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
+                                                                                <!-- <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
                                                                                 <?php foreach ($dm_cc as $key => $dm_cc) { ?>
                                                                                     <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_cc['id_document']])->row_array(); ?>
 
-                                                                                    <?php
-                                                                                    $this->db->where('store_id', $dm_c11['upload_store_id']);
 
-                                                                                    $orderssc = $this->db->get('tbl_upload_store')->result_array();
-                                                                                    ?>
                                                                                     <?php if (!empty($dm_cc['id_document'])) : ?>
                                                                                         <p><b>
                                                                                                 <h3><?php echo $dm_cc['id_document']; ?></h3>
@@ -229,31 +225,27 @@
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
-                                                                                                <?php foreach ($orderssc as $keys => $orderssc) { ?>
-                                                                                                    <?php if ($orderssc['section'] == $dm_c11['section'] || $orderssc['section'] == 0) {
-                                                                                                    ?>
-                                                                                                        <tr>
-                                                                                                            <td>
-                                                                                                                <?php if ($orderssc['relive_status'] == '0') : ?>
-                                                                                                                    -
-                                                                                                                <?php else : ?>
-                                                                                                                    <div class="badge badge-primary">Relive</div>
-                                                                                                                <?php endif ?>
-                                                                                                            </td>
-                                                                                                            <td><?php echo $orderssc['store_id'] ?></td>
-                                                                                                            <td><?php echo $orderssc['file_name'] ?></td>
-                                                                                                            <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                            <td><?php echo $orderssc['create_at'] ?></td>
-                                                                                                        </tr>
-                                                                                                <?php }
-                                                                                                }
-                                                                                                ?>
+
+                                                                                                <tr>
+                                                                                                    <td>
+                                                                                                        <?php if ($orderssc['relive_status'] == '0') : ?>
+                                                                                                            -
+                                                                                                        <?php else : ?>
+                                                                                                            <div class="badge badge-primary">Relive</div>
+                                                                                                        <?php endif ?>
+                                                                                                    </td>
+                                                                                                    <td><?php echo $orderssc['store_id'] ?></td>
+                                                                                                    <td><?php echo $orderssc['file_name'] ?></td>
+                                                                                                    <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $orderssc['create_at'] ?></td>
+                                                                                                </tr>
+
                                                                                             </tbody>
                                                                                         </table>
                                                                                     <?php else : ?>
 
                                                                                     <?php endif; ?>
-                                                                                <?php } ?>
+                                                                                <?php } ?> -->
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -559,17 +551,11 @@
                                                                                 <input type="hidden" name="id" value="<?php echo $stores['orderST']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $stores['id_document']; ?>">
 
-                                                                                <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
+                                                                                <!-- <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
                                                                                 <?php foreach ($dm_c as $key => $dm_c) { ?>
                                                                                     <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
 
-                                                                                    <?php
 
-                                                                                    $this->db->where('store_id', $dm_c1['upload_store_id']);
-
-                                                                                    $orderss = $this->db->get('tbl_upload_store')->result_array();
-
-                                                                                    ?>
 
                                                                                     <?php if (!empty($dm_c['id_document'])) : ?>
                                                                                         <p>
@@ -590,46 +576,40 @@
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
-                                                                                                <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                                    <?php if ($orderss['section'] == $dm_c1['section'] || $orderss['section'] == 0) {
 
+                                                                                                <tr>
+                                                                                                    <td>
+                                                                                                        <label class="container">
+                                                                                                            <input type="checkbox" class="checkmark" id="delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>" name="order_id[]" value="<?php echo $orderss['id'] ?>" onclick="numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>();">
+                                                                                                            <span class="checkmark"></span>
+                                                                                                        </label>
+                                                                                                    </td>
 
-                                                                                                    ?>
-                                                                                                        <tr>
-                                                                                                            <td>
-                                                                                                                <label class="container">
-                                                                                                                    <input type="checkbox" class="checkmark" id="delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>" name="order_id[]" value="<?php echo $orderss['id'] ?>" onclick="numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>();">
-                                                                                                                    <span class="checkmark"></span>
-                                                                                                                </label>
-                                                                                                            </td>
+                                                                                                    <td>
+                                                                                                        <?php if ($orderss['relive_status'] == '0') : ?>
+                                                                                                            -
+                                                                                                        <?php else : ?>
+                                                                                                            <div class="badge badge-primary">Relive</div>
+                                                                                                        <?php endif ?>
+                                                                                                    </td>
+                                                                                                    <td><?php echo $orderss['store_id'] ?></td>
+                                                                                                    <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                    <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $orderss['create_at'] ?></td>
+                                                                                                </tr>
+                                                                                                <script>
+                                                                                                    function numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>() {
+                                                                                                        var checkBox = document.getElementById("delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>");
+                                                                                                        console.log(checkBox.checked)
+                                                                                                    }
+                                                                                                </script>
 
-                                                                                                            <td>
-                                                                                                                <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                                    -
-                                                                                                                <?php else : ?>
-                                                                                                                    <div class="badge badge-primary">Relive</div>
-                                                                                                                <?php endif ?>
-                                                                                                            </td>
-                                                                                                            <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                            <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                            <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                            <td><?php echo $orderss['create_at'] ?></td>
-                                                                                                        </tr>
-                                                                                                        <script>
-                                                                                                            function numCheck<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>() {
-                                                                                                                var checkBox = document.getElementById("delivery<?php echo $orderss['id'] . '-' . $orderss['store_id']; ?>");
-                                                                                                                console.log(checkBox.checked)
-                                                                                                            }
-                                                                                                        </script>
-                                                                                                <?php }
-                                                                                                }
-                                                                                                ?>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     <?php else : ?>
 
                                                                                     <?php endif; ?>
-                                                                                <?php } ?>
+                                                                                <?php } ?> -->
 
                                                                                 <hr>
 

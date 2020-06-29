@@ -135,7 +135,6 @@ class Store_ctr extends CI_Controller
                 );
                 $this->db->insert('tbl_bookmark', $data2);
             }
-
         }
 
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
@@ -824,7 +823,6 @@ class Store_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $store_check    = $this->input->post('store_check');
             $store_id       = $this->input->post('store_id');
             $user_id        = $this->input->post('userId');
             $select_item_id = $this->input->post('select_item_id');
@@ -834,17 +832,16 @@ class Store_ctr extends CI_Controller
             $section        = $this->input->post('section');
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
+            $storedata   = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
             if (!empty($select_item)) {
                 $data = [
-                    'userId' => $user_id,
-                    'select_item_id' => $select_item_id,
-                    'select_item' => $select_item['name_item'],
-                    'code' => $code,
-                    'topic' => $topic,
-                    'upload_store_id' => $store_id,
-                    'section' => $section,
-                    'create_at' => date('Y-m-d H:i:s'),
-                    'update_at' => date('Y-m-d H:i:s'),
+                    'userId'            => $user_id,
+                    'select_item_id'    => $select_item_id,
+                    'select_item'       => $select_item['name_item'],
+                    'code'              => $code,
+                    'topic'             => $topic,
+                    'section'           => $section,
+                    'create_at'         => date('Y-m-d H:i:s'),
                 ];
                 $success = $this->db->insert('tbl_upload_main_search', $data);
                 $id = $this->db->insert_id();
@@ -856,18 +853,25 @@ class Store_ctr extends CI_Controller
                 $this->db->where('store_id', $store_id);
                 $this->db->update('tbl_upload_store', ['status_main_search' => 1]);
 
+                if ($store_id) {
+                    foreach ($storedata as $key => $storedata) {
+
+                        $db_store = [
+                            'dm_main'         => "DM" . $id,
+                            'dm_sub'          => "DM" . $id . $id ,
+                            'file_name'       => $select_item['name_item'],
+                            'path'            => $code,
+                            'create_at'       => date('Y-m-d H:i:s'),
+                        ];
+                        $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
+
+                    }
+                }
+
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
                 } else {
                     $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
-                }
-
-                if ($store_check == 'a') {
-                    redirect('back_store_a');
-                } elseif ($store_check == 'b') {
-                    redirect('back_store_b');
-                } elseif ($store_check == 'c') {
-                    redirect('back_store_c');
                 }
             }
 
@@ -1152,9 +1156,9 @@ class Store_ctr extends CI_Controller
 
         if ($su) {
             $this->db->where('order_id', $id);
-            $this->db->update('tbl_upload_team', ['status' => 1 ]);
+            $this->db->update('tbl_upload_team', ['status' => 1]);
         }
-        
+
         foreach ($dm_id as $key => $dm_id) {
             $this->db->where('id_doc', $dm_id);
             $this->db->update('tbl_upload_main_search', ['update_at' => date('Y-m-d H:i:s')]);
@@ -1175,7 +1179,7 @@ class Store_ctr extends CI_Controller
         $message .= '<div class="row">';
         if ($user_email_send['username']) {
             $message .= '<p>Hey "' . $user_email_send['username'] . '",</p>';
-        }else{
+        } else {
             $message .= '<p>Hey "' . $user_email['Username'] . '",</p>';
         }
         $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
@@ -1219,7 +1223,7 @@ class Store_ctr extends CI_Controller
         $this->email->from('infinityp.soft@gmail.com');
         if ($user_email_send['email']) {
             $this->email->to($user_email_send['email']);
-        }else{
+        } else {
             $this->email->to($user_email['email']);
         }
         $this->email->subject($subject);

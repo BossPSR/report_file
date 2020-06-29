@@ -119,29 +119,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     <?php echo $check_for['userId']; ?>
                                                                 </td>
                                                                 <td>
-                                                                    <?php
-                                                                    $file_nameS = $check_for['file_name'];
-                                                                    $infoGT = pathinfo($file_nameS, PATHINFO_EXTENSION);
-
-                                                                    ?>
-                                                                    <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'png') : ?>
-                                                                        <a href="<?php echo $check_for['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-                                                                    <?php else : ?>
-                                                                        <a href="" id="officeviewer2<?php echo $check_for['id']; ?>" data-file="<?php echo $check_for['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-                                                                    <?php endif; ?>
-                                                                    <script type="text/javascript">
-                                                                        $(function() {
-                                                                            $("#officeviewer2<?php echo $check_for['id']; ?>").on("click", function() {
-                                                                                var f = $(this).data('file');
-                                                                                var viewerAgent = 'https://view.officeapps.live.com/op/view.aspx?src=';
-                                                                                var fileUrl = '<?php echo base_url() ?>uploads/Store/';
-                                                                                var fileData = $(this).data('file'); // ได้ชื่อไฟล์ที่เรากำหนดใน data-file
-                                                                                var fullPathFile = viewerAgent + fileUrl + fileData;
-                                                                                console.log(fullPathFile);
-                                                                                $("#officeviewer2<?php echo $check_for['id']; ?>").attr("href", fullPathFile);
-                                                                            });
-                                                                        });
-                                                                    </script>
+                                                                    <?php echo $check_for['file_name']; ?>
                                                                 </td>
                                                                 <td>
                                                                     <?php if (!empty($check_for['note'])) { ?>
@@ -170,7 +148,31 @@ foreach ($store as $upload_main_searchDetail) {
                                                                         -
                                                                     <?php } ?>
                                                                 </td>
-                                                                <td> <a href="<?php echo $check_for['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a> </td>
+                                                                <td>
+                                                                    <?php
+                                                                    $file_nameS = $check_for['file_name'];
+                                                                    $infoGT = pathinfo($file_nameS, PATHINFO_EXTENSION);
+
+                                                                    ?>
+                                                                    <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'png') : ?>
+                                                                        <a href="<?php echo $check_for['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                    <?php else : ?>
+                                                                        <a href="" id="officeviewer2<?php echo $check_for['id']; ?>" data-file="<?php echo $check_for['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                    <?php endif; ?>
+                                                                    <script type="text/javascript">
+                                                                        $(function() {
+                                                                            $("#officeviewer2<?php echo $check_for['id']; ?>").on("click", function() {
+                                                                                var f = $(this).data('file');
+                                                                                var viewerAgent = 'https://view.officeapps.live.com/op/view.aspx?src=';
+                                                                                var fileUrl = '<?php echo base_url() ?>uploads/Store/';
+                                                                                var fileData = $(this).data('file'); // ได้ชื่อไฟล์ที่เรากำหนดใน data-file
+                                                                                var fullPathFile = viewerAgent + fileUrl + fileData;
+                                                                                console.log(fullPathFile);
+                                                                                $("#officeviewer2<?php echo $check_for['id']; ?>").attr("href", fullPathFile);
+                                                                            });
+                                                                        });
+                                                                    </script>
+                                                                </td>
                                                                 <td><?php echo $orders['create_at']; ?></td>
                                                                 <td>
                                                                     <select class="form-control" name="id_status" id="categories" data-catagory="<?php echo $check_for['id']; ?>">

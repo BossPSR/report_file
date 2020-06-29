@@ -101,7 +101,6 @@ class Store_model extends CI_Model
         $this->db->from('tbl_bookmark'); 
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document = tbl_upload_main_search.id_doc', 'left');
-        $this->db->join('tbl_upload_store', 'tbl_upload_main_search.upload_store_id = tbl_upload_store.store_id', 'left');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
@@ -124,7 +123,6 @@ class Store_model extends CI_Model
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_bookmark', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document=tbl_upload_main_search.id_doc', 'left');
-        $this->db->join('tbl_upload_store', 'tbl_upload_main_search.upload_store_id=tbl_upload_store.store_id', 'left');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id=tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_book !=', 0);
@@ -141,7 +139,6 @@ class Store_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_main_search');
-        $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');
         $this->db->where('tbl_upload_main_search.id_doc', $DM);
 
         return $this->db->get()->row_array();
@@ -153,7 +150,6 @@ class Store_model extends CI_Model
         $this->db->from('tbl_bookmark');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document=tbl_upload_main_search.id_doc', 'left');
-        $this->db->join('tbl_upload_store', 'tbl_upload_main_search.upload_store_id=tbl_upload_store.store_id', 'left');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id=tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
@@ -168,7 +164,6 @@ class Store_model extends CI_Model
         $this->db->from('tbl_bookmark');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document=tbl_upload_main_search.id_doc', 'left');
-        $this->db->join('tbl_upload_store', 'tbl_upload_main_search.upload_store_id=tbl_upload_store.store_id', 'left');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id=tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
@@ -186,7 +181,6 @@ class Store_model extends CI_Model
         $this->db->from('tbl_bookmark');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document=tbl_upload_main_search.id_doc', 'left');
-        $this->db->join('tbl_upload_store', 'tbl_upload_main_search.upload_store_id=tbl_upload_store.store_id', 'left');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id=tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);

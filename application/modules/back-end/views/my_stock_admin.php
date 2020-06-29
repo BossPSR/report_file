@@ -195,7 +195,7 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?>
+                                                            <!-- <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?>
                                                             <?php if (!empty($orderStore)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stock['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalbDM<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -240,7 +240,7 @@
                                                                 </div>
                                                             <?php else : ?>
                                                                 -
-                                                            <?php endif; ?>
+                                                            <?php endif; ?> -->
 
 
                                                         </td>

@@ -61,7 +61,6 @@ class Order_model extends CI_Model
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
-        $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');
         $this->db->where('tbl_upload_order.date_required >=', date('Y-m-d'));
         $this->db->where('tbl_upload_order.date_required <=', 'tbl_upload_order.date_required');
         $this->db->where('tbl_upload_order.status_pay', 1);
@@ -117,7 +116,6 @@ class Order_model extends CI_Model
         // $this->db->join('tbl_morefile_GT', 'tbl_morefile_GT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
-        $this->db->join('tbl_upload_store', 'tbl_upload_store.store_id = tbl_upload_main_search.upload_store_id', 'left');
         $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 1);

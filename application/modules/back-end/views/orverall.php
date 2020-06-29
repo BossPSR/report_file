@@ -31,10 +31,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="row card-header">
-                                <div class="col-8">
+                                <div class="col-lg-8 col-md-8  col-sm-6">
                                     <h4 class="card-title">Over All</h4>
                                 </div>
-                                <div class="col-1 text-center">
+                                <div class="col-lg-1 col-md-1 col-sm-6 text-center">
                                     <?php if ($order_all == '') : ?>
                                         <h3 class="card-title ">0</h3>
                                     <?php else : ?>
@@ -47,7 +47,7 @@
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
 
-                                <div class="col-3 text-right" style="max-width: 20%;">
+                                <div class="col-lg-3 col-md-3 col-sm-12 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
                                         No Work <span class="badge badge-pill badge-warning" id="refresh_nw"><?php echo count($no_work); ?></span>
                                     </a>

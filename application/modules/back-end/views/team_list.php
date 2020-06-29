@@ -121,14 +121,10 @@
 											<thead>
 												<tr>
 													<th>Online</th>
+													<th>Details</th>
 													<th>TeamId</th>
-													<th>Resume</th>
 													<th>Order</th>
 													<th>Name</th>
-													<th>country</th>
-													<th>email</th>
-													<th>phone</th>
-													<th>postion</th>
 													<th>status</th>
 													<th>Notification Ban</th>
 													<th>Tool</th>
@@ -149,7 +145,7 @@
 															}
 															?>
 														</td>
-														<script>
+														<!-- <script>
 															setInterval(function() {
 																checkStatus();
 																checkStatus<?php echo $team['IdTeam']; ?>();
@@ -174,38 +170,80 @@
 																$('#statusTeam_count').load(' #statusTeam_count');
 																$('#team_count_num').load(' #team_count_num');
 															}
-														</script>
-														<td><?php echo $team['IdTeam']; ?></td>
-														<?php
-														$img =  explode(".", $team['file_name']);
-														?>
+														</script> -->
+
 														<td>
-															<?php if ($img[1] == 'pdf') : ?>
-																<a href="<?php echo $team['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-															<?php else : ?>
-																<a href="<?php echo $team['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-															<?php endif; ?>
+															<a href="#" data-toggle="modal" data-target="#exampleModala<?php echo $team['IdTeam']; ?>"><i class="feather icon-eye" style="font-size: 25px;"></i></a>
+															<div class="modal fade" id="exampleModala<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">Note</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+
+																		<div class="modal-body">
+																			<table class="table zero-configuration">
+																				<thead>
+																					<tr>
+																						<th>resume</th>
+																						<th>country</th>
+																						<th>phone</th>
+																						<th>email</th>
+																						<th>postion</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+
+																					<tr>
+																						<td> <?php
+																								$img =  explode(".", $team['file_name']);
+																								?>
+																							<?php if ($img[1] == 'pdf') : ?>
+																								<a href="<?php echo $team['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																							<?php else : ?>
+																								<a href="<?php echo $team['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																							<?php endif; ?>
+																						</td>
+																						<td>
+																							<?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
+																							<?php foreach ($country as $country) { ?>
+																								<?php echo $country['countryName']; ?>
+																							<?php  } ?>
+																						</td>
+																						<td><?php echo $team['phone']; ?></td>
+																						<td><?php echo $team['email']; ?></td>
+																						<td>
+																							<?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['idT']])->result_array(); ?>
+																							<?php foreach ($position as $position) { ?>
+																								<?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $position['job_position']])->result_array(); ?>
+																								<?php foreach ($name_position as $name_position) { ?>
+																									<br> <?php echo $name_position['name_item']; ?>
+																								<?php } ?>
+																							<?php } ?>
+																						</td>
+																					</tr>
+
+																				</tbody>
+																			</table>
+																		</div>
+																		<div class="modal-footer">
+																			<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</td>
+														<td><?php echo $team['IdTeam']; ?></td>
+
 														<td><?php echo $team['countT']; ?></td>
 
 														<td><?php echo $team['name']; ?></td>
-
-														<?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
-														<?php foreach ($country as $country) { ?>
-															<td><?php echo $country['countryName']; ?></td>
-														<?php  } ?>
-														<td><?php echo $team['email']; ?></td>
-														<td><?php echo $team['phone']; ?></td>
-
-														<td>
-															<?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['idT']])->result_array(); ?>
-															<?php foreach ($position as $position) { ?>
-																<?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $position['job_position']])->result_array(); ?>
-																<?php foreach ($name_position as $name_position) { ?>
-																	<br> <?php echo $name_position['name_item']; ?>
-																<?php } ?>
-															<?php } ?>
-														</td>
+														
 
 														<?php if ($team['Tstatus'] == 0) : ?>
 															<td>
