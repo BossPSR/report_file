@@ -154,6 +154,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                     $infoGT = pathinfo($file_nameS, PATHINFO_EXTENSION);
 
                                                                     ?>
+
                                                                     <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'png') : ?>
                                                                         <a href="<?php echo $check_for['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                     <?php else : ?>
@@ -250,109 +251,75 @@ foreach ($store as $upload_main_searchDetail) {
 
                                                                 </td>
                                                             </tr>
-                                                            <div class="modal fade" id="exampleModal<?php echo $check_for['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
+
+
+                                                            <div class="modal fade" id="exampleModallCenter<?php echo $orders['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                                                                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">StoreFile</h5>
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade A</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <form action="back_store_check_store_add_com" method="POST" class="form-horizontal">
-                                                                            <div class="modal-body">
-                                                                                <div class="btn-group" role="group" aria-label="Basic example" style="margin: 13px 21px;">
+                                                                        <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                            <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=complete&grad=A&price=50" class="btn btn-success">Complete</a>
+                                                                            <!-- <button type="button" class="btn btn-danger"  data-dismiss="modal">Not Complete</button> -->
+                                                                        </div>
+                                                                        <div class="modal-footer">
 
-                                                                                </div>
-
-                                                                                <iframe src="<?php echo $check_for['path']; ?>" width="100%" height="600px"></iframe>
-                                                                                <input type="hidden" class="form-control" name="id" value="<?php echo $orders['id']; ?>">
-                                                                                <div class="data-items pb-3">
-                                                                                    <div class="data-fields px-2 mt-3">
-                                                                                        <div class="row">
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="modal fade" id="exampleModallCenter<?php echo $orders['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade A</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
-                                                                                <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=complete&grad=A&price=50" class="btn btn-success">Complete</a>
-                                                                                <!-- <button type="button" class="btn btn-danger"  data-dismiss="modal">Not Complete</button> -->
-                                                                            </div>
-                                                                            <div class="modal-footer">
-
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="modal fade" id="exampleModallCenterb<?php echo $orders['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal fade" id="exampleModallCenterb<?php echo $orders['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade B</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
-                                                                                <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=complete&grad=B&price=20" class="btn btn-success">Complete</a>
-                                                                                <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=notcomplete&grad=B&price=20" class="btn btn-danger">Not Complete</a>
-                                                                            </div>
-                                                                            <div class="modal-footer">
+                                                                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade B</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                            <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=complete&grad=B&price=20" class="btn btn-success">Complete</a>
+                                                                            <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=notcomplete&grad=B&price=20" class="btn btn-danger">Not Complete</a>
+                                                                        </div>
+                                                                        <div class="modal-footer">
 
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="modal fade" id="exampleModallCenterc<?php echo $orders['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal fade" id="exampleModallCenterc<?php echo $orders['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade C</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
-                                                                                <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=complete&grad=C&price=10" class="btn btn-success">Complete</a>
-                                                                                <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=notcomplete&grad=C&price=10" class="btn btn-danger">Not Complete </a>
-                                                                            </div>
-                                                                            <div class="modal-footer">
+                                                                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Check Complete And Not Complete grade C</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="text-align: center;margin: 45px 0;">
+                                                                            <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=complete&grad=C&price=10" class="btn btn-success">Complete</a>
+                                                                            <a href="back_store_check_store_add_com?id=<?php echo $orders['id']; ?>&com=notcomplete&grad=C&price=10" class="btn btn-danger">Not Complete </a>
+                                                                        </div>
+                                                                        <div class="modal-footer">
 
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
-                                                            <?php  } ?>
-                                                        <?php endif; ?>
+                                                        <?php  } ?>
+                                                    <?php endif; ?>
 
-                                                    <?php  } ?>
+                                                <?php  } ?>
 
 
 

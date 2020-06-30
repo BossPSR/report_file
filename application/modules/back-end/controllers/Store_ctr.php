@@ -830,10 +830,41 @@ class Store_ctr extends CI_Controller
             $code           = $this->input->post('code');
             $topic          = $this->input->post('topic');
             $section        = $this->input->post('section');
+            $dmsub          = $this->input->post('dmsub');
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
             $storedata   = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
-            if (!empty($select_item)) {
+            if ($storedata['status_cp'] == 'complete') {
+                $st = '1';
+            } else {
+                $st = '2';
+            }
+
+
+            if ($dmsub) {
+                
+                $this->db->where('section', $section);
+                $this->db->where('store_id', $store_id);
+                $this->db->update('tbl_upload_store', ['status_main_search' => 1]);
+
+                $sub = $this->Store_model->dm_sub($dmsub);
+                $i = 1;
+                foreach ($sub as $key => $sub) {
+                    $i += 1;
+                }
+
+                foreach ($storedata as $key => $storedata) {
+
+                    $db_store = [
+                        'dm_main'         => $dmsub,
+                        'dm_sub'          => "DM" . '.' . $dmsub . '.' . $st . '.' . $i,
+                        'file_name'       => $storedata['file_name'],
+                        'path'            => $storedata['path'],
+                        'create_at'       => date('Y-m-d H:i:s'),
+                    ];
+                    $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
+                }
+            } else {
                 $data = [
                     'userId'            => $user_id,
                     'select_item_id'    => $select_item_id,
@@ -852,28 +883,25 @@ class Store_ctr extends CI_Controller
                 $this->db->where('section', $section);
                 $this->db->where('store_id', $store_id);
                 $this->db->update('tbl_upload_store', ['status_main_search' => 1]);
+                foreach ($storedata as $key => $storedata) {
 
-                if ($store_id) {
-                    foreach ($storedata as $key => $storedata) {
-
-                        $db_store = [
-                            'dm_main'         => "DM" . $id,
-                            'dm_sub'          => "DM" . $id . $id ,
-                            'file_name'       => $select_item['name_item'],
-                            'path'            => $code,
-                            'create_at'       => date('Y-m-d H:i:s'),
-                        ];
-                        $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
-
-                    }
-                }
-
-                if ($success > 0) {
-                    $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
-                } else {
-                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
+                    $db_store = [
+                        'dm_main'         => $id,
+                        'dm_sub'          => "DM" . '.' . $id . '.' . $st . '.' . '1',
+                        'file_name'       => $select_item['name_item'],
+                        'path'            => $code,
+                        'create_at'       => date('Y-m-d H:i:s'),
+                    ];
+                    $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
                 }
             }
+
+            if ($success > 0) {
+                $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully updated status information');
+            }
+
 
             redirect('Section');
         }

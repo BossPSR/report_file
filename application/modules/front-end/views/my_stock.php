@@ -157,7 +157,7 @@
                                     </td>
                                     <td>
                                         <?php $zss = 1; ?>
-                                        <?php $DM = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?>
+                                        <!-- <?php $DM = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?> -->
                                         <?php if (!empty($DM)) { ?>
 
                                             <a href="#" data-toggle="modal" data-target="#DMFILE<?php echo $h++; ?>"><i class="fa fa-file-text-o"></i></a>
@@ -185,14 +185,14 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php foreach ($DM as $DM) { ?>
+                                                                    <!-- <?php foreach ($DM as $DM) { ?>
                                                                         <tr style="text-align:center;">
                                                                             <td><?= $zss++; ?></td>
                                                                             <td><?= $DM['file_name']; ?></td>
                                                                             <td><?= $stock['or_1'];; ?></td>
                                                                             <td><a href="show-pdf?dcnumber=<?= base64_encode($DM['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
-                                                                    <?php } ?>
+                                                                    <?php } ?> -->
                                                                 </tbody>
                                                             </table>
 

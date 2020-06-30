@@ -88,125 +88,187 @@
                                             <tbody>
 
                                                 <?php foreach ($feedback as $keyBook => $feedback) { ?>
-                                                        <tr>
-                                                            <td><?php echo $feedback['order_feed'] ?></td>
-                                                            <td><?php echo $feedback['userId'] ?></td>
-                                                            <td><span data-toggle="modal" data-target="#exampleModala<?php echo $feedback['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModala<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback File</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <?php $feedback_file = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $feedback['id_f']])->result_array(); ?>
+                                                    <tr>
+                                                        <td><?php echo $feedback['order_feed'] ?></td>
+                                                        <td><?php echo $feedback['userId'] ?></td>
+                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $feedback['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Feedback File</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <table class="table zero-configuration">
+                                                                                <thead>
+                                                                                    <?php $feedback_file = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $feedback['id_f']])->result_array(); ?>
+                                                                                    <tr>
+
+                                                                                        <th>File_name</th>
+                                                                                        <th>File</th>
+                                                                                        <th>create</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($feedback_file as $feedback_file) { ?>
                                                                                         <tr>
-
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
+                                                                                            <td><?php echo $feedback_file['file_name'] ?></td>
+                                                                                            <td><a href="<?php echo $feedback_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $feedback_file['create_at'] ?></td>
                                                                                         </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($feedback_file as $feedback_file) { ?>
-                                                                                            <tr>
-                                                                                                <td><?php echo $feedback_file['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $feedback_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $feedback_file['create_at'] ?></td>
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    <?php } ?>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
 
-                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </td>
-                                                            <td>
+                                                            </div>
+                                                        </td>
+                                                        <td>
 
-                                                                <?php if (!empty($feedback['feedback_detail'])) { ?>
+                                                            <?php if (!empty($feedback['feedback_detail'])) { ?>
                                                                 <a href="#" data-toggle="modal" data-target="#note<?php echo $feedback['id_f']; ?>"><i class="feather icon-search"></i></a>
 
 
-                                                                    <div class="modal fade" id="note<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                                    <h5 class="modal-title" id="exampleModalLabel">Note</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
+                                                                <div class="modal fade" id="note<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <form action="feedback_file_update_detail" method="POST">
+                                                                                <input type="hidden" name="id" value="<?php echo $feedback['id_f']; ?>">
+                                                                                <div class="modal-body">
+                                                                                    <textarea name="detail" id="" rows="6" class="form-control"><?= $feedback['feedback_detail']; ?></textarea>
                                                                                 </div>
-                                                                                <form action="feedback_file_update_detail" method="POST">
-                                                                                    <input type="hidden" name="id" value="<?php echo $feedback['id_f']; ?>">
-                                                                                    <div class="modal-body">
-                                                                                        <textarea name="detail" id="" rows="6" class="form-control"><?= $feedback['feedback_detail']; ?></textarea>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                                    <button type=" submit" class="btn btn-success">Save</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php } else { ?>
+                                                                -
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td><?php echo $feedback['time'] ?></td>
+                                                        <td><?php echo $feedback['dated'] ?></td>
+                                                        <td>
+                                                            <?php if (!empty($feedback['teamId'])) : ?>
+                                                                <?php echo $feedback['teamId']; ?>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif;  ?>
+
+                                                        </td>
+                                                        <td>
+                                                            <?php if (!empty($feedback['position'])) : ?>
+                                                                <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback['position']])->result_array(); ?>
+                                                                <?php foreach ($position_name as $keys => $position_name) { ?>
+                                                                    <?php echo $position_name['name_item'] ?>
+                                                                <?php } ?>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif;  ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($feedback['status_book'] == '1' && $feedback['status_cp'] == 'complete' && $feedback['status_admin'] == '0') : ?>
+                                                                <span class=" badge badge-pill badge-success">Original</span>
+                                                            <?php elseif ($feedback['status_book'] == '1' && $feedback['status_cp'] == 'notcomplete'  && $feedback['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ($feedback['status_book'] == '2'  && $feedback['status_admin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                            <?php elseif ($feedback['status_admin'] == '1') : ?>
+                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $feedback['id_f']; ?>"><i class="feather icon-navigation"></i> </button>
+                                                            <button type="button" data-toggle="modal" data-target="#Cancel<?php echo $feedback['id_f']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-delete"></i></button>
+
+                                                            <div class="modal fade" id="sendnw<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Send (<?php echo $feedback['order_feed']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="send_feedbacktion" method="POST" class="form-horizontal">
+                                                                            <input type="hidden" name="order_id" value="<?php echo $feedback['order_feed']; ?>">
+                                                                            <div class="modal-body">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note</label>
+                                                                                        <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
                                                                                     </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
-                                                                                        <button type=" submit" class="btn btn-success">Save</button>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    <div class="add-data-btn mr-1">
+                                                                                        <button type="submit" class="btn btn-primary">submit</button>
                                                                                     </div>
-                                                                                </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal fade" id="Cancel<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="delete_feedbacktion" method="POST">
+                                                                    <input type="hidden" name="idf" value="<?php echo $feedback['id_f']; ?>">
+                                                                    <input type="hidden" name="order" value="<?php echo $feedback['order_feed']; ?>">
+                                                                    <div class="modal-dialog " role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $feedback['order_feed']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note Cancel</label>
+                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                <?php } else { ?>
-                                                                    -
-                                                                <?php } ?>
-                                                            </td>
-                                                            <td><?php echo $feedback['time'] ?></td>
-                                                            <td><?php echo $feedback['dated'] ?></td>
-                                                            <td>
-                                                                <?php if (!empty($feedback['teamId'])) : ?>
-                                                                    <?php echo $feedback['teamId']; ?>
-                                                                <?php else : ?>
-                                                                    -
-                                                                <?php endif;  ?>
+                                                                </form>
+                                                            </div>
 
-                                                            </td>
-                                                            <td>
-                                                                <?php if (!empty($feedback['position'])) : ?>
-                                                                    <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback['position']])->result_array(); ?>
-                                                                    <?php foreach ($position_name as $keys => $position_name) { ?>
-                                                                        <?php echo $position_name['name_item'] ?>
-                                                                    <?php } ?>
-                                                                <?php else : ?>
-                                                                    -
-                                                                <?php endif;  ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php if ($feedback['status_book'] == '1' && $feedback['status_cp'] == 'complete' && $feedback['status_admin'] == '0') : ?>
-                                                                    <span class=" badge badge-pill badge-success">Original</span>
-                                                                <?php elseif ($feedback['status_book'] == '1' && $feedback['status_cp'] == 'notcomplete'  && $feedback['status_admin'] == '0') : ?>
-                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                                <?php elseif ($feedback['status_book'] == '2'  && $feedback['status_admin'] == '0') : ?>
-                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                                <?php elseif ($feedback['status_admin'] == '1') : ?>
-                                                                    <span class="badge badge-pill badge-warning">StockAdmin</span>
-                                                                <?php else : ?>
-                                                                    -
-                                                                <?php endif; ?>
-                                                            </td>
-                                                            <td>
-                                                                <button class="btn btn-icon btn-info " type="button">
-                                                                    <i class="feather icon-mail"></i>
-                                                                </button>
-                                                                <button class="btn btn-icon btn-danger " type="button">
-                                                                    <i class="feather icon-alert-circle"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                   
+                                                        </td>
+                                                    </tr>
+
                                                 <?php } ?>
 
                                             </tbody>

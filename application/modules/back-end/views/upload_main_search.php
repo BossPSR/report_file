@@ -60,7 +60,6 @@
                                                     <th>#</th>
                                                     <th style="width: 10%;">Status Sell</th>
                                                     <th>Document</th>
-                                                    <th>CM</th>
                                                     <th>Item</th>
                                                     <th>file</th>
                                                     <th>Code</th>
@@ -88,7 +87,7 @@
                                                         </td>
 
                                                         <td><?php echo $value['id_doc']; ?></td>
-                                                        <td><?php echo $value['userMain']; ?></td>
+                                                       
                                                         <td><?php echo $value['name_item']; ?></td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -104,9 +103,10 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $store = $this->db->get_where('tbl_upload_store', ['store_id' => $value['upload_store_id'], 'section' =>  $value['section']])->result_array(); ?>
+                                                                                    <?php $store = $this->db->get_where('tbl_upload_main_search_sub', ['dm_main' => $value['idmain']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>DM</th>
+                                                                                        <th>CM</th>
                                                                                         <th>Status upload</th>
                                                                                         <th>File name</th>
                                                                                         <th>Icon file</th>
@@ -115,26 +115,15 @@
                                                                                         <th>Not Approved</th>
                                                                                         <th>Removed</th>
                                                                                         <th>TM</th>
-                                                                                        <!-- <th>create</th> -->
+                                                                                        <th>create</th> 
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr style="background: #ededed;">
-
-                                                                                        <td><?php echo $value['id_doc']; ?></td>
-                                                                                        <td></td>
-                                                                                        <td></td>
-                                                                                        <td></td>
-                                                                                        <td></td>
-                                                                                        <td>1</td>
-                                                                                        <td>2</td>
-                                                                                        <td><a href="" class="btn btn-icon btn-danger"><i class="feather icon-x"></i></a></td>
-                                                                                        <td>TM1</td>
-                                                                                    </tr>
-                                                                                    <?php $ii = 1; ?>
+                                                                                 
                                                                                     <?php foreach ($store as $keys => $store) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $value['id_doc']; ?>.<?= $store['id']; ?></td>
+                                                                                            <td><?php echo $store['dm_sub']; ?></td>
+                                                                                            <td><?php echo $value['userMain']; ?></td>
                                                                                             <td>
                                                                                                 <?php if ($value['status_book'] == '1' && $value['status_cp'] == 'complete' && $value['status_admin'] == '0') : ?>
                                                                                                     <span class="badge badge-pill badge-success">Original</span>
@@ -153,8 +142,8 @@
                                                                                             <td><?php echo $store['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td>
-                                                                                                <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['id_doc']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
-                                                                                                <div class="modal fade" id="dropedit<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                                                                <div class="modal fade" id="dropedit<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                                                     <div class="modal-dialog" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
@@ -218,7 +207,7 @@
                                                                                             <td></td>
                                                                                             <td></td>
                                                                                             <td></td>
-                                                                                            <!-- <td><?php echo $store['create_at'] ?></td> -->
+                                                                                            <td><?php echo $store['create_at'] ?></td> 
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>

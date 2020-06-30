@@ -154,7 +154,7 @@
                                     <td>
 
 
-                                        <?php $DMfile = $this->db->get_where('tbl_upload_store', ['store_id' => $task['upload_store_id']])->result_array(); ?>
+                                        <!-- <?php $DMfile = $this->db->get_where('tbl_upload_store', ['store_id' => $task['upload_store_id']])->result_array(); ?> -->
                                         <?php if (!empty($DMfile)) { ?>
 
                                             <a href="#" data-toggle="modal" data-target="#TEAMFILE<?php echo $task['or_id']; ?>"><i class="fa fa-file-text-o"></i></a>
@@ -180,7 +180,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php foreach ($DMfile as $DMfile) { ?>
+                                                                    <!-- <?php foreach ($DMfile as $DMfile) { ?>
                                                                         <tr style="text-align:center;">
                                                                             <td><?php echo $task['or_id']; ?></td>
                                                                             <td style="text-align:left;"><?php echo $DMfile['file_name']; ?></td>
@@ -193,7 +193,7 @@
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
-                                                                    <?php } ?>
+                                                                    <?php } ?> -->
                                                                 </tbody>
                                                             </table>
 

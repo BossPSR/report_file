@@ -205,4 +205,12 @@ class Store_model extends CI_Model
         $this->db->where('email', $emailadmin);
         return $this->db->get('tbl_admin')->row_array();
     }
+    
+    public function dm_sub($dmsub)
+    {
+        $this->db->where('dm_main',$dmsub);
+        $this->db->group_by('dm_sub');
+        
+        return $this->db->get('tbl_upload_main_search_sub')->result_array();
+    }
 }

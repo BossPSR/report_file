@@ -315,13 +315,13 @@
                                                                                                     <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Code</label>
-                                                                                                            <input type="text" class="form-control" name="code" value="" required>
+                                                                                                            <input type="text" class="form-control req<?php echo $check_for['store_id']; ?>" name="code" value="" required>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Topic</label>
-                                                                                                            <textarea class="form-control" name="topic" id="" cols="30" rows="10" required></textarea>
+                                                                                                            <textarea class="form-control req<?php echo $check_for['store_id']; ?>" name="topic" id="" cols="30" rows="10" required></textarea>
 
                                                                                                         </div>
                                                                                                     </div>
@@ -341,7 +341,7 @@
                                                                                                     <div class="form-group">
                                                                                                         <fieldset>
                                                                                                             <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                                <input type="checkbox" class="ckeck<?php echo $check_for['store_id']; ?>" data-order="<?php echo $check_for['store_id']; ?>">
+                                                                                                                <input type="checkbox"  class="ckeck<?php echo $check_for['store_id']; ?>" data-order="<?php echo $check_for['store_id']; ?>">
                                                                                                                 <span class="vs-checkbox">
                                                                                                                     <span class="vs-checkbox--check">
                                                                                                                         <i class="vs-icon feather icon-check"></i>
@@ -359,9 +359,9 @@
                                                                                                     <div class="form-group teambox<?php echo $check_for['store_id']; ?>"  style="display: none">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Id Document</label>
-                                                                                                            <select name="Documentid" class="form-control select2" id="">
+                                                                                                            <select name="dmsub" class="form-control select2" id="dmsub<?php echo $check_for['store_id']; ?>">
                                                                                                                 <?php foreach ($Dm as $key => $Dm) { ?>
-                                                                                                                    <option value="<?php echo $Dm['id_doc']; ?>"><?php echo $Dm['id_doc']; ?></option>
+                                                                                                                    <option value="<?php echo $Dm['id']; ?>"><?php echo $Dm['id_doc']; ?></option>
                                                                                                                 <?php } ?>
                                                                                                             </select>
                                                                                                         </div>
@@ -424,14 +424,13 @@
         var o = $(this).data('order');
         if ($('.ckeck' + o).is(":checked")) {
             $(".teambox" + o).fadeIn("slow");
-            $("#team" + o).prop('required', true);
-          
-
+            $("#dmsub" + o).prop('required', true);
+            $(".req" + o).prop('required', false);
             $(".hiddens" + o).fadeOut("slow");
         } else {
             $(".teambox" + o).fadeOut("slow");
-            $("#team" + o).prop('required', false);
-          
+            $("#dmsub" + o).prop('required', false);
+            $(".req" + o).prop('required', true);
             $(".hiddens" + o).fadeIn("slow");
         }
 

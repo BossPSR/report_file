@@ -235,6 +235,8 @@ $route['order_auto_feedback_team']                  = 'back-end/Feedback_ctr/ord
 $route['fileUpload_feedback_team']                  = 'back-end/Feedback_ctr/fileUpload_feedback_team';
 $route['Deduct_Money']                              = 'back-end/Feedback_ctr/Deduct_Money';
 $route['order_auto_feedback_Stockadmin']            = 'back-end/Feedback_ctr/order_auto_feedback_Stockadmin';
+$route['send_feedbacktion']                         = 'back-end/Feedback_ctr/send_feedbacktion';
+$route['delete_feedbacktion']                       = 'back-end/Feedback_ctr/delete_feedbacktion';
 $route['realtime_data']                             = 'back-end/Home_ctr/realtime_data';
 $route['withdraw_realtime']                         = 'back-end/Withdraw_ctr/withdraw_realtime';
 $route['withdraw_realtime_data']                    = 'back-end/Withdraw_ctr/withdraw_realtime_data';
@@ -260,8 +262,8 @@ $route['sendEmail_delivery_teamother']              = 'back-end/Store_ctr/sendEm
 
 $route['price_mangement']                           = 'back-end/Price_ctr';
 $route['Edit_Modify_fee']                           = 'back-end/Price_ctr/Edit_Modify_fee';
-$route['Edit_ModifyCashback']                           = 'back-end/Price_ctr/Edit_ModifyCashback';
-$route['Edit_ModifyScoreTeam']                           = 'back-end/Price_ctr/ ';
+$route['Edit_ModifyCashback']                       = 'back-end/Price_ctr/Edit_ModifyCashback';
+$route['Edit_ModifyScoreTeam']                      = 'back-end/Price_ctr/ ';
 
 $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
