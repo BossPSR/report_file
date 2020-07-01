@@ -98,7 +98,7 @@ class Store_model extends CI_Model
         tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re ,tbl_upload_order.order_id AS order_save
         ,tbl_upload_order.price_file AS price_save , tbl_upload_team.teamId AS teamT3 ,tbl_upload_order.status_cp AS statusB
         ,tbl_upload_team.wage AS wageT , tbl_upload_order.status_admin statusAdmin');
-        $this->db->from('tbl_bookmark'); 
+        $this->db->from('tbl_bookmark');
         $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document = tbl_upload_main_search.id_doc', 'left');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
@@ -205,12 +205,25 @@ class Store_model extends CI_Model
         $this->db->where('email', $emailadmin);
         return $this->db->get('tbl_admin')->row_array();
     }
-    
+
     public function dm_sub($dmsub)
     {
-        $this->db->where('dm_main',$dmsub);
+        $this->db->where('dm_main', $dmsub);
         $this->db->group_by('dm_sub');
-        
+
         return $this->db->get('tbl_upload_main_search_sub')->result_array();
+    }
+
+    function fetch_state($st)
+    {
+        $this->db->where('comandnocom', $st);
+        $this->db->group_by('dm_sub');
+        $this->db->order_by('dm_sub', 'asc');
+        $query = $this->db->get('tbl_upload_main_search_sub');
+        $output = ' <option value="">-- Select DM --</option>';
+        foreach ($query->result() as $row) {
+            $output .= ' <option value="' . $row->dm_sub . '">' . $row->dm_sub . '</option> ';
+        }
+        return $output;
     }
 }

@@ -49,7 +49,7 @@
                                                 <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
-                                                <textarea name="detail" id="detail" hidden></textarea>
+                                                <textarea name="detail" class="detail" hidden></textarea>
 
                                             </div>
 
@@ -64,7 +64,6 @@
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
                                             </div>
-
                                         </form>
                                     </div>
                                 </div>
@@ -117,7 +116,7 @@
         $("#detail2").change(function() {
             var value = $(this).val();
 
-            $("#detail").val(value);
+            $(".detail").val(value);
         }).keyup();
 
     });
@@ -158,23 +157,34 @@
                     status: 1
                 },
                 success: function(data) {
-                    myDropzone.processQueue();
+                    var x = document.getElementById("detail2").value;
 
-                    myDropzone.on("queuecomplete", function(file, res) {
-                        if (myDropzone2.processQueue()) {
-                            myDropzone2.on("queuecomplete", function(file, res) {
-                                swal("Good job!", "Upload for data successfull", "success", {
-                                    button: false,
-                                });
-                                setTimeout("location.reload(true);", 1000);
+                    $.ajax({
+                        type: 'POST',
+                        url: 'order_auto_morefile_buy',
+                        data: {
+                            detail: x,
+                        },
+                        success: function(success) {
+                            myDropzone.processQueue();
+                            myDropzone.on("queuecomplete", function(file, res) {
+                                if (myDropzone2.processQueue()) {
+                                    myDropzone2.on("queuecomplete", function(file, res) {
+                                        swal("Good job!", "Upload for data successfull", "success", {
+                                            button: false,
+                                        });
+                                        setTimeout("location.reload(true);", 1000);
+                                    });
+                                } else {
+                                    swal("Good job!", "Upload for data successfull", "success", {
+                                        button: false,
+                                    });
+                                    setTimeout("location.reload(true);", 1000);
+                                }
                             });
-                        } else {
-                            swal("Good job!", "Upload for data successfull", "success", {
-                                button: false,
-                            });
-                            setTimeout("location.reload(true);", 1000);
                         }
                     });
+
                 },
 
             });

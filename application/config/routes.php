@@ -74,6 +74,7 @@ $route['buy_downloadmain']          = 'front-end/Buy_ctr/order_download';
 $route['withdraw_cash']             = 'front-end/My_withdraw_ctr/withdraw_cash';
 
 $route['thank_for_buy']             = 'front-end/Buy_ctr/thank_for_buy';
+$route['order_auto_morefile_buy']   = 'front-end/Buy_ctr/order_auto_morefile_buy';
 $route['store']                     = 'front-end/Store_ctr';
 $route['store_upload']              = 'front-end/Store_ctr/fileUpload_store';
 $route['my_deposit_paypal']         = 'front-end/My_deposit_ctr/my_deposit_paypal';
@@ -162,6 +163,7 @@ $route['back_upload_main_search']                   = 'back-end/Store_ctr/upload
 $route['add_to_upload_main_search']                 = 'back-end/Store_ctr/add_to_upload_main_search';
 $route['upload_main_searc_ouject']                  = 'back-end/Store_ctr/upload_main_searc_ouject';
 $route['fileUpload_search_main']                    = 'back-end/Store_ctr/fileUpload_search_main';
+$route['fetch_state']                               = 'back-end/Store_ctr/fetch_state';
 $route['pdf']                                       = 'front-end/pdf';
 $route['approved']                                  = 'back-end/Approved_ctr';
 $route['not-approved']                              = 'back-end/Approved_ctr/not_approved';

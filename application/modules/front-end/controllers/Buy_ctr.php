@@ -20,10 +20,10 @@ class Buy_ctr extends CI_Controller
       $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['idUser']])->row_array();
       if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
         $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
-				$checkDate = DateDiff($datePaypal, date("Y-m-d"));
+        $checkDate = DateDiff($datePaypal, date("Y-m-d"));
 
         if ($checkDate < 0 || $data['userId']['free_forever'] == 1) {
-					
+
           $this->load->view('options/header_login');
           $this->load->view('buy', $data);
           $this->load->view('options/footer');
@@ -118,13 +118,13 @@ class Buy_ctr extends CI_Controller
   {
     // image_lib
 
-    $userId     = $this->input->post('userId');
-    $date_req   =  $this->input->post('date');
-    $note       = $this->input->post('note');
-    $wage       = $this->input->post('wage');
+    $userId         = $this->input->post('userId');
+    $date_req       =  $this->input->post('date');
+    $note           = $this->input->post('note');
+    $wage           = $this->input->post('wage');
     $date_required  = $this->input->post('date_required');
     $position       = $this->input->post('position');
-    $target_dir = "uploads/Buy/GT/"; // Upload directory
+    $target_dir     = "uploads/Buy/GT/"; // Upload directory
 
     $request = 1;
 
@@ -143,6 +143,7 @@ class Buy_ctr extends CI_Controller
       $this->load->library('upload', $config);
       $this->upload->initialize($config);
       $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
+      $Gtmain = $this->db->order_by('id', 'DESC')->get('tbl_morefile_GT')->row();
 
 
       // File upload
@@ -151,18 +152,32 @@ class Buy_ctr extends CI_Controller
         $uploadData = $this->upload->data();
 
         $data = array(
-          // 'order_id'      => $buymax->maxorder,
-          'order_id'      => $buymax->order_main,
+          'more_id'          => $Gtmain->id,
+          'order_id'         => $buymax->order_main,
           'file_name_GT'     => $uploadData['file_name'],
           'path_GT'          => 'uploads/Buy/GT/' . $uploadData['file_name'],
-          'create_at'     => date('Y-m-d H:i:s'),
+          'create_at'        => date('Y-m-d H:i:s'),
         );
         $this->db->insert('tbl_upload_orderGT', $data);
-         
-        
-      
       }
     }
+  }
+
+  public function order_auto_morefile_buy()
+  {
+    $userId    = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+    $GT        = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
+    $detail    = $this->input->post('detail');
+
+    $orf = array(
+      'more_detail'       => $detail,
+      'order_id'          => $GT->order_main,
+      'userId'            => $userId['idUser'],
+      'create_at'         => date('Y-m-d H:i:s'),
+    );
+    $success = $this->db->insert('tbl_morefile_GT', $orf);
+
+    echo $success;
   }
 
   public function order_download()
@@ -176,7 +191,7 @@ class Buy_ctr extends CI_Controller
       echo $success;
     }
   }
-  
+
   public function order_auto()
   {
     $date_req   =  $this->input->post('status');

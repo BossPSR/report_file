@@ -190,8 +190,8 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <!-- <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stores['upload_store_id']])->result_array(); ?> -->
-                                                            <?php if (!empty($orderStore)) : ?>
+                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
+                                                            <?php if (!empty($dm_cc)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalbDM<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -203,49 +203,42 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-
-                                                                                <!-- <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
                                                                                 <?php foreach ($dm_cc as $key => $dm_cc) { ?>
-                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_cc['id_document']])->row_array(); ?>
-
-
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
                                                                                     <?php if (!empty($dm_cc['id_document'])) : ?>
-                                                                                        <p><b>
-                                                                                                <h3><?php echo $dm_cc['id_document']; ?></h3>
-                                                                                            </b></p>
-
+                                                                                        <p>
+                                                                                            <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                        </p>
                                                                                         <table class="table zero-configuration">
                                                                                             <thead>
                                                                                                 <tr>
-                                                                                                    <th>Relive</th>
-                                                                                                    <th>Store Id</th>
+                                                                                                    <th>Rewrite</th>
                                                                                                     <th>File Name</th>
                                                                                                     <th>File</th>
                                                                                                     <th>create</th>
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
-
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <?php if ($orderssc['relive_status'] == '0') : ?>
-                                                                                                            -
-                                                                                                        <?php else : ?>
-                                                                                                            <div class="badge badge-primary">Relive</div>
-                                                                                                        <?php endif ?>
-                                                                                                    </td>
-                                                                                                    <td><?php echo $orderssc['store_id'] ?></td>
-                                                                                                    <td><?php echo $orderssc['file_name'] ?></td>
-                                                                                                    <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                    <td><?php echo $orderssc['create_at'] ?></td>
-                                                                                                </tr>
-
+                                                                                                <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['comandnocom'] == '4') : ?>
+                                                                                                                <div class="badge badge-primary">Rewrite</div>
+                                                                                                            <?php else : ?>
+                                                                                                                -
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php endforeach; ?>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     <?php else : ?>
 
                                                                                     <?php endif; ?>
-                                                                                <?php } ?> -->
+                                                                                <?php } ?>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">

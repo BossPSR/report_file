@@ -287,38 +287,26 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="book">Document ID</label>
-                                                                                <?php $chek_book  = $this->db->get('tbl_upload_main_search')->result_array(); ?>
-                                                                                <select name="DM[]" id="" class="select2 form-control" multiple="multiple" required>
-                                                                                    <?php foreach ($chek_book as $key => $chek_book) { ?>
-                                                                                        <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
 
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Status Upload</label>
-                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
+                                                                                <select class="form-control statusst" id="status_cp<?php echo $stored['order_id']; ?>" required>
                                                                                     <option value="" selected disabled>select</option>
-                                                                                    <option value="complete">Original</option>
-                                                                                    <option value="notcomplete">Not Complete</option>
-                                                                                    <option value="rewrite">Rewrite</option>
+                                                                                    <option value="1">Complete</option>
+                                                                                    <option value="2">Not Complete</option>
+                                                                                    <option value="3">Original</option>
+                                                                                    <option value="4">Rewrite</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                                <label for="helpInputTop">Status</label>
-                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
-                                                                                    <option value="" selected disabled>select</option>
-                                                                                    <option value="complete">Original</option>
-                                                                                    <option value="notcomplete">Not Complete</option>
-                                                                                    <option value="rewrite">Rewrite</option>
+                                                                                <label for="book">Document ID</label>
+
+                                                                                <select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple" required>
+                                                                                    <option value="" disabled>--- Select DM ---</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -352,7 +340,19 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        
+
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Status</label>
+                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <option value="complete">Original</option>
+                                                                                    <option value="notcomplete">Not Complete</option>
+                                                                                    <option value="rewrite">Rewrite</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
                                                                         <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <fieldset>
@@ -633,6 +633,27 @@
                 }
             });
             return false;
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.statusst').change(function() {
+            var statusst = $('.statusst').val();
+            if (statusst != '') {
+                $.ajax({
+                    url: 'fetch_state',
+                    method: "POST",
+                    data: {
+                        st: statusst
+                    },
+                    success: function(data) {
+                        $('.dmsub').html(data);
+                    }
+                })
+            }
         });
     });
 </script>

@@ -833,16 +833,17 @@ class Store_ctr extends CI_Controller
             $dmsub          = $this->input->post('dmsub');
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
+            $storrow   = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->row_array();
             $storedata   = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
-            if ($storedata['status_cp'] == 'complete') {
+            if ($storrow['status_cp'] == 'complete') {
                 $st = '1';
             } else {
                 $st = '2';
             }
 
 
-            if ($dmsub) {
-                
+            if (!empty($dmsub)) {
+
                 $this->db->where('section', $section);
                 $this->db->where('store_id', $store_id);
                 $this->db->update('tbl_upload_store', ['status_main_search' => 1]);
@@ -1265,5 +1266,12 @@ class Store_ctr extends CI_Controller
         }
 
         return redirect('Bookmark');
+    }
+
+    public function fetch_state()
+    {
+        if ($this->input->post('st')) {
+            echo $this->Store_model->fetch_state($this->input->post('st'));
+        }
     }
 }

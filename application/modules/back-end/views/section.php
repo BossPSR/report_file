@@ -360,6 +360,7 @@
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Id Document</label>
                                                                                                             <select name="dmsub" class="form-control select2" id="dmsub<?php echo $check_for['store_id']; ?>">
+                                                                                                                <option value="" disabled selected> -- selete -- </option>
                                                                                                                 <?php foreach ($Dm as $key => $Dm) { ?>
                                                                                                                     <option value="<?php echo $Dm['id']; ?>"><?php echo $Dm['id_doc']; ?></option>
                                                                                                                 <?php } ?>
