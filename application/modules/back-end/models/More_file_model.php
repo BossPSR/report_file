@@ -13,9 +13,9 @@ class More_file_model extends CI_Model{
         $this->db->select('*,tbl_morefile_GT.order_id AS orderGT,tbl_morefile_GT.id AS idM,
         tbl_morefile_GT.teamId AS TM , tbl_upload_team.status AS Tstatus');
         $this->db->from('tbl_morefile_GT');
-        $this->db->join('tbl_upload_orderGT','tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
-        $this->db->join('tbl_upload_order','tbl_morefile_GT.order_id = tbl_upload_order.order_id');
-        $this->db->join('tbl_upload_team','tbl_morefile_GT.order_id = tbl_upload_team.order_id');
+        $this->db->join('tbl_upload_orderGT','tbl_morefile_GT.id = tbl_upload_orderGT.more_id' , 'left');
+        $this->db->join('tbl_upload_order','tbl_morefile_GT.order_id = tbl_upload_order.order_id' , 'left');
+        $this->db->join('tbl_upload_team','tbl_morefile_GT.order_id = tbl_upload_team.order_id' , 'left');
         $this->db->join('tbl_bookmark','tbl_morefile_GT.order_id = tbl_bookmark.id_orderBuy ' , 'left');
         $this->db->join('tbl_upload_main_search','tbl_bookmark.id_document = tbl_upload_main_search.id_doc ' , 'left');
         // $this->db->where('tbl_morefile_GT.status_see_more_file_team',0);

@@ -79,7 +79,6 @@
     </div>
 </div>
 
-
 <script>
     $(document).ready(function() {
         $("#detail2").change(function() {
@@ -98,10 +97,7 @@
         maxFiles: 5,
         addRemoveLinks: true,
         parallelUploads: 5, // Number of files process at a time (default 2)
-
     });
-
-
 
     $('#uploadfiles').click(function() {
         if (myDropzone.files == 0) {

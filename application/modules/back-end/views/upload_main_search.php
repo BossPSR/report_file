@@ -87,7 +87,7 @@
                                                         </td>
 
                                                         <td><?php echo $value['id_doc']; ?></td>
-                                                       
+
                                                         <td><?php echo $value['name_item']; ?></td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -115,11 +115,11 @@
                                                                                         <th>Not Approved</th>
                                                                                         <th>Removed</th>
                                                                                         <th>TM</th>
-                                                                                        <th>create</th> 
+                                                                                        <th>create</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                 
+
                                                                                     <?php foreach ($store as $keys => $store) { ?>
                                                                                         <tr>
                                                                                             <td><?php echo $store['dm_sub']; ?></td>
@@ -207,7 +207,7 @@
                                                                                             <td></td>
                                                                                             <td></td>
                                                                                             <td></td>
-                                                                                            <td><?php echo $store['create_at'] ?></td> 
+                                                                                            <td><?php echo $store['create_at'] ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -226,12 +226,12 @@
                                                         <td><?php echo $value['topic']; ?></td>
                                                         <td><?php echo $value['create_atMain']; ?></td>
                                                         <td>
-                                                            <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['id_doc']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
-                                                            <div class="modal fade" id="dropW<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                            <div class="modal fade" id="dropW<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Add Drop Document (<?php echo $value['id_doc']; ?>)</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Add Drop Document (<?php echo $value['idmain']; ?>)</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -240,17 +240,31 @@
                                                                         <div class="modal-body">
                                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                                                 <label for="" style="font-size: 16px;">File Document </label>
-                                                                                <form action="fileUpload_main" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['id_doc']; ?>">
-                                                                                    <input type="hidden" id="DM2<?php echo $value['id_doc']; ?>" class="form-control " name="DM" value="<?php echo $value['id_doc'] ?>">
+                                                                                <form action="fileUpload_main" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['idmain']; ?>">
+                                                                                    <input type="hidden" id="DM2<?php echo $value['idmain']; ?>" class="form-control " name="DM" value="<?php echo $value['idmain'] ?>">
+                                                                                    <input type="hidden" class="form-control dr<?php echo $value['idmain']; ?>" name="status_cpS" value="">
                                                                                     <div class="dz-message" style="top: 24%;">Upload Document</div>
                                                                                 </form>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="helpInputTop">Status</label>
+                                                                                    <select name="status_cp" id="stu<?php echo $value['idmain']; ?>" class="form-control status_cp<?php echo $value['idmain']; ?>" required>
+                                                                                        <option value="" selected disabled>select</option>
+                                                                                        <option value="1">Complete</option>
+                                                                                        <option value="2">Not Complete</option>
+                                                                                        <option value="3">Original</option>
+                                                                                        <option value="4">Rewrite</option>
+                                                                                    </select>
+                                                                                </div>
                                                                             </div>
                                                                             <br>
                                                                         </div>
 
                                                                         <div class="modal-footer">
                                                                             <div class="add-data-footer d-flex justify-content-around">
-                                                                                <button type="submit" id="uploadsfileEx<?php echo $value['id_doc']; ?>" class="btn btn-primary">Submit</button>
+                                                                                <button type="submit" id="uploadsfileEx<?php echo $value['idmain']; ?>" class="btn btn-primary">Submit</button>
                                                                             </div>
                                                                         </div>
 
@@ -259,31 +273,50 @@
                                                             </div>
 
                                                             <script>
+                                                                $(".status_cp<?php echo $value['idmain']; ?>").change(function() {
+                                                                    var value = $(this).val();
+                                                                    $(".dr<?php echo $value['idmain']; ?>").val(value);
+                                                                }).change();
+                                                            </script>
+
+                                                            <script>
                                                                 Dropzone.autoDiscover = false;
-                                                                var myDropzone<?php echo $value['id_doc']; ?> = new Dropzone("#maindropzoneEx<?php echo $value['id_doc']; ?>", {
+                                                                var myDropzone<?php echo $value['idmain']; ?> = new Dropzone("#maindropzoneEx<?php echo $value['idmain']; ?>", {
                                                                     autoProcessQueue: false,
                                                                     maxFiles: 5,
                                                                     addRemoveLinks: true,
                                                                     parallelUploads: 5, // Number of files process at a time (default 2)
                                                                 });
 
-                                                                document.getElementById("uploadsfileEx<?php echo $value['id_doc']; ?>").addEventListener("click", function() {
-                                                                    // myDropzone.processQueue();
-                                                                    if (myDropzone<?php echo $value['id_doc']; ?>.files == 0) {
+                                                                document.getElementById("uploadsfileEx<?php echo $value['idmain']; ?>").addEventListener("click", function() {
+
+                                                                    var stu = document.getElementById("stu<?php echo $value['idmain']; ?>").value;
+
+                                                                    console.log(stu);
+
+                                                                    if (myDropzone<?php echo $value['idmain']; ?>.files == 0) {
 
                                                                         swal("Warning!", "Can not be document Empty", "warning", {
                                                                             button: true,
                                                                         });
                                                                     }
-                                                                    myDropzone<?php echo $value['id_doc']; ?>.processQueue();
-                                                                    myDropzone<?php echo $value['id_doc']; ?>.on("queuecomplete", function(file, res) {
-                                                                        swal("Good job!", "Upload for data successfull", "success", {
-                                                                            button: false,
+                                                                    if (stu == '') {
+                                                                        swal("Warning!", "Can not be Status Empty", "warning", {
+                                                                            button: true,
                                                                         });
-                                                                        setTimeout(function() {
-                                                                            location.href = "back_upload_main_search"
-                                                                        }, 1000);
-                                                                    });
+                                                                    } else {
+                                                                        myDropzone<?php echo $value['idmain']; ?>.processQueue();
+                                                                        myDropzone<?php echo $value['idmain']; ?>.on("queuecomplete", function(file, res) {
+                                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                                button: false,
+                                                                            });
+                                                                            setTimeout(function() {
+                                                                                location.href = "back_upload_main_search"
+                                                                            }, 1000);
+                                                                        });
+                                                                    }
+
+
                                                                 });
                                                             </script>
 

@@ -84,7 +84,7 @@
                                                             <?php if ($bookmark_all_not['id_document'] == '') : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <?php echo $bookmark_all_not['id_document'] ?>
+                                                                <span class="badge badge-primary"><?php echo $bookmark_all_not['id_document'] ?></span>
                                                             <?php endif; ?>
 
 

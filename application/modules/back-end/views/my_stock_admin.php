@@ -195,8 +195,8 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <!-- <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?>
-                                                            <?php if (!empty($orderStore)) : ?>
+
+                                                            <?php if (!empty($book_dm['id_document'])) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stock['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalbDM<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -208,27 +208,46 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Order id</th>
-                                                                                            <th>File name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderStore as $keys => $orderStore) { ?>
-                                                                                            <tr>
-                                                                                                <td><?php echo $orderStore['store_id'] ?></td>
-                                                                                                <td><?php echo $orderStore['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderStore['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderStore['create_at'] ?></td>
+                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stock['orderST']])->result_array(); ?>
+                                                                                <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
 
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                    <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                        <p><b>
+                                                                                                <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                            </b></p>
+
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Relive</th>
+                                                                                                    <th>Store Id</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['comandnocom'] == '4') : ?>
+                                                                                                                <div class="badge badge-primary">Rewrite</div>
+                                                                                                            <?php else : ?>
+                                                                                                                -
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php endforeach; ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -240,7 +259,7 @@
                                                                 </div>
                                                             <?php else : ?>
                                                                 -
-                                                            <?php endif; ?> -->
+                                                            <?php endif; ?>
 
 
                                                         </td>
@@ -416,8 +435,8 @@
                                                                     <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="order_not_approved<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
                                                                 <?php else : ?>
                                                                     <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
-                                                                    <button type="button" class="btn btn-secondary btn-icon" ><i class="fa fa-check"></i></button>
-                                                                <button type="button" class="btn btn-secondary btn-icon" ><i class="fa fa-times"></i></button>
+                                                                    <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
+                                                                    <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-times"></i></button>
                                                                 <?php endif; ?>
 
                                                             <?php endif; ?>

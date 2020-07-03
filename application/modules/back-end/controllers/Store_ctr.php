@@ -832,9 +832,9 @@ class Store_ctr extends CI_Controller
             $section        = $this->input->post('section');
             $dmsub          = $this->input->post('dmsub');
 
-            $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
-            $storrow   = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->row_array();
-            $storedata   = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
+            $select_item    = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
+            $storrow        = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->row_array();
+            $storedata      = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
             if ($storrow['status_cp'] == 'complete') {
                 $st = '1';
             } else {
@@ -858,7 +858,7 @@ class Store_ctr extends CI_Controller
 
                     $db_store = [
                         'dm_main'         => $dmsub,
-                        'dm_sub'          => "DM" . '.' . $dmsub . '.' . $st . '.' . $i,
+                        'dm_sub'          => "DM" . $dmsub . '.' . $st . '.' . $i,
                         'file_name'       => $storedata['file_name'],
                         'path'            => $storedata['path'],
                         'create_at'       => date('Y-m-d H:i:s'),
@@ -888,7 +888,7 @@ class Store_ctr extends CI_Controller
 
                     $db_store = [
                         'dm_main'         => $id,
-                        'dm_sub'          => "DM" . '.' . $id . '.' . $st . '.' . '1',
+                        'dm_sub'          => "DM" . $id . '.' . $st . '.' . '1',
                         'file_name'       => $select_item['name_item'],
                         'path'            => $code,
                         'create_at'       => date('Y-m-d H:i:s'),

@@ -53,7 +53,7 @@ class Book_ctr extends CI_Controller
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
         } else {
-            $this->session->set_flashdata('del_ss2' , 'Not Successfully Update to team information');
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
         }
         return redirect('Bookmark_notpay');
     }
@@ -67,7 +67,7 @@ class Book_ctr extends CI_Controller
         } else {
             $discount = 0;
         }
-        
+
 
         $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
 
@@ -251,8 +251,16 @@ class Book_ctr extends CI_Controller
     {
         // image_lib
         $DM = $this->input->post('DM');
+        $status_cp = $this->input->post('status_cpS');
 
-        $upload_book = $this->Store_model->bookmark_upload($DM);
+        // $upload_book = $this->Store_model->bookmark_upload($DM);
+
+        $sub  = $this->Store_model->dm_sub($DM);
+        $i = 1;
+        foreach ($sub as $key => $sub) {
+            $i += 1;
+        }
+
         $target_dir = "uploads/Store/"; // Upload directory
         if (!empty($_FILES['file']['name'])) {
 
@@ -271,18 +279,27 @@ class Book_ctr extends CI_Controller
                 // Get data about the file
                 $uploadData = $this->upload->data();
 
-                $data = array(
-                    'file_name'             => $uploadData['file_name'],
-                    'store_id'              => $upload_book['store_id'],
-                    'status_main_search'    => 1,
-                    'status_chack'          => 1,
-                    'relive_status'         => 1,
-                    'path'                  => 'uploads/Store/' . $uploadData['file_name'],
-                    'status_check_drop'     => 11,
-                    'section'               => $upload_book['section'],
-                    'create_at'             => date('Y-m-d H:i:s'),
-                );
-                $this->db->insert('tbl_upload_store', $data);
+                // $data = array(
+                //     'file_name'             => $uploadData['file_name'],
+                //     'store_id'              => $upload_book['store_id'],
+                //     'status_main_search'    => 1,
+                //     'status_chack'          => 1,
+                //     'relive_status'         => 1,
+                //     'path'                  => 'uploads/Store/' . $uploadData['file_name'],
+                //     'status_check_drop'     => 11,
+                //     'section'               => $upload_book['section'],
+                //     'create_at'             => date('Y-m-d H:i:s'),
+                // );
+                // $this->db->insert('tbl_upload_store', $data);
+
+                $db_store = [
+                    'dm_main'         => $DM,
+                    'dm_sub'          => "DM" . $DM . '.' . $status_cp . '.' . $i,
+                    'file_name'       => $uploadData['file_name'],
+                    'path'            => 'uploads/Store/' . $uploadData['file_name'],
+                    'create_at'       => date('Y-m-d H:i:s'),
+                ];
+                $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
             }
         }
     }
@@ -300,7 +317,6 @@ class Book_ctr extends CI_Controller
 
             $this->db->where('id_doc', $dm_id);
             $this->db->update('tbl_upload_main_search', ['update_at' => date('Y-m-d H:i:s')]);
-
         }
 
         $user_email = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
@@ -335,7 +351,7 @@ class Book_ctr extends CI_Controller
             $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $orderT['path'] . '">' . $orderT['file_name'] . '</a>';
             $message .= '<br>';
         }
-        
+
         $message .= '</center>';
 
 

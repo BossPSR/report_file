@@ -86,7 +86,7 @@
                                                                 -
                                                             <?php else : ?>
                                                                 <?php
-                                                                           $this->db->group_by('id_document');
+                                                                $this->db->group_by('id_document');
                                                                 $show_dm = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $more_file['orderGT']])->result_array();
                                                                 ?>
                                                                 <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
@@ -194,8 +194,8 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <!-- <?php $orderStore = $this->db->get_where('tbl_upload_store', ['store_id' => $more_file['upload_store_id']])->result_array(); ?>
-                                                            <?php if (!empty($orderStore)) : ?>
+
+                                                            <?php if (!empty($more_file['id_document'])) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $more_file['orderGT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalbDM<?php echo $more_file['orderGT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -210,13 +210,8 @@
 
                                                                                 <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $more_file['orderGT']])->result_array(); ?>
                                                                                 <?php foreach ($dm_cc as $key => $dm_cc) { ?>
-                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_cc['id_document']])->row_array(); ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
 
-                                                                                    <?php
-                                                                                    $this->db->where('store_id', $dm_c11['upload_store_id']);
-
-                                                                                    $orderssc = $this->db->get('tbl_upload_store')->result_array();
-                                                                                    ?>
                                                                                     <?php if (!empty($dm_cc['id_document'])) : ?>
                                                                                         <p><b>
                                                                                                 <h3><?php echo $dm_cc['id_document']; ?></h3>
@@ -233,25 +228,20 @@
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
-                                                                                                <?php foreach ($orderssc as $keys => $orderssc) { ?>
-                                                                                                    <?php if ($orderssc['section'] == $dm_c11['section'] || $orderssc['section'] == 0) {
-                                                                                                    ?>
-                                                                                                        <tr>
-                                                                                                            <td>
-                                                                                                                <?php if ($orderssc['relive_status'] == '0') : ?>
-                                                                                                                    -
-                                                                                                                <?php else : ?>
-                                                                                                                    <div class="badge badge-primary">Relive</div>
-                                                                                                                <?php endif ?>
-                                                                                                            </td>
-                                                                                                            <td><?php echo $orderssc['store_id'] ?></td>
-                                                                                                            <td><?php echo $orderssc['file_name'] ?></td>
-                                                                                                            <td><a href="<?php echo $orderssc['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                            <td><?php echo $orderssc['create_at'] ?></td>
-                                                                                                        </tr>
-                                                                                                <?php }
-                                                                                                }
-                                                                                                ?>
+                                                                                                <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['comandnocom'] == '4') : ?>
+                                                                                                                <div class="badge badge-primary">Rewrite</div>
+                                                                                                            <?php else : ?>
+                                                                                                                -
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php endforeach; ?>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     <?php else : ?>
@@ -269,7 +259,7 @@
                                                                 </div>
                                                             <?php else : ?>
                                                                 -
-                                                            <?php endif; ?> -->
+                                                            <?php endif; ?>
 
 
                                                         </td>
