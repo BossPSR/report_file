@@ -33,21 +33,12 @@
             <!--register area start-->
             <div class="col-lg-10 col-md-10">
                 <div class="account_form register">
-                    <h2>Sign Up for team</h2>
+                    <h2 class="text-center">Sign Up for team</h2>
                     <form action="register-team-success" method="POST" enctype="multipart/form-data">
                         <div class="row">
-                            <?php $get_team = $this->db->get('tbl_team')->result_array(); ?>
-                            <?php $get_user = $this->db->get('tbl_user')->result_array(); ?>
-
-                            <?php foreach ($get_team as $key => $get_team) { ?>
-                                <input type="text" name="get_team" value="<?php echo $get_team['email']; ?>" class="form-control" required hidden>
-                            <?php } ?>
-                            <?php foreach ($get_user as $key => $get_user) { ?>
-                                <input type="text" name="get_user" value="<?php echo $get_user['email']; ?>" class="form-control" required hidden>
-                            <?php } ?>
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
+                                <div class="form-group">
                                     <label>Countries <span class="red">*</span></label>
                                     <!-- <input type="number" name="passport" required> -->
                                     <select class="form-control" name="countries">
@@ -56,46 +47,57 @@
                                             <option value="<?php echo $countries['id']; ?>"><?php echo $countries['countryName']; ?></option>
                                         <?php } ?>
                                     </select>
-                                </p>
+                                </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
+                                <div class="form-group">
                                     <label>Name <span class="red">*</span></label>
                                     <input type="text" name="name" class="form-control" required>
-                                </p>
+                                </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
+                                <div class="form-group">
                                     <label>Email <span class="red">*</span></label>
                                     <input type="email" class="form-control" name="email" required>
-                                </p>
+                                </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
+                                <div class="form-group">
                                     <label>Phone Number <span class="red">*</span></label>
                                     <input type="number" name="phone" class="form-control" required>
-                                </p>
+                                </div>
                             </div>
 
                         </div>
+
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
-                                    <label>Passwords <span class="red">*</span></label>
-                                    <input type="password" id="password" name="password" class="form-control" required>
-                                </p>
+                                <div class="form-group">
+                                    <label>Passwords <span class="red"> Please enter a password of at least 8 characters. *</span></label>
+                                    <div class="input-group mb-3" id="show_hide_password">
+                                        <input type="password" id="password" name="password" onblur="check();" minlength="8" class="form-control" aria-describedby="basic-addon1" required>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
-                                    <label>Comfirm password <span class="red">*</span></label>
-                                    <input type="password" id="c_password" name="c_password" class="form-control" required>
-                                    <span id="message"></span>
-                                </p>
+                                <div class="form-group">
+                                    <label>Comfirm password <span class="red">*</span><span id="message"></span></label>
+                                    <div class="input-group mb-3" id="show_hide_password">
+                                        <input type="password" id="c_password" name="c_password" class="form-control" minlength="8" aria-describedby="basic-addon1" required>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
+                                <div class="form-group">
                                     <?php $select_it = $this->db->get('tbl_item_position')->result_array(); ?>
                                     <label>Job <span class="red">*</span></label>
                                     <select id="multiple" class="form-control" name="job[]" multiple>
@@ -104,20 +106,21 @@
                                         <?php } ?>
                                     </select>
                                     <!-- <button id="btnMultiple" class="btn btn-info">show multiple selection</button> -->
-                                </p>
+
+                                </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
+                                <div class="form-group">
                                     <label>Resume <span class="red">*</span></label>
                                     <input type="file" class="form-control" name="file_name" required>
                                     <!-- <input type="file" name="file_name" required> -->
-                                </p>
+                                </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <p>
+                                <div class="form-group">
                                     <label for="">Paypal</label>
                                     <input type="text" class="form-control" name="bank_account" value="" required>
-                                </p>
+                                </div>
                             </div>
                         </div>
                         <div class="login_submit">
@@ -134,4 +137,15 @@
         </div>
     </div>
 </div>
+<!-- customer login end -->
+
+<script>
+    function check() {
+        var elem = document.getElementById('password').value;
+        if (!elem.match(/^([a-z0-9])+$/i)) {
+            alert("กรอกได้เฉพาะตัวเลขและตัวอักษรภาษาอังกฤษเท่านั้น");
+            document.getElementById('password').value = "";
+        }
+    }
+</script>
 <!-- customer login end -->

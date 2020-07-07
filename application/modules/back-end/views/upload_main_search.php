@@ -291,8 +291,10 @@
                                                                 document.getElementById("uploadsfileEx<?php echo $value['idmain']; ?>").addEventListener("click", function() {
 
                                                                     var stu = document.getElementById("stu<?php echo $value['idmain']; ?>").value;
+                                                                    var DMS = document.getElementById("DM2<?php echo $value['idmain']; ?>").value;
 
                                                                     console.log(stu);
+                                                                    console.log(DMS);
 
                                                                     if (myDropzone<?php echo $value['idmain']; ?>.files == 0) {
 
@@ -305,14 +307,28 @@
                                                                             button: true,
                                                                         });
                                                                     } else {
-                                                                        myDropzone<?php echo $value['idmain']; ?>.processQueue();
-                                                                        myDropzone<?php echo $value['idmain']; ?>.on("queuecomplete", function(file, res) {
-                                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                                button: false,
-                                                                            });
-                                                                            setTimeout(function() {
-                                                                                location.href = "back_upload_main_search"
-                                                                            }, 1000);
+
+                                                                        $.ajax({
+                                                                            type: 'POST',
+                                                                            url: 'uploadmain_auto',
+                                                                            data: {
+                                                                                status: 1 ,
+                                                                                DMS: DMS ,
+                                                                                stu: stu
+                                                                            },
+                                                                            success: function(success) {
+
+                                                                                myDropzone<?php echo $value['idmain']; ?>.processQueue();
+                                                                                myDropzone<?php echo $value['idmain']; ?>.on("queuecomplete", function(file, res) {
+                                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                                        button: false,
+                                                                                    });
+                                                                                    setTimeout(function() {
+                                                                                        location.href = "back_upload_main_search"
+                                                                                    }, 1000);
+                                                                                });
+
+                                                                            },
                                                                         });
                                                                     }
 

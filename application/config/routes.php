@@ -83,6 +83,7 @@ $route['order']                     = 'front-end/Order_ctr';
 $route['order_auto']                = 'front-end/Buy_ctr/order_auto';
 $route['order_auto_sell']           = 'front-end/Buy_ctr/order_auto_sell';
 
+
 $route['payment_email']             = 'front-end/Store_ctr/payment_email';
 $route['payment_email_success']     = 'front-end/Store_ctr/payment_email_success';
 $route['userNotify']                = 'front-end/My_user_ctr/userNotify';
@@ -190,6 +191,9 @@ $route['ready_refresh']                             = 'back-end/Customer_order_c
 $route['Add_bookmake']                              = 'back-end/Book_ctr';
 $route['fileUpload_store_book']                     = 'back-end/Book_ctr/fileUpload_store_book';
 $route['fileUpload_main']                           = 'back-end/Book_ctr/fileUpload_main';
+
+$route['uploadmain_auto']                           = 'back-end/Book_ctr/uploadmain_auto';
+
 $route['Complete']                                  = 'back-end/Complete_ctr';
 $route['add_to_upload_main_search_not_approved']    = 'back-end/Approved_ctr/add_to_upload_main_search_not_approved';
 $route['sendEmail_delivery']                        = 'back-end/Complete_ctr/sendEmail_delivery';

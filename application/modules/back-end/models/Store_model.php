@@ -214,6 +214,14 @@ class Store_model extends CI_Model
         return $this->db->get('tbl_upload_main_search_sub')->result_array();
     }
 
+    public function dm_sub_upload($DMS,$stu)
+    {
+        $this->db->like('dm_sub', 'DM'.$DMS.'.'.$stu);
+        $this->db->group_by('dm_sub');
+
+        return $this->db->get('tbl_upload_main_search_sub')->result_array();
+    }
+
     function fetch_state($st)
     {
         $this->db->where('comandnocom', $st);

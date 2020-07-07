@@ -327,7 +327,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Document File </h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">DM File </h5>
 
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
@@ -335,7 +335,7 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <h3>
-                                                                                <p>Document File </p>
+                                                                                <p>DM File </p>
                                                                             </h3>
                                                                             <form action="sendEmail_delivery_complete" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $complete['order_id_t']; ?>">
@@ -450,8 +450,8 @@
                                                                             <textarea id="detail1<?php echo $complete['order_id']; ?>" name="descriptions" class="form-control" rows="5" required></textarea>
                                                                             <br>
 
-                                                                            <label for="" class="font-size-upload">Date : <span style="color: red;">* Can choose the high date as specified by the customer</span></label>
-                                                                            <input type="date" name="dated" id="dated<?php echo $complete['order_id']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo $complete['date_required_t']; ?>" style="width:30%" required>
+                                                                            <label for="" class="font-size-upload">Date </label>
+                                                                            <input type="date" name="dated" id="dated<?php echo $complete['order_id']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="" style="width:30%" required>
                                                                             <input type="text" name="order_id" id="order_id<?php echo $complete['order_id']; ?>" value="<?php echo $complete['order_id']; ?>" hidden>
                                                                             <input type="text" name="userId" id="userId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['user_m']; ?>" hidden>
                                                                             <input type="text" name="teamId" id="teamId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['teamId']; ?>" hidden>

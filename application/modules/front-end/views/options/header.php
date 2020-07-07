@@ -111,7 +111,7 @@
                                 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
                                 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                 <?php if ($user == true) :  ?>
-                                    <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                    <li><a href="my-profile"> <?php echo $user['username'] ?> </a> </li>
                                     <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                 <?php elseif ($team == true) : ?>
                                     <li><a href="#"> <?php echo $team['name'] ?> </a></li>
@@ -303,7 +303,7 @@
                                     <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
                                     <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
                                     <?php if ($user == true) :  ?>
-                                        <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
+                                        <li><a href="my-profile"> <?php echo $user['username'] ?> </a> </li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php elseif ($team == true) : ?>
                                         <li><a href="#"> <?php echo $team['name'] ?> </a></li>

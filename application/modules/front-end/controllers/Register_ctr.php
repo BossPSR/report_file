@@ -32,12 +32,13 @@ class Register_ctr extends CI_Controller
 		$password            = $this->input->post('password');
 		$created_at          = date('Y-m-d H:i:s');
 		$username_check      = $this->Login_model->check_usre($email);
+		$team_check      	 = $this->Login_model->team_check($email);
 		$check_usre2         = $this->Login_model->check_usre2($username);
 
 		$Y = substr(date('Y'), 2);
 		$M = date('m');
 
-		if ($username_check || $check_usre2) {
+		if ($username_check || $check_usre2 || $team_check) {
 			$this->session->set_flashdata('email_ss', true);
 			redirect('register', 'refresh');
 		} else {
@@ -94,8 +95,7 @@ class Register_ctr extends CI_Controller
 
 	public function register_team_success()
 	{
-		$get_team			= $this->input->post('get_team');
-		$get_user			= $this->input->post('get_user');
+
 		$countries			= $this->input->post('countries');
 		$name				= $this->input->post('name');
 		$phone				= $this->input->post('phone');
@@ -104,20 +104,22 @@ class Register_ctr extends CI_Controller
 		$password			= $this->input->post('password');
 		$c_password			= $this->input->post('c_password');
 		$job				= $this->input->post('job');
+		$username_check     = $this->Login_model->check_usre($email);
+		$team_check      	= $this->Login_model->team_check($email);
+		$check_usre2        = $this->Login_model->check_usre2($name);
+
 		$Y = substr(date('Y'), 2);
 		$M = date('m');
 
-		if ($email == $get_team || $email == $get_user) {
+		if ($username_check || $check_usre2 || $team_check) {
 
 			$this->session->set_flashdata('del_ss2', 'Data no must be filled out!!');
 			redirect('register-team');
-
 		} else {
 			if ($password != $c_password) {
 
 				$this->session->set_flashdata('del_ss2', 'Passwords do not match !!');
 				redirect('register-team');
-
 			} else {
 				if (!empty($_FILES['file_name']['name'])) {
 
@@ -338,7 +340,6 @@ class Register_ctr extends CI_Controller
 		$this->email->message($message);
 		$this->email->set_mailtype('html');
 		$this->email->send();
-		
 	}
 
 	private function sendEmailTeam($userEmail, $emailDetail, $token)

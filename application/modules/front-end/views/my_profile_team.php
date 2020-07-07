@@ -3,12 +3,12 @@
 <div class="services_gallery mt-60">
     <div class="container">
         <div class="row">
-            <div class="col-lg-2 col-md-0">
+            <div class="col-lg-1 col-md-0">
                 <div class="single_services">
 
                 </div>
             </div>
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-10 col-md-12">
                 <div class="single_services listProfile">
 
                     <div class="image_profile">
@@ -156,7 +156,7 @@
                             $this->db->join('tbl_withdraw_team', 'tbl_withdraw_team.order_id = tbl_upload_team.order_id', 'left');
                             $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                             $this->db->where('tbl_upload_order.status_delivery', 1);
-                            $this->db->where('tbl_withdraw_team.status', '2' );
+                            $this->db->where('tbl_withdraw_team.status', '2');
                             $this->db->group_by('tbl_upload_order.order_id');
 
                             $sm_de6 = $this->db->get()->result_array();
@@ -172,11 +172,34 @@
                                 <div class="list_menu">My withdraw</div>
                             </div>
 
+                            <?php
+                            $this->db->select('*,tbl_upload_team.wage wg');
+                            $this->db->from('tbl_upload_team');
+                            $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+                            $this->db->join('tbl_withdraw_team', 'tbl_withdraw_team.order_id = tbl_upload_team.order_id', 'left');
+                            $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+                            $this->db->where('tbl_upload_order.status_delivery', 1);
+                            $this->db->where('tbl_withdraw_team.status', '2');
+                            $this->db->group_by('tbl_upload_order.order_id');
+
+                            $sm_de6 = $this->db->get()->result_array();
+                            $sumto6 = 0;
+                            foreach ($sm_de6 as $key => $sm_de6) {
+                                $sumto6 = $sm_de6['wg'];
+                            }
+                            ?>
+                            <div class="result_list_menu">
+                                <div class="result_menu">
+                                    <?= $sumto6; ?>
+                                </div>
+                                <div class="list_menu">My cancel</div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-1 col-md-6">
                 <div class="single_services">
 
                 </div>
@@ -184,44 +207,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Choose a profile icon.</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
 
-            <div class="row text-center">
-                <div class="col-md-12"></div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="account_form">
-                        <hr>
-                        <form>
-                            <p>
-                                <input type="hidden" name="id_logo" value="<?php echo $team['id']; ?>">
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/1.png"><img src="public/frontend/assets/img/profile/1.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/2.png"> <img src="public/frontend/assets/img/profile/2.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/9.jpg"><img src="public/frontend/assets/img/profile/9.jpg" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/8.jpg"><img src="public/frontend/assets/img/profile/8.jpg" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/4.png"><img src="public/frontend/assets/img/profile/4.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/5.png"><img src="public/frontend/assets/img/profile/5.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/6.png"><img src="public/frontend/assets/img/profile/6.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="My-profile_team_edit?logo=public/frontend/assets/img/profile/7.png"><img src="public/frontend/assets/img/profile/7.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                            </p>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -256,8 +242,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="My-profile-team-update" method="POST">
+            <form action="My-profile-team-update" method="POST" enctype="multipart/form-data" > 
                 <div class="modal-body">
+                    <div class="form-group text-center">
+                        <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 150px;height: 150px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Profile</label>
+                        <input type="file" class="form-control" name="profile" value="">
+                    </div>
                     <div class="form-group">
                         <label for="">Name</label>
                         <input type="hidden" name="id" value="<?php echo $team['id']; ?>">

@@ -39,6 +39,32 @@ class My_team_ctr extends CI_Controller
 			$c_password		= $this->input->post('c_password');
 
 			$team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+			// |xlsx|pdf|docx
+			$config['upload_path'] =  'public/frontend/assets/img/profile/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size']     = '200480';
+			$config['max_width'] = '5000';
+			$config['max_height'] = '5000';
+			$name_file = "phpto-" . time();
+			$config['file_name'] = $name_file;
+
+			$this->upload->initialize($config);
+
+			$editdata = array();
+
+			if ($_FILES['profile']['name']) {
+				if ($this->upload->do_upload('profile')) {
+
+					$gamber     = $this->upload->data();
+
+					$editdata = array(
+						'file_name'         => 'public/frontend/assets/img/profile/' . $gamber['file_name'],
+					);
+
+					$this->db->where('id', $id);
+					$this->db->update('tbl_team', $editdata);
+				}
+			}
 
 			if ($password == '' && $c_password == '') {
 				$data = array(
@@ -62,13 +88,11 @@ class My_team_ctr extends CI_Controller
 			} else {
 				$this->session->set_flashdata('error_pass', 'Password incorrect.Try again!!.');
 				redirect('My-profile_team');
-				
 			}
 			$this->db->where('id', $id);
 			if ($this->db->update('tbl_team', $data)) {
 				$this->session->set_flashdata('success_pro', 'Successfull.Change for my profile.');
 				redirect('My-profile_team');
-				
 			} else {
 				$this->session->set_flashdata('error_pro', 'Error for Change my profile.');
 				redirect('My-profile_team');

@@ -55,35 +55,44 @@
                                             </form>
                                         </div>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mt-2">
                                             <label for="" style="font-size: 16px;"> Email </label>
                                             <input type="email" id="email" name="email" class="form-control" value="" required>
                                             <p class="message"></p>
                                         </div>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mt-2">
                                             <label for="" style="font-size: 16px;"> Name </label>
                                             <input type="text" id="names" name="names" class="form-control" value="" required>
                                             <p class="message"></p>
                                         </div>
 
-
-
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
-                                            <label for="" style="font-size: 16px;"> DM </label>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-2 mt-2">
                                             <div class="form-group">
-                                                <select name="DM[]" id="DM" class="select2 form-control" multiple="multiple">
-                                                    <?php foreach ($chek_book as $key => $chek_book) { ?>
-                                                        <option value="<?php echo $chek_book['id_doc'] ?>"><?php echo $chek_book['id_doc'] ?></option>
-                                                    <?php } ?>
+                                                <label for="helpInputTop">Status Upload</label>
+                                                <select class="form-control statusst" id="status_cp<?php echo $stored['order_id']; ?>" required>
+                                                    <option value="" selected disabled>select</option>
+                                                    <option value="1">Complete</option>
+                                                    <option value="2">Not Complete</option>
+                                                    <option value="3">Original</option>
+                                                    <option value="4">Rewrite</option>
                                                 </select>
                                             </div>
+                                        </div>
 
+
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mt-2">
+                                            <div class="form-group">
+                                                <label for="book">Document ID</label>
+                                                <select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple" required>
+                                                    <option value="" disabled>--- Select DM ---</option>
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <?php $item = $this->db->get('tbl_item_position')->result(); ?>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mt-2">
                                             <label for="" style="font-size: 16px;"> Position </label>
                                             <select name="Position" class="form-control" id="position1" required>
                                                 <option value="" selected disabled> --- Position ---</option>
@@ -95,13 +104,13 @@
 
                                         </div>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mt-2">
                                             <label for="" style="font-size: 16px;"> Wage </label>
                                             <input type="number" id="wage1" name="wage" class="form-control" value="0" required>
                                             <p class="message"></p>
                                         </div>
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mt-2">
                                             <label for="" style="font-size: 16px;"> Date required </label>
                                             <input type="date" id="date1" name="date_required" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" required>
                                             <p class="message"></p>
@@ -109,13 +118,13 @@
 
 
 
-                                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="margin-top: 25px;">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-2 mb-2">
                                             <label for="" style="font-size: 16px;"> Note </label>
                                             <textarea name="note" id="note1" class="form-control" rows="10"></textarea>
 
                                         </div>
 
-                                        <div class="col-xl-12 col-md-12 col-12" style="margin-top: 25px;">
+                                        <div class="col-xl-12 col-md-12 col-12">
                                             <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1"> Add Admin</button>
                                             <a href="my_stock_admin" class="btn btn-secondary mr-1 mb-1">Cancel</a>
                                         </div>
@@ -161,11 +170,30 @@
         })
         .keyup();
 
-        $("#date1").change(function() {
+    $("#date1").change(function() {
             var value = $(this).val();
             $("#date2").val(value);
         })
         .change();
+</script>
+<script>
+    $(document).ready(function() {
+        $('.statusst').change(function() {
+            var statusst = $('.statusst').val();
+            if (statusst != '') {
+                $.ajax({
+                    url: 'fetch_state',
+                    method: "POST",
+                    data: {
+                        st: statusst
+                    },
+                    success: function(data) {
+                        $('.dmsub').html(data);
+                    }
+                })
+            }
+        });
+    });
 </script>
 <script>
     Dropzone.autoDiscover = false;
@@ -234,17 +262,27 @@
                                 DM: dm,
                             },
                             success: function(success) {
-                                myDropzone.processQueue();
-                                myDropzone2.processQueue();
-                                swal("Good job!", "Upload for data successfull", "success", {
-                                    button: true,
-                                }).then(function(isConfirm) {
-                                    if (isConfirm == true) {
-                                        setTimeout(function() {
-                                            location.href = "my_stock_admin"
-                                        }, 1000);
-                                    } else {
-                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'order_auto_morefile_buy',
+                                    data: {
+                                        detail: n,
+                                    },
+                                    success: function(success) {
+                                        myDropzone.processQueue();
+                                        myDropzone2.processQueue();
+                                        swal("Good job!", "Upload for data successfull", "success", {
+                                            button: true,
+                                        }).then(function(isConfirm) {
+                                            if (isConfirm == true) {
+                                                setTimeout(function() {
+                                                    location.href = "my_stock_admin"
+                                                }, 1000);
+                                            } else {
+                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                            }
+                                        });
                                     }
                                 });
                             }

@@ -57,6 +57,33 @@ class My_user_ctr extends CI_Controller
 			$c_password		= $this->input->post('c_password');
 
 			$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+			// |xlsx|pdf|docx
+			$config['upload_path'] =  'public/frontend/assets/img/profile/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size']     = '200480';
+			$config['max_width'] = '5000';
+			$config['max_height'] = '5000';
+			$name_file = "phpto-" . time();
+			$config['file_name'] = $name_file;
+
+			$this->upload->initialize($config);
+
+			$editdata = array();
+
+			if ($_FILES['profile']['name']) {
+				if ($this->upload->do_upload('profile')) {
+
+					$gamber     = $this->upload->data();
+
+					$editdata = array(
+						'file_name'         => 'public/frontend/assets/img/profile/' . $gamber['file_name'],
+					);
+
+					$this->db->where('id', $id);
+					$this->db->update('tbl_user', $editdata);
+				}
+			}
+
 
 			if ($password == '' && $c_password == '') {
 				$data = array(
@@ -67,7 +94,6 @@ class My_user_ctr extends CI_Controller
 
 				$this->session->set_flashdata('del_ss2', 'Your password does not match the old password.');
 				redirect('my-profile');
-
 			} elseif ($password == $c_password) {
 				$data = array(
 					'username'			=> $username,

@@ -117,9 +117,7 @@
 
     <!--header area start-->
     <!--Offcanvas menu area start-->
-    <div class="off_canvars_overlay">
-
-    </div>
+    <div class="off_canvars_overlay"></div>
     <div class="Offcanvas_menu">
         <div class="container">
             <div class="row">
@@ -273,7 +271,7 @@
                                     <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 
                                     <?php if ($user == true) :  ?>
-                                        <li><a href="my-profile"> <?php echo $user['idUser'] ?> </a></li>
+                                        <li><a href="my-profile"> <?php echo $user['idUser'] ?> </a> <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
                                         <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php elseif ($team == true) : ?>
                                         <li>
@@ -299,7 +297,7 @@
                                                     <li style="margin: 5px 10px;"><a href="teamOffline"><i class="fa fa-circle" style="color:#b6b6b6;"></i> Offline</a></li>
                                                 </ul>
                                         </li>
-                                        <li><a href="My-profile_team"> <?php echo $team['name']; ?> </a></li>
+                                        <li><a href="My-profile_team"> <?php echo $team['name']; ?> </a> <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
                                         <li><a href="Logout?team=team" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                     <?php else :  ?>
                                         <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
@@ -487,7 +485,7 @@
                                             <li>
                                                 <a href="my-feedback"> My Feedback</a>
                                             </li>
-                                          
+
                                             <li><a href="#">My History<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="my_store_team">Score</a></li>

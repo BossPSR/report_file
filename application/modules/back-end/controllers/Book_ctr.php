@@ -247,19 +247,46 @@ class Book_ctr extends CI_Controller
         }
     }
 
+    public function uploadmain_auto()
+    {
+        $status     =  $this->input->post('status');
+        $DMS        =  $this->input->post('DMS');
+        $stu        =  $this->input->post('stu');
+        $s          = $this->Store_model->dm_sub_upload($DMS, $stu);
+
+        $i = 1;
+        foreach ($s as $key => $s) {
+            $i += 1;
+        }
+
+        $orf = array(
+            'create_at'     => date('Y-m-d H:i:s'),
+            'status'        => $status
+        );
+
+
+        if ($this->db->insert('tbl_upload_auto', $orf)) {
+            $insert_id = $this->db->insert_id();
+            $update = array(
+                'dm_create'    => 'DM' . $DMS . '.' . $stu . '.' . $i,
+            );
+            $this->db->where('id', $insert_id);
+            $success = $this->db->update('tbl_upload_auto', $update);
+            echo $success;
+        }
+    }
+
     public function fileUpload_main()
     {
         // image_lib
-        $DM = $this->input->post('DM');
-        $status_cp = $this->input->post('status_cpS');
+        $DM         = $this->input->post('DM');
+        $status_cp  = $this->input->post('status_cpS');
 
         // $upload_book = $this->Store_model->bookmark_upload($DM);
+                     $this->db->order_by('id', 'DESC');
+        $dmmax     = $this->db->get('tbl_upload_auto')->row();
 
-        $sub  = $this->Store_model->dm_sub($DM);
-        $i = 1;
-        foreach ($sub as $key => $sub) {
-            $i += 1;
-        }
+
 
         $target_dir = "uploads/Store/"; // Upload directory
         if (!empty($_FILES['file']['name'])) {
@@ -294,10 +321,11 @@ class Book_ctr extends CI_Controller
 
                 $db_store = [
                     'dm_main'         => $DM,
-                    'dm_sub'          => "DM" . $DM . '.' . $status_cp . '.' . $i,
+                    'dm_sub'          => $dmmax->dm_create,
                     'file_name'       => $uploadData['file_name'],
                     'path'            => 'uploads/Store/' . $uploadData['file_name'],
                     'create_at'       => date('Y-m-d H:i:s'),
+                    'comandnocom'     => $status_cp,
                 ];
                 $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
             }
@@ -306,10 +334,10 @@ class Book_ctr extends CI_Controller
 
     public function sendEmail_delivery_pay()
     {
-        $order_id = $this->input->post('order_id');
+        $order_id   = $this->input->post('order_id');
         $order_team = $this->input->post('order_team');
-        $id = $this->input->post('id');
-        $dm_id = $this->input->post('dm_id');
+        $id         = $this->input->post('id');
+        $dm_id      = $this->input->post('dm_id');
 
         $this->db->where('order_id', $id);
         $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
@@ -401,14 +429,13 @@ class Book_ctr extends CI_Controller
 
         if ($this->db->insert('tbl_upload_team', $data))
 
-
-
             $data2 = array(
 
                 'status_bookmark_upload_to_team'      => 1,
                 'update_at'                        => date('Y-m-d H:i:s')
 
             );
+
         $this->db->where('order_id', $this->input->post('order_id'));
         $resultsedit = $this->db->update('tbl_upload_order', $data2);
 

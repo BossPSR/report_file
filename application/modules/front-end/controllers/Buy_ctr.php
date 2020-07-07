@@ -214,7 +214,6 @@ class Buy_ctr extends CI_Controller
   {
     $date_req   =  $this->input->post('status');
     $orf = array(
-
       'create_at'     => date('Y-m-d H:i:s'),
       'status'        => $date_req
     );

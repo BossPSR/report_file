@@ -176,6 +176,12 @@
                                         <?php } ?>
                                     </td>
                                         <td>
+                                            <?php if ($feedback['check_status'] == 0) { ?>
+                                                <span class=" badge badge-danger" style="font-size:16px;"> Admin </span>
+                                            <?php } else { ?>
+                                                    <span class="badge badge-info" style="font-size:16px;"> Client </span>
+                                            <?php } ?>
+                                            
                                             <?php if ($feedback['status_feedback_read'] == 0) { ?>
                                                 <span class=" badge badge-danger" style="font-size:16px;">Not Read</span>
                                             <?php } else { ?>

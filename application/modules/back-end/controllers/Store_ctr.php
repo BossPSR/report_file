@@ -862,6 +862,7 @@ class Store_ctr extends CI_Controller
                         'file_name'       => $storedata['file_name'],
                         'path'            => $storedata['path'],
                         'create_at'       => date('Y-m-d H:i:s'),
+                        'comandnocom'     => $st,
                     ];
                     $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
                 }
@@ -892,6 +893,7 @@ class Store_ctr extends CI_Controller
                         'file_name'       => $select_item['name_item'],
                         'path'            => $code,
                         'create_at'       => date('Y-m-d H:i:s'),
+                        'comandnocom'     => $st
                     ];
                     $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
                 }

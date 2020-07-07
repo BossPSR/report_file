@@ -1,30 +1,12 @@
+<?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array(); ?>
+<?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <!--services img area-->
 <div class="services_gallery mt-30">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 wall-center shadow-b hight-100 " style=" padding-right: 0px; padding-left: 0px;">
-                        <div class="p-15 text-center header-profile">
-                            โปรไฟล์ของฉัน
-                        </div>
-                        <div class="p-15 text-center">
-                            <img class="profile-small" src="public/image/man.png" alt="">
-                        </div>
-                        <div class="p-15 text-center font18">
-                            User001
-                        </div>
-                        <!-- <div class="ptw-5 text-center font17">
-                            เอกสารของฉัน : 11 ฉบับ
-                        </div> -->
-                        <div class="pw-5 text-center font17">
-                            ยอดคงเหลือ : ฿<?php echo number_format($user['cash']); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="col-lg-1 col-md-1"></div>
 
-            <div class="col-lg-9 col-md-9">
+            <div class="col-lg-10 col-md-10">
                 <div class="row">
                     <div class="col-lg-11 col-md-11 wall-center shadow-b ml-20">
                         <div class="p-30 text-center color-w">
@@ -46,7 +28,7 @@
 
                         <div class="row text-center wall-center mtb-17-30">
                             <div class="col-md-6 ">
-                                <input type="number" name="number" class="form-control" placeholder="กรอกจำนวนเงิน" style="height: 51px;text-align: center;font-size: 20px;">
+                                <input type="number" name="number" id="numberBox" class="form-control detail" min="0" max="<?php echo $user['cash'] ?>" placeholder="กรอกจำนวนเงิน" style="height: 51px;text-align: center;font-size: 20px;">
                             </div>
                         </div>
                         <div class="row text-center wall-center mtb-20">
@@ -59,32 +41,114 @@
 
                 </div>
             </div>
+            <div class="col-lg-1 col-md-1"></div>
         </div>
     </div>
 </div>
-
+<?php $tp = $this->db->get_where('tbl_price_management', ['id' => '1'])->row_array(); ?>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop2" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="staticBackdropLabel">Confirm Password</h5>
+                <h4 class="modal-title" id="staticBackdropLabel">Fee</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <input type="password" name="password" class="form-control">
+                <div style="font-size: 18px;font-weight: 600;">Website fee <?php echo $tp['price']; ?> %</div>
+                <div>ค่าธรรมเนียมทั้งหมด : <span class="feere"></span> </div>
+                <div>ยอดคงเหลือของท่านจากการโดนหักค่าธรรมเนียม : <span class="details"></span> </div>
+                <hr>
+                <div class="row">
+                    <div class="col-6 col-sm-12">
+                        <div class="form-group">
+                            <label style="font-size: 16px;font-weight: 600;" for="">กรุณาใส่ Paypal ของท่าน</label>
+                            <input type="text" class="form-control" name="paypal">
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-12">
+                        <div class="form-group">
+                            <label style="font-size: 16px;font-weight: 600;" for="">กรุณาใส่เบอร์โทรศัพท์ของท่าน</label>
+                            <input type="text" class="form-control" name="tel">
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id='checkpassword' data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#www">Next</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="www" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="" method="post">
+                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                    <h4 class="modal-title" id="staticBackdropLabel">Confirm Password</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3" id="show_hide_password">
+                        <input type="password" class="form-control" name="password" aria-describedby="basic-addon1" required>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+<script type="text/javascript">
+    $(function() {
+        $("#numberBox").change(function() {
+            var max = parseInt($(this).attr('max'));
+            var min = parseInt($(this).attr('min'));
+            if ($(this).val() > max) {
+                $(this).val(max);
+            } else if ($(this).val() < min) {
+                $(this).val(min);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".detail").change(function() {
+            var plus = <?php echo $tp['price']; ?>;
+            var value = $(this).val();
+            var h = (value * plus) / 100;
+            var result = value - h;
+            $(".details").html(result);
+        }).keyup();
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".detail").change(function() {
+            var plus = <?php echo $tp['price']; ?>;
+            var value = $(this).val();
+            var h = (value * plus) / 100;
+            $(".feere").html(h);
+        }).keyup();
+
+    });
+</script>feere
 
 
 <script type="text/javascript">

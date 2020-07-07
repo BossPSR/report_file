@@ -16,10 +16,8 @@
                             <div class="name_user m17"><i class="fa fa-user"></i><?= $this->lang->line("name"); ?> : <?php echo $user['username']; ?></div>
                         </h2>
                         <div class="image_PF">
-                            <div class=""><?php  ?>
-                                <a href="#exampleModalCenter1" data-toggle="modal"><img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt=""></a>
-                                <!-- <div class="edit_name_user"><a href="#"><i class="fa fa-edit"></i>  Edited</a></div> -->
-                            </div>
+                            <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="">
+                            <!-- <div class="edit_name_user"><a href="#"><i class="fa fa-edit"></i>  Edited</a></div> -->
                         </div>
                         <div class="menu_in_image">
                         </div>
@@ -110,44 +108,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Choose a profile icon.</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
 
-            <div class="row text-center">
-                <div class="col-md-12"></div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="account_form">
-                        <hr>
-                        <form>
-                            <p>
-                                <input type="hidden" name="id_logo" value="<?php echo $user['id']; ?>">
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/1.png"><img src="public/frontend/assets/img/profile/1.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/2.png"> <img src="public/frontend/assets/img/profile/2.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/9.jpg"><img src="public/frontend/assets/img/profile/9.jpg" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/8.jpg"><img src="public/frontend/assets/img/profile/8.jpg" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/4.png"><img src="public/frontend/assets/img/profile/4.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/5.png"><img src="public/frontend/assets/img/profile/5.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/6.png"><img src="public/frontend/assets/img/profile/6.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                                <a href="my-profile_edit?logo=public/frontend/assets/img/profile/7.png"><img src="public/frontend/assets/img/profile/7.png" alt="" style="width: 100px ;margin-bottom: 20px;"></a>
-                            </p>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -182,14 +143,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="My-profile-update" method="POST">
+            <form action="My-profile-update" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
+                    <div class="form-group text-center">
+                        <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 150px;height: 150px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Profile</label>
+                        <input type="file" class="form-control" name="profile" value="">
+                    </div>
                     <div class="form-group">
                         <label for="">Name</label>
                         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                         <input type="text" class="form-control" name="name" value="<?php echo $user['username']; ?>" required>
                     </div>
-
                     <div class="form-group">
                         <label for="">Phone</label>
                         <input type="text" class="form-control" name="phone" value="<?php echo $user['phone']; ?>" required>

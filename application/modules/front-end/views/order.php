@@ -222,14 +222,29 @@
                                         <?php } elseif ($value['status_approved'] == 3 || $value['status_delivery'] == 1) { ?>
 
                                             <?php
-                                            $this->db->select('count(order_id) as N_order');
+                                            $this->db->select('*');
+                                            $this->db->where('order_id', $value['ORD']);
+                                            $this->db->where('check_status', 1);
+                                            $this->db->order_by('dated', 'DESC');
+                                            $N_feed = $this->db->get('tbl_feedback')->row_array();
+
+                                            $this->db->select('count(*) od');
+                                            $this->db->where('order_id', $value['ORD']);
+                                            $this->db->where('check_status', 1);
+                                            $this->db->order_by('dated', 'ASC');
+                                            $N_count = $this->db->get('tbl_feedback')->row_array();
                                             ?>
-                                            <?php $N_feed = $this->db->get_where('tbl_feedback', ['order_id' => $value['ORD'], 'check_status' => 1])->row_array(); ?>
-                                            <?php if ($N_feed['N_order'] >= 3 || $DateT > $produm) { ?>
+                                            <?php if ($N_count['od'] >= 3 || $DateT > $produm) { ?>
 
                                             <?php } else { ?>
 
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                    <?php if ($N_count['od'] == '0') : ?>
+
+                                                    <?php else : ?>
+                                                        <span class="badge badge-light"> <?php echo $N_count['od'];  ?></span> 
+                                                    <?php endif; ?>
+                                                </button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModalNotApprove<?php echo $xxl++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
@@ -256,7 +271,7 @@
                                                                 <br>
 
                                                                 <label for="" class="font-size-upload">Date :</label>
-                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo $value['Drequired']; ?>" style="width:30%" required>
+                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo empty($N_feed['dated'])  ? '' : $N_feed['dated'] ; ?>" style="width:30%" required>
                                                                 <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
                                                                 <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
                                                                 <!-- </form> -->
@@ -334,7 +349,7 @@
 
 
                                             <?php $ord_s = substr($value['ORD'], 3); ?>
-                                            <?php if ($N_feed['N_order'] >= 3 || $DateT > $produm) { ?>
+                                            <?php if ($N_count['od'] >= 3 || $DateT > $produm) { ?>
                                                 <a class="btn btn-danger" id="order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
                                                 <script type='text/javascript'>
                                                     $('#order_not_approved<?php echo $value['ORD']; ?>').click(function() {

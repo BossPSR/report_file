@@ -304,7 +304,6 @@
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="book">Document ID</label>
-
                                                                                 <select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple" required>
                                                                                     <option value="" disabled>--- Select DM ---</option>
                                                                                 </select>
