@@ -169,6 +169,9 @@
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
                                     <li class="menu-item-has-children">
+                                        <a href="home"> Home</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
                                         <a href="buy"> My Buy</a>
                                     </li>
                                     <li class="menu-item-has-children">
@@ -193,6 +196,9 @@
                                         <i class="fa fa-bell icon-bell" style="color:#fff;" aria-hidden="true"></i>
                                     </li>
                                 <?php elseif ($team) : ?>
+                                    <li class="menu-item-has-children">
+                                        <a href="home"> Home</a>
+                                    </li>
                                     <li class="menu-item-has-children">
                                         <a href="My-stock-Item"> Order List</a>
                                     </li>
@@ -458,6 +464,7 @@
                                 <nav>
                                     <ul>
                                         <?php if ($user) :  ?>
+                                            <li><a href="home"> Home</a></li>
                                             <li><a href="buy"> My buy <div class="arrow_box"></div></a></li>
                                             <li><a href="order"> My order </a></li>
                                             <li><a href="store"> My Sell </a></li>
@@ -473,6 +480,7 @@
                                             <li> </li>
 
                                         <?php elseif ($team) : ?>
+                                            <li><a href="home"> Home</a></li>
                                             <li>
                                                 <a href="My-stock-Item"> Order List</a>
                                             </li>

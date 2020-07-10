@@ -33,7 +33,6 @@
 <div class="wishlist_area mt-60">
     <div class="container">
         <div class="row">
-
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
                 <article class="single_upload input-upload">
                     <div class="row">

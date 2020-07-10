@@ -83,6 +83,23 @@
         </div>
     </div>
 </div>
+<?php if (!empty($checkorder)) : ?>
+    <section class="slider_section slider_section_four mb-20 mt-30">
+        <div class="container">
+            <div class="alert alert-warning" role="alert">
+                คุณมีคำสั่งซื้อที่ค้างชำระเงินสามารถชำระเงินได้ <a href="payment_email?order_id=" style="color: #0088ff;">
+                    <u>
+                        <?php foreach ($checkorder as $key => $checkorder) {  ?>
+                            <?php echo $checkorder['order_id']; ?>
+                        <?php } ?>
+                        คลิกที่นี่
+                    </u>
+                </a>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
+
 <section class="slider_section slider_section_four mb-70 mt-30">
     <div class="container">
         <div class="row">

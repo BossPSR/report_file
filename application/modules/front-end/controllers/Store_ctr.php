@@ -150,7 +150,7 @@ class Store_ctr extends CI_Controller
             $user       = $this->db->get_where('tbl_user', ['idUser' => $customer_id])->row_array();
             if ($user['cash'] < $price_dis) {
                 $this->session->set_flashdata('error_cash', TRUE);
-                redirect('/');
+                redirect('my-deposit');
             }
 
 

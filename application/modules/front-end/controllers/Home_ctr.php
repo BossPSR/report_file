@@ -14,17 +14,22 @@ class Home_ctr extends CI_Controller
 	public function index()
 	{
 
-
 		$lang = $this->session->userdata("lang") == null ? "english" : $this->session->userdata("lang");
 		$sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+		$ีuser = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 
 		if ($sess == true) {
 			$as = $sess['IdTeam'];
 			$data['check_read'] 		= $this->Feedback_model->feedback_c_read($as);
 			$data['check_morefile']		= $this->Users_model->check_GT($as);
-		} else {
-		}
+		} 
 
+		if ($ีuser == true) {
+			$us = $ีuser['idUser'];
+			$sq = date('Y-m-d H:i:s');
+			$data['checkorder'] = $this->Users_model->check_order($us,$sq);
+			
+		}
 
 		$this->lang->load($lang, $lang);
 
@@ -32,7 +37,9 @@ class Home_ctr extends CI_Controller
 		$this->load->view('options/header_login');
 		if ($sess == true) {
 			$this->load->view('home', $data);
-		} else {
+		} elseif($ีuser == true) {
+			$this->load->view('home' , $data);
+		}else{
 			$this->load->view('home');
 		}
 		$this->load->view('options/footer');
