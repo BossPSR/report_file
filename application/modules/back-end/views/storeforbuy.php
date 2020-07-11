@@ -287,8 +287,7 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                        <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">Status Upload</label>
                                                                                 <select class="form-control statusst" id="status_cp<?php echo $stored['order_id']; ?>" required>
@@ -299,13 +298,21 @@
                                                                                     <option value="4">Rewrite</option>
                                                                                 </select>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> -->
+                                                                        <?php
+                                                                        $this->db->group_by('dm_sub');
+                                                                        $this->db->order_by('dm_sub', 'asc');
+                                                                        $query = $this->db->get('tbl_upload_main_search_sub')->result_array();
+                                                                        ?>
 
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="book">Document ID</label>
                                                                                 <select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple" required>
                                                                                     <option value="" disabled>--- Select DM ---</option>
+                                                                                    <?php foreach ($query as $key => $query) { ?>
+                                                                                        <option value="<?php echo $query['dm_sub']; ?>" ><?php echo $query['dm_sub']; ?></option>
+                                                                                    <?php } ?>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -637,7 +644,7 @@
 </script>
 
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('.statusst').change(function() {
             var statusst = $('.statusst').val();
@@ -655,7 +662,7 @@
             }
         });
     });
-</script>
+</script> -->
 
 
 

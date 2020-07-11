@@ -890,8 +890,8 @@ class Store_ctr extends CI_Controller
                     $db_store = [
                         'dm_main'         => $id,
                         'dm_sub'          => "DM" . $id . '.' . $st . '.' . '1',
-                        'file_name'       => $select_item['name_item'],
-                        'path'            => $code,
+                        'file_name'       => $storedata['file_name'],
+                        'path'            => $storedata['path'],
                         'create_at'       => date('Y-m-d H:i:s'),
                         'comandnocom'     => $st
                     ];
@@ -1270,10 +1270,10 @@ class Store_ctr extends CI_Controller
         return redirect('Bookmark');
     }
 
-    public function fetch_state()
-    {
-        if ($this->input->post('st')) {
-            echo $this->Store_model->fetch_state($this->input->post('st'));
-        }
-    }
+    // public function fetch_state()
+    // {
+    //     if ($this->input->post('st')) {
+    //         echo $this->Store_model->fetch_state($this->input->post('st'));
+    //     }
+    // }
 }

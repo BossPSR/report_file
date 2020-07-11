@@ -312,17 +312,18 @@
                                                             </button>
                                                             <?php if ($complete['status_admin'] == '0') : ?>
 
-                                                                <a href="book_complete_add_com?id=<?php echo $complete['order_id']; ?>&userid=<?php echo $complete['user_m']; ?>" class="btn btn-icon btn-warning">
+                                                                <a href="book_complete_add_com?id=<?php echo $complete['order_id_t']; ?>&userid=<?php echo $complete['user_m']; ?>" class="btn btn-icon btn-warning">
                                                                     <i class="feather icon-bookmark"></i>
                                                                 </a>
 
                                                             <?php else : ?>
 
                                                             <?php endif; ?>
-                                                            <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $complete['order_id']; ?>">
+                                                            <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $complete['order_id_t']; ?>">
                                                                 <i class="feather icon-alert-triangle"></i>
                                                             </button>
 
+                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $complete['order_id_t']])->result_array(); ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -333,57 +334,67 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
+                                                                        <form action="sendEmail_delivery_complete" method="POST">
                                                                         <div class="modal-body">
-                                                                            <h3>
-                                                                                <p>DM File </p>
-                                                                            </h3>
-                                                                            <form action="sendEmail_delivery_complete" method="POST">
-                                                                                <input type="hidden" name="id" value="<?php echo $complete['order_id_t']; ?>">
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_store', ['store_id' => $complete['store_id']])->result_array(); ?>
-                                                                                        <tr>
-                                                                                            <th>Select</th>
-                                                                                            <th>Relive</th>
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
-                                                                                            <tr>
-                                                                                                <td>
-                                                                                                    <label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" name="order_id[]" value="<?php echo $orderss['id'] ?>">
-                                                                                                        <span class="checkmark"></span>
-                                                                                                    </label>
-                                                                                                </td>
+                                                                            <input type="hidden" name="id" value="<?php echo $complete['order_id_t']; ?>">
+                                                                            <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
+                                                                                <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                    <h3>
+                                                                                        <p>DM File </p>
+                                                                                    </h3>
+                                                                                    
+                                                                                        
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
 
-                                                                                                <td>
-                                                                                                    <?php if ($orderss['relive_status'] == '0') : ?>
-                                                                                                        -
-                                                                                                    <?php else : ?>
-                                                                                                        <div class="badge badge-primary">Relive</div>
-                                                                                                    <?php endif ?>
-                                                                                                </td>
-                                                                                                <td><?php echo $orderss['store_id'] ?></td>
-                                                                                                <td><?php echo $orderss['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderss['create_at'] ?></td>
+                                                                                                <tr>
+                                                                                                    <th>Select</th>
+                                                                                                    <th>Relive</th>
+                                                                                                    <th>Store_id</th>
+                                                                                                    <th>File_name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <label class="container">
+                                                                                                                <input type="checkbox" class="checkmark" name="order_id[]" value="<?php echo $dm_c11['id'] ?>">
+                                                                                                                <span class="checkmark"></span>
+                                                                                                            </label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['relive_status'] == '0') : ?>
+                                                                                                                -
+                                                                                                            <?php else : ?>
+                                                                                                                <div class="badge badge-primary">Relive</div>
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['store_id'] ?></td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
 
 
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                                    </tr>
+                                                                                                <?php endforeach; ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
+
                                                                                 <h3>
                                                                                     <p>Team file</p>
                                                                                 </h3>
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
-                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id']])->result_array(); ?>
+                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id_t']])->result_array(); ?>
                                                                                         <tr>
                                                                                             <th>Select</th>
                                                                                             <th>Store_id</th>

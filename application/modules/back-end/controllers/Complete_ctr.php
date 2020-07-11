@@ -37,8 +37,8 @@ class Complete_ctr extends CI_Controller
 
         );
         $resultsedit = $this->db->insert('tbl_bookmark', $data);
-        
-     
+
+
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Add bookmark information !!.');
         } else {
@@ -166,6 +166,10 @@ class Complete_ctr extends CI_Controller
 
         $id         = $this->input->post('id');
 
+        // print_r($id)  ; 
+        // print_r($order_team) ;
+        // print_r($order_id) ;
+        // exit;
         $feedback   = $this->db->get_where('tbl_feedback', ['order_id' => $id])->row_array();
         $user_order = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
         $user       = $this->db->get_where('tbl_user', ['idUser' => $user_order['userId']])->row_array();
@@ -180,26 +184,31 @@ class Complete_ctr extends CI_Controller
                 $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
 
                 $this->db->where('idUser', $user_order['userId']);
-                $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'] , 'score' => $user['score'] - 100 ]);
+                $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);
             } else {
                 $this->db->where('order_id', $id);
                 $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
                 $this->db->where('idUser', $user_order['userId']);
-                $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'] , 'score' => $user['score'] - 100 ]);
+                $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);
             }
 
 
             $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
 
-            $message .= '<center>';
+            $message = '<center>';
             $message .= '<div style="max-width:800px;">';
             $message .= '<div class="content" >';
             $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
             $message .= 'Send all your documents successfully.';
             $message .= '</div>';
             $message .= '<div class="row">';
-            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+            if (empty($user_order['email'])) {
+                $message .= '<p>Hey "' . $user['username'] . '",</p>';
+            } else {
+                $message .= '<p>Hey "' . $user_order['Username'] . '",</p>';
+            }
+
             $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
             $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
             $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
@@ -222,19 +231,22 @@ class Complete_ctr extends CI_Controller
             }
 
             $message .= '</center>';
-
         } else {
 
             $subject = '(แจ้งเตือน) เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ยอดเงินของคุณไม่เพียงพอให้หักค่าเอกสาร กรุณาเติมเงินด้วยค่ะ  ';
 
-            $message .= '<center>';
+            $message = '<center>';
             $message .= '<div style="max-width:800px;">';
             $message .= '<div class="content" >';
             $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
             $message .= 'ยอดเงินของคุณไม่เพียงพอ.';
             $message .= '</div>';
             $message .= '<div class="row">';
-            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+            if (empty($user_order['email'])) {
+                $message .= '<p>Hey "' . $user['username'] . '",</p>';
+            } else {
+                $message .= '<p>Hey "' . $user_order['Username'] . '",</p>';
+            }
             $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
             $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
             $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
@@ -262,7 +274,11 @@ class Complete_ctr extends CI_Controller
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to($user['email']);
+        if (empty($user_order['email'])) {
+            $this->email->to($user['email']);
+        } else {
+            $this->email->to($user_order['email']);
+        }
         $this->email->subject($subject);
         $this->email->message($message);
         $this->email->set_mailtype('html');

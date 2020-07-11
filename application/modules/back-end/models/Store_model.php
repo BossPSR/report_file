@@ -222,16 +222,16 @@ class Store_model extends CI_Model
         return $this->db->get('tbl_upload_main_search_sub')->result_array();
     }
 
-    function fetch_state($st)
-    {
-        $this->db->where('comandnocom', $st);
-        $this->db->group_by('dm_sub');
-        $this->db->order_by('dm_sub', 'asc');
-        $query = $this->db->get('tbl_upload_main_search_sub');
-        $output = ' <option value="" disabled>-- Select DM --</option>';
-        foreach ($query->result() as $row) {
-            $output .= ' <option value="' . $row->dm_sub . '">' . $row->dm_sub . '</option> ';
-        }
-        return $output;
-    }
+    // function fetch_state($st)
+    // {
+    //     $this->db->where('comandnocom', $st);
+    //     $this->db->group_by('dm_sub');
+    //     $this->db->order_by('dm_sub', 'asc');
+    //     $query = $this->db->get('tbl_upload_main_search_sub');
+    //     $output = ' <option value="" disabled>-- Select DM --</option>';
+    //     foreach ($query->result() as $row) {
+    //         $output .= ' <option value="' . $row->dm_sub . '">' . $row->dm_sub . '</option> ';
+    //     }
+    //     return $output;
+    // }
 }
