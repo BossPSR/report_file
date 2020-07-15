@@ -13,8 +13,10 @@
                                 <li class="breadcrumb-item"><a href="back_dashboard">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item active">User List
-                                </li>
-                            </ol>
+								</li>
+								
+							</ol>
+							
                         </div>
                     </div>
                 </div>
@@ -29,7 +31,68 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">User List</h4>
+								<div class="col-7">
+									<h4 class="card-title">User List</h4>
+								</div>
+								
+								<?php
+									$allWallet = 0;
+									$allCashback = 0;
+									foreach ($user_list as $user_detail) {
+										$allWallet += $user_detail['cash'];
+										$allCashback += $user_detail['cashback'];
+									}
+
+									$this->db->select('*');
+									$this->db->from('tbl_deduct');
+									$this->db->group_by('tbl_deduct.order_id');
+									$allDeduct = 0;
+									$deductAll = $this->db->get()->result_array();
+									foreach ($deductAll as $deductAll) {
+									   $allDeduct += $deductAll['deduct'];
+									}
+
+									$this->db->select('*');
+									$this->db->from('tbl_score');
+									$this->db->group_by('tbl_score.order_id');
+									$allScore = 0;
+									$scoreAll = $this->db->get()->result_array();
+									foreach ($scoreAll as $scoreAll) {
+									   $allScore += $scoreAll['deduct'];
+									}
+
+									
+								?>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php echo $allWallet; ?>
+									</h3>
+									<h3 class="check_list_not">Wallet รวมทั้งหมด</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php echo $allCashback; ?>
+									</h3>
+									<h3 class="check_list_not">Cashback รวมทั้งหมด</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php echo $allDeduct; ?>
+									</h3>
+									<h3 class="check_list_not">Deduct รวมทั้งหมด</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php echo $allScore; ?>
+									</h3>
+									<h3 class="check_list_not">Score รวมทั้งหมด</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php echo $allWallet/10; ?>%
+									</h3>
+									<h3 class="check_list_not">Discount รวมทั้งหมด</h3>
+								</div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -40,9 +103,17 @@
                                                     <th>UserName</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
-                                                    <th>Cash</th>
+													<th>Wallet</th>
+													<th>Cashback</th>
                                                     <th>Score</th>
-                                                    <th>package</th>
+													<th>Num Order</th>
+													<th>Num Price</th>
+													<th>Num Approved</th>
+													<th>Num Not Approved</th>
+													<th>Deduct Income</th>
+													<th>Score Income</th>
+													<th>Discount</th>
+													<th>Package</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -53,13 +124,67 @@
                                                         <td><?php echo $user_list['Us']; ?></td>
                                                         <td><?php echo $user_list['email']; ?></td>
                                                         <td><?php echo $user_list['phone']; ?></td>
-                                                        <td>$<?php echo $user_list['cash']; ?></td>
+														<td>$<?php echo $user_list['cash']; ?></td>
+														<td>$<?php echo $user_list['cashback']; ?></td>
                                                         <td><?php echo $user_list['score']; ?></td>
-                                                        <?php if ($user_list['Us'] == '') :  ?>
-                                                            <td>Not package</td>
+                                                        
+														<?php 
+															 $this->db->select('*');
+															 $this->db->from('tbl_upload_order');
+															 $this->db->where('userId', $user_list['idUser']);
+															 $this->db->group_by('tbl_upload_order.order_id');
+															 $numOrder = 0;
+															 $numPrice = 0;
+															 $numApproved = 0;
+															 $numNotApproved = 0;
+															 $orderListNum = $this->db->get()->result_array();
+															 foreach ($orderListNum as $orderListNum) {
+																 $numOrder += 1;
+																 $numPrice += $orderListNum['price_file'];
+																 if ($orderListNum['status_approved'] == 1) {
+																	 $numApproved += 1;
+																 }
+
+																 if ($orderListNum['status_approved'] == 2) {
+																	 $numNotApproved += 1;
+																 }
+															 }
+
+															 $this->db->select('*');
+															 $this->db->from('tbl_deduct');
+															 $this->db->where('userId', $user_list['idUser']);
+															 $this->db->group_by('tbl_deduct.order_id');
+															 $numDeduct = 0;
+															 $deductListNum = $this->db->get()->result_array();
+															 foreach ($deductListNum as $deductListNum) {
+																$numDeduct += $deductListNum['deduct'];
+															 }
+
+															$this->db->select('*');
+															$this->db->from('tbl_score');
+															$this->db->where('userId', $user_list['idUser']);
+															$this->db->group_by('tbl_score.order_id');
+															$numScore = 0;
+															$scoreListNum = $this->db->get()->result_array();
+															
+															foreach ($scoreListNum as $scoreListNum) {
+																$numScore += $scoreListNum['deduct'];
+															}
+
+															$discountUser = $user_list['score'] / 10;
+														?>
+														<td><?php echo $numOrder; ?></td>
+														<td><?php echo $numPrice; ?></td>
+														<td><?php echo $numApproved; ?></td>
+														<td><?php echo $numNotApproved; ?></td>
+														<td><?php echo $numDeduct; ?></td>
+														<td><?php echo $numScore; ?></td>
+														<td><?php echo $discountUser; ?>%</td>
+														<?php if ($user_list['Us'] == '') :  ?>
+                                                            <td><div class='badge badge-pill badge-glow badge-danger mr-1 mb-1'>Not package</div</td>
                                                         <?php else :  ?>
-                                                            <td>have package </td>
-                                                        <?php endif  ?>
+                                                            <td><div class='badge badge-pill badge-glow badge-success mr-1 mb-1'>have package</div></td>
+														<?php endif  ?>
                                                         <td>
                                                             <button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#infor<?php echo $user_list['Us']; ?>">
                                                                 <i class="feather icon-more-horizontal"></i>
@@ -173,7 +298,11 @@
 
                                                                     </div>
                                                                 </div>
-                                                            </div>
+															</div>
+															<button type="button" class="btn btn-icon btn-danger" onclick="confirmBandUser('<?php echo $user_list['idUser']; ?>')">
+                                                                <i class="fa fa-user-times"></i>
+															</button>
+															
                                                         </td>
                                                     </tr>
                                                 <?php  } ?>

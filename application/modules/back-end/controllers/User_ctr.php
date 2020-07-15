@@ -128,4 +128,21 @@ class User_ctr extends CI_Controller
 			redirect('back_user');
 		}
 	}
+
+	public function block_user()
+	{
+		if ($this->session->userdata('email_admin') == '') {
+			redirect('backend');
+		} else {
+			$iduser   	= $this->input->get('idUser');
+			$this->db->where('idUser', $iduser);
+			$success = $this->db->update('tbl_user', ['block_user' => 1]);
+			if ($success > 0) {
+				$this->session->set_flashdata('save_ss2', ' Successfully update deduct cashback !!.');
+			} else {
+				$this->session->set_flashdata('del_ss2', 'Not Successfully update deduct cashback');
+			}
+			redirect('back_user');
+		}
+	}
 }

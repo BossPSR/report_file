@@ -263,6 +263,23 @@
     }
 </script>
 
+<script>
+    function confirmBandUser(data) {
+
+        swal({
+            title: "Block User",
+            text: "ท่านต้องการ Block User ใช่ใหม่ ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'block_user?idUser=' + data;
+            }
+        })
+    }
+</script>
+
 
 
  <!-- uploadslider -->
