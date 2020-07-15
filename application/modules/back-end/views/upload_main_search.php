@@ -63,7 +63,7 @@
                                                     <th>Item</th>
                                                     <th>file</th>
                                                     <th>Code</th>
-                                                    <th>Topic</th>
+                                                    <th style="width: 800px;">Topic</th>
                                                     <th>Create Date</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -125,24 +125,56 @@
                                                                                             <td><?php echo $store['dm_sub']; ?></td>
                                                                                             <td><?php echo $value['userMain']; ?></td>
                                                                                             <td>
-                                                                                                <?php if ($value['status_book'] == '1' && $value['status_cp'] == 'complete' && $value['status_admin'] == '0') : ?>
+                                                                                                <?php if ($store['comandnocom'] == '1') : ?>
+                                                                                                    <span class="badge badge-pill badge-success">Complete</span>
+                                                                                                <?php elseif ($store['comandnocom'] == '2') : ?>
+                                                                                                    <span class="badge badge-pill badge-warning">Not complete</span>
+                                                                                                <?php elseif ($store['comandnocom'] == '3') : ?>
                                                                                                     <span class="badge badge-pill badge-success">Original</span>
-                                                                                                <?php elseif ($value['status_book'] == '1' && $value['status_cp'] == 'notcomplete' && $value['status_admin'] == '0') : ?>
-                                                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
-                                                                                                <?php elseif ($value['status_book'] == '1' && $value['status_cp'] == 'rewrite') : ?>
+                                                                                                <?php elseif ($store['comandnocom'] == '4') : ?>
                                                                                                     <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                                                                <?php elseif ($value['status_book'] == '2'  && $value['status_admin'] == '0') : ?>
-                                                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                                                                <?php elseif ($value['status_admin'] == '1') : ?>
-                                                                                                    <span class="badge badge-pill badge-warning">StockAdmin</span>
                                                                                                 <?php else : ?>
                                                                                                     -
                                                                                                 <?php endif; ?>
                                                                                             </td>
-                                                                                            <td><?php echo $store['file_name'] ?></td>
+                                                                                            <td>
+                                                                                                <?php echo $store['file_name'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $store['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                <div class="modal fade" id="dms<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                                                    <form action="edit_info_Satisfied" method="POST">
+                                                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Info (<?php echo $store['dm_sub']; ?>)</h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body row" >
+
+                                                                                                                    <div class="col-xl-12 col-md-12 col-12 ">
+                                                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                                                            <label for="Team">Team ID</label>
+                                                                                                                           <input type="text" class="form-control">
+                                                                                                                        </div>
+                                                                                                                    </div>
+
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </form>
+                                                                                                </div>
+                                                                                            </td>
                                                                                             <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td>
-                                                                                                <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                                                                <?php if ($store['status'] == '0') : ?>
+                                                                                                    <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['idmain']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-upload"></i></a>
+                                                                                                <?php else : ?>
+                                                                                                    <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                                                                <?php endif; ?>
                                                                                                 <div class="modal fade" id="dropedit<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                                                     <div class="modal-dialog" role="document">
                                                                                                         <div class="modal-content">
@@ -227,6 +259,8 @@
                                                         <td><?php echo $value['create_atMain']; ?></td>
                                                         <td>
                                                             <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                            <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['idmain']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-x"></i></a>
+
                                                             <div class="modal fade" id="dropW<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
@@ -252,8 +286,6 @@
                                                                                     <label for="helpInputTop">Status</label>
                                                                                     <select name="status_cp" id="stu<?php echo $value['idmain']; ?>" class="form-control status_cp<?php echo $value['idmain']; ?>" required>
                                                                                         <option value="" selected disabled>select</option>
-                                                                                        <option value="1">Complete</option>
-                                                                                        <option value="2">Not Complete</option>
                                                                                         <option value="3">Original</option>
                                                                                         <option value="4">Rewrite</option>
                                                                                     </select>
@@ -312,8 +344,8 @@
                                                                             type: 'POST',
                                                                             url: 'uploadmain_auto',
                                                                             data: {
-                                                                                status: 1 ,
-                                                                                DMS: DMS ,
+                                                                                status: 1,
+                                                                                DMS: DMS,
                                                                                 stu: stu
                                                                             },
                                                                             success: function(success) {

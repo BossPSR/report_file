@@ -136,9 +136,9 @@
                                                                         <tr style="text-align:center;">
                                                                             <td><?php echo $order_GT['order_id']; ?></td>
                                                                             <td class="text-left">
-                                                                                <?php if ($order_GT['status_more_file'] == 1) { ?>
+                                                                                <!-- <?php if ($order_GT['status_more_file'] == 1) { ?>
                                                                                     <span class="badge badge-danger">New</span>
-                                                                                <?php } ?>
+                                                                                <?php } ?> -->
                                                                                 <?php echo $order_GT['file_name_GT']; ?>
                                                                             </td>
                                                                             <?php if (!empty($order_GT['detail'])) { ?>

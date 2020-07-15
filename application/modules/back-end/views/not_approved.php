@@ -54,21 +54,31 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>No.</th>
+                                                    <th>CM</th>
                                                     <th>Order id</th>
-                                                    <th>Document name</th>
-                                                    <th>File Name</th>
-                                                    <th>Date_required</th>
-                                                    <th>Tool</th>
+                                                    <th>Order date</th>
+                                                    <th>Main file</th>
+                                                    <th>GT file</th>
+                                                    <th>DM file</th>
+                                                    <th>Team file</th>
+                                                    <th>TM</th>
+                                                    <th>Feedback file</th>
+                                                    <th>Feedback detail</th>
+                                                    <th>tool</th>
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
                                             <tbody>
                                                 <?php foreach ($not_Approved as $key => $not_Approved) { ?>
                                                     <tr>
-                                                        <td><?php echo $i++; ?></td>
                                                         <td><?php echo $not_Approved['or'] ?></td>
                                                         <td><?php echo $not_Approved['fa'] ?></td>
+                                                        <td><?php echo $not_Approved['or'] ?></td>
+                                                        <td><?php echo $not_Approved['or'] ?></td>
+                                                        <td><?php echo $not_Approved['or'] ?></td>
+                                                        <td><?php echo $not_Approved['or'] ?></td>
+                                                        <td><?php echo $not_Approved['or'] ?></td>
+                                                        <td><?php echo $not_Approved['or'] ?></td>
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $not_Approved['or']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -115,7 +125,7 @@
 
                                                         <td>
                                                             <?php if ($not_Approved['status_approved_upload'] == 0) : ?>
-                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>">Upload</button>
+                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>"><i class="feather icon-upload"></i></button>
                                                             <?php else : ?>
                                                                 <div class="badge badge-success">Success</div>
                                                             <?php endif; ?>

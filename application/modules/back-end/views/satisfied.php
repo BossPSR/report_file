@@ -345,7 +345,6 @@
                                                                 <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $stores['orderST']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
                                                             <?php endif; ?>
 
-
                                                             <div class="modal fade" id="exampleModalwage<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="edit_info_Satisfied" method="POST">
                                                                     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -358,16 +357,16 @@
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
-                                                                            <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+                                                                            <div class="modal-body row" style="text-align: center;margin: 5px 0;">
 
-                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                <div class="col-xl-12 col-md-12 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
-                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $stores['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
@@ -375,7 +374,7 @@
 
                                                                                 <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
 
-                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                <div class="col-xl-12 col-md-12 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Position</label>
                                                                                         <select name="position" class="form-control" required>
@@ -388,12 +387,113 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                <div class="col-xl-6 col-md-6 col-sm-6 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">wage</label>
                                                                                         <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
                                                                                     </div>
                                                                                 </div>
+
+                                                                                <div class="col-xl-6 col-md-6 col-sm-6 col-12 ">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Date</label>
+                                                                                        <input type="date" class="form-control  <?php echo $stores['orderST']; ?>" name="date_required" value="<?php echo $stores['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">note</label>
+                                                                                        <textarea name="note_new" id="" rows="4" class="form-control"></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-6 col-12 ">
+                                                                                    <div class="form-group">
+                                                                                        <fieldset>
+                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                                <input type="checkbox" class="ckeckdeduug<?php echo $stores['orderST']; ?>" data-order="<?php echo $stores['orderST']; ?>">
+                                                                                                <span class="vs-checkbox">
+                                                                                                    <span class="vs-checkbox--check">
+                                                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                                <span class="">Deduct</span>
+                                                                                            </div>
+                                                                                        </fieldset>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-12 col-12 deductTM<?php echo $stores['orderST']; ?>" style="display: none">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="Team">Team ID</label>
+                                                                                        <input type="text" class="form-control" value="<?= $stores['teamId']; ?>" disabled>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-6 col-md-6 col-12  deductTM<?php echo $stores['orderST']; ?>" id="" style="display: none">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="">Deduct </label>
+                                                                                        <input type="number" name="income" class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <?php $teamCost = $this->db->get_where('tbl_team', ['IdTeam' => $stores['teamId']])->row_array(); ?>
+                                                                                <div class="col-xl-6 col-md-6 col-12  deductTM<?php echo $stores['orderST']; ?>" id="" style="display: none">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="">Balance </label>
+                                                                                        <div> $<?= $teamCost['income']; ?> </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12  deductTM<?php echo $stores['orderST']; ?>" id="" style="display: none">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="">file</label>
+                                                                                        <input type="file" name="file_name" class="form-control" style="    height: auto;">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12  deductTM<?php echo $stores['orderST']; ?>" id="" style="display: none">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">note</label>
+                                                                                        <textarea name="note_check" id="" rows="4" class="form-control"></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-12 mb-2">
+                                                                                    <hr>
+                                                                                    <label for="" style="font-size: 14px;font-weight: 500;">Select Team file (Choose files for other teams)</label>
+                                                                                </div>
+
+                                                                                <div class="col-xl-3 col-md-3 col-sm-6 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <fieldset>
+                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                                <input type="checkbox" class="" data-order="<?php echo $stores['orderST']; ?>">
+                                                                                                <span class="vs-checkbox">
+                                                                                                    <span class="vs-checkbox--check">
+                                                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                                <span class="">File TM1</span>
+                                                                                            </div>
+                                                                                        </fieldset>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-3 col-md-3 col-sm-6 col-6  mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <fieldset>
+                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                                <input type="checkbox" class="" data-order="<?php echo $stores['orderST']; ?>">
+                                                                                                <span class="vs-checkbox">
+                                                                                                    <span class="vs-checkbox--check">
+                                                                                                        <i class="vs-icon feather icon-check"></i>
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                                <span class="">File TM2</span>
+                                                                                            </div>
+                                                                                        </fieldset>
+                                                                                    </div>
+                                                                                </div>
+
+
+
 
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -1038,6 +1138,18 @@
             $("#position" + o).prop('required', true);
         } else {
             $("#teambox" + o).fadeOut("slow");
+            $("#team" + o).prop('required', false);
+            $("#wage" + o).prop('required', false);
+            $("#position" + o).prop('required', false);
+        }
+
+        if ($('.ckeckdeduug' + o).is(":checked")) {
+            $(".deductTM" + o).fadeIn("slow");
+            $("#team" + o).prop('required', true);
+            $("#wage" + o).prop('required', true);
+            $("#position" + o).prop('required', true);
+        } else {
+            $(".deductTM" + o).fadeOut("slow");
             $("#team" + o).prop('required', false);
             $("#wage" + o).prop('required', false);
             $("#position" + o).prop('required', false);

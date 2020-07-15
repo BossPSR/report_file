@@ -49,13 +49,39 @@
 			$query = $this->db->get(); // Produces an integer, like 17
 			$count_note = $query->row_array();
 			?>
+			<?php
+			$this->db->select('*');
+			$this->db->from('tbl_upload_team');
+			$this->db->where('status', '1');
+
+			$Outod11 = $this->db->get()->result_array();
+			$d = 0;
+			?>
+
+			<?php foreach ($Outod11 as $key => $Outod11) { ?>
+				<?php $d += 1; ?>
+			<?php } ?>
+
+			<?php
+			$this->db->select('*');
+			$this->db->from('tbl_upload_team');
+			$this->db->where('status', '2');
+
+			$Outod22 = $this->db->get()->result_array();
+			$f = 0;
+			?>
+
+			<?php foreach ($Outod22 as $key => $Outod22) { ?>
+				<?php $f += 1; ?>
+			<?php } ?>
+
 			<section id="basic-datatable">
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
 							<div class="row card-header">
 
-								<div class="col-7">
+								<div class="col-5">
 									<h4 class="card-title">Team list</h4>
 								</div>
 								<div class="col-1 text-center">
@@ -71,7 +97,8 @@
 								<div class="col-1 text-center">
 
 									<h3 class="card-title" id="statusTeam_count">
-										<?php $statusTeam_count = $this->db->get('tbl_status_team')->result_array();
+										<?php
+										$statusTeam_count = $this->db->get('tbl_status_team')->result_array();
 										$team_count = $this->db->get('tbl_team')->result_array();
 										echo count($statusTeam_count);
 										?>
@@ -88,6 +115,24 @@
 										?>
 									</h3>
 									<h3 class="check_list_not">ทีมงานออฟไลน์</h3>
+								</div>
+
+								<div class="col-1 text-center">
+									<h3 class="card-title " id="co">
+										<?php
+											echo $d;
+										?>
+									</h3>
+									<h3 class="check_list_not">ค้างส่ง Order</h3>
+								</div>
+
+								<div class="col-1 text-center">
+									<h3 class="card-title " id="tu">
+										<?php
+											echo $f;
+										?>
+									</h3>
+									<h3 class="check_list_not">ค้างส่ง Feedback</h3>
 								</div>
 
 								<div class="col-1 text-center">
@@ -123,8 +168,18 @@
 													<th>Online</th>
 													<th>Details</th>
 													<th>TeamId</th>
-													<th>Order</th>
 													<th>Name</th>
+													<th>Order</th>
+													<th>Out Order</th>
+													<th>Out Feedback</th>
+													<th>Approved</th>
+													<th>Not Approved</th>
+													<th>Income</th>
+													<th>Score</th>
+													<th>Withdraw</th>
+													<th>Outstanding</th>
+													<th>Cancel Order</th>
+													<th>No Submit</th>
 													<th>status</th>
 													<th>Notification Ban</th>
 													<th>Tool</th>
@@ -239,11 +294,168 @@
 															</div>
 														</td>
 														<td><?php echo $team['IdTeam']; ?></td>
-
-														<td><?php echo $team['countT']; ?></td>
-
 														<td><?php echo $team['name']; ?></td>
-														
+														<td>
+															<?php
+															$this->db->select('count(*) cod');
+															$this->db->from('tbl_upload_team');
+															$this->db->where('teamId', $team['IdTeam']);
+
+															$order = $this->db->get()->row_array();
+															?>
+															<?php echo $order['cod']; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_upload_team');
+															$this->db->where('teamId', $team['IdTeam']);
+															$this->db->where('status', '1');
+
+															$Outod = $this->db->get()->result_array();
+															$e = 0;
+															?>
+
+															<?php foreach ($Outod as $key => $Outod) { ?>
+																<?php $e += 1; ?>
+															<?php } ?>
+
+															<?php echo $e; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_upload_team');
+															$this->db->where('teamId', $team['IdTeam']);
+															$this->db->where('status', '2');
+
+															$Outfe = $this->db->get()->result_array();
+															$r = 0;
+															?>
+
+															<?php foreach ($Outfe as $key => $Outfe) { ?>
+																<?php $r += 1; ?>
+															<?php } ?>
+
+															<?php echo $r; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_upload_team');
+															$this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
+															$this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+															$this->db->where('tbl_upload_order.status_approved', '1');
+															$this->db->group_by('tbl_upload_order.order_id');
+
+															$ap = $this->db->get()->result_array();
+															$t = 0;
+															?>
+
+															<?php foreach ($ap as $key => $ap) { ?>
+																<?php $t += 1; ?>
+															<?php } ?>
+
+															<?php echo $t; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_upload_team');
+															$this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
+															$this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+															$this->db->where('tbl_upload_order.status_approved', '2');
+															$this->db->group_by('tbl_upload_order.order_id');
+
+															$nap = $this->db->get()->result_array();
+															$y = 0;
+															?>
+
+															<?php foreach ($nap as $key => $nap) { ?>
+																<?php $y += 1; ?>
+															<?php } ?>
+
+															<?php echo $y; ?>
+														</td>
+														<td>
+															<?php echo $team['income']; ?>
+														</td>
+														<td>
+															<?php echo $team['team_score']; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_withdraw_team');
+															$this->db->where('teamId', $team['IdTeam']);
+
+															$wit = $this->db->get()->result_array();
+															$u = 0;
+															?>
+
+															<?php foreach ($wit as $key => $wit) { ?>
+																<?php $u += $wit['price']; ?>
+															<?php } ?>
+
+															<?php echo $u; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_withdraw_team');
+															$this->db->where('teamId', $team['IdTeam']);
+															$this->db->where('status', '1');
+
+															$Outwit = $this->db->get()->result_array();
+															$o = 0;
+															?>
+
+															<?php foreach ($Outwit as $key => $Outwit) { ?>
+																<?php $o += $Outwit['price']; ?>
+															<?php } ?>
+
+															<?php echo $o; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_cancel');
+															$this->db->where('teamid', $team['IdTeam']);
+															$this->db->where('status', '1');
+
+															$can = $this->db->get()->result_array();
+															$p = 0;
+															?>
+
+															<?php foreach ($can as $key => $can) { ?>
+																<?php $p += 1; ?>
+															<?php } ?>
+
+															<?php echo $p; ?>
+														</td>
+														<td>
+															<?php
+															$this->db->select('*');
+															$this->db->from('tbl_upload_team');
+															$this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
+															$this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
+															$this->db->where('tbl_upload_order.status_delivery', '1');
+															$this->db->where('tbl_upload_team.status', '2');
+															$this->db->group_by('tbl_upload_order.order_id');
+
+															$nosum = $this->db->get()->result_array();
+															$s = 0;
+															?>
+
+															<?php foreach ($nosum as $key => $nosum) { ?>
+																<?php $s += 1; ?>
+															<?php } ?>
+
+															<?php echo $s; ?>
+														</td>
+
+
+
 
 														<?php if ($team['Tstatus'] == 0) : ?>
 															<td>

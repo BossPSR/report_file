@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                        <div class="row card-header">
+                            <div class="row card-header">
                                 <div class="col-lg-9 col-sm-12">
                                     <h4 class="card-title"> Approved</h4>
                                 </div>
@@ -48,26 +48,44 @@
                                     <button type="button" data-toggle="modal" data-target="#modalUpload" class="btn btn-primary mr-1 mb-1">+ Upload</button>
                                 </div>
                             </div>
-                        
+
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
+                                                    <th>CM</th>
                                                     <th>Order id</th>
-                                                    <th>Document name</th>
-                                                    <th>Date_required</th>
+                                                    <th>Order date</th>
+                                                    <th>Main file</th>
+                                                    <th>GT file</th>
+                                                    <th>DM file</th>
+                                                    <th>Team file</th>
+                                                    <th>TM</th>
+                                                    <th>Feedback file</th>
+                                                    <th>Feedback detail</th>
+                                                    <th>tool</th>
                                                 </tr>
                                             </thead>
                                             <?php $i = 1; ?>
                                             <tbody>
                                                 <?php foreach ($Approved as $key => $Approved) { ?>
-                                                <tr>
-                                                    <td><?php echo $Approved['order_id'] ?></td>
-                                                    <td><?php echo $Approved['file_name'] ?></td>
-                                                    <td><?php echo $Approved['date_required']  ?></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><?php echo $Approved['userId'] ?></td>
+                                                        <td><?php echo $Approved['order_id'] ?></td>
+                                                        <td><?php echo $Approved['date_required'];  ?></td>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agin"><i class="feather icon-upload"></i> </button>
+                                                        </td>
+                                                    </tr>
                                                 <?php } ?>
                                                 </tfoot>
                                         </table>
