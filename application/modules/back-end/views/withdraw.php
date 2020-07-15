@@ -41,7 +41,9 @@
                                                     <th>Username</th>
                                                     <th>Withdraw</th>
                                                     <th>Total</th>
-                                                    <th>Telephone</th>
+													<th>Telephone</th>
+													<th>Requested Date</th>
+													<th>Slip</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -52,37 +54,60 @@
                                                         <td><?php echo $withdraw['username']; ?></td>
                                                         <td><?php echo $withdraw['price']; ?></td>
                                                         <td><?php echo $withdraw['cash']; ?></td>
-                                                        <td><?php echo $withdraw['phone']; ?></td>
+														<td><?php echo $withdraw['phone']; ?></td>
+														<td><?php echo $withdraw['transaction_date']; ?></td>
+														<td><a href="<?php echo $withdraw['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                         <td>
                                                             <button class="btn btn-icon btn-info" data-toggle="modal" data-target="#emailsand<?php echo $withdraw['idW']; ?>" type="button">
                                                                 <i class="feather icon-mail"></i>
                                                             </button>
                                                             <?php if ($withdraw['status'] == 1) : ?>
-                                                                <div class="dropdown " style="display: contents;">
-                                                                    <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        กำลังดำเนินการ
-                                                                    </button>
-                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" type="button" data-toggle="modal" data-target="#drop<?php echo $withdraw['idW']; ?>" href="#">ชำระเงินแล้ว</a>
-                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
-                                                                    </div>
-                                                                </div>
-                                                            <?php elseif ($withdraw['status'] == 2) : ?>
-                                                                <div class="dropdown " style="display: contents;">
-                                                                    <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        ชำระเงินแล้ว
-                                                                    </button>
-                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                        <a class="dropdown-item" href="back_withdraw_update?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
-                                                                    </div>
-                                                                </div>
-                                                            <?php else : ?>
-                                                                <div class="dropdown " style="display: contents;">
-                                                                    <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        ยกเลิก
-                                                                    </button>
+																<div style="display: contents;">
+																<button class="btn btn-warning btn-info" data-toggle="modal" data-target="#note<?php echo $withdraw['idW']; ?>" type="button">
+																	<i class="fa fa-sticky-note"></i>
+																</button>
+																</div>
+																
+																<div class="modal fade" id="note<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																	<div class="modal-dialog modal-lg" role="document">
+																		<div class="modal-content">
+																			<div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+																				<h5 class="modal-title" id="exampleModalLabel">Withdraw (<?php echo $withdraw['idW']; ?>)</h5>
+																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																					<span aria-hidden="true">&times;</span>
+																				</button>
+																			</div>
 
-                                                                </div>
+																			<div class="modal-body" style="text-align:left;">
+																			<form action="" method="post">
+                                                                                <input type="text" name="id" value="1" hidden="">
+                                                                                
+																				<div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Transfer Date</label>
+                                                                                        <input type="date" class="form-control" name="name_item" value="" placeholder="Enter Transfer Date">
+                                                                                    </div>
+																				</div>
+																				<div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Transfer Time</label>
+                                                                                        <input type="time" class="form-control" name="name_item" value="" placeholder="Enter Transfer Time">
+                                                                                    </div>
+                                                                                </div>
+                                                                        	</form>
+																				
+
+																			</div>
+
+																			<div class="modal-footer">
+																				<button type="button" id="SubmitW<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
+																				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+																			</div>
+
+																		</div>
+																	</div>
+																</div>
+                                                            
                                                             <?php endif; ?>
                                                             <!-- Modal Feedback -->
                                                             <div class="modal fade" id="drop<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -134,6 +134,7 @@ $route['back_admin_status_Admin']                   = 'back-end/Admin_ctr/status
 $route['back_admin_delete_admin']                   = 'back-end/Admin_ctr/delete_admin';
 $route['status_team']                               = 'back-end/Team_ctr/status_team';
 $route['back_user']                                 = 'back-end/User_ctr';
+$route['block_user']                                = 'back-end/User_ctr/block_user';
 
 $route['back_store']                                = 'back-end/Store_ctr';
 $route['back_store_a']                              = 'back-end/Store_ctr/store_a';
