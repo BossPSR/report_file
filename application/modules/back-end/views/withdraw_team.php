@@ -112,7 +112,103 @@
 
                                                                     </div>
                                                                 </div>
-                                                            </div>
+															</div>
+															<?php if($withdraw_team['status_id'] != 2){ ?>
+																<div style="display: contents;">
+																		<button class="btn btn-warning btn-info" data-toggle="modal" data-target="#note<?php echo $withdraw_team['idW']; ?>" type="button">
+																			<i class="fa fa-sticky-note"></i>
+																		</button>
+																</div>
+															
+																<div class="modal fade" id="note<?php echo $withdraw_team['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																		<div class="modal-dialog modal-lg" role="document">
+																			<div class="modal-content">
+																				<div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+																					<h5 class="modal-title" id="exampleModalLabel">Withdraw Team (<?php echo $withdraw_team['idW']; ?>)</h5>
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+
+																				<div class="modal-body" style="text-align:left;">
+																					
+																						
+
+																						<div class="col-xl-12 col-md-6 col-12 mb-1">
+																							<div class="form-group">
+																								<label for="helpInputTop">Transfer Date</label>
+																								<input type="date" class="form-control" name="transfer_date" value="" placeholder="Enter Transfer Date">
+																							</div>
+																						</div>
+																						<div class="col-xl-12 col-md-6 col-12 mb-1">
+																							<div class="form-group">
+																								<label for="helpInputTop">Transfer Time</label>
+																								<input type="time" class="form-control" name="transfer_time" value="" placeholder="Enter Transfer Time">
+																							</div>
+																						</div>
+																						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+																							<label for="" style="font-size: 16px;">File Document </label>
+																							<form action="upload_back_withdraw_team_slip" class="dropzone dropzone-area" id="fileup<?php echo $withdraw_team['idW']; ?>">
+																								<div class="dz-message" style="top: 24%;">Upload Document</div>
+																								<input type="text" name="id" value="<?php echo $withdraw_team['id'];?>" hidden="">
+																							</form>
+																						</div>
+																						<br>
+																				
+
+
+																				</div>
+
+																				<div class="modal-footer">
+																					<button type="button" id="SubmitWD<?php echo $withdraw_team['idW']; ?>" class="btn btn-success">Send</button>
+																					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+																				</div>
+
+																			</div>
+																		</div>
+																	</div>
+
+																	<script type='text/javascript'>
+																		Dropzone.autoDiscover = false;
+																		var myDropzone3<?php echo $withdraw_team['idW']; ?> = new Dropzone("#fileup<?php echo $withdraw_team['idW']; ?>", {
+																			autoProcessQueue: false,
+																			maxFiles: 1,
+																			addRemoveLinks: true,
+																			parallelUploads: 5, // Number of files process at a time (default 2)
+																		});
+
+																		$('#SubmitWD<?php echo $withdraw_team['idW']; ?>').click(function() {
+																			
+																			
+
+																			if (myDropzone3<?php echo $withdraw_team['idW']; ?>.files != 0) {
+																				myDropzone3<?php echo $withdraw_team['idW']; ?>.processQueue();
+																				myDropzone3<?php echo $withdraw_team['idW']; ?>.on("queuecomplete", function(file, res) {
+																					var transfer_date = $('input[name="transfer_date"]').val();
+																					var transfer_time = $('input[name="transfer_time"]').val();
+																						$.ajax({
+																						type: "POST",
+																						url: "back_withdraw_team_slip",
+																						data: {
+																							id:<?php echo $withdraw_team['id'];?>,
+																							transfer_date:transfer_date,
+																							transfer_time:transfer_time,
+																						},
+																						success: function(data) {
+																						}
+																					});
+																					swal("Good job!", "Upload for data success Feedback", "success", {
+																						button: false,
+																					});
+																				});
+																				setTimeout("location.reload(true);", 1000);
+																			} else {
+																				swal("Good job!", "Upload for data successfull", "success");
+																			}
+
+																		});
+																	</script>
+															<?php } ?>
                                                         </td>
                                                         <script type='text/javascript'>
                                                             Dropzone.autoDiscover = false;
