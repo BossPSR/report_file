@@ -65,6 +65,7 @@
                                                     <th>Step</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>Country</th>
                                                     <th>T3</th>
                                                     <!-- <th>Main File</th>
                                                     <th>GT File</th> -->
@@ -85,6 +86,9 @@
                                                         <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
                                                         <td><?php echo $stores['order'] ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
+                                                        <td>
+                                                            <?php echo $stores['countryName'] == '' ? '-' : $stores['countryName'] ; ?>
+                                                        </td>
                                                         <td>
                                                             <?php if (!empty($stores['teamId'])) : ?>
                                                                 <?php echo $stores['teamId']; ?>

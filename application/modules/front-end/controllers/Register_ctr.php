@@ -14,9 +14,10 @@ class Register_ctr extends CI_Controller
 
 	public function index()
 	{
+		$data['countries'] = $this->Countries_model->get_countries();
 		if ($this->session->userdata('email') == '') {
 			$this->load->view('options/header_login');
-			$this->load->view('register');
+			$this->load->view('register' , $data);
 			$this->load->view('options/footer');
 		} else {
 			redirect('my-profile');
@@ -25,6 +26,7 @@ class Register_ctr extends CI_Controller
 
 	public function register_success()
 	{
+		$countries           = $this->input->post('countries');
 		$email               = $this->input->post('email');
 		$phone               = $this->input->post('phone');
 		$username            = $this->input->post('username');
@@ -47,6 +49,7 @@ class Register_ctr extends CI_Controller
 				redirect('register', 'refresh');
 			} else {
 				$data = array(
+					'country_id'        => $countries,
 					'email'             => $email,
 					'phone'             => $phone,
 					'username'          => $username,

@@ -51,12 +51,13 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration">
+                                        <table class="table table-hover zero-configuration">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>country</th>
                                                     <th>Note</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
@@ -78,6 +79,7 @@
                                                         <td><?php echo $y++; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
+                                                        <td><?php echo $stored['countryName']; ?></td>
                                                         <td>
 
                                                             <?php if (!empty($stored['note_user'])) { ?>

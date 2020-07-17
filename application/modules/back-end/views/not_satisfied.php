@@ -56,6 +56,7 @@
                                                 <tr>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>Country</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
                                                     <th>T3 File</th>
@@ -81,6 +82,9 @@
                                                     <tr>
                                                         <td><?php echo $store['orderNOT'] ?></td>
                                                         <td><?php echo $store['userId']; ?></td>
+                                                        <td>
+                                                            <?php echo $store['countryName'] == '' ? '-' : $store['countryName'] ; ?>
+                                                        </td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

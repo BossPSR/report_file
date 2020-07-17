@@ -55,6 +55,7 @@
                                                 <tr>
                                                     <th>Order Id</th>
                                                     <th>User</th>
+                                                    <th>Country</th>
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
@@ -79,6 +80,9 @@
                                                     <tr style="background: <?php echo $stores['status_informal'] == 1 ? '#ececec' : ''; ?>">
                                                         <td><?php echo $stores['orderST']; ?></td>
                                                         <td><?php echo $stores['userOR']; ?></td>
+                                                        <td>
+                                                            <?php echo $stores['countryName'] == '' ? '-' : $stores['countryName'] ; ?>
+                                                        </td>
 
                                                         <td>
                                                             <?php if (empty($stores['id_document'])) : ?>
@@ -491,9 +495,6 @@
                                                                                         </fieldset>
                                                                                     </div>
                                                                                 </div>
-
-
-
 
                                                                             </div>
                                                                             <div class="modal-footer">

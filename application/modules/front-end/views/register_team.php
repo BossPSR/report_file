@@ -40,7 +40,6 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label>Countries <span class="red">*</span></label>
-                                    <!-- <input type="number" name="passport" required> -->
                                     <select class="form-control" name="countries">
                                         <option selected disabled>-- SELECT COUNTRIES --</option>
                                         <?php foreach ($countries as $key => $countries) { ?>

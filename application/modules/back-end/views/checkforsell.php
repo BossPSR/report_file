@@ -80,6 +80,7 @@ foreach ($store as $upload_main_searchDetail) {
 
                                                     <th>Store Id</th>
                                                     <th>User</th>
+                                                    <th>country</th>
                                                     <th>File Name</th>
                                                     <th>Note</th>
                                                     <th>File</th>
@@ -104,6 +105,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
+                                                            <td></td>
                                                             <td>
                                                                 <a href="check_com?id=<?php echo $orders['store_id']; ?>" class="btn btn-success " aria-haspopup="true" aria-expanded="false">
                                                                     Done <?php echo $orders['store_id']; ?>
@@ -111,12 +113,20 @@ foreach ($store as $upload_main_searchDetail) {
                                                             </td>
                                                         </tr>
 
-                                                        <?php $check_for = $this->db->order_by('store_id', 'asc')->get_where('tbl_upload_store', ['store_id' => $orders['store_id'], 'is_check' => '0'])->result_array(); ?>
+                                                        <?php
+                                                        $this->db->where('store_id', $orders['store_id']);
+                                                        $this->db->where('is_check', '0');
+                                                        $this->db->order_by('store_id', 'asc');
+                                                        $check_for = $this->db->get('tbl_upload_store')->result_array();
+                                                        ?>
                                                         <?php foreach ($check_for as $keys => $check_for) { ?>
                                                             <tr>
                                                                 <td><?php echo $orders['store_id']; ?></td>
                                                                 <td>
                                                                     <?php echo $check_for['userId']; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $orders['countryName']; ?>
                                                                 </td>
                                                                 <td>
                                                                     <?php echo $check_for['file_name']; ?>

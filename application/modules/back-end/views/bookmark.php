@@ -155,6 +155,9 @@
                                                         <td><?php echo $bookmark['orderby'] ?></td>
                                                         <td><?php echo $bookmark['user_name'] ?></td>
                                                         <td>
+                                                            <?php echo $bookmark['countryName'] == '' ? '-' : $bookmark['countryName'] ; ?>
+                                                        </td>
+                                                        <td>
                                                             <?php if (empty($bookmark['id_document'])) : ?>
                                                                 -
                                                             <?php else : ?>

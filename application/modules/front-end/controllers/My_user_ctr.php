@@ -15,6 +15,7 @@ class My_user_ctr extends CI_Controller
 			redirect('home');
 		} else {
 			$data['user'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+			$data['countries'] = $this->db->get_where('countries', ['id' => $data['user']['country_id'] ])->row_array();
 			// $data['reject'] = $this->db->get_where('tbl_rejected', ['userId_rj' => $data['user']['id']])->row_array();
 			$lang = $this->session->userdata("lang") == null ? "english" : $this->session->userdata("lang");
 			$this->lang->load($lang, $lang);

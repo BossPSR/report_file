@@ -153,6 +153,10 @@
                         <input type="file" class="form-control" name="profile" value="">
                     </div>
                     <div class="form-group">
+                        <label for="">Countries</label>
+                        <input type="text" class="form-control" name="countries" value="<?php echo $countries['countryName']; ?>" disabled>
+                    </div>
+                    <div class="form-group">
                         <label for="">Name</label>
                         <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                         <input type="text" class="form-control" name="name" value="<?php echo $user['username']; ?>" required>

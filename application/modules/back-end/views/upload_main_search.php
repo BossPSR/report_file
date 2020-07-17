@@ -54,7 +54,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration">
+                                        <table class="table table-hover zero-configuration">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -95,7 +95,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">File</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Sub DM</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -140,22 +140,25 @@
                                                                                             <td>
                                                                                                 <?php echo $store['file_name'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $store['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
                                                                                                 <div class="modal fade" id="dms<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                                                    <form action="edit_info_Satisfied" method="POST">
+                                                                                                    <form action="rename_uploadmain" method="POST">
                                                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
 
                                                                                                             <div class="modal-content">
                                                                                                                 <div class="modal-header">
-                                                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Info (<?php echo $store['dm_sub']; ?>)</h5>
+                                                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Rename (<?php echo $store['dm_sub']; ?>)</h5>
                                                                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                                         <span aria-hidden="true">&times;</span>
                                                                                                                     </button>
                                                                                                                 </div>
                                                                                                                 <div class="modal-body row" >
-
+                                                                                                                    <?php $exp = explode(".",$store['file_name']) ; ?>
                                                                                                                     <div class="col-xl-12 col-md-12 col-12 ">
                                                                                                                         <div class="form-group" style="text-align: left;">
-                                                                                                                            <label for="Team">Team ID</label>
-                                                                                                                           <input type="text" class="form-control">
+                                                                                                                            <label for="Team">Rename</label>
+                                                                                                                            <input type="text" class="form-control"   value="<?php echo $exp[0] ?>" name="resume">
+                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['path'] ?>" name="path" >
+                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $exp[1] ?>" name="doc" >
+                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['id']; ?>" name="id" >
                                                                                                                         </div>
                                                                                                                     </div>
 

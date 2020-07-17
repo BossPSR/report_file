@@ -99,6 +99,7 @@ class Store_ctr extends CI_Controller
         $team       = $this->input->post('team');
         $wage       = $this->input->post('wage');
         $Position   = $this->input->post('Position');
+        $note_s   = $this->input->post('note_s');
         if ($team) {
             $cf = '1';
         } else {
@@ -113,7 +114,7 @@ class Store_ctr extends CI_Controller
             'price_file'            => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
             'status_book'           => 1,
-            'note'                  => $this->input->post('note_s'),
+            'note'                  => $note_s,
             'update_at'             => date('Y-m-d H:i:s'),
             'notify_user'           => 0,
             'status_cp'             => $this->input->post('status_cp'),
@@ -139,12 +140,12 @@ class Store_ctr extends CI_Controller
 
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
 
-        $this->sendEmail($upload_order);
+        $this->sendEmail($upload_order,$note_s);
 
         return redirect('back_store_buy');
     }
 
-    private function sendEmail($upload_order)
+    private function sendEmail($upload_order,$note_s)
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
@@ -177,7 +178,7 @@ class Store_ctr extends CI_Controller
         $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
         $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
         $message .= '<p>Check below for your order details.</p><hr>';
-        $message .= '<p>Order details ("' . $upload_order[0]['order_id'] . '")</p>';
+        $message .= '<p>Order details ("' . $upload_order[0]['order_id'] . '") : '.$note_s.' </p>';
 
 
         $message .= '<table style="font-size: 14px;border="0">';
@@ -1268,6 +1269,32 @@ class Store_ctr extends CI_Controller
         }
 
         return redirect('Bookmark');
+    }
+
+    public function rename_uploadmain()
+    {
+        $resume = $this->input->post('resume');
+        $doc    = $this->input->post('doc');
+        $path   = $this->input->post('path');
+        $id     = $this->input->post('id');
+
+         rename($path,'uploads/Store/'.$resume.'.'.$doc);
+        if ($id) {
+            $update = [
+                'file_name' => $resume.'.'.$doc,
+                'path' => 'uploads/Store/'.$resume.'.'.$doc,
+            ];
+            $this->db->where('id', $id);
+            $success = $this->db->update('tbl_upload_main_search_sub', $update);
+        }
+       
+        if ($success) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
+        }
+        return redirect('back_upload_main_search');
+        
     }
 
     // public function fetch_state()

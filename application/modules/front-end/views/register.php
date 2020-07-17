@@ -30,39 +30,70 @@
                     <div class="account_form register">
                         <h2 style="text-align: center;">Sign Up</h2>
                         <form action="register_success" method="POST" name="thisForm">
-                          
-                            <p>
-                                <label>Name <span class="red">*</span></label>
-                                <input type="text" name="username" required>
-                            </p>
-                            <p>
-                                <label>Email <span class="red">*</span></label>
-                                <input type="email" name="email" required>
-                            </p>
-                            <p>
-                                <label>Phone Number <span class="red">* (Should not wear a special symbol /*-+\)</span> </label>
-                                <input type="number" name="phone" required>
-                            </p>
 
-                            <label>Passwords <span class="red"> Please enter a password of at least 8 characters. *</span></label>
-                            <div class="input-group mb-3" id="show_hide_password">
-                                <input type="password" id="password" name="password" onblur="check();" minlength="8" class="form-control" aria-describedby="basic-addon1" required>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
-                                </div>
-                            </div>
-                            <label>Comfirm password <span class="red">*</span><span id="message"></span></label>
-                            <div class="input-group mb-3" id="show_hide_password">
-                                <input type="password" id="c_password" name="c_password" class="form-control" minlength="8" aria-describedby="basic-addon1" required>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Countries <span class="red">*</span></label>
+                                    <!-- <input type="number" name="passport" required> -->
+                                    <select class="form-control" name="countries" required>
+                                        <option selected disabled>-- SELECT COUNTRIES --</option>
+                                        <?php foreach ($countries as $key => $countries) { ?>
+                                            <option value="<?php echo $countries['id']; ?>"><?php echo $countries['countryName']; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
 
-
-                            <div class="login_submit">
-                                <button type="submit">Save</button>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Name <span class="red">*</span></label>
+                                    <input type="text" name="username" required>
+                                </div>
                             </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Email <span class="red">*</span></label>
+                                    <input type="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Phone Number <span class="red">* (Should not wear a special symbol /*-+\)</span> </label>
+                                    <input type="number" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Passwords <span class="red"> Please enter a password of at least 8 characters. *</span></label>
+                                    <div class="input-group mb-3" id="show_hide_password">
+                                        <input type="password" id="password" name="password" onblur="check();" minlength="8" class="form-control" aria-describedby="basic-addon1" required>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Comfirm password <span class="red">*</span><span id="message"></span></label>
+                                    <div class="input-group mb-3" id="show_hide_password">
+                                        <input type="password" id="c_password" name="c_password" class="form-control" minlength="8" aria-describedby="basic-addon1" required>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <div class="login_submit">
+                                        <button type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
