@@ -129,11 +129,12 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration2" id="loading_img_spin">
+                                        <table class="table table-hover zero-configuration2" id="loading_img_spin">
                                             <thead>
                                                 <tr>
                                                     <th>order Id</th>
                                                     <th>User Id</th>
+                                                    <th>Country</th>
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>

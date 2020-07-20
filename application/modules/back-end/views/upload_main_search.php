@@ -101,7 +101,7 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <table class="table zero-configuration">
+                                                                            <table class="table table-hover zero-configuration">
                                                                                 <thead>
                                                                                     <?php $store = $this->db->get_where('tbl_upload_main_search_sub', ['dm_main' => $value['idmain']])->result_array(); ?>
                                                                                     <tr>

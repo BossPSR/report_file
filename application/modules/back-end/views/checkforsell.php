@@ -74,7 +74,7 @@ foreach ($store as $upload_main_searchDetail) {
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration">
+                                        <table class="table table-hover zero-configuration">
                                             <thead>
                                                 <tr>
 

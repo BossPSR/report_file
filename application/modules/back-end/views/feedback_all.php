@@ -67,7 +67,7 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration" id="loading_img_spin">
+                                        <table class="table table-hover zero-configuration" id="loading_img_spin">
                                             <thead>
                                                 <tr>
                                                     <th>order id</th>
