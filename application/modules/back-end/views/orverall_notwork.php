@@ -200,6 +200,20 @@
                                                                                             <label for="helpInputTop">wage</label>
                                                                                             <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
                                                                                         </div>
+																					</div>
+																					
+																					<div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">date required</label>
+                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stores['date_required']; ?>" placeholder="Enter wage" required>
+                                                                                        </div>
+																					</div>
+																					
+																					<div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">Note</label>
+                                                                                            <textarea name="note" id="" cols="30" rows="10" class="form-control"></textarea>
+                                                                                        </div>
                                                                                     </div>
 
                                                                                 </div>

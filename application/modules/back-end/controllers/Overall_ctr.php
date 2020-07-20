@@ -14,10 +14,12 @@ class Overall_ctr extends CI_Controller
         $order_id   = $this->input->post('order_id');
         $wage       = $this->input->post('wage');
         $teamid     = $this->input->post('teamid');
-        $position   = $this->input->post('position');
+		$position   = $this->input->post('position');
+		$date_required = $this->input->post('date_required');
+		$note = $this->input->post('note');
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid,'note' => $note]);
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
@@ -30,7 +32,7 @@ class Overall_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1,'date_required' => $date_required]);
 
                 $this->sendEmail_all($teamid, $order_id);
             }
