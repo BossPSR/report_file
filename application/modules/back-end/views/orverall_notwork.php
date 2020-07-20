@@ -63,7 +63,7 @@
                                                     $e += 1;
                                                 }
                                             }
-                                            echo $e;
+                                            echo $checkDate_nums;
                                             ?>
                                         </span>
                                     </a>
@@ -78,7 +78,8 @@
                                         </span>
                                     </a>
                                 </div>
-                            </div>
+							</div>
+
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
@@ -88,12 +89,13 @@
                                                     <th>Step</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
-                                                    <th>Email</th>
+                                                    <!-- <th>Email</th> -->
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>Info</th>
                                                     <th>Status</th>
-                                                    <th>Status T3</th>
+													<th>Status T3</th>
+													<th>Date 24</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -115,21 +117,23 @@
                                                             </td>
                                                             <td> <?php echo $stores['order'] ?></td>
                                                             <td><?php echo $stores['userId']; ?></td>
-                                                            <td>
+                                                            <!-- <td>
                                                                 <?php if ($stores['emailOt'] == '') : ?>
                                                                     -
                                                                 <?php else : ?>
                                                                     <?php echo $stores['emailOt']; ?>
                                                                 <?php endif; ?>
 
-                                                            </td>
+                                                            </td> -->
                                                             <td><?php echo $stores['createOr']; ?></td>
                                                             <td><?php echo $stores['requiredOr']; ?></td>
                                                             <td>
                                                                 <?php if ($stores['teamId'] == '') : ?>
                                                                     - |
                                                                 <?php else : ?>
-                                                                    <?php echo $stores['teamId']; ?> |
+																	<?php 
+																		$team_id = explode('TM',$stores['teamId']);
+																		echo $team_id[1]; ?> |
                                                                 <?php endif; ?>
 
                                                                 <?php if ($stores['wage'] == '') : ?>
@@ -221,7 +225,8 @@
                                                                 <?php endif; ?>
                                                             </td>
                                                             <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['order']])->row_array(); ?>
-                                                            <td>
+															
+															<td>
                                                                 <?php if ($team == false) : ?>
                                                                     <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['order']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
                                                                 <?php else : ?>
@@ -236,7 +241,28 @@
                                                                     <?php endif ?>
                                                                 <?php endif ?>
 
-                                                            </td>
+															</td>
+															<td>
+																<?php
+																	$date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
+																	$date_required = ceil($date_required) + 1;
+																	
+																	if ($date_required == 6) {
+																		$check_requiredOr = date("Y-m-d",strtotime("+1 day",strtotime($stores['createOr'])));
+																		if ($check_requiredOr >= date('Y-m-d')) {
+																			echo '<span class="badge badge-pill badge-danger">No Work</span>';
+																		}
+																		
+																	
+																	}elseif($date_required >= 7){
+																		$check_requiredOr = date("Y-m-d",strtotime("+2 day",strtotime($stores['createOr'])));
+																		if ($check_requiredOr >= date('Y-m-d')) {
+																			echo '<span class="badge badge-pill badge-danger">No Work</span>';
+																		}
+																	
+																	}
+																?>
+															</td>
                                                             <td>
 
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $stores['order']; ?>"><i class="feather icon-navigation"></i> </button>

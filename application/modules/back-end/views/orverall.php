@@ -72,7 +72,8 @@
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>PriceFile</th>
-                                                    <th>Delivery</th>
+													<th>Delivery</th>
+													<th>Procress</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -196,12 +197,28 @@
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
                                                         <td>
-                                                            <?php if ($stores['status_delivery'] == 0) : ?>
+															<?php if($stores['status_team'] == 0) : ?>
+																<span class="badge badge-pill badge-danger">Procressing</span>
+															<?php elseif ($stores['status_team'] == 1) : ?>
+																<span class="badge badge-pill badge-info">Complete</span>
+                                                            <?php elseif ($stores['status_delivery'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
                                                                 <span class="badge badge-pill badge-success">Delivered</span>
                                                             <?php endif; ?>
-                                                        </td>
+														</td>
+														
+														<td>
+															<?php 
+																if ($stores['status_cancel'] == 1) {
+																	echo '<span class="badge badge-pill badge-danger">Admin cancel</span>';
+																}elseif ($stores['status_cancel'] == 2) {
+																	echo '<span class="badge badge-pill badge-danger">Team cancel</span>';
+																}else{
+																	echo '-';
+																}
+															?>
+														</td>
                                                         <td>
                                                             <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
