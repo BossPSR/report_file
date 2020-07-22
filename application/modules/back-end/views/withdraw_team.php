@@ -76,11 +76,11 @@
                                                                     </div>
                                                                 </div>
                                                             <?php else : ?>
-                                                                <div class="dropdown ">
+                                                                
                                                                     <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         ยกเลิก
                                                                     </button>
-                                                                </div>
+                                                                
                                                             <?php endif; ?>
                                                             <!-- Modal Feedback -->
                                                             <div class="modal fade" id="dropteam<?php echo $withdraw_team['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -114,11 +114,11 @@
                                                                 </div>
 															</div>
 															<?php if($withdraw_team['status_id'] != 2){ ?>
-																<div style="display: contents;">
+															
 																		<button class="btn btn-warning btn-info" data-toggle="modal" data-target="#note<?php echo $withdraw_team['idW']; ?>" type="button">
 																			<i class="fa fa-sticky-note"></i>
 																		</button>
-																</div>
+																
 															
 																<div class="modal fade" id="note<?php echo $withdraw_team['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 																		<div class="modal-dialog modal-lg" role="document">
