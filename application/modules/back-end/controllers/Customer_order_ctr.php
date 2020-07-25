@@ -508,14 +508,14 @@ class Customer_order_ctr extends CI_Controller
         $path   = $this->input->post('path');
         $id     = $this->input->post('id');
 
-         rename($path,'uploads/Store/'.$resume.'.'.$doc);
+         rename($path,'uploads/Team/'.$resume.'.'.$doc);
         if ($id) {
             $update = [
                 'file_name' => $resume.'.'.$doc,
-                'path' => 'uploads/Store/'.$resume.'.'.$doc,
+                'path' => 'uploads/Team/'.$resume.'.'.$doc,
             ];
             $this->db->where('id', $id);
-            $success = $this->db->update('tbl_upload_main_search_sub', $update);
+            $success = $this->db->update('tbl_upload_order_team', $update);
         }
        
         if ($success) {
@@ -523,7 +523,7 @@ class Customer_order_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
         }
-        return redirect('back_upload_main_search');
+        return redirect('Bookmark');
         
     }
 }
