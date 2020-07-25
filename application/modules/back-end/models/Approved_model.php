@@ -12,8 +12,9 @@ class Approved_model extends CI_Model{
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_order');
+        $this->db->join('tbl_upload_team','tbl_upload_team.order_id = tbl_upload_order.order_id','left');
         $this->db->where('status_approved',1);
-        $this->db->group_by('order_id');
+        $this->db->group_by('tbl_upload_order.order_id');
 
         return $this->db->get()->result_array();
 

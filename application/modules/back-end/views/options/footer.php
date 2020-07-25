@@ -20,6 +20,7 @@
 <script src="public/backend/assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
 <script src="public/backend/assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
 <script src="public/backend/assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+<script src="public/backend/app-assets/vendors/js/coming-soon/jquery.countdown.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- <script src="public/backend/assets/vendors/js/extensions/dropzone.min.js"></script> -->
@@ -35,6 +36,8 @@
 <script src="public/backend/assets/js/scripts/datatables/datatable.js"></script>
 <script src="public/backend/assets/js/scripts/pages/dashboard-analytics.js"></script>
 <!-- END: Page JS-->
+<script src="public/backend/app-assets/js/scripts/pages/coming-soon.js"></script>
+<script src="public/backend/assets/js/jquery.countdown.min.js"></script>
 <script src="public/backend/assets/js/scripts/sweetalert.min.js"></script>
 
 <script src="public/backend/assets/vendors/js/extensions/toastr.min.js"></script>
