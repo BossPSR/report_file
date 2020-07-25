@@ -176,6 +176,7 @@
                                                     <th>Info</th>
                                                     <th>cancel</th>
                                                     <th>Delivery</th>
+                                                    <th>Status Team</th>
                                                     <th>Status</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -299,7 +300,7 @@
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Note</label>
-                                                                                       <textarea name="" id="" cols="30" rows="10" class="form-control"><?php echo $stores['note']; ?></textarea>
+                                                                                        <textarea name="" id="" cols="30" rows="10" class="form-control"><?php echo $stores['note']; ?></textarea>
                                                                                     </div>
                                                                                 </div>
 
@@ -328,7 +329,7 @@
                                                                                         <span aria-hidden="true">&times;</span>
                                                                                     </button>
                                                                                 </div>
-                                                                                <div class="modal-body" >
+                                                                                <div class="modal-body">
                                                                                     <div><?php echo $stores['history']; ?></div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
@@ -350,6 +351,23 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
+                                                            <?php
+                                                            if ($stores['status_check_team'] == 1) {
+                                                                echo '<span class="badge badge-pill badge-Info">Waiting for team</span>';
+                                                            } elseif ($stores['status_check_team'] == 2) {
+                                                                echo '<span class="badge badge-pill badge-warning">processing</span>';
+                                                            } elseif ($stores['status_check_team'] == 3) {
+                                                                echo '<span class="badge badge-pill badge-success">complete</span>';
+                                                            } elseif ($stores['status_check_team'] == 4) {
+                                                                $cancel = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array();
+                                                                echo '<span class="badge badge-pill badge-danger">Waiting for team</span>';
+                                                                echo '<br>';
+                                                                echo '<span class="badge badge-pill badge-danger">' . $cancel['history'] . '</span>';
+                                                            }
+
+                                                            ?>
+                                                        </td>
+                                                        <td>
                                                             <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
                                                             <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete'  && $stores['status_admin'] == '0') : ?>
@@ -367,87 +385,87 @@
                                                             <a href="" class="btn btn-icon btn-success"><i class="feather icon-mail"></i></a>
                                                             <a href="" class="btn btn-icon btn-warning"><i class="feather icon-inbox"></i></a> -->
                                                             <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $stores['order']; ?>"><i class="feather icon-navigation"></i> </button>
-                                                            <?php if ($stores['t_id']== ''):?>
-                                                            <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $stores['order']; ?>"><i class="feather icon-users"></i></button>
-                                                            <?php elseif($stores['status_informal']==1):?>
+                                                            <?php if ($stores['t_id'] == '') : ?>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $stores['order']; ?>"><i class="feather icon-users"></i></button>
+                                                            <?php elseif ($stores['status_informal'] == 1) : ?>
                                                                 <button type="button" class="btn btn-icon btn-success" data-toggle="modal" data-target="#infor<?php echo $stores['order']; ?>"><i class="feather icon-log-out"></i></button>
                                                                 <div class="modal fade" id="infor<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Dropfile (<?php echo $stores['order']; ?>)</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-
-                                                                        <div class="modal-body">
-                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                                                <label for="" style="font-size: 16px;">File Document </label>
-                                                                                <form action="fileUpload_t3_not_summit" class="dropzone dropzone-area" id="dropzoneother<?php echo $stores['order']; ?>">
-                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
-                                                                                    <input type="hidden" name="order" value="<?php echo $stores['order']; ?>">
-                                                                                    <input type="hidden" name="teamId" value="<?php echo $stores['t_id']; ?>">
-                                                                                </form>
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Dropfile (<?php echo $stores['order']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
                                                                             </div>
 
+                                                                            <div class="modal-body">
+                                                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                    <label for="" style="font-size: 16px;">File Document </label>
+                                                                                    <form action="fileUpload_t3_not_summit" class="dropzone dropzone-area" id="dropzoneother<?php echo $stores['order']; ?>">
+                                                                                        <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                        <input type="hidden" name="order" value="<?php echo $stores['order']; ?>">
+                                                                                        <input type="hidden" name="teamId" value="<?php echo $stores['t_id']; ?>">
+                                                                                    </form>
+                                                                                </div>
 
-                                                                        </div>
 
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around">
-                                                                                <button type="submit" id="other<?php echo $stores['order']; ?>" class="btn btn-primary">Submit</button>
                                                                             </div>
-                                                                        </div>
 
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around">
+                                                                                    <button type="submit" id="other<?php echo $stores['order']; ?>" class="btn btn-primary">Submit</button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <script>
-                                                                Dropzone.autoDiscover = false;
-                                                                var myDropzone5<?php echo $stores['order']; ?> = new Dropzone("#dropzoneother<?php echo $stores['order']; ?>", {
-                                                                    autoProcessQueue: false,
-                                                                    maxFiles: 5,
-                                                                    addRemoveLinks: true,
-                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
-                                                                });
+                                                                <script>
+                                                                    Dropzone.autoDiscover = false;
+                                                                    var myDropzone5<?php echo $stores['order']; ?> = new Dropzone("#dropzoneother<?php echo $stores['order']; ?>", {
+                                                                        autoProcessQueue: false,
+                                                                        maxFiles: 5,
+                                                                        addRemoveLinks: true,
+                                                                        parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                    });
 
-                                                                document.getElementById("other<?php echo $stores['order']; ?>").addEventListener("click", function() {
-                                                                    // myDropzone.processQueue();
-                                                                    if (myDropzone5<?php echo $stores['order']; ?>.files == 0) {
-                                                                        swal("Warning!", "Can not be document Empty", "warning", {
-                                                                            button: true,
-                                                                        });
-                                                                    } else {
-                                                                        myDropzone5<?php echo $stores['order']; ?>.processQueue();
-                                                                        myDropzone5<?php echo $stores['order']; ?>.on("queuecomplete", function(file, res) {
-                                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                                button: false,
+                                                                    document.getElementById("other<?php echo $stores['order']; ?>").addEventListener("click", function() {
+                                                                        // myDropzone.processQueue();
+                                                                        if (myDropzone5<?php echo $stores['order']; ?>.files == 0) {
+                                                                            swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                button: true,
                                                                             });
-                                                                            setTimeout(function() {
-                                                                                location.href = "orvernotsubmit"
-                                                                            }, 1000);
-                                                                        });
-                                                                    }
-                                                                });
-                                                            </script>
+                                                                        } else {
+                                                                            myDropzone5<?php echo $stores['order']; ?>.processQueue();
+                                                                            myDropzone5<?php echo $stores['order']; ?>.on("queuecomplete", function(file, res) {
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: false,
+                                                                                });
+                                                                                setTimeout(function() {
+                                                                                    location.href = "orvernotsubmit"
+                                                                                }, 1000);
+                                                                            });
+                                                                        }
+                                                                    });
+                                                                </script>
                                                                 <button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#send<?php echo $stores['order']; ?>"><i class="feather icon-upload"></i> </button>
                                                                 <div class="modal fade" id="send<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Delivery File</h5>
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Delivery File</h5>
 
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <form action="sendEmail_delivery_not_summit" method="POST">
-                                                                                <input type="hidden" name="id" value="<?php echo $stores['order']; ?>">
-                                                                                <input type="hidden" name="dm_id[]" value="<?php echo $stores['id_document']; ?>">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form action="sendEmail_delivery_not_summit" method="POST">
+                                                                                    <input type="hidden" name="id" value="<?php echo $stores['order']; ?>">
+                                                                                    <input type="hidden" name="dm_id[]" value="<?php echo $stores['id_document']; ?>">
 
-                                                                                <!-- <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['order']])->result_array(); ?>
+                                                                                    <!-- <?php $dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['order']])->result_array(); ?>
                                                                                 <?php foreach ($dm_c as $key => $dm_c) { ?>
                                                                                     <?php $dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $dm_c['id_document']])->row_array(); ?>
 
@@ -507,55 +525,55 @@
                                                                                     <?php endif; ?>
                                                                                 <?php } ?> -->
 
-                                                                                <hr>
+                                                                                    <hr>
 
-                                                                                <h3>
-                                                                                    <p>Team file</p>
-                                                                                </h3>
-                                                                                <table class="table zero-configuration">
-                                                                                    <thead>
-                                                                                        <?php $orderss_team = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stores['order']])->result_array(); ?>
-                                                                                        <tr>
-                                                                                            <th>Select</th>
-
-                                                                                            <th>Order Id</th>
-                                                                                            <th>File Name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>create</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php foreach ($orderss_team as $keys => $orderss_team) { ?>
+                                                                                    <h3>
+                                                                                        <p>Team file</p>
+                                                                                    </h3>
+                                                                                    <table class="table zero-configuration">
+                                                                                        <thead>
+                                                                                            <?php $orderss_team = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stores['order']])->result_array(); ?>
                                                                                             <tr>
-                                                                                                <td><label class="container">
-                                                                                                        <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>">
-                                                                                                        <span class="checkmark"></span>
-                                                                                                    </label>
-                                                                                                </td>
+                                                                                                <th>Select</th>
 
-                                                                                                <td><?php echo $orderss_team['order_id'] ?></td>
-                                                                                                <td><?php echo $orderss_team['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderss_team['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderss_team['create_at'] ?></td>
-
+                                                                                                <th>Order Id</th>
+                                                                                                <th>File Name</th>
+                                                                                                <th>File</th>
+                                                                                                <th>create</th>
                                                                                             </tr>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <?php foreach ($orderss_team as $keys => $orderss_team) { ?>
+                                                                                                <tr>
+                                                                                                    <td><label class="container">
+                                                                                                            <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>">
+                                                                                                            <span class="checkmark"></span>
+                                                                                                        </label>
+                                                                                                    </td>
 
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around">
-                                                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                                                                    <td><?php echo $orderss_team['order_id'] ?></td>
+                                                                                                    <td><?php echo $orderss_team['file_name'] ?></td>
+                                                                                                    <td><a href="<?php echo $orderss_team['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $orderss_team['create_at'] ?></td>
+
+                                                                                                </tr>
+                                                                                            <?php } ?>
+                                                                                        </tbody>
+                                                                                    </table>
+
                                                                             </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around">
+                                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            </form>
                                                                         </div>
-                                                                        </form>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <?php else:?>
-                                                                <button type="button" class="btn btn-icon btn-secondary" ><i class="feather icon-users"></i></button>
-                                                                <?php endif?>
+                                                            <?php else : ?>
+                                                                <button type="button" class="btn btn-icon btn-secondary"><i class="feather icon-users"></i></button>
+                                                            <?php endif ?>
                                                             <div class="modal fade" id="informal<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="update_team_informal" method="POST">
                                                                     <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
@@ -606,7 +624,7 @@
                                                                 </form>
                                                             </div>
                                                             <button type="button" data-toggle="modal" data-target="#Cancel<?php echo $stores['order']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-delete"></i></button>
-                                                           
+
                                                         </td>
 
 
