@@ -277,13 +277,14 @@ class Customer_order_ctr extends CI_Controller
 
     public function edit_info_Satisfied()
     {
-        $order_id   = $this->input->post('order_id');
-        $wage       = $this->input->post('wage');
-        $teamid     = $this->input->post('teamid');
-        $position   = $this->input->post('position');
-
+        $order_id           = $this->input->post('order_id');
+        $wage               = $this->input->post('wage');
+        $teamid             = $this->input->post('teamid');
+        $position           = $this->input->post('position');
+        $note               = $this->input->post('note_new');
+        $date_required      = $this->input->post('date_required');
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'note' => $note,]);
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
@@ -296,7 +297,7 @@ class Customer_order_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required]);
 
                 $this->sendEmail_all($teamid, $order_id);
             }
@@ -482,6 +483,193 @@ class Customer_order_ctr extends CI_Controller
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+    }
+
+    public function satisfied_up_mainfile()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+            $orderST                = $this->input->post('orderST');
+            $userOR                 = $this->input->post('userOR');
+            $User_St                = $this->input->post('User_St');
+            $St_email               = $this->input->post('St_email');
+            $price_file             = $this->input->post('price_file');
+            $price_dis_order        = $this->input->post('price_dis_order');
+            $score_user             = $this->input->post('score_user');
+            $dateREST               = $this->input->post('dateREST');
+            $create_times           = $this->input->post('create_times');
+            $status_book            = $this->input->post('status_book');
+            $status_admin           = $this->input->post('status_admin');
+            $is_check               = $this->input->post('is_check');
+            $note_reject            = $this->input->post('note_reject');
+            // $is_confirm             = $this->input->post('is_confirm');
+            $status_pay             = $this->input->post('status_pay');
+            $select_item            = $this->input->post('select_item');
+            $status_approved        = $this->input->post('status_approved');
+            $notify_user            = $this->input->post('notify_user');
+            $status_confirmed_team  = $this->input->post('status_confirmed_team');
+            $status_cp              = $this->input->post('status_cp');
+            $status_delivery        = $this->input->post('status_delivery');
+            $notify_team            = $this->input->post('notify_team');
+            $notify_admin           = $this->input->post('notify_admin');
+            $click_step             = $this->input->post('click_step');
+
+            $target_dir = "uploads/Main/"; // Upload directory
+            if (!empty($_FILES['file']['name'])) {
+
+                // Set preference
+                $config['upload_path']     = 'uploads/Main/';
+                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+                $config['allowed_types']   = '*';
+                $config['max_size']        = '99999'; // max_size in kb
+                $config['file_name']     = $_FILES['file']['name'];
+
+                //Load upload library
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                // File upload
+                if ($this->upload->do_upload('file')) {
+                    // Get data about the file
+                    $uploadData = $this->upload->data();
+
+                    $data = array(
+                        'order_id'          => $orderST,
+                        'userId'            => $userOR,
+                        'Username'          => $User_St,
+                        'email'             => $St_email,
+                        'price_file'        => $price_file,
+                        'price_dis_order'   => $price_dis_order,
+                        'score_user'        => $score_user,
+                        'date_required'     => $dateREST,
+                        'status_book'       => $status_book,
+                        'status_admin'      => $status_admin,
+                        'is_check'          => $is_check,
+                        'note_reject'       => $note_reject,
+                        // 'is_confirm'        => $is_confirm,
+                        'status_pay'        => $status_pay,
+                        'select_item'       => $select_item,
+                        'status_approved'   => $status_approved,
+                        'notify_user'       => $notify_user,
+                        'status_confirmed_team' => $status_confirmed_team,
+                        'status_cp'         => $status_cp,
+                        'status_delivery'   => $status_delivery,
+                        'notify_team'       => $notify_team,
+                        'notify_admin'      => $notify_admin,
+                        'click_step'        => $click_step,
+                        'file_name'         => $uploadData['file_name'],
+                        'path'              => 'uploads/Main/' . $uploadData['file_name'],
+                        'create_at'         => date('Y-m-d H:i:s'),
+                        'status_upload_admin'   => 1 // admin
+                    );
+                    $this->db->insert('tbl_upload_order', $data);
+                }
+            }
+        } else {
+            redirect('Login_admin');
+        }
+    }
+
+    public function satisfied_per_add_gt_file()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+            $orderST                = $this->input->post('orderST');
+            $userOR                 = $this->input->post('userOR');
+
+            $data = array(
+                'userId'        => $userOR,
+                'order_id'      => $orderST,
+                'create_at'     => date('Y-m-d H:i:s'),
+            );
+            $success = $this->db->insert('tbl_morefile_GT', $data);
+            echo $success;
+        } else {
+            redirect('Login_admin');
+        }
+    }
+
+    public function satisfied_up_gtfile()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+            $orderST                = $this->input->post('orderST');
+            $userOR                 = $this->input->post('userOR');
+
+
+            $target_dir = "uploads/Buy/GT/"; // Upload directory
+            if (!empty($_FILES['file']['name'])) {
+
+                // Set preference
+                $config['upload_path']     = 'uploads/Buy/GT/';
+                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+                $config['allowed_types']   = '*';
+                $config['max_size']        = '99999'; // max_size in kb
+                $config['file_name']     = $_FILES['file']['name'];
+
+                //Load upload library
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                // File upload
+                if ($this->upload->do_upload('file')) {
+                    // Get data about the file
+                    $max_id = $this->db->order_by('id', 'desc')->get('tbl_morefile_GT')->row_array();
+                    $uploadData = $this->upload->data();
+                    $data2 = array(
+                        'more_id'       => $max_id['id'],
+                        'order_id'      => $orderST,
+                        'file_name_GT'  => $uploadData['file_name'],
+                        'path_GT'       => 'uploads/Buy/GT/' . $uploadData['file_name'],
+                        'create_at'     => date('Y-m-d H:i:s'),
+                    );
+                    $this->db->insert('tbl_upload_orderGT', $data2);
+                }
+            }
+        } else {
+            redirect('Login_admin');
+        }
+    }
+
+    public function rename_filename()
+    {
+        $id = $this->input->post('id');
+        $name_file = $this->input->post('name_file');
+        $last_file = $this->input->post('last_file');
+        $path = $this->input->post('path');
+
+        if ($this->session->userdata('email_admin') != '') {
+            rename($path, 'uploads/Buy/' . $name_file . '.' . $last_file);
+            if ($id) {
+                $update = [
+                    'file_name' => $name_file . '.' . $last_file,
+                    'path' => 'uploads/Buy/' . $name_file . '.' . $last_file,
+                ];
+                $this->db->where('id', $id);
+                $success = $this->db->update('tbl_upload_order', $update);
+                echo $success;
+            }
+        } else {
+            redirect('Login_admin');
+        }
+    }
+
+    public function rename_filenameGT()
+    {
+        $id = $this->input->post('id');
+        $name_file = $this->input->post('name_file');
+        $last_file = $this->input->post('last_file');
+        $path = $this->input->post('path');
+
+        if ($this->session->userdata('email_admin') != '') {
+            rename($path, 'uploads/Buy/GT/' . $name_file . '.' . $last_file);
+            if ($id) {
+                $update = [
+                    'file_name_GT' => $name_file . '.' . $last_file,
+                    'path_GT' => 'uploads/Buy/GT/' . $name_file . '.' . $last_file,
+                ];
+                $this->db->where('id', $id);
+                $success = $this->db->update('tbl_upload_orderGT', $update);
+                echo $success;
+            }
+        } else {
+            redirect('Login_admin');
         }
     }
 }

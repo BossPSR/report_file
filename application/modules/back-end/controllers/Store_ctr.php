@@ -140,12 +140,12 @@ class Store_ctr extends CI_Controller
 
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $orderid])->result_array();
 
-        $this->sendEmail($upload_order,$note_s);
+        $this->sendEmail($upload_order, $note_s);
 
         return redirect('back_store_buy');
     }
 
-    private function sendEmail($upload_order,$note_s)
+    private function sendEmail($upload_order, $note_s)
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
@@ -178,7 +178,7 @@ class Store_ctr extends CI_Controller
         $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
         $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
         $message .= '<p>Check below for your order details.</p><hr>';
-        $message .= '<p>Order details ("' . $upload_order[0]['order_id'] . '") : '.$note_s.' </p>';
+        $message .= '<p>Order details ("' . $upload_order[0]['order_id'] . '") : ' . $note_s . ' </p>';
 
 
         $message .= '<table style="font-size: 14px;border="0">';
@@ -1278,23 +1278,16 @@ class Store_ctr extends CI_Controller
         $path   = $this->input->post('path');
         $id     = $this->input->post('id');
 
-         rename($path,'uploads/Store/'.$resume.'.'.$doc);
+        rename($path, 'uploads/Store/' . $resume . '.' . $doc);
         if ($id) {
             $update = [
-                'file_name' => $resume.'.'.$doc,
-                'path' => 'uploads/Store/'.$resume.'.'.$doc,
+                'file_name' => $resume . '.' . $doc,
+                'path' => 'uploads/Store/' . $resume . '.' . $doc,
             ];
             $this->db->where('id', $id);
-            $success = $this->db->update('tbl_upload_main_search_sub', $update);
+            $success = $this->db->update('tbl_upload_order', $update);
+            echo $success;
         }
-       
-        if ($success) {
-            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
-        }
-        return redirect('back_upload_main_search');
-        
     }
 
     // public function fetch_state()

@@ -13,7 +13,9 @@ class Customer_model extends CI_Model
 
     public function customer_main()
     {
-        $this->db->select('*,tbl_upload_order.userId AS userOR,tbl_upload_order.order_id AS orderST ,tbl_upload_order.create_at AS createST ,tbl_upload_order.date_required AS dateREST');
+        $this->db->select('*,tbl_upload_order.userId AS userOR,tbl_upload_order.order_id AS orderST 
+        ,tbl_upload_order.create_at AS createST ,tbl_upload_order.date_required AS dateREST ,tbl_upload_order.Username AS User_St , tbl_upload_order.email AS St_email
+        ,tbl_upload_team.note as note_team,tbl_upload_order.id AS id_order_main');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_bookmark', 'tbl_upload_order.order_id = tbl_bookmark.id_orderBuy ', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document = tbl_upload_main_search.id_doc ', 'left');
