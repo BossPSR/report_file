@@ -199,6 +199,7 @@ $route['fileUpload_main']                           = 'back-end/Book_ctr/fileUpl
 $route['uploadmain_auto']                           = 'back-end/Book_ctr/uploadmain_auto';
 
 $route['Complete']                                  = 'back-end/Complete_ctr';
+$route['add_to_upload_main_search_approved']        = 'back-end/Approved_ctr/add_to_upload_main_search_approved';
 $route['add_to_upload_main_search_not_approved']    = 'back-end/Approved_ctr/add_to_upload_main_search_not_approved';
 $route['sendEmail_delivery']                        = 'back-end/Complete_ctr/sendEmail_delivery';
 $route['book_complete_add_com']                     = 'back-end/Complete_ctr/book_complete_add_com';

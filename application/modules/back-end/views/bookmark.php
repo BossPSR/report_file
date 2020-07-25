@@ -341,8 +341,8 @@
 
                                                             <?php $status = $this->db->get_where('tbl_upload_order_team', ['order_id' => $bookmark['orderby']])->row_array();  ?>
                                                             <?php if ($status == true) : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['id_orderBuy']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModalc<?php echo $bookmark['id_orderBuy']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#teamfile<?php echo $bookmark['id_orderBuy']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="teamfile<?php echo $bookmark['id_orderBuy']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">

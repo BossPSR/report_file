@@ -50,22 +50,25 @@
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
 
-                                <div class="col-3 text-right" >
+                                <div class="col-3 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
                                         No Work <span class="badge badge-pill badge-warning" id="refresh_nw">
                                             <?php
                                             $e = 0;
-                                            foreach ($no_work as $no_work) {
-												
-                                                $checkDate_nums = DateDiff($no_work['createOr'], $no_work['requiredOr']);
-                                                $checkDates = $checkDate_nums / 2;
-                                                $checkDates = floor($checkDates);
-                                                $dateRequireds = date("Y-m-d", strtotime("-" . $checkDates . " day", strtotime($no_work['requiredOr'])));
-                                                if ($dateRequireds <= date("Y-m-d")) {
-                                                    $e += 1;
+                                            if ($no_work) {
+                                                foreach ($no_work as $no_work) {
+                                                    $checkDate_nums = DateDiff($no_work['createOr'], $no_work['requiredOr']);
+                                                    $checkDates = $checkDate_nums / 2;
+                                                    $checkDates = floor($checkDates);
+                                                    $dateRequireds = date("Y-m-d", strtotime("-" . $checkDates . " day", strtotime($no_work['requiredOr'])));
+                                                    if ($dateRequireds <= date("Y-m-d")) {
+                                                        $e += 1;
+                                                    }
                                                 }
+                                                echo $checkDate_nums;
+                                            }else{
+                                                echo $e;
                                             }
-                                            echo $checkDate_nums;
                                             ?>
                                         </span>
                                     </a>
@@ -80,7 +83,7 @@
                                         </span>
                                     </a>
                                 </div>
-							</div>
+                            </div>
 
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -136,9 +139,9 @@
                                                                 <?php if ($stores['teamId'] == '') : ?>
                                                                     - |
                                                                 <?php else : ?>
-																	<?php 
-																		$team_id = explode('TM',$stores['teamId']);
-																		echo $team_id[1]; ?> |
+                                                                    <?php
+                                                                    $team_id = explode('TM', $stores['teamId']);
+                                                                    echo $team_id[1]; ?> |
                                                                 <?php endif; ?>
 
                                                                 <?php if ($stores['wage'] == '') : ?>
@@ -205,16 +208,16 @@
                                                                                             <label for="helpInputTop">wage</label>
                                                                                             <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
                                                                                         </div>
-																					</div>
-																					
-																					<div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    </div>
+
+                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">date required</label>
                                                                                             <input type="date" class="form-control" name="date_required" value="<?php echo $stores['date_required']; ?>" placeholder="Enter wage" required>
                                                                                         </div>
-																					</div>
-																					
-																					<div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    </div>
+
+                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">Note</label>
                                                                                             <textarea name="note" id="" cols="30" rows="10" class="form-control"></textarea>
@@ -233,7 +236,7 @@
                                                             <td>
                                                                 <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
                                                                     <span class="badge badge-pill badge-success">Original</span>
-                                                                <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete'  && $stores['status_admin'] == '0') : ?>
+                                                                <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'rewrite'  && $stores['status_admin'] == '0') : ?>
                                                                     <span class="badge badge-pill badge-primary">Rewrite</span>
                                                                 <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0') : ?>
                                                                     <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
@@ -244,8 +247,8 @@
                                                                 <?php endif; ?>
                                                             </td>
                                                             <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['order']])->row_array(); ?>
-															
-															<td>
+
+                                                            <td>
                                                                 <?php if ($team == false) : ?>
                                                                     <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['order']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
                                                                 <?php else : ?>
@@ -271,7 +274,6 @@
 																		if ($check_requiredOr >= date('Y-m-d')) {
 																			echo '<span class="badge badge-pill badge-danger">No Work</span>';
 																		}
-																		
 																	
 																	}elseif($date_required >= 7){
 																		$check_requiredOr = date("Y-m-d",strtotime("+2 day",strtotime($stores['createOr'])));
@@ -300,10 +302,32 @@
 																	
 																?>
 															</td>
+																		
+                                                            <td>
+                                                                <?php
+                                                                $date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
+                                                                $date_required = ceil($date_required) + 1;
+
+                                                                if ($date_required <= 6) {
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+1 day", strtotime($stores['createOr'])));
+                                                                    if ($check_requiredOr >= date('Y-m-d')) {
+                                                                        echo '<span class="badge badge-pill badge-warning">24 hour !</span>';
+                                                                    }else{
+                                                                        echo '-';
+                                                                    }
+                                                                } elseif ($date_required >= 7) {
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+2 day", strtotime($stores['createOr'])));
+                                                                    if ($check_requiredOr <= date('Y-m-d')) {
+                                                                        echo '<span class="badge badge-pill badge-danger">48 hour !</span>';
+                                                                    }
+                                                                } else {
+                                                                    echo '-';
+                                                                }
+                                                                ?>
+                                                            </td>
                                                             <td>
 
-																<button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $stores['order']; ?>"><i class="feather icon-navigation"></i> </button>
-																<button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $stores['order']; ?>"><i class="feather icon-users"></i></button>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $stores['order']; ?>"><i class="feather icon-navigation"></i> </button>
                                                                 <button type="button" data-toggle="modal" data-target="#Cancel<?php echo $stores['order']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-delete"></i></button>
                                                             </td>
 

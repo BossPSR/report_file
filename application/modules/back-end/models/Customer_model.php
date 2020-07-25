@@ -73,6 +73,7 @@ class Customer_model extends CI_Model
         $this->db->where('tbl_upload_order.status_confirmed_team', 0);
         $this->db->where('tbl_upload_order.is_check', 0);
         $this->db->where('tbl_upload_team.teamId', null);
+        $this->db->where_in('tbl_upload_order.status_approved', ['0', '3']);
         $this->db->or_where('tbl_upload_team.teamId', '');
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'desc');
@@ -106,6 +107,7 @@ class Customer_model extends CI_Model
         $this->db->where('tbl_feedback.check_feedback_dalivery', 0);
         $this->db->where('tbl_upload_order.is_check', 0);
         $this->db->where('tbl_upload_team.status', 2);
+        // $this->db->or_where('tbl_upload_team.status', 0);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'desc');
         return $this->db->get()->result_array();
