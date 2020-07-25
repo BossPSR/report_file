@@ -68,7 +68,7 @@ class Customer_model extends CI_Model
         $this->db->select('*,tbl_upload_order.order_id AS order ,tbl_upload_order.create_at AS createOr 
         ,  tbl_upload_order.date_required AS requiredOr , tbl_upload_order.email AS emailOt  ');
         $this->db->from('tbl_upload_order');
-        $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
+		$this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 0);
         $this->db->where('tbl_upload_order.is_check', 0);
