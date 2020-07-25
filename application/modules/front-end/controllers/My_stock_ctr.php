@@ -128,6 +128,58 @@ class My_stock_ctr extends CI_Controller
         }
     }
 
+
+    function my_task_app()
+    {
+        $order_id               = $this->input->post('order_id');
+        $status_check_team      = $this->input->post('status_check_team');
+
+        $data = array(
+            'status_check_team'             => $status_check_team,
+            'update_confirm'                => date('Y-m-d H:i:s')
+        );
+
+        $this->db->where('order_id', $order_id);
+        $success = $this->db->update('tbl_upload_team', $data);
+
+        echo $success;
+    }
+    function my_task_can()
+    {
+        $note_can               = $this->input->post('note_can');
+        $orb                    = $this->input->post('orb');
+        $team_idd               = $this->input->post('team_idd');
+
+
+        $data = array(
+            'order_id'                      => $orb,
+            'teamid'                        => $team_idd,
+            'history'                       => $note_can,
+            'status'                        => 1,
+            'status_who'                    => 'Team cancel',
+            'create_at'                     => date('Y-m-d H:i:s')
+        );
+
+        if ($this->db->insert('tbl_cancel', $data)) {
+
+            $data2 = array(
+                'status_check_team'             => 0,
+                'teamId'                        => null,
+                'update_confirm'                => date('Y-m-d H:i:s')
+            );
+            $this->db->where('order_id',  $orb);
+            $success = $this->db->update('tbl_upload_team', $data2);
+
+            if ($success > 0) {
+                $this->session->set_flashdata('save_ss2', 'Successfully Cancel  !!.');
+                redirect('My-task');
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully Cancel !!.');
+                redirect('My-task');
+            }
+        }
+    }
+
     function my_task_withdraw()
     {
         $order_id               = $this->input->post('order_id');

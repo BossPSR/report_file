@@ -342,7 +342,74 @@
                                         <?php } ?>
 
                                     <?php } ?>
-                                    <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
+                                    <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == true) : ?>
+                                        <td>
+                                            <button type="button" class="btn btn-success" id="cancel_team<?php echo $task['or_id']; ?>"><i class="fa fa-check-square-o"></i></button>
+                                            <script type="text/javascript">
+                                                $('#cancel_team<?php echo $task['or_id']; ?>').click(function() {
+                                                    swal({
+                                                        icon: "warning",
+                                                        title: "Are you sure?",
+                                                        text: "To accept this job",
+                                                        closeOnEsc: true,
+                                                        closeOnClickOutside: false,
+                                                        buttons: {
+                                                            cancel: true,
+                                                            confirm: true,
+                                                        },
+                                                    }).then(function(isConfirm) {
+                                                        if (isConfirm == true) {
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: 'my_task_app',
+                                                                data: {
+                                                                    order_id: '<?php echo $task['or_id']; ?>',
+                                                                    status_check_team: '2',
+
+
+                                                                },
+                                                                success: function(success) {
+                                                                    swal("Good job!", "Cancel for data successfull", "success", {
+                                                                        button: false,
+                                                                    });
+                                                                    setTimeout("location.reload(true);", 1000);
+                                                                }
+                                                            });
+                                                        } else {
+                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Can<?php echo $task['or_id']; ?>"><i class="fa fa-times-circle"></i></button>
+                                            <div class="modal fade" id="Can<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <form action="my_task_can" method="post">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
+                                                            <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" >Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+                                    <?php elseif ($task['c_status'] == 0 && $task['status_approved'] == 0 && $task['status_check_team'] == 0) : ?>
                                         <td><button type="button" class="btn btn-danger" id="cancel_task<?php echo $or_sub; ?>"><i class="fa fa-times-circle"></i></button></td>
                                         <script type="text/javascript">
                                             $('#cancel_task<?php echo $or_sub; ?>').click(function() {
@@ -380,9 +447,9 @@
                                                 });
                                             });
                                         </script>
-                                    <?php } else { ?>
+                                    <?php else : ?>
                                         <td><button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button></td>
-                                    <?php } ?>
+                                    <?php endif; ?>
                                 </tr>
                             <?php } ?>
 

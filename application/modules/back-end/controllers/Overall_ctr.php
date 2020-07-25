@@ -47,6 +47,8 @@ class Overall_ctr extends CI_Controller
         $wage       = $this->input->post('wage');
         $teamid     = $this->input->post('teamid');
         $position   = $this->input->post('position');
+        $position   = $this->input->post('position');
+        $date_required_info   = $this->input->post('date_required_info');
 
         $this->db->where('order_id', $order_id);
         $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
@@ -62,7 +64,7 @@ class Overall_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required_info]);
 
                 $this->sendEmail_all($teamid, $order_id);
             }

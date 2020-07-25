@@ -33,6 +33,7 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/themes/dark-layout.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/themes/semi-dark-layout.css">
 
+
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/newstyle.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/forms/select/select2.min.css">
 
@@ -44,6 +45,7 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/plugins/tour/tour.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/vendors/css/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/plugins/extensions/toastr.css">
+    <link rel="stylesheet" type="text/css" href="public/backend/app-assets/css/pages/coming-soon.css">
 
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
 
