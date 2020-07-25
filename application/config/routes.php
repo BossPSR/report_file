@@ -177,6 +177,7 @@ $route['Satisfied']                                 = 'back-end/Customer_order_c
 $route['Not_Satisfied']                             = 'back-end/Customer_order_ctr/not_satisfied';
 $route['Bookmark']                                  = 'back-end/Customer_order_ctr/Bookmark';
 $route['edit_date_required_All']                    = 'back-end/Customer_order_ctr/edit_date_required_All';
+$route['rename_uploadPay']                          = 'back-end/Customer_order_ctr/rename_uploadmain';
 $route['store_section']                             = 'back-end/Store_ctr/store_section';
 $route['check_com']                                 = 'back-end/Store_ctr/check_com';
 $route['Section']                                   = 'back-end/Section_ctr';
@@ -200,6 +201,7 @@ $route['fileUpload_main']                           = 'back-end/Book_ctr/fileUpl
 $route['uploadmain_auto']                           = 'back-end/Book_ctr/uploadmain_auto';
 
 $route['Complete']                                  = 'back-end/Complete_ctr';
+$route['add_to_upload_main_search_approved']        = 'back-end/Approved_ctr/add_to_upload_main_search_approved';
 $route['add_to_upload_main_search_not_approved']    = 'back-end/Approved_ctr/add_to_upload_main_search_not_approved';
 $route['sendEmail_delivery']                        = 'back-end/Complete_ctr/sendEmail_delivery';
 $route['book_complete_add_com']                     = 'back-end/Complete_ctr/book_complete_add_com';

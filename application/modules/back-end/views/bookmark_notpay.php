@@ -70,7 +70,8 @@
                                                     <th>DM File</th>
                                                     <th>price File</th>
                                                     <th>Date Required</th>
-                                                    <th>Date Order</th>
+													<th>Date Order</th>
+													<th>Status Order</th>
                                                     <th>Status</th>
                                                     <th>tool</th>
                                                 </tr>
@@ -254,7 +255,17 @@
                                                         <td><?php echo $bookmark_all_not['date_re'] ?></td>
                                                         <td><?php echo $bookmark_all_not['upload_order_create_at'] ?></td>
 
-
+														<td>
+															<?php
+																$date_order = date('Y-m-d H:i:s' ,strtotime('+1 day',strtotime($bookmark_all_not['upload_order_create_at'])));
+																if ($date_order <= date('Y-m-d H:i:s')) {
+																	echo '<span class="badge badge-pill badge-danger">หมดเวลา</span>';
+																}else{
+																	echo '<span class="badge badge-pill badge-success">-</span>';
+																}
+																
+															?>
+														</td>
                                                         <td>
                                                             <?php if ($bookmark_all_not['status_book'] == '1' && $bookmark_all_not['Stp'] == 'complete' && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
@@ -283,7 +294,25 @@
                                                                         <div class="modal-body">
                                                                             <form action="bookmark_notpay_edit" method="POST">
                                                                                 <input type="text" value="<?php echo $bookmark_all_not['order_upload']; ?>" name="id_order" hidden>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+																				<input type="hidden" name="user_id" value="<?php echo $bookmark_all_not['user_upload']; ?>">
+																				<?php
+																					$this->db->group_by('dm_sub');
+																					$this->db->order_by('dm_sub', 'asc');
+																					$query = $this->db->get('tbl_upload_main_search_sub')->result_array();
+																					?>
+
+																					<div class="col-xl-12 col-md-6 col-12 mb-1">
+																						<div class="form-group">
+																							<label for="book">Document ID</label>
+																							<select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple" required>
+																								<option value="" disabled>--- Select DM ---</option>
+																								<?php foreach ($query as $key => $query) { ?>
+																									<option value="<?php echo $query['dm_sub']; ?>" ><?php echo $query['dm_sub']; ?></option>
+																								<?php } ?>
+																							</select>
+																						</div>
+																					</div>
+																				<div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <label for="helpInputTop">Order</label>
                                                                                         <input type="text" class="form-control" name="Order" value="<?php echo $bookmark_all_not['order_upload']; ?>" placeholder="Enter Order" readonly>
@@ -302,7 +331,19 @@
                                                                                         <input type="date" class="form-control" name="Daterequired" value="<?php echo date($bookmark_all_not['date_re']); ?>" placeholder="Enter price" required>
                                                                                     </div>
 
-                                                                                </div>
+																				</div>
+																				
+																				<div class="col-xl-12 col-md-6 col-12 mb-1">
+																					<div class="form-group">
+																						<label for="helpInputTop">Status</label>
+																						<select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
+																							<option value="" selected disabled>select</option>
+																							<option value="complete">Original</option>
+																							<option value="notcomplete">Not Complete</option>
+																							<option value="rewrite">Rewrite</option>
+																						</select>
+																					</div>
+																				</div>
 
                                                                                 <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Edit</button>
 

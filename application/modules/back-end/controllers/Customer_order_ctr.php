@@ -63,7 +63,23 @@ class Customer_order_ctr extends CI_Controller
             $data['order_notwork']  = $this->Customer_model->customer_notwork();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
             $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
-            $data['ts']         = $this->Store_model->team_select();
+			$data['ts']         = $this->Store_model->team_select();
+			
+			$checks = $this->Customer_model->customer_notwork();
+			foreach ($checks as $check) {
+				if ($check['requiredOr'] != date('Y-m-d')) {
+					if ($check['update_check'] != date('Y-m-d')) {
+						$num = $check['num_check'] + 1;
+						$updateData = [
+							'update_check' => date('Y-m-d'),
+							'num_check' => $num,
+						];
+						$this->db->where('order_id',$check['order']);
+						$this->db->update('tbl_upload_order',$updateData);
+					}
+				}
+			}
+			
             $this->load->view('options/header');
             $this->load->view('orverall_notwork', $data);
             $this->load->view('options/footer');
@@ -483,5 +499,31 @@ class Customer_order_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
+	}
+	
+	public function rename_uploadmain()
+    {
+        $resume = $this->input->post('resume');
+        $doc    = $this->input->post('doc');
+        $path   = $this->input->post('path');
+        $id     = $this->input->post('id');
+
+         rename($path,'uploads/Team/'.$resume.'.'.$doc);
+        if ($id) {
+            $update = [
+                'file_name' => $resume.'.'.$doc,
+                'path' => 'uploads/Team/'.$resume.'.'.$doc,
+            ];
+            $this->db->where('id', $id);
+            $success = $this->db->update('tbl_upload_order_team', $update);
+        }
+       
+        if ($success) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
+        }
+        return redirect('Bookmark');
+        
     }
 }

@@ -26,8 +26,20 @@ class Book_ctr extends CI_Controller
     {
         if ($this->session->userdata('email_admin') != '') {
 
-            $data['bookmark_all_not'] = $this->Store_model->bookmark_all_not();
-
+			$data['bookmark_all_not'] = $this->Store_model->bookmark_all_not();
+			$checkTime = $this->Store_model->bookmark_all_not();
+			foreach ($checkTime as $checkTime) {
+				if ($checkTime['status_pay'] == 0) {
+					
+					$date_orderUp = date('Y-m-d H:i:s' ,strtotime('+30 day',strtotime($checkTime['upload_order_create_at'])));
+					if ($date_orderUp <= date('Y-m-d')) {
+						$this->db->where('id',$checkTime['upload_order_id']);
+						$this->db->delect('tbl_upload_order');
+					}
+				
+				}
+			}
+			
             $this->load->view('options/header');
             $this->load->view('bookmark_notpay', $data);
             $this->load->view('options/footer');
@@ -38,17 +50,35 @@ class Book_ctr extends CI_Controller
 
     public function bookmark_notpay_edit()
     {
-        $id_order = $this->input->post('id_order');
-
+		$id_order = $this->input->post('id_order');
+		$user_id = $this->input->post('user_id');
+		$dm = $this->input->post('DM');
+		$status_cp = $this->input->post('status_cp');
         $data = array(
             'price_file'       => $this->input->post('price_file'),
             'date_required'    => $this->input->post('Daterequired'),
             'update_at'        => date('Y-m-d H:i:s')
         );
         $this->db->where('order_id', $id_order);
-        $resultsedit = $this->db->update('tbl_upload_order', $data);
+		$resultsedit = $this->db->update('tbl_upload_order', $data);
+		$this->db->where('id_orderBuy',$id_order);
+		$this->db->delete('tbl_bookmark');
+		foreach ($dm as $dm) {
+			$dataDM = [
+				'id_user'     => $user_id,
+				'id_orderBuy' => $id_order,
+				'id_document' => $dm,
+				'create_at'   => date('Y-m-d H:i:s'),
+			];
+			$this->db->insert('tbl_bookmark',$dataDM);
+		}
+		
+		$this->db->where('order_id',$id_order);
+		$this->db->update('tbl_upload_order',['status_cp' => $status_cp ,'update_at' => date('Y-m-d H:i:s')]);
+		
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $id_order])->result_array();
-        $this->sendEmail($upload_order);
+		$this->sendEmail($upload_order);
+		
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
