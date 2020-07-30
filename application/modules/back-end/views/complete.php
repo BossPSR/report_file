@@ -150,10 +150,91 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <table class="table zero-configuration">
+																			<div style="text-align:right;">
+                                                                                <button class="btn btn-primary" data-toggle="modal" data-target="#up_gt_file<?php echo $complete['order_id_t']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+																			</div>
+																			<!-- Modal -->
+															<div class="modal fade text-left" id="up_gt_file<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header bg-primary">
+                                                                                            <h4 class="modal-title" id="myModalLabel1">Main File</h4>
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <label for="" style="font-size: 16px;">File Document </label>
+                                                                                            <form action="complete_up_mainfile" class="dropzone dropzone-area" id="dropzone_upmainfile<?php echo $complete['order_id_t']; ?>" method="POST">
+                                                                                                
+																								<input type="hidden" name="orderST" value="<?php echo $complete['order_id_t']; ?>">
+																								<input type="hidden" name="userOR" value="<?php echo $complete['user_m']; ?>">
+                                                                                                <input type="hidden" name="St_email" value="<?php echo $complete['email_main']; ?>">
+                                                                                                <input type="hidden" name="price_file" value="<?php echo $complete['price_file']; ?>">
+                                                                                                <input type="hidden" name="price_dis_order" value="<?php echo $complete['price_dis_order']; ?>">
+                                                                                                <input type="hidden" name="score_user" value="<?php echo $complete['score_user']; ?>">
+                                                                                                <input type="hidden" name="dateREST" value="<?php echo $complete['date_required_t']; ?>">
+                                                                                                <input type="hidden" name="create_times" value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                                                                                <input type="hidden" name="status_book" value="<?php echo $complete['status_book']; ?>">
+                                                                                                <input type="hidden" name="status_admin" value="<?php echo $complete['status_admin']; ?>">
+                                                                                                <input type="hidden" name="is_check" value="<?php echo $complete['is_check']; ?>">
+                                                                                                <input type="hidden" name="note_reject" value="<?php echo $complete['note_reject']; ?>">
+                                                                                                <!-- <input type="hidden" name="is_confirm" value=""> -->
+                                                                                                <input type="hidden" name="status_pay" value="<?php echo $complete['status_pay']; ?>">
+                                                                                                <!-- <input type="hidden" name="select_item" value=""> -->
+                                                                                                <input type="hidden" name="status_approved" value="<?php echo $complete['status_approved']; ?>">
+                                                                                                <input type="hidden" name="status_confirmed_team" value="<?php echo $complete['status_confirmed_team']; ?>">
+                                                                                                <input type="hidden" name="notify_user" value="<?php echo $complete['notify_user']; ?>">
+                                                                                                <input type="hidden" name="status_cp" value="<?php echo $complete['status_cp']; ?>">
+                                                                                                <input type="hidden" name="status_delivery" value="<?php echo $complete['status_delivery']; ?>">
+                                                                                                <input type="hidden" name="notify_team" value="<?php echo $complete['notify_team']; ?>">
+                                                                                                <input type="hidden" name="notify_admin" value="<?php echo $complete['notify_admin']; ?>">
+                                                                                                <input type="hidden" name="click_step" value="<?php echo $complete['click_step']; ?>">
+                                                                                                <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-primary" id="up_main_file_save<?php echo $complete['order_id_t']; ?>">Upload File</button>
+                                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                                        </div>
+                                                                                        <script>
+                                                                                            Dropzone.autoDiscover = false;
+                                                                                            var myDropzone115<?php echo $complete['order_id_t']; ?> = new Dropzone("#dropzone_upmainfile<?php echo $complete['order_id_t']; ?>", {
+                                                                                                autoProcessQueue: false,
+                                                                                                maxFiles: 5,
+                                                                                                addRemoveLinks: true,
+                                                                                                parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                                            });
+                                                                                            document.getElementById("up_main_file_save<?php echo $complete['order_id_t']; ?>").addEventListener("click", function() {
+                                                                                                // myDropzone.processQueue();
+                                                                                                if (myDropzone115<?php echo $complete['order_id_t']; ?>.files == 0) {
+                                                                                                    swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                                        button: true,
+                                                                                                    });
+                                                                                                } else {
+
+                                                                                                    myDropzone115<?php echo $complete['order_id_t']; ?>.processQueue();
+                                                                                                    myDropzone115<?php echo $complete['order_id_t']; ?>.on("queuecomplete", function(file, res) {
+                                                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                            button: true,
+                                                                                                        });
+                                                                                                        $("#here<?php echo $complete['order_id_t']; ?>").load(window.location.href + " #here<?php echo $complete['order_id_t']; ?>");
+                                                                                                        $('#up_gt_file<?php echo $complete['order_id_t']; ?>').modal('hide');
+                                                                                                    });
+                                                                                                }
+                                                                                            });
+                                                                                        </script>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+																			
+																			
+                                                                            <table class="table zero-configuration" id="here<?php echo $complete['order_id_t']; ?>">
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $complete['order_id']])->result_array(); ?>
                                                                                     <tr>
+																						<th>Status</th>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
                                                                                         <th>File</th>
@@ -163,6 +244,14 @@
                                                                                 <tbody>
                                                                                     <?php foreach ($order as $keys => $order) { ?>
                                                                                         <tr>
+																							<td>
+																								<?php 
+																								if ($order['status_upload_admin'] == 1) {
+																									echo '<span class="badge badge-danger">Admin</span>';
+																								}else{
+																									echo '-';
+																								}
+																							?></td>
                                                                                             <td><?php echo $order['order_id'] ?></td>
                                                                                             <td><?php echo $order['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
@@ -179,7 +268,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+															</div>
+															
                                                         </td>
                                                         <td>
                                                             <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $complete['order_id']])->result_array(); ?>
@@ -195,10 +285,83 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <table class="table zero-configuration">
+																				<div style="text-align:right;">
+																					<button class="btn btn-primary" data-toggle="modal" data-target="#up_gt_file_gt<?php echo $complete['order_id_t']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+																				</div>
+																				<!-- Modal -->
+															<div class="modal fade text-left" id="up_gt_file_gt<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header bg-primary">
+                                                                                            <h4 class="modal-title" id="myModalLabel1">Main File</h4>
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <label for="" style="font-size: 16px;">File Document </label>
+                                                                                            <form action="complete_up_mainfile_gt_main" class="dropzone dropzone-area" id="dropzone_upgtfile<?php echo $complete['order_id_t']; ?>" method="POST">
+                                                                                                
+																								<input type="hidden" name="orderST" value="<?php echo $complete['order_id_t']; ?>">
+                                                                                                <input type="hidden" name="userOR" value="<?php echo $complete['user_m']; ?>">
+                                                                                                <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-primary" id="up_main_file_save_gt<?php echo $complete['order_id_t']; ?>">Upload File</button>
+                                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                                        </div>
+                                                                                        <script>
+                                                                                                Dropzone.autoDiscover = false;
+                                                                                                var myDropzone113<?php echo $complete['order_id_t']; ?> = new Dropzone("#dropzone_upgtfile<?php echo $complete['order_id_t']; ?>", {
+                                                                                                    autoProcessQueue: false,
+                                                                                                    maxFiles: 5,
+                                                                                                    addRemoveLinks: true,
+                                                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                                                });
+                                                                                                document.getElementById("up_main_file_save_gt<?php echo $complete['order_id_t']; ?>").addEventListener("click", function() {
+                                                                                                    // myDropzone.processQueue();
+                                                                                                    if (myDropzone113<?php echo $complete['order_id_t']; ?>.files == 0) {
+                                                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                                            button: true,
+                                                                                                        });
+                                                                                                    } else {
+                                                                                                        var orderST = $('#order_id_t').val();
+                                                                                                        var userOR = $('#userOR').val();
+
+                                                                                                        console.log(orderST, userOR);
+                                                                                                        $.ajax({
+                                                                                                            url: "complete_up_mainfile_gt",
+                                                                                                            type: "POST",
+                                                                                                            data: {
+                                                                                                                orderST: orderST,
+                                                                                                                userOR: userOR,
+                                                                                                            },
+                                                                                                            success: function(success) {
+                                                                                                                if (success) {
+                                                                                                                    myDropzone113<?php echo $complete['order_id_t']; ?>.processQueue();
+                                                                                                                    myDropzone113<?php echo $complete['order_id_t']; ?>.on("queuecomplete", function(file, res) {
+                                                                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                            button: true,
+                                                                                                                        });
+                                                                                                                        $("#here_gt<?php echo $complete['order_id_t']; ?>").load(window.location.href + " #here_gt<?php echo $complete['order_id_t']; ?>");
+                                                                                                                        $('#up_gt_file_gt<?php echo $complete['order_id_t']; ?>').modal('hide');
+                                                                                                                    });
+                                                                                                                }
+                                                                                                            },
+                                                                                                        });
+
+                                                                                                    }
+                                                                                                });
+                                                                                            </script>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                                <table class="table zero-configuration" id="here_gt<?php echo $complete['order_id_t']; ?>">
                                                                                     <thead>
 
                                                                                         <tr>
+																							<th>Status</th>
                                                                                             <th>Order_id</th>
                                                                                             <th>File_name</th>
                                                                                             <th>File</th>
@@ -208,6 +371,7 @@
                                                                                     <tbody>
                                                                                         <?php foreach ($order as $keys => $order) { ?>
                                                                                             <tr>
+																								<td></td>
                                                                                                 <td><?php echo $order['order_id'] ?></td>
                                                                                                 <td><?php echo $order['file_name_GT'] ?></td>
                                                                                                 <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
