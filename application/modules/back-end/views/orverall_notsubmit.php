@@ -178,7 +178,7 @@
                                                     <th>Delivery</th>
                                                     <th>Status Team</th>
                                                     <th>Status</th>
-                                                    <th>Tool</th>
+                                                    <th style="width: 12%;">Tool</th>
                                                 </tr>
                                             </thead>
 
@@ -187,7 +187,7 @@
                                                 $i = 1;
                                                 foreach ($order_notsum as $id => $stores) {
                                                 ?> <?php if ($stores['statusC'] == '1') : ?>
-                                                        <tr style="background-color: #ecd7d7;">
+                                                        <tr style="background-color: #ffebebd4;">
                                                         <?php else : ?>
                                                         <tr>
                                                         <?php endif; ?>
@@ -204,13 +204,12 @@
                                                                 <div id="clock-b<?php echo $stores['requiredOr']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-
                                                                         $('#clock-b<?php echo $stores['requiredOr']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
-                                                                                '<div ><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div ><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div ><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
                                                                         });
 
                                                                     });
@@ -317,7 +316,7 @@
                                                         <td>
                                                             <?php if ($stores['statusC'] == '1') : ?>
 
-                                                                <span class="badge badge-pill badge-danger"><?php echo $stores['status_who']; ?></span> <a href="" data-toggle="modal" data-target="#note<?php echo $stores['order']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></a>
+                                                                <span class="badge badge-pill badge-danger"><?php echo $stores['status_who']; ?> <a href="" data-toggle="modal" data-target="#note<?php echo $stores['order']; ?>"> &nbsp; <i class="feather icon-file-text" style="font-size: 25px;"></i></a></span> 
                                                                 <div class="modal fade" id="note<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_info_over_ns" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -363,6 +362,8 @@
                                                                 echo '<span class="badge badge-pill badge-danger">Waiting for team</span>';
                                                                 echo '<br>';
                                                                 echo '<span class="badge badge-pill badge-danger">' . $cancel['history'] . '</span>';
+                                                            }else{
+                                                               echo '-' ;
                                                             }
 
                                                             ?>

@@ -94,7 +94,6 @@
                                                     <th>Step</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
-                                                    <!-- <th>Email</th> -->
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>Info</th>
@@ -125,14 +124,7 @@
                                                             </td>
                                                             <td> <?php echo $stores['order']; ?></td>
                                                             <td><?php echo $stores['userId']; ?></td>
-                                                            <!-- <td>
-                                                                <?php if ($stores['emailOt'] == '') : ?>
-                                                                    -
-                                                                <?php else : ?>
-                                                                    <?php echo $stores['emailOt']; ?>
-                                                                <?php endif; ?>
-
-                                                            </td> -->
+                                                          
                                                             <td><?php echo $stores['createOr']; ?></td>
                                                             <td><?php echo $stores['requiredOr']; ?></td>
                                                             <td>
@@ -264,7 +256,7 @@
                                                                 <?php endif ?>
 
 															</td>
-															<td>
+															<!-- <td>
 																<?php
 																	$date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
 																	$date_required = ceil($date_required) + 1;
@@ -283,7 +275,7 @@
 																	
 																	}
 																?>
-															</td>
+															</td> -->
 															<td align="center">
 																<?php
 																if ($stores['status_check_team'] == 1) {
