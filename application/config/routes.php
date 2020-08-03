@@ -93,8 +93,8 @@ $route['My-stock-Item']             = 'front-end/My_stock_ctr/my_stock_item';
 $route['My-stock']                  = 'front-end/My_stock_ctr/my_stock';
 $route['order_isconfirm']           = 'front-end/My_stock_ctr/order_isconfirm';
 $route['My-task']                   = 'front-end/My_stock_ctr/my_task';
-$route['my_task_app']                   = 'front-end/My_stock_ctr/my_task_app';
-$route['my_task_can']                   = 'front-end/My_stock_ctr/my_task_can';
+$route['my_task_app']               = 'front-end/My_stock_ctr/my_task_app';
+$route['my_task_can']               = 'front-end/My_stock_ctr/my_task_can';
 $route['My-task-cancel']            = 'front-end/My_stock_ctr/my_task_cancel';
 $route['My-task-withdraw']          = 'front-end/My_stock_ctr/my_task_withdraw';
 $route['My-stock-item-add']         = 'front-end/My_stock_ctr/my_stock_item_add';
@@ -119,7 +119,7 @@ $route['teamOnline']                = 'front-end/Login_ctr/teamOnline';
 $route['teamOffline']               = 'front-end/Login_ctr/teamOffline';
 
 $route['my_store_team']             = 'front-end/My_history_ctr/my_store_team';
-$route['my_income']                  = 'front-end/My_history_ctr/my_income';
+$route['my_income']                 = 'front-end/My_history_ctr/my_income';
 
 
 // /------------------------------------- back-end  ---------------------
@@ -210,7 +210,7 @@ $route['sendEmail_delivery']                        = 'back-end/Complete_ctr/sen
 $route['book_complete_add_com']                     = 'back-end/Complete_ctr/book_complete_add_com';
 $route['Add_feedback']                              = 'back-end/Complete_ctr/add_feedback';
 $route['fileUpload_feedback']                       = 'back-end/Complete_ctr/fileUpload_feedback';
-$route['complete_up_mainfile']                      = 'back-end/Complete_ctr/complete_up_mainfile';
+$route['complete_up_teamfile']                      = 'back-end/Complete_ctr/complete_up_teamfile';
 $route['complete_up_mainfile_gt']                   = 'back-end/Complete_ctr/complete_up_mainfile_gt';
 $route['complete_up_mainfile_gt_main']              = 'back-end/Complete_ctr/complete_up_mainfile_gt_main';
 $route['back_poster']                               = 'back-end/Poster_ctr';
@@ -258,7 +258,7 @@ $route['send_feedbacktion']                         = 'back-end/Feedback_ctr/sen
 $route['delete_feedbacktion']                       = 'back-end/Feedback_ctr/delete_feedbacktion';
 $route['realtime_data']                             = 'back-end/Home_ctr/realtime_data';
 $route['withdraw_realtime']                         = 'back-end/Withdraw_ctr/withdraw_realtime';
-$route['back_withdraw_team_slip']                    = 'back-end/Withdraw_ctr/back_withdraw_team_slip';
+$route['back_withdraw_team_slip']                   = 'back-end/Withdraw_ctr/back_withdraw_team_slip';
 $route['upload_back_withdraw_team_slip']            = 'back-end/Withdraw_ctr/upload_back_withdraw_team_slip';
 $route['withdraw_realtime_data']                    = 'back-end/Withdraw_ctr/withdraw_realtime_data';
 $route['withdraw_history']                          = 'back-end/Withdraw_ctr/withdraw_history';
@@ -295,33 +295,35 @@ $route['edit_info_stockadmin']                      = 'back-end/Customer_order_c
 $route['edit_wage_stockadmin']                      = 'back-end/Customer_order_ctr/edit_wage_stockadmin';
 $route['status_reject_forbey']                      = 'back-end/Store_ctr/status_reject_forbey';
 
-$route['checkStatus_admin']                           = 'back-end/Login_ctr/checkStatus_admin';
-$route['refresh_nw']                                   = 'back-end/Customer_order_ctr/refresh_nw';
-$route['refresh_ns']                                   = 'back-end/Customer_order_ctr/refresh_ns';
+$route['checkStatus_admin']                         = 'back-end/Login_ctr/checkStatus_admin';
+$route['refresh_nw']                                = 'back-end/Customer_order_ctr/refresh_nw';
+$route['refresh_ns']                                = 'back-end/Customer_order_ctr/refresh_ns';
 $route['click_step']                                = 'back-end/Customer_order_ctr/click_step';
 $route['checkStatus_admin_admin']                   = 'back-end/Login_ctr/checkStatus_admin_admin';
-$route['checkStatusAdmin']                           = 'back-end/Login_ctr/checkStatusAdmin';
+$route['checkStatusAdmin']                          = 'back-end/Login_ctr/checkStatusAdmin';
 
 $route['add_team_informal']                   		= 'back-end/Informal_ctr/add_team_informal';
 $route['update_team_informal']                      = 'back-end/Informal_ctr/update_team_informal';
 $route['fileUpload_t3_not_summit']                  = 'back-end/Informal_ctr/fileUpload_t3_not_summit';
-$route['sendEmail_delivery_not_summit']                  = 'back-end/Informal_ctr/sendEmail_delivery_not_summit';
+$route['sendEmail_delivery_not_summit']             = 'back-end/Informal_ctr/sendEmail_delivery_not_summit';
 $route['add_score']                   		        = 'back-end/User_ctr/add_score';
 $route['deduct_score']                   		    = 'back-end/User_ctr/deduct_score';
 $route['cash_score']                   		        = 'back-end/User_ctr/cash_score';
 $route['deduct_cash_score']                   	    = 'back-end/User_ctr/deduct_cash_score';
 
-$route['deduct_income']                               = 'back-end/Team_ctr/deduct_income';
-$route['add_score_team']                               = 'back-end/Team_ctr/add_score_team';
-$route['deduct_score_team']                           = 'back-end/Team_ctr/deduct_score_team';
+$route['deduct_income']                             = 'back-end/Team_ctr/deduct_income';
+$route['add_score_team']                            = 'back-end/Team_ctr/add_score_team';
+$route['deduct_score_team']                         = 'back-end/Team_ctr/deduct_score_team';
 
-$route['send_not_work']                               = 'back-end/Overall_ctr/send_not_work';
+$route['send_not_work']                             = 'back-end/Overall_ctr/send_not_work';
 $route['edit_info_over']                            = 'back-end/Overall_ctr/edit_info_over';
 $route['edit_info_over_ns']                         = 'back-end/Overall_ctr/edit_info_over_ns';
 $route['delete_order_nw']                           = 'back-end/Overall_ctr/delete_order_nw';
 $route['delete_order_ns']                           = 'back-end/Overall_ctr/delete_order_ns';
 $route['send_not_submit']                           = 'back-end/Overall_ctr/send_not_submit';
 
-$route['rename_uploadmain']                           = 'back-end/Store_ctr/rename_uploadmain';
+$route['rename_uploadmain']                         = 'back-end/Store_ctr/rename_uploadmain';
 $route['rename_filename']                           = 'back-end/Customer_order_ctr/rename_filename';
-$route['rename_filenameGT']                           = 'back-end/Customer_order_ctr/rename_filenameGT';
+$route['rename_filenameGT']                         = 'back-end/Customer_order_ctr/rename_filenameGT';
+$route['rename_filename_TM']                        = 'back-end/Complete_ctr/rename_filename_TM';
+

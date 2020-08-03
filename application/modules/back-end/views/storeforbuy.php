@@ -259,6 +259,25 @@
                                                         <td><?php echo $stored['create_at']; ?></td>
                                                         <td>
                                                             <input type="date" class="form-control dateread<?php echo $stored['order_id']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $stored['date_required']; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                            <br>
+                                                            <?php if (date("Y-m-d") >= $stored['date_required']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
+                                                            <?php else : ?>
+                                                                <?php $dateReq = date('Y/m/d', strtotime($stored['date_required'])); ?>
+                                                                <div id="clock-b<?php echo $stored['order_id']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $stored['order_id']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
+
+                                                                    });
+                                                                </script>
+                                                            <?php endif; ?>
                                                         </td>
                                                         <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['order_id']; ?>">
                                                                 Satisfired
@@ -313,8 +332,32 @@
                                                                                 <select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple" required>
                                                                                     <option value="" disabled>--- Select DM ---</option>
                                                                                     <?php foreach ($query as $key => $query) { ?>
-                                                                                        <option value="<?php echo $query['dm_sub']; ?>" ><?php echo $query['dm_sub']; ?></option>
+                                                                                        <option value="<?php echo $query['dm_sub']; ?>"><?php echo $query['dm_sub']; ?></option>
                                                                                     <?php } ?>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Status</label>
+                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <option value="complete">Original</option>
+                                                                                    <option value="notcomplete">Not Complete</option>
+                                                                                    <option value="rewrite">Rewrite</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Organization</label>
+                                                                                <select name="organization" class="form-control" id="organization">
+                                                                                    <option value="A">A</option>
+                                                                                    <option value="B">B</option>
+                                                                                    <option value="C">C</option>
+                                                                                    <option value="D">D</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -349,17 +392,7 @@
 
                                                                         </div>
 
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Status</label>
-                                                                                <select name="status_cp" class="form-control" id="status_cp<?php echo $stored['order_id']; ?>" required>
-                                                                                    <option value="" selected disabled>select</option>
-                                                                                    <option value="complete">Original</option>
-                                                                                    <option value="notcomplete">Not Complete</option>
-                                                                                    <option value="rewrite">Rewrite</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+
 
                                                                         <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
@@ -405,12 +438,7 @@
                                                                                 </select>
                                                                             </div>
                                                                         </div> -->
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Note</label>
-                                                                                <textarea class="form-control" name="note_s" id="note_s<?php echo $stored['order_id']; ?>" value="<?php echo $stored['date_required']; ?>" rows="5" placeholder="Enter Note"></textarea>
-                                                                            </div>
-                                                                        </div>
+
                                                                     </div>
                                                                     <div class="modal-footer">
 

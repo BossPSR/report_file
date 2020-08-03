@@ -50,19 +50,23 @@ class Book_ctr extends CI_Controller
 
     public function bookmark_notpay_edit()
     {
-		$id_order = $this->input->post('id_order');
-		$user_id = $this->input->post('user_id');
-		$dm = $this->input->post('DM');
-		$status_cp = $this->input->post('status_cp');
+		$id_order   = $this->input->post('id_order');
+		$user_id    = $this->input->post('user_id');
+		$dm         = $this->input->post('DM');
+        $status_cp  = $this->input->post('status_cp');
+        
         $data = array(
             'price_file'       => $this->input->post('price_file'),
             'date_required'    => $this->input->post('Daterequired'),
+            'create_at'        => date('Y-m-d H:i:s'),
             'update_at'        => date('Y-m-d H:i:s')
         );
         $this->db->where('order_id', $id_order);
-		$resultsedit = $this->db->update('tbl_upload_order', $data);
+        $resultsedit = $this->db->update('tbl_upload_order', $data);
+        
 		$this->db->where('id_orderBuy',$id_order);
-		$this->db->delete('tbl_bookmark');
+        $this->db->delete('tbl_bookmark');
+        
 		foreach ($dm as $dm) {
 			$dataDM = [
 				'id_user'     => $user_id,
@@ -161,7 +165,7 @@ class Book_ctr extends CI_Controller
 
         $message .= '<tr>';
         $message .= '<td>';
-        $message .= ' Order ID : ';
+        $message .= ' Date required : ';
         $message .= '</td>';
         $message .= '<td>';
         $message .= ' ' . $upload_order[0]['date_required'] . ' ';

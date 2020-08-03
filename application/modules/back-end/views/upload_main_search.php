@@ -150,15 +150,15 @@
                                                                                                                         <span aria-hidden="true">&times;</span>
                                                                                                                     </button>
                                                                                                                 </div>
-                                                                                                                <div class="modal-body row" >
-                                                                                                                    <?php $exp = explode(".",$store['file_name']) ; ?>
+                                                                                                                <div class="modal-body row">
+                                                                                                                    <?php $exp = explode(".", $store['file_name']); ?>
                                                                                                                     <div class="col-xl-12 col-md-12 col-12 ">
                                                                                                                         <div class="form-group" style="text-align: left;">
                                                                                                                             <label for="Team">Rename</label>
-                                                                                                                            <input type="text" class="form-control"   value="<?php echo $exp[0] ?>" name="resume">
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['path'] ?>" name="path" >
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $exp[1] ?>" name="doc" >
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['id']; ?>" name="id" >
+                                                                                                                            <input type="text" class="form-control" value="<?php echo $exp[0] ?>" name="resume">
+                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['path'] ?>" name="path">
+                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $exp[1] ?>" name="doc">
+                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['id']; ?>" name="id">
                                                                                                                         </div>
                                                                                                                     </div>
 
@@ -421,8 +421,20 @@
 
                                 <div class="form-group">
                                     <div class="controls">
+                                        <label for="Organization">Organization</label>
+                                        <select name="organization" class="form-control" id="organization" >
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="controls">
                                         <label for="data-name">CP/NCP</label>
-                                        <select name="complete" class="form-control" id="complete">
+                                        <select name="complete" class="form-control" id="complete" >
                                             <option value="complete">Complete</option>
                                             <option value="notcomplete">Not Complete</option>
                                         </select>
@@ -502,10 +514,11 @@
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
 
-        var v = document.getElementById("complete").value;
-        var x = document.getElementById("select-testing").value;
+        var oz  = document.getElementById("organization").value;
+        var v   = document.getElementById("complete").value;
+        var x   = document.getElementById("select-testing").value;
         // var y = document.getElementById("search_item").value;
-        var code = document.getElementById("code").value;
+        var code  = document.getElementById("code").value;
         var topic = document.getElementById("topic").value;
 
         if (myDropzoneS.files == 0) {
@@ -513,7 +526,10 @@
                 button: true,
             });
         } else {
-
+            
+            if (oz == '') {
+                swal("Cancelled", "Please fill in information Complete :)", "error");
+            }
             if (v == '') {
                 swal("Cancelled", "Please fill in information Complete :)", "error");
             }
@@ -535,7 +551,7 @@
             }
 
 
-            if (x != '' && y != '' && v != '' && code != '' && topic != '') {
+            if (x != '' && y != '' && v != '' && code != '' && topic != '' && oz != '' ) {
 
                 $.ajax({
                     type: 'POST',
@@ -550,6 +566,7 @@
                                 type: 'POST',
                                 url: 'upload_main_searc_ouject',
                                 data: {
+                                    organization: oz,
                                     com: v,
                                     select: x,
                                     code: code,

@@ -93,13 +93,14 @@ class Store_ctr extends CI_Controller
 
     public function check_order_add_com()
     {
-        $id         = $this->input->post('id');
-        $orderid    = $this->input->post('Order');
-        $Document   = $this->input->post('DM');
-        $team       = $this->input->post('team');
-        $wage       = $this->input->post('wage');
-        $Position   = $this->input->post('Position');
-        $note_s   = $this->input->post('note_s');
+        $id             = $this->input->post('id');
+        $orderid        = $this->input->post('Order');
+        $Document       = $this->input->post('DM');
+        $team           = $this->input->post('team');
+        $wage           = $this->input->post('wage');
+        $Position       = $this->input->post('Position');
+        $note_s         = $this->input->post('note_s');
+        $organization   = $this->input->post('organization');
         if ($team) {
             $cf = '1';
         } else {
@@ -114,7 +115,7 @@ class Store_ctr extends CI_Controller
             'price_file'            => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
             'status_book'           => 1,
-            'note'                  => $note_s,
+            'organization'          => $organization,
             'update_at'             => date('Y-m-d H:i:s'),
             'notify_user'           => 0,
             'status_cp'             => $this->input->post('status_cp'),
@@ -827,7 +828,7 @@ class Store_ctr extends CI_Controller
             $store_id       = $this->input->post('store_id');
             $user_id        = $this->input->post('userId');
             $select_item_id = $this->input->post('select_item_id');
-            // $search_item    = $this->input->post('search_item');
+            $organization   = $this->input->post('organization');
             $code           = $this->input->post('code');
             $topic          = $this->input->post('topic');
             $section        = $this->input->post('section');
@@ -868,14 +869,16 @@ class Store_ctr extends CI_Controller
                     $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
                 }
             } else {
+                
                 $data = [
-                    'userId'            => $user_id,
-                    'select_item_id'    => $select_item_id,
-                    'select_item'       => $select_item['name_item'],
-                    'code'              => $code,
-                    'topic'             => $topic,
-                    'section'           => $section,
-                    'create_at'         => date('Y-m-d H:i:s'),
+                    'userId'                => $user_id,
+                    'select_item_id'        => $select_item_id,
+                    'select_item'           => $select_item['name_item'],
+                    'code'                  => $code,
+                    'topic'                 => $topic,
+                    'section'               => $section,
+                    'organization_upload'   => $organization,
+                    'create_at'             => date('Y-m-d H:i:s'),
                 ];
                 $success = $this->db->insert('tbl_upload_main_search', $data);
                 $id = $this->db->insert_id();
@@ -916,29 +919,30 @@ class Store_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') == '') {
             redirect('backend');
         } else {
-            $com         = $this->input->post('com');
-            $select      = $this->input->post('select');
-            // $search     = $this->input->post('search');
-            $code        = $this->input->post('code');
-            $topic       = $this->input->post('topic');
-            $emailadmin  = $this->session->userdata('email_admin');
-            $e           = $this->Store_model->admin_id($emailadmin);
+            $com            = $this->input->post('com');
+            $select         = $this->input->post('select');
+            $organization   = $this->input->post('organization');
+            $code           = $this->input->post('code');
+            $topic          = $this->input->post('topic');
+            $emailadmin     = $this->session->userdata('email_admin');
+            $e              = $this->Store_model->admin_id($emailadmin);
 
-            $select_item = $this->db->get_where('tbl_select_item', ['id' => $select])->row_array();
-            $buymax      = $this->db->order_by('id', 'DESC')->get('tbl_order_s')->row();
-            $dm          = $this->db->order_by('id', 'DESC')->get('tbl_upload_main_search')->row();
-            $dmplus      = $dm->id + 1;
+            $select_item    = $this->db->get_where('tbl_select_item', ['id' => $select])->row_array();
+            $buymax         = $this->db->order_by('id', 'DESC')->get('tbl_order_s')->row();
+            $dm             = $this->db->order_by('id', 'DESC')->get('tbl_upload_main_search')->row();
+            $dmplus         = $dm->id + 1;
             if (!empty($select_item)) {
                 $data = [
-                    'userId' => $e['adminId'],
-                    'id_doc' => 'DM' . $dmplus,
-                    'select_item_id' => $select,
-                    'select_item' => $select_item['name_item'],
-                    'code' => $code,
-                    'topic' => $topic,
-                    'upload_store_id' => $buymax->order_main,
-                    'create_at' => date('Y-m-d H:i:s'),
-                    'update_at' => date('Y-m-d H:i:s'),
+                    'userId'                => $e['adminId'],
+                    'id_doc'                => 'DM' . $dmplus,
+                    'select_item_id'        => $select,
+                    'select_item'           => $select_item['name_item'],
+                    'code'                  => $code,
+                    'topic'                 => $topic,
+                    'upload_store_id'       => $buymax->order_main,
+                    'create_at'             => date('Y-m-d H:i:s'),
+                    'update_at'             => date('Y-m-d H:i:s'),
+                    'organization_upload'   => $organization,
                 ];
                 $success = $this->db->insert('tbl_upload_main_search', $data);
                 echo $success;

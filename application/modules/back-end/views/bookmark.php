@@ -156,7 +156,7 @@
                                                         <td><?php echo $bookmark['orderby'] ?></td>
                                                         <td><?php echo $bookmark['user_name'] ?></td>
                                                         <td>
-                                                            <?php echo $bookmark['countryName'] == '' ? '-' : $bookmark['countryName'] ; ?>
+                                                            <?php echo $bookmark['countryName'] == '' ? '-' : $bookmark['countryName']; ?>
                                                         </td>
                                                         <td>
                                                             <?php if (empty($bookmark['id_document'])) : ?>
@@ -375,39 +375,39 @@
                                                                                                     <?php endif ?>
                                                                                                 </td>
                                                                                                 <td><?php echo $orderss['order_id'] ?></td>
-																								<td><?php echo $orderss['file_name'] ?>  <a href="" data-toggle="modal" data-target="#dms<?php echo $orderss['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-																								<div class="modal fade" id="dms<?php echo $orderss['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                                                    <form action="rename_uploadPay" method="POST">
-                                                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                                                <td><?php echo $orderss['file_name'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $orderss['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                    <div class="modal fade" id="dms<?php echo $orderss['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                                                        <form action="rename_uploadPay" method="POST">
+                                                                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
 
-                                                                                                            <div class="modal-content">
-                                                                                                                <div class="modal-header">
-                                                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Rename (<?php echo $orderss['order_id']; ?>)</h5>
-                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                                                    </button>
-                                                                                                                </div>
-                                                                                                                <div class="modal-body row" >
-                                                                                                                    <?php $exp = explode(".",$orderss['file_name']) ; ?>
-                                                                                                                    <div class="col-xl-12 col-md-12 col-12 ">
-                                                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                                                            <label for="Team">Rename</label>
-                                                                                                                            <input type="text" class="form-control"   value="<?php echo $exp[0] ?>" name="resume">
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $orderss['path'] ?>" name="path" >
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $exp[1] ?>" name="doc" >
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $orderss['id']; ?>" name="id" >
-                                                                                                                        </div>
+                                                                                                                <div class="modal-content">
+                                                                                                                    <div class="modal-header">
+                                                                                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Rename (<?php echo $orderss['order_id']; ?>)</h5>
+                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                                                        </button>
                                                                                                                     </div>
+                                                                                                                    <div class="modal-body row">
+                                                                                                                        <?php $exp = explode(".", $orderss['file_name']); ?>
+                                                                                                                        <div class="col-xl-12 col-md-12 col-12 ">
+                                                                                                                            <div class="form-group" style="text-align: left;">
+                                                                                                                                <label for="Team">Rename</label>
+                                                                                                                                <input type="text" class="form-control" value="<?php echo $exp[0] ?>" name="resume">
+                                                                                                                                <input type="hidden" class="form-control" value="<?php echo $orderss['path'] ?>" name="path">
+                                                                                                                                <input type="hidden" class="form-control" value="<?php echo $exp[1] ?>" name="doc">
+                                                                                                                                <input type="hidden" class="form-control" value="<?php echo $orderss['id']; ?>" name="id">
+                                                                                                                            </div>
+                                                                                                                        </div>
 
-                                                                                                                </div>
-                                                                                                                <div class="modal-footer">
-                                                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                                                    </div>
+                                                                                                                    <div class="modal-footer">
+                                                                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                                                    </div>
                                                                                                                 </div>
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                    </form>
-                                                                                                </div>
-																								</td>
+                                                                                                        </form>
+                                                                                                    </div>
+                                                                                                </td>
                                                                                                 <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $orderss['create_at'] ?></td>
 
@@ -430,7 +430,26 @@
                                                             <?php endif; ?>
 
                                                         </td>
-                                                        <td><?php echo $bookmark['date_re'] ?></td>
+                                                        <td>
+                                                            <?php if (date("Y-m-d") >= $bookmark['date_re']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
+                                                            <?php else : ?>
+                                                                <?php $dateReq = date('Y/m/d', strtotime($bookmark['date_re'])); ?>
+                                                                <div id="clock-b<?php echo $bookmark['orderby']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $bookmark['orderby']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
+
+                                                                    });
+                                                                </script>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td><?php echo $bookmark['price_save'] ?></td>
                                                         <td>
                                                             <?php if ($bookmark['wageT']) { ?>

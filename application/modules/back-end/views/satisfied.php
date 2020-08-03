@@ -374,7 +374,10 @@
                                                                                             <tr>
                                                                                                 <td><?php echo $orderGT['order_id'] ?></td>
                                                                                                 <td>
-                                                                                                    <?php echo $orderGT['file_name_GT'] ?> <a href="" data-toggle="modal" data-target="#dmsGT<?php echo $orderGT['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                    <?php echo $orderGT['file_name_GT'] ?>
+                                                                                                    <a href="" data-toggle="modal" data-target="#dmsGT<?php echo $orderGT['id']; ?>">
+                                                                                                        <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                    </a>
                                                                                                     <!-- Modal -->
                                                                                                     <div class="modal fade text-left" id="dmsGT<?php echo $orderGT['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                                         <div class="modal-dialog modal-dialog-scrollable" role="document">

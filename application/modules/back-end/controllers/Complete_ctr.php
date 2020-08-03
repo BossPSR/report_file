@@ -31,12 +31,12 @@ class Complete_ctr extends CI_Controller
         $id = $this->input->get('id');
         $data = array(
 
-            'id_orderBuy'   => $id,
-            'id_user'       => $this->input->get('userid'),
-            'create_at'     => date('Y-m-d H:i:s')
+            'status_bookmark'   => '1',
+            'update_at'         => date('Y-m-d H:i:s')
 
         );
-        $resultsedit = $this->db->insert('tbl_bookmark', $data);
+        $this->db->where('order_id', $id);
+        $resultsedit = $this->db->update('tbl_upload_order', $data);
 
 
         if ($resultsedit > 0) {
@@ -290,41 +290,19 @@ class Complete_ctr extends CI_Controller
         }
 
         return redirect('Complete');
-	}
-	
-	public function complete_up_mainfile()
+    }
+
+    public function complete_up_teamfile()
     {
         if ($this->session->userdata('email_admin') != '') {
-            $orderST                = $this->input->post('orderST');
-			$userOR                 = $this->input->post('userOR');
-            $User_St                = $this->input->post('User_St');
-            $St_email               = $this->input->post('St_email');
-            $price_file             = $this->input->post('price_file');
-            $price_dis_order        = $this->input->post('price_dis_order');
-            $score_user             = $this->input->post('score_user');
-            $dateREST               = $this->input->post('dateREST');
-            $create_times           = $this->input->post('create_times');
-            $status_book            = $this->input->post('status_book');
-            $status_admin           = $this->input->post('status_admin');
-            $is_check               = $this->input->post('is_check');
-            $note_reject            = $this->input->post('note_reject');
-            // $is_confirm             = $this->input->post('is_confirm');
-            $status_pay             = $this->input->post('status_pay');
-         
-            $status_approved        = $this->input->post('status_approved');
-            $notify_user            = $this->input->post('notify_user');
-            $status_confirmed_team  = $this->input->post('status_confirmed_team');
-            $status_cp              = $this->input->post('status_cp');
-            $status_delivery        = $this->input->post('status_delivery');
-            $notify_team            = $this->input->post('notify_team');
-            $notify_admin           = $this->input->post('notify_admin');
-            $click_step             = $this->input->post('click_step');
+            $order = $this->input->post('order');
+            $order_db = $this->db->get_where('tbl_upload_order_team', ['order_id' => $order])->row_array();
 
-            $target_dir = "uploads/Buy/"; // Upload directory
+            $target_dir = "uploads/Team/"; // Upload directory
             if (!empty($_FILES['file']['name'])) {
 
                 // Set preference
-                $config['upload_path']     = 'uploads/Buy/';
+                $config['upload_path']     = 'uploads/Team/';
                 // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
                 $config['allowed_types']   = '*';
                 $config['max_size']        = '99999'; // max_size in kb
@@ -339,45 +317,24 @@ class Complete_ctr extends CI_Controller
                     $uploadData = $this->upload->data();
 
                     $data = array(
-                        'order_id'          => $orderST,
-						'userId'            => $userOR,
-                        'Username'          => $User_St,
-                        'email'             => $St_email,
-                        'price_file'        => $price_file,
-                        'price_dis_order'   => $price_dis_order,
-                        'score_user'        => $score_user,
-                        'date_required'     => $dateREST,
-                        'status_book'       => $status_book,
-                        'status_admin'      => $status_admin,
-                        'is_check'          => $is_check,
-                        'note_reject'       => $note_reject,
-                        // 'is_confirm'        => $is_confirm,
-                        'status_pay'        => $status_pay,
-                        
-                        'status_approved'   => $status_approved,
-                        'notify_user'       => $notify_user,
-                        'status_confirmed_team' => $status_confirmed_team,
-                        'status_cp'         => $status_cp,
-                        'status_delivery'   => $status_delivery,
-                        'notify_team'       => $notify_team,
-                        'notify_admin'      => $notify_admin,
-                        'click_step'        => $click_step,
-                        'file_name'         => $uploadData['file_name'],
-                        'path'              => 'uploads/Buy/' . $uploadData['file_name'],
-                        'create_at'         => date('Y-m-d H:i:s'),
-                        'status_upload_admin'   => 1 // admin
+                        'teamId'                    => $order_db['teamId'],
+                        'order_id'                  => $order,
+                        'file_name'                 => $uploadData['file_name'],
+                        'path'                      => 'uploads/Team/' . $uploadData['file_name'],
+                        'create_at'                 => date('Y-m-d H:i:s'),
+                        'status_upload_admin_cp'    => '1' // admin
                     );
-                    $this->db->insert('tbl_upload_order', $data);
+                    $this->db->insert('tbl_upload_order_team', $data);
                 }
             }
         } else {
             redirect('Login_admin');
         }
-	}
-	
-	public function complete_up_mainfile_gt()
-	{
-		if ($this->session->userdata('email_admin') != '') {
+    }
+
+    public function complete_up_mainfile_gt()
+    {
+        if ($this->session->userdata('email_admin') != '') {
             $orderST                = $this->input->post('orderST');
             $userOR                 = $this->input->post('userOR');
 
@@ -391,9 +348,9 @@ class Complete_ctr extends CI_Controller
         } else {
             redirect('Login_admin');
         }
-	}
+    }
 
-	public function complete_up_mainfile_gt_main()
+    public function complete_up_mainfile_gt_main()
     {
         if ($this->session->userdata('email_admin') != '') {
             $orderST                = $this->input->post('orderST');
@@ -419,15 +376,38 @@ class Complete_ctr extends CI_Controller
                     $max_id = $this->db->order_by('id', 'desc')->get('tbl_morefile_GT')->row_array();
                     $uploadData = $this->upload->data();
                     $data2 = array(
-                        'more_id'       	=> $max_id['id'],
-                        'order_id'      	=> $orderST,
-                        'file_name_GT'  	=> $uploadData['file_name'],
-						'path_GT'       	=> 'uploads/Buy/GT/' . $uploadData['file_name'],
-						'status_admin_gt' 	=> 1,
-                        'create_at'     	=> date('Y-m-d H:i:s'),
+                        'more_id'           => $max_id['id'],
+                        'order_id'          => $orderST,
+                        'file_name_GT'      => $uploadData['file_name'],
+                        'path_GT'           => 'uploads/Buy/GT/' . $uploadData['file_name'],
+                        'status_admin_gt'     => 1,
+                        'create_at'         => date('Y-m-d H:i:s'),
                     );
                     $this->db->insert('tbl_upload_orderGT', $data2);
                 }
+            }
+        } else {
+            redirect('Login_admin');
+        }
+    }
+
+    public function rename_filename_TM()
+    {
+        $id         = $this->input->post('id');
+        $name_file  = $this->input->post('name_file');
+        $last_file  = $this->input->post('last_file');
+        $path       = $this->input->post('path');
+
+        if ($this->session->userdata('email_admin') != '') {
+            rename($path, 'uploads/Team/' . $name_file . '.' . $last_file);
+            if ($id) {
+                $update = [
+                    'file_name' => $name_file . '.' . $last_file,
+                    'path' => 'uploads/Team/' . $name_file . '.' . $last_file,
+                ];
+                $this->db->where('id', $id);
+                $success = $this->db->update('tbl_upload_order_team', $update);
+                echo $success;
             }
         } else {
             redirect('Login_admin');

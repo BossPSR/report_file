@@ -295,6 +295,16 @@
                                                                                                 <div class="col-sm-12 data-field-col">
 
                                                                                                     <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
+                                                                                                        <label for="Organization">Organization</label>
+                                                                                                        <select name="organization" class="form-control" id="organization">
+                                                                                                            <option value="A">A</option>
+                                                                                                            <option value="B">B</option>
+                                                                                                            <option value="C">C</option>
+                                                                                                            <option value="D">D</option>
+                                                                                                        </select>
+                                                                                                    </div>
+
+                                                                                                    <div class="form-group hiddens<?php echo $check_for['store_id']; ?>">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Select Item</label>
                                                                                                             <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
@@ -341,7 +351,7 @@
                                                                                                     <div class="form-group">
                                                                                                         <fieldset>
                                                                                                             <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                                <input type="checkbox"  class="ckeck<?php echo $check_for['store_id']; ?>" data-order="<?php echo $check_for['store_id']; ?>">
+                                                                                                                <input type="checkbox" class="ckeck<?php echo $check_for['store_id']; ?>" data-order="<?php echo $check_for['store_id']; ?>">
                                                                                                                 <span class="vs-checkbox">
                                                                                                                     <span class="vs-checkbox--check">
                                                                                                                         <i class="vs-icon feather icon-check"></i>
@@ -356,7 +366,7 @@
                                                                                                     $this->db->order_by('id', 'DESC');
                                                                                                     $Dm = $this->db->get('tbl_upload_main_search')->result_array();
                                                                                                     ?>
-                                                                                                    <div class="form-group teambox<?php echo $check_for['store_id']; ?>"  style="display: none">
+                                                                                                    <div class="form-group teambox<?php echo $check_for['store_id']; ?>" style="display: none">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Id Document</label>
                                                                                                             <select name="dmsub" class="form-control select2" id="dmsub<?php echo $check_for['store_id']; ?>">

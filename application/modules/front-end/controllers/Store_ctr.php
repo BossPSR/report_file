@@ -170,9 +170,13 @@ class Store_ctr extends CI_Controller
                 $this->db->update('tbl_user', ['score' => $rescore]);
             }
 
+            if ($upload_order['status_book'] == '1') {
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_bookmark' => 1 ]);
+            }
 
-            $this->db->where('order_id', $order_id);
-            $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => $price_dis, 'score_user' => $discount]);
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => $price_dis, 'score_user' => $discount]);
 
 
             $data = [
