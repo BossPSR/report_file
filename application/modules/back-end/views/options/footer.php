@@ -30,6 +30,7 @@
 <script src="public/backend/assets/js/core/app-menu.js"></script>
 <script src="public/backend/assets/js/core/app.js"></script>
 <script src="public/backend/assets/js/scripts/components.js"></script>
+<script src="public/backend/assets/js/scripts/modal/components-modal.js"></script>
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->

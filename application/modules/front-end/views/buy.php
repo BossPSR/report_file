@@ -167,18 +167,20 @@
                         success: function(success) {
                             myDropzone.processQueue();
                             myDropzone.on("queuecomplete", function(file, res) {
-                                if (myDropzone2.processQueue()) {
+                                if (myDropzone2.files == 0) {
+                                    swal("Good job!", "Upload for main successfull", "success", {
+                                        button: false,
+                                    });
+                                    setTimeout("location.reload(true);", 1000);
+
+                                } else {
+                                    myDropzone2.processQueue();
                                     myDropzone2.on("queuecomplete", function(file, res) {
-                                        swal("Good job!", "Upload for data successfull", "success", {
+                                        swal("Good job!", "Upload for main & GT successfull", "success", {
                                             button: false,
                                         });
                                         setTimeout("location.reload(true);", 1000);
                                     });
-                                } else {
-                                    swal("Good job!", "Upload for data successfull", "success", {
-                                        button: false,
-                                    });
-                                    setTimeout("location.reload(true);", 1000);
                                 }
                             });
                         }

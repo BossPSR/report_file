@@ -127,6 +127,7 @@ class Store_ctr extends CI_Controller
         $data['order_id']    = $upload_order[0]['order_id'];
         $data['price_file']  = $upload_order[0]['price_file'];
         $data['discount']    = $discount;
+        $data['cashback']    = $user['cashback'];
         $data['customer_id'] = $upload_order[0]['userId'];
         $data['price_dis']   = $priceDis;
 
@@ -139,6 +140,7 @@ class Store_ctr extends CI_Controller
         $order_id       = $this->input->post('order_id');
         $price_file     = $this->input->post('price_file');
         $discount       = $this->input->post('discount');
+        $discount_exp   = explode('-', $discount);
         $price_dis      = $this->input->post('price_dis');
         $customer_id    = $this->input->post('customer_id');
         $email          = $this->input->post('email');
@@ -153,7 +155,6 @@ class Store_ctr extends CI_Controller
                 redirect('my-deposit');
             }
 
-
             // $price_result = $user['cash'] - $price_dis;
             // $this->db->where('idUser', $customer_id);
             // $this->db->update('tbl_user', ['cash' => $price_result]);
@@ -164,34 +165,71 @@ class Store_ctr extends CI_Controller
                 redirect('/');
             }
 
-            if ($discount != '0') {
-                $rescore = $user['score'] - 100;
-                $this->db->where('idUser', $customer_id);
-                $this->db->update('tbl_user', ['score' => $rescore]);
+            if ($discount_exp[0] == 'Discount') {
+                if ($discount_exp[1] != '0') {
+                    $rescore = $user['score'] - 100;
+                    $this->db->where('idUser', $customer_id);
+                    $this->db->update('tbl_user', ['score' => $rescore]);
+
+                    $this->db->where('order_id', $order_id);
+                    $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => $price_dis, 'score_user' => $discount_exp[1]]);
+
+                    $data = [
+                        'file_name'     => $file_name,
+                        'order_id'      => $order_id,
+                        'price_file'    => $price_file,
+                        'discount'      => $discount_exp[1],
+                        'price_dis'     => $price_dis,
+                        'customer_id'   => $customer_id,
+                        'email'         => $email,
+                        'created_at'    => date('Y-m-d H:i:s')
+                    ];
+                    $this->db->insert('tbl_store_for_buy_email', $data);
+                }
+            } else {
+                if ($discount_exp[1] != '0') {
+                    if ($discount_exp[1] >= $price_file) {
+                        $disq   = $discount_exp[1] - $price_file  ;
+                        $this->db->where('order_id', $order_id);
+                        $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => '0' , 'cashback_user' => $discount_exp[1]]);
+
+                       
+                    }else{
+                        $disq   = '0' ;
+                        $this->db->where('order_id', $order_id);
+                        $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => $price_file - $discount_exp[1] , 'cashback_user' => $discount_exp[1]]);
+                       
+                    }
+                   
+                    $this->db->where('idUser', $customer_id);
+                    $this->db->update('tbl_user', ['cashback' => $disq]);
+
+                  
+
+                    $data = [
+                        'file_name'     => $file_name,
+                        'order_id'      => $order_id,
+                        'price_file'    => $price_file,
+                        'cashback'      => $discount_exp[1],
+                        'price_dis'     => $price_file - $discount_exp[1],
+                        'customer_id'   => $customer_id,
+                        'email'         => $email,
+                        'created_at'    => date('Y-m-d H:i:s')
+                    ];
+                    $this->db->insert('tbl_store_for_buy_email', $data);
+                }
             }
+
 
             if ($upload_order['status_book'] == '1') {
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_bookmark' => 1 ]);
+                $this->db->update('tbl_upload_order', ['status_bookmark' => 1]);
             }
 
-                $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => $price_dis, 'score_user' => $discount]);
 
-
-            $data = [
-                'file_name'     => $file_name,
-                'order_id'      => $order_id,
-                'price_file'    => $price_file,
-                'discount'      => $discount,
-                'price_dis'     => $price_dis,
-                'customer_id'   => $customer_id,
-                'email'         => $email,
-                'created_at'    => date('Y-m-d H:i:s')
-            ];
-            $this->db->insert('tbl_store_for_buy_email', $data);
             $this->session->set_flashdata('success_cash', TRUE);
             redirect('/');
+
         }
     }
 }

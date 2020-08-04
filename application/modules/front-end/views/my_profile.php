@@ -16,7 +16,7 @@
                             <div class="name_user m17"><i class="fa fa-user"></i><?= $this->lang->line("name"); ?> : <?php echo $user['username']; ?></div>
                         </h2>
                         <div class="image_PF">
-                            <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="">
+                            <img class="profile" src="<?php echo (!isset($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="">
                             <!-- <div class="edit_name_user"><a href="#"><i class="fa fa-edit"></i>  Edited</a></div> -->
                         </div>
                         <div class="menu_in_image">

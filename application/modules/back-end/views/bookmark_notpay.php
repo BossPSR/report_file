@@ -283,7 +283,6 @@
                                                             <?php else : ?>
                                                                 <?php echo $bookmark_all_not['upload_order_create_at']; ?>
                                                             <?php endif; ?>
-
                                                         </td>
 
 
@@ -326,7 +325,7 @@
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <label for="book">Document ID</label>
-                                                                                        <select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple" >
+                                                                                        <select name="DM[]" id="" class="select2 form-control dmsub" multiple="multiple">
                                                                                             <option value="" disabled>--- Select DM ---</option>
                                                                                             <?php foreach ($query as $key => $query) { ?>
                                                                                                 <option value="<?php echo $query['dm_sub']; ?>"><?php echo $query['dm_sub']; ?></option>

@@ -762,7 +762,7 @@
                                                                 </form>
                                                             </div>
                                                         </td>
-                                                        <td>
+                                                        <td  style="width: 1%;">
                                                             <a href="#" data-toggle="modal" data-target="#note_new<?php echo $stores['orderST']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
                                                             <div class="modal fade" id="note_new<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">

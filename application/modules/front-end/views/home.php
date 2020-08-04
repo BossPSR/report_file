@@ -87,14 +87,23 @@
     <section class="slider_section slider_section_four mb-20 mt-30">
         <div class="container">
             <div class="alert alert-warning" role="alert">
-                คุณมีคำสั่งซื้อที่ค้างชำระเงินสามารถชำระเงินได้ <a href="payment_email?order_id=" style="color: #0088ff;">
-                    <u>
-                        <?php foreach ($checkorder as $key => $checkorder) {  ?>
-                            <?php echo $checkorder['order_id']; ?>
-                        <?php } ?>
-                        คลิกที่นี่
-                    </u>
-                </a>
+                คุณมีคำสั่งซื้อที่ค้างชำระเงินสามารถชำระเงินได้
+
+                <?php foreach ($checkorder as $key => $checkorder) {  ?>
+                    <?php $dateXX = date('Y-m-d H:i:s', strtotime($checkorder['create_at'] . "+1 days")); ?>
+                    <?php if ($dateXX >= date('Y-m-d H:i:s')) : ?>
+                        <u>
+                            <a href="payment_email?order_id=<?php echo $checkorder['order_id']; ?>" target="_blank" style="color: #0088ff;">
+                                <?php echo $checkorder['order_id']; ?>
+                            </a>
+                        </u> &nbsp;
+                    <?php else : ?>
+
+                    <?php endif; ?>
+                <?php } ?>
+                คลิกตามคำสั่งซื้อเพื่อทำการชำระเงิน
+
+
             </div>
         </div>
     </section>

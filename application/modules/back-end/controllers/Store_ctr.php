@@ -257,8 +257,11 @@ class Store_ctr extends CI_Controller
 
         $message .= '<div>';
         $message .= '<div style="text-align: center; margin:15px auto; font-size:25px;    padding-bottom: 22px;">';
-        $message .= '<a class="btn btn-info" style="     text-decoration: none;   padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #ffffff;background-color: #05786d;border: 1px solid #05786d;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order[0]['order_id'] . '">';
+        $message .= '<a class="btn btn-info" style=" margin-right: 10px ; text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #ffffff;background-color: #05786d;border: 1px solid #05786d;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order[0]['order_id'] . '">';
         $message .= 'Pay $' . $priceDis . ' To Start';
+        $message .= '</a>';
+        $message .= '<a class="btn btn-info" style="     text-decoration: none;   padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
+        $message .= ' เติมเงิน ';
         $message .= '</a>';
         $message .= '</div>';
         $message .= '</div>';

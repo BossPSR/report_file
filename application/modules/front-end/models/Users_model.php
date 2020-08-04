@@ -30,6 +30,7 @@ class Users_model extends CI_Model
         $this->db->from('tbl_upload_order');
         $this->db->where('userId', $us);
         $this->db->where('status_pay', 0);
+        $this->db->where('price_file !=', null);
         // $this->db->where('create_at >=', $sq);
         // $this->db->where('create_at <=', $horu  );
         $this->db->group_by('order_id');
@@ -44,6 +45,7 @@ class Users_model extends CI_Model
             $this->db->from('tbl_upload_order');
             $this->db->where('userId', $us);
             $this->db->where('status_pay', 0);
+            $this->db->where('price_file !=', null);
             $this->db->where('create_at >=', $data['create_at']);
             $this->db->where('create_at <=', $horu  );
             $this->db->group_by('order_id');

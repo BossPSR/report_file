@@ -39,6 +39,7 @@ $route['my-order-feedAuto']         = 'front-end/My_feedback_ctr/order_auto_feed
 $route['my-rejected']               = 'front-end/Rejected_ctr/my_rejected';
 $route['my-reject']                 = 'front-end/Rejected_ctr/my_reject';
 $route['my-selling']                = 'front-end/Selling_ctr/my_selling';
+$route['my-cashback']                = 'front-end/Cashback_ctr/my_cashback';
 $route['register']                  = 'front-end/Register_ctr';
 $route['register-team']             = 'front-end/Register_ctr/register_team';
 $route['register-team-success']     = 'front-end/Register_ctr/register_team_success';

@@ -238,15 +238,15 @@
 
                                             <?php } else { ?>
 
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $BNAP++; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                <button type="button" class="btn btn-warning" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $value['ORD']; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                                     <?php if ($N_count['od'] == '0') : ?>
 
                                                     <?php else : ?>
-                                                        <span class="badge badge-light"> <?php echo $N_count['od'];  ?></span> 
+                                                        <span class="badge badge-light"> <?php echo $N_count['od'];  ?></span>
                                                     <?php endif; ?>
                                                 </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalNotApprove<?php echo $xxl++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModalNotApprove<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -271,7 +271,7 @@
                                                                 <br>
 
                                                                 <label for="" class="font-size-upload">Date :</label>
-                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="<?php echo empty($N_feed['dated'])  ? '' : $N_feed['dated'] ; ?>" style="width:30%" required>
+                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" min="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" max="" style="width:30%" required>
                                                                 <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
                                                                 <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
                                                                 <!-- </form> -->
@@ -283,6 +283,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <?php if (!empty($N_feed['dated'])) { ?>
+                                                    <script>
+                                                        $('#onshownbtn<?php echo $value['ORD']; ?>').on('click', function() {
+                                                            $('#exampleModalNotApprove<?php echo $value['ORD']; ?>').on('shown.bs.modal', function() {
+                                                                var a = $('#dated<?php echo $value['ORD']; ?>').val();
+                                                                swal("Warning!", " คุณสามารถระบุวันเวลาครั้งล่าสุดหรือมากกว่าครั้งล่าสุดเท่านั้น Date required ครั้งล่าสุดของคุณคือ… " + a  , "warning", {
+                                                                    button: true,
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                                <?php } ?>
+
                                                 <script type='text/javascript'>
                                                     Dropzone.autoDiscover = false;
                                                     var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
