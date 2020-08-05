@@ -128,6 +128,43 @@ class My_stock_ctr extends CI_Controller
         }
     }
 
+    function my_task_timeout()
+    {
+        $sess           = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        $see            = $sess['IdTeam'];
+        $order          = $this->input->post('order');
+        $user           = $this->input->post('user');
+        $status         = $this->input->post('status');
+
+        $data = array(
+            'status_out'        => $status,
+            'update_at'         => date('Y-m-d H:i:s')
+        );
+
+        $this->db->where('order_id', $order);
+        if ($this->db->update('tbl_upload_team', $data)) {
+            $team = array(
+                'income'        => $sess['income'] - 10,
+                'update_at'     => date('Y-m-d H:i:s')
+            );
+            $this->db->where('IdTeam', $see);
+            $success = $this->db->update('tbl_team', $team);
+            if ($success) {
+                $deduct = array(
+                    'userId'        => $user,
+                    'order_id'      => $order,
+                    'teamid_deduct' => $see,
+                    'deduct'        => '10',
+                    'detail'        => 'ระบบได้หักรายได้ $10 ของท่าน เนื่องจากเวลาของออเดอร์ ได้เกินกำหนดส่ง จึงมีการเพิ่มเวลาทำการ 12 ชม.สุดท้ายในการส่งออเดอร์ ',
+                    'create_at'     => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_deduct', $deduct);
+            }
+        } 
+
+        echo $success;
+    }
+
 
     function my_task_app()
     {
@@ -144,6 +181,7 @@ class My_stock_ctr extends CI_Controller
 
         echo $success;
     }
+
     function my_task_can()
     {
         $note_can               = $this->input->post('note_can');

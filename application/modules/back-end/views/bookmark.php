@@ -526,10 +526,10 @@
                                                                                             <thead>
                                                                                                 <tr>
                                                                                                     <th>Select</th>
-                                                                                                    <th>Relive</th>
+                                                                                                    <th>Rewrite</th>
                                                                                                     <th>File Name</th>
                                                                                                     <th>File</th>
-                                                                                                    <th>create</th>
+                                                                                                    <th>Create</th>
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
@@ -585,7 +585,7 @@
                                                                                             <th>Order Id</th>
                                                                                             <th>File Name</th>
                                                                                             <th>File</th>
-                                                                                            <th>create</th>
+                                                                                            <th>Create</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>

@@ -184,7 +184,9 @@
                                         <a href="#">My Selling</a>
                                         <ul class="sub-menu">
                                             <li><a href="my-selling">Sale</a></li>
-                                            <li><a href="my-selling">Cashback</a></li>
+                                            <li><a href="my-cashback">Cashback</a></li>
+                                            <li><a href="my-rewards">Rewards</a></li>
+                                            <li><a href="my-commission">Commission</a></li>
                                             <li><a href="my-deduct">Deduct</a></li>
                                             <li><a href="my-reject">Reject</a></li>
                                         </ul>
@@ -221,6 +223,9 @@
                                     </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
+                                        <a href="home"> Home</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
                                         <a href="#exampleModalCenter" data-toggle="modal"> My Buy</a>
                                     </li>
                                     <li class="menu-item-has-children">
@@ -231,6 +236,8 @@
                                         <ul class="sub-menu">
                                             <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal">Cashback</a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal">Rewards</a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal">Commission</a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal">Deduct</a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
                                         </ul>
@@ -342,6 +349,10 @@
                                             <div class="middel_right_info">
 
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
+                                                    <div class="menu-list"><?php echo number_format($user['commission']); ?></div>
+                                                    <div>Commission </div>
+                                                </div>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
                                                         <?php if ($user['score'] < '100') : ?>
                                                             0%
@@ -362,10 +373,6 @@
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['score']); ?></div>
                                                     <div>Score</div>
-                                                </div>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
-                                                    <div class="menu-list"><?php echo number_format($user['cashback']); ?></div>
-                                                    <div>Cashback</div>
                                                 </div>
 
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
@@ -442,20 +449,17 @@
                                 <div class="categories_menu_toggle">
                                     <ul>
                                         <?php if ($user) :  ?>
-                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                             <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <li>
                                                 <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
                                             </li>
 
                                         <?php elseif ($team) : ?>
-                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                             <li><a href="my-rewards-team"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <li>
                                                 <a href="user-manual"> Team manual <i class="fa fa-angle-right"></i></a>
                                             </li>
                                         <?php else : ?>
-                                            <li><a href="home"> Home <i class="fa fa-angle-right"></i></a></li>
                                             <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
                                             <li>
                                                 <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
@@ -478,6 +482,8 @@
                                                 <ul class="sub_menu pages">
                                                     <li><a href="my-selling">Sale</a></li>
                                                     <li><a href="my-cashback">Cashback</a></li>
+                                                    <li><a href="my-rewards-list">Rewards</a></li>
+                                                    <li><a href="my-commission">Commission</a></li>
                                                     <li><a href="my-deduct">Deduct</a></li>
                                                     <li><a href="my-reject">Reject</a></li>
                                                 </ul>
@@ -513,11 +519,15 @@
                                             <li></li>
                                             <li><?php $this->load->view('options/notify_team'); ?></li>
                                         <?php else : ?>
+                                            <li><a href="home"> Home</a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> My Buy <div class="arrow_box"></div></a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> My Sell </a></li>
                                             <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Cashback</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Rewards</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Commission</a></li>
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Deduct</a></li>
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
                                                 </ul>

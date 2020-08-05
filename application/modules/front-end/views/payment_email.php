@@ -84,6 +84,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-3 text-right ss" for="">Discount : </label>
+                        <div class="col-9 text-left">
+                            <?php echo $discount; ?>%
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-3 text-right ss" for="">Customer ID :</label>
                         <div class="col-9 text-left">
                             <?php echo $customer_id; ?>
@@ -94,8 +100,7 @@
                         <input type="hidden" name="file_name" value="<?php echo $file_name; ?>">
                         <input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
                         <input type="hidden" name="price_file" value="<?php echo $price_file; ?>">
-                        <!-- <input type="hidden" name="discount" value="<?php echo $discount; ?>">
-                        <input type="hidden" name="cashback" value="<?php echo $cashback; ?>"> -->
+                        <input type="hidden" name="discount" value="<?php echo $discount; ?>">
                         <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
                         <div class="form-group row">
                             <label class="col-3 text-right ss" for="">E-mail : </label>
@@ -110,29 +115,10 @@
                                 * ถ้าลูกค้าทำการเปลี่ยน Email สามารถกรอกใหม่ได้
                             </div>
                         </div>
-                        <hr>
-                        <h2 class="form-group">เลือกส่วนลด</h2>
-                        <div class="row">
-                            <div class="form-check  col-4" style="align-items: flex-end;">
-                                <input type="radio" name="discount" id="inlineRadio1" value="" style="width: 25px;height: 25px;" checked> &nbsp;
-                                <label class="form-check-label text-right ss" for="">ไม่ใช้ส่วนลด </label>
-                            </div>
-                            <div class="form-check  col-4" style="align-items: flex-end;">
-                                <input type="radio" name="discount" id="inlineRadio1" value="Discount-<?php echo $discount; ?>" style="width: 25px;height: 25px;"> &nbsp;
-                                <label class="form-check-label text-right ss" for="">Discount : </label> &nbsp;
-                                <?php echo $discount; ?>%
-                            </div>
-                            <div class="form-check  col-4" style="align-items: flex-end;">
-                                <input type="radio" name="discount" id="inlineRadio2" value="Cashback-<?php echo $cashback; ?>" style="width: 25px;height: 25px;"> &nbsp;
-                                <label class="form-check-label text-right ss" for="">Cashback : </label> &nbsp;
-                                <?php echo $cashback; ?>
-                            </div>
-                        </div>
-                        
-                        <hr>
+
 
                         <input type="hidden" name="price_dis" value="<?php echo $price_dis; ?>">
-                        <button class="btn btn-success">Pay $<?php echo $price_dis; ?> To Start</button>
+                        <button type="submit" class="btn btn-success">Pay $<?php echo $price_dis; ?> To Start</button>
                     </form>
 
                 </div>

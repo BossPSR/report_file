@@ -124,8 +124,8 @@
                                                         <td><?php echo $user_list['Us']; ?></td>
                                                         <td><?php echo $user_list['email']; ?></td>
                                                         <td><?php echo $user_list['phone']; ?></td>
-														<td>$<?php echo $user_list['cash']; ?></td>
-														<td>$<?php echo $user_list['cashback']; ?></td>
+														<td>$<?php echo $user_list['cash']  == '' ? '0' : $user_list['cash'] ; ?></td>
+														<td>$<?php echo $user_list['cashback'] == '' ? '0' : $user_list['cashback'] ; ?></td>
                                                         <td><?php echo $user_list['score']; ?></td>
                                                         
 														<?php 
@@ -214,9 +214,9 @@
                                                                                         <li class="nav-item">
                                                                                             <a class="nav-link" id="base-pill33" data-toggle="pill" href="#pill33" aria-expanded="false">Cashback</a>
                                                                                         </li>
-                                                                                        <li class="nav-item">
+                                                                                        <!-- <li class="nav-item">
                                                                                             <a class="nav-link" id="base-pill34" data-toggle="pill" href="#pill34" aria-expanded="false">Deduct Cashback</a>
-                                                                                        </li>
+                                                                                        </li> -->
                                                                                     </ul>
                                                                                     <div class="tab-content">
                                                                                         <div role="tabpanel" class="tab-pane active" id="pill31" aria-expanded="true" aria-labelledby="base-pill31">
@@ -230,6 +230,10 @@
                                                                                                     <div class="col-md-4">
                                                                                                         <label for="">score user</label>
                                                                                                         <div><?php echo $user_list['score']; ?></div>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-12 mt-1">
+                                                                                                        <label for="">Note</label>
+                                                                                                        <textarea name="note" class="form-control" rows="3"></textarea>
                                                                                                     </div>
                                                                                                     <div class="col-md-12" style="margin-top: 15px;">
                                                                                                         <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
@@ -249,6 +253,10 @@
                                                                                                         <label for="">score user</label>
                                                                                                         <div><?php echo $user_list['score']; ?></div>
                                                                                                     </div>
+                                                                                                    <div class="col-md-12 mt-1">
+                                                                                                        <label for="">Note</label>
+                                                                                                        <textarea name="note" class="form-control" rows="3"></textarea>
+                                                                                                    </div>
                                                                                                     <div class="col-md-12" style="margin-top: 15px;">
                                                                                                         <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
                                                                                                     </div>
@@ -267,13 +275,17 @@
                                                                                                         <label for="">Cashback user</label>
                                                                                                         <div><?php echo $user_list['cashback']; ?></div>
                                                                                                     </div>
+                                                                                                    <div class="col-md-12 mt-1" >
+                                                                                                        <label for="">Note</label>
+                                                                                                        <textarea name="note" class="form-control" rows="3"></textarea>
+                                                                                                    </div>
                                                                                                     <div class="col-md-12" style="margin-top: 15px;">
                                                                                                         <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </form>
                                                                                         </div>
-                                                                                        <div class="tab-pane" id="pill34" aria-labelledby="base-pill34">
+                                                                                        <!-- <div class="tab-pane" id="pill34" aria-labelledby="base-pill34">
                                                                                             <form action="deduct_cash_score" method="POST">
                                                                                                 <input type="hidden" name="id" value="<?php echo $user_list['Us']; ?>">
                                                                                                 <div class="row">
@@ -285,12 +297,16 @@
                                                                                                         <label for="">Cashback user</label>
                                                                                                         <div><?php echo $user_list['cashback']; ?></div>
                                                                                                     </div>
+                                                                                                    <div class="col-md-12 mt-1">
+                                                                                                        <label for="">Note</label>
+                                                                                                        <textarea name="note" class="form-control" rows="3"></textarea>
+                                                                                                    </div>
                                                                                                     <div class="col-md-12" style="margin-top: 15px;">
                                                                                                         <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </form>
-                                                                                        </div>
+                                                                                        </div> -->
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

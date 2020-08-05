@@ -20,6 +20,7 @@
                                 <th scope="col">Team File</th>
                                 <th scope="col">Order Date</th>
                                 <th scope="col">Date Required</th>
+                                <th scope="col">Warranty day</th>
                                 <th scope="col">Tool</th>
                             </tr>
                         </thead>
@@ -214,6 +215,15 @@
                                     <td><?php echo date("d F Y", strtotime($value['created_at'])); ?></td>
                                     <td><?php echo date("d F Y", strtotime($value['Drequired'])); ?></td>
                                     <td>
+                                        <?php if (!empty($value['update_at']) && $value['status_delivery'] == '1' ) : ?>
+                                        <?php  $qy = date("Y-m-d H:i:s", strtotime($value['update_at'] . " + 60 day")); ?>
+                                        <div data-countdown="<?php echo $qy; ?>"></div>
+                                        <?php else : ?>
+                                            -
+                                        <?php endif; ?>
+                                    </td>
+
+                                    <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php $produm   = date('Y-m-d', strtotime('+60 day' . '+' . $value['update_at_buy'])); ?>
 
@@ -288,7 +298,7 @@
                                                         $('#onshownbtn<?php echo $value['ORD']; ?>').on('click', function() {
                                                             $('#exampleModalNotApprove<?php echo $value['ORD']; ?>').on('shown.bs.modal', function() {
                                                                 var a = $('#dated<?php echo $value['ORD']; ?>').val();
-                                                                swal("Warning!", " คุณสามารถระบุวันเวลาครั้งล่าสุดหรือมากกว่าครั้งล่าสุดเท่านั้น Date required ครั้งล่าสุดของคุณคือ… " + a  , "warning", {
+                                                                swal("Warning!", " คุณสามารถระบุวันเวลาครั้งล่าสุดหรือมากกว่าครั้งล่าสุดเท่านั้น Date required ครั้งล่าสุดของคุณคือ… " + a, "warning", {
                                                                     button: true,
                                                                 });
                                                             });
@@ -358,8 +368,8 @@
                                                     });
                                                 </script>
                                             <?php } ?>
-                                            <button type="button" class="btn btn-success" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS"><i class="fa fa-check" aria-hidden="true"></i></button>
 
+                                            <button type="button" class="btn btn-success" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS"><i class="fa fa-check" aria-hidden="true"></i></button>
 
                                             <?php $ord_s = substr($value['ORD'], 3); ?>
                                             <?php if ($N_count['od'] >= 3 || $DateT > $produm) { ?>

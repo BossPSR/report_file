@@ -110,8 +110,8 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Resume <span class="red">*</span></label>
-                                    <input type="file" class="form-control" name="file_name" required>
+                                    <label>Resume <span class="red">* (PDF / Word)</span></label>
+                                    <input type="file" class="form-control" name="file_name" accept=".doc, .docx , .pdf" required style="padding: 10px 20px;height: auto;">
                                     <!-- <input type="file" name="file_name" required> -->
                                 </div>
                             </div>

@@ -28,12 +28,13 @@ class User_ctr extends CI_Controller
 		if ($this->session->userdata('email_admin') == '') {
 			redirect('backend');
 		} else {
-			
+
 			$add  		= $this->input->post('add');
 			$iduser   	= $this->input->post('id');
+			$note   	= $this->input->post('note');
 
-			$user = $this->db->get_where('tbl_user',['idUser' => $iduser])->row_array();
-			
+			$user = $this->db->get_where('tbl_user', ['idUser' => $iduser])->row_array();
+
 
 			$data = [
 				'score' 		=> $user['score'] + $add,
@@ -41,6 +42,16 @@ class User_ctr extends CI_Controller
 			];
 			$this->db->where('idUser', $iduser);
 			$success = $this->db->update('tbl_user', $data);
+			if ($success) {
+				$deduct = array(
+					'userId'        => $iduser,
+					'score'         => $add,
+					'detail'        => $note,
+					'create_at'     => date('Y-m-d H:i:s')
+				);
+				$this->db->insert('tbl_deduct', $deduct);
+			}
+
 			if ($success > 0) {
 				$this->session->set_flashdata('save_ss2', ' Successfully updated add Score !!.');
 			} else {
@@ -50,7 +61,7 @@ class User_ctr extends CI_Controller
 		}
 	}
 
-	
+
 	public function deduct_score()
 	{
 		if ($this->session->userdata('email_admin') == '') {
@@ -58,8 +69,10 @@ class User_ctr extends CI_Controller
 		} else {
 			$deduct  	= $this->input->post('deduct');
 			$iduser   	= $this->input->post('id');
+			$note   	= $this->input->post('note');
 
-			$user = $this->db->get_where('tbl_user',['idUser' => $iduser])->row_array();
+
+			$user = $this->db->get_where('tbl_user', ['idUser' => $iduser])->row_array();
 
 			$data = [
 				'score' 		=> $user['score'] - $deduct,
@@ -67,6 +80,17 @@ class User_ctr extends CI_Controller
 			];
 			$this->db->where('idUser', $iduser);
 			$success = $this->db->update('tbl_user', $data);
+
+			if ($success) {
+				$deduct = array(
+					'userId'        => $iduser,
+					'deduct'        => $deduct,
+					'detail'        => $note ,
+					'create_at'     => date('Y-m-d H:i:s')
+				);
+				$this->db->insert('tbl_deduct', $deduct);
+			}
+
 			if ($success > 0) {
 				$this->session->set_flashdata('save_ss2', ' Successfully updated deduct Score !!.');
 			} else {
@@ -76,7 +100,7 @@ class User_ctr extends CI_Controller
 		}
 	}
 
-	
+
 	public function cash_score()
 	{
 		if ($this->session->userdata('email_admin') == '') {
@@ -85,15 +109,26 @@ class User_ctr extends CI_Controller
 
 			$cashback   = $this->input->post('cashback');
 			$iduser   	= $this->input->post('id');
+			$note   	= $this->input->post('note');
 
-			$user = $this->db->get_where('tbl_user',['idUser' => $iduser])->row_array();
+
+			$user = $this->db->get_where('tbl_user', ['idUser' => $iduser])->row_array();
 
 			$data = [
-				'cashback' 		=> $user['cashback'] + $cashback,
+				'cash' 			=> $user['cash'] + $cashback,
 				'updated_at' 	=> date('Y-m-d H:i:s'),
 			];
 			$this->db->where('idUser', $iduser);
 			$success = $this->db->update('tbl_user', $data);
+			if ($success) {
+				$save = array(
+					'userId'        	=> $iduser,
+					'cashback'      	=> $cashback,
+					'cashback_detail'   => $note ,
+					'create_at'     	=> date('Y-m-d H:i:s')
+				);
+				$this->db->insert('tbl_cashback', $save);
+			}
 			if ($success > 0) {
 				$this->session->set_flashdata('save_ss2', ' Successfully updated cashback !!.');
 			} else {
@@ -103,31 +138,43 @@ class User_ctr extends CI_Controller
 		}
 	}
 
-	public function deduct_cash_score()
-	{
-		if ($this->session->userdata('email_admin') == '') {
-			redirect('backend');
-		} else {
+	// public function deduct_cash_score()
+	// {
+	// 	if ($this->session->userdata('email_admin') == '') {
+	// 		redirect('backend');
+	// 	} else {
 
-			$cashback   = $this->input->post('cashback');
-			$iduser   	= $this->input->post('id');
+	// 		$cashback   = $this->input->post('cashback');
+	// 		$iduser   	= $this->input->post('id');
+	// 		$note   	= $this->input->post('note');
 
-			$user = $this->db->get_where('tbl_user',['idUser' => $iduser])->row_array();
 
-			$data = [
-				'cashback' 		=> $user['cashback'] - $cashback,
-				'updated_at' 	=> date('Y-m-d H:i:s'),
-			];
-			$this->db->where('idUser', $iduser);
-			$success = $this->db->update('tbl_user', $data);
-			if ($success > 0) {
-				$this->session->set_flashdata('save_ss2', ' Successfully update deduct cashback !!.');
-			} else {
-				$this->session->set_flashdata('del_ss2', 'Not Successfully update deduct cashback');
-			}
-			redirect('back_user');
-		}
-	}
+	// 		$user = $this->db->get_where('tbl_user', ['idUser' => $iduser])->row_array();
+
+	// 		$data = [
+	// 			'cashback' 		=> $user['cashback'] - $cashback,
+	// 			'updated_at' 	=> date('Y-m-d H:i:s'),
+	// 		];
+	// 		$this->db->where('idUser', $iduser);
+	// 		$success = $this->db->update('tbl_user', $data);
+	// 		if ($success) {
+	// 			$save = array(
+	// 				'userId'        	=> $iduser,
+	// 				'cashback'      	=> $cashback,
+	// 				'cashback_detail'   => $note ,
+	// 				'create_at'     	=> date('Y-m-d H:i:s')
+	// 			);
+	// 			$this->db->insert('tbl_cashback', $save);
+	// 		}
+
+	// 		if ($success > 0) {
+	// 			$this->session->set_flashdata('save_ss2', ' Successfully update deduct cashback !!.');
+	// 		} else {
+	// 			$this->session->set_flashdata('del_ss2', 'Not Successfully update deduct cashback');
+	// 		}
+	// 		redirect('back_user');
+	// 	}
+	// }
 
 	public function block_user()
 	{

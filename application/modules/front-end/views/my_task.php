@@ -4,6 +4,25 @@
     <h2 class="text-center" style="margin-top: 15px;">My task</h2>
     <hr class="line_package">
     <br>
+
+    <!-- Modal -->
+    <div class="modal fade" id="TimeOut" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="TimeOut" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                    <h5 class="modal-title" id="staticBackdropLabel">TimeOut</h5>
+                </div>
+                <div class="modal-body">
+                    <p>“คุณมีเวลา12ชม.สุดท้ายในการส่งOrder ระบบจะหักรายได้ $10 จากMy income แบบ Auto แต่หากส่งก่อนเวลา12ชม.จะเริ่มระบบจะไม่หัก หากทีมงานไม่มียอดให้หักระบบจะติดลบไว้ กรณีนี้ต่อให้ไม่มีการ Delivery ก็หัก $10"</p>
+                    <br>
+                    <center>
+                        <a href="#" class="btn btn-primary">ACCEPT</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="wishlist_area mt-60">
         <div class="container">
             <div class="row">
@@ -56,16 +75,53 @@
                                             <span class="badge badge-success">Success</span>
                                         <?php elseif ($task['c_status'] == 1) : ?>
                                             <span class="badge badge-info">Complete</span>
-                                        <?php elseif ($task['date_required'] <= date("Y-m-d")) : ?>
+                                        <?php elseif ($task['date_required'] <= date("Y-m-d H:i:s ") && $task['status_out'] == '0') : ?>
                                             <span class="badge badge-danger">หมดเวลา</span>
+                                            <?php if ($task['status_out'] == '0') : ?>
+                                                <script>
+                                                    function getDataend() {
+                                                        $.ajax({
+                                                                url: "my_task_timeout",
+                                                                type: "POST",
+                                                                data: {
+                                                                    order: '<?php echo $task['or_id']; ?>',
+                                                                    user: '<?php echo $task['userId']; ?>',
+                                                                    status: '1',
+                                                                }
+                                                            })
+                                                            .success(function(result) {
+                                                                console.log(result);
+                                                                $('#TimeOut').modal('show');
+                                                            });
+                                                    }
+
+                                                    setInterval(getDataend, 10000); // 1000 = 1 second
+                                                </script>
+                                            <?php else : ?>
+
+                                            <?php endif; ?>
                                         <?php else : ?>
                                             <?php
-                                            $checkDate_num = DateDiff(date("Y-m-d"), $task['date_required']);
+                                            $checkDate_num = DateDiff(date("Y-m-d H:i:s"), $task['date_required']);
                                             $checkDate = $checkDate_num / 2;
                                             $checkDate = floor($checkDate);
-                                            $dateRequired = date("Y-m-d", strtotime("-" . $checkDate . " day", strtotime($task['date_required'])));
+                                            if ($checkDate_num <= 0) {
+                                                $checkDate = 0;
+                                            }
+                                            $dateRequired = date("Y-m-d H:i:s", strtotime("-" . $checkDate . " day", strtotime($task['date_required'])));
                                             ?>
-                                            <div data-countdown="<?php echo $dateRequired; ?>"></div>
+
+                                            <?php if ($task['status_out'] == '0') : ?>
+
+                                                <div data-countdown="<?php echo $dateRequired; ?>"></div>
+
+                                            <?php else : ?>
+
+                                                <?php $aa = date("Y-m-d H:i:s", strtotime($dateRequired . ' + 12 hour')); ?>
+                                                <div data-countdown="<?php echo $aa; ?>"></div>
+
+                                            <?php endif; ?>
+                                           
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $task['or_id']; ?></td>
@@ -387,8 +443,8 @@
                                                     <form action="my_task_can" method="post">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
-                                                            <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
+                                                                <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
+                                                                <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
                                                                 <h5 class="modal-title" id="exampleModalLabel">Note</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
@@ -399,7 +455,7 @@
                                                                 <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-success" >Submit</button>
+                                                                <button type="submit" class="btn btn-success">Submit</button>
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
