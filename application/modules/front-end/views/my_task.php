@@ -40,7 +40,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 ">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <th scope="col">Date Requred</th>
@@ -121,7 +121,7 @@
                                                 <div data-countdown="<?php echo $aa; ?>"></div>
 
                                             <?php endif; ?>
-                                           
+
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $task['or_id']; ?></td>
@@ -466,8 +466,37 @@
                                         </td>
 
                                     <?php elseif ($task['c_status'] == 0 && $task['status_approved'] == 0 && $task['status_check_team'] == 0) : ?>
-                                        <td><button type="button" class="btn btn-danger" id="cancel_task<?php echo $or_sub; ?>"><i class="fa fa-times-circle"></i></button></td>
-                                        <script type="text/javascript">
+                                        <td>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>"><i class="fa fa-times-circle"></i></button>
+                                            <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <form action="My-task-cancel" method="post">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <input type="text" value="<?php echo $task['or_id']; ?>" name="order_id" hidden>
+                                                                <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">Cancel Order (<?php echo $task['or_id']; ?>) <br>
+                                                                    <span style="color : red">
+                                                                        * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
+                                                                    </span>
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <textarea name="note_can" id="" rows="5" class="form-control" required></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <!-- <script type="text/javascript">
                                             $('#cancel_task<?php echo $or_sub; ?>').click(function() {
                                                 swal({
                                                     icon: "warning",
@@ -502,7 +531,7 @@
                                                     }
                                                 });
                                             });
-                                        </script>
+                                        </script> -->
                                     <?php else : ?>
                                         <td><button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button></td>
                                     <?php endif; ?>

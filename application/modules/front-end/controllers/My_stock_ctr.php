@@ -258,9 +258,10 @@ class My_stock_ctr extends CI_Controller
             redirect('home');
         } else {
             $order_id           = $this->input->post('order_id');
-            $status_cf_team     = $this->input->post('status_cf_team');
-            $teamId             = $this->input->post('teamId');
-            $status             = $this->input->post('status');
+            $note_can           = $this->input->post('note_can');
+            $status_cf_team     = 0;
+            $teamId             = null;
+            $status             = 0;
             $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
 
 
@@ -268,27 +269,46 @@ class My_stock_ctr extends CI_Controller
                 'status_confirmed_team'         => $status_cf_team,
                 'update_at'                     => date('Y-m-d H:i:s'),
             );
-            $this->db->where('order_id', 'ODB' . $order_id);
+            $this->db->where('order_id', $order_id);
             if ($this->db->update('tbl_upload_order', $data)) {
                 $data2 = array(
                     'teamId'                    => $teamId,
                     'status'                    => $status,
                     'update_confirm'            => null,
                 );
-                $this->db->where('order_id', 'ODB' . $order_id);
+                $this->db->where('order_id', $order_id);
                 if ($this->db->update('tbl_upload_team', $data2)) {
                     $data3 = array(
-                        'order_id'         => 'ODB' . $order_id,
-                        'history'          => 'Cancel Order',
+                        'order_id'         => $order_id,
+                        'history'          => $note_can,
+                        'price_deduct'     => '10',
                         'teamid'           => $team['IdTeam'],
                         'create_at'        => date('Y-m-d H:i:s'),
                         'status'           => '1',
+                        'status_who'       => 'Team',
                     );
 
                     $success = $this->db->insert('tbl_cancel', $data3);
+
+                    if ($success) {
+                        $deduct = array(
+                            'income'         => $team['income'] - 10,
+                        );
+                        $this->db->where('IdTeam', $team['IdTeam']);
+                        $success = $this->db->update('tbl_team', $deduct);
+                    }
+
                 }
             }
-            echo $success;
+            
+            if ($success > 0) {
+                $this->session->set_flashdata('save_ss2', 'Successfully Cancel  !!.');
+                redirect('My-task');
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully Cancel !!.');
+                redirect('My-task');
+            }
+            
         }
     }
 
