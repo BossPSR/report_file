@@ -457,6 +457,8 @@ class Team_ctr extends CI_Controller
             $income       = $this->input->post('income');
             $idteam       = $this->input->post('idteam');
 
+
+
             $team = $this->db->get_where('tbl_team', ['IdTeam' => $idteam])->row_array();
             $sum  = $team['income'] - $income;
 
@@ -464,22 +466,123 @@ class Team_ctr extends CI_Controller
                 $this->session->set_flashdata('del_ss2', 'Out of balance can not be deducted.');
                 redirect('back_team');
             } else {
+
                 $data = [
                     'income'        => $sum,
                     'update_at'     => date('Y-m-d H:i:s'),
                 ];
                 $this->db->where('IdTeam', $idteam);
                 $success = $this->db->update('tbl_team', $data);
+
+
+                $detail       = $this->input->post('detail');
+                $admin_by       = $this->input->post('admin_by');
+
+
+                $this->load->library('upload');
+                $config['upload_path'] = './uploads/deduct/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|mp4';
+                $config['max_size']     = '999999';
+                $config['max_width'] = '10000';
+                $config['max_height'] = '10000';
+                $name_file = "Deduct-" . time();
+                $config['file_name'] = $name_file;
+                $this->upload->initialize($config);
+
+                $this->upload->do_upload('file_name');
+
+                $gamber     = $this->upload->data();
+                $data = array(
+
+                    'file_name'                => $gamber['file_name'],
+                    'detail'                   => $detail,
+                    'teamid_deduct'            => $idteam,
+                    'deduct'                   => $income,
+                    'admin_by'                 => $admin_by,
+                    'path'                     => 'uploads/deduct/' . $gamber['file_name'],
+                    'create_at'               => date('Y-m-d H:i:s')
+                );
+
+
+                $success = $this->db->insert('tbl_deduct', $data);
+                $id_set = $this->db->insert_id();
+                $this->sendEmail_deduct_income($team, $id_set);
                 if ($success > 0) {
-                    $this->session->set_flashdata('save_ss2', ' Successfully updated deduct income !!.');
+                    $this->session->set_flashdata('save_ss2', ' Successfully  !!.');
                 } else {
-                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated deduct income');
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully ');
                 }
                 redirect('back_team');
             }
         }
     }
+    private function sendEmail_deduct_income($team, $id_set)
+    {
 
+
+        $subject = 'System Warning';
+
+        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
+        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
+        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+        $message .= '<body style="background: #eee;">';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
+
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
+
+
+        $teamsend = $this->db->get_where('tbl_deduct', ['id' => $id_set])->row_array();
+        $message .= 'โดนโทษปรับ เป็นจำนวนเงินทั้งหมด' . $teamsend['deduct'] . '';
+        $message .= 'รายละเอียด:' . $teamsend['detail'] . '';
+        $message .= '<br>';
+
+
+
+
+
+
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+        $message .= '<div>';
+        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
+        $message .= 'Reject';
+        $message .= '</div>';
+        $message .= '</div>';
+        $message .= '</body>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($team['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
+        }
+
+        return redirect('back_team');
+    }
     public function add_score_team()
     {
         if ($this->session->userdata('email_admin') == '') {
@@ -529,13 +632,113 @@ class Team_ctr extends CI_Controller
                 ];
                 $this->db->where('IdTeam', $idteam);
                 $success = $this->db->update('tbl_team', $data);
+
+                $detail_score       = $this->input->post('detail_score');
+                $admin_by       = $this->input->post('admin_by');
+
+
+                $this->load->library('upload');
+                $config['upload_path'] = './uploads/deduct/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|mp4';
+                $config['max_size']     = '999999';
+                $config['max_width'] = '10000';
+                $config['max_height'] = '10000';
+                $name_file = "Deduct_score-" . time();
+                $config['file_name'] = $name_file;
+                $this->upload->initialize($config);
+
+                $this->upload->do_upload('file_name');
+
+                $gamber     = $this->upload->data();
+                $data = array(
+
+                    'file_name'                => $gamber['file_name'],
+                    'detail_score'             => $detail_score,
+                    'teamid_deduct'            => $idteam,
+                    'deduct_score'             => $deduct,
+                    'admin_by'                 => $admin_by,
+                    'path'                     => 'uploads/deduct/' . $gamber['file_name'],
+                    'create_at'                => date('Y-m-d H:i:s')
+                );
+
+
+                $success = $this->db->insert('tbl_deduct_score', $data);
+                $id_set = $this->db->insert_id();
+                $this->sendEmail_deduct_score($team, $id_set);
                 if ($success > 0) {
-                    $this->session->set_flashdata('save_ss2', 'Successfully updated deduct income !!.');
+                    $this->session->set_flashdata('save_ss2', 'Successfully updated deduct score !!.');
                 } else {
-                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated deduct income');
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated deduct score');
                 }
                 redirect('back_team');
             }
         }
+    }
+    private function sendEmail_deduct_score($team, $id_set)
+    {
+
+
+        $subject = 'System Warning';
+
+        $message = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">';
+        $message .= '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+        $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>';
+        $message .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>';
+        $message .= '<body style="background: #eee;">';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Hello World</div>';
+
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
+
+
+        $teamsend = $this->db->get_where('tbl_deduct_score', ['id' => $id_set])->row_array();
+        $message .= 'โดนโทษปรับ เป็นจำนวนเงินทั้งหมด' . $teamsend['deduct'] . '';
+        $message .= 'รายละเอียด:' . $teamsend['detail'] . '';
+        $message .= '<br>';
+
+
+
+
+
+
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Price : '.$upload_order[0]['price_file'].'</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Discount : '.$discount.'%</div>';
+        //$message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">Customer ID : CM'.$upload_order[0]['userId'].'</div>';
+        $message .= '<div>';
+        $message .= '<div style="text-align: center;width:40%; margin:15px auto; background:#0063d1; font-size:28px;">';
+        $message .= 'Reject';
+        $message .= '</div>';
+        $message .= '</div>';
+        $message .= '</body>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($team['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send  information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send  information');
+        }
+
+        return redirect('back_team');
     }
 }

@@ -103,6 +103,8 @@
                                                     <th>UserName</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
+                                                    <th>Sign update</th>
+                                                    <th>Country</th>
 													<th>Wallet</th>
 													<th>Cashback</th>
                                                     <th>Score</th>
@@ -124,6 +126,11 @@
                                                         <td><?php echo $user_list['Us']; ?></td>
                                                         <td><?php echo $user_list['email']; ?></td>
                                                         <td><?php echo $user_list['phone']; ?></td>
+                                                        <td><?php echo $user_list['created_at']; ?></td>
+                                                        <td>
+                                                            <?php  $country_name= $this->db->get_where('countries',['id' => $user_list['country_id']])->row_array();?>
+                                                            <?php echo $country_name['countryName']; ?>
+                                                        </td>
 														<td>$<?php echo $user_list['cash']  == '' ? '0' : $user_list['cash'] ; ?></td>
 														<td>$<?php echo $user_list['cashback'] == '' ? '0' : $user_list['cashback'] ; ?></td>
                                                         <td><?php echo $user_list['score']; ?></td>
