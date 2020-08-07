@@ -77,8 +77,8 @@
                                                     <th>User id</th>
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
-                                                    <th>Order Date</th>
-                                                    <th>Date feedback</th>
+                                                    <th>Feedback In</th>
+                                                    <th>Feedback Required</th>
                                                     <th>T3</th>
                                                     <th>Position</th>
                                                     <th>Status</th>
@@ -165,7 +165,27 @@
                                                             <?php } ?>
                                                         </td>
                                                         <td><?php echo $feedback['time'] ?></td>
-                                                        <td><?php echo $feedback['dated'] ?></td>
+                                                        <td>
+															
+															<?php if (date("Y-m-d") >= $feedback['dated']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
+                                                            <?php else : ?>
+                                                                <?php $dateReq = date('Y/m/d', strtotime($feedback['dated'])); ?>
+                                                                <div id="clock-b<?php echo $feedback['dated']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $feedback['dated']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
+
+                                                                    });
+                                                                </script>
+                                                            <?php endif; ?>
+														</td>
                                                         <td>
                                                             <?php if (!empty($feedback['teamId'])) : ?>
                                                                 <?php echo $feedback['teamId']; ?>
