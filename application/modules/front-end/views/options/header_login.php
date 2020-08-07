@@ -408,21 +408,23 @@
                                                 </div>
 
                                                 <?php
-                                                $this->db->select('*,sum(tbl_upload_team.wage) as sumWage');
+                                                $this->db->select('*');
                                                 $this->db->from('tbl_upload_team');
                                                 $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                                                 $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                                                 $this->db->where('tbl_upload_order.status_delivery', 1);
+                                                $this->db->group_by('tbl_upload_team.order_id');
+                                                
 
-                                                $sm_de2 = $this->db->get()->row_array();
+                                                $sm_de2 = $this->db->get()->result_array();
+                                                $cc = 0 ;
                                                 ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
-                                                        <?php if ($sm_de2['sumWage']) : ?>
-                                                            <?php echo $sm_de2['sumWage']; ?>
-                                                        <?php else : ?>
-                                                            0
-                                                        <?php endif; ?>
+                                                        <?php foreach ($sm_de2 as $key => $sm_de2) : ?>
+                                                        <?php $cc += $sm_de2['wage']; ?> 
+                                                        <?php endforeach; ?>
+                                                        <?php echo $cc; ?>
                                                     </div>
                                                     <div>My Income</div>
                                                 </div>
