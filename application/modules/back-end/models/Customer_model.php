@@ -111,6 +111,7 @@ class Customer_model extends CI_Model
         $this->db->where('tbl_feedback.check_feedback_dalivery', 0);
         $this->db->where('tbl_upload_order.is_check', 0);
         $this->db->where('tbl_upload_team.status', 2);
+        $this->db->or_where('tbl_cancel.status', 1);
         // $this->db->or_where('tbl_upload_team.status', 0);
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'desc');

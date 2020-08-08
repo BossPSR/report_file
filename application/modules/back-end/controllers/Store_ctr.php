@@ -101,11 +101,19 @@ class Store_ctr extends CI_Controller
         $Position       = $this->input->post('Position');
         $note_s         = $this->input->post('note_s');
         $organization   = $this->input->post('organization');
+        $status_cp   = $this->input->post('status_cp');
+        if ($status_cp == 'complete') {
+            $book = '1';
+        }else{
+            $book = '0';
+        }
+
         if ($team) {
             $cf = '1';
         } else {
             $cf = '0';
         }
+
         // $Document = [];
         // $Document = explode(",", $Document[0]);
         // $Document = array_unique($Document);
@@ -114,11 +122,11 @@ class Store_ctr extends CI_Controller
 
             'price_file'            => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
-            'status_book'           => 1,
+            'status_book'           => $book,
             'organization'          => $organization,
             'update_at'             => date('Y-m-d H:i:s'),
             'notify_user'           => 0,
-            'status_cp'             => $this->input->post('status_cp'),
+            'status_cp'             => $status_cp,
             'status_confirmed_team' => $cf,
             'notify_admin'          => 0,
         );

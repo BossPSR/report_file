@@ -570,7 +570,7 @@
 
                                                                                                 <tr>
                                                                                                     <th>Select</th>
-                                                                                                    <th>Relive</th>
+                                                                                                    <!-- <th>Relive</th> -->
                                                                                                     <th>Store_id</th>
                                                                                                     <th>File_name</th>
                                                                                                     <th>File</th>
@@ -587,13 +587,13 @@
                                                                                                             </label>
                                                                                                         </td>
 
-                                                                                                        <td>
+                                                                                                        <!-- <td>
                                                                                                             <?php if ($dm_c11['relive_status'] == '0') : ?>
                                                                                                                 -
                                                                                                             <?php else : ?>
                                                                                                                 <div class="badge badge-primary">Relive</div>
                                                                                                             <?php endif ?>
-                                                                                                        </td>
+                                                                                                        </td> -->
                                                                                                         <td><?php echo $dm_c11['store_id'] ?></td>
                                                                                                         <td><?php echo $dm_c11['file_name'] ?></td>
                                                                                                         <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>

@@ -56,6 +56,8 @@
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>Country</th>
+                                                    <th>Organi <br>
+                                                        zation</th>
                                                     <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
@@ -83,6 +85,12 @@
                                                         <td><?php echo $stores['userOR']; ?></td>
                                                         <td>
                                                             <?php echo $stores['countryName'] == '' ? '-' : $stores['countryName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <div class="badge badge-pill badge-primary mr-1 mb-1" style="font-weight: 900;">
+                                                                <?php echo $stores['organization'] == '' ? '-' : $stores['organization']; ?>
+                                                            </div>
+
                                                         </td>
 
                                                         <td>
@@ -569,11 +577,12 @@
 
                                                         <td><?php echo $stores['createST']; ?></td>
                                                         <td>
-                                                            <?php if ($stores['status_delivery'] == '1') : ?>
-                                                                <?php echo $stores['dateREST']; ?>
-                                                            <?php else : ?>
+                                                            <?php echo $stores['dateREST']; ?>
+
+                                                            <!-- <?php if ($stores['status_delivery'] == '1') : ?> -->
+                                                            <!-- <?php else : ?>
                                                                 <input type="date" class="form-control  dateread<?php echo $stores['orderST']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stores['orderST']; ?>" value="<?php echo $stores['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
-                                                            <?php endif; ?>
+                                                            <?php endif; ?> -->
 
                                                         </td>
 
@@ -762,7 +771,7 @@
                                                                 </form>
                                                             </div>
                                                         </td>
-                                                        <td  style="width: 1%;">
+                                                        <td style="width: 1%;">
                                                             <a href="#" data-toggle="modal" data-target="#note_new<?php echo $stores['orderST']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
                                                             <div class="modal fade" id="note_new<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
