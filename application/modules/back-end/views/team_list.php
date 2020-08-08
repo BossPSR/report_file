@@ -42,10 +42,23 @@
 			$count_setion = $query->row_array();
 			?>
 			<?php
-			$this->db->select('* ,sum(tbl_upload_team.wage )  AS total');
+			$this->db->select('* ,sum(deduct )  AS total_de');
+			$this->db->from('tbl_deduct');
+
+			$query = $this->db->get(); // Produces an integer, like 17
+			$deduct_total = $query->row_array();
+			?>
+				<?php
+			$this->db->select('* ,sum(deduct_score )  AS total_deduct_score');
+			$this->db->from('tbl_deduct_score');
+
+			$query = $this->db->get(); // Produces an integer, like 17
+			$deduct_total_score = $query->row_array();
+			?>
+			<?php
+			$this->db->select('* ,sum(price)  AS total');
 			$this->db->from('tbl_withdraw_team');
-			$this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_withdraw_team.order_id', 'left');
-			$this->db->where('tbl_withdraw_team.status', 1);
+			$this->db->where('status', 1);
 			$query = $this->db->get(); // Produces an integer, like 17
 			$count_note = $query->row_array();
 			?>
@@ -81,7 +94,7 @@
 						<div class="card">
 							<div class="row card-header">
 
-								<div class="col-5">
+								<div class="col-3">
 									<h4 class="card-title">Team list</h4>
 								</div>
 								<div class="col-1 text-center">
@@ -120,7 +133,7 @@
 								<div class="col-1 text-center">
 									<h3 class="card-title " id="co">
 										<?php
-											echo $d;
+										echo $d;
 										?>
 									</h3>
 									<h3 class="check_list_not">ค้างส่ง Order</h3>
@@ -129,7 +142,7 @@
 								<div class="col-1 text-center">
 									<h3 class="card-title " id="tu">
 										<?php
-											echo $f;
+										echo $f;
 										?>
 									</h3>
 									<h3 class="check_list_not">ค้างส่ง Feedback</h3>
@@ -148,13 +161,33 @@
 								<div class="col-1 text-center">
 
 									<h3 class="card-title ">
-										<?php if (!empty($count_setion['total'])) : ?>
+										<?php if (!empty($count_note['total'])) : ?>
 											<?php echo $count_note['total']; ?>
 										<?php else : ?>
 											0
 										<?php endif; ?>
 									</h3>
 									<h3 class="check_list_not">ค้างชำระเงิน</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php if (!empty($deduct_total['total_de'])) : ?>
+											<?php echo $deduct_total['total_de']; ?>
+										<?php else : ?>
+											0
+										<?php endif; ?>
+									</h3>
+									<h3 class="check_list_not">Deduct income</h3>
+								</div>
+								<div class="col-1 text-center">
+									<h3 class="card-title ">
+										<?php if (!empty($deduct_total_score['total_deduct_score'])) : ?>
+											<?php echo $deduct_total_score['total_deduct_score']; ?>
+										<?php else : ?>
+											0
+										<?php endif; ?>
+									</h3>
+									<h3 class="check_list_not">Deduct score</h3>
 								</div>
 
 							</div>
@@ -167,6 +200,8 @@
 												<tr>
 													<th>Online</th>
 													<th>Details</th>
+													<th>Deduct income</th>
+													<th>Deduct score</th>
 													<th>TeamId</th>
 													<th>Name</th>
 													<th>Order</th>
@@ -248,6 +283,7 @@
 																						<th>phone</th>
 																						<th>email</th>
 																						<th>postion</th>
+																						<th>Sign up date</th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -279,8 +315,151 @@
 																								<?php } ?>
 																							<?php } ?>
 																						</td>
+																						<td><?php echo $team['created_at']; ?></td>
 																					</tr>
 
+																				</tbody>
+																			</table>
+																		</div>
+																		<div class="modal-footer">
+																			<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</td>
+														<td>
+															<a href="#" data-toggle="modal" data-target="#exampleModaldedact<?php echo $team['IdTeam']; ?>"><i class="feather icon-folder" style="font-size: 25px;"></i></a>
+															<div class="modal fade" id="exampleModaldedact<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">Deduct income</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+
+																		<div class="modal-body">
+																			<table class="table zero-configuration">
+																				<thead>
+																					<tr>
+																						<th>File_name</th>
+																						<th>Teamid</th>
+																						<th>Deduct</th>
+																						<th>Order id</th>
+																						<th>Detail</th>
+																						<th>Create_at</th>
+																						<th>Admin_by</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<?php $deduct = $this->db->get_where('tbl_deduct', ['teamid_deduct' => $team['IdTeam']])->result_array(); ?>
+																					<?php foreach ($deduct as $key => $deduct) { ?>
+																						<tr>
+
+																							<td>
+																								<?php if ($deduct['path'] == "") : ?>
+																									-
+																								<?php else : ?>
+																									<a href="<?php echo $deduct['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																								<?php endif; ?>
+																							</td>
+																							<td><?php echo $deduct['teamid_deduct'] ?></td>
+																							<td><?php echo $deduct['deduct'] ?></td>
+
+																							<td>
+																								<?php if ($deduct['order_id'] == "") : ?>
+																									-
+																								<?php else : ?>
+																									<?php echo $deduct['order_id'] ?>
+																								<?php endif; ?>
+																							</td>
+																							<td><?php echo $deduct['detail'] ?></td>
+																							<td><?php echo $deduct['create_at'] ?></td>
+																							<td>
+																								<?php if ($deduct['admin_by'] == "") : ?>
+																									-
+																								<?php else : ?>
+																									<?php $admin = $this->db->get_where('tbl_admin', ['id' => $deduct['admin_by']])->row_array(); ?>
+																									<?php echo $admin['email'] ?>
+																								<?php endif; ?>
+																							</td>
+																						</tr>
+																					<?php } ?>
+																				</tbody>
+																			</table>
+																		</div>
+																		<div class="modal-footer">
+																			<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</td>
+														<td>
+															<a href="#" data-toggle="modal" data-target="#exampleModaldedact_score<?php echo $team['IdTeam']; ?>"><i class="feather icon-folder" style="font-size: 25px;"></i></a>
+															<div class="modal fade" id="exampleModaldedact_score<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">Deduct score</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+
+																		<div class="modal-body">
+																			<table class="table zero-configuration">
+																				<thead>
+																					<tr>
+																						<th>File_name</th>
+																						<th>Teamid</th>
+																						<th>Deduct</th>
+																						<th>Order id</th>
+																						<th>Detail</th>
+																						<th>Create_at</th>
+																						<th>Admin_by</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<?php $deduct = $this->db->get_where('tbl_deduct_score', ['teamid_deduct' => $team['IdTeam']])->result_array(); ?>
+																					<?php foreach ($deduct as $key => $deduct) { ?>
+																						<tr>
+
+																							<td>
+																								<?php if ($deduct['path'] == "") : ?>
+																									-
+																								<?php else : ?>
+																									<a href="<?php echo $deduct['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																								<?php endif; ?>
+																							</td>
+																							<td><?php echo $deduct['teamid_deduct'] ?></td>
+																							<td><?php echo $deduct['deduct_score'] ?></td>
+
+																							<td>
+																								<?php if ($deduct['order_id'] == "") : ?>
+																									-
+																								<?php else : ?>
+																									<?php echo $deduct['order_id'] ?>
+																								<?php endif; ?>
+																							</td>
+																							<td><?php echo $deduct['detail_score'] ?></td>
+																							<td><?php echo $deduct['create_at'] ?></td>
+																							<td>
+																								<?php if ($deduct['admin_by'] == "") : ?>
+																									-
+																								<?php else : ?>
+																									<?php $admin = $this->db->get_where('tbl_admin', ['id' => $deduct['admin_by']])->row_array(); ?>
+																									<?php echo $admin['email'] ?>
+																								<?php endif; ?>
+																							</td>
+																						</tr>
+																					<?php } ?>
 																				</tbody>
 																			</table>
 																		</div>
@@ -578,9 +757,12 @@
 																					</ul>
 																					<div class="tab-content">
 																						<div role="tabpanel" class="tab-pane active" id="pill31" aria-expanded="true" aria-labelledby="base-pill31">
-																							<form action="deduct_income" method="POST">
+																							<form action="deduct_income" method="POST" enctype="multipart/form-data">
 																								<div class="row">
 																									<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
+																									<?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array(); ?>
+
+																									<input type="text" name="admin_by" value="<?php echo $admin['id']; ?>" hidden>
 																									<div class="col-md-8">
 																										<label for="">Deduct Income</label>
 																										<input type="number" name="income" class="form-control">
@@ -590,14 +772,24 @@
 																										<div><?php echo $team['income']; ?></div>
 																									</div>
 																									<div class="col-md-12" style="margin-top: 15px;">
+																										<label for="">File_name</label>
+																										<input type="file" name="file_name" class="form-control">
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
+																										<label for="">Detail</label>
+																										<textarea name="detail" id="" rows="5" class="form-control"></textarea>
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
 																										<button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
 																									</div>
+
 																								</div>
 																							</form>
 																						</div>
 																						<div class="tab-pane" id="pill32" aria-labelledby="base-pill32">
 																							<form action="add_score_team" method="POST">
 																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
+																								
 																								<div class="row">
 																									<div class="col-md-8">
 																										<label for="">Add Score</label>
@@ -614,8 +806,10 @@
 																							</form>
 																						</div>
 																						<div class="tab-pane" id="pill33" aria-labelledby="base-pill33">
-																							<form action="deduct_score_team" method="POST">
+																							<form action="deduct_score_team" method="POST" enctype="multipart/form-data">
 																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
+																								<?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array(); ?>
+																								<input type="text" name="admin_by" value="<?php echo $admin['id']; ?>" hidden>
 																								<div class="row">
 																									<div class="col-md-8">
 																										<label for="">Deduct Score</label>
@@ -624,6 +818,14 @@
 																									<div class="col-md-4">
 																										<label for="">score team</label>
 																										<div><?php echo $team['team_score']; ?></div>
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
+																										<label for="">File_name</label>
+																										<input type="file" name="file_name" class="form-control">
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
+																										<label for="">Detail</label>
+																										<textarea name="detail_score" id="" rows="5" class="form-control"></textarea>
 																									</div>
 																									<div class="col-md-12" style="margin-top: 15px;">
 																										<button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
