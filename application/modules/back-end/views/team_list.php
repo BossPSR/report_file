@@ -48,7 +48,7 @@
 			$query = $this->db->get(); // Produces an integer, like 17
 			$deduct_total = $query->row_array();
 			?>
-				<?php
+			<?php
 			$this->db->select('* ,sum(deduct_score )  AS total_deduct_score');
 			$this->db->from('tbl_deduct_score');
 
@@ -643,9 +643,53 @@
 																		Pending approval
 																	</button>
 																	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=1">approve</a>
+																		<a class="dropdown-item" data-toggle="modal" data-target="#statusid<?php echo $team['IdTeam']; ?>">approve</a>
+																		<!-- href="status_team?id=<?php echo $team['idT']; ?>&status=1" -->
 																		<a class="dropdown-item" href="status_team?id=<?php echo $team['idT']; ?>&status=2">Not approved</a>
+																	</div>
+																</div>
+																<div class="modal fade" id="statusid<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																	<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title" id="exampleModalLabel">Approve Postion (<?php echo $team['IdTeam']; ?>)</h5>
+																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																					<span aria-hidden="true">&times;</span>
+																				</button>
+																			</div>
 
+																			<div class="modal-body">
+																				<table class="table zero-configuration">
+																					<thead>
+																						<tr>
+																							<th>postion</th>
+																							<th>Sign up date</th>
+																							<th>Check postion</th>
+																						</tr>
+																					</thead>
+																					<tbody>
+																						<?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['idT']])->result_array(); ?>
+																						<?php foreach ($position as $position) { ?>
+																							<?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $position['job_position']])->row_array(); ?>
+																							<tr>
+																								<td>
+																									<?php echo $name_position['name_item']; ?>
+																								</td>
+																								<td><?php echo $team['created_at']; ?></td>
+																								<td>
+																									
+																								</td>
+																							</tr>
+																						<?php } ?>
+																					</tbody>
+																				</table>
+																			</div>
+																			<div class="modal-footer">
+																				<div class="add-data-footer d-flex justify-content-around" style="width: 100%;">
+																					<a class="btn btn-success" href="status_team?id=<?php echo $team['idT']; ?>&status=1" style="width: 100%;">Approved</a>
+																				</div>
+																			</div>
+																		</div>
 																	</div>
 																</div>
 															</td>
@@ -789,7 +833,7 @@
 																						<div class="tab-pane" id="pill32" aria-labelledby="base-pill32">
 																							<form action="add_score_team" method="POST">
 																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
-																								
+
 																								<div class="row">
 																									<div class="col-md-8">
 																										<label for="">Add Score</label>

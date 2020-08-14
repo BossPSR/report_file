@@ -386,6 +386,8 @@
                                                 <div class="menu-list"></div>
                                                 <div>Score</div>
                                             </div> -->
+
+
                                                 <?php
                                                 $this->db->select('*,sum(tbl_upload_order.status_delivery) as sum_delivery');
                                                 $this->db->from('tbl_upload_team');
@@ -414,20 +416,25 @@
                                                 $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                                                 $this->db->where('tbl_upload_order.status_delivery', 1);
                                                 $this->db->group_by('tbl_upload_team.order_id');
-                                                
+
 
                                                 $sm_de2 = $this->db->get()->result_array();
-                                                $cc = 0 ;
+                                                $cc = 0;
                                                 ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
                                                         <?php foreach ($sm_de2 as $key => $sm_de2) : ?>
-                                                        <?php $cc += $sm_de2['wage']; ?> 
+                                                            <?php $cc += $sm_de2['wage']; ?>
                                                         <?php endforeach; ?>
                                                         <?php echo $cc; ?>
                                                     </div>
                                                     <div>My Income</div>
                                                 </div>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
+                                                    <div> 1 ดอลลาร์สหรัฐ </div>
+                                                    <div>เท่ากับ 31.14 บาท </div>
+                                                </div>
+
                                             </div>
                                         <?php endif ?>
                                         </div>

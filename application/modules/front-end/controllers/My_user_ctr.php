@@ -15,7 +15,7 @@ class My_user_ctr extends CI_Controller
 			redirect('home');
 		} else {
 			$data['user'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-			$data['countries'] = $this->db->get_where('countries', ['id' => $data['user']['country_id'] ])->row_array();
+			$data['countries'] = $this->db->get_where('countries', ['id' => $data['user']['country_id']])->row_array();
 			// $data['reject'] = $this->db->get_where('tbl_rejected', ['userId_rj' => $data['user']['id']])->row_array();
 			$lang = $this->session->userdata("lang") == null ? "english" : $this->session->userdata("lang");
 			$this->lang->load($lang, $lang);
@@ -58,6 +58,43 @@ class My_user_ctr extends CI_Controller
 			$c_password		= $this->input->post('c_password');
 
 			$user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+		
+			if ($password == '' && $c_password == '') {
+				$data = array(
+					'username'			=> $username,
+					'phone'				=> $phone,
+				);
+			} elseif (md5($oldpassword) != $user['password']) {
+
+				$this->session->set_flashdata('del_ss2', 'Your password does not match the old password.');
+				redirect('my-profile');
+			} elseif ($password == $c_password) {
+				$data = array(
+					'username'			=> $username,
+					'phone'				=> $phone,
+					'password'			=> md5($password)
+				);
+			} else {
+				$this->session->set_flashdata('del_ss2', 'Password incorrect.Try again!!');
+				redirect('my-profile');
+			}
+			$this->db->where('id', $id);
+			if ($this->db->update('tbl_user', $data)) {
+				$this->session->set_flashdata('save_ss2', 'Successfull!!.Change for my profile.');
+				redirect('my-profile');
+			} else {
+				$this->session->set_flashdata('del_ss2', 'Error for Change my profile.');
+				redirect('my-profile');
+			}
+		}
+	}
+
+	function profile_photo_update()
+	{
+		if ($this->session->userdata('email') == '') {
+			redirect('home');
+		} else {
+			$id 			= $this->input->post('id');
 			// |xlsx|pdf|docx
 			$config['upload_path'] =  'public/frontend/assets/img/profile/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -80,33 +117,13 @@ class My_user_ctr extends CI_Controller
 						'file_name'         => 'public/frontend/assets/img/profile/' . $gamber['file_name'],
 					);
 
-					$this->db->where('id', $id);
-					$this->db->update('tbl_user', $editdata);
+							$this->db->where('id', $id);
+				$success =	$this->db->update('tbl_user', $editdata);
 				}
 			}
 
-
-			if ($password == '' && $c_password == '') {
-				$data = array(
-					'username'			=> $username,
-					'phone'				=> $phone,
-				);
-			} elseif (md5($oldpassword) != $user['password']) {
-
-				$this->session->set_flashdata('del_ss2', 'Your password does not match the old password.');
-				redirect('my-profile');
-			} elseif ($password == $c_password) {
-				$data = array(
-					'username'			=> $username,
-					'phone'				=> $phone,
-					'password'			=> md5($password)
-				);
-			} else {
-				$this->session->set_flashdata('del_ss2', 'Password incorrect.Try again!!');
-				redirect('my-profile');
-			}
-			$this->db->where('id', $id);
-			if ($this->db->update('tbl_user', $data)) {
+			
+			if ($success > 0) {
 				$this->session->set_flashdata('save_ss2', 'Successfull!!.Change for my profile.');
 				redirect('my-profile');
 			} else {

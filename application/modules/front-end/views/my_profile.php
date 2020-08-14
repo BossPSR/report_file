@@ -1,5 +1,23 @@
 <?php $reject =  $this->db->get_where('tbl_upload_store', ['userId' => $user['id'], 'is_check' => 1, 'is_accept' => 0])->result_array();; ?>
 <!--services img area-->
+<style>
+    .to {
+        position: absolute;
+        background-color: #00000029;
+        border-radius: 50%;
+        align-items: center;
+        background-size: 34px 486px;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        background-position: 0 -290px;
+        bottom: 51%;
+        right: 40%;
+        transform: translate(50%, 50%);
+        cursor: pointer;
+    }
+</style>
 <div class="services_gallery mt-60">
     <div class="container">
         <div class="row">
@@ -15,9 +33,14 @@
                         <h2 class="text-center my-income">
                             <div class="name_user m17"><i class="fa fa-user"></i><?= $this->lang->line("name"); ?> : <?php echo $user['username']; ?></div>
                         </h2>
+
                         <div class="image_PF">
                             <img class="profile" src="<?php echo (!isset($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="">
-                            <!-- <div class="edit_name_user"><a href="#"><i class="fa fa-edit"></i>  Edited</a></div> -->
+
+                            <div class="to" data-toggle="modal" data-target="#photocheck">
+                                <i class="fa fa-camera" aria-hidden="true" style="font-size: 24px;padding-top: 8px;"></i>
+                            </div>
+
                         </div>
                         <div class="menu_in_image">
                         </div>
@@ -34,7 +57,6 @@
                                         <i class="fa fa-wrench"></i>
                                     </a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -143,22 +165,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="My-profile-update" method="POST" enctype="multipart/form-data">
+            <form action="My-profile-update" method="POST">
                 <div class="modal-body">
-                    <div class="form-group text-center">
-                        <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 150px;height: 150px;">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Profile</label>
-                        <input type="file" class="form-control" name="profile" value="">
-                    </div>
+                    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                     <div class="form-group">
                         <label for="">Countries</label>
                         <input type="text" class="form-control" name="countries" value="<?php echo $countries['countryName']; ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="">Name</label>
-                        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                         <input type="text" class="form-control" name="name" value="<?php echo $user['username']; ?>" required>
                     </div>
                     <div class="form-group">
@@ -177,6 +192,36 @@
                     <div class="form-group">
                         <label for="">Confirm New Password</label>
                         <input type="password" class="form-control" name="c_password" value="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="photocheck" tabindex="-1" role="dialog" aria-labelledby="exampleModalUser" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="My-photo-update" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                    <div class="form-group text-center">
+                        <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 150px;height: 150px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Profile</label>
+                        <input type="file" class="form-control" name="profile" value="">
                     </div>
                 </div>
                 <div class="modal-footer">

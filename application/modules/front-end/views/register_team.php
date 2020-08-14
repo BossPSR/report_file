@@ -40,7 +40,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label>Countries <span class="red">*</span></label>
-                                    <select class="form-control" name="countries">
+                                    <select class="form-control" name="countries" id="cs">
                                         <option selected disabled>-- SELECT COUNTRIES --</option>
                                         <?php foreach ($countries as $key => $countries) { ?>
                                             <option value="<?php echo $countries['id']; ?>"><?php echo $countries['countryName']; ?></option>
@@ -115,10 +115,28 @@
                                     <!-- <input type="file" name="file_name" required> -->
                                 </div>
                             </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 nonep">
+                                <div class="form-group">
+                                    <label for="">Paypal <span style="color: #bbbbbb;">ต้องเป็นชื่อเดียวกันกับชื่อบัญชีธนาคารหรือ Pay pal</span></label>
+                                    <input type="text" id="paypal" class="form-control" name="bank_account" value="" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 noneb" style="display: none;">
+                                <div class="form-group">
+                                    <label for="">บัญชีธนาคาร <span style="color: #bbbbbb;">ต้องเป็นชื่อเดียวกันกับชื่อบัญชีธนาคารหรือ บัญชีธนาคาร</span></label>
+                                    <input type="text" id="bank" class="form-control" name="bank_account" value="" required>
+                                </div>
+                            </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="">Paypal</label>
-                                    <input type="text" class="form-control" name="bank_account" value="" required>
+                                    <?php $select_ed = $this->db->get('tbl_item_educational')->result_array(); ?>
+                                    <label for="">Educational </label>
+                                    <select class="form-control" name="educational" required>
+                                        <option value="" selected disabled> -- Select -- </option>
+                                        <?php foreach ($select_ed as $key => $ed) { ?>
+                                            <option value="<?php echo $ed['name_educational']; ?>"><?php echo $ed['name_educational']; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -146,5 +164,21 @@
             document.getElementById('password').value = "";
         }
     }
+</script>
+<script>
+    $('#cs').change(function() {
+        // $('.te4').css('display', 'none');
+        if (this.value == "218") {
+            $('.noneb').fadeIn("slow");
+            $('.nonep').css('display', 'none');
+            $("#paypal").prop('required', true);
+            $("#bank").prop('required', false);
+        } else {
+            $('.noneb').css('display', 'none');
+            $('.nonep').fadeIn("slow");
+            $("#paypal").prop('required', false);
+            $("#bank").prop('required', true);
+        } 
+    });
 </script>
 <!-- customer login end -->

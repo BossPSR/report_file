@@ -107,6 +107,7 @@ class Register_ctr extends CI_Controller
 		$password			= $this->input->post('password');
 		$c_password			= $this->input->post('c_password');
 		$job				= $this->input->post('job');
+		$educational		= $this->input->post('educational');
 		$username_check     = $this->Login_model->check_usre($email);
 		$team_check      	= $this->Login_model->team_check($email);
 		$check_usre2        = $this->Login_model->check_usre2($name);
@@ -145,6 +146,7 @@ class Register_ctr extends CI_Controller
 							'phone'				=> $phone,
 							'email'				=> $email,
 							'bank_account'		=> $bank_account,
+							'educational'		=> $educational,
 							'password'			=> md5($password),
 							'file_name'			=> 'uploads/resume/' . $uploadData['file_name'],
 							'resume_file'		=> $uploadData['file_name'],
@@ -168,27 +170,18 @@ class Register_ctr extends CI_Controller
 									$saveData = $this->db->insert('tbl_job_position', $data2);
 								}
 								if ($saveData > 0) {
-									// echo "<script>";
-									// echo "alert('Thank for send register team.');";
-									// echo "window.location='home';";
-									// echo "</script>";
+									
 									$this->session->set_flashdata('success_regis_team', TRUE);
 									redirect('home');
 								} else {
 									$this->session->set_flashdata('fail_regis_teamResum', TRUE);
 									redirect('home');
-									// echo "<script>";
-									// echo "alert('Error for send resume. Plase try agian !!');";
-									// echo "window.location='register-team';";
-									// echo "</script>";
+								
 								}
 							} else {
 								$this->session->set_flashdata('fail_regis_teamData', TRUE);
 								redirect('home');
-								// echo "<script>";
-								// echo "alert('Data no must be filled out!!!');";
-								// echo "window.location='register-team';";
-								// echo "</script>";
+							
 							}
 						}
 					} else {
