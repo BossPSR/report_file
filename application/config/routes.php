@@ -105,6 +105,7 @@ $route['My-stock-item-add']         = 'front-end/My_stock_ctr/my_stock_item_add'
 $route['cancel_auto']               = 'front-end/My_stock_ctr/cancel_auto';
 $route['My-delivery']               = 'front-end/Delivery_ctr';
 $route['delivery_file']             = 'front-end/Delivery_ctr/delivery_file';
+$route['new_folder']                = 'front-end/Delivery_ctr/new_folder';
 $route['My-profile_team']           = 'front-end/My_team_ctr/my_profile_team';
 $route['My-profile-team-update']    = 'front-end/My_team_ctr/my_profile_team_update';
 $route['My-profile-photo-team-update']    = 'front-end/My_team_ctr/my_profile_photo_team_update';
