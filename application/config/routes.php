@@ -206,6 +206,7 @@ $route['ready_refresh']                             = 'back-end/Customer_order_c
 $route['Add_bookmake']                              = 'back-end/Book_ctr';
 $route['fileUpload_store_book']                     = 'back-end/Book_ctr/fileUpload_store_book';
 $route['fileUpload_main']                           = 'back-end/Book_ctr/fileUpload_main';
+$route['fileUpload_main_sub']                           = 'back-end/Book_ctr/fileUpload_main_sub';
 
 $route['uploadmain_auto']                           = 'back-end/Book_ctr/uploadmain_auto';
 

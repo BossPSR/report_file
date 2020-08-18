@@ -366,6 +366,61 @@ class Book_ctr extends CI_Controller
         }
     }
 
+    public function fileUpload_main_sub()
+    {
+        // image_lib
+        $DM         = $this->input->post('DM');
+        $status_cp  = $this->input->post('status_cpS');
+        $id_upload  = $this->input->post('id_upload');
+        
+        // $upload_book = $this->Store_model->bookmark_upload($DM);
+                     $this->db->order_by('id', 'DESC');
+        $dmmax     = $this->db->get('tbl_upload_auto')->row();
+
+
+
+        $target_dir = "uploads/Store/"; // Upload directory
+        if (!empty($_FILES['file']['name'])) {
+
+            // Set preference
+            $config['upload_path']      = 'uploads/Store/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']    = '*';
+            $config['max_size']         = '99999'; // max_size in kb
+            $config['file_name']        = $_FILES['file']['name'];
+
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
+
+                // $data = array(
+                //     'file_name'             => $uploadData['file_name'],
+                //     'store_id'              => $upload_book['store_id'],
+                //     'status_main_search'    => 1,
+                //     'status_chack'          => 1,
+                //     'relive_status'         => 1,
+                //     'path'                  => 'uploads/Store/' . $uploadData['file_name'],
+                //     'status_check_drop'     => 11,
+                //     'section'               => $upload_book['section'],
+                //     'create_at'             => date('Y-m-d H:i:s'),
+                // );
+                // $this->db->insert('tbl_upload_store', $data);
+
+                $db_store = [
+                    'file_name'       => $uploadData['file_name'],
+                    'path'            => 'uploads/Store/' . $uploadData['file_name'],
+                    'comandnocom'     => $status_cp,
+                    'status'          => 1,
+                ];          
+                           $this->db->where('id',$id_upload);
+                $success = $this->db->update('tbl_upload_main_search_sub', $db_store);
+            }
+        }
+    }
     public function sendEmail_delivery_pay()
     {
         $order_id   = $this->input->post('order_id');
