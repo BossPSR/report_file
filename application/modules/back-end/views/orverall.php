@@ -72,8 +72,8 @@
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>PriceFile</th>
-													<th>Delivery</th>
-													<th>Procress</th>
+                                                    <th>Delivery</th>
+                                                    <th>Procress</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -88,7 +88,7 @@
                                                         <td><?php echo $stores['order'] ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
                                                         <td>
-                                                            <?php echo $stores['countryName'] == '' ? '-' : $stores['countryName'] ; ?>
+                                                            <?php echo $stores['countryName'] == '' ? '-' : $stores['countryName']; ?>
                                                         </td>
                                                         <td>
                                                             <?php if (!empty($stores['teamId'])) : ?>
@@ -190,35 +190,56 @@
 
                                                         </td> -->
                                                         <td><?php echo $stores['createOr']; ?></td>
-                                                        <td><?php echo $stores['requiredOr']; ?></td>
+                                                        <td>
+                                                            <?php if (date("Y-m-d H:i:s") >= $stores['requiredOr']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
+                                                            <?php else : ?>
+                                                                <?php $dateReq = date('Y/m/d H:i:s', strtotime($stores['requiredOr'])); ?>
+                                                                <div id="clock-b<?php echo $stores['order']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $stores['order']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
+
+                                                                    });
+                                                                </script>
+                                                            <?php endif; ?>
+
+
+                                                        </td>
                                                         <?php if ($stores['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
                                                         <td>
-															<?php if($stores['status_team'] == 0) : ?>
-																<span class="badge badge-pill badge-danger">Procressing</span>
-															<?php elseif ($stores['status_team'] == 1) : ?>
-																<span class="badge badge-pill badge-info">Complete</span>
+                                                            <?php if ($stores['status_team'] == 0) : ?>
+                                                                <span class="badge badge-pill badge-danger">Procressing</span>
+                                                            <?php elseif ($stores['status_team'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-info">Complete</span>
                                                             <?php elseif ($stores['status_delivery'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
                                                                 <span class="badge badge-pill badge-success">Delivered</span>
                                                             <?php endif; ?>
-														</td>
-														
-														<td>
-															<?php 
-																if ($stores['status_cancel'] == 1) {
-																	echo '<span class="badge badge-pill badge-danger">Admin cancel</span>';
-																}elseif ($stores['status_cancel'] == 2) {
-																	echo '<span class="badge badge-pill badge-danger">Team cancel</span>';
-																}else{
-																	echo '-';
-																}
-															?>
-														</td>
+                                                        </td>
+
+                                                        <td>
+                                                            <?php
+                                                            if ($stores['status_cancel'] == 1) {
+                                                                echo '<span class="badge badge-pill badge-danger">Admin cancel</span>';
+                                                            } elseif ($stores['status_cancel'] == 2) {
+                                                                echo '<span class="badge badge-pill badge-danger">Team cancel</span>';
+                                                            } else {
+                                                                echo '-';
+                                                            }
+                                                            ?>
+                                                        </td>
                                                         <td>
                                                             <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>

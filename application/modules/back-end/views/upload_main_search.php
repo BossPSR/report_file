@@ -60,6 +60,7 @@
                                                     <th>#</th>
                                                     <th style="width: 10%;">Status Sell</th>
                                                     <th>Document</th>
+                                                    <th>Organization</th>
                                                     <th>Item</th>
                                                     <th>file</th>
                                                     <th>Code</th>
@@ -87,7 +88,7 @@
                                                         </td>
 
                                                         <td><?php echo $value['id_doc']; ?></td>
-
+                                                        <td><?php echo $value['organization_upload']; ?></td>
                                                         <td><?php echo $value['name_item']; ?></td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -103,14 +104,19 @@
                                                                         <div class="modal-body">
                                                                             <table class="table table-hover zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $store = $this->db->get_where('tbl_upload_main_search_sub', ['dm_main' => $value['idmain']])->result_array(); ?>
+                                                                                    <?php
+                                                                                    $this->db->group_by('dm_sub');
+                                                                                    $store = $this->db->get_where('tbl_upload_main_search_sub', ['dm_main' => $value['idmain']])->result_array();
+
+                                                                                    ?>
+
                                                                                     <tr>
                                                                                         <th>DM</th>
                                                                                         <th>CM</th>
                                                                                         <th>Status upload</th>
-                                                                                        <th>File name</th>
-                                                                                        <th>Icon file</th>
-                                                                                        <th>Drop</th>
+                                                                                        <!-- <th>File name</th> -->
+                                                                                        <th>Icon Folder</th>
+                                                                                        <!-- <th>Drop</th> -->
                                                                                         <th>Approved</th>
                                                                                         <th>Not Approved</th>
                                                                                         <th>Removed</th>
@@ -138,105 +144,181 @@
                                                                                                 <?php endif; ?>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <?php echo $store['file_name'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $store['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-                                                                                                <div class="modal fade" id="dms<?php echo $store['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                                                    <form action="rename_uploadmain" method="POST">
-                                                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-
-                                                                                                            <div class="modal-content">
-                                                                                                                <div class="modal-header">
-                                                                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Rename (<?php echo $store['dm_sub']; ?>)</h5>
-                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                                                    </button>
-                                                                                                                </div>
-                                                                                                                <div class="modal-body row">
-                                                                                                                    <?php $exp = explode(".", $store['file_name']); ?>
-                                                                                                                    <div class="col-xl-12 col-md-12 col-12 ">
-                                                                                                                        <div class="form-group" style="text-align: left;">
-                                                                                                                            <label for="Team">Rename</label>
-                                                                                                                            <input type="text" class="form-control" value="<?php echo $exp[0] ?>" name="resume">
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['path'] ?>" name="path">
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $exp[1] ?>" name="doc">
-                                                                                                                            <input type="hidden" class="form-control" value="<?php echo $store['id']; ?>" name="id">
-                                                                                                                        </div>
-                                                                                                                    </div>
-
-                                                                                                                </div>
-                                                                                                                <div class="modal-footer">
-                                                                                                                    <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </form>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                            <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td>
-                                                                                                <?php if ($store['status'] == '0') : ?>
-                                                                                                    <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['idmain']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-upload"></i></a>
-                                                                                                <?php else : ?>
-                                                                                                    <a href="" data-toggle="modal" data-target="#dropedit<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
-                                                                                                <?php endif; ?>
-                                                                                                <div class="modal fade" id="dropedit<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                                                    <div class="modal-dialog" role="document">
+                                                                                                <?php $cutpoin = explode('.',$store['dm_sub']);?>
+                                                                                                <i class="feather icon-folder" style="font-size: 25px; cursor: pointer;" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0].$cutpoin[1].$cutpoin[2]; ?>"></i>
+                                                                                                <div class="modal fade" id="exampleModaleee<?php echo $cutpoin[0].$cutpoin[1].$cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
-                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Change Drop Document </h5>
+                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Sub DM 2</h5>
                                                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                                     <span aria-hidden="true">&times;</span>
                                                                                                                 </button>
                                                                                                             </div>
-
                                                                                                             <div class="modal-body">
-                                                                                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                                                                                                    <label for="" style="font-size: 16px;">File Document </label>
-                                                                                                                    <form action="fileUpload_main" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['id_doc']; ?>">
-                                                                                                                        <input type="hidden" id="DM2<?php echo $value['id_doc']; ?>" class="form-control " name="DM" value="<?php echo $value['id_doc'] ?>">
-                                                                                                                        <div class="dz-message" style="top: 24%;">Upload Document</div>
-                                                                                                                    </form>
-                                                                                                                </div>
-                                                                                                                <br>
-                                                                                                            </div>
+                                                                                                                <table class="table table-hover zero-configuration">
+                                                                                                                    <thead>
+                                                                                                                        <?php
 
+                                                                                                                        $store23 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $store['dm_sub']])->result_array();
+
+                                                                                                                        ?>
+
+                                                                                                                        <tr>
+                                                                                                                            <th>DM</th>
+                                                                                                                            <th>CM</th>
+                                                                                                                            <th>Status upload</th>
+                                                                                                                            <th>File name</th>
+                                                                                                                            <th>Icon Folder</th>
+                                                                                                                            <th>Drop</th>
+                                                                                                                            <th>Approved</th>
+                                                                                                                            <th>Not Approved</th>
+                                                                                                                            <th>Removed</th>
+                                                                                                                            <th>TM</th>
+                                                                                                                            <th>create</th>
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody>
+
+                                                                                                                        <?php foreach ($store23 as $keys => $store23) { ?>
+                                                                                                                            <tr>
+                                                                                                                                <td><?php echo $store23['dm_sub']; ?></td>
+                                                                                                                                <td><?php echo $value['userMain']; ?></td>
+                                                                                                                                <td>
+                                                                                                                                    <?php if ($store23['comandnocom'] == '1') : ?>
+                                                                                                                                        <span class="badge badge-pill badge-success">Complete</span>
+                                                                                                                                    <?php elseif ($store23['comandnocom'] == '2') : ?>
+                                                                                                                                        <span class="badge badge-pill badge-warning">Not complete</span>
+                                                                                                                                    <?php elseif ($store23['comandnocom'] == '3') : ?>
+                                                                                                                                        <span class="badge badge-pill badge-success">Original</span>
+                                                                                                                                    <?php elseif ($store23['comandnocom'] == '4') : ?>
+                                                                                                                                        <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                                                                                    <?php else : ?>
+                                                                                                                                        -
+                                                                                                                                    <?php endif; ?>
+                                                                                                                                </td>
+                                                                                                                                <td>
+                                                                                                                                    <?php echo $store23['file_name'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $store23['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                                                    <div class="modal fade" id="dms<?php echo $store23['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                                                                                        <form action="rename_uploadmain" method="POST">
+                                                                                                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                                                                                                                                                <div class="modal-content">
+                                                                                                                                                    <div class="modal-header">
+                                                                                                                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Rename (<?php echo $store23['dm_sub']; ?>)</h5>
+                                                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                                                                                        </button>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="modal-body row">
+                                                                                                                                                        <?php $exp = explode(".", $store23['file_name']); ?>
+                                                                                                                                                        <div class="col-xl-12 col-md-12 col-12 ">
+                                                                                                                                                            <div class="form-group" style="text-align: left;">
+                                                                                                                                                                <label for="Team">Rename</label>
+                                                                                                                                                                <input type="text" class="form-control" value="<?php echo $exp[0] ?>" name="resume">
+                                                                                                                                                                <input type="hidden" class="form-control" value="<?php echo $store23['path'] ?>" name="path">
+                                                                                                                                                                <input type="hidden" class="form-control" value="<?php echo $exp[1] ?>" name="doc">
+                                                                                                                                                                <input type="hidden" class="form-control" value="<?php echo $store23['id']; ?>" name="id">
+                                                                                                                                                            </div>
+                                                                                                                                                        </div>
+
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="modal-footer">
+                                                                                                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </form>
+                                                                                                                                    </div>
+                                                                                                                                </td>
+                                                                                                                                <td><a href="<?php echo $store23['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                                                <td>
+                                                                                                                                    <?php if ($store23['status'] == '0') : ?>
+                                                                                                                                        <a href="" data-toggle="modal" data-target="#dropedit<?php echo $store23['id']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-upload"></i></a>
+                                                                                                                                    <?php else : ?>
+                                                                                                                                        <a href="" data-toggle="modal" data-target="#dropedit<?php echo $store23['id']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                                                                                                    <?php endif; ?>
+                                                                                                                                    <div class="modal fade" id="dropedit<?php echo $store23['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                                                        <div class="modal-dialog" role="document">
+                                                                                                                                            <div class="modal-content">
+                                                                                                                                                <div class="modal-header">
+                                                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Change Drop Document </h5>
+                                                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                                                    </button>
+                                                                                                                                                </div>
+
+                                                                                                                                                <div class="modal-body">
+                                                                                                                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                                                                                        <label for="" style="font-size: 16px;">File Document </label>
+                                                                                                                                                        <form action="fileUpload_main_sub" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['id_doc']; ?>">
+                                                                                                                                                            <input type="hidden" id="DM2<?php echo $value['id_doc']; ?>" class="form-control " name="DM" value="<?php echo $value['idmain'] ?>">
+                                                                                                                                                            <input type="hidden" class="form-control " name="id_upload" value="<?php echo $store23['id'] ?>">
+
+                                                                                                                                                            <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                                                                                        </form>
+                                                                                                                                                    </div>
+                                                                                                                                                    <br>
+                                                                                                                                                </div>
+
+                                                                                                                                                <div class="modal-footer">
+                                                                                                                                                    <div class="add-data-footer d-flex justify-content-around">
+                                                                                                                                                        <button type="submit" id="uploadschange<?php echo $value['id_doc']; ?>" class="btn btn-primary">Submit</button>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+
+                                                                                                                                    <script>
+                                                                                                                                        Dropzone.autoDiscover = false;
+                                                                                                                                        var myDropzone<?php echo $value['id_doc']; ?> = new Dropzone("#maindropzoneEx<?php echo $value['id_doc']; ?>", {
+                                                                                                                                            autoProcessQueue: false,
+                                                                                                                                            maxFiles: 5,
+                                                                                                                                            addRemoveLinks: true,
+                                                                                                                                            parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                                                                                        });
+
+                                                                                                                                        document.getElementById("uploadschange<?php echo $value['id_doc']; ?>").addEventListener("click", function() {
+                                                                                                                                            // myDropzone.processQueue();
+                                                                                                                                            if (myDropzone<?php echo $value['id_doc']; ?>.files == 0) {
+
+                                                                                                                                                swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                                                                                    button: true,
+                                                                                                                                                });
+                                                                                                                                            }
+                                                                                                                                            myDropzone<?php echo $value['id_doc']; ?>.processQueue();
+                                                                                                                                            myDropzone<?php echo $value['id_doc']; ?>.on("queuecomplete", function(file, res) {
+                                                                                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                                                    button: false,
+                                                                                                                                                });
+                                                                                                                                                setTimeout(function() {
+                                                                                                                                                    location.href = "back_upload_main_search"
+                                                                                                                                                }, 1000);
+                                                                                                                                            });
+                                                                                                                                        });
+                                                                                                                                    </script>
+                                                                                                                                </td>
+                                                                                                                                <td></td>
+                                                                                                                                <td></td>
+                                                                                                                                <td></td>
+                                                                                                                                <td></td>
+                                                                                                                                <td><?php echo $store23['create_at'] ?></td>
+                                                                                                                            </tr>
+                                                                                                                        <?php } ?>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                            </div>
                                                                                                             <div class="modal-footer">
-                                                                                                                <div class="add-data-footer d-flex justify-content-around">
-                                                                                                                    <button type="submit" id="uploadschange<?php echo $value['id_doc']; ?>" class="btn btn-primary">Submit</button>
+                                                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
                                                                                                                 </div>
                                                                                                             </div>
-
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
 
-                                                                                                <script>
-                                                                                                    Dropzone.autoDiscover = false;
-                                                                                                    var myDropzone<?php echo $value['id_doc']; ?> = new Dropzone("#maindropzoneEx<?php echo $value['id_doc']; ?>", {
-                                                                                                        autoProcessQueue: false,
-                                                                                                        maxFiles: 5,
-                                                                                                        addRemoveLinks: true,
-                                                                                                        parallelUploads: 5, // Number of files process at a time (default 2)
-                                                                                                    });
-
-                                                                                                    document.getElementById("uploadschange<?php echo $value['id_doc']; ?>").addEventListener("click", function() {
-                                                                                                        // myDropzone.processQueue();
-                                                                                                        if (myDropzone<?php echo $value['id_doc']; ?>.files == 0) {
-
-                                                                                                            swal("Warning!", "Can not be document Empty", "warning", {
-                                                                                                                button: true,
-                                                                                                            });
-                                                                                                        }
-                                                                                                        myDropzone<?php echo $value['id_doc']; ?>.processQueue();
-                                                                                                        myDropzone<?php echo $value['id_doc']; ?>.on("queuecomplete", function(file, res) {
-                                                                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                                                                button: false,
-                                                                                                            });
-                                                                                                            setTimeout(function() {
-                                                                                                                location.href = "back_upload_main_search"
-                                                                                                            }, 1000);
-                                                                                                        });
-                                                                                                    });
-                                                                                                </script>
                                                                                             </td>
                                                                                             <td></td>
                                                                                             <td></td>
@@ -422,7 +504,7 @@
                                 <div class="form-group">
                                     <div class="controls">
                                         <label for="Organization">Organization</label>
-                                        <select name="organization" class="form-control" id="organization" >
+                                        <select name="organization" class="form-control" id="organization">
                                             <option value="A">A</option>
                                             <option value="B">B</option>
                                             <option value="C">C</option>
@@ -434,7 +516,7 @@
                                 <div class="form-group">
                                     <div class="controls">
                                         <label for="data-name">CP/NCP</label>
-                                        <select name="complete" class="form-control" id="complete" >
+                                        <select name="complete" class="form-control" id="complete">
                                             <option value="complete">Complete</option>
                                             <option value="notcomplete">Not Complete</option>
                                         </select>
@@ -514,11 +596,11 @@
     document.getElementById("uploadsfile").addEventListener("click", function() {
         // myDropzone.processQueue();
 
-        var oz  = document.getElementById("organization").value;
-        var v   = document.getElementById("complete").value;
-        var x   = document.getElementById("select-testing").value;
+        var oz = document.getElementById("organization").value;
+        var v = document.getElementById("complete").value;
+        var x = document.getElementById("select-testing").value;
         // var y = document.getElementById("search_item").value;
-        var code  = document.getElementById("code").value;
+        var code = document.getElementById("code").value;
         var topic = document.getElementById("topic").value;
 
         if (myDropzoneS.files == 0) {
@@ -526,7 +608,7 @@
                 button: true,
             });
         } else {
-            
+
             if (oz == '') {
                 swal("Cancelled", "Please fill in information Complete :)", "error");
             }
@@ -551,7 +633,7 @@
             }
 
 
-            if (x != '' && y != '' && v != '' && code != '' && topic != '' && oz != '' ) {
+            if (x != '' && y != '' && v != '' && code != '' && topic != '' && oz != '') {
 
                 $.ajax({
                     type: 'POST',
