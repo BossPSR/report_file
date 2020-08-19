@@ -200,6 +200,22 @@
         })
     }
 </script>
+<script>
+    function confirmalertunlock_del_Dm(data15) {
+
+        swal({
+            title: "Are you sure DM?",
+            text: "Are you sure you delete DM ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_dm?id=' + data15  ;
+            }
+        })
+    }
+</script>
 
 <script>
     function confirmalertunlock_del_reject_for_sell(data9) {

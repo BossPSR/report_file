@@ -79,6 +79,7 @@ $route['withdraw_cash']             = 'front-end/My_withdraw_ctr/withdraw_cash';
 $route['thank_for_buy']             = 'front-end/Buy_ctr/thank_for_buy';
 $route['order_auto_morefile_buy']   = 'front-end/Buy_ctr/order_auto_morefile_buy';
 $route['store']                     = 'front-end/Store_ctr';
+
 $route['store_upload']              = 'front-end/Store_ctr/fileUpload_store';
 $route['my_deposit_paypal']         = 'front-end/My_deposit_ctr/my_deposit_paypal';
 
@@ -158,6 +159,8 @@ $route['check_NotSatisfired_order_add_com']         = 'back-end/Store_ctr/check_
 $route['back_store_checkForsell']                   = 'back-end/Store_ctr/checkForsell';
 $route['back_store_check_store_add_com']            = 'back-end/Store_ctr/check_store_add_com';
 $route['back_store_reject']                         = 'back-end/Store_ctr/reject';
+$route['reject_for_buy_del']                        = 'back-end/Store_ctr/reject_for_buy_del';
+$route['delete_dm']                                 = 'back-end/Book_ctr/delete_dm';
 $route['back_store_reject_for_buy']                 = 'back-end/Store_ctr/reject_for_buy';
 $route['reject_order_add_com']                      = 'back-end/Store_ctr/reject_order_add_com';
 $route['back_store_status_reject']                  = 'back-end/Store_ctr/status_reject';

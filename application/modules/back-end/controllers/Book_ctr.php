@@ -315,6 +315,7 @@ class Book_ctr extends CI_Controller
         // image_lib
         $DM         = $this->input->post('DM');
         $status_cp  = $this->input->post('status_cpS');
+        $status_cpncp  = $this->input->post('status_cpncp');
 
         // $upload_book = $this->Store_model->bookmark_upload($DM);
                      $this->db->order_by('id', 'DESC');
@@ -360,6 +361,7 @@ class Book_ctr extends CI_Controller
                     'path'            => 'uploads/Store/' . $uploadData['file_name'],
                     'create_at'       => date('Y-m-d H:i:s'),
                     'comandnocom'     => $status_cp,
+                    'cp'              => $status_cpncp,
                 ];
                 $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
             }
@@ -534,5 +536,26 @@ class Book_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
         }
         return redirect('Bookmark');
+    }
+
+    public function  delete_dm()
+    {
+        $id = $this->input->get('id');
+       
+
+       
+       
+        if ($this->db->delete('tbl_upload_main_search', ['id' => $id])) {
+
+            $resultsedit = $this->db->delete('tbl_upload_main_search_sub', ['dm_main' => $id]);
+            if ($resultsedit > 0) {
+                $this->session->set_flashdata('save_ss2', ' Successfully delete DM information !!.');
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully delete DM information');
+            }
+            return redirect('back_upload_main_search');
+        }
+
+      
     }
 }
