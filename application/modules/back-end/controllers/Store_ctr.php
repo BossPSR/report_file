@@ -558,6 +558,16 @@ class Store_ctr extends CI_Controller
         }
     }
 
+    public function reject_for_buy_del()
+    {
+     
+        $order          = $this->input->post('order');
+    
+
+        $success= $this->db->delete('tbl_upload_order',['order_id' => $order]);
+        echo $success;
+    }
+
     public function checkForsell()
     {
         if ($this->session->userdata('email_admin') == '') {

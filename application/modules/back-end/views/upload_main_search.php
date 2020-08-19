@@ -58,7 +58,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th style="width: 10%;">Status Sell</th>
                                                     <th>Document</th>
                                                     <th>Organization</th>
                                                     <th>Item</th>
@@ -76,16 +75,7 @@
                                                     <tr>
                                                         <td><?php echo $i++; ?></td>
 
-                                                        <td>
-                                                            <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $value['update_atMain'])); ?>
-                                                            <?php $data = date('Y-m-d') ?>
 
-                                                            <?php if ($value['status_delivery'] == '1' && $data <= $prosum) : ?>
-                                                                <button type="button" class="btn btn-danger mr-1 mb-1"><i class="feather icon-download-cloud"></i> Sold</button>
-                                                            <?php else : ?>
-                                                                <button type="button" class="btn btn-info mr-1 mb-1"><i class="feather icon-download-cloud"></i> Not Sold</button>
-                                                            <?php endif; ?>
-                                                        </td>
 
                                                         <td><?php echo $value['id_doc']; ?></td>
                                                         <td><?php echo $value['organization_upload']; ?></td>
@@ -111,10 +101,11 @@
                                                                                     ?>
 
                                                                                     <tr>
+                                                                                        <th>Status Sell</th>
                                                                                         <th>DM</th>
                                                                                         <th>CM</th>
                                                                                         <th>Status upload</th>
-                                                                                        <!-- <th>File name</th> -->
+                                                                                        <th>File Quality</th> 
                                                                                         <th>Icon Folder</th>
                                                                                         <!-- <th>Drop</th> -->
                                                                                         <th>Approved</th>
@@ -128,6 +119,16 @@
 
                                                                                     <?php foreach ($store as $keys => $store) { ?>
                                                                                         <tr>
+                                                                                            <td>
+                                                                                                <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $store['update_at'])); ?>
+                                                                                                <?php $data = date('Y-m-d') ?>
+
+                                                                                                <?php if ($value['status_delivery'] == '1' && $data <= $prosum) : ?>
+                                                                                                    <button type="button" class="btn btn-danger mr-1 mb-1"><i class="feather icon-download-cloud"></i> Sold</button>
+                                                                                                <?php else : ?>
+                                                                                                    <button type="button" class="btn btn-info mr-1 mb-1"><i class="feather icon-download-cloud"></i> Not Sold</button>
+                                                                                                <?php endif; ?>
+                                                                                            </td>
                                                                                             <td><?php echo $store['dm_sub']; ?></td>
                                                                                             <td><?php echo $value['userMain']; ?></td>
                                                                                             <td>
@@ -144,9 +145,18 @@
                                                                                                 <?php endif; ?>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <?php $cutpoin = explode('.',$store['dm_sub']);?>
-                                                                                                <i class="feather icon-folder" style="font-size: 25px; cursor: pointer;" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0].$cutpoin[1].$cutpoin[2]; ?>"></i>
-                                                                                                <div class="modal fade" id="exampleModaleee<?php echo $cutpoin[0].$cutpoin[1].$cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                <?php if ($store['cp']=='complete'):?>                                                                                                }?>
+                                                                                                    Complete
+                                                                                                <?php elseif($store['cp']=='notcomplete'):?>
+                                                                                                   Not Complete
+                                                                                                <?php else:?>
+                                                                                                    -
+                                                                                                <?php endif;?>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <?php $cutpoin = explode('.', $store['dm_sub']); ?>
+                                                                                                <i class="feather icon-folder" style="font-size: 25px; cursor: pointer;" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
+                                                                                                <div class="modal fade" id="exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
@@ -165,6 +175,7 @@
                                                                                                                         ?>
 
                                                                                                                         <tr>
+                                                                                                                          
                                                                                                                             <th>DM</th>
                                                                                                                             <th>CM</th>
                                                                                                                             <th>Status upload</th>
@@ -182,6 +193,7 @@
 
                                                                                                                         <?php foreach ($store23 as $keys => $store23) { ?>
                                                                                                                             <tr>
+
                                                                                                                                 <td><?php echo $store23['dm_sub']; ?></td>
                                                                                                                                 <td><?php echo $value['userMain']; ?></td>
                                                                                                                                 <td>
@@ -344,7 +356,7 @@
                                                         <td><?php echo $value['create_atMain']; ?></td>
                                                         <td>
                                                             <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
-                                                            <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['idmain']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-x"></i></a>
+                                                            <a onclick="confirmalertunlock_del_Dm('<?php echo $value['idmain']; ?>')"  class="btn btn-icon btn-danger"><i class="feather icon-x"></i></a>
 
                                                             <div class="modal fade" id="dropW<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -362,6 +374,7 @@
                                                                                 <form action="fileUpload_main" class="dropzone dropzone-area" id="maindropzoneEx<?php echo $value['idmain']; ?>">
                                                                                     <input type="hidden" id="DM2<?php echo $value['idmain']; ?>" class="form-control " name="DM" value="<?php echo $value['idmain'] ?>">
                                                                                     <input type="hidden" class="form-control dr<?php echo $value['idmain']; ?>" name="status_cpS" value="">
+                                                                                    <input type="hidden" class="form-control dr1<?php echo $value['idmain']; ?>" name="status_cpncp" value="">
                                                                                     <div class="dz-message" style="top: 24%;">Upload Document</div>
                                                                                 </form>
                                                                             </div>
@@ -373,6 +386,16 @@
                                                                                         <option value="" selected disabled>select</option>
                                                                                         <option value="3">Original</option>
                                                                                         <option value="4">Rewrite</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="helpInputTop">Status Cp/Ncp</label>
+                                                                                    <select name="status_cpncp" id="stucp<?php echo $value['idmain']; ?>" class="form-control status_cpncp<?php echo $value['idmain']; ?>" required>
+                                                                                        <option value="" selected disabled>select</option>
+                                                                                        <option value="complete">Complete</option>
+                                                                                        <option value="notcomplete">NotComplete</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -395,6 +418,12 @@
                                                                     $(".dr<?php echo $value['idmain']; ?>").val(value);
                                                                 }).change();
                                                             </script>
+                                                            <script>
+                                                                $(".status_cpncp<?php echo $value['idmain']; ?>").change(function() {
+                                                                    var value = $(this).val();
+                                                                    $(".dr1<?php echo $value['idmain']; ?>").val(value);
+                                                                }).change();
+                                                            </script>
 
                                                             <script>
                                                                 Dropzone.autoDiscover = false;
@@ -408,6 +437,7 @@
                                                                 document.getElementById("uploadsfileEx<?php echo $value['idmain']; ?>").addEventListener("click", function() {
 
                                                                     var stu = document.getElementById("stu<?php echo $value['idmain']; ?>").value;
+                                                                    var stucp = document.getElementById("stucp<?php echo $value['idmain']; ?>").value;
                                                                     var DMS = document.getElementById("DM2<?php echo $value['idmain']; ?>").value;
 
                                                                     console.log(stu);
@@ -431,7 +461,8 @@
                                                                             data: {
                                                                                 status: 1,
                                                                                 DMS: DMS,
-                                                                                stu: stu
+                                                                                stu: stu,
+                                                                                stucp: stucp
                                                                             },
                                                                             success: function(success) {
 
