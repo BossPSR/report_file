@@ -2,6 +2,69 @@
 <h2 class="text-center" style="margin-top: 15px;">Delivery</h2>
 <hr class="line_package">
 <!--wishlist area start -->
+<style>
+    .dil {
+        border-radius: 50%;
+        font-size: 18px;
+        color: #e60000;
+        border: 1px solid;
+        width: 25px;
+        height: 25px;
+        padding: 1px 0px 0px 0;
+        box-shadow: 0px 0px 2px 0px;
+    }
+
+    .dil:hover {
+        background-color: #ffd1d1;
+        -o-transition: .5s;
+        -ms-transition: .5s;
+        -moz-transition: .5s;
+        -webkit-transition: .5s;
+        /* ...and now for the proper property */
+        transition: .5s;
+    }
+
+    .tooltips {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+    .tooltips .tooltiptexts {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: 150%;
+        left: 50%;
+        margin-left: -60px;
+
+        /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+        opacity: 0;
+        transition: opacity 1s;
+    }
+
+    .tooltips .tooltiptexts::after {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent black transparent;
+    }
+
+    .tooltips:hover .tooltiptexts {
+        visibility: visible;
+        opacity: 1;
+    }
+</style>
 <div class="wishlist_area mt-60">
     <div class="container">
         <div class="row">
@@ -35,11 +98,20 @@
 
                         <?php else : ?>
 
+
                             <?php foreach ($folder as $key => $folder) : ?>
-                                <div class="col-12 col-md-4 mt-3 text-center" data-toggle="modal" data-target="#folder<?php echo $folder['id'] ?>" style="cursor: pointer;">
-                                    <img src="uploads/folder-new.png" alt="">
-                                    <p> <?php echo $folder['name_folder'] ?>  <i class="fa fa-times" style="    border-radius: 50%;font-size: 18px;color: #e60000;border: 1px solid;width: 25px;height: 25px;padding: 1px 0px 0px 0;box-shadow: 0px 0px 2px 0px;" aria-hidden="true"></i></p> 
+                                <div class="col-12 col-md-4 mt-3 text-center">
+
+                                    <img src="uploads/folder-new.png" alt="" data-toggle="modal" data-target="#folder<?php echo $folder['id'] ?>" style="cursor: pointer;">
+
+                                    <p> <?php echo $folder['name_folder'] ?>
+                                        <a href="delete_folder?id=<?= $folder['id']; ?>" class="tooltips">
+                                            <i class="fa fa-times dil" aria-hidden="true"></i>
+                                            <span class="tooltiptexts">ปุ่มลบโฟร์เดอร์</span>
+                                        </a>
+                                    </p>
                                 </div>
+
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="folder<?php echo $folder['id'] ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Label" aria-hidden="true">
@@ -55,8 +127,8 @@
                                                             <div class="dz-message needsclick">
                                                                 Drop files here or click to upload.<br>
                                                                 <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                <input type="text" id="selected2" class="position2"     name="select_items" hidden>
-                                                                <input type="text" value="<?php echo $folder['id']; ?>" name="idfolder"     hidden>
+                                                                <input type="text" id="selected2" class="position2" name="select_items" hidden>
+                                                                <input type="text" value="<?php echo $folder['id']; ?>" name="idfolder" hidden>
                                                             </div>
                                                             <div>
                                                                 <!-- <input type="date" name="date" id="" class="form-control" onchange="myFunction()"> -->
