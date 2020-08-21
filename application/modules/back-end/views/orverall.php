@@ -64,9 +64,11 @@
                                                 <tr>
                                                     <th>Step</th>
                                                     <th>Order Id</th>
+                                                    <th>DM</th>
                                                     <th>User</th>
                                                     <th>Country</th>
                                                     <th>T3</th>
+                                                    <th>Organization</th>
                                                     <!-- <th>Main File</th>
                                                     <th>GT File</th> -->
                                                     <th>Order Date</th>
@@ -86,6 +88,7 @@
                                                     <tr>
                                                         <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
                                                         <td><?php echo $stores['order'] ?></td>
+                                                        <td></td>
                                                         <td><?php echo $stores['userId']; ?></td>
                                                         <td>
                                                             <?php echo $stores['countryName'] == '' ? '-' : $stores['countryName']; ?>
@@ -97,7 +100,13 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-
+                                                                <td>
+                                                                    <?php if($stores['organization']==""):?>
+                                                                        -
+                                                                    <?php else:?>
+                                                                    <?php echo $stores['organization']; ?>
+                                                                    <?php endif;?>
+                                                                </td>
                                                         <!-- <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
