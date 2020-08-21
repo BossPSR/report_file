@@ -172,7 +172,7 @@
                             </select>
                         </div>
                         <div class="col-12 mt-3 ">
-                            <button type="button" class="btn btn-primary w-100" id='uploadfiles'>
+                            <button type="button" class="btn btn-primary w-100 uploadfiles" >
                                 Upload Files
                             </button>
                         </div>
@@ -205,7 +205,7 @@
             parallelUploads: 5, // Number of files process at a time (default 2)
         });
 
-        $('#uploadfiles').click(function() {
+        $('.uploadfiles').click(function() {
             var x = document.getElementById("selected2").value;
             if (myDropzone<?= $op; ?>.files < 1 || x == '') {
                 swal("Warning!", "Please fill out the information.", "error", {

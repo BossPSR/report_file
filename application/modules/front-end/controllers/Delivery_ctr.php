@@ -36,9 +36,9 @@ class Delivery_ctr extends CI_Controller
         $feed       = $this->db->get_where('tbl_feedback', ['order_id' => $order_id])->row_array();
 
         $target_dir = "uploads/Team/"; // Upload directory
-        $this->db->where('order_id', $order_id);
-        $this->db->delete('tbl_upload_order_team');
-        unlink($feed['path']);
+        // $this->db->where('order_id', $order_id);
+        // $this->db->delete('tbl_upload_order_team');
+        // unlink($feed['path']);
 
         // Set preference
         $config['upload_path']     = 'uploads/Team/';
@@ -60,6 +60,7 @@ class Delivery_ctr extends CI_Controller
             $data = array(
                 'teamId'        => $team->IdTeam,
                 'order_id'      => $order_id,
+                'group'         => $idfolder,
                 'file_name'     => $uploadData['file_name'],
                 'path'          => 'uploads/Team/' . $uploadData['file_name'],
                 'create_at'     => date('Y-m-d H:i:s'),

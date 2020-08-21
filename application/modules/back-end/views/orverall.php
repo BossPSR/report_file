@@ -64,6 +64,7 @@
                                                 <tr>
                                                     <th>Step</th>
                                                     <th>Order Id</th>
+                                                    <th>DM File</th>
                                                     <th>DM</th>
                                                     <th>User</th>
                                                     <th>Country</th>
@@ -74,6 +75,7 @@
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
                                                     <th>PriceFile</th>
+                                                    <th>Wage</th>
                                                     <th>Delivery</th>
                                                     <th>Procress</th>
                                                     <th>Status</th>
@@ -88,7 +90,86 @@
                                                     <tr>
                                                         <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
                                                         <td><?php echo $stores['order'] ?></td>
-                                                        <td></td>
+                                                        <td>
+                                                            <?php if (empty($stores['id_document'])) : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $stores['order']])->result_array(); ?>
+                                                                <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
+
+                                                                    <?php if ($show_dm['id_document'] == '') : ?>
+                                                                        -
+                                                                    <?php else : ?>
+                                                                        <span class="badge badge-primary"><?php echo $show_dm['id_document'] ?></span>
+                                                                    <?php endif; ?>
+
+                                                                <?php } ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['order']])->result_array(); ?>
+                                                            <?php if (!empty($dm_cc)) : ?>
+                                                                <span data-toggle="modal" data-target="#overall<?php echo $stores['order']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="overall<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">DM File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
+                                                                                    <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                        <p>
+                                                                                            <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                        </p>
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Rewrite</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['comandnocom'] == '4') : ?>
+                                                                                                                <div class="badge badge-primary">Rewrite</div>
+                                                                                                            <?php else : ?>
+                                                                                                                -
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php endforeach; ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
+                                                        </td>
                                                         <td><?php echo $stores['userId']; ?></td>
                                                         <td>
                                                             <?php echo $stores['countryName'] == '' ? '-' : $stores['countryName']; ?>
@@ -100,13 +181,13 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                                <td>
-                                                                    <?php if($stores['organization']==""):?>
-                                                                        -
-                                                                    <?php else:?>
-                                                                    <?php echo $stores['organization']; ?>
-                                                                    <?php endif;?>
-                                                                </td>
+                                                        <td>
+                                                            <?php if ($stores['organization'] == "") : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php echo $stores['organization']; ?>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <!-- <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $stores['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stores['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -225,6 +306,11 @@
                                                             <td>-</td>
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
+                                                        <?php endif; ?>
+                                                        <?php if ($stores['wage'] == '') :   ?>
+                                                            <td>-</td>
+                                                        <?php else : ?>
+                                                            <td>$<?php echo $stores['wage']; ?></td>
                                                         <?php endif; ?>
                                                         <td>
                                                             <?php if ($stores['status_team'] == 0) : ?>
