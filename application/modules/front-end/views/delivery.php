@@ -98,7 +98,7 @@
 
                         <?php else : ?>
 
-
+                            <?php $op = []; ?>
                             <?php foreach ($folder as $key => $folder) : ?>
                                 <div class="col-12 col-md-4 mt-3 text-center">
 
@@ -123,7 +123,7 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <form action="delivery_file" method="POST" class="dropzone" id="fileupload">
+                                                        <form action="delivery_file" method="POST" class="dropzone" id="fileupload<?= $folder['id']; ?>">
                                                             <div class="dz-message needsclick">
                                                                 Drop files here or click to upload.<br>
                                                                 <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
@@ -148,6 +148,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php $op[] = $folder['id']; ?>
+
+
 
                             <?php endforeach; ?>
 
@@ -192,30 +195,31 @@
         })
         .change();
 </script>
+<?php foreach ($op as $key => $op) { ?>
+    <script type="text/javascript">
+        Dropzone.autoDiscover = false;
+        var myDropzone<?= $op; ?> = new Dropzone("#fileupload<?= $op; ?>", {
+            autoProcessQueue: false,
+            maxFiles: 5,
+            addRemoveLinks: true,
+            parallelUploads: 5, // Number of files process at a time (default 2)
+        });
 
-<script type="text/javascript">
-    Dropzone.autoDiscover = false;
-    var myDropzone = new Dropzone("#fileupload", {
-        autoProcessQueue: false,
-        maxFiles: 5,
-        addRemoveLinks: true,
-        parallelUploads: 5, // Number of files process at a time (default 2)
-    });
-
-    $('#uploadfiles').click(function() {
-        var x = document.getElementById("selected2").value;
-        if (myDropzone.files < 1 || x == '') {
-            swal("Warning!", "Please fill out the information.", "error", {
-                button: false,
-            });
-        } else {
-            myDropzone.processQueue();
-            myDropzone.on("queuecomplete", function(file, res) {
-                swal("Good job!", "Upload for data successfull", "success", {
+        $('#uploadfiles').click(function() {
+            var x = document.getElementById("selected2").value;
+            if (myDropzone<?= $op; ?>.files < 1 || x == '') {
+                swal("Warning!", "Please fill out the information.", "error", {
                     button: false,
                 });
-                setTimeout("location.reload(true);", 1000);
-            });
-        }
-    });
-</script>
+            } else {
+                myDropzone<?= $op; ?>.processQueue();
+                myDropzone<?= $op; ?>.on("queuecomplete", function(file, res) {
+                    swal("Good job!", "Upload for data successfull", "success", {
+                        button: false,
+                    });
+                    setTimeout("location.reload(true);", 1000);
+                });
+            }
+        });
+    </script>
+<?php } ?>
