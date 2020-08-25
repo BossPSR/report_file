@@ -315,7 +315,11 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId']])->result_array(); ?>
+                                                            <?php
+                                                            $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
+                                                            $this->db->group_by('group');
+                                                            $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId']])->result_array();
+                                                            ?>
                                                             <?php if (!empty($orderT)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalz<?php echo $complete['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalz<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -388,8 +392,8 @@
 
                                                                                         <tr>
                                                                                             <th>Status Admin</th>
-                                                                                            <th>File name</th>
-                                                                                            <th>File</th>
+                                                                                            <th>Folder name</th>
+                                                                                            <th>Folder</th>
                                                                                             <th>create</th>
                                                                                         </tr>
                                                                                     </thead>
@@ -404,7 +408,7 @@
                                                                                                     <?php endif; ?>
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <?php echo $orderT['file_name'] ?>
+                                                                                                    <?php echo $orderT['name_folder'] ?>
                                                                                                     <a href="" data-toggle="modal" data-target="#tmid<?php echo $orderT['id']; ?>">
                                                                                                         <i class="feather icon-edit-2" style="font-size: 25px;"></i>
                                                                                                     </a>
@@ -432,7 +436,84 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </td>
-                                                                                                <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td>
+                                                                                                    <span data-toggle="modal" data-target="#groupse<?php echo $orderT['group']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
+                                                                                                    <!-- <a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-folder" style="font-size: 25px; cursor: pointer;"></i></a> -->
+                                                                                                    <!-- Modal -->
+                                                                                                    <div class="modal fade text-left" id="groupse<?php echo $orderT['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h4 class="modal-title" id="myModalLabel1"><?php echo $orderT['name_folder'] ?></h4>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+
+                                                                                                                    <?php $orderTgroup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId'] , 'group' => $orderT['group']])->result_array(); ?>
+
+                                                                                                                    <table class="table zero-configuration" id="here<?php echo $complete['order_id_t']; ?>">
+                                                                                                                        <thead>
+
+                                                                                                                            <tr>
+                                                                                                                                <th>File name</th>
+                                                                                                                                <th>File</th>
+                                                                                                                                <th>create</th>
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                                                                                                                            <?php foreach ($orderTgroup as $keys => $orderTgroup) { ?>
+                                                                                                                                <tr>
+
+                                                                                                                                    <td>
+                                                                                                                                        <?php echo $orderTgroup['file_name'] ?>
+                                                                                                                                        <a href="" data-toggle="modal" data-target="#gd01<?php echo $orderTgroup['id']; ?>">
+                                                                                                                                            <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                                                        </a>
+                                                                                                                                        <!-- Modal -->
+                                                                                                                                        <div class="modal fade text-left" id="gd01<?php echo $orderTgroup['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                                                                <div class="modal-content">
+                                                                                                                                                    <div class="modal-header">
+                                                                                                                                                        <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                                                                                        </button>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="modal-body">
+                                                                                                                                                        <h5>Rename</h5>
+                                                                                                                                                        <?php $or_file_name = explode('.', $orderTgroup['file_name']); ?>
+                                                                                                                                                        <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_name<?php echo $orderTgroup['id']; ?>" class="form-control">
+                                                                                                                                                        <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_name<?php echo $orderTgroup['id']; ?>" class="form-control">
+                                                                                                                                                        <input type="hidden" id="pathtm<?php echo $orderTgroup['id']; ?>" data-pathtm="<?php echo $orderTgroup['path']; ?>" class="form-control">
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="modal-footer">
+                                                                                                                                                        <button type="button" class="btn btn-primary ez" id="re_file_name_button<?php echo $orderTgroup['id']; ?> " data-tid="<?php echo $orderTgroup['id']; ?>">Submit</button>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </td>
+                                                                                                                                    <td>
+                                                                                                                                        <a href="<?php echo $orderTgroup['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                                                    </td>
+                                                                                                                                    <td><?php echo $orderTgroup['create_at'] ?></td>
+                                                                                                                                </tr>
+                                                                                                                            <?php } ?>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+
+
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </td>
                                                                                                 <td><?php echo $orderT['create_at'] ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
@@ -481,7 +562,7 @@
                                                         </td>
 
                                                         <td>
-                                                        <?php if (date("Y-m-d") >= $complete['date_required_t']) : ?>
+                                                            <?php if (date("Y-m-d") >= $complete['date_required_t']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($complete['date_required_t'])); ?>
