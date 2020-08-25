@@ -18,6 +18,7 @@ class Customer_order_ctr extends CI_Controller
 
             $data['order_main'] = $this->Customer_model->customer_main();
             $data['ts']         = $this->Store_model->team_select();
+            $data['more_file_gt']         = $this->Customer_model->more_file_gt();
 
             $this->load->view('options/header');
             $this->load->view('satisfied', $data);
@@ -30,8 +31,9 @@ class Customer_order_ctr extends CI_Controller
     public function not_satisfied()
     {
         if ($this->session->userdata('email_admin') != '') {
-            $data['order_not']  = $this->Customer_model->customer_list_not();
-            $data['ts']         = $this->Store_model->team_select();
+            $data['order_not']               = $this->Customer_model->customer_list_not();
+            $data['ts']                      = $this->Store_model->team_select();
+            $data['more_file_gt_st']         = $this->Customer_model->more_file_gt();
             $this->load->view('options/header');
             $this->load->view('not_satisfied', $data);
             $this->load->view('options/footer');

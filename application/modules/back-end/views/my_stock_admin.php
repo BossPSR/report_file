@@ -147,8 +147,21 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php $orderGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['orderST']])->result_array(); ?>
-                                                            <?php if (!empty($orderGT)) : ?>
+                                                            <?php
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
+                                                            $this->db->where('tbl_morefile_GT.order_id', $stock['orderST']);
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 0);
+                                                            $orderGT = $this->db->get('tbl_morefile_GT')->result_array(); ?>
+                                                            <?php
+                                                            $this->db->select('*');
+                                                            $this->db->from('tbl_morefile_GT');
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id', 'left');
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 1);
+                                                            $this->db->where('tbl_morefile_GT.order_id', $stock['orderST']);
+                                                            $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
+                                                            $more_file_gt_more = $this->db->get()->result_array();
+                                                            ?>
+                                                            <?php if (!empty($orderGT || $more_file_gt_more)) : ?>
 
                                                                 <span data-toggle="modal" data-target="#exampleModalGT<?php echo $stock['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalGT<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -177,6 +190,15 @@
                                                                                                 <td><?php echo $orderGT['file_name_GT'] ?></td>
                                                                                                 <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $orderGT['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+
+                                                                                        <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
+                                                                                                <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
+                                                                                                <td><a href="<?php echo $more_file_gt_more['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $more_file_gt_more['create_at'] ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
