@@ -83,7 +83,7 @@
                                                         <td><?php echo $store['orderNOT'] ?></td>
                                                         <td><?php echo $store['userId']; ?></td>
                                                         <td>
-                                                            <?php echo $store['countryName'] == '' ? '-' : $store['countryName'] ; ?>
+                                                            <?php echo $store['countryName'] == '' ? '-' : $store['countryName']; ?>
                                                         </td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -131,9 +131,23 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $store['orderNOT']])->result_array(); ?>
 
-                                                            <?php if ($order == true) : ?>
+                                                            <?php
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
+                                                            $this->db->where('tbl_morefile_GT.order_id', $store['orderNOT']);
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 0);
+                                                            $order = $this->db->get('tbl_morefile_GT')->result_array(); ?>
+                                                            <?php
+                                                            $this->db->select('*');
+                                                            $this->db->from('tbl_morefile_GT');
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id', 'left');
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 1);
+                                                            $this->db->where('tbl_morefile_GT.order_id', $store['orderNOT']);
+                                                            $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
+                                                            $more_file_gt_st = $this->db->get()->result_array();
+                                                            ?>
+
+                                                            <?php if (!empty($order ||$more_file_gt_st )) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalb<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalb<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -161,6 +175,17 @@
                                                                                                 <td><?php echo $order['file_name_GT'] ?></td>
                                                                                                 <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $order['create_at'] ?></td>
+
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+
+                                                                                        <?php foreach ($more_file_gt_st as  $more_file_gt_st) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $more_file_gt_st['order_id'] ?> (MF)</td>
+                                                                                                <td><?php echo $more_file_gt_st['file_name_GT'] ?></td>
+                                                                                                <td><a href="<?php echo $more_file_gt_st['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $more_file_gt_st['create_at'] ?></td>
 
 
                                                                                             </tr>
@@ -284,15 +309,15 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body row" style="text-align: center;margin: 45px 0;">
-                                                
+
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
-                                                                                            <option value="" > All Team </option>
+                                                                                            <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
-                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $store['teamId'] ? 'selected' : '' ; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $store['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
@@ -349,10 +374,10 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                        
+
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['orderNOT']])->row_array(); ?>
                                                         <td>
-                                                        <?php if ($team == false) : ?>
+                                                            <?php if ($team == false) : ?>
                                                                 <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $store['orderNOT']; ?>" type="button" class="btn btn-icon btn-success" style="font-size: 14px;">Upload T3</button>
                                                             <?php else : ?>
                                                                 <?php if ($team['teamId'] == '') : ?>

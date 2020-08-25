@@ -134,4 +134,17 @@ class Customer_model extends CI_Model
         $this->db->group_by('tbl_upload_order.order_id');
         return $this->db->get()->result_array();
     }
+
+    public function more_file_gt()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_morefile_GT');
+        $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id', 'left');
+        $this->db->where('tbl_morefile_GT.status_more_file', 1);
+        $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
+        return $this->db->get()->result_array();
+    }
+
+
+    
 }

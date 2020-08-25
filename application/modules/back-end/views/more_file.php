@@ -62,6 +62,8 @@
                                                     <th>DM File</th>
                                                     <th>More File</th>
                                                     <th>Detail</th>
+                                                    <th>Detail Team</th>
+                                                    <th>Dare required</th>
                                                     <th>create at</th>
                                                     <th>T3</th>
                                                     <th>Position</th>
@@ -80,7 +82,7 @@
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $more_file['orderGT'] ?></td>
-                                                        <td><?php echo $more_file['userId']; ?></td>
+                                                        <td><?php echo $more_file['user']; ?></td>
                                                         <td>
                                                             <?php if (empty($more_file['id_document'])) : ?>
                                                                 -
@@ -324,7 +326,37 @@
                                                                             <form action="more_file_update_detail" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $more_file['idM']; ?>">
                                                                                 <div class="modal-body">
-                                                                                    <textarea name="detail" id="" rows="6" class="form-control"><?= $more_file['more_detail']; ?></textarea>
+                                                                                    <textarea name="detail" id="" rows="6" class="form-control" readonly><?= $more_file['more_detail']; ?> </textarea>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                                    
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php } else { ?>
+                                                                -
+                                                            <?php } ?>
+                                                        </td>
+
+                                                        <td>
+                                                            <?php if (!empty($more_file['more_detail_team'])) { ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note_team<?php echo $more_file['idM']; ?>"><i class="feather icon-search"></i></a>
+                                                                <div class="modal fade" id="note_team<?php echo $more_file['idM']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <form action="more_file_update_detail" method="POST">
+                                                                                <input type="hidden" name="id" value="<?php echo $more_file['idM']; ?>">
+                                                                                <div class="modal-body">
+                                                                                    <textarea name="detail" id="" rows="6" class="form-control"><?= $more_file['more_detail_team']; ?></textarea>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
@@ -338,8 +370,31 @@
                                                                 -
                                                             <?php } ?>
                                                         </td>
+                                                        <td>
+                                                        <?php if (date("Y-m-d H:i:s") >= $more_file['dr_more']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
+                                                            <?php else : ?>
+                                                                <?php $dateReq = date('Y/m/d H:i:s', strtotime($more_file['dr_more'])); ?>
+                                                                <div id="clock-b<?php echo $more_file['orderGT']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $more_file['orderGT']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
 
-                                                        <td><?php echo $more_file['create_at']; ?></td>
+                                                                    });
+                                                                </script>
+                                                            <?php endif; ?>
+
+                                                        
+                                                      
+                                                    
+                                                    </td>
+                                                    <td> <?php echo $more_file['createmore_file']; ?> </td>
                                                         <td>
                                                             <?php if (!empty($more_file['TM'])) : ?>
                                                                 <?php echo $more_file['TM']; ?>

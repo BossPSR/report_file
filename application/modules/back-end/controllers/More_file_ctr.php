@@ -121,7 +121,7 @@ class More_file_ctr extends CI_Controller
         $detail     = $this->input->post('detail');
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_morefile_GT', ['more_detail' => $detail]);
+        $resultsedit = $this->db->update('tbl_morefile_GT', ['more_detail_team' => $detail]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated detail information !!.');

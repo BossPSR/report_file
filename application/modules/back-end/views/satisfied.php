@@ -284,8 +284,22 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php $orderGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['orderST']])->result_array(); ?>
-                                                            <?php if (!empty($orderGT)) : ?>
+                                                            <?php
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
+                                                            $this->db->where('tbl_morefile_GT.order_id', $stores['orderST']);
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 0);
+                                                            $orderGT = $this->db->get('tbl_morefile_GT')->result_array(); ?>
+                                                            <?php
+                                                            $this->db->select('*');
+                                                            $this->db->from('tbl_morefile_GT');
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id', 'left');
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 1);
+                                                            $this->db->where('tbl_morefile_GT.order_id', $stores['orderST']);
+
+                                                            $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
+                                                            $more_file_gt = $this->db->get()->result_array();
+                                                            ?>
+                                                            <?php if (!empty($orderGT||  $more_file_gt)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalb<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -380,6 +394,7 @@
                                                                                     <tbody>
                                                                                         <?php foreach ($orderGT as $keys => $orderGT) { ?>
                                                                                             <tr>
+
                                                                                                 <td><?php echo $orderGT['order_id'] ?></td>
                                                                                                 <td>
                                                                                                     <?php echo $orderGT['file_name_GT'] ?>
@@ -416,6 +431,46 @@
                                                                                             </tr>
 
                                                                                         <?php } ?>
+
+                                                                                        <?php foreach ($more_file_gt as $key => $more_file_gt) { ?>
+                                                                                            <tr>
+
+                                                                                                <td><?php echo $more_file_gt['order_id'] ?> (MF)</td>
+                                                                                                <td>
+                                                                                                    <?php echo $more_file_gt['file_name_GT'] ?>
+                                                                                                    <a href="" data-toggle="modal" data-target="#dmsGT<?php echo $more_file_gt['id']; ?>">
+                                                                                                        <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                    </a>
+                                                                                                    <!-- Modal -->
+                                                                                                    <div class="modal fade text-left" id="dmsGT<?php echo $more_file_gt['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <h5>Rename</h5>
+                                                                                                                    <?php $or_file_name = explode('.', $more_file_gt['file_name_GT']); ?>
+                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameGT<?php echo $orderGT['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameGT<?php echo $orderGT['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" id="path<?php echo $more_file_gt['id']; ?>" data-pathgt="<?php echo $orderGT['path_GT']; ?>" class="form-control">
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="button" class="btn btn-primary ex" id="re_file_name_buttonGT<?php echo $orderGT['id']; ?> " data-fgt="<?php echo $orderGT['id']; ?>">Submit</button>
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td><a href="<?php echo $more_file_gt['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $more_file_gt['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
