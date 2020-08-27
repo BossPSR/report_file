@@ -363,14 +363,16 @@ class Customer_order_ctr extends CI_Controller
         $wage       = $this->input->post('wage');
         $teamid     = $this->input->post('teamid');
         $position   = $this->input->post('position');
+        $note_team       = $this->input->post('note_team');
+        $date_required       = $this->input->post('date_required');
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid ,'note' => $note_team]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 ,'date_required' => $date_required]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -388,6 +390,21 @@ class Customer_order_ctr extends CI_Controller
         return redirect('my_stock_admin');
     }
 
+    public function  my_stock_admin_note()
+    {
+        $id         = $this->input->post('id');
+        $detail     = $this->input->post('detail');
+
+        $this->db->where('order_id', $id);
+        $resultsedit = $this->db->update('tbl_upload_order', ['note_user' => $detail]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated Note information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated Note information');
+        }
+        return redirect('my_stock_admin');
+    }
     public function edit_date_required_Not_Satisfied()
     {
         $order_id = $this->input->post('order_id');
