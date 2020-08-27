@@ -214,6 +214,7 @@ $route['fileUpload_main']                           = 'back-end/Book_ctr/fileUpl
 $route['fileUpload_main_sub']                           = 'back-end/Book_ctr/fileUpload_main_sub';
 
 $route['uploadmain_auto']                           = 'back-end/Book_ctr/uploadmain_auto';
+$route['my_stock_admin_note']                           = 'back-end/Customer_order_ctr/my_stock_admin_note';
 
 $route['Complete']                                  = 'back-end/Complete_ctr';
 $route['add_to_upload_main_search_approved']        = 'back-end/Approved_ctr/add_to_upload_main_search_approved';
