@@ -42,18 +42,28 @@
                                                     <th>Withdraw</th>
                                                     <th>Total</th>
                                                     <th>Telephone</th>
+                                                    <th>transaction</th>
+                                                    <th>silp</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                             <?php foreach ($withdraw_list_history as $key => $withdraw_list_history) {?>
-                                                <tr>
-                                                    <td><?php echo  $withdraw_list_history['email']?></td>
-                                                    <td><?php echo  $withdraw_list_history['username']?></td>
-                                                    <td><?php echo  $withdraw_list_history['price']?></td>
-                                                    <td><?php echo  $withdraw_list_history['cash']?></td>
-                                                    <td><?php echo  $withdraw_list_history['phone']?></td>
-                                                </tr>
-                                             <?php }?>
+                                                <?php foreach ($withdraw_list_history as $key => $withdraw_list_history) { ?>
+                                                    <tr>
+                                                        <td><?php echo  $withdraw_list_history['email'] ?></td>
+                                                        <td><?php echo  $withdraw_list_history['username'] ?></td>
+                                                        <td><?php echo  $withdraw_list_history['price'] ?></td>
+                                                        <td><?php echo  $withdraw_list_history['cash'] ?></td>
+                                                        <td><?php echo  $withdraw_list_history['phone'] ?></td>
+                                                        <td><?php echo  $withdraw_list_history['transaction_date'] == '' ? '-' :  $withdraw_list_history['transaction_date'] ; ?></td>
+                                                        <td>
+                                                            <?php if (empty($withdraw_list_history['file_name'])) : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <a href="<?php echo $withdraw_list_history['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -64,7 +74,7 @@
                 </div>
             </section>
             <!--/ Zero configuration table -->
-            
+
         </div>
     </div>
 </div>
