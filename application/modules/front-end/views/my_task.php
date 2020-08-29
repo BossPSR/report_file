@@ -181,8 +181,22 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <?php $GTS = $this->db->get_where('tbl_morefile_GT', ['order_id' => $task['or_id']])->row_array(); ?>
-                                        <?php if ($GTS) : ?>
+                                        <?php
+                                        $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
+                                        $this->db->where('tbl_morefile_GT.order_id', $task['or_id']);
+                                        $this->db->where('tbl_morefile_GT.status_more_file', 0);
+                                        $orderGT = $this->db->get('tbl_morefile_GT')->result_array(); ?>
+                                        <?php
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_morefile_GT');
+                                        $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id', 'left');
+                                        $this->db->where('tbl_morefile_GT.status_more_file', 1);
+                                        $this->db->where('tbl_morefile_GT.order_id', $task['or_id']);
+                                        $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
+                                        $more_file_gt_more = $this->db->get()->result_array();
+                                        ?>
+
+                                        <?php if (!empty($orderGT || $more_file_gt_more)) : ?>
                                             <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -195,7 +209,35 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
+                                                            <table class="table zero-configuration">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Order_id</th>
+                                                                        <th>File_name</th>
+                                                                        <th>File</th>
+                                                                        <th>create</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($orderGT as $keys => $orderGT) { ?>
+                                                                        <tr>
+                                                                            <td><?php echo $orderGT['order_id'] ?></td>
+                                                                            <td><?php echo $orderGT['file_name_GT'] ?></td>
+                                                                            <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                            <td><?php echo $orderGT['create_at'] ?></td>
+                                                                        </tr>
+                                                                    <?php } ?>
 
+                                                                    <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
+                                                                        <tr>
+                                                                            <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
+                                                                            <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
+                                                                            <td><a href="<?php echo $more_file_gt_more['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                            <td><?php echo $more_file_gt_more['create_at'] ?></td>
+                                                                        </tr>
+                                                                    <?php } ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -210,8 +252,8 @@
                                     <td>
 
 
-                                        <!-- <?php $DMfile = $this->db->get_where('tbl_upload_store', ['store_id' => $task['upload_store_id']])->result_array(); ?> -->
-                                        <?php if (!empty($DMfile)) { ?>
+                                        <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $task['or_id']])->result_array(); ?>
+                                        <?php if (!empty($dm_cc)) { ?>
 
                                             <a href="#" data-toggle="modal" data-target="#TEAMFILE<?php echo $task['or_id']; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
@@ -225,33 +267,35 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <?php $mn = 1; ?>
-                                                            <table class="table">
-                                                                <thead class="thead-light">
-                                                                    <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Info</th>
-                                                                        <th scope="col">Downloads</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <!-- <?php foreach ($DMfile as $DMfile) { ?>
-                                                                        <tr style="text-align:center;">
-                                                                            <td><?php echo $task['or_id']; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $DMfile['file_name']; ?></td>
-                                                                            <td>
-                                                                                <a href="<?php echo $DMfile['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a>
-                                                                            </td>
-                                                                            <td>
-                                                                                <a href="<?php echo $DMfile['path']; ?>" class="btn btn-primary" download>
-                                                                                    <i class="fa fa-download"></i> Download
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php } ?> -->
-                                                                </tbody>
-                                                            </table>
+
+                                                            <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
+
+                                                                <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                    <table class="table">
+                                                                        <thead class="thead-light">
+                                                                            <tr style="text-align:center;">
+                                                                                <!-- <th scope="col">ID Order</th> -->
+                                                                                <th scope="col">File</th>
+                                                                                <th scope="col">Info</th>
+                                                                                <th scope="col">Downloads</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                <tr>
+
+                                                                                    <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                    <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><?php echo $dm_c11['create_at'] ?></td>
+                                                                                </tr>
+                                                                            <?php endforeach; ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                <?php else : ?>
+
+                                                                <?php endif; ?>
+                                                            <?php } ?>
 
                                                         </div>
                                                         <div class="modal-footer">

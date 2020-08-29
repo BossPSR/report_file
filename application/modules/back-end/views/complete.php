@@ -409,11 +409,9 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <?php echo $orderT['name_folder'] ?>
-                                                                                                    <a href="" data-toggle="modal" data-target="#tmid<?php echo $orderT['id']; ?>">
-                                                                                                        <i class="feather icon-edit-2" style="font-size: 25px;"></i>
-                                                                                                    </a>
+                                                                                                    <a href="" data-toggle="modal" data-target="#tmid<?php echo $orderT['id']; ?>"> </a>
                                                                                                     <!-- Modal -->
-                                                                                                    <div class="modal fade text-left" id="tmid<?php echo $orderT['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                    <!-- <div class="modal fade text-left" id="tmid<?php echo $orderT['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                                                                             <div class="modal-content">
                                                                                                                 <div class="modal-header">
@@ -434,7 +432,7 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                    </div>
+                                                                                                    </div> -->
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <span data-toggle="modal" data-target="#groupse<?php echo $orderT['group']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
@@ -566,10 +564,10 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($complete['date_required_t'])); ?>
-                                                                <div id="clock-b<?php echo $complete['date_required_t']; ?>" style="display: flex;"></div>
+                                                                <div id="clock-b<?php echo $complete['order_id_t']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $complete['date_required_t']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $complete['order_id_t']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -626,7 +624,7 @@
 
                                                             <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $complete['order_id_t']])->result_array(); ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">DM File </h5>
@@ -651,8 +649,6 @@
 
                                                                                                 <tr>
                                                                                                     <th>Select</th>
-                                                                                                    <!-- <th>Relive</th> -->
-                                                                                                    <th>Store_id</th>
                                                                                                     <th>File_name</th>
                                                                                                     <th>File</th>
                                                                                                     <th>create</th>
@@ -668,14 +664,7 @@
                                                                                                             </label>
                                                                                                         </td>
 
-                                                                                                        <!-- <td>
-                                                                                                            <?php if ($dm_c11['relive_status'] == '0') : ?>
-                                                                                                                -
-                                                                                                            <?php else : ?>
-                                                                                                                <div class="badge badge-primary">Relive</div>
-                                                                                                            <?php endif ?>
-                                                                                                        </td> -->
-                                                                                                        <td><?php echo $dm_c11['store_id'] ?></td>
+                                                                                                      
                                                                                                         <td><?php echo $dm_c11['file_name'] ?></td>
                                                                                                         <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                         <td><?php echo $dm_c11['create_at'] ?></td>

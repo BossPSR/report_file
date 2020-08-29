@@ -38,6 +38,10 @@
                             <?php $bb = 1; ?>
                             <?php $xxl = 1; ?>
                             <?php foreach ($buy_email as $value) : ?>
+
+
+
+
                                 <?php $sub_order = substr($value['order_id'], 3); ?>
                                 <tr style="text-align:center;">
                                     <th style="text-align: center;">
@@ -215,9 +219,8 @@
                                     <td><?php echo date("d F Y", strtotime($value['created_at'])); ?></td>
                                     <td><?php echo date("d F Y", strtotime($value['Drequired'])); ?></td>
                                     <td>
-                                        <?php if (!empty($value['update_at']) && $value['status_delivery'] == '1' ) : ?>
-                                        <?php  $qy = date("Y-m-d H:i:s", strtotime($value['update_at'] . " + 60 day")); ?>
-                                        <div data-countdown="<?php echo $qy; ?>"></div>
+                                        <?php if (!empty($value['end_time']) && $value['status_delivery'] == '1') : ?>
+                                            <div data-countdown="<?php echo $value['end_time']; ?>"></div>
                                         <?php else : ?>
                                             -
                                         <?php endif; ?>
@@ -225,7 +228,6 @@
 
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
-                                        <?php $produm   = date('Y-m-d', strtotime('+60 day' . '+' . $value['update_at_buy'])); ?>
 
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
                                             -
@@ -244,7 +246,45 @@
                                             $this->db->order_by('dated', 'ASC');
                                             $N_count = $this->db->get('tbl_feedback')->row_array();
                                             ?>
-                                            <?php if ($N_count['od'] >= 3 || $DateT > $produm) { ?>
+                                            <?php $dayUs = date("Y-m-d H:i:s" , strtotime("+30 day" , strtotime($value['end_time']))); ?>
+
+                                            <?php if ($N_count['od'] >= 3 || $DateT > $dayUs) { ?>
+
+                                                <?php if ($value['status_approved'] == 0) { ?>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="apandnotap<?php echo $value['ORD'] ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">กรุณาประเมิน Appovre / Not Appovre</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                                                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <script type="text/javascript">
+                                                        $(window).on('load', function() {
+                                                            $('#apandnotap<?php echo $value['ORD'] ?>').modal('show');
+                                                        });
+                                                    </script>
+                                                <?php } ?>
+                                            <?php } ?>
+
+
+                                            <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
+
+
 
                                             <?php } else { ?>
 
@@ -372,7 +412,7 @@
                                             <button type="button" class="btn btn-success" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS"><i class="fa fa-check" aria-hidden="true"></i></button>
 
                                             <?php $ord_s = substr($value['ORD'], 3); ?>
-                                            <?php if ($N_count['od'] >= 3 || $DateT > $produm) { ?>
+                                            <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
                                                 <a class="btn btn-danger" id="order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
                                                 <script type='text/javascript'>
                                                     $('#order_not_approved<?php echo $value['ORD']; ?>').click(function() {
@@ -531,6 +571,7 @@
         </div>
     </div>
 <?php endif ?>
+
 
 <script type='text/javascript'>
     $('body').on('click', '#approvedS', function() {

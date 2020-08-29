@@ -163,22 +163,18 @@ class Complete_ctr extends CI_Controller
 
         $order_id   = $this->input->post('order_id');
         $order_team = $this->input->post('order_team');
-
         $id         = $this->input->post('id');
 
-        // print_r($id)  ; 
-        // print_r($order_team) ;
-        // print_r($order_id) ;
-        // exit;
         $feedback   = $this->db->get_where('tbl_feedback', ['order_id' => $id])->row_array();
         $user_order = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
         $user       = $this->db->get_where('tbl_user', ['idUser' => $user_order['userId']])->row_array();
+        $dateUP     = date("Y-m-d" , strtotime("+60 day"));
 
         if ($user['cash'] >= $user_order['price_file']) {
 
             if ($feedback == true) {
                 $this->db->where('order_id', $id);
-                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'),'end_time' => $dateUP, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
                 $this->db->where('order_id', $id);
                 $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
@@ -187,7 +183,7 @@ class Complete_ctr extends CI_Controller
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);
             } else {
                 $this->db->where('order_id', $id);
-                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'),'end_time' => $dateUP, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
                 $this->db->where('idUser', $user_order['userId']);
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);

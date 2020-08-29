@@ -17,7 +17,7 @@ class Delivery_ctr extends CI_Controller
 
         $data['delivery'] = $this->Order_model->delivery_team($sessi);
         $data['delivery_feed'] = $this->Order_model->delivery_team_feed($sessi);
-        $data['folder'] = $this->db->get_where('tbl_folder', ['id_team_folder' => $sessi])->result_array();
+        $data['folder'] = $this->db->get_where('tbl_folder', ['id_team_folder' => $sessi , 'cancel_status' => 0 ])->result_array();
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
@@ -117,8 +117,8 @@ class Delivery_ctr extends CI_Controller
         } else {
             $team    = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row();
             $id      = $this->input->get('id');
-
-            $success = $this->db->delete('tbl_folder', ['id' => $id]);
+            $this->db->where('id', $id);
+            $success = $this->db->update('tbl_folder', ['cancel_status' => 1]);
 
             if ($success > 0) {
                 $this->session->set_flashdata('save_ss2', 'Successfull Delete folder .');

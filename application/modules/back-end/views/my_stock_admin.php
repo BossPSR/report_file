@@ -56,7 +56,7 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Order id</th>
@@ -75,6 +75,7 @@
                                                     <th>Date Confirm</th>
                                                     <th>Date Required</th>
                                                     <th>info</th>
+                                                    <th>feedback</th>
                                                     <th>Process</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -134,15 +135,17 @@
                                                                                     <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
 
                                                                                     <?php if (!empty($dm_cc['id_document'])) : ?>
-                                                                                        <p><b>
+                                                                                        <p>
+                                                                                            <b>
                                                                                                 <h3><?php echo $dm_cc['id_document']; ?></h3>
-                                                                                            </b></p>
+                                                                                            </b>
+                                                                                        </p>
 
                                                                                         <table class="table zero-configuration">
                                                                                             <thead>
                                                                                                 <tr>
                                                                                                     <th>Relive</th>
-                                                                                                    <th>Store Id</th>
+                                                                                                    <!-- <th>Store Id</th> -->
                                                                                                     <th>File Name</th>
                                                                                                     <th>File</th>
                                                                                                     <th>create</th>
@@ -423,10 +426,11 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d H:i:s', strtotime($stock['dateREST'])); ?>
-                                                                <div id="clock-b<?php echo $stock['dateREST']; ?>" style="display: flex;"></div>
+                                                                <!-- <?= $stock['dateREST']; ?> -->
+                                                                <div id="clock-b<?php echo $stock['orderST']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $stock['dateREST']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $stock['orderST']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -440,6 +444,7 @@
 
                                                         </td>
 
+                                                        <!-- info -->
                                                         <td>
                                                             <?php if ($stock['teamId'] == '') : ?>
                                                                 - |
@@ -480,7 +485,7 @@
 
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label>
+                                                                                        <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
@@ -537,6 +542,34 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <!-- Feedback -->
+                                                        <td>
+                                                            <?php
+                                                            $tff     = $this->db->get_where('tbl_feedback', ['order_id' => $stock['orderST']])->row_array();
+                                                            ?>
+                                                            <?php if ($tff == true) : ?>
+                                                                <?php if ($tff['re_feedback'] == '0') : ?>
+
+                                                                    <?php
+                                                                    $this->db->where('order_id', $stock['orderST']);
+                                                                    $this->db->where('re_feedback', 0);
+                                                                    $this->db->from('tbl_feedback', 0);
+                                                                    $countff = $this->db->count_all_results();
+                                                                    ?>
+
+                                                                    <span class="badge badge-pill badge-danger">Feedback (<?php echo $countff; ?>) </span>
+                                                                <?php else : ?>
+                                                                    <span class="badge badge-pill badge-danger">Re-Feedback </span>
+                                                                <?php endif; ?>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
+
+                                                        </td>
+
+                                                        <!-- Processing -->
                                                         <td>
                                                             <?php if ($stock['Tstatus'] == 0 && $stock['teamId'] == '') : ?>
                                                                 <span class="badge badge-pill badge-primary">waiting for team </span>
@@ -550,6 +583,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Tool -->
                                                         <td style="width:10%;">
                                                             <?php if ($stock['status_approved'] == 1) : ?>
                                                                 <span class="badge badge-pill badge-success">Approved</span>
