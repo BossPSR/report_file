@@ -129,27 +129,30 @@ class Complete_ctr extends CI_Controller
         $buymax     =  $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
         $position   =  $this->input->post('position');
         $date_req   =  $this->input->post('date');
+        $noteteam   =  $this->input->post('noteteam');
         $DM         =  $this->input->post('DM');
 
         $data = array(
             'order_id'      => $buymax->order_main,
             'position'      => $position,
             'wage'          => $this->input->post('wage'),
-            'note'          => $this->input->post('note'),
+            'note'          => $noteteam,
             'create_at'     => date('Y-m-d H:i:s'),
         );
 
         $success =  $this->db->insert('tbl_upload_team', $data);
         if ($success) {
-            foreach ($DM as $DM) {
-                $datedm = array(
+            if ($DM) {
+                foreach ($DM as $DM) {
+                    $datedm = array(
 
-                    'id_orderBuy'   => $buymax->order_main,
-                    'id_document'   => $DM,
-                    'id_user'       => $admin['adminId'],
-                    'create_at'     => date('Y-m-d H:i:s'),
-                );
-                $this->db->insert('tbl_bookmark', $datedm);
+                        'id_orderBuy'   => $buymax->order_main,
+                        'id_document'   => $DM,
+                        'id_user'       => $admin['adminId'],
+                        'create_at'     => date('Y-m-d H:i:s'),
+                    );
+                    $this->db->insert('tbl_bookmark', $datedm);
+                }
             }
         }
 
@@ -168,13 +171,13 @@ class Complete_ctr extends CI_Controller
         $feedback   = $this->db->get_where('tbl_feedback', ['order_id' => $id])->row_array();
         $user_order = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
         $user       = $this->db->get_where('tbl_user', ['idUser' => $user_order['userId']])->row_array();
-        $dateUP     = date("Y-m-d" , strtotime("+60 day"));
+        $dateUP     = date("Y-m-d", strtotime("+60 day"));
 
         if ($user['cash'] >= $user_order['price_file']) {
 
             if ($feedback == true) {
                 $this->db->where('order_id', $id);
-                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'),'end_time' => $dateUP, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
                 $this->db->where('order_id', $id);
                 $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
@@ -183,7 +186,7 @@ class Complete_ctr extends CI_Controller
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);
             } else {
                 $this->db->where('order_id', $id);
-                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'),'end_time' => $dateUP, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
                 $this->db->where('idUser', $user_order['userId']);
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);

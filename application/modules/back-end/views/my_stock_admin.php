@@ -77,6 +77,7 @@
                                                     <th>info</th>
                                                     <th>feedback</th>
                                                     <th>Process</th>
+                                                    <th>Status</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -584,6 +585,21 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- Status -->
+                                                        <td>
+                                                            <?php if ($stock['status_cp'] == 'complete') : ?>
+                                                                <span class="badge badge-pill badge-success">Complete </span>
+                                                            <?php elseif ($stock['status_cp'] == 'notcomplete' ) : ?>
+                                                                <span class="badge badge-pill badge-warning">Not complete </span>
+                                                            <?php elseif ($stock['status_cp'] == 'rewrite' ) : ?>
+                                                                <span class="badge badge-pill badge-primary">Rewrite </span>
+                                                            <?php elseif ($stock['status_cp'] == 'nodm' ) : ?>
+                                                                <span class="badge badge-pill badge-danger">No DM </span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
                                                         <!-- Tool -->
                                                         <td style="width:10%;">
                                                             <?php if ($stock['status_approved'] == 1) : ?>
@@ -686,7 +702,6 @@
                                                                             }
                                                                         });
                                                                     }
-
                                                                 });
                                                             </script>
 

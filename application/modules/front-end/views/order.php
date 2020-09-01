@@ -1,3 +1,4 @@
+
 <?php if (!empty($buy_email)) : ?>
     <br>
     <h2 class="text-center" style="margin-top: 15px;">My order</h2>
@@ -66,7 +67,7 @@
                                         <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
                                         <?php if (!empty($order_main)) { ?>
 
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalMain<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalMain<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModalMain<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -92,7 +93,7 @@
                                                                         <tr style="text-align:center;">
                                                                             <td><?php echo $order_main['order_id']; ?></td>
                                                                             <td><?php echo $order_main['file_name']; ?></td>
-                                                                            <td><a href="<?php echo $order_main['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <td><a href="<?php echo $order_main['path']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -114,7 +115,7 @@
                                         <?php $order_GT = $this->db->order_by('create_at')->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
                                         <?php if (!empty($order_GT)) { ?>
 
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalMainGT<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalMainGT<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModalMainGT<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -152,7 +153,7 @@
                                                                                 <td class="text-center"> - </td>
                                                                             <?php } ?>
 
-                                                                            <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <td><a href="<?php echo $order_GT['path_GT']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -172,7 +173,7 @@
                                     <td>
                                         <?php $teamF = $this->db->get_where('tbl_upload_order_team', ['order_id' =>  $value['ORDT']])->result_array(); ?>
                                         <?php if (!empty($teamF)) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="Teamfile<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -199,7 +200,7 @@
                                                                         <tr style="text-align:center;">
                                                                             <td><?= $teamF['order_id']; ?></td>
                                                                             <td><?= $teamF['file_name']; ?></td>
-                                                                            <td><a href="<?= $teamF['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <td><a href="<?= $teamF['path']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
@@ -230,7 +231,25 @@
                                         <?php $DateT    = date('Y-m-d');  ?>
 
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
-                                            -
+                                            <a href="#" data-toggle="modal" data-target="#note_appoved<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="note_appoved<?php echo $value['ORD'] ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Comments Appovre / Not Appovre</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p><?php echo $value['note_approved']; ?></p>
+                                        
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <?php } elseif ($value['status_approved'] == 3 || $value['status_delivery'] == 1) { ?>
 
                                             <?php
@@ -246,7 +265,7 @@
                                             $this->db->order_by('dated', 'ASC');
                                             $N_count = $this->db->get('tbl_feedback')->row_array();
                                             ?>
-                                            <?php $dayUs = date("Y-m-d H:i:s" , strtotime("+30 day" , strtotime($value['end_time']))); ?>
+                                            <?php $dayUs = date("Y-m-d H:i:s", strtotime("+30 day", strtotime($value['end_time']))); ?>
 
                                             <?php if ($N_count['od'] >= 3 || $DateT > $dayUs) { ?>
 
@@ -409,13 +428,58 @@
                                                 </script>
                                             <?php } ?>
 
-                                            <button type="button" class="btn btn-success" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="approvedS<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Approved (<?php echo $value['ORD']; ?>)</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <label style="font-size:18px;" for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
+                                                            <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <?php $ord_s = substr($value['ORD'], 3); ?>
                                             <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
-                                                <a class="btn btn-danger" id="order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle"></i></button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="order_not_approved<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Not Approved (<?php echo $value['ORD']; ?>)</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label style="font-size:18px;" for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
+                                                                <textarea name="textareanot" id="textareanot<?php echo $value['ORD']; ?>" class="form-control" rows="5"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" data-ordernot="<?php echo $value['ORD'] ?>" id="not_app<?php echo $value['ORD']; ?>" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <script type='text/javascript'>
-                                                    $('#order_not_approved<?php echo $value['ORD']; ?>').click(function() {
+                                                    $('#not_app<?php echo $value['ORD']; ?>').click(function() {
+                                                        var order = $(this).data("ordernot");
+                                                        var t_not = $("#textareanot<?php echo $value['ORD']; ?>").val();
 
                                                         swal({
                                                             icon: "warning",
@@ -429,12 +493,13 @@
                                                             },
                                                         }).then(function(isConfirm) {
                                                             if (isConfirm == true) {
-                                                                var order = $("td").attr("data-order");
+
                                                                 $.ajax({
                                                                     type: 'POST',
                                                                     url: 'order_not_approved',
                                                                     data: {
                                                                         order_id: order,
+                                                                        textnot: t_not,
                                                                         status_approved: 2,
                                                                     },
                                                                     success: function(success) {
@@ -450,8 +515,8 @@
                                                         });
                                                     });
                                                 </script>
-                                            <?php } else { ?>
                                             <?php } ?>
+
                                         <?php } else { ?>
 
                                             <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
@@ -576,6 +641,8 @@
 <script type='text/javascript'>
     $('body').on('click', '#approvedS', function() {
         var order = $(this).data("orderq");
+        var textarea = $('#textarea').val();
+
         swal({
             icon: "success",
             title: "Are you sure?",
@@ -593,6 +660,7 @@
                     url: 'order_approverd',
                     data: {
                         order_id: order,
+                        textarea: textarea,
                         status_approved: 1,
                     },
                     success: function(success) {
@@ -606,5 +674,6 @@
                 swal("Cancelled", "Your imaginary file is safe :)", "error");
             }
         });
+
     });
 </script>

@@ -37,6 +37,7 @@ class Order_ctr extends CI_Controller
   public function order_approved()
   {
     $order_id       = $this->input->post('order_id');
+    $textarea       = $this->input->post('textarea');
     $is_confirm     = $this->input->post('status_approved');
     $df             = $this->Order_model->delete_feedback($order_id);
 
@@ -46,6 +47,7 @@ class Order_ctr extends CI_Controller
     } else {
       $data = array(
         'status_approved'        => $is_confirm,
+        'note_approved'          => $textarea,
       );
 
       $this->db->where('order_id', $order_id);
@@ -69,6 +71,7 @@ class Order_ctr extends CI_Controller
   public function order_not_approved()
   {
     $order_id             = $this->input->post('order_id');
+    $textnot              = $this->input->post('textnot');
     $is_confirm           = $this->input->post('status_approved');
 
     if ($this->session->userdata('email') == '') {
@@ -76,6 +79,7 @@ class Order_ctr extends CI_Controller
     } else {
       $data = array(
         'status_approved'        => $is_confirm,
+        'note_approved'          => $textnot,
       );
 
       $this->db->where('order_id', $order_id);
