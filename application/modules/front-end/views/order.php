@@ -1,4 +1,3 @@
-
 <?php if (!empty($buy_email)) : ?>
     <br>
     <h2 class="text-center" style="margin-top: 15px;">My order</h2>
@@ -8,8 +7,7 @@
     <div class="wishlist_area mt-60">
         <div class="container">
             <div class="row">
-                <div class="col-1"></div>
-                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 ">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
@@ -23,6 +21,7 @@
                                 <th scope="col">Date Required</th>
                                 <th scope="col">Warranty day</th>
                                 <th scope="col">Tool</th>
+                                <th scope="col">Re feedback</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,6 +44,8 @@
 
                                 <?php $sub_order = substr($value['order_id'], 3); ?>
                                 <tr style="text-align:center;">
+
+                                    <!-- Status -->
                                     <th style="text-align: center;">
                                         <?php if ($value['status_pay'] == 1 && $value['status_delivery'] == 0) : ?>
                                             <span class="badge badge-warning" style="color:#fff;">Processing</span>
@@ -60,8 +61,14 @@
                                             <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
                                         <?php endif; ?>
                                     </th>
+
+                                    <!-- order -->
                                     <td data-order="<?php echo $value['ORD'] ?>"><?php echo $value['ORD']; ?></td>
+
+                                    <!-- price -->
                                     <td>$<?php echo $value['price_file']; ?></td>
+
+                                    <!-- Main Document -->
                                     <td>
                                         <?php $zz = 1; ?>
                                         <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
@@ -110,6 +117,8 @@
                                             -
                                         <?php } ?>
                                     </td>
+
+                                    <!-- GT Document -->
                                     <td>
                                         <?php $kk = 1; ?>
                                         <?php $order_GT = $this->db->order_by('create_at')->get_where('tbl_upload_orderGT', ['order_id' => $value['ORD']])->result_array(); ?>
@@ -170,6 +179,8 @@
                                             -
                                         <?php } ?>
                                     </td>
+
+                                    <!-- Team File -->
                                     <td>
                                         <?php $teamF = $this->db->get_where('tbl_upload_order_team', ['order_id' =>  $value['ORDT']])->result_array(); ?>
                                         <?php if (!empty($teamF)) { ?>
@@ -217,8 +228,14 @@
                                             -
                                         <?php } ?>
                                     </td>
+
+                                    <!-- created_at -->
                                     <td><?php echo date("d F Y", strtotime($value['created_at'])); ?></td>
+
+                                    <!-- Drequired -->
                                     <td><?php echo date("d F Y", strtotime($value['Drequired'])); ?></td>
+
+                                    <!-- end_time -->
                                     <td>
                                         <?php if (!empty($value['end_time']) && $value['status_delivery'] == '1') : ?>
                                             <div data-countdown="<?php echo $value['end_time']; ?>"></div>
@@ -227,9 +244,9 @@
                                         <?php endif; ?>
                                     </td>
 
+                                    <!-- Tool -->
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
-
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
                                             <a href="#" data-toggle="modal" data-target="#note_appoved<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
@@ -242,7 +259,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <p><?php echo $value['note_approved']; ?></p>
-                                        
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -609,6 +626,9 @@
                                         <?php } ?>
 
                                     </td>
+                                    <td>
+                                        <button class="btn btn-success">Re feedback</button>
+                                    </td>
                                 </tr>
 
 
@@ -617,7 +637,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-1"></div>
             </div>
         </div>
     </div>

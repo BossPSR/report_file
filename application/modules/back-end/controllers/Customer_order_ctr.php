@@ -405,6 +405,23 @@ class Customer_order_ctr extends CI_Controller
         }
         return redirect('my_stock_admin');
     }
+
+    public function  my_stock_admin_note_team()
+    {
+        $id             = $this->input->post('id');
+        $detail_team    = $this->input->post('detail_team');
+
+        $this->db->where('order_id', $id);
+        $resultsedit = $this->db->update('tbl_upload_team', ['note' => $detail_team]);
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully updated Note information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully updated Note information');
+        }
+        return redirect('my_stock_admin');
+    }
+
     public function edit_date_required_Not_Satisfied()
     {
         $order_id = $this->input->post('order_id');

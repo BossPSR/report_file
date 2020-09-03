@@ -102,6 +102,7 @@ class Complete_ctr extends CI_Controller
         $DM         = $this->input->post('DM');
         $dated      = $this->input->post('dated');
         $confirm    = $this->input->post('confirm');
+        $date180    = date("Y-m-d", strtotime("+180 day"));
         $orf = array(
             'teamId'                => $team['teamId'],
             'feedback_detail'       => $DM,
@@ -117,7 +118,11 @@ class Complete_ctr extends CI_Controller
             $updateFeed = $this->db->update('tbl_feedback', ['check_feedback_order' => '0']);
             if ($updateFeed) {
                 $this->db->where('order_id', $order_id);
-                $updateFeed = $this->db->update('tbl_upload_team', ['status' => '2']);
+                $ut = $this->db->update('tbl_upload_team', ['status' => '2']);
+                if ($ut) {
+                    $this->db->where('order_id', $order_id);
+                    $this->db->update('tbl_upload_order', ['end_time_feedback' => $date180]);
+                }
             }
         }
         echo $success;

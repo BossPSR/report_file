@@ -109,10 +109,9 @@ class Store_model extends CI_Model
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
         $this->db->join('tbl_user', 'tbl_user.idUser = tbl_bookmark.id_user', 'left');
         $this->db->join('countries', 'countries.id = tbl_user.country_id', 'left');
-        $this->db->where('tbl_upload_order.status_pay', 1);
-        $this->db->where('tbl_upload_order.status_admin', 0);
+        // $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_bookmark', 1);
-        $this->db->where('tbl_upload_order.status_delivery', 0);
+        // $this->db->where('tbl_upload_order.status_delivery', 0);
         $this->db->group_by('tbl_bookmark.id_orderBuy');
         $this->db->order_by('tbl_upload_order.date_required', 'ASC');
 
