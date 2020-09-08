@@ -44,9 +44,9 @@
                                     <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
-                                <div class="col-lg-2 col-sm-12 text-right" style="max-width: 11.66667%;">
+                                <!-- <div class="col-lg-2 col-sm-12 text-right" style="max-width: 11.66667%;">
                                     <button type="button" data-toggle="modal" data-target="#modalUpload" class="btn btn-primary mr-1 mb-1">+ Upload</button>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="card-content">
@@ -65,6 +65,7 @@
                                                     <th>TM</th>
                                                     <th>Feedback file</th>
                                                     <th>Feedback detail</th>
+                                                    <th>Status</th>
                                                     <th>tool</th>
                                                 </tr>
                                             </thead>
@@ -384,7 +385,32 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload<?php echo $Approved['order_id']; ?>"><i class="feather icon-upload"></i> </button>
+                                                            <?php if ($Approved['status_cp'] == "") : ?>
+                                                                -
+                                                            <?php else : ?>
+
+                                                                <?php if ($Approved['status_cp'] == 'complete' && $Approved['status_admin'] == '0') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                <?php elseif ($Approved['status_cp'] == 'notcomplete' && $Approved['status_admin'] == '0') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
+                                                                <?php elseif ($Approved['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                <?php elseif ($Approved['status_admin'] == '0') : ?>
+                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                                <?php elseif ($Approved['status_admin'] == '1') : ?>
+                                                                    <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($Approved['status_cp'] == "complete") : ?>
+                                                                <button type="button" class="btn btn-secondary" data-toggle="modal"><i class="feather icon-upload"></i> </button>
+                                                            <?php else : ?>
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload<?php echo $Approved['order_id']; ?>"><i class="feather icon-upload"></i> </button>
+                                                            <?php endif; ?>
                                                             <div class="modal fade" id="upload<?php echo $Approved['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
@@ -415,17 +441,39 @@
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                                <div class="form-group hiddens">
+                                                                                                    <div class="controls">
+                                                                                                        <label for="data-name">Organization</label>
+                                                                                                        <select name="organization" class="form-control " id="">
+                                                                                                            <option value="" selected disabled>select Organization</option>
+                                                                                                            <option value="A">A</option>
+                                                                                                            <option value="B">B</option>
+                                                                                                            <option value="C">C</option>
+                                                                                                            <option value="D">D</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group hiddens">
+                                                                                                    <div class="controls">
+                                                                                                        <label for="data-name">Cp/Ncp</label>
+                                                                                                        <select name="cp" class="form-control " id="">
+                                                                                                        <option value="" selected disabled>select Cp/Ncp</option>
+                                                                                                            <option value="complete">Complete</option>
+                                                                                                            <option value="notcomplete">NotComplete</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
 
                                                                                                 <div class="form-group hiddens<?php echo $Approved['order_id']; ?>">
                                                                                                     <div class="controls">
                                                                                                         <label for="data-name">Code</label>
-                                                                                                        <input type="text" class="form-control req<?php echo $Approved['order_id']; ?>" name="code" value="" required>
+                                                                                                        <input type="text" class="form-control req<?php echo $Approved['order_id']; ?>" name="code" value="" required  placeholder="Code">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="form-group hiddens<?php echo $Approved['order_id']; ?>">
                                                                                                     <div class="controls">
                                                                                                         <label for="data-name">Topic</label>
-                                                                                                        <textarea class="form-control req<?php echo $Approved['order_id']; ?>" name="topic" id="" cols="30" rows="10" required></textarea>
+                                                                                                        <textarea class="form-control req<?php echo $Approved['order_id']; ?>" name="topic" id="" cols="30" rows="10" required placeholder="Topic"></textarea>
 
                                                                                                     </div>
                                                                                                 </div>
