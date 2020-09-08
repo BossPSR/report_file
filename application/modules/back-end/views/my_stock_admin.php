@@ -317,15 +317,18 @@
 
                                                         <!-- Team File -->
                                                         <td>
-                                                            <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stock['orderST']])->result_array(); ?>
-
+                                                            <?php
+                                                            $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
+                                                            $this->db->group_by('group');
+                                                            $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stock['orderST']])->result_array();
+                                                            ?>
                                                             <?php if ($orderT == true) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalT3<?php echo $stock['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalT3<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -334,18 +337,67 @@
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>Order id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>Create</th>
+                                                                                            <th>Status Admin</th>
+                                                                                            <th>Folder name</th>
+                                                                                            <th>Folder</th>
+                                                                                            <th>create</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
                                                                                         <?php foreach ($orderT as $keys => $orderT) { ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $orderT['order_id'] ?></td>
-                                                                                                <td><?php echo $orderT['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td>
+                                                                                                    <?php if ($orderT['status_upload_admin_cp'] == '1') : ?>
+                                                                                                        <span class="badge badge-pill badge-danger">Admin</span>
+                                                                                                    <?php else : ?>
+                                                                                                        -
+                                                                                                    <?php endif; ?>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderT['name_folder'] == '' ? 'Admin folder' : $orderT['name_folder'] ?></td>
+                                                                                                <td>
+                                                                                                    <span data-toggle="modal" data-target="#tf3_file<?php echo $orderT['group']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                                                    <div class="modal fade" id="tf3_file<?php echo $orderT['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Team File (<?php echo $orderT['name_folder'] ?>)</h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <?php $orderT_sub = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stock['orderST'], 'group' => $orderT['group']])->result_array(); ?>
+
+                                                                                                                    <table class="table zero-configuration">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                <th>Order id</th>
+                                                                                                                                <th>File_name</th>
+                                                                                                                                <th>File</th>
+                                                                                                                                <th>Create</th>
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                                                                                                                            <?php foreach ($orderT_sub as $keys => $orderT_sub) { ?>
+                                                                                                                                <tr>
+                                                                                                                                    <td><?php echo $orderT_sub['order_id'] ?></td>
+                                                                                                                                    <td><?php echo $orderT_sub['file_name'] ?></td>
+                                                                                                                                    <td><a href="<?php echo $orderT_sub['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                                                    <td><?php echo $orderT_sub['create_at'] ?></td>
+                                                                                                                                </tr>
+                                                                                                                            <?php } ?>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
                                                                                                 <td><?php echo $orderT['create_at'] ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
@@ -360,6 +412,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>

@@ -80,11 +80,18 @@
                                                 ?>
 
                                                     <tr>
+                                                        <!-- order -->
                                                         <td><?php echo $store['orderNOT'] ?></td>
+
+                                                        <!-- userId -->
                                                         <td><?php echo $store['userId']; ?></td>
+
+                                                        <!-- countryName -->
                                                         <td>
                                                             <?php echo $store['countryName'] == '' ? '-' : $store['countryName']; ?>
                                                         </td>
+
+                                                        <!-- Main File -->
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -130,8 +137,9 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>
 
+                                                        <!-- GT File -->
+                                                        <td>
                                                             <?php
                                                             $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
                                                             $this->db->where('tbl_morefile_GT.order_id', $store['orderNOT']);
@@ -147,7 +155,7 @@
                                                             $more_file_gt_st = $this->db->get()->result_array();
                                                             ?>
 
-                                                            <?php if (!empty($order ||$more_file_gt_st )) : ?>
+                                                            <?php if (!empty($order || $more_file_gt_st)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalb<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalb<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -175,8 +183,6 @@
                                                                                                 <td><?php echo $order['file_name_GT'] ?></td>
                                                                                                 <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $order['create_at'] ?></td>
-
-
                                                                                             </tr>
                                                                                         <?php } ?>
 
@@ -186,8 +192,6 @@
                                                                                                 <td><?php echo $more_file_gt_st['file_name_GT'] ?></td>
                                                                                                 <td><a href="<?php echo $more_file_gt_st['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $more_file_gt_st['create_at'] ?></td>
-
-
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
@@ -206,16 +210,20 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- Team File -->
                                                         <td>
-                                                            <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $store['orderT3']])->result_array(); ?>
-
+                                                            <?php
+                                                            $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
+                                                            $this->db->group_by('group');
+                                                            $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $store['orderNOT']])->result_array();
+                                                            ?>
                                                             <?php if ($orderT == true) : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModalT3<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModalT3<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#teamfile_sub<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="teamfile_sub<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -224,21 +232,68 @@
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>Order id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>Create</th>
+                                                                                            <th>Status Admin</th>
+                                                                                            <th>Folder name</th>
+                                                                                            <th>Folder</th>
+                                                                                            <th>create</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
                                                                                         <?php foreach ($orderT as $keys => $orderT) { ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $orderT['order_id'] ?></td>
-                                                                                                <td><?php echo $orderT['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderT['create_at'] ?></td>
+                                                                                                <td>
+                                                                                                    <?php if ($orderT['status_upload_admin_cp'] == '1') : ?>
+                                                                                                        <span class="badge badge-pill badge-danger">Admin</span>
+                                                                                                    <?php else : ?>
+                                                                                                        -
+                                                                                                    <?php endif; ?>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderT['name_folder'] == '' ? 'Admin folder' : $orderT['name_folder'] ?></td>
+                                                                                                <td>
+                                                                                                    <span data-toggle="modal" data-target="#tf3_file<?php echo $orderT['group']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                                                    <div class="modal fade" id="tf3_file<?php echo $orderT['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog  modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Team File (<?php echo $orderT['name_folder'] ?>)</h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <?php $orderT_sub = $this->db->get_where('tbl_upload_order_team', ['order_id' => $store['orderNOT'] , 'group' => $orderT['group']])->result_array(); ?>
 
+                                                                                                                    <table class="table zero-configuration">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                <th>Order id</th>
+                                                                                                                                <th>File_name</th>
+                                                                                                                                <th>File</th>
+                                                                                                                                <th>Create</th>
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                                                                                                                            <?php foreach ($orderT_sub as $keys => $orderT_sub) { ?>
+                                                                                                                                <tr>
+                                                                                                                                    <td><?php echo $orderT_sub['order_id'] ?></td>
+                                                                                                                                    <td><?php echo $orderT_sub['file_name'] ?></td>
+                                                                                                                                    <td><a href="<?php echo $orderT_sub['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                                                    <td><?php echo $orderT_sub['create_at'] ?></td>
+                                                                                                                                </tr>
+                                                                                                                            <?php } ?>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
 
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderT['create_at'] == '' ? '-' : $orderT['create_at']; ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
@@ -252,12 +307,17 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- createNOT -->
                                                         <td><?php echo $store['createNOT']; ?></td>
+
+                                                        <!-- dateNOT -->
                                                         <td>
                                                             <?php if ($store['status_delivery'] == '1') : ?>
                                                                 <?php echo $store['dateNOT']; ?>
@@ -266,11 +326,14 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- price -->
                                                         <?php if ($store['price_file'] == '') :   ?>
                                                             <td>-</td>
                                                         <?php else : ?>
                                                             <td>$<?php echo $store['price_file']; ?></td>
                                                         <?php endif; ?>
+
+                                                        <!-- teamId / wage -->
                                                         <td>
                                                             <?php if ($store['teamId'] == '') : ?>
                                                                 - |
@@ -354,6 +417,8 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <!-- Delivered -->
                                                         <td>
                                                             <?php if ($store['status_delivery'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning">Not Delivered</span>
@@ -361,6 +426,8 @@
                                                                 <span class="badge badge-pill badge-success">Delivered</span>
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Status -->
                                                         <td>
                                                             <?php if ($store['status_book'] == '1' && $store['status_cp'] == 'complete' && $store['status_admin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
@@ -375,6 +442,7 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- Status T3-->
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $store['orderNOT']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>
@@ -391,6 +459,8 @@
                                                                 <?php endif ?>
                                                             <?php endif ?>
                                                         </td>
+
+                                                        <!-- Tool -->
                                                         <td>
                                                             <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $store['orderNOT']; ?>"><i class="feather icon-delete"></i></button>
                                                             <div class="modal fade" id="exampleModallCenterc<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
