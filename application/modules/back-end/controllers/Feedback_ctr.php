@@ -8,6 +8,7 @@ class Feedback_ctr extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Feedback_model');
+        $this->load->model('Store_model');
     }
 
     public function index()
@@ -15,6 +16,7 @@ class Feedback_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') != '') {
 
             $data['feedback'] = $this->Feedback_model->feedback();
+            $data['ts']                      = $this->Store_model->team_select();
             $this->load->view('options/header');
             $this->load->view('feedback_notification', $data);
             $this->load->view('options/footer');
@@ -23,7 +25,90 @@ class Feedback_ctr extends CI_Controller
         }
     }
 
+    public function edit_info_feedback()
+    {
+        $order_id   = $this->input->post('order_id');
+        $wage       = $this->input->post('wage');
+        $teamid     = $this->input->post('teamid');
+        $position   = $this->input->post('position');
 
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
+
+        if ($resultsedit) {
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Team All information');
+                }
+            } else {
+
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
+
+
+
+        return redirect('feedback_notification');
+    }
+
+    private function sendEmail_all($teamid, $order_id)
+    {
+        $team  = $this->db->get_where('tbl_team', ['idTeam' => $teamid])->row_array();
+
+        $subject = 'You have received additional work from the admin. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $team['name'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order_id . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $order_id . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> You have received an order at : ' . $order_id . ' , Please check the binder. http://www.ip-soft.co.th/ipsoft </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($team['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+	}
     public function feedback_all()
     {
         if ($this->session->userdata('email_admin') != '') {

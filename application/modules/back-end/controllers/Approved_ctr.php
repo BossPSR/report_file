@@ -100,7 +100,7 @@ class Approved_ctr extends CI_Controller
                     'topic'             => $topic,
                     'section'           => $section,
                     'create_at'         => date('Y-m-d H:i:s'),
-                    'organization_upload'=> $organization
+                    'organization_upload' => $organization
                 ];
                 $success = $this->db->insert('tbl_upload_main_search', $data);
                 $id = $this->db->insert_id();
@@ -152,19 +152,24 @@ class Approved_ctr extends CI_Controller
             $topic                 = $this->input->post('topic');
             $organization          = $this->input->post('organization');
             $cp                    = $this->input->post('cp');
+            $storrow        = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
+
+            if ($storrow['status_cp'] == 'complete') {
+                $st = '1';
+            } else {
+                $st = '2';
+            }
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
             $upload_team = $this->db->get_where('tbl_upload_order_team', ['order_id' => $order_id])->result_array();
             if (!empty($select_item)) {
                 $data = [
                     'userId' => $user_id,
-                    'team_id' => $teamId,
                     'select_item_id' => $select_item_id,
-                    'search_item' => $search_item,
                     'select_item' => $select_item['name_item'],
                     'code' => $code,
                     'topic' => $topic,
-                    'upload_store_id' => $order_id,
+                    'organization_upload' => $organization,
                     'create_at' => date('Y-m-d H:i:s'),
                     'update_at' => date('Y-m-d H:i:s'),
                 ];
@@ -174,8 +179,22 @@ class Approved_ctr extends CI_Controller
                 $this->db->where('id', $id);
                 $this->db->update('tbl_upload_main_search', ['id_doc' => "DM" . $id]);
                 $this->db->where('order_id ', $order_id);
+                $success        = $this->db->update('tbl_upload_order_team', ['status_approved_upload' => 1]);
+                $storedata      = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->result_array();
 
-                $success =  $this->db->update('tbl_upload_order_team', ['status_approved_upload' => 1]);
+                foreach ($storedata as $key => $storedata) {
+
+                    $db_store = [
+                        'dm_main'         => $id,
+                        'dm_sub'          => "DM" . $id . '.' . $st . '.' . '1',
+                        'file_name'       => $storedata['file_name'],
+                        'path'            => $storedata['path'],
+                        'create_at'       => date('Y-m-d H:i:s'),
+                        'comandnocom'     => $st,
+                        'cp'              => $cp
+                    ];
+                    $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
+                }
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated status information !!.');
                 } else {
