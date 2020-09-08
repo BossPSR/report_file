@@ -82,6 +82,7 @@
                                                     <th>T3</th>
                                                     <th>Position</th>
                                                     <th>Status</th>
+                                                    <th>Status T3</th>
                                                     <th>tool</th>
                                                 </tr>
                                             </thead>
@@ -137,7 +138,6 @@
                                                             <?php if (!empty($feedback['feedback_detail'])) { ?>
                                                                 <a href="#" data-toggle="modal" data-target="#note<?php echo $feedback['id_f']; ?>"><i class="feather icon-search"></i></a>
 
-
                                                                 <div class="modal fade" id="note<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
@@ -166,8 +166,8 @@
                                                         </td>
                                                         <td><?php echo $feedback['time'] ?></td>
                                                         <td>
-															
-															<?php if (date("Y-m-d") >= $feedback['dated']) : ?>
+
+                                                            <?php if (date("Y-m-d") >= $feedback['dated']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($feedback['dated'])); ?>
@@ -185,7 +185,7 @@
                                                                     });
                                                                 </script>
                                                             <?php endif; ?>
-														</td>
+                                                        </td>
                                                         <td>
                                                             <?php if (!empty($feedback['teamId'])) : ?>
                                                                 <?php echo $feedback['teamId']; ?>
@@ -213,6 +213,44 @@
                                                                 <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
                                                             <?php elseif ($feedback['status_admin'] == '1') : ?>
                                                                 <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($feedback['status_check_team'] == '1') : ?>
+                                                                <span class=" badge badge-pill badge-success">waiting</span>
+                                                            <?php elseif ($feedback['status_check_team'] == '2') : ?>
+                                                                <span class="badge badge-pill badge-primary">procrssing</span>
+                                                            <?php elseif ($feedback['status_check_team'] == '3') : ?>
+                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">complete</span>
+                                                            <?php elseif ($feedback['status_check_team'] == '4') : ?>
+                                                                <span class="badge badge-pill badge-danger">Team Cancel</span>
+                                                                <a href="#" data-toggle="modal" data-target="#ts3cancal<?php echo $feedback['id_f']; ?>"><i class="feather icon-book" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                <div class="modal fade" id="ts3cancal<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Detail Cancel</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <?php $cancels = $this->db->get_where('tbl_cancel', ['order_id' => $feedback['order_feed']])->row_array(); ?>
+
+                                                                            <form action="feedback_file_update_detail" method="POST">
+                                                                                <input type="hidden" name="id" value="<?php echo $feedback['id_f']; ?>">
+                                                                                <div class="modal-body">
+                                                                                    <p><?php echo $cancels['history']; ?></p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                                    <button type=" submit" class="btn btn-success">Save</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>

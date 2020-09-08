@@ -19,6 +19,7 @@ class Feedback_model extends CI_Model{
         $this->db->where('tbl_feedback.status_c_feedack_team',1);
 		$this->db->group_by('tbl_feedback_file.id_feedback');
 		$this->db->order_by('tbl_feedback.order_id','DESC');
+		$this->db->order_by('tbl_feedback.create_at','DESC');
         
         return $this->db->get()->result_array();
 

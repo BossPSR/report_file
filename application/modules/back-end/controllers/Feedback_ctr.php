@@ -346,10 +346,10 @@ class Feedback_ctr extends CI_Controller
 
     public function delete_feedbacktion()
     {
-        $order   = $this->input->post('order');
-        $idf   = $this->input->post('idf');
-        $note = $this->input->post('note');
-        $filefeedback = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $idf])->row_array();
+        $order          = $this->input->post('order');
+        $idf            = $this->input->post('idf');
+        $note           = $this->input->post('note');
+        $filefeedback   = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $idf])->row_array();
 
         unlink($filefeedback['path']);
         $this->db->where('id_feedback', $idf);
