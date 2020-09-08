@@ -340,4 +340,5 @@ $route['rename_uploadmain']                         = 'back-end/Store_ctr/rename
 $route['rename_filename']                           = 'back-end/Customer_order_ctr/rename_filename';
 $route['rename_filenameGT']                         = 'back-end/Customer_order_ctr/rename_filenameGT';
 $route['rename_filename_TM']                        = 'back-end/Complete_ctr/rename_filename_TM';
+$route['edit_info_feedback']                        = 'back-end/Feedback_ctr/edit_info_feedback';
 

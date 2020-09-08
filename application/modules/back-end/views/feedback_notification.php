@@ -78,9 +78,11 @@
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
                                                     <th>Feedback In</th>
+                                                    <th>TM-Date Confirm</th>
                                                     <th>Feedback Required</th>
                                                     <th>T3</th>
                                                     <th>Position</th>
+                                                    <th>info</th>
                                                     <th>Status</th>
                                                     <th>Status T3</th>
                                                     <th>tool</th>
@@ -165,6 +167,7 @@
                                                             <?php } ?>
                                                         </td>
                                                         <td><?php echo $feedback['time'] ?></td>
+                                                        <td><?php echo $feedback['update_confirm'] ?></td>
                                                         <td>
 
                                                             <?php if (date("Y-m-d") >= $feedback['dated']) : ?>
@@ -203,6 +206,89 @@
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif;  ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($feedback['teamId'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                <?php echo $feedback['teamId']; ?> |
+                                                            <?php endif; ?>
+
+                                                            <?php if ($feedback['wage'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                $<?php echo $feedback['wage']; ?> |
+                                                            <?php endif; ?>
+
+                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback['position']])->result_array(); ?>
+                                                            <?php foreach ($position_name as $position_name) { ?>
+                                                                <?php echo $position_name['name_item'] ?>
+                                                            <?php } ?>
+
+                                                            <?php if ($feedback['teamId'] == '' && $feedback['wage'] == '' && $feedback['position'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $feedback['order_feed']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                            <?php endif; ?>
+
+
+                                                            <div class="modal fade" id="exampleModalwage<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="edit_info_feedback" method="POST">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                                                                        <input type="hidden" name="order_id" value="<?php echo $feedback['order_feed']; ?>">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Info (<?php echo $feedback['order_feed']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="Team">Team ID</label>
+                                                                                        <select class="select2 form-control" name="teamid" required>
+                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                            <option value=""> All Team </option>
+                                                                                            <?php foreach ($ts as $tsM) { ?>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $feedback['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Position</label>
+                                                                                        <select name="position" class="form-control" required>
+                                                                                            <option selected disabled> ---- Select ---- </option>
+
+                                                                                            <?php foreach ($positionX as $positionX) { ?>
+                                                                                                <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $feedback['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">wage</label>
+                                                                                        <input type="text" class="form-control" name="wage" value="<?php echo $feedback['wage']; ?>" placeholder="Enter wage" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <?php if ($feedback['status_book'] == '1' && $feedback['status_cp'] == 'complete' && $feedback['status_admin'] == '0') : ?>
@@ -258,6 +344,174 @@
                                                         <td>
                                                             <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $feedback['id_f']; ?>"><i class="feather icon-navigation"></i> </button>
                                                             <button type="button" data-toggle="modal" data-target="#Cancel<?php echo $feedback['id_f']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-delete"></i></button>
+                                                            <?php if ($feedback['status_informal'] == 1) : ?>
+                                                                <button type="button" class="btn btn-icon btn-success" data-toggle="modal" data-target="#infor<?php echo $feedback['order_feed']; ?>"><i class="feather icon-log-out"></i></button>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#send<?php echo $feedback['order_feed']; ?>"><i class="feather icon-navigation"></i> </button>
+                                                            <?php else : ?>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $feedback['order_feed']; ?>"><i class="feather icon-users"></i></button>
+                                                            <?php endif; ?>
+                                                            <div class="modal fade" id="informal<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="add_team_informal" method="POST">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $feedback['order_feed']; ?>">
+                                                                    <div class="modal-dialog " role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exp">Informal team (<?php echo $feedback['order_feed']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="name">Name</label>
+                                                                                        <input type="text" class="form-control" name="name" value="" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Position</label>
+                                                                                        <select name="position" class="form-control" required>
+                                                                                            <option selected disabled> ---- Select ---- </option>
+
+                                                                                            <?php foreach ($positionX as $positionX) { ?>
+                                                                                                <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $feedback['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="Wage">Wage</label>
+                                                                                        <input type="text" class="form-control" name="Wage" value="" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                            <div class="modal fade" id="infor<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Dropfile (<?php echo $feedback['order_feed']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="modal-body">
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <label for="" style="font-size: 16px;">File Document </label>
+                                                                                <form action="fileUpload_t3_other" class="dropzone dropzone-area" id="dropzoneother<?php echo $feedback['order_feed']; ?>">
+                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                    <input type="hidden" name="order" value="<?php echo $feedback['order_feed']; ?>">
+                                                                                    <input type="hidden" name="teamId" value="<?php echo $feedback['teamId']; ?>">
+                                                                                </form>
+                                                                            </div>
+
+                                                                            
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around">
+                                                                                <button type="submit" id="other<?php echo $feedback['order_feed']; ?>" class="btn btn-primary">Submit</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <script>
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzone5<?php echo $feedback['order_feed']; ?> = new Dropzone("#dropzoneother<?php echo $feedback['order_feed']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                document.getElementById("other<?php echo $feedback['order_feed']; ?>").addEventListener("click", function() {
+                                                                    // myDropzone.processQueue();
+                                                                    if (myDropzone5<?php echo $feedback['order_feed']; ?>.files == 0) {
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    } else {
+                                                                        myDropzone5<?php echo $feedback['order_feed']; ?>.processQueue();
+                                                                        myDropzone5<?php echo $feedback['order_feed']; ?>.on("queuecomplete", function(file, res) {
+                                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                                button: false,
+                                                                            });
+                                                                            setTimeout(function() {
+                                                                                location.href = "Satisfied"
+                                                                            }, 1000);
+                                                                        });
+                                                                    }
+                                                                });
+                                                            </script>
+
+
+                                                            <div class="modal fade" id="informal<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="add_team_informal" method="POST">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $feedback['order_feed']; ?>">
+                                                                    <div class="modal-dialog " role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exp">Informal team (<?php echo $feedback['order_feed']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="name">Name</label>
+                                                                                        <input type="text" class="form-control" name="name" value="" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Position</label>
+                                                                                        <select name="position" class="form-control" required>
+                                                                                            <option selected disabled> ---- Select ---- </option>
+                                                                                            
+                                                                                            <?php foreach ($positionX as $positionX) { ?>
+                                                                                                <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $feedback['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="Wage">Wage</label>
+                                                                                        <input type="text" class="form-control" name="Wage" value="" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
 
                                                             <div class="modal fade" id="sendnw<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
