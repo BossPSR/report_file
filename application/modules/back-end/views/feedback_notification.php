@@ -70,7 +70,7 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration" id="loading_img_spin">
+                                        <table class="table table-hover zero-configuration" id="loading_img_spin" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>order id</th>
@@ -79,11 +79,13 @@
                                                     <th>Feedback Detail</th>
                                                     <th>Feedback In</th>
                                                     <th>TM-Date Confirm</th>
+                                                    <th>Feedback Cancel</th>
                                                     <th>Feedback Required</th>
                                                     <th>T3</th>
                                                     <th>Position</th>
                                                     <th>info</th>
                                                     <th>Status</th>
+                                                    <th>Client Feedback</th>
                                                     <th>Status T3</th>
                                                     <th>tool</th>
                                                 </tr>
@@ -91,9 +93,17 @@
                                             <tbody>
 
                                                 <?php foreach ($feedback as $keyBook => $feedback) { ?>
+
+                                                    <?php $cancels = $this->db->get_where('tbl_cancel', ['order_id' => $feedback['order_feed']])->row_array(); ?>
+
                                                     <tr>
+                                                        <!-- order id -->
                                                         <td><?php echo $feedback['order_feed'] ?></td>
+
+                                                        <!-- userId -->
                                                         <td><?php echo $feedback['userId'] ?></td>
+
+                                                        <!-- Feedback File -->
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $feedback['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -135,8 +145,9 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>
 
+                                                        <!-- feedback_detail -->
+                                                        <td>
                                                             <?php if (!empty($feedback['feedback_detail'])) { ?>
                                                                 <a href="#" data-toggle="modal" data-target="#note<?php echo $feedback['id_f']; ?>"><i class="feather icon-search"></i></a>
 
@@ -166,10 +177,18 @@
                                                                 -
                                                             <?php } ?>
                                                         </td>
-                                                        <td><?php echo $feedback['time'] ?></td>
-                                                        <td><?php echo $feedback['update_confirm'] ?></td>
-                                                        <td>
 
+                                                        <!-- time -->
+                                                        <td><?php echo $feedback['time']; ?></td>
+
+                                                        <!-- update_confirm -->
+                                                        <td><?php echo $feedback['update_confirm']; ?></td>
+
+                                                        <!-- Feedback Cancel -->
+                                                        <td><?php echo $cancels['create_at']; ?> </td>
+
+                                                        <!-- dateReq -->
+                                                        <td>
                                                             <?php if (date("Y-m-d") >= $feedback['dated']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
@@ -189,14 +208,17 @@
                                                                 </script>
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- teamId -->
                                                         <td>
                                                             <?php if (!empty($feedback['teamId'])) : ?>
                                                                 <?php echo $feedback['teamId']; ?>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif;  ?>
-
                                                         </td>
+
+                                                        <!-- position -->
                                                         <td>
                                                             <?php if (!empty($feedback['position'])) : ?>
                                                                 <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback['position']])->result_array(); ?>
@@ -207,6 +229,8 @@
                                                                 -
                                                             <?php endif;  ?>
                                                         </td>
+
+                                                        <!-- teamId / wage -->
                                                         <td>
                                                             <?php if ($feedback['teamId'] == '') : ?>
                                                                 - |
@@ -234,7 +258,7 @@
 
                                                             <div class="modal fade" id="exampleModalwage<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="edit_info_feedback" method="POST">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
 
                                                                         <input type="hidden" name="order_id" value="<?php echo $feedback['order_feed']; ?>">
                                                                         <div class="modal-content">
@@ -244,11 +268,11 @@
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
-                                                                            <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+                                                                            <div class="modal-body" style="text-align: center;margin: 45px 0;">
 
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label>
+                                                                                        <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
@@ -281,6 +305,30 @@
                                                                                     </div>
                                                                                 </div>
 
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1 text-left">
+                                                                                    <label for="">Team file All</label>
+                                                                                    <hr>
+                                                                                    <table class="table zero-configuration">
+                                                                                        <thead>
+                                                                                            <?php $t3file = $this->db->get_where('tbl_upload_order_team', ['order_id' => $feedback['order_feed']])->result_array(); ?>
+                                                                                            <tr>
+                                                                                                <th>File_name</th>
+                                                                                                <th>File</th>
+                                                                                                <th>create</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <?php foreach ($t3file as $t3file) { ?>
+                                                                                                <tr>
+                                                                                                    <td><?php echo $t3file['file_name'] ?></td>
+                                                                                                    <td><a href="<?php echo $t3file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                    <td><?php echo $t3file['create_at'] ?></td>
+                                                                                                </tr>
+                                                                                            <?php } ?>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
@@ -290,6 +338,8 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <!-- Status -->
                                                         <td>
                                                             <?php if ($feedback['status_book'] == '1' && $feedback['status_cp'] == 'complete' && $feedback['status_admin'] == '0') : ?>
                                                                 <span class=" badge badge-pill badge-success">Original</span>
@@ -303,6 +353,31 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Client Feedback -->
+                                                        <td>
+                                                            <?php
+                                                            $z  = 0;
+                                                            $cf = $this->db->get_where('tbl_feedback', ['order_id' => $feedback['order_feed'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                            foreach ($cf as $key => $cf) {
+                                                                $z += 1;
+                                                            }
+                                                            $c  = 0;
+                                                            $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $feedback['order_feed'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                            foreach ($cf2 as $key => $cf2) {
+                                                                $c += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                            <?php elseif ($cf2 == true) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- Status T3 -->
                                                         <td>
                                                             <?php if ($feedback['status_check_team'] == '1') : ?>
                                                                 <span class=" badge badge-pill badge-success">waiting</span>
@@ -311,7 +386,15 @@
                                                             <?php elseif ($feedback['status_check_team'] == '3') : ?>
                                                                 <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">complete</span>
                                                             <?php elseif ($feedback['status_check_team'] == '4') : ?>
-                                                                <span class="badge badge-pill badge-danger">Team Cancel</span>
+                                                                <?php
+                                                                $x  = 0;
+                                                                $af = $this->db->get_where('tbl_feedback', ['order_id' => $feedback['order_feed'], 'check_status' => 0])->result_array();
+                                                                foreach ($af as $key => $af) {
+                                                                    $x += 1;
+                                                                }
+                                                                ?>
+
+                                                                <span class="badge badge-pill badge-danger">Team Cancel (<?= $x; ?>)</span>
                                                                 <a href="#" data-toggle="modal" data-target="#ts3cancal<?php echo $feedback['id_f']; ?>"><i class="feather icon-book" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                 <div class="modal fade" id="ts3cancal<?php echo $feedback['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document">
@@ -322,8 +405,6 @@
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
-                                                                            <?php $cancels = $this->db->get_where('tbl_cancel', ['order_id' => $feedback['order_feed']])->row_array(); ?>
-
                                                                             <form action="feedback_file_update_detail" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $feedback['id_f']; ?>">
                                                                                 <div class="modal-body">
@@ -341,6 +422,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Tool -->
                                                         <td>
                                                             <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $feedback['id_f']; ?>"><i class="feather icon-navigation"></i> </button>
                                                             <button type="button" data-toggle="modal" data-target="#Cancel<?php echo $feedback['id_f']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-delete"></i></button>
@@ -420,7 +503,7 @@
                                                                                 </form>
                                                                             </div>
 
-                                                                            
+
                                                                         </div>
 
                                                                         <div class="modal-footer">
@@ -488,7 +571,7 @@
                                                                                         <label for="helpInputTop">Position</label>
                                                                                         <select name="position" class="form-control" required>
                                                                                             <option selected disabled> ---- Select ---- </option>
-                                                                                            
+
                                                                                             <?php foreach ($positionX as $positionX) { ?>
                                                                                                 <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $feedback['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
                                                                                             <?php } ?>
