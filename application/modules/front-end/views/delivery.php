@@ -104,7 +104,8 @@
 
                                     <img src="uploads/folder-new.png" alt="" data-toggle="modal" data-target="#folder<?php echo $folder['id'] ?>" style="cursor: pointer;">
 
-                                    <p> <?php echo $folder['name_folder'] ?>
+                                    <p>
+                                        <?php echo $folder['name_folder'] ?>
                                         <a href="delete_folder?id=<?= $folder['id']; ?>" class="tooltips">
                                             <i class="fa fa-times dil" aria-hidden="true"></i>
                                             <span class="tooltiptexts">ปุ่มลบโฟร์เดอร์</span>
@@ -172,7 +173,7 @@
                             </select>
                         </div>
                         <div class="col-12 mt-3 ">
-                            <button type="button" class="btn btn-primary w-100 uploadfiles" >
+                            <button type="button" class="btn btn-primary w-100 uploadfiles">
                                 Upload Files
                             </button>
                         </div>
@@ -195,31 +196,33 @@
         })
         .change();
 </script>
-<?php foreach ($op as $key => $op) { ?>
-    <script type="text/javascript">
-        Dropzone.autoDiscover = false;
-        var myDropzone<?= $op; ?> = new Dropzone("#fileupload<?= $op; ?>", {
-            autoProcessQueue: false,
-            maxFiles: 5,
-            addRemoveLinks: true,
-            parallelUploads: 5, // Number of files process at a time (default 2)
-        });
+<?php if (!empty($op)) { ?>
+    <?php foreach ($op as $key => $op) { ?>
+        <script type="text/javascript">
+            Dropzone.autoDiscover = false;
+            var myDropzone<?= $op; ?> = new Dropzone("#fileupload<?= $op; ?>", {
+                autoProcessQueue: false,
+                maxFiles: 5,
+                addRemoveLinks: true,
+                parallelUploads: 5, // Number of files process at a time (default 2)
+            });
 
-        $('.uploadfiles').click(function() {
-            var x = document.getElementById("selected2").value;
-            if (myDropzone<?= $op; ?>.files < 1 || x == '') {
-                swal("Warning!", "Please fill out the information.", "error", {
-                    button: false,
-                });
-            } else {
-                myDropzone<?= $op; ?>.processQueue();
-                myDropzone<?= $op; ?>.on("queuecomplete", function(file, res) {
-                    swal("Good job!", "Upload for data successfull", "success", {
+            $('.uploadfiles').click(function() {
+                var x = document.getElementById("selected2").value;
+                if (myDropzone<?= $op; ?>.files < 1 || x == '') {
+                    swal("Warning!", "Please fill out the information.", "error", {
                         button: false,
                     });
-                    setTimeout("location.reload(true);", 1000);
-                });
-            }
-        });
-    </script>
+                } else {
+                    myDropzone<?= $op; ?>.processQueue();
+                    myDropzone<?= $op; ?>.on("queuecomplete", function(file, res) {
+                        swal("Good job!", "Upload for data successfull", "success", {
+                            button: false,
+                        });
+                        setTimeout("location.reload(true);", 1000);
+                    });
+                }
+            });
+        </script>
+    <?php } ?>
 <?php } ?>

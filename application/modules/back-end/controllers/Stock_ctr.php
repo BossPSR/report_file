@@ -53,15 +53,26 @@ class Stock_ctr extends CI_Controller
 		// image_lib
 		$id_admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array();
 
-		$userId     =  $id_admin['adminId'];
-		$date_req   =  $this->input->post('date_required');
-		$name       =  $this->input->post('name');
-		$email      =  $this->input->post('email');
-		$DMCheck    =  $this->input->post('DMCheck');
+		$userId     	=  $id_admin['adminId'];
+		$date_req   	=  $this->input->post('date_required');
+		$name       	=  $this->input->post('name');
+		$email      	=  $this->input->post('email');
+		$status_cp_save =  $this->input->post('status_cp_save');
+		$price_save 	=  $this->input->post('price_save');
+		$org_save   	=  $this->input->post('org_save');
+		$note1_save 	=  $this->input->post('note1_save');
+		$DMCheck    	=  $this->input->post('DMCheck');
+		
 		if (!empty($DMCheck)) {
 			$num = 1;
 		} else {
 			$num = 2;
+		}
+
+		if ($status_cp_save == 'complete') {
+			$cp = 1;
+		}else{
+			$cp = 0;
 		}
 
 
@@ -93,17 +104,22 @@ class Stock_ctr extends CI_Controller
 
 				$data = array(
 
-					'userId'        => $userId,
-					'order_id'      => $buymax->order_main,
-					'date_required' => $date_req,
-					'Username'      => $name,
-					'email'      	=> $email,
-					'status_admin'  =>  1,
-					'status_book'   =>  $num,
-					'status_pay'    =>  1,
-					'file_name'     => $uploadData['file_name'],
-					'path'          => 'uploads/Buy/' . $uploadData['file_name'],
-					'create_at'     => date('Y-m-d H:i:s'),
+					'userId'        	=> $userId,
+					'order_id'      	=> $buymax->order_main,
+					'date_required' 	=> $date_req,
+					'Username'      	=> $name,
+					'email'      		=> $email,
+					'status_admin'  	=> 1,
+					'status_book'   	=> $num,
+					'status_bookmark'   => $cp,
+					'status_pay'    	=> 1,
+					'price_file'    	=> $price_save,
+					'note_user'    		=> $note1_save,
+					'organization'  	=> $org_save,
+					'status_cp'  		=> $status_cp_save,
+					'file_name'     	=> $uploadData['file_name'],
+					'path'          	=> 'uploads/Buy/' . $uploadData['file_name'],
+					'create_at'     	=> date('Y-m-d H:i:s'),
 				);
 				$this->db->insert('tbl_upload_order', $data);
 			}

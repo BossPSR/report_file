@@ -299,7 +299,7 @@
                                                             $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
                                                             $more_file_gt = $this->db->get()->result_array();
                                                             ?>
-                                                            <?php if (!empty($orderGT||  $more_file_gt)) : ?>
+                                                            <?php if (!empty($orderGT ||  $more_file_gt)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalb<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalb<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -395,7 +395,7 @@
                                                                                         <?php foreach ($orderGT as $keys => $orderGT) { ?>
                                                                                             <tr>
 
-                                                                                                <td><?php echo $orderGT['order_id'] ?></td>
+                                                                                                <td><?php echo $orderGT['order_id'] ?> </td>
                                                                                                 <td>
                                                                                                     <?php echo $orderGT['file_name_GT'] ?>
                                                                                                     <a href="" data-toggle="modal" data-target="#dmsGT<?php echo $orderGT['id']; ?>">
@@ -435,7 +435,7 @@
                                                                                         <?php foreach ($more_file_gt as $key => $more_file_gt) { ?>
                                                                                             <tr>
 
-                                                                                                <td><?php echo $more_file_gt['order_id'] ?> (MF)</td>
+                                                                                                <td><?php echo $more_file_gt['order_id'] ?> (MF) </td>
                                                                                                 <td>
                                                                                                     <?php echo $more_file_gt['file_name_GT'] ?>
                                                                                                     <a href="" data-toggle="modal" data-target="#dmsGT<?php echo $more_file_gt['id']; ?>">
@@ -454,12 +454,12 @@
                                                                                                                 <div class="modal-body">
                                                                                                                     <h5>Rename</h5>
                                                                                                                     <?php $or_file_name = explode('.', $more_file_gt['file_name_GT']); ?>
-                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameGT<?php echo $orderGT['id']; ?>" class="form-control">
-                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameGT<?php echo $orderGT['id']; ?>" class="form-control">
-                                                                                                                    <input type="hidden" id="path<?php echo $more_file_gt['id']; ?>" data-pathgt="<?php echo $orderGT['path_GT']; ?>" class="form-control">
+                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameGT<?php echo $more_file_gt['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameGT<?php echo $more_file_gt['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" id="path<?php echo $more_file_gt['id']; ?>" data-pathgt="<?php echo $more_file_gt['path_GT']; ?>" class="form-control">
                                                                                                                 </div>
                                                                                                                 <div class="modal-footer">
-                                                                                                                    <button type="button" class="btn btn-primary ex" id="re_file_name_buttonGT<?php echo $orderGT['id']; ?> " data-fgt="<?php echo $orderGT['id']; ?>">Submit</button>
+                                                                                                                    <button type="button" class="btn btn-primary ex" id="re_file_name_buttonGT<?php echo $more_file_gt['id']; ?> " data-fgt="<?php echo $more_file_gt['id']; ?>">Submit</button>
                                                                                                                 </div>
 
                                                                                                             </div>

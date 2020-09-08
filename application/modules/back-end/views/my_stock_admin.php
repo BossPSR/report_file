@@ -56,11 +56,10 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Order id</th>
-
                                                     <th>Organization</th>
                                                     <th>Email</th>
                                                     <th>Name</th>
@@ -75,15 +74,19 @@
                                                     <th>Date Confirm</th>
                                                     <th>Date Required</th>
                                                     <th>info</th>
+                                                    <th>feedback</th>
                                                     <th>Process</th>
+                                                    <th>Status</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($stock as $stock) { ?>
                                                     <tr>
+                                                        <!-- Order id -->
                                                         <td><?php echo $stock['orderST'] ?></td>
 
+                                                        <!-- Organization -->
                                                         <td>
                                                             <?php if ($stock['organization'] == "") : ?>
                                                                 -
@@ -91,6 +94,8 @@
                                                                 <?php echo $stock['organization'] ?>
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Email -->
                                                         <td>
                                                             <?php if (!empty($stock['email'])) : ?>
                                                                 <?php echo $stock['email'] ?>
@@ -98,6 +103,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Name -->
                                                         <td>
                                                             <?php if (!empty($stock['Username'])) : ?>
                                                                 <?php echo $stock['Username'] ?>
@@ -105,6 +112,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- DM -->
                                                         <td>
                                                             <?php $book_dm = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stock['orderST']])->result_array(); ?>
                                                             <?php foreach ($book_dm as $key => $book_dm) { ?>
@@ -115,8 +124,9 @@
                                                                 <?php endif; ?>
                                                             <?php } ?>
                                                         </td>
-                                                        <td>
 
+                                                        <!-- DM file -->
+                                                        <td>
                                                             <?php if (!empty($book_dm['id_document'])) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $stock['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalbDM<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,15 +144,17 @@
                                                                                     <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
 
                                                                                     <?php if (!empty($dm_cc['id_document'])) : ?>
-                                                                                        <p><b>
+                                                                                        <p>
+                                                                                            <b>
                                                                                                 <h3><?php echo $dm_cc['id_document']; ?></h3>
-                                                                                            </b></p>
+                                                                                            </b>
+                                                                                        </p>
 
                                                                                         <table class="table zero-configuration">
                                                                                             <thead>
                                                                                                 <tr>
                                                                                                     <th>Relive</th>
-                                                                                                    <th>Store Id</th>
+                                                                                                    <!-- <th>Store Id</th> -->
                                                                                                     <th>File Name</th>
                                                                                                     <th>File</th>
                                                                                                     <th>create</th>
@@ -184,6 +196,8 @@
 
 
                                                         </td>
+
+                                                        <!-- Main File -->
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $stock['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $stock['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -228,6 +242,8 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+
+                                                        <!-- GT File -->
                                                         <td>
                                                             <?php
                                                             $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
@@ -299,6 +315,7 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- Team File -->
                                                         <td>
                                                             <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stock['orderST']])->result_array(); ?>
 
@@ -347,6 +364,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- price -->
                                                         <td>
                                                             <?php if ($stock['price_file'] != '') : ?>
                                                                 <?php echo $stock['price_file'] ?>
@@ -354,6 +373,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Note Client -->
                                                         <td>
                                                             <?php if (!empty($stock['note_user'])) { ?>
                                                                 <a href="#" data-toggle="modal" data-target="#note<?php echo $stock['orderST']; ?>"><i class="feather icon-search"></i></a>
@@ -361,7 +382,7 @@
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Note Client</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note Client (<?php echo $stock['orderST']; ?>)</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -372,7 +393,7 @@
                                                                                     <textarea name="detail" id="" rows="6" class="form-control"><?= $stock['note_user']; ?> </textarea>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button type=" submit" class="btn btn-success">Save</button>
+                                                                                    <button type="submit" class="btn btn-success">Save</button>
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
 
                                                                                 </div>
@@ -384,6 +405,8 @@
                                                                 -
                                                             <?php } ?>
                                                         </td>
+
+                                                        <!-- Note Team -->
                                                         <td>
                                                             <?php if (!empty($stock['note'])) { ?>
                                                                 <a href="#" data-toggle="modal" data-target="#note_t<?php echo $stock['orderST']; ?>"><i class="feather icon-search"></i></a>
@@ -391,18 +414,21 @@
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Note Team</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note Team (<?php echo $stock['orderST']; ?>)</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
                                                                             </div>
-                                                                            <div class="modal-body">
-                                                                                <textarea name="detail" id="" rows="6" class="form-control" readonly><?= $stock['note']; ?> </textarea>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-
-                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
-                                                                            </div>
+                                                                            <form action="my_stock_admin_note_team" method="POST">
+                                                                                <input type="hidden" name="id" value="<?php echo $stock['orderST']; ?>">
+                                                                                <div class="modal-body">
+                                                                                    <textarea name="detail_team" id="" rows="6" class="form-control"><?= $stock['note']; ?> </textarea>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="submit" class="btn btn-success">Save</button>
+                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -423,10 +449,11 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d H:i:s', strtotime($stock['dateREST'])); ?>
-                                                                <div id="clock-b<?php echo $stock['dateREST']; ?>" style="display: flex;"></div>
+                                                                <!-- <?= $stock['dateREST']; ?> -->
+                                                                <div id="clock-b<?php echo $stock['orderST']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $stock['dateREST']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $stock['orderST']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -440,6 +467,7 @@
 
                                                         </td>
 
+                                                        <!-- info -->
                                                         <td>
                                                             <?php if ($stock['teamId'] == '') : ?>
                                                                 - |
@@ -480,7 +508,7 @@
 
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label>
+                                                                                        <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
@@ -537,6 +565,34 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <!-- Feedback -->
+                                                        <td>
+                                                            <?php
+                                                            $tff     = $this->db->get_where('tbl_feedback', ['order_id' => $stock['orderST']])->row_array();
+                                                            ?>
+                                                            <?php if ($tff == true) : ?>
+                                                                <?php if ($tff['re_feedback'] == '0') : ?>
+
+                                                                    <?php
+                                                                    $this->db->where('order_id', $stock['orderST']);
+                                                                    $this->db->where('re_feedback', 0);
+                                                                    $this->db->from('tbl_feedback', 0);
+                                                                    $countff = $this->db->count_all_results();
+                                                                    ?>
+
+                                                                    <span class="badge badge-pill badge-danger">Feedback (<?php echo $countff; ?>) </span>
+                                                                <?php else : ?>
+                                                                    <span class="badge badge-pill badge-danger">Re-Feedback </span>
+                                                                <?php endif; ?>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
+
+                                                        </td>
+
+                                                        <!-- Processing -->
                                                         <td>
                                                             <?php if ($stock['Tstatus'] == 0 && $stock['teamId'] == '') : ?>
                                                                 <span class="badge badge-pill badge-primary">waiting for team </span>
@@ -550,6 +606,23 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Status -->
+                                                        <td>
+                                                            <?php if ($stock['status_cp'] == 'complete') : ?>
+                                                                <span class="badge badge-pill badge-success">Complete </span>
+                                                            <?php elseif ($stock['status_cp'] == 'notcomplete') : ?>
+                                                                <span class="badge badge-pill badge-warning">Not complete </span>
+                                                            <?php elseif ($stock['status_cp'] == 'rewrite') : ?>
+                                                                <span class="badge badge-pill badge-primary">Rewrite </span>
+                                                            <?php elseif ($stock['status_cp'] == 'nodm') : ?>
+                                                                <span class="badge badge-pill badge-danger">No DM </span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- Tool -->
                                                         <td style="width:10%;">
                                                             <?php if ($stock['status_approved'] == 1) : ?>
                                                                 <span class="badge badge-pill badge-success">Approved</span>
@@ -651,7 +724,6 @@
                                                                             }
                                                                         });
                                                                     }
-
                                                                 });
                                                             </script>
 

@@ -318,7 +318,7 @@
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note Client </h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -326,11 +326,11 @@
                                                                             <form action="more_file_update_detail" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $more_file['idM']; ?>">
                                                                                 <div class="modal-body">
-                                                                                    <textarea name="detail" id="" rows="6" class="form-control" readonly><?= $more_file['more_detail']; ?> </textarea>
+                                                                                    <?= $more_file['more_detail']; ?>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
-                                                                                    
+
                                                                                 </div>
                                                                             </form>
                                                                         </div>
@@ -348,7 +348,7 @@
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note Team </h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -371,7 +371,7 @@
                                                             <?php } ?>
                                                         </td>
                                                         <td>
-                                                        <?php if (date("Y-m-d H:i:s") >= $more_file['dr_more']) : ?>
+                                                            <?php if (date("Y-m-d H:i:s") >= $more_file['dr_more']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d H:i:s', strtotime($more_file['dr_more'])); ?>
@@ -390,11 +390,11 @@
                                                                 </script>
                                                             <?php endif; ?>
 
-                                                        
-                                                      
-                                                    
-                                                    </td>
-                                                    <td> <?php echo $more_file['createmore_file']; ?> </td>
+
+
+
+                                                        </td>
+                                                        <td> <?php echo $more_file['createmore_file']; ?> </td>
                                                         <td>
                                                             <?php if (!empty($more_file['TM'])) : ?>
                                                                 <?php echo $more_file['TM']; ?>

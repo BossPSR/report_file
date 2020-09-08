@@ -130,6 +130,8 @@
                                                     <th>Team File</th>
                                                     <th>Date Required</th>
                                                     <th>Position</th>
+                                                    <th>Client Feedback </th>
+                                                    <th>Admin Feedback </th>
                                                     <th>Status</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -138,9 +140,15 @@
                                                 <?php
                                                 $e = 1;
                                                 foreach ($complete as $key => $complete) { ?>
+
                                                     <tr>
+                                                        <!-- Order Id -->
                                                         <td><?php echo $complete['order_id_t']; ?></td>
+
+                                                        <!-- TeamId -->
                                                         <td><?php echo $complete['teamId']; ?></td>
+
+                                                        <!-- DM -->
                                                         <td>
                                                             <?php if (empty($complete['id_document'])) : ?>
                                                                 -
@@ -157,6 +165,8 @@
                                                                 <?php } ?>
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- DM file -->
                                                         <td>
                                                             <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $complete['order_id_t']])->result_array(); ?>
                                                             <?php if (!empty($dm_cc)) : ?>
@@ -221,6 +231,8 @@
                                                             <?php endif; ?>
 
                                                         </td>
+
+                                                        <!-- Main File -->
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $complete['id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="exampleModala<?php echo $complete['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -265,6 +277,8 @@
                                                             </div>
 
                                                         </td>
+
+                                                        <!-- GT File -->
                                                         <td>
                                                             <?php $orderGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $complete['order_id']])->result_array(); ?>
                                                             <?php if (!empty($orderGT)) : ?>
@@ -314,6 +328,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Team File -->
                                                         <td>
                                                             <?php
                                                             $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
@@ -409,11 +425,9 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <?php echo $orderT['name_folder'] ?>
-                                                                                                    <a href="" data-toggle="modal" data-target="#tmid<?php echo $orderT['id']; ?>">
-                                                                                                        <i class="feather icon-edit-2" style="font-size: 25px;"></i>
-                                                                                                    </a>
+                                                                                                    <a href="" data-toggle="modal" data-target="#tmid<?php echo $orderT['id']; ?>"> </a>
                                                                                                     <!-- Modal -->
-                                                                                                    <div class="modal fade text-left" id="tmid<?php echo $orderT['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                    <!-- <div class="modal fade text-left" id="tmid<?php echo $orderT['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                                                                             <div class="modal-content">
                                                                                                                 <div class="modal-header">
@@ -434,7 +448,7 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                    </div>
+                                                                                                    </div> -->
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <span data-toggle="modal" data-target="#groupse<?php echo $orderT['group']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
@@ -451,7 +465,7 @@
                                                                                                                 </div>
                                                                                                                 <div class="modal-body">
 
-                                                                                                                    <?php $orderTgroup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId'] , 'group' => $orderT['group']])->result_array(); ?>
+                                                                                                                    <?php $orderTgroup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId'], 'group' => $orderT['group']])->result_array(); ?>
 
                                                                                                                     <table class="table zero-configuration" id="here<?php echo $complete['order_id_t']; ?>">
                                                                                                                         <thead>
@@ -561,15 +575,16 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- date_required -->
                                                         <td>
                                                             <?php if (date("Y-m-d") >= $complete['date_required_t']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($complete['date_required_t'])); ?>
-                                                                <div id="clock-b<?php echo $complete['date_required_t']; ?>" style="display: flex;"></div>
+                                                                <div id="clock-b<?php echo $complete['order_id_t']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $complete['date_required_t']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $complete['order_id_t']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -582,6 +597,7 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- position -->
                                                         <td>
                                                             <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $complete['position']])->result_array(); ?>
                                                             <?php foreach ($position_name as $keys => $position_name) { ?>
@@ -590,6 +606,46 @@
 
                                                         </td>
 
+                                                        <!-- Client Feedback -->
+                                                        <td>
+                                                            <?php
+                                                            $z  = 0;
+                                                            $cf = $this->db->get_where('tbl_feedback', ['order_id' => $complete['order_id_t'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                            foreach ($cf as $key => $cf) {
+                                                                $z += 1;
+                                                            }
+                                                            $c  = 0;
+                                                            $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $complete['order_id_t'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                            foreach ($cf2 as $key => $cf2) {
+                                                                $c += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                            <?php elseif ($cf2 == true) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- Admin Feedback -->
+                                                        <td>
+                                                            <?php
+                                                            $x  = 0;
+                                                            $af = $this->db->get_where('tbl_feedback', ['order_id' => $complete['order_id_t'], 'check_status' => 0])->result_array();
+                                                            foreach ($af as $key => $af) {
+                                                                $x += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($af == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Admin Feedback (<?= $x; ?>)</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- Status -->
                                                         <td>
                                                             <?php if ($complete['status_book'] == '1' && $complete['statusB'] == 'complete' && $complete['stadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
@@ -606,6 +662,7 @@
                                                             <?php endif; ?>
                                                         </td>
 
+                                                        <!-- Tool -->
                                                         <td>
 
                                                             <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $complete['order_id_t']; ?>">
@@ -626,7 +683,7 @@
 
                                                             <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $complete['order_id_t']])->result_array(); ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">DM File </h5>
@@ -651,8 +708,6 @@
 
                                                                                                 <tr>
                                                                                                     <th>Select</th>
-                                                                                                    <!-- <th>Relive</th> -->
-                                                                                                    <th>Store_id</th>
                                                                                                     <th>File_name</th>
                                                                                                     <th>File</th>
                                                                                                     <th>create</th>
@@ -668,14 +723,7 @@
                                                                                                             </label>
                                                                                                         </td>
 
-                                                                                                        <!-- <td>
-                                                                                                            <?php if ($dm_c11['relive_status'] == '0') : ?>
-                                                                                                                -
-                                                                                                            <?php else : ?>
-                                                                                                                <div class="badge badge-primary">Relive</div>
-                                                                                                            <?php endif ?>
-                                                                                                        </td> -->
-                                                                                                        <td><?php echo $dm_c11['store_id'] ?></td>
+
                                                                                                         <td><?php echo $dm_c11['file_name'] ?></td>
                                                                                                         <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                         <td><?php echo $dm_c11['create_at'] ?></td>
