@@ -70,6 +70,8 @@
                             ?>
                             <?php foreach ($task as $task) { ?>
                                 <tr style="text-align:center;">
+
+                                    <!-- Date Requred -->
                                     <td>
                                         <?php if ($task['status_approved'] == 1) : ?>
                                             <span class="badge badge-success">Success</span>
@@ -124,7 +126,11 @@
 
                                         <?php endif; ?>
                                     </td>
+
+                                    <!-- ID Order -->
                                     <td><?php echo $task['or_id']; ?></td>
+
+                                    <!-- Main Doc -->
                                     <td>
                                         <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
 
@@ -180,6 +186,8 @@
                                             -
                                         <?php } ?>
                                     </td>
+
+                                    <!-- GT Document -->
                                     <td>
                                         <?php
                                         $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
@@ -249,9 +257,9 @@
                                             -
                                         <?php endif; ?>
                                     </td>
+
+                                    <!-- DM Document -->
                                     <td>
-
-
                                         <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $task['or_id']])->result_array(); ?>
                                         <?php if (!empty($dm_cc)) { ?>
 
@@ -308,58 +316,111 @@
                                             -
                                         <?php } ?>
                                     </td>
+
+                                    <!-- Team File -->
                                     <td>
-
-                                        <?php $teamfile = $this->db->get_where('tbl_upload_order_team', ['order_id' => $task['or_id']])->result_array(); ?>
+                                        <?php
+                                        $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
+                                        $this->db->group_by('group');
+                                        $teamfile = $this->db->get_where('tbl_upload_order_team', ['order_id' => $task['or_id']])->result_array();
+                                        ?>
                                         <?php if (!empty($teamfile)) { ?>
-
                                             <a href="#" data-toggle="modal" data-target="#DMDOC<?php echo $task['or_id']; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="DMDOC<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <?php $mn = 1; ?>
                                                             <table class="table">
                                                                 <thead class="thead-light">
-                                                                    <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Info</th>
-                                                                        <th scope="col">Downloads</th>
+                                                                    <tr>
+                                                                        <th>Folder name</th>
+                                                                        <th>Folder</th>
+                                                                        <th>create</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php foreach ($teamfile as $teamfile) { ?>
-                                                                        <tr style="text-align:center;">
-                                                                            <td><?php echo $task['or_id']; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $teamfile['file_name']; ?></td>
+                                                                        <tr style="text-align:center;font-size: 18px;">
+                                                                            <td style="text-align:left;"><?php echo $teamfile['name_folder']; ?></td>
                                                                             <td>
-                                                                                <a href="<?php echo $teamfile['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a>
+                                                                                <a href="#" data-toggle="modal" data-target="#groud<?php echo $teamfile['group']; ?>"><i class="fa fa-folder"></i></a>
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade" id="groud<?php echo $teamfile['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File (<?php echo $teamfile['name_folder']; ?>)</h5>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+
+                                                                                                <table class="table">
+                                                                                                    <thead class="thead-light">
+                                                                                                        <tr style="text-align:center;">
+                                                                                                            <th scope="col">ID Order</th>
+                                                                                                            <th scope="col">File name</th>
+                                                                                                            <th scope="col">File</th>
+                                                                                                            <th scope="col">Downloads</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <?php $orderTgroup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $task['or_id'], 'group' => $teamfile['group']])->result_array(); ?>
+
+                                                                                                        <?php foreach ($orderTgroup as $orderTgroup) { ?>
+                                                                                                            <tr style="text-align:center;">
+                                                                                                                <td><?php echo $task['or_id']; ?></td>
+                                                                                                                <td style="text-align:left;"><?php echo $orderTgroup['file_name']; ?></td>
+                                                                                                                <td>
+                                                                                                                    <a href="<?php echo $orderTgroup['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <a href="<?php echo $orderTgroup['path']; ?>" class="btn btn-primary" download>
+                                                                                                                        <i class="fa fa-download"></i> Download
+                                                                                                                    </a>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        <?php } ?>
+                                                                                                    </tbody>
+                                                                                                </table>
+
+
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </td>
                                                                             <td>
-                                                                                <a href="<?php echo $teamfile['path']; ?>" class="btn btn-primary" download>
-                                                                                    <i class="fa fa-download"></i> Download
-                                                                                </a>
+                                                                                <?php echo $teamfile['create_at'] ?>
                                                                             </td>
                                                                         </tr>
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
 
+
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
+
                                         <?php } else { ?>
                                             -
                                         <?php } ?>
