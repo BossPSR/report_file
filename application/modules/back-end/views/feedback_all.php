@@ -79,6 +79,8 @@
                                                     <th>Date require</th>
                                                     <th>info</th>
                                                     <th>Status</th>
+                                                    <th>Status T3</th>    
+                                                    <th>Client Feedback</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -187,7 +189,7 @@
                                                                 </script>
                                                             <?php endif; ?>
                                                         </td>
-                                                        
+
 
                                                         <td>
                                                             <?php if ($feedback_team['teamId'] == '') : ?>
@@ -275,7 +277,7 @@
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Note</label>
-                                                                                        <textarea name="note"  class="form-control" rows="10"></textarea>
+                                                                                        <textarea name="note" class="form-control" rows="10"></textarea>
                                                                                     </div>
                                                                                 </div>
 
@@ -288,6 +290,9 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+                                                        
+                                                        
+                                                        
                                                         <td>
                                                             <?php if ($feedback_team['status_book'] == '1' && $feedback_team['status_cp'] == 'complete' && $feedback_team['status_admin'] == '0') : ?>
                                                                 <span class=" badge badge-pill badge-success">Original</span>
@@ -312,6 +317,61 @@
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            $z  = 0;
+                                                            $cf = $this->db->get_where('tbl_feedback', ['order_id' => $feedback_team['order_id'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                            foreach ($cf as $key => $cf) {
+                                                                $z += 1;
+                                                            }
+                                                            $c  = 0;
+                                                            $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $feedback_team['order_id'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                            foreach ($cf2 as $key => $cf2) {
+                                                                $c += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                            <?php elseif ($cf2 == true) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $feedback_team['id_f']; ?>"><i class="feather icon-navigation"></i> </button>
+                                                            <div class="modal fade" id="sendnw<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Send (<?php echo $feedback_team['order_id']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="send_feedbacktion_all" method="POST" class="form-horizontal">
+                                                                            <input type="hidden" name="order_id" value="<?php echo $feedback_team['order_id']; ?>">
+                                                                            <div class="modal-body">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note</label>
+                                                                                        <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                                    <div class="add-data-btn mr-1">
+                                                                                        <button type="submit" class="btn btn-primary">submit</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <div class="modal fade" id="exampleModalb<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
