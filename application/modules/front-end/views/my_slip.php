@@ -45,13 +45,13 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <?php if ($user) { ?>
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">ชำระค่า Order</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Paid (ชำระแล้ว)r</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="commission-tab" data-toggle="tab" href="#commission" role="tab" aria-controls="commission" aria-selected="false">Commission ค่าแนะนำ</a>
+                                    <a class="nav-link" id="commission-tab" data-toggle="tab" href="#commission" role="tab" aria-controls="commission" aria-selected="false">Not pay (ยังไม่ชำระ)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="cashback-tab" data-toggle="tab" href="#cashback" role="tab" aria-controls="cashback" aria-selected="false">Cashback </a>
+                                    <a class="nav-link" id="cashback-tab" data-toggle="tab" href="#cashback" role="tab" aria-controls="cashback" aria-selected="false">Withdraw History (ประวัติการถอน) </a>
                                 </li>
                             <?php } ?>
 
@@ -68,8 +68,9 @@
                                     <table class="table mt-15">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">ราคา</th>
+                                                <th scope="col">Amoumt (จำนวนเงิน)</th>
                                                 <th scope="col">รหัสออเดอร์สินค้า</th>
+                                                <!-- <td>Request date (วันที่ส่งคำขอ)</td> -->
                                                 <th scope="col" class="text-center">สถานะ</th>
                                                 <th scope="col">รายละเอียดเวลา</th>
                                             </tr>
@@ -77,8 +78,9 @@
                                         <tbody>
                                             <?php foreach ($slip_success as $slip_success) { ?>
                                                 <tr>
-                                                    <th scope="row">฿ <?php echo $slip_success['price_file']; ?></th>
+                                                    <th scope="row">$ <?php echo $slip_success['price_file']; ?></th>
                                                     <td><?php echo $slip_success['order_id']; ?></td>
+                                                    <!-- <td></td> -->
                                                     <td class="text-center">
                                                         <?php if ($slip_success['status_pay'] == 1) { ?>
                                                             <span class="badge badge-pill badge-success">ชำระเงินแล้ว</span>
@@ -122,19 +124,38 @@
                                     <table class="table mt-15">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">ราคา</th>
-                                                <th scope="col">รหัสออเดอร์สินค้า</th>
-                                                <th scope="col" class="text-center">สถานะ</th>
-                                                <th scope="col">รายละเอียดเวลา</th>
+                                                <th scope="col">Amount (จำนวนเงิน)</th>
+                                                <th scope="col">Request date (วันที่ส่งคำขอ)</th>
+                                                <th scope="col">Success Date (วันที่สำเร็จ)</th>
+                                                <th scope="col">Slips (สลิป)</th>
+                                                <th scope="col">Status (สถานะ)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            <?php foreach ($slip as $key => $slip) { ?>
+                                                <tr>
+                                                    <td>$ <?php echo $slip['price']; ?></td>
+                                                    <td><?php echo $slip['create_at']; ?></td>
+                                                    <td><?php echo $slip['transaction_date']; ?></td>
+                                                    <td>
+                                                        <?php if ($slip['file_name'] == '-') : ?>
+                                                            -
+                                                        <?php else : ?>
+                                                            <a href="uploads/Withdraw/<?php echo $slip['file_name']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                    <?php if ($slip['status'] == 2) { ?>
+                                                            <span class="badge badge-pill badge-success">Success (สำเร็จแล้ว)</span>
+                                                        <?php } elseif ($slip['status'] == 1) { ?>
+                                                            <span class="badge badge-pill badge-warning" style="color:#fff;">Processing (กำลังดำเนินการ)</span>
+                                                        <?php } elseif ($$slip['status'] == 3) { ?>
+                                                            <span class="badge badge-pill badge-danger">Cencal (ยกเลิก)</span>
+                                                        <?php } ?>
+                                                       
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

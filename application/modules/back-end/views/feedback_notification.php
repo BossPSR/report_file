@@ -75,12 +75,19 @@
                                                 <tr>
                                                     <th>order id</th>
                                                     <th>User id</th>
+                                                    <th>DM</th>
+                                                    <th>Main File</th>
+                                                    <th>GT File</th>
+                                                    <th>DM File</th>
+                                                    <th>T3 File</th>
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
                                                     <th>Feedback In</th>
                                                     <th>TM-Date Confirm</th>
                                                     <th>Feedback Cancel</th>
                                                     <th>Feedback Required</th>
+                                                    <th>Price</th>
+                                                    <th>note</th>
                                                     <th>info</th>
                                                     <th>Status</th>
                                                     <th>Client Feedback</th>
@@ -100,6 +107,527 @@
 
                                                         <!-- userId -->
                                                         <td><?php echo $feedback['userId'] ?></td>
+                                                        <!-- DM -->
+                                                        <td>
+                                                            <?php if (empty($stores['id_document'])) : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $feedback['order_feed']])->result_array(); ?>
+                                                                <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
+
+                                                                    <?php if ($show_dm['id_document'] == '') : ?>
+                                                                        -
+                                                                    <?php else : ?>
+                                                                        <span class="badge badge-primary"><?php echo $show_dm['id_document'] ?></span>
+                                                                    <?php endif; ?>
+
+                                                                <?php } ?>
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- Main File -->
+                                                        <td>
+                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $feedback['order_feed']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Main File</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+
+
+                                                                            <table class="table zero-configuration" id="here<?php echo $feedback['order_feed']; ?>">
+                                                                                <thead>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $feedback['order_feed']])->result_array(); ?>
+                                                                                    <tr>
+                                                                                        <th>Order_id</th>
+                                                                                        <th>File_name</th>
+                                                                                        <th>File</th>
+                                                                                        <th>create</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <tr>
+                                                                                            <td><?php echo $order['order_id'] ?></td>
+                                                                                            <td>
+                                                                                                <?php echo $order['file_name'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $order['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                <!-- Modal -->
+                                                                                                <div class="modal fade text-left" id="dms<?php echo $order['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                            <div class="modal-body">
+                                                                                                                <h5>Rename</h5>
+                                                                                                                <?php $or_file_name = explode('.', $order['file_name']); ?>
+                                                                                                                <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_name<?php echo $order['id']; ?>" class="form-control">
+                                                                                                                <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_name<?php echo $order['id']; ?>" class="form-control">
+                                                                                                                <input type="hidden" id="pathmain<?php echo $order['id']; ?>" data-pathgt="<?php echo $order['path']; ?>" class="form-control">
+                                                                                                            </div>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <button type="button" class="btn btn-primary ey" id="re_file_name_button<?php echo $order['id']; ?>" data-fmain="<?php echo $order['id']; ?>">Submit</button>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                        </tr>
+                                                                                    <?php } ?>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <script>
+                                                                                $('body').on('click', 'button[type="button"].ey', function() {
+                                                                                    var c = $(this).data('fmain');
+                                                                                    var d = $('#pathmain' + c).data('pathgt');
+                                                                                    var name_file = $('#Re_file_name' + c).val();
+                                                                                    var last_file = $('#Re_last_name' + c).val();
+
+                                                                                    $.ajax({
+                                                                                        url: "rename_filename",
+                                                                                        type: "POST",
+                                                                                        data: {
+                                                                                            id: c,
+                                                                                            name_file: name_file,
+                                                                                            last_file: last_file,
+                                                                                            path: d
+                                                                                        },
+                                                                                        success: function(success) {
+                                                                                            if (success) {
+                                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                    button: true,
+                                                                                                });
+                                                                                                $("#here<?php echo $feedback['order_feed']; ?>").load(window.location.href + " #here<?php echo $feedback['order_feed']; ?>");
+                                                                                                $('#dms' + c).modal('hide');
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                                });
+                                                                            </script>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <!-- GT File -->
+                                                        <td>
+                                                            <?php
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
+                                                            $this->db->where('tbl_morefile_GT.order_id', $feedback['order_feed']);
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 0);
+                                                            $orderGT = $this->db->get('tbl_morefile_GT')->result_array(); ?>
+                                                            <?php
+                                                            $this->db->select('*');
+                                                            $this->db->from('tbl_morefile_GT');
+                                                            $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id', 'left');
+                                                            $this->db->where('tbl_morefile_GT.status_more_file', 1);
+                                                            $this->db->where('tbl_morefile_GT.order_id', $feedback['order_feed']);
+
+                                                            $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
+                                                            $more_file_gt = $this->db->get()->result_array();
+                                                            ?>
+                                                            <?php if (!empty($orderGT ||  $more_file_gt)) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalb<?php echo $feedback['order_feed']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalb<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">GT File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade text-left" id="up_gt_file<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header bg-primary">
+                                                                                                <h4 class="modal-title" id="myModalLabel1">File Document </h4>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+                                                                                                <label for="" style="font-size: 16px;">GT File </label>
+                                                                                                <form action="Satisfied_add_gt_file" class="dropzone dropzone-area" id="dropzone_upgtfile<?php echo $feedback['order_feed']; ?>" method="POST">
+                                                                                                    <input type="hidden" name="orderST" id="orderST" value="<?php echo $feedback['order_feed']; ?>">
+                                                                                                    <input type="hidden" name="userOR" id="userOR" value="<?php echo $stores['userOR']; ?>">
+                                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-primary" id="up_gt_file_save<?php echo $feedback['order_feed']; ?>">Upload File</button>
+                                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                                            </div>
+                                                                                            <script>
+                                                                                                Dropzone.autoDiscover = false;
+                                                                                                var myDropzone113<?php echo $feedback['order_feed']; ?> = new Dropzone("#dropzone_upgtfile<?php echo $feedback['order_feed']; ?>", {
+                                                                                                    autoProcessQueue: false,
+                                                                                                    maxFiles: 5,
+                                                                                                    addRemoveLinks: true,
+                                                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                                                });
+                                                                                                document.getElementById("up_gt_file_save<?php echo $feedback['order_feed']; ?>").addEventListener("click", function() {
+                                                                                                    // myDropzone.processQueue();
+                                                                                                    if (myDropzone113<?php echo $feedback['order_feed']; ?>.files == 0) {
+                                                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                                            button: true,
+                                                                                                        });
+                                                                                                    } else {
+                                                                                                        var orderST = $('#orderST').val();
+                                                                                                        var userOR = $('#userOR').val();
+
+                                                                                                        console.log(orderST, userOR);
+                                                                                                        $.ajax({
+                                                                                                            url: "Satisfied_per_add_gt_file",
+                                                                                                            type: "POST",
+                                                                                                            data: {
+                                                                                                                orderST: orderST,
+                                                                                                                userOR: userOR,
+                                                                                                            },
+                                                                                                            success: function(success) {
+                                                                                                                if (success) {
+                                                                                                                    myDropzone113<?php echo $feedback['order_feed']; ?>.processQueue();
+                                                                                                                    myDropzone113<?php echo $feedback['order_feed']; ?>.on("queuecomplete", function(file, res) {
+                                                                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                            button: true,
+                                                                                                                        });
+                                                                                                                        $("#here_gt<?php echo $feedback['order_feed']; ?>").load(window.location.href + " #here_gt<?php echo $feedback['order_feed']; ?>");
+                                                                                                                        $('#up_gt_file<?php echo $feedback['order_feed']; ?>').modal('hide');
+                                                                                                                    });
+                                                                                                                }
+                                                                                                            },
+                                                                                                        });
+
+                                                                                                    }
+                                                                                                });
+                                                                                            </script>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <table class="table zero-configuration" id="here_gt<?php echo $feedback['order_feed']; ?>">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Order_id</th>
+                                                                                            <th>File_name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderGT as $keys => $orderGT) { ?>
+                                                                                            <tr>
+
+                                                                                                <td><?php echo $orderGT['order_id'] ?> </td>
+                                                                                                <td>
+                                                                                                    <?php echo $orderGT['file_name_GT'] ?>
+                                                                                                    <a href="" data-toggle="modal" data-target="#dmsGT<?php echo $orderGT['id']; ?>">
+                                                                                                        <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                    </a>
+                                                                                                    <!-- Modal -->
+                                                                                                    <div class="modal fade text-left" id="dmsGT<?php echo $orderGT['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <h5>Rename</h5>
+                                                                                                                    <?php $or_file_name = explode('.', $orderGT['file_name_GT']); ?>
+                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameGT<?php echo $orderGT['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameGT<?php echo $orderGT['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" id="path<?php echo $orderGT['id']; ?>" data-pathgt="<?php echo $orderGT['path_GT']; ?>" class="form-control">
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="button" class="btn btn-primary ex" id="re_file_name_buttonGT<?php echo $orderGT['id']; ?> " data-fgt="<?php echo $orderGT['id']; ?>">Submit</button>
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderGT['create_at'] ?></td>
+                                                                                            </tr>
+
+                                                                                        <?php } ?>
+
+                                                                                        <?php foreach ($more_file_gt as $key => $more_file_gt) { ?>
+                                                                                            <tr>
+
+                                                                                                <td><?php echo $more_file_gt['order_id'] ?> (MF) </td>
+                                                                                                <td>
+                                                                                                    <?php echo $more_file_gt['file_name_GT'] ?>
+                                                                                                    <a href="" data-toggle="modal" data-target="#dmsGT<?php echo $more_file_gt['id']; ?>">
+                                                                                                        <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                    </a>
+                                                                                                    <!-- Modal -->
+                                                                                                    <div class="modal fade text-left" id="dmsGT<?php echo $more_file_gt['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <h5>Rename</h5>
+                                                                                                                    <?php $or_file_name = explode('.', $more_file_gt['file_name_GT']); ?>
+                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameGT<?php echo $more_file_gt['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameGT<?php echo $more_file_gt['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" id="path<?php echo $more_file_gt['id']; ?>" data-pathgt="<?php echo $more_file_gt['path_GT']; ?>" class="form-control">
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="button" class="btn btn-primary ex" id="re_file_name_buttonGT<?php echo $more_file_gt['id']; ?> " data-fgt="<?php echo $more_file_gt['id']; ?>">Submit</button>
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td><a href="<?php echo $more_file_gt['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $more_file_gt['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                            <script>
+                                                                $('body').on('click', 'button[type="button"].ex', function() {
+                                                                    var a = $(this).data('fgt');
+                                                                    var b = $('#path' + a).data('pathgt');
+                                                                    var name_fileGT = $('#Re_file_nameGT' + a).val();
+                                                                    var last_fileGT = $('#Re_last_nameGT' + a).val();
+
+                                                                    $.ajax({
+                                                                        url: "rename_filenameGT",
+                                                                        type: "POST",
+                                                                        data: {
+                                                                            id: a,
+                                                                            name_file: name_fileGT,
+                                                                            last_file: last_fileGT,
+                                                                            path: b
+                                                                        },
+                                                                        success: function(success) {
+                                                                            if (success) {
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: true,
+                                                                                });
+                                                                                $("#here_gt<?php echo $feedback['order_feed']; ?>").load(window.location.href + " #here_gt<?php echo $feedback['order_feed']; ?>");
+                                                                                $('#dmsGT' + a).modal('hide');
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        </td>
+
+                                                        <!-- DM File -->
+                                                        <td>
+                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $feedback['order_feed']])->result_array(); ?>
+                                                            <?php if (!empty($dm_cc)) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $feedback['order_feed']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalbDM<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">DM File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
+                                                                                    <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                        <p>
+                                                                                            <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                        </p>
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Rewrite</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['comandnocom'] == '4') : ?>
+                                                                                                                <div class="badge badge-primary">Rewrite</div>
+                                                                                                            <?php else : ?>
+                                                                                                                -
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php endforeach; ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
+
+                                                        </td>
+
+                                                        <!-- Team File -->
+                                                        <td>
+                                                            <?php
+                                                            $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
+                                                            $this->db->group_by('group');
+                                                            $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $feedback['order_feed']])->result_array();
+                                                            ?>
+                                                            <?php if ($orderT == true) : ?>
+                                                                <span data-toggle="modal" data-target="#TeamFile<?php echo $feedback['order_feed']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="TeamFile<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Status Admin</th>
+                                                                                            <th>Folder name</th>
+                                                                                            <th>Folder</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderT as $keys => $orderT) { ?>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <?php if ($orderT['status_upload_admin_cp'] == '1') : ?>
+                                                                                                        <span class="badge badge-pill badge-danger">Admin</span>
+                                                                                                    <?php else : ?>
+                                                                                                        -
+                                                                                                    <?php endif; ?>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderT['name_folder'] == '' ? 'Admin folder' : $orderT['name_folder'] ?></td>
+                                                                                                <td>
+                                                                                                    <span data-toggle="modal" data-target="#group_sup<?php echo $orderT['group']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                                                    <div class="modal fade" id="group_sup<?php echo $orderT['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog  modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Team File (<?php echo $orderT['name_folder'] ?>)</h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <table class="table zero-configuration">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                <th>Order id</th>
+                                                                                                                                <th>File_name</th>
+                                                                                                                                <th>File</th>
+                                                                                                                                <th>Create</th>
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                                                                                                                            <?php $orderT_sup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $feedback['order_feed'], 'group' => $orderT['group']])->result_array(); ?>
+
+                                                                                                                            <?php foreach ($orderT_sup as $keys => $orderT_sup) { ?>
+                                                                                                                                <tr>
+                                                                                                                                    <td><?php echo $orderT_sup['order_id'] ?></td>
+                                                                                                                                    <td><?php echo $orderT_sup['file_name'] ?></td>
+                                                                                                                                    <td><a href="<?php echo $orderT_sup['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                                                    <td><?php echo $orderT_sup['create_at'] ?></td>
+                                                                                                                                </tr>
+                                                                                                                            <?php } ?>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderT['create_at'] == '' ? '-' : $orderT['create_at']; ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
 
                                                         <!-- Feedback File -->
                                                         <td><span data-toggle="modal" data-target="#exampleModala<?php echo $feedback['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -206,6 +734,38 @@
                                                                 </script>
                                                             <?php endif; ?>
                                                         </td>
+                                                        <!-- Price file -->
+                                                        <?php if ($feedback['price_file'] == '') :   ?>
+                                                            <td>-</td>
+                                                        <?php else : ?>
+                                                            <td>$<?php echo $feedback['price_file']; ?></td>
+                                                        <?php endif; ?>
+
+                                                        <!-- Note -->
+                                                        <td style="width: 1%;">
+                                                            <a href="#" data-toggle="modal" data-target="#note_new<?php echo $feedback['order_feed']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                            <div class="modal fade" id="note_new<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <?= $feedback['note_user']; ?>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
 
                                                         <!-- teamId / wage -->
                                                         <td>

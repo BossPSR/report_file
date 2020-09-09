@@ -35,6 +35,17 @@ class Slip_model extends CI_Model
         return $data->result_array();
     }
 
+    function my_slip($_user)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_withdraw');
+        $this->db->where('userId', $_user);
+        $this->db->order_by('create_at', 'desc');
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+
     function my_slip_team($_team)
     {
         $this->db->select('*, tbl_withdraw_team.status AS st2');

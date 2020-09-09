@@ -37,18 +37,18 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-
-                                <th scope="col">รหัสออเดอร์</th>
-                                <th scope="col">รายละเอียด</th>
-                                <th scope="col">วันที่</th>
-                                <th scope="col">จำนวนเงิน</th>
+                                <th scope="col">Item (รายการ)</th>
+                                <th scope="col">ODB (รหัสออเดอร์)</th>
+                                <th scope="col">Detail (รายละเอียด)</th>
+                                <th scope="col">Date (วันที่)</th>
+                                <th scope="col">Amount (จำนวนเงิน)</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php foreach ($cashback as $key => $cashback) { ?>
                                 <tr style="text-align:center;">
-
+                                    <td><?php echo $cashback['type_cashback']; ?></td>
                                     <td><?php echo $cashback['order_id']; ?></td>
                                     <td>
                                         <?php if (!empty($cashback['cashback_detail'])) { ?>
@@ -79,7 +79,7 @@
                                         <?php } ?>
                                     </td>
                                     <td><?php echo date("d F Y", strtotime($cashback['create_at'])); ?></td>
-                                    <td><?php echo number_format($cashback['cashback']); ?></td>
+                                    <td>$<?php echo number_format($cashback['cashback']); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
