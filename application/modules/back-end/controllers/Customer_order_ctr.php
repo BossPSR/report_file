@@ -330,14 +330,16 @@ class Customer_order_ctr extends CI_Controller
         $wage       = $this->input->post('wage');
         $teamid     = $this->input->post('teamid');
         $position   = $this->input->post('position');
+        $date_require   = $this->input->post('date_require');
+        $note   = $this->input->post('note');
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid ,'note'=>$note]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 ,'date_required' => $date_require]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -346,7 +348,7 @@ class Customer_order_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1,'date_required' => $date_require]);
 
                 $this->sendEmail_all($teamid, $order_id);
             }

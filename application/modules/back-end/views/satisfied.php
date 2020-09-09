@@ -793,11 +793,14 @@
                                                                                         <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
                                                                                     </div>
                                                                                 </div>
-
+                                                                                <?php
+                                                                                $str =  $stores['dateREST'];
+                                                                                $datr_re = explode(" ", $str);
+                                                                                ?>
                                                                                 <div class="col-xl-6 col-md-6 col-sm-6 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Date</label>
-                                                                                        <input type="date" class="form-control  <?php echo $stores['orderST']; ?>" name="date_required" value="<?php echo $stores['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                                                        <input type="date" class="form-control  <?php echo $stores['orderST']; ?>" name="date_required" value="<?php echo $datr_re[0]; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">

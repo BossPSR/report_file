@@ -35,7 +35,7 @@ class Customer_model extends CI_Model
 
     public function customer_list_not()
     {
-        $this->db->select('*,tbl_upload_order.order_id AS orderNOT,tbl_upload_team.order_id AS orderT3,tbl_upload_order.create_at AS createNOT ,tbl_upload_order.date_required AS dateNOT');
+        $this->db->select('*,tbl_upload_order.order_id AS orderNOT,tbl_upload_order.id AS id_num,tbl_upload_team.order_id AS orderT3,tbl_upload_order.create_at AS createNOT ,tbl_upload_order.date_required AS dateNOT');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id =tbl_upload_team.order_id ', 'left');
         $this->db->join('tbl_user', 'tbl_user.idUser = tbl_upload_order.userId', 'left');

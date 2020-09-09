@@ -319,12 +319,27 @@
 
                                                         <!-- dateNOT -->
                                                         <td>
-                                                            <?php if ($store['status_delivery'] == '1') : ?>
-                                                                <?php echo $store['dateNOT']; ?>
+
+                                                            <?php if (date("Y-m-d") >= $store['dateNOT']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <input type="date" class="form-control" name="date_required" id="datenow" data-datenow="<?php echo $store['orderNOT']; ?>" value="<?php echo $store['dateNOT']; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                                <?php $dateReq = date('Y/m/d', strtotime($store['dateNOT'])); ?>
+                                                                <div id="clock-b<?php echo $store['id_num']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $store['id_num']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
+
+                                                                    });
+                                                                </script>
                                                             <?php endif; ?>
                                                         </td>
+                                                        
 
                                                         <!-- price -->
                                                         <?php if ($store['price_file'] == '') :   ?>
@@ -405,6 +420,22 @@
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">wage</label>
                                                                                         <input type="text" class="form-control" name="wage" value="<?php echo $store['wage']; ?>" placeholder="Enter wage" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <?php
+                                                                                $str =  $store['dateNOT'];
+                                                                                $datr_re = explode(" ", $str);
+                                                                                ?>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Date require</label>
+                                                                                        <input type="date" class="form-control" name="date_require" value="<?php echo $datr_re[0]; ?>" placeholder="Enter wage" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Note</label>
+                                                                                     <textarea name="note" class="form-control" rows="10"></textarea>
                                                                                     </div>
                                                                                 </div>
 
