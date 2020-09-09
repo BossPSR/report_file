@@ -86,7 +86,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Sub DM</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Sub DM Folder</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
@@ -160,7 +160,7 @@
                                                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
-                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Sub DM 2</h5>
+                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Sub DM File</h5>
                                                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                                     <span aria-hidden="true">&times;</span>
                                                                                                                 </button>
@@ -182,8 +182,7 @@
                                                                                                                             <th>File name</th>
                                                                                                                             <th>Icon Folder</th>
                                                                                                                             <th>Drop</th>
-                                                                                                                            <th>Approved</th>
-                                                                                                                            <th>Not Approved</th>
+                                                                                                                           
                                                                                                                             <th>Removed</th>
                                                                                                                             <th>TM</th>
                                                                                                                             <th>create</th>
@@ -312,8 +311,6 @@
                                                                                                                                         });
                                                                                                                                     </script>
                                                                                                                                 </td>
-                                                                                                                                <td></td>
-                                                                                                                                <td></td>
                                                                                                                                 <td></td>
                                                                                                                                 <td></td>
                                                                                                                                 <td><?php echo $store23['create_at'] ?></td>

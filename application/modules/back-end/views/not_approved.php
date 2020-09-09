@@ -44,7 +44,7 @@
                                     <?php endif; ?>
                                     <h3 class="check_list_not"> จำนวนออเดอร์ </h3>
                                 </div>
-                                
+
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -70,9 +70,16 @@
                                             <tbody>
                                                 <?php foreach ($not_Approved as $key => $not_Approved) { ?>
                                                     <tr>
+                                                        <!-- userId -->
                                                         <td><?php echo $not_Approved['userId'] ?></td>
+
+                                                        <!-- Order id -->
                                                         <td><?php echo $not_Approved['or'] ?></td>
+
+                                                        <!-- date_required -->
                                                         <td><?php echo $not_Approved['date_required'] ?></td>
+
+                                                        <!-- Main File -->
                                                         <td>
                                                             <span data-toggle="modal" data-target="#main<?php echo $not_Approved['or']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                             <div class="modal fade" id="main<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -116,6 +123,8 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+
+                                                        <!-- GT File -->
                                                         <td>
                                                             <?php $ordergt = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $not_Approved['or']])->result_array(); ?>
                                                             <?php if (!empty($ordergt)) : ?>
@@ -164,6 +173,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- DM File -->
                                                         <td>
                                                             <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $not_Approved['or']])->result_array(); ?>
                                                             <?php if (!empty($dm_cc)) : ?>
@@ -227,16 +238,22 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Team File -->
                                                         <td>
-                                                            <?php $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['or']])->result_array(); ?>
+                                                            <?php
+                                                            $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
+                                                            $this->db->group_by('group');
+                                                            $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['order_id']])->result_array();
+                                                            ?>
 
                                                             <?php if ($orderT == true) : ?>
-                                                                <span data-toggle="modal" data-target="#orderT<?php echo $not_Approved['or']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="orderT<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#orderT<?php echo $not_Approved['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="orderT<?php echo $not_Approved['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -245,21 +262,69 @@
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>Order id</th>
-                                                                                            <th>File_name</th>
-                                                                                            <th>File</th>
-                                                                                            <th>Create</th>
+                                                                                            <th>Status Admin</th>
+                                                                                            <th>Folder name</th>
+                                                                                            <th>Folder</th>
+                                                                                            <th>create</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
                                                                                         <?php foreach ($orderT as $keys => $orderT) { ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $orderT['order_id'] ?></td>
-                                                                                                <td><?php echo $orderT['file_name'] ?></td>
-                                                                                                <td><a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $orderT['create_at'] ?></td>
+                                                                                                <td>
+                                                                                                    <?php if ($orderT['status_upload_admin_cp'] == '1') : ?>
+                                                                                                        <span class="badge badge-pill badge-danger">Admin</span>
+                                                                                                    <?php else : ?>
+                                                                                                        -
+                                                                                                    <?php endif; ?>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderT['name_folder'] == '' ? 'Admin folder' : $orderT['name_folder'] ?></td>
+                                                                                                <td>
+                                                                                                    <span data-toggle="modal" data-target="#tfoder<?php echo $orderT['group']; ?>"><i class="feather icon-folder" style="font-size: 25px;"></i></span>
+                                                                                                    <div class="modal fade" id="tfoder<?php echo $orderT['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <?php $orderT_sub = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['order_id'] , 'group' => $orderT['group']])->result_array(); ?>
+                                                                                                                    <table class="table zero-configuration">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                <th>Order id</th>
+                                                                                                                                <th>File_name</th>
+                                                                                                                                <th>File</th>
+                                                                                                                                <th>Create</th>
+                                                                                                                            </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                                                                                                                            <?php foreach ($orderT_sub as $keys => $orderT_sub) { ?>
+                                                                                                                                <tr>
+                                                                                                                                    <td><?php echo $orderT_sub['order_id'] ?></td>
+                                                                                                                                    <td><?php echo $orderT_sub['file_name'] ?></td>
+                                                                                                                                    <td><a href="<?php echo $orderT_sub['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                                                    <td><?php echo $orderT_sub['create_at'] ?></td>
 
 
+                                                                                                                                </tr>
+                                                                                                                            <?php } ?>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td><?php echo $orderT['create_at'] == '' ? '-' : $orderT['create_at']; ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
@@ -273,10 +338,15 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
+
                                                         </td>
+
+                                                        <!-- teamId -->
                                                         <td>
                                                             <?php if ($not_Approved['teamId'] == '') : ?>
                                                                 -
@@ -284,6 +354,8 @@
                                                                 <?php echo $not_Approved['teamId']; ?>
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Feedback file -->
                                                         <td>
                                                             <?php $feedback = $this->db->get_where('tbl_feedback', ['order_id' => $not_Approved['or']])->row_array(); ?>
 
@@ -293,7 +365,7 @@
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback file</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -334,6 +406,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- Feedback detail -->
                                                         <td>
                                                             <?php $fdetail = $this->db->get_where('tbl_feedback', ['order_id' => $not_Approved['or']])->result_array(); ?>
 
@@ -343,7 +417,7 @@
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback detail</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -381,8 +455,10 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                                <td>
-                                                                <?php if ($not_Approved['status_cp'] == "") : ?>
+
+                                                        <!-- Status -->
+                                                        <td>
+                                                            <?php if ($not_Approved['status_cp'] == "") : ?>
                                                                 -
                                                             <?php else : ?>
 
@@ -401,15 +477,17 @@
                                                                 <?php endif; ?>
 
                                                             <?php endif; ?>
-                                                                </td>
+                                                        </td>
+
+                                                        <!-- Tool -->
                                                         <td>
                                                             <?php if ($not_Approved['status_approved_upload'] == 0) : ?>
                                                                 <?php if ($not_Approved['status_cp'] == "complete") : ?>
                                                                     <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal"><i class="feather icon-upload"></i></button>
-                                                            <?php else : ?>
-                                                                <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>"><i class="feather icon-upload"></i></button>
-                                                            <?php endif; ?>
-                                                               
+                                                                <?php else : ?>
+                                                                    <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>"><i class="feather icon-upload"></i></button>
+                                                                <?php endif; ?>
+
                                                                 <div class="modal fade" id="modalUpload<?php echo $not_Approved['or']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
@@ -441,31 +519,31 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="form-group hiddens">
-                                                                                                    <div class="controls">
-                                                                                                        <label for="data-name">Organization</label>
-                                                                                                        <select name="organization" class="form-control " id="">
-                                                                                                            <option value="" selected disabled>select Organization</option>
-                                                                                                            <option value="A">A</option>
-                                                                                                            <option value="B">B</option>
-                                                                                                            <option value="C">C</option>
-                                                                                                            <option value="D">D</option>
-                                                                                                        </select>
+                                                                                                        <div class="controls">
+                                                                                                            <label for="data-name">Organization</label>
+                                                                                                            <select name="organization" class="form-control " id="">
+                                                                                                                <option value="" selected disabled>select Organization</option>
+                                                                                                                <option value="A">A</option>
+                                                                                                                <option value="B">B</option>
+                                                                                                                <option value="C">C</option>
+                                                                                                                <option value="D">D</option>
+                                                                                                            </select>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
-                                                                                                <div class="form-group hiddens">
-                                                                                                    <div class="controls">
-                                                                                                        <label for="data-name">Cp/Ncp</label>
-                                                                                                        <select name="cp" class="form-control " id="">
-                                                                                                        <option value="" selected disabled>select Cp/Ncp</option>
-                                                                                                            <option value="complete">Complete</option>
-                                                                                                            <option value="notcomplete">NotComplete</option>
-                                                                                                        </select>
+                                                                                                    <div class="form-group hiddens">
+                                                                                                        <div class="controls">
+                                                                                                            <label for="data-name">Cp/Ncp</label>
+                                                                                                            <select name="cp" class="form-control " id="">
+                                                                                                                <option value="" selected disabled>select Cp/Ncp</option>
+                                                                                                                <option value="complete">Complete</option>
+                                                                                                                <option value="notcomplete">NotComplete</option>
+                                                                                                            </select>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
                                                                                                     <div class="form-group">
                                                                                                         <div class="controls">
                                                                                                             <label for="data-name">Search Item</label>
-                                                                                                            <input type="text" class="form-control" name="search_item" value="" required placeholder="Search Item"> 
+                                                                                                            <input type="text" class="form-control" name="search_item" value="" required placeholder="Search Item">
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="form-group">
