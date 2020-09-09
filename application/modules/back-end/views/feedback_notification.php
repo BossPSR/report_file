@@ -84,7 +84,7 @@
                                                     <th>info</th>
                                                     <th>Status</th>
                                                     <th>Client Feedback</th>
-                                                    <th>Admin Feedback</th>
+                                                    <th>Status T3</th>
                                                     <th>tool</th>
                                                 </tr>
                                             </thead>
@@ -312,8 +312,8 @@
                                                                                                         <td><?php echo $t3folder['order_id'] ?></td>
                                                                                                         <td><?php echo $t3folder['teamId'] ?></td>
                                                                                                         <td>
-                                                                                                            <span data-toggle="modal" data-target="#teamId_team<?php echo $t3folder['teamId']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
-                                                                                                            <div class="modal fade text-left" id="teamId_team<?php echo $t3folder['teamId']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                            <span data-toggle="modal" data-target="#teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $t3folder['order_feed']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
+                                                                                                            <div class="modal fade text-left" id="teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $t3folder['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                                                                     <div class="modal-content">
                                                                                                                         <div class="modal-header bg-primary white">

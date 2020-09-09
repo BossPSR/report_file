@@ -403,7 +403,7 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <table class="table zero-configuration" id="here<?php echo $complete['order_id_t']; ?>">
+                                                                                <table class="table zero-configuration" >
                                                                                     <thead>
 
                                                                                         <tr>

@@ -1,121 +1,91 @@
-<style>
-  .free-button-container{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    height:100%;
-    width:100%;
-  }
-  .freeButton{
-    width:100%;
-    
-  }
-  .freeButton > button{
-    width:100%;
-    padding:15px;
-    font-size: 18px;
-  }
-</style>
-<br>
 <h2 class="text-center" style="margin-top: 30px;">Package</h2>
 <hr class="line_package">
 <br>
-<div class="container">
-  <div class="row" style="margin-top: 20px;">
-    <?php $i = 1; ?>
-    <?php $e = 1; ?>
-    <?php foreach ($package as $key => $package) : ?>
-      
+<div class="priceing_table">
+  <div class="container">
+    <div class="row">
+      <?php $i = 1; ?>
+      <?php $e = 1; ?>
+      <?php foreach ($package as $key => $package) : ?>
+        <!--price table area -->
 
-      <div class="col-lg-6 col-md-6 col-6 line_package_m hover-fx">
-        <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2); position:relative; height: 100%;">
-          <div class="label_product">
-            <span class="label_sale">Sale</span>
+        <div class="col-lg-3 col-md-6">
+          <div class="single_priceing">
+            <div class="priceing_title">
+              <h1>Returns</h1>
+            </div>
+            <div class="priceing_list">
+              <h1><span>$<?php echo $package['price_pk']; ?></span>/<?php echo $package['time_pk']; ?></h1>
+              <ul>
+                <li><?php echo $package['description_pk']; ?></li>
+                <li>1 Domain</li>
+                <li>PHP 5 Enbled</li>
+                <li>24H – Support</li>
+              </ul>
+              <a class="list_button paypal-button-container<?php echo $i++; ?>" href="#">purchase now </a>
+            </div>
           </div>
-          <figure>
-            <div class="product_thumb">
+        </div>
 
-            </div>
-            <div class="product_content grid_content" style="position: relative;">
-              <h4 style="MARGIN-BOTTOM: 2rem;"><?php echo $package['title_pk']; ?></h4>
-              <div class="price_box">
-                <span class="current_price" style="font-size:30px">$<?php echo $package['price_pk']; ?>/<?php echo $package['time_pk']; ?></span>
-              </div>
-              <h3 class="product_name grid_name"><?php echo $package['description_pk']; ?></h3><br>
-              <!-- <button type="button" class="btn btn-primary" style="width: 80%">Choose Annual</button> -->
-              <?php if ($i == 2) { ?>
-                <div class="paypal-button-container<?php echo $i; ?>"></div>
-              <?php }else{ ?>
-                <div class="free-button-container">
-                  <div class="freeButton">
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Free</button>
-                  </div>
-                      
-                </div>
-              <?php } 
-                $i++;
-              ?>
-            </div>
-          </figure>
-        </article>
-      </div>
 
-      
-      <script>
-        paypal.Buttons({
-          createOrder: function(data, actions) {
-            return actions.order.create({
-              purchase_units: [{
-                amount: {
+
+        <!--price table  end-->
+
+
+        <script>
+          paypal.Buttons({
+            createOrder: function(data, actions) {
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
 
                     value: '10.00'
 
-                }
-              }]
-            });
-          },
-          onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-              alert('Transaction completed by ' + details.payer.name.given_name);
-              // Call your server to save the transaction
-              // return fetch('/ss', {
-              //   method: 'post',
-              //   headers: {
-              //     'content-type': 'application/json'
-              //   },
-              //   body: JSON.stringify({
-              //     orderID: data.orderID
-              //   })
-              // });
-              console.log(details);
-              $.ajax({
-                url: 'paypal_success',
-                method: 'post',
-                data: {
-                  orderID: data.orderID,
-                  payerID: data.payerID,
-                  user_id: <?php echo $userId['id']; ?>,
-                  first_name: details.payer.name.given_name,
-                  last_name: details.payer.name.surname,
-                  create_time: details.create_time,
-                  amount: details.purchase_units['0'].amount.value,
-                  currency_code: details.purchase_units['0'].amount.currency_code,
-                },
-                success: function(response) {
-                  let dataSucces = JSON.parse(response);
-                  console.log(dataSucces);
-                  window.location.href = 'mainbuysell';
-                }
+                  }
+                }]
               });
+            },
+            onApprove: function(data, actions) {
+              return actions.order.capture().then(function(details) {
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                // Call your server to save the transaction
+                // return fetch('/ss', {
+                //   method: 'post',
+                //   headers: {
+                //     'content-type': 'application/json'
+                //   },
+                //   body: JSON.stringify({
+                //     orderID: data.orderID
+                //   })
+                // });
+                console.log(details);
+                $.ajax({
+                  url: 'paypal_success',
+                  method: 'post',
+                  data: {
+                    orderID: data.orderID,
+                    payerID: data.payerID,
+                    user_id: <?php echo $userId['id']; ?>,
+                    first_name: details.payer.name.given_name,
+                    last_name: details.payer.name.surname,
+                    create_time: details.create_time,
+                    amount: details.purchase_units['0'].amount.value,
+                    currency_code: details.purchase_units['0'].amount.currency_code,
+                  },
+                  success: function(response) {
+                    let dataSucces = JSON.parse(response);
+                    console.log(dataSucces);
+                    window.location.href = 'mainbuysell';
+                  }
+                });
 
-            });
-          }
-        }).render('.paypal-button-container<?php echo $e; ?>');
-      </script>
-    <?php $e++; endforeach; ?>
+              });
+            }
+          }).render('.paypal-button-container<?php echo $e++; ?>');
+        </script>
+      <?php  endforeach; ?>
 
-    <!-- <div class="col-lg-4 col-md-4 col-12 line_package_m hover-fx">
+      <!-- <div class="col-lg-4 col-md-4 col-12 line_package_m hover-fx">
             <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2);">
                 <figure>
                     <div class="product_thumb"></div>
@@ -135,6 +105,7 @@
             </article>
         </div> -->
 
+    </div>
   </div>
 </div>
 <br>
@@ -150,13 +121,13 @@
         </button>
       </div>
       <div class="modal-body">
-       ท่านต้องการใช้ Free Package ใช่มั้ย?
+        ท่านต้องการใช้ Free Package ใช่มั้ย?
       </div>
       <div class="modal-footer">
 
-          <a href="store"><button type="button" class="btn btn-success">ตกลง</button></a>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-      
+        <a href="store"><button type="button" class="btn btn-success">ตกลง</button></a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+
       </div>
     </div>
   </div>

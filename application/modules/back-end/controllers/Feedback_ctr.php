@@ -33,28 +33,32 @@ class Feedback_ctr extends CI_Controller
         $position   = $this->input->post('position');
         $checkbox   = $this->input->post('checkbox');
 
+        $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        if ($wa == true) {
+            $this->db->delete('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        }
+
         if ($checkbox) {
             foreach ($checkbox as $key => $checkbox) {
                 $resultT = $this->db->get_where('tbl_upload_order_team', ['id' => $checkbox])->row_array();
                 $boxdata = [
-                    'order_id_back'     => $resultT['order_id'] , 
-                    'file_name_back'     => $resultT['file_name'] , 
-                    'path_back'         => $resultT['path'] , 
-                    'create_at_back'    => date('Y-m-d H:i:s') , 
+                    'order_id_back'     => $resultT['order_id'],
+                    'file_name_back'     => $resultT['file_name'],
+                    'path_back'         => $resultT['path'],
+                    'create_at_back'    => date('Y-m-d H:i:s'),
                 ];
-               
-                $this->db->insert('tbl_upload_backup_team' , $boxdata);
+
+                $this->db->insert('tbl_upload_backup_team', $boxdata);
             }
-           
         }
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid , 'status' => 0 , 'status_check_team' => 1]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'status' => 0, 'status_check_team' => 1]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 , 'status_approved' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'status_approved' => 0]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -63,7 +67,7 @@ class Feedback_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1 , 'status_approved' => 0]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'status_approved' => 0]);
 
                 $this->sendEmail_all($teamid, $order_id);
             }
@@ -124,7 +128,7 @@ class Feedback_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
-	}
+    }
     public function feedback_all()
     {
         if ($this->session->userdata('email_admin') != '') {
@@ -147,14 +151,34 @@ class Feedback_ctr extends CI_Controller
         $position       = $this->input->post('position');
         $date_require   = $this->input->post('date_require');
         $note           = $this->input->post('note');
+        $checkbox       = $this->input->post('checkbox');
+
+        $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        if ($wa == true) {
+            $this->db->delete('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        }
+
+        if ($checkbox) {
+            foreach ($checkbox as $key => $checkbox) {
+                $resultT = $this->db->get_where('tbl_upload_order_team', ['id' => $checkbox])->row_array();
+                $boxdata = [
+                    'order_id_back'     => $resultT['order_id'],
+                    'file_name_back'     => $resultT['file_name'],
+                    'path_back'         => $resultT['path'],
+                    'create_at_back'    => date('Y-m-d H:i:s'),
+                ];
+
+                $this->db->insert('tbl_upload_backup_team', $boxdata);
+            }
+        }
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid,'note' => $note]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'note' => $note , 'status_check_team' => 1]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 , 'date_required'=>$date_require]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'date_required' => $date_require , 'status_approved' => 0]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -163,7 +187,7 @@ class Feedback_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1 ,'date_required'=> $date_require]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_require , 'status_approved' => 0]);
 
                 $this->sendEmail_all_a($teamid, $order_id);
             }
@@ -224,7 +248,7 @@ class Feedback_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
-	}
+    }
     public function status_Feedback()
     {
         $id = $this->input->get('id');
@@ -531,7 +555,7 @@ class Feedback_ctr extends CI_Controller
         return redirect('feedback_notification');
     }
 
-    
+
     public function send_feedbacktion_all()
     {
         $note       = $this->input->post('note');
@@ -614,8 +638,8 @@ class Feedback_ctr extends CI_Controller
         }
 
         $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
-        
-        
+
+
 
         $this->sendEmail_cancel_nw($orderid, $note);
 

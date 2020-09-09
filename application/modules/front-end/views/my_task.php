@@ -211,44 +211,72 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">GT Document</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <table class="table zero-configuration">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Order_id</th>
-                                                                        <th>File_name</th>
-                                                                        <th>File</th>
-                                                                        <th>create</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($orderGT as $keys => $orderGT) { ?>
-                                                                        <tr>
-                                                                            <td><?php echo $orderGT['order_id'] ?></td>
-                                                                            <td><?php echo $orderGT['file_name_GT'] ?></td>
-                                                                            <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                            <td><?php echo $orderGT['create_at'] ?></td>
+                                                            <div class="form-group" style="text-align: left;">
+                                                                <table class="table zero-configuration">
+                                                                    <thead>
+                                                                        <tr style="background: aliceblue;">
+                                                                            <th>Order_id</th>
+                                                                            <th>File_name</th>
+                                                                            <th>File</th>
+                                                                            <th>create</th>
                                                                         </tr>
-                                                                    <?php } ?>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($orderGT as $keys => $orderGT) { ?>
+                                                                            <tr>
+                                                                                <td><?php echo $orderGT['order_id'] ?></td>
+                                                                                <td><?php echo $orderGT['file_name_GT'] ?></td>
+                                                                                <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                <td><?php echo $orderGT['create_at'] ?></td>
+                                                                            </tr>
+                                                                        <?php } ?>
 
-                                                                    <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
-                                                                        <tr>
-                                                                            <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
-                                                                            <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
-                                                                            <td><a href="<?php echo $more_file_gt_more['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                            <td><?php echo $more_file_gt_more['create_at'] ?></td>
+                                                                        <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
+                                                                            <tr>
+                                                                                <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
+                                                                                <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
+                                                                                <td><a href="<?php echo $more_file_gt_more['path_GT'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                <td><?php echo $more_file_gt_more['create_at'] ?></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            
+                                                            <div class="form-group mt-5 " style="text-align: left;"> 
+                                                                <label for="" style="font-size: 18px;color: #0072ff;"> <u> GT Extension admin</u> </label>
+                                                                <?php $bt = $this->db->get_where('tbl_upload_backup_team', ['status_back' => 0, 'order_id_back' => $task['or_id']])->result_array(); ?>
+                                                                <table class="table zero-configuration">
+                                                                    <thead>
+                                                                        <tr style="background: aliceblue;">
+                                                                            <th>Order id</th>
+                                                                            <th>File name</th>
+                                                                            <th>File</th>
+                                                                            <th>create</th>
                                                                         </tr>
-                                                                    <?php } ?>
-                                                                </tbody>
-                                                            </table>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($bt as $keys => $bt) { ?>
+                                                                            <tr>
+                                                                                <td><?php echo $bt['order_id_back'] ?></td>
+                                                                                <td><?php echo $bt['file_name_back'] ?></td>
+                                                                                <td><a href="<?php echo $bt['path_back'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                <td><?php echo $bt['create_at_back'] ?></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -294,7 +322,7 @@
                                                                                 <tr>
 
                                                                                     <td><?php echo $dm_c11['file_name'] ?></td>
-                                                                                    <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                     <td><?php echo $dm_c11['create_at'] ?></td>
                                                                                 </tr>
                                                                             <?php endforeach; ?>
@@ -307,7 +335,7 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,7 +376,7 @@
                                                                 <tbody>
                                                                     <?php foreach ($teamfile as $teamfile) { ?>
                                                                         <tr style="text-align:center;font-size: 18px;">
-                                                                            <td style="text-align:left;"><?php echo $teamfile['name_folder']; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $teamfile['name_folder'] == '' ? 'folder' : $teamfile['name_folder']; ?></td>
                                                                             <td>
                                                                                 <a href="#" data-toggle="modal" data-target="#groud<?php echo $teamfile['group']; ?>"><i class="fa fa-folder"></i></a>
                                                                                 <!-- Modal -->
@@ -601,7 +629,7 @@
                                             </div>
                                         </td>
 
-                                      
+
                                     <?php else : ?>
                                         <td><button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button></td>
                                     <?php endif; ?>
