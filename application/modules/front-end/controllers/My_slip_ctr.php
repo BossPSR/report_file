@@ -22,6 +22,7 @@ class My_slip_ctr extends CI_Controller
 			$_user 							= $ses['idUser'];
 			$data['slip_success'] 			= $this->Slip_model->my_slip_success($_user);
 			$data['slip_not_success'] 		= $this->Slip_model->my_slip_not_success($_user);
+			$data['slip'] 		            = $this->Slip_model->my_slip($_user);
 		}
 
 		if ($this->session->userdata('email') == '') {

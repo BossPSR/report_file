@@ -37,11 +37,12 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">ผู้ที่เติมแนะนำ</th>
-                                <th scope="col">ผู้แนะนำ</th>
-                                <th scope="col">รายละเอียด</th>
-                                <th scope="col">วันที่</th>
-                                <th scope="col">commission</th>
+                                <!-- <th scope="col">ผู้ที่เติมแนะนำ</th> -->
+                                <!-- <th scope="col">ผู้แนะนำ</th> -->
+                                <th>Item (รายการ)</th>
+                                <th scope="col">Detail (รายละเอียด)</th>
+                                <th scope="col">Date (วันที่)</th>
+                                <th scope="col">Amount (จำนวนค่าแนะนำที่ได้)</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
@@ -50,8 +51,9 @@
                         <tbody>
                             <?php foreach ($commission as $key => $commission) { ?>
                                 <tr style="text-align:center;">
-                                    <td><?php echo $commission['commission_recipient']; ?></td>
-                                    <td><?php echo $commission['commission_inviter']; ?></td>
+                                    <!-- <td><?php echo $commission['commission_recipient']; ?></td> -->
+                                    <!-- <td><?php echo $commission['commission_inviter']; ?></td> -->
+                                    <td>Commission</td>
                                     <td>
                                         <?php if (!empty($commission['commission_detail'])) { ?>
                                             <a href="#" data-toggle="modal" data-target="#NOTE<?= $commission['id']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
