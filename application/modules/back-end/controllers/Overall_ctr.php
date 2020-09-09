@@ -23,7 +23,7 @@ class Overall_ctr extends CI_Controller
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0,'date_required' => $date_required]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -47,11 +47,11 @@ class Overall_ctr extends CI_Controller
         $wage       = $this->input->post('wage');
         $teamid     = $this->input->post('teamid');
         $position   = $this->input->post('position');
-        $position   = $this->input->post('position');
+        $note   = $this->input->post('position');
         $date_required_info   = $this->input->post('date_required_info');
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid ,'note'=>$note]);
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);

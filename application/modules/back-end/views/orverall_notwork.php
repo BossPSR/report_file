@@ -42,7 +42,7 @@
                                     <?php else : ?>
                                         <?php $e = 0; ?>
                                         <?php foreach ($order_notwork as $key => $datata) {
-											
+
                                             $e++;
                                         } ?>
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>
@@ -66,7 +66,7 @@
                                                     }
                                                 }
                                                 echo $checkDate_nums;
-                                            }else{
+                                            } else {
                                                 echo $e;
                                             }
                                             ?>
@@ -98,9 +98,10 @@
                                                     <th>Date required</th>
                                                     <th>Info</th>
                                                     <th>Status</th>
-													<th>Status T3</th>
-													<th>Date 24</th>
-													<th>Status Team</th>
+                                                    <th>Status T3</th>
+                                                    <th>Date 24</th>
+                                                    <th>Status Team</th>
+                                                    <th>Client Feedback</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -108,9 +109,9 @@
                                                 <?php
                                                 $i = 1;
                                                 foreach ($order_notwork as $id => $stores) {
-													if ($stores['status'] == 1) {
-														continue;
-													}
+                                                    if ($stores['status'] == 1) {
+                                                        continue;
+                                                    }
                                                     $checkDate_num = DateDiff($stores['createOr'], $stores['requiredOr']);
                                                     $checkDate = $checkDate_num / 2;
                                                     $checkDate = floor($checkDate);
@@ -124,9 +125,30 @@
                                                             </td>
                                                             <td> <?php echo $stores['order']; ?></td>
                                                             <td><?php echo $stores['userId']; ?></td>
-                                                          
+
                                                             <td><?php echo $stores['createOr']; ?></td>
-                                                            <td><?php echo $stores['requiredOr']; ?></td>
+                                                            <td>
+
+                                                                <?php if (date("Y-m-d") >= $stores['requiredOr']) : ?>
+                                                                    <span class="badge badge-danger">หมดเวลา</span>
+                                                                <?php else : ?>
+                                                                    <?php $dateReq = date('Y/m/d', strtotime($stores['requiredOr'])); ?>
+                                                                    <div id="clock-b<?php echo $stores['id_not']; ?>" style="display: flex;"></div>
+                                                                    <script>
+                                                                        $(function() {
+                                                                            $('#clock-b<?php echo $stores['id_not']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                                var $this = $(this).html(event.strftime('' +
+                                                                                    '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                    '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                    '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                    '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                            });
+
+                                                                        });
+                                                                    </script>
+                                                                <?php endif; ?>
+
+                                                            </td>
                                                             <td>
                                                                 <?php if ($stores['teamId'] == '') : ?>
                                                                     - |
@@ -201,11 +223,14 @@
                                                                                             <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
                                                                                         </div>
                                                                                     </div>
-
+                                                                                    <?php
+                                                                                $str =  $stores['requiredOr'];
+                                                                                $datr_re = explode(" ", $str);
+                                                                                ?>
                                                                                     <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">date required</label>
-                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $stores['date_required']; ?>" placeholder="Enter wage" required>
+                                                                                            <input type="date" class="form-control" name="date_required" value="<?php echo $datr_re[0]; ?>" placeholder="Enter wage" required>
                                                                                         </div>
                                                                                     </div>
 
@@ -255,46 +280,43 @@
                                                                     <?php endif ?>
                                                                 <?php endif ?>
 
-															</td>
-															<!-- <td>
+                                                            </td>
+                                                            <!-- <td>
 																<?php
-																	$date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
-																	$date_required = ceil($date_required) + 1;
-																	
-																	if ($date_required == 6) {
-																		$check_requiredOr = date("Y-m-d",strtotime("+1 day",strtotime($stores['createOr'])));
-																		if ($check_requiredOr >= date('Y-m-d')) {
-																			echo '<span class="badge badge-pill badge-danger">No Work</span>';
-																		}
-																	
-																	}elseif($date_required >= 7){
-																		$check_requiredOr = date("Y-m-d",strtotime("+2 day",strtotime($stores['createOr'])));
-																		if ($check_requiredOr >= date('Y-m-d')) {
-																			echo '<span class="badge badge-pill badge-danger">No Work</span>';
-																		}
-																	
-																	}
-																?>
+                                                                $date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
+                                                                $date_required = ceil($date_required) + 1;
+
+                                                                if ($date_required == 6) {
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+1 day", strtotime($stores['createOr'])));
+                                                                    if ($check_requiredOr >= date('Y-m-d')) {
+                                                                        echo '<span class="badge badge-pill badge-danger">No Work</span>';
+                                                                    }
+                                                                } elseif ($date_required >= 7) {
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+2 day", strtotime($stores['createOr'])));
+                                                                    if ($check_requiredOr >= date('Y-m-d')) {
+                                                                        echo '<span class="badge badge-pill badge-danger">No Work</span>';
+                                                                    }
+                                                                }
+                                                                ?>
 															</td> -->
-															<td align="center">
-																<?php
-																if ($stores['status_check_team'] == 1) {
-																	echo '<span class="badge badge-pill badge-Info">Waiting for team</span>';
-																	
-																}elseif ($stores['status_check_team'] == 2) {
-																	echo '<span class="badge badge-pill badge-warning">processing</span>';
-																}elseif ($stores['status_check_team'] == 3) {
-																	echo '<span class="badge badge-pill badge-success">complete</span>';
-																}elseif ($stores['status_check_team'] == 4) {
-																	$cancel = $this->db->get_where('tbl_cancel',['order_id' =>$stores['order']])->row_array();
-																	echo '<span class="badge badge-pill badge-danger">Waiting for team</span>';
-																	echo '<br>';
-																	echo '<span class="badge badge-pill badge-danger">'.$cancel['history'].'</span>';
-																}
-																	
-																?>
-															</td>
-																		
+                                                            <td align="center">
+                                                                <?php
+                                                                if ($stores['status_check_team'] == 1) {
+                                                                    echo '<span class="badge badge-pill badge-Info">Waiting for team</span>';
+                                                                } elseif ($stores['status_check_team'] == 2) {
+                                                                    echo '<span class="badge badge-pill badge-warning">processing</span>';
+                                                                } elseif ($stores['status_check_team'] == 3) {
+                                                                    echo '<span class="badge badge-pill badge-success">complete</span>';
+                                                                } elseif ($stores['status_check_team'] == 4) {
+                                                                    $cancel = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array();
+                                                                    echo '<span class="badge badge-pill badge-danger">Waiting for team</span>';
+                                                                    echo '<br>';
+                                                                    echo '<span class="badge badge-pill badge-danger">' . $cancel['history'] . '</span>';
+                                                                }
+
+                                                                ?>
+                                                            </td>
+
                                                             <td>
                                                                 <?php
                                                                 $date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
@@ -304,7 +326,7 @@
                                                                     $check_requiredOr = date("Y-m-d", strtotime("+1 day", strtotime($stores['createOr'])));
                                                                     if ($check_requiredOr >= date('Y-m-d')) {
                                                                         echo '<span class="badge badge-pill badge-warning">24 hour !</span>';
-                                                                    }else{
+                                                                    } else {
                                                                         echo '-';
                                                                     }
                                                                 } elseif ($date_required >= 7) {
@@ -317,6 +339,28 @@
                                                                 }
                                                                 ?>
                                                             </td>
+                                                            <!-- Client Feedback -->
+                                                            <td>
+                                                                <?php
+                                                                $z  = 0;
+                                                                $cf = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                                foreach ($cf as $key => $cf) {
+                                                                    $z += 1;
+                                                                }
+                                                                $c  = 0;
+                                                                $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                                foreach ($cf2 as $key => $cf2) {
+                                                                    $c += 1;
+                                                                }
+                                                                ?>
+                                                                <?php if ($cf == true) : ?>
+                                                                    <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                                <?php elseif ($cf2 == true) : ?>
+                                                                    <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+
                                                             <td>
 
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $stores['order']; ?>"><i class="feather icon-navigation"></i> </button>
@@ -356,57 +400,57 @@
                                                                     </form>
                                                                 </div>
                                                             </div>
-														</div>
-														
-														<div class="modal fade" id="informal<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                <form action="add_team_informal" method="POST">
-                                                                    <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
-                                                                    <div class="modal-dialog " role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exp">Informal team (<?php echo $stores['order']; ?>)</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body row">
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="name">Name</label>
-                                                                                        <input type="text" class="form-control" name="name" value="" required>
-                                                                                    </div>
-                                                                                </div>
+                                                        </div>
 
-                                                                                <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
-                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
-                                                                                    <div class="form-group" style="text-align: left;">
-                                                                                        <label for="helpInputTop">Position</label>
-                                                                                        <select name="position" class="form-control" required>
-                                                                                            <option selected disabled> ---- Select ---- </option>
-
-                                                                                            <?php foreach ($positionX as $positionX) { ?>
-                                                                                                <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $stores['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
-                                                                                            <?php } ?>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="Wage">Wage</label>
-                                                                                        <input type="text" class="form-control" name="Wage" value="" required>
-                                                                                    </div>
+                                                        <div class="modal fade" id="informal<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <form action="add_team_informal" method="POST">
+                                                                <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
+                                                                <div class="modal-dialog " role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exp">Informal team (<?php echo $stores['order']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body row">
+                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                <div class="form-group">
+                                                                                    <label for="name">Name</label>
+                                                                                    <input type="text" class="form-control" name="name" value="" required>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="modal-footer">
-                                                                                <div class="add-data-btn mr-1">
-                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+
+                                                                            <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+                                                                            <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                <div class="form-group" style="text-align: left;">
+                                                                                    <label for="helpInputTop">Position</label>
+                                                                                    <select name="position" class="form-control" required>
+                                                                                        <option selected disabled> ---- Select ---- </option>
+
+                                                                                        <?php foreach ($positionX as $positionX) { ?>
+                                                                                            <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $stores['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                        <?php } ?>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                <div class="form-group">
+                                                                                    <label for="Wage">Wage</label>
+                                                                                    <input type="text" class="form-control" name="Wage" value="" required>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                </form>
-                                                            </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
 
                                                         <div class="modal fade" id="Cancel<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             <form action="delete_order_nw" method="POST">

@@ -79,6 +79,7 @@
                                                     <th>Delivery</th>
                                                     <th>Procress</th>
                                                     <th>Status</th>
+                                                    <th>Client Feedback</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -351,7 +352,28 @@
                                                             <?php endif; ?>
                                                         </td>
 
-
+                                                        <!-- Client Feedback -->
+                                                        <td>
+                                                            <?php
+                                                            $z  = 0;
+                                                            $cf = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                            foreach ($cf as $key => $cf) {
+                                                                $z += 1;
+                                                            }
+                                                            $c  = 0;
+                                                            $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                            foreach ($cf2 as $key => $cf2) {
+                                                                $c += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                            <?php elseif ($cf2 == true) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <!-- <td><span  class="badge badge-pill badge-success">Successful payment</button></td> -->
                                                     </tr>
 

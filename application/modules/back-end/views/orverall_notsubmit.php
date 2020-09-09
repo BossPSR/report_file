@@ -178,6 +178,7 @@
                                                     <th>Delivery</th>
                                                     <th>Status Team</th>
                                                     <th>Status</th>
+                                                    <th>Client Feedback</th>
                                                     <th style="width: 12%;">Tool</th>
                                                 </tr>
                                             </thead>
@@ -201,10 +202,10 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($stores['requiredOr'])); ?>
-                                                                <div id="clock-b<?php echo $stores['requiredOr']; ?>" style="display: flex;"></div>
+                                                                <div id="clock-b<?php echo $stores['id_c']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $stores['requiredOr']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $stores['id_c']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -290,16 +291,20 @@
                                                                                         <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
                                                                                     </div>
                                                                                 </div>
+                                                                                <?php
+                                                                                $str =  $stores['requiredOr'];
+                                                                                $datr_re = explode(" ", $str);
+                                                                                ?>
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Date required</label>
-                                                                                        <input type="date" class="form-control" name="date_required_info" value="<?php echo $stores['requiredOr']; ?>" placeholder="Enter wage" required>
+                                                                                        <input type="date" class="form-control" name="date_required_info" value="<?php echo $datr_re[0]; ?>" placeholder="Enter wage" required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Note</label>
-                                                                                        <textarea name="" id="" cols="30" rows="10" class="form-control"><?php echo $stores['note']; ?></textarea>
+                                                                                        <textarea name="note" id="" cols="30" rows="10" class="form-control"><?php echo $stores['note']; ?></textarea>
                                                                                     </div>
                                                                                 </div>
 
@@ -377,6 +382,28 @@
                                                                 <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
                                                             <?php elseif ($stores['status_admin'] == '1') : ?>
                                                                 <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                          <!-- Client Feedback -->
+                                                          <td>
+                                                        <?php
+                                                            $z  = 0;
+                                                            $cf = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                            foreach ($cf as $key => $cf) {
+                                                                $z += 1;
+                                                            }
+                                                            $c  = 0;
+                                                            $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                            foreach ($cf2 as $key => $cf2) {
+                                                                $c += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                            <?php elseif ($cf2 == true) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>

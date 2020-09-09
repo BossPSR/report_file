@@ -73,6 +73,7 @@
                                                     <th>Delivery</th>
                                                     <th>Status</th>
                                                     <th style="width: 85px;">Status T3</th>
+                                                    <th>Client Feedback</th>
                                                     <th style="width: 11%;">Tool</th>
                                                 </tr>
                                             </thead>
@@ -974,7 +975,29 @@
                                                                 <?php endif ?>
                                                             <?php endif ?>
                                                         </td>
-
+                                                         <!-- Client Feedback -->
+                                                        <td>
+                                                        <?php
+                                                            $z  = 0;
+                                                            $cf = $this->db->get_where('tbl_feedback', ['order_id' => $stores['orderST'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                            foreach ($cf as $key => $cf) {
+                                                                $z += 1;
+                                                            }
+                                                            $c  = 0;
+                                                            $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $stores['orderST'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                            foreach ($cf2 as $key => $cf2) {
+                                                                $c += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                            <?php elseif ($cf2 == true) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        
                                                         <!-- Tool -->
                                                         <td>
                                                             <?php if ($stores['status_delivery'] == 1) : ?>

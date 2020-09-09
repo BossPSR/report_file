@@ -86,6 +86,8 @@
                                                     <th>TM-Date Confirm</th>
                                                     <th>Feedback Cancel</th>
                                                     <th>Feedback Required</th>
+                                                    <th>Price</th>
+                                                    <th>note</th>
                                                     <th>info</th>
                                                     <th>Status</th>
                                                     <th>Client Feedback</th>
@@ -105,8 +107,8 @@
 
                                                         <!-- userId -->
                                                         <td><?php echo $feedback['userId'] ?></td>
-                                                         <!-- DM -->
-                                                         <td>
+                                                        <!-- DM -->
+                                                        <td>
                                                             <?php if (empty($stores['id_document'])) : ?>
                                                                 -
                                                             <?php else : ?>
@@ -136,8 +138,8 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                          
-                                                                          
+
+
                                                                             <table class="table zero-configuration" id="here<?php echo $feedback['order_feed']; ?>">
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $feedback['order_feed']])->result_array(); ?>
@@ -253,7 +255,7 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                
+
                                                                                 <!-- Modal -->
                                                                                 <div class="modal fade text-left" id="up_gt_file<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -605,7 +607,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </td>
-                                                                                                <td><?php echo $orderT['create_at'] == '' ? '-' : $orderT['create_at'] ; ?></td>
+                                                                                                <td><?php echo $orderT['create_at'] == '' ? '-' : $orderT['create_at']; ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
@@ -732,6 +734,38 @@
                                                                 </script>
                                                             <?php endif; ?>
                                                         </td>
+                                                        <!-- Price file -->
+                                                        <?php if ($feedback['price_file'] == '') :   ?>
+                                                            <td>-</td>
+                                                        <?php else : ?>
+                                                            <td>$<?php echo $feedback['price_file']; ?></td>
+                                                        <?php endif; ?>
+
+                                                        <!-- Note -->
+                                                        <td style="width: 1%;">
+                                                            <a href="#" data-toggle="modal" data-target="#note_new<?php echo $feedback['order_feed']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                            <div class="modal fade" id="note_new<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <?= $feedback['note_user']; ?>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
 
                                                         <!-- teamId / wage -->
                                                         <td>
