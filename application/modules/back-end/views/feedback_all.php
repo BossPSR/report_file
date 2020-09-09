@@ -74,10 +74,10 @@
                                                     <th>User id</th>
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
-                                                    <th>Date feedback</th>
-                                                    <th>Order Date</th>
-                                                    <th>T3</th>
-                                                    <th>Position</th>
+                                                    <th>Feedback Required</th>
+                                                    <th>Feedback in</th>
+                                                    <th>Date require</th>
+                                                    <th>info</th>
                                                     <th>Status</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -166,16 +166,127 @@
 
                                                         <td><?php echo $feedback_team['dated'] ?></td>
                                                         <td><?php echo $feedback_team['time'] ?></td>
-                                                        <td><?php echo $feedback_team['teamId'] ?></td>
                                                         <td>
-                                                            <?php if (!empty($feedback_team['position'])) : ?>
-                                                                <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback_team['position']])->result_array(); ?>
-                                                                <?php foreach ($position_name as $keys => $position_name) { ?>
-                                                                    <?php echo $position_name['name_item'] ?>
-                                                                <?php } ?>
+
+                                                            <?php if (date("Y-m-d") >= $feedback_team['date_re']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
+                                                                <?php $dateReq = date('Y/m/d', strtotime($feedback_team['date_re'])); ?>
+                                                                <div id="clock-b<?php echo $feedback_team['id_num']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $feedback_team['id_num']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
+
+                                                                    });
+                                                                </script>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        
+
+                                                        <td>
+                                                            <?php if ($feedback_team['teamId'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                <?php echo $feedback_team['teamId']; ?> |
+                                                            <?php endif; ?>
+
+                                                            <?php if ($feedback_team['wage'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                $<?php echo $feedback_team['wage']; ?> |
+                                                            <?php endif; ?>
+
+                                                            <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback_team['position']])->result_array(); ?>
+                                                            <?php foreach ($position_name as $position_name) { ?>
+                                                                <?php echo $position_name['name_item'] ?>
+                                                            <?php } ?>
+
+                                                            <?php if ($feedback_team['teamId'] == '' && $feedback_team['wage'] == '' && $feedback_team['position'] == '') : ?>
                                                                 -
-                                                            <?php endif;  ?>
+                                                            <?php else : ?>
+                                                                <a href="" data-toggle="modal" data-target="#exampleModalwage<?php echo $feedback_team['order_id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                            <?php endif; ?>
+
+
+                                                            <div class="modal fade" id="exampleModalwage<?php echo $feedback_team['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="edit_info_feedback_all" method="POST">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                                                                        <input type="hidden" name="order_id" value="<?php echo $feedback_team['order_id']; ?>">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Info (<?php echo $feedback_team['order_id']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row" style="text-align: center;margin: 45px 0;">
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="Team">Team ID</label>
+                                                                                        <select class="select2 form-control" name="teamid" required>
+                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                            <option value=""> All Team </option>
+                                                                                            <?php foreach ($ts as $tsM) { ?>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $feedback_team['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Position</label>
+                                                                                        <select name="position" class="form-control" required>
+                                                                                            <option selected disabled> ---- Select ---- </option>
+
+                                                                                            <?php foreach ($positionX as $positionX) { ?>
+                                                                                                <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $feedback_team['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">wage</label>
+                                                                                        <input type="text" class="form-control" name="wage" value="<?php echo $feedback_team['wage']; ?>" placeholder="Enter wage" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <?php
+                                                                                $str =  $feedback_team['date_re'];
+                                                                                $datr_re = explode(" ", $str);
+                                                                                ?>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Date require</label>
+                                                                                        <input type="date" class="form-control" name="date_require" value="<?php echo $datr_re[0]; ?>" placeholder="Enter wage" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Note</label>
+                                                                                        <textarea name="note"  class="form-control" rows="10"></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <?php if ($feedback_team['status_book'] == '1' && $feedback_team['status_cp'] == 'complete' && $feedback_team['status_admin'] == '0') : ?>
@@ -258,11 +369,11 @@
                                                         document.getElementById("uploadsfile<?php echo $feedback_team['id_f']; ?>").addEventListener("click", function() {
                                                             // myDropzone.processQueue();
 
-                                                            var v  = document.getElementById("dated<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var v = document.getElementById("dated<?php echo $feedback_team['id_f']; ?>").value;
                                                             var fi = document.getElementById("id<?php echo $feedback_team['id_f']; ?>").value;
-                                                            var x  = document.getElementById("order_id<?php echo $feedback_team['id_f']; ?>").value;
-                                                            var y  = document.getElementById("cmid<?php echo $feedback_team['id_f']; ?>").value;
-                                                            var z  = document.getElementById("DM1<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var x = document.getElementById("order_id<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var y = document.getElementById("cmid<?php echo $feedback_team['id_f']; ?>").value;
+                                                            var z = document.getElementById("DM1<?php echo $feedback_team['id_f']; ?>").value;
                                                             if (myDropzone.files < 1) {
                                                                 swal("Warning!", "Can not be document Empty", "warning", {
                                                                     button: true,
