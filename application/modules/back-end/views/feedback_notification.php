@@ -842,6 +842,23 @@
                                                                                     </div>
                                                                                 </div>
 
+                                                                                <?php
+                                                                                $str =  $feedback['date_required'];
+                                                                                $datr_re = explode(" ", $str);
+                                                                                ?>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Date require</label>
+                                                                                        <input type="date" class="form-control" name="date_require" value="<?php echo $datr_re[0]; ?>" placeholder="Enter wage" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Note</label>
+                                                                                        <textarea name="note" class="form-control" rows="5"></textarea>
+                                                                                    </div>
+                                                                                </div>
+
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <button type="submit" class="btn btn-primary w-100">Submit</button>
@@ -850,7 +867,7 @@
 
 
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1 text-left">
-                                                                                    <label style="font-size: 16px;" for="">Team file All <span style="color:red;">* ่ทานสามารถเลือกทีมไฟล์คนเก่าได้ที่นี้</span></label>
+                                                                                    <label style="font-size: 16px;" for="">Team file All <span style="color:red;">* ่ทานสามารถเลือกทีมไฟล์คนเก่าได้ที่นี้ </span></label>
                                                                                     <hr>
                                                                                     <?php
                                                                                     $this->db->group_by('teamId');
@@ -872,8 +889,8 @@
                                                                                                         <td><?php echo $t3folder['order_id'] ?></td>
                                                                                                         <td><?php echo $t3folder['teamId'] ?></td>
                                                                                                         <td>
-                                                                                                            <span data-toggle="modal" data-target="#teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $t3folder['order_feed']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
-                                                                                                            <div class="modal fade text-left" id="teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $t3folder['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                            <span data-toggle="modal" data-target="#teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $feedback['order_feed']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
+                                                                                                            <div class="modal fade text-left" id="teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $feedback['order_feed']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                                                                     <div class="modal-content">
                                                                                                                         <div class="modal-header bg-primary white">

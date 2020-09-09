@@ -27,11 +27,13 @@ class Feedback_ctr extends CI_Controller
 
     public function edit_info_feedback()
     {
-        $order_id   = $this->input->post('order_id');
-        $wage       = $this->input->post('wage');
-        $teamid     = $this->input->post('teamid');
-        $position   = $this->input->post('position');
-        $checkbox   = $this->input->post('checkbox');
+        $order_id       = $this->input->post('order_id');
+        $wage           = $this->input->post('wage');
+        $teamid         = $this->input->post('teamid');
+        $position       = $this->input->post('position');
+        $date_require   = $this->input->post('date_require');
+        $note           = $this->input->post('note');
+        $checkbox       = $this->input->post('checkbox');
 
         $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
         if ($wa == true) {
@@ -53,12 +55,12 @@ class Feedback_ctr extends CI_Controller
         }
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'status' => 0, 'status_check_team' => 1]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid , 'note' => $note,  'status' => 0, 'status_check_team' => 1]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'status_approved' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'status_approved' => 0 , 'date_required' => $date_require]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -67,7 +69,7 @@ class Feedback_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'status_approved' => 0]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'status_approved' => 0 , 'date_required' => $date_require]);
 
                 $this->sendEmail_all($teamid, $order_id);
             }
@@ -173,12 +175,12 @@ class Feedback_ctr extends CI_Controller
         }
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'note' => $note , 'status_check_team' => 1]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid , 'note' => $note ,  'status' => 0 , 'status_check_team' => 1]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'date_required' => $date_require , 'status_approved' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 , 'date_required' => $date_require, 'status_approved' => 0]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -187,7 +189,7 @@ class Feedback_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_require , 'status_approved' => 0]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_require, 'status_approved' => 0]);
 
                 $this->sendEmail_all_a($teamid, $order_id);
             }

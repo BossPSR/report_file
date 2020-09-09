@@ -425,13 +425,15 @@ class Book_ctr extends CI_Controller
     }
     public function sendEmail_delivery_pay()
     {
-        $order_id   = $this->input->post('order_id');
-        $order_team = $this->input->post('order_team');
-        $id         = $this->input->post('id');
-        $dm_id      = $this->input->post('dm_id');
+        $order_id       = $this->input->post('order_id');
+        $order_team     = $this->input->post('order_team');
+        $id             = $this->input->post('id');
+        $dm_id          = $this->input->post('dm_id');
+        $dateUP         = date("Y-m-d", strtotime("+60 day"));
+        $time_withdraw  = date("Y-m-d", strtotime("+65 day"));
 
         $this->db->where('order_id', $id);
-        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s') , 'end_time' => $dateUP , 'end_time_withdraw' => $time_withdraw ,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
         foreach ($dm_id as $key => $dm_id) {
 
             $this->db->where('id_doc', $dm_id);

@@ -37,15 +37,15 @@ class delivery_ctr extends CI_Controller
         $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
         $data = array(
 
-            'userId' => $userId,
-            'select_item_id' => $select_item_id,
-            'search_item' => $search_item,
-            'select_item' => $select_item['name_item'],
-            'upload_store_id' => $order_id,
-            'team_id'      => $team_id,
-            'code' => $code,
-            'topic' => $topic,
-            'create_at'                        => date('Y-m-d H:i:s')
+            'userId'            => $userId,
+            'select_item_id'    => $select_item_id,
+            'search_item'       => $search_item,
+            'select_item'       => $select_item['name_item'],
+            'upload_store_id'   => $order_id,
+            'team_id'           => $team_id,
+            'code'              => $code,
+            'topic'             => $topic,
+            'create_at'         => date('Y-m-d H:i:s')
 
         );
 

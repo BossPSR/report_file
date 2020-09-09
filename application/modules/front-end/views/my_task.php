@@ -248,31 +248,34 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                            
-                                                            <div class="form-group mt-5 " style="text-align: left;"> 
-                                                                <label for="" style="font-size: 18px;color: #0072ff;"> <u> GT Extension admin</u> </label>
-                                                                <?php $bt = $this->db->get_where('tbl_upload_backup_team', ['status_back' => 0, 'order_id_back' => $task['or_id']])->result_array(); ?>
-                                                                <table class="table zero-configuration">
-                                                                    <thead>
-                                                                        <tr style="background: aliceblue;">
-                                                                            <th>Order id</th>
-                                                                            <th>File name</th>
-                                                                            <th>File</th>
-                                                                            <th>create</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php foreach ($bt as $keys => $bt) { ?>
-                                                                            <tr>
-                                                                                <td><?php echo $bt['order_id_back'] ?></td>
-                                                                                <td><?php echo $bt['file_name_back'] ?></td>
-                                                                                <td><a href="<?php echo $bt['path_back'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                <td><?php echo $bt['create_at_back'] ?></td>
+
+                                                            <?php $bt = $this->db->get_where('tbl_upload_backup_team', ['status_back' => 0, 'order_id_back' => $task['or_id']])->result_array(); ?>
+                                                            <?php if (!empty($bt)) :  ?>
+                                                                <div class="form-group mt-5 " style="text-align: left;">
+                                                                    <label for="" style="font-size: 18px;color: #0072ff;"> <u> GT Extension admin</u> </label>
+
+                                                                    <table class="table zero-configuration">
+                                                                        <thead>
+                                                                            <tr style="background: aliceblue;">
+                                                                                <th>Order id</th>
+                                                                                <th>File name</th>
+                                                                                <th>File</th>
+                                                                                <th>create</th>
                                                                             </tr>
-                                                                        <?php } ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php foreach ($bt as $keys => $bt) { ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $bt['order_id_back'] ?></td>
+                                                                                    <td><?php echo $bt['file_name_back'] ?></td>
+                                                                                    <td><a href="<?php echo $bt['path_back'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><?php echo $bt['create_at_back'] ?></td>
+                                                                                </tr>
+                                                                            <?php } ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            <?php endif; ?>
 
                                                         </div>
                                                         <div class="modal-footer">
@@ -453,17 +456,23 @@
                                             -
                                         <?php } ?>
                                     </td>
+
+                                    <!-- wage -->
                                     <td>
                                         <span class="badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
                                     </td>
 
                                     <?php $data = date('Y-m-d') ?>
-                                    <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $task['up_order'])); ?>
+                                    <?php $prosum = date('Y-m-d', strtotime('+65 day' . '+' . $task['up_order'])); ?>
                                     <?php $or_sub = substr($task['or_id'], 3); ?>
                                     <?php $te_sub = substr($team['IdTeam'], 2); ?>
+
+                                    <!-- name_item -->
                                     <td><?php echo $task['name_item']; ?></td>
+
+                                    <!-- update_confirm -->
                                     <td><?php echo date('d F Y', strtotime($task['update_confirm'])); ?></td>
-                                    <?php if ($task['status_approved'] == 1 || date('Y-m-d') >= $prosum && $task['up_order'] != '') { ?>
+                                    <?php if ($task['status_approved'] == 1 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
                                         <?php if (empty($withh)) { ?>
@@ -528,9 +537,12 @@
                                             <td><span class="badge badge-info" style="font-size:16px;">Complete</span></td>
                                         <?php } elseif ($task['c_status'] == 2) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Feedback</span></td>
+                                        <?php } elseif ($task['c_status'] == 3) { ?>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
                                         <?php } ?>
 
                                     <?php } ?>
+
                                     <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == true) : ?>
                                         <td>
                                             <button type="button" class="btn btn-success" id="cancel_team<?php echo $task['or_id']; ?>"><i class="fa fa-check-square-o"></i></button>
