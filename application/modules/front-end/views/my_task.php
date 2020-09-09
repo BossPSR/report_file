@@ -601,42 +601,7 @@
                                             </div>
                                         </td>
 
-                                        <!-- <script type="text/javascript">
-                                            $('#cancel_task<?php echo $or_sub; ?>').click(function() {
-                                                swal({
-                                                    icon: "warning",
-                                                    title: "Are you sure?",
-                                                    text: "Do you want cancel document",
-                                                    closeOnEsc: true,
-                                                    closeOnClickOutside: false,
-                                                    buttons: {
-                                                        cancel: true,
-                                                        confirm: true,
-                                                    },
-                                                }).then(function(isConfirm) {
-                                                    if (isConfirm == true) {
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: 'My-task-cancel',
-                                                            data: {
-                                                                order_id: <?php echo $or_sub; ?>,
-                                                                status_cf_team: 0,
-                                                                teamId: null,
-                                                                status: 0,
-                                                            },
-                                                            success: function(success) {
-                                                                swal("Good job!", "Cancel for data successfull", "success", {
-                                                                    button: false,
-                                                                });
-                                                                setTimeout("location.reload(true);", 1000);
-                                                            }
-                                                        });
-                                                    } else {
-                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                    }
-                                                });
-                                            });
-                                        </script> -->
+                                      
                                     <?php else : ?>
                                         <td><button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button></td>
                                     <?php endif; ?>

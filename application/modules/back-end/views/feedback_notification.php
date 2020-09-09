@@ -81,7 +81,6 @@
                                                     <th>TM-Date Confirm</th>
                                                     <th>Feedback Cancel</th>
                                                     <th>Feedback Required</th>
-
                                                     <th>info</th>
                                                     <th>Status</th>
                                                     <th>Client Feedback</th>
