@@ -50,7 +50,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
@@ -67,8 +67,8 @@
                                                     <th>T3 File</th>
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
-                                                    <th>note</th>
                                                     <th>Price</th>
+                                                    <th>note</th>
                                                     <th style="width: 240px;">info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
@@ -679,7 +679,7 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </td>
-                                                                                                <td><?php echo $orderT['create_at'] == '' ? '-' : $orderT['create_at'] ; ?></td>
+                                                                                                <td><?php echo $orderT['create_at'] == '' ? '-' : $orderT['create_at']; ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>
@@ -720,6 +720,31 @@
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
+
+                                                        <!-- Note -->
+                                                        <td style="width: 1%;">
+                                                            <a href="#" data-toggle="modal" data-target="#note_new<?php echo $stores['orderST']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                            <div class="modal fade" id="note_new<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <?= $stores['note_team']; ?>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
 
                                                         <!-- TeamId / wage -->
                                                         <td>
@@ -905,30 +930,6 @@
                                                             </div>
                                                         </td>
 
-                                                        <!-- Note -->
-                                                        <td style="width: 1%;">
-                                                            <a href="#" data-toggle="modal" data-target="#note_new<?php echo $stores['orderST']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
-                                                            <div class="modal fade" id="note_new<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <?= $stores['note_team']; ?>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
 
                                                         <!-- Delivered -->
                                                         <td>

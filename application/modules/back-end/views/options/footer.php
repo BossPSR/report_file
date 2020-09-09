@@ -6,7 +6,6 @@
 </footer>
 <!-- END: Footer-->
 
-
 <!-- BEGIN: Page Vendor JS-->
 <script src="public/backend/assets/vendors/js/ui/jquery.sticky.js"></script>
 <script src="public/backend/assets/vendors/js/charts/apexcharts.min.js"></script>
@@ -26,6 +25,7 @@
 <!-- <script src="public/backend/assets/vendors/js/extensions/dropzone.min.js"></script> -->
 <script src="public/backend/assets/fileupload/global.js" type="text/javascript"></script>
 <script src="public/backend/assets/fileupload/js/uploadslider.js" type="text/javascript"></script>
+
 <!-- BEGIN: Theme JS-->
 <script src="public/backend/assets/js/core/app-menu.js"></script>
 <script src="public/backend/assets/js/core/app.js"></script>
@@ -36,6 +36,8 @@
 <!-- BEGIN: Page JS-->
 <script src="public/backend/assets/js/scripts/datatables/datatable.js"></script>
 <script src="public/backend/assets/js/scripts/pages/dashboard-analytics.js"></script>
+<script src="public/backend/assets/js/scripts/ui/data-list-view.js"></script>
+
 <!-- END: Page JS-->
 <script src="public/backend/app-assets/js/scripts/pages/coming-soon.js"></script>
 <script src="public/backend/assets/js/jquery.countdown.min.js"></script>
@@ -44,7 +46,6 @@
 <script src="public/backend/assets/vendors/js/extensions/toastr.min.js"></script>
 
 <script src="public/backend/assets/vendors/js/forms/select/select2.full.min.js"></script>
-
 
 <script src="public/backend/assets/js/scripts/forms/select/form-select2.js"></script>
 
