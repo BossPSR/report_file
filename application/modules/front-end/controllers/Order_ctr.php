@@ -40,7 +40,7 @@ class Order_ctr extends CI_Controller
     $textarea       = $this->input->post('textarea');
     $is_confirm     = $this->input->post('status_approved');
     $df             = $this->Order_model->delete_feedback($order_id);
-
+    $star            = $this->input->post('star');
 
     if ($this->session->userdata('email') == '') {
       redirect('home');
@@ -48,6 +48,7 @@ class Order_ctr extends CI_Controller
       $data = array(
         'status_approved'        => $is_confirm,
         'note_approved'          => $textarea,
+        ''       => $star
       );
 
       $this->db->where('order_id', $order_id);
@@ -73,13 +74,15 @@ class Order_ctr extends CI_Controller
     $order_id             = $this->input->post('order_id');
     $textnot              = $this->input->post('textnot');
     $is_confirm           = $this->input->post('status_approved');
+    $star                 = $this->input->post('star');
 
     if ($this->session->userdata('email') == '') {
       redirect('home');
     } else {
       $data = array(
-        'status_approved'        => $is_confirm,
-        'note_approved'          => $textnot,
+        'status_approved'           => $is_confirm,
+        'note_approved'             => $textnot,
+        'stars_score_user'          => $star,
       );
 
       $this->db->where('order_id', $order_id);

@@ -444,7 +444,56 @@
                                                     });
                                                 </script>
                                             <?php } ?>
+                                            <style>
+                                                * {
+                                                    margin: 0;
+                                                    padding: 0;
+                                                }
 
+                                                .rate {
+                                                    float: left;
+                                                    height: 46px;
+                                                    padding: 0 10px;
+                                                }
+
+                                                .rate:not(:checked)>input {
+                                                    position: absolute;
+                                                    top: -9999px;
+                                                }
+
+                                                .rate:not(:checked)>label {
+                                                    float: right;
+                                                    width: 1em;
+                                                    overflow: hidden;
+                                                    white-space: nowrap;
+                                                    cursor: pointer;
+                                                    font-size: 40px;
+                                                    color: #ccc;
+                                                }
+
+                                                .rate:not(:checked)>label:before {
+                                                    content: '★ ';
+                                                }
+
+                                                .rate>input:checked~label {
+                                                    color: #ffc700;
+                                                }
+
+                                                .rate:not(:checked)>label:hover,
+                                                .rate:not(:checked)>label:hover~label {
+                                                    color: #deb217;
+                                                }
+
+                                                .rate>input:checked+label:hover,
+                                                .rate>input:checked+label:hover~label,
+                                                .rate>input:checked~label:hover,
+                                                .rate>input:checked~label:hover~label,
+                                                .rate>label:hover~input:checked~label {
+                                                    color: #c59b08;
+                                                }
+
+                                                /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+                                            </style>
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="approvedS<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -456,9 +505,22 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <label style="font-size:18px;" for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
-                                                            <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea>
+                                                        <div class="modal-body" style="text-align: left;">
+                                                            <label style="font-size:18px; " for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
+                                                            <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea><br>
+                                                            <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
+                                                            <div class="rate" style="text-align: center;">
+                                                                <input type="radio" class="star" id="star5" name="rate" value="5" />
+                                                                <label for="star5" title="text">5 stars</label>
+                                                                <input type="radio" class="star" id="star4" name="rate" value="4" />
+                                                                <label for="star4" title="text">4 stars</label>
+                                                                <input type="radio" class="star" id="star3" name="rate" value="3" />
+                                                                <label for="star3" class="star" title="text">3 stars</label>
+                                                                <input type="radio" class="star" name="rate" id="star2" value="2" />
+                                                                <label for="star2" title="text">2 stars</label>
+                                                                <input type="radio" class="star" id="star1" name="rate" value="1" />
+                                                                <label for="star1" title="text">1 star</label>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -481,9 +543,22 @@
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">
+                                                            <div class="modal-body" style="text-align: left;">
                                                                 <label style="font-size:18px;" for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
                                                                 <textarea name="textareanot" id="textareanot<?php echo $value['ORD']; ?>" class="form-control" rows="5"></textarea>
+                                                                <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
+                                                                <div class="rate" style="text-align: center;">
+                                                                    <input type="radio" class="star" id="star6" name="rate_not" value="5" />
+                                                                    <label for="star6" title="text">5 stars</label>
+                                                                    <input type="radio" class="star" id="star7" name="rate_not" value="4" />
+                                                                    <label for="star7" title="text">4 stars</label>
+                                                                    <input type="radio" class="star" id="star8" name="rate_not" value="3" />
+                                                                    <label for="star8" class="star" title="text">3 stars</label>
+                                                                    <input type="radio" class="star" id="star9"  name="rate_not" value="2"/>
+                                                                    <label for="star9" title="text">2 stars</label>
+                                                                    <input type="radio" class="star" id="star10" name="rate_not" value="1" />
+                                                                    <label for="star10" title="text">1 star</label>
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -497,6 +572,7 @@
                                                     $('#not_app<?php echo $value['ORD']; ?>').click(function() {
                                                         var order = $(this).data("ordernot");
                                                         var t_not = $("#textareanot<?php echo $value['ORD']; ?>").val();
+                                                        var star = $('input[name="rate_not"]:checked').val();
 
                                                         swal({
                                                             icon: "warning",
@@ -518,6 +594,7 @@
                                                                         order_id: order,
                                                                         textnot: t_not,
                                                                         status_approved: 2,
+                                                                        star: star,
                                                                     },
                                                                     success: function(success) {
                                                                         swal("Good job!", "Upload for data successfull", "success", {
@@ -661,6 +738,7 @@
     $('body').on('click', '#approvedS', function() {
         var order = $(this).data("orderq");
         var textarea = $('#textarea').val();
+        var star = $('input[name="rate"]:checked').val();
 
         swal({
             icon: "success",
@@ -681,6 +759,7 @@
                         order_id: order,
                         textarea: textarea,
                         status_approved: 1,
+                        star: star,
                     },
                     success: function(success) {
                         swal("Good job!", "Upload for data successfull", "success", {

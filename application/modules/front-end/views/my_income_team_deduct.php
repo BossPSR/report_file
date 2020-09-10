@@ -22,12 +22,12 @@
                 <div class="col-3"></div>
                 <div class="col-2">
                     <div class="form-group text-center" style="margin-top: 1rem;">
-                    <?php  $z = 0  ?>
-                    <?php foreach ($income as $key => $counts) { ?>
-                        <?php $z+=1; ?>
-                    <?php } ?>
-                       <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                       <div>Order</div>
+                        <?php $z = 0  ?>
+                        <?php foreach ($income as $key => $counts) { ?>
+                            <?php $z += 1; ?>
+                        <?php } ?>
+                        <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
+                        <div>Order</div>
                     </div>
                 </div>
             </div>
@@ -37,22 +37,38 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">No.</th>
-                                <th scope="col">Order</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Score</th>
-                                <th scope="col">note</th>
+                                <th scope="col">ODB</th>
+                                <th scope="col">Iitem</th>
+                                <th scope="col">File</th>
+                                <th scope="col">Details</th>
+                                <th scope="col">Date Deduct</th>
+                                <th scope="col">Amount</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
                         <tbody>
                             <?php foreach ($income as $key => $income) { ?>
                                 <tr style="text-align:center;">
-                                    <td scope="row"><?php echo $i++; ?></td>
-                                    <td><?php echo $income['order_id']; ?></td>
-                                    <td><?php echo date("d F Y", strtotime($income['create_at'])); ?></td>
-                                    <td><?php echo number_format($income['income']); ?></td>
-                                    <td><?php echo $income['note'] == '' ? '-' : $income['note']; ?></td>
+                                    <td scope="row"><?php echo $income['order_id_dti']; ?></td>
+                                    <td>
+                                        <?php if ($income['item_dti'] == '') : ?>
+                                            -
+                                        <?php else : ?>
+
+                                            <?php echo $income['item_dti']; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($income['file_name_dti'] == '') : ?>
+                                            -
+                                        <?php else : ?>
+                                            <a href="uploads/deduct/<?php echo $income['file_name_dti']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo $income['note_dti']; ?></td>
+                                    <td><?php echo $income['create_at_dti']; ?></td>
+                                    <td>$<?php echo number_format($income['income_dti']); ?></td>
+
                                 </tr>
                             <?php } ?>
                         </tbody>
