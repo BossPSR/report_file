@@ -12,8 +12,8 @@ class History_model extends CI_Model
     function my_store($_team)
     {
         $this->db->select('*');
-        $this->db->from('tbl_store_team');
-        $this->db->where('teamid', $_team);
+        $this->db->from('tbl_deduct_team_score');
+        $this->db->where('teamid_dts', $_team);
         $this->db->order_by('id', 'desc');
 
         $data = $this->db->get();
@@ -37,6 +37,16 @@ class History_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_income_team');
         $this->db->where('teamid', $_team);
+        $this->db->order_by('id', 'desc');
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+    function my_income_deducte($_team)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_deduct_team_income');
+        $this->db->where('teamid_dti', $_team);
         $this->db->order_by('id', 'desc');
 
         $data = $this->db->get();

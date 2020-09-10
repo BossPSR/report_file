@@ -160,7 +160,7 @@ class My_stock_ctr extends CI_Controller
                 );
                 $this->db->insert('tbl_deduct', $deduct);
             }
-        } 
+        }
 
         echo $success;
     }
@@ -225,10 +225,12 @@ class My_stock_ctr extends CI_Controller
         $price                  = $this->input->post('price');
         $status                 = 1;
         $create_at              = date('Y-m-d H:i:s');
+        $star                   = $this->input->post('star');
+        $textarea                   = $this->input->post('textarea');
 
         $data = array(
-            'order_id'          => "ODB" . $order_id,
-            'teamId'            => "TM" . $teamId,
+            'order_id'          => $order_id,
+            'teamId'            => $teamId,
             'price'             => $price,
             'status'            => $status,
             'create_at'         => $create_at
@@ -240,7 +242,13 @@ class My_stock_ctr extends CI_Controller
                 'bill_id'       => "BILL" . "-" . $maxId,
             );
             $this->db->where('id', $maxId);
-            $success = $this->db->update('tbl_withdraw_team', $data2);
+            if ($this->db->update('tbl_withdraw_team', $data2))
+                $data3 = array(
+                    'stars_score_team'       => $star,
+                    'note_approved_team'       => $textarea,
+                );
+            $this->db->where('order_id', $order_id);
+            $success = $this->db->update('tbl_upload_team', $data3);
 
             echo $success;
         }
@@ -297,10 +305,9 @@ class My_stock_ctr extends CI_Controller
                         $this->db->where('IdTeam', $team['IdTeam']);
                         $success = $this->db->update('tbl_team', $deduct);
                     }
-
                 }
             }
-            
+
             if ($success > 0) {
                 $this->session->set_flashdata('save_ss2', 'Successfully Cancel  !!.');
                 redirect('My-task');
@@ -308,7 +315,6 @@ class My_stock_ctr extends CI_Controller
                 $this->session->set_flashdata('del_ss2', 'Not Successfully Cancel !!.');
                 redirect('My-task');
             }
-            
         }
     }
 

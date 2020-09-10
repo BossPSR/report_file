@@ -476,10 +476,96 @@
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
                                         <?php if (empty($withh)) { ?>
+                                            <style>
+                                                * {
+                                                    margin: 0;
+                                                    padding: 0;
+                                                }
 
-                                            <td><button class="btn btn-info" id="cf_draw<?php echo $or_sub; ?>"><i class="fa fa-money"></i> Withdraw</button></td>
+                                                .rate {
+                                                    float: left;
+                                                    height: 46px;
+                                                    padding: 0 10px;
+                                                }
+
+                                                .rate:not(:checked)>input {
+                                                    position: absolute;
+                                                    top: -9999px;
+                                                }
+
+                                                .rate:not(:checked)>label {
+                                                    float: right;
+                                                    width: 1em;
+                                                    overflow: hidden;
+                                                    white-space: nowrap;
+                                                    cursor: pointer;
+                                                    font-size: 40px;
+                                                    color: #ccc;
+                                                }
+
+                                                .rate:not(:checked)>label:before {
+                                                    content: '★ ';
+                                                }
+
+                                                .rate>input:checked~label {
+                                                    color: #ffc700;
+                                                }
+
+                                                .rate:not(:checked)>label:hover,
+                                                .rate:not(:checked)>label:hover~label {
+                                                    color: #deb217;
+                                                }
+
+                                                .rate>input:checked+label:hover,
+                                                .rate>input:checked+label:hover~label,
+                                                .rate>input:checked~label:hover,
+                                                .rate>input:checked~label:hover~label,
+                                                .rate>label:hover~input:checked~label {
+                                                    color: #c59b08;
+                                                }
+
+                                                /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+                                            </style>
+                                            <td><button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> Withdraw</button>
+                                                <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Withdraw (<?php echo $task['or_id']; ?>)</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body" style="text-align: left;">
+                                                                <label style="font-size:18px; " for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
+                                                                <textarea name="textarea" id="textarea" class="form-control" rows="5" ></textarea><br>
+                                                                <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
+                                                                <div class="rate" style="text-align: center;">
+                                                                    <input type="radio" class="star" id="star5" name="rate" value="5" />
+                                                                    <label for="star5" title="text">5 stars</label>
+                                                                    <input type="radio" class="star" id="star4" name="rate" value="4" />
+                                                                    <label for="star4" title="text">4 stars</label>
+                                                                    <input type="radio" class="star" id="star3" name="rate" value="3" />
+                                                                    <label for="star3" class="star" title="text">3 stars</label>
+                                                                    <input type="radio" class="star" name="rate" id="star2" value="2" />
+                                                                    <label for="star2" title="text">2 stars</label>
+                                                                    <input type="radio" class="star" id="star1" name="rate" value="1" />
+                                                                    <label for="star1" title="text">1 star</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" data-orderq="<?php echo $task['or_id'] ?>" id="star" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <script>
-                                                $('#cf_draw<?php echo $or_sub; ?>').click(function() {
+                                                $('body').on('click', '#star', function() {
+                                                    var star = $('input[name="rate"]:checked').val();
+                                                    var textarea = $('#textarea').val();
+                                                  
                                                     swal({
                                                         icon: "warning",
                                                         title: "Are you sure?",
@@ -496,9 +582,11 @@
                                                                 type: 'POST',
                                                                 url: 'My-task-withdraw',
                                                                 data: {
-                                                                    order_id: <?= $or_sub; ?>,
-                                                                    teamId: <?= $te_sub; ?>,
-                                                                    price: <?= $task['wage']; ?>,
+                                                                    order_id: '<?php echo $task['or_id'] ?>',
+                                                                    teamId: '<?php  echo $team['IdTeam']; ?>',
+                                                                    price: '<?= $task['wage']; ?>',
+                                                                    star: star,
+                                                                    textarea: textarea,
                                                                 },
                                                                 success: function(success) {
                                                                     swal("Good job!", "Upload for data successfull", "success", {

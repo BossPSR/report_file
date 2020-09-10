@@ -37,22 +37,29 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">No.</th>
-                                <th scope="col">Order</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Score</th>
-                                <th scope="col">note</th>
+                                <th scope="col">ODB</th>
+                                <th scope="col">File</th>
+                                <th scope="col">Details</th>
+                                <th scope="col">Date Deduct</th>
+                                <th scope="col">Amount</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
                         <tbody>
                             <?php foreach ($store as $key => $store) { ?>
                                 <tr style="text-align:center;">
-                                    <td scope="row"><?php echo $i++; ?></td>
-                                    <td><?php echo $store['order_id']; ?></td>
-                                    <td><?php echo date("d F Y", strtotime($store['create_at'])); ?></td>
-                                    <td><?php echo number_format($store['store']); ?></td>
-                                    <td><?php echo $store['note'] == '' ? '-' : $store['note'] ; ?></td>
+                                <td scope="row"><?php echo $store['order_id_dts']; ?></td>
+                                 
+                                    <td>
+                                        <?php if ($store['file_name_dts'] == '') : ?>
+                                            -
+                                        <?php else : ?>
+                                            <a href="uploads/deduct/<?php echo $store['file_name_dts']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo $store['detail_score_dts']; ?></td>
+                                    <td><?php echo $store['create_at_dts']; ?></td>
+                                    <td>$<?php echo number_format($store['deduct_dts']); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
