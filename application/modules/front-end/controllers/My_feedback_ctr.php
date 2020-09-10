@@ -51,6 +51,12 @@ class My_feedback_ctr extends CI_Controller
         $order_id   = $this->input->post('order_id');
         $userId     = $this->input->post('userId');
         $teamId     = $this->input->post('teamId');
+        $refdata    = $this->input->post('refdata');
+        if ($refdata == 1) {
+            $s = 4;
+        }else{
+            $s = 3;
+        }
 
         $orf = array(
             'feedback_detail'   => $detail,
@@ -59,11 +65,12 @@ class My_feedback_ctr extends CI_Controller
             'userId'            => $userId,
             'create_at'         => date('Y-m-d H:i:s'),
             'dated'             => $dated,
-            'check_status'      => 1
+            'check_status'      => 1 ,
+            're_feedback'       => $refdata
         );
         if ($this->db->insert('tbl_feedback', $orf)) {
             $appro = array(
-                'status_approved' => 3
+                'status_approved' => $s
             );
             $this->db->where('order_id', $order_id);
             $success = $this->db->update('tbl_upload_order', $appro);

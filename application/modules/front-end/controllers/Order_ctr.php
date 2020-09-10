@@ -73,6 +73,8 @@ class Order_ctr extends CI_Controller
     $order_id             = $this->input->post('order_id');
     $textnot              = $this->input->post('textnot');
     $is_confirm           = $this->input->post('status_approved');
+    $df                   = $this->Order_model->delete_feedback($order_id);
+
 
     if ($this->session->userdata('email') == '') {
       redirect('home');
@@ -84,6 +86,53 @@ class Order_ctr extends CI_Controller
 
       $this->db->where('order_id', $order_id);
       $success = $this->db->update('tbl_upload_order', $data);
+
+      if ($success) {
+        foreach ($df as $key => $df) {
+          unlink($df['path']);
+          $this->db->where('id_feedback', $df['id']);
+          $this->db->delete('tbl_feedback_file');
+        }
+
+        $this->db->where('order_id', $order_id);
+        $this->db->delete('tbl_feedback');
+      }
+
+      echo $success;
+    }
+  }
+
+  public function order_refeedback()
+  {
+    $order_id       = $this->input->post('ordercon');
+    $price          = $this->input->post('price');
+    $is_confirm     = $this->input->post('status_approved');
+    $df             = $this->Order_model->delete_feedback($order_id);
+    $time_withdraw  = date("Y-m-d", strtotime("+60 day"));
+
+    if ($this->session->userdata('email') == '') {
+      redirect('home');
+    } else {
+      $data = array(
+        'status_approved'        => $is_confirm,
+        'end_time'      => $time_withdraw,
+        'price_refeedback'       => $price,
+        'status_refeedback'      => 1,
+      );
+
+      $this->db->where('order_id', $order_id);
+
+      if ($success = $this->db->update('tbl_upload_order', $data)) {
+
+        foreach ($df as $key => $df) {
+          unlink($df['path']);
+          $this->db->where('id_feedback', $df['id']);
+          $this->db->delete('tbl_feedback_file');
+        }
+
+        $this->db->where('order_id', $order_id);
+        $this->db->delete('tbl_feedback');
+      }
 
       echo $success;
     }

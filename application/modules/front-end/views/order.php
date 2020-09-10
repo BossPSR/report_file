@@ -59,6 +59,8 @@
                                             <span class="badge badge-danger" style="color:#fff;">Not Approved</span>
                                         <?php elseif ($value['status_approved'] == 3) : ?>
                                             <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
+                                        <?php elseif ($value['status_approved'] == 4) : ?>
+                                            <span class="badge" style="color:#fff;background-color:#7000cc;">Re Feedback</span>
                                         <?php endif; ?>
                                     </th>
 
@@ -267,24 +269,39 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } elseif ($value['status_approved'] == 3 || $value['status_delivery'] == 1) { ?>
+                                        <?php } elseif ($value['status_approved'] == 3 || $value['status_approved'] == 4 || $value['status_delivery'] == 1) { ?>
 
                                             <?php
                                             $this->db->select('*');
                                             $this->db->where('order_id', $value['ORD']);
                                             $this->db->where('check_status', 1);
+                                            $this->db->where('re_feedback', 0);
                                             $this->db->order_by('dated', 'DESC');
                                             $N_feed = $this->db->get('tbl_feedback')->row_array();
 
                                             $this->db->select('count(*) od');
                                             $this->db->where('order_id', $value['ORD']);
                                             $this->db->where('check_status', 1);
+                                            $this->db->where('re_feedback', 0);
                                             $this->db->order_by('dated', 'ASC');
                                             $N_count = $this->db->get('tbl_feedback')->row_array();
-                                            ?>
-                                            <?php $dayUs = date("Y-m-d H:i:s", strtotime("+30 day", strtotime($value['end_time']))); ?>
 
-                                            <?php if ($N_count['od'] >= 3 || $DateT > $dayUs) { ?>
+                                            $this->db->select('*');
+                                            $this->db->where('order_id', $value['ORD']);
+                                            $this->db->where('check_status', 1);
+                                            $this->db->where('re_feedback', 1);
+                                            $this->db->order_by('dated', 'DESC');
+                                            $ref_feed = $this->db->get('tbl_feedback')->row_array();
+
+                                            $this->db->select('count(*) odref');
+                                            $this->db->where('order_id', $value['ORD']);
+                                            $this->db->where('check_status', 1);
+                                            $this->db->where('re_feedback', 1);
+                                            $this->db->order_by('dated', 'ASC');
+                                            $ref_count = $this->db->get('tbl_feedback')->row_array();
+                                            ?>
+
+                                            <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
                                                 <?php if ($value['status_approved'] == 0) { ?>
 
@@ -318,103 +335,124 @@
                                             <?php } ?>
 
 
-                                            <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
 
+                                            <!-- Modal -->
+                                            <?php if ($value['status_refeedback'] == '0') : ?>
 
-                                            <?php } else { ?>
+                                                <!-- feedback -->
 
-                                                <button type="button" class="btn btn-warning" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $value['ORD']; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                                    <?php if ($N_count['od'] == '0') : ?>
+                                                <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
-                                                    <?php else : ?>
-                                                        <span class="badge badge-light"> <?php echo $N_count['od'];  ?></span>
-                                                    <?php endif; ?>
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalNotApprove<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback (<?php echo $value['ORD']; ?>)</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
+                                                <?php } else { ?>
 
-                                                            <div class="modal-body" style="text-align:left;">
-                                                                <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprove<?php echo $value['ORD']; ?>">
-                                                                    <div class="dz-message needsclick">
-                                                                        Drop files here or click to upload.<br>
-                                                                        <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                    </div>
-                                                                </form>
-                                                                <br>
-                                                                <!-- <form action="my-order-feedAuto" method="POST"> -->
-                                                                <label for="" class="font-size-upload">Detail :</label>
-                                                                <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
-                                                                <br>
+                                                    <button type="button" class="btn btn-warning" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                        <?php if ($N_count['od'] == '0') : ?>
 
-                                                                <label for="" class="font-size-upload">Date :</label>
-                                                                <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" min="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" max="" style="width:30%" required>
-                                                                <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
-                                                                <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
-                                                                <!-- </form> -->
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        <?php else : ?>
+                                                            <span class="badge badge-light"> <?php echo $N_count['od'];  ?></span>
+                                                        <?php endif; ?>
+                                                    </button>
+
+                                                    <div class="modal fade" id="feedback_user<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Feedback (<?php echo $value['ORD']; ?>)</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="modal-body" style="text-align:left;">
+                                                                    <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                    <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprove<?php echo $value['ORD']; ?>">
+                                                                        <div class="dz-message needsclick">
+                                                                            Drop files here or click to upload.<br>
+                                                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                        </div>
+                                                                    </form>
+                                                                    <br>
+                                                                    <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                                    <label for="" class="font-size-upload">Detail :</label>
+                                                                    <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
+                                                                    <br>
+
+                                                                    <label for="" class="font-size-upload">Date :</label>
+                                                                    <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" min="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" max="" style="width:30%" required>
+
+                                                                    <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
+                                                                    <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
+                                                                    <input type="text" name="refeed" id="refeed<?php echo $value['ORD']; ?>" value="0" hidden>
+
+                                                                    <!-- </form> -->
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <?php if (!empty($N_feed['dated'])) { ?>
-                                                    <script>
-                                                        $('#onshownbtn<?php echo $value['ORD']; ?>').on('click', function() {
-                                                            $('#exampleModalNotApprove<?php echo $value['ORD']; ?>').on('shown.bs.modal', function() {
-                                                                var a = $('#dated<?php echo $value['ORD']; ?>').val();
-                                                                swal("Warning!", " คุณสามารถระบุวันเวลาครั้งล่าสุดหรือมากกว่าครั้งล่าสุดเท่านั้น Date required ครั้งล่าสุดของคุณคือ… " + a, "warning", {
-                                                                    button: true,
+                                                    <?php if (!empty($N_feed['dated'])) { ?>
+                                                        <script>
+                                                            $('#onshownbtn<?php echo $value['ORD']; ?>').on('click', function() {
+                                                                $('#exampleModalNotApprove<?php echo $value['ORD']; ?>').on('shown.bs.modal', function() {
+                                                                    var a = $('#dated<?php echo $value['ORD']; ?>').val();
+                                                                    swal("Warning!", " คุณสามารถระบุวันเวลาครั้งล่าสุดหรือมากกว่าครั้งล่าสุดเท่านั้น Date required ครั้งล่าสุดของคุณคือ… " + a, "warning", {
+                                                                        button: true,
+                                                                    });
                                                                 });
                                                             });
+                                                        </script>
+                                                    <?php } ?>
+
+                                                    <script type='text/javascript'>
+                                                        Dropzone.autoDiscover = false;
+                                                        var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
+                                                            autoProcessQueue: false,
+                                                            maxFiles: 5,
+                                                            addRemoveLinks: true,
+                                                            parallelUploads: 5, // Number of files process at a time (default 2)
                                                         });
-                                                    </script>
-                                                <?php } ?>
 
-                                                <script type='text/javascript'>
-                                                    Dropzone.autoDiscover = false;
-                                                    var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
-                                                        autoProcessQueue: false,
-                                                        maxFiles: 5,
-                                                        addRemoveLinks: true,
-                                                        parallelUploads: 5, // Number of files process at a time (default 2)
-                                                    });
+                                                        $('#SubmitNotApp<?php echo $value['ORD']; ?>').click(function() {
+                                                            var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
+                                                            var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
+                                                            var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
+                                                            var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
+                                                            var re = $('#refeed<?php echo $value['ORD']; ?>').val();
 
-                                                    $('#SubmitNotApp<?php echo $value['ORD']; ?>').click(function() {
-                                                        var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
-                                                        var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
-                                                        var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
-                                                        var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
-
-                                                        if (myDropzone2.files == 0 && x == '') {
-                                                            swal("Warning!", "Can not be document Empty", "warning", {
-                                                                button: true,
-                                                            });
-                                                        } else {
-                                                            $.ajax({
-                                                                type: 'POST',
-                                                                url: 'Not_approved',
-                                                                data: {
-                                                                    detail: x,
-                                                                    dated: y,
-                                                                    order_id: z,
-                                                                    userId: c,
-                                                                },
-                                                                success: function(success) {
-                                                                    if (myDropzone2.files != 0) {
-                                                                        myDropzone2.processQueue();
-                                                                        myDropzone2.on("queuecomplete", function(file, res) {
+                                                            if (myDropzone2.files == 0 && x == '') {
+                                                                swal("Warning!", "Can not be document Empty", "warning", {
+                                                                    button: true,
+                                                                });
+                                                            } else {
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    url: 'Not_approved',
+                                                                    data: {
+                                                                        detail: x,
+                                                                        dated: y,
+                                                                        order_id: z,
+                                                                        userId: c,
+                                                                        refdata: re,
+                                                                    },
+                                                                    success: function(success) {
+                                                                        if (myDropzone2.files != 0) {
+                                                                            myDropzone2.processQueue();
+                                                                            myDropzone2.on("queuecomplete", function(file, res) {
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: true,
+                                                                                }).then(function(isConfirm) {
+                                                                                    if (isConfirm == true) {
+                                                                                        setTimeout("location.reload(true);", 1000);
+                                                                                    } else {
+                                                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                    }
+                                                                                });
+                                                                            });
+                                                                        } else {
                                                                             swal("Good job!", "Upload for data successfull", "success", {
                                                                                 button: true,
                                                                             }).then(function(isConfirm) {
@@ -424,26 +462,152 @@
                                                                                     swal("Cancelled", "Your imaginary file is safe :)", "error");
                                                                                 }
                                                                             });
-                                                                        });
-                                                                    } else {
-                                                                        swal("Good job!", "Upload for data successfull", "success", {
-                                                                            button: true,
-                                                                        }).then(function(isConfirm) {
-                                                                            if (isConfirm == true) {
-                                                                                setTimeout("location.reload(true);", 1000);
-                                                                            } else {
-                                                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                            }
-                                                                        });
+                                                                        }
+
                                                                     }
+                                                                });
+                                                            }
 
-                                                                }
+                                                        });
+                                                    </script>
+                                                <?php } ?>
+
+                                            <?php else : ?>
+
+                                                <!-- Re feedback -->
+
+                                                <?php if ($ref_count['odref'] >= 3 || $DateT > $value['end_time']) { ?>
+
+                                                <?php } else { ?>
+
+                                                    <button type="button" class="btn btn-danger" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                        <?php if ($ref_count['odref'] == '0') : ?>
+
+                                                        <?php else : ?>
+                                                            <span class="badge badge-light"> <?php echo $ref_count['odref'];  ?></span>
+                                                        <?php endif; ?>
+                                                    </button>
+
+                                                    <div class="modal fade" id="feedback_user<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Re Feedback (<?php echo $value['ORD']; ?>)</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="modal-body" style="text-align:left;">
+                                                                    <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                    <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprove<?php echo $value['ORD']; ?>">
+                                                                        <div class="dz-message needsclick">
+                                                                            Drop files here or click to upload.<br>
+                                                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                        </div>
+                                                                    </form>
+                                                                    <br>
+                                                                    <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                                    <label for="" class="font-size-upload">Detail :</label>
+                                                                    <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
+                                                                    <br>
+
+                                                                    <label for="" class="font-size-upload">Date : <span style="color: red;">* Date required ระบุได้ตั้งแต่ 4 วันขึ้นไป</span></label>
+                                                                    <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date("Y-m-d", strtotime("+ 4 days")); ?>" min="<?php echo date("Y-m-d", strtotime("+ 4 days")); ?>" max="" style="width:30%" required>
+
+                                                                    <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
+                                                                    <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
+                                                                    <input type="text" name="refeed" id="refeed<?php echo $value['ORD']; ?>" value="1" hidden>
+                                                                    <!-- </form> -->
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php if (!empty($ref_feed['dated'])) { ?>
+                                                        <script>
+                                                            $('#onshownbtn<?php echo $value['ORD']; ?>').on('click', function() {
+                                                                $('#exampleModalNotApprove<?php echo $value['ORD']; ?>').on('shown.bs.modal', function() {
+                                                                    var a = $('#dated<?php echo $value['ORD']; ?>').val();
+                                                                    swal("Warning!", " คุณสามารถระบุวันเวลาครั้งล่าสุดหรือมากกว่าครั้งล่าสุดเท่านั้น Date required ครั้งล่าสุดของคุณคือ… " + a, "warning", {
+                                                                        button: true,
+                                                                    });
+                                                                });
                                                             });
-                                                        }
+                                                        </script>
+                                                    <?php } ?>
 
-                                                    });
-                                                </script>
-                                            <?php } ?>
+                                                    <script type='text/javascript'>
+                                                        Dropzone.autoDiscover = false;
+                                                        var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
+                                                            autoProcessQueue: false,
+                                                            maxFiles: 5,
+                                                            addRemoveLinks: true,
+                                                            parallelUploads: 5, // Number of files process at a time (default 2)
+                                                        });
+
+                                                        $('#SubmitNotApp<?php echo $value['ORD']; ?>').click(function() {
+                                                            var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
+                                                            var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
+                                                            var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
+                                                            var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
+                                                            var re = $('#refeed<?php echo $value['ORD']; ?>').val();
+
+                                                            if (myDropzone2.files == 0 && x == '') {
+                                                                swal("Warning!", "Can not be document Empty", "warning", {
+                                                                    button: true,
+                                                                });
+                                                            } else {
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    url: 'Not_approved',
+                                                                    data: {
+                                                                        detail: x,
+                                                                        dated: y,
+                                                                        order_id: z,
+                                                                        userId: c,
+                                                                        refdata: re,
+                                                                    },
+                                                                    success: function(success) {
+                                                                        if (myDropzone2.files != 0) {
+                                                                            myDropzone2.processQueue();
+                                                                            myDropzone2.on("queuecomplete", function(file, res) {
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: true,
+                                                                                }).then(function(isConfirm) {
+                                                                                    if (isConfirm == true) {
+                                                                                        setTimeout("location.reload(true);", 1000);
+                                                                                    } else {
+                                                                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                    }
+                                                                                });
+                                                                            });
+                                                                        } else {
+                                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                                button: true,
+                                                                            }).then(function(isConfirm) {
+                                                                                if (isConfirm == true) {
+                                                                                    setTimeout("location.reload(true);", 1000);
+                                                                                } else {
+                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                }
+                                                                            });
+                                                                        }
+
+                                                                    }
+                                                                });
+                                                            }
+
+                                                        });
+                                                    </script>
+                                                <?php } ?>
+
+                                            <?php endif; ?>
+
+
 
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <!-- Modal -->
@@ -626,9 +790,42 @@
                                         <?php } ?>
 
                                     </td>
+
+                                    <!-- Re feedback -->
                                     <td>
-                                        <button class="btn btn-success">Re feedback</button>
+                                        <?php if ($value['status_refeedback'] == 0) : ?>
+
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#refeedback<?php echo $value['ORD']; ?>">Re feedback</button>
+                                            <div class="modal fade" id="refeedback<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Re feedback</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body" style="text-align:left;">
+                                                            <p style="font-size: 26px;color: #0066ff;">ค่าบริการในการทำรายการทั้งหมด $<?php echo $value['price_file'] / 2; ?> </p>
+                                                            <p style="font-size: 16px;">คุณต้องการที่จะใช้บริการเสริมในการซื้อแพ๊กเกจเพื่อให้เราดูแลคุณให้มากขึ้นอีก 65 วัน</p>
+                                                            <p style="color: red;font-size: 16px;">
+                                                                หมายเหตุ : กรณีที่ออร์เดอร์ลูกค้าหมดอายุการรับประกัน 60 วัน ไม่ว่าสิทธิ์ในการแก้ไขงาน Feedback ยังคงเหลืออยู่หรือไม่ก็ตาม ลูกค้าจะสามารถต่ออายุประกันได้อีก โดยกดปุ่ม Re-feedback ใหม่ได้ โดยทางเราจะคิดค่าบริการ 50% จากราคาเดิมของ Order ดังกล่าวโดยลูกค้าจะได้รับประกันอีก 60 วันและสามารถแก้ไขงาน Feedback ได้ฟรี 3 ครั้ง
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="refeedback" data-ordercon="<?php echo $value['ORD'] ?>" data-price="<?php echo $value['price_file'] / 2; ?>" class="btn btn-success">Confirm</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <?php else : ?>
+                                            <button class="btn btn-secondary">Re feedback</button>
+                                        <?php endif; ?>
                                     </td>
+
                                 </tr>
 
 
@@ -681,6 +878,46 @@
                         order_id: order,
                         textarea: textarea,
                         status_approved: 1,
+                    },
+                    success: function(success) {
+                        swal("Good job!", "Upload for data successfull", "success", {
+                            button: false,
+                        });
+                        setTimeout("location.reload(true);", 1000);
+                    }
+                });
+            } else {
+                swal("Cancelled", "Your imaginary file is safe :)", "error");
+            }
+        });
+
+    });
+</script>
+
+<script type='text/javascript'>
+    $('body').on('click', '#refeedback', function() {
+        var ordercon = $(this).data("ordercon");
+        var price = $(this).data("price");
+
+        swal({
+            icon: "success",
+            title: "Are you sure?",
+            text: "Do you want Re feedback",
+            closeOnEsc: true,
+            closeOnClickOutside: false,
+            buttons: {
+                cancel: true,
+                confirm: true,
+            },
+        }).then(function(isConfirm) {
+            if (isConfirm == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'order_refeedback',
+                    data: {
+                        ordercon: ordercon,
+                        price: price,
+                        status_approved: 4,
                     },
                     success: function(success) {
                         swal("Good job!", "Upload for data successfull", "success", {
