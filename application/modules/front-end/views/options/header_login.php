@@ -519,7 +519,10 @@
                                             <li><a href="#">My History<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="my_store_team">Score</a></li>
+                                                    <li><a href="my_score_team_deduct">Score deducted</a></li>
                                                     <li><a href="my_income">Income</a></li>
+                                                    <li><a href="my_income_team_deduct">Income deducted</a></li>
+
                                                 </ul>
                                             </li>
                                             <!-- <li>

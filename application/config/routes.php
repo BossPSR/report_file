@@ -128,7 +128,9 @@ $route['teamOnline']                = 'front-end/Login_ctr/teamOnline';
 $route['teamOffline']               = 'front-end/Login_ctr/teamOffline';
 
 $route['my_store_team']             = 'front-end/My_history_ctr/my_store_team';
+$route['my_score_team_deduct']      = 'front-end/My_history_ctr/my_score_team_deduct';
 $route['my_income']                 = 'front-end/My_history_ctr/my_income';
+$route['my_income_team_deduct']     = 'front-end/My_history_ctr/my_income_team_deduct';
 
 
 // /------------------------------------- back-end  ---------------------
