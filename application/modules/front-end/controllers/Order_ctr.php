@@ -118,13 +118,12 @@ class Order_ctr extends CI_Controller
     } else {
       $data = array(
         'status_approved'        => $is_confirm,
-        'end_time'      => $time_withdraw,
+        'end_time'               => $time_withdraw,
         'price_refeedback'       => $price,
         'status_refeedback'      => 1,
       );
 
       $this->db->where('order_id', $order_id);
-
       if ($success = $this->db->update('tbl_upload_order', $data)) {
 
         foreach ($df as $key => $df) {

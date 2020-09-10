@@ -1,3 +1,51 @@
+<style>
+
+
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+
+    .rate:not(:checked)>input {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .rate:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 40px;
+        color: #ccc;
+    }
+
+    .rate:not(:checked)>label:before {
+        content: '★ ';
+    }
+
+    .rate>input:checked~label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked)>label:hover,
+    .rate:not(:checked)>label:hover~label {
+        color: #deb217;
+    }
+
+    .rate>input:checked+label:hover,
+    .rate>input:checked+label:hover~label,
+    .rate>input:checked~label:hover,
+    .rate>input:checked~label:hover~label,
+    .rate>label:hover~input:checked~label {
+        color: #c59b08;
+    }
+
+    /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+</style>
+
 <?php if (!empty($buy_email)) : ?>
     <br>
     <h2 class="text-center" style="margin-top: 15px;">My order</h2>
@@ -340,8 +388,6 @@
                                             <!-- Modal -->
                                             <?php if ($value['status_refeedback'] == '0') : ?>
 
-                                                <!-- feedback -->
-
                                                 <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
                                                 <?php } else { ?>
@@ -474,8 +520,6 @@
 
                                             <?php else : ?>
 
-                                                <!-- Re feedback -->
-
                                                 <?php if ($ref_count['odref'] >= 3 || $DateT > $value['end_time']) { ?>
 
                                                 <?php } else { ?>
@@ -605,59 +649,10 @@
                                                     </script>
                                                 <?php } ?>
 
-                                                    });
-                                                </script>
-                                            <?php } ?>
-                                            <style>
-                                                * {
-                                                    margin: 0;
-                                                    padding: 0;
-                                                }
+                                            <?php endif; ?>
 
-                                                .rate {
-                                                    float: left;
-                                                    height: 46px;
-                                                    padding: 0 10px;
-                                                }
 
-                                                .rate:not(:checked)>input {
-                                                    position: absolute;
-                                                    top: -9999px;
-                                                }
 
-                                                .rate:not(:checked)>label {
-                                                    float: right;
-                                                    width: 1em;
-                                                    overflow: hidden;
-                                                    white-space: nowrap;
-                                                    cursor: pointer;
-                                                    font-size: 40px;
-                                                    color: #ccc;
-                                                }
-
-                                                .rate:not(:checked)>label:before {
-                                                    content: '★ ';
-                                                }
-
-                                                .rate>input:checked~label {
-                                                    color: #ffc700;
-                                                }
-
-                                                .rate:not(:checked)>label:hover,
-                                                .rate:not(:checked)>label:hover~label {
-                                                    color: #deb217;
-                                                }
-
-                                                .rate>input:checked+label:hover,
-                                                .rate>input:checked+label:hover~label,
-                                                .rate>input:checked~label:hover,
-                                                .rate>input:checked~label:hover~label,
-                                                .rate>label:hover~input:checked~label {
-                                                    color: #c59b08;
-                                                }
-
-                                                /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
-                                            </style>
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="approvedS<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -718,7 +713,7 @@
                                                                     <label for="star7" title="text">4 stars</label>
                                                                     <input type="radio" class="star" id="star8" name="rate_not" value="3" />
                                                                     <label for="star8" class="star" title="text">3 stars</label>
-                                                                    <input type="radio" class="star" id="star9"  name="rate_not" value="2"/>
+                                                                    <input type="radio" class="star" id="star9" name="rate_not" value="2" />
                                                                     <label for="star9" title="text">2 stars</label>
                                                                     <input type="radio" class="star" id="star10" name="rate_not" value="1" />
                                                                     <label for="star10" title="text">1 star</label>
@@ -774,6 +769,7 @@
                                                     });
                                                 </script>
                                             <?php } ?>
+
 
                                         <?php } else { ?>
 
@@ -930,7 +926,6 @@
     </div>
 <?php endif ?>
 
-
 <script type='text/javascript'>
     $('body').on('click', '#approvedS', function() {
         var order = $(this).data("orderq");
@@ -973,15 +968,17 @@
     });
 </script>
 
+
 <script type='text/javascript'>
     $('body').on('click', '#refeedback', function() {
-        var ordercon = $(this).data("ordercon");
+        var order = $(this).data("ordercon");
         var price = $(this).data("price");
+        var star = $('input[name="rate"]:checked').val();
 
         swal({
             icon: "success",
             title: "Are you sure?",
-            text: "Do you want Re feedback",
+            text: "Do you want Approvend document",
             closeOnEsc: true,
             closeOnClickOutside: false,
             buttons: {
@@ -992,9 +989,9 @@
             if (isConfirm == true) {
                 $.ajax({
                     type: 'POST',
-                    url: 'order_refeedback',
+                    url: 'order_approverd',
                     data: {
-                        ordercon: ordercon,
+                        order_id: order,
                         price: price,
                         status_approved: 4,
                     },

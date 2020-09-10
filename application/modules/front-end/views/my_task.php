@@ -1,3 +1,50 @@
+<style>
+
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+
+    .rate:not(:checked)>input {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .rate:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 40px;
+        color: #ccc;
+    }
+
+    .rate:not(:checked)>label:before {
+        content: '★ ';
+    }
+
+    .rate>input:checked~label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked)>label:hover,
+    .rate:not(:checked)>label:hover~label {
+        color: #deb217;
+    }
+
+    .rate>input:checked+label:hover,
+    .rate>input:checked+label:hover~label,
+    .rate>input:checked~label:hover,
+    .rate>input:checked~label:hover~label,
+    .rate>label:hover~input:checked~label {
+        color: #c59b08;
+    }
+
+    /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+</style>
+
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php if (!empty($task)) { ?>
     <br>
@@ -476,56 +523,7 @@
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
                                         <?php if (empty($withh)) { ?>
-                                            <style>
-                                                * {
-                                                    margin: 0;
-                                                    padding: 0;
-                                                }
 
-                                                .rate {
-                                                    float: left;
-                                                    height: 46px;
-                                                    padding: 0 10px;
-                                                }
-
-                                                .rate:not(:checked)>input {
-                                                    position: absolute;
-                                                    top: -9999px;
-                                                }
-
-                                                .rate:not(:checked)>label {
-                                                    float: right;
-                                                    width: 1em;
-                                                    overflow: hidden;
-                                                    white-space: nowrap;
-                                                    cursor: pointer;
-                                                    font-size: 40px;
-                                                    color: #ccc;
-                                                }
-
-                                                .rate:not(:checked)>label:before {
-                                                    content: '★ ';
-                                                }
-
-                                                .rate>input:checked~label {
-                                                    color: #ffc700;
-                                                }
-
-                                                .rate:not(:checked)>label:hover,
-                                                .rate:not(:checked)>label:hover~label {
-                                                    color: #deb217;
-                                                }
-
-                                                .rate>input:checked+label:hover,
-                                                .rate>input:checked+label:hover~label,
-                                                .rate>input:checked~label:hover,
-                                                .rate>input:checked~label:hover~label,
-                                                .rate>label:hover~input:checked~label {
-                                                    color: #c59b08;
-                                                }
-
-                                                /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
-                                            </style>
                                             <td><button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> Withdraw</button>
                                                 <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -538,7 +536,7 @@
                                                             </div>
                                                             <div class="modal-body" style="text-align: left;">
                                                                 <label style="font-size:18px; " for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
-                                                                <textarea name="textarea" id="textarea" class="form-control" rows="5" ></textarea><br>
+                                                                <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea><br>
                                                                 <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
                                                                 <div class="rate" style="text-align: center;">
                                                                     <input type="radio" class="star" id="star5" name="rate" value="5" />
@@ -565,7 +563,7 @@
                                                 $('body').on('click', '#star', function() {
                                                     var star = $('input[name="rate"]:checked').val();
                                                     var textarea = $('#textarea').val();
-                                                  
+
                                                     swal({
                                                         icon: "warning",
                                                         title: "Are you sure?",
@@ -583,7 +581,7 @@
                                                                 url: 'My-task-withdraw',
                                                                 data: {
                                                                     order_id: '<?php echo $task['or_id'] ?>',
-                                                                    teamId: '<?php  echo $team['IdTeam']; ?>',
+                                                                    teamId: '<?php echo $team['IdTeam']; ?>',
                                                                     price: '<?= $task['wage']; ?>',
                                                                     star: star,
                                                                     textarea: textarea,
