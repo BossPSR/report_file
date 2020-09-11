@@ -17,11 +17,26 @@ class Team_ctr extends CI_Controller
         } else {
 
             $data['team'] = $this->Team_model->teamOrder();
+            // $data['team_job'] = $this->Team_model->team_job();
 
             $this->load->view('options/header');
             $this->load->view('team_list', $data);
             $this->load->view('options/footer');
         }
+    }
+
+    public function team_job_status()
+    {
+        $id = $this->input->post('id');
+       
+        $data = array(
+
+            'status_approve'          => $this->input->post('status'),
+            
+        );
+                       $this->db->where('id', $id);
+        $resultsedit = $this->db->update('tbl_job_position', $data);
+        echo $resultsedit;
     }
 
     public function T3()

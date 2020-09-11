@@ -284,42 +284,60 @@
 																						<th>email</th>
 																						<th>postion</th>
 																						<th>Sign up date</th>
+																						<th>Tool</th>
 																					</tr>
 																				</thead>
 																				<tbody>
+																					<?php $this->db->select('*,tbl_job_position.id as id_job');
+																					$this->db->from('tbl_team');
+																					$this->db->join('tbl_job_position', 'tbl_team.id = tbl_job_position.id_team', 'left');
+																					$this->db->where('tbl_team.IdTeam', $team['IdTeam']);
+																					$team_job = $this->db->get()->result_array(); ?>
+																					<?php foreach ($team_job as $key => $team_job) { ?>
+																						<tr>
+																							<td> <?php
+																									$img =  explode(".", $team_job['file_name']);
+																									?>
+																								<?php if ($img[1] == 'pdf') : ?>
+																									<a href="<?php echo $team_job['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																								<?php else : ?>
+																									<a href="<?php echo $team_job['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																								<?php endif; ?>
+																							</td>
+																							<td>
+																								<?php $country = $this->db->get_where('countries', ['id' => $team_job['country_id']])->result_array(); ?>
+																								<?php foreach ($country as $country) { ?>
+																									<?php echo $country['countryName']; ?>
+																								<?php  } ?>
+																							</td>
+																							<td><?php echo $team_job['phone']; ?></td>
+																							<td><?php echo $team_job['email']; ?></td>
+																							<td>
 
-																					<tr>
-																						<td> <?php
-																								$img =  explode(".", $team['file_name']);
-																								?>
-																							<?php if ($img[1] == 'pdf') : ?>
-																								<a href="<?php echo $team['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-																							<?php else : ?>
-																								<a href="<?php echo $team['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-																							<?php endif; ?>
-																						</td>
-																						<td>
-																							<?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
-																							<?php foreach ($country as $country) { ?>
-																								<?php echo $country['countryName']; ?>
-																							<?php  } ?>
-																						</td>
-																						<td><?php echo $team['phone']; ?></td>
-																						<td><?php echo $team['email']; ?></td>
-																						<td>
-																							<?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['idT']])->result_array(); ?>
-																							<?php foreach ($position as $position) { ?>
-																								<?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $position['job_position']])->result_array(); ?>
+																								<?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $team_job['job_position']])->result_array(); ?>
 																								<?php foreach ($name_position as $name_position) { ?>
 																									<br> <?php echo $name_position['name_item']; ?>
-																								<?php } ?>
-																							<?php } ?>
-																						</td>
-																						<td><?php echo $team['created_at']; ?></td>
-																					</tr>
 
+																								<?php } ?>
+																							</td>
+
+																							<td><?php echo $team_job['created_at']; ?></td>
+																							<td>
+																								<div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+																									<?php if($team_job['status_approve'] == '1'):?>
+																									<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
+																									<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
+																								<?php else:?>
+																									<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
+																									<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
+																								<?php endif;?>
+																								</div>
+																							</td>
+																						</tr>
+																					<?php } ?>
 																				</tbody>
 																			</table>
+
 																		</div>
 																		<div class="modal-footer">
 																			<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -677,7 +695,7 @@
 																								</td>
 																								<td><?php echo $team['created_at']; ?></td>
 																								<td>
-																									
+
 																								</td>
 																							</tr>
 																						<?php } ?>
@@ -911,7 +929,41 @@
 		</div>
 	</div>
 </div>
+<script>
+	$('body').on('change', 'input[type="checkbox"]', function() {
+		var o = $(this).data('status');
 
+
+		if ($('.ckeck' + o).is(":checked")) {
+			$.ajax({
+				type: 'POST',
+				data: {
+
+					status: "1",
+					id: o
+				},
+				url: 'team_job_status',
+				success: function(resultsedit) {
+					toastr.success('สถานะเปิดใช้งานเรียบร้อยแล้ว.', 'Success');
+				}
+			});
+		} else {
+
+			$.ajax({
+				type: 'POST',
+				data: {
+
+					status: "0",
+					id: o
+				},
+				url: 'team_job_status',
+				success: function(resultsedit) {
+					toastr.error('สถานะถูกปิดใช้งาน.', 'Success');
+				}
+			});
+		}
+	});
+</script>
 <!-- END: Content-->
 <!-- 
 <div class="modal fade" id="deduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

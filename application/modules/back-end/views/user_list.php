@@ -321,11 +321,16 @@
 
                                                                     </div>
                                                                 </div>
-															</div>
+                                                            </div>
+                                                            <?php if($user_list['block_user'] == '1'):?>
 															<button type="button" class="btn btn-icon btn-danger" onclick="confirmBandUser('<?php echo $user_list['idUser']; ?>')">
                                                                 <i class="fa fa-user-times"></i>
-															</button>
-															
+                                                            </button>
+                                                            <?php else:?>
+                                                                <button type="button" class="btn btn-icon btn-success" onclick="confirmBandUser('<?php echo $user_list['idUser']; ?>')">
+                                                                <i class="fa fa-user-times"></i>
+                                                            </button>
+															<?php endif;?>
                                                         </td>
                                                     </tr>
                                                 <?php  } ?>
