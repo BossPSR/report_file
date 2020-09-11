@@ -65,23 +65,23 @@ class Customer_order_ctr extends CI_Controller
             $data['order_notwork']  = $this->Customer_model->customer_notwork();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
             $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
-			$data['ts']         = $this->Store_model->team_select();
-			
-			$checks = $this->Customer_model->customer_notwork();
-			foreach ($checks as $check) {
-				if ($check['requiredOr'] != date('Y-m-d')) {
-					if ($check['update_check'] != date('Y-m-d')) {
-						$num = $check['num_check'] + 1;
-						$updateData = [
-							'update_check' => date('Y-m-d'),
-							'num_check' => $num,
-						];
-						$this->db->where('order_id',$check['order']);
-						$this->db->update('tbl_upload_order',$updateData);
-					}
-				}
-			}
-			
+            $data['ts']         = $this->Store_model->team_select();
+
+            $checks = $this->Customer_model->customer_notwork();
+            foreach ($checks as $check) {
+                if ($check['requiredOr'] != date('Y-m-d')) {
+                    if ($check['update_check'] != date('Y-m-d')) {
+                        $num = $check['num_check'] + 1;
+                        $updateData = [
+                            'update_check' => date('Y-m-d'),
+                            'num_check' => $num,
+                        ];
+                        $this->db->where('order_id', $check['order']);
+                        $this->db->update('tbl_upload_order', $updateData);
+                    }
+                }
+            }
+
             $this->load->view('options/header');
             $this->load->view('orverall_notwork', $data);
             $this->load->view('options/footer');
@@ -302,7 +302,17 @@ class Customer_order_ctr extends CI_Controller
         $note               = $this->input->post('note_new');
         $date_required      = $this->input->post('date_required');
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'note' => $note,]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4]);
+
+        $data_re = [
+            'order_id' => $order_id,
+            'wage' => $wage,
+            'position' => $position,
+            'teamId' => $teamid,
+            'note' => $note,
+        ];
+        $this->db->insert('tbl_upload_team' , $data_re);
+
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
@@ -334,12 +344,12 @@ class Customer_order_ctr extends CI_Controller
         $note   = $this->input->post('note');
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid ,'note'=>$note]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'note' => $note]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 ,'date_required' => $date_require]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'date_required' => $date_require]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -348,7 +358,7 @@ class Customer_order_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1,'date_required' => $date_require]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_require]);
 
                 $this->sendEmail_all($teamid, $order_id);
             }
@@ -369,12 +379,12 @@ class Customer_order_ctr extends CI_Controller
         $date_required       = $this->input->post('date_required');
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid ,'note' => $note_team]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'note' => $note_team]);
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 ,'date_required' => $date_required]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'date_required' => $date_required]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -538,32 +548,31 @@ class Customer_order_ctr extends CI_Controller
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
-	}
-	
-	public function rename_uploadmain()
+    }
+
+    public function rename_uploadmain()
     {
         $resume = $this->input->post('resume');
         $doc    = $this->input->post('doc');
         $path   = $this->input->post('path');
         $id     = $this->input->post('id');
 
-         rename($path,'uploads/Team/'.$resume.'.'.$doc);
+        rename($path, 'uploads/Team/' . $resume . '.' . $doc);
         if ($id) {
             $update = [
-                'file_name' => $resume.'.'.$doc,
-                'path' => 'uploads/Team/'.$resume.'.'.$doc,
+                'file_name' => $resume . '.' . $doc,
+                'path' => 'uploads/Team/' . $resume . '.' . $doc,
             ];
             $this->db->where('id', $id);
             $success = $this->db->update('tbl_upload_order_team', $update);
         }
-       
+
         if ($success) {
             $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
         }
         return redirect('Bookmark');
-        
     }
 
     public function satisfied_up_mainfile()

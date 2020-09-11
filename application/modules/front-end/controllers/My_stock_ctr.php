@@ -27,7 +27,7 @@ class My_stock_ctr extends CI_Controller
             $data['dd']             = date('Y-m-d', strtotime('+30 day' . '+' . $data['countcancel']['create_at']));
             $data['item']           = $this->Order_model->my_stock_item($as);
             $data['item_loop']      = $this->Order_model->my_stock_item_not($as);
-            // $data['stock']      = $this->Order_model->my_stock($as);
+            // $data['stock']       = $this->Order_model->my_stock($as);
 
             $this->load->view('options/header_login');
             $this->load->view('my_stock_item', $data);

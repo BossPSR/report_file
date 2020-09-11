@@ -787,7 +787,7 @@
 
                                                                                 <div class="col-xl-12 col-md-12 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label>
+                                                                                        <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
@@ -853,7 +853,7 @@
                                                                                 </div>
                                                                                 <div class="col-xl-12 col-md-12 col-12 deductTM<?php echo $stores['orderST']; ?>" style="display: none">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label>
+                                                                                        <label for="Team">Team ID</label> 
                                                                                         <input type="text" class="form-control" value="<?= $stores['teamId']; ?>" disabled>
                                                                                     </div>
                                                                                 </div>
@@ -885,41 +885,7 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-12 mb-2">
-                                                                                    <hr>
-                                                                                    <label for="" style="font-size: 14px;font-weight: 500;">Select Team file (Choose files for other teams)</label>
-                                                                                </div>
-
-                                                                                <div class="col-xl-3 col-md-3 col-sm-6 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <fieldset>
-                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                <input type="checkbox" class="" data-order="<?php echo $stores['orderST']; ?>">
-                                                                                                <span class="vs-checkbox">
-                                                                                                    <span class="vs-checkbox--check">
-                                                                                                        <i class="vs-icon feather icon-check"></i>
-                                                                                                    </span>
-                                                                                                </span>
-                                                                                                <span class="">File TM1</span>
-                                                                                            </div>
-                                                                                        </fieldset>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-3 col-md-3 col-sm-6 col-6  mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <fieldset>
-                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                <input type="checkbox" class="" data-order="<?php echo $stores['orderST']; ?>">
-                                                                                                <span class="vs-checkbox">
-                                                                                                    <span class="vs-checkbox--check">
-                                                                                                        <i class="vs-icon feather icon-check"></i>
-                                                                                                    </span>
-                                                                                                </span>
-                                                                                                <span class="">File TM2</span>
-                                                                                            </div>
-                                                                                        </fieldset>
-                                                                                    </div>
-                                                                                </div>
+                                                                               
 
                                                                             </div>
                                                                             <div class="modal-footer">

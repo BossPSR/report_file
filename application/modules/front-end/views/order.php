@@ -650,8 +650,12 @@
                                             <?php endif; ?>
 
 
+                                            <?php if ($value['status_delivery'] == 1) { ?>
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <?php } else { ?>
+                                                <button type="button" class="btn btn-secondary" ><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <?php } ?>
 
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="approvedS<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -690,7 +694,13 @@
 
                                             <?php $ord_s = substr($value['ORD'], 3); ?>
                                             <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle"></i></button>
+
+                                                <?php if ($value['status_delivery'] == 1) { ?>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle"></i></button>
+                                                <?php } else { ?>
+                                                    <button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button>
+                                                <?php } ?>
+
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="order_not_approved<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">

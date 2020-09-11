@@ -104,7 +104,7 @@ class Store_ctr extends CI_Controller
         $status_cp   = $this->input->post('status_cp');
         if ($status_cp == 'complete') {
             $book = '1';
-        }else{
+        } else {
             $book = '0';
         }
 
@@ -361,6 +361,15 @@ class Store_ctr extends CI_Controller
     {
         $id   = $this->input->post('order_id');
         $note = $this->input->post('note');
+        $row            = $this->db->get_where('tbl_upload_team', ['order_id' => $id])->row_array();
+        if ($row == true) {
+            $team = array(
+                'status'      => 4,
+            );
+
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_upload_team', $team);
+        }
 
         $data = array(
 
@@ -560,11 +569,11 @@ class Store_ctr extends CI_Controller
 
     public function reject_for_buy_del()
     {
-     
-        $order          = $this->input->post('order');
-    
 
-        $success= $this->db->delete('tbl_upload_order',['order_id' => $order]);
+        $order          = $this->input->post('order');
+
+
+        $success = $this->db->delete('tbl_upload_order', ['order_id' => $order]);
         echo $success;
     }
 
@@ -890,7 +899,7 @@ class Store_ctr extends CI_Controller
                     $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
                 }
             } else {
-                
+
                 $data = [
                     'userId'                => $user_id,
                     'select_item_id'        => $select_item_id,
