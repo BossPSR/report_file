@@ -31,6 +31,17 @@ class Price_ctr extends CI_Controller
         echo  $resultsedit;
       
     }
+    public function Edit_Modify_re_feedback()
+    {
+       
+        $price = $this->input->post('price');
+
+        $this->db->where('id', 6);
+        $resultsedit = $this->db->update('tbl_price_management', ['update_at' => date('Y-m-d H:i:s'), 'price' => $price]);
+ 
+        echo  $resultsedit;
+      
+    }
 
     public function Edit_ModifyCashback()
     {
