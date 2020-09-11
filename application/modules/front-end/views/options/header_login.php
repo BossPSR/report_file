@@ -42,6 +42,12 @@
 
     <link rel="stylesheet" href="public/frontend/assets/css/animation.min.css">
 
+    <style>
+        .modal-content {
+            border-radius: 7px;
+        }
+    </style>
+
     <script>
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
