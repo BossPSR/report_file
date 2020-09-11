@@ -112,10 +112,21 @@ class Order_ctr extends CI_Controller
     $is_confirm     = $this->input->post('status_approved');
     $df             = $this->Order_model->delete_feedback($order_id);
     $time_withdraw  = date("Y-m-d", strtotime("+60 day"));
+    $row            = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
+
+    if ($row == true) {
+      $data = array(
+        'status'      => 3,
+      );
+
+      $this->db->where('order_id', $order_id);
+      $this->db->update('tbl_upload_team', $data);
+    }
 
     if ($this->session->userdata('email') == '') {
       redirect('home');
     } else {
+      
       $data = array(
         'status_approved'        => $is_confirm,
         'end_time'               => $time_withdraw,
@@ -124,17 +135,7 @@ class Order_ctr extends CI_Controller
       );
 
       $this->db->where('order_id', $order_id);
-      if ($success = $this->db->update('tbl_upload_order', $data)) {
-
-        foreach ($df as $key => $df) {
-          unlink($df['path']);
-          $this->db->where('id_feedback', $df['id']);
-          $this->db->delete('tbl_feedback_file');
-        }
-
-        $this->db->where('order_id', $order_id);
-        $this->db->delete('tbl_feedback');
-      }
+      $success = $this->db->update('tbl_upload_order', $data);
 
       echo $success;
     }

@@ -119,7 +119,7 @@ class Order_model extends CI_Model
         $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
         $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_upload_order.status_pay', 1);
-        $this->db->where('tbl_upload_order.status_confirmed_team', 1);
+        // $this->db->where('tbl_upload_order.status_confirmed_team', 1);
         $this->db->where('tbl_upload_team.teamId', $see);
 
         $this->db->group_by('tbl_upload_order.order_id');
