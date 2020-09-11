@@ -100,6 +100,8 @@
                                         <table class="table table-hover zero-configuration">
                                             <thead>
                                                 <tr>
+                                                    <th>Recommend </th>
+                                                    <th>Inviter </th>
                                                     <th>UserName</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
