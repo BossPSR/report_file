@@ -1,6 +1,4 @@
 <style>
-
-
     .rate {
         float: left;
         height: 46px;
@@ -95,7 +93,11 @@
 
                                     <!-- Status -->
                                     <th style="text-align: center;">
-                                        <?php if ($value['status_pay'] == 1 && $value['status_delivery'] == 0) : ?>
+                                        <?php if ($value['status_approved'] == 4) : ?>
+                                            <span class="badge" style="color:#fff;background-color:#7000cc;">Re Feedback</span>
+                                        <?php elseif ($value['status_approved'] == 3) : ?>
+                                            <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
+                                        <?php elseif ($value['status_pay'] == 1 && $value['status_delivery'] == 0) : ?>
                                             <span class="badge badge-warning" style="color:#fff;">Processing</span>
                                             <!-- <i class="fa fa-check-square-o" style="color: #28a745;" aria-hidden="true"></i> -->
                                         <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 0) : ?>
@@ -105,10 +107,6 @@
                                             <span class="badge badge-info" style="color:#fff;">Approved</span>
                                         <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 2) : ?>
                                             <span class="badge badge-danger" style="color:#fff;">Not Approved</span>
-                                        <?php elseif ($value['status_approved'] == 3) : ?>
-                                            <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
-                                        <?php elseif ($value['status_approved'] == 4) : ?>
-                                            <span class="badge" style="color:#fff;background-color:#7000cc;">Re Feedback</span>
                                         <?php endif; ?>
                                     </th>
 
@@ -565,8 +563,8 @@
                                                                     <!-- </form> -->
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
-                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Save</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -682,8 +680,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             <button type="button" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS" class="btn btn-primary">Save changes</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -720,8 +719,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                 <button type="button" data-ordernot="<?php echo $value['ORD'] ?>" id="not_app<?php echo $value['ORD']; ?>" class="btn btn-primary">Save changes</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -989,9 +988,9 @@
             if (isConfirm == true) {
                 $.ajax({
                     type: 'POST',
-                    url: 'order_approverd',
+                    url: 'order_refeedback',
                     data: {
-                        order_id: order,
+                        ordercon: order,
                         price: price,
                         status_approved: 4,
                     },

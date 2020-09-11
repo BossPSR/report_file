@@ -268,22 +268,20 @@ class My_stock_ctr extends CI_Controller
             $order_id           = $this->input->post('order_id');
             $note_can           = $this->input->post('note_can');
             $status_cf_team     = 0;
-            $teamId             = null;
-            $status             = 0;
-            $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
-
+            $team               = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
 
             $data = array(
                 'status_confirmed_team'         => $status_cf_team,
                 'update_at'                     => date('Y-m-d H:i:s'),
             );
+
             $this->db->where('order_id', $order_id);
             if ($this->db->update('tbl_upload_order', $data)) {
+
                 $data2 = array(
-                    'teamId'                    => $teamId,
-                    'status'                    => $status,
-                    'update_confirm'            => null,
+                    'status'            => 4,
                 );
+                
                 $this->db->where('order_id', $order_id);
                 if ($this->db->update('tbl_upload_team', $data2)) {
                     $data3 = array(
@@ -299,9 +297,11 @@ class My_stock_ctr extends CI_Controller
                     $success = $this->db->insert('tbl_cancel', $data3);
 
                     if ($success) {
+
                         $deduct = array(
                             'income'         => $team['income'] - 10,
                         );
+
                         $this->db->where('IdTeam', $team['IdTeam']);
                         $success = $this->db->update('tbl_team', $deduct);
                     }

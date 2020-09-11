@@ -1,5 +1,4 @@
 <style>
-
     .rate {
         float: left;
         height: 46px;
@@ -124,6 +123,8 @@
                                             <span class="badge badge-success">Success</span>
                                         <?php elseif ($task['c_status'] == 1) : ?>
                                             <span class="badge badge-info">Complete</span>
+                                        <?php elseif ($task['c_status'] == 4) : ?>
+                                            <span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">Not complete</span>
                                         <?php elseif ($task['date_required'] <= date("Y-m-d H:i:s ") && $task['status_out'] == '0') : ?>
                                             <span class="badge badge-danger">หมดเวลา</span>
                                             <?php if ($task['status_out'] == '0') : ?>
@@ -519,10 +520,12 @@
 
                                     <!-- update_confirm -->
                                     <td><?php echo date('d F Y', strtotime($task['update_confirm'])); ?></td>
-                                    <?php if ($task['status_approved'] == 1 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
+                                    <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
-                                        <?php if (empty($withh)) { ?>
+                                        <?php if ($task['c_status'] == 3) { ?>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
+                                        <?php } elseif (empty($withh)) { ?>
 
                                             <td><button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> Withdraw</button>
                                                 <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -544,8 +547,8 @@
                                                                     <input type="radio" class="star" id="star4" name="rate" value="4" />
                                                                     <label for="star4" title="text">4 stars</label>
                                                                     <input type="radio" class="star" id="star3" name="rate" value="3" />
-                                                                    <label for="star3" class="star" title="text">3 stars</label>
-                                                                    <input type="radio" class="star" name="rate" id="star2" value="2" />
+                                                                    <label for="star3" title="text">3 stars</label>
+                                                                    <input type="radio" class="star" id="star2" name="rate" value="2" />
                                                                     <label for="star2" title="text">2 stars</label>
                                                                     <input type="radio" class="star" id="star1" name="rate" value="1" />
                                                                     <label for="star1" title="text">1 star</label>
@@ -608,25 +611,23 @@
                                             <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
                                         <?php } ?>
 
-                                    <?php } elseif ($task['status_approved'] == 2) { ?>
-
-                                        <td><span class="badge badge-danger" style="font-size:16px;">Not Appovre</span></td>
-
                                     <?php } elseif ($task['status_approved'] == 3 && $task['check_feedback_dalivery'] == 0) { ?>
 
                                         <td><span class="badge badge-warning" style="font-size:16px;">Feedback</span></td>
 
                                     <?php } else { ?>
+
                                         <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
                                             <td><span class="badge badge-warning" style="font-size:16px;">Processing</span></td>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
-                                            <td><span class="badge badge-info" style="font-size:16px;">Complete</span></td>
+                                            <td><span class="badge badge-info" style="font-size:16px;">Waiting for Approved</span></td>
                                         <?php } elseif ($task['c_status'] == 2) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Feedback</span></td>
                                         <?php } elseif ($task['c_status'] == 3) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
+                                        <?php } elseif ($task['c_status'] == 4) { ?>
+                                            <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">Not complete </span></td>
                                         <?php } ?>
-
                                     <?php } ?>
 
                                     <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == true) : ?>
@@ -696,7 +697,7 @@
 
                                         </td>
 
-                                    <?php elseif ($task['c_status'] == 0 && $task['status_approved'] == 0 && $task['status_check_team'] == 0) : ?>
+                                    <?php elseif ($task['c_status'] == 2 || $task['c_status'] == 3 && $task['status_check_team'] == 0) : ?>
                                         <td>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>"><i class="fa fa-times-circle"></i></button>
                                             <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
