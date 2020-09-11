@@ -73,21 +73,21 @@
                                 successMode: true,
                             }).then(function(isConfirm) {
                                 if (isConfirm == true) {
-                                $.ajax({
-                                    type: 'POST',
-                                    url: 'Edit_Modify_fee',
-                                    data: {
-                                        fee: v,
-                                    },
-                                    success: function(success) {
-                                        swal("Good job!", "Upload for data successfull", "success", {
-                                            button: false,
-                                        })
-                                        setTimeout(function() {
-                                            location.href = "price_mangement"
-                                        }, 1000);
-                                    }
-                                });
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: 'Edit_Modify_fee',
+                                        data: {
+                                            fee: v,
+                                        },
+                                        success: function(success) {
+                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                button: false,
+                                            })
+                                            setTimeout(function() {
+                                                location.href = "price_mangement"
+                                            }, 1000);
+                                        }
+                                    });
                                 }
                             })
                         });
@@ -138,24 +138,24 @@
                             }).then(function(isConfirm) {
                                 if (isConfirm == true) {
                                     $.ajax({
-                                    type: 'POST',
-                                    url: 'Edit_ModifyCashback',
-                                    data: {
-                                        price: x,
-                                        count: y,
-                                    },
-                                    success: function(success) {
-                                        swal("Good job!", "Upload for data successfull", "success", {
-                                            button: false,
-                                        })
-                                        setTimeout(function() {
-                                            location.href = "price_mangement"
-                                        }, 1000);
-                                    }
-                                });
+                                        type: 'POST',
+                                        url: 'Edit_ModifyCashback',
+                                        data: {
+                                            price: x,
+                                            count: y,
+                                        },
+                                        success: function(success) {
+                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                button: false,
+                                            })
+                                            setTimeout(function() {
+                                                location.href = "price_mangement"
+                                            }, 1000);
+                                        }
+                                    });
                                 }
-                               
-                              
+
+
                             })
                         });
                     </script>
@@ -224,7 +224,70 @@
                                             }, 1000);
                                         }
                                     });
-                                } 
+                                }
+
+                            })
+                        });
+                    </script>
+
+                    <div class="col-xl-4 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <h4 class="card-title">Modify Re Feedback</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form class="form">
+                                        <div class="form-body">
+                                            <div class="form-group">
+                                                <?php $price_team = $this->db->get_where('tbl_price_management', ['id' => 6])->row_array(); ?>
+                                                <label for="price" class="sr-only">Price</label>
+                                                <input type="number" id="price" class="form-control" placeholder="999xx" name="price" value="<?php echo $price_team['price'] ?>">
+                                            </div>
+
+                                        
+
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button class="btn btn-primary mr-1 " id="ModifyFeedback" type="button" aria-haspopup="true" aria-expanded="false">
+                                                Submit
+                                            </button>
+                                            <button type="reset" class="btn btn-outline-warning">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        document.getElementById("ModifyFeedback").addEventListener("click", function() {
+                            var f = document.getElementById("price").value;
+                            swal({
+                                title: "Are you sure Edit Modify Re Feedback?",
+                                text: "Are you sure you this Modify Re Feedback ?",
+                                icon: "warning",
+                                buttons: true,
+                                successMode: true,
+                            }).then(function(isConfirm) {
+                                if (isConfirm == true) {
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: 'Edit_Modify_re_feedback',
+                                        data: {
+                                            price: f,
+                                           
+                                        },
+                                        success: function(success) {
+                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                button: false,
+                                            })
+                                            setTimeout(function() {
+                                                location.href = "price_mangement"
+                                            }, 1000);
+                                        }
+                                    });
+                                }
 
                             })
                         });

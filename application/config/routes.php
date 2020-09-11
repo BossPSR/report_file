@@ -300,7 +300,8 @@ $route['sendEmail_delivery_teamother']              = 'back-end/Store_ctr/sendEm
 $route['price_mangement']                           = 'back-end/Price_ctr';
 $route['Edit_Modify_fee']                           = 'back-end/Price_ctr/Edit_Modify_fee';
 $route['Edit_ModifyCashback']                       = 'back-end/Price_ctr/Edit_ModifyCashback';
-$route['Edit_ModifyScoreTeam']                      = 'back-end/Price_ctr/ ';
+$route['Edit_ModifyScoreTeam']                      = 'back-end/Price_ctr/Edit_ModifyScoreTeam';
+$route['Edit_Modify_re_feedback']                   = 'back-end/Price_ctr/Edit_Modify_re_feedback';
 
 $route['edit_date_required_Satisfied']              = 'back-end/Customer_order_ctr/edit_date_required_Satisfied';
 $route['edit_date_required_Not_Satisfied']          = 'back-end/Customer_order_ctr/edit_date_required_Not_Satisfied';
@@ -344,5 +345,6 @@ $route['rename_filenameGT']                         = 'back-end/Customer_order_c
 $route['rename_filename_TM']                        = 'back-end/Complete_ctr/rename_filename_TM';
 $route['edit_info_feedback']                        = 'back-end/Feedback_ctr/edit_info_feedback';
 $route['edit_info_feedback_all']                    = 'back-end/Feedback_ctr/edit_info_feedback_all';
-$route['send_feedbacktion_all']                     = 'back-end/Feedback_ctr/send_feedbacktion_all';
+$route['my_stock_up_mainfile']                      = 'back-end/Stock_ctr/my_stock_up_mainfile';
+$route['my_stock_up_gtfile']                        = 'back-end/Stock_ctr/my_stock_up_gtfile';
 

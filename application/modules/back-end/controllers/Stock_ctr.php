@@ -35,6 +35,105 @@ class Stock_ctr extends CI_Controller
 			$this->load->view('login');
 		}
 	}
+	public function  my_stock_up_mainfile()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+            $orderST                = $this->input->post('orderST');
+			$ordername = $this->db->get_where('tbl_upload_order',['order_id' => $orderST])->row_array();
+
+            $target_dir = "uploads/Main/"; // Upload directory
+            if (!empty($_FILES['file']['name'])) {
+
+                // Set preference
+                $config['upload_path']     = 'uploads/Main/';
+                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+                $config['allowed_types']   = '*';
+                $config['max_size']        = '99999'; // max_size in kb
+                $config['file_name']     = $_FILES['file']['name'];
+
+                //Load upload library
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                // File upload
+                if ($this->upload->do_upload('file')) {
+                    // Get data about the file
+                    $uploadData = $this->upload->data();
+
+                    $data = array(
+                        'order_id'          => $ordername['order_id'],
+                        'userId'            => $ordername['userId'],
+                        'Username'          => $ordername['Username'],
+                        'email'             => $ordername['email'],
+                        'price_file'        => $ordername['price_file'],
+                        'price_dis_order'   => $ordername['price_dis_order'],
+                        'score_user'        => $ordername['score_user'],
+                        'date_required'     => $ordername['date_required'],
+                        'status_book'       => $ordername['status_book'],
+                        'status_admin'      => $ordername['status_admin'],
+                        'is_check'          => $ordername['is_check'],
+                        'note_reject'       => $ordername['note_reject'],
+                        // 'is_confirm'        => $is_confirm,
+                        'status_pay'        => $ordername['status_pay'],
+                        'select_item'       => $ordername['select_item'],
+                        'status_approved'   => $ordername['status_approved'],
+                        'notify_user'       => $ordername['notify_user'],
+                        'status_confirmed_team' => $ordername['status_confirmed_team'],
+                        'status_cp'         => $ordername['status_cp'],
+                        'status_delivery'   => $ordername['status_delivery'],
+                        'notify_team'       => $ordername['notify_team'],
+                        'notify_admin'      => $ordername['notify_admin'],
+                        'click_step'        => $ordername['click_step'],
+                        'file_name'         => $uploadData['file_name'],
+                        'path'              => 'uploads/Main/' . $uploadData['file_name'],
+                        'create_at'         => date('Y-m-d H:i:s'),
+                        'status_upload_admin'   => 1 // admin
+                    );
+                    $this->db->insert('tbl_upload_order', $data);
+                }
+            }
+        } else {
+            redirect('Login_admin');
+        }
+	}
+	public function my_stock_up_gtfile()
+    {
+        if ($this->session->userdata('email_admin') != '') {
+            $orderST                = $this->input->post('orderST');
+            $userOR                 = $this->input->post('userOR');
+
+
+            $target_dir = "uploads/Buy/GT/"; // Upload directory
+            if (!empty($_FILES['file']['name'])) {
+
+                // Set preference
+                $config['upload_path']     = 'uploads/Buy/GT/';
+                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+                $config['allowed_types']   = '*';
+                $config['max_size']        = '99999'; // max_size in kb
+                $config['file_name']     = $_FILES['file']['name'];
+
+                //Load upload library
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                // File upload
+                if ($this->upload->do_upload('file')) {
+                    // Get data about the file
+                    $max_id = $this->db->order_by('id', 'desc')->get('tbl_morefile_GT')->row_array();
+                    $uploadData = $this->upload->data();
+                    $data2 = array(
+                        'more_id'       => $max_id['id'],
+                        'order_id'      => $orderST,
+                        'file_name_GT'  => $uploadData['file_name'],
+                        'path_GT'       => 'uploads/Buy/GT/' . $uploadData['file_name'],
+                        'create_at'     => date('Y-m-d H:i:s'),
+                    );
+                    $this->db->insert('tbl_upload_orderGT', $data2);
+                }
+            }
+        } else {
+            redirect('Login_admin');
+        }
+    }
 
 	public function add_my_stock_admin()
 	{
