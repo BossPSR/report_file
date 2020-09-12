@@ -128,7 +128,7 @@
                                                             <div class="dz-message needsclick">
                                                                 Drop files here or click to upload.<br>
                                                                 <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                <input type="text" id="selected2" class="position2" name="select_items" hidden>
+                                                                <input type="text" id="selected2" class="position2" name="select_items" >
                                                                 <input type="text" value="<?php echo $folder['id']; ?>" name="idfolder" hidden>
                                                             </div>
                                                             <div>
@@ -165,10 +165,10 @@
                             <select name="select_item" class="form-control" id="position1">
                                 <option selected disabled>-- SELECT ITEM --</option>
                                 <?php foreach ($delivery as $delivery) { ?>
-                                    <option value="<?php echo $delivery['order_id']; ?>"><?php echo $delivery['order_id']; ?></option>
+                                    <option value="<?php echo $delivery['order_id']; ?>,<?php echo $delivery['idt']; ?>"><?php echo $delivery['order_id']; ?></option>
                                 <?php } ?>
                                 <?php foreach ($delivery_feed as $delivery_feed) { ?>
-                                    <option value="<?php echo $delivery_feed['order_feed']; ?>"><?php echo $delivery_feed['order_feed'] . ' ' . "(Feedback)"; ?></option>
+                                    <option value="<?php echo $delivery_feed['order_feed']; ?>,<?php echo $delivery['idt']; ?>"><?php echo $delivery_feed['order_feed'] . ' ' . "(Feedback)"; ?></option>
                                 <?php } ?>
                             </select>
                         </div>

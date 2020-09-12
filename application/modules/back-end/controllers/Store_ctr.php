@@ -359,9 +359,9 @@ class Store_ctr extends CI_Controller
 
     public function delete_order_st()
     {
-        $id   = $this->input->post('order_id');
-        $note = $this->input->post('note');
-        $row            = $this->db->get_where('tbl_upload_team', ['order_id' => $id])->row_array();
+        $id     = $this->input->post('order_id');
+        $note   = $this->input->post('note');
+        $row    = $this->db->get_where('tbl_upload_team', ['order_id' => $id])->row_array();
         if ($row == true) {
             $team = array(
                 'status'      => 4,
@@ -382,6 +382,18 @@ class Store_ctr extends CI_Controller
         );
         $this->db->where('order_id', $id);
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+        if ($resultsedit1) {
+            $cancel = array(
+
+                'order_id'         => $id,
+                'status'           => 1,
+                'history'          => $note,
+                'status_who'       => 'admin cancel',
+                'update_at'        => date('Y-m-d H:i:s'),
+    
+            );
+            $this->db->insert('tbl_cancel', $cancel);
+        }
 
         $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
 

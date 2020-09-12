@@ -131,7 +131,7 @@ class Order_model extends CI_Model
 
     public function delivery_team($sessi)
     {
-        $this->db->select('*');
+        $this->db->select('* , tbl_upload_team.id idt');
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_upload_order', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
         $this->db->where('tbl_upload_team.status', 0);
@@ -146,7 +146,7 @@ class Order_model extends CI_Model
 
     public function delivery_team_feed($sessi)
     {
-        $this->db->select('*,tbl_feedback.order_id as order_feed');
+        $this->db->select('*,tbl_feedback.order_id as order_feed , tbl_upload_team.id idt');
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_team.order_id', 'left');
         $this->db->where('tbl_feedback.check_feedback_dalivery', 0);

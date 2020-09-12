@@ -853,7 +853,7 @@
                                                                                 </div>
                                                                                 <div class="col-xl-12 col-md-12 col-12 deductTM<?php echo $stores['orderST']; ?>" style="display: none">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label> 
+                                                                                        <label for="Team">Team ID</label>
                                                                                         <input type="text" class="form-control" value="<?= $stores['teamId']; ?>" disabled>
                                                                                     </div>
                                                                                 </div>
@@ -885,7 +885,7 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                               
+
 
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -909,18 +909,31 @@
 
                                                         <!-- Status -->
                                                         <td>
-                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-success">Original</span>
-                                                            <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete' && $stores['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-primary">Not complete</span>
-                                                            <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'rewrite') : ?>
-                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($stores['status_admin'] == '1') : ?>
-                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php $admin_stu = $this->db->get('tbl_admin', ['adminId' => $stores['userOR']])->row_array(); ?>
+                                                            <?php if ($admin_stu == true) : ?>
+                                                                <?php if ($stores['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Admin Original </span>
+                                                                <?php elseif ($stores['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-warning"> Admin Not complete </span>
+                                                                <?php elseif ($stores['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Admin Rewrite </span>
+                                                                <?php elseif ($stores['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> Admin No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php else : ?>
-                                                                -
+                                                                <?php if ($stores['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                <?php elseif ($stores['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
+                                                                <?php elseif ($stores['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                <?php elseif ($stores['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         </td>
 
@@ -941,9 +954,9 @@
                                                                 <?php endif ?>
                                                             <?php endif ?>
                                                         </td>
-                                                         <!-- Client Feedback -->
+                                                        <!-- Client Feedback -->
                                                         <td>
-                                                        <?php
+                                                            <?php
                                                             $z  = 0;
                                                             $cf = $this->db->get_where('tbl_feedback', ['order_id' => $stores['orderST'], 'check_status' => 1, 're_feedback' => 0])->result_array();
                                                             foreach ($cf as $key => $cf) {
@@ -963,7 +976,7 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                        
+
                                                         <!-- Tool -->
                                                         <td>
                                                             <?php if ($stores['status_delivery'] == 1) : ?>
