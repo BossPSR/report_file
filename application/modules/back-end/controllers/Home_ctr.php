@@ -322,6 +322,7 @@ class Home_ctr extends CI_Controller
 			//result
 			$data[] = "";
 			$data['deliveryList'] = $deliveryList;
+			$data['delivery_uploadOrder'] = $uploadOrder;
 			$data['feedback_allList'] = $feedback_allList;
 			$data['processingList'] = $processingList;
 			$data['processing_feedbackList'] = $processing_feedbackList;
