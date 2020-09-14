@@ -199,8 +199,8 @@
 											<tr>
 												<th>Delivery</th>
 												<?php foreach ($deliveryList as $key => $delivery) { ?>
-													<td data-toggle="modal" data-target="#showData<?php echo $delivery; ?>" style="cursor:pointer;"><?php echo $delivery; ?></td>
-													<div class="modal fade" id="showData<?php echo $delivery; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<td data-toggle="modal" data-target="#showData_delivery<?php echo $delivery . '-' . $key; ?>" style="cursor:pointer;"><?php echo $delivery; ?></td>
+													<div class="modal fade" id="showData_delivery<?php echo $delivery . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -311,8 +311,8 @@
 											<tr>
 												<th>Feedback All</th>
 												<?php foreach ($feedback_allList as $key => $feedback_all) { ?>
-													<td data-toggle="modal" data-target="#showData<?php echo $feedback_all; ?>" style="cursor:pointer;"><?php echo $feedback_all; ?></td>
-													<div class="modal fade" id="showData<?php echo $feedback_all; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<td data-toggle="modal" data-target="#showData_feedbook_all<?php echo $feedback_all . '-' . $key; ?>; ?>" style="cursor:pointer;"><?php echo $feedback_all; ?></td>
+													<div class="modal fade" id="showData_feedbook_all<?php echo $feedback_all . '-' . $key; ?>; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -439,8 +439,8 @@
 											<tr>
 												<th>Processing New Order</th>
 												<?php foreach ($processingList as $key => $processing) { ?>
-													<td data-toggle="modal" data-target="#showData<?php echo $processing; ?>" style="cursor:pointer;"><?php echo $processing; ?></td>
-													<div class="modal fade" id="showData<?php echo $processing; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<td data-toggle="modal" data-target="#showData_processing<?php echo $processing . '-' . $key; ?>" style="cursor:pointer;"><?php echo $processing; ?></td>
+													<div class="modal fade" id="showData_processing<?php echo $processing . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -552,8 +552,8 @@
 											<tr>
 												<th>Processing Feedback</th>
 												<?php foreach ($processing_feedbackList as $key => $processing_feedback) { ?>
-													<td data-toggle="modal" data-target="#showData<?php echo $processing_feedback; ?>" style="cursor:pointer;"><?php echo $processing_feedback; ?></td>
-													<div class="modal fade" id="showData<?php echo $processing_feedback; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<td data-toggle="modal" data-target="#showData_processing_feedback<?php echo $processing_feedback . '-' . $key; ?>" style="cursor:pointer;"><?php echo $processing_feedback; ?></td>
+													<div class="modal fade" id="showData_processing_feedback<?php echo $processing_feedback . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -680,8 +680,8 @@
 											<tr>
 												<th>Cancel</th>
 												<?php foreach ($cancelList as $key => $cancel) { ?>
-													<td data-toggle="modal" data-target="#showData<?php echo $cancel; ?>" style="cursor:pointer;"><?php echo $cancel; ?></td>
-													<div class="modal fade" id="showData<?php echo $cancel; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<td data-toggle="modal" data-target="#showData_cancel<?php echo $cancel . '-' . $key; ?>" style="cursor:pointer;"><?php echo $cancel; ?></td>
+													<div class="modal fade" id="showData_cancel<?php echo $cancel . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -809,8 +809,8 @@
 												<th>Cancel Not Working</th>
 
 												<?php foreach ($cancel_notWorkingList as $key => $cancel_notWorking) { ?>
-													<td data-toggle="modal" data-target="#showData<?php echo $cancel_notWorking; ?>" style="cursor:pointer;"><?php echo $cancel_notWorking; ?></td>
-													<div class="modal fade" id="showData<?php echo $cancel_notWorking; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<td data-toggle="modal" data-target="#showData_cancel_not_working<?php echo $cancel_notWorking . '-' . $key; ?>" style="cursor:pointer;"><?php echo $cancel_notWorking; ?></td>
+													<div class="modal fade" id="showData_cancel_not_working<?php echo $cancel_notWorking . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -974,22 +974,378 @@
 										<tbody>
 											<tr>
 												<th>Total DM</th>
-												<?php foreach ($total_dmList as $total_dm) { ?>
-													<td><?php echo $total_dm; ?> DM</td>
+												<?php foreach ($total_dmList as $key => $total_dm) { ?>
+													<td data-toggle="modal" data-target="#showData_total_dm<?php echo $total_dm . '-' . $key; ?>" style="cursor:pointer;"><?php echo $total_dm; ?> DM</td>
+													<div class="modal fade" id="showData_total_dm<?php echo $total_dm . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>DM Sub</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+
+																	$total_dm_com = $this->db->get_where('tbl_upload_main_search_sub', ['comandnocom' => 1])->result_array();
+																	$total_dm_notcom = $this->db->get_where('tbl_upload_main_search_sub', ['comandnocom' => 2])->result_array();
+																	$total_dm_rew = $this->db->get_where('tbl_upload_main_search_sub', ['comandnocom' => 3])->result_array();
+																	$total_dm_notsati = $this->db->get_where('tbl_upload_main_search_sub', ['comandnocom' => 4])->result_array();
+																	$total_dm_result = array_merge($total_dm_com, $total_dm_notcom, $total_dm_rew, $total_dm_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($total_dm_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($total_dm_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($total_dm_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($total_dm_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($total_dm_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>รวมจำนวน DM ทั้งหมดโดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
 											</tr>
 											<tr>
 												<th>Approved</th>
-												<?php foreach ($approvedList as $approved) { ?>
-													<td><?php echo $approved; ?> DM</td>
+												<?php foreach ($approvedList as $key => $approved) { ?>
+													<td data-toggle="modal" data-target="#showData_approved<?php echo $approved . '-' . $key; ?>" style="cursor:pointer;"><?php echo $approved; ?> DM</td>
+													<div class="modal fade" id="showData_approved<?php echo $approved . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '1');
+																	$this->db->where('comandnocom', 1);
+																	$approved_com =  $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '1');
+																	$this->db->where('comandnocom', 2);
+																	$approved_notcom = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '1');
+																	$this->db->where('comandnocom', 3);
+																	$approved_rew = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '1');
+																	$this->db->where('comandnocom', 4);
+																	$approved_notsati = $this->db->get('tbl_upload_order')->result_array();
+																	$approved_result = array_merge($approved_com, $approved_notcom, $approved_rew, $approved_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($approved_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($approved_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($approved_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($approved_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($approved_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>รวมจำนวน DM ที่ลูกค้ากด Approved โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
 											</tr>
 											<tr>
 												<th>Not Approved</th>
-												<?php foreach ($not_approvedList as $not_approved) { ?>
-													<td><?php echo $not_approved; ?> DM</td>
+												<?php foreach ($not_approvedList as $key => $not_approved) { ?>
+													<td data-toggle="modal" data-target="#showData_not_approved<?php echo $not_approved . '-' . $key; ?>" style="cursor:pointer;"><?php echo $not_approved; ?> DM</td>
+													<div class="modal fade" id="showData_not_approved<?php echo $not_approved . '-' . $key; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '2');
+																	$this->db->where('comandnocom', 1);
+																	$not_approved_com =  $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '2');
+																	$this->db->where('comandnocom', 2);
+																	$not_approved_notcom = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '2');
+																	$this->db->where('comandnocom', 3);
+																	$not_approved_rew = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+																	$this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub', 'left');
+																	$this->db->where('tbl_upload_order.status_approved', '2');
+																	$this->db->where('comandnocom', 4);
+																	$not_approved_notsati = $this->db->get('tbl_upload_order')->result_array();
+																	$not_approved_result = array_merge($not_approved_com, $not_approved_notcom, $not_approved_rew, $not_approved_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($not_approved_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($not_approved_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($not_approved_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($not_approved_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['dm_sub']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($not_approved_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>รวมจำนวน DM ที่ลูกค้ากด Not Approved โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
 											</tr>
