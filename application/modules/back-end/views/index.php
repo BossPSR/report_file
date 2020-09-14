@@ -198,7 +198,7 @@
 										<tbody>
 											<tr>
 												<th>Delivery</th>
-												<?php foreach ($deliveryList as $delivery) { ?>
+												<?php foreach ($deliveryList as $key => $delivery) { ?>
 													<td data-toggle="modal" data-target="#showData<?php echo $delivery; ?>" style="cursor:pointer;"><?php echo $delivery; ?></td>
 													<div class="modal fade" id="showData<?php echo $delivery; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
@@ -210,6 +210,91 @@
 																	</button>
 																</div>
 																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+																	$uploadOrder_com = $this->db->get_where('tbl_upload_order', ["status_cp" => "complete", "status_delivery" => 1])->result_array();
+																	$uploadOrder_notcom = $this->db->get_where('tbl_upload_order', ["status_cp" => "notcomplete", "status_delivery" => 1])->result_array();
+																	$uploadOrder_rew = $this->db->get_where('tbl_upload_order', ["status_cp" => "rewrite", "status_delivery" => 1])->result_array();
+																	$uploadOrder_notsati = $this->db->get_where('tbl_upload_order', ["status_book" => 2, "status_delivery" => 1])->result_array();
+																	$uploadOrder_result = array_merge($uploadOrder_com, $uploadOrder_notcom, $uploadOrder_rew, $uploadOrder_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($uploadOrder_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($uploadOrder_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($uploadOrder_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($uploadOrder_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($uploadOrder_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
 
 																</div>
 																<div class="modal-footer">
@@ -225,37 +310,635 @@
 											</tr>
 											<tr>
 												<th>Feedback All</th>
-												<?php foreach ($feedback_allList as $feedback_all) { ?>
-													<td><?php echo $feedback_all; ?></td>
+												<?php foreach ($feedback_allList as $key => $feedback_all) { ?>
+													<td data-toggle="modal" data-target="#showData<?php echo $feedback_all; ?>" style="cursor:pointer;"><?php echo $feedback_all; ?></td>
+													<div class="modal fade" id="showData<?php echo $feedback_all; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+																	$this->db->join('tbl_upload_order', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_cp', 'complete');
+																	$this->db->where('status_delivery', 1);
+																	$feedbackAll_com = $this->db->get('tbl_feedback')->result_array();
+
+																	$this->db->join('tbl_upload_order', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_cp', 'notcomplete');
+																	$this->db->where('status_delivery', 1);
+																	$feedbackAll_notcom = $this->db->get('tbl_feedback')->result_array();
+
+																	$this->db->join('tbl_upload_order', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_cp', 'rewrite');
+																	$this->db->where('status_delivery', 1);
+																	$feedbackAll_rew = $this->db->get('tbl_feedback')->result_array();
+
+																	$this->db->join('tbl_upload_order', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_book', 2);
+																	$this->db->where('status_delivery', 1);
+																	$feedbackAll_notsati = $this->db->get('tbl_feedback')->result_array();
+
+																	$feedbackAll_result = array_merge($feedbackAll_com, $feedbackAll_notcom, $feedbackAll_rew, $feedbackAll_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($feedbackAll_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($feedbackAll_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($feedbackAll_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($feedbackAll_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($feedbackAll_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>รวม Feedbackตั้งแต่เปิดระบบ</td>
 											</tr>
 											<tr>
 												<th>Processing New Order</th>
-												<?php foreach ($processingList as $processing) { ?>
-													<td><?php echo $processing; ?></td>
+												<?php foreach ($processingList as $key => $processing) { ?>
+													<td data-toggle="modal" data-target="#showData<?php echo $processing; ?>" style="cursor:pointer;"><?php echo $processing; ?></td>
+													<div class="modal fade" id="showData<?php echo $processing; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+
+																	$processing_com = $this->db->get_where('tbl_upload_order', ["status_cp" => "complete", "is_check" => 0, "status_approved" => 0])->result_array();
+																	$processing_notcom = $this->db->get_where('tbl_upload_order', ["status_cp" => "notcomplete", "is_check" => 0, "status_approved" => 0])->result_array();
+																	$processing_rew = $this->db->get_where('tbl_upload_order', ["status_cp" => "rewrite", "is_check" => 0, "status_approved" => 0])->result_array();
+																	$processing_notsati = $this->db->get_where('tbl_upload_order', ["status_book" => 2, "is_check" => 0, "status_approved" => 0])->result_array();
+																	$processing_result = array_merge($processing_com, $processing_notcom, $processing_rew, $processing_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($processing_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($processing_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($processing_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($processing_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($processing_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>Orderปรกติที่กำลังดำเนินการแต่ไม่รวม Feedback</td>
 											</tr>
 											<tr>
 												<th>Processing Feedback</th>
-												<?php foreach ($processing_feedbackList as $processing_feedback) { ?>
-													<td><?php echo $processing_feedback; ?></td>
+												<?php foreach ($processing_feedbackList as $key => $processing_feedback) { ?>
+													<td data-toggle="modal" data-target="#showData<?php echo $processing_feedback; ?>" style="cursor:pointer;"><?php echo $processing_feedback; ?></td>
+													<div class="modal fade" id="showData<?php echo $processing_feedback; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+																	$this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_cp', 'complete');
+																	$this->db->where('status_delivery', 1);
+																	$processing_feedback_com = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_cp', 'notcomplete');
+																	$this->db->where('status_delivery', 1);
+																	$processing_feedback_notcom = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_cp', 'rewrite');
+																	$this->db->where('status_delivery', 1);
+																	$processing_feedback_rew = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_book', 2);
+																	$this->db->where('status_delivery', 1);
+																	$processing_feedback_notsati = $this->db->get('tbl_upload_order')->result_array();
+
+																	$processing_feedback_result = array_merge($processing_feedback_com, $processing_feedback_notcom, $processing_feedback_rew, $processing_feedback_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($processing_feedback_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($processing_feedback_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($processing_feedback_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($processing_feedback_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($processing_feedback_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>Orderที่ถูก Feedback แต่ไม่รวม Order ปรกติ</td>
 											</tr>
 											<tr>
 												<th>Cancel</th>
-												<?php foreach ($cancelList as $cancel) { ?>
-													<td><?php echo $cancel; ?></td>
+												<?php foreach ($cancelList as $key => $cancel) { ?>
+													<td data-toggle="modal" data-target="#showData<?php echo $cancel; ?>" style="cursor:pointer;"><?php echo $cancel; ?></td>
+													<div class="modal fade" id="showData<?php echo $cancel; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+																	$this->db->join('tbl_cancel', 'tbl_cancel.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_cp', 'complete');
+																	$this->db->where('status_delivery', 1);
+																	$cancel_com = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_cancel', 'tbl_cancel.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_cp', 'notcomplete');
+																	$this->db->where('status_delivery', 1);
+																	$cancel_notcom = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_cancel', 'tbl_cancel.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_cp', 'rewrite');
+																	$this->db->where('status_delivery', 1);
+																	$cancel_rew = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->join('tbl_cancel', 'tbl_cancel.order_id = tbl_upload_order.order_id');
+																	$this->db->where('status_book', 2);
+																	$this->db->where('status_delivery', 1);
+																	$cancel_notsati = $this->db->get('tbl_upload_order')->result_array();
+
+																	$cancel_result = array_merge($cancel_com, $cancel_notcom, $cancel_rew, $cancel_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($cancel_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($cancel_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($cancel_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($cancel_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($cancel_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>Orderที่ทีมกดยกเลิกทั้งOrderปรกติและFeedback</td>
 											</tr>
 											<tr>
 												<th>Cancel Not Working</th>
 
-												<?php foreach ($cancel_notWorkingList as $cancel_notWorking) { ?>
-													<td><?php echo $cancel_notWorking; ?></td>
+												<?php foreach ($cancel_notWorkingList as $key => $cancel_notWorking) { ?>
+													<td data-toggle="modal" data-target="#showData<?php echo $cancel_notWorking; ?>" style="cursor:pointer;"><?php echo $cancel_notWorking; ?></td>
+													<div class="modal fade" id="showData<?php echo $cancel_notWorking; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="d-flex" style="justify-content:space-around">
+																		<div>Order Id</div>
+																		<div>File</div>
+																		<div>Create Date</div>
+																	</div>
+																	<?php
+																	$this->db->where('tbl_upload_team.teamId !=', '');
+																	$this->db->where('tbl_upload_team.status', '0');
+																	$this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_cp', 'complete');
+																	$this->db->where('status_delivery', 1);
+																	$cancel_notWorking_com = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->where('tbl_upload_team.teamId !=', '');
+																	$this->db->where('tbl_upload_team.status', '0');
+																	$this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_cp', 'notcomplete');
+																	$this->db->where('status_delivery', 1);
+																	$cancel_notWorking_notcom = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->where('tbl_upload_team.teamId !=', '');
+																	$this->db->where('tbl_upload_team.status', '0');
+																	$this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_cp', 'rewrite');
+																	$this->db->where('status_delivery', 1);
+																	$cancel_notWorking_rew = $this->db->get('tbl_upload_order')->result_array();
+
+																	$this->db->where('tbl_upload_team.teamId !=', '');
+																	$this->db->where('tbl_upload_team.status', '0');
+																	$this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+																	$this->db->where('status_book', 2);
+																	$this->db->where('status_delivery', 1);
+																	$cancel_notWorking_notsati = $this->db->get('tbl_upload_order')->result_array();
+
+																	$cancel_notWorking_result = array_merge($cancel_notWorking_com, $cancel_notWorking_notcom, $cancel_notWorking_rew, $cancel_notWorking_notsati);
+
+
+
+																	if ($key == 0) {
+																		foreach ($cancel_notWorking_com as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 1) {
+																		foreach ($cancel_notWorking_notcom as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 2) {
+																		foreach ($cancel_notWorking_rew as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 3) {
+																		foreach ($cancel_notWorking_notsati as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+																	<?php
+																	if ($key == 4) {
+																		foreach ($cancel_notWorking_result as $order) {
+
+																	?>
+																			<div class="d-flex" style="justify-content: space-around;">
+																				<div><?php echo $order['order_id']; ?></div>
+																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
+																				<div><?php echo $order['create_at']; ?></div>
+																			</div>
+																	<?php
+																		}
+																	}
+																	?>
+
+
+
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
 												<?php } ?>
 												<td>Orderที่ทีมไม่กดยกเลิกทั้งOrderปรกติและFeedback</td>
 											</tr>
