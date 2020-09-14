@@ -536,7 +536,7 @@
                                         <?php } elseif (empty($withh)) { ?>
 
                                             <td>
-                                                <?php if ($task['end_time_withdraw'] > date('Y-m-d')  ) : ?>
+                                                <?php if ($task['end_time_withdraw'] > date('Y-m-d')) : ?>
                                                     <button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> Withdraw </button>
                                                     <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -747,8 +747,39 @@
                                         <td><button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button></td>
                                     <?php endif; ?>
                                 </tr>
-                            <?php } ?>
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        if (<?= $task['status']; ?> == 4 && <?= $task['check_popup_nocom']; ?> == 0) {
+                                            $('#check_popup').modal({
+                                                backdrop: 'static',
+                                                keyboard: false
+                                            });
+                                        }
+                                    });
+                                </script>
 
+                            <?php } ?>
+                            <div class="modal fade" tabindex="-1" role="dialog" id="check_popup">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                            <h5 class="modal-title">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <script>
                                 $('#download<?php echo $key; ?>').click(function() {
                                     swal({
