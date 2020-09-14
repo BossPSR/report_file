@@ -179,7 +179,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="mb-0">Dispatched Orders</h4>
+                                    <h4 class="mb-0">Dashboard</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="table-responsive mt-1">
