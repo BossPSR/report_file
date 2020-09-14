@@ -301,18 +301,20 @@ class Customer_order_ctr extends CI_Controller
         $position           = $this->input->post('position');
         $note               = $this->input->post('note_new');
         $date_required      = $this->input->post('date_required');
-        
+
         $this->db->where('order_id', $order_id);
         $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4]);
 
-        $data_re = [
-            'order_id' => $order_id,
-            'wage' => $wage,
-            'position' => $position,
-            'teamId' => $teamid,
-            'note' => $note,
-        ];
-        $this->db->insert('tbl_upload_team' , $data_re);
+        foreach ($teamid as $key => $teamid) {
+            $data_re = [
+                'order_id' => $order_id,
+                'wage' => $wage,
+                'position' => $position,
+                'teamId' => $teamid,
+                'note' => $note,
+            ];
+            $this->db->insert('tbl_upload_team', $data_re);
+        }
 
         if ($resultsedit) {
             if ($teamid == '') {

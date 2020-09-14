@@ -23,7 +23,7 @@
     <?php $dd; ?>
     <?php $cc = $countcancel['ccancel']; ?>
     <?php $ti = $countcancel['teamid']; ?>
-    <?php if ($dd > date("Y-m-d") && $cc >= '2') : ?>
+    <?php if ($countcancel['create_at'] > date("Y-m-d") && $cc >= '2') : ?>
         <div class="text-center wishlist_area"> <span style="color:red;font-size: 24px;"> ท่านยกเลิกออเดอร์เกิน 2 ครั้ง คุณไม่สามารถรับ Order ได้จนถึงวันที่ <?= $dd; ?> </span> </div>
     <?php else : ?>
         <h2 class="text-center" style="margin-bottom:15px;"><a class="btn btn-success" data-toggle="modal" data-target="#exampleModalPosition"><i class="fa fa-plus-circle"></i> ADD POSITION</a></h2>

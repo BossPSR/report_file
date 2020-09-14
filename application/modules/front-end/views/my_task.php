@@ -151,24 +151,32 @@
 
                                             <?php endif; ?>
                                         <?php else : ?>
-                                            <?php
-                                            $checkDate_num = DateDiff(date("Y-m-d H:i:s"), $task['date_required']);
-                                            $checkDate = $checkDate_num / 2;
-                                            $checkDate = floor($checkDate);
-                                            if ($checkDate_num <= 0) {
-                                                $checkDate = 0;
-                                            }
-                                            $dateRequired = date("Y-m-d H:i:s", strtotime("-" . $checkDate . " day", strtotime($task['date_required'])));
-                                            ?>
+                                            <?php if ($task['dated'] == true) : ?>
 
-                                            <?php if ($task['status_out'] == '0') : ?>
-
-                                                <div data-countdown="<?php echo $dateRequired; ?>"></div>
+                                                <div data-countdown="<?php echo $task['dated']; ?>"></div> 11
 
                                             <?php else : ?>
 
-                                                <?php $aa = date("Y-m-d H:i:s", strtotime($dateRequired . ' + 12 hour')); ?>
-                                                <div data-countdown="<?php echo $aa; ?>"></div>
+                                                <?php
+                                                $checkDate_num = DateDiff(date("Y-m-d H:i:s"), $task['date_required']);
+                                                $checkDate = $checkDate_num / 2;
+                                                $checkDate = floor($checkDate);
+                                                if ($checkDate_num <= 0) {
+                                                    $checkDate = 0;
+                                                }
+                                                $dateRequired = date("Y-m-d H:i:s", strtotime("-" . $checkDate . " day", strtotime($task['date_required'])));
+                                                ?>
+
+                                                <?php if ($task['status_out'] == '0') : ?>
+
+                                                    <div data-countdown="<?php echo $dateRequired; ?>"></div>
+
+                                                <?php else : ?>
+
+                                                    <?php $aa = date("Y-m-d H:i:s", strtotime($dateRequired . ' + 12 hour')); ?>
+                                                    <div data-countdown="<?php echo $aa; ?>"></div>
+
+                                                <?php endif; ?>
 
                                             <?php endif; ?>
 
@@ -527,40 +535,46 @@
                                             <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
                                         <?php } elseif (empty($withh)) { ?>
 
-                                            <td><button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> Withdraw</button>
-                                                <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Withdraw (<?php echo $task['or_id']; ?>)</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body" style="text-align: left;">
-                                                                <label style="font-size:18px; " for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
-                                                                <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea><br>
-                                                                <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
-                                                                <div class="rate" style="text-align: center;">
-                                                                    <input type="radio" class="star" id="star5" name="rate" value="5" />
-                                                                    <label for="star5" title="text">5 stars</label>
-                                                                    <input type="radio" class="star" id="star4" name="rate" value="4" />
-                                                                    <label for="star4" title="text">4 stars</label>
-                                                                    <input type="radio" class="star" id="star3" name="rate" value="3" />
-                                                                    <label for="star3" title="text">3 stars</label>
-                                                                    <input type="radio" class="star" id="star2" name="rate" value="2" />
-                                                                    <label for="star2" title="text">2 stars</label>
-                                                                    <input type="radio" class="star" id="star1" name="rate" value="1" />
-                                                                    <label for="star1" title="text">1 star</label>
+                                            <td>
+                                                <?php if ($task['end_time_withdraw'] > date('Y-m-d')  ) : ?>
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> Withdraw </button>
+                                                    <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Withdraw (<?php echo $task['or_id']; ?>)</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
                                                                 </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="button" data-orderq="<?php echo $task['or_id'] ?>" id="star" class="btn btn-primary">Save changes</button>
+                                                                <div class="modal-body" style="text-align: left;">
+                                                                    <label style="font-size:18px; " for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
+                                                                    <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea><br>
+                                                                    <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
+                                                                    <div class="rate" style="text-align: center;">
+                                                                        <input type="radio" class="star" id="star5" name="rate" value="5" />
+                                                                        <label for="star5" title="text">5 stars</label>
+                                                                        <input type="radio" class="star" id="star4" name="rate" value="4" />
+                                                                        <label for="star4" title="text">4 stars</label>
+                                                                        <input type="radio" class="star" id="star3" name="rate" value="3" />
+                                                                        <label for="star3" title="text">3 stars</label>
+                                                                        <input type="radio" class="star" id="star2" name="rate" value="2" />
+                                                                        <label for="star2" title="text">2 stars</label>
+                                                                        <input type="radio" class="star" id="star1" name="rate" value="1" />
+                                                                        <label for="star1" title="text">1 star</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" data-orderq="<?php echo $task['or_id'] ?>" id="star" class="btn btn-primary">Save changes</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+
+                                                <?php else : ?>
+                                                    <span class="badge badge-info" style="color:#fff;font-size:16px;">Withdraw Expired </span>
+                                                <?php endif; ?>
                                             </td>
                                             <script>
                                                 $('body').on('click', '#star', function() {

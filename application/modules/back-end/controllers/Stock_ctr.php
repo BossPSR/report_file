@@ -351,7 +351,8 @@ class Stock_ctr extends CI_Controller
                 'order_id'         => $id,
                 'status'           => 1,
                 'history'          => $note,
-                'status_who'       => 'admin cancel',
+				'status_who'       => 'admin cancel',
+                'create_at'        => date('Y-m-d H:i:s'),
                 'update_at'        => date('Y-m-d H:i:s'),
     
             );

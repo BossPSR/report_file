@@ -44,6 +44,7 @@
                                                     <th>PriceFile</th>
                                                     <th>Note</th>
                                                     <th>create_at</th>
+                                                    <th>Status</th>
                                                     <th>Tool</th>
 
                                                 </tr>
@@ -53,21 +54,21 @@
                                                     <?php $prosum = date('Y-m-d', strtotime('+30 day' . '+' . $store['update_at'])); ?>
                                                     <?php if ($prosum <= date('Y-m-d')) : ?>
                                                         <script>
-                                                    function getDataend() {
-                                                        $.ajax({
-                                                                url: "reject_for_buy_del",
-                                                                type: "POST",
-                                                                data: {
-                                                                    order: '<?php echo $store['order_id']; ?>',
-                                                                }
-                                                            })
-                                                            .success(function(success) {
-                                                                console.log(success);
-                                                            });
-                                                    }
+                                                            function getDataend() {
+                                                                $.ajax({
+                                                                        url: "reject_for_buy_del",
+                                                                        type: "POST",
+                                                                        data: {
+                                                                            order: '<?php echo $store['order_id']; ?>',
+                                                                        }
+                                                                    })
+                                                                    .success(function(success) {
+                                                                        console.log(success);
+                                                                    });
+                                                            }
 
-                                                    setInterval(getDataend, 10000); // 1000 = 1 second
-                                                </script>
+                                                            setInterval(getDataend, 10000); // 1000 = 1 second
+                                                        </script>
                                                     <?php else : ?>
                                                         <tbody>
                                                             <tr>
@@ -82,6 +83,13 @@
                                                                 <?php endif; ?>
                                                                 <td><?php echo $store['note_reject']; ?></td>
                                                                 <td><?php echo $store['create_at']; ?></td>
+                                                                <td>
+                                                                    <?php if ($store['status_approved'] == 3) : ?>
+                                                                        <span class="badge badge-pill badge-danger">feedback</span>
+                                                                    <?php else : ?>
+                                                                        -
+                                                                    <?php endif ?>
+                                                                </td>
                                                                 <td><button type="button" class="btn btn-outline-info" onclick="confirmalertunlock_reject('<?php echo $store['id']; ?>')">Clover</button></td>
 
 

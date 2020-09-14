@@ -72,7 +72,7 @@
                                                     <th style="width: 240px;">info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
-                                                    <th style="width: 85px;">Status T3</th>
+                                                    <th style="width: 85px;">Process</th>
                                                     <th>Client Feedback</th>
                                                     <th style="width: 11%;">Tool</th>
                                                 </tr>
@@ -788,7 +788,7 @@
                                                                                 <div class="col-xl-12 col-md-12 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label> <br>
-                                                                                        <select class="select2 form-control" name="teamid" required>
+                                                                                        <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
@@ -943,14 +943,19 @@
                                                             <?php if ($team == false) : ?>
                                                                 <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['orderST']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
                                                             <?php else : ?>
-                                                                <?php if ($team['teamId'] == '') : ?>
-                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-warning">processing</span>
-                                                                <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-success">complete</span>
-                                                                <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-danger">feedback</span>
+                                                                <?php $cancel_sa = $this->db->get_where('tbl_cancel', ['order_id' => $stores['orderST']])->row_array(); ?>
+                                                                <?php if ($cancel_sa == true) : ?>
+                                                                    <span class="badge badge-pill badge-danger"><?= $cancel_sa['status_who']; ?></span>
+                                                                <?php else : ?>
+                                                                    <?php if ($team['teamId'] == '') : ?>
+                                                                        <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                    <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-warning">processing</span>
+                                                                    <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-success">complete</span>
+                                                                    <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-danger">feedback</span>
+                                                                    <?php endif ?>
                                                                 <?php endif ?>
                                                             <?php endif ?>
                                                         </td>

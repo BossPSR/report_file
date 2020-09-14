@@ -110,7 +110,7 @@ class Order_model extends CI_Model
     public function my_task($see)
     {
         $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_id
-        ,tbl_upload_team.status as c_status,tbl_upload_order.update_at as up_order,tbl_upload_team.teamId as t_ch');
+        ,tbl_upload_team.status as c_status,tbl_upload_order.update_at as up_order,tbl_upload_team.teamId as t_ch , ');
         $this->db->from('tbl_upload_team');
         $this->db->join('tbl_upload_order', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');

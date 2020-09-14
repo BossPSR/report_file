@@ -39,7 +39,7 @@
                 purchase_units: [{
                   amount: {
 
-                    value: '10.00'
+                    value: '<?php echo $package['price_pk']; ?>'
 
                   }
                 }]
@@ -65,7 +65,8 @@
                   data: {
                     orderID: data.orderID,
                     payerID: data.payerID,
-                    user_id: <?php echo $userId['id']; ?>,
+                    user_id: '<?php echo $userId['idUser']; ?>',
+                    package: '<?php echo $package['id']; ?>',
                     first_name: details.payer.name.given_name,
                     last_name: details.payer.name.surname,
                     create_time: details.create_time,

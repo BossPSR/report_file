@@ -101,7 +101,8 @@ class Store_ctr extends CI_Controller
         $Position       = $this->input->post('Position');
         $note_s         = $this->input->post('note_s');
         $organization   = $this->input->post('organization');
-        $status_cp   = $this->input->post('status_cp');
+        $status_cp      = $this->input->post('status_cp');
+        $dateUP         = date("Y-m-d", strtotime("+60 day"));
         if ($status_cp == 'complete') {
             $book = '1';
         } else {
@@ -129,6 +130,7 @@ class Store_ctr extends CI_Controller
             'status_cp'             => $status_cp,
             'status_confirmed_team' => $cf,
             'notify_admin'          => 0,
+            'end_time'              => $dateUP,
         );
         $this->db->where('order_id', $orderid);
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
@@ -259,6 +261,15 @@ class Store_ctr extends CI_Controller
         $message .= '</td>';
         $message .= '</tr>';
 
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Warranty  : ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' ' . $upload_order[0]['end_time'] . ' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
         $message .= '</table>';
 
 
@@ -314,6 +325,8 @@ class Store_ctr extends CI_Controller
         $team       = $this->input->post('team');
         $wage       = $this->input->post('wage');
         $Position   = $this->input->post('Position');
+        $dateUP     = date("Y-m-d", strtotime("+60 day"));
+
         if ($team) {
             $cf = '1';
         } else {
@@ -329,7 +342,8 @@ class Store_ctr extends CI_Controller
             'update_at'                 => date('Y-m-d H:i:s'),
             'status_confirmed_team'     => $cf,
             'notify_user'               => 0,
-            'notify_admin'              => 0
+            'notify_admin'              => 0 , 
+            'end_time'                  => $dateUP,
 
         );
         $this->db->where('order_id', $orderid);
@@ -389,6 +403,7 @@ class Store_ctr extends CI_Controller
                 'status'           => 1,
                 'history'          => $note,
                 'status_who'       => 'admin cancel',
+                'create_at'        => date('Y-m-d H:i:s'),
                 'update_at'        => date('Y-m-d H:i:s'),
     
             );
