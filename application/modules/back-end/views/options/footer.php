@@ -300,6 +300,22 @@
         })
     }
 </script>
+<script>
+    function confirmalertunlock_del_unblock(data22) {
+
+        swal({
+            title: "UnBlock",
+            text: "ท่านต้องการ UnBlock ใช่ใหม่ ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_unlock?tm_id=' + data22;
+            }
+        })
+    }
+</script>
 
 
 

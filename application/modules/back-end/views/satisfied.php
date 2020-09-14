@@ -68,7 +68,8 @@
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
                                                     <th>Price</th>
-                                                    <th>note</th>
+                                                    <th>Note Team</th>
+                                                    <th>Note Client</th>
                                                     <th style="width: 240px;">info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
@@ -706,12 +707,24 @@
 
                                                         <!-- dateREST -->
                                                         <td>
-                                                            <?php echo $stores['dateREST']; ?>
+                                                            <?php if (date("Y-m-d") >= $stores['dateREST']) : ?>
+                                                                <span class="badge badge-danger">หมดเวลา</span>
+                                                            <?php else : ?>
+                                                                <?php $dateReq = date('Y/m/d', strtotime($stores['dateREST'])); ?>
+                                                                <div id="clock-b<?php echo $stores['id_sss']; ?>" style="display: flex;"></div>
+                                                                <script>
+                                                                    $(function() {
+                                                                        $('#clock-b<?php echo $stores['id_sss']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                            var $this = $(this).html(event.strftime('' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
+                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
+                                                                        });
 
-                                                            <!-- <?php if ($stores['status_delivery'] == '1') : ?> -->
-                                                            <!-- <?php else : ?>
-                                                                <input type="date" class="form-control  dateread<?php echo $stores['orderST']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stores['orderST']; ?>" value="<?php echo $stores['dateREST']; ?>" min="<?php echo date('Y-m-d'); ?>">
-                                                            <?php endif; ?> -->
+                                                                    });
+                                                                </script>
+                                                            <?php endif; ?>
 
                                                         </td>
 
@@ -722,29 +735,63 @@
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
 
-                                                        <!-- Note -->
+                                                        <!-- Note Team -->
                                                         <td style="width: 1%;">
-                                                            <a href="#" data-toggle="modal" data-target="#note_new<?php echo $stores['orderST']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
-                                                            <div class="modal fade" id="note_new<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <?= $stores['note_team']; ?>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                            <?php if ($stores['note_team'] == '') : ?>
+                                                                -
 
+                                                            <?php else : ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note_new<?php echo $stores['orderST']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="note_new<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?= $stores['note_team']; ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            <?php endif ?>
+                                                        </td>
+                                                        <!-- Note c -->
+                                                        <td style="width: 1%;">
+                                                            <?php if ($stores['note_user'] == '') : ?>
+                                                                -
+
+                                                            <?php else : ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note_user<?php echo $stores['orderST']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="note_user<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?= $stores['note_user']; ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php endif ?>
                                                         </td>
 
                                                         <!-- TeamId / wage -->
@@ -990,6 +1037,7 @@
 
                                                         <!-- Tool -->
                                                         <td>
+
                                                             <?php if ($stores['status_delivery'] == 1) : ?>
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#agin<?php echo $stores['orderST']; ?>"><i class="feather icon-navigation"></i> </button>
                                                             <?php else : ?>

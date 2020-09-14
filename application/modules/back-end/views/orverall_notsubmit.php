@@ -179,6 +179,7 @@
                                                     <th>Status Team</th>
                                                     <th>Status</th>
                                                     <th>Client Feedback</th>
+                                                    <th>Date Cancel</th>
                                                     <th style="width: 12%;">Tool</th>
                                                 </tr>
                                             </thead>
@@ -355,6 +356,7 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
+                                                            <?php  $cancel = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array();?>
                                                             <?php
                                                             if ($stores['status_check_team'] == 1) {
                                                                 echo '<span class="badge badge-pill badge-Info">Waiting for team</span>';
@@ -363,7 +365,7 @@
                                                             } elseif ($stores['status_check_team'] == 3) {
                                                                 echo '<span class="badge badge-pill badge-success">complete</span>';
                                                             } elseif ($stores['status_check_team'] == 4) {
-                                                                $cancel = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array();
+                                                               
                                                                 echo '<span class="badge badge-pill badge-danger">Waiting for team</span>';
                                                                 echo '<br>';
                                                                 echo '<span class="badge badge-pill badge-danger">' . $cancel['history'] . '</span>';
@@ -408,6 +410,7 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+                                                        <td><?php echo $cancel['create_at']; ?></td>
                                                         <td>
                                                             <!-- <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['order_id']; ?>" type="button" class="btn btn-icon btn-info"><i class="feather icon-upload"></i></button>
                                                             <a href="" class="btn btn-icon btn-success"><i class="feather icon-mail"></i></a>

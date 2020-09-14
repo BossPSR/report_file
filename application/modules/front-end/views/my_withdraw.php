@@ -32,7 +32,14 @@
 
                         <div class="row text-center wall-center mtb-17-30">
                             <div class="col-md-6 ">
-                                <input type="number" name="number" id="numberBox" class="form-control detail" min="0" max="<?php echo $user['cash'] ?>" placeholder="กรอกจำนวนเงิน" style="height: 51px;text-align: center;font-size: 20px;">
+                                <?php if ($user['block_user'] == 1 && $user['cash'] > 0) { ?>
+                                    <div class="form-control detail" style="height: 51px;text-align: center;font-size: 20px;">
+                                        <?php echo $user['cash'] ?>
+                                    </div>
+                                    <input type="hidden" name="number" id="numberBox" class="form-control detail" min="0" max="<?php echo $user['cash'] ?>" value="<?php echo $user['cash'] ?>" placeholder="กรอกจำนวนเงิน" style="height: 51px;text-align: center;font-size: 25px;">
+                                <?php } else { ?>
+                                    <input type="number" name="number" id="numberBox" class="form-control detail" min="0" max="<?php echo $user['cash'] ?>" placeholder="กรอกจำนวนเงิน" style="height: 51px;text-align: center;font-size: 20px;">
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="row text-center wall-center mtb-20">
@@ -152,7 +159,7 @@
         }).keyup();
 
     });
-</script>feere
+</script>
 
 
 <script type="text/javascript">

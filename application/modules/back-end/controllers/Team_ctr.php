@@ -25,6 +25,22 @@ class Team_ctr extends CI_Controller
         }
     }
 
+    public function  delete_unlock()
+    {
+        $tm_id = $this->input->get('tm_id');
+       
+
+        $this->db->where('teamid', $tm_id);
+        $resultsedit = $this->db->delete('tbl_cancel');
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully Unblock information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Unblock information');
+        }
+        return redirect('back_team');
+    }
+
     public function team_job_status()
     {
         $id = $this->input->post('id');

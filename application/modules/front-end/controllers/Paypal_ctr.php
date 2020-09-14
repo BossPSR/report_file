@@ -22,8 +22,35 @@ class Paypal_ctr extends CI_Controller{
         $data['orderID'] = $this->input->post('orderID');
         $data['payerID'] = $this->input->post('payerID');
         $pac_su = $this->db->get_where('tbl_package', ['id' => $data['package']])->row_array();
-        $dateend = date("Y-m-d" , strtotime("+ ".$pac_su['month_pk']." month"));
+		$dateend = date("Y-m-d" , strtotime("+ ".$pac_su['month_pk']." month"));
+		$commission = $this->input->post('commission');
+		if ($commission == "") {
+			$commission = null;
+		}
+		
+		if ($commission != "" || $commission !== null) {
+			$checkCommission = $this->db->get_where('tbl_commission',['commission_inviter'=> $commission , 'commission_recipient' => $data['user_id']])->row_array();
+			if (empty($checkCommission)) {
+				$dataCommission = [];
+				$dataCommission['commission_inviter'] = $commission;
+				$dataCommission['commission_recipient'] = $data['user_id'];
+				$dataCommission['id_package_com'] = $data['package'];
+				$dataCommission['update_at'] = date("Y-m-d H:i:s");
+				$dataCommission['commission_price'] = $pac_su['price_pk'];
+				$dataCommission['commission_detail'] = "เชิญเข้ามา join กัน";
+				$dataCommission['commission_sale'] = $pac_su['new_price'];
+				$dataCommission['create_at'] = date("Y-m-d H:i:s");
+				$this->db->insert('tbl_commission', $dataCommission);
 
+				$userCommission = $this->db->get_where('tbl_user' ,['idUser' => $commission])->row_array();
+				$userCom = $userCommission['commission'] + $pac_su['commission_price'];
+				$this->db->where('idUser' , $commission);
+				$this->db->update('tbl_user' , ['commission' => $userCom] );
+			}
+			
+		}
+		
+		
         $insert = [
             'orderID' => $data['orderID'],
             'payerID' => $data['payerID'],

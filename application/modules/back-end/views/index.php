@@ -1,31 +1,31 @@
 <!-- BEGIN: Content-->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <div class="app-content content">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-        <div class="content-header row">
-        </div>
-        <div class="content-body">
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+		</div>
+		<div class="content-body">
 
-       
-            <!-- Dashboard Analytics Start -->
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Dashboard</h2>
-                        <div class="breadcrumb-wrapper col-12">
-                            <ol class="breadcrumb">
-                              
-                                <li class="breadcrumb-item active">Dashboard
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <section id="dashboard-analytics">
-                <!-- <div class="row">
+
+			<!-- Dashboard Analytics Start -->
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Dashboard</h2>
+						<div class="breadcrumb-wrapper col-12">
+							<ol class="breadcrumb">
+
+								<li class="breadcrumb-item active">Dashboard
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section id="dashboard-analytics">
+				<!-- <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -79,7 +79,7 @@
                     </div>
                 </div> -->
 
-                <div class="row">
+				<!-- <div class="row">
                     <div class="col-3">
                         <div class="card">
                             <div class="card-header">
@@ -173,157 +173,292 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-            </section>
-            <!-- Dashboard Analytics end -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="mb-0">Dashboard</h4>
+							</div>
+							<div class="card-content">
+								<div class="table-responsive mt-1">
+									<table class="table table-hover-animation mb-0">
+										<thead>
+											<tr>
+												<th>Item</th>
+												<th>Original</th>
+												<th>Not Complete </th>
+												<th>Rewrite</th>
+												<th>Not Satified</th>
+												<th>รวมทั้งหมด</th>
+												<th>อ่านคำอธิบาย</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th>Delivery</th>
+												<?php foreach ($deliveryList as $delivery) { ?>
+													<td data-toggle="modal" data-target="#showData<?php echo $delivery; ?>" style="cursor:pointer;"><?php echo $delivery; ?></td>
+													<div class="modal fade" id="showData<?php echo $delivery; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
 
-        </div>
-    </div>
+																</div>
+																<div class="modal-footer">
+																	<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												<?php } ?>
+												<td>รวมจำนวน Order ตั้งแต่เปิดระบบ</td>
+											</tr>
+											<tr>
+												<th>Feedback All</th>
+												<?php foreach ($feedback_allList as $feedback_all) { ?>
+													<td><?php echo $feedback_all; ?></td>
+												<?php } ?>
+												<td>รวม Feedbackตั้งแต่เปิดระบบ</td>
+											</tr>
+											<tr>
+												<th>Processing New Order</th>
+												<?php foreach ($processingList as $processing) { ?>
+													<td><?php echo $processing; ?></td>
+												<?php } ?>
+												<td>Orderปรกติที่กำลังดำเนินการแต่ไม่รวม Feedback</td>
+											</tr>
+											<tr>
+												<th>Processing Feedback</th>
+												<?php foreach ($processing_feedbackList as $processing_feedback) { ?>
+													<td><?php echo $processing_feedback; ?></td>
+												<?php } ?>
+												<td>Orderที่ถูก Feedback แต่ไม่รวม Order ปรกติ</td>
+											</tr>
+											<tr>
+												<th>Cancel</th>
+												<?php foreach ($cancelList as $cancel) { ?>
+													<td><?php echo $cancel; ?></td>
+												<?php } ?>
+												<td>Orderที่ทีมกดยกเลิกทั้งOrderปรกติและFeedback</td>
+											</tr>
+											<tr>
+												<th>Cancel Not Working</th>
+
+												<?php foreach ($cancel_notWorkingList as $cancel_notWorking) { ?>
+													<td><?php echo $cancel_notWorking; ?></td>
+												<?php } ?>
+												<td>Orderที่ทีมไม่กดยกเลิกทั้งOrderปรกติและFeedback</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="mb-0">Summary Quality DM</h4>
+							</div>
+							<div class="card-content">
+								<div class="table-responsive mt-1">
+									<table class="table table-hover-animation mb-0">
+										<thead>
+											<tr>
+												<th>Item</th>
+												<th>Sell Complete</th>
+												<th>Sell Not Complete </th>
+												<th>Original</th>
+												<th>Rewrite</th>
+												<th>รวมทั้งหมด</th>
+												<th>อ่านคำอธิบาย</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th>Total DM</th>
+												<?php foreach ($total_dmList as $total_dm) { ?>
+													<td><?php echo $total_dm; ?> DM</td>
+												<?php } ?>
+												<td>รวมจำนวน DM ทั้งหมดโดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+											</tr>
+											<tr>
+												<th>Approved</th>
+												<?php foreach ($approvedList as $approved) { ?>
+													<td><?php echo $approved; ?> DM</td>
+												<?php } ?>
+												<td>รวมจำนวน DM ที่ลูกค้ากด Approved โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+											</tr>
+											<tr>
+												<th>Not Approved</th>
+												<?php foreach ($not_approvedList as $not_approved) { ?>
+													<td><?php echo $not_approved; ?> DM</td>
+												<?php } ?>
+												<td>รวมจำนวน DM ที่ลูกค้ากด Not Approved โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</section>
+			<!-- Dashboard Analytics end -->
+
+		</div>
+	</div>
 </div>
 <!-- END: Content-->
 <script>
-function getDataFromDb()
-{
-	$.ajax({ 
-				url: "realtime_data" ,
+	function getDataFromDb() {
+		$.ajax({
+				url: "realtime_data",
 				type: "POST",
 				data: ''
 			})
-			.success(function(result) { 
+			.success(function(result) {
 				var obj = jQuery.parseJSON(result);
-					if(obj != '')
-					{
-						  //$("#myTable tbody tr:not(:first-child)").remove();
-						  $("#myBody").empty();
-						  $.each(obj, function(key, val) {
-                           
-									var tr = "<tr>";
-                                    tr = tr + "<td>" + val["name_item"] + "</td>";
-                                   
-                                   
-									tr = tr + "</tr>";
-									$('#myTable > tbody:last').append(tr);
-						  });
-					}
+				if (obj != '') {
+					//$("#myTable tbody tr:not(:first-child)").remove();
+					$("#myBody").empty();
+					$.each(obj, function(key, val) {
+
+						var tr = "<tr>";
+						tr = tr + "<td>" + val["name_item"] + "</td>";
+
+
+						tr = tr + "</tr>";
+						$('#myTable > tbody:last').append(tr);
+					});
+				}
 
 			});
 
-}
+	}
 
-setInterval(getDataFromDb, 1000);   // 1000 = 1 second
-</script> 
+	setInterval(getDataFromDb, 1000); // 1000 = 1 second
+</script>
 
 <script>
-function getDataFromDb1()
-{
-	$.ajax({ 
-				url: "realtime_data1" ,
+	function getDataFromDb1() {
+		$.ajax({
+				url: "realtime_data1",
 				type: "POST",
 				data: ''
 			})
-			.success(function(result) { 
+			.success(function(result) {
 				var obj = jQuery.parseJSON(result);
-					if(obj != '')
-					{
-						  //$("#myTable tbody tr:not(:first-child)").remove();
-						  $("#myBody1").empty();
-						  $.each(obj, function(key, val) {
-                            var data =  val["position_number"];
+				if (obj != '') {
+					//$("#myTable tbody tr:not(:first-child)").remove();
+					$("#myBody1").empty();
+					$.each(obj, function(key, val) {
+						var data = val["position_number"];
 
-									var tr = "<tr>";
-                                    if(data==null ){
-                                    tr = tr + "<td>" + 0 + "</td>";
-                                }else{
-                                    tr = tr + "<td>" + data + "</td>";
-                                }
-                                   
-									tr = tr + "</tr>";
-									$('#myTable1 > tbody:last').append(tr);
-						  });
-					}
+						var tr = "<tr>";
+						if (data == null) {
+							tr = tr + "<td>" + 0 + "</td>";
+						} else {
+							tr = tr + "<td>" + data + "</td>";
+						}
+
+						tr = tr + "</tr>";
+						$('#myTable1 > tbody:last').append(tr);
+					});
+				}
 
 			});
 
-}
+	}
 
-setInterval(getDataFromDb1, 1000);   // 1000 = 1 second
-</script> 
+	setInterval(getDataFromDb1, 1000); // 1000 = 1 second
+</script>
 
 
 <script>
-function getDataFromDb2()
-{
-	$.ajax({ 
-				url: "realtime_data2" ,
+	function getDataFromDb2() {
+		$.ajax({
+				url: "realtime_data2",
 				type: "POST",
 				data: ''
 			})
-			.success(function(result) { 
+			.success(function(result) {
 				var obj = jQuery.parseJSON(result);
-					if(obj != '')
-					{
-						  //$("#myTable tbody tr:not(:first-child)").remove();
-						  $("#myBody2").empty();
-						  $.each(obj, function(key, val) {
-                            var data =  val["status_dashboard"];
-									var tr = "<tr>";
-                                    if(data==1 ){
-                                        tr = tr + "<td>" + val["team_number"]; + "</td>";
-                            
-                                    }else{
-                                        tr = tr + "<td>" + 0 + "</td>";
-                                    }
-                                   
-									tr = tr + "</tr>";
-									$('#myTable2 > tbody:last').append(tr);
-						  });
-					}
-                    console.log(obj);
+				if (obj != '') {
+					//$("#myTable tbody tr:not(:first-child)").remove();
+					$("#myBody2").empty();
+					$.each(obj, function(key, val) {
+						var data = val["status_dashboard"];
+						var tr = "<tr>";
+						if (data == 1) {
+							tr = tr + "<td>" + val["team_number"]; + "</td>";
+
+						} else {
+							tr = tr + "<td>" + 0 + "</td>";
+						}
+
+						tr = tr + "</tr>";
+						$('#myTable2 > tbody:last').append(tr);
+					});
+				}
+				console.log(obj);
 
 			});
 
-}
+	}
 
-setInterval(getDataFromDb2, 1000);   // 1000 = 1 second
-</script> 
+	setInterval(getDataFromDb2, 1000); // 1000 = 1 second
+</script>
 
 <script>
-function getDataFromDb3()
-{
-	$.ajax({ 
-				url: "realtime_data3" ,
+	function getDataFromDb3() {
+		$.ajax({
+				url: "realtime_data3",
 				type: "POST",
 				data: ''
 			})
-			.success(function(result) { 
+			.success(function(result) {
 				var obj = jQuery.parseJSON(result);
-					if(obj != '')
-					{
-						  //$("#myTable tbody tr:not(:first-child)").remove();
-						  $("#myBody3").empty();
-						  $.each(obj, function(key, val) {
-                            var data =  val["status_dashboard"];
-									var tr = "<tr>";
-                                    if(data==0 ){
-                                        tr = tr + "<td>" + val["team_number"]; + "</td>";
-                                    }else{
-                                       
-                                         tr = tr + "<td>" + 0 + "</td>";
-                                    }
-                                   
-                                   
-									tr = tr + "</tr>";
-									$('#myTable3 > tbody:last').append(tr);
-						  });
-					}
-                    console.log(obj);
+				if (obj != '') {
+					//$("#myTable tbody tr:not(:first-child)").remove();
+					$("#myBody3").empty();
+					$.each(obj, function(key, val) {
+						var data = val["status_dashboard"];
+						var tr = "<tr>";
+						if (data == 0) {
+							tr = tr + "<td>" + val["team_number"]; + "</td>";
+						} else {
+
+							tr = tr + "<td>" + 0 + "</td>";
+						}
+
+
+						tr = tr + "</tr>";
+						$('#myTable3 > tbody:last').append(tr);
+					});
+				}
+				console.log(obj);
 
 			});
 
-}
+	}
 
-setInterval(getDataFromDb3, 1000);   // 1000 = 1 second
-</script> 
-
-
+	setInterval(getDataFromDb3, 1000); // 1000 = 1 second
+</script>
