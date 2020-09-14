@@ -246,6 +246,57 @@
                                 </div>
                             </div>
                         </div>
+					</div>
+					
+					<div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Summary Quality DM</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="table-responsive mt-1">
+                                        <table class="table table-hover-animation mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Sell Complete</th>
+                                                    <th>Sell Not Complete </th>
+                                                    <th>Original</th>
+                                                    <th>Rewrite</th>
+													<th>รวมทั้งหมด</th>
+													<th>อ่านคำอธิบาย</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+													<th>Total DM</th>
+													<?php foreach ($total_dmList as $total_dm) { ?>
+														<td><?php echo $total_dm; ?> DM</td>
+													<?php } ?>
+													<td>รวมจำนวน DM ทั้งหมดโดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+												</tr>
+												<tr>
+													<th>Approved</th>
+													<?php foreach ($approvedList as $approved) { ?>
+														<td><?php echo $approved; ?> DM</td>
+													<?php } ?>
+													<td>รวมจำนวน DM ที่ลูกค้ากด Approved  โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+												</tr>
+												<tr>
+													<th>Not Approved</th>
+													<?php foreach ($not_approvedList as $not_approved) { ?>
+														<td><?php echo $not_approved; ?> DM</td>
+													<?php } ?>
+													<td>รวมจำนวน DM ที่ลูกค้ากด Not Approved  โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+												</tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
             </section>
