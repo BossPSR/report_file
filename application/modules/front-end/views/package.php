@@ -20,12 +20,34 @@
                 <li><?php echo $package['description_pk']; ?></li>
                 <li>1 Domain</li>
                 <li>PHP 5 Enbled</li>
-                <li>24H – Support</li>
+								<li>24H – Support</li>
+								<li>
+									<div>Commission</div>
+									<div>
+										<input type="checkbox" id="check<?php echo $package['id'];?>">
+										<label>
+											<input type="text" name="commission" id="check_commission<?php echo $package['id'];?>" class="form-control" disabled>
+										</label>
+									</div>
+								</li>
               </ul>
               <a class="list_button paypal-button-container<?php echo $i++; ?>" href="#">purchase now </a>
             </div>
           </div>
-        </div>
+				</div>
+				
+				<script>
+
+					$("#check<?php echo $package['id'];?>").change(function() {
+							$('#check_commission<?php echo $package['id'];?>').val(null);
+							if(this.checked) {
+								$('#check_commission<?php echo $package['id'];?>').prop("disabled",false);
+							}else{
+								$('#check_commission<?php echo $package['id'];?>').prop("disabled",true);
+							}
+					});
+
+				</script>
 
 
 
@@ -39,7 +61,7 @@
                 purchase_units: [{
                   amount: {
 
-                    value: '10.00'
+                    value: '<?php echo $package['price_pk']; ?>'
 
                   }
                 }]
@@ -65,17 +87,20 @@
                   data: {
                     orderID: data.orderID,
                     payerID: data.payerID,
-                    user_id: <?php echo $userId['id']; ?>,
+                    user_id: '<?php echo $userId['idUser']; ?>',
+                    package: '<?php echo $package['id']; ?>',
                     first_name: details.payer.name.given_name,
                     last_name: details.payer.name.surname,
                     create_time: details.create_time,
                     amount: details.purchase_units['0'].amount.value,
                     currency_code: details.purchase_units['0'].amount.currency_code,
+										commission: $('#check_commission<?php echo $package['id'];?>').val(),
                   },
                   success: function(response) {
                     let dataSucces = JSON.parse(response);
                     console.log(dataSucces);
                     window.location.href = 'mainbuysell';
+
                   }
                 });
 

@@ -319,4 +319,53 @@ class Stock_ctr extends CI_Controller
 			echo $success;
 		}
 	}
+
+	public function delete_order_stock_admin()
+    {
+        $id     = $this->input->post('order_id');
+        $note   = $this->input->post('note');
+        $row    = $this->db->get_where('tbl_upload_team', ['order_id' => $id])->row_array();
+        if ($row == true) {
+            $team = array(
+                'status'      => 4,
+            );
+
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_upload_team', $team);
+        }
+
+        $data = array(
+
+            'note_reject'         => $note,
+            'is_check'            => 1,
+            'update_at'           => date('Y-m-d H:i:s'),
+            'notify_user'         => 0,
+            'notify_admin'        => 0
+
+        );
+        $this->db->where('order_id', $id);
+        $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+        if ($resultsedit1) {
+            $cancel = array(
+
+                'order_id'         => $id,
+                'status'           => 1,
+                'history'          => $note,
+				'status_who'       => 'admin cancel',
+                'create_at'        => date('Y-m-d H:i:s'),
+                'update_at'        => date('Y-m-d H:i:s'),
+    
+            );
+            $this->db->insert('tbl_cancel', $cancel);
+        }
+
+		if ($resultsedit1) {
+			$this->session->set_flashdata('save_ss2', 'Successfully cancel information !!.');
+			return redirect('my_stock_admin');
+        } else {
+			$this->session->set_flashdata('del_ss2', 'Not Successfully cancel email information');
+			return redirect('my_stock_admin');
+        }
+       
+    }
 }

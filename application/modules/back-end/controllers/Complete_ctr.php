@@ -94,6 +94,40 @@ class Complete_ctr extends CI_Controller
         }
     }
 
+    public function fileUpload_not_complete()
+    {
+        $target_dir = "uploads/Feedback/"; // Upload directory
+        if (!empty($_FILES['file']['name'])) {
+
+            // Set preference
+            $config['upload_path']     = 'uploads/notcomplete/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
+
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            $feedmax = $this->db->order_by('id', 'DESC')->get('tbl_feedback')->row();
+
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
+
+                $data = array(
+                    'id_upload_team'                => $this->input->post('idco'),
+                    'file_name_notcomplete'         => $uploadData['file_name'],
+                    'path_notcomplete'              => 'uploads/notcomplete/' . $uploadData['file_name'],
+                    'create_at_ncf'                 => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_not_complete_file', $data);
+            }
+        }
+    }
+
     public function order_auto_feedback()
     {
         $order_id   = $this->input->post('order_id');
@@ -125,6 +159,17 @@ class Complete_ctr extends CI_Controller
                 }
             }
         }
+        echo $success;
+    }
+
+    public function order_auto_not_complete_file()
+    {
+        $idco   = $this->input->post('idco');
+        $detail1co   = $this->input->post('detail1co');
+       
+        $this->db->where('id', $idco);
+        $success = $this->db->update('tbl_upload_team', ['status' => '4' , 'note' => $detail1co ]);
+      
         echo $success;
     }
 

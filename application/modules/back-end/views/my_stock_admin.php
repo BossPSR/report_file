@@ -861,54 +861,87 @@
                                                         </td>
 
                                                         <!-- Processing -->
+                                                        <?php $cancel_sa = $this->db->get_where('tbl_cancel', ['order_id' => $stock['orderST']])->row_array(); ?>
                                                         <td>
-                                                            <?php if ($stock['Tstatus'] == 0 && $stock['teamId'] == '') : ?>
-                                                                <span class="badge badge-pill badge-primary">waiting for team </span>
-                                                            <?php elseif ($stock['Tstatus'] == 0 && $stock['teamId'] != '') : ?>
-                                                                <span class="badge badge-pill badge-warning">Processing </span>
-                                                            <?php elseif ($stock['Tstatus'] == 1 && $stock['teamId'] != '') : ?>
-                                                                <span class="badge badge-pill badge-success">Complete </span>
-                                                            <?php elseif ($stock['Tstatus'] == 2 && $stock['teamId'] != '') : ?>
-                                                                <span class="badge badge-pill badge-danger">Feedback </span>
+                                                            <?php if ($cancel_sa == true) : ?>
+                                                                <span class="badge badge-pill badge-danger"><?= $cancel_sa['status_who']; ?></span>
                                                             <?php else : ?>
-                                                                -
+                                                                <?php if ($stock['Tstatus'] == 0 && $stock['teamId'] == '') : ?>
+                                                                    <span class="badge badge-pill badge-primary">waiting for team </span>
+                                                                <?php elseif ($stock['Tstatus'] == 0 && $stock['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-warning">Processing </span>
+                                                                <?php elseif ($stock['Tstatus'] == 1 && $stock['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-success">Complete </span>
+                                                                <?php elseif ($stock['Tstatus'] == 2 && $stock['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-danger">Feedback </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         </td>
 
                                                         <!-- Status -->
                                                         <td>
-                                                            <?php if ($stock['status_cp'] == 'complete') : ?>
-                                                                <span class="badge badge-pill badge-success">Complete </span>
-                                                            <?php elseif ($stock['status_cp'] == 'notcomplete') : ?>
-                                                                <span class="badge badge-pill badge-warning">Not complete </span>
-                                                            <?php elseif ($stock['status_cp'] == 'rewrite') : ?>
-                                                                <span class="badge badge-pill badge-primary">Rewrite </span>
-                                                            <?php elseif ($stock['status_cp'] == 'nodm') : ?>
-                                                                <span class="badge badge-pill badge-danger">No DM </span>
+                                                            <?php $admin_stu = $this->db->get('tbl_admin', ['adminId' => $stock['userId']])->row_array(); ?>
+                                                            <?php if ($admin_stu == true) : ?>
+                                                                <?php if ($stock['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Admin Original </span>
+                                                                <?php elseif ($stock['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-warning"> Admin Not complete </span>
+                                                                <?php elseif ($stock['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Admin Rewrite </span>
+                                                                <?php elseif ($stock['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> Admin No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php else : ?>
-                                                                -
+                                                                <?php if ($stock['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original </span>
+                                                                <?php elseif ($stock['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-warning">Not complete </span>
+                                                                <?php elseif ($stock['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite </span>
+                                                                <?php elseif ($stock['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger">No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
+
+
                                                         </td>
 
                                                         <!-- Tool -->
                                                         <td style="width:10%;">
-                                                            <?php if ($stock['status_approved'] == 1) : ?>
-                                                                <span class="badge badge-pill badge-success">Approved</span>
-                                                            <?php elseif ($stock['status_approved'] == 2) : ?>
-                                                                <span class="badge badge-pill badge-danger">Not Approved</span>
+                                                            <?php if ($stock['is_check'] == 1) : ?>
+                                                                <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-plus-circle"></i></button>
+                                                                <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
+                                                                <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-times"></i></button>
+                                                                <button type="button" class="btn btn-secondary btn-icon"><i class="feather icon-delete"></i></button>
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>"><i class="fa fa-plus-circle"></i></button>
-                                                                <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
-                                                                    <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation-triangle"></i></button>
-                                                                    <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="approved<?php echo $stock['orderST']; ?>"><i class="fa fa-check"></i></button>
-                                                                    <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="order_not_approved<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
+                                                                <?php if ($stock['status_approved'] == 1) : ?>
+                                                                    <span class="badge badge-pill badge-success">Approved</span>
+                                                                <?php elseif ($stock['status_approved'] == 2) : ?>
+                                                                    <span class="badge badge-pill badge-danger">Not Approved</span>
                                                                 <?php else : ?>
-                                                                    <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
-                                                                    <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
-                                                                    <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-times"></i></button>
-                                                                <?php endif; ?>
+                                                                    <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>"><i class="fa fa-plus-circle"></i></button>
+                                                                    <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
+                                                                        <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                        <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="approved<?php echo $stock['orderST']; ?>"><i class="fa fa-check"></i></button>
+                                                                        <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="order_not_approved<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
+                                                                    <?php else : ?>
+                                                                        <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                        <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
+                                                                        <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-times"></i></button>
+                                                                    <?php endif; ?>
+                                                                    <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#Cancel<?php echo $stock['orderST']; ?>"><i class="feather icon-delete"></i></button>
 
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
+
+
 
                                                             <!-- Modal Feedback -->
                                                             <div class="modal fade" id="exampleModalNotApprove<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1030,6 +1063,38 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+
+                                                            <div class="modal fade" id="Cancel<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="delete_order_stock_admin" method="POST">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $stock['orderST']; ?>">
+                                                                    <div class="modal-dialog " role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $stock['orderST']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="helpInputTop">Note Cancel</label>
+                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                             </div>
 
 

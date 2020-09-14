@@ -616,16 +616,31 @@
 
                                                         <!-- Status -->
                                                         <td>
-                                                            <?php if ($store['status_book'] == '1' && $store['status_cp'] == 'complete' && $store['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-success">Original</span>
-                                                            <?php elseif ($store['status_book'] == '1' && $store['status_cp'] == 'notcomplete'  && $store['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($store['status_book'] == '2'  && $store['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($store['status_admin'] == '1') : ?>
-                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php $admin_stu = $this->db->get('tbl_admin', ['adminId' => $store['userId']])->row_array(); ?>
+                                                            <?php if ($admin_stu == true) : ?>
+                                                                <?php if ($store['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Admin Original </span>
+                                                                <?php elseif ($store['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-warning"> Admin Not complete </span>
+                                                                <?php elseif ($store['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Admin Rewrite </span>
+                                                                <?php elseif ($store['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> Admin No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php else : ?>
-                                                                -
+                                                                <?php if ($store['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                <?php elseif ($store['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
+                                                                <?php elseif ($store['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                <?php elseif ($store['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         </td>
 

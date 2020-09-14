@@ -33,12 +33,11 @@ class Delivery_ctr extends CI_Controller
         $order_id   = $this->input->post('select_items');
         $idfolder   = $this->input->post('idfolder');
         $team       = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row();
-        $feed       = $this->db->get_where('tbl_feedback', ['order_id' => $order_id])->row_array();
+        $order_exp = explode( ',' , $order_id);
+        $feed       = $this->db->get_where('tbl_feedback', ['order_id' => $order_exp[0]])->row_array();
 
-        $target_dir = "uploads/Team/"; // Upload directory
-        // $this->db->where('order_id', $order_id);
-        // $this->db->delete('tbl_upload_order_team');
-        // unlink($feed['path']);
+
+       
 
         // Set preference
         $config['upload_path']     = 'uploads/Team/';
@@ -58,18 +57,19 @@ class Delivery_ctr extends CI_Controller
             $uploadData = $this->upload->data();
 
             $data = array(
-                'teamId'        => $team->IdTeam,
-                'order_id'      => $order_id,
-                'group'         => $idfolder,
-                'file_name'     => $uploadData['file_name'],
-                'path'          => 'uploads/Team/' . $uploadData['file_name'],
-                'create_at'     => date('Y-m-d H:i:s'),
+                'id_upload_team_uot'    => $order_exp[1],
+                'teamId'                => $team->IdTeam,
+                'order_id'              => $order_exp[0],
+                'group'                 => $idfolder,
+                'file_name'             => $uploadData['file_name'],
+                'path'                  => 'uploads/Team/' . $uploadData['file_name'],
+                'create_at'             => date('Y-m-d H:i:s'),
             );
             if ($this->db->insert('tbl_upload_order_team', $data)) {
                 $data3 = array(
                     'status'        => 1,
                 );
-                $this->db->where('order_id', $order_id);
+                $this->db->where('order_id', $order_exp[0]);
                 $this->db->update('tbl_upload_team', $data3);
             }
             if ($feed == true) {
@@ -77,7 +77,7 @@ class Delivery_ctr extends CI_Controller
                     'check_feedback_dalivery'   => 1
 
                 );
-                $this->db->where('order_id', $order_id);
+                $this->db->where('order_id', $order_exp[0]);
                 if ($this->db->update('tbl_feedback', $data2)) {
                     $data3 = array(
                         'check_feedback_order'  => 1

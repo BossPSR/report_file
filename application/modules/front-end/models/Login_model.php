@@ -57,7 +57,37 @@ class Login_model extends CI_Model
             return false;
         }
     }
-    
+
+    public function login_user_block($email, $password)
+    {
+        $this->db->where('email', $email);
+        $this->db->where('password', $password);
+        $this->db->where('block_user', 1);
+        $this->db->where('cash', 0);
+        $query = $this->db->get('tbl_user');
+
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function login_user_block_money($email, $password)
+    {
+        $this->db->where('email', $email);
+        $this->db->where('password', $password);
+        $this->db->where('block_user', 1);
+        $this->db->where('cash !=', 0);
+        $query = $this->db->get('tbl_user');
+
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function login_team_c($email, $password)
     {
         $this->db->where('email', $email);

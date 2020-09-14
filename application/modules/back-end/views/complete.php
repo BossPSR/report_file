@@ -133,6 +133,7 @@
                                                     <th>Client Feedback </th>
                                                     <th>Admin Feedback </th>
                                                     <th>Status</th>
+                                                    <th>Process</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -143,7 +144,7 @@
 
                                                     <tr>
                                                         <!-- Order Id -->
-                                                        <td><?php echo $complete['order_id_t']; ?></td>
+                                                        <td><?php echo $complete['order_id_t']; ?> </td>
 
                                                         <!-- TeamId -->
                                                         <td><?php echo $complete['teamId']; ?></td>
@@ -403,7 +404,7 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <table class="table zero-configuration" >
+                                                                                <table class="table zero-configuration">
                                                                                     <thead>
 
                                                                                         <tr>
@@ -426,29 +427,7 @@
                                                                                                 <td>
                                                                                                     <?php echo $orderT['name_folder'] ?>
                                                                                                     <a href="" data-toggle="modal" data-target="#tmid<?php echo $orderT['id']; ?>"> </a>
-                                                                                                    <!-- Modal -->
-                                                                                                    <!-- <div class="modal fade text-left" id="tmid<?php echo $orderT['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                                                                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                                                                            <div class="modal-content">
-                                                                                                                <div class="modal-header">
-                                                                                                                    <h4 class="modal-title" id="myModalLabel1">Rename</h4>
-                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                                                    </button>
-                                                                                                                </div>
-                                                                                                                <div class="modal-body">
-                                                                                                                    <h5>Rename</h5>
-                                                                                                                    <?php $or_file_name = explode('.', $orderT['file_name']); ?>
-                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_name<?php echo $orderT['id']; ?>" class="form-control">
-                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_name<?php echo $orderT['id']; ?>" class="form-control">
-                                                                                                                    <input type="hidden" id="pathtm<?php echo $orderT['id']; ?>" data-pathtm="<?php echo $orderT['path']; ?>" class="form-control">
-                                                                                                                </div>
-                                                                                                                <div class="modal-footer">
-                                                                                                                    <button type="button" class="btn btn-primary ez" id="re_file_name_button<?php echo $orderT['id']; ?> " data-tid="<?php echo $orderT['id']; ?>">Submit</button>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div> -->
+
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <span data-toggle="modal" data-target="#groupse<?php echo $orderT['group']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
@@ -639,7 +618,77 @@
                                                             }
                                                             ?>
                                                             <?php if ($af == true) : ?>
-                                                                <span class="badge badge-pill badge-danger">Admin Feedback (<?= $x; ?>)</span>
+                                                                <span class="badge badge-pill badge-danger">Admin Feedback (<?= $x; ?>) </span>
+                                                                <span data-toggle="modal" data-target="#filenotefeedback<?php echo $complete['order_id_t']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="filenotefeedback<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Admin Feedback note </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+
+                                                                                        <tr>
+                                                                                            <th>Order id</th>
+                                                                                            <th>name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php $ai = 1;
+                                                                                        $feedbackde = $this->db->get_where('tbl_feedback', ['order_id' => $complete['order_id_t'], 'check_status' => 0])->result_array();
+                                                                                        ?>
+
+                                                                                        <?php foreach ($feedbackde as $areed) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $areed['order_id'] ?></td>
+                                                                                                <td>Feedback admin (<?php echo $ai++; ?>)</td>
+                                                                                                <td>
+
+                                                                                                    <i data-toggle="modal" data-target="#detailfeedback<?php echo $areed['id']; ?>" class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i>
+                                                                                                    <div class="modal fade" id="detailfeedback<?php echo $areed['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog  modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Admin Feedback Detail </h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <p><?php echo $areed['feedback_detail']; ?></p>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </td>
+                                                                                                <td><?php echo $areed['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
@@ -647,16 +696,49 @@
 
                                                         <!-- Status -->
                                                         <td>
-                                                            <?php if ($complete['status_book'] == '1' && $complete['statusB'] == 'complete' && $complete['stadmin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-success">Original</span>
-                                                            <?php elseif ($complete['status_book'] == '1' && $complete['statusB'] == 'notcomplete' && $complete['stadmin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-primary">Not complete</span>
-                                                            <?php elseif ($complete['status_book'] == '1' && $complete['statusB'] == 'rewrite') : ?>
-                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($complete['status_book'] == '2'  && $complete['stadmin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($complete['stadmin'] == '1') : ?>
-                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php $admin_stu = $this->db->get('tbl_admin', ['adminId' => $complete['userId']])->row_array(); ?>
+                                                            <?php if ($admin_stu == true) : ?>
+                                                                <?php if ($complete['statusB'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Admin Original </span>
+                                                                <?php elseif ($complete['statusB'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-warning"> Admin Not complete </span>
+                                                                <?php elseif ($complete['statusB'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Admin Rewrite </span>
+                                                                <?php elseif ($complete['statusB'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> Admin No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+                                                            <?php else : ?>
+                                                                <?php if ($complete['statusB'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                <?php elseif ($complete['statusB'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
+                                                                <?php elseif ($complete['statusB'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                <?php elseif ($complete['statusB'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- Process -->
+                                                        <td>
+                                                            <?php if ($complete['Tstatus'] == 0 && $complete['teamId'] == '') : ?>
+                                                                <span class="badge badge-pill badge-primary">waiting for team </span>
+                                                            <?php elseif ($complete['Tstatus'] == 0 && $complete['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-warning">Processing </span>
+                                                            <?php elseif ($complete['Tstatus'] == 1 && $complete['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-success">Complete </span>
+                                                            <?php elseif ($complete['Tstatus'] == 2 && $complete['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback </span>
+                                                            <?php elseif ($complete['Tstatus'] == 3 && $complete['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-danger">Re Feedback </span>
+                                                            <?php elseif ($complete['Tstatus'] == 4 && $complete['teamId'] != '') : ?>
+                                                                <span class="badge badge-pill badge-danger">Not complete </span>
+
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
@@ -664,22 +746,224 @@
 
                                                         <!-- Tool -->
                                                         <td>
-
-                                                            <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $complete['order_id_t']; ?>">
-                                                                <i class="feather icon-navigation"></i>
-                                                            </button>
-                                                            <?php if ($complete['status_admin'] == '0') : ?>
-
-                                                                <a href="book_complete_add_com?id=<?php echo $complete['order_id_t']; ?>&userid=<?php echo $complete['user_m']; ?>" class="btn btn-icon btn-warning">
-                                                                    <i class="feather icon-bookmark"></i>
-                                                                </a>
-
+                                                            <?php if ($complete['Tstatus'] == 4) : ?>
+                                                                <button type="button" class="btn btn-icon btn-secondary" > <i class="feather icon-navigation"></i> </button>
+                                                                <button type="button" class="btn btn-icon btn-secondary" > <i class="feather icon-triangle"></i> </button>
+                                                                <button type="button" class="btn btn-icon btn-secondary" > <i class="feather icon-x-circle"></i> </button>
                                                             <?php else : ?>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $complete['order_id_t']; ?>">
+                                                                    <i class="feather icon-navigation"></i>
+                                                                </button>
+                                                                <?php if ($complete['status_admin'] == '0') : ?>
 
+                                                                    <a href="book_complete_add_com?id=<?php echo $complete['order_id_t']; ?>&userid=<?php echo $complete['user_m']; ?>" class="btn btn-icon btn-warning">
+                                                                        <i class="feather icon-bookmark"></i>
+                                                                    </a>
+
+                                                                <?php else : ?>
+
+                                                                <?php endif; ?>
+                                                                <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $complete['order_id_t']; ?>">
+                                                                    <i class="feather icon-alert-triangle"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-icon btn-warning" data-toggle="modal" data-target="#notcomplete<?php echo $complete['id_upload_team_uot']; ?>">
+                                                                    <i class="feather icon-x-circle"></i>
+                                                                </button>
                                                             <?php endif; ?>
-                                                            <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $complete['order_id_t']; ?>">
-                                                                <i class="feather icon-alert-triangle"></i>
-                                                            </button>
+
+
+
+                                                            <!-- Modal notcomplete -->
+                                                            <div class="modal fade" id="notcomplete<?php echo $complete['id_upload_team_uot']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Not complete (<?php echo $complete['order_id']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="modal-body" style="text-align:left;">
+                                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                            <form action="fileUpload_not_complete" class="dropzone" id="fileuploadnotcomplete<?php echo $complete['id_upload_team_uot']; ?>">
+                                                                                <div class="dz-message needsclick">
+                                                                                    Drop files here or click to upload.<br>
+                                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+
+                                                                                </div>
+                                                                            </form>
+                                                                            <br>
+                                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                                            <label for="" class="font-size-upload">Detail :</label>
+                                                                            <textarea id="detail1co<?php echo $complete['id_upload_team_uot']; ?>" name="descriptions" class="form-control" rows="5" required></textarea>
+                                                                            <br>
+
+                                                                            <input type="text" name="idco" id="idco<?php echo $complete['id_upload_team_uot']; ?>" value="<?php echo $complete['id_upload_team_uot']; ?>" hidden>
+
+                                                                            <!-- </form> -->
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="Submitnotcomplete<?php echo $complete['id_upload_team_uot']; ?>" class="btn btn-success">Success</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <script type='text/javascript'>
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzoneco<?php echo $complete['id_upload_team_uot']; ?> = new Dropzone("#fileuploadnotcomplete<?php echo $complete['id_upload_team_uot']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                $('#Submitnotcomplete<?php echo $complete['id_upload_team_uot']; ?>').click(function() {
+                                                                    var idco = document.getElementById("idco<?php echo $complete['id_upload_team_uot']; ?>").value;
+                                                                    var detail1co = document.getElementById("detail1co<?php echo $complete['id_upload_team_uot']; ?>").value;
+
+                                                                    if (detail1co == '') {
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    } else {
+                                                                        $.ajax({
+                                                                            type: 'POST',
+                                                                            url: 'notcomplete_ajax',
+                                                                            data: {
+                                                                                idco: idco,
+                                                                                detail1co: detail1co,
+                                                                            },
+                                                                            success: function(success) {
+                                                                                if (myDropzoneco<?php echo $complete['id_upload_team_uot']; ?>.files != 0) {
+                                                                                    myDropzoneco<?php echo $complete['id_upload_team_uot']; ?>.processQueue();
+                                                                                    myDropzoneco<?php echo $complete['id_upload_team_uot']; ?>.on("queuecomplete", function(file, res) {
+                                                                                        swal("Good job!", "Upload for data success Feedback", "success", {
+                                                                                            button: false,
+                                                                                        });
+                                                                                    });
+                                                                                    setTimeout("location.reload(true);", 1000);
+                                                                                } else {
+                                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                                        button: true,
+                                                                                    }).then(function(isConfirm) {
+                                                                                        if (isConfirm == true) {
+                                                                                            setTimeout("location.reload(true);", 1000);
+                                                                                        } else {
+                                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                        }
+                                                                                    });
+                                                                                }
+
+                                                                            }
+                                                                        });
+                                                                    }
+
+                                                                });
+                                                            </script>
+
+
+                                                            <!-- Modal Feedback -->
+                                                            <div class="modal fade" id="exampleModalNotApprove<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Feedback (<?php echo $complete['order_id']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="modal-body" style="text-align:left;">
+                                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                            <form action="fileUpload_feedback" class="dropzone" id="fileuploadnotApprove<?php echo $complete['order_id']; ?>">
+                                                                                <div class="dz-message needsclick">
+                                                                                    Drop files here or click to upload.<br>
+                                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                                </div>
+                                                                            </form>
+                                                                            <br>
+                                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                                            <label for="" class="font-size-upload">Detail :</label>
+                                                                            <textarea id="detail1<?php echo $complete['order_id']; ?>" name="descriptions" class="form-control" rows="5" required></textarea>
+                                                                            <br>
+
+                                                                            <label for="" class="font-size-upload">Date </label>
+                                                                            <input type="date" name="dated" id="dated<?php echo $complete['order_id']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="" style="width:30%" required>
+                                                                            <input type="text" name="order_id" id="order_id<?php echo $complete['order_id']; ?>" value="<?php echo $complete['order_id']; ?>" hidden>
+                                                                            <input type="text" name="userId" id="userId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['user_m']; ?>" hidden>
+                                                                            <input type="text" name="teamId" id="teamId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['teamId']; ?>" hidden>
+                                                                            <!-- </form> -->
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="SubmitNotApp<?php echo $complete['order_id']; ?>" class="btn btn-success">Success</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <script type='text/javascript'>
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzone2<?php echo $complete['order_id']; ?> = new Dropzone("#fileuploadnotApprove<?php echo $complete['order_id']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                $('#SubmitNotApp<?php echo $complete['order_id']; ?>').click(function() {
+                                                                    var x = document.getElementById("detail1<?php echo $complete['order_id']; ?>").value;
+                                                                    var y = document.getElementById("dated<?php echo $complete['order_id']; ?>").value;
+                                                                    var z = document.getElementById("order_id<?php echo $complete['order_id']; ?>").value;
+                                                                    var c = document.getElementById("userId<?php echo $complete['order_id']; ?>").value;
+                                                                    var team = document.getElementById("teamId<?php echo $complete['order_id']; ?>").value;
+
+                                                                    if (x == '') {
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    } else {
+                                                                        $.ajax({
+                                                                            type: 'POST',
+                                                                            url: 'feedback_ajax',
+                                                                            data: {
+                                                                                DM: x,
+                                                                                dated: y,
+                                                                                order_id: z,
+                                                                                cmid: c,
+                                                                                teamId: team,
+                                                                                confirm: 1,
+                                                                            },
+                                                                            success: function(success) {
+                                                                                if (myDropzone2<?php echo $complete['order_id']; ?>.files != 0) {
+                                                                                    myDropzone2<?php echo $complete['order_id']; ?>.processQueue();
+                                                                                    myDropzone2<?php echo $complete['order_id']; ?>.on("queuecomplete", function(file, res) {
+                                                                                        swal("Good job!", "Upload for data success Feedback", "success", {
+                                                                                            button: false,
+                                                                                        });
+                                                                                    });
+                                                                                    setTimeout("location.reload(true);", 1000);
+                                                                                } else {
+                                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                                        button: true,
+                                                                                    }).then(function(isConfirm) {
+                                                                                        if (isConfirm == true) {
+                                                                                            setTimeout("location.reload(true);", 1000);
+                                                                                        } else {
+                                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                        }
+                                                                                    });
+                                                                                }
+
+                                                                            }
+                                                                        });
+                                                                    }
+
+                                                                });
+                                                            </script>
 
                                                             <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $complete['order_id_t']])->result_array(); ?>
                                                             <div class="modal fade" id="exampleModalu<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -784,109 +1068,9 @@
                                                             </div>
 
 
-
-                                                            <!-- Modal Feedback -->
-                                                            <div class="modal fade" id="exampleModalNotApprove<?php echo $complete['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">Feedback (<?php echo $complete['order_id']; ?>)</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-
-                                                                        <div class="modal-body" style="text-align:left;">
-                                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                            <form action="fileUpload_feedback" class="dropzone" id="fileuploadnotApprove<?php echo $complete['order_id']; ?>">
-                                                                                <div class="dz-message needsclick">
-                                                                                    Drop files here or click to upload.<br>
-                                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                                                                                </div>
-                                                                            </form>
-                                                                            <br>
-                                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
-                                                                            <label for="" class="font-size-upload">Detail :</label>
-                                                                            <textarea id="detail1<?php echo $complete['order_id']; ?>" name="descriptions" class="form-control" rows="5" required></textarea>
-                                                                            <br>
-
-                                                                            <label for="" class="font-size-upload">Date </label>
-                                                                            <input type="date" name="dated" id="dated<?php echo $complete['order_id']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" max="" style="width:30%" required>
-                                                                            <input type="text" name="order_id" id="order_id<?php echo $complete['order_id']; ?>" value="<?php echo $complete['order_id']; ?>" hidden>
-                                                                            <input type="text" name="userId" id="userId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['user_m']; ?>" hidden>
-                                                                            <input type="text" name="teamId" id="teamId<?php echo $complete['order_id']; ?>" value="<?php echo $complete['teamId']; ?>" hidden>
-                                                                            <!-- </form> -->
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" id="SubmitNotApp<?php echo $complete['order_id']; ?>" class="btn btn-success">Success</button>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <script type='text/javascript'>
-                                                                Dropzone.autoDiscover = false;
-                                                                var myDropzone2<?php echo $complete['order_id']; ?> = new Dropzone("#fileuploadnotApprove<?php echo $complete['order_id']; ?>", {
-                                                                    autoProcessQueue: false,
-                                                                    maxFiles: 5,
-                                                                    addRemoveLinks: true,
-                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
-                                                                });
-
-                                                                $('#SubmitNotApp<?php echo $complete['order_id']; ?>').click(function() {
-                                                                    var x = document.getElementById("detail1<?php echo $complete['order_id']; ?>").value;
-                                                                    var y = document.getElementById("dated<?php echo $complete['order_id']; ?>").value;
-                                                                    var z = document.getElementById("order_id<?php echo $complete['order_id']; ?>").value;
-                                                                    var c = document.getElementById("userId<?php echo $complete['order_id']; ?>").value;
-                                                                    var team = document.getElementById("teamId<?php echo $complete['order_id']; ?>").value;
-
-                                                                    if (x == '') {
-                                                                        swal("Warning!", "Can not be document Empty", "warning", {
-                                                                            button: true,
-                                                                        });
-                                                                    } else {
-                                                                        $.ajax({
-                                                                            type: 'POST',
-                                                                            url: 'feedback_ajax',
-                                                                            data: {
-                                                                                DM: x,
-                                                                                dated: y,
-                                                                                order_id: z,
-                                                                                cmid: c,
-                                                                                teamId: team,
-                                                                                confirm: 1,
-                                                                            },
-                                                                            success: function(success) {
-                                                                                if (myDropzone2<?php echo $complete['order_id']; ?>.files != 0) {
-                                                                                    myDropzone2<?php echo $complete['order_id']; ?>.processQueue();
-                                                                                    myDropzone2<?php echo $complete['order_id']; ?>.on("queuecomplete", function(file, res) {
-                                                                                        swal("Good job!", "Upload for data success Feedback", "success", {
-                                                                                            button: false,
-                                                                                        });
-                                                                                    });
-                                                                                    setTimeout("location.reload(true);", 1000);
-                                                                                } else {
-                                                                                    swal("Good job!", "Upload for data successfull", "success", {
-                                                                                        button: true,
-                                                                                    }).then(function(isConfirm) {
-                                                                                        if (isConfirm == true) {
-                                                                                            setTimeout("location.reload(true);", 1000);
-                                                                                        } else {
-                                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                                        }
-                                                                                    });
-                                                                                }
-
-                                                                            }
-                                                                        });
-                                                                    }
-
-                                                                });
-                                                            </script>
-
                                                         </td>
                                                     </tr>
+
 
                                                 <?php  } ?>
 

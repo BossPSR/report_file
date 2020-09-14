@@ -101,10 +101,11 @@ class Store_ctr extends CI_Controller
         $Position       = $this->input->post('Position');
         $note_s         = $this->input->post('note_s');
         $organization   = $this->input->post('organization');
-        $status_cp   = $this->input->post('status_cp');
+        $status_cp      = $this->input->post('status_cp');
+        $dateUP         = date("Y-m-d", strtotime("+60 day"));
         if ($status_cp == 'complete') {
             $book = '1';
-        }else{
+        } else {
             $book = '0';
         }
 
@@ -129,6 +130,7 @@ class Store_ctr extends CI_Controller
             'status_cp'             => $status_cp,
             'status_confirmed_team' => $cf,
             'notify_admin'          => 0,
+            'end_time'              => $dateUP,
         );
         $this->db->where('order_id', $orderid);
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
@@ -259,6 +261,15 @@ class Store_ctr extends CI_Controller
         $message .= '</td>';
         $message .= '</tr>';
 
+        $message .= '<tr>';
+        $message .= '<td>';
+        $message .= ' Warranty  : ';
+        $message .= '</td>';
+        $message .= '<td>';
+        $message .= ' ' . $upload_order[0]['end_time'] . ' ';
+        $message .= '</td>';
+        $message .= '</tr>';
+
         $message .= '</table>';
 
 
@@ -314,6 +325,8 @@ class Store_ctr extends CI_Controller
         $team       = $this->input->post('team');
         $wage       = $this->input->post('wage');
         $Position   = $this->input->post('Position');
+        $dateUP     = date("Y-m-d", strtotime("+60 day"));
+
         if ($team) {
             $cf = '1';
         } else {
@@ -329,7 +342,8 @@ class Store_ctr extends CI_Controller
             'update_at'                 => date('Y-m-d H:i:s'),
             'status_confirmed_team'     => $cf,
             'notify_user'               => 0,
-            'notify_admin'              => 0
+            'notify_admin'              => 0 , 
+            'end_time'                  => $dateUP,
 
         );
         $this->db->where('order_id', $orderid);
@@ -359,8 +373,17 @@ class Store_ctr extends CI_Controller
 
     public function delete_order_st()
     {
-        $id   = $this->input->post('order_id');
-        $note = $this->input->post('note');
+        $id     = $this->input->post('order_id');
+        $note   = $this->input->post('note');
+        $row    = $this->db->get_where('tbl_upload_team', ['order_id' => $id])->row_array();
+        if ($row == true) {
+            $team = array(
+                'status'      => 4,
+            );
+
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_upload_team', $team);
+        }
 
         $data = array(
 
@@ -373,6 +396,19 @@ class Store_ctr extends CI_Controller
         );
         $this->db->where('order_id', $id);
         $resultsedit1 = $this->db->update('tbl_upload_order', $data);
+        if ($resultsedit1) {
+            $cancel = array(
+
+                'order_id'         => $id,
+                'status'           => 1,
+                'history'          => $note,
+                'status_who'       => 'admin cancel',
+                'create_at'        => date('Y-m-d H:i:s'),
+                'update_at'        => date('Y-m-d H:i:s'),
+    
+            );
+            $this->db->insert('tbl_cancel', $cancel);
+        }
 
         $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
 
@@ -560,11 +596,11 @@ class Store_ctr extends CI_Controller
 
     public function reject_for_buy_del()
     {
-     
-        $order          = $this->input->post('order');
-    
 
-        $success= $this->db->delete('tbl_upload_order',['order_id' => $order]);
+        $order          = $this->input->post('order');
+
+
+        $success = $this->db->delete('tbl_upload_order', ['order_id' => $order]);
         echo $success;
     }
 
@@ -890,7 +926,7 @@ class Store_ctr extends CI_Controller
                     $success = $this->db->insert('tbl_upload_main_search_sub', $db_store);
                 }
             } else {
-                
+
                 $data = [
                     'userId'                => $user_id,
                     'select_item_id'        => $select_item_id,

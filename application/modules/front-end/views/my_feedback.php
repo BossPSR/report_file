@@ -185,23 +185,25 @@
                                         <?php } ?>
                                     </td>
                                         <td>
-                                            <?php if ($feedback['check_status'] == 0) { ?>
-                                                <span class=" badge badge-danger" style="font-size:16px;"> Admin </span>
-                                                                <?php } else { ?>
-                                                                    <span class="badge badge-info" style="font-size:16px;"> Client </span>
-                                                                <?php } ?>
+                                            <?php if ($feedback['re_feedback'] == 1) : ?>
+                                                <span class=" badge badge-danger" style="font-size:16px;"> Re-feedback </span>
+                                            <?php elseif ($feedback['check_status'] == 0) : ?>
+                                                <span class=" badge badge-danger" style="font-size:16px;"> Admin feedback </span>
+                                            <?php else : ?>
+                                                <span class="badge badge-info" style="font-size:16px;"> Client feedback </span>
+                                            <?php endif; ?>
 
-                                                                <?php if ($feedback['status_feedback_read'] == 0) { ?>
-                                                                    <span class=" badge badge-danger" style="font-size:16px;">Not Read</span>
-                                                                <?php } else { ?>
-                                                                    <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
-                                                                        <span class="badge badge-info" style="font-size:16px;">Read</span>
-                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
-                                                                        <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
-                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
-                                                                        <span class="badge badge-success" style="font-size:16px;">Success</span>
-                                                                    <?php } ?>
-                                                                <?php } ?>
+                                            <?php if ($feedback['status_feedback_read'] == 0) { ?>
+                                                <span class=" badge badge-danger" style="font-size:16px;">Not Read</span>
+                                            <?php } else { ?>
+                                                <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
+                                                    <span class="badge badge-info" style="font-size:16px;">Read</span>
+                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
+                                                    <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
+                                                <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
+                                                    <span class="badge badge-success" style="font-size:16px;">Success</span>
+                                                <?php } ?>
+                                            <?php } ?>
                                         </td>
                                         <td><?= $feedback['name_item']; ?></td>
                                     </tr>

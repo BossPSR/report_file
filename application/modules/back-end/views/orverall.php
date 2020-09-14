@@ -326,15 +326,13 @@
                                                         </td>
 
                                                         <td>
-                                                            <?php
-                                                            if ($stores['status_cancel'] == 1) {
-                                                                echo '<span class="badge badge-pill badge-danger">Admin cancel</span>';
-                                                            } elseif ($stores['status_cancel'] == 2) {
-                                                                echo '<span class="badge badge-pill badge-danger">Team cancel</span>';
-                                                            } else {
-                                                                echo '-';
-                                                            }
-                                                            ?>
+                                                            <?php $cancel_sa = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array(); ?>
+                                                            <?php if ($cancel_sa == true) : ?>
+                                                                <span class="badge badge-pill badge-danger"><?= $cancel_sa['status_who']; ?></span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
                                                         </td>
                                                         <td>
                                                             <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>

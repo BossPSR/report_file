@@ -73,7 +73,7 @@
                                                     <th style="width: 240px;">info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
-                                                    <th style="width: 85px;">Status T3</th>
+                                                    <th style="width: 85px;">Process</th>
                                                     <th>Client Feedback</th>
                                                     <th style="width: 11%;">Tool</th>
                                                 </tr>
@@ -834,8 +834,8 @@
 
                                                                                 <div class="col-xl-12 col-md-12 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label>
-                                                                                        <select class="select2 form-control" name="teamid" required>
+                                                                                        <label for="Team">Team ID</label> <br>
+                                                                                        <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
@@ -932,41 +932,7 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-12 mb-2">
-                                                                                    <hr>
-                                                                                    <label for="" style="font-size: 14px;font-weight: 500;">Select Team file (Choose files for other teams)</label>
-                                                                                </div>
 
-                                                                                <div class="col-xl-3 col-md-3 col-sm-6 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <fieldset>
-                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                <input type="checkbox" class="" data-order="<?php echo $stores['orderST']; ?>">
-                                                                                                <span class="vs-checkbox">
-                                                                                                    <span class="vs-checkbox--check">
-                                                                                                        <i class="vs-icon feather icon-check"></i>
-                                                                                                    </span>
-                                                                                                </span>
-                                                                                                <span class="">File TM1</span>
-                                                                                            </div>
-                                                                                        </fieldset>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-3 col-md-3 col-sm-6 col-6  mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <fieldset>
-                                                                                            <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                <input type="checkbox" class="" data-order="<?php echo $stores['orderST']; ?>">
-                                                                                                <span class="vs-checkbox">
-                                                                                                    <span class="vs-checkbox--check">
-                                                                                                        <i class="vs-icon feather icon-check"></i>
-                                                                                                    </span>
-                                                                                                </span>
-                                                                                                <span class="">File TM2</span>
-                                                                                            </div>
-                                                                                        </fieldset>
-                                                                                    </div>
-                                                                                </div>
 
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -990,18 +956,31 @@
 
                                                         <!-- Status -->
                                                         <td>
-                                                            <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-success">Original</span>
-                                                            <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'notcomplete' && $stores['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-primary">Not complete</span>
-                                                            <?php elseif ($stores['status_book'] == '1' && $stores['status_cp'] == 'rewrite') : ?>
-                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($stores['status_book'] == '2'  && $stores['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($stores['status_admin'] == '1') : ?>
-                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php $admin_stu = $this->db->get('tbl_admin', ['adminId' => $stores['userOR']])->row_array(); ?>
+                                                            <?php if ($admin_stu == true) : ?>
+                                                                <?php if ($stores['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Admin Original </span>
+                                                                <?php elseif ($stores['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-warning"> Admin Not complete </span>
+                                                                <?php elseif ($stores['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Admin Rewrite </span>
+                                                                <?php elseif ($stores['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> Admin No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php else : ?>
-                                                                -
+                                                                <?php if ($stores['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                <?php elseif ($stores['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
+                                                                <?php elseif ($stores['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                <?php elseif ($stores['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> No DM </span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         </td>
 
@@ -1011,14 +990,19 @@
                                                             <?php if ($team == false) : ?>
                                                                 <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['orderST']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
                                                             <?php else : ?>
-                                                                <?php if ($team['teamId'] == '') : ?>
-                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-warning">processing</span>
-                                                                <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-success">complete</span>
-                                                                <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-danger">feedback</span>
+                                                                <?php $cancel_sa = $this->db->get_where('tbl_cancel', ['order_id' => $stores['orderST']])->row_array(); ?>
+                                                                <?php if ($cancel_sa == true) : ?>
+                                                                    <span class="badge badge-pill badge-danger"><?= $cancel_sa['status_who']; ?></span>
+                                                                <?php else : ?>
+                                                                    <?php if ($team['teamId'] == '') : ?>
+                                                                        <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                    <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-warning">processing</span>
+                                                                    <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-success">complete</span>
+                                                                    <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-danger">feedback</span>
+                                                                    <?php endif ?>
                                                                 <?php endif ?>
                                                             <?php endif ?>
                                                         </td>

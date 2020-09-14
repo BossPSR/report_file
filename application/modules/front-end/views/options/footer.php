@@ -224,7 +224,27 @@
 <script src="assets/reponsive/js/bootstrap.min.js"></script> -->
 <script src="assets/reponsive/plugins/selectator/fm.selectator.js"></script>
 
-
+<div class="modal fade" tabindex="-1" role="dialog" id="block_user">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                <h5 class="modal-title">Modal title</h5>
+            </div>
+            <div class="modal-body">
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <br>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="agree_block" class="btn btn-primary">Agree</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     function confirmalertunlock(data, data2, data3, data4) {
@@ -368,6 +388,11 @@
     <?php endif; ?>
 </script>
 
+<script>
+    <?php if ($this->session->flashdata('login_user_block')) : ?>
+        swal("คำเตือน", "Email ของคุณถูกระงับถาวร", "error");
+    <?php endif; ?>
+</script>
 <script>
     <?php if ($this->session->flashdata('package_check')) : ?>
         swal("คำเตือน", "Package ของคุณยังไม่หมดอายุ", "error");
@@ -556,14 +581,26 @@
 <!--Start of Tawk.to Script-->
 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
+<?php if ($user['block_user'] == 1 && $user['cash'] > 0 && $this->uri->segment(1) != 'my-withdraw') { ?>
+    <script type="text/javascript">
+        $('#block_user').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $('#agree_block').on('click', function() {
+            window.location.href = 'my-withdraw';
+        });
+    </script>
+<?php } ?>
+
 
 <?php if ($team == true) : ?>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};
         Tawk_API.visitor = {
-            name: '<?php echo $team['IdTeam']; ?>' ,
-            email : '<?php echo $team['email']; ?>'
+            name: '<?php echo $team['IdTeam']; ?>',
+            email: '<?php echo $team['email']; ?>'
         };
         Tawk_LoadStart = new Date();
         (function() {
@@ -584,8 +621,8 @@
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};
         Tawk_API.visitor = {
-            name: '<?php echo $user['idUser']; ?>' ,
-            email : '<?php echo $user['email']; ?>'
+            name: '<?php echo $user['idUser']; ?>',
+            email: '<?php echo $user['email']; ?>'
         };
         Tawk_LoadStart = new Date();
         (function() {

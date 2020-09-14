@@ -79,7 +79,7 @@
                     </div>
                 </div> -->
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-3">
                         <div class="card">
                             <div class="card-header">
@@ -173,7 +173,131 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+				<div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Dashboard</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="table-responsive mt-1">
+                                        <table class="table table-hover-animation mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Original</th>
+                                                    <th>Not Complete </th>
+                                                    <th>Rewrite</th>
+                                                    <th>Not Satified</th>
+                                                    <th>รวมทั้งหมด</th>
+                                                    <th>อ่านคำอธิบาย</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+													<th>Delivery</th>
+													<?php foreach ($deliveryList as $delivery) { ?>
+														<td><?php echo $delivery; ?></td>
+													<?php } ?>
+													<td>รวมจำนวน Order ตั้งแต่เปิดระบบ</td>
+												</tr>
+												<tr>
+													<th>Feedback All</th>
+                                                    <?php foreach ($feedback_allList as $feedback_all) { ?>
+														<td><?php echo $feedback_all; ?></td>
+													<?php } ?>
+													<td>รวม Feedbackตั้งแต่เปิดระบบ</td>
+												</tr>
+												<tr>
+													<th>Processing New Order</th>
+                                                    <?php foreach ($processingList as $processing) { ?>
+														<td><?php echo $processing; ?></td>
+													<?php } ?>
+													<td>Orderปรกติที่กำลังดำเนินการแต่ไม่รวม Feedback</td>
+												</tr>
+												<tr>
+													<th>Processing Feedback</th>
+													<?php foreach ($processing_feedbackList as $processing_feedback) { ?>
+														<td><?php echo $processing_feedback; ?></td>
+													<?php } ?>
+													<td>Orderที่ถูก Feedback แต่ไม่รวม Order ปรกติ</td>
+												</tr>
+												<tr>
+													<th>Cancel</th>
+													<?php foreach ($cancelList as $cancel) { ?>
+														<td><?php echo $cancel; ?></td>
+													<?php } ?>
+													<td>Orderที่ทีมกดยกเลิกทั้งOrderปรกติและFeedback</td>
+												</tr>
+												<tr>
+													<th>Cancel Not Working</th>
+													
+													<?php foreach ($cancel_notWorkingList as $cancel_notWorking) { ?>
+														<td><?php echo $cancel_notWorking; ?></td>
+													<?php } ?>
+													<td>Orderที่ทีมไม่กดยกเลิกทั้งOrderปรกติและFeedback</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+					
+					<div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Summary Quality DM</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="table-responsive mt-1">
+                                        <table class="table table-hover-animation mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Sell Complete</th>
+                                                    <th>Sell Not Complete </th>
+                                                    <th>Original</th>
+                                                    <th>Rewrite</th>
+													<th>รวมทั้งหมด</th>
+													<th>อ่านคำอธิบาย</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+													<th>Total DM</th>
+													<?php foreach ($total_dmList as $total_dm) { ?>
+														<td><?php echo $total_dm; ?> DM</td>
+													<?php } ?>
+													<td>รวมจำนวน DM ทั้งหมดโดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+												</tr>
+												<tr>
+													<th>Approved</th>
+													<?php foreach ($approvedList as $approved) { ?>
+														<td><?php echo $approved; ?> DM</td>
+													<?php } ?>
+													<td>รวมจำนวน DM ที่ลูกค้ากด Approved  โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+												</tr>
+												<tr>
+													<th>Not Approved</th>
+													<?php foreach ($not_approvedList as $not_approved) { ?>
+														<td><?php echo $not_approved; ?> DM</td>
+													<?php } ?>
+													<td>รวมจำนวน DM ที่ลูกค้ากด Not Approved  โดยนับจาก DM ย่อยทั้งหมดของแต่ล่ะชุด</td>
+												</tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
             </section>
             <!-- Dashboard Analytics end -->
