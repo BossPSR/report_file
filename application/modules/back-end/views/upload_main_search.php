@@ -81,7 +81,7 @@
                                                         <td><?php echo $value['organization_upload']; ?></td>
                                                         <td><?php echo $value['name_item']; ?></td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span>
                                                             <div class="modal fade" id="exampleModal<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                     <div class="modal-content">
@@ -145,7 +145,7 @@
                                                                                                 <?php endif; ?>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <?php if ($store['cp']=='complete'):?>                                                                                                }?>
+                                                                                                <?php if ($store['cp']=='complete'):?>                                                                                               
                                                                                                     Complete
                                                                                                 <?php elseif($store['cp']=='notcomplete'):?>
                                                                                                    Not Complete
@@ -155,7 +155,12 @@
                                                                                             </td>
                                                                                             <td>
                                                                                                 <?php $cutpoin = explode('.', $store['dm_sub']); ?>
-                                                                                                <i class="feather icon-folder" style="font-size: 25px; cursor: pointer;" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
+                                                                                                <?php $dm_sub = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $store['dm_sub']])->row_array();?>
+                                                                                                <?php if ($dm_sub['status']=='0'):?>
+                                                                                                    <i class="feather icon-folder" style="font-size: 25px; cursor: pointer; color:red" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
+                                                                                                <?php else:?>
+                                                                                                    <i class="feather icon-folder" style="font-size: 25px; cursor: pointer; color:green" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
+                                                                                                <?php endif;?>
                                                                                                 <div class="modal fade" id="exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                                                         <div class="modal-content">

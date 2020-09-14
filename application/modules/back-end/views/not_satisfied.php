@@ -57,16 +57,25 @@
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>Country</th>
+                                                    <th>
+                                                        Organi <br>
+                                                        zation
+                                                    </th>
+                                                    <th>DM</th>
                                                     <th>Main File</th>
                                                     <th>GT File</th>
+                                                    <th>DM File</th>
                                                     <th>T3 File</th>
                                                     <th>Create Date</th>
                                                     <th>Date required</th>
                                                     <th>Price</th>
+                                                    <th>Note Team</th>
+                                                    <th>Note Client</th>
                                                     <th>Info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
                                                     <th>Status T3</th>
+                                                    <th>Client Feedback</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -89,6 +98,30 @@
                                                         <!-- countryName -->
                                                         <td>
                                                             <?php echo $store['countryName'] == '' ? '-' : $store['countryName']; ?>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="badge badge-pill badge-primary mr-1 mb-1" style="font-weight: 900;">
+                                                                <?php echo $store['organization'] == '' ? '-' : $store['organization']; ?>
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td>
+                                                            <?php if (empty($stores['id_document'])) : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $store['orderNOT']])->result_array(); ?>
+                                                                <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
+
+                                                                    <?php if ($show_dm['id_document'] == '') : ?>
+                                                                        -
+                                                                    <?php else : ?>
+                                                                        <span class="badge badge-primary"><?php echo $show_dm['id_document'] ?></span>
+                                                                    <?php endif; ?>
+
+                                                                <?php } ?>
+                                                            <?php endif; ?>
                                                         </td>
 
                                                         <!-- Main File -->
@@ -208,6 +241,72 @@
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
+                                                        </td>
+                                                        <!-- DM File -->
+                                                        <td>
+                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $store['orderNOT']])->result_array(); ?>
+                                                            <?php if (!empty($dm_cc)) : ?>
+                                                                <span data-toggle="modal" data-target="#exampleModalbDM<?php echo $store['orderNOT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalbDM<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">DM File</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
+                                                                                    <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                        <p>
+                                                                                            <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                        </p>
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Rewrite</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($dm_c11 as $key => $dm_c11) : ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['comandnocom'] == '4') : ?>
+                                                                                                                <div class="badge badge-primary">Rewrite</div>
+                                                                                                            <?php else : ?>
+                                                                                                                -
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php endforeach; ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+
+
                                                         </td>
 
                                                         <!-- Team File -->
@@ -347,6 +446,63 @@
                                                         <?php else : ?>
                                                             <td>$<?php echo $store['price_file']; ?></td>
                                                         <?php endif; ?>
+                                                        <!-- Note Team -->
+                                                        <td>
+                                                            <?php if ($store['note_team'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note_new<?php echo $store['orderNOT']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="note_new<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?= $store['note_team']; ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php endif ?>
+                                                        </td>
+                                                        <!-- Note Client -->
+                                                        <td>
+                                                            <?php if ($store['note_user'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <a href="#" data-toggle="modal" data-target="#note_user<?php echo $store['orderNOT']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                                <div class="modal fade" id="note_user<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <?= $store['note_user']; ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php endif ?>
+                                                        </td>
+
 
                                                         <!-- teamId / wage -->
                                                         <td>
@@ -505,10 +661,82 @@
                                                                 <?php endif ?>
                                                             <?php endif ?>
                                                         </td>
-
+                                                        <!-- Client Feedback -->
+                                                        <td>
+                                                            <?php
+                                                            $z  = 0;
+                                                            $cf = $this->db->get_where('tbl_feedback', ['order_id' => $store['orderNOT'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                                            foreach ($cf as $key => $cf) {
+                                                                $z += 1;
+                                                            }
+                                                            $c  = 0;
+                                                            $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $store['orderNOT'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                            foreach ($cf2 as $key => $cf2) {
+                                                                $c += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
+                                                            <?php elseif ($cf2 == true) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <!-- Tool -->
                                                         <td>
-                                                            <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $store['orderNOT']; ?>"><i class="feather icon-delete"></i></button>
+                                                        <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $store['orderNOT']; ?>"><i class="feather icon-users"></i></button>
+                                                        <div class="modal fade" id="informal<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <form action="add_team_informal_not" method="POST">
+                                                                    <input type="hidden" name="order_id" value="<?php echo$store['orderNOT']; ?>">
+                                                                    <div class="modal-dialog " role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exp">Informal team (<?php echo $store['orderNOT']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body row">
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="name">Name</label>
+                                                                                        <input type="text" class="form-control" name="name" value="" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group" style="text-align: left;">
+                                                                                        <label for="helpInputTop">Position</label>
+                                                                                        <select name="position" class="form-control" required>
+                                                                                            <option selected disabled> ---- Select ---- </option>
+
+                                                                                            <?php foreach ($positionX as $positionX) { ?>
+                                                                                                <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $store['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                            <?php } ?>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <label for="Wage">Wage</label>
+                                                                                        <input type="text" class="form-control" name="Wage" value="" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-btn mr-1">
+                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        
+                                                        <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $store['orderNOT']; ?>"><i class="feather icon-delete"></i></button>
                                                             <div class="modal fade" id="exampleModallCenterc<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="delete_order_notst" method="POST">
                                                                     <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
