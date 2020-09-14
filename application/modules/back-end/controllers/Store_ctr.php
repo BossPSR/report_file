@@ -405,6 +405,7 @@ class Store_ctr extends CI_Controller
                 'status_who'       => 'admin cancel',
                 'create_at'        => date('Y-m-d H:i:s'),
                 'update_at'        => date('Y-m-d H:i:s'),
+                'end_date_ncf'     => date("Y-m-d" , strtotime(" + 30 days")),
     
             );
             $this->db->insert('tbl_cancel', $cancel);
