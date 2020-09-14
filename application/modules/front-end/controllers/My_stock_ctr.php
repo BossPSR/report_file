@@ -195,7 +195,8 @@ class My_stock_ctr extends CI_Controller
             'history'                       => $note_can,
             'status'                        => 1,
             'status_who'                    => 'Team cancel',
-            'create_at'                     => date('Y-m-d H:i:s')
+            'create_at'                     => date('Y-m-d H:i:s'),
+            'end_date_ncf'                  => date("Y-m-d" , strtotime(" + 30 days")),
         );
 
         if ($this->db->insert('tbl_cancel', $data)) {
@@ -291,7 +292,8 @@ class My_stock_ctr extends CI_Controller
                         'teamid'           => $team['IdTeam'],
                         'create_at'        => date('Y-m-d H:i:s'),
                         'status'           => '1',
-                        'status_who'       => 'Team',
+                        'status_who'       => 'Team cancel',
+                        'end_date_ncf'     => date("Y-m-d" , strtotime(" + 30 days")),
                     );
 
                     $success = $this->db->insert('tbl_cancel', $data3);
