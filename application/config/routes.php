@@ -349,4 +349,6 @@ $route['edit_info_feedback_all']                    = 'back-end/Feedback_ctr/edi
 $route['my_stock_up_mainfile']                      = 'back-end/Stock_ctr/my_stock_up_mainfile';
 $route['my_stock_up_gtfile']                        = 'back-end/Stock_ctr/my_stock_up_gtfile';
 $route['team_job_status']                           = 'back-end/Team_ctr/team_job_status';
+$route['delete_unlock']                             = 'back-end/Team_ctr/delete_unlock';
+$route['add_team_informal_not']                     = 'back-end/Informal_ctr/add_team_informal_not';
 
