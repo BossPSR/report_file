@@ -15,35 +15,18 @@ class Package_ctr extends CI_Controller
 		$data['package'] 	= $this->db->get('tbl_package')->result_array();
 		$datePaypal = date("Y-m-d", strtotime($data['userId']['package_end']));
 		$checkDate = DateDiff($datePaypal,date("Y-m-d"));
-		if ($checkDate >= 0) {
-			$this->session->set_flashdata('package_check', TRUE);
-			redirect('home');
-		}
-		
-		
-		$paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['idUser']])->row_array();
-		if (!empty($paypal)) {
-			$datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
-			$checkDate = DateDiff($datePaypal,date("Y-m-d"));
+		if ($data['userId']['package_end'] !== null) {
 
-			// if ($data['userId']['free_forever'] == 1) {
-			// 	$this->session->set_flashdata('package_check', TRUE);
-			// 	redirect('home');
-			// }
-
-
-			if ($checkDate >= 0 || empty($paypal)) {
-				$this->load->view('options/header_login');
-				$this->load->view('package', $data);
-				$this->load->view('options/footer');
-			} else {
+			if ($checkDate < 0) {
 				$this->session->set_flashdata('package_check', TRUE);
 				redirect('home');
 			}
-		} else {
-			$this->load->view('options/header_login');
-			$this->load->view('package', $data);
-			$this->load->view('options/footer');
 		}
+
+		$this->load->view('options/header_login');
+		$this->load->view('package', $data);
+		$this->load->view('options/footer');
+	
+	
 	}
 }

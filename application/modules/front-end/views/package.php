@@ -25,7 +25,8 @@
 									<div>Commission</div>
 									<div>
 										<input type="checkbox" id="check<?php echo $package['id'];?>">
-										<label>
+										<label id="text_commission<?php echo $package['id'];?>">หากมีผู้แนะนำ สามารถใส่เลขผู้แนะนำได้ค่ะ</label>
+										<label id="input_commission<?php echo $package['id'];?>" style="display: none;">
 											<input type="text" name="commission" id="check_commission<?php echo $package['id'];?>" class="form-control" disabled>
 										</label>
 									</div>
@@ -40,10 +41,14 @@
 
 					$("#check<?php echo $package['id'];?>").change(function() {
 							$('#check_commission<?php echo $package['id'];?>').val(null);
+							$('#text_commission<?php echo $package['id'];?>').css('display','none');
+							$('#input_commission<?php echo $package['id'];?>').css('display','none');
 							if(this.checked) {
 								$('#check_commission<?php echo $package['id'];?>').prop("disabled",false);
+								$('#input_commission<?php echo $package['id'];?>').css('display','inline-block');
 							}else{
 								$('#check_commission<?php echo $package['id'];?>').prop("disabled",true);
+								$('#text_commission<?php echo $package['id'];?>').css('display','inline-block');
 							}
 					});
 
@@ -99,7 +104,7 @@
                   success: function(response) {
                     let dataSucces = JSON.parse(response);
                     console.log(dataSucces);
-                    window.location.href = 'mainbuysell';
+                    window.location.href = '/mainbuysell';
 
                   }
                 });
