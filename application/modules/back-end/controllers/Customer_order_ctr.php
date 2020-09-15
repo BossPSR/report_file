@@ -305,15 +305,22 @@ class Customer_order_ctr extends CI_Controller
         $this->db->where('order_id', $order_id);
         $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4]);
 
-        foreach ($teamid as $key => $teamid) {
-            $data_re = [
-                'order_id' => $order_id,
-                'wage' => $wage,
-                'position' => $position,
-                'teamId' => $teamid,
-                'note' => $note,
-            ];
-            $this->db->insert('tbl_upload_team', $data_re);
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid ,
+                    'note'              => $note ,
+                    'status'            => 0 ,
+                    'status_check_team' => 1 ,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team' , $insertdb);
+                $this->sendEmail_all($teamid, $order_id);
+
+            }
         }
 
         if ($resultsedit) {
@@ -329,8 +336,6 @@ class Customer_order_ctr extends CI_Controller
 
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required]);
-
-                $this->sendEmail_all($teamid, $order_id);
             }
         }
 
@@ -530,7 +535,7 @@ class Customer_order_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';

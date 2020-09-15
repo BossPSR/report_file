@@ -161,7 +161,40 @@
         </div>
     </div>
 </div>
+
 <?php if (!empty($teamId)) { ?>
+    <?php $cancel = $this->db->get_where('tbl_cancel', ['teamid' => $teamId['IdTeam']])->result_array(); ?>
+    <?php foreach ($cancel as $cn) { ?>
+        <?php if ($cn['teamid'] == $teamId['IdTeam'] && $cn['status_cl'] == '0') { ?>
+            <script type="text/javascript">
+                var x = "<?= $teamId['IdTeam']; ?>";
+                console.log(x);
+                swal({
+                    icon: "success",
+                    title: "Congratulations",
+                    text: "ยินดีด้วยท่านสามารถกด Confirm Order ได้แล้ว",
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: 'congratulations',
+                            type: 'POST',
+                            data: {
+                                TM: x,
+                            },
+                            success: function(success) {}
+                        });
+                        // swal("Poof! Your imaginary file has been deleted!", {
+                        //     icon: "success",
+                        // });
+                    } else {
+                        // swal("Your imaginary file is safe!");
+                    };
+                });
+            </script>
+        <?php } ?>
+    <?php } ?>
     <?php if ($check_morefile) { ?>
         <?php $moreT = substr($check_morefile['ti'], 2); ?>
         <?php echo $moreT; ?>

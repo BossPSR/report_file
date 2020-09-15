@@ -153,7 +153,7 @@
                                         <?php else : ?>
                                             <?php if ($task['dated'] == true) : ?>
 
-                                                <div data-countdown="<?php echo $task['dated']; ?>"></div> 11
+                                                <div data-countdown="<?php echo $task['dated']; ?>"></div>
 
                                             <?php else : ?>
 
@@ -666,6 +666,7 @@
                                                                 url: 'my_task_app',
                                                                 data: {
                                                                     order_id: '<?php echo $task['or_id']; ?>',
+                                                                    tm: '<?php echo $team['IdTeam']; ?>',
                                                                     status_check_team: '2',
 
 

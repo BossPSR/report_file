@@ -711,7 +711,14 @@
                                                         <td><?php echo $feedback['update_confirm']; ?></td>
 
                                                         <!-- Feedback Cancel -->
-                                                        <td><?php echo $cancels['create_at']; ?> </td>
+                                                        <td>
+                                                            <?php if ($cancels == true) :  ?>
+                                                                <?php echo $cancels['create_at'] == '' ? '-' : $cancels['create_at']; ?>
+
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
 
                                                         <!-- dateReq -->
                                                         <td>
@@ -810,11 +817,11 @@
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label style="font-size: 16px;" for="Team">Team ID</label> <br>
-                                                                                        <select class="select2 form-control" name="teamid" required>
+                                                                                        <select class="select2 form-control" name="teamid[]"  multiple="multiple"  required>
                                                                                             <option disabled selected> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
-                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $feedback['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" ><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>

@@ -836,7 +836,7 @@
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
-                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                            <option disabled > -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
                                                                                                 <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
@@ -879,7 +879,7 @@
                                                                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">note</label>
-                                                                                        <textarea name="note_new" id="" rows="4" class="form-control"></textarea>
+                                                                                        <textarea name="note_new" id="" rows="4" class="form-control"><?php echo $stores['note']; ?></textarea>
                                                                                     </div>
                                                                                 </div>
 
@@ -1002,6 +1002,12 @@
                                                                         <span class="badge badge-pill badge-success">complete</span>
                                                                     <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
                                                                         <span class="badge badge-pill badge-danger">feedback</span>
+                                                                    <?php elseif ($team['status'] == 3 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-danger">Re feedback</span>
+                                                                    <?php elseif ($team['status'] == 4 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                    <?php else : ?>
+                                                                        -
                                                                     <?php endif ?>
                                                                 <?php endif ?>
                                                             <?php endif ?>

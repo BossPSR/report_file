@@ -146,7 +146,7 @@ class Team_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -259,7 +259,7 @@ class Team_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -363,7 +363,7 @@ class Team_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -454,7 +454,7 @@ class Team_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -590,7 +590,7 @@ class Team_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -748,7 +748,7 @@ class Team_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';

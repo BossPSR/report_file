@@ -31,8 +31,36 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="row card-header">
-                                <div class="col-lg-8 col-md-8  col-sm-6">
+                                <div class="col-lg-6 col-md-6  col-sm-6">
                                     <h4 class="card-title">Over All</h4>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-6 text-center">
+                                    <?php if ($order_all == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $p = 0; ?>
+                                        <?php foreach ($order_all as $key => $dataza) {
+                                            if (date("Y-m-d") > $dataza['end_time']) {
+                                                $p++;
+                                            }
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $p += 0; ?></h3>
+                                    <?php endif; ?>
+                                    <h3 class="check_list_not"> Not Expired </h3>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-6 text-center">
+                                    <?php if ($order_all == '') : ?>
+                                        <h3 class="card-title ">0</h3>
+                                    <?php else : ?>
+                                        <?php $k = 0; ?>
+                                        <?php foreach ($order_all as $key => $dataga) {
+                                             if (date("Y-m-d") < $dataga['end_time']) {
+                                                $k++;
+                                            }
+                                        } ?>
+                                        <h3 class="card-title "><?php echo $k += 0; ?></h3>
+                                    <?php endif; ?>
+                                    <h3 class="check_list_not"> Expired </h3>
                                 </div>
                                 <div class="col-lg-1 col-md-1 col-sm-6 text-center">
                                     <?php if ($order_all == '') : ?>

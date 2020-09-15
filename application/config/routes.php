@@ -18,7 +18,7 @@ $route['forget_resetTeam']          = 'front-end/Register_ctr/forget_sendemailTe
 $route['forget_step1']              = 'front-end/Register_ctr/forgot_passwordProcess';
 $route['forget_step2']              = 'front-end/Register_ctr/sendEmail';
 $route['forget_step3']              = 'front-end/Register_ctr/reset_passwordProcess';
-
+$route['congratulations']           = 'front-end/Home_ctr/congratulations';
 $route['forget_step3Team']          = 'front-end/Register_ctr/reset_passwordProcessTeam';
 $route['my-rewards']                = 'front-end/Rewards_ctr/my_rewards';
 $route['my-rewards-team']           = 'front-end/Rewards_ctr/my_rewards_team';
@@ -324,13 +324,14 @@ $route['checkStatus_admin_admin']                   = 'back-end/Login_ctr/checkS
 $route['checkStatusAdmin']                          = 'back-end/Login_ctr/checkStatusAdmin';
 
 $route['add_team_informal']                   		= 'back-end/Informal_ctr/add_team_informal';
+$route['add_team_informal_feedbackall']             = 'back-end/Informal_ctr/add_team_informal_feedbackall';
 $route['update_team_informal']                      = 'back-end/Informal_ctr/update_team_informal';
 $route['fileUpload_t3_not_summit']                  = 'back-end/Informal_ctr/fileUpload_t3_not_summit';
 $route['sendEmail_delivery_not_summit']             = 'back-end/Informal_ctr/sendEmail_delivery_not_summit';
-$route['add_score']                   		        = 'back-end/User_ctr/add_score';
-$route['deduct_score']                   		    = 'back-end/User_ctr/deduct_score';
-$route['cash_score']                   		        = 'back-end/User_ctr/cash_score';
-$route['deduct_cash_score']                   	    = 'back-end/User_ctr/deduct_cash_score';
+$route['add_score']                                   = 'back-end/User_ctr/add_score';
+$route['deduct_score']                               = 'back-end/User_ctr/deduct_score';
+$route['cash_score']                                   = 'back-end/User_ctr/cash_score';
+$route['deduct_cash_score']                           = 'back-end/User_ctr/deduct_cash_score';
 
 $route['deduct_income']                             = 'back-end/Team_ctr/deduct_income';
 $route['add_score_team']                            = 'back-end/Team_ctr/add_score_team';
@@ -351,6 +352,7 @@ $route['edit_info_feedback']                        = 'back-end/Feedback_ctr/edi
 $route['edit_info_feedback_all']                    = 'back-end/Feedback_ctr/edit_info_feedback_all';
 $route['my_stock_up_mainfile']                      = 'back-end/Stock_ctr/my_stock_up_mainfile';
 $route['my_stock_up_gtfile']                        = 'back-end/Stock_ctr/my_stock_up_gtfile';
+$route['sendemail_delivery_stockadmin']             = 'back-end/Stock_ctr/sendemail_delivery_stockadmin';
 $route['team_job_status']                           = 'back-end/Team_ctr/team_job_status';
 $route['delete_unlock']                             = 'back-end/Team_ctr/delete_unlock';
 $route['add_team_informal_not']                     = 'back-end/Informal_ctr/add_team_informal_not';

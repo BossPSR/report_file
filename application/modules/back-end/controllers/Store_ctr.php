@@ -292,7 +292,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -405,6 +405,7 @@ class Store_ctr extends CI_Controller
                 'status_who'       => 'admin cancel',
                 'create_at'        => date('Y-m-d H:i:s'),
                 'update_at'        => date('Y-m-d H:i:s'),
+                'end_date_ncf'     => date("Y-m-d" , strtotime(" + 30 days")),
     
             );
             $this->db->insert('tbl_cancel', $cancel);
@@ -543,7 +544,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -625,7 +626,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -782,7 +783,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -902,7 +903,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -1174,7 +1175,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -1370,7 +1371,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
