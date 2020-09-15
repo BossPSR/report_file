@@ -31,21 +31,49 @@ class Paypal_ctr extends CI_Controller{
 		if ($commission != "" || $commission !== null) {
 			$checkCommission = $this->db->get_where('tbl_commission',['commission_inviter'=> $commission , 'commission_recipient' => $data['user_id']])->row_array();
 			if (empty($checkCommission)) {
-				$dataCommission = [];
-				$dataCommission['commission_inviter'] = $commission;
-				$dataCommission['commission_recipient'] = $data['user_id'];
-				$dataCommission['id_package_com'] = $data['package'];
-				$dataCommission['update_at'] = date("Y-m-d H:i:s");
-				$dataCommission['commission_price'] = $pac_su['price_pk'];
-				$dataCommission['commission_detail'] = "เชิญเข้ามา join กัน";
-				$dataCommission['commission_sale'] = $pac_su['new_price'];
-				$dataCommission['create_at'] = date("Y-m-d H:i:s");
-				$this->db->insert('tbl_commission', $dataCommission);
-
 				$userCommission = $this->db->get_where('tbl_user' ,['idUser' => $commission])->row_array();
-				$userCom = $userCommission['commission'] + $pac_su['commission_price'];
-				$this->db->where('idUser' , $commission);
-				$this->db->update('tbl_user' , ['commission' => $userCom] );
+				$comPrice_commission = 0;
+				if ($userCommission['package_user'] !== null) {
+					if ($userCommission['package_user'] == 1) {
+						$priceNew = $this->db->get_where('tbl_package', ['id' => 1])->row_array();
+						$comPrice_commission += $priceNew['commission_price'];
+					}
+					if ($userCommission['package_user'] == 2) {
+						if ($data['package'] == 1) {
+							$priceNew = $this->db->get_where('tbl_package', ['id' => 1])->row_array();
+						}else{
+							$priceNew = $this->db->get_where('tbl_package', ['id' => 2])->row_array();
+						}
+						$comPrice_commission += $priceNew['commission_price'];
+					}
+					if ($userCommission['package_user'] == 3) {
+						if ($data['package'] == 1) {
+							$priceNew = $this->db->get_where('tbl_package', ['id' => 1])->row_array();
+						}elseif ($data['package'] == 2) {
+							$priceNew = $this->db->get_where('tbl_package', ['id' => 2])->row_array();
+						}else{
+							$priceNew = $this->db->get_where('tbl_package', ['id' => 3])->row_array();
+						}
+						
+						$comPrice_commission += $priceNew['commission_price'];
+					}
+				
+					$dataCommission = [];
+					$dataCommission['commission_inviter'] = $commission;
+					$dataCommission['commission_recipient'] = $data['user_id'];
+					$dataCommission['id_package_com'] = $data['package'];
+					$dataCommission['update_at'] = date("Y-m-d H:i:s");
+					$dataCommission['commission_price'] = $pac_su['price_pk'];
+					$dataCommission['commission_detail'] = "เชิญเข้ามา join กัน";
+					$dataCommission['commission_sale'] = $pac_su['new_price'];
+					$dataCommission['create_at'] = date("Y-m-d H:i:s");
+					$this->db->insert('tbl_commission', $dataCommission);
+
+					
+					$userCom = $userCommission['commission'] + $comPrice_commission;
+					$this->db->where('idUser' , $commission);
+					$this->db->update('tbl_user' , ['commission' => $userCom] );
+				}
 			}
 			
 		}
