@@ -738,7 +738,7 @@
                                                         
                                                         <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $store['orderNOT']; ?>"><i class="feather icon-delete"></i></button>
                                                             <div class="modal fade" id="exampleModallCenterc<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                <form action="delete_order_notst" method="POST">
+                                                                <!-- <form action="delete_order_notst" method="POST"> -->
                                                                     <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
                                                                     <div class="modal-dialog " role="document">
                                                                         <div class="modal-content">
@@ -749,6 +749,14 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body row">
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <label for="" style="font-size: 16px;">File Document </label>
+                                                                                <form action="cancel_dropzone_not" class="dropzone dropzone-area" id="maindropzonecan<?php echo $store['orderNOT']; ?>">
+                                                                                    <!-- <input type="hidden" id="DM2<?php echo $store['orderNOT']; ?>" class="form-control " name="DM" value="<?php echo $stores['id_document'] ?>"> -->
+
+                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                </form>
+                                                                            </div>
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <label for="helpInputTop">Note Cancel</label>
@@ -760,14 +768,55 @@
                                                                             <div class="modal-footer">
 
                                                                                 <div class="add-data-btn mr-1">
-                                                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                                                    <button type="submit" id="uploadsfilecan<?php echo $store['orderNOT']; ?>" class="btn btn-primary">submit</button>
                                                                                 </div>
 
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </form>
+                                                                <!-- </form> -->
                                                             </div>
+                                                            <script>
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzone22<?php echo $store['orderNOT']; ?> = new Dropzone("#maindropzonecan<?php echo $store['orderNOT']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                document.getElementById("uploadsfilecan<?php echo $store['orderNOT']; ?>").addEventListener("click", function() {
+                                                                    var note_cancel = $('#note_cancel').val();
+                                                                    // myDropzone.processQueue();
+                                                                    if (myDropzone22<?php echo $store['orderNOT']; ?>.files == 0) {
+
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    }
+                                                                    $.ajax({
+                                                                        url: 'delete_order_notst',
+                                                                        method: "POST",
+                                                                        data: {
+                                                                            note_cancel: note_cancel,
+                                                                            order_id: '<?php echo $store['orderNOT']; ?>'
+                                                                        },
+                                                                        success: function(getData) {
+
+                                                                            myDropzone22<?php echo $store['orderNOT']; ?>.processQueue();
+                                                                            myDropzone22<?php echo $store['orderNOT']; ?>.on("queuecomplete", function(file, res) {
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: false,
+                                                                                });
+                                                                                setTimeout(function() {
+                                                                                    location.href = "Not_Satisfied"
+                                                                                }, 1000);
+                                                                            });
+                                                                        }
+                                                                    });
+
+                                                                });
+                                                            </script>
                                                         </td>
 
 
@@ -845,8 +894,14 @@
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                                <label for="helpInputTop">Note</label>
-                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                                <label for="helpInputTop">Note Client</label>
+                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"><?php echo $store['note_user']; ?></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note Team</label>
+                                                                                <textarea class="form-control" name="note_t" rows="5" placeholder="Enter Note"><?php echo $store['note_team']; ?></textarea>
                                                                             </div>
 
                                                                         </div>

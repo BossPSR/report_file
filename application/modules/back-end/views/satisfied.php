@@ -1186,36 +1186,86 @@
                                                             </div>
 
                                                             <div class="modal fade" id="exampleModallCenterc<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                <form action="delete_order_st" method="POST">
-                                                                    <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
-                                                                    <div class="modal-dialog " role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $stores['orderST']; ?>)</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body row">
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">Note Cancel</label>
-                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+                                                                <!-- <form action="delete_order_st" method="POST"> -->
+                                                                <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
+                                                                <div class="modal-dialog " role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $stores['orderST']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body row">
+                                                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                                                <label for="" style="font-size: 16px;">File Document </label>
+                                                                                <form action="cancel_dropzone" class="dropzone dropzone-area" id="maindropzonecan<?php echo $stores['orderST']; ?>">
+                                                                                    <input type="hidden" id="DM2<?php echo $stores['orderST']; ?>" class="form-control " name="DM" value="<?php echo $stores['id_document'] ?>">
 
-                                                                                    </div>
+                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                <div class="form-group">
+                                                                                    <label for="helpInputTop">Note Cancel</label>
+                                                                                    <textarea type="text" class="form-control" name="note" value="" id="note_cancel" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="modal-footer">
 
-                                                                                <div class="add-data-btn mr-1">
-                                                                                    <button type="submit" class="btn btn-primary">submit</button>
-                                                                                </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
 
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" id="uploadsfilecan<?php echo $stores['orderST']; ?>" class="btn btn-primary">submit</button>
                                                                             </div>
+
                                                                         </div>
                                                                     </div>
-                                                                </form>
+                                                                </div>
+                                                                <!-- </form> -->
                                                             </div>
+                                                            <script>
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzone22<?php echo $stores['orderST']; ?> = new Dropzone("#maindropzonecan<?php echo $stores['orderST']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                document.getElementById("uploadsfilecan<?php echo $stores['orderST']; ?>").addEventListener("click", function() {
+                                                                    var note_cancel = $('#note_cancel').val();
+                                                                    // myDropzone.processQueue();
+                                                                    if (myDropzone22<?php echo $stores['orderST']; ?>.files == 0) {
+
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    }
+                                                                    $.ajax({
+                                                                        url: 'delete_order_st',
+                                                                        method: "POST",
+                                                                        data: {
+                                                                            note_cancel: note_cancel,
+                                                                            order_id: '<?php echo $stores['orderST']; ?>'
+                                                                        },
+                                                                        success: function(getData) {
+
+                                                                            myDropzone22<?php echo $stores['orderST']; ?>.processQueue();
+                                                                            myDropzone22<?php echo $stores['orderST']; ?>.on("queuecomplete", function(file, res) {
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: false,
+                                                                                });
+                                                                                setTimeout(function() {
+                                                                                    location.href = "Satisfied"
+                                                                                }, 1000);
+                                                                            });
+                                                                        }
+                                                                    });
+
+                                                                });
+                                                            </script>
 
                                                             <div class="modal fade" id="informal<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="add_team_informal" method="POST">
@@ -1514,8 +1564,15 @@
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
-                                                                                <label for="helpInputTop">Note</label>
-                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                                <label for="helpInputTop">Note Client</label>
+                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"><?php echo $stores['note_user']; ?></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note Team</label>
+                                                                                <textarea class="form-control" name="note_t" rows="5" placeholder="Enter Note"><?php echo $stores['note_team']; ?></textarea>
                                                                             </div>
 
                                                                         </div>

@@ -356,4 +356,6 @@ $route['sendemail_delivery_stockadmin']             = 'back-end/Stock_ctr/sendem
 $route['team_job_status']                           = 'back-end/Team_ctr/team_job_status';
 $route['delete_unlock']                             = 'back-end/Team_ctr/delete_unlock';
 $route['add_team_informal_not']                     = 'back-end/Informal_ctr/add_team_informal_not';
+$route['cancel_dropzone']                           = 'back-end/Store_ctr/cancel_dropzone';
+$route['cancel_dropzone_not']                       = 'back-end/Store_ctr/cancel_dropzone_not';
 
