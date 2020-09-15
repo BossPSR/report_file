@@ -158,14 +158,14 @@ class Customer_order_ctr extends CI_Controller
             'order_id'                         => $this->input->post('order_id'),
             'position'                         => $this->input->post('position'),
             'wage'                             => $this->input->post('wage'),
-            'note'                             => $this->input->post('note'),
+            'note'                             => $this->input->post('note_t'),
             'create_at'                        => date('Y-m-d H:i:s')
 
         );
 
         $resultsedit = $this->db->insert('tbl_upload_team', $data);
         $this->db->where('order_id', $this->input->post('order_id'));
-        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired')]);
+        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired'), 'note_user' => $this->input->post('note')]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
@@ -186,7 +186,7 @@ class Customer_order_ctr extends CI_Controller
             'position'                         => $this->input->post('position'),
             'wage'                             => $this->input->post('wage'),
             'teamId'                           => $teamid,
-            'note'                             => $this->input->post('note'),
+            'note'                             => $this->input->post('note_t'),
             'create_at'                        => date('Y-m-d H:i:s')
 
         );
@@ -195,7 +195,7 @@ class Customer_order_ctr extends CI_Controller
         $resultsedit = $this->db->insert('tbl_upload_team', $data);
 
         $this->db->where('order_id', $this->input->post('order_id'));
-        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired')]);
+        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired'),'note_user' => $this->input->post('note')]);
 
         if ($resultsedit) {
             if ($teamid == '') {
