@@ -22,13 +22,12 @@ class Home_ctr extends CI_Controller
 			$as = $sess['IdTeam'];
 			$data['check_read'] 		= $this->Feedback_model->feedback_c_read($as);
 			$data['check_morefile']		= $this->Users_model->check_GT($as);
-		} 
+		}
 
 		if ($ีuser == true) {
 			$us = $ีuser['idUser'];
 			$sq = date('Y-m-d H:i:s');
-			$data['checkorder'] = $this->Users_model->check_order($us,$sq);
-			
+			$data['checkorder'] = $this->Users_model->check_order($us, $sq);
 		}
 
 		$this->lang->load($lang, $lang);
@@ -37,9 +36,9 @@ class Home_ctr extends CI_Controller
 		$this->load->view('options/header_login');
 		if ($sess == true) {
 			$this->load->view('home', $data);
-		} elseif($ีuser == true) {
-			$this->load->view('home' , $data);
-		}else{
+		} elseif ($ีuser == true) {
+			$this->load->view('home', $data);
+		} else {
 			$this->load->view('home');
 		}
 		$this->load->view('options/footer');
@@ -81,5 +80,17 @@ class Home_ctr extends CI_Controller
 			$success = $this->db->update('tbl_morefile_GT', $data);
 			echo $success;
 		}
+	}
+
+	function congratulations()
+	{
+		$teamid = $this->input->post('TM');
+
+		$data = array(
+			'status_cl' => 1,
+		);
+		$this->db->where('teamid', $teamid);
+		$success = $this->db->update('tbl_cancel', $data);
+		echo $success;
 	}
 }
