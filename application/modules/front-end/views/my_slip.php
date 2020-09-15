@@ -28,6 +28,8 @@
     $sm_del2 = $this->db->get()->row_array();
     ?>
 <?php } ?>
+
+
 <br>
 <h2 class="text-center" style="margin-top: 15px;">My Slip</h2>
 <hr class="line_package">
@@ -64,8 +66,8 @@
                         </ul>
                         <?php if ($user) { ?>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <table class="table mt-15">
+                                <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab" style="margin: 25px 0px;">
+                                    <table class="table mt-15 tabledata">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Amoumt (จำนวนเงิน)</th>
@@ -98,10 +100,10 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="commission" role="tabpanel" aria-labelledby="profile-tab">
-                                    <table class="table mt-15">
+                                    <table class="table mt-15 tabledata">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">ราคา</th>
+                                                <th scope="col">Amoumt (จำนวนเงิน)</th>
                                                 <th scope="col">รหัสออเดอร์สินค้า</th>
                                                 <th scope="col" class="text-center">สถานะ</th>
                                                 <th scope="col">รายละเอียดเวลา</th>
@@ -110,10 +112,20 @@
                                         <tbody>
                                             <?php foreach ($slip_not_success as $slip_not_success) { ?>
                                                 <tr>
-                                                    <td> </td>
-                                                    <td></td>
-                                                    <td class="text-center"> </td>
-                                                    <td></td>
+                                                    <th scope="row"><?php echo $slip_not_success['price_file'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$'.$slip_not_success['price']; ?></th>
+                                                    <td><?php echo $slip_not_success['order_id']; ?></td>
+                                                    <!-- <td></td> -->
+                                                    <td class="text-center">
+                                                        <?php if ($slip_not_success['status_pay'] == 1) { ?>
+                                                            <span class="badge badge-pill badge-success">ชำระเงินแล้ว</span>
+                                                        <?php } elseif ($slip_not_success['status_pay'] == 0) { ?>
+                                                            <span class="badge badge-pill badge-warning" style="color:#fff;">ยังไม่ชำระเงิน</span>
+                                                        <?php } elseif ($slip_not_success['is_check'] == 1) { ?>
+                                                            <span class="badge badge-pill badge-danger">ยกเลิกออเดอร์</span>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <?php $ggh = explode(" ", $slip_not_success['create_at']); ?>
+                                                    <td><?php echo $ggh[0]; ?></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
@@ -121,7 +133,7 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="cashback" role="tabpanel" aria-labelledby="profile-tab">
-                                    <table class="table mt-15">
+                                    <table class="table mt-15 tabledata">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Amount (จำนวนเงิน)</th>
@@ -134,7 +146,7 @@
                                         <tbody>
                                             <?php foreach ($slip as $key => $slip) { ?>
                                                 <tr>
-                                                    <td>$ <?php echo $slip['price']; ?></td>
+                                                    <td><?php echo $slip['price'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$'.$slip['price']; ?></td>
                                                     <td><?php echo $slip['create_at']; ?></td>
                                                     <td><?php echo $slip['transaction_date']; ?></td>
                                                     <td>
@@ -145,14 +157,14 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td>
-                                                    <?php if ($slip['status'] == 2) { ?>
+                                                        <?php if ($slip['status'] == 2) { ?>
                                                             <span class="badge badge-pill badge-success">Success (สำเร็จแล้ว)</span>
                                                         <?php } elseif ($slip['status'] == 1) { ?>
                                                             <span class="badge badge-pill badge-warning" style="color:#fff;">Processing (กำลังดำเนินการ)</span>
                                                         <?php } elseif ($$slip['status'] == 3) { ?>
                                                             <span class="badge badge-pill badge-danger">Cencal (ยกเลิก)</span>
                                                         <?php } ?>
-                                                       
+
                                                     </td>
                                                 </tr>
                                             <?php } ?>

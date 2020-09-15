@@ -221,7 +221,7 @@
 
                                                             <div class="modal fade" id="exampleModalwage<?php echo $feedback_team['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="edit_info_feedback_all" method="POST">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
 
                                                                         <input type="hidden" name="order_id" value="<?php echo $feedback_team['order_id']; ?>">
                                                                         <div class="modal-content">

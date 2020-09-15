@@ -224,6 +224,9 @@
 <script src="assets/reponsive/js/bootstrap.min.js"></script> -->
 <script src="assets/reponsive/plugins/selectator/fm.selectator.js"></script>
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+
 <div class="modal fade" tabindex="-1" role="dialog" id="block_user">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -245,7 +248,11 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function() {
+        $('.tabledata').DataTable();
+    });
+</script>
 <script>
     function confirmalertunlock(data, data2, data3, data4) {
 

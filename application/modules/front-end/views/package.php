@@ -104,7 +104,7 @@
                   success: function(response) {
                     let dataSucces = JSON.parse(response);
                     console.log(dataSucces);
-                    window.location.href = '/mainbuysell';
+                    window.location.href = 'home';
 
                   }
                 });

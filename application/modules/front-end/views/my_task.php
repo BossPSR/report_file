@@ -531,6 +531,7 @@
                                     <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
+                                     
                                         <?php if ($task['c_status'] == 3) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
                                         <?php } elseif (empty($withh)) { ?>
@@ -625,10 +626,10 @@
                                             <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
                                         <?php } ?>
 
-                                   
+
 
                                     <?php } else { ?>
-                                        <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0 || $task['status_approved'] == 4) { ?>
+                                        <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0 ) { ?>
                                             <td><span class="badge badge-warning" style="font-size:16px;">Processing</span></td>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
                                             <td><span class="badge badge-info" style="font-size:16px;">Waiting for Approved</span></td>
@@ -638,6 +639,8 @@
                                             <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
                                         <?php } elseif ($task['c_status'] == 4) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">Not complete </span></td>
+                                        <?php } elseif ($task['c_status'] == 5) { ?>
+                                            <td><span class="badge badge-success" style="font-size:16px;">Complete </span></td>
                                         <?php } else { ?>
                                             <td>-</td>
                                         <?php } ?>

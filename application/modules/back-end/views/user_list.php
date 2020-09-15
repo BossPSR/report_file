@@ -149,14 +149,14 @@
                                                                                 </thead>
                                                                                 <?php $user_redetail = $this->db->get_where('tbl_commission', ['commission_inviter' => $user_list['Us']])->result_array(); ?>
                                                                                 <tbody>
-                                                                                    <?php foreach ($user_redetail as $key => $user_redetail) { ?> 
+                                                                                    <?php foreach ($user_redetail as $key => $user_redetail) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $user_redetail['commission_recipient'];?></td>
+                                                                                            <td><?php echo $user_redetail['commission_recipient']; ?></td>
                                                                                             <?php $package = $this->db->get_where('tbl_package', ['id' => $user_redetail['id_package_com']])->row_array(); ?>
-                                                                                            <td><?php echo $package['title_pk'];?></td>
-                                                                                            <td><?php echo $user_redetail['commission_price'];?></td>
-                                                                                            <td><?php echo $user_redetail['commission_detail'];?></td>
-                                                                                            <td><?php echo $user_redetail['create_at'];?></td>
+                                                                                            <td><?php echo $package['title_pk']; ?></td>
+                                                                                            <td><?php echo $user_redetail['commission_price']; ?></td>
+                                                                                            <td><?php echo $user_redetail['commission_detail']; ?></td>
+                                                                                            <td><?php echo $user_redetail['create_at']; ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -172,10 +172,16 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <?php $user_recom = $this->db->get_where('tbl_commission', ['commission_recipient' => $user_list['Us']])->row_array(); ?>
+
                                                         <td>
-                                                            <?php if ($user_recom['commission_inviter']) : ?>
-                                                                <?php echo $user_recom['commission_inviter'] ?>
+                                                            <?php $user_recom = $this->db->get_where('tbl_commission', ['commission_recipient' => $user_list['Us']])->row_array(); ?>
+
+                                                            <?php if ($user_recom == true) : ?>
+                                                                <?php if ($user_recom['commission_inviter']) : ?>
+                                                                    <?php echo $user_recom['commission_inviter'] ?>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>

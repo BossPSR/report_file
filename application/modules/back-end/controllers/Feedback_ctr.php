@@ -60,22 +60,21 @@ class Feedback_ctr extends CI_Controller
                     'order_id'          => $order_id,
                     'wage'              => $wage,
                     'position'          => $position,
-                    'teamId'            => $teamid ,
-                    'note'              => $note ,
-                    'status'            => 0 ,
-                    'status_check_team' => 1 ,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 1,
                     'create_at'         => date('Y-m-d H:i:s')
                 ];
-                $resultsedit = $this->db->insert('tbl_upload_team' , $insertdb);
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
                 $this->sendEmail_all($teamid, $order_id);
-
             }
         }
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'status_approved' => 0 , 'date_required' => $date_require]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'status_approved' => 0, 'date_required' => $date_require]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -84,7 +83,7 @@ class Feedback_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'status_approved' => 0 , 'date_required' => $date_require]);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'status_approved' => 0, 'date_required' => $date_require]);
             }
         }
 
@@ -187,22 +186,21 @@ class Feedback_ctr extends CI_Controller
             }
         }
 
-      
+
         if ($teamid) {
             foreach ($teamid as $key => $teamid) {
                 $insertdb = [
                     'order_id'          => $order_id,
                     'wage'              => $wage,
                     'position'          => $position,
-                    'teamId'            => $teamid ,
-                    'note'              => $note ,
-                    'status'            => 0 ,
-                    'status_check_team' => 1 ,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 1,
                     'create_at'         => date('Y-m-d H:i:s')
                 ];
-                $resultsedit = $this->db->insert('tbl_upload_team' , $insertdb);
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
                 $this->sendEmail_all_a($teamid, $order_id);
-
             }
         }
 
@@ -210,9 +208,10 @@ class Feedback_ctr extends CI_Controller
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 , 'date_required' => $date_require, 'status_approved' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'date_required' => $date_require, 'status_approved' => 0]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
+                    $this->sendEmail_all_user($order_id);
                 } else {
                     $this->session->set_flashdata('del_ss2', 'Not Successfully updated Edit Team All information');
                 }
@@ -220,7 +219,7 @@ class Feedback_ctr extends CI_Controller
 
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_require, 'status_approved' => 0]);
-
+                $this->sendEmail_all_user($order_id);
             }
         }
 
@@ -280,6 +279,87 @@ class Feedback_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
     }
+
+    private function sendEmail_all_user($order_id)
+    {
+        $orderdb  = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
+        $userdb  = $this->db->get_where('tbl_user', ['idUser' => $orderdb['userId']])->row_array();
+
+        $subject = 'You have received additional work from the admin. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $userdb['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order_id . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $order_id . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> You have received an order at : ' . $order_id . ' , Please check the binder. http://www.ip-soft.co.th/ipsoft </div>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> ' . $order_id . ' , You can cancel your order here. http://www.ip-soft.co.th/ipsoft/cancel_order?order='.$order_id.' </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($userdb['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile User !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile User');
+        }
+    }
+
+    public function cancel_order()
+    {
+        $order = $this->input->get('order');
+
+        $data = [
+            'is_check' => 1
+        ];
+        $this->db->where('order_id', $order);
+        $success = $this->db->update('tbl_upload_order', $data);
+        if ($success) {
+            $data01 = [
+                'status' => 4
+            ];
+            $this->db->where('order_id', $order);
+            $this->db->update('tbl_upload_team', $data01);
+        }
+
+        if ($success > 0) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Cancel order !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Cancel order.');
+        }
+        return redirect('home');
+
+    }
+
     public function status_Feedback()
     {
         $id = $this->input->get('id');

@@ -38,6 +38,7 @@ class Feedback_model extends CI_Model
         $this->db->join('tbl_upload_order', 'tbl_feedback.order_id=tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_feedback_file', 'tbl_feedback.id=tbl_feedback_file.id', 'left');
         $this->db->where_not_in('tbl_upload_order.status_approved', ['1', '2']);
+        $this->db->where('tbl_upload_order.is_check', 0);
         $this->db->group_by('tbl_feedback.id');
 
         return $this->db->get()->result_array();

@@ -209,6 +209,21 @@
 
             $('.uploadfiles').click(function() {
                 var x = document.getElementById("selected2").value;
+                $.ajax({
+                    type: 'POST',
+                    url: 'order_check_timeout',
+                    data: {
+                        order: x,
+                    },
+                    success: function(success) {
+                        console.log('1');
+                    },
+                    error: function(error) {
+                        console.log('2');
+                    }
+
+                });
+
                 if (myDropzone<?= $op; ?>.files < 1 || x == '') {
                     swal("Warning!", "Please fill out the information.", "error", {
                         button: false,
@@ -222,6 +237,7 @@
                         setTimeout("location.reload(true);", 1000);
                     });
                 }
+
             });
         </script>
     <?php } ?>

@@ -897,7 +897,7 @@
                                                                                     $t3folder = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stores['orderST']])->result_array();
                                                                                     ?>
                                                                                     <div class="table-responsive">
-                                                                                        <table class="table zero-configuration">
+                                                                                        <table class="table zero-configuration" >
                                                                                             <thead>
                                                                                                 <tr>
                                                                                                     <th>Order id</th>
@@ -924,9 +924,9 @@
                                                                                                                         </div>
                                                                                                                         <div class="modal-body">
 
-                                                                                                                            <?php $orderTgroup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $t3folder['order_id'], 'teamId' => $t3folder['teamId']])->result_array(); ?>
+                                                                                                                            <?php $orderTgroupold = $this->db->get_where('tbl_upload_order_team', ['order_id' => $t3folder['order_id'], 'teamId' => $t3folder['teamId']])->result_array(); ?>
 
-                                                                                                                            <table class="table zero-configuration">
+                                                                                                                            <table class="table zero-configuration" id="hereold<?php echo $stores['orderST']; ?>">
                                                                                                                                 <thead>
                                                                                                                                     <tr>
                                                                                                                                         <th>#</th>
@@ -936,12 +936,12 @@
                                                                                                                                     </tr>
                                                                                                                                 </thead>
                                                                                                                                 <tbody>
-                                                                                                                                    <?php foreach ($orderTgroup as $keys => $orderTgroup) { ?>
+                                                                                                                                    <?php foreach ($orderTgroupold as $keys => $orderTgroupold) { ?>
                                                                                                                                         <tr>
                                                                                                                                             <td>
                                                                                                                                                 <fieldset>
                                                                                                                                                     <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                                                                                        <input type="checkbox" name="checkbox[]" value="<?php echo $orderTgroup['id']; ?>">
+                                                                                                                                                        <input type="checkbox" name="checkbox[]" value="<?php echo $orderTgroupold['id']; ?>">
                                                                                                                                                         <span class="vs-checkbox">
                                                                                                                                                             <span class="vs-checkbox--check">
                                                                                                                                                                 <i class="vs-icon feather icon-check"></i>
@@ -951,15 +951,67 @@
                                                                                                                                                 </fieldset>
                                                                                                                                             </td>
                                                                                                                                             <td>
-                                                                                                                                                <?php echo $orderTgroup['file_name'] ?>
-                                                                                                                                                <!-- <a href="" data-toggle="modal" data-target="#gd01<?php echo $orderTgroup['id']; ?>">
+                                                                                                                                                <?php echo $orderTgroupold['file_name'] ?>
+                                                                                                                                                <a href="" data-toggle="modal" data-target="#fileold<?php echo $orderTgroupold['id']; ?>">
                                                                                                                                                     <i class="feather icon-edit-2" style="font-size: 25px;"></i>
-                                                                                                                                                </a> -->
+                                                                                                                                                </a>
+
+                                                                                                                                                <!-- Modal -->
+                                                                                                                                                <div class="modal fade text-left" id="fileold<?php echo $orderTgroupold['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                                                                        <div class="modal-content">
+                                                                                                                                                            <div class="modal-header">
+                                                                                                                                                                <h4 class="modal-title" id="myModalLabel1">Rename team old</h4>
+                                                                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                                                                </button>
+                                                                                                                                                            </div>
+                                                                                                                                                            <div class="modal-body">
+                                                                                                                                                                <?php $or_file_name = explode('.', $orderTgroupold['file_name']); ?>
+                                                                                                                                                                <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameold<?php echo $orderTgroupold['id']; ?>" class="form-control">
+                                                                                                                                                                <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameold<?php echo $orderTgroupold['id']; ?>" class="form-control">
+                                                                                                                                                                <input type="hidden" id="path<?php echo $orderTgroupold['id']; ?>" data-pathgt="<?php echo $orderTgroupold['path']; ?>" class="form-control">
+                                                                                                                                                            </div>
+                                                                                                                                                            <div class="modal-footer">
+                                                                                                                                                                <button type="button" class="btn btn-primary ep" id="re_file_name_buttonGT<?php echo $orderTgroupold['id']; ?> " data-fgt="<?php echo $orderTgroupold['id']; ?>"  data-fmain="<?php echo $order['id']; ?>">Submit</button>
+                                                                                                                                                            </div>
+
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                                <script>
+                                                                                                                                                    $('body').on('click', 'button[type="button"].ep', function() {
+                                                                                                                                                        var c = $(this).data('fmain');
+                                                                                                                                                        var d = $('#pathmain' + c).data('pathgt');
+                                                                                                                                                        var name_file = $('#Re_file_nameold' + c).val();
+                                                                                                                                                        var last_file = $('#Re_last_nameold' + c).val();
+
+                                                                                                                                                        $.ajax({
+                                                                                                                                                            url: "rename_filename_TM",
+                                                                                                                                                            type: "POST",
+                                                                                                                                                            data: {
+                                                                                                                                                                id: c,
+                                                                                                                                                                name_file: name_file,
+                                                                                                                                                                last_file: last_file,
+                                                                                                                                                                path: d
+                                                                                                                                                            },
+                                                                                                                                                            success: function(success) {
+                                                                                                                                                                if (success) {
+                                                                                                                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                                                                        button: true,
+                                                                                                                                                                    });
+                                                                                                                                                                    $("#hereold<?php echo $stores['orderST']; ?>").load(window.location.href + " #hereold<?php echo $stores['orderST']; ?>");
+                                                                                                                                                                    $('#fileold' + c).modal('hide');
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                        });
+                                                                                                                                                    });
+                                                                                                                                                </script>
                                                                                                                                             </td>
                                                                                                                                             <td>
-                                                                                                                                                <a href="<?php echo $orderTgroup['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                                                                <a href="<?php echo $orderTgroupold['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                                                                                             </td>
-                                                                                                                                            <td><?php echo $orderTgroup['create_at'] ?></td>
+                                                                                                                                            <td><?php echo $orderTgroupold['create_at'] ?></td>
                                                                                                                                         </tr>
                                                                                                                                     <?php } ?>
                                                                                                                                 </tbody>
@@ -1125,9 +1177,9 @@
                                                                 $c += 1;
                                                             }
                                                             ?>
-                                                            <?php if ($cf == true ) : ?>
+                                                            <?php if ($cf == true) : ?>
                                                                 <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
-                                                            <?php elseif ($cf2 == true ) : ?>
+                                                            <?php elseif ($cf2 == true) : ?>
                                                                 <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
                                                             <?php elseif ($stores['status_approved'] == 3) : ?>
                                                                 <span class="badge badge-pill badge-danger">Feedback</span>
@@ -1140,6 +1192,136 @@
 
                                                         <!-- Tool -->
                                                         <td>
+
+
+                                                            <?php if ($stores['status_delivery'] == '1') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $stores['orderST']; ?>"><i class="feather icon-navigation"></i></button>
+                                                            <?php endif; ?>
+
+                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $stores['orderST']])->result_array(); ?>
+
+                                                            <div class="modal fade" id="exampleModalu<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Delivery File</h5>
+
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+
+                                                                            <form action="sendEmail_delivery_pay_st" method="POST">
+                                                                                <input type="hidden" name="id" value="<?php echo $stores['orderST']; ?>">
+                                                                                <input type="hidden" name="dm_id[]" value="<?php echo $stores['id_document']; ?>">
+
+                                                                                <?php foreach ($dm_cc as $key => $dm_cc) { ?>
+                                                                                    <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
+                                                                                    <?php if (!empty($dm_cc['id_document'])) : ?>
+                                                                                        <p>
+                                                                                            <b>
+                                                                                                <h3><?php echo $dm_cc['id_document']; ?></h3>
+                                                                                            </b>
+                                                                                        </p>
+
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Select</th>
+                                                                                                    <th>Rewrite</th>
+                                                                                                    <th>File Name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>Create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($dm_c11 as $keys => $dm_c11) { ?>
+
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <label class="container">
+                                                                                                                <input type="checkbox" class="checkmark" id="delivery<?php echo $dm_c11['id']; ?>" name="order_id[]" value="<?php echo $dm_c11['id'] ?>" onclick="numCheck<?php echo $dm_c11['id']; ?>();">
+                                                                                                                <span class="checkmark"></span>
+                                                                                                            </label>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            <?php if ($dm_c11['comandnocom'] == '4') : ?>
+                                                                                                                <div class="badge badge-primary">Rewrite</div>
+                                                                                                            <?php else : ?>
+                                                                                                                -
+                                                                                                            <?php endif ?>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $dm_c11['file_name'] ?></td>
+                                                                                                        <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                        <td><?php echo $dm_c11['create_at'] ?></td>
+
+
+                                                                                                    </tr>
+                                                                                                    <script>
+                                                                                                        function numCheck<?php echo $dm_c11['id'] . '-' . $dm_c11['store_id']; ?>() {
+                                                                                                            var checkBox = document.getElementById("delivery<?php echo $dm_c11['id'] . '-' . $dm_c11['store_id']; ?>");
+                                                                                                            console.log(checkBox.checked)
+                                                                                                        }
+                                                                                                    </script>
+                                                                                                <?php }
+                                                                                                ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <?php else : ?>
+
+                                                                                    <?php endif; ?>
+                                                                                <?php } ?>
+
+                                                                                <hr>
+
+                                                                                <h3>
+                                                                                    <p>Team file</p>
+                                                                                </h3>
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <?php $orderss_team = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stores['order_id']])->result_array(); ?>
+                                                                                        <tr>
+                                                                                            <th>Select</th>
+
+                                                                                            <th>Order Id</th>
+                                                                                            <th>File Name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>Create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderss_team as $keys => $orderss_team) { ?>
+                                                                                            <tr>
+                                                                                                <td><label class="container">
+                                                                                                        <input type="checkbox" class="checkmark" id="Team_ff" name="order_team[]" value="<?php echo $orderss_team['id'] ?>">
+                                                                                                        <span class="checkmark"></span>
+                                                                                                    </label>
+                                                                                                </td>
+
+                                                                                                <td><?php echo $orderss_team['order_id'] ?></td>
+                                                                                                <td><?php echo $orderss_team['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderss_team['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderss_team['create_at'] ?></td>
+
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around">
+                                                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                             <?php if ($stores['status_delivery'] == 1) : ?>
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#agin<?php echo $stores['orderST']; ?>"><i class="feather icon-navigation"></i> </button>

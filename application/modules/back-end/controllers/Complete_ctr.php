@@ -166,10 +166,10 @@ class Complete_ctr extends CI_Controller
     {
         $idco   = $this->input->post('idco');
         $detail1co   = $this->input->post('detail1co');
-       
+
         $this->db->where('id', $idco);
-        $success = $this->db->update('tbl_upload_team', ['status' => '4' , 'note' => $detail1co ]);
-      
+        $success = $this->db->update('tbl_upload_team', ['status' => '4', 'note' => $detail1co]);
+
         echo $success;
     }
 
@@ -228,19 +228,27 @@ class Complete_ctr extends CI_Controller
 
             if ($feedback == true) {
                 $this->db->where('order_id', $id);
-                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP , 'end_time_withdraw' => $time_withdraw, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'end_time_withdraw' => $time_withdraw, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
                 $this->db->where('order_id', $id);
                 $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'check_feedback_dalivery' => 2]);
 
                 $this->db->where('idUser', $user_order['userId']);
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);
+                if ($user_order['status_approved'] == 4) {
+                    $this->db->where('order_id', $id);
+                    $this->db->update('tbl_upload_order', ['status_approved' => 1]);
+                }
             } else {
                 $this->db->where('order_id', $id);
-                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP  , 'end_time_withdraw' => $time_withdraw , 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+                $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'end_time_withdraw' => $time_withdraw, 'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
 
                 $this->db->where('idUser', $user_order['userId']);
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file'], 'score' => $user['score'] - 100]);
+                if ($user_order['status_approved'] == 4) {
+                    $this->db->where('order_id', $id);
+                    $this->db->update('tbl_upload_order', ['status_approved' => 1]);
+                }
             }
 
 

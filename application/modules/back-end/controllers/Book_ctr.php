@@ -507,6 +507,90 @@ class Book_ctr extends CI_Controller
         return redirect('Bookmark');
     }
 
+    public function sendEmail_delivery_pay_st()
+    {
+        $order_id       = $this->input->post('order_id');
+        $order_team     = $this->input->post('order_team');
+        $id             = $this->input->post('id');
+        $dm_id          = $this->input->post('dm_id');
+        $dateUP         = date("Y-m-d", strtotime("+60 day"));
+        $time_withdraw  = date("Y-m-d", strtotime("+65 day"));
+
+        $this->db->where('order_id', $id);
+        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s') , 'end_time' => $dateUP , 'end_time_withdraw' => $time_withdraw ,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+        foreach ($dm_id as $key => $dm_id) {
+
+            $this->db->where('id_doc', $dm_id);
+            $this->db->update('tbl_upload_main_search', ['update_at' => date('Y-m-d H:i:s')]);
+        }
+
+        $user_email = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
+        $user_email_send  = $this->db->get_where('tbl_user', ['idUser' => $user_email['userId']])->row_array();
+
+
+        $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Send all your documents successfully.';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $user_email_send['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order details ("' . $id  . '")</p>';
+
+
+        foreach ($order_id as $key => $order_id) {
+            $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
+            $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $order['path'] . '">' . $order['file_name'] . '</a>';
+            $message .= '<br>';
+        }
+
+        foreach ($order_team as $key => $order_team) {
+            $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
+            $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $orderT['path'] . '">' . $orderT['file_name'] . '</a>';
+            $message .= '<br>';
+        }
+
+        $message .= '</center>';
+
+
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($user_email_send['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
+        }
+
+        return redirect('Satisfied');
+    }
+
     public function upload_team_book()
     {
         $data = array(

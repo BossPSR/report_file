@@ -17,7 +17,7 @@ class Delivery_ctr extends CI_Controller
 
         $data['delivery'] = $this->Order_model->delivery_team($sessi);
         $data['delivery_feed'] = $this->Order_model->delivery_team_feed($sessi);
-        $data['folder'] = $this->db->get_where('tbl_folder', ['id_team_folder' => $sessi , 'cancel_status' => 0 ])->result_array();
+        $data['folder'] = $this->db->get_where('tbl_folder', ['id_team_folder' => $sessi, 'cancel_status' => 0])->result_array();
         if ($this->session->userdata('email') == '') {
             redirect('home');
         } else {
@@ -33,11 +33,11 @@ class Delivery_ctr extends CI_Controller
         $order_id   = $this->input->post('select_items');
         $idfolder   = $this->input->post('idfolder');
         $team       = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row();
-        $order_exp = explode( ',' , $order_id);
+        $order_exp = explode(',', $order_id);
         $feed       = $this->db->get_where('tbl_feedback', ['order_id' => $order_exp[0]])->row_array();
 
 
-       
+
 
         // Set preference
         $config['upload_path']     = 'uploads/Team/';
@@ -67,7 +67,7 @@ class Delivery_ctr extends CI_Controller
             );
             if ($this->db->insert('tbl_upload_order_team', $data)) {
                 $data3 = array(
-                    'status'        => 1,
+                    'status'        => 5,
                 );
                 $this->db->where('order_id', $order_exp[0]);
                 $this->db->update('tbl_upload_team', $data3);
@@ -87,6 +87,38 @@ class Delivery_ctr extends CI_Controller
                 }
             }
         }
+    }
+
+    public function order_check_timeout()
+    {
+        $order       = $this->input->get('order');
+        $teamorder   = $this->db->get_where('tbl_upload_team', ['order_id' => $order, 'status_out' => 1])->row();
+        $team        = $this->db->get_where('tbl_team', ['IdTeam' => $teamorder->teamid])->row();
+
+        if ($teamorder == true) {
+
+
+            $data = [
+                'income'         => $team->income - 10,
+            ];
+
+            $this->db->where('IdTeam', $teamorder->teamid);
+            $success = $this->db->update('tbl_team', $data);
+            if ($success) {
+                $data02 = [
+                    'teamid_dti'     =>  $teamorder->teamid,
+                    'item_dti'       =>  'deduct income',
+                    'income_dti'     =>  '10',
+                    'order_id_dti'   =>  $order,
+                    'create_at_dti'  =>  date('Y-m-d H:i:s'),
+                ];
+                $this->db->insert('tbl_deduct_team_income', $data02);
+            }
+        } else {
+            $success = 1;
+        }
+
+        echo $success;
     }
 
     public function new_folder()

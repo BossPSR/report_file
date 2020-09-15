@@ -188,7 +188,8 @@
                                                 <?php
                                                 $i = 1;
                                                 foreach ($order_notsum as $id => $stores) {
-                                                ?> <?php if ($stores['statusC'] == '1') : ?>
+                                                ?>
+                                                    <?php if ($stores['statusC'] == '1') : ?>
                                                         <tr style="background-color: #ffebebd4;">
                                                         <?php else : ?>
                                                         <tr>
@@ -203,10 +204,10 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($stores['requiredOr'])); ?>
-                                                                <div id="clock-b<?php echo $stores['id_c']; ?>" style="display: flex;"></div>
+                                                                <div id="clock-b<?php echo $stores['order']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $stores['id_c']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $stores['order']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -261,11 +262,11 @@
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label>
-                                                                                        <select class="select2 form-control" name="teamid[]" multiple="multiple"  required>
-                                                                                            <option disabled > -- Select Team -- </option>
+                                                                                        <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
+                                                                                            <option disabled> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
-                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" ><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
@@ -322,7 +323,7 @@
                                                         <td>
                                                             <?php if ($stores['statusC'] == '1') : ?>
 
-                                                                <span class="badge badge-pill badge-danger"><?php echo $stores['status_who']; ?> <a href="" data-toggle="modal" data-target="#note<?php echo $stores['order']; ?>"> &nbsp; <i class="feather icon-file-text" style="font-size: 25px;"></i></a></span> 
+                                                                <span class="badge badge-pill badge-danger"><?php echo $stores['status_who']; ?> <a href="" data-toggle="modal" data-target="#note<?php echo $stores['order']; ?>"> &nbsp; <i class="feather icon-file-text" style="font-size: 25px;"></i></a></span>
                                                                 <div class="modal fade" id="note<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_info_over_ns" method="POST">
                                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -356,7 +357,7 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php  $cancel = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array();?>
+                                                            <?php $cancel = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array(); ?>
                                                             <?php
                                                             if ($stores['status_check_team'] == 1) {
                                                                 echo '<span class="badge badge-pill badge-Info">Waiting for team</span>';
@@ -365,12 +366,12 @@
                                                             } elseif ($stores['status_check_team'] == 3) {
                                                                 echo '<span class="badge badge-pill badge-success">complete</span>';
                                                             } elseif ($stores['status_check_team'] == 4) {
-                                                               
+
                                                                 echo '<span class="badge badge-pill badge-danger">Waiting for team</span>';
                                                                 echo '<br>';
                                                                 echo '<span class="badge badge-pill badge-danger">' . $cancel['history'] . '</span>';
-                                                            }else{
-                                                               echo '-' ;
+                                                            } else {
+                                                                echo '-';
                                                             }
 
                                                             ?>
@@ -388,9 +389,9 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                          <!-- Client Feedback -->
-                                                          <td>
-                                                        <?php
+                                                        <!-- Client Feedback -->
+                                                        <td>
+                                                            <?php
                                                             $z  = 0;
                                                             $cf = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 0])->result_array();
                                                             foreach ($cf as $key => $cf) {
@@ -410,7 +411,13 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td><?php echo $cancel['create_at']; ?></td>
+                                                        <td>
+                                                            <?php if ($cancel == true) : ?>
+                                                                <?php echo $cancel['create_at']; ?>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td>
                                                             <!-- <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['order_id']; ?>" type="button" class="btn btn-icon btn-info"><i class="feather icon-upload"></i></button>
                                                             <a href="" class="btn btn-icon btn-success"><i class="feather icon-mail"></i></a>

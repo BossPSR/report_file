@@ -195,7 +195,7 @@ class Customer_order_ctr extends CI_Controller
         $resultsedit = $this->db->insert('tbl_upload_team', $data);
 
         $this->db->where('order_id', $this->input->post('order_id'));
-        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired'),'note_user' => $this->input->post('note')]);
+        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired'), 'note_user' => $this->input->post('note')]);
 
         if ($resultsedit) {
             if ($teamid == '') {
@@ -301,6 +301,26 @@ class Customer_order_ctr extends CI_Controller
         $position           = $this->input->post('position');
         $note               = $this->input->post('note_new');
         $date_required      = $this->input->post('date_required');
+        $checkbox       = $this->input->post('checkbox');
+
+        $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        if ($wa == true) {
+            $this->db->delete('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        }
+
+        if ($checkbox) {
+            foreach ($checkbox as $key => $checkbox) {
+                $resultT = $this->db->get_where('tbl_upload_order_team', ['id' => $checkbox])->row_array();
+                $boxdata = [
+                    'order_id_back'     => $resultT['order_id'],
+                    'file_name_back'     => $resultT['file_name'],
+                    'path_back'         => $resultT['path'],
+                    'create_at_back'    => date('Y-m-d H:i:s'),
+                ];
+
+                $this->db->insert('tbl_upload_backup_team', $boxdata);
+            }
+        }
 
         $this->db->where('order_id', $order_id);
         $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4]);
@@ -311,15 +331,14 @@ class Customer_order_ctr extends CI_Controller
                     'order_id'          => $order_id,
                     'wage'              => $wage,
                     'position'          => $position,
-                    'teamId'            => $teamid ,
-                    'note'              => $note ,
-                    'status'            => 0 ,
-                    'status_check_team' => 1 ,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 1,
                     'create_at'         => date('Y-m-d H:i:s')
                 ];
-                $resultsedit = $this->db->insert('tbl_upload_team' , $insertdb);
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
                 $this->sendEmail_all($teamid, $order_id);
-
             }
         }
 
