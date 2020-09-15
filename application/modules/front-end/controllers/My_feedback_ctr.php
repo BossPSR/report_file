@@ -52,10 +52,22 @@ class My_feedback_ctr extends CI_Controller
         $userId     = $this->input->post('userId');
         $teamId     = $this->input->post('teamId');
         $refdata    = $this->input->post('refdata');
+        $teamdb     = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id] )->row_array();
+         ;
         if ($refdata == 1) {
             $s = 4;
+            $g = 3;
         }else{
             $s = 3;
+            $g = 2;
+        }
+
+        if ($teamdb == true) {
+            $team = array(
+                'status' => $g
+            );
+            $this->db->where('order_id', $order_id);
+            $success = $this->db->update('tbl_upload_team', $team);
         }
 
         $orf = array(
@@ -68,13 +80,8 @@ class My_feedback_ctr extends CI_Controller
             'check_status'      => 1 ,
             're_feedback'       => $refdata
         );
-        if ($this->db->insert('tbl_feedback', $orf)) {
-            $appro = array(
-                'status_approved' => $s
-            );
-            $this->db->where('order_id', $order_id);
-            $success = $this->db->update('tbl_upload_order', $appro);
-        }
+        $this->db->insert('tbl_feedback', $orf);
+        
         echo $success;
     }
 

@@ -51,7 +51,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
@@ -685,10 +685,10 @@
                                                         </td>
                                                         <!-- Tool -->
                                                         <td>
-                                                        <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $store['orderNOT']; ?>"><i class="feather icon-users"></i></button>
-                                                        <div class="modal fade" id="informal<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $store['orderNOT']; ?>"><i class="feather icon-users"></i></button>
+                                                            <div class="modal fade" id="informal<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="add_team_informal_not" method="POST">
-                                                                    <input type="hidden" name="order_id" value="<?php echo$store['orderNOT']; ?>">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
                                                                     <div class="modal-dialog " role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -735,20 +735,20 @@
                                                                     </div>
                                                                 </form>
                                                             </div>
-                                                        
-                                                        <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $store['orderNOT']; ?>"><i class="feather icon-delete"></i></button>
+
+                                                            <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $store['orderNOT']; ?>"><i class="feather icon-delete"></i></button>
                                                             <div class="modal fade" id="exampleModallCenterc<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <!-- <form action="delete_order_notst" method="POST"> -->
-                                                                    <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
-                                                                    <div class="modal-dialog " role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $store['orderNOT']; ?>)</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body row">
+                                                                <input type="hidden" name="order_id" value="<?php echo $store['orderNOT']; ?>">
+                                                                <div class="modal-dialog " role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $store['orderNOT']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body row">
                                                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                                                                 <label for="" style="font-size: 16px;">File Document </label>
                                                                                 <form action="cancel_dropzone_not" class="dropzone dropzone-area" id="maindropzonecan<?php echo $store['orderNOT']; ?>">
@@ -757,23 +757,23 @@
                                                                                     <div class="dz-message" style="top: 24%;">Upload Document</div>
                                                                                 </form>
                                                                             </div>
-                                                                                <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                    <div class="form-group">
-                                                                                        <label for="helpInputTop">Note Cancel</label>
-                                                                                        <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
+                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                                <div class="form-group">
+                                                                                    <label for="helpInputTop">Note Cancel</label>
+                                                                                    <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
 
-                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-
-                                                                                <div class="add-data-btn mr-1">
-                                                                                    <button type="submit" id="uploadsfilecan<?php echo $store['orderNOT']; ?>" class="btn btn-primary">submit</button>
-                                                                                </div>
-
                                                                             </div>
                                                                         </div>
+                                                                        <div class="modal-footer">
+
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" id="uploadsfilecan<?php echo $store['orderNOT']; ?>" class="btn btn-primary">submit</button>
+                                                                            </div>
+
+                                                                        </div>
                                                                     </div>
+                                                                </div>
                                                                 <!-- </form> -->
                                                             </div>
                                                             <script>
@@ -839,10 +839,13 @@
                                                                                 <input type="text" class="form-control" name="order_id" value="<?php echo $store['orderNOT']; ?>" placeholder="Enter Order" readonly>
                                                                             </div>
                                                                         </div>
+                                                                        <?php
+                                                                        $exp01 = explode(" ", $store['dateNOT']);
+                                                                        ?>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">date required</label>
-                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $store['dateNOT']; ?>" placeholder="Enter price" required>
+                                                                                <input type="date" class="form-control" name="Daterequired" value="<?php echo $exp01[0]; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>

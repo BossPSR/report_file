@@ -542,7 +542,7 @@
 
                                                                 <div class="modal-body" style="text-align:left;">
                                                                     <label for="" class="font-size F-upload">You can drop Document. </label>
-                                                                    <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprove<?php echo $value['ORD']; ?>">
+                                                                    <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprovere<?php echo $value['ORD']; ?>">
                                                                         <div class="dz-message needsclick">
                                                                             Drop files here or click to upload.<br>
                                                                             <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
@@ -563,7 +563,7 @@
                                                                     <!-- </form> -->
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" id="SubmitNotApp<?php echo $value['ORD']; ?>" class="btn btn-success">Save</button>
+                                                                    <button type="button" id="SubmitNotAppre<?php echo $value['ORD']; ?>" class="btn btn-success">Save</button>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                 </div>
                                                             </div>
@@ -584,21 +584,21 @@
 
                                                     <script type='text/javascript'>
                                                         Dropzone.autoDiscover = false;
-                                                        var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
+                                                        var myDropzoneRe = new Dropzone("#fileuploadnotApprovere<?php echo $value['ORD']; ?>", {
                                                             autoProcessQueue: false,
                                                             maxFiles: 5,
                                                             addRemoveLinks: true,
                                                             parallelUploads: 5, // Number of files process at a time (default 2)
                                                         });
 
-                                                        $('#SubmitNotApp<?php echo $value['ORD']; ?>').click(function() {
+                                                        $('#SubmitNotAppre<?php echo $value['ORD']; ?>').click(function() {
                                                             var x = document.getElementById("detail1<?php echo $value['ORD']; ?>").value;
                                                             var y = document.getElementById("dated<?php echo $value['ORD']; ?>").value;
                                                             var z = document.getElementById("order_id<?php echo $value['ORD']; ?>").value;
                                                             var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
                                                             var re = $('#refeed<?php echo $value['ORD']; ?>').val();
 
-                                                            if (myDropzone2.files == 0 && x == '') {
+                                                            if (myDropzoneRe.files == 0 && x == '') {
                                                                 swal("Warning!", "Can not be document Empty", "warning", {
                                                                     button: true,
                                                                 });
@@ -614,9 +614,9 @@
                                                                         refdata: re,
                                                                     },
                                                                     success: function(success) {
-                                                                        if (myDropzone2.files != 0) {
-                                                                            myDropzone2.processQueue();
-                                                                            myDropzone2.on("queuecomplete", function(file, res) {
+                                                                        if (myDropzoneRe.files != 0) {
+                                                                            myDropzoneRe.processQueue();
+                                                                            myDropzoneRe.on("queuecomplete", function(file, res) {
                                                                                 swal("Good job!", "Upload for data successfull", "success", {
                                                                                     button: true,
                                                                                 }).then(function(isConfirm) {
@@ -1002,7 +1002,6 @@
                     data: {
                         ordercon: order,
                         price: price,
-                        status_approved: 4,
                     },
                     success: function(success) {
                         swal("Good job!", "Upload for data successfull", "success", {

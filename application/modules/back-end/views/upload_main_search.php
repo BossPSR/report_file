@@ -358,7 +358,7 @@
                                                         <td><?php echo $value['create_atMain']; ?></td>
                                                         <td>
                                                             <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
-                                                            <a onclick="confirmalertunlock_del_Dm('<?php echo $value['idmain']; ?>')"  class="btn btn-icon btn-danger"><i class="feather icon-x"></i></a>
+                                                            <a onclick="confirmalertunlock_del_Dm('<?php echo $value['idmain']; ?>')"  class="btn btn-icon btn-danger" ><i class="feather icon-x" style="color: #fff;"></i></a>
 
                                                             <div class="modal fade" id="dropW<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">

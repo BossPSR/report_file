@@ -625,9 +625,7 @@
                                             <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
                                         <?php } ?>
 
-                                    <?php } elseif ($task['status_approved'] == 3 && $task['check_feedback_dalivery'] == 0) { ?>
-
-                                        <td><span class="badge badge-warning" style="font-size:16px;">Feedback</span></td>
+                                   
 
                                     <?php } else { ?>
                                         <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0 || $task['status_approved'] == 4) { ?>

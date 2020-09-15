@@ -258,16 +258,19 @@
                                                         </td>
                                                         <td><?php echo $stored['create_at']; ?></td>
                                                         <td>
-                                                            <input type="date" class="form-control dateread<?php echo $stored['order_id']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $stored['date_required']; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                            <?php 
+                                                                $exp  = explode(" ",$stored['date_required']);
+                                                            ?>
+                                                            <input type="date" class="form-control dateread<?php echo $stored['order_id']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $exp[0]; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                             <br>
                                                             <?php if (date("Y-m-d") > $stored['date_required']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($stored['date_required'])); ?>
-                                                                <div id="clock-b<?php echo $stored['id']; ?>" style="display: flex;"></div>
+                                                                <div id="clock-b<?php echo $stored['order_id']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $stored['id']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $stored['order_id']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +

@@ -40,7 +40,7 @@ class Order_ctr extends CI_Controller
     $textarea       = $this->input->post('textarea');
     $is_confirm     = $this->input->post('status_approved');
     $df             = $this->Order_model->delete_feedback($order_id);
-    $star            = $this->input->post('star');
+    $star           = $this->input->post('star');
 
     if ($this->session->userdata('email') == '') {
       redirect('home');
@@ -48,11 +48,9 @@ class Order_ctr extends CI_Controller
       $data = array(
         'status_approved'        => $is_confirm,
         'note_approved'          => $textarea,
-        ''       => $star
+        'stars_score_user'       => $star
       );
-
       $this->db->where('order_id', $order_id);
-
       if ($success = $this->db->update('tbl_upload_order', $data)) {
 
         foreach ($df as $key => $df) {
