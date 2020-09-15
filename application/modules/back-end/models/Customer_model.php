@@ -15,7 +15,7 @@ class Customer_model extends CI_Model
     {
         $this->db->select('*,tbl_upload_order.userId AS userOR,tbl_upload_order.id AS id_sss,tbl_upload_order.order_id AS orderST 
         ,tbl_upload_order.create_at AS createST ,tbl_upload_order.date_required AS dateREST ,tbl_upload_order.Username AS User_St , tbl_upload_order.email AS St_email
-        ,tbl_upload_team.note as note_team,tbl_upload_order.id AS id_order_main');
+        ,tbl_upload_team.note as note_team,tbl_upload_order.id AS id_order_main , tbl_upload_team.status st01');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_bookmark', 'tbl_upload_order.order_id = tbl_bookmark.id_orderBuy ', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document = tbl_upload_main_search.id_doc ', 'left');
@@ -25,7 +25,7 @@ class Customer_model extends CI_Model
         $this->db->where('tbl_upload_order.status_book', 1);
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.is_check', 0);
-        $this->db->where_in('tbl_upload_order.status_approved', array(0, 3));
+        $this->db->where_in('tbl_upload_order.status_approved', array(0 , 3 , 4));
         $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'desc');
         return $this->db->get()->result_array();

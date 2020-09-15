@@ -180,7 +180,7 @@ class My_stock_ctr extends CI_Controller
         $this->db->where('order_id', $order_id);
         $this->db->where('teamId', $tm);
         $success = $this->db->update('tbl_upload_team', $data);
-        
+
         if ($success) {
             $this->db->where('order_id', $order_id);
             $this->db->where('status_check_team', 1);
@@ -196,7 +196,6 @@ class My_stock_ctr extends CI_Controller
         $orb                    = $this->input->post('orb');
         $team_idd               = $this->input->post('team_idd');
 
-
         $data = array(
             'order_id'                      => $orb,
             'teamid'                        => $team_idd,
@@ -204,14 +203,14 @@ class My_stock_ctr extends CI_Controller
             'status'                        => 1,
             'status_who'                    => 'Team cancel',
             'create_at'                     => date('Y-m-d H:i:s'),
-            'end_date_ncf'                  => date("Y-m-d" , strtotime(" + 30 days")),
+            'end_date_ncf'                  => date("Y-m-d", strtotime(" + 30 days")),
         );
 
         if ($this->db->insert('tbl_cancel', $data)) {
-
+          
             $data2 = array(
                 'status_check_team'             => 0,
-                'teamId'                        => null,
+                'status'            => 4,
                 'update_confirm'                => date('Y-m-d H:i:s')
             );
             $this->db->where('order_id',  $orb);
@@ -290,7 +289,7 @@ class My_stock_ctr extends CI_Controller
                 $data2 = array(
                     'status'            => 4,
                 );
-                
+
                 $this->db->where('order_id', $order_id);
                 if ($this->db->update('tbl_upload_team', $data2)) {
                     $data3 = array(
@@ -301,7 +300,7 @@ class My_stock_ctr extends CI_Controller
                         'create_at'        => date('Y-m-d H:i:s'),
                         'status'           => '1',
                         'status_who'       => 'Team cancel',
-                        'end_date_ncf'     => date("Y-m-d" , strtotime(" + 30 days")),
+                        'end_date_ncf'     => date("Y-m-d", strtotime(" + 30 days")),
                     );
 
                     $success = $this->db->insert('tbl_cancel', $data3);

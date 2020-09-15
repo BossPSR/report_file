@@ -820,7 +820,7 @@
                                                             <?php endif; ?>
                                                             <div class="modal fade" id="exampleModalwage<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="edit_info_Satisfied" method="POST">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
 
                                                                         <input type="hidden" name="order_id" value="<?php echo $stores['orderST']; ?>">
                                                                         <div class="modal-content">
@@ -836,7 +836,7 @@
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
-                                                                                            <option disabled > -- Select Team -- </option>
+                                                                                            <option disabled> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
                                                                                                 <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
@@ -880,6 +880,105 @@
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">note</label>
                                                                                         <textarea name="note_new" id="" rows="4" class="form-control"><?php echo $stores['note']; ?></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                    <div class="form-group">
+                                                                                        <button type="submit" class="btn btn-primary w-100" style="font-size: 18px;">Submit</button>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-xl-12 col-md-12 col-12 mb-1 text-left">
+                                                                                    <label style="font-size: 16px;" for="">Team file All <span style="color:red;">* ่ทานสามารถเลือกทีมไฟล์คนเก่าได้ที่นี้</span></label>
+                                                                                    <hr>
+                                                                                    <?php
+                                                                                    $this->db->group_by('teamId');
+                                                                                    $t3folder = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stores['orderST']])->result_array();
+                                                                                    ?>
+                                                                                    <div class="table-responsive">
+                                                                                        <table class="table zero-configuration">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Order id</th>
+                                                                                                    <th>TM</th>
+                                                                                                    <th>Folder</th>
+                                                                                                    <th>Create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($t3folder as $t3folder) { ?>
+                                                                                                    <tr>
+                                                                                                        <td><?php echo $t3folder['order_id'] ?></td>
+                                                                                                        <td><?php echo $t3folder['teamId'] ?></td>
+                                                                                                        <td>
+                                                                                                            <span data-toggle="modal" data-target="#teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $t3folder['order_id']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
+                                                                                                            <div class="modal fade text-left" id="teamId_team<?php echo $t3folder['teamId']; ?>_<?php echo $t3folder['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                                                                                    <div class="modal-content">
+                                                                                                                        <div class="modal-header bg-primary white">
+                                                                                                                            <h4 class="modal-title" id="myModalLabel1"><?php echo $t3folder['teamId'] ?></h4>
+                                                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                                                            </button>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-body">
+
+                                                                                                                            <?php $orderTgroup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $t3folder['order_id'], 'teamId' => $t3folder['teamId']])->result_array(); ?>
+
+                                                                                                                            <table class="table zero-configuration">
+                                                                                                                                <thead>
+                                                                                                                                    <tr>
+                                                                                                                                        <th>#</th>
+                                                                                                                                        <th>File name</th>
+                                                                                                                                        <th>File</th>
+                                                                                                                                        <th>create</th>
+                                                                                                                                    </tr>
+                                                                                                                                </thead>
+                                                                                                                                <tbody>
+                                                                                                                                    <?php foreach ($orderTgroup as $keys => $orderTgroup) { ?>
+                                                                                                                                        <tr>
+                                                                                                                                            <td>
+                                                                                                                                                <fieldset>
+                                                                                                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                                                                                        <input type="checkbox" name="checkbox[]" value="<?php echo $orderTgroup['id']; ?>">
+                                                                                                                                                        <span class="vs-checkbox">
+                                                                                                                                                            <span class="vs-checkbox--check">
+                                                                                                                                                                <i class="vs-icon feather icon-check"></i>
+                                                                                                                                                            </span>
+                                                                                                                                                        </span>
+                                                                                                                                                    </div>
+                                                                                                                                                </fieldset>
+                                                                                                                                            </td>
+                                                                                                                                            <td>
+                                                                                                                                                <?php echo $orderTgroup['file_name'] ?>
+                                                                                                                                                <!-- <a href="" data-toggle="modal" data-target="#gd01<?php echo $orderTgroup['id']; ?>">
+                                                                                                                                                    <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                                                                </a> -->
+                                                                                                                                            </td>
+                                                                                                                                            <td>
+                                                                                                                                                <a href="<?php echo $orderTgroup['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                                                            </td>
+                                                                                                                                            <td><?php echo $orderTgroup['create_at'] ?></td>
+                                                                                                                                        </tr>
+                                                                                                                                    <?php } ?>
+                                                                                                                                </tbody>
+                                                                                                                            </table>
+
+
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-footer">
+                                                                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $t3folder['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php } ?>
+                                                                                            </tbody>
+                                                                                        </table>
                                                                                     </div>
                                                                                 </div>
 
@@ -1026,10 +1125,14 @@
                                                                 $c += 1;
                                                             }
                                                             ?>
-                                                            <?php if ($cf == true) : ?>
+                                                            <?php if ($cf == true ) : ?>
                                                                 <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
-                                                            <?php elseif ($cf2 == true) : ?>
+                                                            <?php elseif ($cf2 == true ) : ?>
                                                                 <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php elseif ($stores['status_approved'] == 3) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback</span>
+                                                            <?php elseif ($stores['status_approved'] == 4) : ?>
+                                                                <span class="badge badge-pill badge-primary">Re-Feedback</span>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>

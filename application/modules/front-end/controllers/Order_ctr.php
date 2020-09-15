@@ -127,15 +127,16 @@ class Order_ctr extends CI_Controller
       redirect('home');
     } else {
       
-      $data = array(
+      $data02 = array(
         'status_approved'        => $is_confirm,
         'end_time'               => $time_withdraw,
         'price_refeedback'       => $price,
         'status_refeedback'      => 1,
+        'status_confirmed_team'  => 0,
       );
 
       $this->db->where('order_id', $order_id);
-      $success = $this->db->update('tbl_upload_order', $data);
+      $success = $this->db->update('tbl_upload_order', $data02);
 
       echo $success;
     }

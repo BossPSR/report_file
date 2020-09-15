@@ -26,10 +26,10 @@ class Package_ctr extends CI_Controller
 			$datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
 			$checkDate = DateDiff($datePaypal,date("Y-m-d"));
 
-			if ($data['userId']['free_forever'] == 1) {
-				$this->session->set_flashdata('package_check', TRUE);
-				redirect('home');
-			}
+			// if ($data['userId']['free_forever'] == 1) {
+			// 	$this->session->set_flashdata('package_check', TRUE);
+			// 	redirect('home');
+			// }
 
 
 			if ($checkDate >= 0 || empty($paypal)) {

@@ -620,7 +620,7 @@
                                         <?php } elseif ($withh['status'] == 1) { ?>
                                             <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for withdraw</span></td>
                                         <?php } elseif ($withh['status'] == 2) { ?>
-                                            <td><span class="badge badge-success" style="font-size:16px;">Success</span></td>
+                                            <td><span class="badge badge-success" style="font-size:16px;">Payment successfully</span></td>
                                         <?php } else { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
                                         <?php } ?>
@@ -630,8 +630,7 @@
                                         <td><span class="badge badge-warning" style="font-size:16px;">Feedback</span></td>
 
                                     <?php } else { ?>
-
-                                        <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
+                                        <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0 || $task['status_approved'] == 4) { ?>
                                             <td><span class="badge badge-warning" style="font-size:16px;">Processing</span></td>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
                                             <td><span class="badge badge-info" style="font-size:16px;">Waiting for Approved</span></td>
@@ -641,6 +640,8 @@
                                             <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
                                         <?php } elseif ($task['c_status'] == 4) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">Not complete </span></td>
+                                        <?php } else { ?>
+                                            <td>-</td>
                                         <?php } ?>
                                     <?php } ?>
 
@@ -692,13 +693,16 @@
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                                                                 <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
                                                                 <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
-                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Cancel Order Team</h5>
+
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">
-
+                                                            <div class="modal-body" style="text-align: left;">
+                                                                <span style="color : red">
+                                                                    * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
+                                                                </span>
                                                                 <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
                                                             </div>
                                                             <div class="modal-footer">

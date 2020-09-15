@@ -1006,13 +1006,9 @@
                                                                                                                 <span class="checkmark"></span>
                                                                                                             </label>
                                                                                                         </td>
-
-
                                                                                                         <td><?php echo $dm_c11['file_name'] ?></td>
                                                                                                         <td><a href="<?php echo $dm_c11['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                         <td><?php echo $dm_c11['create_at'] ?></td>
-
-
                                                                                                     </tr>
                                                                                                 <?php endforeach; ?>
                                                                                             </tbody>

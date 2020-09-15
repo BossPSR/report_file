@@ -57,7 +57,7 @@ class Order_model extends CI_Model
     {
         $this->db->select('*,tbl_upload_order.file_name as file_or ,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,tbl_upload_team.note as uptnote , tbl_upload_team.status as up_status2');
         $this->db->from('tbl_upload_order');
-        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id');
+        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
