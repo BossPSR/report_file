@@ -14,16 +14,31 @@ class Overall_ctr extends CI_Controller
         $order_id   = $this->input->post('order_id');
         $wage       = $this->input->post('wage');
         $teamid     = $this->input->post('teamid');
-		$position   = $this->input->post('position');
-		$date_required = $this->input->post('date_required');
-		$note = $this->input->post('note');
+        $position   = $this->input->post('position');
+        $date_required = $this->input->post('date_required');
+        $note = $this->input->post('note');
 
-        $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid,'note' => $note]);
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 1,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
+
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0,'date_required' => $date_required]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'date_required' => $date_required]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -32,9 +47,8 @@ class Overall_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1,'date_required' => $date_required]);
-
-                $this->sendEmail_all($teamid, $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required]);
+            
             }
         }
 
@@ -50,8 +64,23 @@ class Overall_ctr extends CI_Controller
         $note   = $this->input->post('position');
         $date_required_info   = $this->input->post('date_required_info');
 
-        $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid ,'note'=>$note]);
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 1,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
+
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
@@ -65,8 +94,6 @@ class Overall_ctr extends CI_Controller
 
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required_info]);
-
-                $this->sendEmail_all($teamid, $order_id);
             }
         }
 
@@ -157,7 +184,7 @@ class Overall_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -221,7 +248,7 @@ class Overall_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -278,7 +305,7 @@ class Overall_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -334,7 +361,7 @@ class Overall_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';

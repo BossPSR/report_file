@@ -54,8 +54,23 @@ class Feedback_ctr extends CI_Controller
             }
         }
 
-        $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid , 'note' => $note,  'status' => 0, 'status_check_team' => 1]);
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid ,
+                    'note'              => $note ,
+                    'status'            => 0 ,
+                    'status_check_team' => 1 ,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team' , $insertdb);
+                $this->sendEmail_all($teamid, $order_id);
+
+            }
+        }
 
         if ($resultsedit) {
             if ($teamid == '') {
@@ -70,8 +85,6 @@ class Feedback_ctr extends CI_Controller
 
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'status_approved' => 0 , 'date_required' => $date_require]);
-
-                $this->sendEmail_all($teamid, $order_id);
             }
         }
 
@@ -109,7 +122,7 @@ class Feedback_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -135,8 +148,8 @@ class Feedback_ctr extends CI_Controller
     {
         if ($this->session->userdata('email_admin') != '') {
 
-            $data['feedback_team'] = $this->Feedback_model->feedback_team();
-            $data['ts']                      = $this->Store_model->team_select();
+            $data['feedback_team']  = $this->Feedback_model->feedback_team();
+            $data['ts']             = $this->Store_model->team_select();
             $this->load->view('options/header');
             $this->load->view('feedback_all', $data);
             $this->load->view('options/footer');
@@ -174,8 +187,25 @@ class Feedback_ctr extends CI_Controller
             }
         }
 
-        $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid , 'note' => $note ,  'status' => 0 , 'status_check_team' => 1]);
+      
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid ,
+                    'note'              => $note ,
+                    'status'            => 0 ,
+                    'status_check_team' => 1 ,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team' , $insertdb);
+                $this->sendEmail_all_a($teamid, $order_id);
+
+            }
+        }
+
 
         if ($resultsedit) {
             if ($teamid == '') {
@@ -191,7 +221,6 @@ class Feedback_ctr extends CI_Controller
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_require, 'status_approved' => 0]);
 
-                $this->sendEmail_all_a($teamid, $order_id);
             }
         }
 
@@ -229,7 +258,7 @@ class Feedback_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -433,7 +462,7 @@ class Feedback_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -529,7 +558,7 @@ class Feedback_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -594,7 +623,7 @@ class Feedback_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -681,7 +710,7 @@ class Feedback_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'P@Ssw0rd';  //sender's password
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';

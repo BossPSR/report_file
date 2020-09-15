@@ -1,4 +1,74 @@
 <!-- BEGIN: Content-->
+<style>
+    /* The container */
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input~.checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked~.checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked~.checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+</style>
+<!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -915,6 +985,8 @@
                                                         <!-- Tool -->
                                                         <td style="width:10%;">
                                                             <?php if ($stock['is_check'] == 1) : ?>
+                                                                <button type="button" class="btn btn-secondary btn-icon"><i class="feather icon-navigation"></i></button>
+
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-plus-circle"></i></button>
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
@@ -926,6 +998,7 @@
                                                                 <?php elseif ($stock['status_approved'] == 2) : ?>
                                                                     <span class="badge badge-pill badge-danger">Not Approved</span>
                                                                 <?php else : ?>
+                                                                    <button type="button" class="btn btn-info btn-icon" data-toggle="modal" data-target="#sendadmin<?php echo $stock['orderST']; ?>"><i class="feather icon-navigation"></i></button>
                                                                     <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>"><i class="fa fa-plus-circle"></i></button>
                                                                     <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
                                                                         <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation-triangle"></i></button>
@@ -977,7 +1050,7 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" id="SubmitNotApp<?php echo $stock['orderST']; ?>" class="btn btn-success">Success</button>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1029,6 +1102,59 @@
                                                             </script>
 
                                                             <!-- Modal GT Document-->
+                                                            <div class="modal fade" id="sendadmin<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Sent Email (<?php echo $stock['orderST']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="sendemail_delivery_stockadmin" method="POST">
+                                                                            <input type="hidden" name="order_id" value="<?php echo $stock['orderST']; ?>">
+                                                                            <input type="hidden" name="email" value="<?php echo $stock['email']; ?>">
+                                                                            <div class="modal-body" style="text-align:left;">
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+                                                                                        <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stock['orderST']])->result_array(); ?>
+                                                                                        <tr>
+                                                                                            <th>Select</th>
+                                                                                            <th>Order id</th>
+                                                                                            <th>File name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($orderss as $keys => $orderss) { ?>
+                                                                                            <tr>
+                                                                                                <td><label class="container">
+                                                                                                        <input type="checkbox" class="checkmark" name="order_team[]" value="<?php echo $orderss['id'] ?>">
+                                                                                                        <span class="checkmark"></span>
+                                                                                                    </label>
+                                                                                                </td>
+
+                                                                                                <td><?php echo $orderss['order_id'] ?></td>
+                                                                                                <td><?php echo $orderss['file_name'] ?></td>
+                                                                                                <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $orderss['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" id="Submitsent<?php echo $stock['orderST']; ?>" class="btn btn-success">Success</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Modal GT Document-->
                                                             <div class="modal fade" id="gtdoc<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
@@ -1059,7 +1185,7 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" id="Submitgtdoc<?php echo $stock['orderST']; ?>" class="btn btn-success">Success</button>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1097,6 +1223,37 @@
                                                                 </form>
                                                             </div>
 
+                                                            <script type='text/javascript'>
+                                                                $("#detailsent")
+                                                                    .keyup(function() {
+                                                                        var value = $(this).val();
+                                                                        $(".detailshow_sent").val(value);
+                                                                    })
+                                                                    .keyup();
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzonesent<?php echo $stock['orderST']; ?> = new Dropzone("#filesent<?php echo $stock['orderST']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                $('#Submitsent<?php echo $stock['orderST']; ?>').click(function() {
+                                                                    if (myDropzonesent<?php echo $stock['orderST']; ?>.files < 1) {
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    } else {
+                                                                        myDropzonesent<?php echo $stock['orderST']; ?>.processQueue();
+                                                                        myDropzonesent<?php echo $stock['orderST']; ?>.on("queuecomplete", function(file, res) {
+                                                                            swal("Good job!", "Upload for data successfull", "success", {
+                                                                                button: false,
+                                                                            });
+                                                                        });
+                                                                        setTimeout("location.reload(true);", 1000);
+                                                                    }
+                                                                });
+                                                            </script>
 
 
 

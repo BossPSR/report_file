@@ -970,7 +970,7 @@
                                                                 <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">DM File </h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Delivery File </h5>
 
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
@@ -992,7 +992,7 @@
 
                                                                                                 <tr>
                                                                                                     <th>Select</th>
-                                                                                                    <th>File_name</th>
+                                                                                                    <th>File name</th>
                                                                                                     <th>File</th>
                                                                                                     <th>create</th>
                                                                                                 </tr>
@@ -1030,8 +1030,8 @@
                                                                                         <?php $orderss = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id_t']])->result_array(); ?>
                                                                                         <tr>
                                                                                             <th>Select</th>
-                                                                                            <th>Store_id</th>
-                                                                                            <th>File_name</th>
+                                                                                            <th>Order id</th>
+                                                                                            <th>File name</th>
                                                                                             <th>File</th>
                                                                                             <th>create</th>
                                                                                         </tr>
@@ -1044,13 +1044,10 @@
                                                                                                         <span class="checkmark"></span>
                                                                                                     </label>
                                                                                                 </td>
-
                                                                                                 <td><?php echo $orderss['order_id'] ?></td>
                                                                                                 <td><?php echo $orderss['file_name'] ?></td>
                                                                                                 <td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <td><?php echo $orderss['create_at'] ?></td>
-
-
                                                                                             </tr>
                                                                                         <?php } ?>
                                                                                     </tbody>

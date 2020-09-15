@@ -836,7 +836,7 @@
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
-                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                            <option disabled > -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
                                                                                                 <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>

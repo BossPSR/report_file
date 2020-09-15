@@ -67,7 +67,7 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration" id="loading_img_spin">
+                                        <table class="table table-hover zero-configuration" id="loading_img_spin" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>order id</th>
@@ -79,7 +79,7 @@
                                                     <th>Date require</th>
                                                     <th>info</th>
                                                     <th>Status</th>
-                                                    <th>Status T3</th>
+                                                    <th>Process </th>
                                                     <th>Client Feedback</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -195,7 +195,10 @@
                                                             <?php if ($feedback_team['teamId'] == '') : ?>
                                                                 - |
                                                             <?php else : ?>
-                                                                <?php echo $feedback_team['teamId']; ?> |
+                                                                <?php $teamloop = $this->db->get_where('tbl_upload_team', ['order_id' => $feedback_team['order_id']])->result_array(); ?>
+                                                                <?php foreach ($teamloop as $key => $teamloop) : ?>
+                                                                    <?php echo $teamloop['teamId']; ?> |
+                                                                <?php endforeach; ?>
                                                             <?php endif; ?>
 
                                                             <?php if ($feedback_team['wage'] == '') : ?>
@@ -232,12 +235,12 @@
 
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
-                                                                                        <label for="Team">Team ID</label>
-                                                                                        <select class="select2 form-control" name="teamid" required>
-                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                        <label for="Team">Team ID</label><br>
+                                                                                        <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
+                                                                                            <option disabled> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
-                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $feedback_team['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
@@ -406,13 +409,19 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($feedback_team['status_c_feedack_team'] == '1') : ?>
-                                                                <span class="badge badge-pill badge-success">complete</span>
-                                                            <?php elseif ($feedback_team['team'] != '') : ?>
+                                                            <?php if ($feedback_team['status_c_feedack_team'] == 0) : ?>
                                                                 <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $feedback_team['id_f']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-alert-circle"></i></button>
                                                                 <button onclick="confileFeedback_team('<?php echo $feedback_team['id_f']; ?>')" class="btn btn-icon btn-success " type="button" aria-haspopup="true" aria-expanded="false">
                                                                     <i class="feather icon-log-out"></i>
                                                                 </button>
+                                                            <?php elseif ($feedback_team['status_delivery'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-success">Delivered  </span>
+                                                            <?php elseif ($feedback_team['statusall'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-success">Complete </span>
+                                                            <?php elseif ($feedback_team['status_feedback_read'] == 0) : ?>
+                                                                <span class="badge badge-pill badge-info">waiting for team</span>
+                                                            <?php elseif ($feedback_team['status_feedback_read'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-warning">Processing </span>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
@@ -439,6 +448,12 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
+                                                            <?php if ($feedback_team['status_informal'] == 1) : ?>
+                                                                <button type="button" class="btn btn-icon btn-success" data-toggle="modal" data-target="#infor<?php echo $feedback_team['order_id']; ?>"><i class="feather icon-log-out"></i></button>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#send<?php echo $feedback_team['order_id']; ?>"><i class="feather icon-navigation"></i> </button>
+                                                            <?php else : ?>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#informal<?php echo $feedback_team['order_id']; ?>"><i class="feather icon-users"></i></button>
+                                                            <?php endif; ?>
                                                             <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $feedback_team['id_f']; ?>"><i class="feather icon-navigation"></i> </button>
                                                             <div class="modal fade" id="sendnw<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -473,6 +488,55 @@
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    <div class="modal fade" id="informal<?php echo $feedback_team['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <form action="add_team_informal_feedbackall" method="POST">
+                                                            <input type="hidden" name="order_id" value="<?php echo $feedback_team['order_id']; ?>">
+                                                            <div class="modal-dialog " role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exp">Informal team (<?php echo $feedback_team['order_id']; ?>)</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body row">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="name">Name</label>
+                                                                                <input type="text" class="form-control" name="name" value="" required>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+                                                                        <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                            <div class="form-group" style="text-align: left;">
+                                                                                <label for="helpInputTop">Position</label>
+                                                                                <select name="position" class="form-control" required>
+                                                                                    <option selected disabled> ---- Select ---- </option>
+
+                                                                                    <?php foreach ($positionX as $positionX) { ?>
+                                                                                        <option value="<?php echo $positionX['id'] ?>"><?php echo $positionX['name_item'] ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="Wage">Wage</label>
+                                                                                <input type="text" class="form-control" name="Wage" value="" required>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-btn mr-1">
+                                                                            <button type="submit" class="btn btn-primary">submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                     <div class="modal fade" id="exampleModalb<?php echo $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                             <div class="modal-content">

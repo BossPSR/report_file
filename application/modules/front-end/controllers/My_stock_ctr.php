@@ -169,6 +169,7 @@ class My_stock_ctr extends CI_Controller
     function my_task_app()
     {
         $order_id               = $this->input->post('order_id');
+        $tm                     = $this->input->post('tm');
         $status_check_team      = $this->input->post('status_check_team');
 
         $data = array(
@@ -177,7 +178,14 @@ class My_stock_ctr extends CI_Controller
         );
 
         $this->db->where('order_id', $order_id);
+        $this->db->where('teamId', $tm);
         $success = $this->db->update('tbl_upload_team', $data);
+        
+        if ($success) {
+            $this->db->where('order_id', $order_id);
+            $this->db->where('status_check_team', 1);
+            $this->db->delete('tbl_upload_team');
+        }
 
         echo $success;
     }

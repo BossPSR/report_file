@@ -261,11 +261,11 @@
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label>
-                                                                                        <select class="select2 form-control" name="teamid" required>
-                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                        <select class="select2 form-control" name="teamid[]" multiple="multiple"  required>
+                                                                                            <option disabled > -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
-                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $stores['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <option value="<?php echo $tsM['IdTeam']; ?>" ><?php echo $tsM['IdTeam']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
