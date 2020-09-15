@@ -217,8 +217,109 @@ class Home_ctr extends CI_Controller
 			$result_cancel_notWorking = $original_cancel_notWorking + $notComplete_cancel_notWorking + $rewrite_cancel_notWorking + $notSatified_cancel_notWorking;
 			$cancel_notWorkingList[4] = $result_cancel_notWorking;
 			
+			//total DM
+			$upload_main_search_sub = $this->db->get('tbl_upload_main_search_sub')->result_array();
+			$sell_completeTotal_dm = 0;
+			$sell_notCompleteTotal_dm = 0;
+			$originalTotal_dm = 0;
+			$rewriteTotal_dm = 0;
+			$total_dmList = [];
+
+			foreach ($upload_main_search_sub as $upload_mainSearchSub) {
+				if ($upload_mainSearchSub['comandnocom'] == 1) {
+					$sell_completeTotal_dm +=1;
+				}
+				if ($upload_mainSearchSub['comandnocom'] == 2) {
+					$sell_notCompleteTotal_dm +=1;
+				}
+				if ($upload_mainSearchSub['comandnocom'] == 3) {
+					$originalTotal_dm +=1;
+				}
+				if ($upload_mainSearchSub['comandnocom'] == 4) {
+					$rewriteTotal_dm +=1;
+				}
+			}
+
+			$total_dmList[0] = $sell_completeTotal_dm;
+			$total_dmList[1] = $sell_notCompleteTotal_dm;
+			$total_dmList[2] = $originalTotal_dm;
+			$total_dmList[3] = $rewriteTotal_dm;
+			$result_total_dm = 0;
+			$result_total_dm = $sell_completeTotal_dm + $sell_notCompleteTotal_dm + $originalTotal_dm + $rewriteTotal_dm;
+			$total_dmList[4] = $result_total_dm;
+
+			//approved
+			$this->db->join('tbl_bookmark','tbl_bookmark.id_orderBuy = tbl_upload_order.order_id','left');
+			$this->db->join('tbl_upload_main_search_sub','tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub','left');
+			$this->db->where('tbl_upload_order.status_approved','1');
+			$up_app = $this->db->get('tbl_upload_order')->result_array();
+
+			$sell_completeApproved = 0;
+			$sell_notCompleteApproved = 0;
+			$originalApproved = 0;
+			$rewriteApproved = 0;
+			$approvedList = [];
+
+			foreach ($up_app as $app) {
+				if ($app['comandnocom'] == 1) {
+					$sell_completeApproved +=1;
+				}
+				if ($app['comandnocom'] == 2) {
+					$sell_notCompleteApproved +=1;
+				}
+				if ($app['comandnocom'] == 3) {
+					$originalApproved +=1;
+				}
+				if ($app['comandnocom'] == 4) {
+					$rewriteApproved +=1;
+				}
+			}
+
+			$approvedList[0] = $sell_completeApproved;
+			$approvedList[1] = $sell_notCompleteApproved;
+			$approvedList[2] = $originalApproved;
+			$approvedList[3] = $rewriteApproved;
+			$resultApproved = 0;
+			$resultApproved = $sell_completeApproved + $sell_notCompleteApproved + $originalApproved + $rewriteApproved;
+			$approvedList[4] = $resultApproved;
 
 
+			//not approved
+			$this->db->join('tbl_bookmark','tbl_bookmark.id_orderBuy = tbl_upload_order.order_id','left');
+			$this->db->join('tbl_upload_main_search_sub','tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub','left');
+			$this->db->where('tbl_upload_order.status_approved','2');
+			$up_appnot = $this->db->get('tbl_upload_order')->result_array();
+
+			$sell_completeNotApproved = 0;
+			$sell_notCompleteNotApproved = 0;
+			$originalNotApproved = 0;
+			$rewriteNotApproved = 0;
+			$not_approvedList = [];
+
+			foreach ($up_appnot as $appnot) {
+				if ($appnot['comandnocom'] == 1) {
+					$sell_completeNotApproved +=1;
+				}
+				if ($appnot['comandnocom'] == 2) {
+					$sell_notCompleteNotApproved +=1;
+				}
+				if ($appnot['comandnocom'] == 3) {
+					$originalNotApproved +=1;
+				}
+				if ($appnot['comandnocom'] == 4) {
+					$rewriteNotApproved +=1;
+				}
+			}
+
+			$not_approvedList[0] = $sell_completeNotApproved;
+			$not_approvedList[1] = $sell_notCompleteNotApproved;
+			$not_approvedList[2] = $originalNotApproved;
+			$not_approvedList[3] = $rewriteNotApproved;
+			$resultNotApproved = 0;
+			$resultNotApproved = $sell_completeNotApproved + $sell_notCompleteNotApproved + $originalNotApproved + $rewriteNotApproved;
+			$not_approvedList[4] = $resultNotApproved;
+
+			//result
 			$data[] = "";
 			$data['deliveryList'] = $deliveryList;
 			$data['feedback_allList'] = $feedback_allList;
@@ -227,6 +328,9 @@ class Home_ctr extends CI_Controller
 			$data['cancelList'] = $cancelList;
 			$data['cancel_notWorkingList'] = $cancel_notWorkingList;
 
+			$data['total_dmList'] = $total_dmList;
+			$data['approvedList'] = $approvedList;
+			$data['not_approvedList'] = $not_approvedList;
 
 			$this->load->view('options/header');
 			$this->load->view('index',$data);

@@ -324,13 +324,13 @@
 																							<td><?php echo $team_job['created_at']; ?></td>
 																							<td>
 																								<div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
-																									<?php if($team_job['status_approve'] == '1'):?>
-																									<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
-																									<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
-																								<?php else:?>
-																									<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
-																									<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
-																								<?php endif;?>
+																									<?php if ($team_job['status_approve'] == '1') : ?>
+																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
+																										<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
+																									<?php else : ?>
+																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
+																										<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
+																									<?php endif; ?>
 																								</div>
 																							</td>
 																						</tr>
@@ -911,6 +911,16 @@
 															<button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#score<?php echo $team['IdTeam']; ?>">
 																<i class="feather icon-more-horizontal"></i>
 															</button>
+															<?php $unblock = $this->db->get_where('tbl_cancel', ['teamid' => $team['IdTeam']])->row_array(); ?>
+															<?php if ($unblock) : ?>
+																<button type="button" class="btn btn-icon btn-success" onclick="confirmalertunlock_del_unblock('<?php echo $team['IdTeam']; ?>')">
+																	<i class="feather icon-unlock"></i>
+																</button>
+															<?php else : ?>
+																<button type="button" class="btn btn-icon btn-secondary">
+																	<i class="feather icon-unlock"></i>
+																</button>
+															<?php endif; ?>
 														</td>
 													</tr>
 												<?php  } ?>

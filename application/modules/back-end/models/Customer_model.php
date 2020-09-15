@@ -13,7 +13,7 @@ class Customer_model extends CI_Model
 
     public function customer_main()
     {
-        $this->db->select('*,tbl_upload_order.userId AS userOR,tbl_upload_order.order_id AS orderST 
+        $this->db->select('*,tbl_upload_order.userId AS userOR,tbl_upload_order.id AS id_sss,tbl_upload_order.order_id AS orderST 
         ,tbl_upload_order.create_at AS createST ,tbl_upload_order.date_required AS dateREST ,tbl_upload_order.Username AS User_St , tbl_upload_order.email AS St_email
         ,tbl_upload_team.note as note_team,tbl_upload_order.id AS id_order_main');
         $this->db->from('tbl_upload_order');
@@ -35,7 +35,7 @@ class Customer_model extends CI_Model
 
     public function customer_list_not()
     {
-        $this->db->select('*,tbl_upload_order.order_id AS orderNOT,tbl_upload_order.id AS id_num,tbl_upload_team.order_id AS orderT3,tbl_upload_order.create_at AS createNOT ,tbl_upload_order.date_required AS dateNOT');
+        $this->db->select('*,tbl_upload_order.order_id AS orderNOT,tbl_upload_order.id AS id_num,tbl_upload_team.order_id AS orderT3,tbl_upload_order.create_at AS createNOT ,tbl_upload_order.date_required AS dateNOT,tbl_upload_team.note as note_team');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id =tbl_upload_team.order_id ', 'left');
         $this->db->join('tbl_user', 'tbl_user.idUser = tbl_upload_order.userId', 'left');
