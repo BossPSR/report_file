@@ -235,33 +235,6 @@
 															}
 															?>
 														</td>
-														<!-- <script>
-															setInterval(function() {
-																checkStatus();
-																checkStatus<?php echo $team['IdTeam']; ?>();
-															}, 10000);
-
-															function checkStatus<?php echo $team['IdTeam']; ?>() {
-																$.ajax({
-																	url: 'checkStatus_admin',
-																	data: {
-																		IdTeam: '<?php echo $team['IdTeam']; ?>'
-																	},
-																	success: function(getData) {
-
-																		console.log(getData);
-																		$('#statusTeam<?php echo $team['IdTeam']; ?>').load(' #statusTeam<?php echo $team['IdTeam']; ?>');
-																	}
-																});
-															}
-
-															function checkStatus() {
-
-																$('#statusTeam_count').load(' #statusTeam_count');
-																$('#team_count_num').load(' #team_count_num');
-															}
-														</script> -->
-
 														<td>
 															<a href="#" data-toggle="modal" data-target="#exampleModala<?php echo $team['IdTeam']; ?>"><i class="feather icon-eye" style="font-size: 25px;"></i></a>
 															<div class="modal fade" id="exampleModala<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -916,6 +889,33 @@
 																<button type="button" class="btn btn-icon btn-success" onclick="confirmalertunlock_del_unblock('<?php echo $team['IdTeam']; ?>')">
 																	<i class="feather icon-unlock"></i>
 																</button>
+																<button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#slide_ban<?php echo $team['IdTeam']; ?>">
+																	<i class="feather icon-sliders"></i>
+																</button>
+																<div class="modal fade" id="slide_ban<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																	<div class="modal-dialog " role="document">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title" id="exampleModalLabel">Blocked</h5>
+																				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																					<span aria-hidden="true">&times;</span>
+																				</button>
+																			</div>
+																			<form action="slide_blocked" method="POST">
+																				<div class="modal-body">
+																					<div class="form-group">
+																						<label for="">Date blocked</label>
+																						<input type="date" class="form-control" name="slide_date" min="<?= date('Y-m-d'); ?>" required>
+																						<input type="hidden" class="form-control" name="team_id" value="<?= $team['IdTeam']; ?>">
+																					</div>
+																				</div>
+																				<div class="modal-footer">
+																					<button type="submit" class="btn btn-primary">submit</button>
+																				</div>
+																			</form>
+																		</div>
+																	</div>
+																</div>
 															<?php else : ?>
 																<button type="button" class="btn btn-icon btn-secondary">
 																	<i class="feather icon-unlock"></i>

@@ -85,7 +85,7 @@
 </script>
 
 <script>
-    function confirmalertunlock_upload_de(data1,data2) {
+    function confirmalertunlock_upload_de(data1, data2) {
 
         swal({
             title: "Are you sure Unloc?",
@@ -95,7 +95,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'sendEmail_delivery?id=' + data1 + '&email=' + data2 ;
+                window.location = 'sendEmail_delivery?id=' + data1 + '&email=' + data2;
             }
         })
     }
@@ -117,9 +117,16 @@
         })
     }
 </script> -->
-
 <script>
-    function confirmalertunlock_upload_morefile(data5,data6) {
+    <?php if ($this->session->flashdata('slide_ss')) : ?>
+        swal("Complete", "Successfully blocked information", "success");
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('slide_false')) : ?>
+        swal("Error", "Not Successfully blocked information", "error");
+    <?php endif; ?>
+</script>
+<script>
+    function confirmalertunlock_upload_morefile(data5, data6) {
 
         swal({
             title: "Are you sure upload morefile?",
@@ -129,7 +136,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'status_more_file_team?id=' + data5 + '&order=' + data6  ;
+                window.location = 'status_more_file_team?id=' + data5 + '&order=' + data6;
             }
         })
     }
@@ -145,7 +152,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'status_feedback_now?id=' + data  ;
+                window.location = 'status_feedback_now?id=' + data;
             }
         })
     }
@@ -162,7 +169,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'delete_vdo?id=' + data6  ;
+                window.location = 'delete_vdo?id=' + data6;
             }
         })
     }
@@ -179,7 +186,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'delete_poster?id=' + data7  ;
+                window.location = 'delete_poster?id=' + data7;
             }
         })
     }
@@ -196,7 +203,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'back_admin_delete_admin?id=' + data8  ;
+                window.location = 'back_admin_delete_admin?id=' + data8;
             }
         })
     }
@@ -212,7 +219,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'delete_dm?id=' + data15  ;
+                window.location = 'delete_dm?id=' + data15;
             }
         })
     }
@@ -229,7 +236,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'status_reject_del?id=' + data9  ;
+                window.location = 'status_reject_del?id=' + data9;
             }
         })
     }
@@ -245,7 +252,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'delete_Position?id=' + data10  ;
+                window.location = 'delete_Position?id=' + data10;
             }
         })
     }
@@ -261,7 +268,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'status_reject_forbey?id=' + data11  ;
+                window.location = 'status_reject_forbey?id=' + data11;
             }
         })
     }
@@ -278,7 +285,7 @@
             successMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'Edit_Modify_fee?id=' + data12   ;
+                window.location = 'Edit_Modify_fee?id=' + data12;
             }
         })
     }
@@ -319,7 +326,7 @@
 
 
 
- <!-- uploadslider -->
+<!-- uploadslider -->
 
 </body>
 <!-- END: Body-->

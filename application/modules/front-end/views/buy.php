@@ -9,14 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>เพื่อประโยชน์สูงสุดของท่านในการสั่งออร์เดอร์จากทางระบบ <br>กรุณาตรวจสอบไฟล์ของท่านเพื่อให้แน่ใจว่าท่านได้อัปโหลดไฟล์ ทั้งฝั่งซ้ายและขวาอย่างถูกต้อง ฝั่งซ้ายคือ รายละเอียดคำสั่งงาน ฝั่งขวาคือ ข้อมูลหรือตัวอย่างประกอบ(ถ้ามี)</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -34,14 +27,16 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                <div class="text-center">
+                    <label style="color:red;" class=" font-size-upload">ในการสั่งออร์เดอร์แต่ล่ะครั้งต้องเป็นออร์เดอร์เดียวกันเท่านั้น <span> หากท่านต้องการสั่งออร์เดอร์มากกว่า1ออร์เดอร์ท่านสามารถกดสั่งได้ในครั้งต่อไป</span></label>
+                </div>
                 <article class="single_upload input-upload">
                     <div class="row">
                         <div class="col-12">
                             <div class="tab">
-
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">You can buy Document. <span style="color:red">( Can select more than 1 file )</span></label>
+                                        <label for="" class="font-size-upload">You can buy Document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 10 File )</span></label>
                                         <form action="buy_upload" class="dropzone" id="fileupload" style="margin-bottom:10px;">
                                             <div class="dz-message needsclick">
                                                 Drop files here or click to upload.<br>
@@ -55,7 +50,7 @@
                                         </form>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">You can buy GT Document. <span style="color:red">( Can select more than 1 file )</span></label>
+                                        <label for="" class="font-size-upload">You can buy GT Document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 10 File )</span></label>
                                         <form action="buy_uploadGT" class="dropzone" id="fileuploadGT">
                                             <div class="dz-message needsclick">
                                                 Drop files here or click to upload.<br>
@@ -76,11 +71,18 @@
                                 </div>
                                 <br>
                                 <label for="">Choose the date to pick up the document.</label>
-                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                    <div class="row">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                         <input type="date" class="form-control" id="date2" name="date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
+                                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                                        <div class="text-right" style="font-size: 16px;color:red;">
+                                            <p> * อธิบายการสั่งOrder</p>
+                                            <p>Due date 1-4 วันคืองานด่วน</p>
+                                            <p>Due date 5-10 วันคืองานปรกติ</p>
+                                        </div>
 
+                                    </div>
                                 </div>
                                 <br>
                                 <button type="button" class="btn btn-primary" id='uploadfiles'>

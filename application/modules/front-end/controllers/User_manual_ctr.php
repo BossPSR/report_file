@@ -17,4 +17,16 @@ class User_manual_ctr extends CI_Controller
         $this->load->view('user_manual', $data);
         $this->load->view('options/footer');
     }
+
+    public function check_email_ot()
+    {
+        $or_id = $this->input->post('order_id');
+        $data = array(
+            'check_email_ot' => '1',
+        );
+        $this->db->where('order_id', $or_id);
+        $query = $this->db->update('tbl_upload_order', $data);
+
+        echo $query;
+    }
 }

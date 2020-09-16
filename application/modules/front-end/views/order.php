@@ -450,7 +450,30 @@
                                                             });
                                                         </script>
                                                     <?php } ?>
-
+                                                    <div class="modal fade" id="feedback_term" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-md" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Feedback (<?php echo $value['ORD']; ?>)</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="text-align:left;">
+                                                                    <p>ท่านสามารถกด Feedback ได้ทั้งหมด3ครั้งและDue dateในแต่ล่ะครั้งต้องไม่น้อยกว่า 3 วัน</p>
+                                                                    <p>ทางระบบขอแนะนำให้ท่านเตรียมข้อมูลรายละเอียดหรือตัวอย่างประกอบ ในการแก้ไขให้ครบถ้วนและตรวจสอบวันเวลาที่ต้องการ รับ Feedback ให้แน่ชัดก่อนการกดปุ่มFeedabck</p>
+                                                                    <p>กรณีที่ท่านกด Feedback ครั้งที่ 2 และระบุวัน Due date ใหม่ ทางระบบจะยึด Feedback ที่มีวันเวลามากที่สุดเป็นหลัก</p>
+                                                                    <p><b>ยกตัวอย่าง:</b> Feedback ครั้งที่ 1 ระบุ Due Date 10/01/2020</p>
+                                                                    <p>Feedback ครั้งที่ 2 Due Date 05/01/2020</p>
+                                                                    <p>ทางระบบจะส่ง Feedback ให้ 10/01/2020</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" id="submit_term<?php echo $value['ORD']; ?>" class="btn btn-success">Save</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <script type='text/javascript'>
                                                         Dropzone.autoDiscover = false;
                                                         var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
@@ -472,20 +495,33 @@
                                                                     button: true,
                                                                 });
                                                             } else {
-                                                                $.ajax({
-                                                                    type: 'POST',
-                                                                    url: 'Not_approved',
-                                                                    data: {
-                                                                        detail: x,
-                                                                        dated: y,
-                                                                        order_id: z,
-                                                                        userId: c,
-                                                                        refdata: re,
-                                                                    },
-                                                                    success: function(success) {
-                                                                        if (myDropzone2.files != 0) {
-                                                                            myDropzone2.processQueue();
-                                                                            myDropzone2.on("queuecomplete", function(file, res) {
+                                                                $('#feedback_term').modal('show');
+                                                                $('#submit_term<?php echo $value['ORD']; ?>').on('click', function() {
+                                                                    $.ajax({
+                                                                        type: 'POST',
+                                                                        url: 'Not_approved',
+                                                                        data: {
+                                                                            detail: x,
+                                                                            dated: y,
+                                                                            order_id: z,
+                                                                            userId: c,
+                                                                            refdata: re,
+                                                                        },
+                                                                        success: function(success) {
+                                                                            if (myDropzone2.files != 0) {
+                                                                                myDropzone2.processQueue();
+                                                                                myDropzone2.on("queuecomplete", function(file, res) {
+                                                                                    swal("Good job!", "Upload for data successfull", "success", {
+                                                                                        button: true,
+                                                                                    }).then(function(isConfirm) {
+                                                                                        if (isConfirm == true) {
+                                                                                            setTimeout("location.reload(true);", 1000);
+                                                                                        } else {
+                                                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                                                        }
+                                                                                    });
+                                                                                });
+                                                                            } else {
                                                                                 swal("Good job!", "Upload for data successfull", "success", {
                                                                                     button: true,
                                                                                 }).then(function(isConfirm) {
@@ -495,21 +531,12 @@
                                                                                         swal("Cancelled", "Your imaginary file is safe :)", "error");
                                                                                     }
                                                                                 });
-                                                                            });
-                                                                        } else {
-                                                                            swal("Good job!", "Upload for data successfull", "success", {
-                                                                                button: true,
-                                                                            }).then(function(isConfirm) {
-                                                                                if (isConfirm == true) {
-                                                                                    setTimeout("location.reload(true);", 1000);
-                                                                                } else {
-                                                                                    swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                                                }
-                                                                            });
-                                                                        }
+                                                                            }
 
-                                                                    }
+                                                                        }
+                                                                    });
                                                                 });
+
                                                             }
 
                                                         });
@@ -569,6 +596,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+
                                                     <?php if (!empty($ref_feed['dated'])) { ?>
                                                         <script>
                                                             $('#onshownbtn<?php echo $value['ORD']; ?>').on('click', function() {
@@ -603,6 +632,7 @@
                                                                     button: true,
                                                                 });
                                                             } else {
+
                                                                 $.ajax({
                                                                     type: 'POST',
                                                                     url: 'Not_approved',
@@ -642,18 +672,16 @@
                                                                     }
                                                                 });
                                                             }
-
                                                         });
                                                     </script>
                                                 <?php } ?>
-
                                             <?php endif; ?>
 
 
                                             <?php if ($value['status_delivery'] == 1) { ?>
                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <?php } else { ?>
-                                                <button type="button" class="btn btn-secondary" ><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <?php } ?>
 
                                             <!-- Modal -->

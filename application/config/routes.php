@@ -132,7 +132,7 @@ $route['my_store_team']             = 'front-end/My_history_ctr/my_store_team';
 $route['my_score_team_deduct']      = 'front-end/My_history_ctr/my_score_team_deduct';
 $route['my_income']                 = 'front-end/My_history_ctr/my_income';
 $route['my_income_team_deduct']     = 'front-end/My_history_ctr/my_income_team_deduct';
-
+$route['check_email_ot']            = 'front-end/User_manual_ctr/check_email_ot';
 
 // /------------------------------------- back-end  ---------------------
 
@@ -329,7 +329,7 @@ $route['click_step']                                = 'back-end/Customer_order_c
 $route['checkStatus_admin_admin']                   = 'back-end/Login_ctr/checkStatus_admin_admin';
 $route['checkStatusAdmin']                          = 'back-end/Login_ctr/checkStatusAdmin';
 
-$route['add_team_informal']                   		= 'back-end/Informal_ctr/add_team_informal';
+$route['add_team_informal']                           = 'back-end/Informal_ctr/add_team_informal';
 $route['add_team_informal_feedbackall']             = 'back-end/Informal_ctr/add_team_informal_feedbackall';
 $route['update_team_informal']                      = 'back-end/Informal_ctr/update_team_informal';
 $route['fileUpload_t3_not_summit']                  = 'back-end/Informal_ctr/fileUpload_t3_not_summit';
@@ -365,4 +365,4 @@ $route['delete_unlock']                             = 'back-end/Team_ctr/delete_
 $route['add_team_informal_not']                     = 'back-end/Informal_ctr/add_team_informal_not';
 $route['cancel_dropzone']                           = 'back-end/Store_ctr/cancel_dropzone';
 $route['cancel_dropzone_not']                       = 'back-end/Store_ctr/cancel_dropzone_not';
-
+$route['slide_blocked']                             = 'back-end/Team_ctr/slide_unlock';

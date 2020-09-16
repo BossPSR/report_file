@@ -388,7 +388,7 @@
 </script>
 <script>
     <?php if ($suss = $this->session->flashdata('save_ss2')) : ?>
-        swal("Good job!", "<?php echo $suss; ?>", "success");
+        swal("Welcome", "<?php echo $suss; ?>", "success");
     <?php endif; ?>
     <?php if ($errors = $this->session->flashdata('del_ss2')) : ?>
         swal("Fail !", "<?php echo $errors; ?>", "error");
@@ -584,7 +584,30 @@
         });
     });
 </script>
-
+<?php $order = base64_decode($this->input->get('order')); ?>
+<?php $order_c = $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array(); ?>
+<script>
+    <?php if ($order_c['check_email_ot'] == 0) { ?>
+        $('#order_c').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    <?php } ?>
+</script>
+<script>
+    $('#agree_user_manual').on('click', function() {
+        $.ajax({
+            url: 'check_email_ot',
+            type: 'POST',
+            data: {
+                order_id: '<?= $order; ?>',
+            },
+            success: function(data) {
+                $('#order_c').modal('hide');
+            }
+        });
+    });
+</script>
 <!--Start of Tawk.to Script-->
 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
