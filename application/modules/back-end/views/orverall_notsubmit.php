@@ -152,12 +152,20 @@
 
                                 <div class="col-3 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
-                                        No Work <span class="badge badge-pill badge-warning" id="refresh_nw"><?php $no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
-                                                                                                                echo count($no_work); ?></span>
+                                        No Work <span class="badge badge-pill badge-warning" id="">
+                                            <?php $no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
+                                            echo count($no_work); ?></span>
                                     </a>
                                     <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">
-                                        Not Submit <span class="badge badge-pill badge-success" id="refresh_ns"><?php $not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
-                                                                                                                echo count($not_submit); ?></span>
+                                        Not Submit <span class="badge badge-pill badge-success" id="">
+                                            <?php $ok = 0; ?>
+                                            <?php foreach ($order_notsum as $key => $dd) {
+                                                $ok++;
+                                            } ?>
+                                            <?php echo $ok += 0; ?>
+                                            <!-- <?php $not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
+                                                    echo count($not_submit); ?> -->
+                                        </span>
                                     </a>
                                 </div>
                             </div>

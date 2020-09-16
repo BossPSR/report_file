@@ -59,10 +59,10 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configurationF">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <th style="display: none;">#</th>
                                                     <th>Store Id</th>
                                                     <th>UserId</th>
                                                     <th>Note</th>
@@ -75,7 +75,7 @@
                                                 <?php foreach ($section as $keys => $section) { ?>
                                                     <?php $check_for = $this->db->group_by('section')->get_where('tbl_upload_store', ['store_id' => $section['store_id'], 'is_check' => 0, 'status_main_search' => 0])->result_array(); ?>
                                                     <tr>
-                                                        <td><?php echo $i++; ?></td>
+                                                        <td style="display: none;"><?php echo $section['create_at']; ?> </td>
                                                         <td><?php echo $section['store_id']; ?></td>
                                                         <td> <?php echo $section['userId']; ?></td>
                                                         <td>

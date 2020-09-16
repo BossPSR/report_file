@@ -21,6 +21,12 @@ $(document).ready(function() {
         ]
     });
 
+    $('.zero-configurationF').DataTable({
+        "order": [
+            [0, 'asc']
+        ]
+    });
+
     /********************************************
      *        js of Order by the grouping        *
      ********************************************/

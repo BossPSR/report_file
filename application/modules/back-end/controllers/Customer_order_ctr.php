@@ -655,9 +655,11 @@ class Customer_order_ctr extends CI_Controller
         $teamdb  = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
         $orderdb = $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
         
-        if ($orderdb) {
+        if ($orderdb['check_email_ot'] == 1) {
+            $this->session->set_flashdata('del_ss2', 'You have already done this. Sorry for the inconvenience.');
+            return redirect('home');
         }
-        
+
         $update = [
             'date_required'  =>  $date,
             'check_email_ot' =>  1
@@ -681,12 +683,17 @@ class Customer_order_ctr extends CI_Controller
 
     public function no_ok_new_date()
     {
-        $order  = $this->input->get('order');
-        $date   = $this->input->get('date');
-        $user   = $this->input->get('user');
-        $userdb = $this->db->get_where('tbl_user', ['IdUser' => $user])->row_array();
-        $teamdb = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
+        $order   = $this->input->get('order');
+        $date    = $this->input->get('date');
+        $user    = $this->input->get('user');
+        $userdb  = $this->db->get_where('tbl_user', ['IdUser' => $user])->row_array();
+        $teamdb  = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
+        $orderdb = $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
         
+        if ($orderdb['check_email_ot'] == 1) {
+            $this->session->set_flashdata('del_ss2', 'You have already done this. Sorry for the inconvenience.');
+            return redirect('home');
+        }
 
         $update = [
             'is_check'          =>  1,

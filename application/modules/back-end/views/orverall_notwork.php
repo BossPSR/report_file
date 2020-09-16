@@ -42,7 +42,6 @@
                                     <?php else : ?>
                                         <?php $e = 0; ?>
                                         <?php foreach ($order_notwork as $key => $datata) {
-
                                             $e++;
                                         } ?>
                                         <h3 class="card-title "><?php echo $e += 0; ?></h3>
@@ -52,28 +51,33 @@
 
                                 <div class="col-3 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
-                                        No Work <span class="badge badge-pill badge-warning" id="refresh_nw">
+                                        No Work <span class="badge badge-pill badge-warning" id="">
                                             <?php
-                                            $e = 0;
-                                            if ($no_work) {
-                                                foreach ($no_work as $no_work) {
-                                                    $checkDate_nums = DateDiff($no_work['createOr'], $no_work['requiredOr']);
-                                                    $checkDates = $checkDate_nums / 2;
-                                                    $checkDates = floor($checkDates);
-                                                    $dateRequireds = date("Y-m-d", strtotime("-" . $checkDates . " day", strtotime($no_work['requiredOr'])));
-                                                    if ($dateRequireds <= date("Y-m-d")) {
-                                                        $e += 1;
-                                                    }
-                                                }
-                                                echo $checkDate_nums;
-                                            } else {
-                                                echo $e;
-                                            }
+                                            $op = 0;
+                                            // if ($no_work) {
+                                            //     foreach ($no_work as $no_work) {
+                                            //         $checkDate_nums = DateDiff($no_work['createOr'], $no_work['requiredOr']);
+                                            //         $checkDates = $checkDate_nums / 2;
+                                            //         $checkDates = floor($checkDates);
+                                            //         $dateRequireds = date("Y-m-d", strtotime("-" . $checkDates . " day", strtotime($no_work['requiredOr'])));
+                                            //         if ($dateRequireds <= date("Y-m-d")) {
+                                            //             $e += 1;
+                                            //         }
+                                            //     }
+                                            //     echo $checkDate_nums;
+                                            // } else {
+                                            //     echo $e;
+                                            // }
                                             ?>
+                                            <?php foreach ($order_notwork as $key => $datata) {
+                                                $op++;
+                                            } ?>
+                                            <?php echo $op += 0; ?>
+
                                         </span>
                                     </a>
                                     <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">
-                                        Not Submit <span class="badge badge-pill badge-success" id="refresh_ns">
+                                        Not Submit <span class="badge badge-pill badge-success" id="">
                                             <?php
                                             $y = 0;
                                             foreach ($not_submit as $key => $not_submit) {
@@ -193,7 +197,7 @@
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="Team">Team ID</label>
                                                                                             <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
-                                                                                                <option disabled > -- Select Team -- </option>
+                                                                                                <option disabled> -- Select Team -- </option>
                                                                                                 <option value=""> All Team </option>
                                                                                                 <?php foreach ($ts as $tsM) { ?>
                                                                                                     <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $stores['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
@@ -224,9 +228,9 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <?php
-                                                                                $str =  $stores['requiredOr'];
-                                                                                $datr_re = explode(" ", $str);
-                                                                                ?>
+                                                                                    $str =  $stores['requiredOr'];
+                                                                                    $datr_re = explode(" ", $str);
+                                                                                    ?>
                                                                                     <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                         <div class="form-group" style="text-align: left;">
                                                                                             <label for="helpInputTop">date required</label>

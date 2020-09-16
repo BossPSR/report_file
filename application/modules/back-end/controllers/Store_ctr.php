@@ -168,7 +168,6 @@ class Store_ctr extends CI_Controller
 
         $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
 
-
         $uploads = [];
         $numFile = 0;
         foreach ($upload_order as $uploadOrder) {
