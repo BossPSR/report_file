@@ -603,13 +603,13 @@ class Customer_order_ctr extends CI_Controller
         $message .= '<br>';
         $message .= '<p style="font-size: 18px;">New Date required. ' . $daterq . '</p>';
 
-        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #00cc2cfa;border: 1px solid #009c22;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #00cc2cfa;border: 1px solid #009c22;" href="https://www.ip-soft.co.th/ipsoft/ok_new_date?order=' . $order . '&date=' . $daterq . '&user='.$userid.' ">';
         $message .= 'ตกลงเวลาใหม่ที่แอดมินกำหนด ';
         $message .= '</a> &nbsp;';
-        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #ef0000;border: 1px solid #b10000;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #ef0000;border: 1px solid #b10000;" href="https://www.ip-soft.co.th/ipsoft/no_ok_new_date?order=' . $order . '&date=' . $daterq . '&user='.$userid.'">';
         $message .= 'ยกเลิกออเดอร์ ';
         $message .= '</a> &nbsp;';
-        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/user-manual">';
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/user-manual?order=' . base64_encode($order) . '">';
         $message .= 'ฉันขอกำหนดวันที่ด้วยตัวเอง ';
         $message .= '</a>';
 
@@ -645,6 +645,255 @@ class Customer_order_ctr extends CI_Controller
             return redirect('Satisfied');
         }
     }
+
+    public function ok_new_date()
+    {
+        $order   = $this->input->get('order');
+        $date    = $this->input->get('date');
+        $user    = $this->input->get('user');
+        $userdb  = $this->db->get_where('tbl_user', ['IdUser' => $user])->row_array();
+        $teamdb  = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
+        $orderdb = $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
+        
+        if ($orderdb) {
+        }
+        
+        $update = [
+            'date_required'  =>  $date,
+            'check_email_ot' =>  1
+        ];
+        $this->db->where('order_id', $order);
+        $success = $this->db->update('tbl_upload_order', $update);
+        
+        $this->sendEmail_success_user($userdb,$order,$date);
+
+        if ($teamdb == true) {
+            $this->sendEmail_success_team($teamdb,$order,$date);
+        }
+
+        if ($success) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
+        }
+        return redirect('home');
+    }
+
+    public function no_ok_new_date()
+    {
+        $order  = $this->input->get('order');
+        $date   = $this->input->get('date');
+        $user   = $this->input->get('user');
+        $userdb = $this->db->get_where('tbl_user', ['IdUser' => $user])->row_array();
+        $teamdb = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
+        
+
+        $update = [
+            'is_check'          =>  1,
+            'check_email_ot'    =>  1
+        ];
+        $this->db->where('order_id', $order);
+        $success = $this->db->update('tbl_upload_order', $update);
+        
+        $this->sendEmail_success_user_no($userdb,$order,$date);
+
+        if ($teamdb == true) {
+            $this->sendEmail_success_user_no($teamdb,$order,$date);
+        }
+
+        if ($success) {
+            $this->session->set_flashdata('save_ss2', 'Successfully send delivery information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully send delivery information');
+        }
+        return redirect('home');
+    }
+    
+
+    public function sendEmail_success_user($userdb,$order,$date)
+    {
+       
+        $subject = 'You have successfully changed the date. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $userdb['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p> You have successfully changed the date. ("' . $order . '")</p>';
+        $message .= '<p style="font-size: 18px;">New Date required. ' . $date . '</p>';
+  
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($userdb['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+        $this->email->send();
+          
+    }
+
+    public function sendEmail_success_user_no($userdb,$order,$date)
+    {
+       
+        $subject = 'You have successfully changed the date. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $userdb['username'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p> You have successfully canceled your order. ("' . $order . '")</p>';
+        $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
+  
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($userdb['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+        $this->email->send();
+          
+    }
+
+    public function sendEmail_success_team($teamdb,$order,$date)
+    {
+       
+        $subject = 'You have successfully changed the date. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $teamdb['name'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p> You have successfully changed the date. ("' . $order . '")</p>';
+        $message .= '<p style="font-size: 18px;">New Date required. ' . $date . '</p>';
+  
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($teamdb['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+        $this->email->send();
+
+    }
+
+    public function sendEmail_success_team_no($teamdb,$order,$date)
+    {
+       
+        $subject = 'You have successfully changed the date. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $teamdb['name'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p> You have successfully canceled your order. ("' . $order . '")</p>';
+        $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
+  
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($teamdb['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+        $this->email->send();
+
+    }
+    
 
     public function rename_uploadmain()
     {
