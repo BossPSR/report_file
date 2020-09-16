@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="tab">
-                                <label for="" class="font-size-upload">You can store document. <span style="color:red">( Can select more than 1 file )</span></label>
+                                <label for="" class="font-size-upload">You can store document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 10 File )</span></label>
                                 <form action="store_upload" class="dropzone" id="dropzone2">
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
@@ -62,14 +62,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>เพื่อประโยชน์สูงสุดของท่านในการรับส่วนลดจากทางระบบ<br> กรุณาตรวจสอบไฟล์ของท่านเพื่อให้แน่ใจว่าไฟล์ทั้งหมด คืองานเดียวกันไม่มีงานอื่นรวมอยู่ในการUploadครั้งนี้</p>
+                <p>หมายเหตุ: หากการUploadในครั้งนี้มีไฟล์งานอื่นรวมอยู่ด้วย ท่านอาจเสียสิทธิ์ในการได้รับส่วนลดจากทางระบบ</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

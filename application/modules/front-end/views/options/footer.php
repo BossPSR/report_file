@@ -388,7 +388,7 @@
 </script>
 <script>
     <?php if ($suss = $this->session->flashdata('save_ss2')) : ?>
-        swal("Good job!", "<?php echo $suss; ?>", "success");
+        swal("Welcome", "<?php echo $suss; ?>", "success");
     <?php endif; ?>
     <?php if ($errors = $this->session->flashdata('del_ss2')) : ?>
         swal("Fail !", "<?php echo $errors; ?>", "error");

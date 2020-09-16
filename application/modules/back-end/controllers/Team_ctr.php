@@ -25,10 +25,28 @@ class Team_ctr extends CI_Controller
         }
     }
 
+    public function slide_unlock()
+    {
+        $team_id        = $this->input->post('team_id');
+        $slide_date     = $this->input->post('slide_date');
+
+        $data = array(
+            'end_date_ncf' => $slide_date,
+        );
+        $this->db->where('teamid', $team_id);
+        $success = $this->db->update('tbl_cancel', $data);
+        if ($success > 0) {
+            $this->session->set_flashdata('slide_ss', true);
+        } else {
+            $this->session->set_flashdata('slide_false', true);
+        }
+        return redirect('back_team');
+    }
+
     public function  delete_unlock()
     {
         $tm_id = $this->input->get('tm_id');
-       
+
 
         $this->db->where('teamid', $tm_id);
         $resultsedit = $this->db->delete('tbl_cancel');
@@ -44,13 +62,13 @@ class Team_ctr extends CI_Controller
     public function team_job_status()
     {
         $id = $this->input->post('id');
-       
+
         $data = array(
 
             'status_approve'          => $this->input->post('status'),
-            
+
         );
-                       $this->db->where('id', $id);
+        $this->db->where('id', $id);
         $resultsedit = $this->db->update('tbl_job_position', $data);
         echo $resultsedit;
     }

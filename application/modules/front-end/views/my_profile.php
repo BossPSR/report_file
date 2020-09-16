@@ -220,7 +220,7 @@
                         <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 150px;height: 150px;">
                     </div>
                     <div class="form-group">
-                        <label for="">Profile</label>
+                        <label for="">Change picture</label>
                         <input type="file" class="form-control" name="profile" value="">
                     </div>
                 </div>
