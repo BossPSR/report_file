@@ -707,10 +707,39 @@
 
                                                         <!-- dateREST -->
                                                         <td>
-                                                            <?php if (date("Y-m-d") >= $stores['dateREST']) : ?>
+                                                            <?php if (date("Y-m-d H:i:s") >= $stores['dateREST']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
+                                                                <button type="button" class="btn btn-icon btn-warning waves-effect waves-light" data-toggle="modal" data-target="#dateagin<?php echo $stores['orderST']; ?>"><i class="feather icon-rotate-ccw"></i> ส่งเมล์ต่อเวลา </button>
+                                                                <div class="modal fade" id="dateagin<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Send date required (<?php echo $stores['orderST']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <form action="sendEmail_new_daterq" method="POST">
+                                                                                <input type="hidden" name="order" value="<?php echo $stores['orderST']; ?>">
+                                                                                <input type="hidden" name="userid" value="<?php echo $stores['userOR']; ?>">
+                                                                                <div class="modal-body">
+                                                                                    <div class="form-group">
+                                                                                        <label for="" style="font-size: 16px;">Date required </label>
+                                                                                        <input type="date" name="daterq" id="" class="form-control" min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="modal-footer">
+                                                                                    <div class="add-data-footer d-flex justify-content-around">
+                                                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d', strtotime($stores['dateREST'])); ?>
+                                                                <?php $dateReq = date('Y-m-d', strtotime($stores['dateREST'])); ?>
                                                                 <div id="clock-b<?php echo $stores['id_sss']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
@@ -897,7 +926,7 @@
                                                                                     $t3folder = $this->db->get_where('tbl_upload_order_team', ['order_id' => $stores['orderST']])->result_array();
                                                                                     ?>
                                                                                     <div class="table-responsive">
-                                                                                        <table class="table zero-configuration" >
+                                                                                        <table class="table zero-configuration">
                                                                                             <thead>
                                                                                                 <tr>
                                                                                                     <th>Order id</th>
@@ -973,7 +1002,7 @@
                                                                                                                                                                 <input type="hidden" id="path<?php echo $orderTgroupold['id']; ?>" data-pathgt="<?php echo $orderTgroupold['path']; ?>" class="form-control">
                                                                                                                                                             </div>
                                                                                                                                                             <div class="modal-footer">
-                                                                                                                                                                <button type="button" class="btn btn-primary ep" id="re_file_name_buttonGT<?php echo $orderTgroupold['id']; ?> " data-fgt="<?php echo $orderTgroupold['id']; ?>"  data-fmain="<?php echo $order['id']; ?>">Submit</button>
+                                                                                                                                                                <button type="button" class="btn btn-primary ep" id="re_file_name_buttonGT<?php echo $orderTgroupold['id']; ?> " data-fgt="<?php echo $orderTgroupold['id']; ?>" data-fmain="<?php echo $order['id']; ?>">Submit</button>
                                                                                                                                                             </div>
 
                                                                                                                                                         </div>

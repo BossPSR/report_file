@@ -201,6 +201,7 @@ $route['Section']                                   = 'back-end/Section_ctr';
 $route['upload_team']                               = 'back-end/Customer_order_ctr/upload_team';
 $route['upload_team_not_work']                      = 'back-end/Customer_order_ctr/upload_team_not_work';
 $route['upload_team_ST']                            = 'back-end/Customer_order_ctr/upload_team_ST';
+$route['sendEmail_new_daterq']                            = 'back-end/Customer_order_ctr/sendEmail_new_daterq';
 $route['Stock']                                     = 'back-end/Stock_ctr';
 $route['orverall']                                  = 'back-end/Customer_order_ctr/orverall';
 $route['orvernotwork']                              = 'back-end/Customer_order_ctr/orvernotwork';

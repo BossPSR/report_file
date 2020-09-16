@@ -577,6 +577,75 @@ class Customer_order_ctr extends CI_Controller
         }
     }
 
+    public function sendEmail_new_daterq()
+    {
+        $userid  = $this->input->post('userid');
+        $order   = $this->input->post('order');
+        $daterq  = $this->input->post('daterq');
+        $user    = $this->db->get_where('tbl_user', ['IdUser' => $userid])->row();
+
+
+        $subject = 'You have received additional work from the admin. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $userid . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Your order time has expired. You can choose from 3 options. ("' . $order . '")</p>';
+        $message .= '<br>';
+        $message .= '<p style="font-size: 18px;">New Date required. ' . $daterq . '</p>';
+
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #00cc2cfa;border: 1px solid #009c22;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
+        $message .= 'ตกลงเวลาใหม่ที่แอดมินกำหนด ';
+        $message .= '</a> &nbsp;';
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #ef0000;border: 1px solid #b10000;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
+        $message .= 'ยกเลิกออเดอร์ ';
+        $message .= '</a> &nbsp;';
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/user-manual">';
+        $message .= 'ฉันขอกำหนดวันที่ด้วยตัวเอง ';
+        $message .= '</a>';
+
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($user->email);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Sent new date !!.');
+            return redirect('Satisfied');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Sent new date');
+            return redirect('Satisfied');
+        }
+    }
+
     public function rename_uploadmain()
     {
         $resume = $this->input->post('resume');
