@@ -989,6 +989,7 @@
                         textarea: textarea,
                         status_approved: 1,
                         star: star,
+                        userId: '<?php echo $userId['idUser']; ?>'
                     },
                     success: function(success) {
                         swal("Good job!", "Upload for data successfull", "success", {

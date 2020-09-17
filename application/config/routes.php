@@ -210,6 +210,7 @@ $route['Stock']                                     = 'back-end/Stock_ctr';
 $route['orverall']                                  = 'back-end/Customer_order_ctr/orverall';
 $route['orvernotwork']                              = 'back-end/Customer_order_ctr/orvernotwork';
 $route['orvernotsubmit']                            = 'back-end/Customer_order_ctr/orvernotsubmit';
+$route['deduct_full20']                             = 'back-end/Customer_order_ctr/deduct_full20';
 $route['my_stock_admin']                            = 'back-end/Stock_ctr/my_stock_admin';
 $route['Add_my_stock_admin']                        = 'back-end/Stock_ctr/add_my_stock_admin';
 $route['fileUpload_buy_admin']                      = 'back-end/Stock_ctr/fileUpload_buy_admin';

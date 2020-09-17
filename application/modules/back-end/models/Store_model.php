@@ -50,14 +50,14 @@ class Store_model extends CI_Model
 
     public function store_row()
     {
-        $this->db->select('*');
+        $this->db->select('*,tbl_upload_order.id idmain');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_user', 'tbl_user.idUser = tbl_upload_order.userId', 'left');
         $this->db->join('countries', 'countries.id = tbl_user.country_id', 'left');
         $this->db->where('tbl_upload_order.is_check', 0);
         $this->db->where('tbl_upload_order.status_book', 0);
         $this->db->group_by('tbl_upload_order.order_id');
-        $this->db->order_by('tbl_upload_order.date_required', 'ACC');
+        $this->db->order_by('tbl_upload_order.id', 'ASC');
         return $this->db->get()->result_array();
     }
 

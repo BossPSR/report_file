@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set('Asia/Bangkok');
 
 class Buy_ctr extends CI_Controller
 {
@@ -68,6 +69,7 @@ class Buy_ctr extends CI_Controller
     $userId     = $this->input->post('userId');
     $date_req   =  $this->input->post('date');
     $detail     =  $this->input->post('detail');
+    $date_now     =  $this->input->post('date_now');
 
     $target_dir = "uploads/Buy/"; // Upload directory
 
@@ -90,7 +92,6 @@ class Buy_ctr extends CI_Controller
 
       $buymax = $this->db->order_by('id', 'DESC')->get('tbl_order_f')->row();
 
-
       // File upload
       if ($this->upload->do_upload('file')) {
         // Get data about the file
@@ -103,13 +104,11 @@ class Buy_ctr extends CI_Controller
           'date_required' => $date_req,
           'file_name'     => $uploadData['file_name'],
           'path'          => 'uploads/Buy/' . $uploadData['file_name'],
-          'create_at'     => date('Y-m-d H:i:s'),
-          'notify_admin'     => 0
+          'notify_admin'  => 0
         );
+
         $this->db->insert('tbl_upload_order', $data);
-        // if ($this->db->insert('tbl_upload_order', $data)) {
-        //   return redirect('buy_uploadGT', $data);
-        // }
+     
       }
     }
   }

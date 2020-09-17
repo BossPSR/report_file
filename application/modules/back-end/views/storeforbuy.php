@@ -54,7 +54,7 @@
                                         <table class="table table-hover zero-configuration">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <th style="display: none;">#</th>
                                                     <th>Order Id</th>
                                                     <th>User</th>
                                                     <th>country</th>
@@ -76,7 +76,7 @@
                                                 ?>
 
                                                     <tr>
-                                                        <td><?php echo $y++; ?></td>
+                                                        <td style="display: none;"><?php echo $stored['idmain']; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
                                                         <td><?php echo $stored['countryName']; ?></td>

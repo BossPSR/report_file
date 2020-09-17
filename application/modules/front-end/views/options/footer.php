@@ -611,47 +611,52 @@
 <!--Start of Tawk.to Script-->
 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array() ?>
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
-<?php if ($user['block_user'] == 1 && $user['cash'] > 0 && $this->uri->segment(1) != 'my-withdraw') { ?>
-    <script type="text/javascript">
-        $('#block_user').modal({
-            backdrop: 'static',
-            keyboard: false
-        });
-        $('#agree_block').on('click', function() {
-            window.location.href = 'my-withdraw';
-        });
-    </script>
-<?php } ?>
 
 
-<?php $order02 = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'], 'status_pay' => '0'])->result_array(); ?>
-<script>
-    <?php foreach ($order02 as $order02) { ?>
-
-        <?php if ($order02['status_pay'] == 0 && $order02['check_time_not_pay'] == 0) { ?>
-            console.log('<?php echo $order02['order_id']; ?>');
-
-            function checkStatus() {
-                console.log('1');
-                $.ajax({
-                    url: 'check_first_12',
-                    data: {
-                        order: '<?php echo $order02['order_id']; ?>',
-                        status: '1'
-                    },
-                    success: function(getData) {
-
-                        console.log(getData);
-
-                    }
-                });
-            }
-            checkStatus();
-        <?php } ?>
-
-
+<?php if ($user == true) : ?>
+    <?php if ($user['block_user'] == 1 && $user['cash'] > 0 && $this->uri->segment(1) != 'my-withdraw') { ?>
+        <script type="text/javascript">
+            $('#block_user').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            $('#agree_block').on('click', function() {
+                window.location.href = 'my-withdraw';
+            });
+        </script>
     <?php } ?>
-</script>
+
+
+
+    <?php $order02 = $this->db->get_where('tbl_upload_order', ['userId' => $user['idUser'], 'status_pay' => '0'])->result_array(); ?>
+    <script>
+        <?php foreach ($order02 as $order02) { ?>
+
+            <?php if ($order02['status_pay'] == 0 && $order02['check_time_not_pay'] == 0) { ?>
+                console.log('<?php echo $order02['order_id']; ?>');
+
+                function checkStatus() {
+                    console.log('1');
+                    $.ajax({
+                        url: 'check_first_12',
+                        data: {
+                            order: '<?php echo $order02['order_id']; ?>',
+                            status: '1'
+                        },
+                        success: function(getData) {
+
+                            console.log(getData);
+
+                        }
+                    });
+                }
+                checkStatus();
+            <?php } ?>
+
+
+        <?php } ?>
+    </script>
+<?php endif; ?>
 <script type="text/javascript">
     // if ($order02['status_pay'] == 0 && $order02['check_time_not_pay'] == 0 && date("Y-m-d H:i:s") > date("Y-m-d H:i:s", strtotime("+ 12 hours", $order02['create_at']))) {
     //     setInterval(function() {

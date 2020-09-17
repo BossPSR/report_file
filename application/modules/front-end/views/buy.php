@@ -19,7 +19,7 @@
     </div>
 </div>
 <br>
-<h2 class="text-center" style="margin-top: 15px;"> My buy</h2>
+<h2 class="text-center" style="margin-top: 15px;"> My buy </h2>
 <hr class="line_package">
 <br>
 <!--wishlist area start -->

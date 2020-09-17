@@ -107,6 +107,50 @@ class Customer_order_ctr extends CI_Controller
         }
     }
 
+    public function deduct_full20()
+    {
+        $order    = $this->input->get('order');
+        $status   = $this->input->get('status');
+        $deprice  = $this->input->get('deprice');
+        $teamdb   = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
+        $resultsedit = 0;
+        if ($teamdb == true) {
+            $tm   = $this->db->get_where('tbl_team', ['IdTeam' => $teamdb['teamId']])->row_array();
+
+            $deduct = [
+                'income' =>  $tm['income'] - $deprice
+            ];
+            $this->db->where('IdTeam', $teamdb['teamId']);
+            $good = $this->db->update('tbl_team', $deduct);
+
+            if ($good) {
+                $detail = [
+                    'teamid_dti'        =>  $teamdb['teamId'],
+                    'item_dti'          =>  'ไม่ส่ง Delivery และไม่กดยกเลิก',
+                    'income_dti'        =>  $deprice,
+                    'order_id_dti'      =>  $order,
+                    'note_dti'          =>  'ไม่ส่ง Delivery และไม่กดยกเลิกหัก $20',
+                    'create_at_dti'     =>  date("Y-m-d H:i:s"),
+                ];
+                $this->db->insert('tbl_deduct_team_income', $detail);
+            }
+            $data = array(
+
+                'check_deduct_full'      => $status,
+                'create_at'              => date('Y-m-d H:i:s'),
+
+            );
+
+            $this->db->where('order_id', $order);
+            $this->db->where('teamId', $teamdb['teamId']);
+            $resultsedit = $this->db->update('tbl_upload_team', $data);
+        }
+
+
+
+        echo $resultsedit;
+    }
+
 
 
 
@@ -603,10 +647,10 @@ class Customer_order_ctr extends CI_Controller
         $message .= '<br>';
         $message .= '<p style="font-size: 18px;">New Date required. ' . $daterq . '</p>';
 
-        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #00cc2cfa;border: 1px solid #009c22;" href="https://www.ip-soft.co.th/ipsoft/ok_new_date?order=' . $order . '&date=' . $daterq . '&user='.$userid.' ">';
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #00cc2cfa;border: 1px solid #009c22;" href="https://www.ip-soft.co.th/ipsoft/ok_new_date?order=' . $order . '&date=' . $daterq . '&user=' . $userid . ' ">';
         $message .= 'ตกลงเวลาใหม่ที่แอดมินกำหนด ';
         $message .= '</a> &nbsp;';
-        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #ef0000;border: 1px solid #b10000;" href="https://www.ip-soft.co.th/ipsoft/no_ok_new_date?order=' . $order . '&date=' . $daterq . '&user='.$userid.'">';
+        $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #fff;background-color: #ef0000;border: 1px solid #b10000;" href="https://www.ip-soft.co.th/ipsoft/no_ok_new_date?order=' . $order . '&date=' . $daterq . '&user=' . $userid . '">';
         $message .= 'ยกเลิกออเดอร์ ';
         $message .= '</a> &nbsp;';
         $message .= '<a class="btn btn-info" style="text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/user-manual?order=' . base64_encode($order) . '">';
@@ -654,7 +698,7 @@ class Customer_order_ctr extends CI_Controller
         $userdb  = $this->db->get_where('tbl_user', ['IdUser' => $user])->row_array();
         $teamdb  = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
         $orderdb = $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
-        
+
         if ($orderdb['check_email_ot'] == 1) {
             $this->session->set_flashdata('del_ss2', 'You have already done this. Sorry for the inconvenience.');
             return redirect('home');
@@ -666,11 +710,11 @@ class Customer_order_ctr extends CI_Controller
         ];
         $this->db->where('order_id', $order);
         $success = $this->db->update('tbl_upload_order', $update);
-        
-        $this->sendEmail_success_user($userdb,$order,$date);
+
+        $this->sendEmail_success_user($userdb, $order, $date);
 
         if ($teamdb == true) {
-            $this->sendEmail_success_team($teamdb,$order,$date);
+            $this->sendEmail_success_team($teamdb, $order, $date);
         }
 
         if ($success) {
@@ -689,7 +733,7 @@ class Customer_order_ctr extends CI_Controller
         $userdb  = $this->db->get_where('tbl_user', ['IdUser' => $user])->row_array();
         $teamdb  = $this->db->get_where('tbl_upload_team', ['order_id' => $order])->row_array();
         $orderdb = $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
-        
+
         if ($orderdb['check_email_ot'] == 1) {
             $this->session->set_flashdata('del_ss2', 'You have already done this. Sorry for the inconvenience.');
             return redirect('home');
@@ -701,11 +745,11 @@ class Customer_order_ctr extends CI_Controller
         ];
         $this->db->where('order_id', $order);
         $success = $this->db->update('tbl_upload_order', $update);
-        
-        $this->sendEmail_success_user_no($userdb,$order,$date);
+
+        $this->sendEmail_success_user_no($userdb, $order, $date);
 
         if ($teamdb == true) {
-            $this->sendEmail_success_user_no($teamdb,$order,$date);
+            $this->sendEmail_success_user_no($teamdb, $order, $date);
         }
 
         if ($success) {
@@ -715,11 +759,11 @@ class Customer_order_ctr extends CI_Controller
         }
         return redirect('home');
     }
-    
 
-    public function sendEmail_success_user($userdb,$order,$date)
+
+    public function sendEmail_success_user($userdb, $order, $date)
     {
-       
+
         $subject = 'You have successfully changed the date. ';
 
         $message  = '<center>';
@@ -736,7 +780,7 @@ class Customer_order_ctr extends CI_Controller
         $message .= '<p>Check below for your order details.</p><hr>';
         $message .= '<p> You have successfully changed the date. ("' . $order . '")</p>';
         $message .= '<p style="font-size: 18px;">New Date required. ' . $date . '</p>';
-  
+
         $message .= '</center>';
 
         //config email settings
@@ -760,12 +804,11 @@ class Customer_order_ctr extends CI_Controller
         $this->email->message($message);
         $this->email->set_mailtype('html');
         $this->email->send();
-          
     }
 
-    public function sendEmail_success_user_no($userdb,$order,$date)
+    public function sendEmail_success_user_no($userdb, $order, $date)
     {
-       
+
         $subject = 'You have successfully changed the date. ';
 
         $message  = '<center>';
@@ -782,7 +825,7 @@ class Customer_order_ctr extends CI_Controller
         $message .= '<p>Check below for your order details.</p><hr>';
         $message .= '<p> You have successfully canceled your order. ("' . $order . '")</p>';
         $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
-  
+
         $message .= '</center>';
 
         //config email settings
@@ -806,12 +849,11 @@ class Customer_order_ctr extends CI_Controller
         $this->email->message($message);
         $this->email->set_mailtype('html');
         $this->email->send();
-          
     }
 
-    public function sendEmail_success_team($teamdb,$order,$date)
+    public function sendEmail_success_team($teamdb, $order, $date)
     {
-       
+
         $subject = 'You have successfully changed the date. ';
 
         $message  = '<center>';
@@ -828,7 +870,7 @@ class Customer_order_ctr extends CI_Controller
         $message .= '<p>Check below for your order details.</p><hr>';
         $message .= '<p> You have successfully changed the date. ("' . $order . '")</p>';
         $message .= '<p style="font-size: 18px;">New Date required. ' . $date . '</p>';
-  
+
         $message .= '</center>';
 
         //config email settings
@@ -852,12 +894,11 @@ class Customer_order_ctr extends CI_Controller
         $this->email->message($message);
         $this->email->set_mailtype('html');
         $this->email->send();
-
     }
 
-    public function sendEmail_success_team_no($teamdb,$order,$date)
+    public function sendEmail_success_team_no($teamdb, $order, $date)
     {
-       
+
         $subject = 'You have successfully changed the date. ';
 
         $message  = '<center>';
@@ -874,7 +915,7 @@ class Customer_order_ctr extends CI_Controller
         $message .= '<p>Check below for your order details.</p><hr>';
         $message .= '<p> You have successfully canceled your order. ("' . $order . '")</p>';
         $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
-  
+
         $message .= '</center>';
 
         //config email settings
@@ -898,9 +939,8 @@ class Customer_order_ctr extends CI_Controller
         $this->email->message($message);
         $this->email->set_mailtype('html');
         $this->email->send();
-
     }
-    
+
 
     public function rename_uploadmain()
     {

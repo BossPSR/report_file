@@ -81,7 +81,7 @@
                                                         <td><?php echo $value['organization_upload']; ?></td>
                                                         <td><?php echo $value['name_item']; ?></td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span>
+                                                            <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                             <div class="modal fade" id="exampleModal<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                     <div class="modal-content">
@@ -161,7 +161,7 @@
                                                                                                     <i class="feather icon-folder" style="font-size: 25px; cursor: pointer; color:green" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
                                                                                                 <?php endif; ?>
                                                                                                 <div class="modal fade" id="exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
+                                                                                                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
                                                                                                                 <h5 class="modal-title" id="exampleModalLabel">Sub DM File</h5>
@@ -368,9 +368,52 @@
                                                                                                 <?php echo $ki; ?>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <a href="">
+                                                                                                <a href="" data-toggle="modal" data-target="#teamdetail<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>">
                                                                                                     <i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i>
                                                                                                 </a>
+                                                                                                <div class="modal fade" id="teamdetail<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Team detail</h5>
+                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                            <div class="modal-body">
+                                                                                                                <table class="table table-hover zero-configuration">
+                                                                                                                    <thead>
+                                                                                                                        <?php
+                                                                                                                        $this->db->select('*,tbl_upload_team.create_at cta , tbl_upload_team.teamid tmi');
+                                                                                                                        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_bookmark.id_orderBuy');
+                                                                                                                        $this->db->where('tbl_bookmark.id_document',  $store['dm_sub']);
+                                                                                                                        $this->db->group_by('tbl_upload_team.order_id');
+                                                                                                                        $teambooks = $this->db->get('tbl_bookmark')->result_array();
+                                                                                                                        ?>
+                                                                                                                        <tr>
+                                                                                                                            <th>TM</th>
+                                                                                                                            <th>Create</th>
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody>
+
+                                                                                                                        <?php foreach ($teambooks as $keys => $teambooks) { ?>
+                                                                                                                            <tr>
+                                                                                                                                <td><?php echo $teambooks['tmi']; ?></td>
+                                                                                                                                <td><?php echo $teambooks['cta'] ?></td>
+                                                                                                                            </tr>
+                                                                                                                        <?php } ?>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                            </div>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
                                                                                             </td>
                                                                                             <td><?php echo $store['create_at'] ?></td>
                                                                                         </tr>
