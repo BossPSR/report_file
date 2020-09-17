@@ -202,6 +202,7 @@ $route['upload_team']                               = 'back-end/Customer_order_c
 $route['upload_team_not_work']                      = 'back-end/Customer_order_ctr/upload_team_not_work';
 $route['upload_team_ST']                            = 'back-end/Customer_order_ctr/upload_team_ST';
 $route['sendEmail_new_daterq']                      = 'back-end/Customer_order_ctr/sendEmail_new_daterq';
+$route['sendEmail_no_new_daterq']                   = 'back-end/Customer_order_ctr/sendEmail_no_new_daterq';
 $route['ok_new_date']                               = 'back-end/Customer_order_ctr/ok_new_date';
 $route['no_ok_new_date']                            = 'back-end/Customer_order_ctr/no_ok_new_date';
 $route['check_first_12']                            = 'back-end/Home_ctr/check_first_12';
