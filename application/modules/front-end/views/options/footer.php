@@ -707,6 +707,47 @@
 
 
 <?php if ($team == true) : ?>
+    <div class="modal fade" tabindex="-1" role="dialog" id="bonus">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                    <h5 class="modal-title">Bonus</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="public/image/5231.jpg">
+                    <p style="font-size:24px;">ขอแสดงความยินดี</p>
+                    <p style="font-size:18px;">คุณได้รับ Bonus 100 wallet</p>
+                    <!-- <img src="public/image/5231.jpg" style="position: absolute;z-index:9999;"> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="agree_bonus" class="btn btn-primary">Agree</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php $score_bonus = $this->db->get_where('tbl_score', ['teamid_sc' => $team['IdTeam'], 'type_sc' => "bonus", 'status_sc' => 0])->row_array(); ?>
+    <?php if ($score_bonus) { ?>
+        <script type="text/javascript">
+            $('#bonus').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            $('#agree_bonus').on('click', function() {
+                $.ajax({
+                    url: 'bonus_check',
+                    type: 'POST',
+                    data: {
+                        teamid: "<?= $team['IdTeam']; ?>",
+                    },
+                    success: function(success) {
+                        if (success) {
+                            $('#bonus').modal('hide');
+                        }
+                    }
+                });
+            });
+        </script>
+    <?php } ?>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {};

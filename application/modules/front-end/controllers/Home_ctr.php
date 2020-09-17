@@ -93,4 +93,16 @@ class Home_ctr extends CI_Controller
 		$success = $this->db->update('tbl_cancel', $data);
 		echo $success;
 	}
+
+	function bonus_check()
+	{
+		$teamid = $this->input->post('teamid');
+		$data = array(
+			'status_sc' => 1,
+		);
+		$this->db->where('teamid_sc', $teamid);
+		$success = $this->db->update('tbl_score', $data);
+
+		echo $success;
+	}
 }
