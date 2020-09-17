@@ -81,7 +81,7 @@
                                                         <td><?php echo $value['organization_upload']; ?></td>
                                                         <td><?php echo $value['name_item']; ?></td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></span>
+                                                            <a href="" data-toggle="modal" data-target="#exampleModal<?php echo $value['id_doc']; ?>"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                             <div class="modal fade" id="exampleModal<?php echo $value['id_doc']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
                                                                     <div class="modal-content">
@@ -105,7 +105,7 @@
                                                                                         <th>DM</th>
                                                                                         <th>CM</th>
                                                                                         <th>Status upload</th>
-                                                                                        <th>File Quality</th> 
+                                                                                        <th>File Quality</th>
                                                                                         <th>Icon Folder</th>
                                                                                         <!-- <th>Drop</th> -->
                                                                                         <th>Approved</th>
@@ -122,7 +122,6 @@
                                                                                             <td>
                                                                                                 <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $store['update_at'])); ?>
                                                                                                 <?php $data = date('Y-m-d') ?>
-
                                                                                                 <?php if ($value['status_delivery'] == '1' && $data <= $prosum) : ?>
                                                                                                     <button type="button" class="btn btn-danger mr-1 mb-1"><i class="feather icon-download-cloud"></i> Sold</button>
                                                                                                 <?php else : ?>
@@ -145,24 +144,24 @@
                                                                                                 <?php endif; ?>
                                                                                             </td>
                                                                                             <td>
-                                                                                                <?php if ($store['cp']=='complete'):?>                                                                                               
+                                                                                                <?php if ($store['cp'] == 'complete') : ?>
                                                                                                     Complete
-                                                                                                <?php elseif($store['cp']=='notcomplete'):?>
-                                                                                                   Not Complete
-                                                                                                <?php else:?>
+                                                                                                <?php elseif ($store['cp'] == 'notcomplete') : ?>
+                                                                                                    Not Complete
+                                                                                                <?php else : ?>
                                                                                                     -
-                                                                                                <?php endif;?>
+                                                                                                <?php endif; ?>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <?php $cutpoin = explode('.', $store['dm_sub']); ?>
-                                                                                                <?php $dm_sub = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $store['dm_sub']])->row_array();?>
-                                                                                                <?php if ($dm_sub['status']=='0'):?>
+                                                                                                <?php $dm_sub = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $store['dm_sub']])->row_array(); ?>
+                                                                                                <?php if ($dm_sub['status'] == '0') : ?>
                                                                                                     <i class="feather icon-folder" style="font-size: 25px; cursor: pointer; color:red" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
-                                                                                                <?php else:?>
+                                                                                                <?php else : ?>
                                                                                                     <i class="feather icon-folder" style="font-size: 25px; cursor: pointer; color:green" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
-                                                                                                <?php endif;?>
+                                                                                                <?php endif; ?>
                                                                                                 <div class="modal fade" id="exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-xl" role="document">
+                                                                                                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
                                                                                                                 <h5 class="modal-title" id="exampleModalLabel">Sub DM File</h5>
@@ -180,17 +179,14 @@
                                                                                                                         ?>
 
                                                                                                                         <tr>
-                                                                                                                          
+
                                                                                                                             <th>DM</th>
                                                                                                                             <th>CM</th>
                                                                                                                             <th>Status upload</th>
                                                                                                                             <th>File name</th>
                                                                                                                             <th>Icon Folder</th>
                                                                                                                             <th>Drop</th>
-                                                                                                                           
-                                                                                                                            <th>Removed</th>
-                                                                                                                            <th>TM</th>
-                                                                                                                            <th>create</th>
+                                                                                                                            <th>Create</th>
                                                                                                                         </tr>
                                                                                                                     </thead>
                                                                                                                     <tbody>
@@ -316,8 +312,6 @@
                                                                                                                                         });
                                                                                                                                     </script>
                                                                                                                                 </td>
-                                                                                                                                <td></td>
-                                                                                                                                <td></td>
                                                                                                                                 <td><?php echo $store23['create_at'] ?></td>
                                                                                                                             </tr>
                                                                                                                         <?php } ?>
@@ -334,10 +328,93 @@
                                                                                                 </div>
 
                                                                                             </td>
-                                                                                            <td></td>
-                                                                                            <td></td>
-                                                                                            <td></td>
-                                                                                            <td></td>
+                                                                                            <td>
+                                                                                                <?php
+                                                                                                $k = 0;
+                                                                                                $this->db->where('tbl_upload_order.status_approved', 1);
+                                                                                                $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_bookmark.id_orderBuy', 'left');
+                                                                                                $this->db->group_by('tbl_upload_order.order_id');
+                                                                                                $bookmarklop = $this->db->get_where('tbl_bookmark', ['id_document' => $store['dm_sub']])->result_array();
+                                                                                                ?>
+                                                                                                <?php foreach ($bookmarklop as $key => $bookmarklop) : ?>
+                                                                                                    <?php $k += 1; ?>
+                                                                                                <?php endforeach; ?>
+                                                                                                <?php echo $k; ?>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <?php
+                                                                                                $kp = 0;
+                                                                                                $this->db->where('tbl_upload_order.status_approved', 2);
+                                                                                                $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_bookmark.id_orderBuy', 'left');
+                                                                                                $this->db->group_by('tbl_upload_order.order_id');
+                                                                                                $bookmarkeep = $this->db->get_where('tbl_bookmark', ['id_document' => $store['dm_sub']])->result_array();
+                                                                                                ?>
+                                                                                                <?php foreach ($bookmarkeep as $key => $bookmarkeep) : ?>
+                                                                                                    <?php $kp += 1; ?>
+                                                                                                <?php endforeach; ?>
+                                                                                                <?php echo $kp; ?>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <?php
+                                                                                                $ki = 0;
+                                                                                                $this->db->where('tbl_upload_order.is_check', 1);
+                                                                                                $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_bookmark.id_orderBuy', 'left');
+                                                                                                $this->db->group_by('tbl_upload_order.order_id');
+                                                                                                $bookmarkaop = $this->db->get_where('tbl_bookmark', ['id_document' => $store['dm_sub']])->result_array();
+                                                                                                ?>
+                                                                                                <?php foreach ($bookmarkaop as $key => $bookmarkaop) : ?>
+                                                                                                    <?php $ki += 1; ?>
+                                                                                                <?php endforeach; ?>
+                                                                                                <?php echo $ki; ?>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a href="" data-toggle="modal" data-target="#teamdetail<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>">
+                                                                                                    <i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i>
+                                                                                                </a>
+                                                                                                <div class="modal fade" id="teamdetail<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Team detail</h5>
+                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                            <div class="modal-body">
+                                                                                                                <table class="table table-hover zero-configuration">
+                                                                                                                    <thead>
+                                                                                                                        <?php
+                                                                                                                        $this->db->select('*,tbl_upload_team.create_at cta , tbl_upload_team.teamid tmi');
+                                                                                                                        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_bookmark.id_orderBuy');
+                                                                                                                        $this->db->where('tbl_bookmark.id_document',  $store['dm_sub']);
+                                                                                                                        $this->db->group_by('tbl_upload_team.order_id');
+                                                                                                                        $teambooks = $this->db->get('tbl_bookmark')->result_array();
+                                                                                                                        ?>
+                                                                                                                        <tr>
+                                                                                                                            <th>TM</th>
+                                                                                                                            <th>Create</th>
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody>
+
+                                                                                                                        <?php foreach ($teambooks as $keys => $teambooks) { ?>
+                                                                                                                            <tr>
+                                                                                                                                <td><?php echo $teambooks['tmi']; ?></td>
+                                                                                                                                <td><?php echo $teambooks['cta'] ?></td>
+                                                                                                                            </tr>
+                                                                                                                        <?php } ?>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                            </div>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
                                                                                             <td><?php echo $store['create_at'] ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
@@ -358,7 +435,7 @@
                                                         <td><?php echo $value['create_atMain']; ?></td>
                                                         <td>
                                                             <a href="" data-toggle="modal" data-target="#dropW<?php echo $value['idmain']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
-                                                            <a onclick="confirmalertunlock_del_Dm('<?php echo $value['idmain']; ?>')"  class="btn btn-icon btn-danger" ><i class="feather icon-x" style="color: #fff;"></i></a>
+                                                            <a onclick="confirmalertunlock_del_Dm('<?php echo $value['idmain']; ?>')" class="btn btn-icon btn-danger"><i class="feather icon-x" style="color: #fff;"></i></a>
 
                                                             <div class="modal fade" id="dropW<?php echo $value['idmain']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">

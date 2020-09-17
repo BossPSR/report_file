@@ -34,7 +34,7 @@ class Book_ctr extends CI_Controller
 					$date_orderUp = date('Y-m-d H:i:s' ,strtotime('+30 day',strtotime($checkTime['upload_order_create_at'])));
 					if ($date_orderUp <= date('Y-m-d')) {
 						$this->db->where('id',$checkTime['upload_order_id']);
-						$this->db->delect('tbl_upload_order');
+						$this->db->delete('tbl_upload_order');
 					}
 				
 				}

@@ -83,6 +83,7 @@
         </div>
     </div>
 </div>
+
 <?php if (!empty($checkorder)) : ?>
     <section class="slider_section slider_section_four mb-20 mt-30">
         <div class="container">

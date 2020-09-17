@@ -16,8 +16,11 @@ class Rewards_ctr extends CI_Controller
 		if ($this->session->userdata('email') == '') { 
 			redirect('home');
 		} else {
+			$data['userId'] 	= $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+			$data['cashback']   = $this->db->get_where('tbl_cashback', ['userId' => $data['userId']['idUser']])->result_array();
+			
 			$this->load->view('options/header_login');
-			$this->load->view('my_rewards');
+			$this->load->view('my_rewards' , $data);
 			$this->load->view('options/footer');
 		}
 	}
@@ -26,8 +29,10 @@ class Rewards_ctr extends CI_Controller
 		if ($this->session->userdata('email') == '') { 
 			redirect('home');
 		} else {
+			$data['teamid'] 	= $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+			$data['score']   = $this->db->get_where('tbl_score', ['teamid_sc' => $data['teamid']['IdTeam']])->result_array();
 			$this->load->view('options/header_login');
-			$this->load->view('my_rewards_team');
+			$this->load->view('my_rewards_team' , $data);
 			$this->load->view('options/footer');
 		}
 	}

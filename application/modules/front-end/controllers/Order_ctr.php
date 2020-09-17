@@ -36,15 +36,93 @@ class Order_ctr extends CI_Controller
 
   public function order_approved()
   {
+    $q = 1;
+    $userId         = $this->input->post('userId');
     $order_id       = $this->input->post('order_id');
     $textarea       = $this->input->post('textarea');
     $is_confirm     = $this->input->post('status_approved');
     $df             = $this->Order_model->delete_feedback($order_id);
     $star           = $this->input->post('star');
 
+    $this->db->group_by('order_id');
+    $user01         = $this->db->get_where('tbl_upload_order', ['userId' => $userId, 'check_cashback_reward' => '0'])->result_array();
+    $team01         = $this->db->get_where('tbl_upload_team',  ['order_id' => $order_id, 'status' => '1'])->row_array();
+    $user02         = $this->db->get_where('tbl_user', ['userId' => $userId])->row_array();
+    foreach ($user01 as $key => $user01) {
+      $q += 1;
+    }
+
+
     if ($this->session->userdata('email') == '') {
       redirect('home');
     } else {
+
+      if ($q == '30') {
+        $user_reward = [
+          'cash' => $user02['cash'] + 100
+        ];
+        $this->db->where('userId', $userId);
+        $this->db->update('tbl_user', $user_reward);
+
+        $reward = [
+          'check_cashback_reward' => 1
+        ];
+        $this->db->where('userId', $userId);
+        $this->db->update('tbl_upload_order', $reward);
+
+        $before = [
+          'type_cashback'   => 'Rewards',
+          'userId'          =>  $userId,
+          'cashback'        => '100',
+          'order_id'        =>  $order_id,
+          'cashback_detail' =>  'ยินดีด้วยคุณได้รับ Reward จากการสั่งซื้อเอกสารครบ 30 ออเดอร์!',
+          'create_at'       => date('Y-m-d H:i:s')
+        ];
+        $this->db->insert('tbl_cashback', $user_reward);
+      }
+
+      if ($team01 == true) {
+        $team03   = $this->db->get_where('tbl_team', ['IdTeam' => $team01['teamid']])->row_array();
+        $teamscore = [
+          'team_score' =>  $team03['team_score'] + 10
+        ];
+        $this->db->where('IdTeam', $team01['teamid']);
+        $tm3 = $this->db->update('tbl_team', $teamscore);
+        if ($tm3) {
+          if ($team03['team_score'] == '500') {
+
+            $teamic = [
+              'income' =>  $team03['income'] + 100
+            ];
+            $this->db->where('IdTeam', $team01['teamid']);
+            $tmdoop = $this->db->update('tbl_team', $teamic);
+            if ($tmdoop) {
+              $insertdb = [
+                'userId'    => $userId,
+                'type_sc'   => 'bonus',
+                'teamid_sc' => $team01['teamid'],
+                'score'     => '100',
+                'order_id'  => $order_id,
+                'detail'    => 'ยินดีด้วยคุณได้รับ 100 income จากคุณได้ Score ครบ 500 Score ',
+                'create_at' => date('Y-m-d H:i:s')
+              ];
+              $this->db->insert('tbl_score', $insertdb);
+            }
+          } else {
+            $insertdb = [
+              'userId'    => $userId,
+              'type_sc'   => 'score',
+              'teamid_sc' => $team01['teamid'],
+              'score'     => '10',
+              'order_id'  => $order_id,
+              'detail'    => 'ยินดีด้วยคุณได้รับ 10 Score จากการปิดออเดอร์ได้',
+              'create_at' => date('Y-m-d H:i:s')
+            ];
+            $this->db->insert('tbl_score', $insertdb);
+          }
+        }
+      }
+
       $data = array(
         'status_approved'        => $is_confirm,
         'note_approved'          => $textarea,

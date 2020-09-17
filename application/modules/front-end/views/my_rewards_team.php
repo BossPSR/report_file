@@ -7,32 +7,111 @@
     <div class="container">
         <div class="checkout_form">
             <div class="row">
-                <div class="col-lg-12 col-md-12 text-center" data-aos="zoom-in" >
+                <div class="col-lg-12 col-md-12 text-center">
+                    <div style="font-size: 35px;">Score!</div>
+                    <div class="vi counter" data-count="<?php echo $teamid['team_score']; ?>" style="margin: 30px 0px;font-weight: 100;font-size: 60px;color: #0088ff;">0</div>
+                </div>
+                <div class="col-lg-12 col-md-12 text-center" data-aos="zoom-in">
                     <img src="public/image/501890-PIIDRV-434.png" style="width: 300px;" alt="">
                 </div>
-                <div class="col-lg-12 col-md-12 text-center" >
+                <div class="col-lg-12 col-md-12 text-center">
                     <div class="vi">Victory!</div>
                 </div>
-                <div class="col-lg-12 col-md-12 text-center type-vi" >
-                    ประเภทของรางวัล 
+
+                <div class="col-lg-12 col-md-12 text-center type-vi">
+                    ประเภทของรางวัล
                 </div>
                 <div class="col-lg-12 col-md-12 text-center" style="color: #b6b6b6;">
-                    Rating / Upload 
-                <hr style="width: 59%;">
+                    Rating / Upload
+                    <hr style="width: 59%;">
                 </div>
-                <div class="col-lg-2 col-md-2 text-center" ></div>
-                <div class="col-lg-4 col-md-4 text-center " >
-                    <div class="detail-vi"> รางวัล : เมื่อรับงานเอกสารครบ 500 Score รับเลย 100 Wallet  </div> 
-                    <div style="color: #b6b6b6;"> รายละเอียดรางวัล </div> 
+                <div class="col-lg-2 col-md-2 text-center"></div>
+                <div class="col-lg-4 col-md-4 text-center ">
+                    <div class="detail-vi"> รางวัล : เมื่อรับงานเอกสารครบ 500 Score รับเลย 100 Wallet </div>
+                    <div style="color: #b6b6b6;"> รายละเอียดรางวัล </div>
                 </div>
-                <div class="col-lg-4 col-md-4 text-center" style="border-left: 1px solid #e5e5e5;margin-top: 20px;" >
-                <button class="btn btn-success">รับเลย</button>
-                    <button type="button" class="btn btn-info">ประวัติย้อนหลัง</button> 
+                <div class="col-lg-4 col-md-4 text-center" style="border-left: 1px solid #e5e5e5;margin-top: 20px;">
+                    <button class="btn btn-success">รับเลย</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#before">ประวัติย้อนหลัง</button>
                 </div>
-                <div class="col-lg-2 col-md-2 text-center" ></div>
+                <div class="col-lg-2 col-md-2 text-center"></div>
             </div>
         </div>
     </div>
 </div>
 <!--Checkout page section end-->
 <br>
+
+
+<!-- Modal -->
+<div class="modal fade" id="before" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ประวัติย้อนหลัง</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php if (!empty($cashback)) : ?>
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr style="text-align:center;">
+                                <th scope="col" style="width: 100px;">Order</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Score detail</th>
+                                <th scope="col">Create at</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php foreach ($score as $key => $score) { ?>
+                                <tr style="text-align:center;">
+                                    <td><?php echo $score['order_id']; ?></td>
+                                    <td><?php echo number_format($score['score']); ?></td>
+                                    <td><?php echo $score['detail']; ?></td>
+                                    <td><?php echo date("d F Y", strtotime($score['create_at'])); ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <h4 style="color: #0073ff;">ท่านยังไม่มีข้อมูลในระบบ</h4>
+                <?php endif; ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.counter').each(function() {
+        var $this = $(this),
+            countTo = $this.attr('data-count');
+
+        $({
+            countNum: $this.text()
+        }).animate({
+                countNum: countTo
+            },
+
+            {
+
+                duration: 4000,
+                easing: 'linear',
+                step: function() {
+                    $this.text(Math.floor(this.countNum));
+                },
+                complete: function() {
+                    $this.text(this.countNum);
+                    //alert('finished');
+                }
+
+            });
+
+    });
+</script>

@@ -152,12 +152,20 @@
 
                                 <div class="col-3 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
-                                        No Work <span class="badge badge-pill badge-warning" id="refresh_nw"><?php $no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
-                                                                                                                echo count($no_work); ?></span>
+                                        No Work <span class="badge badge-pill badge-warning" id="">
+                                            <?php $no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
+                                            echo count($no_work); ?></span>
                                     </a>
                                     <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">
-                                        Not Submit <span class="badge badge-pill badge-success" id="refresh_ns"><?php $not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
-                                                                                                                echo count($not_submit); ?></span>
+                                        Not Submit <span class="badge badge-pill badge-success" id="">
+                                            <?php $ok = 0; ?>
+                                            <?php foreach ($order_notsum as $key => $dd) {
+                                                $ok++;
+                                            } ?>
+                                            <?php echo $ok += 0; ?>
+                                            <!-- <?php $not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
+                                                    echo count($not_submit); ?> -->
+                                        </span>
                                     </a>
                                 </div>
                             </div>
@@ -189,11 +197,8 @@
                                                 $i = 1;
                                                 foreach ($order_notsum as $id => $stores) {
                                                 ?>
-                                                    <?php if ($stores['statusC'] == '1') : ?>
-                                                        <tr style="background-color: #ffebebd4;">
-                                                        <?php else : ?>
-                                                        <tr>
-                                                        <?php endif; ?>
+
+                                                    <tr>
                                                         <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
                                                         <td><?php echo $stores['order'] ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
@@ -202,6 +207,26 @@
 
                                                             <?php if (date("Y-m-d") >= $stores['requiredOr']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
+                                                                <?php if ($stores['status_out'] == 1 && $stores['check_deduct_full'] == 0) { ?>
+                                                                    <script>
+                                                                        function deductfull() {
+                                                                            $.ajax({
+                                                                                url: 'deduct_full20',
+                                                                                data: {
+                                                                                    order: '<?php echo $stores['order']; ?>',
+                                                                                    status: '1',
+                                                                                    deprice: '20'
+                                                                                },
+                                                                                success: function(resultsedit) {
+
+                                                                                    console.log(resultsedit);
+
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        deductfull();
+                                                                    </script>
+                                                                <?php } ?>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($stores['requiredOr'])); ?>
                                                                 <div id="clock-b<?php echo $stores['order']; ?>" style="display: flex;"></div>
@@ -667,74 +692,74 @@
 
 
                                                         <!-- <td><span  class="badge badge-pill badge-success">Successful payment</button></td> -->
-                                                        </tr>
+                                                    </tr>
 
-                                                        <div class="modal fade" id="sendnw<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
+                                                    <div class="modal fade" id="sendnw<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Send (<?php echo $stores['order']; ?>)</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="send_not_submit" method="POST" class="form-horizontal">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
+                                                                    <div class="modal-body">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note</label>
+                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal fade" id="Cancel<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <form action="delete_order_ns" method="POST">
+                                                            <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
+                                                            <div class="modal-dialog " role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Send (<?php echo $stores['order']; ?>)</h5>
+                                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $stores['order']; ?>)</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
                                                                     </div>
-                                                                    <form action="send_not_submit" method="POST" class="form-horizontal">
-                                                                        <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
-                                                                        <div class="modal-body">
-                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                <div class="form-group">
-                                                                                    <label for="helpInputTop">Note</label>
-                                                                                    <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
-                                                                                </div>
+                                                                    <div class="modal-body row">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note Cancel</label>
+                                                                                <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
 
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                                <div class="add-data-btn mr-1">
-                                                                                    <button type="submit" class="btn btn-primary">submit</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal fade" id="Cancel<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                            <form action="delete_order_ns" method="POST">
-                                                                <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
-                                                                <div class="modal-dialog " role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalCenterTitle">Cancel (<?php echo $stores['order']; ?>)</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body row">
-                                                                            <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                                <div class="form-group">
-                                                                                    <label for="helpInputTop">Note Cancel</label>
-                                                                                    <textarea type="text" class="form-control" name="note" value="" rows="10" placeholder="Enter note" required>เอการของคุณโดน Cancel ขออภัยในความไม่สะดวก</textarea>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
-
                                                                         </div>
                                                                     </div>
+                                                                    <div class="modal-footer">
+
+                                                                        <div class="add-data-btn mr-1">
+                                                                            <button type="submit" class="btn btn-primary">submit</button>
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
-                                                            </form>
-                                                        </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
 
 
-                                                    <?php  } ?>
+                                                <?php  } ?>
                                             </tbody>
                                         </table>
 
