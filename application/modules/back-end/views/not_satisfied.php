@@ -137,7 +137,84 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <table class="table zero-configuration">
+                                                                            <div style="text-align:right;">
+                                                                                <button class="btn btn-primary" data-toggle="modal" data-target="#up_main_file<?php echo $store['orderNOT']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+                                                                            </div>
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade text-left" id="up_main_file<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header bg-primary">
+                                                                                            <h4 class="modal-title" id="myModalLabel1">Drop main file</h4>
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <label for="" style="font-size: 16px;">File Document </label>
+                                                                                            <form action="Satisfied_add_mainfile" class="dropzone dropzone-area" id="dropzone_upmainfile<?php echo $store['orderNOT']; ?>" method="POST">
+                                                                                                <input type="hidden" name="orderST" value="<?php echo $store['orderNOT']; ?>">
+                                                                                                <input type="hidden" name="userOR" value="<?php echo $store['userId']; ?>">
+                                                                                                <input type="hidden" name="User_St" value="<?php echo $store['Username']; ?>">
+                                                                                                <input type="hidden" name="St_email" value="<?php echo $store['email']; ?>">
+                                                                                                <input type="hidden" name="price_file" value="<?php echo $store['price_file']; ?>">
+                                                                                                <input type="hidden" name="price_dis_order" value="<?php echo $store['price_dis_order']; ?>">
+                                                                                                <input type="hidden" name="score_user" value="<?php echo $store['score_user']; ?>">
+                                                                                                <input type="hidden" name="dateREST" value="<?php echo $store['dateNOT']; ?>">
+                                                                                                <input type="hidden" name="create_times" value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                                                                                <input type="hidden" name="status_book" value="<?php echo $store['status_book']; ?>">
+                                                                                                <input type="hidden" name="status_admin" value="<?php echo $store['status_admin']; ?>">
+                                                                                                <input type="hidden" name="is_check" value="<?php echo $store['is_check']; ?>">
+                                                                                                <input type="hidden" name="note_reject" value="<?php echo $store['note_reject']; ?>">
+                                                                                                <!-- <input type="hidden" name="is_confirm" value=""> -->
+                                                                                                <input type="hidden" name="status_pay" value="<?php echo $store['status_pay']; ?>">
+                                                                                                <!-- <input type="hidden" name="select_item" value=""> -->
+                                                                                                <input type="hidden" name="status_approved" value="<?php echo $store['status_approved']; ?>">
+                                                                                                <input type="hidden" name="status_confirmed_team" value="<?php echo $store['status_confirmed_team']; ?>">
+                                                                                                <input type="hidden" name="notify_user" value="<?php echo $store['notify_user']; ?>">
+                                                                                                <input type="hidden" name="status_cp" value="<?php echo $store['status_cp']; ?>">
+                                                                                                <input type="hidden" name="status_delivery" value="<?php echo $store['status_delivery']; ?>">
+                                                                                                <input type="hidden" name="notify_team" value="<?php echo $store['notify_team']; ?>">
+                                                                                                <input type="hidden" name="notify_admin" value="<?php echo $store['notify_admin']; ?>">
+                                                                                                <input type="hidden" name="click_step" value="<?php echo $store['click_step']; ?>">
+                                                                                                <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-primary" id="up_main_file_save<?php echo $store['orderNOT']; ?>">Upload File</button>
+                                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                        </div>
+                                                                                        <script>
+                                                                                            Dropzone.autoDiscover = false;
+                                                                                            var myDropzone115<?php echo $store['orderNOT']; ?> = new Dropzone("#dropzone_upmainfile<?php echo $store['orderNOT']; ?>", {
+                                                                                                autoProcessQueue: false,
+                                                                                                maxFiles: 5,
+                                                                                                addRemoveLinks: true,
+                                                                                                parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                                            });
+                                                                                            document.getElementById("up_main_file_save<?php echo $store['orderNOT']; ?>").addEventListener("click", function() {
+                                                                                                // myDropzone.processQueue();
+                                                                                                if (myDropzone115<?php echo $store['orderNOT']; ?>.files == 0) {
+                                                                                                    swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                                        button: true,
+                                                                                                    });
+                                                                                                } else {
+
+                                                                                                    myDropzone115<?php echo $store['orderNOT']; ?>.processQueue();
+                                                                                                    myDropzone115<?php echo $store['orderNOT']; ?>.on("queuecomplete", function(file, res) {
+                                                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                            button: true,
+                                                                                                        });
+                                                                                                        $("#here<?php echo $store['orderNOT']; ?>").load(window.location.href + " #here<?php echo $store['orderNOT']; ?>");
+                                                                                                        $('#up_main_file<?php echo $store['orderNOT']; ?>').modal('hide');
+                                                                                                    });
+                                                                                                }
+                                                                                            });
+                                                                                        </script>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <table class="table zero-configuration" id="here<?php echo $store['orderNOT']; ?>">
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $store['orderNOT']])->result_array(); ?>
                                                                                     <tr>
@@ -200,7 +277,78 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <table class="table zero-configuration">
+                                                                                <div style="text-align:right;">
+                                                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#up_gt_file<?php echo $store['orderNOT']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+                                                                                </div>
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade text-left" id="up_gt_file<?php echo $store['orderNOT']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header bg-primary">
+                                                                                                <h4 class="modal-title" id="myModalLabel1">File Document </h4>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+                                                                                                <label for="" style="font-size: 16px;">GT File </label>
+                                                                                                <form action="Satisfied_add_gt_file" class="dropzone dropzone-area" id="dropzone_upgtfile<?php echo $store['orderNOT']; ?>" method="POST">
+                                                                                                    <input type="hidden" name="orderST" id="orderST" value="<?php echo $store['orderNOT']; ?>">
+                                                                                                    <input type="hidden" name="userOR" id="userOR" value="<?php echo $store['userId']; ?>">
+                                                                                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-primary" id="up_gt_file_save<?php echo $store['orderNOT']; ?>">Upload File</button>
+                                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                            </div>
+                                                                                            <script>
+                                                                                                Dropzone.autoDiscover = false;
+                                                                                                var myDropzone113<?php echo $store['orderNOT']; ?> = new Dropzone("#dropzone_upgtfile<?php echo $store['orderNOT']; ?>", {
+                                                                                                    autoProcessQueue: false,
+                                                                                                    maxFiles: 5,
+                                                                                                    addRemoveLinks: true,
+                                                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                                                });
+                                                                                                document.getElementById("up_gt_file_save<?php echo $store['orderNOT']; ?>").addEventListener("click", function() {
+                                                                                                    // myDropzone.processQueue();
+                                                                                                    if (myDropzone113<?php echo $store['orderNOT']; ?>.files == 0) {
+                                                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                                                            button: true,
+                                                                                                        });
+                                                                                                    } else {
+                                                                                                        var orderST = $('#orderST').val();
+                                                                                                        var userOR = $('#userOR').val();
+
+                                                                                                        console.log(orderST, userOR);
+                                                                                                        $.ajax({
+                                                                                                            url: "Satisfied_per_add_gt_file",
+                                                                                                            type: "POST",
+                                                                                                            data: {
+                                                                                                                orderST: orderST,
+                                                                                                                userOR: userOR,
+                                                                                                            },
+                                                                                                            success: function(success) {
+                                                                                                                if (success) {
+                                                                                                                    myDropzone113<?php echo $store['orderNOT']; ?>.processQueue();
+                                                                                                                    myDropzone113<?php echo $store['orderNOT']; ?>.on("queuecomplete", function(file, res) {
+                                                                                                                        swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                            button: true,
+                                                                                                                        });
+                                                                                                                        $("#here_gt<?php echo $store['orderNOT']; ?>").load(window.location.href + " #here_gt<?php echo $store['orderNOT']; ?>");
+                                                                                                                        $('#up_gt_file<?php echo $store['orderNOT']; ?>').modal('hide');
+                                                                                                                    });
+                                                                                                                }
+                                                                                                            },
+                                                                                                        });
+
+                                                                                                    }
+                                                                                                });
+                                                                                            </script>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <table class="table zero-configuration" id="here_gt<?php echo $store['orderNOT']; ?>">
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th>Order_id</th>
@@ -432,7 +580,7 @@
                                                                                 </button>
                                                                             </div>
                                                                             <form action="sendEmail_no_new_daterq" method="POST">
-                                                                                <input type="hidden" name="order"  value="<?php echo $store['orderNOT']; ?>">
+                                                                                <input type="hidden" name="order" value="<?php echo $store['orderNOT']; ?>">
                                                                                 <input type="hidden" name="userid" value="<?php echo $store['userId']; ?>">
                                                                                 <div class="modal-body">
                                                                                     <div class="form-group">
@@ -577,7 +725,7 @@
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="Team">Team ID</label> <br>
                                                                                         <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
-                                                                                            <option disabled selected> -- Select Team -- </option>
+                                                                                            <option disabled> -- Select Team -- </option>
                                                                                             <option value=""> All Team </option>
                                                                                             <?php foreach ($ts as $tsM) { ?>
                                                                                                 <option value="<?php echo $tsM['IdTeam']; ?>" <?php echo $tsM['IdTeam'] == $store['teamId'] ? 'selected' : ''; ?>><?php echo $tsM['IdTeam']; ?></option>
@@ -592,7 +740,7 @@
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Position</label>
                                                                                         <select name="position" class="form-control" required>
-                                                                                            <option selected disabled> ---- Select ---- </option>
+                                                                                            <option selected> ---- Select ---- </option>
 
                                                                                             <?php foreach ($positionX as $positionX) { ?>
                                                                                                 <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $store['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>

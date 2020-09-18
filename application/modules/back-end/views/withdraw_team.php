@@ -68,12 +68,12 @@
                                                                 </div>
                                                             <?php elseif ($withdraw_team['status_id'] == 2) : ?>
                                                                 <div class="dropdown" style="display: contents;">
-                                                                    <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <button class="btn btn-success mr-1" type="button" id="dropdownMenuButton">
                                                                         ชำระเงินแล้ว
                                                                     </button>
-                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" href="withdraw_status_team?id=<?php echo $withdraw_team['idW']; ?>&status=3">ยกเลิก</a>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             <?php else : ?>
 

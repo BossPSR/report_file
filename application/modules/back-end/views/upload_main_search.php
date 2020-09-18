@@ -209,12 +209,12 @@
                                                                                                                                         -
                                                                                                                                     <?php endif; ?>
                                                                                                                                 </td>
+                                                                                                                                
                                                                                                                                 <td>
                                                                                                                                     <?php echo $store23['file_name'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $store23['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
                                                                                                                                     <div class="modal fade" id="dms<?php echo $store23['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                                                                                                        <form action="rename_uploadmain" method="POST">
+                                                                                                                                        <form action="rename_uploadmains" method="POST">
                                                                                                                                             <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-
                                                                                                                                                 <div class="modal-content">
                                                                                                                                                     <div class="modal-header">
                                                                                                                                                         <h5 class="modal-title" id="exampleModalCenterTitle">Rename (<?php echo $store23['dm_sub']; ?>)</h5>
@@ -243,6 +243,7 @@
                                                                                                                                         </form>
                                                                                                                                     </div>
                                                                                                                                 </td>
+
                                                                                                                                 <td><a href="<?php echo $store23['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                                                 <td>
                                                                                                                                     <?php if ($store23['status'] == '0') : ?>
@@ -589,7 +590,7 @@
 
 <!-- upload -->
 <div class="modal fade" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Upload To Main Search</h5>
@@ -598,95 +599,84 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="data-items pb-3">
-                    <div class="data-fields px-2 mt-3">
-                        <div class="row">
-                            <div class="col-sm-12 data-field-col">
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <label for="" style="font-size: 16px;">File Document </label>
-                                        <form action="fileUpload_search_main" class="dropzone dropzone-area" id="maindropzone">
-                                            <div class="dz-message" style="top: 24%;">Upload Document</div>
-                                        </form>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <label for="Organization">Organization</label>
-                                        <select name="organization" class="form-control" id="organization">
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
-                                            <option value="D">D</option>
-                                        </select>
-                                    </div>
-                                </div>
+                <div class="row">
+                    <div class="col-sm-12 data-field-col">
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="" style="font-size: 16px;">File Document </label>
+                                <form action="fileUpload_search_main" class="dropzone dropzone-area" id="maindropzone">
+                                    <div class="dz-message" style="top: 24%;">Upload Document</div>
+                                </form>
+                            </div>
+                        </div>
 
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <label for="data-name">CP/NCP</label>
-                                        <select name="complete" class="form-control" id="complete">
-                                            <option value="complete">Complete</option>
-                                            <option value="notcomplete">Not Complete</option>
-                                        </select>
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="Organization">Organization</label>
+                                <select name="organization" class="form-control" id="organization">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </div>
+                        </div>
 
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <label for="data-name">Select Item</label>
-                                        <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
-                                        <select name="select_item_id" class="form-control selectpicker" id="select-testing" data-live-search="true">
-                                            <?php foreach ($select_itemList as $key => $selectItem) { ?>
-                                                <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="data-name">CP/NCP</label>
+                                <select name="complete" class="form-control" id="complete">
+                                    <option value="complete">Complete</option>
+                                    <option value="notcomplete">Not Complete</option>
+                                </select>
+                            </div>
+                        </div>
 
-                                <!-- <div class="form-group">
-                                    <div class="controls">
-                                        <label for="data-name">Search Item</label>
-                                        <input type="text" class="form-control" name="search_item" id="search_item" value="">
-                                    </div>
-                                </div> -->
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <label for="data-name">Code</label>
-                                        <input type="text" class="form-control" name="code" value="" id="code">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <label for="data-name">Topic</label>
-                                        <textarea class="form-control" name="topic" cols="30" rows="10" id="topic"></textarea>
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="data-name">Select Item</label>
+                                <?php $select_itemList = $this->db->get('tbl_select_item')->result_array(); ?>
+                                <select name="select_item_id" class="form-control selectpicker" id="select-testing" data-live-search="true">
+                                    <?php foreach ($select_itemList as $key => $selectItem) { ?>
+                                        <option value="<?php echo $selectItem['id']; ?>"><?php echo $selectItem['name_item']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
 
-                                    </div>
-                                </div>
-
-                                <?php
-                                $this->db->order_by('id', 'DESC');
-                                $Dm = $this->db->get('tbl_upload_main_search')->row_array();
-                                ?>
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <label for="data-name">Id Document</label>
-                                        <input type="text" class="form-control" value="DM<?php echo $Dm['id'] + 1 ?>" readonly>
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="data-name">Code</label>
+                                <input type="text" class="form-control" name="code" value="" id="code">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="data-name">Topic</label>
+                                <textarea class="form-control" name="topic" cols="30" rows="10" id="topic"></textarea>
 
                             </div>
                         </div>
+
+                        <?php
+                        $this->db->order_by('id', 'DESC');
+                        $Dm = $this->db->get('tbl_upload_main_search')->row_array();
+                        ?>
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="data-name">Id Document</label>
+                                <input type="text" class="form-control" value="DM<?php echo $Dm['id'] + 1 ?>" readonly>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
             <div class="modal-footer">
-                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                    <div class="add-data-btn mr-1">
-                        <button type="submit" id="uploadsfile" class="btn btn-primary">submit</button>
-                    </div>
-
+                <div class="add-data-btn mr-1">
+                    <button type="submit" id="uploadsfile" class="btn btn-primary">submit</button>
                 </div>
             </div>
         </div>

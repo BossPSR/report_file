@@ -31,7 +31,7 @@
                     <div style="color: #b6b6b6;"> รายละเอียดรางวัล </div>
                 </div>
                 <div class="col-lg-4 col-md-4 text-center" style="border-left: 1px solid #e5e5e5;margin-top: 20px;">
-                    <button class="btn btn-success">รับเลย</button>
+                    <!-- <button class="btn btn-success">รับเลย</button> -->
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#before">ประวัติย้อนหลัง</button>
                 </div>
                 <div class="col-lg-2 col-md-2 text-center"></div>

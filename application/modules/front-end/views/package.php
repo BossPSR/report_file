@@ -9,50 +9,50 @@
       <?php foreach ($package as $key => $package) : ?>
         <!--price table area -->
 
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <div class="single_priceing">
             <div class="priceing_title">
               <h1>Returns</h1>
             </div>
             <div class="priceing_list">
-              <h1><span>$<?php echo $package['price_pk']; ?></span>/<?php echo $package['time_pk']; ?></h1>
-              <ul>
+              <h1><span>$<?php echo $package['price_pk']; ?></span>/<?php echo $package['time_pk']; ?> (ราคาปกติ)</h1>
+              <h1 style="    padding: 25px 0px;border-top: 1px solid #e2e2e2;background: #cae3ff;"><span>$<?php echo $package['new_price']; ?></span>/<?php echo $package['time_pk']; ?> (ราคาพิเศษ)</h1>
+              <div class="row" style="padding: 15px 0px 10px 0;">
+                <div class="col-1">
+                  <input type="checkbox" style="width: 30px;height: 30px;" id="check<?php echo $package['id']; ?>">
+                </div>
+                <div class="col-11">
+                  <label id="text_commission<?php echo $package['id']; ?>" style="font-size: 19px;">หากมีผู้แนะนำ สามารถใส่เลขผู้แนะนำได้ค่ะ</label>
+                  <label id="input_commission<?php echo $package['id']; ?>" style="display: none;">
+                    <input type="text" name="commission" id="check_commission<?php echo $package['id']; ?>" class="form-control" disabled>
+                  </label>
+                </div>
+              </div>
+              <ul style="font-size: 20px;">
                 <li><?php echo $package['description_pk']; ?></li>
                 <li>1 Domain</li>
                 <li>PHP 5 Enbled</li>
-								<li>24H – Support</li>
-								<li>
-									<div>Commission</div>
-									<div>
-										<input type="checkbox" id="check<?php echo $package['id'];?>">
-										<label id="text_commission<?php echo $package['id'];?>">หากมีผู้แนะนำ สามารถใส่เลขผู้แนะนำได้ค่ะ</label>
-										<label id="input_commission<?php echo $package['id'];?>" style="display: none;">
-											<input type="text" name="commission" id="check_commission<?php echo $package['id'];?>" class="form-control" disabled>
-										</label>
-									</div>
-								</li>
+                <li>24H – Support</li>
               </ul>
               <a class="list_button paypal-button-container<?php echo $i++; ?>" href="#">purchase now </a>
             </div>
           </div>
-				</div>
-				
-				<script>
+        </div>
 
-					$("#check<?php echo $package['id'];?>").change(function() {
-							$('#check_commission<?php echo $package['id'];?>').val(null);
-							$('#text_commission<?php echo $package['id'];?>').css('display','none');
-							$('#input_commission<?php echo $package['id'];?>').css('display','none');
-							if(this.checked) {
-								$('#check_commission<?php echo $package['id'];?>').prop("disabled",false);
-								$('#input_commission<?php echo $package['id'];?>').css('display','inline-block');
-							}else{
-								$('#check_commission<?php echo $package['id'];?>').prop("disabled",true);
-								$('#text_commission<?php echo $package['id'];?>').css('display','inline-block');
-							}
-					});
-
-				</script>
+        <script>
+          $("#check<?php echo $package['id']; ?>").change(function() {
+            $('#check_commission<?php echo $package['id']; ?>').val(null);
+            $('#text_commission<?php echo $package['id']; ?>').css('display', 'none');
+            $('#input_commission<?php echo $package['id']; ?>').css('display', 'none');
+            if (this.checked) {
+              $('#check_commission<?php echo $package['id']; ?>').prop("disabled", false);
+              $('#input_commission<?php echo $package['id']; ?>').css('display', 'inline-block');
+            } else {
+              $('#check_commission<?php echo $package['id']; ?>').prop("disabled", true);
+              $('#text_commission<?php echo $package['id']; ?>').css('display', 'inline-block');
+            }
+          });
+        </script>
 
 
 
@@ -99,7 +99,7 @@
                     create_time: details.create_time,
                     amount: details.purchase_units['0'].amount.value,
                     currency_code: details.purchase_units['0'].amount.currency_code,
-										commission: $('#check_commission<?php echo $package['id'];?>').val(),
+                    commission: $('#check_commission<?php echo $package['id']; ?>').val(),
                   },
                   success: function(response) {
                     let dataSucces = JSON.parse(response);
@@ -113,7 +113,7 @@
             }
           }).render('.paypal-button-container<?php echo $e++; ?>');
         </script>
-      <?php  endforeach; ?>
+      <?php endforeach; ?>
 
       <!-- <div class="col-lg-4 col-md-4 col-12 line_package_m hover-fx">
             <article class="single_product" style="border-radius:5%; box-shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.2);">

@@ -352,7 +352,7 @@ $route['delete_order_nw']                           = 'back-end/Overall_ctr/dele
 $route['delete_order_ns']                           = 'back-end/Overall_ctr/delete_order_ns';
 $route['send_not_submit']                           = 'back-end/Overall_ctr/send_not_submit';
 
-$route['rename_uploadmain']                         = 'back-end/Store_ctr/rename_uploadmain';
+$route['rename_uploadmains']                        = 'back-end/Store_ctr/rename_uploadmains';
 $route['rename_filename']                           = 'back-end/Customer_order_ctr/rename_filename';
 $route['rename_filenameGT']                         = 'back-end/Customer_order_ctr/rename_filenameGT';
 $route['rename_filename_TM']                        = 'back-end/Complete_ctr/rename_filename_TM';

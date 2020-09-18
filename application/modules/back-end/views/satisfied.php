@@ -143,7 +143,7 @@
                                                                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                                                     <div class="modal-content">
                                                                                         <div class="modal-header bg-primary">
-                                                                                            <h4 class="modal-title" id="myModalLabel1">Main File</h4>
+                                                                                            <h4 class="modal-title" id="myModalLabel1">Drop main file</h4>
                                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                 <span aria-hidden="true">&times;</span>
                                                                                             </button>
@@ -152,8 +152,8 @@
                                                                                             <label for="" style="font-size: 16px;">File Document </label>
                                                                                             <form action="Satisfied_add_mainfile" class="dropzone dropzone-area" id="dropzone_upmainfile<?php echo $stores['orderST']; ?>" method="POST">
                                                                                                 <input type="hidden" name="orderST" value="<?php echo $stores['orderST']; ?>">
-                                                                                                <input type="hidden" name="userOR" value="<?php echo $stores['userOR']; ?>">
-                                                                                                <input type="hidden" name="User_St" value="<?php echo $stores['User_St']; ?>">
+                                                                                                <input type="text" name="userOR" value="<?php echo $stores['userOR']; ?>">
+                                                                                                <input type="text" name="User_St" value="<?php echo $stores['User_St']; ?>">
                                                                                                 <input type="hidden" name="St_email" value="<?php echo $stores['St_email']; ?>">
                                                                                                 <input type="hidden" name="price_file" value="<?php echo $stores['price_file']; ?>">
                                                                                                 <input type="hidden" name="price_dis_order" value="<?php echo $stores['price_dis_order']; ?>">
@@ -1224,7 +1224,7 @@
 
 
                                                             <?php if ($stores['status_delivery'] == '1') : ?>
-                                                                -
+                                                                
                                                             <?php else : ?>
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $stores['orderST']; ?>"><i class="feather icon-navigation"></i></button>
                                                             <?php endif; ?>

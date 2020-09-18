@@ -195,7 +195,7 @@
 								<div class="card-body card-dashboard">
 
 									<div class="table-responsive">
-										<table class="table table-hover zero-configuration">
+										<table class="table table-hover zero-configuration" style="white-space: nowrap;">
 											<thead>
 												<tr>
 													<th>Online</th>
@@ -238,7 +238,7 @@
 														<td>
 															<a href="#" data-toggle="modal" data-target="#exampleModala<?php echo $team['IdTeam']; ?>"><i class="feather icon-eye" style="font-size: 25px;"></i></a>
 															<div class="modal fade" id="exampleModala<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-																<div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+																<div class="modal-dialog  modal-dialog-scrollable modal-xl" role="document">
 																	<div class="modal-content">
 																		<div class="modal-header">
 																			<h5 class="modal-title" id="exampleModalLabel">Note</h5>
@@ -261,7 +261,7 @@
 																					</tr>
 																				</thead>
 																				<tbody>
-																					<?php $this->db->select('*,tbl_job_position.id as id_job');
+																					<?php $this->db->select('*,tbl_job_position.id as id_job , tbl_job_position.status_approve jp_sa');
 																					$this->db->from('tbl_team');
 																					$this->db->join('tbl_job_position', 'tbl_team.id = tbl_job_position.id_team', 'left');
 																					$this->db->where('tbl_team.IdTeam', $team['IdTeam']);
@@ -297,11 +297,11 @@
 																							<td><?php echo $team_job['created_at']; ?></td>
 																							<td>
 																								<div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
-																									<?php if ($team_job['status_approve'] == '1') : ?>
+																									<?php if ($team_job['jp_sa'] == '1') : ?>
 																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
 																										<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
 																									<?php else : ?>
-																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
+																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>"  >
 																										<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
 																									<?php endif; ?>
 																								</div>

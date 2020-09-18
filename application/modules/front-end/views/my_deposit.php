@@ -81,7 +81,7 @@ $sm_del = $this->db->get()->row_array();
             </div>
             <div class="row text-center wall-center mtb-20">
               <div class="col-md-4">
-                <div id="paypal-button-containers" ></div>
+                <div id="paypal-button-containers"></div>
               </div>
             </div>
           </div>
@@ -128,6 +128,12 @@ $sm_del = $this->db->get()->row_array();
   }
 
   paypal.Buttons({
+    style: {
+      color: 'blue',
+    },
+    funding: {
+      fundingicons: false
+    },
     createOrder: function(data, actions) {
       return actions.order.create({
         purchase_units: [{

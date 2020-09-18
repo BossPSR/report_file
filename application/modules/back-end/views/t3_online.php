@@ -52,7 +52,7 @@
                                                     <th>country</th>
                                                     <th>email</th>
                                                     <th>phone</th>
-                                                    <th>postion</th>
+                                                    <!-- <th>postion</th> -->
                                                     <th>status</th>
 
                                                 </tr>
@@ -68,103 +68,6 @@
                                                         <?php  } ?>
                                                         <td><?php echo $team['email']; ?></td>
                                                         <td><?php echo $team['phone']; ?></td>
-
-                                                        <td>
-
-
-                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $team['id']; ?>"><i class="feather icon-users" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title" id="exampleModalLabel">position</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <table class="table zero-configuration">
-                                                                                <thead>
-
-                                                                                    <tr>
-                                                                                        <th>Name Position</th>
-                                                                                        <th>Tool</th>
-
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php $position = $this->db->get_where('tbl_job_position', ['id_team' => $team['id']])->result_array(); ?>
-                                                                                    <?php foreach ($position as $position) { ?>
-                                                                                        <?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $position['job_position']])->result_array(); ?>
-                                                                                        <?php foreach ($name_position as $name_position) { ?>
-                                                                                            <tr>
-                                                                                                <td><?php echo $name_position['name_item'] ?></td>
-
-
-                                                                                                <?php if ($position['status_approve'] == 0) : ?>
-                                                                                                    <td>
-                                                                                                        <div class="dropdown ">
-                                                                                                            <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                                                Pending approval
-                                                                                                            </button>
-                                                                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                                                <a class="dropdown-item" href="status_team_t3?id=<?php echo $position['id']; ?>&status=1">approve</a>
-                                                                                                                <a class="dropdown-item" href="status_team_t3?id=<?php echo $position['id']; ?>&status=2">Not approved</a>
-
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </td>
-
-                                                                                                <?php elseif ($position['status_approve'] == 1) : ?>
-                                                                                                    <td>
-                                                                                                        <div class="dropdown ">
-                                                                                                            <button class="btn btn-success dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                                                approve
-                                                                                                            </button>
-                                                                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                                                <a class="dropdown-item" href="status_team_t3?id=<?php echo $position['id']; ?>&status=0">Pending approval</a>
-                                                                                                                <a class="dropdown-item" href="status_team_t3?id=<?php echo $position['id']; ?>&status=2">Not approved</a>
-
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                <?php else : ?>
-
-                                                                                                    <td>
-                                                                                                        <div class="dropdown ">
-                                                                                                            <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                                                Not approved
-                                                                                                            </button>
-                                                                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                                                <a class="dropdown-item" href="status_team_t3?id=<?php echo $position['id']; ?>&status=1">approve</a>
-                                                                                                                <a class="dropdown-item" href="status_team_t3?id=<?php echo $position['id']; ?>&status=0">Pending approval</a>
-
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </td>
-
-                                                                                                <?php endif; ?>
-
-
-                                                                                            </tr>
-                                                                                        <?php } ?>
-                                                                                    <?php } ?>
-
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </td>
-
-
                                                         <td>
                                                             <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $team['id']; ?>" class="btn btn-info mr-1 mb-1"><i class="feather icon-mail"></i> Send Email</button>
                                                             <div class="modal fade" id="exampleModalb<?php echo $team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

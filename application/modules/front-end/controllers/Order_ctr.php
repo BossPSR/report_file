@@ -89,10 +89,11 @@ class Order_ctr extends CI_Controller
         $this->db->where('IdTeam', $team01['teamid']);
         $tm3 = $this->db->update('tbl_team', $teamscore);
         if ($tm3) {
-          if ($team03['team_score'] == '500') {
+          if ($team03['team_score'] >= '500') {
 
             $teamic = [
-              'income' =>  $team03['income'] + 100
+              'income' =>  $team03['income'] + 100 ,
+              'team_score' =>  '0'
             ];
             $this->db->where('IdTeam', $team01['teamid']);
             $tmdoop = $this->db->update('tbl_team', $teamic);

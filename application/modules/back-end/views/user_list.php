@@ -53,12 +53,11 @@
                                 }
 
                                 $this->db->select('*');
-                                $this->db->from('tbl_score');
-                                $this->db->group_by('tbl_score.order_id');
+                                $this->db->from('tbl_user');
                                 $allScore = 0;
                                 $scoreAll = $this->db->get()->result_array();
                                 foreach ($scoreAll as $scoreAll) {
-                                    $allScore += $scoreAll['deduct'];
+                                    $allScore += $scoreAll['score'];
                                 }
 
 
@@ -143,7 +142,6 @@
                                                                                         <th>Commission Recipient</th>
                                                                                         <th>package</th>
                                                                                         <th>Commission Price</th>
-                                                                                        <th>Commission Detail</th>
                                                                                         <th>Date</th>
                                                                                     </tr>
                                                                                 </thead>
@@ -155,7 +153,6 @@
                                                                                             <?php $package = $this->db->get_where('tbl_package', ['id' => $user_redetail['id_package_com']])->row_array(); ?>
                                                                                             <td><?php echo $package['title_pk']; ?></td>
                                                                                             <td><?php echo $user_redetail['commission_price']; ?></td>
-                                                                                            <td><?php echo $user_redetail['commission_detail']; ?></td>
                                                                                             <td><?php echo $user_redetail['create_at']; ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
@@ -232,14 +229,13 @@
                                                         }
 
                                                         $this->db->select('*');
-                                                        $this->db->from('tbl_score');
-                                                        $this->db->where('userId', $user_list['idUser']);
-                                                        $this->db->group_by('tbl_score.order_id');
+                                                        $this->db->from('tbl_user');
+                                                        $this->db->where('idUser', $user_list['idUser']);
                                                         $numScore = 0;
                                                         $scoreListNum = $this->db->get()->result_array();
 
                                                         foreach ($scoreListNum as $scoreListNum) {
-                                                            $numScore += $scoreListNum['deduct'];
+                                                            $numScore += $scoreListNum['score'];
                                                         }
 
                                                         $discountUser = $user_list['score'] / 10;

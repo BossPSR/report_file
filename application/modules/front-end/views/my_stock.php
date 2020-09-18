@@ -1,6 +1,10 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">Order List</h2>
-<hr class="line_package">
+<?php 
+$item = base64_decode($this->input->get('item')) ;
+$tip  = $this->db->get_where('tbl_item_position', ['id' => $item ])->row_array();
+ ?>
+<h2 class="text-center" style="margin-top: 15px;">Order List <br> <span style="font-size: 24px;color: #0063d1;">(<?= $tip['name_item'] ?>)</span></h2>
+<hr class="line_package">0
 <?php if (!empty($stock)) { ?>
     <br>
 

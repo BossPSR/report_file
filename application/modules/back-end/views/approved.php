@@ -481,7 +481,7 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($Approved['status_cp'] == "complete") : ?>
+                                                            <?php if ($Approved['status_cp'] == "complete" || $Approved['check_upload_to_main_search'] == "1") : ?>
                                                                 <button type="button" class="btn btn-secondary" data-toggle="modal"><i class="feather icon-upload"></i> </button>
                                                             <?php else : ?>
                                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload<?php echo $Approved['order_id']; ?>"><i class="feather icon-upload"></i> </button>

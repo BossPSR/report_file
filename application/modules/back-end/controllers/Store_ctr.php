@@ -341,7 +341,7 @@ class Store_ctr extends CI_Controller
             'update_at'                 => date('Y-m-d H:i:s'),
             'status_confirmed_team'     => $cf,
             'notify_user'               => 0,
-            'notify_admin'              => 0 , 
+            'notify_admin'              => 0,
             'end_time'                  => $dateUP,
 
         );
@@ -404,51 +404,49 @@ class Store_ctr extends CI_Controller
                 'status_who'       => 'admin cancel',
                 'create_at'        => date('Y-m-d H:i:s'),
                 'update_at'        => date('Y-m-d H:i:s'),
-                'end_date_ncf'     => date("Y-m-d" , strtotime(" + 30 days")),
-    
+                'end_date_ncf'     => date("Y-m-d", strtotime(" + 30 days")),
+
             );
             $this->db->insert('tbl_cancel', $cancel);
         }
 
         $orderid = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
 
-        
+
         $this->sendEmail_cancel_st($orderid, $note);
         echo $resultsedit1;
-        
     }
     public function cancel_dropzone()
     {
-            if (!empty($_FILES['file']['name'])) {
+        if (!empty($_FILES['file']['name'])) {
 
-                // Set preference
-                $config['upload_path']     = 'uploads/cancel/';
-                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-                $config['allowed_types']   = '*';
-                $config['max_size']        = '99999'; // max_size in kb
-                $config['file_name']     = $_FILES['file']['name'];
+            // Set preference
+            $config['upload_path']     = 'uploads/cancel/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
 
-                //Load upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
 
-                $buymax = $this->db->order_by('id', 'DESC')->get('tbl_cancel')->row();
+            $buymax = $this->db->order_by('id', 'DESC')->get('tbl_cancel')->row();
 
-                // File upload
-                if ($this->upload->do_upload('file')) {
-                    // Get data about the file
-                    $uploadData = $this->upload->data();
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
 
-                    $data = array(
-                        'id_cancel'             => $buymax->id,
-                        'file_name_cfa'             => $uploadData['file_name'],
-                        'path_cfa'                  => 'uploads/cancel/' . $uploadData['file_name'],
-                        'create_at_cfa'             => date('Y-m-d H:i:s'),
-                    );
-                    $this->db->insert('tbl_cancel_file_admin', $data);
-                }
+                $data = array(
+                    'id_cancel'             => $buymax->id,
+                    'file_name_cfa'             => $uploadData['file_name'],
+                    'path_cfa'                  => 'uploads/cancel/' . $uploadData['file_name'],
+                    'create_at_cfa'             => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_cancel_file_admin', $data);
             }
-        
+        }
     }
 
 
@@ -477,36 +475,35 @@ class Store_ctr extends CI_Controller
     }
     public function cancel_dropzone_not()
     {
-            if (!empty($_FILES['file']['name'])) {
+        if (!empty($_FILES['file']['name'])) {
 
-                // Set preference
-                $config['upload_path']     = 'uploads/cancel/';
-                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-                $config['allowed_types']   = '*';
-                $config['max_size']        = '99999'; // max_size in kb
-                $config['file_name']     = $_FILES['file']['name'];
+            // Set preference
+            $config['upload_path']     = 'uploads/cancel/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
 
-                //Load upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
 
-                $buymax = $this->db->order_by('id', 'DESC')->get('tbl_cancel')->row();
+            $buymax = $this->db->order_by('id', 'DESC')->get('tbl_cancel')->row();
 
-                // File upload
-                if ($this->upload->do_upload('file')) {
-                    // Get data about the file
-                    $uploadData = $this->upload->data();
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
 
-                    $data = array(
-                        'id_cancel'                 => $buymax->id,
-                        'file_name_cfa'             => $uploadData['file_name'],
-                        'path_cfa'                  => 'uploads/cancel/' . $uploadData['file_name'],
-                        'create_at_cfa'             => date('Y-m-d H:i:s'),
-                    );
-                    $this->db->insert('tbl_cancel_file_admin', $data);
-                }
+                $data = array(
+                    'id_cancel'                 => $buymax->id,
+                    'file_name_cfa'             => $uploadData['file_name'],
+                    'path_cfa'                  => 'uploads/cancel/' . $uploadData['file_name'],
+                    'create_at_cfa'             => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_cancel_file_admin', $data);
             }
-        
+        }
     }
 
 
@@ -1399,7 +1396,7 @@ class Store_ctr extends CI_Controller
         return redirect('Bookmark');
     }
 
-    public function rename_uploadmain()
+    public function rename_uploadmains()
     {
         $resume = $this->input->post('resume');
         $doc    = $this->input->post('doc');
@@ -1414,7 +1411,12 @@ class Store_ctr extends CI_Controller
             ];
             $this->db->where('id', $id);
             $success = $this->db->update('tbl_upload_order', $update);
-            echo $success;
+            if ($success) {
+                $this->session->set_flashdata('save_ss2', 'Successfully refilename !!.');
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not Successfully refilename');
+            }
+            return redirect('rename_uploadmains');
         }
     }
 
@@ -1424,4 +1426,5 @@ class Store_ctr extends CI_Controller
     //         echo $this->Store_model->fetch_state($this->input->post('st'));
     //     }
     // }
+
 }

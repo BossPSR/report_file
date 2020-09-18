@@ -590,6 +590,7 @@
                                                                             <form action="sendEmail_delivery_pay" method="POST">
                                                                                 <input type="hidden" name="id" value="<?php echo $bookmark['orderby']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
+                                                                                <input type="hidden" name="price_save" value="<?php echo $bookmark['price_save'] ?>">
 
                                                                                 <?php foreach ($dm_cc as $key => $dm_cc) { ?>
                                                                                     <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>

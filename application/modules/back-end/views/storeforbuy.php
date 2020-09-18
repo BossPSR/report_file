@@ -146,7 +146,7 @@
                                                                                                 <td><?php echo $order['file_name'] ?></td>
 
                                                                                                 <td>
-                                                                                                    <?php if ($info == 'pdf' || $info == 'jpg' || $info == 'png') : ?>
+                                                                                                    <?php if ($info == 'pdf' ||  $info == 'jpg' || $info == 'JPG' || $info == 'png' || $info == 'PNG') : ?>
                                                                                                         <a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                                                     <?php else : ?>
                                                                                                         <a href="" id="officeviewer1<?php echo $order['id']; ?>" data-file="<?php echo $order['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
@@ -220,7 +220,7 @@
                                                                                                 <td><?php echo $orderGT['order_id'] ?></td>
                                                                                                 <td><?php echo $orderGT['file_name_GT'] ?></td>
                                                                                                 <td>
-                                                                                                    <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'png') : ?>
+                                                                                                    <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'JPG' || $infoGT == 'png' || $infoGT == 'PNG') : ?>
                                                                                                         <a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                                                     <?php else : ?>
                                                                                                         <a href="" id="officeviewer2<?php echo $orderGT['id']; ?>" data-file="<?php echo $orderGT['file_name_GT']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
@@ -263,7 +263,7 @@
                                                             ?>
                                                             <input type="date" class="form-control dateread<?php echo $stored['order_id']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $exp[0]; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                             <br>
-                                                            <?php if (date("Y-m-d") > $stored['date_required']) : ?>
+                                                            <?php if (date("Y-m-d H:i:s") > $stored['date_required']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($stored['date_required'])); ?>
@@ -311,18 +311,7 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Status Upload</label>
-                                                                                <select class="form-control statusst" id="status_cp<?php echo $stored['order_id']; ?>" required>
-                                                                                    <option value="" selected disabled>select</option>
-                                                                                    <option value="1">Complete</option>
-                                                                                    <option value="2">Not Complete</option>
-                                                                                    <option value="3">Original</option>
-                                                                                    <option value="4">Rewrite</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div> -->
+                                                                     
                                                                         <?php
                                                                         $this->db->group_by('dm_sub');
                                                                         $this->db->order_by('dm_sub', 'asc');
@@ -392,63 +381,13 @@
                                                                                 <label for="helpInputTop">date required</label>
                                                                                 <input type="date" class="form-control dr<?php echo $stored['order_id']; ?>" name="Daterequired" id="Daterequired" value="<?php echo $stored['date_required']; ?>" placeholder="Enter price" required>
                                                                             </div>
-
                                                                         </div>
-
-
-
-                                                                        <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <fieldset>
-                                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                        <input type="checkbox" class="ckeck<?php echo $stored['order_id']; ?>" data-order="<?php echo $stored['order_id']; ?>">
-                                                                                        <span class="vs-checkbox">
-                                                                                            <span class="vs-checkbox--check">
-                                                                                                <i class="vs-icon feather icon-check"></i>
-                                                                                            </span>
-                                                                                        </span>
-                                                                                        <span class="">Add Team</span>
-                                                                                    </div>
-                                                                                </fieldset>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1" id="teambox<?php echo $stored['order_id']; ?>" style="display: none">
-                                                                            <div class="form-group">
-                                                                                <label for="team">Team Id</label>
-                                                                                <select class="select2 form-control" name="team" id="team<?php echo $stored['order_id']; ?>">
-                                                                                    <option disabled selected> -- Select Team -- </option>
-                                                                                    <?php foreach ($ts as $tsM) { ?>
-                                                                                        <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label for="Wage">Wage</label>
-                                                                                <input type="number" id="wage<?php echo $stored['order_id']; ?>" name="wage" class="form-control" value="">
-                                                                            </div>
-
-                                                                            <?php $item = $this->db->get('tbl_item_position')->result(); ?>
-                                                                            <div class="form-group">
-                                                                                <label for="Position">Position</label>
-                                                                                <select name="Position" class="form-control" id="position<?php echo $stored['order_id']; ?>">
-                                                                                    <option value="" selected disabled> --- Position ---</option>
-                                                                                    <?php foreach ($item as $key => $item) : ?>
-                                                                                        <option value="<?php echo $item->id; ?>"> <?php echo $item->name_item; ?> </option>
-                                                                                    <?php endforeach; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div> -->
 
                                                                     </div>
                                                                     <div class="modal-footer">
-
                                                                         <div class="add-data-btn mr-1">
                                                                             <button id="Dm_c" type="submit" class="btn btn-primary">submit</button>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -458,7 +397,6 @@
 
 
                                                     <div class="modal fade" id="exampleModallCenterb<?php echo $stored['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
                                                         <form action="check_NotSatisfired_order_add_com" method="POST">
                                                             <input type="hidden" name="id" value="<?php echo $stored['id']; ?>">
                                                             <input type="hidden" name="orderid" value="<?php echo $stored['order_id']; ?>">
@@ -499,57 +437,13 @@
                                                                             </div>
                                                                         </div>
 
-                                                                        <!-- <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <fieldset>
-                                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                        <input type="checkbox" class="ckeckNot<?php echo $stored['order_id']; ?>" data-notst="<?php echo $stored['order_id']; ?>">
-                                                                                        <span class="vs-checkbox">
-                                                                                            <span class="vs-checkbox--check">
-                                                                                                <i class="vs-icon feather icon-check"></i>
-                                                                                            </span>
-                                                                                        </span>
-                                                                                        <span class="">Add Team</span>
-                                                                                    </div>
-                                                                                </fieldset>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1" id="teamboxNot<?php echo $stored['order_id']; ?>" style="display: none">
-                                                                            <div class="form-group">
-                                                                                <label for="team">Team Id</label>
-                                                                                <select class="select2 form-control" name="team" id="teamNot<?php echo $stored['order_id']; ?>">
-                                                                                    <option disabled selected> -- Select Team -- </option>
-                                                                                    <?php foreach ($ts as $tsNot) { ?>
-                                                                                        <option value="<?php echo $tsNot['IdTeam']; ?>"><?php echo $tsNot['IdTeam']; ?></option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label for="Wage">Wage</label>
-                                                                                <input type="number" id="wageNot<?php echo $stored['order_id']; ?>" name="wage" class="form-control" value="">
-                                                                            </div>
-
-                                                                            <?php $item = $this->db->get('tbl_item_position')->result(); ?>
-                                                                            <div class="form-group">
-                                                                                <label for="Position">Position</label>
-                                                                                <select name="Position" class="form-control" id="positionNot<?php echo $stored['order_id']; ?>">
-                                                                                    <option value="" selected disabled> --- Position ---</option>
-                                                                                    <?php foreach ($item as $key => $item) : ?>
-                                                                                        <option value="<?php echo $item->id; ?>"> <?php echo $item->name_item; ?> </option>
-                                                                                    <?php endforeach; ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div> -->
-
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="Note">Note</label>
                                                                                 <textarea class="form-control" name="note_s" rows="5" placeholder="Enter Note"></textarea>
                                                                             </div>
-
                                                                         </div>
+
                                                                     </div>
                                                                     <div class="modal-footer">
 
@@ -603,14 +497,12 @@
                                                         </form>
                                                     </div>
 
-
-
-
                                                 <?php  } ?>
 
                                             </tbody>
 
                                         </table>
+
                                     </div>
                                 </div>
                             </div>
@@ -675,30 +567,6 @@
         });
     });
 </script>
-
-
-<!-- <script>
-    $(document).ready(function() {
-        $('.statusst').change(function() {
-            var statusst = $('.statusst').val();
-            if (statusst != '') {
-                $.ajax({
-                    url: 'fetch_state',
-                    method: "POST",
-                    data: {
-                        st: statusst
-                    },
-                    success: function(data) {
-                        $('.dmsub').html(data);
-                    }
-                })
-            }
-        });
-    });
-</script> -->
-
-
-
 
 
 <!-- END: Content-->

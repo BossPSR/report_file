@@ -482,7 +482,7 @@
                                                         <!-- Tool -->
                                                         <td>
                                                             <?php if ($not_Approved['status_approved_upload'] == 0) : ?>
-                                                                <?php if ($not_Approved['status_cp'] == "complete") : ?>
+                                                                <?php if ($not_Approved['status_cp'] == "complete" || $not_Approved['check_upload_to_main_search'] == "1") : ?>
                                                                     <button type="button" class="btn btn-secondary mr-1 mb-1" data-toggle="modal"><i class="feather icon-upload"></i></button>
                                                                 <?php else : ?>
                                                                     <button type="button" class="btn btn-primary mr-1 mb-1" data-toggle="modal" data-target="#modalUpload<?php echo $not_Approved['or']; ?>"><i class="feather icon-upload"></i></button>

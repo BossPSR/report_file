@@ -56,7 +56,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="staticBackdropLabel">Retrun confirm</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">คำแนะนำ</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -66,7 +66,7 @@
                 <p>หมายเหตุ: หากการUploadในครั้งนี้มีไฟล์งานอื่นรวมอยู่ด้วย ท่านอาจเสียสิทธิ์ในการได้รับส่วนลดจากทางระบบ</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" id='uploadfiles' data-dismiss="modal">Confirm</button>
             </div>
         </div>
@@ -88,7 +88,7 @@
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone("#dropzone2", {
         autoProcessQueue: false,
-        maxFiles: 5,
+        maxFiles: 30,
         addRemoveLinks: true,
         parallelUploads: 5, // Number of files process at a time (default 2)
     });

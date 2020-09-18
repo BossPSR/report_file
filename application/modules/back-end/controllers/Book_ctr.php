@@ -26,20 +26,19 @@ class Book_ctr extends CI_Controller
     {
         if ($this->session->userdata('email_admin') != '') {
 
-			$data['bookmark_all_not'] = $this->Store_model->bookmark_all_not();
-			$checkTime = $this->Store_model->bookmark_all_not();
-			foreach ($checkTime as $checkTime) {
-				if ($checkTime['status_pay'] == 0) {
-					
-					$date_orderUp = date('Y-m-d H:i:s' ,strtotime('+30 day',strtotime($checkTime['upload_order_create_at'])));
-					if ($date_orderUp <= date('Y-m-d')) {
-						$this->db->where('id',$checkTime['upload_order_id']);
-						$this->db->delete('tbl_upload_order');
-					}
-				
-				}
-			}
-			
+            $data['bookmark_all_not'] = $this->Store_model->bookmark_all_not();
+            $checkTime = $this->Store_model->bookmark_all_not();
+            foreach ($checkTime as $checkTime) {
+                if ($checkTime['status_pay'] == 0) {
+
+                    $date_orderUp = date('Y-m-d H:i:s', strtotime('+30 day', strtotime($checkTime['upload_order_create_at'])));
+                    if ($date_orderUp <= date('Y-m-d')) {
+                        $this->db->where('id', $checkTime['upload_order_id']);
+                        $this->db->delete('tbl_upload_order');
+                    }
+                }
+            }
+
             $this->load->view('options/header');
             $this->load->view('bookmark_notpay', $data);
             $this->load->view('options/footer');
@@ -50,11 +49,11 @@ class Book_ctr extends CI_Controller
 
     public function bookmark_notpay_edit()
     {
-		$id_order   = $this->input->post('id_order');
-		$user_id    = $this->input->post('user_id');
-		$dm         = $this->input->post('DM');
+        $id_order   = $this->input->post('id_order');
+        $user_id    = $this->input->post('user_id');
+        $dm         = $this->input->post('DM');
         $status_cp  = $this->input->post('status_cp');
-        
+
         $data = array(
             'price_file'       => $this->input->post('price_file'),
             'date_required'    => $this->input->post('Daterequired'),
@@ -63,26 +62,26 @@ class Book_ctr extends CI_Controller
         );
         $this->db->where('order_id', $id_order);
         $resultsedit = $this->db->update('tbl_upload_order', $data);
-        
-		$this->db->where('id_orderBuy',$id_order);
+
+        $this->db->where('id_orderBuy', $id_order);
         $this->db->delete('tbl_bookmark');
-        
-		foreach ($dm as $dm) {
-			$dataDM = [
-				'id_user'     => $user_id,
-				'id_orderBuy' => $id_order,
-				'id_document' => $dm,
-				'create_at'   => date('Y-m-d H:i:s'),
-			];
-			$this->db->insert('tbl_bookmark',$dataDM);
-		}
-		
-		$this->db->where('order_id',$id_order);
-		$this->db->update('tbl_upload_order',['status_cp' => $status_cp ,'update_at' => date('Y-m-d H:i:s')]);
-		
+
+        foreach ($dm as $dm) {
+            $dataDM = [
+                'id_user'     => $user_id,
+                'id_orderBuy' => $id_order,
+                'id_document' => $dm,
+                'create_at'   => date('Y-m-d H:i:s'),
+            ];
+            $this->db->insert('tbl_bookmark', $dataDM);
+        }
+
+        $this->db->where('order_id', $id_order);
+        $this->db->update('tbl_upload_order', ['status_cp' => $status_cp, 'update_at' => date('Y-m-d H:i:s')]);
+
         $upload_order =  $this->db->get_where('tbl_upload_order', ['order_id' => $id_order])->result_array();
-		$this->sendEmail($upload_order);
-		
+        $this->sendEmail($upload_order);
+
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', 'Successfully Update to team information !!.');
@@ -318,7 +317,7 @@ class Book_ctr extends CI_Controller
         $status_cpncp  = $this->input->post('status_cpncp');
 
         // $upload_book = $this->Store_model->bookmark_upload($DM);
-                     $this->db->order_by('id', 'DESC');
+        $this->db->order_by('id', 'DESC');
         $dmmax     = $this->db->get('tbl_upload_auto')->row();
 
 
@@ -374,9 +373,9 @@ class Book_ctr extends CI_Controller
         $DM         = $this->input->post('DM');
         $status_cp  = $this->input->post('status_cpS');
         $id_upload  = $this->input->post('id_upload');
-        
+
         // $upload_book = $this->Store_model->bookmark_upload($DM);
-                     $this->db->order_by('id', 'DESC');
+        $this->db->order_by('id', 'DESC');
         $dmmax     = $this->db->get('tbl_upload_auto')->row();
 
 
@@ -417,8 +416,8 @@ class Book_ctr extends CI_Controller
                     'path'            => 'uploads/Store/' . $uploadData['file_name'],
                     'comandnocom'     => $status_cp,
                     'status'          => 1,
-                ];          
-                           $this->db->where('id',$id_upload);
+                ];
+                $this->db->where('id', $id_upload);
                 $success = $this->db->update('tbl_upload_main_search_sub', $db_store);
             }
         }
@@ -427,13 +426,14 @@ class Book_ctr extends CI_Controller
     {
         $order_id       = $this->input->post('order_id');
         $order_team     = $this->input->post('order_team');
+        $price_save     = $this->input->post('price_save');
         $id             = $this->input->post('id');
         $dm_id          = $this->input->post('dm_id');
         $dateUP         = date("Y-m-d", strtotime("+60 day"));
         $time_withdraw  = date("Y-m-d", strtotime("+65 day"));
 
         $this->db->where('order_id', $id);
-        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s') , 'end_time' => $dateUP , 'end_time_withdraw' => $time_withdraw ,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'end_time_withdraw' => $time_withdraw,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
         foreach ($dm_id as $key => $dm_id) {
 
             $this->db->where('id_doc', $dm_id);
@@ -443,6 +443,16 @@ class Book_ctr extends CI_Controller
         $user_email = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
         $user_email_send  = $this->db->get_where('tbl_user', ['idUser' => $user_email['userId']])->row_array();
 
+        if ($user_email_send['cash'] > $price_save) {
+            $userdb = [
+                'cash' => $user_email_send['cash'] - $price_save
+            ];
+            $this->db->where('idUser', $user_email['userId']);
+            $this->db->update('tbl_user', $userdb);
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not successfully send not enough money ');
+            return redirect('Bookmark');
+        }
 
         $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
 
@@ -450,7 +460,8 @@ class Book_ctr extends CI_Controller
         $message .= '<div style="max-width:800px;">';
         $message .= '<div class="content" >';
         $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-        $message .= 'Send all your documents successfully.';
+        $message .= 'คุณได้ทำการชำระในขั้นตอนสุดท้ายของการส่งเอกสารจาก admin ส่งมาถึงท่านเรียบร้อยแล้ว .';
+        $message .= 'ขอขอบคุณที่เลือกใช้บริการของเรา report-file .';
         $message .= '</div>';
         $message .= '<div class="row">';
         $message .= '<p>Hey "' . $user_email_send['username'] . '",</p>';
@@ -517,7 +528,7 @@ class Book_ctr extends CI_Controller
         $time_withdraw  = date("Y-m-d", strtotime("+65 day"));
 
         $this->db->where('order_id', $id);
-        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s') , 'end_time' => $dateUP , 'end_time_withdraw' => $time_withdraw ,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'end_time_withdraw' => $time_withdraw,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
         foreach ($dm_id as $key => $dm_id) {
 
             $this->db->where('id_doc', $dm_id);
@@ -526,7 +537,6 @@ class Book_ctr extends CI_Controller
 
         $user_email = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
         $user_email_send  = $this->db->get_where('tbl_user', ['idUser' => $user_email['userId']])->row_array();
-
 
         $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
 
@@ -627,10 +637,10 @@ class Book_ctr extends CI_Controller
     public function  delete_dm()
     {
         $id = $this->input->get('id');
-       
 
-       
-       
+
+
+
         if ($this->db->delete('tbl_upload_main_search', ['id' => $id])) {
 
             $resultsedit = $this->db->delete('tbl_upload_main_search_sub', ['dm_main' => $id]);
@@ -641,7 +651,5 @@ class Book_ctr extends CI_Controller
             }
             return redirect('back_upload_main_search');
         }
-
-      
     }
 }

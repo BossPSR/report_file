@@ -25,61 +25,8 @@
 				</div>
 			</div>
 			<section id="dashboard-analytics">
-				<!-- <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="mb-0">Team</h4>
-                            </div>
-                            <div class="card-content">
-                                <div class="table-responsive mt-1">
-                                    <table class="table table-hover-animation mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th>Amount</th>
-                                                <th>Availble</th>
-                                                <th>Online Now Available</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>#879985</td>
-                                                <td><i class="fa fa-circle font-small-3 text-success mr-50"></i>Moving</td>
-                                                <td class="p-1">
-                                                    <ul class="list-unstyled users-list m-0  d-flex align-items-center">
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Vinnie Mostowy" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-5.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Elicia Rieske" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-7.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Julee Rossignol" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-10.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-popup="tooltip-custom" data-placement="bottom" data-original-title="Darcey Nooner" class="avatar pull-up">
-                                                            <img class="media-object rounded-circle" src="public/backend/assets/images/portrait/small/avatar-s-8.jpg" alt="Avatar" height="30" width="30">
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                              
-                                                <td>
-                                                    <span>130 km</span>
-                                                    <div class="progress progress-bar-success mt-1 mb-0">
-                                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-				<!-- <div class="row">
+				
+				<div class="row">
                     <div class="col-3">
                         <div class="card">
                             <div class="card-header">
@@ -91,8 +38,6 @@
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                               
-
                                             </tr>
                                         </thead>
                                         <tbody id="myBody">
@@ -173,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
 				<div class="row">
 					<div class="col-12">

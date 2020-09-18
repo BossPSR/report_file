@@ -12,7 +12,7 @@
         width: 42px;
         height: 42px;
         background-position: 0 -290px;
-        bottom: 51%;
+        bottom: 43%;
         right: 40%;
         transform: translate(50%, 50%);
         cursor: pointer;
@@ -31,8 +31,18 @@
 
                     <div class="image_profile">
                         <h2 class="text-center my-income">
-                            <div class="name_user m17"><i class="fa fa-user"></i><?= $this->lang->line("name"); ?> : <?php echo $user['username']; ?></div>
+                            <div class="name_user m17"> <i class="fa fa-user"></i><?= $this->lang->line("name"); ?> : <?php echo $user['username']; ?></div>
                         </h2>
+                        <?php $p = $this->db->get_where('tbl_package', ['id' => $user['package_user']])->row_array(); ?>
+                        <?php if ($p == true) : ?>
+                            <h2 class="text-center my-income" style="color: #40a6ff;">
+                                <div> Package name : <?php echo $p['title_pk']; ?></div>
+                                <div>Package : <?php echo date("d F Y", strtotime($user['package_start'])); ?> - <?php echo date("d F Y", strtotime($user['package_end'])); ?></div>
+                            </h2>
+                        <?php else : ?>
+
+                        <?php endif; ?>
+
 
                         <div class="image_PF">
                             <img class="profile" src="<?php echo (!isset($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="">

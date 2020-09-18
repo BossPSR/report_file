@@ -40,7 +40,7 @@
                                 <!-- <th scope="col">ผู้ที่เติมแนะนำ</th> -->
                                 <!-- <th scope="col">ผู้แนะนำ</th> -->
                                 <th>Item (รายการ)</th>
-                                <th scope="col">Detail (รายละเอียด)</th>
+                                <!-- <th scope="col">Detail (รายละเอียด)</th> -->
                                 <th scope="col">Date (วันที่)</th>
                                 <th scope="col">Amount (จำนวนค่าแนะนำที่ได้)</th>
                             </tr>
@@ -54,34 +54,7 @@
                                     <!-- <td><?php echo $commission['commission_recipient']; ?></td> -->
                                     <!-- <td><?php echo $commission['commission_inviter']; ?></td> -->
                                     <td>Commission</td>
-                                    <td>
-                                        <?php if (!empty($commission['commission_detail'])) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#NOTE<?= $commission['id']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="NOTE<?= $commission['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-
-                                                            <p style="font-size:16px;font-weight:bold;"><?= $commission['commission_detail']; ?></p>
-
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php } else { ?>
-                                            -
-                                        <?php } ?>
-                                    </td>
+                                   
                                     <td><?php echo date("d F Y", strtotime($commission['create_at'])); ?></td>
                                     <td><?php echo number_format($commission['commission_price']); ?></td>
                                 </tr>

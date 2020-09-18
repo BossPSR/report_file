@@ -113,16 +113,16 @@
                                                 <?php
                                                 $i = 1;
                                                 foreach ($order_notwork as $id => $stores) {
-                                                    if ($stores['status'] == 1) {
-                                                        continue;
-                                                    }
+                                                    // if ($stores['status'] == 1) {
+                                                    //     continue;
+                                                    // }
                                                     $checkDate_num = DateDiff($stores['createOr'], $stores['requiredOr']);
                                                     $checkDate = $checkDate_num / 2;
                                                     $checkDate = floor($checkDate);
 
                                                     $dateRequired = date("Y-m-d", strtotime("-" . $checkDate . " day", strtotime($stores['requiredOr'])));
                                                 ?>
-                                                    <?php if ($dateRequired <= date('Y-m-d')) : ?>
+                                                    <!--if ($dateRequired <= date('Y-m-d')) :  -->
                                                         <tr>
                                                             <td>
                                                                 <button class="btn btn-primary" type="button"><?php echo $stores['num_check']; ?></button>
@@ -577,9 +577,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    <?php else : ?>
+                                                    <!--  else : 
 
-                                                    <?php endif; ?>
+                                                    endif; -->
 
                                                 <?php } ?>
                                             </tbody>

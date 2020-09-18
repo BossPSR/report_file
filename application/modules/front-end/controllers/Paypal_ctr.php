@@ -64,7 +64,6 @@ class Paypal_ctr extends CI_Controller{
 					$dataCommission['id_package_com'] = $data['package'];
 					$dataCommission['update_at'] = date("Y-m-d H:i:s");
 					$dataCommission['commission_price'] = $pac_su['price_pk'];
-					$dataCommission['commission_detail'] = "เชิญเข้ามา join กัน";
 					$dataCommission['commission_sale'] = $pac_su['new_price'];
 					$dataCommission['create_at'] = date("Y-m-d H:i:s");
 					$this->db->insert('tbl_commission', $dataCommission);
@@ -72,7 +71,7 @@ class Paypal_ctr extends CI_Controller{
 					
 					$userCom = $userCommission['commission'] + $comPrice_commission;
 					$this->db->where('idUser' , $commission);
-					$this->db->update('tbl_user' , ['commission' => $userCom] );
+					$this->db->update('tbl_user' , ['cash' => $userCommission['cash'] + $userCom] );
 				}
 			}
 			

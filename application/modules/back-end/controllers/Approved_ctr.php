@@ -64,6 +64,14 @@ class Approved_ctr extends CI_Controller
                 $st = '2';
             }
 
+            if ($order_id) {
+                $updb = [
+                    'check_upload_to_main_search'         => '1',
+                ];
+                $this->db->where('order_id', $order_id);
+                $success = $this->db->update('tbl_upload_order', $updb);
+            }
+
 
             if (!empty($dmsub)) {
 
@@ -159,6 +167,15 @@ class Approved_ctr extends CI_Controller
             } else {
                 $st = '2';
             }
+
+            if ($order_id) {
+                $updb = [
+                    'check_upload_to_main_search'         => '1',
+                ];
+                $this->db->where('order_id', $order_id);
+                $success = $this->db->update('tbl_upload_order', $updb);
+            }
+
 
             $select_item = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
             $upload_team = $this->db->get_where('tbl_upload_order_team', ['order_id' => $order_id])->result_array();

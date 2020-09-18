@@ -165,7 +165,7 @@ foreach ($store as $upload_main_searchDetail) {
 
                                                                     ?>
 
-                                                                    <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'png') : ?>
+                                                                    <?php if ($infoGT == 'pdf' || $infoGT == 'jpg' || $infoGT == 'JPG' || $infoGT == 'png' || $infoGT == 'PNG') : ?>
                                                                         <a href="<?php echo $check_for['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                     <?php else : ?>
                                                                         <a href="" id="officeviewer2<?php echo $check_for['id']; ?>" data-file="<?php echo $check_for['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
@@ -188,11 +188,16 @@ foreach ($store as $upload_main_searchDetail) {
                                                                 <td>
                                                                     <select class="form-control" name="id_status" id="categories" data-catagory="<?php echo $check_for['id']; ?>">
                                                                         <option value="" selected disabled>Select Section</option>
-                                                                        <option value="1" <?php if ($check_for['section'] == 1) echo 'selected'; ?>>section1</option>
-                                                                        <option value="2" <?php if ($check_for['section'] == 2) echo 'selected'; ?>>section2</option>
-                                                                        <option value="3" <?php if ($check_for['section'] == 3) echo 'selected'; ?>>section3</option>
-                                                                        <option value="4" <?php if ($check_for['section'] == 4) echo 'selected'; ?>>section4</option>
-                                                                        <option value="5" <?php if ($check_for['section'] == 5) echo 'selected'; ?>>section5</option>
+                                                                        <option value="1" <?php if ($check_for['section'] == 1) echo 'selected'; ?>>section 1</option>
+                                                                        <option value="2" <?php if ($check_for['section'] == 2) echo 'selected'; ?>>section 2</option>
+                                                                        <option value="3" <?php if ($check_for['section'] == 3) echo 'selected'; ?>>section 3</option>
+                                                                        <option value="4" <?php if ($check_for['section'] == 4) echo 'selected'; ?>>section 4</option>
+                                                                        <option value="5" <?php if ($check_for['section'] == 5) echo 'selected'; ?>>section 5</option>
+                                                                        <option value="6" <?php if ($check_for['section'] == 6) echo 'selected'; ?>>section 6</option>
+                                                                        <option value="7" <?php if ($check_for['section'] == 7) echo 'selected'; ?>>section 7</option>
+                                                                        <option value="8" <?php if ($check_for['section'] == 8) echo 'selected'; ?>>section 8</option>
+                                                                        <option value="9" <?php if ($check_for['section'] == 9) echo 'selected'; ?>>section 9</option>
+                                                                        <option value="10" <?php if ($check_for['section'] == 10) echo 'selected'; ?>>section 10</option>
                                                                     </select>
                                                                 </td>
 

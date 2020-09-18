@@ -77,10 +77,10 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-12 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
-                                        No Work <span class="badge badge-pill badge-warning" id="refresh_nw"><?php echo count($no_work); ?></span>
+                                        No Work <span class="badge badge-pill badge-warning" id=""><?php echo count($no_work); ?></span>
                                     </a>
                                     <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">
-                                        Not Submit <span class="badge badge-pill badge-success" id="refresh_ns"><?php echo count($not_submit); ?></span>
+                                        Not Submit <span class="badge badge-pill badge-success" id=""><?php echo count($not_submit); ?></span>
                                     </a>
                                 </div>
                             </div>
