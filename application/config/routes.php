@@ -370,3 +370,4 @@ $route['add_team_informal_not']                     = 'back-end/Informal_ctr/add
 $route['cancel_dropzone']                           = 'back-end/Store_ctr/cancel_dropzone';
 $route['cancel_dropzone_not']                       = 'back-end/Store_ctr/cancel_dropzone_not';
 $route['slide_blocked']                             = 'back-end/Team_ctr/slide_unlock';
+$route['send_feedbacktion_all']                     = 'back-end/Feedback_ctr/send_feedbacktion_all';
