@@ -151,7 +151,7 @@
                                                 <?php foreach ($bookmark as $keyBook => $bookmark) { ?>
 
                                                     <tr>
-                                                        <!-- orderby -->
+                                                        <!-- orderd -->
                                                         <td><?php echo $bookmark['orderd'] ?></td>
 
                                                         <!-- user_name -->
@@ -167,7 +167,7 @@
                                                             <?php if (empty($bookmark['id_document'])) : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->result_array(); ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderd']])->result_array(); ?>
                                                                 <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
 
                                                                     <?php if ($show_dm['id_document'] == '') : ?>
@@ -181,8 +181,8 @@
                                                         </td>
 
                                                         <!-- Main File -->
-                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <td><span data-toggle="modal" data-target="#exampleModala<?php echo $bookmark['orderd']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?php echo $bookmark['orderd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -194,7 +194,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark['orderby']])->result_array(); ?>
+                                                                                    <?php $order = $this->db->get_where('tbl_upload_order', ['order_id' => $bookmark['orderd']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order Id</th>
                                                                                         <th>File Name</th>
@@ -226,11 +226,11 @@
 
                                                         <!-- GT File -->
                                                         <td>
-                                                            <?php $status = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $bookmark['orderby']])->row_array();  ?>
+                                                            <?php $status = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $bookmark['orderd']])->row_array();  ?>
                                                             <?php if ($status == true) : ?>
 
-                                                                <span data-toggle="modal" data-target="#exampleModaly<?php echo $bookmark['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModaly<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#exampleModaly<?php echo $bookmark['orderd']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModaly<?php echo $bookmark['orderd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -242,7 +242,7 @@
                                                                             <div class="modal-body">
                                                                                 <table class="table zero-configuration">
                                                                                     <thead>
-                                                                                        <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $bookmark['orderby']])->result_array(); ?>
+                                                                                        <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $bookmark['orderd']])->result_array(); ?>
                                                                                         <tr>
                                                                                             <th>Order Id</th>
                                                                                             <th>File Name</th>
@@ -280,8 +280,8 @@
                                                         <!-- Document File -->
                                                         <td>
                                                             <?php if (!empty($bookmark['id_document'])) : ?>
-                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['orderby']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                                <div class="modal fade" id="exampleModalc<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <span data-toggle="modal" data-target="#exampleModalc<?php echo $bookmark['orderd']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="exampleModalc<?php echo $bookmark['orderd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -291,7 +291,7 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->result_array(); ?>
+                                                                                <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderd']])->result_array(); ?>
                                                                                 <?php foreach ($dm_cc as $key => $dm_cc) { ?>
                                                                                     <?php $dm_c11 = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $dm_cc['id_document']])->result_array(); ?>
                                                                                     <?php if (!empty($dm_cc['id_document'])) : ?>
@@ -507,10 +507,10 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($bookmark['date_re'])); ?>
-                                                                <div id="clock-b<?php echo $bookmark['orderby']; ?>" style="display: flex;"></div>
+                                                                <div id="clock-b<?php echo $bookmark['orderd']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $bookmark['orderby']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $bookmark['orderd']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -556,26 +556,26 @@
                                                         <!-- Tool -->
                                                         <td>
 
-                                                            <!-- <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->row_array(); ?>
+                                                            <!-- <?php $show_dm_c = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderd']])->row_array(); ?>
 
                                                             <?php $show_dm_c1 = $this->db->get_where('tbl_upload_main_search', ['id_doc' => $show_dm_c['id_document']])->row_array(); ?>
 
                                                             <?php $show_dm_c2 = $this->db->get_where('tbl_upload_store', ['store_id' => $show_dm_c1['upload_store_id'], 'status_check_drop' => '11'])->row_array(); ?>
                                                             <?php if ($show_dm_c2 == true) : ?>
-                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-icon btn-success "><i class="feather icon-download-cloud"></i></a>
+                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderd']; ?>" class="btn btn-icon btn-success "><i class="feather icon-download-cloud"></i></a>
                                                             <?php else : ?>
-                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderby']; ?>" class="btn btn-icon btn-primary "><i class="feather icon-download-cloud"></i></a>
+                                                                <a href="" data-toggle="modal" data-target="#dropW<?php echo $bookmark['orderd']; ?>" class="btn btn-icon btn-primary "><i class="feather icon-download-cloud"></i></a>
                                                             <?php endif; ?> -->
 
                                                             <?php if ($bookmark['status_delivery'] == '1') : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['orderby']; ?>"><i class="feather icon-navigation"></i></button>
+                                                                <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $bookmark['orderd']; ?>"><i class="feather icon-navigation"></i></button>
                                                             <?php endif; ?>
 
-                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderby']])->result_array(); ?>
+                                                            <?php $dm_cc = $this->db->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark['orderd']])->result_array(); ?>
 
-                                                            <div class="modal fade" id="exampleModalu<?php echo $bookmark['orderby']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal fade" id="exampleModalu<?php echo $bookmark['orderd']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -588,7 +588,7 @@
                                                                         <div class="modal-body">
 
                                                                             <form action="sendEmail_delivery_pay" method="POST">
-                                                                                <input type="hidden" name="id" value="<?php echo $bookmark['orderby']; ?>">
+                                                                                <input type="hidden" name="id" value="<?php echo $bookmark['orderd']; ?>">
                                                                                 <input type="hidden" name="dm_id[]" value="<?php echo $bookmark['id_document']; ?>">
                                                                                 <input type="hidden" name="price_save" value="<?php echo $bookmark['price_save'] ?>">
 
@@ -699,32 +699,32 @@
 
 
                                                             <script>
-                                                                $("#DM1<?php echo $bookmark['orderby']; ?>").change(function() {
+                                                                $("#DM1<?php echo $bookmark['orderd']; ?>").change(function() {
                                                                     var value = $(this).val();
-                                                                    $("#DM2<?php echo $bookmark['orderby']; ?>").val(value);
+                                                                    $("#DM2<?php echo $bookmark['orderd']; ?>").val(value);
                                                                 }).change();
                                                             </script>
 
                                                             <script>
-                                                                var x = document.getElementById("DM1<?php echo $bookmark['orderby']; ?>").value;
+                                                                var x = document.getElementById("DM1<?php echo $bookmark['orderd']; ?>").value;
                                                                 Dropzone.autoDiscover = false;
-                                                                var myDropzone<?php echo $bookmark['orderby']; ?> = new Dropzone("#maindropzone<?php echo $bookmark['orderby']; ?>", {
+                                                                var myDropzone<?php echo $bookmark['orderd']; ?> = new Dropzone("#maindropzone<?php echo $bookmark['orderd']; ?>", {
                                                                     autoProcessQueue: false,
                                                                     maxFiles: 5,
                                                                     addRemoveLinks: true,
                                                                     parallelUploads: 5, // Number of files process at a time (default 2)
                                                                 });
 
-                                                                document.getElementById("uploadsfile<?php echo $bookmark['orderby']; ?>").addEventListener("click", function() {
+                                                                document.getElementById("uploadsfile<?php echo $bookmark['orderd']; ?>").addEventListener("click", function() {
                                                                     // myDropzone.processQueue();
-                                                                    if (myDropzone<?php echo $bookmark['orderby']; ?>.files == 0) {
+                                                                    if (myDropzone<?php echo $bookmark['orderd']; ?>.files == 0) {
 
                                                                         swal("Warning!", "Can not be document Empty", "warning", {
                                                                             button: true,
                                                                         });
                                                                     }
-                                                                    myDropzone<?php echo $bookmark['orderby']; ?>.processQueue();
-                                                                    myDropzone<?php echo $bookmark['orderby']; ?>.on("queuecomplete", function(file, res) {
+                                                                    myDropzone<?php echo $bookmark['orderd']; ?>.processQueue();
+                                                                    myDropzone<?php echo $bookmark['orderd']; ?>.on("queuecomplete", function(file, res) {
                                                                         swal("Good job!", "Upload for data successfull", "success", {
                                                                             button: false,
                                                                         });

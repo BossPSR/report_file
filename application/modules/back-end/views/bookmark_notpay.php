@@ -348,10 +348,13 @@
                                                                                     </div>
 
                                                                                 </div>
+                                                                                <?php
+                                                                                $dateq = explode(' ', $bookmark_all_not['date_re']);
+                                                                                ?>
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <label for="helpInputTop">date required</label>
-                                                                                        <input type="date" class="form-control" name="Daterequired" min="<?php echo date("Y-m-d" , strtotime(" + 1 days ")); ?>" value="<?php echo date("Y-m-d" , strtotime(" + 1 days ")); ?>" placeholder="Enter price" required>
+                                                                                        <input type="date" class="form-control" name="Daterequired" min="<?php echo $dateq[0]; ?>" value="<?php echo $dateq[0]; ?>" placeholder="Enter price" required>
                                                                                     </div>
 
                                                                                 </div>

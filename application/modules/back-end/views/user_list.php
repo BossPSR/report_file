@@ -113,7 +113,7 @@
                                                     <th>Num Price</th>
                                                     <th>Num Approved</th>
                                                     <th>Num Not Approved</th>
-                                                    <th>Deduct Income</th>
+                                                    <th>Deduct score</th>
                                                     <th>Score Income</th>
                                                     <th>Discount</th>
                                                     <th>Package</th>

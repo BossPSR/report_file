@@ -152,8 +152,8 @@
                                                                                             <label for="" style="font-size: 16px;">File Document </label>
                                                                                             <form action="Satisfied_add_mainfile" class="dropzone dropzone-area" id="dropzone_upmainfile<?php echo $stores['orderST']; ?>" method="POST">
                                                                                                 <input type="hidden" name="orderST" value="<?php echo $stores['orderST']; ?>">
-                                                                                                <input type="text" name="userOR" value="<?php echo $stores['userOR']; ?>">
-                                                                                                <input type="text" name="User_St" value="<?php echo $stores['User_St']; ?>">
+                                                                                                <input type="hidden" name="userOR" value="<?php echo $stores['userOR']; ?>">
+                                                                                                <input type="hidden" name="User_St" value="<?php echo $stores['User_St']; ?>">
                                                                                                 <input type="hidden" name="St_email" value="<?php echo $stores['St_email']; ?>">
                                                                                                 <input type="hidden" name="price_file" value="<?php echo $stores['price_file']; ?>">
                                                                                                 <input type="hidden" name="price_dis_order" value="<?php echo $stores['price_dis_order']; ?>">
@@ -1224,7 +1224,7 @@
 
 
                                                             <?php if ($stores['status_delivery'] == '1') : ?>
-                                                                
+
                                                             <?php else : ?>
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $stores['orderST']; ?>"><i class="feather icon-navigation"></i></button>
                                                             <?php endif; ?>
@@ -1708,7 +1708,6 @@
                                                                                 <label for="" style="font-size: 16px;">File Document </label>
                                                                                 <form action="fileUpload_store_book" class="dropzone dropzone-area" id="maindropzone<?php echo $stores['orderST']; ?>">
                                                                                     <input type="hidden" id="DM2<?php echo $stores['orderST']; ?>" class="form-control " name="DM" value="<?php echo $stores['id_document'] ?>">
-
                                                                                     <div class="dz-message" style="top: 24%;">Upload Document</div>
                                                                                 </form>
                                                                             </div>
@@ -1759,15 +1758,27 @@
                                                                             button: true,
                                                                         });
                                                                     }
-                                                                    myDropzone<?php echo $stores['orderST']; ?>.processQueue();
-                                                                    myDropzone<?php echo $stores['orderST']; ?>.on("queuecomplete", function(file, res) {
-                                                                        swal("Good job!", "Upload for data successfull", "success", {
-                                                                            button: false,
-                                                                        });
-                                                                        setTimeout(function() {
-                                                                            location.href = "Satisfied"
-                                                                        }, 1000);
+
+                                                                    $.ajax({
+                                                                        type: 'POST',
+                                                                        data: {
+                                                                            order: '<?php echo $stores['orderST']; ?>'
+                                                                        },
+                                                                        url: 'bookmark_drop',
+                                                                        success: function(data) {
+                                                                            myDropzone<?php echo $stores['orderST']; ?>.processQueue();
+                                                                            myDropzone<?php echo $stores['orderST']; ?>.on("queuecomplete", function(file, res) {
+                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                    button: false,
+                                                                                });
+                                                                                setTimeout(function() {
+                                                                                    location.href = "Satisfied"
+                                                                                }, 1000);
+                                                                            });
+                                                                        }
                                                                     });
+
+
                                                                 });
                                                             </script>
 

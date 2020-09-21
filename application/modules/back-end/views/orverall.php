@@ -343,18 +343,18 @@
                                                         <?php endif; ?>
                                                         <td>
                                                             <?php $fb_status = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order']])->row_array(); ?>
-                                                           
+
                                                             <?php if ($fb_status['status_c_feedack_team'] == '0') : ?>
 
                                                                 <span class="badge badge-pill badge-danger">Wating for Admin </span>
 
                                                             <?php else : ?>
                                                                 <?php if ($stores['status_team'] == 0) : ?>
-                                                                    <span class="badge badge-pill badge-danger">Procressing</span>
+                                                                    <span class="badge badge-pill badge-warning">Procressing</span>
                                                                 <?php elseif ($stores['status_team'] == 1) : ?>
                                                                     <span class="badge badge-pill badge-info">Complete</span>
                                                                 <?php elseif ($stores['status_delivery'] == 0) : ?>
-                                                                    <span class="badge badge-pill badge-warning">Not Delivered</span>
+                                                                    <span class="badge badge-pill badge-danger">Not Delivered</span>
                                                                 <?php else : ?>
                                                                     <span class="badge badge-pill badge-success">Delivered</span>
                                                                 <?php endif; ?>
@@ -362,12 +362,27 @@
                                                         </td>
 
                                                         <td>
+                                                            <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['order']])->row_array(); ?>
                                                             <?php $cancel_sa = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array(); ?>
                                                             <?php if ($cancel_sa == true) : ?>
                                                                 <span class="badge badge-pill badge-danger"><?= $cancel_sa['status_who']; ?></span>
                                                             <?php else : ?>
-                                                                -
-                                                            <?php endif; ?>
+                                                                <?php if ($team['teamId'] == '') : ?>
+                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-warning">processing</span>
+                                                                <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-success">complete</span>
+                                                                <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-danger">feedback</span>
+                                                                <?php elseif ($team['status'] == 3 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-danger">Re feedback</span>
+                                                                <?php elseif ($team['status'] == 4 && $team['teamId'] != '') : ?>
+                                                                    <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif ?>
+                                                            <?php endif ?>
 
                                                         </td>
                                                         <td>

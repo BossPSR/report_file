@@ -266,18 +266,31 @@ class Book_ctr extends CI_Controller
                 $uploadData = $this->upload->data();
 
                 $data = array(
-                    'store_id'      =>  $upload_book['store_id'],
-                    'file_name'     => $uploadData['file_name'],
-                    'status_main_search' => 1,
-                    'status_chack' => 1,
-                    'relive_status' => 1,
-                    'path'          => 'uploads/Store/' . $uploadData['file_name'],
-                    'status_check_drop' => 11,
-                    'create_at'     => date('Y-m-d H:i:s'),
+                    'dm_main'               => $upload_book['dm_main'],
+                    'dm_sub'                => $upload_book['dm_sub'],
+                    'file_name'             => $uploadData['file_name'],
+                    'path'                  => 'uploads/Store/'. $uploadData['file_name'],
+                    'create_at'             => date('Y-m-d H:i:s'),
+                    'comandnocom'           => $upload_book['comandnocom'],
+                    'cp'                    => $upload_book['cp'],
                 );
-                $this->db->insert('tbl_upload_store', $data);
+                $this->db->insert('tbl_upload_main_search_sub', $data);
             }
         }
+    }
+
+
+    public function bookmark_drop()
+    {
+        $order     =  $this->input->post('order');
+
+        $orf = array(
+            'status_bookmark'     => '1',
+        );
+        $this->db->where('order_id', $order);
+        $success = $this->db->update('tbl_upload_order', $orf);
+        
+        echo $success;
     }
 
     public function uploadmain_auto()

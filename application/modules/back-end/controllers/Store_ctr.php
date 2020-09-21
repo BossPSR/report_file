@@ -123,7 +123,7 @@ class Store_ctr extends CI_Controller
 
             'price_file'            => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
-            'status_book'           => '1',
+            'status_book'           => $book,
             'organization'          => $organization,
             'update_at'             => date('Y-m-d H:i:s'),
             'notify_user'           => 0,

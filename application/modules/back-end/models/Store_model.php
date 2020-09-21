@@ -146,8 +146,8 @@ class Store_model extends CI_Model
     public function bookmark_upload($DM)
     {
         $this->db->select('*');
-        $this->db->from('tbl_upload_main_search');
-        $this->db->where('tbl_upload_main_search.id_doc', $DM);
+        $this->db->from('tbl_upload_main_search_sub');
+        $this->db->where('tbl_upload_main_search_sub.dm_sub', $DM);
 
         return $this->db->get()->row_array();
     }
