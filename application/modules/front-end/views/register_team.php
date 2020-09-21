@@ -34,7 +34,8 @@
             <div class="col-lg-10 col-md-10">
                 <div class="account_form register">
                     <h2 class="text-center">Sign Up for team</h2>
-                    <form action="register-team-success" method="POST" id="myLogin" enctype="multipart/form-data">
+                    <!-- <form action="register-team-success" method="POST" id="myLogin" enctype="multipart/form-data"> -->
+                    <form onsubmit="register_team_success();" method="POST" enctype="multipart/form-data">
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -141,7 +142,8 @@
                             </div>
                         </div>
                         <div class="login_submit">
-                            <button type="button" id="save_chk">Save</button>
+                            <!-- <button type="submit" id="save_chk">Save</button> -->
+                            <button type="submit">Save</button>
                         </div>
                     </form>
                 </div>
@@ -167,63 +169,62 @@
 </script>
 
 <script>
-    $('#cs').change(function() {
-        // $('.te4').css('display', 'none');
-        if (this.value == "218") {
-            $('.noneb').fadeIn("slow");
-            $('.nonep').css('display', 'none');
-            $("#paypal").prop('required', false);
-            $("#bank").prop('required', true);
-        } else {
-            $('.noneb').css('display', 'none');
-            $('.nonep').fadeIn("slow");
-            $("#paypal").prop('required', true);
-            $("#bank").prop('required', false);
-        }
-    });
+    // $('#cs').change(function() {
+    //     // $('.te4').css('display', 'none');
+    //     if (this.value == "218") {
+    //         $('.noneb').fadeIn("slow");
+    //         $('.nonep').css('display', 'none');
+    //         $("#paypal").prop('required', false);
+    //         $("#bank").prop('required', true);
+    //     } else {
+    //         $('.noneb').css('display', 'none');
+    //         $('.nonep').fadeIn("slow");
+    //         $("#paypal").prop('required', true);
+    //         $("#bank").prop('required', false);
+    //     }
+    // });
 </script>
 
 <script>
     <?php $chk = $this->db->get('tbl_user')->result_array(); ?>
-    $('#save_chk').on('click', function() {
-        var x = $('#name').val();
-        var e = $('#email').val();
-        var p = $('#password').val();
-        var chk_p = $('#c_password').val();
-        var cc = 0;
-        <?php 
-            foreach ($chk as $chk) {
+    // $('#save_chk').on('click', function() {
+    //     var x = $('#name').val();
+    //     var e = $('#email').val();
+    //     var p = $('#password').val();
+    //     var chk_p = $('#c_password').val();
+    //     var cc = 0;
 
-        ?>
-            if ('<?php echo $chk['email']; ?>' == e) {
-                swal("Warning", "Email นี้ได้ถูกใช้งานแล้ว!!", "warning");
-            } else if ('<?php echo $chk['username']; ?>' == x) {
-                swal("Warning", "ชื่อนี้ได้ถูกใช้งานแล้ว!!", "warning");
-            }
+    //         if ('<?php echo $chk['email']; ?>' == e) {
+    //             swal("Warning", "Email นี้ได้ถูกใช้งานแล้ว!!", "warning");
+    //         } else if ('<?php echo $chk['username']; ?>' == x) {
+    //             swal("Warning", "ชื่อนี้ได้ถูกใช้งานแล้ว!!", "warning");
+    //         }
 
-            cc += 1;
-        <?php 
-                
-            }
-        ?>
-            if (cc > 0) {
-                if(x == ''){
-                    swal("Warning", "กรุณากรอกชื่อผู้ใช้งาน!!", "warning");
-                }
-                if (e == '') {
-                    swal("Warning", "กรุณากรอก Email ของคุณ!!", "warning");
-                }
-                if (p == '' || chk_p == '') {
-                    swal("Warning", "กรุณากรอกรหัสผ่านของคุณให้ตรงกัน!!", "warning");
-                } 
-                if (p != chk_p) {
-                    swal("Warning", "กรุณากรอกรหัสผ่านของคุณให้ตรงกัน!!", "warning");
-                }
 
-                if (x != '' && e != '' && p != '' && chk_p != '' && p ==  chk_p) {
-                    $('#myLogin').submit();
-                }
-            }
+
+    //             if(x == ''){
+    //                 swal("Warning", "กรุณากรอกชื่อผู้ใช้งาน!!", "warning");
+    //             }
+    //             if (e == '') {
+    //                 swal("Warning", "กรุณากรอก Email ของคุณ!!", "warning");
+    //             }
+    //             if (p == '' || chk_p == '') {
+    //                 swal("Warning", "กรุณากรอกรหัสผ่านของคุณให้ตรงกัน!!", "warning");
+    //             } 
+    //             if (p != chk_p) {
+    //                 swal("Warning", "กรุณากรอกรหัสผ่านของคุณให้ตรงกัน!!", "warning");
+    //             }
+
+    //             if (x != '' && e != '' && p != '' && chk_p != '' && p ==  chk_p) {
+    //                 $('#myLogin').submit();
+    //             }
+            
         
-    });
+    // });
+
+    function register_team_success() {
+        e.preventDefault();
+        var x = $('#name').val();
+        console.log(x)
+    }
 </script>

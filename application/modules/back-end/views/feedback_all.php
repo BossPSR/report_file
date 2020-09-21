@@ -274,7 +274,7 @@
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">Date require</label>
-                                                                                        <input type="date" class="form-control" name="date_require" value="<?php echo $datr_re[0]; ?>" placeholder="Enter wage" required>
+                                                                                        <input type="date" class="form-control" name="date_require" min="<?= date("Y-m-d") ?>" value="<?php echo $datr_re[0]; ?>" placeholder="Enter wage" required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-xl-12 col-md-12 col-12 mb-1">

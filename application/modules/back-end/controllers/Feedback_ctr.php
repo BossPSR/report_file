@@ -200,7 +200,9 @@ class Feedback_ctr extends CI_Controller
                     'create_at'         => date('Y-m-d H:i:s')
                 ];
                 $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
-                $this->sendEmail_all_a($teamid, $order_id);
+                if ($teamid != '') {
+                    $this->sendEmail_all_a($teamid, $order_id);
+                }
             }
         }
 
