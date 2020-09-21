@@ -471,4 +471,17 @@ class Complete_ctr extends CI_Controller
             redirect('Login_admin');
         }
     }
+
+    public function download_all_file()
+    {
+        $order_id  = $this->input->post('order_id');
+        $group      = $this->input->post('group');
+        $this->db->select('*');
+        $this->db->from('tbl_upload_order_team');
+        $this->db->where('order_id' , $order_id);
+        $this->db->where('group' , $group);
+        $result = $this->db->get()->result_array();
+        
+        echo json_encode($result);
+    }
 }

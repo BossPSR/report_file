@@ -445,20 +445,25 @@
                                                                                                                 <div class="modal-body">
 
                                                                                                                     <?php $orderTgroup = $this->db->get_where('tbl_upload_order_team', ['order_id' => $complete['order_id'], 'teamId' => $complete['teamId'], 'group' => $orderT['group']])->result_array(); ?>
-
+                                                                                                                   
                                                                                                                     <table class="table zero-configuration" id="here<?php echo $complete['order_id_t']; ?>">
                                                                                                                         <thead>
 
                                                                                                                             <tr>
+
                                                                                                                                 <th>File name</th>
                                                                                                                                 <th>File</th>
                                                                                                                                 <th>create</th>
                                                                                                                             </tr>
                                                                                                                         </thead>
                                                                                                                         <tbody>
-                                                                                                                            <?php foreach ($orderTgroup as $keys => $orderTgroup) { ?>
+                                                                                                                            <button class="btn btn-primary" onclick='downloadAll(window.links,"<?php echo $complete["order_id"];?>","<?php echo $orderT["group"];?>")'>Download All File</button>
+                                                                                                                            <?php foreach ($orderTgroup as $keys => $orderTgroup) { 
+                                                                                                                                    
+                                                                                                                            ?>
+                                                                                                                            
+                                                                                                                               
                                                                                                                                 <tr>
-
                                                                                                                                     <td>
                                                                                                                                         <?php echo $orderTgroup['file_name'] ?>
                                                                                                                                         <a href="" data-toggle="modal" data-target="#gd01<?php echo $orderTgroup['id']; ?>">
@@ -487,9 +492,13 @@
                                                                                                                                                 </div>
                                                                                                                                             </div>
                                                                                                                                         </div>
+
+
+
                                                                                                                                     </td>
                                                                                                                                     <td>
-                                                                                                                                        <a href="<?php echo $orderTgroup['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                                                        <a href="<?php echo $orderTgroup['path'] ?>" id="text-val" target="_blank" download><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;" ></i></a>
+
                                                                                                                                     </td>
                                                                                                                                     <td><?php echo $orderTgroup['create_at'] ?></td>
                                                                                                                                 </tr>
@@ -747,9 +756,9 @@
                                                         <!-- Tool -->
                                                         <td>
                                                             <?php if ($complete['Tstatus'] == 4) : ?>
-                                                                <button type="button" class="btn btn-icon btn-secondary" > <i class="feather icon-navigation"></i> </button>
-                                                                <button type="button" class="btn btn-icon btn-secondary" > <i class="feather icon-triangle"></i> </button>
-                                                                <button type="button" class="btn btn-icon btn-secondary" > <i class="feather icon-x-circle"></i> </button>
+                                                                <button type="button" class="btn btn-icon btn-secondary"> <i class="feather icon-navigation"></i> </button>
+                                                                <button type="button" class="btn btn-icon btn-secondary"> <i class="feather icon-triangle"></i> </button>
+                                                                <button type="button" class="btn btn-icon btn-secondary"> <i class="feather icon-x-circle"></i> </button>
                                                             <?php else : ?>
                                                                 <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#exampleModalu<?php echo $complete['order_id_t']; ?>">
                                                                     <i class="feather icon-navigation"></i>
@@ -1085,3 +1094,38 @@
     </div>
 </div>
 <!-- END: Content-->
+
+<script>
+    var links = [];
+    function linkAll(data) {
+        data.forEach(element => {
+            links.push(element.path);
+        });
+    }
+    function downloadAll(urls,order_id,group) {
+        $.ajax({
+                type: 'POST',
+                data: {
+                    order_id: order_id,
+                    group: group,
+                },
+                url: 'download_all_file',
+                success: function(data) {
+                    var result = JSON.parse(data);
+                    linkAll(result);
+
+                    links.forEach(value_arr => {
+                        var a = document.createElement('A');
+                        a.href = value_arr;
+                        a.download = value_arr.substr(value_arr.lastIndexOf('/') + 1);
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    });
+
+                    links = [];
+                }
+            });
+    
+    }
+</script>
