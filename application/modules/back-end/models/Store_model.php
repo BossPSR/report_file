@@ -101,18 +101,18 @@ class Store_model extends CI_Model
         $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order,
         tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re ,tbl_upload_order.order_id AS order_save
         ,tbl_upload_order.price_file AS price_save , tbl_upload_team.teamId AS teamT3 ,tbl_upload_order.status_cp AS statusB
-        ,tbl_upload_team.wage AS wageT , tbl_upload_order.status_admin statusAdmin');
-        $this->db->from('tbl_bookmark');
-        $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');
+        ,tbl_upload_team.wage AS wageT , tbl_upload_order.status_admin statusAdmin ,tbl_upload_order.order_id orderd  ,tbl_upload_order.userId usermain ');
+        $this->db->from('tbl_upload_order');
+        $this->db->join('tbl_bookmark', 'tbl_upload_order.order_id = tbl_bookmark.id_orderBuy', 'left');
         $this->db->join('tbl_upload_main_search', 'tbl_bookmark.id_document = tbl_upload_main_search.id_doc', 'left');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_upload_order_team', 'tbl_upload_order.order_id=tbl_upload_order_team.order_id', 'left');
-        $this->db->join('tbl_user', 'tbl_user.idUser = tbl_bookmark.id_user', 'left');
+        $this->db->join('tbl_user', 'tbl_user.idUser = tbl_upload_order.userId', 'left');
         $this->db->join('countries', 'countries.id = tbl_user.country_id', 'left');
         // $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_bookmark', 1);
         // $this->db->where('tbl_upload_order.status_delivery', 0);
-        $this->db->group_by('tbl_bookmark.id_orderBuy');
+        $this->db->group_by('tbl_upload_order.order_id');
         $this->db->order_by('tbl_upload_order.date_required', 'ASC');
 
         return  $this->db->get()->result_array();

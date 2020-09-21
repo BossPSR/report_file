@@ -422,7 +422,7 @@
                                                                 <?php endif; ?>
                                                                 
                                                             <?php elseif ($feedback_team['status_c_feedack_team'] == 2) : ?>
-                                                                <span class="badge badge-pill badge-success">Not delivered </span>
+                                                                <span class="badge badge-pill badge-danger">Not delivered </span>
                                                             <?php elseif ($feedback_team['status_delivery'] == 1) : ?>
                                                                 <span class="badge badge-pill badge-success">Delivered </span>
 

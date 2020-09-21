@@ -152,10 +152,10 @@
 
                                                     <tr>
                                                         <!-- orderby -->
-                                                        <td><?php echo $bookmark['orderby'] ?></td>
+                                                        <td><?php echo $bookmark['orderd'] ?></td>
 
                                                         <!-- user_name -->
-                                                        <td><?php echo $bookmark['user_name'] ?></td>
+                                                        <td><?php echo $bookmark['usermain'] ?></td>
 
                                                         <!-- countryName -->
                                                         <td>
