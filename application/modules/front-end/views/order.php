@@ -92,7 +92,7 @@
                                 <tr style="text-align:center;">
 
                                     <!-- Status -->
-                                    <th style="text-align: center;">
+                                    <td style="text-align: center;">
                                         <?php if ($value['status_approved'] == 4) : ?>
                                             <span class="badge" style="color:#fff;background-color:#7000cc;">Re Feedback</span>
                                         <?php elseif ($value['status_approved'] == 3) : ?>
@@ -108,7 +108,7 @@
                                         <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 2) : ?>
                                             <span class="badge badge-danger" style="color:#fff;">Not Approved</span>
                                         <?php endif; ?>
-                                    </th>
+                                        </td>
 
                                     <!-- order -->
                                     <td data-order="<?php echo $value['ORD'] ?>"><?php echo $value['ORD']; ?></td>
@@ -315,7 +315,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } elseif ($value['status_approved'] == 3 || $value['status_approved'] == 4 || $value['status_delivery'] == 1) { ?>
+                                        <?php } elseif (($value['status_approved'] == 3 || $value['status_approved'] == 4) && $value['status_delivery'] == 1) { ?>
 
                                             <?php
                                             $this->db->select('*');
@@ -450,7 +450,7 @@
                                                             });
                                                         </script>
                                                     <?php } ?>
-                                                    <div class="modal fade" id="feedback_term" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="feedback_term<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-md" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -495,7 +495,7 @@
                                                                     button: true,
                                                                 });
                                                             } else {
-                                                                $('#feedback_term').modal('show');
+                                                                $('#feedback_term<?php echo $value['ORD']; ?>').modal('show');
                                                                 $('#submit_term<?php echo $value['ORD']; ?>').on('click', function() {
                                                                     $.ajax({
                                                                         type: 'POST',
