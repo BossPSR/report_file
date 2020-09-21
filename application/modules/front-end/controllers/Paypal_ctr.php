@@ -95,25 +95,19 @@ class Paypal_ctr extends CI_Controller{
         $success = $this->db->insert('tbl_paypal', $insert);
 
         $this->db->where('idUser' , $data['user_id']);
-        $this->db->update('tbl_user' , ['package_user' => $data['package'] , 'package_end' => $dateend ] );
+        $this->db->update('tbl_user' , ['package_user' => $data['package'] , 'package_end' => $dateend   , 'package_start' => date("Y-m-d H:i:s") ] );
 
-        $this->sendEmail($data['user_id']);
+        $this->sendEmails($data['user_id']);
 
         echo json_encode($data);  
     }
 
-    private function sendEmail($userid)
+    public function sendEmails($userid)
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $userid])->row_array();
-        $pac = $this->db->get_where('tbl_package', ['id' => $user['package_user']])->row_array();
+        $pac  = $this->db->get_where('tbl_package', ['id' => $user['package_user']])->row_array();
 
-        if ($user['score'] >= '100') {
-            $discount = 10;
-        } else {
-            $discount = 0;
-        }
-
-       
+    
 
         $subject  = 'เอกสารการชำระเงิน จาก www.report-file.com ';
         $message  = '<center>';
@@ -168,18 +162,17 @@ class Paypal_ctr extends CI_Controller{
 
         $message .= '</center>';
 
-        //config email settings
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'smtp.gmail.com';
-        $config['smtp_port'] = '2002';
-        $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
-        $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
-        $config['wordwrap'] = 'TRUE';
-        $config['smtp_crypto'] = 'tls';
-        $config['newline'] = "\r\n";
-
+       //config email settings
+       $config['protocol'] = 'smtp';
+       $config['smtp_host'] = 'smtp.gmail.com';
+       $config['smtp_port'] = '2002';
+       $config['smtp_user'] = 'infinityp.soft@gmail.com';
+       $config['smtp_pass'] = 'infinityP23';  //sender's password
+       $config['mailtype'] = 'html';
+       $config['charset'] = 'utf-8';
+       $config['wordwrap'] = 'TRUE';
+       $config['smtp_crypto'] = 'tls';
+       $config['newline'] = "\r\n";
 
         //$file_path = 'uploads/' . $file_name;
         $this->load->library('email', $config);
@@ -191,9 +184,9 @@ class Paypal_ctr extends CI_Controller{
         $this->email->set_mailtype('html');
 
         if ($this->email->send() == true) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
+            $this->session->set_flashdata('save_ss2', 'Successfully Buy Package !!.');
         } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Buy Package');
         }
     }
 

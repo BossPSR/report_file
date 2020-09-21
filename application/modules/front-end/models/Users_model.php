@@ -34,7 +34,7 @@ class Users_model extends CI_Model
         // $this->db->where('create_at >=', $sq);
         // $this->db->where('create_at <=', $horu  );
         $this->db->group_by('order_id');
-        $this->db->order_by('create_at', 'desc');
+        $this->db->order_by('created_at_buy', 'desc');
 
         $data = $this->db->get()->result_array();
         // return $data->result_array();
@@ -46,10 +46,10 @@ class Users_model extends CI_Model
             $this->db->where('userId', $us);
             $this->db->where('status_pay', 0);
             $this->db->where('price_file !=', null);
-            $this->db->where('create_at >=', $data['create_at']);
-            $this->db->where('create_at <=', $horu  );
+            $this->db->where('created_at_buy >=', $data['created_at_buy']);
+            $this->db->where('created_at_buy <=', $horu  );
             $this->db->group_by('order_id');
-            $this->db->order_by('create_at', 'desc');
+            $this->db->order_by('created_at_buy', 'desc');
             $data2 = $this->db->get();
             // print_r($horu)  ; print_r(date('Y-m-d H:i:s'))  ;
             

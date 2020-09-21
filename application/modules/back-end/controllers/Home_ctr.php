@@ -407,7 +407,7 @@ class Home_ctr extends CI_Controller
 		$upload_order  		= $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
 
 					  $this->db->where('order_id', $order);
-		$orderdb02  = $this->db->update('tbl_upload_order', ['create_at' => date("Y-m-d H:i:s" , strtotime("+ 12 hours" , $upload_order['create_at'])) , 'check_time_not_pay' => $status  ]);
+		$orderdb02  = $this->db->update('tbl_upload_order', ['created_at_buy' => date("Y-m-d H:i:s" ) , 'check_time_not_pay' => $status  ]);
 
 		$user = $this->db->get_where('tbl_user', ['idUser' => $upload_order['userId']])->row_array();
 
@@ -551,19 +551,19 @@ class Home_ctr extends CI_Controller
 
 
         //$file_path = 'uploads/' . $file_name;
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to($user['email']);
-        $this->email->subject($subject);
-        $this->email->message($message);
-        $this->email->set_mailtype('html');
+        // $this->load->library('email', $config);
+        // $this->email->set_newline("\r\n");
+        // $this->email->from('infinityp.soft@gmail.com');
+        // $this->email->to($user['email']);
+        // $this->email->subject($subject);
+        // $this->email->message($message);
+        // $this->email->set_mailtype('html');
 
-        if ($this->email->send() == true) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
-        }
+        // if ($this->email->send() == true) {
+        //     $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
+        // } else {
+        //     $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
+        // }
 	}
 
 	// check_first_24
@@ -575,7 +575,7 @@ class Home_ctr extends CI_Controller
 		$upload_order  	= $this->db->get_where('tbl_upload_order', ['order_id' => $order])->result_array();
 
 					  $this->db->where('order_id', $order);
-		$orderdb02  = $this->db->update('tbl_upload_order', ['create_at' => date("Y-m-d H:i:s" , strtotime("12 hours" , $upload_order[0]['create_at'])) , 'check_time_not_pay' => $status  ]);
+		$orderdb02  = $this->db->update('tbl_upload_order', ['created_at_buy' => date("Y-m-d H:i:s" ) , 'check_time_not_pay' => $status  ]);
 
 		$user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
@@ -719,18 +719,18 @@ class Home_ctr extends CI_Controller
 
 
         //$file_path = 'uploads/' . $file_name;
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('infinityp.soft@gmail.com');
-        $this->email->to($user['email']);
-        $this->email->subject($subject);
-        $this->email->message($message);
-        $this->email->set_mailtype('html');
+        // $this->load->library('email', $config);
+        // $this->email->set_newline("\r\n");
+        // $this->email->from('infinityp.soft@gmail.com');
+        // $this->email->to($user['email']);
+        // $this->email->subject($subject);
+        // $this->email->message($message);
+        // $this->email->set_mailtype('html');
 
-        if ($this->email->send() == true) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
-        } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
-        }
+        // if ($this->email->send() == true) {
+        //     $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
+        // } else {
+        //     $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
+        // }
 	}
 }

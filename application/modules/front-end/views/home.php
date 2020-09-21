@@ -91,7 +91,7 @@
                 คุณมีคำสั่งซื้อที่ค้างชำระเงินสามารถชำระเงินได้
 
                 <?php foreach ($checkorder as $key => $checkorder) {  ?>
-                    <?php $dateXX = date('Y-m-d H:i:s', strtotime($checkorder['create_at'] . "+1 days")); ?>
+                    <?php $dateXX = date('Y-m-d H:i:s', strtotime($checkorder['created_at_buy'] . "+1 days")); ?>
                     <?php if ($dateXX >= date('Y-m-d H:i:s')) : ?>
                         <u>
                             <a href="payment_email?order_id=<?php echo $checkorder['order_id']; ?>" target="_blank" style="color: #0088ff;">

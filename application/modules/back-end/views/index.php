@@ -26,7 +26,7 @@
 			</div>
 			<section id="dashboard-analytics">
 				
-				<div class="row">
+				<!-- <div class="row">
                     <div class="col-3">
                         <div class="card">
                             <div class="card-header">
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 				<div class="row">
 					<div class="col-12">
@@ -176,7 +176,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -190,7 +190,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -204,7 +204,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -218,7 +218,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -232,7 +232,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -304,7 +304,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -318,7 +318,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -332,7 +332,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -346,7 +346,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -360,7 +360,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -417,7 +417,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -431,7 +431,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -445,7 +445,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -459,7 +459,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -473,7 +473,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -545,7 +545,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -559,7 +559,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -573,7 +573,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -587,7 +587,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -601,7 +601,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -673,7 +673,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -687,7 +687,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -701,7 +701,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -715,7 +715,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -729,7 +729,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -810,7 +810,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -824,7 +824,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -838,7 +838,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -852,7 +852,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -866,7 +866,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1085,7 +1085,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1099,7 +1099,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1113,7 +1113,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1127,7 +1127,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1141,7 +1141,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1217,7 +1217,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1231,7 +1231,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1245,7 +1245,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1259,7 +1259,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['dm_sub']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}
@@ -1273,7 +1273,7 @@
 																			<div class="d-flex" style="justify-content: space-around;">
 																				<div><?php echo $order['order_id']; ?></div>
 																				<div><a href="<?php echo $order['path']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></div>
-																				<div><?php echo $order['create_at']; ?></div>
+																				<div><?php echo $order['created_at_buy']; ?></div>
 																			</div>
 																	<?php
 																		}

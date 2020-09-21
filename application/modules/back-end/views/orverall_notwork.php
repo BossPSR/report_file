@@ -56,7 +56,7 @@
                                             $op = 0;
                                             // if ($no_work) {
                                             //     foreach ($no_work as $no_work) {
-                                            //         $checkDate_nums = DateDiff($no_work['createOr'], $no_work['requiredOr']);
+                                            //         $checkDate_nums = DateDiff($no_work['created_at_buy'], $no_work['requiredOr']);
                                             //         $checkDates = $checkDate_nums / 2;
                                             //         $checkDates = floor($checkDates);
                                             //         $dateRequireds = date("Y-m-d", strtotime("-" . $checkDates . " day", strtotime($no_work['requiredOr'])));
@@ -116,7 +116,7 @@
                                                     // if ($stores['status'] == 1) {
                                                     //     continue;
                                                     // }
-                                                    $checkDate_num = DateDiff($stores['createOr'], $stores['requiredOr']);
+                                                    $checkDate_num = DateDiff($stores['created_at_buy'], $stores['requiredOr']);
                                                     $checkDate = $checkDate_num / 2;
                                                     $checkDate = floor($checkDate);
 
@@ -130,7 +130,7 @@
                                                             <td> <?php echo $stores['order']; ?></td>
                                                             <td><?php echo $stores['userId']; ?></td>
 
-                                                            <td><?php echo $stores['createOr']; ?></td>
+                                                            <td><?php echo $stores['created_at_buy']; ?></td>
                                                             <td>
 
                                                                 <?php if (date("Y-m-d") >= $stores['requiredOr']) : ?>
@@ -287,16 +287,16 @@
                                                             </td>
                                                             <!-- <td>
 																<?php
-                                                                $date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
+                                                                $date_required = DateDiff($stores['created_at_buy'], $stores['requiredOr']);
                                                                 $date_required = ceil($date_required) + 1;
 
                                                                 if ($date_required == 6) {
-                                                                    $check_requiredOr = date("Y-m-d", strtotime("+1 day", strtotime($stores['createOr'])));
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+1 day", strtotime($stores['created_at_buy'])));
                                                                     if ($check_requiredOr >= date('Y-m-d')) {
                                                                         echo '<span class="badge badge-pill badge-danger">No Work</span>';
                                                                     }
                                                                 } elseif ($date_required >= 7) {
-                                                                    $check_requiredOr = date("Y-m-d", strtotime("+2 day", strtotime($stores['createOr'])));
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+2 day", strtotime($stores['created_at_buy'])));
                                                                     if ($check_requiredOr >= date('Y-m-d')) {
                                                                         echo '<span class="badge badge-pill badge-danger">No Work</span>';
                                                                     }
@@ -323,18 +323,18 @@
 
                                                             <td>
                                                                 <?php
-                                                                $date_required = DateDiff($stores['createOr'], $stores['requiredOr']);
+                                                                $date_required = DateDiff($stores['created_at_buy'], $stores['requiredOr']);
                                                                 $date_required = ceil($date_required) + 1;
 
                                                                 if ($date_required <= 6) {
-                                                                    $check_requiredOr = date("Y-m-d", strtotime("+1 day", strtotime($stores['createOr'])));
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+1 day", strtotime($stores['created_at_buy'])));
                                                                     if ($check_requiredOr >= date('Y-m-d')) {
                                                                         echo '<span class="badge badge-pill badge-warning">24 hour !</span>';
                                                                     } else {
                                                                         echo '-';
                                                                     }
                                                                 } elseif ($date_required >= 7) {
-                                                                    $check_requiredOr = date("Y-m-d", strtotime("+2 day", strtotime($stores['createOr'])));
+                                                                    $check_requiredOr = date("Y-m-d", strtotime("+2 day", strtotime($stores['created_at_buy'])));
                                                                     if ($check_requiredOr <= date('Y-m-d')) {
                                                                         echo '<span class="badge badge-pill badge-danger">48 hour !</span>';
                                                                     }

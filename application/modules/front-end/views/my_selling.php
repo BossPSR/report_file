@@ -44,13 +44,27 @@
                                         <th scope="col">Score</th>
                                     </tr>
                                 </thead>
-                         
+
                                 <tbody>
                                     <?php foreach ($selling as $key => $selling) { ?>
+                                        <?php
+                                        $l = 0 ;
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_upload_store');
+                                        $this->db->where('store_id', $selling['store_id']);
+                                        $this->db->where('price_file !=', '');
+                                        $this->db->where('grade !=', '');
+                                        $this->db->group_by('store_id');
+                                        $this->db->group_by('section');
+                                        $sunall = $this->db->get()->result_array();
+                                        foreach ($sunall as $key => $sunall) {
+                                            $l += $sunall['price_file'];
+                                        }
+                                        ?>
                                         <tr style="text-align:center;">
                                             <td><?php echo $selling['store_id']; ?></td>
                                             <td><?php echo date("d F Y", strtotime($selling['create_at'])); ?></td>
-                                            <td><?php echo number_format($selling['price_file']); ?></td>
+                                            <td><?php echo number_format($l); ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

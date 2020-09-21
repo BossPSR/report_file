@@ -76,7 +76,7 @@
                                                 ?>
 
                                                     <tr>
-                                                        <td style="display: none;"><?php echo $stored['idmain']; ?></td>
+                                                        <td style="display: none;"><?php echo $stored['created_at_buy']; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
                                                         <td><?php echo $stored['countryName']; ?></td>
@@ -152,7 +152,7 @@
                                                                                                         <a href="" id="officeviewer1<?php echo $order['id']; ?>" data-file="<?php echo $order['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
                                                                                                     <?php endif; ?>
                                                                                                 </td>
-                                                                                                <td><?php echo $order['create_at'] ?></td>
+                                                                                                <td><?php echo $order['created_at_buy'] ?></td>
                                                                                             </tr>
 
                                                                                             <script type="text/javascript">
@@ -256,7 +256,7 @@
                                                                 </div>
                                                             <?php } ?>
                                                         </td>
-                                                        <td><?php echo $stored['create_at']; ?></td>
+                                                        <td><?php echo $stored['created_at_buy']; ?></td>
                                                         <td>
                                                             <?php 
                                                                 $exp  = explode(" ",$stored['date_required']);

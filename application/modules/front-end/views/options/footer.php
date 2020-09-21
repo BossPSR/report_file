@@ -322,6 +322,10 @@
 </script>
 
 <script>
+    $('#myModalsell').modal('show')
+</script>
+
+<script>
     <?php if ($this->session->flashdata('error_pay')) : ?>
         swal("Error!", "Incorrect transaction !!", "error");
     <?php endif; ?>
@@ -332,7 +336,7 @@
         swal("Error!", "Error for send resume. Plase try agian !!", "error");
     <?php endif; ?>
     <?php if ($this->session->flashdata('fail_regis_teamData')) : ?>
-        swal("Error!", "Data no must be filled out!!", "error");
+        swal("Error!", "Your email has been used before. Please try again.", "error");
     <?php endif; ?>
     <?php if ($this->session->flashdata('success_pro')) : ?>
         swal("Good job!", "Successfull.Change for my profile.", "success");
@@ -390,6 +394,11 @@
     <?php if ($suss = $this->session->flashdata('save_ss2')) : ?>
         swal("Welcome", "<?php echo $suss; ?>", "success");
     <?php endif; ?>
+
+    <?php if ($susspay = $this->session->flashdata('save_pay')) : ?>
+        swal("สำเร็จ", "<?php echo $susspay; ?>", "success");
+    <?php endif; ?>
+
     <?php if ($errors = $this->session->flashdata('del_ss2')) : ?>
         swal("Fail !", "<?php echo $errors; ?>", "error");
     <?php endif; ?>

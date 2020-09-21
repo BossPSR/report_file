@@ -130,7 +130,7 @@
                                                                                             <td><?php echo $order['order_id'] ?></td>
                                                                                             <td><?php echo $order['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                            <td><?php echo $order['created_at_buy'] ?></td>
 
 
                                                                                         </tr>
@@ -148,7 +148,7 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $more_file['orderGT']])->result_array(); ?>
+                                                            <?php $ordergtlist = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $more_file['orderGT']])->result_array(); ?>
                                                             <?php if (!empty($order)) : ?>
                                                                 <span data-toggle="modal" data-target="#exampleModalb<?php echo $more_file['orderGT']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="exampleModalb<?php echo $more_file['orderGT']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -171,12 +171,12 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <?php foreach ($ordergtlist as $keys => $ordergtlist) { ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $order['order_id'] ?></td>
-                                                                                                <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                                <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $order['create_at'] ?></td>
+                                                                                                <td><?php echo $ordergtlist['order_id'] ?></td>
+                                                                                                <td><?php echo $ordergtlist['file_name_GT'] ?></td>
+                                                                                                <td><a href="<?php echo $ordergtlist['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $ordergtlist['create_at'] ?></td>
 
                                                                                             </tr>
                                                                                         <?php } ?>

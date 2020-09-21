@@ -23,7 +23,7 @@ $(document).ready(function() {
 
     $('.zero-configurationF').DataTable({
         "order": [
-            [0, 'asc']
+            [0, 'desc']
         ]
     });
 

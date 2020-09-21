@@ -187,10 +187,7 @@ class Register_ctr extends CI_Controller
 					} else {
 						$this->session->set_flashdata('fail_regis_teamResum', TRUE);
 						redirect('home');
-						// echo "<script>";
-						// echo "alert('Resume no must be filled out!!!');";
-						// echo "window.location='register-team';";
-						// echo "</script>";
+				
 					}
 				}
 			}

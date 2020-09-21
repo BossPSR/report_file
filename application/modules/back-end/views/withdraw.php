@@ -56,7 +56,14 @@
 														<td><?php echo $withdraw['cash']; ?></td>
 														<td><?php echo $withdraw['phone']; ?></td>
 														<td><?php echo $withdraw['transaction_date']; ?></td>
-														<td><a href="<?php echo $withdraw['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+														<td>
+															<?php if ($withdraw['file_name'] == '') : ?>
+																-
+															<?php else : ?>
+																<a href="<?php echo $withdraw['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+
+															<?php endif; ?>
+														</td>
 														<td>
 															<button class="btn btn-icon btn-info" data-toggle="modal" data-target="#emailsand<?php echo $withdraw['idW']; ?>" type="button">
 																<i class="feather icon-mail"></i>
@@ -79,30 +86,30 @@
 																			</div>
 
 																			<div class="modal-body" style="text-align:left;">
-																				
-																					
 
-																					<div class="col-xl-12 col-md-6 col-12 mb-1">
-																						<div class="form-group">
-																							<label for="helpInputTop">Transfer Date</label>
-																							<input type="date" class="form-control" name="transfer_date" value="" placeholder="Enter Transfer Date">
-																						</div>
+
+
+																				<div class="col-xl-12 col-md-6 col-12 mb-1">
+																					<div class="form-group">
+																						<label for="helpInputTop">Transfer Date</label>
+																						<input type="date" class="form-control" name="transfer_date" value="" placeholder="Enter Transfer Date">
 																					</div>
-																					<div class="col-xl-12 col-md-6 col-12 mb-1">
-																						<div class="form-group">
-																							<label for="helpInputTop">Transfer Time</label>
-																							<input type="time" class="form-control" name="transfer_time" value="" placeholder="Enter Transfer Time">
-																						</div>
+																				</div>
+																				<div class="col-xl-12 col-md-6 col-12 mb-1">
+																					<div class="form-group">
+																						<label for="helpInputTop">Transfer Time</label>
+																						<input type="time" class="form-control" name="transfer_time" value="" placeholder="Enter Transfer Time">
 																					</div>
-																					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-																						<label for="" style="font-size: 16px;">File Document </label>
-																						<form action="upload_back_withdraw_slip" class="dropzone dropzone-area" id="fileup<?php echo $withdraw['idW']; ?>">
-																							<div class="dz-message" style="top: 24%;">Upload Document</div>
-																							<input type="text" name="id" value="<?php echo $withdraw['id'];?>" hidden="">
-																						</form>
-																					</div>
-																					<br>
-																			
+																				</div>
+																				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+																					<label for="" style="font-size: 16px;">File Document </label>
+																					<form action="upload_back_withdraw_slip" class="dropzone dropzone-area" id="fileup<?php echo $withdraw['idW']; ?>">
+																						<div class="dz-message" style="top: 24%;">Upload Document</div>
+																						<input type="text" name="id" value="<?php echo $withdraw['id']; ?>" hidden="">
+																					</form>
+																				</div>
+																				<br>
+
 
 
 																			</div>
@@ -126,24 +133,23 @@
 																	});
 
 																	$('#SubmitWD<?php echo $withdraw['idW']; ?>').click(function() {
-																		
-																		
+
+
 
 																		if (myDropzone3<?php echo $withdraw['idW']; ?>.files != 0) {
 																			myDropzone3<?php echo $withdraw['idW']; ?>.processQueue();
 																			myDropzone3<?php echo $withdraw['idW']; ?>.on("queuecomplete", function(file, res) {
 																				var transfer_date = $('input[name="transfer_date"]').val();
 																				var transfer_time = $('input[name="transfer_time"]').val();
-																					$.ajax({
+																				$.ajax({
 																					type: "POST",
 																					url: "back_withdraw_slip",
 																					data: {
-																						id:<?php echo $withdraw['id'];?>,
-																						transfer_date:transfer_date,
-																						transfer_time:transfer_time,
+																						id: <?php echo $withdraw['id']; ?>,
+																						transfer_date: transfer_date,
+																						transfer_time: transfer_time,
 																					},
-																					success: function(data) {
-																					}
+																					success: function(data) {}
 																				});
 																				swal("Good job!", "Upload for data success Feedback", "success", {
 																					button: false,
@@ -244,7 +250,7 @@
 																	swal("Good job!", "Upload for data successfull", "success");
 																}
 
-																
+
 															});
 														</script>
 

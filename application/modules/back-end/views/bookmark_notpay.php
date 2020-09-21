@@ -119,7 +119,7 @@
                                                                                             <td><?php echo $order['order_id'] ?></td>
                                                                                             <td><?php echo $order['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                            <td><?php echo $order['created_at_buy'] ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -254,7 +254,7 @@
                                                         </td>
                                                         <td><?php echo $bookmark_all_not['pricr_f'] ?></td>
                                                         <td>
-                                                            <?php if (date("Y-m-d") >= $bookmark_all_not['date_re']) : ?>
+                                                            <?php if (date("Y-m-d H:i:s") >= $bookmark_all_not['date_re']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($bookmark_all_not['date_re'])); ?>
@@ -275,23 +275,25 @@
                                                         </td>
                                                         <td>
                                                             <?php
-                                                            $ab = explode(" ", $bookmark_all_not['upload_order_create_at']);
-                                                            $dateXX = date('Y-m-d H:i:s', strtotime($bookmark_all_not['upload_order_create_at'] . "+1 days"));
+                                                            $ab = explode(" ", $bookmark_all_not['created_at_buy']);
+                                                            $dateXX = date('Y-m-d H:i:s', strtotime($bookmark_all_not['created_at_buy'] . "+1 days"));
                                                             ?>
                                                             <?php if ($dateXX <= date('Y-m-d H:i:s')) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <?php echo $bookmark_all_not['upload_order_create_at']; ?>
+                                                                <?php echo $bookmark_all_not['created_at_buy']; ?>
                                                             <?php endif; ?>
                                                         </td>
 
 
 
                                                         <td>
-                                                            <?php if ($bookmark_all_not['status_book'] == '1' && $bookmark_all_not['Stp'] == 'complete' && $bookmark_all_not['Sadmin'] == '0') : ?>
+                                                            <?php if ( $bookmark_all_not['Stp'] == 'complete' && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
-                                                            <?php elseif ($bookmark_all_not['status_book'] == '1' && $bookmark_all_not['Stp'] == 'notcomplete'  && $bookmark_all_not['Sadmin'] == '0') : ?>
+                                                            <?php elseif ($bookmark_all_not['Stp'] == 'rewrite'  && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                            <?php elseif ( $bookmark_all_not['Stp'] == 'notcomplete'  && $bookmark_all_not['Sadmin'] == '0') : ?>
+                                                                <span class="badge badge-pill badge-primary">Not complete</span>
                                                             <?php elseif ($bookmark_all_not['status_book'] == '2'  && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
                                                             <?php elseif ($bookmark_all_not['Sadmin'] == '1') : ?>
@@ -349,7 +351,7 @@
                                                                                 <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                                     <div class="form-group">
                                                                                         <label for="helpInputTop">date required</label>
-                                                                                        <input type="date" class="form-control" name="Daterequired" value="<?php echo date($bookmark_all_not['date_re']); ?>" placeholder="Enter price" required>
+                                                                                        <input type="date" class="form-control" name="Daterequired" min="<?php echo date("Y-m-d" , strtotime(" + 1 days ")); ?>" value="<?php echo date("Y-m-d" , strtotime(" + 1 days ")); ?>" placeholder="Enter price" required>
                                                                                     </div>
 
                                                                                 </div>

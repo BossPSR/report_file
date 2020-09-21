@@ -15,17 +15,15 @@
               <h1>Returns</h1>
             </div>
             <div class="priceing_list">
+              <h1><span><?php echo $package['title_pk']; ?></h1>
               <h1><span>$<?php echo $package['price_pk']; ?></span>/<?php echo $package['time_pk']; ?> (ราคาปกติ)</h1>
               <h1 style="    padding: 25px 0px;border-top: 1px solid #e2e2e2;background: #cae3ff;"><span>$<?php echo $package['new_price']; ?></span>/<?php echo $package['time_pk']; ?> (ราคาพิเศษ)</h1>
-              <div class="row" style="padding: 15px 0px 10px 0;">
-                <div class="col-1">
-                  <input type="checkbox" style="width: 30px;height: 30px;" id="check<?php echo $package['id']; ?>">
-                </div>
-                <div class="col-11">
-                  <label id="text_commission<?php echo $package['id']; ?>" style="font-size: 19px;">หากมีผู้แนะนำ สามารถใส่เลขผู้แนะนำได้ค่ะ</label>
-                  <label id="input_commission<?php echo $package['id']; ?>" style="display: none;">
-                    <input type="text" name="commission" id="check_commission<?php echo $package['id']; ?>" class="form-control" disabled>
-                  </label>
+              <div class="row" style="padding: 18px 0px 18px 0;">
+                <div class="col-12">
+                  <label id="text_commission<?php echo $package['id']; ?>" style="font-size: 19px;">หากมีผู้แนะนำ สามารถใส่เลขผู้แนะนำได้ที่นี้</label>
+
+                  <input type="text" name="commission" id="check_commission<?php echo $package['id']; ?>" class="form-control" placeholder="ใส่ Code ส่วนลดของคุณที่นี้">
+
                 </div>
               </div>
               <ul style="font-size: 20px;">
@@ -39,7 +37,7 @@
           </div>
         </div>
 
-        <script>
+        <!-- <script>
           $("#check<?php echo $package['id']; ?>").change(function() {
             $('#check_commission<?php echo $package['id']; ?>').val(null);
             $('#text_commission<?php echo $package['id']; ?>').css('display', 'none');
@@ -52,7 +50,7 @@
               $('#text_commission<?php echo $package['id']; ?>').css('display', 'inline-block');
             }
           });
-        </script>
+        </script> -->
 
 
 

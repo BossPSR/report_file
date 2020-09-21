@@ -208,6 +208,25 @@
         })
     }
 </script>
+
+
+<script>
+    function confirmalert_del_all(data8) {
+
+        swal({
+            title: "Are you sure ?",
+            text: "Are you sure you delete all ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                window.location = 'delete_reject_all?id=' + data8;
+            }
+        })
+    }
+</script>
+
 <script>
     function confirmalertunlock_del_Dm(data15) {
 

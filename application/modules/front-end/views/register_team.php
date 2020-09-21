@@ -34,7 +34,7 @@
             <div class="col-lg-10 col-md-10">
                 <div class="account_form register">
                     <h2 class="text-center">Sign Up for team</h2>
-                    <form action="register-team-success" method="POST" enctype="multipart/form-data">
+                    <form action="register-team-success" method="POST" id="myForm" enctype="multipart/form-data">
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Phone Number <span class="red">*</span></label>
+                                    <label>Phone Number <span class="red">* (Should not wear a special symbol /*-+\)</span></label>
                                     <input type="number" name="phone" class="form-control" required>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 noneb" style="display: none;">
                                 <div class="form-group">
                                     <label for="">บัญชีธนาคาร <span style="color: #bbbbbb;">ต้องเป็นชื่อเดียวกันกับชื่อบัญชีธนาคารหรือ บัญชีธนาคาร</span></label>
-                                    <input type="text" id="bank" class="form-control" name="bank_account" value="" required>
+                                    <input type="text" id="bank" class="form-control" name="bank_account" value="">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -165,20 +165,48 @@
         }
     }
 </script>
+
 <script>
     $('#cs').change(function() {
         // $('.te4').css('display', 'none');
         if (this.value == "218") {
             $('.noneb').fadeIn("slow");
             $('.nonep').css('display', 'none');
-            $("#paypal").prop('required', true);
-            $("#bank").prop('required', false);
+            $("#paypal").prop('required', false);
+            $("#bank").prop('required', true);
         } else {
             $('.noneb').css('display', 'none');
             $('.nonep').fadeIn("slow");
-            $("#paypal").prop('required', false);
-            $("#bank").prop('required', true);
-        } 
+            $("#paypal").prop('required', true);
+            $("#bank").prop('required', false);
+        }
+    });
+</script>
+
+<script>
+    $("#myForm").submit(function(e) {
+        console.log('1');
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(success) {
+
+                swal("Good job!", "Register successfull.", "success");
+
+            },error : function(data) {
+
+                swal("Fail !", data, "error");
+                
+            }
+        });
+
+
     });
 </script>
 <!-- customer login end -->

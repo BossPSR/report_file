@@ -82,7 +82,7 @@
                                                                     <td>$<?php echo $store['price_file']; ?></td>
                                                                 <?php endif; ?>
                                                                 <td><?php echo $store['note_reject']; ?></td>
-                                                                <td><?php echo $store['create_at']; ?></td>
+                                                                <td><?php echo $store['created_at_buy']; ?></td>
                                                                 <td>
                                                                     <?php if ($store['status_approved'] == 3) : ?>
                                                                         <span class="badge badge-pill badge-danger">feedback</span>

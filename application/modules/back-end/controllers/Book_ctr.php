@@ -31,7 +31,7 @@ class Book_ctr extends CI_Controller
             foreach ($checkTime as $checkTime) {
                 if ($checkTime['status_pay'] == 0) {
 
-                    $date_orderUp = date('Y-m-d H:i:s', strtotime('+30 day', strtotime($checkTime['upload_order_create_at'])));
+                    $date_orderUp = date('Y-m-d H:i:s', strtotime('+30 day', strtotime($checkTime['created_at_buy'])));
                     if ($date_orderUp <= date('Y-m-d')) {
                         $this->db->where('id', $checkTime['upload_order_id']);
                         $this->db->delete('tbl_upload_order');
@@ -57,7 +57,7 @@ class Book_ctr extends CI_Controller
         $data = array(
             'price_file'       => $this->input->post('price_file'),
             'date_required'    => $this->input->post('Daterequired'),
-            'create_at'        => date('Y-m-d H:i:s'),
+            'created_at_buy'        => date('Y-m-d H:i:s'),
             'update_at'        => date('Y-m-d H:i:s')
         );
         $this->db->where('order_id', $id_order);
@@ -414,7 +414,6 @@ class Book_ctr extends CI_Controller
                 $db_store = [
                     'file_name'       => $uploadData['file_name'],
                     'path'            => 'uploads/Store/' . $uploadData['file_name'],
-                    'comandnocom'     => $status_cp,
                     'status'          => 1,
                 ];
                 $this->db->where('id', $id_upload);

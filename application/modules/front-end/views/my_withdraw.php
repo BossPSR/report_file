@@ -76,13 +76,13 @@
                     <div class="col-6 col-sm-12">
                         <div class="form-group">
                             <label style="font-size: 16px;font-weight: 600;" for="">กรุณาใส่ Paypal ของท่าน</label>
-                            <input type="text" class="form-control" name="paypal">
+                            <input type="text" class="form-control" name="paypal" id="paypal_next">
                         </div>
                     </div>
                     <div class="col-6 col-sm-12">
                         <div class="form-group">
                             <label style="font-size: 16px;font-weight: 600;" for="">กรุณาใส่เบอร์โทรศัพท์ของท่าน</label>
-                            <input type="text" class="form-control" name="tel">
+                            <input type="text" class="form-control" name="tel" id="tel_next">
                         </div>
                     </div>
                 </div>
@@ -100,9 +100,13 @@
 <div class="modal fade" id="www" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="" method="post">
+            <form action="withdraw_cash" method="post">
+                <input type="hidden" name="email" value="<?php echo $this->session->userdata('email'); ?>">
+                <input type="hidden" name="paypal_sub" id="paypal_id" value="">
+                <input type="hidden" name="tel_sub" id="tel_id" value="">
+                <input type="hidden" name="numberBox_sub" id="numberBox_id" value="">
                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                    <h4 class="modal-title" id="staticBackdropLabel">Confirm Password</h4>
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirm Password</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -136,6 +140,8 @@
             }
         });
     });
+
+  
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -159,6 +165,33 @@
         }).keyup();
 
     });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#paypal_next").change(function() {
+            var value = $(this).val();
+            $("#paypal_id").val(value);
+        }).change();
+
+    });
+
+    $(document).ready(function() {
+        $("#tel_next").change(function() {
+            var value = $(this).val();
+            $("#tel_id").val(value);
+        }).change();
+
+    });
+
+    $(document).ready(function() {
+        $("#numberBox").change(function() {
+            var value = $(this).val();
+            $("#numberBox_id").val(value);
+        }).change();
+
+    });
+
 </script>
 
 

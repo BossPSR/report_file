@@ -13,7 +13,7 @@ class Complete_model extends CI_Model{
         $this->db->select('*,tbl_upload_order_team.order_id AS order_id_t,
         tbl_upload_order.date_required AS date_required_t,
         tbl_upload_order.userId AS user_m ,tbl_upload_order.status_admin stadmin 
-        ,tbl_upload_order.status_cp statusB,tbl_upload_order.email AS email_main , tbl_upload_order.create_at ct_time , tbl_upload_team.status Tstatus');
+        ,tbl_upload_order.status_cp statusB,tbl_upload_order.email AS email_main  , tbl_upload_team.status Tstatus');
         $this->db->from('tbl_upload_order_team');
         $this->db->join('tbl_bookmark','tbl_upload_order_team.order_id=tbl_bookmark.id_orderBuy','left');
         $this->db->join('tbl_upload_order','tbl_upload_order_team.order_id=tbl_upload_order.order_id','left');

@@ -94,7 +94,7 @@
                                                                                             <td><?php echo $order['order_id'] ?></td>
                                                                                             <td><?php echo $order['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                            <td><?php echo $order['created_at_buy'] ?></td>
 
 
                                                                                         </tr>
@@ -123,7 +123,7 @@
                                                                         <div class="modal-body">
                                                                             <table class="table zero-configuration">
                                                                                 <thead>
-                                                                                    <?php $order = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
+                                                                                    <?php $ordergt = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['order_id']])->result_array(); ?>
                                                                                     <tr>
                                                                                         <th>Order_id</th>
                                                                                         <th>File_name</th>
@@ -132,12 +132,12 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <?php foreach ($order as $keys => $order) { ?>
+                                                                                    <?php foreach ($ordergt as $keys => $ordergt) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                            <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                            <td><?php echo $ordergt['order_id'] ?></td>
+                                                                                            <td><?php echo $ordergt['file_name_GT'] ?></td>
+                                                                                            <td><a href="<?php echo $ordergt['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                            <td><?php echo $ordergt['create_at'] ?></td>
 
 
                                                                                         </tr>

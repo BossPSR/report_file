@@ -1143,7 +1143,7 @@ class Customer_order_ctr extends CI_Controller
                         'click_step'        => $click_step,
                         'file_name'         => $uploadData['file_name'],
                         'path'              => 'uploads/Main/' . $uploadData['file_name'],
-                        'create_at'         => date('Y-m-d H:i:s'),
+                        'created_at_buy'         => date('Y-m-d H:i:s'),
                         'status_upload_admin'   => 1 // admin
                     );
                     $this->db->insert('tbl_upload_order', $data);

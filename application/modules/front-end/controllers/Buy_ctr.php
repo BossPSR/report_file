@@ -20,8 +20,8 @@ class Buy_ctr extends CI_Controller
       $data['userId']   = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
       $data['package']   = $this->db->get('tbl_package')->result_array();
       $datePaypal = date("Y-m-d", strtotime($data['userId']['package_end']));
-      $checkDate = DateDiff(date("Y-m-d"),$datePaypal);
-  
+      $checkDate = DateDiff(date("Y-m-d"), $datePaypal);
+
       if ($data['userId']['package_end'] !== null) {
 
         if ($checkDate < 0) {
@@ -69,7 +69,7 @@ class Buy_ctr extends CI_Controller
     $userId     = $this->input->post('userId');
     $date_req   =  $this->input->post('date');
     $detail     =  $this->input->post('detail');
-    $date_now     =  $this->input->post('date_now');
+    $datenow     =  $this->input->post('datenow');
 
     $target_dir = "uploads/Buy/"; // Upload directory
 
@@ -97,18 +97,21 @@ class Buy_ctr extends CI_Controller
         // Get data about the file
         $uploadData = $this->upload->data();
 
-        $data = array(
+        $dataT = array(
           'userId'        => $userId,
           'order_id'      => $buymax->order_main,
           'note_user'     => $detail,
           'date_required' => $date_req,
           'file_name'     => $uploadData['file_name'],
           'path'          => 'uploads/Buy/' . $uploadData['file_name'],
-          'notify_admin'  => 0
+          'created_at_buy' => date("Y-m-d H:i:s"),
+          'update_at'     => date("Y-m-d H:i:s"),
+          'notify_admin'  => 0,
         );
 
-        $this->db->insert('tbl_upload_order', $data);
-     
+        $this->db->insert('tbl_upload_order', $dataT);
+        // $success =  json_decode('2020-01-01');
+        // echo $success;
       }
     }
   }
@@ -118,7 +121,7 @@ class Buy_ctr extends CI_Controller
     // image_lib
 
     $userId         = $this->input->post('userId');
-    $date_req       =  $this->input->post('date');
+    $date_req       = $this->input->post('date');
     $note           = $this->input->post('note');
     $wage           = $this->input->post('wage');
     $date_required  = $this->input->post('date_required');
@@ -193,6 +196,8 @@ class Buy_ctr extends CI_Controller
 
   public function order_auto()
   {
+    $userId    = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+
     $date_req   =  $this->input->post('status');
     $orf = array(
 
@@ -206,11 +211,13 @@ class Buy_ctr extends CI_Controller
       );
       $this->db->where('id', $insert_id);
       $this->db->update('tbl_order_f', $update);
+      $this->sendEmail_success_main($userId, $insert_id);
     }
   }
 
   public function order_auto_sell()
   {
+    $userId    = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
     $date_req   =  $this->input->post('status');
     $orf = array(
       'create_at'     => date('Y-m-d H:i:s'),
@@ -223,7 +230,99 @@ class Buy_ctr extends CI_Controller
       );
       $this->db->where('id', $insert_id);
       $success = $this->db->update('tbl_order_s', $update);
+      $this->sendEmail_success($userId, $insert_id);
+
       echo $success;
     }
+  }
+
+  public function sendEmail_success($userId, $insert_id)
+  {
+
+    $subject = 'You have successfully sold the documents to the system. ';
+
+    $message  = '<center>';
+    $message .= '<div style="max-width:800px;">';
+    $message .= '<div class="content" >';
+    $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+    $message .= 'You have received additional work from the admin..';
+    $message .= '</div>';
+    $message .= '<div class="row">';
+    $message .= '<p>Hey "' . $userId['username'] . '",</p>';
+    $message .= '<p>You have been Order number <span style="color: #0063d1;">" ODS' . $insert_id . '"</span></p>';
+    $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+    $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+    $message .= '<p>Check below for your order details.</p><hr>';
+    $message .= '<p> You have successfully canceled your order. (" ODS' . $insert_id . '")</p>';
+    $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
+
+    $message .= '</center>';
+
+    //config email settings
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'smtp.gmail.com';
+    $config['smtp_port'] = '2002';
+    $config['smtp_user'] = 'infinityp.soft@gmail.com';
+    $config['smtp_pass'] = 'infinityP23';  //sender's password
+    $config['mailtype'] = 'html';
+    $config['charset'] = 'utf-8';
+    $config['wordwrap'] = 'TRUE';
+    $config['smtp_crypto'] = 'tls';
+    $config['newline'] = "\r\n";
+
+    //$file_path = 'uploads/' . $file_name;
+    $this->load->library('email', $config);
+    $this->email->set_newline("\r\n");
+    $this->email->from('infinityp.soft@gmail.com');
+    $this->email->to($this->session->userdata('email'));
+    $this->email->subject($subject);
+    $this->email->message($message);
+    $this->email->set_mailtype('html');
+    $this->email->send();
+  }
+
+  public function sendEmail_success_main($userId, $insert_id)
+  {
+
+    $subject = 'You have successfully sold the documents to the system. ';
+
+    $message  = '<center>';
+    $message .= '<div style="max-width:800px;">';
+    $message .= '<div class="content" >';
+    $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+    $message .= 'You have received additional work from the admin..';
+    $message .= '</div>';
+    $message .= '<div class="row">';
+    $message .= '<p>Hey "' . $userId['username'] . '",</p>';
+    $message .= '<p>You have been Order number <span style="color: #0063d1;">" ODB' . $insert_id . '"</span></p>';
+    $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+    $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+    $message .= '<p>Check below for your order details.</p><hr>';
+    $message .= '<p> You have successfully canceled your order. (" ODB' . $insert_id . '")</p>';
+    $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
+
+    $message .= '</center>';
+
+    //config email settings
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'smtp.gmail.com';
+    $config['smtp_port'] = '2002';
+    $config['smtp_user'] = 'infinityp.soft@gmail.com';
+    $config['smtp_pass'] = 'infinityP23';  //sender's password
+    $config['mailtype'] = 'html';
+    $config['charset'] = 'utf-8';
+    $config['wordwrap'] = 'TRUE';
+    $config['smtp_crypto'] = 'tls';
+    $config['newline'] = "\r\n";
+
+    //$file_path = 'uploads/' . $file_name;
+    $this->load->library('email', $config);
+    $this->email->set_newline("\r\n");
+    $this->email->from('infinityp.soft@gmail.com');
+    $this->email->to($this->session->userdata('email'));
+    $this->email->subject($subject);
+    $this->email->message($message);
+    $this->email->set_mailtype('html');
+    $this->email->send();
   }
 }

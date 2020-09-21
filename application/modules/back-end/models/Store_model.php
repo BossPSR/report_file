@@ -13,8 +13,8 @@ class Store_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_upload_store');
-        $this->db->group_by('userId');
-        $this->db->order_by('id', 'asc');
+        $this->db->group_by('store_id');
+        $this->db->order_by('id', 'desc');
         return $this->db->get()->result_array();
     }
     public function store_list_a()
@@ -124,7 +124,7 @@ class Store_model extends CI_Model
         $this->db->select('*,tbl_bookmark.id_user AS user_name,tbl_upload_order.file_name AS file_order
         ,tbl_bookmark.id_orderBuy AS orderby,tbl_upload_order.date_required AS date_re,
         tbl_upload_order.price_file AS pricr_f,tbl_upload_order.order_id AS order_upload
-        ,tbl_upload_order.userId AS user_upload ,tbl_upload_order.create_at AS upload_order_create_at , tbl_upload_order.status_cp AS Stp 
+        ,tbl_upload_order.userId AS user_upload , tbl_upload_order.status_cp AS Stp 
         , tbl_upload_order.status_admin AS Sadmin , tbl_upload_order.id AS upload_order_id');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_bookmark', 'tbl_upload_order.order_id=tbl_bookmark.id_orderBuy', 'left');

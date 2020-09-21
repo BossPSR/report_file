@@ -119,7 +119,7 @@
                                     <!-- Main Document -->
                                     <td>
                                         <?php $zz = 1; ?>
-                                        <?php $order_main = $this->db->order_by('create_at')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
+                                        <?php $order_main = $this->db->order_by('created_at_buy')->get_where('tbl_upload_order', ['order_id' => $value['ORD']])->result_array(); ?>
                                         <?php if (!empty($order_main)) { ?>
 
                                             <a href="#" data-toggle="modal" data-target="#exampleModalMain<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>

@@ -247,12 +247,14 @@
                                                         <td><?php echo $numDeduct; ?></td>
                                                         <td><?php echo $numScore; ?></td>
                                                         <td><?php echo $discountUser; ?>%</td>
-                                                        <?php if ($user_list['Us'] == '') :  ?>
-                                                            <td>
-                                                                <div class='badge badge-pill badge-glow badge-danger mr-1 mb-1'>Not package</div</td> <?php else :  ?> <td>
-                                                                    <div class='badge badge-pill badge-glow badge-success mr-1 mb-1'>have package</div>
-                                                            </td>
-                                                        <?php endif  ?>
+                                                        <td>
+                                                            <?php if ($user_list['package_user'] == '') :  ?>
+                                                                <div class='badge badge-pill badge-glow badge-danger mr-1 mb-1'>No package</div>
+                                                            <?php else :  ?>
+                                                                <?php $pu = $this->db->get_where('tbl_package', ['id' => $user_list['package_user']])->row_array(); ?>
+                                                                <div class='badge badge-pill badge-glow badge-success mr-1 mb-1'><?php echo $pu['title_pk'] ?> (<?php echo $pu['price_pk'] ?>)</div>
+                                                            <?php endif  ?>
+                                                        </td>
                                                         <td>
                                                             <button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#infor<?php echo $user_list['Us']; ?>">
                                                                 <i class="feather icon-more-horizontal"></i>

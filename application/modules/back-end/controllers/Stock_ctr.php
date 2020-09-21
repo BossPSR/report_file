@@ -85,7 +85,7 @@ class Stock_ctr extends CI_Controller
                         'click_step'        => $ordername['click_step'],
                         'file_name'         => $uploadData['file_name'],
                         'path'              => 'uploads/Main/' . $uploadData['file_name'],
-                        'create_at'         => date('Y-m-d H:i:s'),
+                        'created_at_buy'         => date('Y-m-d H:i:s'),
                         'status_upload_admin'   => 1 // admin
                     );
                     $this->db->insert('tbl_upload_order', $data);
@@ -218,7 +218,7 @@ class Stock_ctr extends CI_Controller
                     'status_cp'          => $status_cp_save,
                     'file_name'         => $uploadData['file_name'],
                     'path'              => 'uploads/Buy/' . $uploadData['file_name'],
-                    'create_at'         => date('Y-m-d H:i:s'),
+                    'created_at_buy'         => date('Y-m-d H:i:s'),
                 );
                 $this->db->insert('tbl_upload_order', $data);
             }
@@ -275,7 +275,7 @@ class Stock_ctr extends CI_Controller
                     'status_pay'    =>  1,
                     'file_name'     => $uploadData['file_name'],
                     'path'          => 'uploads/Buy/' . $uploadData['file_name'],
-                    'create_at'     => date('Y-m-d H:i:s'),
+                    'created_at_buy'     => date('Y-m-d H:i:s'),
                 );
                 $this->db->insert('tbl_upload_order', $data);
             }

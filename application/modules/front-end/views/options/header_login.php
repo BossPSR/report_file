@@ -360,19 +360,21 @@
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
-                                                        <?php if ($user['score'] < '100') : ?>
-                                                            0%
-                                                        <?php elseif ($user['score'] <= '199') : ?>
-                                                            10%
-                                                        <?php elseif ($user['score'] <= '299') : ?>
-                                                            20%
-                                                        <?php elseif ($user['score'] <= '399') : ?>
-                                                            30%
-                                                        <?php elseif ($user['score'] <= '499') : ?>
-                                                            40%
-                                                        <?php else : ?>
-                                                            50%
-                                                        <?php endif; ?>
+                                                        <?php
+                                                        $numScore = 0;
+
+                                                        $this->db->select('*');
+                                                        $this->db->from('tbl_user');
+                                                        $this->db->where('idUser', $user['idUser']);
+                                                        $numScore = 0;
+                                                        $scoreListNum = $this->db->get()->result_array();
+                                                        foreach ($scoreListNum as $scoreListNum) {
+                                                            $numScore += $scoreListNum['score'];
+                                                        }
+
+                                                        $discountUser = $user['score'] / 10;
+                                                        ?>
+                                                        <?php echo $discountUser; ?>%
                                                     </div>
                                                     <div>Discount</div>
                                                 </div>

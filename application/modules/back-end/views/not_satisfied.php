@@ -230,7 +230,7 @@
                                                                                             <td><?php echo $order['order_id'] ?></td>
                                                                                             <td><?php echo $order['file_name'] ?></td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                            <td><?php echo $order['created_at_buy'] ?></td>
 
 
                                                                                         </tr>
@@ -254,7 +254,7 @@
                                                             $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
                                                             $this->db->where('tbl_morefile_GT.order_id', $store['orderNOT']);
                                                             $this->db->where('tbl_morefile_GT.status_more_file', 0);
-                                                            $order = $this->db->get('tbl_morefile_GT')->result_array(); ?>
+                                                            $ordergt = $this->db->get('tbl_morefile_GT')->result_array(); ?>
                                                             <?php
                                                             $this->db->select('*');
                                                             $this->db->from('tbl_morefile_GT');
@@ -358,12 +358,12 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <?php foreach ($order as $keys => $order) { ?>
+                                                                                        <?php foreach ($ordergt as $keys => $ordergt) { ?>
                                                                                             <tr>
-                                                                                                <td><?php echo $order['order_id'] ?></td>
-                                                                                                <td><?php echo $order['file_name_GT'] ?></td>
-                                                                                                <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                                <td><?php echo $order['create_at'] ?></td>
+                                                                                                <td><?php echo $ordergt['order_id'] ?></td>
+                                                                                                <td><?php echo $ordergt['file_name_GT'] ?></td>
+                                                                                                <td><a href="<?php echo $ordergt['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                <td><?php echo $ordergt['create_at'] ?></td>
                                                                                             </tr>
                                                                                         <?php } ?>
 
@@ -562,7 +562,7 @@
                                                         </td>
 
                                                         <!-- createNOT -->
-                                                        <td><?php echo $store['createNOT']; ?></td>
+                                                        <td><?php echo $store['created_at_buy']; ?></td>
 
                                                         <!-- dateNOT -->
                                                         <td>

@@ -42,7 +42,7 @@
                                                 Drop files here or click to upload.<br>
                                                 <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
-                                                <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
+                                                <input type="date" name="date" id="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" hidden>
                                                 <textarea name="detail" class="detail" hidden></textarea>
 
                                             </div>
@@ -56,7 +56,7 @@
                                                 Drop files here or click to upload.<br>
                                                 <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
-                                                <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" hidden>
+                                                <input type="date" name="date" id="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" hidden>
                                             </div>
                                         </form>
                                     </div>
@@ -73,7 +73,7 @@
                                 <label for="">Choose the date to pick up the document.</label>
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                                        <input type="date" class="form-control" id="date2" name="date" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" required>
+                                        <input type="date" class="form-control" id="date2" name="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" min="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" required>
                                     </div>
                                     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
                                         <div class="text-right" style="font-size: 16px;color:red;">
@@ -167,8 +167,10 @@
                             detail: x,
                         },
                         success: function(success) {
+
                             myDropzone.processQueue();
-                            myDropzone.on("queuecomplete", function(file, res) {
+                            myDropzone.on("queuecomplete", function(file, res ) {
+                               console.log(file);
                                 if (myDropzone2.files == 0) {
                                     swal("Good job!", "Upload for main successfull", "success", {
                                         button: false,

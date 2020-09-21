@@ -168,4 +168,36 @@ class Admin_ctr extends CI_Controller
         }
         return redirect('back_admin');
     }
+
+    public function  status_reject_del()
+    {
+        $id = $this->input->get('id');
+       
+
+        $this->db->where('id', $id);
+        $resultsedit = $this->db->delete('tbl_upload_store');
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully delete Admin information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully delete Admin information');
+        }
+        return redirect('back_store_reject');
+    }
+    
+    public function  delete_reject_all()
+    {
+        $id = $this->input->get('id');
+       
+
+        $this->db->where('is_check', $id);
+        $resultsedit = $this->db->delete('tbl_upload_store');
+
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully delete Admin information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully delete Admin information');
+        }
+        return redirect('back_store_reject');
+    }
 }

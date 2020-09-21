@@ -1,6 +1,25 @@
+<!--slider area start-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="myModalsell">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                <h5 class="modal-title" id="staticBackdropLabel">คำแนะนำ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>เพื่อประโยชน์สูงสุดของท่านในการรับส่วนลดจากทางระบบ<br> กรุณาตรวจสอบไฟล์ของท่านเพื่อให้แน่ใจว่าไฟล์ทั้งหมด คืองานเดียวกันไม่มีงานอื่นรวมอยู่ในการUploadครั้งนี้</p>
+                <p>หมายเหตุ: หากการUploadในครั้งนี้มีไฟล์งานอื่นรวมอยู่ด้วย ท่านอาจเสียสิทธิ์ในการได้รับส่วนลดจากทางระบบ</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 <br>
-
-
 <h2 class="text-center" style="margin-top: 15px;"> My Sell</h2>
 
 <hr class="line_package">
@@ -15,8 +34,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="tab">
-                                <label for="" class="font-size-upload">You can store document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 10 File )</span></label>
-                                <form action="store_upload" class="dropzone" id="dropzone2">
+                                <label for="" class="font-size-upload">You can store document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 30 File ไม่เกิน 500 MB)</span></label>
+                                <form action="store_upload" class="dropzone" id="my-awesome-dropzone">
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
                                         <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
@@ -86,11 +105,11 @@
 
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
-    var myDropzone = new Dropzone("#dropzone2", {
+    var myDropzone = new Dropzone("#my-awesome-dropzone", {
         autoProcessQueue: false,
         maxFiles: 30,
         addRemoveLinks: true,
-        parallelUploads: 5, // Number of files process at a time (default 2)
+        parallelUploads: 30, // Number of files process at a time (default 2)
     });
 
     $('#uploadfiles').click(function() {

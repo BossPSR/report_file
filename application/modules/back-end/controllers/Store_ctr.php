@@ -123,7 +123,7 @@ class Store_ctr extends CI_Controller
 
             'price_file'            => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
-            'status_book'           => $book,
+            'status_book'           => '1',
             'organization'          => $organization,
             'update_at'             => date('Y-m-d H:i:s'),
             'notify_user'           => 0,
@@ -159,7 +159,8 @@ class Store_ctr extends CI_Controller
     private function sendEmail($upload_order, $note_s)
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
-
+        // echo $user['email'];
+        // exit;
         if ($user['score'] >= '100') {
             $discount = 10;
         } else {
@@ -289,19 +290,19 @@ class Store_ctr extends CI_Controller
         //config email settings
         $config['protocol'] = 'smtp';
         $config['smtp_host'] = 'smtp.gmail.com';
-        $config['smtp_port'] = '2002';
+        $config['smtp_port'] = '465'; //2002
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
         $config['smtp_pass'] = 'infinityP23';  //sender's password
         $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
+        $config['charset'] = 'iso-8859-1'; //utf-8
         $config['wordwrap'] = 'TRUE';
-        $config['smtp_crypto'] = 'tls';
-        $config['newline'] = "\r\n";
+        // $config['smtp_crypto'] = 'tls';
+        // $config['newline'] = "\r\n";
 
 
         //$file_path = 'uploads/' . $file_name;
         $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
+        // $this->email->set_newline("\r\n");
         $this->email->from('infinityp.soft@gmail.com');
         $this->email->to($user['email']);
         $this->email->subject($subject);
@@ -309,9 +310,9 @@ class Store_ctr extends CI_Controller
         $this->email->set_mailtype('html');
 
         if ($this->email->send() == true) {
-            $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email information !!.');
         } else {
-            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email information');
         }
     }
 
@@ -956,7 +957,7 @@ class Store_ctr extends CI_Controller
             $dmsub          = $this->input->post('dmsub');
 
             $select_item    = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
-            $storrow        = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->row_array();
+            $storrow        = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id , 'section' => $section])->row_array();
             $storedata      = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
             if ($storrow['status_cp'] == 'complete') {
                 $st = '1';
@@ -1146,13 +1147,13 @@ class Store_ctr extends CI_Controller
     {
         $user = $this->db->get_where('tbl_user', ['idUser' => $CM])->row_array();
 
-        $subject = 'Your document has been rejected.';
+        $subject = 'Your document has been deduct.';
 
         $message  = '<center>';
         $message .= '<div style="max-width:800px;">';
         $message .= '<div class="content" >';
         $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-        $message .= 'Your order has been placed';
+        $message .= 'Your order has been deduct';
         $message .= '</div>';
         $message .= '<div class="row">';
         $message .= '<p>Hey "' . $user['username'] . '",</p>';
@@ -1162,7 +1163,7 @@ class Store_ctr extends CI_Controller
         $message .= '<p>Check below for your order details.</p><hr>';
         $message .= '<p>Order details ("' . $Order . '")</p>';
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">รหัส : ' . $CM .  'order' . $Order . ' โดนหัก ' . $score . '</div>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;">รหัส : ' . $CM .  ' order ' . $Order . ' โดนหัก ' . $score . '</div>';
 
         $message .= '</center>';
 
@@ -1398,25 +1399,21 @@ class Store_ctr extends CI_Controller
 
     public function rename_uploadmains()
     {
-        $resume = $this->input->post('resume');
-        $doc    = $this->input->post('doc');
-        $path   = $this->input->post('path');
-        $id     = $this->input->post('id');
+        $id = $this->input->post('id');
+        $name_file = $this->input->post('name_file');
+        $last_file = $this->input->post('last_file');
+        $path = $this->input->post('path');
 
-        rename($path, 'uploads/Store/' . $resume . '.' . $doc);
+        rename($path, 'uploads/Store/' . $name_file . '.' . $last_file);
         if ($id) {
             $update = [
-                'file_name' => $resume . '.' . $doc,
-                'path' => 'uploads/Store/' . $resume . '.' . $doc,
+                'file_name' => $name_file . '.' . $last_file,
+                'path' => 'uploads/Store/' . $name_file . '.' . $last_file,
             ];
             $this->db->where('id', $id);
-            $success = $this->db->update('tbl_upload_order', $update);
-            if ($success) {
-                $this->session->set_flashdata('save_ss2', 'Successfully refilename !!.');
-            } else {
-                $this->session->set_flashdata('del_ss2', 'Not Successfully refilename');
-            }
-            return redirect('rename_uploadmains');
+            $success = $this->db->update('tbl_upload_main_search_sub', $update);
+            echo $success;
+            
         }
     }
 

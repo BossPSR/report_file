@@ -28,8 +28,14 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Reject For sell</h4>
+                            <div class="row card-header">
+                                <div class="col-lg-10 col-sm-12">
+                                    <h4 class="card-title">Reject For sell</h4>
+                                </div>
+
+                                <div class="col-lg-2 col-sm-12 text-right">
+                                    <button type="button" onclick="confirmalert_del_all('1')" class="btn btn-danger mr-1 mb-1 waves-effect waves-light">Delete all</button>
+                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -41,42 +47,42 @@
                                                     <th>User</th>
                                                     <th>File Name</th>
                                                     <th>File</th>
-                                                    
+
                                                     <th>create_at</th>
                                                     <th>tool</th>
                                                 </tr>
                                             </thead>
                                             <?php foreach ($store as $store) { ?>
-                                               <?php if($store['is_check']=="0"): ?>
-                                                <?php else :?>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><?php echo $store['store_id']; ?></td>
-                                                        <?php $store_name   = $this->db->get_where('tbl_user', ['idUser' => $store['userId']])->result_array(); ?>
-                                                        <?php foreach ($store_name as $store_name) { ?>
-                                                            <td><?php echo $store_name['idUser']; ?></td>
-                                                        <?php  } ?>
-                                                        <td><?php echo $store['file_name']; ?></td>
-                                                        <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                       
-                                                        <td><?php echo $store['create_at']; ?></td>
-                                                        <td>
-                                                            <button onclick="confirmalertunlock_del_admin('<?php echo $store['id']; ?>')"   class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
-                                                             Reject
-                                                            </button>
-                                                        </td>
+                                                <?php if ($store['is_check'] == "0") : ?>
+                                                <?php else : ?>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo $store['store_id']; ?></td>
+                                                            <?php $store_name   = $this->db->get_where('tbl_user', ['idUser' => $store['userId']])->result_array(); ?>
+                                                            <?php foreach ($store_name as $store_name) { ?>
+                                                                <td><?php echo $store_name['idUser']; ?></td>
+                                                            <?php  } ?>
+                                                            <td><?php echo $store['file_name']; ?></td>
+                                                            <td><a href="<?php echo $store['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
 
-                                                    </tr>
+                                                            <td><?php echo $store['create_at']; ?></td>
+                                                            <td>
+                                                                <button onclick="confirmalertunlock_del_reject_for_sell('<?php echo $store['id']; ?>')" class="btn btn-danger " type="button" aria-haspopup="true" aria-expanded="false">
+                                                                    Reject
+                                                                </button>
+                                                            </td>
 
-                                                    </tfoot>
-                                                   
-                                                        <?php endif;?>
-                                                    <?php  } ?>
-                                                      
-                                                
+                                                        </tr>
+
+                                                        </tfoot>
+
+                                                    <?php endif; ?>
+                                                <?php  } ?>
+
+
 
                                         </table>
-                                        
+
                                     </div>
                                 </div>
                             </div>

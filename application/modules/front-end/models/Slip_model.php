@@ -16,7 +16,7 @@ class Slip_model extends CI_Model
         $this->db->where('userId', $_user);
         $this->db->where('status_pay', 1);
         $this->db->group_by('order_id');
-        $this->db->order_by('create_at', 'desc');
+        $this->db->order_by('created_at_buy', 'desc');
 
         $data = $this->db->get();
         return $data->result_array();
@@ -29,7 +29,7 @@ class Slip_model extends CI_Model
         $this->db->where('userId', $_user);
         $this->db->where('status_pay', 0);
         $this->db->group_by('order_id');
-        $this->db->order_by('create_at', 'desc');
+        $this->db->order_by('created_at_buy', 'desc');
 
         $data = $this->db->get();
         return $data->result_array();

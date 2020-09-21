@@ -254,7 +254,7 @@
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td><a href="<?php echo $order['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                            <td><?php echo $order['create_at'] ?></td>
+                                                                                            <td><?php echo $order['created_at_buy'] ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -703,7 +703,7 @@
                                                         </td>
 
                                                         <!-- createST -->
-                                                        <td><?php echo $stores['createST']; ?></td>
+                                                        <td><?php echo $stores['created_at_buy']; ?></td>
 
                                                         <!-- dateREST -->
                                                         <td>

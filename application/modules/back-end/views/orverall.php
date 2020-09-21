@@ -308,7 +308,7 @@
                                                         <?php endif; ?>
 
                                                         </td> -->
-                                                        <td><?php echo $stores['createOr']; ?></td>
+                                                        <td><?php echo $stores['created_at_buy']; ?></td>
                                                         <td>
                                                             <?php if (date("Y-m-d H:i:s") >= $stores['requiredOr']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>

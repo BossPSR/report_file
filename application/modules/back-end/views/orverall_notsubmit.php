@@ -202,7 +202,7 @@
                                                         <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
                                                         <td><?php echo $stores['order'] ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
-                                                        <td><?php echo $stores['createOr']; ?></td>
+                                                        <td><?php echo $stores['created_at_buy']; ?></td>
                                                         <td>
 
                                                             <?php if (date("Y-m-d") >= $stores['requiredOr']) : ?>

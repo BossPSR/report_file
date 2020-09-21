@@ -46,25 +46,31 @@ class Login_ctr extends CI_Controller
                 $this->session->set_userdata($user_data);
                 $save_sss = $this->session->set_flashdata('save_ss', TRUE);
                 $user = $this->db->get_where('tbl_user', ['email' => $email])->row_array();
-                $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
-                if (!empty($packAgeCheck)) {
-                    $datePaypal = date("Y-m-d", strtotime($packAgeCheck['start_time']));
-                    $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-
-                    if ($checkDate == 5) {
-                        $this->session->set_flashdata('package_timeOut_3_day', TRUE);
+                if ($user['package_user'] == '') {
+                    $this->session->set_flashdata('save_ss2', 'Welcome to Fileback Help');
+                    redirect('package');
+                }else{
+                    $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
+                    if (!empty($packAgeCheck)) {
+                        $datePaypal = date("Y-m-d", strtotime($packAgeCheck['start_time']));
+                        $checkDate = DateDiff($datePaypal, date("Y-m-d"));
+    
+                        if ($checkDate == 5) {
+                            $this->session->set_flashdata('package_timeOut_3_day', TRUE);
+                        }
+    
+                        if ($checkDate == 6) {
+                            $this->session->set_flashdata('package_timeOut_2_day', TRUE);
+                        }
+    
+                        if ($checkDate == 7) {
+                            $this->session->set_flashdata('package_timeOut_1_day', TRUE);
+                        }
                     }
-
-                    if ($checkDate == 6) {
-                        $this->session->set_flashdata('package_timeOut_2_day', TRUE);
-                    }
-
-                    if ($checkDate == 7) {
-                        $this->session->set_flashdata('package_timeOut_1_day', TRUE);
-                    }
+                    $this->session->set_flashdata('save_ss2', 'Welcome to Fileback Help');
+                    redirect('my-profile');
                 }
-                $this->session->set_flashdata('save_ss2', 'Welcome to Fileback Help');
-                redirect('my-profile');
+               
             } elseif ($this->Login_model->login_team($email, $password)) {
 
                 $user_data = array(

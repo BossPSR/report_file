@@ -15,13 +15,13 @@ class Package_ctr extends CI_Controller
 		$data['package'] 	= $this->db->get('tbl_package')->result_array();
 		$datePaypal = date("Y-m-d", strtotime($data['userId']['package_end']));
 		$checkDate = DateDiff($datePaypal,date("Y-m-d"));
-		if ($data['userId']['package_end'] !== null) {
+		// if ($data['userId']['package_end'] !== null) {
 
-			if ($checkDate < 0) {
-				$this->session->set_flashdata('package_check', TRUE);
-				redirect('home');
-			}
-		}
+		// 	if ($checkDate < 0) {
+		// 		$this->session->set_flashdata('package_check', TRUE);
+		// 		redirect('home');
+		// 	}
+		// }
 
 		$this->load->view('options/header_login');
 		$this->load->view('package', $data);

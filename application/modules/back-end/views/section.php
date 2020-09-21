@@ -59,7 +59,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configurationF">
+                                        <table class="table table-hover zero-configuration">
                                             <thead>
                                                 <tr>
                                                     <th style="display: none;">#</th>

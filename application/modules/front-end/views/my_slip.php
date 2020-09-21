@@ -92,7 +92,7 @@
                                                             <span class="badge badge-pill badge-danger">ยกเลิกออเดอร์</span>
                                                         <?php } ?>
                                                     </td>
-                                                    <?php $ggh = explode(" ", $slip_success['create_at']); ?>
+                                                    <?php $ggh = explode(" ", $slip_success['created_at_buy']); ?>
                                                     <td><?php echo $ggh[0]; ?></td>
                                                 </tr>
                                             <?php } ?>
@@ -124,7 +124,7 @@
                                                             <span class="badge badge-pill badge-danger">ยกเลิกออเดอร์</span>
                                                         <?php } ?>
                                                     </td>
-                                                    <?php $ggh = explode(" ", $slip_not_success['create_at']); ?>
+                                                    <?php $ggh = explode(" ", $slip_not_success['created_at_buy']); ?>
                                                     <td><?php echo $ggh[0]; ?></td>
                                                 </tr>
                                             <?php } ?>
