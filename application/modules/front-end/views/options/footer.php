@@ -451,6 +451,18 @@
     <?php endif; ?>
 </script>
 
+<script>
+    <?php if ($this->session->flashdata('fail_regis_teamName')) : ?>
+        swal("fill !", "ชื่อนี้ได้ถูกใช้งานแล้ว!!", "error");
+    <?php endif; ?>
+</script>
+
+<script>
+    <?php if ($this->session->flashdata('fail_regis_teamEmail')) : ?>
+        swal("fill !", "Email นี้ได้ถูกใช้งานแล้ว!!", "error");
+    <?php endif; ?>
+</script>
+
 <!-- <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script> -->
 
 <script src="public/frontend/assets/js/myscript.js"></script>

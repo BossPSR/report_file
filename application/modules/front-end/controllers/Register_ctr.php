@@ -112,6 +112,21 @@ class Register_ctr extends CI_Controller
 		$team_check      	= $this->Login_model->team_check($email);
 		$check_usre2        = $this->Login_model->check_usre2($name);
 
+		$teamCheck = $this->db->get_where('tbl_team',['name' => $name])->row_array();
+		
+		if (!empty($teamCheck)) {
+			$this->session->set_flashdata('fail_regis_teamName', TRUE);
+			redirect('register-team');
+			exit();
+		}
+		$teamCheck = $this->db->get_where('tbl_team',['email' => $email])->row_array();
+		$userCheck = $this->db->get_where('tbl_user',['email' => $email])->row_array();
+		if (!empty($teamCheck) || !empty($userCheck) && !empty($teamCheck) && !empty($userCheck)) {
+			$this->session->set_flashdata('fail_regis_teamEmail', TRUE);
+			redirect('register-team');
+			exit();
+		}
+
 		$Y = substr(date('Y'), 2);
 		$M = date('m');
 
@@ -468,5 +483,31 @@ class Register_ctr extends CI_Controller
 			echo "window.location='home';";
 			echo "</script>";
 		}
+	}
+
+	public function check_name()
+	{
+		$name = $this->input->post('name');
+		$teamCheck = $this->db->get_where('tbl_team',['name' => $name])->row_array();
+		
+		if (!empty($teamCheck)) {
+			echo "data found";
+			exit();
+		}
+
+		echo "data not found";
+	}
+
+	public function check_email()
+	{
+		$email = $this->input->post('email');
+		$teamCheck = $this->db->get_where('tbl_team',['email' => $email])->row_array();
+		$userCheck = $this->db->get_where('tbl_user',['email' => $email])->row_array();
+		if (!empty($teamCheck) || !empty($userCheck) && !empty($teamCheck) && !empty($userCheck)) {
+			echo "data found";
+			exit();
+		}
+
+		echo "data not found";
 	}
 }
