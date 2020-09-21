@@ -54,7 +54,7 @@
                                     <?php else : ?>
                                         <?php $k = 0; ?>
                                         <?php foreach ($order_all as $key => $dataga) {
-                                             if (date("Y-m-d") < $dataga['end_time']) {
+                                            if (date("Y-m-d") < $dataga['end_time']) {
                                                 $k++;
                                             }
                                         } ?>
@@ -342,14 +342,22 @@
                                                             <td>$<?php echo $stores['wage']; ?></td>
                                                         <?php endif; ?>
                                                         <td>
-                                                            <?php if ($stores['status_team'] == 0) : ?>
-                                                                <span class="badge badge-pill badge-danger">Procressing</span>
-                                                            <?php elseif ($stores['status_team'] == 1) : ?>
-                                                                <span class="badge badge-pill badge-info">Complete</span>
-                                                            <?php elseif ($stores['status_delivery'] == 0) : ?>
-                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
+                                                            <?php $fb_status = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order']])->row_array(); ?>
+                                                           
+                                                            <?php if ($fb_status['status_c_feedack_team'] == '0') : ?>
+
+                                                                <span class="badge badge-pill badge-danger">Wating for Admin </span>
+
                                                             <?php else : ?>
-                                                                <span class="badge badge-pill badge-success">Delivered</span>
+                                                                <?php if ($stores['status_team'] == 0) : ?>
+                                                                    <span class="badge badge-pill badge-danger">Procressing</span>
+                                                                <?php elseif ($stores['status_team'] == 1) : ?>
+                                                                    <span class="badge badge-pill badge-info">Complete</span>
+                                                                <?php elseif ($stores['status_delivery'] == 0) : ?>
+                                                                    <span class="badge badge-pill badge-warning">Not Delivered</span>
+                                                                <?php else : ?>
+                                                                    <span class="badge badge-pill badge-success">Delivered</span>
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         </td>
 

@@ -472,7 +472,7 @@ class Book_ctr extends CI_Controller
 
 
         foreach ($order_id as $key => $order_id) {
-            $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
+            $order = $this->db->get_where('tbl_upload_main_search_sub', ['id' => $order_id])->row_array();
             $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $order['path'] . '">' . $order['file_name'] . '</a>';
             $message .= '<br>';
         }

@@ -69,6 +69,14 @@ class My_feedback_ctr extends CI_Controller
             $this->db->where('order_id', $order_id);
             $success = $this->db->update('tbl_upload_team', $team);
         }
+        
+        if ($order_id) {
+            $status_order = array(
+                'status_approved' => $s ,
+            );
+            $this->db->where('order_id', $order_id);
+            $this->db->update('tbl_upload_order', $status_order);
+        }
 
         $orf = array(
             'feedback_detail'   => $detail,
@@ -78,9 +86,11 @@ class My_feedback_ctr extends CI_Controller
             'create_at'         => date('Y-m-d H:i:s'),
             'dated'             => $dated,
             'check_status'      => 1 ,
+            're_feedback'       => $refdata ,
             're_feedback'       => $refdata
         );
         $this->db->insert('tbl_feedback', $orf);
+        
         
         echo $success;
     }
