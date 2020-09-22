@@ -116,6 +116,8 @@
                                                     <th>Deduct score</th>
                                                     <th>Score Income</th>
                                                     <th>Discount</th>
+                                                    <th>Sell</th>
+                                                    <th>Reject</th>
                                                     <th>Package</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -239,7 +241,28 @@
                                                         }
 
                                                         $discountUser = $user_list['score'] / 10;
+
+                                                        $this->db->select('*');
+                                                        $this->db->from('tbl_upload_store');
+                                                        $this->db->where('userId', $user_list['idUser']);
+                                                        $this->db->group_by('store_id');
+                                                        $numsell = 0;
+                                                        $sell= $this->db->get()->result_array();
+                                                        foreach ($sell as $sell) {
+                                                            $numsell += 1;
+                                                        }
+                                                        $this->db->select('*');
+                                                        $this->db->from('tbl_upload_store');
+                                                        $this->db->where('userId', $user_list['idUser']);
+                                                        $this->db->where('is_check', 1);
+                                                       
+                                                        $numreject = 0;
+                                                        $reject= $this->db->get()->result_array();
+                                                        foreach ($reject as $reject) {
+                                                            $numreject += 1;
+                                                        }
                                                         ?>
+                                                        
                                                         <td><?php echo $numOrder; ?></td>
                                                         <td><?php echo $numPrice; ?></td>
                                                         <td><?php echo $numApproved; ?></td>
@@ -247,6 +270,8 @@
                                                         <td><?php echo $numDeduct; ?></td>
                                                         <td><?php echo $numScore; ?></td>
                                                         <td><?php echo $discountUser; ?>%</td>
+                                                        <td><?php echo $numsell; ?></td>
+                                                        <td><?php echo $numreject; ?></td>
                                                         <td>
                                                             <?php if ($user_list['package_user'] == '') :  ?>
                                                                 <div class='badge badge-pill badge-glow badge-danger mr-1 mb-1'>No package</div>
