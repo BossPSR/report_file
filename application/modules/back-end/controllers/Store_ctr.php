@@ -746,25 +746,13 @@ class Store_ctr extends CI_Controller
             $this->db->where('idUser', $uploadStore['userId']);
             $resultsedit = $this->db->update('tbl_user', $data2);
         }
-        $this->db->group_by('section');
-        $check_store = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
+        $cccc = $this->Store_model->check_mail($store_id);
         $cc = 0;
         $newPrice = 0;
-        foreach ($check_store as $check_store) {
-            if ($check_store['grade'] == null) {
-             break;
-            }else{
-                   $cc += 1;
-                $newPrice += $check_store['price_file'];
+            if ($cccc == false) {
+                $this->sendEmail_Grade($user, $newPrice, $store_id);
             }
-        }
-
-        if ($cc += 1) {
-            $this->sendEmail_Grade($user, $newPrice, $store_id);
-        }
-
         
-
 
         return redirect('Section');
     }

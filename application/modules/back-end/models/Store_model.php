@@ -230,6 +230,17 @@ class Store_model extends CI_Model
         return $this->db->get('tbl_upload_main_search_sub')->result_array();
     }
 
+    public function check_mail($store_id)
+    {
+        $this->db->where('store_id',$store_id);
+        $this->db->where('grade',null);
+        $this->db->group_by('section');
+        return  $this->db->get('tbl_upload_store')->row_array();
+
+      
+    }
+
+
     // function fetch_state($st)
     // {
     //     $this->db->where('comandnocom', $st);
