@@ -751,8 +751,10 @@ class Store_ctr extends CI_Controller
         $cc = 0;
         $newPrice = 0;
         foreach ($check_store as $check_store) {
-            if ($check_store['grade'] !== null) {
-                $cc += 1;
+            if ($check_store['grade'] == null) {
+             break;
+            }else{
+                   $cc += 1;
                 $newPrice += $check_store['price_file'];
             }
         }
