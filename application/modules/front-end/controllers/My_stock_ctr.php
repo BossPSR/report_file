@@ -69,6 +69,7 @@ class My_stock_ctr extends CI_Controller
             redirect('home');
         } else {
             $sess                   = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+            $data['teamTM']                   = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
             $data['stock']          = $this->Order_model->my_stock($item_id, $sess['IdTeam']);
             $data['stock_row']      = $this->Order_model->my_stock_row($sess['IdTeam']);
             $stock_capp             = $this->Order_model->my_stock_count($sess['IdTeam']);

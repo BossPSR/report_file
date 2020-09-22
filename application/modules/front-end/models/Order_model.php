@@ -55,7 +55,9 @@ class Order_model extends CI_Model
 
     public function my_stock($item_id, $sess)
     {
-        $this->db->select('*,tbl_upload_order.file_name as file_or ,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,tbl_upload_team.note as uptnote , tbl_upload_team.status as up_status2');
+        $this->db->select('*,tbl_upload_order.file_name as file_or ,tbl_upload_order.date_required as or_date,
+        tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,
+        tbl_upload_team.note as uptnote , tbl_upload_team.status as up_status2 , tbl_upload_team.id idteam');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
         $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
@@ -66,6 +68,7 @@ class Order_model extends CI_Model
         $this->db->where('tbl_upload_order.date_required <=', 'tbl_upload_order.date_required');
         $this->db->where('tbl_upload_order.status_pay', 1);
         $this->db->where('tbl_upload_order.status_confirmed_team', 0);
+        $this->db->where('tbl_upload_team.status', 0);
         $this->db->where('tbl_upload_team.position', $item_id);
         $this->db->or_where('tbl_upload_order.status_confirmed_team', NULL);
         $this->db->where_in('tbl_upload_team.teamId', $sess);
