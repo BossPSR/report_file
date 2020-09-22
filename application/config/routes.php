@@ -375,3 +375,5 @@ $route['cancel_dropzone']                           = 'back-end/Store_ctr/cancel
 $route['cancel_dropzone_not']                       = 'back-end/Store_ctr/cancel_dropzone_not';
 $route['slide_blocked']                             = 'back-end/Team_ctr/slide_unlock';
 $route['send_feedbacktion_all']                     = 'back-end/Feedback_ctr/send_feedbacktion_all';
+$route['delete_dm_sub']                             = 'back-end/Book_ctr/delete_dm_sub';
+$route['delete_dm_folder']                             = 'back-end/Book_ctr/delete_dm_folder';

@@ -92,7 +92,7 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <table class="table table-hover zero-configuration">
+                                                                            <table class="table table-hover zero-configuration" id="herere<?php echo $value['id_doc']; ?>">
                                                                                 <thead>
                                                                                     <?php
                                                                                     $this->db->group_by('dm_sub');
@@ -113,11 +113,21 @@
                                                                                         <th>Removed</th>
                                                                                         <th>TM</th>
                                                                                         <th>create</th>
+                                                                                        <th>Tool</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
+                                                                                    <?php
 
-                                                                                    <?php foreach ($store as $keys => $store) { ?>
+                                                                                    foreach ($store as $keys => $store) {
+                                                                                        $this->db->where('status', '0');
+                                                                                        $this->db->where('dm_sub', $store['dm_sub']);
+                                                                                        $iconCheck_text = 0;
+                                                                                        $iconCheck = $this->db->get('tbl_upload_main_search_sub')->result_array();
+                                                                                        foreach ($iconCheck as $iconCheck_num) {
+                                                                                            $iconCheck_text += 1;
+                                                                                        }
+                                                                                    ?>
                                                                                         <tr>
                                                                                             <td>
                                                                                                 <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $store['update_at'])); ?>
@@ -154,8 +164,8 @@
                                                                                             </td>
                                                                                             <td>
                                                                                                 <?php $cutpoin = explode('.', $store['dm_sub']); ?>
-                                                                                                <?php $dm_sub = $this->db->get_where('tbl_upload_main_search_sub', ['dm_sub' => $store['dm_sub']])->row_array(); ?>
-                                                                                                <?php if ($dm_sub['status'] == '0') : ?>
+
+                                                                                                <?php if ($iconCheck_text > 0) : ?>
                                                                                                     <i class="feather icon-folder" style="font-size: 25px; cursor: pointer; color:red" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
                                                                                                 <?php else : ?>
                                                                                                     <i class="feather icon-folder" style="font-size: 25px; cursor: pointer; color:green" data-toggle="modal" data-target="#exampleModaleee<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>"></i>
@@ -164,7 +174,7 @@
                                                                                                     <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
-                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Sub DM File</h5>
+                                                                                                                <h5 class="modal-title" id="exampleModalLabel">Sub DM File <?php echo $store['dm_sub'] ?></h5>
                                                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                                     <span aria-hidden="true">&times;</span>
                                                                                                                 </button>
@@ -187,6 +197,7 @@
                                                                                                                             <th>Icon Folder</th>
                                                                                                                             <th>Drop</th>
                                                                                                                             <th>Create</th>
+                                                                                                                            <th>Tool</th>
                                                                                                                         </tr>
                                                                                                                     </thead>
                                                                                                                     <tbody>
@@ -247,9 +258,9 @@
                                                                                                                                 <td><a href="<?php echo $store23['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                                                 <td>
                                                                                                                                     <?php if ($store23['status'] == '0') : ?>
-                                                                                                                                        <a href="" data-toggle="modal" data-target="#dropedit<?php echo $store23['id']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-upload"></i></a>
+                                                                                                                                        <a href="" data-toggle="modal" data-iddoc="<?php echo $store23['id']; ?>" data-target="#dropedit<?php echo $store23['id']; ?>" class="btn btn-icon btn-danger click"><i class="feather icon-upload"></i></a>
                                                                                                                                     <?php else : ?>
-                                                                                                                                        <a href="" data-toggle="modal" data-target="#dropedit<?php echo $store23['id']; ?>" class="btn btn-icon btn-success"><i class="feather icon-upload"></i></a>
+                                                                                                                                        <a href="" data-toggle="modal" data-iddoc="<?php echo $store23['id']; ?>" data-target="#dropedit<?php echo $store23['id']; ?>" class="btn btn-icon btn-success click"><i class="feather icon-upload"></i></a>
                                                                                                                                     <?php endif; ?>
                                                                                                                                     <div class="modal fade" id="dropedit<?php echo $store23['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                                                                                         <div class="modal-dialog" role="document">
@@ -276,7 +287,7 @@
 
                                                                                                                                                 <div class="modal-footer">
                                                                                                                                                     <div class="add-data-footer d-flex justify-content-around">
-                                                                                                                                                        <button type="submit" id="uploadschange<?php echo $store23['id']; ?>" class="btn btn-primary">Submit</button>
+                                                                                                                                                        <button type="button" id="uploadschange<?php echo $store23['id']; ?>" data-idvalue="<?php echo $value['id_doc']; ?>" class="btn btn-primary exp" data-dzid="<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>" data-id="<?php echo $store23['id']; ?>">Submit</button>
                                                                                                                                                     </div>
                                                                                                                                                 </div>
 
@@ -284,41 +295,16 @@
                                                                                                                                         </div>
                                                                                                                                     </div>
 
-                                                                                                                                    <script>
-                                                                                                                                        Dropzone.autoDiscover = false;
-                                                                                                                                        var myDropzone<?php echo $store23['id']; ?> = new Dropzone("#maindropzoneEx<?php echo $store23['id']; ?>", {
-                                                                                                                                            autoProcessQueue: false,
-                                                                                                                                            maxFiles: 5,
-                                                                                                                                            addRemoveLinks: true,
-                                                                                                                                            parallelUploads: 5, // Number of files process at a time (default 2)
-                                                                                                                                        });
-
-                                                                                                                                        document.getElementById("uploadschange<?php echo $store23['id']; ?>").addEventListener("click", function() {
-                                                                                                                                            // myDropzone.processQueue();
-                                                                                                                                            if (myDropzone<?php echo $store23['id']; ?>.files == 0) {
-
-                                                                                                                                                swal("Warning!", "Can not be document Empty", "warning", {
-                                                                                                                                                    button: true,
-                                                                                                                                                });
-                                                                                                                                            }
-                                                                                                                                            myDropzone<?php echo $store23['id']; ?>.processQueue();
-                                                                                                                                            myDropzone<?php echo $store23['id']; ?>.on("queuecomplete", function(file, res) {
-                                                                                                                                                swal("Good job!", "Upload for data successfull", "success", {
-                                                                                                                                                    button: false,
-                                                                                                                                                });
-                                                                                                                                                setTimeout(function() {
-                                                                                                                                                    location.href = "back_upload_main_search"
-                                                                                                                                                }, 1000);
-                                                                                                                                            });
-                                                                                                                                        });
-                                                                                                                                    </script>
                                                                                                                                 </td>
                                                                                                                                 <td><?php echo $store23['create_at'] ?></td>
+                                                                                                                                <td> <a onclick="confirmalertunlock_del_Dm_sub('<?php echo $store23['id']; ?>','<?php echo $cutpoin[0] . $cutpoin[1] . $cutpoin[2]; ?>')"   class="btn btn-icon btn-danger"><i class="feather icon-x" style="color: #fff;"></i></a></td>
                                                                                                                             </tr>
 
                                                                                                                         <?php } ?>
                                                                                                                     </tbody>
                                                                                                                 </table>
+
+
                                                                                                             </div>
                                                                                                             <div class="modal-footer">
                                                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -418,6 +404,7 @@
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td><?php echo $store['create_at'] ?></td>
+                                                                                            <td><a onclick="confirmalertunlock_del_Dm_folder('<?php echo $store['dm_sub']; ?>','<?php echo $value['id_doc']; ?>')"   class="btn btn-icon btn-danger"><i class="feather icon-x" style="color: #fff;"></i></a></td>
                                                                                         </tr>
                                                                                     <?php } ?>
                                                                                 </tbody>
@@ -807,10 +794,124 @@
                     swal("Good job!", "Upload for data successfull", "success", {
                         button: true,
                     });
-                    $("#here"+l).load(window.location.href + " #here" + l);
+                    $("#here" + l).load(window.location.href + " #here" + l);
                     $('#dms' + c).modal('hide');
                 }
             }
         });
     });
+</script>
+
+<script>
+    $('body').on('click', 'a.click', function() {
+        var c = $(this).data('iddoc');
+        console.log(c);
+        var myDropzonedoc = new Dropzone("#maindropzoneEx" + c, {
+            autoProcessQueue: false,
+            maxFiles: 5,
+            addRemoveLinks: true,
+            parallelUploads: 5, // Number of files process at a time (default 2)
+        });
+
+        $('body').on('click', 'button[type="button"].exp', function() {
+            var a = $(this).data('dzid');
+            var b = $(this).data('id');
+            var idvalue = $(this).data('idvalue');
+            console.log(a);
+
+            Dropzone.autoDiscover = false;
+
+
+            // myDropzone.processQueue();
+            if (myDropzonedoc.files == 0) {
+
+                swal("Warning!", "Can not be document Empty", "warning", {
+                    button: true,
+                });
+            }
+            myDropzonedoc.processQueue();
+            myDropzonedoc.on("queuecomplete", function(file, res) {
+                swal("Good job!", "Upload for data successfull", "success", {
+                    button: false,
+                });
+
+                $("#here" + a).load(window.location.href + " #here" + a);
+                $('#dropedit' + b).modal('hide');
+
+                // $("#herere"+idvalue).load(window.location.href + " #herere"+idvalue);
+                // $('#exampleModaleee' + a).modal('show');
+
+                // setTimeout(function() {
+                //     location.href = "back_upload_main_search"
+                // }, 1000);
+            });
+        });
+    });
+</script>
+<script>
+    function confirmalertunlock_del_Dm_sub(data1555,delid) {
+        var l = $(this).data('tagdle');
+
+        swal({
+            title: "Are you sure Sub DM?",
+            text: "Are you sure you delete Sub DM ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+              
+                $.ajax({
+                    url: 'delete_dm_sub?id=' + data1555,
+                    type: "GET",
+                    success: function(success) {
+                        if (success) {
+                            swal("Good job!", "Upload for data successfull", "success", {
+                                button: true,
+                            });
+                        }
+                        $("#here" + delid).load(window.location.href + " #here" + delid);
+                        $('#dropedit' + b).modal('hide');
+
+                    }
+                });
+                //window.location = 'delete_dm_sub?id=' + data1555;
+            }
+
+
+        })
+    }
+</script>
+<script>
+    function confirmalertunlock_del_Dm_folder(data155,delidfolder) {
+        
+        swal({
+            title: "Are you sure Sub DM Folder?",
+            text: "Are you sure you delete Sub DM Folder ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+              
+                $.ajax({
+                    url: 'delete_dm_folder?id=' + data155,
+                    type: "GET",
+                    success: function(success) {
+                        if (success) {
+                            swal("Good job!", "Upload for data successfull", "success", {
+                                button: true,
+                            });
+                        }
+                        $("#herere" + delidfolder).load(window.location.href + " #herere" + delidfolder);
+                        $('#dropedit' + b).modal('hide');
+
+                    }
+                });
+                //window.location = 'delete_dm_sub?id=' + data1555;
+            }
+
+
+        })
+    }
 </script>

@@ -269,7 +269,7 @@ class Book_ctr extends CI_Controller
                     'dm_main'               => $upload_book['dm_main'],
                     'dm_sub'                => $upload_book['dm_sub'],
                     'file_name'             => $uploadData['file_name'],
-                    'path'                  => 'uploads/Store/'. $uploadData['file_name'],
+                    'path'                  => 'uploads/Store/' . $uploadData['file_name'],
                     'create_at'             => date('Y-m-d H:i:s'),
                     'comandnocom'           => $upload_book['comandnocom'],
                     'cp'                    => $upload_book['cp'],
@@ -289,7 +289,7 @@ class Book_ctr extends CI_Controller
         );
         $this->db->where('order_id', $order);
         $success = $this->db->update('tbl_upload_order', $orf);
-        
+
         echo $success;
     }
 
@@ -663,5 +663,37 @@ class Book_ctr extends CI_Controller
             }
             return redirect('back_upload_main_search');
         }
+    }
+    public function  delete_dm_sub()
+    {
+        $id = $this->input->get('id');
+
+
+        $reject_del =  $this->db->get_where('tbl_upload_main_search_sub', ['id' => $id])->row_array();
+
+        unlink($reject_del['path']);
+        $resultsedit = $this->db->delete('tbl_upload_main_search_sub', ['id' => $id]);
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully delete Sub DM information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully delete Sub DM information');
+        }
+        return redirect('back_upload_main_search');
+    }
+
+    public function  delete_dm_folder()
+    {
+        $id = $this->input->get('id');
+
+        $reject_del =  $this->db->get_where('tbl_upload_main_search_sub', ['id' => $id])->row_array();
+
+        unlink($reject_del['path']);
+        $resultsedit = $this->db->delete('tbl_upload_main_search_sub', ['dm_sub' => $id]);
+        if ($resultsedit > 0) {
+            $this->session->set_flashdata('save_ss2', ' Successfully delete DM information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully delete DM information');
+        }
+        return redirect('back_upload_main_search');
     }
 }

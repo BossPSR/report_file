@@ -746,8 +746,23 @@ class Store_ctr extends CI_Controller
             $this->db->where('idUser', $uploadStore['userId']);
             $resultsedit = $this->db->update('tbl_user', $data2);
         }
+        $this->db->group_by('section');
+        $check_store = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
+        $cc = 0;
+        $newPrice = 0;
+        foreach ($check_store as $check_store) {
+            if ($check_store['grade'] !== null) {
+                $cc += 1;
+                $newPrice += $check_store['price_file'];
+            }
+        }
 
-        $this->sendEmail_Grade($user, $price, $store_id);
+        if ($cc += 1) {
+            $this->sendEmail_Grade($user, $newPrice, $store_id);
+        }
+
+        
+
 
         return redirect('Section');
     }
@@ -771,7 +786,7 @@ class Store_ctr extends CI_Controller
         $message .= '<p>Check below for your order details.</p><hr>';
         $message .= '<p>Order Details ("' . $store_id . '")</p>';
 
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> Your documents, orders at : ' . $store_id . ' , totaling $' . $price . ' .</div>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> Your documents, orders at : ' . $store_id . ' , totaling $' . $newPrice . ' .</div>';
 
         $message .= '</center>';
 
@@ -957,7 +972,7 @@ class Store_ctr extends CI_Controller
             $dmsub          = $this->input->post('dmsub');
 
             $select_item    = $this->db->get_where('tbl_select_item', ['id' => $select_item_id])->row_array();
-            $storrow        = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id , 'section' => $section])->row_array();
+            $storrow        = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id, 'section' => $section])->row_array();
             $storedata      = $this->db->get_where('tbl_upload_store', ['store_id' => $store_id])->result_array();
             if ($storrow['status_cp'] == 'complete') {
                 $st = '1';
@@ -1413,7 +1428,6 @@ class Store_ctr extends CI_Controller
             $this->db->where('id', $id);
             $success = $this->db->update('tbl_upload_main_search_sub', $update);
             echo $success;
-            
         }
     }
 
