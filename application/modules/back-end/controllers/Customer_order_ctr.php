@@ -346,6 +346,8 @@ class Customer_order_ctr extends CI_Controller
         $note               = $this->input->post('note_new');
         $date_required      = $this->input->post('date_required');
         $checkbox           = $this->input->post('checkbox');
+        $checkboxmain       = $this->input->post('checkboxmain');
+        $checkboxgt         = $this->input->post('checkboxgt');
 
         $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
         if ($wa == true) {
@@ -382,6 +384,38 @@ class Customer_order_ctr extends CI_Controller
                     'create_at'         => date('Y-m-d H:i:s')
                 ];
                 $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
+                $last = $this->db->insert_id();
+                
+                if ($checkboxmain) {
+                    foreach ($checkboxmain as $key => $checkboxmain) {
+                        $resultTM = $this->db->get_where('tbl_upload_order', ['id' => $checkboxmain])->row_array();
+                        $mdata = [
+                            'sub_id_m'          => $last,
+                            'order_id_m'        => $resultTM['order_id'],
+                            'file_name_m'       => $resultTM['file_name'],
+                            'path_m'            => $resultTM['path'],
+                            'create_at_m'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_main', $mdata);
+                    }
+                }
+
+                if ($checkboxgt) {
+                    foreach ($checkboxgt as $key => $checkboxgt) {
+                        $resultTG = $this->db->get_where('tbl_upload_orderGT', ['id' => $checkboxgt])->row_array();
+                        $gtdata = [
+                            'sub_id_g'          => $last,
+                            'order_id_g'        => $resultTG['order_id'],
+                            'file_name_g'       => $resultTG['file_name_GT'],
+                            'path_g'            => $resultTG['path_GT'],
+                            'create_at_g'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_gt', $gtdata);
+                    }
+                }
+
                 $this->sendEmail_all($teamid, $order_id);
             }
         }
@@ -468,7 +502,6 @@ class Customer_order_ctr extends CI_Controller
 
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_require]);
-
             }
         }
 
