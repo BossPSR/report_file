@@ -74,7 +74,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Main Document new</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -90,11 +90,11 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <?php foreach ($stockmain as $stockmain) { ?>
+                                                                        <?php foreach ($backmain as $backmain) { ?>
                                                                             <tr style="text-align:center;">
-                                                                                <td><?php echo $stockmain['order_id']; ?></td>
-                                                                                <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
-                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($stockmain['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                                <td><?php echo $backmain['order_id_m']; ?></td>
+                                                                                <td style="text-align:left;"><?php echo $backmain['file_name_m']; ?></td>
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($backmain['path_m']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                             </tr>
                                                                         <?php } ?>
                                                                     </tbody>
@@ -160,62 +160,110 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
 
                                     <td>
                                         <?php $stockGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
-                                        <?php if (!empty($stockGT)) { ?>
-
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <?php $z = 1; ?>
-                                                        <div class="modal-body">
-                                                            <table class="table">
-                                                                <thead class="thead-light">
-                                                                    <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">Info</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($stockGT as $key => $stockGT) { ?>
+                                        <?php $backgt  = $this->db->get_where('tbl_upload_backup_gt', ['sub_id_g' => $stock['idteam']])->result_array(); ?>
+                                        <?php if ($backgt == true) : ?>
+                                            <?php if (!empty($backgt)) { ?>
+                                                <a href="#" data-toggle="modal" data-target="#backgt<?php echo $stock['or_1']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="backgt<?php echo $stock['or_1']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document new</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <?php $t = 1; ?>
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $z++; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $stockGT['file_name_GT']; ?></td>
-                                                                            <td><?php echo $stockGT['order_id']; ?></td>
-                                                                            <td><a href="show-pdf?dcnumber=<?= base64_encode($stockGT['path_GT']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">File</th>
+                                                                            <th scope="col">Info</th>
                                                                         </tr>
-                                                                    <?php } ?>
-                                                                </tbody>
-                                                            </table>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($backgt as $backgt) { ?>
+                                                                            <tr style="text-align:center;">
+                                                                                <td><?php echo $backgt['order_id_g']; ?></td>
+                                                                                <td style="text-align:left;"><?php echo $backgt['file_name_g']; ?></td>
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($backgt['path_g']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        <?php } else { ?>
-                                            -
-                                        <?php } ?>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        <?php else : ?>
+                                            <?php if (!empty($stockGT)) { ?>
+
+                                                <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
+                                                                        <tr style="text-align:center;">
+                                                                            <th scope="col">File</th>
+                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">Info</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($stockGT as $key => $stockGT) { ?>
+                                                                            <tr style="text-align:center;">
+                                                                                <td style="text-align:left;"><?php echo $stockGT['file_name_GT']; ?></td>
+                                                                                <td><?php echo $stockGT['order_id']; ?></td>
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($stockGT['path_GT']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        <?php endif; ?>
                                     </td>
+
+                                    <!-- DM -->
                                     <td>
-                                        <?php $zss = 1; ?>
-                                        <!-- <?php $DM = $this->db->get_where('tbl_upload_store', ['store_id' => $stock['upload_store_id']])->result_array(); ?> -->
-                                        <?php if (!empty($DM)) { ?>
+                                        <?php
+                                        $this->db->join('tbl_upload_main_search_sub', 'tbl_bookmark.id_document = tbl_upload_main_search_sub.dm_sub');
+                                        $this->db->where('tbl_bookmark.id_orderBuy', $stock['or_1']);
+                                        $dm_cc = $this->db->get('tbl_bookmark')->result_array();
+                                        ?>
+                                        <?php if (!empty($dm_cc)) { ?>
 
-                                            <a href="#" data-toggle="modal" data-target="#DMFILE<?php echo $h++; ?>"><i class="fa fa-file-text-o"></i></a>
-
+                                            <a href="#" data-toggle="modal" data-target="#TEAMFILE<?php echo $stock['or_1']; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="DMFILE<?php echo $k++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="TEAMFILE<?php echo $stock['or_1']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -226,31 +274,31 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                         </div>
                                                         <div class="modal-body">
 
-                                                            <h3>DM Document</h3>
+
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">No.</th>
+                                                                        <!-- <th scope="col">ID Order</th> -->
                                                                         <th scope="col">File</th>
-                                                                        <th scope="col">ID Order</th>
                                                                         <th scope="col">Info</th>
+                                                                        <th scope="col">Downloads</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <!-- <?php foreach ($DM as $DM) { ?>
-                                                                        <tr style="text-align:center;">
-                                                                            <td><?= $zss++; ?></td>
-                                                                            <td><?= $DM['file_name']; ?></td>
-                                                                            <td><?= $stock['or_1'];; ?></td>
-                                                                            <td><a href="show-pdf?dcnumber=<?= base64_encode($DM['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                    <?php foreach ($dm_cc as $key => $dm_cc) : ?>
+                                                                        <tr>
+
+                                                                            <td><?php echo $dm_cc['file_name'] ?></td>
+                                                                            <td><a href="<?php echo $dm_cc['path'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                            <td><?php echo $dm_cc['create_at'] ?></td>
                                                                         </tr>
-                                                                    <?php } ?> -->
+                                                                    <?php endforeach; ?>
                                                                 </tbody>
                                                             </table>
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success" id="close_doc3">Success</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
