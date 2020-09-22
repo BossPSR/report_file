@@ -767,7 +767,7 @@ class Store_ctr extends CI_Controller
         return redirect('Section');
     }
 
-    private function sendEmail_Grade($user, $price, $store_id)
+    private function sendEmail_Grade($user, $newPrice, $store_id)
     {
 
         $subject = 'Congratulations! Your documents can be purchased from Fileback help. ';
