@@ -341,7 +341,7 @@ class Customer_order_ctr extends CI_Controller
     {
         $order_id           = $this->input->post('order_id');
         $wage               = $this->input->post('wage');
-        $teamid             = $this->input->post('teamid');
+        $teamid             = $this->input->post('teamid') == '' ? null : $this->input->post('teamid') ;
         $position           = $this->input->post('position');
         $note               = $this->input->post('note_new');
         $date_required      = $this->input->post('date_required');
@@ -369,7 +369,10 @@ class Customer_order_ctr extends CI_Controller
         }
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4 , 'position' => $position , 'update_at' => date('Y-m-d H:i:s')]);
+
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_order', ['status_confirmed_team' => '0' , 'update_at' => date('Y-m-d H:i:s')]);
 
         if ($teamid) {
             foreach ($teamid as $key => $teamid) {

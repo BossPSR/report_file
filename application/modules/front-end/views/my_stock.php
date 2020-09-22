@@ -1,8 +1,8 @@
 <br>
-<?php 
-$item = base64_decode($this->input->get('item')) ;
-$tip  = $this->db->get_where('tbl_item_position', ['id' => $item ])->row_array();
- ?>
+<?php
+$item = base64_decode($this->input->get('item'));
+$tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
+?>
 <h2 class="text-center" style="margin-top: 15px;">Order List <br> <span style="font-size: 24px;color: #0063d1;">(<?= $tip['name_item'] ?>)</span></h2>
 <hr class="line_package">0
 <?php if (!empty($stock)) { ?>
@@ -55,7 +55,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item ])->row_array()
                             ?>
                             <?php foreach ($stock as $stock) { ?>
                                 <tr style="text-align:center;">
-                                    <td><?php echo $stock['or_1']; ?></td>
+                                    <td><?php echo $stock['or_1']; ?> </td>
                                     <?php
                                     $checkDate_num = DateDiff(date("Y-m-d"), $stock['or_date']);
                                     $checkDate = $checkDate_num / 2;
@@ -65,49 +65,97 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item ])->row_array()
                                     <td><?php echo date('d F Y', strtotime($dateRequired)); ?></td>
                                     <td>
                                         <?php $stockmain = $this->db->get_where('tbl_upload_order', ['order_id' => $stock['mms']])->result_array(); ?>
-                                        <?php if (!empty($stockmain)) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $q++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalMain<?php echo $w++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <?php $t = 1; ?>
-                                                            <table class="table">
-                                                                <thead class="thead-light">
-                                                                    <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Info</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($stockmain as $stockmain) { ?>
+                                        <?php $backmain  = $this->db->get_where('tbl_upload_backup_main', ['sub_id_m' => $stock['idteam']])->result_array(); ?>
+                                        <?php if ($backmain == true) : ?>
+                                            <?php if (!empty($backmain)) { ?>
+                                                <a href="#" data-toggle="modal" data-target="#backmain<?php echo $stock['or_1']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="backmain<?php echo $stock['or_1']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <?php $t = 1; ?>
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $stockmain['order_id']; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
-                                                                            <td><a href="show-pdf?dcnumber=<?= base64_encode($stockmain['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">File</th>
+                                                                            <th scope="col">Info</th>
                                                                         </tr>
-                                                                    <?php } ?>
-                                                                </tbody>
-                                                            </table>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($stockmain as $stockmain) { ?>
+                                                                            <tr style="text-align:center;">
+                                                                                <td><?php echo $stockmain['order_id']; ?></td>
+                                                                                <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($stockmain['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        <?php } else { ?>
-                                            -
-                                        <?php } ?>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        <?php else : ?>
+                                            <?php if (!empty($stockmain)) { ?>
+                                                <a href="#" data-toggle="modal" data-target="#exampleModalMain<?php echo $q++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalMain<?php echo $w++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <?php $t = 1; ?>
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
+                                                                        <tr style="text-align:center;">
+                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">File</th>
+                                                                            <th scope="col">Info</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($stockmain as $stockmain) { ?>
+                                                                            <tr style="text-align:center;">
+                                                                                <td><?php echo $stockmain['order_id']; ?></td>
+                                                                                <td style="text-align:left;"><?php echo $stockmain['file_name']; ?></td>
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($stockmain['path']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        <?php endif; ?>
+
                                     </td>
 
                                     <td>
@@ -245,6 +293,18 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item ])->row_array()
                                     </td>
                                     <td>
                                         <?php $sub_order = substr($stock['mms'], 3); ?>
+                                        <?php
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_upload_order');
+                                        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+                                        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id', 'left');
+                                        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+                                        $this->db->where('tbl_upload_order.status_pay', 1);
+                                        $this->db->where('tbl_upload_team.teamId', $teamTM['IdTeam']);
+                                        $this->db->where_in('tbl_upload_team.status', [2, 3, 4]);
+                                        $this->db->order_by('tbl_upload_order.date_required', 'DESC');
+                                        $stock_row = $this->db->get()->row_array();
+                                        ?>
 
                                         <?php if ($stock_row == true) { ?>
                                             <button type="button" class="btn btn-secondery"> Confirmed</button>
