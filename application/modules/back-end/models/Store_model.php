@@ -239,6 +239,18 @@ class Store_model extends CI_Model
 
       
     }
+    public function check_price($store_id)
+    {
+        $this->db->where('store_id',$store_id);
+        $this->db->where('grade !=','');
+        $this->db->group_by('section');
+        return  $this->db->get('tbl_upload_store')->result_array();
+
+      
+    }
+        
+        
+
 
 
     // function fetch_state($st)

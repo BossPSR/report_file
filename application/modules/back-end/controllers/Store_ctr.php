@@ -747,12 +747,21 @@ class Store_ctr extends CI_Controller
             $resultsedit = $this->db->update('tbl_user', $data2);
         }
         $cccc = $this->Store_model->check_mail($store_id);
+        $check_price = $this->Store_model->check_price($store_id);
         $cc = 0;
         $newPrice = 0;
+        
             if ($cccc == false) {
+                foreach ($check_price as $check_price) {$newPrice += $check_price['price_file'];}
                 $this->sendEmail_Grade($user, $newPrice, $store_id);
+                
             }
         
+
+        
+
+        
+
 
         return redirect('Section');
     }
