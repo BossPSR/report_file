@@ -259,6 +259,60 @@
                                                                                     <?php } ?>
                                                                                 </tbody>
                                                                             </table>
+                                                                            <?php
+                                                                            $po = 0;
+                                                                            $this->db->group_by('sub_id_m');
+                                                                            $orderbp_for = $this->db->get_where('tbl_upload_backup_main', ['order_id_m' => $stores['orderST']])->result_array();
+                                                                            ?>
+                                                                            <?php if (!empty($orderbp_for)) : ?>
+                                                                                <br>
+                                                                                <hr>
+                                                                                <div>
+                                                                                    <h3>Sub file details</h3>
+                                                                                </div>
+                                                                                <div class="accordion" id="accordionExample" data-toggle-hover="true">
+
+                                                                                    <?php foreach ($orderbp_for as $key => $orderbp_for) : ?>
+                                                                                        <div class="collapse-margin">
+                                                                                            <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse<?= $orderbp_for['sub_id_m'] ?>" aria-expanded="false" aria-controls="collapseOne">
+                                                                                                <span class="lead collapse-title collapsed">
+                                                                                                    Main file ชุดที่ <?= $po += 1; ?>
+                                                                                                </span>
+                                                                                            </div>
+
+                                                                                            <div id="collapse<?= $orderbp_for['sub_id_m'] ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                                                                <div class="card-body">
+                                                                                                    <table class="table zero-configuration">
+                                                                                                        <thead>
+                                                                                                            <?php $orderbp_main = $this->db->get_where('tbl_upload_backup_main', ['order_id_m' => $stores['orderST'], 'sub_id_m' => $orderbp_for['sub_id_m']])->result_array(); ?>
+                                                                                                            <tr>
+                                                                                                                <th>Order_id</th>
+                                                                                                                <th>File_name</th>
+                                                                                                                <th>File</th>
+                                                                                                                <th>create</th>
+                                                                                                            </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            <?php foreach ($orderbp_main as $keys => $orderbp_main) { ?>
+                                                                                                                <tr>
+                                                                                                                    <td><?php echo $orderbp_main['order_id_m'] ?></td>
+                                                                                                                    <td>
+                                                                                                                        <?php echo $orderbp_main['file_name_m'] ?>
+                                                                                                                    </td>
+                                                                                                                    <td><a href="<?php echo $orderbp_main['path_m'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                                    <td><?php echo $orderbp_main['create_at_m'] ?></td>
+                                                                                                                </tr>
+                                                                                                            <?php } ?>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <?php endforeach; ?>
+                                                                                </div>
+                                                                            <?php endif; ?>
+
+
                                                                             <script>
                                                                                 $('body').on('click', 'button[type="button"].ey', function() {
                                                                                     var c = $(this).data('fmain');
@@ -489,6 +543,58 @@
 
                                                                                     </tbody>
                                                                                 </table>
+                                                                                <?php
+                                                                                $po = 0;
+                                                                                $this->db->group_by('sub_id_g');
+                                                                                $orderbg_for = $this->db->get_where('tbl_upload_backup_gt', ['order_id_g' => $stores['orderST']])->result_array();
+                                                                                ?>
+                                                                                <?php if (!empty($orderbg_for)) : ?>
+                                                                                    <br>
+                                                                                    <hr>
+                                                                                    <div>
+                                                                                        <h3>Sub file details</h3>
+                                                                                    </div>
+                                                                                    <div class="accordion" id="accordionExample" data-toggle-hover="true">
+
+                                                                                        <?php foreach ($orderbg_for as $key => $orderbg_for) : ?>
+                                                                                            <div class="collapse-margin">
+                                                                                                <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseGT<?= $orderbg_for['sub_id_g'] ?>" aria-expanded="false" aria-controls="collapseOne">
+                                                                                                    <span class="lead collapse-title collapsed">
+                                                                                                        GT file ชุดที่ <?= $po += 1; ?>
+                                                                                                    </span>
+                                                                                                </div>
+
+                                                                                                <div id="collapseGT<?= $orderbg_for['sub_id_g'] ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                                                                    <div class="card-body">
+                                                                                                        <table class="table zero-configuration">
+                                                                                                            <thead>
+                                                                                                                <?php $orderbp_gt = $this->db->get_where('tbl_upload_backup_gt', ['order_id_g' => $stores['orderST'], 'sub_id_g' => $orderbg_for['sub_id_g']])->result_array(); ?>
+                                                                                                                <tr>
+                                                                                                                    <th>Order id</th>
+                                                                                                                    <th>File name</th>
+                                                                                                                    <th>File</th>
+                                                                                                                    <th>create</th>
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                                <?php foreach ($orderbp_gt as $keys => $orderbp_gt) { ?>
+                                                                                                                    <tr>
+                                                                                                                        <td><?php echo $orderbp_gt['order_id_g'] ?></td>
+                                                                                                                        <td>
+                                                                                                                            <?php echo $orderbp_gt['file_name_g'] ?>
+                                                                                                                        </td>
+                                                                                                                        <td><a href="<?php echo $orderbp_gt['path_g'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                                                        <td><?php echo $orderbp_gt['create_at_g'] ?></td>
+                                                                                                                    </tr>
+                                                                                                                <?php } ?>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        <?php endforeach; ?>
+                                                                                    </div>
+                                                                                <?php endif; ?>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -2029,10 +2135,13 @@
                                                                                 <input type="text" class="form-control" name="order_id" value="<?php echo $stores['orderST']; ?>" placeholder="Enter Order" readonly>
                                                                             </div>
                                                                         </div>
+                                                                        <?php
+                                                                        $expdate = explode(' ', $stores['dateREST']);
+                                                                        ?>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">date required</label>
-                                                                                <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control dr<?php echo $stores['orderST']; ?>" name="Daterequired" value="<?php echo $stores['dateREST']; ?>" placeholder="Enter price" required>
+                                                                                <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control dr<?php echo $stores['orderST']; ?>" name="Daterequired" value="<?php echo  $expdate[0]; ?>" placeholder="Enter price" required>
                                                                             </div>
 
                                                                         </div>

@@ -185,7 +185,7 @@
                                     <td><?php echo $task['or_id']; ?></td>
 
                                     <!-- Main Doc -->
-                                    <td>
+                                    <td> 
                                         <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
                                         <?php $backmain = $this->db->get_where('tbl_upload_backup_main', ['sub_id_m' => $task['idteam']])->result_array(); ?>
                                         <?php if ($backmain == true) : ?>
@@ -212,13 +212,13 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php foreach ($taskmain as $taskmain) { ?>
+                                                                    <?php foreach ($backmain as $backmain) { ?>
                                                                         <tr style="text-align:center;">
-                                                                            <td><?php echo $taskmain['order_id']; ?></td>
-                                                                            <td style="text-align:left;"><?php echo $taskmain['file_name']; ?></td>
-                                                                            <td><a href="<?php echo $taskmain['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            <td><?php echo $backmain['order_id_m']; ?></td>
+                                                                            <td style="text-align:left;"><?php echo $backmain['file_name_m']; ?></td>
+                                                                            <td><a href="<?php echo $backmain['path_m']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                             <td>
-                                                                                <a href="<?php echo $taskmain['path']; ?>" class="btn btn-primary" download>
+                                                                                <a href="<?php echo $backmain['path_m']; ?>" class="btn btn-primary" download>
                                                                                     <i class="fa fa-download"></i> Download
                                                                                 </a>
                                                                             </td>
@@ -228,7 +228,7 @@
                                                             </table>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,90 +304,145 @@
                                         $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
                                         $more_file_gt_more = $this->db->get()->result_array();
                                         ?>
+                                        <?php $backgt  = $this->db->get_where('tbl_upload_backup_gt', ['sub_id_g' => $task['idteam']])->result_array(); ?>
+                                        <?php if ($backgt == true) : ?>
+                                            <?php if (!empty($backgt)) { ?>
+                                                <a href="#" data-toggle="modal" data-target="#backgt<?php echo $task['or_id']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="backgt<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document new</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <?php $t = 1; ?>
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
+                                                                        <tr style="text-align:center;">
+                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">File</th>
+                                                                            <th scope="col">Info</th>
+                                                                            <th scope="col">Downloads</th>
 
-                                        <?php if (!empty($orderGT || $more_file_gt_more)) : ?>
-                                            <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">GT Document</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="form-group" style="text-align: left;">
-                                                                <table class="table zero-configuration">
-                                                                    <thead>
-                                                                        <tr style="background: aliceblue;">
-                                                                            <th>Order_id</th>
-                                                                            <th>File_name</th>
-                                                                            <th>File</th>
-                                                                            <th>create</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <?php foreach ($orderGT as $keys => $orderGT) { ?>
-                                                                            <tr>
-                                                                                <td><?php echo $orderGT['order_id'] ?></td>
-                                                                                <td><?php echo $orderGT['file_name_GT'] ?></td>
-                                                                                <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                <td><?php echo $orderGT['create_at'] ?></td>
-                                                                            </tr>
-                                                                        <?php } ?>
-
-                                                                        <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
-                                                                            <tr>
-                                                                                <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
-                                                                                <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
-                                                                                <td><a href="<?php echo $more_file_gt_more['path_GT'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                <td><?php echo $more_file_gt_more['create_at'] ?></td>
+                                                                        <?php foreach ($backgt as $backgt) { ?>
+                                                                            <tr style="text-align:center;">
+                                                                                <td><?php echo $backgt['order_id_g']; ?></td>
+                                                                                <td style="text-align:left;"><?php echo $backgt['file_name_g']; ?></td>
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($backgt['path_g']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                                <td>
+                                                                                    <a href="<?php echo $backgt['path_g']; ?>" class="btn btn-primary" download>
+                                                                                        <i class="fa fa-download"></i> Download
+                                                                                    </a>
+                                                                                </td>
                                                                             </tr>
                                                                         <?php } ?>
                                                                     </tbody>
                                                                 </table>
+
                                                             </div>
-
-                                                            <?php $bt = $this->db->get_where('tbl_upload_backup_team', ['status_back' => 0, 'order_id_back' => $task['or_id']])->result_array(); ?>
-                                                            <?php if (!empty($bt)) :  ?>
-                                                                <div class="form-group mt-5 " style="text-align: left;">
-                                                                    <label for="" style="font-size: 18px;color: #0072ff;"> <u> GT Extension admin</u> </label>
-
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        <?php else : ?>
+                                            <?php if (!empty($orderGT || $more_file_gt_more)) : ?>
+                                                <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $y++; ?>"><i class="fa fa-file-text-o"></i></a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalGT<?php echo $r++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">GT Document</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group" style="text-align: left;">
                                                                     <table class="table zero-configuration">
                                                                         <thead>
                                                                             <tr style="background: aliceblue;">
-                                                                                <th>Order id</th>
-                                                                                <th>File name</th>
+                                                                                <th>Order_id</th>
+                                                                                <th>File_name</th>
                                                                                 <th>File</th>
                                                                                 <th>create</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <?php foreach ($bt as $keys => $bt) { ?>
+                                                                            <?php foreach ($orderGT as $keys => $orderGT) { ?>
                                                                                 <tr>
-                                                                                    <td><?php echo $bt['order_id_back'] ?></td>
-                                                                                    <td><?php echo $bt['file_name_back'] ?></td>
-                                                                                    <td><a href="<?php echo $bt['path_back'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                                    <td><?php echo $bt['create_at_back'] ?></td>
+                                                                                    <td><?php echo $orderGT['order_id'] ?></td>
+                                                                                    <td><?php echo $orderGT['file_name_GT'] ?></td>
+                                                                                    <td><a href="<?php echo $orderGT['path_GT'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><?php echo $orderGT['create_at'] ?></td>
+                                                                                </tr>
+                                                                            <?php } ?>
+
+                                                                            <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
+                                                                                    <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
+                                                                                    <td><a href="<?php echo $more_file_gt_more['path_GT'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                    <td><?php echo $more_file_gt_more['create_at'] ?></td>
                                                                                 </tr>
                                                                             <?php } ?>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
-                                                            <?php endif; ?>
 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <?php $bt = $this->db->get_where('tbl_upload_backup_team', ['status_back' => 0, 'order_id_back' => $task['or_id']])->result_array(); ?>
+                                                                <?php if (!empty($bt)) :  ?>
+                                                                    <div class="form-group mt-5 " style="text-align: left;">
+                                                                        <label for="" style="font-size: 18px;color: #0072ff;"> <u> GT Extension admin</u> </label>
+
+                                                                        <table class="table zero-configuration">
+                                                                            <thead>
+                                                                                <tr style="background: aliceblue;">
+                                                                                    <th>Order id</th>
+                                                                                    <th>File name</th>
+                                                                                    <th>File</th>
+                                                                                    <th>create</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php foreach ($bt as $keys => $bt) { ?>
+                                                                                    <tr>
+                                                                                        <td><?php echo $bt['order_id_back'] ?></td>
+                                                                                        <td><?php echo $bt['file_name_back'] ?></td>
+                                                                                        <td><a href="<?php echo $bt['path_back'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
+                                                                                        <td><?php echo $bt['create_at_back'] ?></td>
+                                                                                    </tr>
+                                                                                <?php } ?>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                <?php endif; ?>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        <?php else : ?>
-                                            -
+                                            <?php else : ?>
+                                                -
+                                            <?php endif; ?>
                                         <?php endif; ?>
+
+
                                     </td>
 
                                     <!-- DM Document -->

@@ -89,6 +89,7 @@ class My_stock_ctr extends CI_Controller
     function order_isconfirm()
     {
         $order_id       = $this->input->post('order_id');
+        $idteam         = $this->input->post('idteam');
         $is_confirm     = $this->input->post('is_confirm');
 
         $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row();
@@ -100,14 +101,15 @@ class My_stock_ctr extends CI_Controller
                 'status_confirmed_team'        => $is_confirm,
             );
 
-            $this->db->where('order_id', "ODB" . $order_id);
+            $this->db->where('order_id', $order_id);
             if ($this->db->update('tbl_upload_order', $data)) {
                 $data_team = array(
                     'teamId'            => $team->IdTeam,
                     'status_dashboard'  => 1,
                     'update_confirm'    => date('Y-m-d H:i:s')
                 );
-                $this->db->where('order_id', "ODB" . $order_id);
+                $this->db->where('order_id', $order_id);
+                $this->db->where('id', $idteam);
                 $success =  $this->db->update('tbl_upload_team', $data_team);
             }
             echo $success;

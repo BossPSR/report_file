@@ -279,7 +279,7 @@
                                                             $dateXX = date('Y-m-d H:i:s', strtotime($bookmark_all_not['created_at_buy'] . "+1 days"));
                                                             ?>
                                                             <?php if ($dateXX <= date('Y-m-d H:i:s')) : ?>
-                                                                <span class="badge badge-danger">หมดเวลา</span>
+                                                                <span class="badge badge-danger">หมดเวลาชำระเงิน</span>
                                                             <?php else : ?>
                                                                 <?php echo $bookmark_all_not['created_at_buy']; ?>
                                                             <?php endif; ?>
