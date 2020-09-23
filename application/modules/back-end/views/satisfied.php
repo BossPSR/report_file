@@ -135,8 +135,13 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <div style="text-align:right;">
-                                                                                <button class="btn btn-primary" data-toggle="modal" data-target="#up_main_file<?php echo $stores['orderST']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+                                                                            <div class="row">
+                                                                                <div class="col-6" style="text-align:left;">
+                                                                                    <button class="btn btn-primary" onclick='downloadAll(window.links,"<?php echo $stores["orderST"]; ?>")'>Download All File</button>
+                                                                                </div>
+                                                                                <div class="col-6" style="text-align:right;">
+                                                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#up_main_file<?php echo $stores['orderST']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+                                                                                </div>
                                                                             </div>
                                                                             <!-- Modal -->
                                                                             <div class="modal fade text-left" id="up_main_file<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -223,6 +228,8 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
+
+
                                                                                     <?php foreach ($order as $keys => $order) { ?>
                                                                                         <tr>
                                                                                             <td><?php echo $order['order_id'] ?></td>
@@ -327,8 +334,13 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <div style="text-align:right;">
-                                                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#up_gt_file<?php echo $stores['orderST']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+                                                                                <div class="row">
+                                                                                    <div class="col-6" style="text-align:left;">
+                                                                                        <button class="btn btn-primary" onclick='downloadAll_gt(window.links,"<?php echo $stores["orderST"]; ?>")'>Download All File</button>
+                                                                                    </div>
+                                                                                    <div class="col-6" style="text-align:right;">
+                                                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#up_gt_file<?php echo $stores['orderST']; ?>"><i class="fa fa-cloud-upload"></i> Drop file</button>
+                                                                                    </div>
                                                                                 </div>
                                                                                 <!-- Modal -->
                                                                                 <div class="modal fade text-left" id="up_gt_file<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -2186,4 +2198,78 @@
             return false;
         });
     });
+</script>
+<script>
+    var links = [];
+
+    function linkAll(data) {
+        data.forEach(element => {
+            links.push(element.path);
+        });
+    }
+
+    function downloadAll(urls, orderST) {
+        $.ajax({
+            type: 'POST',
+            data: {
+                orderST: orderST,
+
+            },
+            url: 'download_all_file_satisfied',
+            success: function(data) {
+                var result = JSON.parse(data);
+                linkAll(result);
+                console.log(result);
+
+                links.forEach(value_arr => {
+                    var a = document.createElement('A');
+                    a.href = value_arr;
+                    a.download = value_arr.substr(value_arr.lastIndexOf('/') + 1);
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                });
+
+                links = [];
+            }
+        });
+
+    }
+
+    var links_gt = [];
+
+    function linkAll_gt(data) {
+        data.forEach(element => {
+            links_gt.push(element.path_GT);
+        });
+
+    }
+
+    function downloadAll_gt(urls, orderST) {
+        $.ajax({
+            type: 'POST',
+            data: {
+                orderST: orderST,
+
+            },
+            url: 'download_all_file_satisfied_gt',
+            success: function(data) {
+                var result = JSON.parse(data);
+                linkAll_gt(result);
+                console.log(links_gt);
+
+                links_gt.forEach(value_arr => {
+                    var a = document.createElement('A');
+                    a.href = value_arr;
+                    a.download = value_arr.substr(value_arr.lastIndexOf('/') + 1);
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                });
+
+                links_gt = [];
+            }
+        });
+
+    }
 </script>

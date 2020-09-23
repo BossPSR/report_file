@@ -652,7 +652,9 @@ class Store_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-            $data['store'] = $this->db->get('tbl_upload_order')->result_array();
+         
+
+            $data['store'] = $this->Store_model->reject_buy();
             $this->load->view('options/header');
             $this->load->view('reject_for_buy', $data);
             $this->load->view('options/footer');
@@ -666,6 +668,8 @@ class Store_ctr extends CI_Controller
 
 
         $success = $this->db->delete('tbl_upload_order', ['order_id' => $order]);
+        $success = $this->db->delete('tbl_upload_orderGT', ['order_id' => $order]);
+        $success = $this->db->delete('tbl_morefile_GT', ['order_id' => $order]);
         echo $success;
     }
 

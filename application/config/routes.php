@@ -376,4 +376,6 @@ $route['cancel_dropzone_not']                       = 'back-end/Store_ctr/cancel
 $route['slide_blocked']                             = 'back-end/Team_ctr/slide_unlock';
 $route['send_feedbacktion_all']                     = 'back-end/Feedback_ctr/send_feedbacktion_all';
 $route['delete_dm_sub']                             = 'back-end/Book_ctr/delete_dm_sub';
-$route['delete_dm_folder']                             = 'back-end/Book_ctr/delete_dm_folder';
+$route['delete_dm_folder']                          = 'back-end/Book_ctr/delete_dm_folder';
+$route['download_all_file_satisfied']               = 'back-end/Customer_order_ctr/download_all_file_satisfied';
+$route['download_all_file_satisfied_gt']               = 'back-end/Customer_order_ctr/download_all_file_satisfied_gt';
