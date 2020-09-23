@@ -217,8 +217,8 @@ class Buy_ctr extends CI_Controller
 
   public function order_auto_sell()
   {
-    $userId    = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-    $date_req   =  $this->input->post('status');
+    $userId     = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+    $date_req   = $this->input->post('status');
     $orf = array(
       'create_at'     => date('Y-m-d H:i:s'),
       'status'        => $date_req
@@ -245,7 +245,7 @@ class Buy_ctr extends CI_Controller
     $message .= '<div style="max-width:800px;">';
     $message .= '<div class="content" >';
     $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-    $message .= 'You have received additional work from the admin..';
+    $message .= 'You have received additional work from the admin.';
     $message .= '</div>';
     $message .= '<div class="row">';
     $message .= '<p>Hey "' . $userId['username'] . '",</p>';
@@ -253,7 +253,6 @@ class Buy_ctr extends CI_Controller
     $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
     $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
     $message .= '<p>Check below for your order details.</p><hr>';
-    $message .= '<p> You have successfully canceled your order. (" ODS' . $insert_id . '")</p>';
     $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
 
     $message .= '</center>';
@@ -298,7 +297,6 @@ class Buy_ctr extends CI_Controller
     $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
     $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
     $message .= '<p>Check below for your order details.</p><hr>';
-    $message .= '<p> You have successfully canceled your order. (" ODB' . $insert_id . '")</p>';
     $message .= '<p style="font-size: 18px;">Thank you customers for using our services.</p>';
 
     $message .= '</center>';
