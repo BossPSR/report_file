@@ -28,6 +28,29 @@ class Customer_order_ctr extends CI_Controller
         }
     }
 
+    public function download_all_file_satisfied()
+    {
+        $order_id  = $this->input->post('orderST');
+       
+        $this->db->select('*');
+        $this->db->from('tbl_upload_order');
+        $this->db->where('order_id' , $order_id);
+        $result = $this->db->get()->result_array();
+        
+        echo json_encode($result);
+    }
+    public function download_all_file_satisfied_gt()
+    {
+        $order_id  = $this->input->post('orderST');
+       
+        $this->db->select('*');
+        $this->db->from('tbl_upload_orderGT');
+        $this->db->where('order_id' , $order_id);
+        $result = $this->db->get()->result_array();
+        
+        echo json_encode($result);
+    }
+
     public function not_satisfied()
     {
         if ($this->session->userdata('email_admin') != '') {

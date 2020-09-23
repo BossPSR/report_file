@@ -248,6 +248,19 @@ class Store_model extends CI_Model
 
       
     }
+
+    public function reject_buy()
+    {
+         $this->db->select('*,tbl_upload_order.update_at as update_buy ,tbl_upload_order.order_id as order_re,tbl_upload_order.file_name as file_name_re' );
+         $this->db->from('tbl_upload_order');
+         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id','left');
+         $this->db->join('tbl_user', 'tbl_user.idUser = tbl_upload_order.userId', 'left');
+         $this->db->join('countries', 'countries.id = tbl_user.country_id','left');
+         $this->db->where('tbl_upload_order.is_check','1');
+        return  $this->db->get()->result_array();
+
+      
+    }
         
         
 
