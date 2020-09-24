@@ -1037,7 +1037,7 @@ textarea:-ms-input-placeholder {
 }
 
 .header_middle {
-	padding: 19px 0;
+	padding: 45px 0;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.header_middle {
@@ -1632,7 +1632,7 @@ textarea:-ms-input-placeholder {
 }
 
 .main_menu nav > ul > li:nth-last-child(3) {
-	margin-right: 97px;
+	margin-right: 62px;
 }
 .main_menu nav > ul > li:last-child {
 	margin-right: 0;

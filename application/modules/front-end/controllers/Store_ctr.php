@@ -172,7 +172,7 @@ class Store_ctr extends CI_Controller
             $this->db->where('order_id', $order_id);
             $this->db->update('tbl_upload_order', ['status_pay' => 1, 'price_dis_order' => $price_dis, 'score_user' => $discount]);
 
-            if ($upload_order['status_book'] == '1' || $upload_order['status_cp'] == 'complete') {
+            if ($upload_order['status_book'] == '1' && $upload_order['status_cp'] == 'complete') {
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_bookmark' => 1]);
             }

@@ -103,11 +103,11 @@ class Store_ctr extends CI_Controller
         $organization   = $this->input->post('organization');
         $status_cp      = $this->input->post('status_cp');
         $dateUP         = date("Y-m-d", strtotime("+60 day"));
-        // if ($status_cp == 'complete') {
-        //     $book = '1';
-        // } else {
-        //     $book = '0';
-        // }
+        if ($status_cp == 'complete') {
+            $book = '1';
+        } else {
+            $book = '0';
+        }
 
         if ($team) {
             $cf = '1';
@@ -124,6 +124,7 @@ class Store_ctr extends CI_Controller
             'price_file'            => $this->input->post('price_file'),
             'Date_required'         => $this->input->post('Daterequired'),
             'status_book'           => '1',
+            'status_bookmark'       => $book,
             'organization'          => $organization,
             'update_at'             => date('Y-m-d H:i:s'),
             'notify_user'           => 0,

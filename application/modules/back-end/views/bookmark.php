@@ -392,8 +392,8 @@
                                                                                                     <?php echo $orderss['name_folder'] ?>
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <span data-toggle="modal" data-target="#groupse<?php echo $orderss['group']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
-                                                                                                    <div class="modal fade" id="groupse<?php echo $orderss['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                    <span data-toggle="modal" data-target="#groupse<?php echo $orderss['group']; ?>_<?php echo $bookmark['id_orderBuy']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
+                                                                                                    <div class="modal fade" id="groupse<?php echo $orderss['group']; ?>_<?php echo $bookmark['id_orderBuy']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                                                         <div class="modal-dialog  modal-dialog-scrollable modal-lg" role="document">
                                                                                                             <div class="modal-content">
                                                                                                                 <div class="modal-header">
