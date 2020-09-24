@@ -1,7 +1,7 @@
 <?php $user = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <br>
-<h2 class="text-center" style="margin-top: 15px;">Withdraw</h2>
+<h2 class="text-center" style="margin-top: 15px;">ถอนเงิน</h2>
 <hr class="line_package">
 <br>
 <!--services img area-->

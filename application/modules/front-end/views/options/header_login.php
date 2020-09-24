@@ -400,7 +400,7 @@
 
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['commission']); ?></div>
-                                                    <div>Commission </div>
+                                                    <div>ค่าแนะนำของฉัน </div>
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
@@ -420,16 +420,16 @@
                                                         ?>
                                                         <?php echo $discountUser; ?>%
                                                     </div>
-                                                    <div>Discount</div>
+                                                    <div>ส่วนลด</div>
                                                 </div>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['score']); ?></div>
-                                                    <div>Score</div>
+                                                    <div>คะแนนสะสม</div>
                                                 </div>
 
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
-                                                    <div>My Wallet</div>
+                                                    <div>กระเป๋าตังค์</div>
                                                 </div>
                                             </div>
                                         <?php elseif ($team == true) : ?>

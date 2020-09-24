@@ -34,7 +34,7 @@ class Login_ctr extends CI_Controller
                 // );
 
                 // $this->db->insert('tbl_status_team', $check_status);
-                $this->session->set_flashdata('save_ss2', 'Welcome to Fileback Help');
+                $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
                 redirect('home');
             } elseif ($this->Login_model->login_user_block($email, $password)) {
                 $this->session->set_flashdata('login_user_block', TRUE);
@@ -47,7 +47,7 @@ class Login_ctr extends CI_Controller
                 $save_sss = $this->session->set_flashdata('save_ss', TRUE);
                 $user = $this->db->get_where('tbl_user', ['email' => $email])->row_array();
                 if ($user['package_user'] == '') {
-                    $this->session->set_flashdata('save_ss2', 'Welcome to Fileback Help');
+                    $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
                     redirect('package');
                 }else{
                     $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
@@ -67,7 +67,7 @@ class Login_ctr extends CI_Controller
                             $this->session->set_flashdata('package_timeOut_1_day', TRUE);
                         }
                     }
-                    $this->session->set_flashdata('save_ss2', 'Welcome to Fileback Help');
+                    $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
                     redirect('my-profile');
                 }
                
@@ -85,7 +85,7 @@ class Login_ctr extends CI_Controller
                 );
 
                 $this->db->insert('tbl_status_team', $check_status);
-                $this->session->set_flashdata('save_ss2', 'Welcome to Fileback Help');
+                $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
                 redirect('home');
             } elseif ($this->Login_model->login_team_c($email, $password)) {
                 $this->session->set_flashdata('fail_login_status', TRUE);

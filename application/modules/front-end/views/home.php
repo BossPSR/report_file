@@ -135,7 +135,8 @@
             <div class="col-lg-1 col-md-1 text-center"></div>
             <div class="col-lg-5 col-md-5 text-center">
                 <div class="section_title">
-                    <h2><?= $this->lang->line("Highestscore"); ?> </h2>
+                    <h2>คะแนนสูงสุด</h2>
+                    <!-- <?= $this->lang->line("Highestscore"); ?> -->
 
                 </div>
                 <br>
@@ -147,7 +148,7 @@
             </div>
             <div class="col-lg-5 col-md-5 text-center">
                 <div class="section_title">
-                    <h2>Poster </h2>
+                    <h2>โปรเตอร์ </h2>
                 </div>
                 <br>
                 <?php $poster = $this->db->get('tbl_poster')->row_array(); ?>
