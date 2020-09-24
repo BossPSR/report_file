@@ -118,7 +118,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>

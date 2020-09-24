@@ -814,7 +814,7 @@
 
                                         </td>
 
-                                    <?php elseif ($task['c_status'] == 2 || $task['c_status'] == 3 && $task['status_check_team'] == 0) : ?>
+                                    <?php elseif ($task['c_status'] == 0 || $task['c_status'] == 1 || $task['c_status'] == 2 || $task['c_status'] == 3 || $task['c_status'] == 5 && $task['status_check_team'] == 0) : ?>
                                         <td>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>"><i class="fa fa-times-circle"></i></button>
                                             <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

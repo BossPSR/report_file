@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="public/frontend/assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="public/frontend/assets/img/logo/1255.png">
 
     <!-- CSS 
     ========================= -->
@@ -68,6 +68,7 @@
 </head>
 
 <body>
+
     <script>
         $('#myModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
@@ -89,17 +90,17 @@
                     </button>
                 </div>
                 <div class="row text-center">
-                    <div class="col-md-12"><img style="width: 250px;" src="public/frontend/assets/img/logo/logo4.png" alt=""></div>
+                    <div class="col-md-12"><img style="width: 250px;" src="public/frontend/assets/img/logo/1277.png" alt=""></div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="account_form">
                             <form action="loginme" method="post">
                                 <p>
-                                    <label>Email <span>*</span></label>
+                                    <label>อีเมล <span>*</span></label>
                                     <input type="email" name="email" required>
                                 </p>
-                                <label>Password</label>
+                                <label>รหัสผ่าน</label>
                                 <div class="input-group mb-3" id="show_hide_password">
                                     <input type="password" class="form-control" name="password" aria-describedby="basic-addon1" required>
                                     <div class="input-group-prepend">
@@ -107,10 +108,10 @@
                                     </div>
                                 </div>
                                 <div class="login_submit">
-                                    <a href="forget_password">Lost your password?</a>
+                                    <a href="forget_password">ลืมรหัสผ่าน?</a>
                                 </div>
                                 <div class="login_submit">
-                                    <button type="submit">login</button>
+                                    <button type="submit">เข้าสู่ระบบ</button>
                                 </div>
 
                             </form>
@@ -150,7 +151,7 @@
                                     <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                 <?php else : ?>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                    <li><a href="register"> Sign up </a></li>
+                                    <li><a href="register"> สมัครสมาชิก </a></li>
                                 <?php endif  ?>
                                 <li><a href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>"> TH </a></li>
                                 <li><a href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>"> ENG </a></li>
@@ -175,7 +176,7 @@
                             <ul class="offcanvas_main_menu">
                                 <?php if ($user) :  ?>
                                     <li class="menu-item-has-children">
-                                        <a href="home"> Home</a>
+                                        <a href="home"> หน้าแรก</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="buy"> My Buy</a>
@@ -206,7 +207,7 @@
                                     </li>
                                 <?php elseif ($team) : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="home"> Home</a>
+                                        <a href="home"> หน้าแรก</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="My-stock-Item"> Order List</a>
@@ -229,7 +230,7 @@
                                     </li>
                                 <?php else : ?>
                                     <li class="menu-item-has-children">
-                                        <a href="home"> Home</a>
+                                        <a href="home"> หน้าแรก</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#exampleModalCenter" data-toggle="modal"> My Buy</a>
@@ -277,7 +278,7 @@
     <header>
         <div class="main_header">
             <!--header top start-->
-            <div class="header_top">
+            <div class="header_top" style="background-color: #2b2871;">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
@@ -292,8 +293,8 @@
                                     <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 
                                     <?php if ($user == true) :  ?>
-                                        <li><a href="my-profile"> <?php echo $user['idUser'] ?> </a> <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
-                                        <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
+                                        <li><a style="color: white;" href="my-profile"> <?php echo $user['idUser'] ?> </a> <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
+                                        <li><a style="color: white;" href="Logout" onclick="return confirm('Are you sure to logout?');"> ออกจากระบบ </a></li>
                                     <?php elseif ($team == true) : ?>
                                         <li>
                                             <div class="dropdown">
@@ -318,14 +319,14 @@
                                                     <li style="margin: 5px 10px;"><a href="teamOffline"><i class="fa fa-circle" style="color:#b6b6b6;"></i> Offline</a></li>
                                                 </ul>
                                         </li>
-                                        <li><a href="My-profile_team"> <?php echo $team['name']; ?> </a> <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
-                                        <li><a href="Logout?team=team" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
+                                        <li><a style="color: white;" href="My-profile_team"> <?php echo $team['name']; ?> </a> <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
+                                        <li><a style="color: white;" href="Logout?team=team" onclick="return confirm('Are you sure to logout?');"> ออกจากระบบ </a></li>
                                     <?php else :  ?>
-                                        <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
-                                        <li><a href="main"> Sign up </a></li>
+                                        <li><a style="color: white;" href="#exampleModalCenter" data-toggle="modal"> เข้าสู่ระบบ </a></li>
+                                        <li><a style="color: white;" href="main"> สมัครสมาชิก </a></li>
                                     <?php endif  ?>
-                                    <li><a href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>"> TH </a></li>
-                                    <li><a href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>"> ENG </a></li>
+                                    <li><a style="color: white;" href="change?type=thailand&uri=<?php echo $this->uri->segment(1); ?>"> TH </a></li>
+                                    <li><a style="color: white;" href="change?type=english&uri=<?php echo $this->uri->segment(1); ?>"> ENG </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -333,22 +334,65 @@
                 </div>
             </div>
             <!--header top start-->
+            <style>
+                #try {
+                    overflow: hidden;
+                    /* Ensures the content is not revealed until the animation */
+                    border-right: .15em solid orange;
+                    /* The typwriter cursor */
+                    white-space: nowrap;
+                    /* Keeps the content on a single line */
+                    margin: 0 auto;
+                    /* Gives that scrolling effect as the typing happens */
+                    letter-spacing: .15em;
+                    /* Adjust as needed */
+                    animation:
+                        typing 3.5s steps(40, end),
+                        blink-caret .75s step-end infinite;
+                }
 
+                /* The typing effect */
+                @keyframes typing {
+                    from {
+                        width: 0
+                    }
+
+                    to {
+                        width: 100%
+                    }
+                }
+
+                /* The typewriter cursor effect */
+                @keyframes blink-caret {
+
+                    from,
+                    to {
+                        border-color: transparent
+                    }
+
+                    50% {
+                        border-color: orange;
+                    }
+                }
+            </style>
             <!--header middel start-->
-            <div class="header_middle" style="background: #2b286f;">
-                <div class="container">
+            <div class="header_middle" style="background-image: linear-gradient(#2b286f, #282392);">
+                <div class="container" style="max-width: 1470px;">
                     <div class="row align-items-center">
-                        <div class="col-lg-2 col-md-6">
+                        <div class="col-lg-3 col-md-6">
                             <div class="logo">
-                                <a href="home"><img src="public/frontend/assets/img/logo/3.png" alt=""></a>
+                                <a href="home"><img src="public/frontend/assets/img/logo/1299.png" alt=""></a>
                             </div>
                         </div>
-                        <div class="col-lg-10 col-md-6">
+                        <div class="typewriter text-center">
+                            <h2 style="color: #fff;" id="try">รับค่าคอมมิชชั่นง่ายๆสูงสุด $40</h2>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
                             <div class="middel_right">
                                 <?php if ($user == false) :  ?>
-                                    <div class="search_container">
+                                    <div class="search_container" style="margin-right: 0px;">
                                     <?php elseif ($team == true) : ?>
-                                        <div class="search_container">
+                                        <div class="search_container" style="margin-right: 0px;">
                                         <?php else : ?>
                                         <?php endif ?>
                                         <?php if ($user == true) : ?>
@@ -455,31 +499,31 @@
             <!--header middel end-->
 
             <!--header bottom satrt-->
-            <div class="main_menu_area" style="background: #2b286f;border-top: 1px solid white;">
+            <div class="main_menu_area" style="background: #282390;border-top: 1px solid white;">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-12">
                             <div class="categories_menu" style="padding-bottom: 8px;">
-                                <div class="categories_title" style="    background: #2b286f;">
-                                    <h2 class="categori_toggle">Category</h2>
+                                <div class="categories_title" style="background: #282390;">
+                                    <h2 class="categori_toggle">รายการอื่นๆ</h2>
                                 </div>
                                 <div class="categories_menu_toggle">
                                     <ul>
                                         <?php if ($user) :  ?>
-                                            <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <li><a href="my-rewards"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
                                             <li>
-                                                <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
+                                                <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
 
                                         <?php elseif ($team) : ?>
-                                            <li><a href="my-rewards-team"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <li><a href="my-rewards-team"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
                                             <li>
-                                                <a href="user-manual"> Team manual <i class="fa fa-angle-right"></i></a>
+                                                <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
                                         <?php else : ?>
-                                            <li><a href="my-rewards"> My Rewards <i class="fa fa-angle-right"></i></a></li>
+                                            <li><a href="my-rewards"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
                                             <li>
-                                                <a href="user-manual"> User manual <i class="fa fa-angle-right"></i></a>
+                                                <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
                                         <?php endif ?>
                                     </ul>
@@ -491,26 +535,26 @@
                                 <nav>
                                     <ul>
                                         <?php if ($user) :  ?>
-                                            <li><a href="home"> Home</a></li>
-                                            <li><a href="buy"> My buy <div class="arrow_box"></div></a></li>
-                                            <li><a href="order"> My order </a></li>
-                                            <li><a href="store"> My Sell </a></li>
+                                            <li><a href="home"> หน้าแรก</a></li>
+                                            <li><a href="buy"> สั่งออร์เดอร์ <div class="arrow_box"></div></a></li>
+                                            <li><a href="order"> ออร์เดอร์ของฉัน </a></li>
+                                            <li><a href="store"> แลกคะแนนส่วนลด </a></li>
                                             <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
-                                                    <li><a href="my-selling">Sale</a></li>
+                                                    <li><a href="my-selling">ได้รับคะแนน</a></li>
                                                     <li><a href="my-cashback">Cashback</a></li>
                                                     <li><a href="my-rewards-list">Rewards</a></li>
                                                     <li><a href="my-commission">Commission</a></li>
-                                                    <li><a href="my-deduct">Deduct</a></li>
-                                                    <li><a href="my-reject">Reject</a></li>
+                                                    <li><a href="my-deduct">ถูกหักคะแนน</a></li>
+                                                    <li><a href="my-reject">ไม่ผ่านเกณฑ์</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="package"> Package</a></li>
+                                            <li><a href="package"> แพ็คเกจ</a></li>
                                             <li><?php $this->load->view('options/notify_user'); ?></li>
                                             <li> </li>
 
                                         <?php elseif ($team) : ?>
-                                            <li><a href="home"> Home</a></li>
+                                            <li><a href="home"> หน้าแรก</a></li>
                                             <li>
                                                 <a href="My-stock-Item"> Order List</a>
                                             </li>
@@ -539,20 +583,20 @@
                                             <li></li>
                                             <li><?php $this->load->view('options/notify_team'); ?></li>
                                         <?php else : ?>
-                                            <li><a href="home"> Home</a></li>
-                                            <li><a href="#exampleModalCenter" data-toggle="modal"> My Buy <div class="arrow_box"></div></a></li>
-                                            <li><a href="#exampleModalCenter" data-toggle="modal"> My Sell </a></li>
-                                            <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
+                                            <li><a href="home"> หน้าแรก</a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> สั่งออร์เดอร์ <div class="arrow_box"></div></a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> แลกคะแนนส่วนลด </a></li>
+                                            <li><a href="#">ข้อมูลคะแนน<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
-                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Sale</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">ได้รับคะแนน</a></li>
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Cashback</a></li>
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Rewards</a></li>
                                                     <li><a href="#exampleModalCenter" data-toggle="modal">Commission</a></li>
-                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Deduct</a></li>
-                                                    <li><a href="#exampleModalCenter" data-toggle="modal">Reject</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">ถูกหักคะแนน</a></li>
+                                                    <li><a href="#exampleModalCenter" data-toggle="modal">ไม่ผ่านเกณฑ์</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#exampleModalCenter" data-toggle="modal"> Package</a></li>
+                                            <li><a href="#exampleModalCenter" data-toggle="modal"> แพ็คเกจ</a></li>
                                             <li></li>
                                             <li></li>
                                             <!-- <li class="menu-item-has-children">
@@ -593,7 +637,7 @@
                                     <span>
                                         <i class="fa fa-google-wallet" aria-hidden="true"></i>
                                         <br>
-                                        My wallet
+                                        กระเป๋าตังค์
                                     </span>
                                 </li>
                             </a>
@@ -602,7 +646,7 @@
                                     <span>
                                         <i class="fa fa-money" aria-hidden="true"></i>
                                         <br>
-                                        Deposit
+                                        เติมเงิน
                                     </span>
                                 </li>
                             </a>
@@ -612,7 +656,7 @@
                                     <span>
                                         <i class="fa fa-minus-square" aria-hidden="true"></i>
                                         <br>
-                                        Withdraw
+                                        ถอนเงิน
                                     </span>
                                 </li>
                             </a>
@@ -622,7 +666,7 @@
                                 <span>
                                     <i class="fa fa-file-text-o" aria-hidden="true"></i>
                                     <br>
-                                    My slip
+                                    ใบเสร็จของฉัน
                                 </span>
                             </li>
                         </a>

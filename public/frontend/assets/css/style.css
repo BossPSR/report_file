@@ -923,7 +923,7 @@ textarea:-ms-input-placeholder {
 }
 
 .header_top {
-	border-bottom: 1px solid #ebebeb;
+	/* border-bottom: 1px solid #ebebeb; */
 	background: #f8f9f9;
 }
 @media only screen and (max-width: 767px) {
@@ -994,7 +994,7 @@ textarea:-ms-input-placeholder {
 	content: "";
 	width: 1px;
 	height: 12px;
-	background: #1f1f1f;
+	background: #fff;
 	top: 50%;
 	right: 0px;
 	transform: translatey(-50%);
@@ -1585,7 +1585,7 @@ textarea:-ms-input-placeholder {
 /* 2.4 main menu css here */
 .main_menu_area {
 	background: #0063d1;
-	height: 51px;
+	/* height: 51px; */
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.main_menu_area {
@@ -1849,8 +1849,8 @@ textarea:-ms-input-placeholder {
 	padding: 0 30px;
 	position: relative;
 	cursor: pointer;
-	height: 47px;
-	line-height: 48px;
+	height: 67px;
+	line-height: 73px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.categories_title {
