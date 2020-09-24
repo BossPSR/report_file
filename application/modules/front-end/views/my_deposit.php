@@ -9,7 +9,7 @@ $this->db->where('status_delivery', 1);
 $sm_del = $this->db->get()->row_array();
 ?>
 <br>
-<h2 class="text-center" style="margin-top: 15px;">Deposit</h2>
+<h2 class="text-center" style="margin-top: 15px;">เติมเงิน</h2>
 <hr class="line_package">
 <br>
 <!--services img area-->
@@ -40,7 +40,7 @@ $sm_del = $this->db->get()->row_array();
         <div class="row">
           <div class="col-lg-5 col-md-5 wall-center shadow-b ml-20">
             <div class="p-30 text-center color-w">
-              My wallet
+            กระเป๋าตังค์
             </div>
             <div class="p-15 text-center color-p">
               $ <?php echo number_format($user['cash']); ?>
@@ -56,7 +56,7 @@ $sm_del = $this->db->get()->row_array();
 
           <div class="col-lg-6 col-md-6 wall-center shadow-b ml-20">
             <div class="p-30 text-center color-w">
-              My Jobs
+              งานของฉัน
             </div>
             <div class="p-15 text-center color-p">
               <?php echo number_format($sm_del['sum_delivery']); ?>

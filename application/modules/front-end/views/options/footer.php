@@ -365,18 +365,18 @@
     <?php endif; ?>
 
     <?php if ($this->session->flashdata('del_ss')) : ?>
-        swal("fill !", "Please enter the Passwords do not match. !!", "error");
+        swal("fell !", "Please enter the Passwords do not match. !!", "error");
     <?php endif; ?>
 
     <?php if ($this->session->flashdata('email_ss')) : ?>
-        swal("fill !", "Please enter the Email correctly !!", "error");
+        swal("fell !", "Please enter the Email correctly !!", "error");
     <?php endif; ?>
 
     <?php if ($this->session->flashdata('nomoney')) : ?>
-        swal("fill !", "Your money is not enough to withdraw money.", "error");
+        swal("fell !", "Your money is not enough to withdraw money.", "error");
     <?php endif; ?>
     <?php if ($this->session->flashdata('without')) : ?>
-        swal("fill !", "Not enough money Please top up!!", "error");
+        swal("fell !", "Not enough money Please top up!!", "error");
     <?php endif; ?>
     <?php if ($this->session->flashdata('reject')) : ?>
         swal("Rejected!", "You have already rejected!!", "error");
@@ -387,7 +387,7 @@
         swal("Good job!", "Upload for data successfull", "success");
     <?php endif; ?>
     <?php if ($this->session->flashdata('upload_fail')) : ?>
-        swal("fill !", "Error for upload. Please try again later.!", "error");
+        swal("fell !", "Error for upload. Please try again later.!", "error");
     <?php endif; ?>
 </script>
 <script>

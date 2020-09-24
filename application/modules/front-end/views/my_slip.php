@@ -31,7 +31,7 @@
 
 
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Slip</h2>
+<h2 class="text-center" style="margin-top: 15px;">ใบเสร็จของฉัน</h2>
 <hr class="line_package">
 <br>
 <!--services img area-->
