@@ -32,7 +32,7 @@ class Feedback_model extends CI_Model
     {
         $this->db->select('*,tbl_feedback.create_at AS time
         ,tbl_feedback.id AS id_f ,tbl_upload_team.teamId AS team,tbl_upload_order.date_required as date_re
-        ,tbl_upload_team.status statusall');
+        ,tbl_upload_team.status statusall,tbl_upload_team.note as note_team');
         $this->db->from('tbl_feedback');
         $this->db->join('tbl_upload_team', 'tbl_feedback.order_id=tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_upload_order', 'tbl_feedback.order_id=tbl_upload_order.order_id', 'left');

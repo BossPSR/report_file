@@ -381,3 +381,4 @@ $route['delete_dm_folder']                          = 'back-end/Book_ctr/delete_
 $route['download_all_file_satisfied']               = 'back-end/Customer_order_ctr/download_all_file_satisfied';
 $route['download_all_file_satisfied_gt']            = 'back-end/Customer_order_ctr/download_all_file_satisfied_gt';
 $route['rename_filename_for_sell']                  = 'back-end/Store_ctr/rename_filename_for_sell';
+$route['upload_team_ST_feedback_all']                  = 'back-end/Feedback_ctr/upload_team_ST_feedback_all';

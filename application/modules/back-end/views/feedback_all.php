@@ -89,7 +89,7 @@
                                                 <?php $x = 1 ?>
                                                 <?php foreach ($feedback_team as $keyBook => $feedback_team) { ?>
                                                     <tr>
-                                                        <td><?php echo $feedback_team['order_id'] ?> <?= $feedback_team['id_f']; ?> </td>
+                                                        <td><?php echo $feedback_team['order_id'] ?></td>
                                                         <td><?php echo $feedback_team['userId'] ?></td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?= $feedback_team['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
@@ -437,6 +437,108 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
+                                                        <?php if ($feedback_team['status_cp'] == 'complete') :?>
+                                                            <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $feedback_team['order_id']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
+                                                            <div class="modal fade" id="exampleModalUpload<?php echo $feedback_team['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team (<?php echo $feedback_team['order_id']; ?>)</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="upload_team_ST_feedback_all" method="POST" class="form-horizontal">
+                                                                    <div class="modal-body">
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Order</label>
+                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $feedback_team['order_id']; ?>" placeholder="Enter Order" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <?php
+                                                                        $expdate = explode(' ', $feedback_team['date_re']);
+                                                                        ?>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">date required</label>
+                                                                                <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control dr<?php echo $feedback_team['order_id']; ?>" name="Daterequired" value="<?php echo  $expdate[0]; ?>" placeholder="Enter price" required>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">position</label>
+                                                                                <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
+                                                                                <select name="position" class="form-control" required>
+                                                                                    <option value="" selected disabled>select</option>
+                                                                                    <?php foreach ($select_postion as $keys => $select_postion) { ?>
+                                                                                        <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">wage(10%)</label>
+
+                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $feedback_team['price_file'] * 10 / 100; ?>" placeholder="Enter wage">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <fieldset>
+                                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                        <input type="checkbox" class="ckeck<?php echo $feedback_team['order_id']; ?>" data-order="<?php echo $feedback_team['order_id']; ?>">
+                                                                                        <span class="vs-checkbox">
+                                                                                            <span class="vs-checkbox--check">
+                                                                                                <i class="vs-icon feather icon-check"></i>
+                                                                                            </span>
+                                                                                        </span>
+                                                                                        <span class="">Add Team</span>
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1" id="teambox<?php echo $feedback_team['order_id']; ?>" style="display: none">
+                                                                            <div class="form-group">
+                                                                                <label for="team">Team Id</label>
+                                                                                <select class="select2 form-control" name="team" id="team<?php echo $feedback_team['order_id']; ?>">
+                                                                                    <option disabled selected> -- Select Team -- </option>
+                                                                                    <?php foreach ($ts as $tsM) { ?>
+                                                                                        <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note Client</label>
+                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"><?php echo $feedback_team['note_user']; ?></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">Note Team</label>
+                                                                                <textarea class="form-control" name="note_t" rows="5" placeholder="Enter Note"><?php echo $feedback_team['note_team']; ?></textarea>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                                                                            <div class="add-data-btn mr-1">
+                                                                                <button type="submit" class="btn btn-primary">submit</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                        <?php else:?>
                                                             <?php if ($feedback_team['status_c_feedack_team'] == 0) : ?>
                                                                 <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $feedback_team['id_f']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-alert-circle"></i></button>
                                                                 <?php if ($feedback_team['status_cp'] == '') : ?>
@@ -448,6 +550,7 @@
                                                                         <i class="feather icon-log-out"></i>
                                                                     </button>
                                                                 <?php endif; ?>
+                                                              
 
                                                                 <!-- elseif ($feedback_team['status_c_feedack_team'] == 2) : 
                                                                 <span class="badge badge-pill badge-danger">Not delivered </span> -->
@@ -462,6 +565,7 @@
                                                                 <span class="badge badge-pill badge-warning">Processing </span>
                                                             <?php else : ?>
                                                                 -
+                                                            <?php endif; ?>
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
