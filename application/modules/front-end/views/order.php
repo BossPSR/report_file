@@ -297,6 +297,7 @@
                                     </td>
 
                                     <!-- Tool -->
+
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
@@ -394,7 +395,7 @@
 
                                                 <?php } else { ?>
 
-                                                    <button type="button" class="btn btn-warning" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                    <button type="button" class="btn btn-warning" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Feedback (แก้ไขงาน)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                                         <?php if ($N_count['od'] == '0') : ?>
 
                                                         <?php else : ?>
@@ -553,7 +554,7 @@
 
                                                 <?php } else { ?>
 
-                                                    <button type="button" class="btn btn-danger" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                    <button type="button" class="btn btn-danger" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Re Feedback (แก้ไขงาน)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                                         <?php if ($ref_count['odref'] == '0') : ?>
 
                                                         <?php else : ?>
@@ -683,9 +684,9 @@
 
 
                                             <?php if ($value['status_delivery'] == 1) { ?>
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id=""><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id="" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"><i class="fa fa-check" aria-hidden="true"></i></button>
                                             <?php } else { ?>
-                                                <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"></i></button>
                                             <?php } ?>
 
                                             <!-- Modal -->
@@ -728,9 +729,9 @@
                                             <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
                                                 <?php if ($value['status_delivery'] == 1) { ?>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>"><i class="fa fa-times-circle"></i></button>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Not Approve (ไม่อนุมัติ)"><i class="fa fa-times-circle"></i></button>
                                                 <?php } else { ?>
-                                                    <button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button>
+                                                    <button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Not Approved (ไม่อนุมัติ)"><i class="fa fa-times-circle"></i></button>
                                                 <?php } ?>
 
                                                 <!-- Modal -->
@@ -815,8 +816,8 @@
                                         <?php } else { ?>
 
                                             <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
-                                            <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-
+                                            <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info" data-toggled="tooltip" data-placement="top" title="More File (ส่งข้อมูลเพิ่มเติม)"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                           
                                             <!-- Modal -->
                                             <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">

@@ -142,7 +142,7 @@ foreach ($store as $upload_main_searchDetail) {
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                 <?php $tus = $this->db->get_where('tbl_upload_store', ['store_id' =>  $orders['store_id']])->result_array();  ?>
-                                                                                <table class="table table-hover zero-configuration">
+                                                                                <table class="table table-hover zero-configuration" id="here<?php echo $orders['store_id']?>">
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th>Store Id</th>
@@ -157,7 +157,33 @@ foreach ($store as $upload_main_searchDetail) {
                                                                                         <?php foreach ($tus as $key => $tus) : ?>
                                                                                             <tr>
                                                                                                 <td><?php echo $tus['store_id']; ?></td>
-                                                                                                <td> <?php echo $tus['file_name']; ?></td>
+                                                                                                <td><?php echo $tus['file_name']; ?><a href="" data-toggle="modal" data-target="#rename<?php echo $tus['store_id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                    <!-- Modal -->
+                                                                                                    <div class="modal fade text-left" id="rename<?php echo $tus['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <h5>Rename</h5>
+                                                                                                                    <?php $or_file_name = explode('.', $tus['file_name']); ?>
+                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_name<?php echo $tus['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_name<?php echo $tus['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" id="pathmain<?php echo $tus['id']; ?>" data-pathgt="<?php echo $tus['path']; ?>" class="form-control">
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="button" class="btn btn-primary ey" id="re_file_name_button<?php echo $tus['id']; ?>" data-store="<?php echo $tus['store_id']; ?>"  data-fmain="<?php echo $tus['id']; ?>">Submit</button>
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </td>   
                                                                                                 <td>
                                                                                                     <?php
                                                                                                     $file_nameS = $tus['file_name'];
@@ -352,7 +378,35 @@ foreach ($store as $upload_main_searchDetail) {
     </div>
 </div>
 <!-- END: Content-->
+<script>
+    $('body').on('click', 'button[type="button"].ey', function() {
+        var c = $(this).data('fmain');
+        var store = $(this).data('store');
+        var d = $('#pathmain' + c).data('pathgt');
+        var name_file = $('#Re_file_name' + c).val();
+        var last_file = $('#Re_last_name' + c).val();
 
+        $.ajax({
+            url: "rename_filename_for_sell",
+            type: "POST",
+            data: {
+                id: c,
+                name_file: name_file,
+                last_file: last_file,
+                path: d
+            },
+            success: function(success) {
+                if (success) {
+                    swal("Good job!", "Upload for data successfull", "success", {
+                        button: true,
+                    });
+                    $("#here<?php echo $orders['store_id']; ?>").load(window.location.href + " #here<?php echo $orders['store_id']; ?>");
+                    $('#rename' + store).modal('hide');
+                }
+            }
+        });
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('body').on('change', '#categories', function() {

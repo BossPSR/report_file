@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">Delivery</h2>
+<h2 class="text-center" style="margin-top: 15px;">ส่งงานที่นี่</h2>
 <hr class="line_package">
 <!--wishlist area start -->
 <style>

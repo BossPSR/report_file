@@ -466,7 +466,11 @@
 <!-- <script src="public/frontend/assets/dist/dropzone-amd-module.js"></script> -->
 
 <script src="public/frontend/assets/js/myscript.js"></script>
-
+<script>
+    $(function() {
+        $('[data-toggled="tooltip"]').tooltip()
+    })
+</script>
 
 <script type='text/javascript'>
     // Dropzone.autoDiscover = false;

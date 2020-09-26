@@ -688,6 +688,29 @@ class Store_ctr extends CI_Controller
         }
     }
 
+    public function rename_filename_for_sell()
+    {
+        $id = $this->input->post('id');
+        $name_file = $this->input->post('name_file');
+        $last_file = $this->input->post('last_file');
+        $path = $this->input->post('path');
+
+        if ($this->session->userdata('email_admin') != '') {
+            rename($path, 'uploads/Store/' . $name_file . '.' . $last_file);
+            if ($id) {
+                $update = [
+                    'file_name' => $name_file . '.' . $last_file,
+                    'path' => 'uploads/Store/' . $name_file . '.' . $last_file,
+                ];
+                $this->db->where('id', $id);
+                $success = $this->db->update('tbl_upload_store', $update);
+                echo $success;
+            }
+        } else {
+            redirect('back_store_checkForsell');
+        }
+    }
+
     public function store_add_com()
     {
         $id = $this->input->post('id');

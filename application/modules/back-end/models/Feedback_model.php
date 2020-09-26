@@ -30,7 +30,7 @@ class Feedback_model extends CI_Model
 
     public function feedback_team()
     {
-        $this->db->select('*,tbl_feedback.id AS id_num,tbl_feedback.create_at AS time
+        $this->db->select('*,tbl_feedback.create_at AS time
         ,tbl_feedback.id AS id_f ,tbl_upload_team.teamId AS team,tbl_upload_order.date_required as date_re
         ,tbl_upload_team.status statusall');
         $this->db->from('tbl_feedback');
