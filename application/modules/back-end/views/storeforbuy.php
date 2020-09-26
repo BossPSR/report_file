@@ -266,21 +266,40 @@
                                                             <?php if (date("Y-m-d H:i:s") > $stored['date_required']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d', strtotime($stored['date_required'])); ?>
-                                                                <div id="clock-b<?php echo $stored['order_id']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $stored['order_id']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                <p id="demo<?php echo $stored['order_id']; ?>" style="font-size: 18px;font-weight: bold;"></p>
+															<?php endif; ?>
+															<script>
+                                                                var datep<?php echo $stored['order_id']; ?> = "<?= $stored['date_required']; ?>";
+                                                                
+                                                                // Set the date we're counting down to
+                                                                var countDownDate<?php echo $stored['order_id']; ?> = new Date(datep<?php echo $stored['order_id']; ?>);
 
-                                                                    });
-                                                                </script>
-                                                            <?php endif; ?>
+                                                                // Update the count down every 1 second
+                                                                var x<?php echo $stored['order_id']; ?> = setInterval(function() {
+
+                                                                    // Get today's date and time
+                                                                    var now<?php echo $stored['order_id']; ?> = new Date();
+
+                                                                    // Find the distance between now and the count down date
+                                                                    var distance<?php echo $stored['order_id']; ?> = countDownDate<?php echo $stored['order_id']; ?> - now<?php echo $stored['order_id']; ?>;
+
+                                                                    // Time calculations for days, hours, minutes and seconds
+                                                                    var days<?php echo $stored['order_id']; ?> = Math.floor(distance<?php echo $stored['order_id']; ?> / (1000 * 60 * 60 * 24));
+                                                                    var hours<?php echo $stored['order_id']; ?> = Math.floor((distance<?php echo $stored['order_id']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                    var minutes<?php echo $stored['order_id']; ?> = Math.floor((distance<?php echo $stored['order_id']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                    var seconds<?php echo $stored['order_id']; ?> = Math.floor((distance<?php echo $stored['order_id']; ?> % (1000 * 60)) / 1000);
+
+                                                                    // Output the result in an element with id="demo"
+                                                                    document.getElementById("demo<?php echo $stored['order_id']; ?>").innerHTML = days<?php echo $stored['order_id']; ?> + "Day " + hours<?php echo $stored['order_id']; ?> + "h " +
+                                                                        minutes<?php echo $stored['order_id']; ?> + "m " + seconds<?php echo $stored['order_id']; ?> + "s ";
+
+                                                                    // If the count down is over, write some text 
+                                                                    if (distance<?php echo $stored['order_id']; ?> < 0) {
+                                                                        clearInterval(x<?php echo $stored['order_id']; ?>);
+                                                                        document.getElementById("demo<?php echo $stored['order_id']; ?>").innerHTML = "หมดเวลา";
+                                                                    }
+                                                                }, 1000);
+                                                            </script>
                                                         </td>
                                                         <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['order_id']; ?>">
                                                                 Satisfired

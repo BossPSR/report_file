@@ -599,19 +599,40 @@
                                                                     </div>
                                                                 </div>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d', strtotime($store['dateNOT'])); ?>
-                                                                <div id="clock-b<?php echo $store['id_num']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $store['id_num']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                <p id="demo<?php echo $store['orderNOT']; ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-                                                                    });
+
+                                                                <script>
+                                                                    var datep<?php echo $store['orderNOT']; ?> = "<?=  $store['dateNOT']; ?>";
+
+                                                                    // Set the date we're counting down to
+                                                                    var countDownDate<?php echo $store['orderNOT']; ?> = new Date(datep<?php echo $store['orderNOT']; ?>);
+
+                                                                    // Update the count down every 1 second
+                                                                    var x<?php echo $store['orderNOT']; ?> = setInterval(function() {
+
+                                                                        // Get today's date and time
+                                                                        var now<?php echo $store['orderNOT']; ?> = new Date();
+
+                                                                        // Find the distance between now and the count down date
+                                                                        var distance<?php echo $store['orderNOT']; ?> = countDownDate<?php echo $store['orderNOT']; ?> - now<?php echo $store['orderNOT']; ?>;
+
+                                                                        // Time calculations for days, hours, minutes and seconds
+                                                                        var days<?php echo $store['orderNOT']; ?> = Math.floor(distance<?php echo $store['orderNOT']; ?> / (1000 * 60 * 60 * 24));
+                                                                        var hours<?php echo $store['orderNOT']; ?> = Math.floor((distance<?php echo $store['orderNOT']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                        var minutes<?php echo $store['orderNOT']; ?> = Math.floor((distance<?php echo $store['orderNOT']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                        var seconds<?php echo $store['orderNOT']; ?> = Math.floor((distance<?php echo $store['orderNOT']; ?> % (1000 * 60)) / 1000);
+
+                                                                        // Output the result in an element with id="demo"
+                                                                        document.getElementById("demo<?php echo $store['orderNOT']; ?>").innerHTML = days<?php echo $store['orderNOT']; ?> + "Day " + hours<?php echo $store['orderNOT']; ?> + "h " +
+                                                                            minutes<?php echo $store['orderNOT']; ?> + "m " + seconds<?php echo $store['orderNOT']; ?> + "s ";
+
+                                                                        // If the count down is over, write some text 
+                                                                        if (distance<?php echo $store['orderNOT']; ?> < 0) {
+                                                                            clearInterval(x<?php echo $store['orderNOT']; ?>);
+                                                                            document.getElementById("demo<?php echo $store['orderNOT']; ?>").innerHTML = "หมดเวลา";
+                                                                        }
+                                                                    }, 1000);
                                                                 </script>
                                                             <?php endif; ?>
                                                         </td>

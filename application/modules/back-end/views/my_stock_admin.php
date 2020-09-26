@@ -786,22 +786,41 @@
                                                             <?php if (date("Y-m-d H:i:s") >= $stock['dateREST']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d H:i:s', strtotime($stock['dateREST'])); ?>
-                                                                <!-- <?= $stock['dateREST']; ?> -->
-                                                                <div id="clock-b<?php echo $stock['orderST']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $stock['orderST']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                <p id="demo<?php echo $stock['orderST']; ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-                                                                    });
-                                                                </script>
                                                             <?php endif; ?>
+                                                            <script>
+                                                                var datep<?php echo $stock['orderST']; ?> = "<?= $stock['dateREST']; ?>";
+
+                                                                // Set the date we're counting down to
+                                                                var countDownDate<?php echo $stock['orderST']; ?> = new Date(datep<?php echo $stock['orderST']; ?>);
+
+                                                                // Update the count down every 1 second
+                                                                var x<?php echo $stock['orderST']; ?> = setInterval(function() {
+
+                                                                    // Get today's date and time
+                                                                    var now<?php echo $stock['orderST']; ?> = new Date();
+
+                                                                    // Find the distance between now and the count down date
+                                                                    var distance<?php echo $stock['orderST']; ?> = countDownDate<?php echo $stock['orderST']; ?> - now<?php echo $stock['orderST']; ?>;
+
+                                                                    // Time calculations for days, hours, minutes and seconds
+                                                                    var days<?php echo $stock['orderST']; ?> = Math.floor(distance<?php echo $stock['orderST']; ?> / (1000 * 60 * 60 * 24));
+                                                                    var hours<?php echo $stock['orderST']; ?> = Math.floor((distance<?php echo $stock['orderST']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                    var minutes<?php echo $stock['orderST']; ?> = Math.floor((distance<?php echo $stock['orderST']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                    var seconds<?php echo $stock['orderST']; ?> = Math.floor((distance<?php echo $stock['orderST']; ?> % (1000 * 60)) / 1000);
+
+                                                                    // Output the result in an element with id="demo"
+                                                                    document.getElementById("demo<?php echo $stock['orderST']; ?>").innerHTML = days<?php echo $stock['orderST']; ?> + "Day " + hours<?php echo $stock['orderST']; ?> + "h " +
+                                                                        minutes<?php echo $stock['orderST']; ?> + "m " + seconds<?php echo $stock['orderST']; ?> + "s ";
+
+                                                                    // If the count down is over, write some text 
+                                                                    if (distance<?php echo $stock['orderST']; ?> < 0) {
+                                                                        clearInterval(x<?php echo $stock['orderST']; ?>);
+                                                                        document.getElementById("demo<?php echo $stock['orderST']; ?>").innerHTML = "หมดเวลา";
+                                                                    }
+                                                                }, 1000);
+                                                            </script>
 
                                                         </td>
 
@@ -1144,11 +1163,11 @@
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
-                                                                        
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit" id="Submitsent<?php echo $stock['orderST']; ?>" class="btn btn-success">Success</button>
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                        </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" id="Submitsent<?php echo $stock['orderST']; ?>" class="btn btn-success">Success</button>
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                            </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
