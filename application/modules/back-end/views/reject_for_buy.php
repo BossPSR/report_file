@@ -155,7 +155,7 @@
                                                                                     </button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    <table class="table zero-configuration" id="here_gt<?php echo $store['orderST']; ?>">
+                                                                                    <table class="table zero-configuration" id="here_gt<?php echo $store['order_re']; ?>">
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>order_re</th>
@@ -206,7 +206,40 @@
                                                                 <?php endif; ?>
 
                                                             </td>
-                                                            <td><?php echo $store['date_required']; ?></td>
+															<td><p id="demo<?php echo $stores['order_re']; ?>" style="font-size: 18px;font-weight: bold;"></p>
+																<script>
+																	var datep<?php echo $store['order_re']; ?> = "<?= $store['date_required']; ?>";
+																	
+																	// Set the date we're counting down to
+																	var countDownDate<?php echo $store['order_re']; ?> = new Date(datep<?php echo $store['order_re']; ?>);
+
+																	// Update the count down every 1 second
+																	var x<?php echo $store['order_re']; ?> = setInterval(function() {
+
+																		// Get today's date and time
+																		var now<?php echo $store['order_re']; ?> = new Date();
+
+																		// Find the distance between now and the count down date
+																		var distance<?php echo $store['order_re']; ?> = countDownDate<?php echo $store['order_re']; ?> - now<?php echo $store['order_re']; ?>;
+
+																		// Time calculations for days, hours, minutes and seconds
+																		var days<?php echo $store['order_re']; ?> = Math.floor(distance<?php echo $store['order_re']; ?> / (1000 * 60 * 60 * 24));
+																		var hours<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+																		var minutes<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+																		var seconds<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60)) / 1000);
+
+																		// Output the result in an element with id="demo"
+																		document.getElementById("demo<?php echo $store['order_re']; ?>").innerHTML = days<?php echo $store['order_re']; ?> + "Day " + hours<?php echo $store['order_re']; ?> + "h " +
+																			minutes<?php echo $store['order_re']; ?> + "m " + seconds<?php echo $store['order_re']; ?> + "s ";
+
+																		// If the count down is over, write some text 
+																		if (distance<?php echo $store['order_re']; ?> < 0) {
+																			clearInterval(x<?php echo $store['order_re']; ?>);
+																			document.getElementById("demo<?php echo $store['order_re']; ?>").innerHTML = "หมดเวลา";
+																		}
+																	}, 1000);
+																</script>
+															</td>
                                                             <td>
                                                                 <?php if ($store['note_user'] == '') : ?>
                                                                     -
