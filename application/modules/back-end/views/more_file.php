@@ -61,8 +61,8 @@
                                                     <th>GT File</th>
                                                     <th>DM File</th>
                                                     <th>More File</th>
-                                                    <th>Detail</th>
-                                                    <th>Detail Team</th>
+                                                    <th>Note Client</th>
+                                                    <th>Note Team</th>
                                                     <th>Dare required</th>
                                                     <th>create at</th>
                                                     <th>T3</th>
@@ -278,7 +278,7 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <table class="table zero-configuration">
+                                                                            <table class="table zero-configuration" id="here<?php $more_file['more_id']; ?>">
                                                                                 <thead>
                                                                                     <?php $order = $this->db->get_where('tbl_upload_orderGT', ['more_id' => $more_file['idM']])->result_array(); ?>
                                                                                     <tr>
@@ -292,11 +292,39 @@
                                                                                     <?php foreach ($order as $keys => $order) { ?>
                                                                                         <tr>
                                                                                             <td><?php echo $order['order_id'] ?></td>
-                                                                                            <td><?php echo $order['file_name_GT'] ?></td>
+																							<td>
+																								<?php echo $order['file_name_GT'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $order['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+																								<!-- Modal -->
+																								<div class="modal fade text-left" id="dms<?php echo $order['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                            <div class="modal-body">
+                                                                                                                <h5>Rename</h5>
+                                                                                                                <?php $or_file_name = explode('.', $order['file_name_GT']); ?>
+                                                                                                                <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_name<?php echo $order['id']; ?>" class="form-control">
+                                                                                                                <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_name<?php echo $order['id']; ?>" class="form-control">
+                                                                                                                <input type="hidden" id="pathmain<?php echo $order['id']; ?>" data-pathgt="<?php echo $order['path_GT']; ?>" class="form-control">
+                                                                                                            </div>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <button type="button" class="btn btn-primary ey" id="re_file_name_button<?php echo $order['id']; ?>" data-fmain="<?php echo $order['id']; ?>" data-moreid="<?php $more_file['more_id']; ?>">Submit</button>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+																							</td>
                                                                                             <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td><?php echo $order['create_at'] ?></td>
-                                                                                        </tr>
-                                                                                    <?php } ?>
+																						</tr>
+
+																					<?php } ?>
+												
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -561,3 +589,33 @@
     </div>
 </div>
 <!-- END: Content-->
+<script>
+																							$('body').on('click', 'button[type="button"].ey', function() {
+																								var c = $(this).data('fmain');
+																								var moreid = $(this).data('moreid');
+																								var d = $('#pathmain' + c).data('pathgt');
+																								var name_file = $('#Re_file_name' + c).val();
+																								var last_file = $('#Re_last_name' + c).val();
+
+																								$.ajax({
+																									url: "rename_filenameGT",
+																									type: "POST",
+																									data: {
+																										id: c,
+																										name_file: name_file,
+																										last_file: last_file,
+																										path: d
+																									},
+																									success: function(success) {
+																										if (success) {
+																											swal("Good job!", "Upload for data successfull", "success", {
+																												button: true,
+																											});
+																											$("#here" + moreid).load("More_File #here" + moreid);
+																											$('#dms' + c).modal('hide');
+																										}
+																									}
+																								});
+																							});
+																						</script>
+
