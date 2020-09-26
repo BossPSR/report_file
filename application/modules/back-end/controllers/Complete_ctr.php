@@ -483,5 +483,19 @@ class Complete_ctr extends CI_Controller
         $result = $this->db->get()->result_array();
         
         echo json_encode($result);
-    }
+	}
+	
+	public function complete_status()
+	{
+		$id = $this->input->post('id');
+
+        $data = array(
+
+            'check_past'          => $this->input->post('status'),
+
+        );
+        $this->db->where('order_id', $id);
+        $resultsedit = $this->db->update('tbl_upload_team', $data);
+        echo $resultsedit;
+	}
 }
