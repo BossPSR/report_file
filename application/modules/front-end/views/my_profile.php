@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="result_menu">
                                     <?php echo $user['email']; ?>
-                                    <a class="btn btn-warning" style="color:#fff;margin-left:10px;" data-toggle="modal" data-target="#exampleModalUser">
+                                    <a class="btn btn-warning" style="color:#fff;margin-left:10px;" data-toggle="modal" data-target="#exampleModalUser" data-toggled="tooltip" data-placement="top" title="Edit (แก้ไข) ">
                                         <i class="fa fa-wrench"></i>
                                     </a>
                                 </div>

@@ -47,7 +47,7 @@
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php if (!empty($task)) { ?>
     <br>
-    <h2 class="text-center" style="margin-top: 15px;">My task</h2>
+    <h2 class="text-center" style="margin-top: 15px;">งานของฉัน  </h2>
     <hr class="line_package">
     <br>
 
@@ -745,7 +745,7 @@
 
                                     <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == true) : ?>
                                         <td>
-                                            <button type="button" class="btn btn-success" id="cancel_team<?php echo $task['or_id']; ?>"><i class="fa fa-check-square-o"></i></button>
+                                            <button type="button" class="btn btn-success" id="cancel_team<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Confirm (ยืนยัน)"><i class="fa fa-check-square-o"></i></button>
                                             <script type="text/javascript">
                                                 $('#cancel_team<?php echo $task['or_id']; ?>').click(function() {
                                                     swal({
@@ -783,7 +783,7 @@
                                                     });
                                                 });
                                             </script>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Can<?php echo $task['or_id']; ?>"><i class="fa fa-times-circle"></i></button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Can<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle" ></i></button>
                                             <div class="modal fade" id="Can<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <form action="my_task_can" method="post">
@@ -816,7 +816,7 @@
 
                                     <?php elseif ($task['c_status'] == 0 || $task['c_status'] == 1 || $task['c_status'] == 2 || $task['c_status'] == 3 || $task['c_status'] == 5 && $task['status_check_team'] == 0) : ?>
                                         <td>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>"><i class="fa fa-times-circle"></i></button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button>
                                             <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <form action="My-task-cancel" method="post">
@@ -847,7 +847,7 @@
 
 
                                     <?php else : ?>
-                                        <td><button type="button" class="btn btn-secondary"><i class="fa fa-times-circle"></i></button></td>
+                                        <td><button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
                                     <?php endif; ?>
                                 </tr>
                                 <script type="text/javascript">
