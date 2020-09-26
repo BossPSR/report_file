@@ -50,10 +50,10 @@
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                 <h5 class="modal-title" id="staticBackdropLabel">MY FEEDBACK</h5>
             </div>
+            <?php $fb = $this->db->get_where('tbl_feedback', ['teamId' => $teamId['IdTeam'] , 'status_feedback_read' => '0'])->row_array(); ?>
             <div class="modal-body">
-                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <p>คุณได้รับ Feedback : <?php echo $fb['check_status'] == '0' ? 'Admin Feedback' : 'Client Feedback' ; ?> </p>
+                
                 <br>
                 <center>
                     <button class="btn btn-primary" id="status_feed">ACCEPT</button>
@@ -255,7 +255,6 @@
 
                 });
             </script>
-            <?php $sb = substr($teamId['IdTeam'], 2); ?>
             <script type="text/javascript">
                 $('#status_feed').click(function() {
                     swal("Good job!", "Got it.", "success", {
@@ -266,7 +265,7 @@
                         type: 'POST',
                         url: 'check_c_feed',
                         data: {
-                            teamId: <?= $sb; ?>,
+                            teamId: '<?= $teamId['IdTeam']; ?>',
                             status_feedback_read: 1,
                         },
                         success: function(success) {

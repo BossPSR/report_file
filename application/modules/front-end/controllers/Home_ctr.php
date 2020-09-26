@@ -54,13 +54,13 @@ class Home_ctr extends CI_Controller
 
 	public function check_c_feed()
 	{
-		$teamId 			= $this->input->post('teamId');
+		$teamId 			  = $this->input->post('teamId');
 		$status_feedback_read = $this->input->post('status_feedback_read');
 
 		$data = array(
 			'status_feedback_read'	=> $status_feedback_read,
 		);
-		$this->db->where('teamId', "TM" . $teamId);
+		$this->db->where('teamId', $teamId);
 		$success = $this->db->update('tbl_feedback', $data);
 
 		echo $success;

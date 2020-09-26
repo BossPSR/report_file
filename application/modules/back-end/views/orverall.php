@@ -382,21 +382,26 @@
                                                                 <?php if ($cancel_sa == true) : ?>
                                                                     <span class="badge badge-pill badge-danger"><?= $cancel_sa['status_who']; ?></span>
                                                                 <?php else : ?>
-                                                                    <?php if ($team['teamId'] == '') : ?>
-                                                                        <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                    <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
-                                                                        <span class="badge badge-pill badge-warning">processing</span>
-                                                                    <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
-                                                                        <span class="badge badge-pill badge-success">complete</span>
-                                                                    <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
-                                                                        <span class="badge badge-pill badge-danger">feedback</span>
-                                                                    <?php elseif ($team['status'] == 3 && $team['teamId'] != '') : ?>
-                                                                        <span class="badge badge-pill badge-danger">Re feedback</span>
-                                                                    <?php elseif ($team['status'] == 4 && $team['teamId'] != '') : ?>
-                                                                        <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                    <?php if ($stores['status_approved'] == '5') : ?>
+                                                                        <span class="badge badge-pill badge-danger">Admin feedback</span>
                                                                     <?php else : ?>
-                                                                        -
-                                                                    <?php endif ?>
+                                                                        <?php if ($team['teamId'] == '') : ?>
+                                                                            <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                        <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
+                                                                            <span class="badge badge-pill badge-warning">processing</span>
+                                                                        <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
+                                                                            <span class="badge badge-pill badge-success">complete</span>
+                                                                        <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
+                                                                            <span class="badge badge-pill badge-danger">feedback</span>
+                                                                        <?php elseif ($team['status'] == 3 && $team['teamId'] != '') : ?>
+                                                                            <span class="badge badge-pill badge-danger">Re feedback</span>
+                                                                        <?php elseif ($team['status'] == 4 && $team['teamId'] != '') : ?>
+                                                                            <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                        <?php else : ?>
+                                                                            -
+                                                                        <?php endif ?>
+                                                                    <?php endif; ?>
+
                                                                 <?php endif ?>
                                                             <?php endif ?>
 

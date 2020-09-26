@@ -74,7 +74,7 @@
                                                     <th>Info</th>
                                                     <th>Delivery</th>
                                                     <th>Status</th>
-                                                    <th>Status T3</th>
+                                                    <th>Process</th>
                                                     <th>Client Feedback</th>
                                                     <th>Tool</th>
                                                 </tr>
@@ -978,16 +978,20 @@
                                                             <?php if ($team == false) : ?>
                                                                 <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $store['orderNOT']; ?>" type="button" class="btn btn-icon btn-success" style="font-size: 14px;">Upload T3</button>
                                                             <?php else : ?>
-                                                                <?php if ($team['teamId'] == '') : ?>
-                                                                    <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-warning">processing</span>
-                                                                <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-success">complete</span>
-                                                                <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
-                                                                    <span class="badge badge-pill badge-danger">feedback</span>
-                                                                <?php endif ?>
-                                                            <?php endif ?>
+                                                                <?php if ($store['status_approved'] == '5') : ?>
+                                                                    <span class="badge badge-pill badge-danger">Admin feedback</span>
+                                                                <?php else : ?>
+                                                                    <?php if ($team['teamId'] == '') : ?>
+                                                                        <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                    <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-warning">processing</span>
+                                                                    <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-success">complete</span>
+                                                                    <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
+                                                                        <span class="badge badge-pill badge-danger">feedback</span>
+                                                                    <?php endif; ?>
+                                                                <?php endif; ?>
+                                                            <?php endif; ?>
                                                         </td>
                                                         <!-- Client Feedback -->
                                                         <td>

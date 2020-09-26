@@ -155,7 +155,7 @@ class Complete_ctr extends CI_Controller
                 $ut = $this->db->update('tbl_upload_team', ['status' => '2']);
                 if ($ut) {
                     $this->db->where('order_id', $order_id);
-                    $this->db->update('tbl_upload_order', ['end_time_feedback' => $date180]);
+                    $this->db->update('tbl_upload_order', ['end_time_feedback' => $date180 , 'status_approved' => '5']);
                 }
             }
         }

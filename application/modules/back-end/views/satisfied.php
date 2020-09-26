@@ -857,22 +857,42 @@
                                                                     </div>
                                                                 </div>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y-m-d', strtotime($stores['dateREST'])); ?>
-                                                                <div id="clock-b<?php echo $stores['id_sss']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $stores['id_sss']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                
+                                                                <p id="demo<?php echo $stores['orderST']; ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-                                                                    });
-                                                                </script>
                                                             <?php endif; ?>
+                                                            <script>
+                                                                var datep<?php echo $stores['orderST']; ?> = "<?= $stores['dateREST']; ?>";
+                                                                
+                                                                // Set the date we're counting down to
+                                                                var countDownDate<?php echo $stores['orderST']; ?> = new Date(datep<?php echo $stores['orderST']; ?>);
 
+                                                                // Update the count down every 1 second
+                                                                var x<?php echo $stores['orderST']; ?> = setInterval(function() {
+
+                                                                    // Get today's date and time
+                                                                    var now<?php echo $stores['orderST']; ?> = new Date();
+
+                                                                    // Find the distance between now and the count down date
+                                                                    var distance<?php echo $stores['orderST']; ?> = countDownDate<?php echo $stores['orderST']; ?> - now<?php echo $stores['orderST']; ?>;
+
+                                                                    // Time calculations for days, hours, minutes and seconds
+                                                                    var days<?php echo $stores['orderST']; ?> = Math.floor(distance<?php echo $stores['orderST']; ?> / (1000 * 60 * 60 * 24));
+                                                                    var hours<?php echo $stores['orderST']; ?> = Math.floor((distance<?php echo $stores['orderST']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                    var minutes<?php echo $stores['orderST']; ?> = Math.floor((distance<?php echo $stores['orderST']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                    var seconds<?php echo $stores['orderST']; ?> = Math.floor((distance<?php echo $stores['orderST']; ?> % (1000 * 60)) / 1000);
+
+                                                                    // Output the result in an element with id="demo"
+                                                                    document.getElementById("demo<?php echo $stores['orderST']; ?>").innerHTML = days<?php echo $stores['orderST']; ?> + "Day " + hours<?php echo $stores['orderST']; ?> + "h " +
+                                                                        minutes<?php echo $stores['orderST']; ?> + "m " + seconds<?php echo $stores['orderST']; ?> + "s ";
+
+                                                                    // If the count down is over, write some text 
+                                                                    if (distance<?php echo $stores['orderST']; ?> < 0) {
+                                                                        clearInterval(x<?php echo $stores['orderST']; ?>);
+                                                                        document.getElementById("demo<?php echo $stores['orderST']; ?>").innerHTML = "หมดเวลา";
+                                                                    }
+                                                                }, 1000);
+                                                            </script>
                                                         </td>
 
                                                         <!-- Price file -->
@@ -1487,23 +1507,28 @@
                                                                 <?php if ($cancel_sa == true) : ?>
                                                                     <span class="badge badge-pill badge-danger"><?= $cancel_sa['status_who']; ?></span>
                                                                 <?php else : ?>
-                                                                    <?php if ($team['teamId'] == '') : ?>
-                                                                        <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                    <?php elseif ($team['status'] == '0') : ?>
-                                                                        <span class="badge badge-pill badge-warning">processing</span>
-                                                                    <?php elseif ($team['status'] == '1') : ?>
-                                                                        <span class="badge badge-pill badge-success">complete</span>
-                                                                    <?php elseif ($team['status'] == '2') : ?>
-                                                                        <span class="badge badge-pill badge-danger">feedback</span>
-                                                                    <?php elseif ($team['status'] == '3') : ?>
-                                                                        <span class="badge badge-pill badge-danger">Re feedback</span>
-                                                                    <?php elseif ($team['status'] == '4') : ?>
-                                                                        <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                    <?php if ($stores['status_approved'] == '5') : ?>
+                                                                        <span class="badge badge-pill badge-danger">Admin feedback</span>
                                                                     <?php else : ?>
-                                                                        -
-                                                                    <?php endif ?>
-                                                                <?php endif ?>
-                                                            <?php endif ?>
+                                                                        <?php if ($team['teamId'] == '') : ?>
+                                                                            <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                        <?php elseif ($team['status'] == '0') : ?>
+                                                                            <span class="badge badge-pill badge-warning">processing</span>
+                                                                        <?php elseif ($team['status'] == '1') : ?>
+                                                                            <span class="badge badge-pill badge-success">complete</span>
+                                                                        <?php elseif ($team['status'] == '2') : ?>
+                                                                            <span class="badge badge-pill badge-danger">feedback</span>
+                                                                        <?php elseif ($team['status'] == '3') : ?>
+                                                                            <span class="badge badge-pill badge-danger">Re feedback</span>
+                                                                        <?php elseif ($team['status'] == '4') : ?>
+                                                                            <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                        <?php else : ?>
+                                                                            -
+                                                                        <?php endif; ?>
+                                                                    <?php endif; ?>
+
+                                                                <?php endif; ?>
+                                                            <?php endif; ?>
                                                         </td>
                                                         <!-- Client Feedback -->
                                                         <td>
