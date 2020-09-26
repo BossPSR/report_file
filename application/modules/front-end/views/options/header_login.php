@@ -334,7 +334,7 @@
                 </div>
             </div>
             <!--header top start-->
-            <style>
+            <!-- <style>
                 #try {
                     overflow: hidden;
                     /* Ensures the content is not revealed until the animation */
@@ -374,20 +374,24 @@
                         border-color: orange;
                     }
                 }
-            </style>
+            </style> -->
             <!--header middel start-->
             <div class="header_middle" style="background-image: linear-gradient(#2b286f, #282392);">
-                <div class="container" style="max-width: 1470px;">
+                <div class="container" style="max-width: 1500px;">
                     <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-3 col-md-4">
                             <div class="logo">
                                 <a href="home"><img src="public/frontend/assets/img/logo/1299.png" alt=""></a>
                             </div>
                         </div>
-                        <div class="typewriter text-center">
-                            <h2 style="color: #fff;" id="try">รับค่าคอมมิชชั่นง่ายๆสูงสุด $40</h2>
+                        <div class="col-lg-5 col-md-4 text-center">
+                            <h1 style="color: #fff;font-size: 35px;">
+                                <span class="txt-rotate" data-period="2000" data-rotate='[ "รับค่าคอมมิชชั่นง่ายๆสูงสุด $40.", "รับส่วนลดง่ายๆเพียงแค่กดปุ่ม Earn point",
+                                 "ปลอดภัย 100% ด้วยระบบ Wallet ป้องกันการถูกโกง", "ทีมงานติวเตอร์ทุกท่านเป็นผู้เชี่ยวชาญ.",
+                                  "รับประกันการแก้ไขงานนานถึง 60 วัน" , "สะสมคะแนนรับส่วนลดแบบไม่มีวันหมดอายุ" , "ราคามาตราฐาน" ]'></span>
+                            </h1>
                         </div>
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-4 col-md-4">
                             <div class="middel_right">
                                 <?php if ($user == false) :  ?>
                                     <div class="search_container" style="margin-right: 0px;">
@@ -398,11 +402,11 @@
                                         <?php if ($user == true) : ?>
                                             <div class="middel_right_info">
 
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
+                                                <div class="header_wishlist text-center" style="margin-right: 25px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['commission']); ?></div>
                                                     <div>ค่าแนะนำของฉัน </div>
                                                 </div>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
+                                                <div class="header_wishlist text-center" style="margin-right: 25px;color: white;">
                                                     <div class="menu-list">
                                                         <?php
                                                         $numScore = 0;
@@ -422,12 +426,12 @@
                                                     </div>
                                                     <div>ส่วนลด</div>
                                                 </div>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
+                                                <div class="header_wishlist text-center" style="margin-right: 25px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['score']); ?></div>
                                                     <div>คะแนนสะสม</div>
                                                 </div>
 
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
+                                                <div class="header_wishlist text-center" style="margin-right: 25px;color: white;">
                                                     <div class="menu-list"><?php echo number_format($user['cash']); ?></div>
                                                     <div>กระเป๋าตังค์</div>
                                                 </div>
@@ -539,12 +543,12 @@
                                             <li><a href="buy"> สั่งออร์เดอร์ <div class="arrow_box"></div></a></li>
                                             <li><a href="order"> ออร์เดอร์ของฉัน </a></li>
                                             <li><a href="store"> แลกคะแนนส่วนลด </a></li>
-                                            <li><a href="#">My Selling<i class="fa fa-angle-down"></i></a>
+                                            <li><a href="#">ข้อมูลคะแนน<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="my-selling">ได้รับคะแนน</a></li>
-                                                    <li><a href="my-cashback">Cashback</a></li>
-                                                    <li><a href="my-rewards-list">Rewards</a></li>
-                                                    <li><a href="my-commission">Commission</a></li>
+                                                    <li><a href="my-cashback">ได้รับเงินคืน</a></li>
+                                                    <li><a href="my-rewards-list">ได้รับรางวัล</a></li>
+                                                    <li><a href="my-commission">ค่าคอมมิชชั่น</a></li>
                                                     <li><a href="my-deduct">ถูกหักคะแนน</a></li>
                                                     <li><a href="my-reject">ไม่ผ่านเกณฑ์</a></li>
                                                 </ul>
@@ -556,24 +560,24 @@
                                         <?php elseif ($team) : ?>
                                             <li><a href="home"> หน้าแรก</a></li>
                                             <li>
-                                                <a href="My-stock-Item"> Order List</a>
+                                                <a href="My-stock-Item"> คลังออร์เดอร์</a>
                                             </li>
                                             <li>
-                                                <a href="My-task"> My task</a>
+                                                <a href="My-task"> งานของฉัน</a>
                                             </li>
                                             <li>
-                                                <a href="My-delivery"> Delivery</a>
+                                                <a href="My-delivery"> ส่งงานที่นี่ </a>
                                             </li>
                                             <li>
-                                                <a href="my-feedback"> My Feedback</a>
+                                                <a href="my-feedback"> แก้ไขงานของฉัน</a>
                                             </li>
 
-                                            <li><a href="#">My History<i class="fa fa-angle-down"></i></a>
+                                            <li><a href="#">Mการหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
-                                                    <li><a href="my_store_team">Score</a></li>
-                                                    <li><a href="my_score_team_deduct">Score deducted</a></li>
-                                                    <li><a href="my_income">Income</a></li>
-                                                    <li><a href="my_income_team_deduct">Income deducted</a></li>
+                                                    <li><a href="my_store_team">คะแนน</a></li>
+                                                    <li><a href="my_score_team_deduct">หักคะแนน</a></li>
+                                                    <li><a href="my_income">ค่าตอบแทน</a></li>
+                                                    <li><a href="my_income_team_deduct">หักค่าตอบแทน</a></li>
 
                                                 </ul>
                                             </li>
@@ -697,4 +701,64 @@
                 });
             }
         <?php } ?>
+    </script>
+    <script>
+        var TxtRotate = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtRotate.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, 0);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 150 - Math.random() * 100;
+
+            if (this.isDeleting) {
+                delta /= 2;
+            }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function() {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function() {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #fff }";
+            document.body.appendChild(css);
+        };
     </script>

@@ -430,10 +430,10 @@
 
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <span data-toggle="modal" data-target="#groupse<?php echo $orderT['group']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
+                                                                                                    <span data-toggle="modal" data-target="#groupse<?php echo $orderT['group']; ?>_<?php echo $complete['order_id_t']; ?>"><i class="feather icon-folder" style="font-size: 25px;cursor: pointer;"></i></span>
                                                                                                     <!-- <a href="<?php echo $orderT['path'] ?>" target="_blank"><i class="feather icon-folder" style="font-size: 25px; cursor: pointer;"></i></a> -->
                                                                                                     <!-- Modal -->
-                                                                                                    <div class="modal fade text-left" id="groupse<?php echo $orderT['group']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                    <div class="modal fade text-left" id="groupse<?php echo $orderT['group']; ?>_<?php echo $complete['order_id_t']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                                         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                                                                                             <div class="modal-content">
                                                                                                                 <div class="modal-header">
@@ -775,7 +775,7 @@
                                                                 <button type="button" class="btn btn-icon btn-danger" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $complete['order_id_t']; ?>">
                                                                     <i class="feather icon-alert-triangle"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-icon btn-warning" data-toggle="modal" data-target="#notcomplete<?php echo $complete['id_upload_team_uot']; ?>">
+                                                                <button type="button" class="btn btn-icon btn-primary" data-toggle="modal" data-target="#notcomplete<?php echo $complete['id_upload_team_uot']; ?>">
                                                                     <i class="feather icon-x-circle"></i>
                                                                 </button>
                                                             <?php endif; ?>

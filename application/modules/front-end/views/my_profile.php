@@ -35,7 +35,7 @@
                         </h2>
                         <?php $p = $this->db->get_where('tbl_package', ['id' => $user['package_user']])->row_array(); ?>
                         <?php if ($p == true) : ?>
-                            <h2 class="text-center my-income" style="color: #40a6ff;">
+                            <h2 class="text-center my-income" style="color: #40a6ff;font-size: 20px;">
                                 <div> Package name : <?php echo $p['title_pk']; ?></div>
                                 <div>Package : <?php echo date("d F Y", strtotime($user['package_start'])); ?> - <?php echo date("d F Y", strtotime($user['package_end'])); ?></div>
                             </h2>

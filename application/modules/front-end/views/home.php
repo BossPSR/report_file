@@ -116,7 +116,7 @@
             <div class="col-lg-12  col-ld-12">
                 <div class="slider_area owl-carousel">
                     <div class="single_slider d-flex align-items-center justify-content-center">
-                        <iframe width="1000" height="500" src="https://www.youtube.com/embed/rdzdbNKs0fQ" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+                        <iframe width="800" height="450" src="https://www.youtube.com/embed/rdzdbNKs0fQ" frameborder="0" allow="autoplay" allowfullscreen></iframe>
                     </div>
                 </div>
 

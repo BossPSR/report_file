@@ -230,51 +230,55 @@
 
                                     <!-- Team File -->
                                     <td>
-                                        <?php $teamF = $this->db->get_where('tbl_upload_order_team', ['order_id' =>  $value['ORDT']])->result_array(); ?>
-                                        <?php if (!empty($teamF)) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
+                                        <?php if ($value['status_delivery'] == 1) : ?>
+                                            <?php $teamF = $this->db->get_where('tbl_upload_order_team', ['order_id' =>  $value['ORDT']])->result_array(); ?>
+                                            <?php if (!empty($teamF)) { ?>
+                                                <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="Teamfile<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="Teamfile<?= $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
 
-                                                        <div class="modal-body">
-                                                            <table class="table">
-                                                                <thead class="thead-light">
-                                                                    <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Tool</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($teamF as $teamF) { ?>
+                                                            <div class="modal-body">
+                                                                <table class="table">
+                                                                    <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <td><?= $teamF['order_id']; ?></td>
-                                                                            <td><?= $teamF['file_name']; ?></td>
-                                                                            <td><a href="<?= $teamF['path']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
+                                                                            <th scope="col">ID Order</th>
+                                                                            <th scope="col">File</th>
+                                                                            <th scope="col">Tool</th>
                                                                         </tr>
-                                                                    <?php } ?>
-                                                                </tbody>
-                                                            </table>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php foreach ($teamF as $teamF) { ?>
+                                                                            <tr style="text-align:center;">
+                                                                                <td><?= $teamF['order_id']; ?></td>
+                                                                                <td><?= $teamF['file_name']; ?></td>
+                                                                                <td><a href="<?= $teamF['path']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        <?php } else { ?>
+                                            <?php } else { ?>
+                                                -
+                                            <?php } ?>
+                                        <?php else : ?>
                                             -
-                                        <?php } ?>
+                                        <?php endif; ?>
                                     </td>
 
                                     <!-- created_at -->
@@ -316,7 +320,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php } elseif (($value['status_approved'] == 3 || $value['status_approved'] == 4) && $value['status_delivery'] == 1) { ?>
+                                        <?php } elseif ($value['status_approved'] == 3 || $value['status_approved'] == 4 || $value['status_delivery'] == 1) { ?>
 
                                             <?php
                                             $this->db->select('*');
