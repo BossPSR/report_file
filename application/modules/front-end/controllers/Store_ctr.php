@@ -137,7 +137,7 @@ class Store_ctr extends CI_Controller
     {
         
         if ($this->session->userdata('email') == '') {
-            $this->session->set_flashdata('error_pass', 'login out');
+            $this->session->set_flashdata('del_ss2', 'กรุณาเข้าสู่ระบบ และทำการกดชำระเงินที่อีเมล์อีกครั้ง');
             redirect('home');
         } 
         $file_name      = $this->input->post('file_name');
