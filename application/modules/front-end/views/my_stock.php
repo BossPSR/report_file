@@ -348,7 +348,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                         $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
                                         $this->db->where('tbl_upload_order.status_pay', 1);
                                         $this->db->where('tbl_upload_team.teamId', $teamTM['IdTeam']);
-                                        $this->db->where_in('tbl_upload_team.status', [2, 3, 4]);
+                                        $this->db->where_in('tbl_upload_team.status', [2, 3]);
                                         $this->db->order_by('tbl_upload_order.date_required', 'DESC');
                                         $stock_row = $this->db->get()->row_array();
                                         ?>

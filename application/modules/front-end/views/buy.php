@@ -50,7 +50,7 @@
                                         </form>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">You can buy GT Document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 10 File )</span></label>
+                                        <label for="" class="font-size-upload">You can buy GT Document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 30 File )</span></label>
                                         <form action="buy_uploadGT" class="dropzone" id="fileuploadGT">
                                             <div class="dz-message needsclick">
                                                 Drop files here or click to upload.<br>
@@ -128,9 +128,9 @@
     Dropzone.autoDiscover = false;
     var myDropzone = new Dropzone("#fileupload", {
             autoProcessQueue: false,
-            maxFiles: 5,
+            maxFiles: 10,
             addRemoveLinks: true,
-            parallelUploads: 5, // Number of files process at a time (default 2)
+            parallelUploads: 10, // Number of files process at a time (default 2)
 
         }
 
@@ -138,9 +138,9 @@
 
     var myDropzone2 = new Dropzone("#fileuploadGT", {
             autoProcessQueue: false,
-            maxFiles: 5,
+            maxFiles: 30,
             addRemoveLinks: true,
-            parallelUploads: 5, // Number of files process at a time (default 2)
+            parallelUploads: 30, // Number of files process at a time (default 2)
 
         }
 

@@ -17,7 +17,7 @@ class Register_ctr extends CI_Controller
 		$data['countries'] = $this->Countries_model->get_countries();
 		if ($this->session->userdata('email') == '') {
 			$this->load->view('options/header_login');
-			$this->load->view('register' , $data);
+			$this->load->view('register', $data);
 			$this->load->view('options/footer');
 		} else {
 			redirect('my-profile');
@@ -40,44 +40,50 @@ class Register_ctr extends CI_Controller
 		$Y = substr(date('Y'), 2);
 		$M = date('m');
 
-		if ($username_check || $check_usre2 || $team_check) {
-			$this->session->set_flashdata('email_ss', true);
+		if ($username_check || $team_check) {
+
+			$this->session->set_flashdata('del_ss2', 'อีเมล์นี้ถูกใช้งานแล้ว กรุณาลองใหม่อีกครั้ง');
+			redirect('register');
+		}
+		if ($check_usre2) {
+
+			$this->session->set_flashdata('del_ss2', 'ชื่อนี้ถูกใช้งานแล้ว กรุณาลองใหม่อีกครั้ง');
+			redirect('register');
+		}
+
+		if ($password != $c_password) {
+			$this->session->set_flashdata('del_ss', true);
 			redirect('register', 'refresh');
 		} else {
-			if ($password != $c_password) {
-				$this->session->set_flashdata('del_ss', true);
-				redirect('register', 'refresh');
-			} else {
-				$data = array(
-					'country_id'        => $countries,
-					'email'             => $email,
-					'phone'             => $phone,
-					'username'          => $username,
-					'password'          => md5($password),
-					'created_at'        => $created_at
+			$data = array(
+				'country_id'        => $countries,
+				'email'             => $email,
+				'phone'             => $phone,
+				'username'          => $username,
+				'password'          => md5($password),
+				'created_at'        => $created_at
+			);
+
+			if ($this->db->insert('tbl_user', $data)) {
+				$last_id = $this->db->insert_id();
+				// echo $sumStandard;
+
+				$data2 = array(
+					'idUser' => "CM" . $Y . $M . "00" . $last_id
 				);
+				$this->db->where('id', $last_id);
+				$success = $this->db->update('tbl_user', $data2);
+				// print_r($success);
+				// exit();
 
-				if ($this->db->insert('tbl_user', $data)) {
-					$last_id = $this->db->insert_id();
-					// echo $sumStandard;
+				if ($success > 0) {
+					$this->sendEmail_success($email);
+					$this->session->set_flashdata('success_regis_team', TRUE);
+					redirect('package');
+				} else {
 
-					$data2 = array(
-						'idUser' => "CM" . $Y . $M . "00" . $last_id
-					);
-					$this->db->where('id', $last_id);
-					$success = $this->db->update('tbl_user', $data2);
-					// print_r($success);
-					// exit();
-
-					if ($success > 0) {
-						$this->sendEmail_success($email);
-						$this->session->set_flashdata('success_regis_team', TRUE);
-						redirect('home');
-					} else {
-
-						$this->session->set_flashdata('fail_regis_team', TRUE);
-						redirect('home');
-					}
+					$this->session->set_flashdata('fail_regis_team', TRUE);
+					redirect('home');
 				}
 			}
 		}
@@ -112,15 +118,15 @@ class Register_ctr extends CI_Controller
 		$team_check      	= $this->Login_model->team_check($email);
 		$check_usre2        = $this->Login_model->check_usre2($name);
 
-		$teamCheck = $this->db->get_where('tbl_team',['name' => $name])->row_array();
-		
+		$teamCheck = $this->db->get_where('tbl_team', ['name' => $name])->row_array();
+
 		if (!empty($teamCheck)) {
 			$this->session->set_flashdata('fail_regis_teamName', TRUE);
 			redirect('register-team');
 			exit();
 		}
-		$teamCheck = $this->db->get_where('tbl_team',['email' => $email])->row_array();
-		$userCheck = $this->db->get_where('tbl_user',['email' => $email])->row_array();
+		$teamCheck = $this->db->get_where('tbl_team', ['email' => $email])->row_array();
+		$userCheck = $this->db->get_where('tbl_user', ['email' => $email])->row_array();
 		if (!empty($teamCheck) || !empty($userCheck) && !empty($teamCheck) && !empty($userCheck)) {
 			$this->session->set_flashdata('fail_regis_teamEmail', TRUE);
 			redirect('register-team');
@@ -130,80 +136,82 @@ class Register_ctr extends CI_Controller
 		$Y = substr(date('Y'), 2);
 		$M = date('m');
 
-		if ($username_check || $check_usre2 || $team_check) {
+		if ($username_check || $team_check) {
 
-			$this->session->set_flashdata('del_ss2', 'Data no must be filled out!!');
+			$this->session->set_flashdata('del_ss2', 'อีเมล์นี้ถูกใช้งานแล้ว กรุณาลองใหม่อีกครั้ง');
+			redirect('register-team');
+		}
+		if ($check_usre2) {
+
+			$this->session->set_flashdata('del_ss2', 'ชื่อนี้ถูกใช้งานแล้ว กรุณาลองใหม่อีกครั้ง');
+			redirect('register-team');
+		}
+
+		if ($password != $c_password) {
+
+			$this->session->set_flashdata('del_ss2', 'Passwords do not match !!');
 			redirect('register-team');
 		} else {
-			if ($password != $c_password) {
+			if (!empty($_FILES['file_name']['name'])) {
 
-				$this->session->set_flashdata('del_ss2', 'Passwords do not match !!');
-				redirect('register-team');
-			} else {
-				if (!empty($_FILES['file_name']['name'])) {
+				$config['upload_path'] 		= 'uploads/resume/';
+				// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+				$config['allowed_types'] 	= '*';
+				$config['max_size']    		= '99999'; // max_size in kb
+				$config['file_name'] 		= $_FILES['file_name']['name'];
+				//Load upload library
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
 
-					$config['upload_path'] 		= 'uploads/resume/';
-					// $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-					$config['allowed_types'] 	= '*';
-					$config['max_size']    		= '99999'; // max_size in kb
-					$config['file_name'] 		= $_FILES['file_name']['name'];
-					//Load upload library
-					$this->load->library('upload', $config);
-					$this->upload->initialize($config);
-
-					// File upload
-					if ($this->upload->do_upload('file_name')) {
-						// Get data about the file
-						$uploadData = $this->upload->data();
-						$data = array(
-							'country_id'		=> $countries,
-							'name'				=> $name,
-							'phone'				=> $phone,
-							'email'				=> $email,
-							'bank_account'		=> $bank_account,
-							'educational'		=> $educational,
-							'password'			=> md5($password),
-							'file_name'			=> 'uploads/resume/' . $uploadData['file_name'],
-							'resume_file'		=> $uploadData['file_name'],
-							'created_at'		=> date('Y-m-d H:i:s'),
-							'notify_admin'      => 0
+				// File upload
+				if ($this->upload->do_upload('file_name')) {
+					// Get data about the file
+					$uploadData = $this->upload->data();
+					$data = array(
+						'country_id'		=> $countries,
+						'name'				=> $name,
+						'phone'				=> $phone,
+						'email'				=> $email,
+						'bank_account'		=> $bank_account,
+						'educational'		=> $educational,
+						'password'			=> md5($password),
+						'file_name'			=> 'uploads/resume/' . $uploadData['file_name'],
+						'resume_file'		=> $uploadData['file_name'],
+						'created_at'		=> date('Y-m-d H:i:s'),
+						'notify_admin'      => 0
+					);
+					if ($this->db->insert('tbl_team', $data)) {
+						$team_id = $this->db->insert_id();
+						$dataTM = array(
+							'IdTeam'		=> "TM" . $Y . $M . "00" . $team_id,
 						);
-						if ($this->db->insert('tbl_team', $data)) {
-							$team_id = $this->db->insert_id();
-							$dataTM = array(
-								'IdTeam'		=> "TM" . $Y . $M . "00" . $team_id,
-							);
-							$this->db->where('id', $team_id);
-							if ($this->db->update('tbl_team', $dataTM)) {
+						$this->db->where('id', $team_id);
+						if ($this->db->update('tbl_team', $dataTM)) {
 
-								foreach ($job as $key => $job) {
-									$data2 = array(
-										'id_team'			=> $team_id,
-										'job_position'		=> $job,
-										'create_at'			=> date('Y-m-d H:i:s'),
-									);
-									$saveData = $this->db->insert('tbl_job_position', $data2);
-								}
-								if ($saveData > 0) {
-									
-									$this->session->set_flashdata('success_regis_team', TRUE);
-									redirect('home');
-								} else {
-									$this->session->set_flashdata('fail_regis_teamResum', TRUE);
-									redirect('home');
-								
-								}
-							} else {
-								$this->session->set_flashdata('fail_regis_teamData', TRUE);
-								redirect('home');
-							
+							foreach ($job as $key => $job) {
+								$data2 = array(
+									'id_team'			=> $team_id,
+									'job_position'		=> $job,
+									'create_at'			=> date('Y-m-d H:i:s'),
+								);
+								$saveData = $this->db->insert('tbl_job_position', $data2);
 							}
+							if ($saveData > 0) {
+
+								$this->session->set_flashdata('success_regis_team', TRUE);
+								redirect('home');
+							} else {
+								$this->session->set_flashdata('fail_regis_teamResum', TRUE);
+								redirect('home');
+							}
+						} else {
+							$this->session->set_flashdata('fail_regis_teamData', TRUE);
+							redirect('home');
 						}
-					} else {
-						$this->session->set_flashdata('fail_regis_teamResum', TRUE);
-						redirect('home');
-				
 					}
+				} else {
+					$this->session->set_flashdata('fail_regis_teamResum', TRUE);
+					redirect('home');
 				}
 			}
 		}
@@ -488,8 +496,8 @@ class Register_ctr extends CI_Controller
 	public function check_name()
 	{
 		$name = $this->input->post('name');
-		$teamCheck = $this->db->get_where('tbl_team',['name' => $name])->row_array();
-		
+		$teamCheck = $this->db->get_where('tbl_team', ['name' => $name])->row_array();
+
 		if (!empty($teamCheck)) {
 			echo "data found";
 			exit();
@@ -501,8 +509,8 @@ class Register_ctr extends CI_Controller
 	public function check_email()
 	{
 		$email = $this->input->post('email');
-		$teamCheck = $this->db->get_where('tbl_team',['email' => $email])->row_array();
-		$userCheck = $this->db->get_where('tbl_user',['email' => $email])->row_array();
+		$teamCheck = $this->db->get_where('tbl_team', ['email' => $email])->row_array();
+		$userCheck = $this->db->get_where('tbl_user', ['email' => $email])->row_array();
 		if (!empty($teamCheck) || !empty($userCheck) && !empty($teamCheck) && !empty($userCheck)) {
 			echo "data found";
 			exit();
