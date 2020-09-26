@@ -108,7 +108,7 @@
                                         <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 2) : ?>
                                             <span class="badge badge-danger" style="color:#fff;">Not Approved</span>
                                         <?php endif; ?>
-                                        </td>
+                                    </td>
 
                                     <!-- order -->
                                     <td data-order="<?php echo $value['ORD'] ?>"><?php echo $value['ORD']; ?></td>
@@ -293,6 +293,7 @@
                                     </td>
 
                                     <!-- Tool -->
+
                                     <td>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
@@ -811,8 +812,8 @@
                                         <?php } else { ?>
 
                                             <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
-                                            <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-
+                                            <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info" data-toggled="tooltip" data-placement="top" title="More File"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                           
                                             <!-- Modal -->
                                             <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
