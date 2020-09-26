@@ -201,21 +201,41 @@
                                                             <?php if (date("Y-m-d") >= $feedback_team['date_re']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d', strtotime($feedback_team['date_re'])); ?>
-                                                                <div id="clock-b<?php echo $feedback_team['id_f']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $feedback_team['id_f']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                <p id="demo<?php echo $feedback_team['id_f']; ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-                                                                    });
-                                                                </script>
                                                             <?php endif; ?>
+                                                            <script>
+                                                                var datep<?php echo $feedback_team['id_f']; ?> = "<?= $feedback_team['date_re']; ?>";
+
+                                                                // Set the date we're counting down to
+                                                                var countDownDate<?php echo $feedback_team['id_f']; ?> = new Date(datep<?php echo $feedback_team['id_f']; ?>);
+
+                                                                // Update the count down every 1 second
+                                                                var x<?php echo $feedback_team['id_f']; ?> = setInterval(function() {
+
+                                                                    // Get today's date and time
+                                                                    var now<?php echo $feedback_team['id_f']; ?> = new Date();
+
+                                                                    // Find the distance between now and the count down date
+                                                                    var distance<?php echo $feedback_team['id_f']; ?> = countDownDate<?php echo $feedback_team['id_f']; ?> - now<?php echo $feedback_team['id_f']; ?>;
+
+                                                                    // Time calculations for days, hours, minutes and seconds
+                                                                    var days<?php echo $feedback_team['id_f']; ?> = Math.floor(distance<?php echo $feedback_team['id_f']; ?> / (1000 * 60 * 60 * 24));
+                                                                    var hours<?php echo $feedback_team['id_f']; ?> = Math.floor((distance<?php echo $feedback_team['id_f']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                    var minutes<?php echo $feedback_team['id_f']; ?> = Math.floor((distance<?php echo $feedback_team['id_f']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                    var seconds<?php echo $feedback_team['id_f']; ?> = Math.floor((distance<?php echo $feedback_team['id_f']; ?> % (1000 * 60)) / 1000);
+
+                                                                    // Output the result in an element with id="demo"
+                                                                    document.getElementById("demo<?php echo $feedback_team['id_f']; ?>").innerHTML = days<?php echo $feedback_team['id_f']; ?> + "Day " + hours<?php echo $feedback_team['id_f']; ?> + "h " +
+                                                                        minutes<?php echo $feedback_team['id_f']; ?> + "m " + seconds<?php echo $feedback_team['id_f']; ?> + "s ";
+
+                                                                    // If the count down is over, write some text 
+                                                                    if (distance<?php echo $feedback_team['id_f']; ?> < 0) {
+                                                                        clearInterval(x<?php echo $feedback_team['id_f']; ?>);
+                                                                        document.getElementById("demo<?php echo $feedback_team['id_f']; ?>").innerHTML = "หมดเวลา";
+                                                                    }
+                                                                }, 1000);
+                                                            </script>
                                                         </td>
 
 

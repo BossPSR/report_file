@@ -83,7 +83,7 @@
                                                         <td><?php echo $bookmark_all_not['user_upload'] ?></td>
                                                         <td><?php echo $bookmark_all_not['countryName'] ?></td>
                                                         <td>
-                                                      
+
                                                             <?php if (empty($bookmark_all_not['id_document'])) : ?>
                                                                 -
                                                             <?php else : ?>
@@ -266,21 +266,41 @@
                                                             <?php if (date("Y-m-d H:i:s") >= $bookmark_all_not['date_re']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d', strtotime($bookmark_all_not['date_re'])); ?>
-                                                                <div id="clock-b<?php echo $bookmark_all_not['order_upload']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $bookmark_all_not['order_upload']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                <p id="demo<?php echo $bookmark_all_not['order_upload'] ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-                                                                    });
-                                                                </script>
                                                             <?php endif; ?>
+                                                            <script>
+                                                                var datep<?php echo $bookmark_all_not['order_upload'] ?> = "<?= $bookmark_all_not['date_re']; ?>";
+
+                                                                // Set the date we're counting down to
+                                                                var countDownDate<?php echo $bookmark_all_not['order_upload'] ?> = new Date(datep<?php echo $bookmark_all_not['order_upload'] ?>);
+
+                                                                // Update the count down every 1 second
+                                                                var x<?php echo $bookmark_all_not['order_upload'] ?> = setInterval(function() {
+
+                                                                    // Get today's date and time
+                                                                    var now<?php echo $bookmark_all_not['order_upload'] ?> = new Date();
+
+                                                                    // Find the distance between now and the count down date
+                                                                    var distance<?php echo $bookmark_all_not['order_upload'] ?> = countDownDate<?php echo $bookmark_all_not['order_upload'] ?> - now<?php echo $bookmark_all_not['order_upload'] ?>;
+
+                                                                    // Time calculations for days, hours, minutes and seconds
+                                                                    var days<?php echo $bookmark_all_not['order_upload'] ?> = Math.floor(distance<?php echo $bookmark_all_not['order_upload'] ?> / (1000 * 60 * 60 * 24));
+                                                                    var hours<?php echo $bookmark_all_not['order_upload'] ?> = Math.floor((distance<?php echo $bookmark_all_not['order_upload'] ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                    var minutes<?php echo $bookmark_all_not['order_upload'] ?> = Math.floor((distance<?php echo $bookmark_all_not['order_upload'] ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                    var seconds<?php echo $bookmark_all_not['order_upload'] ?> = Math.floor((distance<?php echo $bookmark_all_not['order_upload'] ?> % (1000 * 60)) / 1000);
+
+                                                                    // Output the result in an element with id="demo"
+                                                                    document.getElementById("demo<?php echo $bookmark_all_not['order_upload'] ?>").innerHTML = days<?php echo $bookmark_all_not['order_upload'] ?> + "Day " + hours<?php echo $bookmark_all_not['order_upload'] ?> + "h " +
+                                                                        minutes<?php echo $bookmark_all_not['order_upload'] ?> + "m " + seconds<?php echo $bookmark_all_not['order_upload'] ?> + "s ";
+
+                                                                    // If the count down is over, write some text 
+                                                                    if (distance<?php echo $bookmark_all_not['order_upload'] ?> < 0) {
+                                                                        clearInterval(x<?php echo $bookmark_all_not['order_upload'] ?>);
+                                                                        document.getElementById("demo<?php echo $bookmark_all_not['order_upload'] ?>").innerHTML = "หมดเวลา";
+                                                                    }
+                                                                }, 1000);
+                                                            </script>
                                                         </td>
                                                         <td>
                                                             <?php
@@ -297,11 +317,11 @@
 
 
                                                         <td>
-                                                            <?php if ( $bookmark_all_not['Stp'] == 'complete' && $bookmark_all_not['Sadmin'] == '0') : ?>
+                                                            <?php if ($bookmark_all_not['Stp'] == 'complete' && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
                                                             <?php elseif ($bookmark_all_not['Stp'] == 'rewrite'  && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ( $bookmark_all_not['Stp'] == 'notcomplete'  && $bookmark_all_not['Sadmin'] == '0') : ?>
+                                                            <?php elseif ($bookmark_all_not['Stp'] == 'notcomplete'  && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-primary">Not complete</span>
                                                             <?php elseif ($bookmark_all_not['status_book'] == '2'  && $bookmark_all_not['Sadmin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>

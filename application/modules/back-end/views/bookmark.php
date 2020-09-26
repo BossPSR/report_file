@@ -506,21 +506,43 @@
                                                             <?php if (date("Y-m-d") >= $bookmark['date_re']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d', strtotime($bookmark['date_re'])); ?>
-                                                                <div id="clock-b<?php echo $bookmark['orderd']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $bookmark['orderd']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                   
+                                                                <p id="demo<?php echo $bookmark['orderd'] ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-                                                                    });
-                                                                </script>
                                                             <?php endif; ?>
+                                                            <script>
+                                                                var datep<?php echo $bookmark['orderd'] ?> = "<?= $bookmark['date_re']; ?>";
+                                                                
+                                                                // Set the date we're counting down to
+                                                                var countDownDate<?php echo $bookmark['orderd'] ?> = new Date(datep<?php echo $bookmark['orderd'] ?>);
+
+                                                                // Update the count down every 1 second
+                                                                var x<?php echo $bookmark['orderd'] ?> = setInterval(function() {
+
+                                                                    // Get today's date and time
+                                                                    var now<?php echo $bookmark['orderd'] ?> = new Date();
+
+                                                                    // Find the distance between now and the count down date
+                                                                    var distance<?php echo $bookmark['orderd'] ?> = countDownDate<?php echo $bookmark['orderd'] ?> - now<?php echo $bookmark['orderd'] ?>;
+
+                                                                    // Time calculations for days, hours, minutes and seconds
+                                                                    var days<?php echo $bookmark['orderd'] ?> = Math.floor(distance<?php echo $bookmark['orderd'] ?> / (1000 * 60 * 60 * 24));
+                                                                    var hours<?php echo $bookmark['orderd'] ?> = Math.floor((distance<?php echo $bookmark['orderd'] ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                    var minutes<?php echo $bookmark['orderd'] ?> = Math.floor((distance<?php echo $bookmark['orderd'] ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                    var seconds<?php echo $bookmark['orderd'] ?> = Math.floor((distance<?php echo $bookmark['orderd'] ?> % (1000 * 60)) / 1000);
+
+                                                                    // Output the result in an element with id="demo"
+                                                                    document.getElementById("demo<?php echo $bookmark['orderd'] ?>").innerHTML = days<?php echo $bookmark['orderd'] ?> + "Day " + hours<?php echo $bookmark['orderd'] ?> + "h " +
+                                                                        minutes<?php echo $bookmark['orderd'] ?> + "m " + seconds<?php echo $bookmark['orderd'] ?> + "s ";
+
+                                                                    // If the count down is over, write some text 
+                                                                    if (distance<?php echo $bookmark['orderd'] ?> < 0) {
+                                                                        clearInterval(x<?php echo $bookmark['orderd'] ?>);
+                                                                        document.getElementById("demo<?php echo $bookmark['orderd'] ?>").innerHTML = "หมดเวลา";
+                                                                    }
+                                                                }, 1000);
+                                                            </script>
+                                                           
                                                         </td>
 
                                                         <!-- price -->
