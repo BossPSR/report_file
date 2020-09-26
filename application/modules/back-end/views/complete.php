@@ -581,21 +581,41 @@
 															<?php if (date("Y-m-d") >= $complete['date_required_t']) : ?>
 																<span class="badge badge-danger">หมดเวลา</span>
 															<?php else : ?>
-																<?php $dateReq = date('Y/m/d', strtotime($complete['date_required_t'])); ?>
-																<div id="clock-b<?php echo $complete['order_id_t']; ?>" style="display: flex;"></div>
-																<script>
-																	$(function() {
-																		$('#clock-b<?php echo $complete['order_id_t']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-																			var $this = $(this).html(event.strftime('' +
-																				'<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-																				'<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-																				'<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-																				'<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-																		});
+																<p id="demo<?php echo $complete['order_id_t']; ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-																	});
-																</script>
 															<?php endif; ?>
+															<script>
+																var datep<?php echo $complete['order_id_t']; ?> = "<?= $complete['date_required_t']; ?>";
+
+																// Set the date we're counting down to
+																var countDownDate<?php echo $complete['order_id_t']; ?> = new Date(datep<?php echo $complete['order_id_t']; ?>);
+
+																// Update the count down every 1 second
+																var x<?php echo $complete['order_id_t']; ?> = setInterval(function() {
+
+																	// Get today's date and time
+																	var now<?php echo $complete['order_id_t']; ?> = new Date();
+
+																	// Find the distance between now and the count down date
+																	var distance<?php echo $complete['order_id_t']; ?> = countDownDate<?php echo $complete['order_id_t']; ?> - now<?php echo $complete['order_id_t']; ?>;
+
+																	// Time calculations for days, hours, minutes and seconds
+																	var days<?php echo $complete['order_id_t']; ?> = Math.floor(distance<?php echo $complete['order_id_t']; ?> / (1000 * 60 * 60 * 24));
+																	var hours<?php echo $complete['order_id_t']; ?> = Math.floor((distance<?php echo $complete['order_id_t']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+																	var minutes<?php echo $complete['order_id_t']; ?> = Math.floor((distance<?php echo $complete['order_id_t']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+																	var seconds<?php echo $complete['order_id_t']; ?> = Math.floor((distance<?php echo $complete['order_id_t']; ?> % (1000 * 60)) / 1000);
+
+																	// Output the result in an element with id="demo"
+																	document.getElementById("demo<?php echo $complete['order_id_t']; ?>").innerHTML = days<?php echo $complete['order_id_t']; ?> + "Day " + hours<?php echo $complete['order_id_t']; ?> + "h " +
+																		minutes<?php echo $complete['order_id_t']; ?> + "m " + seconds<?php echo $complete['order_id_t']; ?> + "s ";
+
+																	// If the count down is over, write some text 
+																	if (distance<?php echo $complete['order_id_t']; ?> < 0) {
+																		clearInterval(x<?php echo $complete['order_id_t']; ?>);
+																		document.getElementById("demo<?php echo $complete['order_id_t']; ?>").innerHTML = "หมดเวลา";
+																	}
+																}, 1000);
+															</script>
 														</td>
 
 														<!-- position -->

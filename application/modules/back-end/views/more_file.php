@@ -292,10 +292,10 @@
                                                                                     <?php foreach ($order as $keys => $order) { ?>
                                                                                         <tr>
                                                                                             <td><?php echo $order['order_id'] ?></td>
-																							<td>
-																								<?php echo $order['file_name_GT'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $order['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
-																								<!-- Modal -->
-																								<div class="modal fade text-left" id="dms<?php echo $order['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                            <td>
+                                                                                                <?php echo $order['file_name_GT'] ?> <a href="" data-toggle="modal" data-target="#dms<?php echo $order['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                <!-- Modal -->
+                                                                                                <div class="modal fade text-left" id="dms<?php echo $order['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                                                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                                                                         <div class="modal-content">
                                                                                                             <div class="modal-header">
@@ -318,13 +318,13 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-																							</td>
+                                                                                            </td>
                                                                                             <td><a href="<?php echo $order['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td><?php echo $order['create_at'] ?></td>
-																						</tr>
+                                                                                        </tr>
 
-																					<?php } ?>
-												
+                                                                                    <?php } ?>
+
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -402,21 +402,41 @@
                                                             <?php if (date("Y-m-d H:i:s") >= $more_file['dr_more']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
-                                                                <?php $dateReq = date('Y/m/d H:i:s', strtotime($more_file['dr_more'])); ?>
-                                                                <div id="clock-b<?php echo $more_file['orderGT']; ?>" style="display: flex;"></div>
-                                                                <script>
-                                                                    $(function() {
-                                                                        $('#clock-b<?php echo $more_file['orderGT']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
-                                                                            var $this = $(this).html(event.strftime('' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%M</span> Min</div>' +
-                                                                                '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%S</span> Sec</div>'));
-                                                                        });
+                                                                <p id="demo<?php echo $more_file['orderGT']; ?>" style="font-size: 18px;font-weight: bold;"></p>
 
-                                                                    });
-                                                                </script>
                                                             <?php endif; ?>
+                                                            <script>
+                                                                var datep<?php echo $more_file['orderGT']; ?> = "<?= $more_file['dr_more']; ?>";
+
+                                                                // Set the date we're counting down to
+                                                                var countDownDate<?php echo $more_file['orderGT']; ?> = new Date(datep<?php echo $more_file['orderGT']; ?>);
+
+                                                                // Update the count down every 1 second
+                                                                var x<?php echo $more_file['orderGT']; ?> = setInterval(function() {
+
+                                                                    // Get today's date and time
+                                                                    var now<?php echo $more_file['orderGT']; ?> = new Date();
+
+                                                                    // Find the distance between now and the count down date
+                                                                    var distance<?php echo $more_file['orderGT']; ?> = countDownDate<?php echo $more_file['orderGT']; ?> - now<?php echo $more_file['orderGT']; ?>;
+
+                                                                    // Time calculations for days, hours, minutes and seconds
+                                                                    var days<?php echo $more_file['orderGT']; ?> = Math.floor(distance<?php echo $more_file['orderGT']; ?> / (1000 * 60 * 60 * 24));
+                                                                    var hours<?php echo $more_file['orderGT']; ?> = Math.floor((distance<?php echo $more_file['orderGT']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                    var minutes<?php echo $more_file['orderGT']; ?> = Math.floor((distance<?php echo $more_file['orderGT']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                    var seconds<?php echo $more_file['orderGT']; ?> = Math.floor((distance<?php echo $more_file['orderGT']; ?> % (1000 * 60)) / 1000);
+
+                                                                    // Output the result in an element with id="demo"
+                                                                    document.getElementById("demo<?php echo $more_file['orderGT']; ?>").innerHTML = days<?php echo $more_file['orderGT']; ?> + "Day " + hours<?php echo $more_file['orderGT']; ?> + "h " +
+                                                                        minutes<?php echo $more_file['orderGT']; ?> + "m " + seconds<?php echo $more_file['orderGT']; ?> + "s ";
+
+                                                                    // If the count down is over, write some text 
+                                                                    if (distance<?php echo $more_file['orderGT']; ?> < 0) {
+                                                                        clearInterval(x<?php echo $more_file['orderGT']; ?>);
+                                                                        document.getElementById("demo<?php echo $more_file['orderGT']; ?>").innerHTML = "หมดเวลา";
+                                                                    }
+                                                                }, 1000);
+                                                            </script>
 
 
 
@@ -590,32 +610,31 @@
 </div>
 <!-- END: Content-->
 <script>
-																							$('body').on('click', 'button[type="button"].ey', function() {
-																								var c = $(this).data('fmain');
-																								var moreid = $(this).data('moreid');
-																								var d = $('#pathmain' + c).data('pathgt');
-																								var name_file = $('#Re_file_name' + c).val();
-																								var last_file = $('#Re_last_name' + c).val();
+    $('body').on('click', 'button[type="button"].ey', function() {
+        var c = $(this).data('fmain');
+        var moreid = $(this).data('moreid');
+        var d = $('#pathmain' + c).data('pathgt');
+        var name_file = $('#Re_file_name' + c).val();
+        var last_file = $('#Re_last_name' + c).val();
 
-																								$.ajax({
-																									url: "rename_filenameGT",
-																									type: "POST",
-																									data: {
-																										id: c,
-																										name_file: name_file,
-																										last_file: last_file,
-																										path: d
-																									},
-																									success: function(success) {
-																										if (success) {
-																											swal("Good job!", "Upload for data successfull", "success", {
-																												button: true,
-																											});
-																											$("#here" + moreid).load("More_File #here" + moreid);
-																											$('#dms' + c).modal('hide');
-																										}
-																									}
-																								});
-																							});
-																						</script>
-
+        $.ajax({
+            url: "rename_filenameGT",
+            type: "POST",
+            data: {
+                id: c,
+                name_file: name_file,
+                last_file: last_file,
+                path: d
+            },
+            success: function(success) {
+                if (success) {
+                    swal("Good job!", "Upload for data successfull", "success", {
+                        button: true,
+                    });
+                    $("#here" + moreid).load("More_File #here" + moreid);
+                    $('#dms' + c).modal('hide');
+                }
+            }
+        });
+    });
+</script>
