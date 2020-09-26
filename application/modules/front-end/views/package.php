@@ -32,7 +32,13 @@
                 <li>PHP 5 Enbled</li>
                 <li>24H – Support</li>
               </ul>
-              <a class="list_button paypal-button-container<?php echo $i++; ?>" href="#">purchase now </a>
+             
+              <?php if ($userId['package_user'] >= $package['id']) : ?>
+                <button type="button" class="btn btn-secondary">Buy package</button>
+              <?php else : ?>
+                <a class="list_button paypal-button-container<?php echo $i++; ?>" href="#">purchase now <?php echo $package['id']; ?> </a>
+
+              <?php endif ; ?>
             </div>
           </div>
         </div>

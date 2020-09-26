@@ -67,20 +67,20 @@ class Delivery_ctr extends CI_Controller
             );
             if ($this->db->insert('tbl_upload_order_team', $data)) {
                 $data3 = array(
-                    'status'        => 5,
+                    'status'        => '1',
                 );
                 $this->db->where('order_id', $order_exp[0]);
                 $this->db->update('tbl_upload_team', $data3);
             }
             if ($feed == true) {
                 $data2 = array(
-                    'check_feedback_dalivery'   => 1
+                    'check_feedback_dalivery'   => '1'
 
                 );
                 $this->db->where('order_id', $order_exp[0]);
                 if ($this->db->update('tbl_feedback', $data2)) {
                     $data3 = array(
-                        'check_feedback_order'  => 1
+                        'check_feedback_order'  => '1'
                     );
                     $this->db->where('teamId', $team->IdTeam);
                     $this->db->update('tbl_feedback', $data3);

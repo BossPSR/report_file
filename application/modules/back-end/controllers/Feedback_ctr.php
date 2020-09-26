@@ -382,10 +382,17 @@ class Feedback_ctr extends CI_Controller
 
     public function status_feedback_now()
     {
-        $id = $this->input->get('id');
+        $id      = $this->input->get('id');
+        $order   = $this->input->get('order');
+
+                    $this->db->where('order_id', $order);
+                    $this->db->where('status !=', '4');
+                    $this->db->where('teamId !=', '');
+        $getw    =  $this->db->get('tbl_upload_team')->row_array();
+
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'notify_team' => 0, 'status_c_feedack_team' => 1]);
+        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'teamId' => $getw['teamId'] , 'notify_team' => 0, 'status_c_feedack_team' => 1]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated Feedback information !!.');

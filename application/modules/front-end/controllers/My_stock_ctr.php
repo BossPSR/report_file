@@ -116,6 +116,24 @@ class My_stock_ctr extends CI_Controller
         }
     }
 
+    function order_popup()
+    {
+        $id       = $this->input->post('id');
+
+        if ($this->session->userdata('email') == '') {
+            redirect('home');
+        } else {
+            $data = array(
+                'check_popup_nocom'        => '1',
+            );
+
+            $this->db->where('id', $id);
+            $success = $this->db->update('tbl_upload_team', $data);
+            
+            echo $success;
+        }
+    }
+
     function my_task()
     {
         $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
@@ -210,7 +228,7 @@ class My_stock_ctr extends CI_Controller
         );
 
         if ($this->db->insert('tbl_cancel', $data)) {
-          
+
             $data2 = array(
                 'status_check_team'             => 0,
                 'status'            => 4,

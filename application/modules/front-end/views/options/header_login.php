@@ -572,7 +572,7 @@
                                                 <a href="my-feedback"> แก้ไขงานของฉัน</a>
                                             </li>
 
-                                            <li><a href="#">Mการหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
+                                            <li><a href="#">การหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a href="my_store_team">คะแนน</a></li>
                                                     <li><a href="my_score_team_deduct">หักคะแนน</a></li>

@@ -546,7 +546,7 @@
                                                                         <i class="feather icon-log-out"></i>
                                                                     </button>
                                                                 <?php else : ?>
-                                                                    <button onclick="confileFeedback_team('<?php echo $feedback_team['id_f']; ?>')" class="btn btn-icon btn-success " type="button" aria-haspopup="true" aria-expanded="false">
+                                                                    <button onclick="confileFeedback_team('<?php echo $feedback_team['id_f']; ?>','<?php echo $feedback_team['order_id']; ?>')" class="btn btn-icon btn-success " type="button" aria-haspopup="true" aria-expanded="false">
                                                                         <i class="feather icon-log-out"></i>
                                                                     </button>
                                                                 <?php endif; ?>

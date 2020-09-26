@@ -155,23 +155,22 @@
 
                                             <?php else : ?>
 
-                                                <?php
-                                                $checkDate_num = DateDiff(date("Y-m-d H:i:s"), $task['date_required']);
+                                                <!-- $checkDate_num = DateDiff(date("Y-m-d H:i:s"), $task['date_required']);
                                                 $checkDate = $checkDate_num / 2;
                                                 $checkDate = floor($checkDate);
                                                 if ($checkDate_num <= 0) {
                                                     $checkDate = 0;
                                                 }
                                                 $dateRequired = date("Y-m-d H:i:s", strtotime("-" . $checkDate . " day", strtotime($task['date_required'])));
-                                                ?>
+                                                 -->
 
                                                 <?php if ($task['status_out'] == '0') : ?>
 
-                                                    <div data-countdown="<?php echo $dateRequired; ?>"></div>
+                                                    <div data-countdown="<?php echo $task['date_required']; ?>"></div>
 
                                                 <?php else : ?>
 
-                                                    <?php $aa = date("Y-m-d H:i:s", strtotime($dateRequired . ' + 12 hour')); ?>
+                                                    <?php $aa = date("Y-m-d H:i:s", strtotime($task['date_required'] . ' + 12 hour')); ?>
                                                     <div data-countdown="<?php echo $aa; ?>"></div>
 
                                                 <?php endif; ?>
@@ -185,7 +184,7 @@
                                     <td><?php echo $task['or_id']; ?></td>
 
                                     <!-- Main Doc -->
-                                    <td> 
+                                    <td>
                                         <?php $taskmain = $this->db->get_where('tbl_upload_order', ['order_id' => $task['or_id']])->result_array(); ?>
                                         <?php $backmain = $this->db->get_where('tbl_upload_backup_main', ['sub_id_m' => $task['idteam']])->result_array(); ?>
                                         <?php if ($backmain == true) : ?>
@@ -804,8 +803,8 @@
                                                                 <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
                                                             </div>
                                                             <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                 <button type="submit" class="btn btn-success">Submit</button>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -836,8 +835,8 @@
                                                                 <textarea name="note_can" id="" rows="5" class="form-control" required></textarea>
                                                             </div>
                                                             <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                 <button type="submit" class="btn btn-success">Submit</button>
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -853,7 +852,7 @@
                                 <script type="text/javascript">
                                     $(document).ready(function() {
                                         if (<?= $task['status']; ?> == 4 && <?= $task['check_popup_nocom']; ?> == 0) {
-                                            $('#check_popup').modal({
+                                            $('#check_popup<?= $task['idteam']; ?>').modal({
                                                 backdrop: 'static',
                                                 keyboard: false
                                             });
@@ -861,28 +860,44 @@
                                     });
                                 </script>
 
-                            <?php } ?>
-                            <div class="modal fade" tabindex="-1" role="dialog" id="check_popup">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                            <h5 class="modal-title">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <div class="modal fade" tabindex="-1" role="dialog" id="check_popup<?= $task['idteam']; ?>">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                <h5 class="modal-title">Modal title</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                                                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="popup<?= $task['idteam']; ?>" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <script>
+                                    $('#popup<?= $task['idteam']; ?>').click(function() {
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: 'order_popup',
+                                            data: {
+                                                id: '<?= $task['idteam']; ?>',
+                                            },
+                                            success: function(success) {
+                                                $('#check_popup<?= $task['idteam']; ?>').modal('hide');
+                                            }
+                                        });
+                                    });
+                                </script>
+
+                            <?php } ?>
+
                             <script>
                                 $('#download<?php echo $key; ?>').click(function() {
                                     swal({

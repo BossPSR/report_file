@@ -262,14 +262,14 @@ class Store_ctr extends CI_Controller
         $message .= '</td>';
         $message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Warranty  : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order[0]['end_time'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+        // $message .= '<tr>';
+        // $message .= '<td>';
+        // $message .= ' Warranty  : ';
+        // $message .= '</td>';
+        // $message .= '<td>';
+        // $message .= ' ' . $upload_order[0]['end_time'] . ' ';
+        // $message .= '</td>';
+        // $message .= '</tr>';
 
         $message .= '</table>';
 

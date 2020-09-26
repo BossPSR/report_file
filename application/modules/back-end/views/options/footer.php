@@ -143,7 +143,7 @@
 </script>
 
 <script>
-    function confileFeedback_team(data) {
+    function confileFeedback_team(data,data2) {
 
         swal({
             title: "Are you sure upload Feedback to Team ?",
@@ -152,7 +152,7 @@
             dangerMode: true,
         }).then(function(isConfirm) {
             if (isConfirm) {
-                window.location = 'status_feedback_now?id=' + data;
+                window.location = 'status_feedback_now?id=' + data + '&order=' + data2 ;
             }
         })
     }

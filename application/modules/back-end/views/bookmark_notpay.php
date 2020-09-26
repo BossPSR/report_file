@@ -83,12 +83,21 @@
                                                         <td><?php echo $bookmark_all_not['user_upload'] ?></td>
                                                         <td><?php echo $bookmark_all_not['countryName'] ?></td>
                                                         <td>
-                                                            <?php if ($bookmark_all_not['id_document'] == '') : ?>
+                                                      
+                                                            <?php if (empty($bookmark_all_not['id_document'])) : ?>
                                                                 -
                                                             <?php else : ?>
-                                                                <span class="badge badge-primary"><?php echo $bookmark_all_not['id_document'] ?></span>
-                                                            <?php endif; ?>
+                                                                <?php $show_dm = $this->db->group_by('id_document')->get_where('tbl_bookmark', ['id_orderBuy' => $bookmark_all_not['order_upload']])->result_array(); ?>
+                                                                <?php foreach ($show_dm as $keyBook => $show_dm) { ?>
 
+                                                                    <?php if ($show_dm['id_document'] == '') : ?>
+                                                                        -
+                                                                    <?php else : ?>
+                                                                        <span class="badge badge-primary"><?php echo $show_dm['id_document'] ?></span>
+                                                                    <?php endif; ?>
+
+                                                                <?php } ?>
+                                                            <?php endif; ?>
 
                                                         </td>
 

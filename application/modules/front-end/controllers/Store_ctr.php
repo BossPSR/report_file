@@ -135,6 +135,11 @@ class Store_ctr extends CI_Controller
 
     public function payment_email_success()
     {
+        
+        if ($this->session->userdata('email') == '') {
+            $this->session->set_flashdata('del_ss2', 'กรุณาเข้าสู่ระบบ และทำการกดชำระเงินที่อีเมล์อีกครั้ง');
+            redirect('home');
+        } 
         $file_name      = $this->input->post('file_name');
         $order_id       = $this->input->post('order_id');
         $price_file     = $this->input->post('price_file');
@@ -176,6 +181,7 @@ class Store_ctr extends CI_Controller
                 $this->db->where('order_id', $order_id);
                 $this->db->update('tbl_upload_order', ['status_bookmark' => 1]);
             }
+            
 
             $data = [
                 'file_name'     => $file_name,
