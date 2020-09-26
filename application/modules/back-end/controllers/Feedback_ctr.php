@@ -818,4 +818,27 @@ class Feedback_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update email information');
         }
     }
+
+    public function rename_filename_feedback_all()
+    {
+        $id = $this->input->post('id');
+        $name_file = $this->input->post('name_file');
+        $last_file = $this->input->post('last_file');
+        $path = $this->input->post('path');
+
+        if ($this->session->userdata('email_admin') != '') {
+            rename($path, 'uploads/Feedback/' . $name_file . '.' . $last_file);
+            if ($id) {
+                $update = [
+                    'file_name' => $name_file . '.' . $last_file,
+                    'path' => 'uploads/Feedback/' . $name_file . '.' . $last_file,
+                ];
+                $this->db->where('id', $id);
+                $success = $this->db->update('tbl_feedback_file', $update);
+                echo $success;
+            }
+        } else {
+            redirect('feedback_all');
+        }
+    }
 }

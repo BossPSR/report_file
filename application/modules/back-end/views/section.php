@@ -156,7 +156,7 @@
                                                                                         </button>
                                                                                     <?php }  ?>
                                                                                 <?php endif; ?>
-                                                                                <table class="table zero-configuration">
+                                                                                <table class="table zero-configuration" id="here<?php echo  $section['store_id'];?>">
                                                                                     <thead>
                                                                                         <?php $section_file = $this->db->get_where('tbl_upload_store', ['store_id' => $section['store_id'], 'status_chack' => 1, 'section' => $check_for['section']])->result_array(); ?>
                                                                                         <tr>
@@ -172,7 +172,34 @@
                                                                                         <?php foreach ($section_file as $keys => $section_file) { ?>
                                                                                             <tr>
                                                                                                 <td><?php echo $section_file['store_id'] ?></td>
-                                                                                                <td><?php echo $section_file['file_name'] ?></td>
+                                                                                                <td><?php echo $section_file['file_name'] ?><a href="" data-toggle="modal" data-target="#rename<?php echo $section_file['store_id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                    <!-- Modal -->
+                                                                                                    <div class="modal fade text-left" id="rename<?php echo $section_file['store_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <h5>Rename</h5>
+                                                                                                                    <?php $or_file_name = explode('.', $section_file['file_name']); ?>
+                                                                                                                    <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_name<?php echo $section_file['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_name<?php echo $section_file['id']; ?>" class="form-control">
+                                                                                                                    <input type="hidden" id="pathmain<?php echo $section_file['id']; ?>" data-pathgt="<?php echo $section_file['path']; ?>" class="form-control">
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <button type="button" class="btn btn-primary ey" id="re_file_name_button<?php echo $section_file['id']; ?>" data-store="<?php echo $section_file['store_id']; ?>" data-fmain="<?php echo $section_file['id']; ?>">Submit</button>
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+
+                                                                                                </td>
                                                                                                 <td><a href="<?php echo $section_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                                 <?php if ($section_file['grade'] != '') : ?>
                                                                                                     <td><?php echo $section_file['grade'] ?></td>
@@ -423,7 +450,35 @@
     </div>
 </div>
 <!-- END: Content-->
+<script>
+    $('body').on('click', 'button[type="button"].ey', function() {
+        var c = $(this).data('fmain');
+        var store = $(this).data('store');
+        var d = $('#pathmain' + c).data('pathgt');
+        var name_file = $('#Re_file_name' + c).val();
+        var last_file = $('#Re_last_name' + c).val();
 
+        $.ajax({
+            url: "rename_filename_for_sell",
+            type: "POST",
+            data: {
+                id: c,
+                name_file: name_file,
+                last_file: last_file,
+                path: d
+            },
+            success: function(success) {
+                if (success) {
+                    swal("Good job!", "Upload for data successfull", "success", {
+                        button: true,
+                    });
+                    $("#here<?php echo $section['store_id']; ?>").load(window.location.href + " #here<?php echo $section['store_id']; ?>");
+                    $('#rename' + store).modal('hide');
+                }
+            }
+        });
+    });
+</script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 

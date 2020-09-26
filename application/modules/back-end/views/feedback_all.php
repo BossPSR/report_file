@@ -27,7 +27,7 @@
         </div>
 
         <?php
-        $this->db->select('*,tbl_feedback.id AS id_num');
+        $this->db->select('*,tbl_feedback.id AS id_f');
         $this->db->from('tbl_feedback');
         $this->db->join('tbl_upload_team', 'tbl_feedback.order_id=tbl_upload_team.order_id');
 
@@ -89,11 +89,11 @@
                                                 <?php $x = 1 ?>
                                                 <?php foreach ($feedback_team as $keyBook => $feedback_team) { ?>
                                                     <tr>
-                                                        <td><?php echo $feedback_team['order_id'] ?></td>
+                                                        <td><?php echo $feedback_team['order_id'] ?> <?= $feedback_team['id_f']; ?> </td>
                                                         <td><?php echo $feedback_team['userId'] ?></td>
                                                         <td>
-                                                            <span data-toggle="modal" data-target="#exampleModala<?php echo $feedback_team['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
-                                                            <div class="modal fade" id="exampleModala<?php echo $feedback_team['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <span data-toggle="modal" data-target="#exampleModala<?= $feedback_team['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                            <div class="modal fade" id="exampleModala<?= $feedback_team['id_f']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -103,11 +103,14 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <table class="table zero-configuration">
+
+                                                                            <?php $feedback_file = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $feedback_team['id_f']])->result_array(); ?>
+
+                                                                            <table class="table zero-configuration" id="heresd<?php echo $feedback_team['id_f']; ?>">
                                                                                 <thead>
-                                                                                    <?php $feedback_file = $this->db->get_where('tbl_feedback_file', ['id_feedback' => $feedback_team['id_f']])->result_array(); ?>
+
                                                                                     <tr>
-                                                                                        <th>File_name</th>
+                                                                                        <th>File_name </th>
                                                                                         <th>File</th>
                                                                                         <th>create</th>
                                                                                     </tr>
@@ -115,7 +118,32 @@
                                                                                 <tbody>
                                                                                     <?php foreach ($feedback_file as $keys => $feedback_file) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $feedback_file['file_name'] ?></td>
+                                                                                            <td><?php echo $feedback_file['file_name'] ?><a href="" data-toggle="modal" data-target="#rename<?php echo $feedback_file['id']; ?>"><i class="feather icon-edit-2" style="font-size: 25px;"></i></a>
+                                                                                                <!-- Modal -->
+                                                                                                <div class="modal fade text-left" id="rename<?php echo $feedback_file['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <h4 class="modal-title" id="myModalLabel1">Rename</h4>
+                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                            <div class="modal-body">
+                                                                                                                <h5>Rename</h5>
+                                                                                                                <?php $or_file_name = explode('.', $feedback_file['file_name']); ?>
+                                                                                                                <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_name<?php echo $feedback_file['id']; ?>" class="form-control">
+                                                                                                                <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_name<?php echo $feedback_file['id']; ?>" class="form-control">
+                                                                                                                <input type="hidden" id="pathmain<?php echo $feedback_file['id']; ?>" data-pathgt="<?php echo $feedback_file['path']; ?>" class="form-control">
+                                                                                                            </div>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <button type="button" class="btn btn-primary eye" id="re_file_name_button<?php echo $feedback_file['id']; ?>" data-id="<?php echo $feedback_file['id']; ?>" data-idf="<?php echo $feedback_team['id_f']; ?>">Submit</button>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
                                                                                             <td><a href="<?php echo $feedback_file['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
                                                                                             <td><?php echo $feedback_file['create_at'] ?></td>
                                                                                         </tr>
@@ -174,10 +202,10 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <?php $dateReq = date('Y/m/d', strtotime($feedback_team['date_re'])); ?>
-                                                                <div id="clock-b<?php echo $feedback_team['id_num']; ?>" style="display: flex;"></div>
+                                                                <div id="clock-b<?php echo $feedback_team['id_f']; ?>" style="display: flex;"></div>
                                                                 <script>
                                                                     $(function() {
-                                                                        $('#clock-b<?php echo $feedback_team['id_num']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
+                                                                        $('#clock-b<?php echo $feedback_team['id_f']; ?>').countdown('<?php echo $dateReq; ?>').on('update.countdown', function(event) {
                                                                             var $this = $(this).html(event.strftime('' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%D</span> Day%!d</div>' +
                                                                                 '<div class="text-center" style="padding: 0 10px;"><span class="h4 font-weight-bold">%H</span> Hours</div>' +
@@ -420,8 +448,8 @@
                                                                         <i class="feather icon-log-out"></i>
                                                                     </button>
                                                                 <?php endif; ?>
-                                                                
-                                                            <!-- elseif ($feedback_team['status_c_feedack_team'] == 2) : 
+
+                                                                <!-- elseif ($feedback_team['status_c_feedack_team'] == 2) : 
                                                                 <span class="badge badge-pill badge-danger">Not delivered </span> -->
                                                             <?php elseif ($feedback_team['status_delivery'] == 1) : ?>
                                                                 <span class="badge badge-pill badge-success">Delivered </span>
@@ -661,3 +689,33 @@
         </div>
     </div>
 </div>
+<script>
+    $('button[type="button"].eye' ).click(function() {
+        var id  = $(this).data('id');
+        var idf = $(this).data('idf');
+        var d = $('#pathmain' + id).data('pathgt');
+        var name_file = $('#Re_file_name' + id).val();
+        var last_file = $('#Re_last_name' + id).val();
+        console.log(idf)
+
+        $.ajax({
+            url: "rename_filename_feedback_all",
+            type: "POST",
+            data: {
+                id: id,
+                name_file: name_file,
+                last_file: last_file,
+                path: d
+            },
+            success: function(success) {
+                if (success) {
+                    swal("Good job!", "Upload for data successfull", "success", {
+                        button: true,
+                    });
+                    $("#heresd" + idf).load("feedback_all #heresd"+idf);
+                    $("#rename" + id).modal('hide');
+                }
+            }
+        });
+    });
+</script>
