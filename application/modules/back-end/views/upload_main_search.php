@@ -133,9 +133,9 @@
                                                                                                 <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $store['update_at'])); ?>
                                                                                                 <?php $data = date('Y-m-d') ?>
                                                                                                 <?php if ($value['status_delivery'] == '1' && $data <= $prosum) : ?>
-                                                                                                    <button type="button" class="btn btn-danger mr-1 mb-1"><i class="feather icon-download-cloud"></i> Sold</button>
+                                                                                                    <button type="button" class="btn btn-danger"><i class="feather icon-download-cloud"></i> Sold</button>
                                                                                                 <?php else : ?>
-                                                                                                    <button type="button" class="btn btn-info mr-1 mb-1"><i class="feather icon-download-cloud"></i> Not Sold</button>
+                                                                                                    <button type="button" class="btn btn-info"><i class="feather icon-download-cloud"></i> Not Sold</button>
                                                                                                 <?php endif; ?>
                                                                                             </td>
                                                                                             <td><?php echo $store['dm_sub']; ?></td>
