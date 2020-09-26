@@ -57,18 +57,17 @@
 														<td><?php echo $withdraw['phone']; ?></td>
 														<td><?php echo $withdraw['transaction_date']; ?></td>
 														<td>
-															<?php if ($withdraw['file_name'] == '') : ?>
+															<?php if ($withdraw['filew'] == '') : ?>
 																-
 															<?php else : ?>
-																<a href="<?php echo $withdraw['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
-
+																<a href="<?php echo $withdraw['pathw'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
 															<?php endif; ?>
 														</td>
 														<td>
 															<button class="btn btn-icon btn-info" data-toggle="modal" data-target="#emailsand<?php echo $withdraw['idW']; ?>" type="button">
 																<i class="feather icon-mail"></i>
 															</button>
-															<?php if ($withdraw['status'] != 1) : ?>
+															<?php if ($withdraw['status'] == 1) : ?>
 																<div style="display: contents;">
 																	<button class="btn btn-warning btn-info" data-toggle="modal" data-target="#note<?php echo $withdraw['idW']; ?>" type="button">
 																		<i class="fa fa-sticky-note"></i>
@@ -105,7 +104,7 @@
 																					<label for="" style="font-size: 16px;">File Document </label>
 																					<form action="upload_back_withdraw_slip" class="dropzone dropzone-area" id="fileup<?php echo $withdraw['idW']; ?>">
 																						<div class="dz-message" style="top: 24%;">Upload Document</div>
-																						<input type="text" name="id" value="<?php echo $withdraw['id']; ?>" hidden="">
+																						<input type="hidden" name="id" value="<?php echo $withdraw['idW']; ?>" >
 																					</form>
 																				</div>
 																				<br>
@@ -145,7 +144,7 @@
 																					type: "POST",
 																					url: "back_withdraw_slip",
 																					data: {
-																						id: <?php echo $withdraw['id']; ?>,
+																						id: '<?php echo $withdraw['idW']; ?>',
 																						transfer_date: transfer_date,
 																						transfer_time: transfer_time,
 																					},

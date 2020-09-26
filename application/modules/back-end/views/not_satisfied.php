@@ -93,7 +93,7 @@
                                                         <td><?php echo $store['orderNOT'] ?></td>
 
                                                         <!-- userId -->
-                                                        <td><?php echo $store['userId']; ?></td>
+                                                        <td> <?php echo $store['Username'] == '' ? $store['userId'] : $store['Username'] ; ?></td>
 
                                                         <!-- countryName -->
                                                         <td>
@@ -965,7 +965,7 @@
 
                                                         <!-- Status -->
                                                         <td>
-                                                            <?php $admin_stu = $this->db->get('tbl_admin', ['adminId' => $store['userId']])->row_array(); ?>
+                                                            <?php $admin_stu = $this->db->get_where('tbl_admin', ['adminId' => $store['userId']])->row_array(); ?>
                                                             <?php if ($admin_stu == true) : ?>
                                                                 <?php if ($store['status_cp'] == 'complete') : ?>
                                                                     <span class="badge badge-pill badge-success">Admin Original </span>

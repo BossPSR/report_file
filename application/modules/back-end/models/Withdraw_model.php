@@ -9,7 +9,7 @@ class Withdraw_model extends CI_Model{
     
     public function withdraw_list()
     {
-        $this->db->select('*,tbl_withdraw.id AS idW');
+        $this->db->select('*,tbl_withdraw.id AS idW , tbl_withdraw.file_name filew  , tbl_withdraw.path pathw');
         $this->db->from('tbl_withdraw');
         $this->db->join('tbl_user','tbl_user.idUser = tbl_withdraw.userId');
         return $this->db->get()->result_array();

@@ -381,7 +381,13 @@
 
 
                                                         </td>
-
+                                                        <?php
+                                                        $ui  = 0;
+                                                        $ui2 = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                                        foreach ($ui2 as $key => $ui2) {
+                                                            $ui += 1;
+                                                        }
+                                                        ?>
                                                         <td>
                                                             <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['order']])->row_array(); ?>
                                                             <?php if ($team == true) : ?>
@@ -402,7 +408,7 @@
                                                                         <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
                                                                             <span class="badge badge-pill badge-danger">feedback</span>
                                                                         <?php elseif ($team['status'] == 3 && $team['teamId'] != '') : ?>
-                                                                            <span class="badge badge-pill badge-danger">Re feedback</span>
+                                                                            <span class="badge badge-pill badge-danger">Re feedback <?= $ui; ?></span>
                                                                         <?php elseif ($team['status'] == 4 && $team['teamId'] != '') : ?>
                                                                             <span class="badge badge-pill badge-danger">Not complete</span>
                                                                         <?php else : ?>

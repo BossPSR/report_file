@@ -299,6 +299,36 @@
                                     <!-- Tool -->
 
                                     <td>
+
+                                        <?php
+                                        $this->db->select('*');
+                                        $this->db->where('order_id', $value['ORD']);
+                                        $this->db->where('check_status', 1);
+                                        $this->db->where('re_feedback', 0);
+                                        $this->db->order_by('dated', 'DESC');
+                                        $N_feed = $this->db->get('tbl_feedback')->row_array();
+
+                                        $this->db->select('count(*) od');
+                                        $this->db->where('order_id', $value['ORD']);
+                                        $this->db->where('check_status', 1);
+                                        $this->db->where('re_feedback', 0);
+                                        $this->db->order_by('dated', 'ASC');
+                                        $N_count = $this->db->get('tbl_feedback')->row_array();
+
+                                        $this->db->select('*');
+                                        $this->db->where('order_id', $value['ORD']);
+                                        $this->db->where('check_status', 1);
+                                        $this->db->where('re_feedback', 1);
+                                        $this->db->order_by('dated', 'DESC');
+                                        $ref_feed = $this->db->get('tbl_feedback')->row_array();
+
+                                        $this->db->select('count(*) odref');
+                                        $this->db->where('order_id', $value['ORD']);
+                                        $this->db->where('check_status', 1);
+                                        $this->db->where('re_feedback', 1);
+                                        $this->db->order_by('dated', 'ASC');
+                                        $ref_count = $this->db->get('tbl_feedback')->row_array();
+                                        ?>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
                                             <a href="#" data-toggle="modal" data-target="#note_appoved<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
@@ -322,35 +352,6 @@
                                             </div>
                                         <?php } elseif ($value['status_approved'] == 3 || $value['status_approved'] == 4 || $value['status_delivery'] == 1) { ?>
 
-                                            <?php
-                                            $this->db->select('*');
-                                            $this->db->where('order_id', $value['ORD']);
-                                            $this->db->where('check_status', 1);
-                                            $this->db->where('re_feedback', 0);
-                                            $this->db->order_by('dated', 'DESC');
-                                            $N_feed = $this->db->get('tbl_feedback')->row_array();
-
-                                            $this->db->select('count(*) od');
-                                            $this->db->where('order_id', $value['ORD']);
-                                            $this->db->where('check_status', 1);
-                                            $this->db->where('re_feedback', 0);
-                                            $this->db->order_by('dated', 'ASC');
-                                            $N_count = $this->db->get('tbl_feedback')->row_array();
-
-                                            $this->db->select('*');
-                                            $this->db->where('order_id', $value['ORD']);
-                                            $this->db->where('check_status', 1);
-                                            $this->db->where('re_feedback', 1);
-                                            $this->db->order_by('dated', 'DESC');
-                                            $ref_feed = $this->db->get('tbl_feedback')->row_array();
-
-                                            $this->db->select('count(*) odref');
-                                            $this->db->where('order_id', $value['ORD']);
-                                            $this->db->where('check_status', 1);
-                                            $this->db->where('re_feedback', 1);
-                                            $this->db->order_by('dated', 'ASC');
-                                            $ref_count = $this->db->get('tbl_feedback')->row_array();
-                                            ?>
 
                                             <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
@@ -427,8 +428,8 @@
                                                                     <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
                                                                     <br>
 
-                                                                    <label for="" class="font-size-upload">Date :</label>
-                                                                    <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" min="<?php echo empty($N_feed['dated'])  ? date('Y-m-d') : $N_feed['dated']; ?>" max="" style="width:30%" required>
+                                                                    <label for="" class="font-size-upload">Date : <span style="color: red;">*กรุณาระบุวันที่อย่างน้อย 4 วันขึ้นไปโดยนับวันพรุ่งนี้เป็นวันที่ 1</span></label>
+                                                                    <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo empty($N_feed['dated'])  ? date('Y-m-d', strtotime("+ 4 day")) : $N_feed['dated']; ?>" min="<?php echo empty($N_feed['dated'])  ? date('Y-m-d', strtotime("+ 4 day")) : $N_feed['dated']; ?>" max="" style="width:30%" required>
 
                                                                     <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
                                                                     <input type="text" name="userId" id="userId<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
@@ -817,7 +818,7 @@
 
                                             <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
                                             <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info" data-toggled="tooltip" data-placement="top" title="More File (ส่งข้อมูลเพิ่มเติม)"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
-                                           
+
                                             <!-- Modal -->
                                             <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
@@ -908,37 +909,42 @@
 
                                     <!-- Re feedback -->
                                     <td>
-                                        <?php if ($value['status_refeedback'] == 0) : ?>
+                                        <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) : ?>
+                                            <?php if ($value['status_refeedback'] == 0) : ?>
 
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#refeedback<?php echo $value['ORD']; ?>">Re feedback</button>
-                                            <div class="modal fade" id="refeedback<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Re feedback</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
+                                                <button class="btn btn-success" data-toggle="modal" data-target="#refeedback<?php echo $value['ORD']; ?>">Re feedback</button>
+                                                <div class="modal fade" id="refeedback<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Re feedback</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
 
-                                                        <div class="modal-body" style="text-align:left;">
-                                                            <p style="font-size: 26px;color: #0066ff;">ค่าบริการในการทำรายการทั้งหมด $<?php echo $value['price_file'] / 2; ?> </p>
-                                                            <p style="font-size: 16px;">คุณต้องการที่จะใช้บริการเสริมในการซื้อแพ๊กเกจเพื่อให้เราดูแลคุณให้มากขึ้นอีก 65 วัน</p>
-                                                            <p style="color: red;font-size: 16px;">
-                                                                หมายเหตุ : กรณีที่ออร์เดอร์ลูกค้าหมดอายุการรับประกัน 60 วัน ไม่ว่าสิทธิ์ในการแก้ไขงาน Feedback ยังคงเหลืออยู่หรือไม่ก็ตาม ลูกค้าจะสามารถต่ออายุประกันได้อีก โดยกดปุ่ม Re-feedback ใหม่ได้ โดยทางเราจะคิดค่าบริการ 50% จากราคาเดิมของ Order ดังกล่าวโดยลูกค้าจะได้รับประกันอีก 60 วันและสามารถแก้ไขงาน Feedback ได้ฟรี 3 ครั้ง
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" id="refeedback" data-ordercon="<?php echo $value['ORD'] ?>" data-price="<?php echo $value['price_file'] / 2; ?>" class="btn btn-success">Confirm</button>
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <div class="modal-body" style="text-align:left;">
+                                                                <p style="font-size: 26px;color: #0066ff;">ค่าบริการในการทำรายการทั้งหมด $<?php echo $value['price_file'] / 2; ?> </p>
+                                                                <p style="font-size: 16px;">คุณต้องการที่จะใช้บริการเสริมในการซื้อแพ๊กเกจเพื่อให้เราดูแลคุณให้มากขึ้นอีก 65 วัน</p>
+                                                                <p style="color: red;font-size: 16px;">
+                                                                    หมายเหตุ : กรณีที่ออร์เดอร์ลูกค้าหมดอายุการรับประกัน 60 วัน ไม่ว่าสิทธิ์ในการแก้ไขงาน Feedback ยังคงเหลืออยู่หรือไม่ก็ตาม ลูกค้าจะสามารถต่ออายุประกันได้อีก โดยกดปุ่ม Re-feedback ใหม่ได้ โดยทางเราจะคิดค่าบริการ 50% จากราคาเดิมของ Order ดังกล่าวโดยลูกค้าจะได้รับประกันอีก 60 วันและสามารถแก้ไขงาน Feedback ได้ฟรี 3 ครั้ง
+                                                                </p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" id="refeedback" data-ordercon="<?php echo $value['ORD'] ?>" data-price="<?php echo $value['price_file'] / 2; ?>" class="btn btn-success">Confirm</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            <?php else : ?>
+                                                <button class="btn btn-secondary">Re feedback</button>
+                                            <?php endif; ?>
                                         <?php else : ?>
-                                            <button class="btn btn-secondary">Re feedback</button>
+                                            -
                                         <?php endif; ?>
+
                                     </td>
 
                                 </tr>
