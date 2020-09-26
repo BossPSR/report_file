@@ -43,6 +43,7 @@
                                                     <th>Username</th>
                                                     <th>Withdraw</th>
                                                     <th>Telephone</th>
+                                                    <th>silp</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -55,6 +56,13 @@
                                                         <td><?php echo $withdraw_team['name']; ?></td>
                                                         <td><?php echo $withdraw_team['price']; ?></td>
                                                         <td><?php echo $withdraw_team['phone']; ?></td>
+                                                        <td>
+                                                            <?php if ($withdraw_team['filew'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <a href="<?php echo $withdraw_team['pathw'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td>
                                                             <?php if ($withdraw_team['status_id'] == 1) : ?>
                                                                 <div class="dropdown" style="display: contents;">
@@ -190,7 +198,7 @@
                                                                                     type: "POST",
                                                                                     url: "back_withdraw_team_slip",
                                                                                     data: {
-                                                                                        id: <?php echo $withdraw_team['id']; ?>,
+                                                                                        id: <?php echo $withdraw_team['idW']; ?>,
                                                                                         transfer_date: transfer_date,
                                                                                         transfer_time: transfer_time,
                                                                                     },

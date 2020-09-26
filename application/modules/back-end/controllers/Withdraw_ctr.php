@@ -321,7 +321,7 @@ class Withdraw_ctr extends CI_Controller
                        
                         
                         'file_name'             => $uploadData['file_name'],
-                        'path'                  => 'uploads/Withdraw/' . $uploadData['file_name'],
+                        'path'                  => 'uploads/WithdrawTeam/' . $uploadData['file_name'],
                         'update_at'             => date('Y-m-d H:i:s'),
                         
 					);
