@@ -138,6 +138,7 @@ $route['my_income']                 = 'front-end/My_history_ctr/my_income';
 $route['my_income_team_deduct']     = 'front-end/My_history_ctr/my_income_team_deduct';
 $route['check_email_ot']            = 'front-end/User_manual_ctr/check_email_ot';
 $route['bonus_check']               = 'front-end/Home_ctr/bonus_check';
+$route['paypal_check_commission']	= 'front-end/Paypal_ctr/paypal_check_commission';
 // /------------------------------------- back-end  ---------------------
 
 
