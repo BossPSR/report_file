@@ -445,22 +445,24 @@
 
 
                                                 <?php
-                                                $this->db->select('*,sum(tbl_upload_order.status_delivery) as sum_delivery');
+                                                $test = 0;
+                                                $this->db->select('*');
                                                 $this->db->from('tbl_upload_team');
                                                 $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                                                 $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                                                 $this->db->where('tbl_upload_order.status_delivery', 1);
                                                 $this->db->where('tbl_upload_order.status_approved', 1);
+                                                $this->db->group_by('tbl_upload_order.order_id');
 
-                                                $sm_del = $this->db->get()->row_array();
+                                                $sm_del = $this->db->get()->result_array();
                                                 ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
-                                                        <?php if (empty($sm_del['sum_delivery'])) { ?>
-                                                            0
-                                                        <?php } else { ?>
-                                                            <?php echo $sm_del['sum_delivery']; ?>
+                                                        <?php foreach ($sm_del as $sm_del) { ?>
+                                                            <?php echo $test += 1; ?>
                                                         <?php } ?>
+
+
                                                     </div>
                                                     <div>My Jobs</div>
                                                 </div>

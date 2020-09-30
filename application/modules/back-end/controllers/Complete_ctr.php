@@ -235,9 +235,13 @@ class Complete_ctr extends CI_Controller
                 // , 'score' => $user['score'] - 100]
                 $this->db->where('idUser', $user_order['userId']);
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file']]);
-                if ($user_order['status_approved'] == 4) {
+                if ($user_order['status_approved'] == '4') {
                     $this->db->where('order_id', $id);
-                    $this->db->update('tbl_upload_order', ['status_approved' => 1]);
+                    $this->db->update('tbl_upload_order', ['status_approved' => '1']);
+                }
+                if ($user_order['status_approved'] == '3') {
+                    $this->db->where('order_id', $id);
+                    $this->db->update('tbl_upload_order', ['status_approved' => '0']);
                 }
             } else {
                 $this->db->where('order_id', $id);
@@ -245,9 +249,13 @@ class Complete_ctr extends CI_Controller
                 // , 'score' => $user['score'] - 100
                 $this->db->where('idUser', $user_order['userId']);
                 $this->db->update('tbl_user', ['cash' => $user['cash'] - $user_order['price_file']]);
-                if ($user_order['status_approved'] == 4) {
+                if ($user_order['status_approved'] == '4') {
                     $this->db->where('order_id', $id);
-                    $this->db->update('tbl_upload_order', ['status_approved' => 1]);
+                    $this->db->update('tbl_upload_order', ['status_approved' => '1']);
+                }
+                if ($user_order['status_approved'] == '3') {
+                    $this->db->where('order_id', $id);
+                    $this->db->update('tbl_upload_order', ['status_approved' => '0']);
                 }
             }
 

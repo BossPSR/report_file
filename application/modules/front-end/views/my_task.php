@@ -725,7 +725,7 @@
 
 
                                     <?php } else { ?>
-                                    
+
                                         <?php
                                         $z  = 0;
                                         $cf = $this->db->get_where('tbl_feedback', ['order_id' => $task['or_id'], 'check_status' => 1, 're_feedback' => 0])->result_array();
@@ -755,110 +755,113 @@
                                             <td>-</td>
                                         <?php } ?>
                                     <?php } ?>
+                                    <?php if ($task['status_approved'] != '1' && $task['status_approved'] != '2') : ?>
+                                        <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == $team['IdTeam']) : ?>
+                                            <td>
+                                                <button type="button" class="btn btn-success" id="cancel_team<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Confirm (ยืนยัน)"><i class="fa fa-check-square-o"></i></button>
+                                                <script type="text/javascript">
+                                                    $('#cancel_team<?php echo $task['or_id']; ?>').click(function() {
+                                                        swal({
+                                                            icon: "warning",
+                                                            title: "Are you sure?",
+                                                            text: "To accept this job",
+                                                            closeOnEsc: true,
+                                                            closeOnClickOutside: false,
+                                                            buttons: {
+                                                                cancel: true,
+                                                                confirm: true,
+                                                            },
+                                                        }).then(function(isConfirm) {
+                                                            if (isConfirm == true) {
+                                                                $.ajax({
+                                                                    type: 'POST',
+                                                                    url: 'my_task_app',
+                                                                    data: {
+                                                                        order_id: '<?php echo $task['or_id']; ?>',
+                                                                        tm: '<?php echo $team['IdTeam']; ?>',
+                                                                        status_check_team: '2',
 
-                                    <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == $team['IdTeam']) : ?>
-                                        <td>
-                                            <button type="button" class="btn btn-success" id="cancel_team<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Confirm (ยืนยัน)"><i class="fa fa-check-square-o"></i></button>
-                                            <script type="text/javascript">
-                                                $('#cancel_team<?php echo $task['or_id']; ?>').click(function() {
-                                                    swal({
-                                                        icon: "warning",
-                                                        title: "Are you sure?",
-                                                        text: "To accept this job",
-                                                        closeOnEsc: true,
-                                                        closeOnClickOutside: false,
-                                                        buttons: {
-                                                            cancel: true,
-                                                            confirm: true,
-                                                        },
-                                                    }).then(function(isConfirm) {
-                                                        if (isConfirm == true) {
-                                                            $.ajax({
-                                                                type: 'POST',
-                                                                url: 'my_task_app',
-                                                                data: {
-                                                                    order_id: '<?php echo $task['or_id']; ?>',
-                                                                    tm: '<?php echo $team['IdTeam']; ?>',
-                                                                    status_check_team: '2',
 
-
-                                                                },
-                                                                success: function(success) {
-                                                                    swal("Good job!", "Cancel for data successfull", "success", {
-                                                                        button: false,
-                                                                    });
-                                                                    setTimeout("location.reload(true);", 1000);
-                                                                }
-                                                            });
-                                                        } else {
-                                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                                        }
+                                                                    },
+                                                                    success: function(success) {
+                                                                        swal("Good job!", "Cancel for data successfull", "success", {
+                                                                            button: false,
+                                                                        });
+                                                                        setTimeout("location.reload(true);", 1000);
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                                            }
+                                                        });
                                                     });
-                                                });
-                                            </script>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Can<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button>
-                                            <div class="modal fade" id="Can<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <form action="my_task_can" method="post">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
-                                                                <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
-                                                                <h5 class="modal-title" id="exampleModalLabel">Cancel Order Team</h5>
+                                                </script>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Can<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button>
+                                                <div class="modal fade" id="Can<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <form action="my_task_can" method="post">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                    <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
+                                                                    <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Cancel Order Team</h5>
 
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body" style="text-align: left;">
-                                                                <span style="color : red">
-                                                                    * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
-                                                                </span>
-                                                                <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                <button type="submit" class="btn btn-success">Submit</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-
-                                        </td>
-
-                                    <?php elseif ($task['c_status'] == 0 || $task['c_status'] == 1 || $task['c_status'] == 2 || $task['c_status'] == 3 || $task['c_status'] == 5 && $task['status_check_team'] == 0) : ?>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button>
-                                            <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    <form action="My-task-cancel" method="post">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <input type="text" value="<?php echo $task['or_id']; ?>" name="order_id" hidden>
-                                                                <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">Cancel Order (<?php echo $task['or_id']; ?>) <br>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="text-align: left;">
                                                                     <span style="color : red">
                                                                         * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
                                                                     </span>
-                                                                </h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
+                                                                    <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                                </div>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <textarea name="note_can" id="" rows="5" class="form-control" required></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                <button type="submit" class="btn btn-success">Submit</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
+
+                                            </td>
+
+                                        <?php elseif ($task['c_status'] == 0 || $task['c_status'] == 1 || $task['c_status'] == 2 || $task['c_status'] == 3 || $task['c_status'] == 5 && $task['status_check_team'] == 0) : ?>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button>
+                                                <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <form action="My-task-cancel" method="post">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                    <input type="text" value="<?php echo $task['or_id']; ?>" name="order_id" hidden>
+                                                                    <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">Cancel Order (<?php echo $task['or_id']; ?>) <br>
+                                                                        <span style="color : red">
+                                                                            * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
+                                                                        </span>
+                                                                    </h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <textarea name="note_can" id="" rows="5" class="form-control" required></textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
 
 
+                                        <?php else : ?>
+                                            <td><button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
+                                        <?php endif; ?>
                                     <?php else : ?>
                                         <td><button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
                                     <?php endif; ?>
