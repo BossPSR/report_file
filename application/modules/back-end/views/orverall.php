@@ -383,20 +383,15 @@
                                                             <td>$<?php echo $stores['wage']; ?></td>
                                                         <?php endif; ?>
                                                         <td>
-                                                            <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['order']])->row_array(); ?>
-                                                            <?php if ($team == false) : ?>
-                                                                <span class="badge badge-pill badge-danger">Wating for Admin </span>
 
+                                                            <?php if ($stores['status_team'] == 0) : ?>
+                                                                <span class="badge badge-pill badge-warning" style="background-color: #ffe600;color:black">Procressing</span>
+                                                            <?php elseif ($stores['status_team'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-info">Complete</span>
+                                                            <?php elseif ($stores['status_delivery'] == 0) : ?>
+                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
-                                                                <?php if ($stores['status_team'] == 0) : ?>
-                                                                    <span class="badge badge-pill badge-warning" style="background-color: #ffe600;color:black">Procressing</span>
-                                                                <?php elseif ($stores['status_team'] == 1) : ?>
-                                                                    <span class="badge badge-pill badge-info">Complete</span>
-                                                                <?php elseif ($stores['status_delivery'] == 0) : ?>
-                                                                    <span class="badge badge-pill badge-warning">Not Delivered</span>
-                                                                <?php else : ?>
-                                                                    <span class="badge badge-pill badge-success">Delivered</span>
-                                                                <?php endif; ?>
+                                                                <span class="badge badge-pill badge-success">Delivered</span>
                                                             <?php endif; ?>
                                                         </td>
 
@@ -434,23 +429,34 @@
                                                                         <span class="badge badge-pill badge-danger">Admin feedback</span>
 
                                                                     <?php else : ?>
-                                                                        <?php if ($team['teamId'] == '') : ?>
-                                                                            <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                        <?php elseif ($team['status'] == '0') : ?>
-                                                                            <span class="badge badge-pill badge-warning">processing</span>
-                                                                        <?php elseif ($team['status'] == '1') : ?>
-                                                                            <span class="badge badge-pill badge-success">complete</span>
-                                                                        <?php elseif ($team['status'] == '2') : ?>
-                                                                            <span class="badge badge-pill badge-danger">feedback</span>
-                                                                        <?php elseif ($team['status'] == '3') : ?>
-                                                                            <span class="badge badge-pill badge-danger">Re feedback <?= $ui; ?></span>
-                                                                        <?php elseif ($team['status'] == '4') : ?>
-                                                                            <span class="badge badge-pill badge-danger">Not complete</span>
-                                                                        <?php elseif ($team['status'] == '5') : ?>
-                                                                            <span class="badge badge-pill badge-success">complete refeedback</span>
+                                                                        <?php
+                                                                        $this->db->where('tbl_feedback.status_c_feedack_team', '0');
+                                                                        $this->db->where('tbl_upload_team.order_id', $stores['order']);
+                                                                        $this->db->join('tbl_feedback', 'tbl_feedback.order_id = tbl_upload_team.order_id');
+                                                                        $teamss = $this->db->get('tbl_upload_team')->row_array();
+                                                                        ?>
+                                                                        <?php if ($teamss == true) : ?>
+                                                                            <span class="badge badge-pill badge-danger">Wating for Admin </span>
                                                                         <?php else : ?>
-                                                                            -
+                                                                            <?php if ($team['teamId'] == '') : ?>
+                                                                                <span class="badge badge-pill badge-Info">Waiting for team</span>
+                                                                            <?php elseif ($team['status'] == '0') : ?>
+                                                                                <span class="badge badge-pill badge-warning">processing</span>
+                                                                            <?php elseif ($team['status'] == '1') : ?>
+                                                                                <span class="badge badge-pill badge-success">complete</span>
+                                                                            <?php elseif ($team['status'] == '2') : ?>
+                                                                                <span class="badge badge-pill badge-danger">feedback</span>
+                                                                            <?php elseif ($team['status'] == '3') : ?>
+                                                                                <span class="badge badge-pill badge-danger">Re feedback <?= $ui; ?></span>
+                                                                            <?php elseif ($team['status'] == '4') : ?>
+                                                                                <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                            <?php elseif ($team['status'] == '5') : ?>
+                                                                                <span class="badge badge-pill badge-success">complete refeedback</span>
+                                                                            <?php else : ?>
+                                                                                -
+                                                                            <?php endif ?>
                                                                         <?php endif ?>
+
                                                                     <?php endif; ?>
 
                                                                 <?php endif ?>

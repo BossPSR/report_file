@@ -538,7 +538,7 @@
                                                                     // If the count down is over, write some text 
                                                                     if (distance<?php echo $bookmark['orderd'] ?> < 0) {
                                                                         clearInterval(x<?php echo $bookmark['orderd'] ?>);
-                                                                        document.getElementById("demo<?php echo $bookmark['orderd'] ?>").innerHTML = "หมดเวลา";
+                                                                        document.getElementById("demo<?php echo $bookmark['orderd'] ?>").innerHTML = '<span class="badge badge-danger">หมดเวลา</span>';
                                                                     }
                                                                 }, 1000);
                                                             </script>

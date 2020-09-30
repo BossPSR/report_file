@@ -21,6 +21,18 @@ $(document).ready(function() {
         ]
     });
 
+    $('.zero-configurationdate').DataTable({
+        "order": [
+            [10, 'asc']
+        ]
+    });
+
+    $('.zero-configurationbook').DataTable({
+        "order": [
+            [8, 'desc']
+        ]
+    });
+
     $('.zero-configurationF').DataTable({
         "order": [
             [0, 'desc']

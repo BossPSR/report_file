@@ -159,6 +159,21 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                     </td>
 
                                     <td>
+                                        <?php
+                                        $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id');
+                                        $this->db->where('tbl_morefile_GT.order_id', $stock['mms']);
+                                        $this->db->where('tbl_morefile_GT.status_more_file', 0);
+                                        $orderGT = $this->db->get('tbl_morefile_GT')->result_array();
+                                        ?>
+                                        <?php
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_morefile_GT');
+                                        $this->db->join('tbl_upload_orderGT', 'tbl_morefile_GT.id = tbl_upload_orderGT.more_id', 'left');
+                                        $this->db->where('tbl_morefile_GT.status_more_file', 1);
+                                        $this->db->where('tbl_morefile_GT.order_id', $stock['mms']);
+                                        $this->db->where('tbl_morefile_GT.status_see_more_file_team', 1);
+                                        $more_file_gt_more = $this->db->get()->result_array();
+                                        ?>
                                         <?php $stockGT = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
                                         <?php $backgt  = $this->db->get_where('tbl_upload_backup_gt', ['sub_id_g' => $stock['idteam']])->result_array(); ?>
                                         <?php if ($backgt == true) : ?>
@@ -206,7 +221,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                 -
                                             <?php } ?>
                                         <?php else : ?>
-                                            <?php if (!empty($stockGT)) { ?>
+                                            <?php if (!empty($orderGT || $more_file_gt_more)) { ?>
 
                                                 <a href="#" data-toggle="modal" data-target="#exampleModalGT<?php echo $e++; ?>"><i class="fa fa-file-text-o"></i></a>
                                                 <!-- Modal -->
@@ -229,11 +244,21 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <?php foreach ($stockGT as $key => $stockGT) { ?>
+                                                                        <?php foreach ($orderGT as $keys => $orderGT) { ?>
                                                                             <tr style="text-align:center;">
-                                                                                <td style="text-align:left;"><?php echo $stockGT['file_name_GT']; ?></td>
-                                                                                <td><?php echo $stockGT['order_id']; ?></td>
-                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($stockGT['path_GT']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                                <td><?php echo $orderGT['order_id']; ?></td>
+
+                                                                                <td style="text-align:left;"><?php echo $orderGT['file_name_GT']; ?></td>
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($orderGT['path_GT']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+                                                                            </tr>
+                                                                        <?php } ?>
+                                                                        <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
+                                                                            <tr>
+                                                                                <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
+                                                                                <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
+
+                                                                                <td><a href="show-pdf?dcnumber=<?= base64_encode($orderGT['path_GT']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
+
                                                                             </tr>
                                                                         <?php } ?>
                                                                     </tbody>
