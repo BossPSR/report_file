@@ -15,22 +15,22 @@ class Order_ctr extends CI_Controller
     if ($this->session->userdata('email') == '') {
       redirect('home');
     } else {
-      $data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-      $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['idUser']])->row_array();
-      if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
-        $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
-        $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-        if ($checkDate < 0 || $data['userId']['free_forever'] == 1) {
-          $data['buy_email'] = $this->Order_model->order_buy($data['userId']['idUser']);
-          $this->load->view('options/header_login');
-          $this->load->view('order', $data);
-          $this->load->view('options/footer');
-        } else {
-          redirect('package');
+      $data['userId']   = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+      $data['package']   = $this->db->get('tbl_package')->result_array();
+      $datePaypal = date("Y-m-d", strtotime($data['userId']['package_end']));
+      $checkDate = DateDiff(date("Y-m-d"), $datePaypal);
+
+      if ($data['userId']['package_end'] !== null) {
+
+        if ($checkDate < 0) {
+          $this->session->set_flashdata('package_check', TRUE);
+          redirect('home');
         }
-      } else {
-        redirect('package');
       }
+
+      $this->load->view('options/header_login');
+      $this->load->view('order', $data);
+      $this->load->view('options/footer');
     }
   }
 
@@ -92,7 +92,7 @@ class Order_ctr extends CI_Controller
           if ($team03['team_score'] >= '500') {
 
             $teamic = [
-              'income' =>  $team03['income'] + 100 ,
+              'income' =>  $team03['income'] + 100,
               'team_score' =>  '0'
             ];
             $this->db->where('IdTeam', $team01['teamid']);
