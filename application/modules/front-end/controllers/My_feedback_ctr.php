@@ -74,7 +74,7 @@ class My_feedback_ctr extends CI_Controller
         if ($order_id) {
             $status_order = array(
                 'status_approved' => $s,
-                'status_delivery' => '0',
+                'status_delivery' => '0'
             );
             $this->db->where('order_id', $order_id);
             $this->db->update('tbl_upload_order', $status_order);

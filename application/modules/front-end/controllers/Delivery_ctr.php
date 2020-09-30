@@ -107,6 +107,9 @@ class Delivery_ctr extends CI_Controller
         $this->db->where('order_id', $order);
         $this->db->update('tbl_upload_order_team', ['check_new' => '0']);
 
+        $this->db->where('order_id', $order);
+        $this->db->update('tbl_upload_order', ['status_bookmark' => '0']);
+
         if ($teamorder == true) {
 
 
