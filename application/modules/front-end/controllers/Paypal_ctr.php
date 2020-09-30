@@ -207,5 +207,33 @@ class Paypal_ctr extends CI_Controller{
 
         $success = $this->db->insert('tbl_paypal', $insert);
         redirect('my-profile');
-    }
+	}
+	
+	public function paypal_check_commission()
+	{
+		$commission = $this->input->post('commission');
+		$idUser = $this->input->post('idUser');
+		$user = $this->db->get_where('tbl_user',['idUser'=>$commission])->row_array();
+		if (empty($user)) {
+			$viewModel = [];
+			$viewModel['successful'] = false;
+			$viewModel['message'] = 'user not found.';
+			echo json_encode($viewModel);
+			exit();
+		}
+
+		$commissionCheck = $this->db->get_where('tbl_commission',['commission_inviter' => $commission,'commission_recipient' => $idUser])->row_array();
+		if (!empty($commissionCheck)) {
+			$viewModel = [];
+			$viewModel['successful'] = false;
+			$viewModel['message'] = 'commission found.';
+			echo json_encode($viewModel);
+			exit();
+		}
+
+		$viewModel = [];
+		$viewModel['successful'] = true;
+		$viewModel['message'] = 'commission not found.';
+		echo json_encode($viewModel);
+	}
 }
