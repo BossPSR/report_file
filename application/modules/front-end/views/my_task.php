@@ -47,7 +47,7 @@
 <?php $team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php if (!empty($task)) { ?>
     <br>
-    <h2 class="text-center" style="margin-top: 15px;">งานของฉัน  </h2>
+    <h2 class="text-center" style="margin-top: 15px;">งานของฉัน </h2>
     <hr class="line_package">
     <br>
 
@@ -725,14 +725,28 @@
 
 
                                     <?php } else { ?>
+                                    
+                                        <?php
+                                        $z  = 0;
+                                        $cf = $this->db->get_where('tbl_feedback', ['order_id' => $task['or_id'], 'check_status' => 1, 're_feedback' => 0])->result_array();
+                                        foreach ($cf as $key => $cf) {
+                                            $z += 1;
+                                        }
+                                        $c  = 0;
+                                        $cf2 = $this->db->get_where('tbl_feedback', ['order_id' => $task['or_id'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                        foreach ($cf2 as $key => $cf2) {
+                                            $c += 1;
+                                        }
+                                        ?>
+
                                         <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
                                             <td><span class="badge badge-warning" style="font-size:16px;">Processing</span></td>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
                                             <td><span class="badge badge-info" style="font-size:16px;">Waiting for Approved</span></td>
                                         <?php } elseif ($task['c_status'] == 2) { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;">Feedback</span></td>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">Feedback <?= $z; ?></span></td>
                                         <?php } elseif ($task['c_status'] == 3) { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback <?= $c; ?></span></td>
                                         <?php } elseif ($task['c_status'] == 4) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">Not complete </span></td>
                                         <?php } elseif ($task['c_status'] == 5) { ?>
@@ -742,7 +756,7 @@
                                         <?php } ?>
                                     <?php } ?>
 
-                                    <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == true) : ?>
+                                    <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == $team['IdTeam']) : ?>
                                         <td>
                                             <button type="button" class="btn btn-success" id="cancel_team<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Confirm (ยืนยัน)"><i class="fa fa-check-square-o"></i></button>
                                             <script type="text/javascript">
@@ -782,7 +796,7 @@
                                                     });
                                                 });
                                             </script>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Can<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle" ></i></button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Can<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button>
                                             <div class="modal fade" id="Can<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <form action="my_task_can" method="post">

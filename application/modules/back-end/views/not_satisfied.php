@@ -93,7 +93,7 @@
                                                         <td><?php echo $store['orderNOT'] ?></td>
 
                                                         <!-- userId -->
-                                                        <td> <?php echo $store['Username'] == '' ? $store['userId'] : $store['Username'] ; ?></td>
+                                                        <td> <?php echo $store['Username'] == '' ? $store['userId'] : $store['Username']; ?></td>
 
                                                         <!-- countryName -->
                                                         <td>
@@ -603,7 +603,7 @@
 
 
                                                                 <script>
-                                                                    var datep<?php echo $store['orderNOT']; ?> = "<?=  $store['dateNOT']; ?>";
+                                                                    var datep<?php echo $store['orderNOT']; ?> = "<?= $store['dateNOT']; ?>";
 
                                                                     // Set the date we're counting down to
                                                                     var countDownDate<?php echo $store['orderNOT']; ?> = new Date(datep<?php echo $store['orderNOT']; ?>);
@@ -975,6 +975,8 @@
                                                                     <span class="badge badge-pill badge-primary">Admin Rewrite </span>
                                                                 <?php elseif ($store['status_cp'] == 'nodm') : ?>
                                                                     <span class="badge badge-pill badge-danger"> Admin No DM </span>
+                                                                <?php elseif ($store['status_book'] == '2') : ?>
+                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
                                                                 <?php else : ?>
                                                                     -
                                                                 <?php endif; ?>
@@ -987,6 +989,8 @@
                                                                     <span class="badge badge-pill badge-primary">Rewrite</span>
                                                                 <?php elseif ($store['status_cp'] == 'nodm') : ?>
                                                                     <span class="badge badge-pill badge-danger"> No DM </span>
+                                                                <?php elseif ($store['status_book'] == '2') : ?>
+                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
                                                                 <?php else : ?>
                                                                     -
                                                                 <?php endif; ?>
@@ -1004,16 +1008,18 @@
                                                                 <?php else : ?>
                                                                     <?php if ($team['teamId'] == '') : ?>
                                                                         <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                    <?php elseif ($team['status'] == '0' ) : ?>
+                                                                    <?php elseif ($team['status'] == '0') : ?>
                                                                         <span class="badge badge-pill badge-warning">processing</span>
-                                                                    <?php elseif ($team['status'] == '1' ) : ?>
+                                                                    <?php elseif ($team['status'] == '1') : ?>
                                                                         <span class="badge badge-pill badge-success">complete</span>
-                                                                    <?php elseif ($team['status'] == '2' ) : ?>
+                                                                    <?php elseif ($team['status'] == '2') : ?>
                                                                         <span class="badge badge-pill badge-danger">feedback</span>
                                                                     <?php elseif ($team['status'] == '3') : ?>
                                                                         <span class="badge badge-pill badge-danger">Re feedback</span>
                                                                     <?php elseif ($team['status'] == '4') : ?>
                                                                         <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                    <?php elseif ($team['status'] == '5') : ?>
+                                                                        <span class="badge badge-pill badge-success">complete refeedback</span>
                                                                     <?php endif; ?>
                                                                 <?php endif; ?>
                                                             <?php endif; ?>

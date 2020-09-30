@@ -1,4 +1,4 @@
-<h2 class="text-center" style="margin-top: 30px;">Package</h2>
+<h2 class="text-center" style="margin-top: 30px;"> แพ็คเกจ</h2>
 <hr class="line_package">
 <br>
 <div class="priceing_table">

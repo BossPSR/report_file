@@ -47,7 +47,7 @@ class Order_ctr extends CI_Controller
     $this->db->group_by('order_id');
     $user01         = $this->db->get_where('tbl_upload_order', ['userId' => $userId, 'check_cashback_reward' => '0'])->result_array();
     $team01         = $this->db->get_where('tbl_upload_team',  ['order_id' => $order_id, 'status' => '1'])->row_array();
-    $user02         = $this->db->get_where('tbl_user', ['userId' => $userId])->row_array();
+    $user02         = $this->db->get_where('tbl_user', ['idUser' => $userId])->row_array();
     foreach ($user01 as $key => $user01) {
       $q += 1;
     }
@@ -61,7 +61,7 @@ class Order_ctr extends CI_Controller
         $user_reward = [
           'cash' => $user02['cash'] + 100
         ];
-        $this->db->where('userId', $userId);
+        $this->db->where('idUser', $userId);
         $this->db->update('tbl_user', $user_reward);
 
         $reward = [

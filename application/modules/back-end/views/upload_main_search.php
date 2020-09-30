@@ -130,7 +130,7 @@
                                                                                     ?>
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $store['update_at'])); ?>
+                                                                                                <?php $prosum = date('Y-m-d', strtotime('+60 day' . '+' . $value['upat'])); ?>
                                                                                                 <?php $data = date('Y-m-d') ?>
                                                                                                 <?php if ($value['status_delivery'] == '1' && $data <= $prosum) : ?>
                                                                                                     <button type="button" class="btn btn-danger"><i class="feather icon-download-cloud"></i> Sold</button>

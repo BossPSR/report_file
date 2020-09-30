@@ -394,6 +394,9 @@ class Feedback_ctr extends CI_Controller
         $this->db->where('id', $id);
         $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'teamId' => $getw['teamId'] , 'notify_team' => 0, 'status_c_feedack_team' => 1]);
 
+        $this->db->where('order_id', $order);
+        $resultsedit = $this->db->update('tbl_upload_order_team', ['update_at' => date('Y-m-d H:i:s') ,'check_new' => 0]);
+
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated Feedback information !!.');
         } else {

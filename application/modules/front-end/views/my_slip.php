@@ -112,7 +112,7 @@
                                         <tbody>
                                             <?php foreach ($slip_not_success as $slip_not_success) { ?>
                                                 <tr>
-                                                    <th scope="row"><?php echo $slip_not_success['price_file'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$'.$slip_not_success['price']; ?></th>
+                                                    <th scope="row"><?php echo $slip_not_success['price_file'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$'.$slip_not_success['price_file']; ?></th>
                                                     <td><?php echo $slip_not_success['order_id']; ?></td>
                                                     <!-- <td></td> -->
                                                     <td class="text-center">

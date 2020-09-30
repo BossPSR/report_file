@@ -336,7 +336,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                             -
                                         <?php } ?>
                                     </td>
-                                    <td><?php echo $stock['name_item']; ?></td>
+                                    <td><?php echo $stock['name_item']; ?> <?= $stock['idteam'] ?></td>
                                     <td><span class=" badge badge-danger" style="font-size:16px;">$ <?php echo $stock['wage']; ?></span>
                                     </td>
                                     <td>
@@ -410,12 +410,14 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
 
                                                             </tbody>
                                                         </table>
-                                                        <br>
-                                                        <h3>GT Document</h3>
+
+
                                                         <?php $stockGT2 = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stock['mms']])->result_array(); ?>
                                                         <?php $backgt2  = $this->db->get_where('tbl_upload_backup_gt', ['sub_id_g' => $stock['idteam']])->result_array(); ?>
                                                         <?php if ($backgt2 == true) : ?>
                                                             <?php if (!empty($backgt2)) : ?>
+                                                                <br>
+                                                                <h3>GT Document </h3>
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
@@ -425,12 +427,12 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <?php foreach ($stockGT2 as $backgt2) { ?>
+                                                                        <?php foreach ($backgt2 as $backgt2) { ?>
                                                                             <tr style="text-align:center;">
                                                                                 <td><?php echo $backgt2['order_id_g']; ?></td>
-                                                                                <td><?php echo $backgt2['file_name_GT_g']; ?></td>
+                                                                                <td><?php echo $backgt2['file_name_g']; ?></td>
                                                                                 <td>
-                                                                                    <a href="<?php echo $backgt2['path_GT_g']; ?>" class="btn btn-primary" download>
+                                                                                    <a href="<?php echo $backgt2['path_g']; ?>" class="btn btn-primary" download>
                                                                                         <i class="fa fa-download"></i> Download
                                                                                     </a>
                                                                                 </td>
@@ -443,6 +445,8 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                             <?php endif; ?>
                                                         <?php else : ?>
                                                             <?php if (!empty($stockGT2)) : ?>
+                                                                <br>
+                                                                <h3>GT Document </h3>
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
@@ -496,7 +500,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                             url: 'order_isconfirm',
                                                             data: {
                                                                 order_id: '<?php echo $stock['mms']; ?>',
-                                                                idteam:   '<?php echo $stock['idteam']; ?>',
+                                                                idteam: '<?php echo $stock['idteam']; ?>',
                                                                 is_confirm: 1,
                                                             },
                                                             success: function(success) {

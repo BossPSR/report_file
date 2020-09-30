@@ -444,17 +444,37 @@
 
 
                                                         <td>
-                                                            <?php if ($feedback_team['status_book'] == '1' && $feedback_team['status_cp'] == 'complete' && $feedback_team['status_admin'] == '0') : ?>
-                                                                <span class=" badge badge-pill badge-success">Original</span>
-                                                            <?php elseif ($feedback_team['status_book'] == '1' && $feedback_team['status_cp'] == 'notcomplete'  && $feedback_team['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-primary">Rewrite</span>
-                                                            <?php elseif ($feedback_team['status_book'] == '2'  && $feedback_team['status_admin'] == '0') : ?>
-                                                                <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
-                                                            <?php elseif ($feedback_team['status_admin'] == '1') : ?>
-                                                                <span class="badge badge-pill badge-warning">StockAdmin</span>
+                                                            <?php $admin_stu = $this->db->get_where('tbl_admin', ['adminId' => $feedback_team['userId']])->row_array(); ?>
+                                                            <?php if ($admin_stu == true) : ?>
+                                                                <?php if ($feedback_team['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Admin Original </span>
+                                                                <?php elseif ($feedback_team['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-warning"> Admin Not complete </span>
+                                                                <?php elseif ($feedback_team['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Admin Rewrite </span>
+                                                                <?php elseif ($feedback_team['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> Admin No DM </span>
+                                                                <?php elseif ($feedback_team['status_book'] == '2') : ?>
+                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php else : ?>
-                                                                -
+                                                                <?php if ($feedback_team['status_cp'] == 'complete') : ?>
+                                                                    <span class="badge badge-pill badge-success">Original</span>
+                                                                <?php elseif ($feedback_team['status_cp'] == 'notcomplete') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Not complete</span>
+                                                                <?php elseif ($feedback_team['status_cp'] == 'rewrite') : ?>
+                                                                    <span class="badge badge-pill badge-primary">Rewrite</span>
+                                                                <?php elseif ($feedback_team['status_cp'] == 'nodm') : ?>
+                                                                    <span class="badge badge-pill badge-danger"> No DM </span>
+                                                                <?php elseif ($feedback_team['status_book'] == '2') : ?>
+                                                                    <span class="badge badge-pill badge-dark" style="background-color: #f35eb0">Not Satisfired</span>
+                                                                <?php else : ?>
+                                                                    -
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
+                                                           
                                                         </td>
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $feedback_team['order_id']])->row_array(); ?>
                                                         <td>
@@ -547,8 +567,8 @@
                                                                                             <label for="helpInputTop">Note Team</label>
                                                                                             <textarea class="form-control" name="note_t" rows="5" placeholder="Enter Note"><?php echo $feedback_team['note_team']; ?></textarea>
                                                                                         </div>
-
                                                                                     </div>
+
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
@@ -607,10 +627,10 @@
                                                                 $c += 1;
                                                             }
                                                             ?>
-                                                            <?php if ($cf == true) : ?>
-                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
-                                                            <?php elseif ($cf2 == true) : ?>
+                                                            <?php if ($cf2 == true) : ?>
                                                                 <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php elseif ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
@@ -640,7 +660,6 @@
                                                                                         <label for="helpInputTop">Note</label>
                                                                                         <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
                                                                                     </div>
-
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -681,7 +700,6 @@
                                                                                 <label for="helpInputTop">Position</label>
                                                                                 <select name="position" class="form-control" required>
                                                                                     <option selected disabled> ---- Select ---- </option>
-
                                                                                     <?php foreach ($positionX as $positionX) { ?>
                                                                                         <option value="<?php echo $positionX['id'] ?>"><?php echo $positionX['name_item'] ?></option>
                                                                                     <?php } ?>

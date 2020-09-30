@@ -155,7 +155,7 @@ class Complete_ctr extends CI_Controller
                 $ut = $this->db->update('tbl_upload_team', ['status' => '2']);
                 if ($ut) {
                     $this->db->where('order_id', $order_id);
-                    $this->db->update('tbl_upload_order', ['end_time_feedback' => $date180 , 'status_approved' => '5']);
+                    $this->db->update('tbl_upload_order', ['end_time_feedback' => $date180, 'status_approved' => '5']);
                 }
             }
         }
@@ -248,6 +248,37 @@ class Complete_ctr extends CI_Controller
                 if ($user_order['status_approved'] == 4) {
                     $this->db->where('order_id', $id);
                     $this->db->update('tbl_upload_order', ['status_approved' => 1]);
+                }
+            }
+
+            if (!empty($order_id) || !empty($order_team)) {
+                $this->db->where('order_id_d', $id);
+                $this->db->update('tbl_delivery_file', ['check_new_d' => '0']);
+            }
+
+            if (!empty($order_id)) {
+                foreach ($order_id as $key => $order_id) {
+                    $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
+                    $insert01 = [
+                        'order_id_d'    => $id,
+                        'file_name_d'   => $order['file_name'],
+                        'path_d'        => $order['path'],
+                        'create_at_d'   => date('Y-m-d H:i:s'),
+                    ];
+                    $this->db->insert('tbl_delivery_file', $insert01);
+                }
+            }
+
+            if (!empty($order_team)) {
+                foreach ($order_team as $key => $order_team) {
+                    $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
+                    $insert02 = [
+                        'order_id_d'    => $id,
+                        'file_name_d'   => $orderT['file_name'],
+                        'path_d'        => $orderT['path'],
+                        'create_at_d'   => date('Y-m-d H:i:s'),
+                    ];
+                    $this->db->insert('tbl_delivery_file', $insert02);
                 }
             }
 
@@ -478,16 +509,16 @@ class Complete_ctr extends CI_Controller
         $group      = $this->input->post('group');
         $this->db->select('*');
         $this->db->from('tbl_upload_order_team');
-        $this->db->where('order_id' , $order_id);
-        $this->db->where('group' , $group);
+        $this->db->where('order_id', $order_id);
+        $this->db->where('group', $group);
         $result = $this->db->get()->result_array();
-        
+
         echo json_encode($result);
-	}
-	
-	public function complete_status()
-	{
-		$id = $this->input->post('id');
+    }
+
+    public function complete_status()
+    {
+        $id = $this->input->post('id');
 
         $data = array(
 
@@ -497,5 +528,5 @@ class Complete_ctr extends CI_Controller
         $this->db->where('order_id', $id);
         $resultsedit = $this->db->update('tbl_upload_team', $data);
         echo $resultsedit;
-	}
+    }
 }

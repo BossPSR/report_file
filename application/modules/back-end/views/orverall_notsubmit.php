@@ -153,8 +153,13 @@
                                 <div class="col-3 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
                                         No Work <span class="badge badge-pill badge-warning" id="">
-                                            <?php $no_work = $this->db->get_where('tbl_upload_team', ['teamId' => null])->result_array();
-                                            echo count($no_work); ?></span>
+                                            <?php $op = 0; ?>
+                                            <?php foreach ($order_notwork as $key => $datata) {
+                                                $op++;
+                                            } ?>
+                                            <?php echo $op += 0; ?>
+
+                                        </span>
                                     </a>
                                     <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">
                                         Not Submit <span class="badge badge-pill badge-success" id="">
@@ -172,7 +177,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Step</th>
@@ -182,11 +187,12 @@
                                                     <th>Date required</th>
                                                     <th>TM-Date Comfirm</th>
                                                     <th>Info</th>
-                                                    <th>cancel</th>
                                                     <th>Delivery</th>
+                                                    <th>cancel</th>
                                                     <th>Status Team</th>
                                                     <th>Status</th>
                                                     <th>Client Feedback</th>
+                                                    <th>Admin Feedback</th>
                                                     <th>Date Cancel</th>
                                                     <th style="width: 12%;">Tool</th>
                                                 </tr>
@@ -199,12 +205,20 @@
                                                 ?>
 
                                                     <tr>
+                                                        <!-- Step -->
                                                         <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
-                                                        <td><?php echo $stores['order'] ?></td>
-                                                        <td><?php echo $stores['userId']; ?></td>
-                                                        <td><?php echo $stores['created_at_buy']; ?></td>
-                                                        <td>
 
+                                                        <!-- Order Id -->
+                                                        <td><?php echo $stores['order'] ?></td>
+
+                                                        <!-- User -->
+                                                        <td><?php echo $stores['userId']; ?></td>
+
+                                                        <!-- created_at_buy -->
+                                                        <td><?php echo $stores['created_at_buy']; ?></td>
+
+                                                        <!-- Date required -->
+                                                        <td>
                                                             <?php if (date("Y-m-d") >= $stores['requiredOr']) : ?>
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                                 <?php if ($stores['status_out'] == 1 && $stores['check_deduct_full'] == 0) { ?>
@@ -265,7 +279,11 @@
                                                                 </script>
                                                             <?php endif; ?>
                                                         </td>
+
+                                                        <!-- TM-Date Comfirm -->
                                                         <td><?php echo $stores['uadateTOr']; ?></td>
+
+                                                        <!-- Info -->
                                                         <td>
                                                             <?php if ($stores['t_id'] == '') : ?>
                                                                 - |
@@ -293,7 +311,7 @@
 
                                                             <div class="modal fade" id="exampleModalwage<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                 <form action="edit_info_over_ns" method="POST">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                                         <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -365,13 +383,25 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <!-- Delivered -->
+                                                        <td>
+                                                            <?php if ($stores['status_delivery'] == 0) : ?>
+                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
+                                                            <?php else : ?>
+                                                                <span class="badge badge-pill badge-success">Delivered</span>
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- cancel -->
                                                         <td>
                                                             <?php if ($stores['statusC'] == '1') : ?>
 
-                                                                <span class="badge badge-pill badge-danger"><?php echo $stores['status_who']; ?> <a href="" data-toggle="modal" data-target="#note<?php echo $stores['order']; ?>"> &nbsp; <i class="feather icon-file-text" style="font-size: 25px;"></i></a></span>
+                                                                <span class="badge badge-pill badge-danger"><?php echo $stores['status_who']; ?></span>
+                                                                <a href="" data-toggle="modal" data-target="#note<?php echo $stores['order']; ?>"> &nbsp; <i class="feather icon-file-text" style="font-size: 25px;"></i></a>
                                                                 <div class="modal fade" id="note<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <form action="edit_info_over_ns" method="POST">
-                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                        <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable" role="document">
                                                                             <input type="hidden" name="order_id" value="<?php echo $stores['order']; ?>">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
@@ -394,13 +424,8 @@
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td>
-                                                            <?php if ($stores['status_delivery'] == 0) : ?>
-                                                                <span class="badge badge-pill badge-warning">Not Delivered</span>
-                                                            <?php else : ?>
-                                                                <span class="badge badge-pill badge-success">Delivered</span>
-                                                            <?php endif; ?>
-                                                        </td>
+
+                                                        <!-- Status Team -->
                                                         <td>
                                                             <?php $cancel = $this->db->get_where('tbl_cancel', ['order_id' => $stores['order']])->row_array(); ?>
                                                             <?php
@@ -421,6 +446,8 @@
 
                                                             ?>
                                                         </td>
+                                                        
+                                                        <!-- Status -->
                                                         <td>
                                                             <?php if ($stores['status_book'] == '1' && $stores['status_cp'] == 'complete' && $stores['status_admin'] == '0') : ?>
                                                                 <span class="badge badge-pill badge-success">Original</span>
@@ -457,12 +484,97 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
+                                                            <?php
+                                                            $xs  = 0;
+                                                            $af = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 0])->result_array();
+                                                            foreach ($af as $key => $af) {
+                                                                $xs += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($af == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Admin Feedback (<?= $xs; ?>) </span>
+                                                                <span data-toggle="modal" data-target="#filenotefeedback<?php echo $stores['order']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="filenotefeedback<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Admin Feedback note </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+
+                                                                                        <tr>
+                                                                                            <th>Order id</th>
+                                                                                            <th>name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php $ai = 1;
+                                                                                        $feedbackde = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 0])->result_array();
+                                                                                        ?>
+
+                                                                                        <?php foreach ($feedbackde as $areed) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $areed['order_id'] ?></td>
+                                                                                                <td>Feedback admin (<?php echo $ai++; ?>)</td>
+                                                                                                <td>
+
+                                                                                                    <i data-toggle="modal" data-target="#detailfeedback<?php echo $areed['id']; ?>" class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i>
+                                                                                                    <div class="modal fade" id="detailfeedback<?php echo $areed['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog  modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Admin Feedback Detail </h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <p><?php echo $areed['feedback_detail']; ?></p>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </td>
+                                                                                                <td><?php echo $areed['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
                                                             <?php if ($cancel == true) : ?>
                                                                 <?php echo $cancel['create_at']; ?>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
                                                         </td>
+
                                                         <td>
                                                             <!-- <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['order_id']; ?>" type="button" class="btn btn-icon btn-info"><i class="feather icon-upload"></i></button>
                                                             <a href="" class="btn btn-icon btn-success"><i class="feather icon-mail"></i></a>

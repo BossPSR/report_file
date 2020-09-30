@@ -62,6 +62,8 @@
                                                     <th>TM</th>
                                                     <th>Feedback file</th>
                                                     <th>Feedback detail</th>
+                                                    <th>Commit</th>
+                                                    <th>Rateing</th>
                                                     <th>Status</th>
                                                     <th>tool</th>
                                                 </tr>
@@ -291,7 +293,7 @@
                                                                                                                     </button>
                                                                                                                 </div>
                                                                                                                 <div class="modal-body">
-                                                                                                                    <?php $orderT_sub = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['order_id'] , 'group' => $orderT['group']])->result_array(); ?>
+                                                                                                                    <?php $orderT_sub = $this->db->get_where('tbl_upload_order_team', ['order_id' => $not_Approved['order_id'], 'group' => $orderT['group']])->result_array(); ?>
                                                                                                                     <table class="table zero-configuration">
                                                                                                                         <thead>
                                                                                                                             <tr>
@@ -454,6 +456,49 @@
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
+                                                        </td>
+
+                                                        <td>
+                                                            <?php if ($not_Approved['note_approved'] != '') : ?>
+                                                                <span data-toggle="modal" data-target="#ratedetail<?php echo $not_Approved['order_id']; ?>"><i class="feather icon-clipboard" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="ratedetail<?php echo $not_Approved['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Commit detail</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <?= $not_Approved['note_approved']; ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <div class="rate" style="text-align: center;">
+                                                                <input type="radio" class="star" id="star5" name="rate" value="5" <?php echo $not_Approved['stars_score_user'] == '5' ? 'checked' : '' ?> />
+                                                                <label for="star5" title="text">5 stars</label>
+                                                                <input type="radio" class="star" id="star4" name="rate" value="4" <?php echo $not_Approved['stars_score_user'] == '4' ? 'checked' : '' ?> />
+                                                                <label for="star4" title="text">4 stars</label>
+                                                                <input type="radio" class="star" id="star3" name="rate" value="3" <?php echo $not_Approved['stars_score_user'] == '3' ? 'checked' : '' ?> />
+                                                                <label for="star3" class="star" title="text">3 stars</label>
+                                                                <input type="radio" class="star" name="rate" id="star2" value="2" <?php echo $not_Approved['stars_score_user'] == '2' ? 'checked' : '' ?> />
+                                                                <label for="star2" title="text">2 stars</label>
+                                                                <input type="radio" class="star" id="star1" name="rate" value="1" <?php echo $not_Approved['stars_score_user'] == '1' ? 'checked' : '' ?> />
+                                                                <label for="star1" title="text">1 star</label>
+                                                            </div>
                                                         </td>
 
                                                         <!-- Status -->

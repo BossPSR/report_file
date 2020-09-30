@@ -71,7 +71,7 @@ class Paypal_ctr extends CI_Controller{
 					
 					$userCom = $userCommission['commission'] + $comPrice_commission;
 					$this->db->where('idUser' , $commission);
-					$this->db->update('tbl_user' , ['cash' => $userCommission['cash'] + $userCom] );
+					$this->db->update('tbl_user' , ['cash' => $userCommission['cash'] + $comPrice_commission , 'commission' => $userCommission['commission'] + $comPrice_commission ] );
 				}
 			}
 			

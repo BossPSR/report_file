@@ -31,23 +31,23 @@ class Customer_order_ctr extends CI_Controller
     public function download_all_file_satisfied()
     {
         $order_id  = $this->input->post('orderST');
-       
+
         $this->db->select('*');
         $this->db->from('tbl_upload_order');
-        $this->db->where('order_id' , $order_id);
+        $this->db->where('order_id', $order_id);
         $result = $this->db->get()->result_array();
-        
+
         echo json_encode($result);
     }
     public function download_all_file_satisfied_gt()
     {
         $order_id  = $this->input->post('orderST');
-       
+
         $this->db->select('*');
         $this->db->from('tbl_upload_orderGT');
-        $this->db->where('order_id' , $order_id);
+        $this->db->where('order_id', $order_id);
         $result = $this->db->get()->result_array();
-        
+
         echo json_encode($result);
     }
 
@@ -71,6 +71,8 @@ class Customer_order_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') != '') {
 
             $data['order_all']      = $this->Customer_model->customer_all();
+            $data['order_notwork']  = $this->Customer_model->customer_notwork();
+            $data['order_notsum']   = $this->Customer_model->customer_notsubmit();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
             $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
             $this->load->view('options/header');
@@ -86,6 +88,7 @@ class Customer_order_ctr extends CI_Controller
         if ($this->session->userdata('email_admin') != '') {
 
             $data['order_notwork']  = $this->Customer_model->customer_notwork();
+            $data['order_notsum']   = $this->Customer_model->customer_notsubmit();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
             $data['not_submit']     = $this->Customer_model->customer_notsubmit_count();
             $data['ts']         = $this->Store_model->team_select();
@@ -117,6 +120,8 @@ class Customer_order_ctr extends CI_Controller
     {
 
         if ($this->session->userdata('email_admin') != '') {
+
+            $data['order_notwork']  = $this->Customer_model->customer_notwork();
 
             $data['order_notsum']   = $this->Customer_model->customer_notsubmit();
             $data['no_work']        = $this->Customer_model->customer_notwork_count();
@@ -244,25 +249,88 @@ class Customer_order_ctr extends CI_Controller
 
     public function upload_team_ST()
     {
-        $teamid  = $this->input->post('team');
-        $order_id = $this->input->post('order_id');
+        $order_id           = $this->input->post('order_id');
+        $wage               = $this->input->post('wage');
+        $teamid             = $this->input->post('teamid') == '' ? null : $this->input->post('teamid');
+        $position           = $this->input->post('position');
+        $note               = $this->input->post('note_new');
+        $date_required      = $this->input->post('date_required');
+        $checkbox           = $this->input->post('checkbox');
+        $checkboxmain       = $this->input->post('checkboxmain');
+        $checkboxgt         = $this->input->post('checkboxgt');
 
-        $data = array(
+        $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        if ($wa == true) {
+            $this->db->delete('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        }
 
-            'order_id'                         => $order_id,
-            'position'                         => $this->input->post('position'),
-            'wage'                             => $this->input->post('wage'),
-            'teamId'                           => $teamid,
-            'note'                             => $this->input->post('note_t'),
-            'create_at'                        => date('Y-m-d H:i:s')
+        if ($checkbox) {
+            foreach ($checkbox as $key => $checkbox) {
+                $resultT = $this->db->get_where('tbl_upload_order_team', ['id' => $checkbox])->row_array();
+                $boxdata = [
+                    'order_id_back'     => $resultT['order_id'],
+                    'file_name_back'     => $resultT['file_name'],
+                    'path_back'         => $resultT['path'],
+                    'create_at_back'    => date('Y-m-d H:i:s'),
+                ];
 
-        );
+                $this->db->insert('tbl_upload_backup_team', $boxdata);
+            }
+        }
 
 
-        $resultsedit = $this->db->insert('tbl_upload_team', $data);
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_order', ['status_confirmed_team' => '0', 'update_at' => date('Y-m-d H:i:s')]);
 
-        $this->db->where('order_id', $this->input->post('order_id'));
-        $this->db->update('tbl_upload_order', ['notify_admin' => 1, 'date_required' => $this->input->post('Daterequired'), 'note_user' => $this->input->post('note')]);
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 0,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
+                $last = $this->db->insert_id();
+
+                if ($checkboxmain) {
+                    foreach ($checkboxmain as $key => $checkboxmain) {
+                        $resultTM = $this->db->get_where('tbl_upload_order', ['id' => $checkboxmain])->row_array();
+                        $mdata = [
+                            'sub_id_m'          => $last,
+                            'order_id_m'        => $resultTM['order_id'],
+                            'file_name_m'       => $resultTM['file_name'],
+                            'path_m'            => $resultTM['path'],
+                            'create_at_m'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_main', $mdata);
+                    }
+                }
+
+                if ($checkboxgt) {
+                    foreach ($checkboxgt as $key => $checkboxgt) {
+                        $resultTG = $this->db->get_where('tbl_upload_orderGT', ['id' => $checkboxgt])->row_array();
+                        $gtdata = [
+                            'sub_id_g'          => $last,
+                            'order_id_g'        => $resultTG['order_id'],
+                            'file_name_g'       => $resultTG['file_name_GT'],
+                            'path_g'            => $resultTG['path_GT'],
+                            'create_at_g'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_gt', $gtdata);
+                    }
+                }
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
+
 
         if ($resultsedit) {
             if ($teamid == '') {
@@ -276,9 +344,7 @@ class Customer_order_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
-
-                $this->sendEmail_all($teamid, $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required]);
             }
         }
 
@@ -364,7 +430,7 @@ class Customer_order_ctr extends CI_Controller
     {
         $order_id           = $this->input->post('order_id');
         $wage               = $this->input->post('wage');
-        $teamid             = $this->input->post('teamid') == '' ? null : $this->input->post('teamid') ;
+        $teamid             = $this->input->post('teamid') == '' ? null : $this->input->post('teamid');
         $position           = $this->input->post('position');
         $note               = $this->input->post('note_new');
         $date_required      = $this->input->post('date_required');
@@ -392,10 +458,10 @@ class Customer_order_ctr extends CI_Controller
         }
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4 , 'position' => $position , 'update_at' => date('Y-m-d H:i:s')]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4, 'position' => $position, 'update_at' => date('Y-m-d H:i:s')]);
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_order', ['status_confirmed_team' => '0' , 'update_at' => date('Y-m-d H:i:s')]);
+        $resultsedit = $this->db->update('tbl_upload_order', ['status_confirmed_team' => '0', 'update_at' => date('Y-m-d H:i:s')]);
 
         if ($teamid) {
             foreach ($teamid as $key => $teamid) {
@@ -411,7 +477,7 @@ class Customer_order_ctr extends CI_Controller
                 ];
                 $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
                 $last = $this->db->insert_id();
-                
+
                 if ($checkboxmain) {
                     foreach ($checkboxmain as $key => $checkboxmain) {
                         $resultTM = $this->db->get_where('tbl_upload_order', ['id' => $checkboxmain])->row_array();

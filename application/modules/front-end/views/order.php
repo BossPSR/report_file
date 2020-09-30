@@ -85,9 +85,6 @@
                             <?php $xxl = 1; ?>
                             <?php foreach ($buy_email as $value) : ?>
 
-
-
-
                                 <?php $sub_order = substr($value['order_id'], 3); ?>
                                 <tr style="text-align:center;">
 
@@ -231,8 +228,8 @@
                                     <!-- Team File -->
                                     <td>
                                         <?php if ($value['status_delivery'] == 1) : ?>
-                                            <?php $teamF = $this->db->get_where('tbl_upload_order_team', ['order_id' =>  $value['ORDT']])->result_array(); ?>
-                                            <?php if (!empty($teamF)) { ?>
+                                            <?php $teamF = $this->db->get_where('tbl_delivery_file', ['order_id_d' =>  $value['ORD']])->result_array(); ?>
+                                            <?php if ($teamF == true) { ?>
                                                 <a href="#" data-toggle="modal" data-target="#Teamfile<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
 
                                                 <!-- Modal -->
@@ -253,14 +250,20 @@
                                                                             <th scope="col">ID Order</th>
                                                                             <th scope="col">File</th>
                                                                             <th scope="col">Tool</th>
+                                                                            <th scope="col">Downloads</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <?php foreach ($teamF as $teamF) { ?>
                                                                             <tr style="text-align:center;">
-                                                                                <td><?= $teamF['order_id']; ?></td>
-                                                                                <td><?= $teamF['file_name']; ?></td>
-                                                                                <td><a href="<?= $teamF['path']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
+                                                                                <td><?= $teamF['check_new_d'] == '1' ? '<span style="color:red;">New</span>' : '' ; ?> <?= $teamF['order_id_d']; ?></td>
+                                                                                <td><?= $teamF['file_name_d']; ?></td>
+                                                                                <td><a href="<?= $teamF['path_d']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
+                                                                                <td>
+                                                                                    <a href="<?php echo $teamF['path_d']; ?>" class="btn btn-primary" download>
+                                                                                        <i class="fa fa-download"></i> Download
+                                                                                    </a>
+                                                                                </td>
                                                                             </tr>
                                                                         <?php } ?>
                                                                     </tbody>

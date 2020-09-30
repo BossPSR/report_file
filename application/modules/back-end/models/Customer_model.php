@@ -104,7 +104,8 @@ class Customer_model extends CI_Model
     public function customer_notsubmit()
     {
         $this->db->select('*,tbl_upload_order.order_id AS order ,tbl_upload_order.id AS id_c ,
-        tbl_upload_order.date_required AS requiredOr ,tbl_upload_team.update_confirm AS uadateTOr,tbl_cancel.status AS statusC,tbl_upload_team.teamId AS t_id  ');
+        tbl_upload_order.date_required AS requiredOr ,tbl_upload_team.update_confirm AS uadateTOr
+        ,tbl_cancel.status AS statusC,tbl_upload_team.teamId AS t_id  ');
         $this->db->from('tbl_upload_order');
         $this->db->join('tbl_upload_team', 'tbl_upload_order.order_id = tbl_upload_team.order_id', 'left');
         $this->db->join('tbl_feedback', 'tbl_upload_order.order_id = tbl_feedback.order_id', 'left');

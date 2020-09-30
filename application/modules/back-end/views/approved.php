@@ -1,3 +1,48 @@
+<style>
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+
+    .rate:not(:checked)>input {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .rate:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 40px;
+        color: #ccc;
+    }
+
+    .rate:not(:checked)>label:before {
+        content: '★ ';
+    }
+
+    .rate>input:checked~label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked)>label:hover,
+    .rate:not(:checked)>label:hover~label {
+        color: #deb217;
+    }
+
+    .rate>input:checked+label:hover,
+    .rate>input:checked+label:hover~label,
+    .rate>input:checked~label:hover,
+    .rate>input:checked~label:hover~label,
+    .rate>label:hover~input:checked~label {
+        color: #c59b08;
+    }
+
+    /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+</style>
 <!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -65,6 +110,8 @@
                                                     <th>TM</th>
                                                     <th>Feedback file</th>
                                                     <th>Feedback detail</th>
+                                                    <th>Commit</th>
+                                                    <th>Rateing</th>
                                                     <th>Status</th>
                                                     <th>tool</th>
                                                 </tr>
@@ -249,7 +296,7 @@
                                                             $this->db->group_by('group');
                                                             $orderT = $this->db->get_where('tbl_upload_order_team', ['order_id' => $Approved['order_id']])->result_array();
                                                             ?>
-                                                           
+
                                                             <?php if ($orderT == true) : ?>
                                                                 <span data-toggle="modal" data-target="#orderT<?php echo $Approved['order_id']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
                                                                 <div class="modal fade" id="orderT<?php echo $Approved['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -294,7 +341,7 @@
                                                                                                                     </button>
                                                                                                                 </div>
                                                                                                                 <div class="modal-body">
-                                                                                                                    <?php $orderT_sub = $this->db->get_where('tbl_upload_order_team', ['order_id' => $Approved['order_id'] , 'group' => $orderT['group']])->result_array(); ?>
+                                                                                                                    <?php $orderT_sub = $this->db->get_where('tbl_upload_order_team', ['order_id' => $Approved['order_id'], 'group' => $orderT['group']])->result_array(); ?>
                                                                                                                     <table class="table zero-configuration">
                                                                                                                         <thead>
                                                                                                                             <tr>
@@ -458,6 +505,49 @@
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
+                                                        </td>
+                                                        <!-- Feedback detail -->
+                                                        <td>
+                                                            <?php if ($Approved['note_approved'] != '') : ?>
+                                                                <span data-toggle="modal" data-target="#ratedetail<?php echo $Approved['order_id']; ?>"><i class="feather icon-clipboard" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="ratedetail<?php echo $Approved['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Commit detail</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <?= $Approved['note_approved']; ?>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <div class="rate" style="text-align: center;">
+                                                                <input type="radio" class="star" id="star5" name="rate" value="5" <?php echo $Approved['stars_score_user'] == '5' ? 'checked' : '' ?> />
+                                                                <label for="star5" title="text">5 stars</label>
+                                                                <input type="radio" class="star" id="star4" name="rate" value="4" <?php echo $Approved['stars_score_user'] == '4' ? 'checked' : '' ?>   />
+                                                                <label for="star4" title="text">4 stars</label>
+                                                                <input type="radio" class="star" id="star3" name="rate" value="3" <?php echo $Approved['stars_score_user'] == '3' ? 'checked' : '' ?>  />
+                                                                <label for="star3" class="star" title="text">3 stars</label>
+                                                                <input type="radio" class="star" name="rate" id="star2" value="2" <?php echo $Approved['stars_score_user'] == '2' ? 'checked' : '' ?>  />
+                                                                <label for="star2" title="text">2 stars</label>
+                                                                <input type="radio" class="star" id="star1" name="rate" value="1" <?php echo $Approved['stars_score_user'] == '1' ? 'checked' : '' ?>  />
+                                                                <label for="star1" title="text">1 star</label>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <?php if ($Approved['status_cp'] == "") : ?>

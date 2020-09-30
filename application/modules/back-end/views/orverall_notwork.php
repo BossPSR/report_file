@@ -52,22 +52,10 @@
                                 <div class="col-3 text-right">
                                     <a href="orvernotwork" class="btn btn-success mr-1 mb-1">
                                         No Work <span class="badge badge-pill badge-warning" id="">
+
                                             <?php
                                             $op = 0;
-                                            // if ($no_work) {
-                                            //     foreach ($no_work as $no_work) {
-                                            //         $checkDate_nums = DateDiff($no_work['created_at_buy'], $no_work['requiredOr']);
-                                            //         $checkDates = $checkDate_nums / 2;
-                                            //         $checkDates = floor($checkDates);
-                                            //         $dateRequireds = date("Y-m-d", strtotime("-" . $checkDates . " day", strtotime($no_work['requiredOr'])));
-                                            //         if ($dateRequireds <= date("Y-m-d")) {
-                                            //             $e += 1;
-                                            //         }
-                                            //     }
-                                            //     echo $checkDate_nums;
-                                            // } else {
-                                            //     echo $e;
-                                            // }
+
                                             ?>
                                             <?php foreach ($order_notwork as $key => $datata) {
                                                 $op++;
@@ -78,12 +66,13 @@
                                     </a>
                                     <a href="orvernotsubmit" class="btn btn-warning mr-1 mb-1">
                                         Not Submit <span class="badge badge-pill badge-success" id="">
-                                            <?php
-                                            $y = 0;
-                                            foreach ($not_submit as $key => $not_submit) {
-                                                $y += 1;
-                                            }
-                                            echo $y; ?>
+                                            <?php $ok = 0; ?>
+                                            <?php foreach ($order_notsum as $key => $dd) {
+                                                $ok++;
+                                            } ?>
+                                            <?php echo $ok += 0; ?>
+                                            <!-- <?php $not_submit = $this->db->get_where('tbl_feedback', ['check_feedback_dalivery' => 0])->result_array();
+                                                    echo count($not_submit); ?> -->
                                         </span>
                                     </a>
                                 </div>
@@ -92,7 +81,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Step</th>
@@ -106,6 +95,7 @@
                                                     <th>Date 24</th>
                                                     <th>Status Team</th>
                                                     <th>Client Feedback</th>
+                                                    <th>Admin Feedback</th>
                                                     <th>Tool</th>
                                                 </tr>
                                             </thead>
@@ -295,12 +285,20 @@
                                                             <?php else : ?>
                                                                 <?php if ($team['teamId'] == '') : ?>
                                                                     <span class="badge badge-pill badge-Info">Waiting for team</span>
-                                                                <?php elseif ($team['status'] == 0 && $team['teamId'] != '') : ?>
+                                                                <?php elseif ($team['status'] == '0') : ?>
                                                                     <span class="badge badge-pill badge-warning">processing</span>
-                                                                <?php elseif ($team['status'] == 1 && $team['teamId'] != '') : ?>
+                                                                <?php elseif ($team['status'] == '1') : ?>
                                                                     <span class="badge badge-pill badge-success">complete</span>
-                                                                <?php elseif ($team['status'] == 2 && $team['teamId'] != '') : ?>
+                                                                <?php elseif ($team['status'] == '2') : ?>
                                                                     <span class="badge badge-pill badge-danger">feedback</span>
+                                                                <?php elseif ($team['status'] == '3') : ?>
+                                                                    <span class="badge badge-pill badge-danger">Re feedback <?= $ui; ?></span>
+                                                                <?php elseif ($team['status'] == '4') : ?>
+                                                                    <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                <?php elseif ($team['status'] == '5') : ?>
+                                                                    <span class="badge badge-pill badge-success">complete refeedback</span>
+                                                                <?php else : ?>
+                                                                    -
                                                                 <?php endif ?>
                                                             <?php endif ?>
 
@@ -384,7 +382,91 @@
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php
+                                                            $xs  = 0;
+                                                            $af = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 0])->result_array();
+                                                            foreach ($af as $key => $af) {
+                                                                $xs += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($af == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Admin Feedback (<?= $xs; ?>) </span>
+                                                                <span data-toggle="modal" data-target="#filenotefeedback<?php echo $stores['order']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="filenotefeedback<?php echo $stores['order']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Admin Feedback note </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
 
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+
+                                                                                        <tr>
+                                                                                            <th>Order id</th>
+                                                                                            <th>name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php $ai = 1;
+                                                                                        $feedbackde = $this->db->get_where('tbl_feedback', ['order_id' => $stores['order'], 'check_status' => 0])->result_array();
+                                                                                        ?>
+
+                                                                                        <?php foreach ($feedbackde as $areed) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $areed['order_id'] ?></td>
+                                                                                                <td>Feedback admin (<?php echo $ai++; ?>)</td>
+                                                                                                <td>
+
+                                                                                                    <i data-toggle="modal" data-target="#detailfeedback<?php echo $areed['id']; ?>" class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i>
+                                                                                                    <div class="modal fade" id="detailfeedback<?php echo $areed['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog  modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Admin Feedback Detail </h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <p><?php echo $areed['feedback_detail']; ?></p>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </td>
+                                                                                                <td><?php echo $areed['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td>
 
                                                             <button type="button" class="btn btn-icon btn-info" data-toggle="modal" data-target="#sendnw<?php echo $stores['order']; ?>"><i class="feather icon-navigation"></i> </button>

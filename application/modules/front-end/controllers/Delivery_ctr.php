@@ -33,8 +33,9 @@ class Delivery_ctr extends CI_Controller
         $order_id   = $this->input->post('select_items');
         $idfolder   = $this->input->post('idfolder');
         $team       = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row();
-        $order_exp = explode(',', $order_id);
+        $order_exp  = explode(',', $order_id);
         $feed       = $this->db->get_where('tbl_feedback', ['order_id' => $order_exp[0]])->row_array();
+        $order_re   = $this->db->get_where('tbl_upload_order', ['order_id' => $order_exp[0]])->row_array();
 
 
 
@@ -66,11 +67,19 @@ class Delivery_ctr extends CI_Controller
                 'create_at'             => date('Y-m-d H:i:s'),
             );
             if ($this->db->insert('tbl_upload_order_team', $data)) {
-                $data3 = array(
-                    'status'        => '1',
-                );
-                $this->db->where('order_id', $order_exp[0]);
-                $this->db->update('tbl_upload_team', $data3);
+                if ($order_re['status_refeedback'] == '1') {
+                    $data3 = array(
+                        'status'        => '5',
+                    );
+                    $this->db->where('order_id', $order_exp[0]);
+                    $this->db->update('tbl_upload_team', $data3);
+                } else {
+                    $data3 = array(
+                        'status'        => '1',
+                    );
+                    $this->db->where('order_id', $order_exp[0]);
+                    $this->db->update('tbl_upload_team', $data3);
+                }
             }
             if ($feed == true) {
                 $data2 = array(
@@ -94,6 +103,9 @@ class Delivery_ctr extends CI_Controller
         $order       = $this->input->get('order');
         $teamorder   = $this->db->get_where('tbl_upload_team', ['order_id' => $order, 'status_out' => 1])->row();
         $team        = $this->db->get_where('tbl_team', ['IdTeam' => $teamorder->teamid])->row();
+
+        $this->db->where('order_id', $order);
+        $this->db->update('tbl_upload_order_team', ['check_new' => '0']);
 
         if ($teamorder == true) {
 

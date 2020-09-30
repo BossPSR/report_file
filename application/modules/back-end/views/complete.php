@@ -148,10 +148,10 @@
 														<td>
 															<div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
 																<?php if ($complete['check_past'] == '1') : ?>
-																	<input type="checkbox" class="custom-control-input ckeck<?php echo $complete['order_id']; ?>" id="customSwitch4<?php echo $complete['order_id']; ?>" data-status="<?php echo $complete['order_id']; ?>" checked>
+																	<input type="checkbox" class="custom-control-input cxl ckeck<?php echo $complete['order_id']; ?>" id="customSwitch4<?php echo $complete['order_id']; ?>" data-status="<?php echo $complete['order_id']; ?>" checked>
 																	<label class="custom-control-label" for="customSwitch4<?php echo $complete['order_id']; ?>"></label>
 																<?php else : ?>
-																	<input type="checkbox" class="custom-control-input ckeck<?php echo $complete['order_id']; ?>" id="customSwitch4<?php echo $complete['order_id']; ?>" data-status="<?php echo $complete['order_id']; ?>">
+																	<input type="checkbox" class="custom-control-input cxl ckeck<?php echo $complete['order_id']; ?>" id="customSwitch4<?php echo $complete['order_id']; ?>" data-status="<?php echo $complete['order_id']; ?>">
 																	<label class="custom-control-label" for="customSwitch4<?php echo $complete['order_id']; ?>"></label>
 																<?php endif; ?>
 															</div>
@@ -1082,7 +1082,7 @@
 																										<span class="checkmark"></span>
 																									</label>
 																								</td>
-																								<td><?php echo $orderss['order_id'] ?></td>
+																								<td><?php echo $orderss['check_new'] == '1' ? '<span style="color:red">New</span>' : ''; ?> <?php echo $orderss['order_id'] ?></td>
 																								<td><?php echo $orderss['file_name'] ?></td>
 																								<td><a href="<?php echo $orderss['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a></td>
 																								<td><?php echo $orderss['create_at'] ?></td>
@@ -1166,7 +1166,7 @@
 </script>
 
 <script>
-	$('body').on('change', 'input[type="checkbox"]', function() {
+	$('body').on('change', 'input[type="checkbox"].cxl', function() {
 		var o = $(this).data('status');
 
 		if ($('.ckeck' + o).is(":checked")) {

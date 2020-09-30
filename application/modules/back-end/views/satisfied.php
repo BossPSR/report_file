@@ -75,6 +75,7 @@
                                                     <th>Status</th>
                                                     <th style="width: 85px;">Process</th>
                                                     <th>Client Feedback</th>
+                                                    <th>Admin Feedback </th>
                                                     <th style="width: 11%;">Tool</th>
                                                 </tr>
                                             </thead>
@@ -89,7 +90,7 @@
                                                         <td><?php echo $stores['orderST']; ?></td>
 
                                                         <!-- userOR -->
-                                                        <td><?php echo $stores['Username'] == '' ? $stores['userOR'] : $stores['Username'] ; ?></td>
+                                                        <td><?php echo $stores['Username'] == '' ? $stores['userOR'] : $stores['Username']; ?></td>
 
                                                         <!-- countryName -->
                                                         <td>
@@ -857,13 +858,13 @@
                                                                     </div>
                                                                 </div>
                                                             <?php else : ?>
-                                                                
+
                                                                 <p id="demo<?php echo $stores['orderST']; ?>" style="font-size: 18px;font-weight: bold;"></p>
 
                                                             <?php endif; ?>
                                                             <script>
                                                                 var datep<?php echo $stores['orderST']; ?> = "<?= $stores['dateREST']; ?>";
-                                                                
+
                                                                 // Set the date we're counting down to
                                                                 var countDownDate<?php echo $stores['orderST']; ?> = new Date(datep<?php echo $stores['orderST']; ?>);
 
@@ -1447,6 +1448,7 @@
 
 
 
+
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
@@ -1497,11 +1499,290 @@
                                                             <?php endif; ?>
                                                         </td>
 
-                                                        <!-- Status T3 -->
+                                                        <!-- Process -->
                                                         <?php $team = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['orderST']])->row_array(); ?>
                                                         <td>
                                                             <?php if ($team == false) : ?>
                                                                 <button data-toggle="modal" data-target="#exampleModalUpload<?php echo $stores['orderST']; ?>" type="button" class="btn btn-icon btn-success" style="    font-size: 14px;">Upload T3</button>
+
+                                                                <div class="modal fade" id="exampleModalUpload<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-xl" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Upload to team (<?php echo $stores['orderST']; ?>)</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <form action="upload_team_ST" method="POST" class="form-horizontal">
+                                                                                <div class="modal-body row" style="text-align: center;margin: 5px 0;">
+
+                                                                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">Order</label>
+                                                                                            <input type="text" class="form-control" name="order_id" value="<?php echo $stores['orderST']; ?>" placeholder="Enter Order" readonly>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-xl-12 col-md-12 col-12 ">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="Team">Team ID</label> <br>
+                                                                                            <select class="select2 form-control" name="teamid[]" multiple="multiple" required>
+                                                                                                <option disabled> -- Select Team -- </option>
+                                                                                                <option value=""> All Team </option>
+                                                                                                <?php foreach ($ts as $tsM) { ?>
+                                                                                                    <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
+                                                                                                <?php } ?>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <?php $positionX  = $this->db->get('tbl_item_position')->result_array();  ?>
+
+                                                                                    <div class="col-xl-12 col-md-12 col-12 ">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">Position</label>
+                                                                                            <select name="position" class="form-control" required>
+                                                                                                <option selected disabled> ---- Select ---- </option>
+
+                                                                                                <?php foreach ($positionX as $positionX) { ?>
+                                                                                                    <option value="<?php echo $positionX['id'] ?>" <?php echo $positionX['id'] == $stores['position'] ? 'selected' : ''; ?>><?php echo $positionX['name_item'] ?></option>
+                                                                                                <?php } ?>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-xl-6 col-md-6 col-sm-6 col-12 ">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">wage</label>
+                                                                                            <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <?php
+                                                                                    $str =  $stores['dateREST'];
+                                                                                    $datr_re = explode(" ", $str);
+                                                                                    ?>
+                                                                                    <div class="col-xl-6 col-md-6 col-sm-6 col-12 ">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">Date</label>
+                                                                                            <input type="date" class="form-control  <?php echo $stores['orderST']; ?>" name="date_required" value="<?php echo $datr_re[0]; ?>" min="<?php echo date('Y-m-d'); ?>">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12 ">
+                                                                                        <div class="form-group" style="text-align: left;">
+                                                                                            <label for="helpInputTop">note</label>
+                                                                                            <textarea name="note_new" id="" rows="4" class="form-control"><?php echo $stores['note']; ?></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-xl-12 col-md-12 col-12 mb-1">
+                                                                                        <div class="form-group">
+                                                                                            <button type="submit" class="btn btn-primary w-100" style="font-size: 18px;">Submit</button>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-xl-6 col-md-12 col-12 mb-1 text-left" style="box-shadow: -2px 2px 4px 0px #dedede;">
+                                                                                        <label style="font-size: 16px;margin: 23px 0 5px 0px;" for="">Main file All <span style="color:red;">* ่ทานสามารถเลือกทีมไฟล์คนเก่าได้ที่นี้</span></label>
+                                                                                        <hr>
+                                                                                        <?php $ordermain = $this->db->get_where('tbl_upload_order', ['order_id' => $stores['orderST']])->result_array(); ?>
+
+                                                                                        <table class="table zero-configuration" id="heremain<?php echo $stores['orderST']; ?>">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>#</th>
+                                                                                                    <th>File name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($ordermain as $keys => $ordermain) { ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <fieldset>
+                                                                                                                <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                                                    <input type="checkbox" name="checkboxmain[]" value="<?php echo $ordermain['id']; ?>">
+                                                                                                                    <span class="vs-checkbox">
+                                                                                                                        <span class="vs-checkbox--check">
+                                                                                                                            <i class="vs-icon feather icon-check"></i>
+                                                                                                                        </span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </fieldset>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <?php echo $ordermain['file_name'] ?>
+                                                                                                            <a href="" data-toggle="modal" data-target="#filemain<?php echo $ordermain['id']; ?>">
+                                                                                                                <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                            </a>
+
+                                                                                                            <!-- Modal -->
+                                                                                                            <div class="modal fade text-left" id="filemain<?php echo $ordermain['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                                    <div class="modal-content">
+                                                                                                                        <div class="modal-header">
+                                                                                                                            <h4 class="modal-title" id="myModalLabel1">Rename main</h4>
+                                                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                                                            </button>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-body">
+                                                                                                                            <?php $or_file_name = explode('.', $ordermain['file_name']); ?>
+                                                                                                                            <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameold<?php echo $ordermain['id']; ?>" class="form-control">
+                                                                                                                            <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameold<?php echo $ordermain['id']; ?>" class="form-control">
+                                                                                                                            <input type="hidden" id="path<?php echo $ordermain['id']; ?>" data-pathgt="<?php echo $ordermain['path']; ?>" class="form-control">
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-footer">
+                                                                                                                            <button type="button" class="btn btn-primary epx" id="re_file_name_buttonGT<?php echo $ordermain['id']; ?> " data-fgt="<?php echo $orderTgroupold['id']; ?>" data-fmain="<?php echo $order['id']; ?>">Submit</button>
+                                                                                                                        </div>
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <script>
+                                                                                                                $('body').on('click', 'button[type="button"].epx', function() {
+                                                                                                                    var c = $(this).data('fmain');
+                                                                                                                    var d = $('#pathmain' + c).data('pathgt');
+                                                                                                                    var name_file = $('#Re_file_nameold' + c).val();
+                                                                                                                    var last_file = $('#Re_last_nameold' + c).val();
+
+                                                                                                                    $.ajax({
+                                                                                                                        url: "rename_filename",
+                                                                                                                        type: "POST",
+                                                                                                                        data: {
+                                                                                                                            id: c,
+                                                                                                                            name_file: name_file,
+                                                                                                                            last_file: last_file,
+                                                                                                                            path: d
+                                                                                                                        },
+                                                                                                                        success: function(success) {
+                                                                                                                            if (success) {
+                                                                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                                    button: true,
+                                                                                                                                });
+                                                                                                                                $("#heremain<?php echo $stores['orderST']; ?>").load(window.location.href + " #heremain<?php echo $stores['orderST']; ?>");
+                                                                                                                                $('#filemain' + c).modal('hide');
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            </script>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <a href="<?php echo $ordermain['path'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $ordermain['created_at_buy'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php } ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+
+                                                                                    <div class="col-xl-6 col-md-12 col-12 mb-1 text-left" style="box-shadow: -2px 2px 4px 0px #dedede;">
+                                                                                        <label style="font-size: 16px;margin: 23px 0 5px 0px;" for="">GT file All <span style="color:red;">* ่ทานสามารถเลือกทีมไฟล์คนเก่าได้ที่นี้</span></label>
+                                                                                        <hr>
+                                                                                        <?php $ordergt_sub = $this->db->get_where('tbl_upload_orderGT', ['order_id' => $stores['orderST']])->result_array(); ?>
+
+                                                                                        <table class="table zero-configuration" id="heregt<?php echo $stores['orderST']; ?>">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>#</th>
+                                                                                                    <th>File name</th>
+                                                                                                    <th>File</th>
+                                                                                                    <th>create</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php foreach ($ordergt_sub as $keys => $ordergt_sub) { ?>
+                                                                                                    <tr>
+                                                                                                        <td>
+                                                                                                            <fieldset>
+                                                                                                                <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                                                                    <input type="checkbox" name="checkboxgt[]" value="<?php echo $ordergt_sub['id']; ?>">
+                                                                                                                    <span class="vs-checkbox">
+                                                                                                                        <span class="vs-checkbox--check">
+                                                                                                                            <i class="vs-icon feather icon-check"></i>
+                                                                                                                        </span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </fieldset>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <?php echo $ordergt_sub['file_name_GT'] ?>
+                                                                                                            <a href="" data-toggle="modal" data-target="#filegt_sub<?php echo $ordergt_sub['id']; ?>">
+                                                                                                                <i class="feather icon-edit-2" style="font-size: 25px;"></i>
+                                                                                                            </a>
+
+                                                                                                            <!-- Modal -->
+                                                                                                            <div class="modal fade text-left" id="filegt_sub<?php echo $ordergt_sub['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                                                                                    <div class="modal-content">
+                                                                                                                        <div class="modal-header">
+                                                                                                                            <h4 class="modal-title" id="myModalLabel1">Rename main</h4>
+                                                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                                                            </button>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-body">
+                                                                                                                            <?php $or_file_name = explode('.', $ordergt_sub['file_name_GT']); ?>
+                                                                                                                            <input type="text" name="file_name" value="<?php echo $or_file_name[0]; ?>" id="Re_file_nameold<?php echo $ordergt_sub['id']; ?>" class="form-control">
+                                                                                                                            <input type="hidden" name="last_name" value="<?php echo $or_file_name[1]; ?>" id="Re_last_nameold<?php echo $ordergt_sub['id']; ?>" class="form-control">
+                                                                                                                            <input type="hidden" id="path<?php echo $ordergt_sub['id']; ?>" data-pathgt="<?php echo $ordergt_sub['path_GT']; ?>" class="form-control">
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-footer">
+                                                                                                                            <button type="button" class="btn btn-primary epq" id="re_file_name_buttonGT<?php echo $ordergt_sub['id']; ?> " data-fgt="<?php echo $orderTgroupold['id']; ?>" data-fmain="<?php echo $order['id']; ?>">Submit</button>
+                                                                                                                        </div>
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <script>
+                                                                                                                $('body').on('click', 'button[type="button"].epq', function() {
+                                                                                                                    var c = $(this).data('fmain');
+                                                                                                                    var d = $('#pathmain' + c).data('pathgt');
+                                                                                                                    var name_file = $('#Re_file_nameold' + c).val();
+                                                                                                                    var last_file = $('#Re_last_nameold' + c).val();
+
+                                                                                                                    $.ajax({
+                                                                                                                        url: "rename_filenameGT",
+                                                                                                                        type: "POST",
+                                                                                                                        data: {
+                                                                                                                            id: c,
+                                                                                                                            name_file: name_file,
+                                                                                                                            last_file: last_file,
+                                                                                                                            path: d
+                                                                                                                        },
+                                                                                                                        success: function(success) {
+                                                                                                                            if (success) {
+                                                                                                                                swal("Good job!", "Upload for data successfull", "success", {
+                                                                                                                                    button: true,
+                                                                                                                                });
+                                                                                                                                $("#heregt<?php echo $stores['orderST']; ?>").load(window.location.href + " #heregt<?php echo $stores['orderST']; ?>");
+                                                                                                                                $('#filegt_sub' + c).modal('hide');
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            </script>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            <a href="<?php echo $ordergt_sub['path_GT'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+                                                                                                        </td>
+                                                                                                        <td><?php echo $ordergt_sub['create_at'] ?></td>
+                                                                                                    </tr>
+                                                                                                <?php } ?>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="modal-footer">
+
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             <?php else : ?>
                                                                 <?php $cancel_sa = $this->db->get_where('tbl_cancel', ['order_id' => $stores['orderST']])->row_array(); ?>
                                                                 <?php if ($cancel_sa == true) : ?>
@@ -1522,10 +1803,12 @@
                                                                             <span class="badge badge-pill badge-danger">Re feedback</span>
                                                                         <?php elseif ($team['status'] == '4') : ?>
                                                                             <span class="badge badge-pill badge-danger">Not complete</span>
+                                                                        <?php elseif ($team['status'] == '5') : ?>
+                                                                            <span class="badge badge-pill badge-success">complete refeedback</span>
                                                                         <?php else : ?>
                                                                             -
                                                                         <?php endif; ?>
-                                                                        
+
                                                                     <?php endif; ?>
 
                                                                 <?php endif; ?>
@@ -1545,14 +1828,100 @@
                                                                 $c += 1;
                                                             }
                                                             ?>
-                                                            <?php if ($cf == true) : ?>
-                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
-                                                            <?php elseif ($cf2 == true) : ?>
+                                                            <?php if ($cf2 == true) : ?>
                                                                 <span class="badge badge-pill badge-primary">Re-Feedback (<?= $c; ?>)</span>
+                                                            <?php elseif ($cf == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Feedback (<?= $z; ?>)</span>
                                                             <?php elseif ($stores['status_approved'] == 3) : ?>
                                                                 <span class="badge badge-pill badge-danger">Feedback</span>
                                                             <?php elseif ($stores['status_approved'] == 4) : ?>
                                                                 <span class="badge badge-pill badge-primary">Re-Feedback</span>
+                                                            <?php else : ?>
+                                                                -
+                                                            <?php endif; ?>
+                                                        </td>
+
+                                                        <!-- Admin Feedback  -->
+                                                        <td>
+                                                            <?php
+                                                            $xs  = 0;
+                                                            $af = $this->db->get_where('tbl_feedback', ['order_id' => $stores['orderST'], 'check_status' => 0])->result_array();
+                                                            foreach ($af as $key => $af) {
+                                                                $xs += 1;
+                                                            }
+                                                            ?>
+                                                            <?php if ($af == true) : ?>
+                                                                <span class="badge badge-pill badge-danger">Admin Feedback (<?= $xs; ?>) </span>
+                                                                <span data-toggle="modal" data-target="#filenotefeedback<?php echo $stores['orderST']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>
+                                                                <div class="modal fade" id="filenotefeedback<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered  modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Admin Feedback note </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <table class="table zero-configuration">
+                                                                                    <thead>
+
+                                                                                        <tr>
+                                                                                            <th>Order id</th>
+                                                                                            <th>name</th>
+                                                                                            <th>File</th>
+                                                                                            <th>create</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php $ai = 1;
+                                                                                        $feedbackde = $this->db->get_where('tbl_feedback', ['order_id' => $stores['orderST'], 'check_status' => 0])->result_array();
+                                                                                        ?>
+
+                                                                                        <?php foreach ($feedbackde as $areed) { ?>
+                                                                                            <tr>
+                                                                                                <td><?php echo $areed['order_id'] ?></td>
+                                                                                                <td>Feedback admin (<?php echo $ai++; ?>)</td>
+                                                                                                <td>
+
+                                                                                                    <i data-toggle="modal" data-target="#detailfeedback<?php echo $areed['id']; ?>" class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i>
+                                                                                                    <div class="modal fade" id="detailfeedback<?php echo $areed['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog  modal-dialog-scrollable modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title" id="exampleModalLabel">Admin Feedback Detail </h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <p><?php echo $areed['feedback_detail']; ?></p>
+                                                                                                                </div>
+                                                                                                                <div class="modal-footer">
+                                                                                                                    <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </td>
+                                                                                                <td><?php echo $areed['create_at'] ?></td>
+                                                                                            </tr>
+                                                                                        <?php } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             <?php else : ?>
                                                                 -
                                                             <?php endif; ?>
@@ -2125,9 +2494,6 @@
                                                     </tr>
 
 
-
-
-
                                                     <div class="modal fade" id="exampleModal<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -2156,105 +2522,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="modal fade" id="exampleModalUpload<?php echo $stores['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Upload to team (<?php echo $stores['orderST']; ?>)</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="upload_team_ST" method="POST" class="form-horizontal">
-                                                                    <div class="modal-body">
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Order</label>
-                                                                                <input type="text" class="form-control" name="order_id" value="<?php echo $stores['orderST']; ?>" placeholder="Enter Order" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <?php
-                                                                        $expdate = explode(' ', $stores['dateREST']);
-                                                                        ?>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">date required</label>
-                                                                                <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control dr<?php echo $stores['orderST']; ?>" name="Daterequired" value="<?php echo  $expdate[0]; ?>" placeholder="Enter price" required>
-                                                                            </div>
 
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">position</label>
-                                                                                <?php $select_postion = $this->db->get('tbl_item_position')->result_array(); ?>
-                                                                                <select name="position" class="form-control" required>
-                                                                                    <option value="" selected disabled>select</option>
-                                                                                    <?php foreach ($select_postion as $keys => $select_postion) { ?>
-                                                                                        <option value="<?php echo $select_postion['id']; ?>"><?php echo $select_postion['name_item']; ?></option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">wage(10%)</label>
-
-                                                                                <input type="text" class="form-control" name="wage" value="<?php echo $stores['price_file'] * 10 / 100; ?>" placeholder="Enter wage">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <fieldset>
-                                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                                        <input type="checkbox" class="ckeck<?php echo $stores['orderST']; ?>" data-order="<?php echo $stores['orderST']; ?>">
-                                                                                        <span class="vs-checkbox">
-                                                                                            <span class="vs-checkbox--check">
-                                                                                                <i class="vs-icon feather icon-check"></i>
-                                                                                            </span>
-                                                                                        </span>
-                                                                                        <span class="">Add Team</span>
-                                                                                    </div>
-                                                                                </fieldset>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1" id="teambox<?php echo $stores['orderST']; ?>" style="display: none">
-                                                                            <div class="form-group">
-                                                                                <label for="team">Team Id</label>
-                                                                                <select class="select2 form-control" name="team" id="team<?php echo $stores['orderST']; ?>">
-                                                                                    <option disabled selected> -- Select Team -- </option>
-                                                                                    <?php foreach ($ts as $tsM) { ?>
-                                                                                        <option value="<?php echo $tsM['IdTeam']; ?>"><?php echo $tsM['IdTeam']; ?></option>
-                                                                                    <?php } ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Note Client</label>
-                                                                                <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"><?php echo $stores['note_user']; ?></textarea>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
-                                                                            <div class="form-group">
-                                                                                <label for="helpInputTop">Note Team</label>
-                                                                                <textarea class="form-control" name="note_t" rows="5" placeholder="Enter Note"><?php echo $stores['note_team']; ?></textarea>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                                                                            <div class="add-data-btn mr-1">
-                                                                                <button type="submit" class="btn btn-primary">submit</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
                                                     <script>
                                                         $(".dateread<?php echo  $stores['orderST']; ?>").change(function() {

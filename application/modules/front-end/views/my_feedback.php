@@ -41,6 +41,7 @@
                             $io = 0;
                             $ii = 0;
                             $ip = 0;
+                            $orderarray = null;
                             ?>
                             <?php foreach ($feedback as $feedback) { ?>
                                 <?php $upder = $this->db->get_where('tbl_upload_order', ['order_id' => $feedback['order_id']])->row_array(); ?>
@@ -191,33 +192,60 @@
                                         <td>
                                          
                                             <?php if ($feedback['re_feedback'] == 1) : ?>
-                                                <span class=" badge badge-danger" style="font-size:16px;"> Re-feedback <?php echo $io += 1; ?> </span>
+                                                <?php if ($orderarray === null || $orderarray == $feedback['orIdd']) {
+                                                    $io += 1;
+                                                }
+                                                if ($orderarray != $feedback['orIdd']) {
+                                                    $io = 1;
+                                                } ?>
+                                                <span class=" badge badge-danger" style="font-size:16px;"> Re-feedback <?php echo $io; ?> </span>
 
                                                                 <?php elseif ($feedback['check_status'] == 0) : ?>
-                                                                    <span class=" badge badge-danger" style="font-size:16px;"> Admin feedback <?php echo $ii += 1; ?> </span>
+                                                                    <?php
+                                                                    if ($orderarray === null || $orderarray == $feedback['orIdd']) {
+                                                                        $ii += 1;
+                                                                    }
+                                                                    if ($orderarray != $feedback['orIdd']) {
+                                                                        $ii = 1;
+                                                                    }
+                                                                    ?>
+                                                                    <span class=" badge badge-danger" style="font-size:16px;"> Admin feedback
+                                                                        <?php echo $ii; ?>
+                                                                    </span>
 
                                                                 <?php else : ?>
-                                                                    <span class="badge badge-info" style="font-size:16px;"> Client feedback <?php echo $ip += 1; ?></span>
+                                                                    <?php
+                                                                    if ($orderarray === null || $orderarray == $feedback['orIdd']) {
+                                                                        $ip += 1;
+                                                                    }
+                                                                    if ($orderarray != $feedback['orIdd']) {
+                                                                        $ip = 1;
+                                                                    }
+
+
+                                                                    ?>
+                                                                    <span class="badge badge-info" style="font-size:16px;"> Client feedback <?php echo $ip; ?></span>
 
                                                                 <?php endif; ?>
 
-                                                                <?php if ($feedback['status_feedback_read'] == 0) { ?>
+                                                                <?php if ($feedback['status_feedback_read'] == 0) : ?>
                                                                     <span class=" badge badge-danger" style="font-size:16px;">Not Read</span>
-                                                                <?php } else { ?>
-                                                                    <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) { ?>
+                                                                <?php else :  ?>
+                                                                    <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) : ?>
                                                                         <span class="badge badge-info" style="font-size:16px;">Read</span>
-                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) { ?>
+                                                                    <?php elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) : ?>
                                                                         <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
-                                                                    <?php } elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) { ?>
+                                                                    <?php elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) : ?>
                                                                         <span class="badge badge-success" style="font-size:16px;">Success</span>
-                                                                    <?php } ?>
-                                                                <?php } ?>
+                                                                    <?php endif; ?>
+                                                                <?php endif; ?>
                                         </td>
                                         <td><?= $feedback['name_item']; ?></td>
                                     </tr>
-
+                                    <?php $orderarray = $feedback['orIdd']; ?>
                                 <?php } ?>
                             <?php } ?>
+
                         </tbody>
                     </table>
                 </div>
