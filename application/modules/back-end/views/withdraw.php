@@ -34,7 +34,7 @@
 							<div class="card-content">
 								<div class="card-body card-dashboard">
 									<div class="table-responsive">
-										<table class="table table-hover zero-configuration">
+										<table class="table table-hover zero-configuration"  style="white-space: nowrap;">
 											<thead>
 												<tr>
 													<th>Email</th>
@@ -63,16 +63,73 @@
 																<a href="<?php echo $withdraw['pathw'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
 															<?php endif; ?>
 														</td>
-														<td>
+														<td >
 															<button class="btn btn-icon btn-info" data-toggle="modal" data-target="#emailsand<?php echo $withdraw['idW']; ?>" type="button">
 																<i class="feather icon-mail"></i>
 															</button>
 															<?php if ($withdraw['status'] == 1) : ?>
-																<div style="display: contents;">
+                                                                <div class="dropdown" style="display: initial;">
+                                                                    <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        กำลังดำเนินการ
+                                                                    </button>
+                                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" type="button" data-toggle="modal" data-target="#drop<?php echo $withdraw['idW']; ?>" href="#">ชำระเงินแล้ว</a>
+                                                                        <a class="dropdown-item" href="withdraw_status_team?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                    </div>
+                                                                </div>
+                                                            <?php elseif ($withdraw['status'] == 2) : ?>
+                                                                <div class="dropdown" style="display: initial;">
+                                                                    <button class="btn btn-success mr-1" type="button" id="dropdownMenuButton">
+                                                                        ชำระเงินแล้ว
+                                                                    </button>
+                                                                    <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" href="withdraw_status_team?id=<?php echo $withdraw['idW']; ?>&status=3">ยกเลิก</a>
+                                                                    </div> -->
+                                                                </div>
+                                                            <?php else : ?>
+
+                                                                <button class="btn btn-danger dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    ยกเลิก
+                                                                </button>
+
+															<?php endif; ?>
+															  <!-- Modal Feedback -->
+															  <div class="modal fade" id="dropteam<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Withdraw Team (<?php echo $withdraw['idW']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="modal-body" style="text-align:left;">
+                                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                            <form action="img_withdraw_team" class="dropzone" id="fileuploadTeam<?php echo $withdraw['idW']; ?>">
+                                                                                <div class="dz-message needsclick">
+                                                                                    Drop files here or click to upload.<br>
+                                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                                    <input type="hidden" name="id" value="<?php echo $withdraw['idW']; ?>">
+                                                                                </div>
+                                                                            </form>
+
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="SubmitW<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+															<?php if ($withdraw['status'] == 1) : ?>
+																<!-- <div style="display: contents;">
 																	<button class="btn btn-warning btn-info" data-toggle="modal" data-target="#note<?php echo $withdraw['idW']; ?>" type="button">
 																		<i class="fa fa-sticky-note"></i>
 																	</button>
-																</div>
+																</div> -->
 
 																<div class="modal fade" id="note<?php echo $withdraw['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 																	<div class="modal-dialog modal-lg" role="document">
@@ -190,7 +247,7 @@
 																		</div>
 
 																		<div class="modal-footer">
-																			<button type="button" id="SubmitW<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
+																			<button type="button" id="SubmitWuser<?php echo $withdraw['idW']; ?>" class="btn btn-success">Send</button>
 																			<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 																		</div>
 
@@ -235,7 +292,7 @@
 																parallelUploads: 5, // Number of files process at a time (default 2)
 															});
 
-															$('#SubmitW<?php echo $withdraw['idW']; ?>').click(function() {
+															$('#SubmitWuser<?php echo $withdraw['idW']; ?>').click(function() {
 
 																if (myDropzone2<?php echo $withdraw['idW']; ?>.files != 0) {
 																	myDropzone2<?php echo $withdraw['idW']; ?>.processQueue();
