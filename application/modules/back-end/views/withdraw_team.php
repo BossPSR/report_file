@@ -123,9 +123,9 @@
                                                             </div>
                                                             <?php if ($withdraw_team['status_id'] != 2) { ?>
 
-                                                                <button class="btn btn-warning btn-info" data-toggle="modal" data-target="#note<?php echo $withdraw_team['idW']; ?>" type="button">
+                                                                <!-- <button class="btn btn-warning btn-info" data-toggle="modal" data-target="#note<?php echo $withdraw_team['idW']; ?>" type="button">
                                                                     <i class="fa fa-sticky-note"></i>
-                                                                </button>
+                                                                </button> -->
 
 
                                                                 <div class="modal fade" id="note<?php echo $withdraw_team['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
