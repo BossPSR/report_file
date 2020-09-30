@@ -15,10 +15,13 @@ class Order_ctr extends CI_Controller
     if ($this->session->userdata('email') == '') {
       redirect('home');
     } else {
+   
+
       $data['userId']   = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
       $data['package']   = $this->db->get('tbl_package')->result_array();
       $datePaypal = date("Y-m-d", strtotime($data['userId']['package_end']));
       $checkDate = DateDiff(date("Y-m-d"), $datePaypal);
+      $data['buy_email'] = $this->Order_model->order_buy($data['userId']['idUser']);
 
       if ($data['userId']['package_end'] !== null) {
 
@@ -31,6 +34,7 @@ class Order_ctr extends CI_Controller
       $this->load->view('options/header_login');
       $this->load->view('order', $data);
       $this->load->view('options/footer');
+
     }
   }
 
@@ -92,7 +96,7 @@ class Order_ctr extends CI_Controller
           if ($team03['team_score'] >= '500') {
 
             $teamic = [
-              'income' =>  $team03['income'] + 100,
+              'income' =>  $team03['income'] + 100 ,
               'team_score' =>  '0'
             ];
             $this->db->where('IdTeam', $team01['teamid']);
