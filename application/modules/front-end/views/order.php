@@ -256,7 +256,7 @@
                                                                     <tbody>
                                                                         <?php foreach ($teamF as $teamF) { ?>
                                                                             <tr style="text-align:center;">
-                                                                                <td><?= $teamF['check_new_d'] == '1' ? '<span style="color:red;">New</span>' : '' ; ?> <?= $teamF['order_id_d']; ?></td>
+                                                                                <td><?= $teamF['check_new_d'] == '1' ? '<span style="color:red;">New</span>' : ''; ?> <?= $teamF['order_id_d']; ?></td>
                                                                                 <td><?= $teamF['file_name_d']; ?></td>
                                                                                 <td><a href="<?= $teamF['path_d']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
                                                                                 <td>
@@ -399,7 +399,7 @@
 
                                                 <?php } else { ?>
 
-                                                    <button type="button" class="btn btn-warning" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Feedback (แก้ไขงาน)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                    <button type="button" class="btn btn-warning" id="onshownbtn<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_user<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Feedback (แก้ไขงาน)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>แก้ไขงาน
                                                         <?php if ($N_count['od'] == '0') : ?>
 
                                                         <?php else : ?>
@@ -688,9 +688,9 @@
 
 
                                             <?php if ($value['status_delivery'] == 1) { ?>
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id="" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id="" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"><i class="fa fa-check" aria-hidden="true"></i>อนุมัติ</button>
                                             <?php } else { ?>
-                                                <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"></i></button>
+                                                <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"></i>อนุมัติ</button>
                                             <?php } ?>
 
                                             <!-- Modal -->
@@ -820,7 +820,7 @@
                                         <?php } else { ?>
 
                                             <!-- <button type="button" data-toggle="modal" data-target="#exampleModalMainFeed<?php echo $OP++; ?>" class="btn btn-warning" style="color:#FFF;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></button> -->
-                                            <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info" data-toggled="tooltip" data-placement="top" title="More File (ส่งข้อมูลเพิ่มเติม)"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                                            <button type="button" data-toggle="modal" data-target="#gtdoc<?php echo $value['ORD']; ?>" class="btn btn-info" data-toggled="tooltip" data-placement="top" title="More File (ส่งข้อมูลเพิ่มเติม)"><i class="fa fa-plus-square" aria-hidden="true"></i> ส่งข้อมูลเพิ่มเติม</button>
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="gtdoc<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
