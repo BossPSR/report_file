@@ -34,7 +34,7 @@
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
                                     <div class="table-responsive">
-                                        <table class="table table-hover zero-configuration">
+                                        <table class="table table-hover zero-configuration" style="white-space: nowrap;">
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
@@ -206,40 +206,45 @@
                                                                 <?php endif; ?>
 
                                                             </td>
-															<td><p id="demo<?php echo $stores['order_re']; ?>" style="font-size: 18px;font-weight: bold;"></p>
-																<script>
-																	var datep<?php echo $store['order_re']; ?> = "<?= $store['date_required']; ?>";
-																	
-																	// Set the date we're counting down to
-																	var countDownDate<?php echo $store['order_re']; ?> = new Date(datep<?php echo $store['order_re']; ?>);
+                                                            <td>
+                                                                <?php if (date("Y-m-d H:i:s") >= $store['date_required']) : ?>
+                                                                    <span class="badge badge-danger">หมดเวลา</span>
+                                                                <?php else : ?>
+                                                                    <p id="demo<?php echo $store['order_re']; ?>" style="font-size: 18px;font-weight: bold;"></p>
+                                                                    <script>
+                                                                        var datep<?php echo $store['order_re']; ?> = "<?= $store['date_required']; ?>";
 
-																	// Update the count down every 1 second
-																	var x<?php echo $store['order_re']; ?> = setInterval(function() {
+                                                                        // Set the date we're counting down to
+                                                                        var countDownDate<?php echo $store['order_re']; ?> = new Date(datep<?php echo $store['order_re']; ?>);
 
-																		// Get today's date and time
-																		var now<?php echo $store['order_re']; ?> = new Date();
+                                                                        // Update the count down every 1 second
+                                                                        var x<?php echo $store['order_re']; ?> = setInterval(function() {
 
-																		// Find the distance between now and the count down date
-																		var distance<?php echo $store['order_re']; ?> = countDownDate<?php echo $store['order_re']; ?> - now<?php echo $store['order_re']; ?>;
+                                                                            // Get today's date and time
+                                                                            var now<?php echo $store['order_re']; ?> = new Date();
 
-																		// Time calculations for days, hours, minutes and seconds
-																		var days<?php echo $store['order_re']; ?> = Math.floor(distance<?php echo $store['order_re']; ?> / (1000 * 60 * 60 * 24));
-																		var hours<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-																		var minutes<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60 * 60)) / (1000 * 60));
-																		var seconds<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60)) / 1000);
+                                                                            // Find the distance between now and the count down date
+                                                                            var distance<?php echo $store['order_re']; ?> = countDownDate<?php echo $store['order_re']; ?> - now<?php echo $store['order_re']; ?>;
 
-																		// Output the result in an element with id="demo"
-																		document.getElementById("demo<?php echo $store['order_re']; ?>").innerHTML = days<?php echo $store['order_re']; ?> + "Day " + hours<?php echo $store['order_re']; ?> + "h " +
-																			minutes<?php echo $store['order_re']; ?> + "m " + seconds<?php echo $store['order_re']; ?> + "s ";
+                                                                            // Time calculations for days, hours, minutes and seconds
+                                                                            var days<?php echo $store['order_re']; ?> = Math.floor(distance<?php echo $store['order_re']; ?> / (1000 * 60 * 60 * 24));
+                                                                            var hours<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                                            var minutes<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60 * 60)) / (1000 * 60));
+                                                                            var seconds<?php echo $store['order_re']; ?> = Math.floor((distance<?php echo $store['order_re']; ?> % (1000 * 60)) / 1000);
 
-																		// If the count down is over, write some text 
-																		if (distance<?php echo $store['order_re']; ?> < 0) {
-																			clearInterval(x<?php echo $store['order_re']; ?>);
-																			document.getElementById("demo<?php echo $store['order_re']; ?>").innerHTML = "หมดเวลา";
-																		}
-																	}, 1000);
-																</script>
-															</td>
+                                                                            // Output the result in an element with id="demo"
+                                                                            document.getElementById("demo<?php echo $store['order_re']; ?>").innerHTML = days<?php echo $store['order_re']; ?> + "Day " + hours<?php echo $store['order_re']; ?> + "h " +
+                                                                                minutes<?php echo $store['order_re']; ?> + "m " + seconds<?php echo $store['order_re']; ?> + "s ";
+
+                                                                            // If the count down is over, write some text 
+                                                                            if (distance<?php echo $store['order_re']; ?> < 0) {
+                                                                                clearInterval(x<?php echo $store['order_re']; ?>);
+                                                                                document.getElementById("demo<?php echo $store['order_re']; ?>").innerHTML = "หมดเวลา";
+                                                                            }
+                                                                        }, 1000);
+                                                                    </script>
+                                                                <?php endif; ?>
+                                                            </td>
                                                             <td>
                                                                 <?php if ($store['note_user'] == '') : ?>
                                                                     -
@@ -254,7 +259,7 @@
                                                             <?php endif; ?>
                                                             <td><?php echo $store['note_reject']; ?></td>
                                                             <td><?php echo $store['created_at_buy']; ?></td>
-                                                            
+
                                                             <td><button type="button" class="btn btn-outline-info" onclick="confirmalertunlock_reject('<?php echo $store['id']; ?>')">Clover</button></td>
 
 
