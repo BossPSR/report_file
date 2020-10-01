@@ -587,15 +587,16 @@
                                                             <?php else : ?>
                                                                 <?php if ($feedback_team['status_c_feedack_team'] == 0) : ?>
                                                                     <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $feedback_team['id_f']; ?>" class="btn btn-icon btn-danger"><i class="feather icon-alert-circle"></i></button>
-                                                                    <?php if ($feedback_team['status_cp'] == '') : ?>
+                                                                    <!-- if ($feedback_team['status_cp'] == '') : ?>
                                                                         <button class="btn btn-icon btn-secondary" type="button" aria-haspopup="true" aria-expanded="false">
                                                                             <i class="feather icon-log-out"></i>
                                                                         </button>
-                                                                    <?php else : ?>
+                                                                     else : ?>
+                                                                     endif; ?> -->
+
                                                                         <button onclick="confileFeedback_team('<?php echo $feedback_team['id_f']; ?>','<?php echo $feedback_team['order_id']; ?>')" class="btn btn-icon btn-success " type="button" aria-haspopup="true" aria-expanded="false">
                                                                             <i class="feather icon-log-out"></i>
                                                                         </button>
-                                                                    <?php endif; ?>
 
 
                                                                     <!-- elseif ($feedback_team['status_c_feedack_team'] == 2) : 
