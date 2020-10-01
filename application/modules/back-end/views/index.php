@@ -120,93 +120,150 @@
                     </div>
 				</div> -->
 				<div class="row">
-					<div class="col-xl-2 col-md-4 col-sm-6">
-						<div class="card text-center">
-							<div class="card-content">
-								<div class="card-body">
-									<div class="avatar bg-rgba-info p-50 m-0 mb-1">
-										<div class="avatar-content">
-											<i class="feather icon-eye text-info font-medium-5"></i>
-										</div>
+					<div class="col-lg-4 col-12">
+						<div class="card">
+							<div class="card-header d-flex justify-content-between align-items-end">
+								<h4 class="card-title">ตำแหน่งงาน</h4>
+								<div class="dropdown chart-dropdown">
+
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem3">
+										<a class="dropdown-item" href="#">Last 28 Days</a>
+										<a class="dropdown-item" href="#">Last Month</a>
+										<a class="dropdown-item" href="#">Last Year</a>
 									</div>
-									<h2 class="text-bold-700">36.9k</h2>
-									<p class="mb-0 line-ellipsis">Views</p>
 								</div>
+							</div>
+							<div class="card-content">
+								<div class="card-body py-0">
+									<div id="customer-chart"></div>
+								</div>
+								<ul class="list-group list-group-flush customer-info">
+									<li class="list-group-item d-flex justify-content-between">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-primary"></i>
+											<span class="text-bold-600">New</span>
+										</div>
+										<div class="product-result">
+											<span>890</span>
+										</div>
+									</li>
+									<li class="list-group-item d-flex justify-content-between ">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-warning"></i>
+											<span class="text-bold-600">Returning</span>
+										</div>
+										<div class="product-result">
+											<span>258</span>
+										</div>
+									</li>
+									<li class="list-group-item d-flex justify-content-between ">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-danger"></i>
+											<span class="text-bold-600">Referrals</span>
+										</div>
+										<div class="product-result">
+											<span>149</span>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-2 col-md-4 col-sm-6">
-						<div class="card text-center">
-							<div class="card-content">
-								<div class="card-body">
-									<div class="avatar bg-rgba-warning p-50 m-0 mb-1">
-										<div class="avatar-content">
-											<i class="feather icon-message-square text-warning font-medium-5"></i>
-										</div>
+					<div class="col-lg-4 col-12">
+						<div class="card">
+							<div class="card-header d-flex justify-content-between align-items-end">
+								<h4 class="card-title">จำนวนทีมงานที่รับงาน</h4>
+								<div class="dropdown chart-dropdown">
+
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem3">
+										<a class="dropdown-item" href="#">Last 28 Days</a>
+										<a class="dropdown-item" href="#">Last Month</a>
+										<a class="dropdown-item" href="#">Last Year</a>
 									</div>
-									<h2 class="text-bold-700">12k</h2>
-									<p class="mb-0 line-ellipsis">Comments</p>
 								</div>
+							</div>
+							<div class="card-content">
+								<div class="card-body py-0">
+									<div id="customer-chart2"></div>
+								</div>
+								<ul class="list-group list-group-flush customer-info">
+									<li class="list-group-item d-flex justify-content-between">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-primary"></i>
+											<span class="text-bold-600">New</span>
+										</div>
+										<div class="product-result">
+											<span>890</span>
+										</div>
+									</li>
+									<li class="list-group-item d-flex justify-content-between ">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-warning"></i>
+											<span class="text-bold-600">Returning</span>
+										</div>
+										<div class="product-result">
+											<span>258</span>
+										</div>
+									</li>
+									<li class="list-group-item d-flex justify-content-between ">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-danger"></i>
+											<span class="text-bold-600">Referrals</span>
+										</div>
+										<div class="product-result">
+											<span>149</span>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-2 col-md-4 col-sm-6">
-						<div class="card text-center">
-							<div class="card-content">
-								<div class="card-body">
-									<div class="avatar bg-rgba-danger p-50 m-0 mb-1">
-										<div class="avatar-content">
-											<i class="feather icon-shopping-bag text-danger font-medium-5"></i>
-										</div>
+					<div class="col-lg-4 col-12">
+						<div class="card">
+							<div class="card-header d-flex justify-content-between align-items-end">
+								<h4 class="card-title">จำนวนทีมงานที่ไม่ได้รับงาน</h4>
+								<div class="dropdown chart-dropdown">
+
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem3">
+										<a class="dropdown-item" href="#">Last 28 Days</a>
+										<a class="dropdown-item" href="#">Last Month</a>
+										<a class="dropdown-item" href="#">Last Year</a>
 									</div>
-									<h2 class="text-bold-700">97.8k</h2>
-									<p class="mb-0 line-ellipsis">Orders</p>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-md-4 col-sm-6">
-						<div class="card text-center">
 							<div class="card-content">
-								<div class="card-body">
-									<div class="avatar bg-rgba-primary p-50 m-0 mb-1">
-										<div class="avatar-content">
-											<i class="feather icon-heart text-primary font-medium-5"></i>
-										</div>
-									</div>
-									<h2 class="text-bold-700">26.8</h2>
-									<p class="mb-0 line-ellipsis">Bookmarks</p>
+								<div class="card-body py-0">
+									<div id="customer-chart3"></div>
 								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-md-4 col-sm-6">
-						<div class="card text-center">
-							<div class="card-content">
-								<div class="card-body">
-									<div class="avatar bg-rgba-success p-50 m-0 mb-1">
-										<div class="avatar-content">
-											<i class="feather icon-award text-success font-medium-5"></i>
+								<ul class="list-group list-group-flush customer-info">
+									<li class="list-group-item d-flex justify-content-between">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-primary"></i>
+											<span class="text-bold-600">New</span>
 										</div>
-									</div>
-									<h2 class="text-bold-700">689</h2>
-									<p class="mb-0 line-ellipsis">Reviews</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-2 col-md-4 col-sm-6">
-						<div class="card text-center">
-							<div class="card-content">
-								<div class="card-body">
-									<div class="avatar bg-rgba-danger p-50 m-0 mb-1">
-										<div class="avatar-content">
-											<i class="feather icon-truck text-danger font-medium-5"></i>
+										<div class="product-result">
+											<span>890</span>
 										</div>
-									</div>
-									<h2 class="text-bold-700">2.1k</h2>
-									<p class="mb-0 line-ellipsis">Returns</p>
-								</div>
+									</li>
+									<li class="list-group-item d-flex justify-content-between ">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-warning"></i>
+											<span class="text-bold-600">Returning</span>
+										</div>
+										<div class="product-result">
+											<span>258</span>
+										</div>
+									</li>
+									<li class="list-group-item d-flex justify-content-between ">
+										<div class="series-info">
+											<i class="fa fa-circle font-small-3 text-danger"></i>
+											<span class="text-bold-600">Referrals</span>
+										</div>
+										<div class="product-result">
+											<span>149</span>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -1537,4 +1594,155 @@
 	}
 
 	setInterval(getDataFromDb3, 1000); // 1000 = 1 second
+</script>
+<script>
+	$(window).on("load", function() {
+
+		var $primary = '#7367F0';
+		var $danger = '#EA5455';
+		var $warning = '#FF9F43';
+		var $info = '#00cfe8';
+		var $success = '#00db89';
+		var $primary_light = '#9c8cfc';
+		var $warning_light = '#FFC085';
+		var $danger_light = '#f29292';
+		var $info_light = '#1edec5';
+		var $strok_color = '#b9c3cd';
+		var $label_color = '#e7eef7';
+		var $purple = '#df87f2';
+		var $white = '#fff';
+
+
+		var customerChartoptions = {
+			chart: {
+				type: 'pie',
+				height: 325,
+				dropShadow: {
+					enabled: false,
+					blur: 5,
+					left: 1,
+					top: 1,
+					opacity: 0.2
+				},
+				toolbar: {
+					show: false
+				}
+			},
+			labels: ['New', 'Returning', 'Referrals'],
+			series: [690, 258, 149],
+			dataLabels: {
+				enabled: false
+			},
+			legend: {
+				show: false
+			},
+			stroke: {
+				width: 5
+			},
+			colors: [$primary, $warning, $danger],
+			fill: {
+				type: 'gradient',
+				gradient: {
+					gradientToColors: [$primary_light, $warning_light, $danger_light]
+				}
+			}
+		}
+
+		var customerChart = new ApexCharts(
+			document.querySelector("#customer-chart"),
+			customerChartoptions
+		);
+
+		customerChart.render();
+
+		// Sales Chart
+		// -----------------------------
+
+		var customerChartoptions2 = {
+			chart: {
+				type: 'pie',
+				height: 325,
+				dropShadow: {
+					enabled: false,
+					blur: 5,
+					left: 1,
+					top: 1,
+					opacity: 0.2
+				},
+				toolbar: {
+					show: false
+				}
+			},
+			labels: ['New', 'Returning', 'Referrals'],
+			series: [690, 258, 149],
+			dataLabels: {
+				enabled: false
+			},
+			legend: {
+				show: false
+			},
+			stroke: {
+				width: 5
+			},
+			colors: [$primary, $warning, $danger],
+			fill: {
+				type: 'gradient',
+				gradient: {
+					gradientToColors: [$primary_light, $warning_light, $danger_light]
+				}
+			}
+		}
+
+		var customerChart = new ApexCharts(
+			document.querySelector("#customer-chart2"),
+			customerChartoptions2
+		);
+
+		customerChart.render();
+
+		
+		var customerChartoptions3 = {
+			chart: {
+				type: 'pie',
+				height: 325,
+				dropShadow: {
+					enabled: false,
+					blur: 5,
+					left: 1,
+					top: 1,
+					opacity: 0.2
+				},
+				toolbar: {
+					show: false
+				}
+			},
+			labels: ['New', 'Returning', 'Referrals'],
+			series: [690, 258, 149],
+			dataLabels: {
+				enabled: false
+			},
+			legend: {
+				show: false
+			},
+			stroke: {
+				width: 5
+			},
+			colors: [$primary, $warning, $danger],
+			fill: {
+				type: 'gradient',
+				gradient: {
+					gradientToColors: [$primary_light, $warning_light, $danger_light]
+				}
+			}
+		}
+
+		var customerChart = new ApexCharts(
+			document.querySelector("#customer-chart3"),
+			customerChartoptions3
+		);
+
+		customerChart.render();
+	});
+	// Sales Chart
+	// -----------------------------
 </script>

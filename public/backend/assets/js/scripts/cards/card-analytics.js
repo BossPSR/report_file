@@ -130,48 +130,48 @@ $(window).on("load", function(){
     // Customer Chart
     // -----------------------------
 
-    var customerChartoptions = {
-        chart: {
-            type: 'pie',
-            height: 325,
-            dropShadow: {
-                enabled: false,
-                blur: 5,
-                left: 1,
-                top: 1,
-                opacity: 0.2
-            },
-            toolbar: {
-                show: false
-            }
-        },
-        labels: ['New', 'Returning', 'Referrals'],
-        series: [690, 258, 149],
-        dataLabels: {
-            enabled: false
-        },
-        legend: { show: false },
-        stroke: {
-            width: 5
-        },
-        colors: [$primary, $warning, $danger],
-        fill: {
-            type: 'gradient',
-            gradient: {
-                gradientToColors: [$primary_light, $warning_light, $danger_light]
-            }
-        }
-    }
+    // var customerChartoptions = {
+    //     chart: {
+    //         type: 'pie',
+    //         height: 325,
+    //         dropShadow: {
+    //             enabled: false,
+    //             blur: 5,
+    //             left: 1,
+    //             top: 1,
+    //             opacity: 0.2
+    //         },
+    //         toolbar: {
+    //             show: false
+    //         }
+    //     },
+    //     labels: ['New', 'Returning', 'Referrals'],
+    //     series: [690, 258, 149],
+    //     dataLabels: {
+    //         enabled: false
+    //     },
+    //     legend: { show: false },
+    //     stroke: {
+    //         width: 5
+    //     },
+    //     colors: [$primary, $warning, $danger],
+    //     fill: {
+    //         type: 'gradient',
+    //         gradient: {
+    //             gradientToColors: [$primary_light, $warning_light, $danger_light]
+    //         }
+    //     }
+    // }
 
-    var customerChart = new ApexCharts(
-        document.querySelector("#customer-chart"),
-        customerChartoptions
-    );
+    // var customerChart = new ApexCharts(
+    //     document.querySelector("#customer-chart"),
+    //     customerChartoptions
+    // );
 
-    customerChart.render();
+    // customerChart.render();
 
-    // Sales Chart
-    // -----------------------------
+    // // Sales Chart
+    // // -----------------------------
 
     var salesChartoptions = {
         chart: {
