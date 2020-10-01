@@ -138,33 +138,41 @@
 									<div id="customer-chart"></div>
 								</div>
 								<ul class="list-group list-group-flush customer-info">
-									<li class="list-group-item d-flex justify-content-between">
-										<div class="series-info">
-											<i class="fa fa-circle font-small-3 text-primary"></i>
-											<span class="text-bold-600">New</span>
-										</div>
-										<div class="product-result">
-											<span>890</span>
-										</div>
-									</li>
-									<li class="list-group-item d-flex justify-content-between ">
-										<div class="series-info">
-											<i class="fa fa-circle font-small-3 text-warning"></i>
-											<span class="text-bold-600">Returning</span>
-										</div>
-										<div class="product-result">
-											<span>258</span>
-										</div>
-									</li>
-									<li class="list-group-item d-flex justify-content-between ">
-										<div class="series-info">
-											<i class="fa fa-circle font-small-3 text-danger"></i>
-											<span class="text-bold-600">Referrals</span>
-										</div>
-										<div class="product-result">
-											<span>149</span>
-										</div>
-									</li>
+									<?php
+									$item_postionName = [];
+									$item_postionNum = [];
+									$item_postionColor = [];
+									foreach ($item_postion as $key => $itemPostion) {
+									?>
+										<li class="list-group-item d-flex justify-content-between">
+											<div class="series-info">
+
+												<i class="fa fa-circle font-small-3" style="color:<?php echo $itemPostion['color_item']; ?>"></i>
+												<span class="text-bold-600"><?php echo $itemPostion['name_item']; ?></span>
+											</div>
+											<?php
+											$ii = 0;
+											$this->db->where('position', $itemPostion['id']);
+											$this->db->group_by('order_id');
+											$item_postionNum = $this->db->get('tbl_upload_team')->result_array();
+											foreach ($item_postionNum as $item_postionNum) {
+												$ii += 1;
+											}
+											?>
+											<div class="product-result">
+												<span><?php echo $ii; ?></span>
+											</div>
+										</li>
+									<?php
+										$item_postionName[] = $itemPostion['name_item'];
+										$item_postionNum[] = $ii;
+										$item_postionColor[] = $itemPostion['color_item'];
+									}
+
+									?>
+
+
+
 								</ul>
 							</div>
 						</div>
@@ -236,6 +244,7 @@
 									<div id="customer-chart3"></div>
 								</div>
 								<ul class="list-group list-group-flush customer-info">
+
 									<li class="list-group-item d-flex justify-content-between">
 										<div class="series-info">
 											<i class="fa fa-circle font-small-3 text-primary"></i>
@@ -245,6 +254,7 @@
 											<span>890</span>
 										</div>
 									</li>
+
 									<li class="list-group-item d-flex justify-content-between ">
 										<div class="series-info">
 											<i class="fa fa-circle font-small-3 text-warning"></i>
@@ -1613,6 +1623,34 @@
 		var $white = '#fff';
 
 
+		var item_postionName = [];
+		var item_postionNum = [];
+		var item_postionColor = [];
+
+		<?php
+			foreach ($item_postionName as $item_postionName) {
+		?>
+				item_postionName.push('<?php echo $item_postionName; ?>');
+		<?php
+			}
+		?>
+
+		<?php
+			foreach ($item_postionNum as $item_postionNum) {
+		?>
+				item_postionNum.push(<?php echo $item_postionNum; ?>);
+		<?php
+			}
+		?>
+
+		<?php
+			foreach ($item_postionColor as $item_postionColor) {
+		?>
+				item_postionColor.push('<?php echo $item_postionColor; ?>');
+		<?php
+			}
+		?>
+		
 		var customerChartoptions = {
 			chart: {
 				type: 'pie',
@@ -1700,7 +1738,7 @@
 
 		customerChart.render();
 
-		
+
 		var customerChartoptions3 = {
 			chart: {
 				type: 'pie',
