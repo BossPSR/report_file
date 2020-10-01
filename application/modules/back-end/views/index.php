@@ -123,7 +123,7 @@
 					<div class="col-lg-4 col-12">
 						<div class="card">
 							<div class="card-header d-flex justify-content-between align-items-end">
-								<h4 class="card-title">Customers</h4>
+								<h4 class="card-title">ตำแหน่งงาน</h4>
 								<div class="dropdown chart-dropdown">
 
 									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem3">
@@ -172,7 +172,7 @@
 					<div class="col-lg-4 col-12">
 						<div class="card">
 							<div class="card-header d-flex justify-content-between align-items-end">
-								<h4 class="card-title">Customers</h4>
+								<h4 class="card-title">จำนวนทีมงานที่รับงาน</h4>
 								<div class="dropdown chart-dropdown">
 
 									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem3">
@@ -221,7 +221,7 @@
 					<div class="col-lg-4 col-12">
 						<div class="card">
 							<div class="card-header d-flex justify-content-between align-items-end">
-								<h4 class="card-title">Customers</h4>
+								<h4 class="card-title">จำนวนทีมงานที่ไม่ได้รับงาน</h4>
 								<div class="dropdown chart-dropdown">
 
 									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem3">
