@@ -539,7 +539,7 @@
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-
+<script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 <script>
     AOS.init();
 </script>

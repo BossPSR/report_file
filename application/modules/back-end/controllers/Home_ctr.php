@@ -342,8 +342,6 @@ class Home_ctr extends CI_Controller
 
 			/////////////////////////////////////////////////////
 			//ตำแหน่งงานทั้งหมด
-			$this->db->join('tbl_upload_team', 'tbl_item_position.id = tbl_upload_team.position', 'left');
-			$this->db->group_by('tbl_item_position.id');
 			$item_postion = $this->db->get('tbl_item_position')->result_array();
 
 			//ตำแหน่งงานที่รับงาน
@@ -358,7 +356,11 @@ class Home_ctr extends CI_Controller
 			$this->db->join('tbl_upload_team', 'tbl_item_position.id = tbl_upload_team.position', 'left');
 			$this->db->where('tbl_upload_team.teamId','');
 			$this->db->group_by('tbl_item_position.id');
-			$item_confilm = $this->db->get('tbl_item_position')->result_array();
+			$item_av = $this->db->get('tbl_item_position')->result_array();
+
+			$data['item_postion'] = $item_postion;
+			$data['item_confilm'] = $item_confilm;
+			$data['item_av'] = $item_av;
 
 
 			$this->load->view('options/header');

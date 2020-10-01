@@ -50,10 +50,10 @@
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                 <h5 class="modal-title" id="staticBackdropLabel">MY FEEDBACK</h5>
             </div>
-            <?php $fb = $this->db->get_where('tbl_feedback', ['teamId' => $teamId['IdTeam'] , 'status_feedback_read' => '0'])->row_array(); ?>
+            <?php $fb = $this->db->get_where('tbl_feedback', ['teamId' => $teamId['IdTeam'], 'status_feedback_read' => '0'])->row_array(); ?>
             <div class="modal-body">
-                <p>คุณได้รับ Feedback : <?php echo $fb['check_status'] == '0' ? 'Admin Feedback' : 'Client Feedback' ; ?> </p>
-                
+                <p>คุณได้รับ Feedback : <?php echo $fb['check_status'] == '0' ? 'Admin Feedback' : 'Client Feedback'; ?> </p>
+
                 <br>
                 <center>
                     <button class="btn btn-primary" id="status_feed">ACCEPT</button>
