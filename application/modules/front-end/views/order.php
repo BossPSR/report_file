@@ -67,7 +67,6 @@
                                 <th scope="col">Date Required</th>
                                 <th scope="col">Warranty day</th>
                                 <th scope="col">Tool</th>
-                                <th scope="col">Re feedback</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -907,11 +906,6 @@
                                                 });
                                             </script>
                                         <?php } ?>
-
-                                    </td>
-
-                                    <!-- Re feedback -->
-                                    <td>
                                         <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) : ?>
                                             <?php if ($value['status_refeedback'] == 0) : ?>
 
@@ -944,11 +938,12 @@
                                             <?php else : ?>
                                                 <button class="btn btn-secondary">Re feedback</button>
                                             <?php endif; ?>
-                                        <?php else : ?>
-                                            -
+                                       
                                         <?php endif; ?>
 
                                     </td>
+
+
 
                                 </tr>
 

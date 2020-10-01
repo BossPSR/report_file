@@ -384,11 +384,11 @@
                                                         <?php endif; ?>
                                                         <td>
 
-                                                            <?php if ($stores['status_team'] == 0) : ?>
+                                                            <!-- if ($stores['status_team'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning" style="background-color: #ffe600;color:black">Procressing</span>
-                                                            <?php elseif ($stores['status_team'] == 1) : ?>
-                                                                <span class="badge badge-pill badge-info">Complete</span>
-                                                            <?php elseif ($stores['status_delivery'] == 0) : ?>
+                                                             elseif ($stores['status_team'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-info">Complete</span> -->
+                                                            <?php if ($stores['status_delivery'] == 0) : ?>
                                                                 <span class="badge badge-pill badge-warning">Not Delivered</span>
                                                             <?php else : ?>
                                                                 <span class="badge badge-pill badge-success">Delivered</span>

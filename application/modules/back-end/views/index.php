@@ -25,7 +25,7 @@
 				</div>
 			</div>
 			<section id="dashboard-analytics">
-				
+
 				<!-- <div class="row">
                     <div class="col-3">
                         <div class="card">
@@ -118,7 +118,99 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+				</div> -->
+				<div class="row">
+					<div class="col-xl-2 col-md-4 col-sm-6">
+						<div class="card text-center">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="avatar bg-rgba-info p-50 m-0 mb-1">
+										<div class="avatar-content">
+											<i class="feather icon-eye text-info font-medium-5"></i>
+										</div>
+									</div>
+									<h2 class="text-bold-700">36.9k</h2>
+									<p class="mb-0 line-ellipsis">Views</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-md-4 col-sm-6">
+						<div class="card text-center">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="avatar bg-rgba-warning p-50 m-0 mb-1">
+										<div class="avatar-content">
+											<i class="feather icon-message-square text-warning font-medium-5"></i>
+										</div>
+									</div>
+									<h2 class="text-bold-700">12k</h2>
+									<p class="mb-0 line-ellipsis">Comments</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-md-4 col-sm-6">
+						<div class="card text-center">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="avatar bg-rgba-danger p-50 m-0 mb-1">
+										<div class="avatar-content">
+											<i class="feather icon-shopping-bag text-danger font-medium-5"></i>
+										</div>
+									</div>
+									<h2 class="text-bold-700">97.8k</h2>
+									<p class="mb-0 line-ellipsis">Orders</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-md-4 col-sm-6">
+						<div class="card text-center">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="avatar bg-rgba-primary p-50 m-0 mb-1">
+										<div class="avatar-content">
+											<i class="feather icon-heart text-primary font-medium-5"></i>
+										</div>
+									</div>
+									<h2 class="text-bold-700">26.8</h2>
+									<p class="mb-0 line-ellipsis">Bookmarks</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-md-4 col-sm-6">
+						<div class="card text-center">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="avatar bg-rgba-success p-50 m-0 mb-1">
+										<div class="avatar-content">
+											<i class="feather icon-award text-success font-medium-5"></i>
+										</div>
+									</div>
+									<h2 class="text-bold-700">689</h2>
+									<p class="mb-0 line-ellipsis">Reviews</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2 col-md-4 col-sm-6">
+						<div class="card text-center">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="avatar bg-rgba-danger p-50 m-0 mb-1">
+										<div class="avatar-content">
+											<i class="feather icon-truck text-danger font-medium-5"></i>
+										</div>
+									</div>
+									<h2 class="text-bold-700">2.1k</h2>
+									<p class="mb-0 line-ellipsis">Returns</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<div class="row">
 					<div class="col-12">

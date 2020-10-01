@@ -444,59 +444,120 @@ class Book_ctr extends CI_Controller
         $dateUP         = date("Y-m-d", strtotime("+60 day"));
         $time_withdraw  = date("Y-m-d", strtotime("+65 day"));
 
-        $this->db->where('order_id', $id);
-        $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'end_time_withdraw' => $time_withdraw,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
-        foreach ($dm_id as $key => $dm_id) {
-
-            $this->db->where('id_doc', $dm_id);
-            $this->db->update('tbl_upload_main_search', ['update_at' => date('Y-m-d H:i:s')]);
-        }
 
         $user_email = $this->db->get_where('tbl_upload_order', ['order_id' => $id])->row_array();
         $user_email_send  = $this->db->get_where('tbl_user', ['idUser' => $user_email['userId']])->row_array();
 
-        if ($user_email_send['cash'] > $price_save) {
-            $userdb = [
-                'cash' => $user_email_send['cash'] - $price_save
-            ];
-            $this->db->where('idUser', $user_email['userId']);
-            $this->db->update('tbl_user', $userdb);
+        if ($user_email_send['cash'] >= $user_email['price_file']) {
+
+            if ($user_email_send['cash'] > $price_save) {
+                $userdb = [
+                    'cash' => $user_email_send['cash'] - $price_save
+                ];
+                $this->db->where('idUser', $user_email['userId']);
+                $this->db->update('tbl_user', $userdb);
+            } else {
+                $this->session->set_flashdata('del_ss2', 'Not successfully send not enough money ');
+                return redirect('Bookmark');
+            }
+
+            $this->db->where('order_id', $id);
+            $this->db->update('tbl_upload_order', ['update_at' => date('Y-m-d H:i:s'), 'end_time' => $dateUP, 'end_time_withdraw' => $time_withdraw,  'status_delivery' => 1, 'notify_team' => 0, 'notify_user' => 0]);
+            foreach ($dm_id as $key => $dm_id) {
+
+                $this->db->where('id_doc', $dm_id);
+                $this->db->update('tbl_upload_main_search', ['update_at' => date('Y-m-d H:i:s')]);
+            }
+
+
+            if (!empty($order_id) || !empty($order_team)) {
+                $this->db->where('order_id_d', $id);
+                $this->db->update('tbl_delivery_file', ['check_new_d' => '0']);
+            }
+
+            if (!empty($order_id)) {
+                foreach ($order_id as $key => $order_id) {
+                    $order = $this->db->get_where('tbl_upload_store', ['id' => $order_id])->row_array();
+                    $insert01 = [
+                        'order_id_d'    => $id,
+                        'file_name_d'   => $order['file_name'],
+                        'path_d'        => $order['path'],
+                        'create_at_d'   => date('Y-m-d H:i:s'),
+                    ];
+                    $this->db->insert('tbl_delivery_file', $insert01);
+                }
+            }
+
+            if (!empty($order_team)) {
+                foreach ($order_team as $key => $order_team) {
+                    $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
+                    $insert02 = [
+                        'order_id_d'    => $id,
+                        'file_name_d'   => $orderT['file_name'],
+                        'path_d'        => $orderT['path'],
+                        'create_at_d'   => date('Y-m-d H:i:s'),
+                    ];
+                    $this->db->insert('tbl_delivery_file', $insert02);
+                }
+            }
+
+            $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
+
+            $message  = '<center>';
+            $message .= '<div style="max-width:800px;">';
+            $message .= '<div class="content" >';
+            $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+            $message .= 'คุณได้ทำการชำระในขั้นตอนสุดท้ายของการส่งเอกสารจาก admin ส่งมาถึงท่านเรียบร้อยแล้ว .';
+            $message .= 'ขอขอบคุณที่เลือกใช้บริการของเรา report-file .';
+            $message .= '</div>';
+            $message .= '<div class="row">';
+            $message .= '<p>Hey "' . $user_email_send['username'] . '",</p>';
+            $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
+            $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+            $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+            $message .= '<p>Check below for your order details.</p><hr>';
+            $message .= '<p>Order details ("' . $id  . '")</p>';
+
+
+            foreach ($order_id as $key => $order_id) {
+                $order = $this->db->get_where('tbl_upload_main_search_sub', ['id' => $order_id])->row_array();
+                $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $order['path'] . '">' . $order['file_name'] . '</a>';
+                $message .= '<br>';
+            }
+
+            foreach ($order_team as $key => $order_team) {
+                $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
+                $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $orderT['path'] . '">' . $orderT['file_name'] . '</a>';
+                $message .= '<br>';
+            }
+
+            $message .= '</center>';
         } else {
-            $this->session->set_flashdata('del_ss2', 'Not successfully send not enough money ');
-            return redirect('Bookmark');
+
+            $subject = '(แจ้งเตือน) เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ยอดเงินของคุณไม่เพียงพอให้หักค่าเอกสาร กรุณาเติมเงินด้วยค่ะ  ';
+
+            $message = '<center>';
+            $message .= '<div style="max-width:800px;">';
+            $message .= '<div class="content" >';
+            $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+            $message .= 'ยอดเงินของคุณไม่เพียงพอ.';
+            $message .= '</div>';
+            $message .= '<div class="row">';
+            if (empty($user_email['email'])) {
+                $message .= '<p>Hey "' . $user_email_send['username'] . '",</p>';
+            } else {
+                $message .= '<p>Hey "' . $user_email['Username'] . '",</p>';
+            }
+            $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
+            $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+            $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+            $message .= '<p>Check below for your order details.</p><hr>';
+            $message .= '<p>Order details ("' . $id  . '")</p>';
+            $message .= '<p>You can top up into the system here.</p>';
+            $message .= '<p style="color: #0063d1;">http://www.ip-soft.co.th/ipsoft/my-deposit</p><br />';
+
+            $message .= '</center>';
         }
-
-        $subject = 'เอกสารของคุณที่สั่งซื้อไว้ จาก www.report-file.com ';
-
-        $message  = '<center>';
-        $message .= '<div style="max-width:800px;">';
-        $message .= '<div class="content" >';
-        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-        $message .= 'คุณได้ทำการชำระในขั้นตอนสุดท้ายของการส่งเอกสารจาก admin ส่งมาถึงท่านเรียบร้อยแล้ว .';
-        $message .= 'ขอขอบคุณที่เลือกใช้บริการของเรา report-file .';
-        $message .= '</div>';
-        $message .= '<div class="row">';
-        $message .= '<p>Hey "' . $user_email_send['username'] . '",</p>';
-        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $id  . '"</span></p>';
-        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
-        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
-        $message .= '<p>Check below for your order details.</p><hr>';
-        $message .= '<p>Order details ("' . $id  . '")</p>';
-
-
-        foreach ($order_id as $key => $order_id) {
-            $order = $this->db->get_where('tbl_upload_main_search_sub', ['id' => $order_id])->row_array();
-            $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $order['path'] . '">' . $order['file_name'] . '</a>';
-            $message .= '<br>';
-        }
-
-        foreach ($order_team as $key => $order_team) {
-            $orderT = $this->db->get_where('tbl_upload_order_team', ['id' => $order_team])->row_array();
-            $message .= '<a href="http://ip-soft.co.th/ipsoft/' . $orderT['path'] . '">' . $orderT['file_name'] . '</a>';
-            $message .= '<br>';
-        }
-
-        $message .= '</center>';
 
 
 
