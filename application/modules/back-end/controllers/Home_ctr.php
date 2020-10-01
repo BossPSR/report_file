@@ -82,7 +82,7 @@ class Home_ctr extends CI_Controller
 			$processingList[4] = $result_new_order;
 
 			//Feedback All
-			
+
 			$this->db->join('tbl_upload_order', 'tbl_feedback.order_id = tbl_upload_order.order_id', 'left');
 			$this->db->group_by('tbl_upload_order.order_id');
 			$up_feedbackall = $this->db->get('tbl_feedback')->result_array();
@@ -340,6 +340,27 @@ class Home_ctr extends CI_Controller
 			$data['approvedList'] = $approvedList;
 			$data['not_approvedList'] = $not_approvedList;
 
+			/////////////////////////////////////////////////////
+			//ตำแหน่งงานทั้งหมด
+			$this->db->join('tbl_upload_team', 'tbl_item_position.id = tbl_upload_team.position', 'left');
+			$this->db->group_by('tbl_item_position.id');
+			$item_postion = $this->db->get('tbl_item_position')->result_array();
+
+			//ตำแหน่งงานที่รับงาน
+			$this->db->join('tbl_upload_team', 'tbl_item_position.id = tbl_upload_team.position', 'left');
+			$this->db->where('tbl_upload_team.teamId !=','');
+			$this->db->where('tbl_upload_team.status !=','5');
+			$this->db->group_by('tbl_item_position.id');
+			$item_confilm = $this->db->get('tbl_item_position')->result_array();
+			// print_r($item_confilm);
+
+			//ตำแหน่งงานทีมงานที่ว่างงานอยู่
+			$this->db->join('tbl_upload_team', 'tbl_item_position.id = tbl_upload_team.position', 'left');
+			$this->db->where('tbl_upload_team.teamId','');
+			$this->db->group_by('tbl_item_position.id');
+			$item_confilm = $this->db->get('tbl_item_position')->result_array();
+
+
 			$this->load->view('options/header');
 			$this->load->view('index', $data);
 			$this->load->view('options/footer');
@@ -406,164 +427,164 @@ class Home_ctr extends CI_Controller
 		$upload_order00  	= $this->db->get_where('tbl_upload_order', ['order_id' => $order])->result_array();
 		$upload_order  		= $this->db->get_where('tbl_upload_order', ['order_id' => $order])->row_array();
 
-					  $this->db->where('order_id', $order);
-		$orderdb02  = $this->db->update('tbl_upload_order', ['created_at_buy' => date("Y-m-d H:i:s" ) , 'check_time_not_pay' => $status  ]);
+		$this->db->where('order_id', $order);
+		$orderdb02  = $this->db->update('tbl_upload_order', ['created_at_buy' => date("Y-m-d H:i:s"), 'check_time_not_pay' => $status]);
 
 		$user = $this->db->get_where('tbl_user', ['idUser' => $upload_order['userId']])->row_array();
 
-        if ($user['score'] >= '100') {
-            $discount = 10;
-        } else {
-            $discount = 0;
-        }
-
-        $priceDis = $upload_order['price_file'] - (($upload_order['price_file'] * $discount) / 100);
-
-        $uploads = [];
-        $numFile = 0;
-        foreach ($upload_order00 as $uploadOrder) {
-            $uploads[] = $uploadOrder['file_name'];
-            $numFile += 1;
+		if ($user['score'] >= '100') {
+			$discount = 10;
+		} else {
+			$discount = 0;
 		}
-		
+
+		$priceDis = $upload_order['price_file'] - (($upload_order['price_file'] * $discount) / 100);
+
+		$uploads = [];
+		$numFile = 0;
+		foreach ($upload_order00 as $uploadOrder) {
+			$uploads[] = $uploadOrder['file_name'];
+			$numFile += 1;
+		}
+
 		$subject = 'System notification Please pay for the pending order. ';
 
-        $message  = '<center>';
-        $message .= '<div style="max-width:800px;">';
-        $message .= '<div class="content" >';
-        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-        $message .= 'Your order has been placed';
-        $message .= '</div>';
-        $message .= '<div class="row">';
-        $message .= '<p>Hey "' . $user['username'] . '",</p>';
-        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $upload_order['order_id'] . '"</span></p>';
-        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
-        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
-        $message .= '<p>Check below for your order details.</p><hr>';
+		$message  = '<center>';
+		$message .= '<div style="max-width:800px;">';
+		$message .= '<div class="content" >';
+		$message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+		$message .= 'Your order has been placed';
+		$message .= '</div>';
+		$message .= '<div class="row">';
+		$message .= '<p>Hey "' . $user['username'] . '",</p>';
+		$message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $upload_order['order_id'] . '"</span></p>';
+		$message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+		$message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+		$message .= '<p>Check below for your order details.</p><hr>';
 
 
-        $message .= '<table style="font-size: 14px;border="0">';
+		$message .= '<table style="font-size: 14px;border="0">';
 
-        // $message .= '<tr>';
-        // $message .= '<td rowspan="' . $numFile . '">';
-        // $message .= ' File Name : ';
-        // $message .= '</td>';
-        // $message .= '<td>';
-        // $message .= ' 1.' . $uploads[0] . ' ';
-        // $message .= '</td>';
-        // $message .= '</tr>';
+		// $message .= '<tr>';
+		// $message .= '<td rowspan="' . $numFile . '">';
+		// $message .= ' File Name : ';
+		// $message .= '</td>';
+		// $message .= '<td>';
+		// $message .= ' 1.' . $uploads[0] . ' ';
+		// $message .= '</td>';
+		// $message .= '</tr>';
 
-        $num_list = 1;
-        foreach ($uploads as $numKey => $upload) {
-            if ($numKey == 0) {
-                continue;
-            }
-            $num_list += 1;
-            $message .= '<tr>';
-            $message .= '<td>';
-            $message .=  ' ' . $num_list . '.' . $upload . ' ';
-            $message .= '</td>';
-            $message .= '</tr>';
-        }
+		$num_list = 1;
+		foreach ($uploads as $numKey => $upload) {
+			if ($numKey == 0) {
+				continue;
+			}
+			$num_list += 1;
+			$message .= '<tr>';
+			$message .= '<td>';
+			$message .=  ' ' . $num_list . '.' . $upload . ' ';
+			$message .= '</td>';
+			$message .= '</tr>';
+		}
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Order ID : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order['order_id'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Order ID : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order['order_id'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Date required : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order['date_required'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Date required : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order['date_required'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Price :';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' $' . $upload_order['price_file'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Price :';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' $' . $upload_order['price_file'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Discount : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $discount . '% ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Discount : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $discount . '% ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Customer ID : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order['userId'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Customer ID : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order['userId'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Warranty  : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order['end_time'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Warranty  : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order['end_time'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '</table>';
-
-
-
-        $message .= '<div>';
-        $message .= '<div style="text-align: center; margin:15px auto; font-size:25px;    padding-bottom: 22px;">';
-        $message .= '<a class="btn btn-info" style=" margin-right: 10px ; text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #ffffff;background-color: #05786d;border: 1px solid #05786d;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order['order_id'] . '">';
-        $message .= 'Pay $' . $priceDis . ' To Start';
-        $message .= '</a>';
-        $message .= '<a class="btn btn-info" style="     text-decoration: none;   padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
-        $message .= ' เติมเงิน ';
-        $message .= '</a>';
-        $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</center>';
-
-        //config email settings
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'smtp.gmail.com';
-        $config['smtp_port'] = '2002';
-        $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
-        $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
-        $config['wordwrap'] = 'TRUE';
-        $config['smtp_crypto'] = 'tls';
-        $config['newline'] = "\r\n";
+		$message .= '</table>';
 
 
-        //$file_path = 'uploads/' . $file_name;
-        // $this->load->library('email', $config);
-        // $this->email->set_newline("\r\n");
-        // $this->email->from('infinityp.soft@gmail.com');
-        // $this->email->to($user['email']);
-        // $this->email->subject($subject);
-        // $this->email->message($message);
-        // $this->email->set_mailtype('html');
 
-        // if ($this->email->send() == true) {
-        //     $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
-        // } else {
-        //     $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
-        // }
+		$message .= '<div>';
+		$message .= '<div style="text-align: center; margin:15px auto; font-size:25px;    padding-bottom: 22px;">';
+		$message .= '<a class="btn btn-info" style=" margin-right: 10px ; text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #ffffff;background-color: #05786d;border: 1px solid #05786d;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order['order_id'] . '">';
+		$message .= 'Pay $' . $priceDis . ' To Start';
+		$message .= '</a>';
+		$message .= '<a class="btn btn-info" style="     text-decoration: none;   padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
+		$message .= ' เติมเงิน ';
+		$message .= '</a>';
+		$message .= '</div>';
+		$message .= '</div>';
+		$message .= '</div>';
+		$message .= '</center>';
+
+		//config email settings
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'smtp.gmail.com';
+		$config['smtp_port'] = '2002';
+		$config['smtp_user'] = 'infinityp.soft@gmail.com';
+		$config['smtp_pass'] = 'infinityP23';  //sender's password
+		$config['mailtype'] = 'html';
+		$config['charset'] = 'utf-8';
+		$config['wordwrap'] = 'TRUE';
+		$config['smtp_crypto'] = 'tls';
+		$config['newline'] = "\r\n";
+
+
+		//$file_path = 'uploads/' . $file_name;
+		// $this->load->library('email', $config);
+		// $this->email->set_newline("\r\n");
+		// $this->email->from('infinityp.soft@gmail.com');
+		// $this->email->to($user['email']);
+		// $this->email->subject($subject);
+		// $this->email->message($message);
+		// $this->email->set_mailtype('html');
+
+		// if ($this->email->send() == true) {
+		//     $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
+		// } else {
+		//     $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
+		// }
 	}
 
 	// check_first_24
@@ -574,163 +595,163 @@ class Home_ctr extends CI_Controller
 		$status 	= $this->input->post('status');
 		$upload_order  	= $this->db->get_where('tbl_upload_order', ['order_id' => $order])->result_array();
 
-					  $this->db->where('order_id', $order);
-		$orderdb02  = $this->db->update('tbl_upload_order', ['created_at_buy' => date("Y-m-d H:i:s" ) , 'check_time_not_pay' => $status  ]);
+		$this->db->where('order_id', $order);
+		$orderdb02  = $this->db->update('tbl_upload_order', ['created_at_buy' => date("Y-m-d H:i:s"), 'check_time_not_pay' => $status]);
 
 		$user = $this->db->get_where('tbl_user', ['idUser' => $upload_order[0]['userId']])->row_array();
 
-        if ($user['score'] >= '100') {
-            $discount = 10;
-        } else {
-            $discount = 0;
-        }
-
-        $priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
-
-        $uploads = [];
-        $numFile = 0;
-        foreach ($upload_order as $uploadOrder) {
-            $uploads[] = $uploadOrder['file_name'];
-            $numFile += 1;
+		if ($user['score'] >= '100') {
+			$discount = 10;
+		} else {
+			$discount = 0;
 		}
-		
+
+		$priceDis = $upload_order[0]['price_file'] - (($upload_order[0]['price_file'] * $discount) / 100);
+
+		$uploads = [];
+		$numFile = 0;
+		foreach ($upload_order as $uploadOrder) {
+			$uploads[] = $uploadOrder['file_name'];
+			$numFile += 1;
+		}
+
 		$subject = 'System notification Please pay for the pending order. ';
 
-        $message  = '<center>';
-        $message .= '<div style="max-width:800px;">';
-        $message .= '<div class="content" >';
-        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
-        $message .= 'Your order has been placed';
-        $message .= '</div>';
-        $message .= '<div class="row">';
-        $message .= '<p>Hey "' . $user['username'] . '",</p>';
-        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $upload_order[0]['order_id'] . '"</span></p>';
-        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
-        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
-        $message .= '<p>Check below for your order details.</p><hr>';
+		$message  = '<center>';
+		$message .= '<div style="max-width:800px;">';
+		$message .= '<div class="content" >';
+		$message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+		$message .= 'Your order has been placed';
+		$message .= '</div>';
+		$message .= '<div class="row">';
+		$message .= '<p>Hey "' . $user['username'] . '",</p>';
+		$message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $upload_order[0]['order_id'] . '"</span></p>';
+		$message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+		$message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+		$message .= '<p>Check below for your order details.</p><hr>';
 
 
-        $message .= '<table style="font-size: 14px;border="0">';
+		$message .= '<table style="font-size: 14px;border="0">';
 
-        $message .= '<tr>';
-        $message .= '<td rowspan="' . $numFile . '">';
-        $message .= ' File Name : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' 1.' . $uploads[0] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td rowspan="' . $numFile . '">';
+		$message .= ' File Name : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' 1.' . $uploads[0] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $num_list = 1;
-        foreach ($uploads as $numKey => $upload) {
-            if ($numKey == 0) {
-                continue;
-            }
-            $num_list += 1;
-            $message .= '<tr>';
-            $message .= '<td>';
-            $message .=  ' ' . $num_list . '.' . $upload . ' ';
-            $message .= '</td>';
-            $message .= '</tr>';
-        }
+		$num_list = 1;
+		foreach ($uploads as $numKey => $upload) {
+			if ($numKey == 0) {
+				continue;
+			}
+			$num_list += 1;
+			$message .= '<tr>';
+			$message .= '<td>';
+			$message .=  ' ' . $num_list . '.' . $upload . ' ';
+			$message .= '</td>';
+			$message .= '</tr>';
+		}
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Order ID : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order[0]['order_id'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Order ID : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order[0]['order_id'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Date required : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order[0]['date_required'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Date required : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order[0]['date_required'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Price :';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' $' . $upload_order[0]['price_file'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Price :';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' $' . $upload_order[0]['price_file'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Discount : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $discount . '% ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Discount : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $discount . '% ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Customer ID : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order[0]['userId'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Customer ID : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order[0]['userId'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '<tr>';
-        $message .= '<td>';
-        $message .= ' Warranty  : ';
-        $message .= '</td>';
-        $message .= '<td>';
-        $message .= ' ' . $upload_order[0]['end_time'] . ' ';
-        $message .= '</td>';
-        $message .= '</tr>';
+		$message .= '<tr>';
+		$message .= '<td>';
+		$message .= ' Warranty  : ';
+		$message .= '</td>';
+		$message .= '<td>';
+		$message .= ' ' . $upload_order[0]['end_time'] . ' ';
+		$message .= '</td>';
+		$message .= '</tr>';
 
-        $message .= '</table>';
-
-
-
-        $message .= '<div>';
-        $message .= '<div style="text-align: center; margin:15px auto; font-size:25px;    padding-bottom: 22px;">';
-        $message .= '<a class="btn btn-info" style=" margin-right: 10px ; text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #ffffff;background-color: #05786d;border: 1px solid #05786d;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order[0]['order_id'] . '">';
-        $message .= 'Pay $' . $priceDis . ' To Start';
-        $message .= '</a>';
-        $message .= '<a class="btn btn-info" style="     text-decoration: none;   padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
-        $message .= ' เติมเงิน ';
-        $message .= '</a>';
-        $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</div>';
-        $message .= '</center>';
-
-        //config email settings
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'smtp.gmail.com';
-        $config['smtp_port'] = '2002';
-        $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
-        $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
-        $config['wordwrap'] = 'TRUE';
-        $config['smtp_crypto'] = 'tls';
-        $config['newline'] = "\r\n";
+		$message .= '</table>';
 
 
-        //$file_path = 'uploads/' . $file_name;
-        // $this->load->library('email', $config);
-        // $this->email->set_newline("\r\n");
-        // $this->email->from('infinityp.soft@gmail.com');
-        // $this->email->to($user['email']);
-        // $this->email->subject($subject);
-        // $this->email->message($message);
-        // $this->email->set_mailtype('html');
 
-        // if ($this->email->send() == true) {
-        //     $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
-        // } else {
-        //     $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
-        // }
+		$message .= '<div>';
+		$message .= '<div style="text-align: center; margin:15px auto; font-size:25px;    padding-bottom: 22px;">';
+		$message .= '<a class="btn btn-info" style=" margin-right: 10px ; text-decoration: none;padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #ffffff;background-color: #05786d;border: 1px solid #05786d;" href="https://www.ip-soft.co.th/ipsoft/payment_email?order_id=' . $upload_order[0]['order_id'] . '">';
+		$message .= 'Pay $' . $priceDis . ' To Start';
+		$message .= '</a>';
+		$message .= '<a class="btn btn-info" style="     text-decoration: none;   padding: 12px 30px;border-radius: 5px;width: 300px;font-size: 18px;color: #000000;background-color: #ffda00;border: 1px solid #ffc03f;" href="https://www.ip-soft.co.th/ipsoft/my-deposit">';
+		$message .= ' เติมเงิน ';
+		$message .= '</a>';
+		$message .= '</div>';
+		$message .= '</div>';
+		$message .= '</div>';
+		$message .= '</center>';
+
+		//config email settings
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'smtp.gmail.com';
+		$config['smtp_port'] = '2002';
+		$config['smtp_user'] = 'infinityp.soft@gmail.com';
+		$config['smtp_pass'] = 'infinityP23';  //sender's password
+		$config['mailtype'] = 'html';
+		$config['charset'] = 'utf-8';
+		$config['wordwrap'] = 'TRUE';
+		$config['smtp_crypto'] = 'tls';
+		$config['newline'] = "\r\n";
+
+
+		//$file_path = 'uploads/' . $file_name;
+		// $this->load->library('email', $config);
+		// $this->email->set_newline("\r\n");
+		// $this->email->from('infinityp.soft@gmail.com');
+		// $this->email->to($user['email']);
+		// $this->email->subject($subject);
+		// $this->email->message($message);
+		// $this->email->set_mailtype('html');
+
+		// if ($this->email->send() == true) {
+		//     $this->session->set_flashdata('save_ss2', 'Successfully Update email ST information !!.');
+		// } else {
+		//     $this->session->set_flashdata('del_ss2', 'Not Successfully Update email ST information');
+		// }
 	}
 }
