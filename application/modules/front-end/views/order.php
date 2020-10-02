@@ -50,7 +50,7 @@
     <hr class="line_package">
     <br>
     <!--wishlist area start -->
-    <div class="wishlist_area mt-60">
+    <div class="wishlist_area mt-60" style="padding-bottom: 200px;">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">

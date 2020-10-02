@@ -515,7 +515,7 @@ class Customer_order_ctr extends CI_Controller
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 , 'date_required' => $date_required]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -602,20 +602,94 @@ class Customer_order_ctr extends CI_Controller
 
     public function edit_info_stockadmin()
     {
-        $order_id   = $this->input->post('order_id');
-        $wage       = $this->input->post('wage');
-        $teamid     = $this->input->post('teamid');
-        $position   = $this->input->post('position');
-        $note_team       = $this->input->post('note_team');
-        $date_required       = $this->input->post('date_required');
+        $order_id           = $this->input->post('order_id');
+        $wage               = $this->input->post('wage');
+        $teamid             = $this->input->post('teamid') == '' ? null : $this->input->post('teamid');
+        $position           = $this->input->post('position');
+        $note               = $this->input->post('note_new');
+        $date_required      = $this->input->post('date_required');
+        $checkbox           = $this->input->post('checkbox');
+        $checkboxmain       = $this->input->post('checkboxmain');
+        $checkboxgt         = $this->input->post('checkboxgt');
+
+        $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        if ($wa == true) {
+            $this->db->delete('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        }
+
+        if ($checkbox) {
+            foreach ($checkbox as $key => $checkbox) {
+                $resultT = $this->db->get_where('tbl_upload_order_team', ['id' => $checkbox])->row_array();
+                $boxdata = [
+                    'order_id_back'     => $resultT['order_id'],
+                    'file_name_back'     => $resultT['file_name'],
+                    'path_back'         => $resultT['path'],
+                    'create_at_back'    => date('Y-m-d H:i:s'),
+                ];
+
+                $this->db->insert('tbl_upload_backup_team', $boxdata);
+            }
+        }
 
         $this->db->where('order_id', $order_id);
-        $resultsedit = $this->db->update('tbl_upload_team', ['wage' => $wage, 'position' => $position, 'teamId' => $teamid, 'note' => $note_team]);
+        $resultsedit = $this->db->update('tbl_upload_team', ['status' => 4, 'position' => $position, 'update_at' => date('Y-m-d H:i:s')]);
+
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_order', ['status_confirmed_team' => '0', 'update_at' => date('Y-m-d H:i:s')]);
+
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 1,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
+                $last = $this->db->insert_id();
+
+                if ($checkboxmain) {
+                    foreach ($checkboxmain as $key => $checkboxmain) {
+                        $resultTM = $this->db->get_where('tbl_upload_order', ['id' => $checkboxmain])->row_array();
+                        $mdata = [
+                            'sub_id_m'          => $last,
+                            'order_id_m'        => $resultTM['order_id'],
+                            'file_name_m'       => $resultTM['file_name'],
+                            'path_m'            => $resultTM['path'],
+                            'create_at_m'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_main', $mdata);
+                    }
+                }
+
+                if ($checkboxgt) {
+                    foreach ($checkboxgt as $key => $checkboxgt) {
+                        $resultTG = $this->db->get_where('tbl_upload_orderGT', ['id' => $checkboxgt])->row_array();
+                        $gtdata = [
+                            'sub_id_g'          => $last,
+                            'order_id_g'        => $resultTG['order_id'],
+                            'file_name_g'       => $resultTG['file_name_GT'],
+                            'path_g'            => $resultTG['path_GT'],
+                            'create_at_g'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_gt', $gtdata);
+                    }
+                }
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
 
         if ($resultsedit) {
             if ($teamid == '') {
                 $this->db->where('order_id', $order_id);
-                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0, 'date_required' => $date_required]);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0 , 'date_required' => $date_required]);
                 if ($update > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully updated Edit Team All information !!.');
                 } else {
@@ -624,9 +698,7 @@ class Customer_order_ctr extends CI_Controller
             } else {
 
                 $this->db->where('order_id', $order_id);
-                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1]);
-
-                $this->sendEmail_all($teamid, $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required]);
             }
         }
 

@@ -439,4 +439,161 @@ class Stock_ctr extends CI_Controller
 
         return redirect('my_stock_admin');
     }
+
+    public function upload_team_ST_admin()
+    {
+        $order_id           = $this->input->post('order_id');
+        $wage               = $this->input->post('wage');
+        $teamid             = $this->input->post('teamid') == '' ? null : $this->input->post('teamid');
+        $position           = $this->input->post('position');
+        $note               = $this->input->post('note_new');
+        $date_required      = $this->input->post('date_required');
+        $checkbox           = $this->input->post('checkbox');
+        $checkboxmain       = $this->input->post('checkboxmain');
+        $checkboxgt         = $this->input->post('checkboxgt');
+
+        $wa = $this->db->get_where('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        if ($wa == true) {
+            $this->db->delete('tbl_upload_backup_team', ['order_id_back' => $order_id]);
+        }
+
+        if ($checkbox) {
+            foreach ($checkbox as $key => $checkbox) {
+                $resultT = $this->db->get_where('tbl_upload_order_team', ['id' => $checkbox])->row_array();
+                $boxdata = [
+                    'order_id_back'     => $resultT['order_id'],
+                    'file_name_back'     => $resultT['file_name'],
+                    'path_back'         => $resultT['path'],
+                    'create_at_back'    => date('Y-m-d H:i:s'),
+                ];
+
+                $this->db->insert('tbl_upload_backup_team', $boxdata);
+            }
+        }
+
+
+        $this->db->where('order_id', $order_id);
+        $resultsedit = $this->db->update('tbl_upload_order', ['status_confirmed_team' => '0', 'update_at' => date('Y-m-d H:i:s')]);
+
+        if ($teamid) {
+            foreach ($teamid as $key => $teamid) {
+                $insertdb = [
+                    'order_id'          => $order_id,
+                    'wage'              => $wage,
+                    'position'          => $position,
+                    'teamId'            => $teamid,
+                    'note'              => $note,
+                    'status'            => 0,
+                    'status_check_team' => 0,
+                    'create_at'         => date('Y-m-d H:i:s')
+                ];
+                $resultsedit = $this->db->insert('tbl_upload_team', $insertdb);
+                $last = $this->db->insert_id();
+
+                if ($checkboxmain) {
+                    foreach ($checkboxmain as $key => $checkboxmain) {
+                        $resultTM = $this->db->get_where('tbl_upload_order', ['id' => $checkboxmain])->row_array();
+                        $mdata = [
+                            'sub_id_m'          => $last,
+                            'order_id_m'        => $resultTM['order_id'],
+                            'file_name_m'       => $resultTM['file_name'],
+                            'path_m'            => $resultTM['path'],
+                            'create_at_m'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_main', $mdata);
+                    }
+                }
+
+                if ($checkboxgt) {
+                    foreach ($checkboxgt as $key => $checkboxgt) {
+                        $resultTG = $this->db->get_where('tbl_upload_orderGT', ['id' => $checkboxgt])->row_array();
+                        $gtdata = [
+                            'sub_id_g'          => $last,
+                            'order_id_g'        => $resultTG['order_id'],
+                            'file_name_g'       => $resultTG['file_name_GT'],
+                            'path_g'            => $resultTG['path_GT'],
+                            'create_at_g'       => date('Y-m-d H:i:s'),
+                        ];
+
+                        $this->db->insert('tbl_upload_backup_gt', $gtdata);
+                    }
+                }
+
+                $this->sendEmail_all($teamid, $order_id);
+            }
+        }
+
+
+        if ($resultsedit) {
+            if ($teamid == '') {
+                $this->db->where('order_id', $order_id);
+                $update = $this->db->update('tbl_upload_order', ['status_confirmed_team' => 0]);
+                if ($update > 0) {
+                    $this->session->set_flashdata('save_ss2', ' Successfully Update to team information !!.');
+                } else {
+                    $this->session->set_flashdata('del_ss2', 'Not Successfully Update to team information');
+                }
+            } else {
+
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_order', ['status_confirmed_team' => 1, 'date_required' => $date_required]);
+            }
+        }
+
+        return redirect('my_stock_admin');
+    }
+
+
+    private function sendEmail_all($teamid, $order_id)
+    {
+        $team  = $this->db->get_where('tbl_team', ['idTeam' => $teamid])->row_array();
+
+        $subject = 'You have received additional work from the admin. ';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'You have received additional work from the admin..';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $team['name'] . '",</p>';
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order_id . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $order_id . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> You have received an order at : ' . $order_id . ' , Please check the binder. http://www.ip-soft.co.th/ipsoft </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($team['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+    }
 }

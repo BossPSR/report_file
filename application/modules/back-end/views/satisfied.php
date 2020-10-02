@@ -964,6 +964,11 @@
 
                                                         <!-- TeamId / wage -->
                                                         <td>
+                                                            <?php
+                                                            $this->db->order_by('id', 'desc');
+                                                            $wagenow = $this->db->get_where('tbl_upload_team', ['order_id' => $stores['orderST']])->row_array();
+                                                            ?>
+
                                                             <?php if ($stores['teamId'] == '') : ?>
                                                                 - |
                                                             <?php else : ?>
@@ -973,7 +978,7 @@
                                                             <?php if ($stores['wage'] == '') : ?>
                                                                 - |
                                                             <?php else : ?>
-                                                                $<?php echo $stores['wage']; ?> |
+                                                                $<?php echo $wagenow['wage']; ?> |
                                                             <?php endif; ?>
 
                                                             <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $stores['position']])->result_array(); ?>
@@ -1030,7 +1035,7 @@
                                                                                 <div class="col-xl-6 col-md-6 col-sm-6 col-12 ">
                                                                                     <div class="form-group" style="text-align: left;">
                                                                                         <label for="helpInputTop">wage</label>
-                                                                                        <input type="text" class="form-control" name="wage" value="<?php echo $stores['wage']; ?>" placeholder="Enter wage" required>
+                                                                                        <input type="text" class="form-control" name="wage" value="<?php echo $wagenow['wage']; ?>" placeholder="Enter wage" required>
                                                                                     </div>
                                                                                 </div>
                                                                                 <?php
@@ -1451,7 +1456,7 @@
 
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="submit" class="btn btn-primary mr-1 mb-1" style="MARGIN: 15px;">Submit</button>
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
