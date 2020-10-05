@@ -46,7 +46,7 @@
 
 <?php if (!empty($buy_email)) : ?>
     <br>
-    <h2 class="text-center" style="margin-top: 15px;">My order</h2>
+    <h2 class="text-center" style="margin-top: 15px;"> ออร์เดอร์ของฉัน </h2>
     <hr class="line_package">
     <br>
     <!--wishlist area start -->
@@ -57,16 +57,16 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">Status</th>
-                                <th scope="col">Order</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Main Document</th>
-                                <th scope="col">GT Document</th>
-                                <th scope="col">Team File</th>
-                                <th scope="col">Order Date</th>
-                                <th scope="col">Date Required</th>
-                                <th scope="col">Warranty day</th>
-                                <th scope="col">Tool</th>
+                                <th scope="col">สถานะ </th>
+                                <th scope="col">รหัสออร์เดอร์</th>
+                                <th scope="col">ราคา </th>
+                                <th scope="col">รายละเอียดคำสั่งงาน</th>
+                                <th scope="col">ข้อมูลประกอบ</th>
+                                <th scope="col">ไฟล์ที่ได้รับ</th>
+                                <th scope="col">วันสั่งออร์เดอร์</th>
+                                <th scope="col">วันส่งออร์เดอร์</th>
+                                <th scope="col">วันรับประกัน</th>
+                                <th scope="col">เครื่องมือ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,19 +90,19 @@
                                     <!-- Status -->
                                     <td style="text-align: center;">
                                         <?php if ($value['status_approved'] == 4) : ?>
-                                            <span class="badge" style="color:#fff;background-color:#7000cc;">Re Feedback</span>
+                                            <span class="badge" style="color:#fff;background-color:#7000cc;">แก้ไขงานต่อ</span>
                                         <?php elseif ($value['status_approved'] == 3) : ?>
-                                            <span class="badge" style="color:#fff;background-color:#cc7a00;">Feedback</span>
+                                            <span class="badge" style="color:#fff;background-color:#cc7a00;">กำลังแก้ไข</span>
                                         <?php elseif ($value['status_pay'] == 1 && $value['status_delivery'] == 0) : ?>
-                                            <span class="badge badge-warning" style="color:#fff;">Processing</span>
+                                            <span class="badge badge-warning" style="color:#fff;">กำลังดำเนินการ</span>
                                             <!-- <i class="fa fa-check-square-o" style="color: #28a745;" aria-hidden="true"></i> -->
                                         <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 0) : ?>
-                                            <span class="badge badge-success" style="color:#fff;">Complete</span>
+                                            <span class="badge badge-success" style="color:#fff;">ได้รับไฟล์แล้ว</span>
                                             <!-- <i class="fa fa-minus-square-o" style="color: #cbcbcb;" aria-hidden="true"></i> -->
                                         <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 1) : ?>
-                                            <span class="badge badge-info" style="color:#fff;">Approved</span>
+                                            <span class="badge badge-info" style="color:#fff;">อนุมัติผ่านแล้ว</span>
                                         <?php elseif ($value['status_delivery'] == 1 && $value['status_approved'] == 2) : ?>
-                                            <span class="badge badge-danger" style="color:#fff;">Not Approved</span>
+                                            <span class="badge badge-danger" style="color:#fff;">ไม่ผ่านคุณภาพ</span>
                                         <?php endif; ?>
                                     </td>
 
@@ -124,7 +124,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">รายละเอียดคำสั่งงาน</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -134,9 +134,9 @@
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Tool</th>
+                                                                        <th scope="col">รหัสออร์เดอร์</th>
+                                                                        <th scope="col">ชื่อไฟล์งาน</th>
+                                                                        <th scope="col">ไฟล์ของฉัน</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -152,7 +152,7 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,7 +184,7 @@
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
+                                                                        <th scope="col">รหัสออร์เดอร์</th>
                                                                         <th scope="col">File</th>
                                                                         <th scope="col" class="text-left">Detail</th>
                                                                         <th scope="col">Tool</th>
@@ -214,7 +214,7 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,7 +236,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">ไฟล์ที่ได้รับ </h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -246,10 +246,10 @@
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Tool</th>
-                                                                            <th scope="col">Downloads</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">รายละเอียดงาน</th>
+                                                                            <th scope="col">ดาวน์โหลด</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -260,7 +260,7 @@
                                                                                 <td><a href="<?= $teamF['path_d']; ?>" target="_bank"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a></td>
                                                                                 <td>
                                                                                     <a href="<?php echo $teamF['path_d']; ?>" class="btn btn-primary" download>
-                                                                                        <i class="fa fa-download"></i> Download
+                                                                                        <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                     </a>
                                                                                 </td>
                                                                             </tr>
@@ -270,7 +270,7 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -333,25 +333,9 @@
                                         ?>
                                         <?php $DateT    = date('Y-m-d');  ?>
                                         <?php if ($value['status_approved'] == 1 || $value['status_approved'] == 2) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#note_appoved<?= $value['ORD']; ?>"><i style="font-size: 18px;" class="fa fa-file-text-o"></i></a>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="note_appoved<?php echo $value['ORD'] ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
 
-                                                            <h5 class="modal-title" id="staticBackdropLabel">Comments Appovre / Not Appovre</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p><?php echo $value['note_approved']; ?></p>
+                                            <span class="badge badge-success" style="color:#fff;">เรียบร้อยแล้ว</span>
 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         <?php } elseif ($value['status_approved'] == 3 || $value['status_approved'] == 4 || $value['status_delivery'] == 1) { ?>
 
 
@@ -569,7 +553,7 @@
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Re Feedback (<?php echo $value['ORD']; ?>)</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">แก้ไขงานต่อ (<?php echo $value['ORD']; ?>)</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -579,8 +563,8 @@
                                                                     <label for="" class="font-size F-upload">You can drop Document. </label>
                                                                     <form action="my-order-feedback" class="dropzone" id="fileuploadnotApprovere<?php echo $value['ORD']; ?>">
                                                                         <div class="dz-message needsclick">
-                                                                            Drop files here or click to upload.<br>
-                                                                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                            อัปโหลดรายละเอียดคำสั่งงานได้ที่นี่<br>
+
                                                                         </div>
                                                                     </form>
                                                                     <br>
@@ -589,7 +573,7 @@
                                                                     <textarea id="detail1<?php echo $value['ORD']; ?>" name="detail" class="form-control" rows="5" required></textarea>
                                                                     <br>
 
-                                                                    <label for="" class="font-size-upload">Date : <span style="color: red;">* Date required ระบุได้ตั้งแต่ 4 วันขึ้นไป</span></label>
+                                                                    <label for="" class="font-size-upload">วันส่งออร์เดอร์ : <span style="color: red;">* วันส่งออร์เดอร์ ระบุได้ตั้งแต่ 4 วันขึ้นไป</span></label>
                                                                     <input type="date" name="dated" id="dated<?php echo $value['ORD']; ?>" class="form-control" value="<?php echo date("Y-m-d", strtotime("+ 4 days")); ?>" min="<?php echo date("Y-m-d", strtotime("+ 4 days")); ?>" max="" style="width:30%" required>
 
                                                                     <input type="text" name="order_id" id="order_id<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
@@ -598,8 +582,8 @@
                                                                     <!-- </form> -->
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" id="SubmitNotAppre<?php echo $value['ORD']; ?>" class="btn btn-success">Save</button>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" id="SubmitNotAppre<?php echo $value['ORD']; ?>" class="btn btn-success">บันทึก</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -687,7 +671,7 @@
 
 
                                             <?php if ($value['status_delivery'] == 1) { ?>
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id="" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"><i class="fa fa-check" aria-hidden="true"></i>อนุมัติ</button>
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approvedS<?php echo $value['ORD']; ?>" id="" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"> อนุมัติ</button>
                                             <?php } else { ?>
                                                 <button type="button" class="btn btn-secondary"><i class="fa fa-check" aria-hidden="true" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"></i>อนุมัติ</button>
                                             <?php } ?>
@@ -697,7 +681,7 @@
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLongTitle">Approved (<?php echo $value['ORD']; ?>)</h5>
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">อนุมัติผ่าน (<?php echo $value['ORD']; ?>)</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -708,20 +692,20 @@
                                                             <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
                                                             <div class="rate" style="text-align: center;">
                                                                 <input type="radio" class="star" id="star5" name="rate" value="5" />
-                                                                <label for="star5" title="text">5 stars</label>
+                                                                <label for="star5" title="text">5 ดาว</label>
                                                                 <input type="radio" class="star" id="star4" name="rate" value="4" />
-                                                                <label for="star4" title="text">4 stars</label>
+                                                                <label for="star4" title="text">4 ดาว</label>
                                                                 <input type="radio" class="star" id="star3" name="rate" value="3" />
-                                                                <label for="star3" class="star" title="text">3 stars</label>
+                                                                <label for="star3" class="star" title="text">3 ดาว</label>
                                                                 <input type="radio" class="star" name="rate" id="star2" value="2" />
-                                                                <label for="star2" title="text">2 stars</label>
+                                                                <label for="star2" title="text">2 ดาว</label>
                                                                 <input type="radio" class="star" id="star1" name="rate" value="1" />
-                                                                <label for="star1" title="text">1 star</label>
+                                                                <label for="star1" title="text">1 ดาว</label>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS" class="btn btn-primary">Save changes</button>
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" data-orderq="<?php echo $value['ORD'] ?>" id="approvedS" class="btn btn-primary">บันทึก</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
 
                                                         </div>
                                                     </div>
@@ -732,9 +716,9 @@
                                             <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
                                                 <?php if ($value['status_delivery'] == 1) { ?>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Not Approve (ไม่อนุมัติ)"><i class="fa fa-times-circle"></i></button>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Not Approve (ไม่อนุมัติ)"> ไม่ผ่านคุณภาพ</button>
                                                 <?php } else { ?>
-                                                    <button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Not Approved (ไม่อนุมัติ)"><i class="fa fa-times-circle"></i></button>
+                                                    <button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Not Approved (ไม่อนุมัติ)"></button>
                                                 <?php } ?>
 
                                                 <!-- Modal -->
@@ -742,7 +726,7 @@
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Not Approved (<?php echo $value['ORD']; ?>)</h5>
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">ไม่ผ่านคุณภาพ(<?php echo $value['ORD']; ?>)</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -753,20 +737,20 @@
                                                                 <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
                                                                 <div class="rate" style="text-align: center;">
                                                                     <input type="radio" class="star" id="star6" name="rate_not" value="5" />
-                                                                    <label for="star6" title="text">5 stars</label>
+                                                                    <label for="star6" title="text">5 ดาว</label>
                                                                     <input type="radio" class="star" id="star7" name="rate_not" value="4" />
-                                                                    <label for="star7" title="text">4 stars</label>
+                                                                    <label for="star7" title="text">4 ดาว</label>
                                                                     <input type="radio" class="star" id="star8" name="rate_not" value="3" />
-                                                                    <label for="star8" class="star" title="text">3 stars</label>
+                                                                    <label for="star8" class="star" title="text">3 ดาว</label>
                                                                     <input type="radio" class="star" id="star9" name="rate_not" value="2" />
-                                                                    <label for="star9" title="text">2 stars</label>
+                                                                    <label for="star9" title="text">2 ดาว</label>
                                                                     <input type="radio" class="star" id="star10" name="rate_not" value="1" />
-                                                                    <label for="star10" title="text">1 star</label>
+                                                                    <label for="star10" title="text">1 ดาว</label>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" data-ordernot="<?php echo $value['ORD'] ?>" id="not_app<?php echo $value['ORD']; ?>" class="btn btn-primary">Save changes</button>
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" data-ordernot="<?php echo $value['ORD'] ?>" id="not_app<?php echo $value['ORD']; ?>" class="btn btn-primary">บันทึก</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -826,24 +810,23 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">ข้อมูลประกอบ</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
 
                                                         <div class="modal-body" style="text-align:left;">
-                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                            <label for="" class="font-size F-upload">อัปโหลดข้อมูลแบบฟอร์มตาราง หรือตัวอย่างประกอบได้ที่นี่ (ถ้ามี) </label>
                                                             <form action="oder-morefile-upload" class="dropzone" id="fileuploadmorefile<?php echo $value['ORD']; ?>">
                                                                 <div class="dz-message needsclick">
                                                                     Drop files here or click to upload.<br>
-                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
                                                                 </div>
                                                                 <input type="text" name="order_id" id="order_idS<?php echo $value['ORD']; ?>" value="<?php echo $value['ORD']; ?>" hidden>
                                                             </form>
                                                             <br>
                                                             <!-- <form action="my-order-feedAuto" method="POST"> -->
-                                                            <label for="" class="font-size-upload">Detail :</label>
+                                                            <label for="" class="font-size-upload">ระบุรายละเอียดเพิ่มเติม (ถ้ามี) :</label>
                                                             <textarea id="detailkey<?php echo $value['ORD']; ?>" class="form-control" rows="5"></textarea>
                                                             <br>
 
@@ -851,8 +834,8 @@
                                                             <input type="text" name="userId" id="userIdS<?php echo $value['ORD']; ?>" value="<?php echo $userId['idUser']; ?>" hidden>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" id="Submitgtdoc<?php echo $value['ORD']; ?>" class="btn btn-success">Success</button>
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" id="Submitgtdoc<?php echo $value['ORD']; ?>" class="btn btn-success">ยืนยัน</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -909,12 +892,12 @@
                                         <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) : ?>
                                             <?php if ($value['status_refeedback'] == 0) : ?>
 
-                                                <button class="btn btn-success" data-toggle="modal" data-target="#refeedback<?php echo $value['ORD']; ?>">Re feedback</button>
+                                                <button class="btn btn-warning" data-toggle="modal" data-target="#refeedback<?php echo $value['ORD']; ?>">แก้ไขงานต่อ</button>
                                                 <div class="modal fade" id="refeedback<?php echo $value['ORD']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Re feedback</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">แก้ไขงานต่อ</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -928,25 +911,22 @@
                                                                 </p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" id="refeedback" data-ordercon="<?php echo $value['ORD'] ?>" data-price="<?php echo $value['price_file'] / 2; ?>" class="btn btn-success">Confirm</button>
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                <button type="button" id="refeedback" data-ordercon="<?php echo $value['ORD'] ?>" data-price="<?php echo $value['price_file'] / 2; ?>" class="btn btn-success">ยืนยัน</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                             <?php else : ?>
-                                                <button class="btn btn-secondary">Re feedback</button>
+                                                <button class="btn btn-secondary">แก้ไขงานต่อ</button>
                                             <?php endif; ?>
-                                       
+
                                         <?php endif; ?>
 
                                     </td>
 
-
-
                                 </tr>
-
 
                             <?php endforeach; ?>
 
@@ -963,8 +943,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Order</h1>
-                        <h2>Data Not Found</h2>
+                        <h1>ไม่มีออร์เดอร์ของฉัน</h1>
+                        <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>
             </div>

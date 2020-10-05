@@ -267,8 +267,12 @@
 
                 <img src="public/frontend/assets/img/logo/banner02.png" alt="">
 
-                <div class="text-right" style="font-size: 18px;">Everytime we can learn</div>
-                <div class="text-right" style="font-size: 18px;">Anytime we can earn money</div>
+                <?php if ($teamId) : ?>
+                    <div class="text-right" style="font-size: 22px;">Anytime we can earn money</div>
+                <?php else : ?>
+                    <div class="text-right" style="font-size: 22px;">Everytime we can learn</div>
+
+                <?php endif; ?>
             </div>
 
         </div>

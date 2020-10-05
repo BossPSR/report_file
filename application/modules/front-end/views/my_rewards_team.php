@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My rewards</h2>
+<h2 class="text-center" style="margin-top: 15px;">รางวัลของฉัน</h2>
 <hr class="line_package">
 <br>
 <!--Checkout page section-->
@@ -8,21 +8,21 @@
         <div class="checkout_form">
             <div class="row">
                 <div class="col-lg-12 col-md-12 text-center">
-                    <div style="font-size: 35px;">Score!</div>
+                    <div style="font-size: 35px;">คะแนนของฉัน</div>
                     <div class="vi counter" data-count="<?php echo $teamid['team_score']; ?>" style="margin: 30px 0px;font-weight: 100;font-size: 60px;color: #0088ff;">0</div>
                 </div>
                 <div class="col-lg-12 col-md-12 text-center" data-aos="zoom-in">
                     <img src="public/image/501890-PIIDRV-434.png" style="width: 300px;" alt="">
                 </div>
                 <div class="col-lg-12 col-md-12 text-center">
-                    <div class="vi">Victory!</div>
+                    <div class="vi">ยินดีด้วย!</div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 text-center type-vi">
                     ประเภทของรางวัล
                 </div>
                 <div class="col-lg-12 col-md-12 text-center" style="color: #b6b6b6;">
-                    Rating / Upload
+                    <!-- Rating / Upload -->
                     <hr style="width: 59%;">
                 </div>
                 <div class="col-lg-2 col-md-2 text-center"></div>

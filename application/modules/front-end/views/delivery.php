@@ -74,15 +74,15 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="tab">
-                                <h3 for="" class="font-size-upload">New folder </h3>
+                                <h3 for="" class="font-size-upload">สร้างโฟลเดอร์ใหม่ </h3>
                                 <hr>
                                 <form action="new_folder" method="POST">
                                     <div class="form-group">
-                                        <label for="" class="">Name folder </label>
+                                        <label for="" class="">ชื่อโฟลเดอร์ </label>
                                         <input type="text" name="name" class="form-control" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">
-                                        Create
+                                        สร้าง
                                     </button>
                                 </form>
                             </div>
@@ -92,8 +92,8 @@
                         <?php if (empty($folder)) : ?>
 
                             <div class="error_form col-12">
-                                <h1 style="font-size: 100px;margin: 0px;">No folder</h1>
-                                <h2>Data Not Found</h2>
+                                <h1 style="font-size: 100px;margin: 0px;">ไม่มีโฟลเดอร์</h1>
+                                <!-- <h2>Data Not Found</h2> -->
                             </div>
 
                         <?php else : ?>
@@ -119,15 +119,15 @@
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="Label">You can buy document.</h5>
+                                                <h5 class="modal-title" id="Label">คุณสามารถใส่เอกสารได้ที่นี้.</h5>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <form action="delivery_file" method="POST" class="dropzone" id="fileupload<?= $folder['id']; ?>">
                                                             <div class="dz-message needsclick">
-                                                                Drop files here or click to upload.<br>
-                                                                <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                                วางไฟล์ที่นี่หรือคลิกเพื่ออัปโหลด.<br>
+                                                                <!-- <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span> -->
                                                                 <input type="text" id="selected2" class="position2" name="select_items" hidden>
                                                                 <input type="text" value="<?php echo $folder['id']; ?>" name="idfolder" hidden>
                                                             </div>
@@ -159,9 +159,9 @@
                             <hr>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mt-2">
-                            <label for=""> Select Order </label>
+                            <label for=""> เลือกออเดอร์ของฉัน </label>
                             <select name="select_item" class="form-control" id="position1">
-                                <option selected disabled>-- SELECT ITEM --</option>
+                                <option selected disabled>-- กรุณาเลือก --</option>
                                 <?php foreach ($delivery as $delivery) { ?>
                                     <option value="<?php echo $delivery['order_id']; ?>,<?php echo $delivery['idt']; ?>"><?php echo $delivery['order_id']; ?></option>
                                 <?php } ?>
@@ -172,7 +172,7 @@
                         </div>
                         <div class="col-12 mt-3 ">
                             <button type="button" class="btn btn-primary w-100 uploadfiles">
-                                Upload Files
+                                อัพโหลดไฟล์
                             </button>
                         </div>
 

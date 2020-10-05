@@ -11,14 +11,14 @@
             <!--register area start-->
             <div class="col-lg-8 col-md-8">
                 <div class="account_form register">
-                    <h2>Forget Password</h2>
+                    <h2>ลืมรหัสผ่าน </h2>
                     <form action="forget_step1" method="POST">
                         <p>
-                            <label>Email <span class="red">*</span></label>
+                            <label>อีเมล์ของฉัน <span class="red">*</span></label>
                             <input type="email" name="email" required>
                         </p>
                         <div class="login_submit">
-                            <button type="submit">Send</button>
+                            <button type="submit">ส่ง</button>
                         </div>
                     </form>
                 </div>

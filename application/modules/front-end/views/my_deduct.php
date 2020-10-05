@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Deduct</h2>
+<h2 class="text-center" style="margin-top: 15px;">รายการถูกหักคะแนน</h2>
 <hr class="line_package">
 <br>
 <?php foreach ($deduct as $key => $data) {
@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                    <span style="font-size:16px;">Search for date : </span>
+                    <span style="font-size:16px;">ค้นหาวันที่ : </span>
                     <form action="my-deduct" method="GET">
                         <div style="display:flex; margin-bottom:1.3em;">
                             <input type="date" name="search_key" class="form-control" style="width:70%">
@@ -27,7 +27,7 @@
                         <?php $z+=1; ?>
                     <?php } ?>
                        <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                       <div>Order</div>
+                       <div>ออเดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -37,10 +37,9 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">No.</th>
                                 <th scope="col">รหัสออเดอร์</th>
                                 <th scope="col">วันที่</th>
-                                <th scope="col">Score</th>
+                                <th scope="col">คะแนน</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
@@ -49,7 +48,6 @@
                         <tbody>
                             <?php foreach ($deduct as $key => $selling) { ?>
                                 <tr style="text-align:center;">
-                                    <td scope="row"><?php echo $i++; ?></td>
                                     <td><?php echo $selling['order_id']; ?></td>
                                     <td><?php echo date("d F Y", strtotime($selling['create_at'])); ?></td>
                                     <td><?php echo number_format($selling['deduct']); ?></td>
@@ -70,8 +68,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Selling</h1>
-                        <h2>Data Not Found</h2>
+                        <h1 style="font-size: 120px;">ไม่มีรายการถูกหักคะแนน</h1>
+                        <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>
             </div>

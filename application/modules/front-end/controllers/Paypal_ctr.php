@@ -65,6 +65,7 @@ class Paypal_ctr extends CI_Controller{
 					$dataCommission['update_at'] = date("Y-m-d H:i:s");
 					$dataCommission['commission_price'] = $pac_su['price_pk'];
 					$dataCommission['commission_sale'] = $pac_su['new_price'];
+					$dataCommission['commission_value'] = $pac_su['commission_price'];
 					$dataCommission['create_at'] = date("Y-m-d H:i:s");
 					$this->db->insert('tbl_commission', $dataCommission);
 

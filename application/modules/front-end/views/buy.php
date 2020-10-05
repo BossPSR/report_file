@@ -19,7 +19,7 @@
     </div>
 </div>
 <br>
-<h2 class="text-center" style="margin-top: 15px;"> My buy </h2>
+<h2 class="text-center" style="margin-top: 15px;">  สั่งออร์เดอร์  </h2>
 <hr class="line_package">
 <br>
 <!--wishlist area start -->
@@ -36,11 +36,11 @@
                             <div class="tab">
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">You can buy Document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 10 File )</span></label>
+                                        <label for="" class="font-size-upload">กรุณาตรวจสอบไฟล์ของท่านเพื่อให้แน่ใจว่าไฟล์ทั้งหมดคืองานเดียวกัน <br> <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 10 File )</span></label>
                                         <form action="buy_upload" class="dropzone" id="fileupload" style="margin-bottom:10px;">
                                             <div class="dz-message needsclick">
-                                                Drop files here or click to upload.<br>
-                                                <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                อัปโหลดได้สูงสุดไม่เกิน 10 ไฟล์หรือไม่เกิน 20 เมกะไบต์
+                                              
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" hidden>
                                                 <textarea name="detail" class="detail" hidden></textarea>
@@ -50,11 +50,11 @@
                                         </form>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">You can buy GT Document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 30 File )</span></label>
+                                        <label for="" class="font-size-upload">อัปโหลดข้อมูลแบบฟอร์มตาราง หรือตัวอย่างประกอบได้ที่นี่  (ถ้ามี) <br> <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 20 File )</span></label>
                                         <form action="buy_uploadGT" class="dropzone" id="fileuploadGT">
                                             <div class="dz-message needsclick">
-                                                Drop files here or click to upload.<br>
-                                                <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                            อัปโหลดได้สูงสุดไม่เกิน 20 ไฟล์หรือไม่เกิน 50 เมกะไบต์
+                                             
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" hidden>
                                             </div>
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <label for="">More details.</label>
+                                <label for="">ระบุรายละเอียดเพิ่มเติม (ถ้ามี)</label>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                     <div class="row">
                                         <textarea name="detail" class="form-control" id="detail2" rows="5"></textarea>
@@ -70,7 +70,7 @@
 
                                 </div>
                                 <br>
-                                <label for="">Choose the date to pick up the document.</label>
+                                <label for="">ระบุวันรับออร์เดอร์</label>
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                         <input type="date" class="form-control" id="date2" name="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" min="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" required>
@@ -86,7 +86,7 @@
                                 </div>
                                 <br>
                                 <button type="button" class="btn btn-primary" id='uploadfiles'>
-                                    Upload Files
+                                    อัพโหลดไฟล์
                                 </button>
                             </div>
                         </div>

@@ -1,8 +1,8 @@
 .team-R-center
 {
-    position: absolute;
-    left: 35%;
-    top: 40%;
+    position: relative;
+    /* left: 30%; */
+    top: 30%;
     text-align: center;
 }
 .bk-main-whith{
@@ -11,7 +11,7 @@
     left: 0%;
     right: 0%;
     bottom: 0%;
-    background: #f7fbffbd;
+    background:#f7fbff94;
 }
 .bk-main-black{
     position: absolute;
@@ -19,11 +19,11 @@
     left: 0%;
     right: 0%;
     bottom: 0%;
-    background: #0e1427cc;
+    background: #0e1427ad;
 }
 .bk-main-imgL
 {
-    background-image:url('../../../../uploads/Main/10247-[Converted].jpg'); 
+    background-image:url('../../../../public/frontend/assets/img/bg/9212.jpg'); 
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;

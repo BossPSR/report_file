@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Sale</h2>
+<h2 class="text-center" style="margin-top: 15px;">ได้รับคะแนน</h2>
 <hr class="line_package">
 <br>
 <?php foreach ($selling as $key => $data) {
@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                    <span style="font-size:16px;">Search for date : </span>
+                    <span style="font-size:16px;">ค้นหาวันที่ : </span>
                     <form action="my-selling" method="GET">
                         <div style="display:flex; margin-bottom:1.3em;">
                             <input type="date" name="search_key" class="form-control" style="width:70%">
@@ -27,7 +27,7 @@
                             <?php $z += 1; ?>
                         <?php } ?>
                         <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                        <div>Order</div>
+                        <div>ออเดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                                     <tr style="text-align:center;">
                                         <th scope="col" style="width: 100px;">รหัสออเดอร์</th>
                                         <th scope="col">วันที่</th>
-                                        <th scope="col">Score</th>
+                                        <th scope="col">คะแนน</th>
                                     </tr>
                                 </thead>
 
@@ -84,8 +84,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Selling</h1>
-                        <h2>Data Not Found</h2>
+                        <h1 style="font-size: 130px;">ไม่มีประวัติได้รับคะแนน</h1>
+                        <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>
             </div>

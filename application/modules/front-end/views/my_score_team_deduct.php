@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My score deduct</h2>
+<h2 class="text-center" style="margin-top: 15px;">การหักคะแนน </h2>
 <hr class="line_package">
 <br>
 <?php foreach ($store as $key => $data) {
@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                    <span style="font-size:16px;">Search for date : </span>
+                    <span style="font-size:16px;">ค้นหาวันที่ : </span>
                     <form action="my_store_team" method="GET">
                         <div style="display:flex; margin-bottom:1.3em;">
                             <input type="date" name="search_key" class="form-control" style="width:70%">
@@ -27,7 +27,7 @@
                         <?php $z+=1; ?>
                     <?php } ?>
                        <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                       <div>Order</div>
+                       <div>ออเดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -37,11 +37,11 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">ODB</th>
-                                <th scope="col">File</th>
-                                <th scope="col">Details</th>
-                                <th scope="col">Date Deduct</th>
-                                <th scope="col">Amount</th>
+                                <th scope="col">รหัสออร์เดอร์</th>
+                                <th scope="col">ไฟล์ของฉัน</th>
+                                <th scope="col">รายละเอียด</th>
+                                <th scope="col">วันที่หักคะแนน</th>
+                                <th scope="col">จำนวน</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
@@ -77,8 +77,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No store</h1>
-                        <h2>Data Not Found</h2>
+                        <h1 style="font-size: 122px;">ไม่มีข้อมูลการหักคะแนน</h1>
+                        <!-- <h2>ไม่มีข้อมูลการหักคะแนน</h2> -->
                     </div>
                 </div>
             </div>

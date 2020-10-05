@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My income</h2>
+<h2 class="text-center" style="margin-top: 15px;">ค่าตอบแทน</h2>
 <hr class="line_package">
 <br>
 <?php foreach ($income as $key => $data) {
@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                    <span style="font-size:16px;">Search for date : </span>
+                    <span style="font-size:16px;">ค้นหาวันที่ : </span>
                     <form action="my_income" method="GET">
                         <div style="display:flex; margin-bottom:1.3em;">
                             <input type="date" name="search_key" class="form-control" style="width:70%">
@@ -27,7 +27,7 @@
                         <?php $z+=1; ?>
                     <?php } ?>
                        <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                       <div>Order</div>
+                       <div>ออเดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -37,18 +37,16 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">No.</th>
-                                <th scope="col">Order</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Score</th>
-                                <th scope="col">note</th>
+                                <th scope="col">รหัสออร์เดอร์</th>
+                                <th scope="col">วัน/เวลา</th>
+                                <th scope="col">คะแนนของฉัน</th>
+                                <th scope="col">หมายเหตุ</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
                         <tbody>
                             <?php foreach ($income as $key => $income) { ?>
                                 <tr style="text-align:center;">
-                                    <td scope="row"><?php echo $i++; ?></td>
                                     <td><?php echo $income['order_id']; ?></td>
                                     <td><?php echo date("d F Y", strtotime($income['create_at'])); ?></td>
                                     <td><?php echo number_format($income['income']); ?></td>
@@ -70,8 +68,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Income</h1>
-                        <h2>Data Not Found</h2>
+                        <h1>ไม่มีประวัติค่าตอบแทนe</h1>
+                        <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>
             </div>

@@ -133,6 +133,7 @@ class Withdraw_ctr extends CI_Controller
                     'path'              => 'uploads/money/' . $uploadData['file_name'],
                     'create_at'         => date('Y-m-d H:i:s'),
                     'status'            => '2',
+                    'transaction_date'  => date('Y-m-d H:i:s')
                 );
 
                 $this->db->where('id', $id);
@@ -169,6 +170,7 @@ class Withdraw_ctr extends CI_Controller
                     'path'              => 'uploads/money/team/' . $uploadData['file_name'],
                     'create_at'         => date('Y-m-d H:i:s'),
                     'status'            => '2',
+                    'transaction_date'  => date('Y-m-d H:i:s')
                 );
 
                 $this->db->where('id', $id);
@@ -223,112 +225,109 @@ class Withdraw_ctr extends CI_Controller
         $this->email->message($message);
         $this->email->set_mailtype('html');
         $this->email->send();
-        
     }
 
-	public function back_withdraw_slip()
-	{
-		$id = $this->input->post('id');
-		$transfer_date = $this->input->post('transfer_date');
-		$transfer_time = $this->input->post('transfer_time');
-		$transaction_date = $transfer_date.' '.$transfer_time;
-		$data = array(
-			'status'                       => 2,
-			'transaction_date'             => $transaction_date,
-		);
-		$this->db->where('id',$id);
-		$this->db->update('tbl_withdraw', $data);
-		return true;
-	}
+    public function back_withdraw_slip()
+    {
+        $id = $this->input->post('id');
+        $transfer_date = $this->input->post('transfer_date');
+        $transfer_time = $this->input->post('transfer_time');
+        $transaction_date = $transfer_date . ' ' . $transfer_time;
+        $data = array(
+            'status'                       => 2,
+            'transaction_date'             => $transaction_date,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('tbl_withdraw', $data);
+        return true;
+    }
 
-	
+
     public function upload_back_withdraw_slip()
     {
-       
 
-            if (!empty($_FILES['file']['name'])) {
 
-                // Set preference
-                $config['upload_path']     = 'uploads/Withdraw/';
-                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-                $config['allowed_types']   = '*';
-                $config['max_size']        = '99999'; // max_size in kb
-                $config['file_name']     = $_FILES['file']['name'];
+        if (!empty($_FILES['file']['name'])) {
 
-                //Load upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
+            // Set preference
+            $config['upload_path']     = 'uploads/Withdraw/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
 
-                // File upload
-                if ($this->upload->do_upload('file')) {
-                    // Get data about the file
-                    $uploadData = $this->upload->data();
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
 
-                    $data = array(
-                       
-                        
-                        'file_name'             => $uploadData['file_name'],
-                        'path'                  => 'uploads/Withdraw/' . $uploadData['file_name'],
-                        'update_at'             => date('Y-m-d H:i:s'),
-                        
-					);
-					$this->db->where('id',$this->input->post('id'));
-                    $this->db->update('tbl_withdraw', $data);
-                }
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
+
+                $data = array(
+
+
+                    'file_name'             => $uploadData['file_name'],
+                    'path'                  => 'uploads/Withdraw/' . $uploadData['file_name'],
+                    'update_at'             => date('Y-m-d H:i:s'),
+
+                );
+                $this->db->where('id', $this->input->post('id'));
+                $this->db->update('tbl_withdraw', $data);
             }
-        
-	}
-	
-	public function back_withdraw_team_slip()
-	{
-		$id = $this->input->post('id');
-		$transfer_date = $this->input->post('transfer_date');
-		$transfer_time = $this->input->post('transfer_time');
-		$transaction_date = $transfer_date.' '.$transfer_time;
-		$data = array(
-			'status'                       => 2,
-			'transaction_date'             => $transaction_date,
-		);
-		$this->db->where('id',$id);
-		$this->db->update('tbl_withdraw_team', $data);
-		return true;
-	}
+        }
+    }
 
-	
+    public function back_withdraw_team_slip()
+    {
+        $id = $this->input->post('id');
+        $transfer_date = $this->input->post('transfer_date');
+        $transfer_time = $this->input->post('transfer_time');
+        $transaction_date = $transfer_date . ' ' . $transfer_time;
+        $data = array(
+            'status'                       => 2,
+            'transaction_date'             => $transaction_date,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('tbl_withdraw_team', $data);
+        return true;
+    }
+
+
     public function upload_back_withdraw_team_slip()
     {
-       
 
-            if (!empty($_FILES['file']['name'])) {
 
-                // Set preference
-                $config['upload_path']     = 'uploads/WithdrawTeam/';
-                // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
-                $config['allowed_types']   = '*';
-                $config['max_size']        = '99999'; // max_size in kb
-                $config['file_name']     = $_FILES['file']['name'];
+        if (!empty($_FILES['file']['name'])) {
 
-                //Load upload library
-                $this->load->library('upload', $config);
-                $this->upload->initialize($config);
+            // Set preference
+            $config['upload_path']     = 'uploads/WithdrawTeam/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
 
-                // File upload
-                if ($this->upload->do_upload('file')) {
-                    // Get data about the file
-                    $uploadData = $this->upload->data();
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
 
-                    $data = array(
-                       
-                        
-                        'file_name'             => $uploadData['file_name'],
-                        'path'                  => 'uploads/WithdrawTeam/' . $uploadData['file_name'],
-                        'update_at'             => date('Y-m-d H:i:s'),
-                        
-					);
-					$this->db->where('id',$this->input->post('id'));
-                    $this->db->update('tbl_withdraw_team', $data);
-                }
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
+
+                $data = array(
+
+
+                    'file_name'             => $uploadData['file_name'],
+                    'path'                  => 'uploads/WithdrawTeam/' . $uploadData['file_name'],
+                    'update_at'             => date('Y-m-d H:i:s'),
+
+                );
+                $this->db->where('id', $this->input->post('id'));
+                $this->db->update('tbl_withdraw_team', $data);
             }
-        
+        }
     }
 }

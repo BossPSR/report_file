@@ -20,7 +20,7 @@
     </div>
 </div>
 <br>
-<h2 class="text-center" style="margin-top: 15px;"> My Sell</h2>
+<h2 class="text-center" style="margin-top: 15px;"> แลกคะแนนส่วนลด</h2>
 
 <hr class="line_package">
 <br>
@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="tab">
-                                <label for="" class="font-size-upload">You can store document. <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 30 File ไม่เกิน 500 MB)</span></label>
+                                <label for="" class="font-size-upload">กรุณาตรวจสอบไฟล์ของท่านเพื่อให้แน่ใจว่าไฟล์ทั้งหมดคืองานเดียวกัน <br> <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 30 File ไม่เกิน 500 MB)</span></label>
                                 <form action="store_upload" class="dropzone" id="my-awesome-dropzone">
                                     <div class="dz-message needsclick">
                                         Drop files here or click to upload.<br>
@@ -44,7 +44,7 @@
                                     </div>
                                 </form>
                                 <br>
-                                <label for="">More details.</label>
+                                <label for="">ระบุรายละเอียดเพิ่มเติม (ถ้ามี)</label>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                     <div class="row">
                                         <textarea name="detail" class="form-control" id="detail2" rows="5"></textarea>
@@ -54,7 +54,7 @@
                                 <!-- Button trigger modal -->
                                 <br>
                                 <button type="button" data-toggle="modal" data-target="#staticBackdrop2" class="btn btn-primary">
-                                    Upload Files
+                                    อัพโหลดไฟล์
                                 </button>
                                 <!-- <input type="button" id='uploadfiles' value='Upload Files'> -->
                             </div>

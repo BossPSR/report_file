@@ -148,7 +148,7 @@
                                     <li><a href="my-profile"> <?php echo $user['username'] ?> </a></li>
                                     <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                 <?php elseif ($team == true) : ?>
-                                    <li><a href="#"> <?php echo $team['name'] ?> </a></li>
+                                    <li><a href="#"> <?php echo $team['idTeam'] ?> </a></li>
                                     <li><a href="Logout" onclick="return confirm('Are you sure to logout?');"> Logout </a></li>
                                 <?php else : ?>
                                     <li><a href="#exampleModalCenter" data-toggle="modal"> Login member </a></li>
@@ -320,7 +320,7 @@
                                                     <li style="margin: 5px 10px;"><a href="teamOffline"><i class="fa fa-circle" style="color:#b6b6b6;"></i> Offline</a></li>
                                                 </ul>
                                         </li>
-                                        <li><a style="color: white;" href="My-profile_team"> <?php echo $team['name']; ?> </a> <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
+                                        <li><a style="color: white;" href="My-profile_team"> <?php echo $team['IdTeam']; ?> </a> <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
                                         <li><a style="color: white;" href="Logout?team=team" onclick="return confirm('Are you sure to logout?');"> ออกจากระบบ </a></li>
                                     <?php else :  ?>
                                         <li><a style="color: white;" href="#exampleModalCenter" data-toggle="modal"> เข้าสู่ระบบ </a></li>
@@ -476,7 +476,7 @@
 
 
                                                     </div>
-                                                    <div>My Jobs</div>
+                                                    <div>จำนวนชิ้นงาน</div>
                                                 </div>
 
                                                 <?php
@@ -498,12 +498,9 @@
                                                         <?php endforeach; ?>
                                                         <?php echo $cc; ?>
                                                     </div>
-                                                    <div>My Income</div>
+                                                    <div>รายได้ปัจจุบัน</div>
                                                 </div>
-                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
-                                                    <div> 1 ดอลลาร์สหรัฐ </div>
-                                                    <div>เท่ากับ 31.14 บาท </div>
-                                                </div>
+                                             
 
                                             </div>
                                         <?php endif ?>
@@ -574,7 +571,7 @@
                                         <?php elseif ($team) : ?>
                                             <li><a href="home"> หน้าแรก</a></li>
                                             <li>
-                                                <a href="My-stock-Item"> คลังออร์เดอร์</a>
+                                                <a href="My-stock-Item"> เลือกงานที่นี่</a>
                                             </li>
                                             <li>
                                                 <a href="My-task"> งานของฉัน</a>

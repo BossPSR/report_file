@@ -8,7 +8,6 @@ class Commission_ctr extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Commission_model');
-
     }
 
 
@@ -19,28 +18,28 @@ class Commission_ctr extends CI_Controller
         } else {
             $data['userId'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
             $paypal = $this->db->order_by('id', 'DESC')->get_where('tbl_paypal', ['user_id' => $data['userId']['idUser']])->row_array();
-            if (!empty($paypal) || $data['userId']['free_forever'] == 1) {
-                $datePaypal = date("Y-m-d", strtotime($paypal['start_time']));
-                $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-                if ($checkDate < 0 || $data['userId']['free_forever'] == 1) {
 
-                    $search_key                     = $this->input->get('search_key');
-                    $user                           = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
-                    $_user                          = $user['idUser'];
-                    if ($search_key == '' || $search_key == null) {
-                        $data['commission']                = $this->Commission_model->list_commission($_user);
-                    } else {
-                        $data['commission']                = $this->Commission_model->search_commission($search_key, $_user);
-                    }
-                    $this->load->view('options/header_login');
-                    $this->load->view('my_commission',$data);
-                    $this->load->view('options/footer');
-                } else {
-                    redirect('package');
+            $datePaypal = date("Y-m-d", strtotime($data['userId']['package_end']));
+            $checkDate = DateDiff(date("Y-m-d"), $datePaypal);
+            if ($data['userId']['package_end'] !== null) {
+
+                if ($checkDate < 0) {
+                    $this->session->set_flashdata('package_check', TRUE);
+                    redirect('home');
                 }
-            } else {
-                redirect('package');
             }
+            
+            $search_key                     = $this->input->get('search_key');
+            $user                           = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+            $_user                          = $user['idUser'];
+            if ($search_key == '' || $search_key == null) {
+                $data['commission']                = $this->Commission_model->list_commission($_user);
+            } else {
+                $data['commission']                = $this->Commission_model->search_commission($search_key, $_user);
+            }
+            $this->load->view('options/header_login');
+            $this->load->view('my_commission', $data);
+            $this->load->view('options/footer');
         }
     }
 }

@@ -31,7 +31,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="col-7">
+                                <div class="col-6">
                                     <h4 class="card-title">User List</h4>
                                 </div>
 
@@ -58,6 +58,14 @@
                                 $scoreAll = $this->db->get()->result_array();
                                 foreach ($scoreAll as $scoreAll) {
                                     $allScore += $scoreAll['score'];
+                                }
+
+                                $this->db->select('*');
+                                $this->db->from('tbl_commission');
+                                $allcommission = 0;
+                                $commissionAll = $this->db->get()->result_array();
+                                foreach ($commissionAll as $commissionAll) {
+                                    $allcommission += $commissionAll['commission_value'];
                                 }
 
 
@@ -92,6 +100,12 @@
                                     </h3>
                                     <h3 class="check_list_not">Discount รวมทั้งหมด</h3>
                                 </div>
+                                <div class="col-1 text-center">
+                                    <h3 class="card-title ">
+                                        <?php echo $allcommission; ?>
+                                    </h3>
+                                    <h3 class="check_list_not">Commission รวมทั้งหมด</h3>
+                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body card-dashboard">
@@ -107,6 +121,7 @@
                                                     <th>Sign update</th>
                                                     <th>Country</th>
                                                     <th>Wallet</th>
+                                                    <th>Commission</th>
                                                     <th>Cashback</th>
                                                     <th>Score</th>
                                                     <th>Num Order</th>
@@ -144,17 +159,22 @@
                                                                                         <th>Commission Recipient</th>
                                                                                         <th>package</th>
                                                                                         <th>Commission Price</th>
+                                                                                        <th>Commission Value</th>
                                                                                         <th>Date</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <?php $user_redetail = $this->db->get_where('tbl_commission', ['commission_inviter' => $user_list['Us']])->result_array(); ?>
                                                                                 <tbody>
+                                                                                    <?php $iop = 0; ?>
                                                                                     <?php foreach ($user_redetail as $key => $user_redetail) { ?>
+                                                                                        <?php $iop += $user_redetail['commission_value']; ?>
+
                                                                                         <tr>
                                                                                             <td><?php echo $user_redetail['commission_recipient']; ?></td>
                                                                                             <?php $package = $this->db->get_where('tbl_package', ['id' => $user_redetail['id_package_com']])->row_array(); ?>
                                                                                             <td><?php echo $package['title_pk']; ?></td>
                                                                                             <td><?php echo $user_redetail['commission_price']; ?></td>
+                                                                                            <td><?php echo $user_redetail['commission_value']; ?></td>
                                                                                             <td><?php echo $user_redetail['create_at']; ?></td>
                                                                                         </tr>
                                                                                     <?php } ?>
@@ -195,6 +215,7 @@
                                                             <?php echo $country_name['countryName']; ?>
                                                         </td>
                                                         <td>$<?php echo $user_list['cash']  == '' ? '0' : $user_list['cash']; ?></td>
+                                                        <td>$<?php echo $iop; ?></td>
                                                         <td>$<?php echo $user_list['cashback'] == '' ? '0' : $user_list['cashback']; ?></td>
                                                         <td><?php echo $user_list['score']; ?></td>
 
@@ -247,7 +268,7 @@
                                                         $this->db->where('userId', $user_list['idUser']);
                                                         $this->db->group_by('store_id');
                                                         $numsell = 0;
-                                                        $sell= $this->db->get()->result_array();
+                                                        $sell = $this->db->get()->result_array();
                                                         foreach ($sell as $sell) {
                                                             $numsell += 1;
                                                         }
@@ -255,14 +276,14 @@
                                                         $this->db->from('tbl_upload_store');
                                                         $this->db->where('userId', $user_list['idUser']);
                                                         $this->db->where('is_check', 1);
-                                                       
+
                                                         $numreject = 0;
-                                                        $reject= $this->db->get()->result_array();
+                                                        $reject = $this->db->get()->result_array();
                                                         foreach ($reject as $reject) {
                                                             $numreject += 1;
                                                         }
                                                         ?>
-                                                        
+
                                                         <td><?php echo $numOrder; ?></td>
                                                         <td><?php echo $numPrice; ?></td>
                                                         <td><?php echo $numApproved; ?></td>

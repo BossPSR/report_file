@@ -1,15 +1,32 @@
-<br>
 <?php
 $item = base64_decode($this->input->get('item'));
 $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
 ?>
-<h2 class="text-center" style="margin-top: 15px;">Order List <br> <span style="font-size: 24px;color: #0063d1;">(<?= $tip['name_item'] ?>)</span></h2>
-<hr class="line_package">0
-<?php if (!empty($stock)) { ?>
-    <br>
 
-    <div class="wishlist_area mt-10">
+<style>
+    .cssd {
+        background-image: url(public/image/books-2463779_1920.png);
+        width: 100%;
+        margin: 0 auto;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: repeat-y;
+
+    }
+
+    .cssd::before {
+        content: " ";
+        background-color: rgba(33, 35, 49, 0.76);
+    }
+</style>
+<?php if (!empty($stock)) { ?>
+
+    <div class="wishlist_area mt-10 cssd" style="padding-bottom: 150px;">
+
         <div class="container">
+            <br>
+            <h2 class="text-center text-white">เลือกงานที่นี่ <br> <span style="font-size: 24px;color: white;">(<?= $tip['name_item'] ?>)</span></h2>
+            <hr class="line_package">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-xl-10 col-lg-6 col-md-12 col-sm-12">
@@ -30,16 +47,16 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">ID Order</th>
+                                <th scope="col">รหัสออร์เดอร์</th>
                                 <!-- <th scope="col">Document</th> -->
-                                <th scope="col">Date Requred</th>
-                                <th scope="col">Main Doc</th>
-                                <th scope="col">GT Doc</th>
-                                <th scope="col">DM</th>
-                                <th scope="col">Note</th>
-                                <th scope="col">Select item</th>
-                                <th scope="col">Wage</th>
-                                <th scope="col">Confrim</th>
+                                <th scope="col">เวลาคงเหลือ</th>
+                                <th scope="col">รายละเอียดคำสั่งงานc</th>
+                                <th scope="col">ข้อมูลประกอบ</th>
+                                <th scope="col">ตัวอย่างงาน</th>
+                                <th scope="col">หมายเหตุ</th>
+                                <th scope="col">สาขา</th>
+                                <th scope="col">เรทค่าตอบแทน</th>
+                                <th scope="col">ยืนยัน</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +71,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                             $cvc = 1;
                             ?>
                             <?php foreach ($stock as $stock) { ?>
-                                <tr style="text-align:center;">
+                                <tr style="text-align:center;background-color: white;">
                                     <td><?php echo $stock['or_1']; ?> </td>
                                     <?php
                                     $checkDate_num = DateDiff(date("Y-m-d"), $stock['or_date']);
@@ -74,7 +91,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Main Document new</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">รายละเอียดคำสั่งงาน (ใหม่)</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -118,7 +135,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">รายละเอียดคำสั่งงาน</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -128,9 +145,9 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Info</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ไฟล์ของฉัน</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -184,7 +201,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document new</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">ข้อมูลประกอบ (ใหม่)</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -194,9 +211,9 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Info</th>
+                                                                            <th scope="col"> รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ไฟล์ของฉัน</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -229,7 +246,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">ข้อมูลประกอบ</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -238,9 +255,9 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">Info</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ไฟล์ของฉัน</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -255,7 +272,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                         <?php foreach ($more_file_gt_more as $keys => $more_file_gt_more) { ?>
                                                                             <tr>
                                                                                 <td><?php echo $more_file_gt_more['order_id'] ?> (MF)</td>
-                                                                                <td><?php echo $more_file_gt_more['file_name_GT'] ?></td>
+                                                                                <td style="text-align:left;"><?php echo $more_file_gt_more['file_name_GT'] ?></td>
 
                                                                                 <td><a href="show-pdf?dcnumber=<?= base64_encode($orderGT['path_GT']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
 
@@ -292,7 +309,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">ตัวอย่างงาน</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -303,19 +320,19 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
-                                                                        <!-- <th scope="col">ID Order</th> -->
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Info</th>
-                                                                        <th scope="col">Downloads</th>
+                                                                        <!-- <th scope="col">รหัสออร์เดอร์</th> -->
+                                                                        <th scope="col">ชื่อไฟล์</th>
+                                                                        <th scope="col">ไฟล์ของฉัน</th>
+                                                                        <!-- <th scope="col">Downloads</th> -->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php foreach ($dm_cc as $key => $dm_cc) : ?>
                                                                         <tr>
 
-                                                                            <td><?php echo $dm_cc['file_name'] ?></td>
+                                                                            <td class="text-left"><?php echo $dm_cc['file_name'] ?></td>
                                                                             <td><a href="<?php echo $dm_cc['path'] ?>" target="_blank"><i class="fa fa-file-text-o" style="font-size: 25px; cursor: pointer;"></i></a></td>
-                                                                            <td><?php echo $dm_cc['create_at'] ?></td>
+                                                                            <!-- <td> echo $dm_cc['create_at'] ?></td> -->
                                                                         </tr>
                                                                     <?php endforeach; ?>
                                                                 </tbody>
@@ -323,7 +340,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -341,7 +358,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">หมายเหตุ</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -352,7 +369,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">Close</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -379,29 +396,184 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                         ?>
 
                                         <?php if ($stock_row == true) { ?>
-                                            <button type="button" class="btn btn-secondery"> Confirmed</button>
+                                            <button type="button" class="btn btn-secondery"> ยืนยัน</button>
                                         <?php } else { ?>
-                                            <button type="button" class="btn btn-success" id="cf<?php echo $stock['mms']; ?>"> Confirmed</button>
+                                            <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#cfmodal<?php echo $stock['mms']; ?>" id=""> ยืนยัน</button>
                                         <?php } ?>
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="cfmodal<?php echo $stock['mms']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 18px;"> การหักรายได้ในกรณีต่าง</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p style="font-size: 20px;color: #0095ff;"> ตารางสรุปการหักรายได้กรณีต่างๆที่ต้องรู้ก่อนทำงาน </p>
+                                                        <li class="text-left" style="font-size: 18px;">ส่งงานช้า</li>
+                                                        <table class="table">
+                                                            <thead class="thead-light">
+                                                                <tr style="text-align:center;">
+                                                                    <th>หัวข้อการหัก</th>
+                                                                    <th>จำนวนที่ถูกหัก</th>
+                                                                    <th>แนวทางแก้ไข</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p> ส่งงานช้าไม่เกิน12 ชม.สุดท้าย
+                                                                            (ระบบนับเวลาถอยหลังยังคงทำงานอยู่) </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ได้ค่าตอบแทน
+                                                                            แต่ถูกหัก 100 บาท
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>วางแผนเวลาในการทำงานและส่งงานตรงตามวันเวลาที่กำหนดหรือส่งก่อนล่วงหน้า 1 วัน</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p>ส่งงานช้าเกิน12 ชม.สุดท้าย
+                                                                            (ไม่มีกำหนดวันที่เกินขึ้นอยู่กับความยินยอมของทางผู้เรียน)
+                                                                            (ระบบนับเวลาถอยหลังหยุดทำงาน)
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ได้ค่าตอบแทน
+                                                                            แต่ถูกหัก 200 บาท
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ติดต่อเจ้าหน้าที่ภายใน12 ชม.สุดท้าย (เท่านั้น) กรณีนี้อาจไม่สามารถส่งงานได้ขึ้นอยู่กับความยินยอมของผู้เรียน</p>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+
+                                                        <br>
+
+                                                        <li class="text-left" style="font-size: 18px;"> การยกเลิกงาน </li>
+                                                        <table class="table">
+                                                            <thead class="thead-light">
+                                                                <tr style="text-align:center;">
+                                                                    <th>หัวข้อการหัก</th>
+                                                                    <th>จำนวนที่ถูกหัก</th>
+                                                                    <th>แนวทางแก้ไข</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p> กดยกเลิกงานขณะที่เหลือเวลาส่งมากกว่า 48 ชม. </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ไม่ได้ค่าตอบแทนและถูกหัก 100 บาท </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>เลือกงานที่ตรงตามทักษะความสามารถตนเองวางแผนเวลาในการทำงานและตรวจเช็ครายละเอียดงานอย่างรอบคอบก่อนกด Confirm Order </p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p>กดยกเลิกงานขณะที่เหลือเวลาส่งน้อยกว่า 48 ชม.
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ไม่ได้ค่าตอบแทนและถูกหัก 200 บาท </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>หากประเมินเวลาและทักษะความสามารถตนเองแล้วว่าไม่สามารถทำงานให้สำเร็จได้ให้ทำการกดปุ่มยกเลิก Order ทันที</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p>ไม่กดยกเลิกงาน </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ไม่ได้ค่าตอบแทนและถูกหัก 300 บาท </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>กรณีไม่กดยกเลิกงานและไม่มีการส่งงานอาจถูกระบบระงับบัญชีการใช้งานแบบชั่วคราวและถาวร</p>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+
+                                                        <br>
+
+                                                        <li class="text-left" style="font-size: 18px;"> คุณภาพผลงาน </li>
+                                                        <table class="table">
+                                                            <thead class="thead-light">
+                                                                <tr style="text-align:center;">
+                                                                    <th>หัวข้อการหัก</th>
+                                                                    <th>จำนวนที่ถูกหัก</th>
+                                                                    <th>แนวทางแก้ไข</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p> คุณภาพผลงานไม่ถึงเกณฑ์ 50% </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ไม่ได้ค่าตอบแทนและถูกหัก 100 บาท </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>เลือกงานที่ตรงตามทักษะความสามารถตนเองวางแผนเวลาในการทำงานและตรวจเช็ครายละเอียดงานอย่างรอบคอบก่อนกด
+                                                                            Confirm Order กรณีผลงานไม่ถึงเกณฑ์บ่อยครั้งอาจถูกระบบยกเลิกตำแหน่งงานดังกล่าว </p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <p>คัดลอกผลงานหรือข้อมูลอินเตอร์เน็ต โดยไม่มีการแก้ไขใดๆเกิน 1 Paragraph หรือ 4 บรรทัดขึ้นไป </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>ไม่ได้ค่าตอบแทนและถูกหัก 100 บาท </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>หากข้อมูลใน Order ไม่เพียงพอติวเตอร์สามารถหาข้อมูลจากแหล่งเว็บไซต์อินเตอร์เน็ตเพิ่มเติมได้โดยต้อง
+                                                                            Rewrite ใหม่ก่อนนำมาใช้ประกอบผลงานทุกครั้ง</p>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                                                        <button type="button" class="btn btn-primary" id="cf<?php echo $stock['mms']; ?>">ยอมรับ</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModalCF" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Document</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">เอกสาร</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h3>Main Document</h3>
+                                                        <h3>รายละเอียดคำสั่งงาน</h3>
                                                         <table class="table">
                                                             <thead class="thead-light">
                                                                 <tr style="text-align:center;">
-                                                                    <th scope="col">File</th>
-                                                                    <th scope="col">ID Order</th>
-                                                                    <th scope="col">Download</th>
+                                                                    <th scope="col">รหัสออร์เดอร์</th>
+                                                                    <th scope="col">ชื่อไฟล์</th>
+                                                                    <th scope="col">ดาวน์โหลด</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -414,7 +586,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                             <td><?php echo $backmain2['file_name_m']; ?></td>
                                                                             <td>
                                                                                 <a href="<?php echo $backmain2['path_m']; ?>" class="btn btn-primary" download>
-                                                                                    <i class="fa fa-download"></i> Download
+                                                                                    <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
@@ -426,7 +598,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                             <td><?php echo $stockmain_Download['file_name']; ?></td>
                                                                             <td>
                                                                                 <a href="<?php echo $stockmain_Download['path']; ?>" class="btn btn-primary" download>
-                                                                                    <i class="fa fa-download"></i> Download
+                                                                                    <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
@@ -442,13 +614,13 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                         <?php if ($backgt2 == true) : ?>
                                                             <?php if (!empty($backgt2)) : ?>
                                                                 <br>
-                                                                <h3>GT Document </h3>
+                                                                <h3> ข้อมูลประกอบ </h3>
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">Download</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ดาวน์โหลด</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -458,7 +630,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                                 <td><?php echo $backgt2['file_name_g']; ?></td>
                                                                                 <td>
                                                                                     <a href="<?php echo $backgt2['path_g']; ?>" class="btn btn-primary" download>
-                                                                                        <i class="fa fa-download"></i> Download
+                                                                                        <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                     </a>
                                                                                 </td>
                                                                             </tr>
@@ -471,13 +643,13 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                         <?php else : ?>
                                                             <?php if (!empty($stockGT2)) : ?>
                                                                 <br>
-                                                                <h3>GT Document </h3>
+                                                                <h3> ข้อมูลประกอบ </h3>
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">Download</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ดาวน์โหลด</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -487,7 +659,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                                                 <td><?php echo $stockGT_Download['file_name_GT']; ?></td>
                                                                                 <td>
                                                                                     <a href="<?php echo $stockGT_Download['path_GT']; ?>" class="btn btn-primary" download>
-                                                                                        <i class="fa fa-download"></i> Download
+                                                                                        <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                     </a>
                                                                                 </td>
                                                                             </tr>
@@ -501,7 +673,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-success" id="close_doc">Success</button>
+                                                        <button type="button" class="btn btn-success" id="close_doc">เรียบร้อย</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -555,7 +727,27 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                 </div>
                 <div class="col-1"></div>
             </div>
+            <div class="row" style="padding-top: 30px;border-top: 1px solid white;margin-top: 100px;">
+                <div class="col-md-12 text-white">
+                    <h3> วิธีการทำงานให้ผ่านโดยไม่ต้องแก้ไขงาน</h3>
+                    <p> 1. อ่านและทำความเข้าใจรายละเอียดคำสั่งงานทั้งหมด </p>
+                    <p> 2. เช็คข้อมูล Resources หรือ Template ที่ใช้ประกอบในการทำงานให้ครบตามที่คำสั่งงานต้องการ </p>
+                    <p> 3. ติดต่อเจ้าหน้าที่เมื่อข้อมูลไม่เพียงพอ ตัวอย่างเช่น ขาด Template/Resources (ติดต่อทางระบบแชทเท่านั้น) </p>
+                    <p> 4. ใช้ข้อมูลใน Resources ที่ให้มาประกอบในการทำงาน หากข้อมูลไม่เพียงพอสามารถ
+                        Search internet เพื่อเป็นข้อมูลประกอบได้แต่ต้องนำข้อมูลมาเรียบเรียงใหม่เป็น Own words (ห้ามก๊อปวางโดยเด็ดขาด) </p>
+
+                    <p> 5. เน้นการเขียนงานโดยใช้ Own words และอ้างอิงด้วยแหล่งที่มาของข้อมูลที่ใช้ประกอบ </p>
+                    <p> 6. กรณีเป็นงานกลุ่มโปรเจ็คหรือรายงาน ทีมงานสามารถทำการสมมติชื่อสมาชิกกลุ่มขึ้นมาและระบุหน้าที่รับผิดชอบตามชื่อแต่ล่ะคน
+                        โดยจำลองสถานการณ์ขึ้นมาใช้ให้เหมาะสมกับคำสั่งงาน </p>
+                    <p> 7. ก่อนส่งงานควรตรวจเช็คความเรียบร้อยให้แน่ใจว่าได้ดำเนินการครบทุกคำสั่งของงานทั้งหมดและตรวจสอบข้อกำหนดการตั้งค่าหน้ากระดาษต่าง ๆ
+                        (ถ้ามี) เช่น ใช้ตัวหนังสือสีดำ, ขนาด 18, ฟอนต์ Calibri </p>
+                    <p> 8. แยกไฟล์ Folder ของงานแต่ล่ะ Task ให้ชัดเจนพร้อมระบุตัวเลขกำกับใน Template ที่ใช้ตอบในแต่ล่ะข้อ (ถ้ามี) </p>
+                    <p> 9. กรณีที่เป็นงานที่ต้องแก้ไข ให้ทำการ Highlight ส่วนที่แก้ไขด้วยสีเหลือง </p>
+                    <p> 10. อธิบายภาพรวมของงานผ่านคลิปวีดีโอด้วยเสียงที่ชัดเจน </p>
+                </div>
+            </div>
         </div>
+
     </div>
 <?php } else { ?>
     <!--wishlist area end -->
@@ -565,8 +757,8 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Order</h1>
-                        <h2>Data Not Found</h2>
+                        <h1>ไม่มีข้อมูลงาน</h1>
+                        <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>
             </div>

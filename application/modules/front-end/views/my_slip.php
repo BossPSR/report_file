@@ -12,10 +12,10 @@
     $this->db->group_by('tbl_upload_order.order_id');
 
     $sm_del = $this->db->get()->result_array();
-    $sumto = 0;
-    foreach ($sm_del as $key => $sm_del) {
-        $sumto = $sumto['wg'];
-    }
+    // $sumto = 0;
+    // foreach ($sm_del as $key => $sm_del) {
+    //     $sumto = $sumto['wg'];
+    // }
 
     ?>
 <?php } else { ?>
@@ -35,13 +35,27 @@
 <hr class="line_package">
 <br>
 <!--services img area-->
-<div class="services_gallery ">
+<div class="services_gallery" style="padding-bottom: 158px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-1 col-md-1"></div>
             <div class="col-lg-10 col-md-10">
+                <?php $ist = 0; ?>
+
+
+
                 <div class="row">
 
+                    <div class="col-lg-10">
+                    </div>
+                    <div class="col-lg-2">
+                        <?php foreach ($slip_team as $slip_teamcount) { ?>
+                            <?php $ist += 1; ?>
+
+                        <?php } ?>
+                        <div class="text-center"> <?= $ist; ?></div>
+                        <div class="text-center">รายได้ทั้งหมด</div>
+                    </div>
                     <div class="col-lg-12 col-md-12 wall-center shadow-b table-w mtp-20">
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -70,8 +84,8 @@
                                     <table class="table mt-15 tabledata">
                                         <thead class="thead-light">
                                             <tr>
+                                                <th scope="col">รหัสออเดอร์</th>
                                                 <th scope="col">Amoumt (จำนวนเงิน)</th>
-                                                <th scope="col">รหัสออเดอร์สินค้า</th>
                                                 <!-- <td>Request date (วันที่ส่งคำขอ)</td> -->
                                                 <th scope="col" class="text-center">สถานะ</th>
                                                 <th scope="col">รายละเอียดเวลา</th>
@@ -80,8 +94,8 @@
                                         <tbody>
                                             <?php foreach ($slip_success as $slip_success) { ?>
                                                 <tr>
-                                                    <th scope="row">$ <?php echo $slip_success['price_file']; ?></th>
                                                     <td><?php echo $slip_success['order_id']; ?></td>
+                                                    <td scope="row">$ <?php echo $slip_success['price_file']; ?></td>
                                                     <!-- <td></td> -->
                                                     <td class="text-center">
                                                         <?php if ($slip_success['status_pay'] == 1) { ?>
@@ -112,7 +126,7 @@
                                         <tbody>
                                             <?php foreach ($slip_not_success as $slip_not_success) { ?>
                                                 <tr>
-                                                    <th scope="row"><?php echo $slip_not_success['price_file'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$'.$slip_not_success['price_file']; ?></th>
+                                                    <th scope="row"><?php echo $slip_not_success['price_file'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$' . $slip_not_success['price_file']; ?></th>
                                                     <td><?php echo $slip_not_success['order_id']; ?></td>
                                                     <!-- <td></td> -->
                                                     <td class="text-center">
@@ -146,7 +160,7 @@
                                         <tbody>
                                             <?php foreach ($slip as $key => $slip) { ?>
                                                 <tr>
-                                                    <td><?php echo $slip['price'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$'.$slip['price']; ?></td>
+                                                    <td><?php echo $slip['price'] == '' ? 'รอดำเนินการจากแอดมิน' :  '$' . $slip['price']; ?></td>
                                                     <td><?php echo $slip['create_at']; ?></td>
                                                     <td><?php echo $slip['transaction_date']; ?></td>
                                                     <td>
@@ -180,28 +194,30 @@
                                     <table class="table mt-15">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col" class="text-center">ราคา</th>
-                                                <th scope="col" class="text-center">รหัสออเดอร์สินค้า</th>
+                                                <th scope="col" class="text-center">รหัสออเดอร์</th>
+                                                <th scope="col" class="text-center">วันที่ส่งคำขอ</th>
+                                                <th scope="col" class="text-center">วันที่โอนสำเร็จ</th>
+                                                <th scope="col" class="text-center">รายได้</th>
                                                 <th scope="col" class="text-center">สถานะ</th>
-                                                <th scope="col" class="text-center">รายละเอียดเวลา</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($slip_team as $slip_team) { ?>
                                                 <tr class="text-center">
-
-                                                    <td scope="row"><span class="badge badge-primary" style="font-size:16px;">$ <?php echo $slip_team['price']; ?></span></td>
                                                     <td><?php echo $slip_team['order_id']; ?></td>
-
-                                                    <?php if ($slip_team['st2'] == 1) { ?>
-                                                        <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for admin</span></td>
-                                                    <?php } elseif ($slip_team['st2'] == 2) { ?>
-                                                        <td><span class="badge badge-success" style="font-size:16px;">Success</span></td>
-                                                    <?php } else { ?>
-                                                        <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
-                                                    <?php } ?>
                                                     <?php $ggh = explode(" ", $slip_team['create_at']); ?>
                                                     <td><?php echo $ggh[0]; ?></td>
+                                                    <td><?= $slip_team['transaction_date'] == '' ? '-' : $slip_team['transaction_date'] ?></td>
+                                                    <td scope="row"><span class="badge badge-primary" style="font-size:16px;">$ <?php echo $slip_team['price']; ?></span></td>
+
+                                                    <?php if ($slip_team['st2'] == 1) { ?>
+                                                        <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">รอแอดมินตรวจสอบ</span></td>
+                                                    <?php } elseif ($slip_team['st2'] == 2) { ?>
+                                                        <td><span class="badge badge-success" style="font-size:16px;">อนุมัติแล้ว</span></td>
+                                                    <?php } else { ?>
+                                                        <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออเดอร์มีปัญหา</span></td>
+                                                    <?php } ?>
+
                                                 </tr>
                                             <?php } ?>
                                         </tbody>

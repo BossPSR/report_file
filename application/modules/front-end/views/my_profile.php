@@ -31,13 +31,15 @@
 
                     <div class="image_profile">
                         <h2 class="text-center my-income">
-                            <div class="name_user m17"> <i class="fa fa-user"></i><?= $this->lang->line("name"); ?> : <?php echo $user['username']; ?></div>
+                            <div class="name_user m17"> <i class="fa fa-user" style="color: #282390;"></i>
+                                <!-- $this->lang->line("name"); ?>  --> <span style="font-size: 26px;">ชื่อของฉัน</span>
+                                : <?php echo $user['username']; ?></div>
                         </h2>
                         <?php $p = $this->db->get_where('tbl_package', ['id' => $user['package_user']])->row_array(); ?>
                         <?php if ($p == true) : ?>
                             <h2 class="text-center my-income" style="color: #40a6ff;font-size: 20px;">
-                                <div> Package name : <?php echo $p['title_pk']; ?></div>
-                                <div>Package : <?php echo date("d F Y", strtotime($user['package_start'])); ?> - <?php echo date("d F Y", strtotime($user['package_end'])); ?></div>
+                                <div> <span style="color:#7b7b7b">ชื่อแพ็คเกจของฉัน </span> : <?php echo $p['title_pk']; ?></div>
+                                <div> <span style="color:#7b7b7b">ระยะเวลาแพ็คเกจ </span> : <?php echo date("d F Y", strtotime($user['package_start'])); ?> - <?php echo date("d F Y", strtotime($user['package_end'])); ?></div>
                             </h2>
                         <?php else : ?>
 
@@ -74,25 +76,28 @@
                         <div class="menu_profileRow">
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($user['score']); ?></div>
-                                <div class="list_menu">Score</div>
+                                <div class="list_menu">คะแนนสะสม</div>
                             </div>
                             <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?php if ($user['score'] < '100') : ?>
-                                        0%
-                                    <?php elseif ($user['score'] <= '199') : ?>
-                                        10%
-                                    <?php elseif ($user['score'] <= '299') : ?>
-                                        20%
-                                    <?php elseif ($user['score'] <= '399') : ?>
-                                        30%
-                                    <?php elseif ($user['score'] <= '499') : ?>
-                                        40%
-                                    <?php else : ?>
-                                        50%
-                                    <?php endif; ?>
+                                    <?php
+                                    $numScore = 0;
+
+                                    $this->db->select('*');
+                                    $this->db->from('tbl_user');
+                                    $this->db->where('idUser', $user['idUser']);
+                                    $numScore = 0;
+                                    $scoreListNum = $this->db->get()->result_array();
+                                    foreach ($scoreListNum as $scoreListNum) {
+                                        $numScore += $scoreListNum['score'];
+                                    }
+
+                                    $discountUser = $user['score'] / 10;
+                                    ?>
+                                    <?php echo $discountUser; ?>%
+
                                 </div>
-                                <div class="list_menu">Discount</div>
+                                <div class="list_menu">ส่วนลด</div>
                             </div>
 
                             <?php
@@ -110,7 +115,7 @@
 
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($numUp); ?></div>
-                                <div class="list_menu">Order</div>
+                                <div class="list_menu">ข้อมูลออร์เดอร์</div>
                             </div>
 
                             <?php
@@ -125,7 +130,7 @@
 
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($numCost); ?></div>
-                                <div class="list_menu">Seller</div>
+                                <div class="list_menu">ข้อมูลคะแนน</div>
                             </div>
                         </div>
                         <!-- <div class="menu_profileRow"></div>  -->
@@ -170,7 +175,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+                <h5 class="modal-title" id="exampleModalLabel">ข้อมูลส่วนตัว</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -179,34 +184,34 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                     <div class="form-group">
-                        <label for="">Countries</label>
+                        <label for="">ประเทศ</label>
                         <input type="text" class="form-control" name="countries" value="<?php echo $countries['countryName']; ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="">Name</label>
+                        <label for="">ชื่อ - นามสกุล</label>
                         <input type="text" class="form-control" name="name" value="<?php echo $user['username']; ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="">Phone</label>
+                        <label for="">หมายเลขโทรศัพท์</label>
                         <input type="text" class="form-control" name="phone" value="<?php echo $user['phone']; ?>" required>
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label for="">Old Password</label>
+                        <label for="">รหัสผ่านเก่าของฉัน </label>
                         <input type="password" class="form-control" name="oldpassword" value="">
                     </div>
                     <div class="form-group">
-                        <label for="">New Password</label>
+                        <label for="">รหัสผ่านใหม่ของฉััน</label>
                         <input type="password" class="form-control" name="password" value="">
                     </div>
                     <div class="form-group">
-                        <label for="">Confirm New Password</label>
+                        <label for="">ยืนยันรหัสผผ่านใหม่</label>
                         <input type="password" class="form-control" name="c_password" value="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                    <button type="submit" class="btn btn-primary">แก้ไขเพิ่มเติม </button>
                 </div>
             </form>
         </div>
@@ -218,7 +223,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+                <h5 class="modal-title" id="exampleModalLabel">รูปโปรไฟล์ </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -230,13 +235,13 @@
                         <img class="profile" src="<?php echo (empty($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="" style="width: 150px;height: 150px;">
                     </div>
                     <div class="form-group">
-                        <label for="">Change picture</label>
+                        <label for="">เปลี่ยนรูปโปรไฟล์ </label>
                         <input type="file" class="form-control" name="profile" value="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                    <button type="submit" class="btn btn-primary">แก้ไขข้อมูล</button>
                 </div>
             </form>
         </div>

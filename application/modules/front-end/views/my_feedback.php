@@ -1,7 +1,7 @@
 <?php $teamId = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array(); ?>
 <?php $status_c = $this->db->get_where('tbl_feedback', ['teamId' => $teamId['IdTeam']])->row_array(); ?>
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Feedback</h2>
+<h2 class="text-center" style="margin-top: 15px;"> แก้ไขงานของฉัน </h2>
 <hr class="line_package">
 <?php if (!empty($feedback)) { ?>
     <br>
@@ -27,13 +27,13 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">ID Order</th>
-                                <th scope="col">Date required</th>
-                                <th scope="col">Team File</th>
-                                <th scope="col">Feedback File</th>
-                                <th scope="col">Note</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Select item</th>
+                                <th scope="col">รหัสออร์เดอร์</th>
+                                <th scope="col">วันส่งออร์เดอร์</th>
+                                <th scope="col">ไฟล์ที่ได้รับ</th>
+                                <th scope="col">ไฟล์แก้ไขงาน</th>
+                                <th scope="col">หมายเหตุ</th>
+                                <th scope="col">สถานะ</th>
+                                <th scope="col">สาขา</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,7 +61,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Team File</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">ไฟล์ที่ส่งแล้ว</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -71,10 +71,10 @@
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Document</th>
-                                                                            <th scope="col">Downloads</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ไฟล์ของฉัน</th>
+                                                                            <th scope="col">ดาวน์โหลด</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -86,7 +86,7 @@
                                                                                 </td>
                                                                                 <td><a href="<?= $doc_old['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                                 <td>
-                                                                                    <a href="<?= $doc_old['path']; ?>" class="btn btn-info" download><i class="fa fa-download"></i> Download</a>
+                                                                                    <a href="<?= $doc_old['path']; ?>" class="btn btn-info" download><i class="fa fa-download"></i> ดาวน์โหลด</a>
                                                                                 </td>
                                                                             </tr>
                                                                         <?php } ?>
@@ -115,7 +115,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">ไฟล์แก้ไขงาน</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -126,10 +126,10 @@
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Document</th>
-                                                                            <th scope="col">Downloads</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ไฟล์ของฉัน</th>
+                                                                            <th scope="col">ดาวน์โหลด</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -152,7 +152,7 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,7 +169,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">หมายเหตุ</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -180,7 +180,7 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">Close</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>

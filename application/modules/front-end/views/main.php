@@ -33,25 +33,32 @@
 
 <body>
 
-  <div class="row">
-    <div class="col-md-6 bk-main-imgL">
+  <div class="row bk-main-imgL" >
+    <div class="col-md-6 " style="height: 100vh;">
         <div class="bk-main-black">
             <div class="team-R-center">
+                <h2 style="color: #ffff;    padding-top: 20px;">Anytime we can earn money</h2>
+                <br>
+                <br>
                 <img src="uploads/Main/regis_icon.png" alt="icon">
-                <h4 style="color: #ffff;    padding-top: 20px;">ฉันต้องการเป็นทีมงาน</h4>
+                <!-- <h3 style="color: #ffff;    padding-top: 20px;">สมัครเป็นติวเตอร์</h3> -->
                 <div style="padding-top: 20px;">
-                    <a href="register-team" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-success"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นทีมงาน</a>
+                    <a href="register-team" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-info"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นติวเตอร์</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 bk-main-imgR">
+    <div class="col-md-6 " style="height: 100vh;">
       <div class="bk-main-whith">
           <div class="team-R-center">
+              <h2 style="color: #000;    padding-top: 20px;">Everytime we can learn</h2>
+              <br>
+              <br>
+
               <img src="uploads/Main/regis_icon2.png" alt="icon">
-              <h4 style="color: #000000ba;font-weight: 600;padding-top: 20px;">ฉันต้องการลูกค้า</h4>
+              <!-- <h3 style="color: #000000ba;font-weight: 600;padding-top: 20px;">สมัครเป็นผู้เรียน</h3> -->
               <div style="padding-top: 20px;">
-                  <a href="register" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-primary"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครสมาชิกผู้ใช้</a>
+                  <a href="register" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-success"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นผู้เรียน</a>
               </div>
           </div>
       </div>

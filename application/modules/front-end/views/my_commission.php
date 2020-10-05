@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">My Commission</h2>
+<h2 class="text-center" style="margin-top: 15px;">ค่าแนะนำของฉัน</h2>
 <hr class="line_package">
 <br>
 <?php foreach ($commission as $key => $data) {
@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-                    <span style="font-size:16px;">Search for date : </span>
+                    <span style="font-size:16px;">ค้นหาวันที่ : </span>
                     <form action="my-selling" method="GET">
                         <div style="display:flex; margin-bottom:1.3em;">
                             <input type="date" name="search_key" class="form-control" style="width:70%">
@@ -27,7 +27,7 @@
                             <?php $z += 1; ?>
                         <?php } ?>
                         <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                        <div>Order</div>
+                        <div>ออเดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -37,12 +37,10 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <!-- <th scope="col">ผู้ที่เติมแนะนำ</th> -->
-                                <!-- <th scope="col">ผู้แนะนำ</th> -->
-                                <th>Item (รายการ)</th>
-                                <!-- <th scope="col">Detail (รายละเอียด)</th> -->
-                                <th scope="col">Date (วันที่)</th>
-                                <th scope="col">Amount (จำนวนค่าแนะนำที่ได้)</th>
+
+                                <th> รายการ</th>
+                                <th scope="col">วันที่</th>
+                                <th scope="col">จำนวนค่าแนะนำที่ได้</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
@@ -51,10 +49,8 @@
                         <tbody>
                             <?php foreach ($commission as $key => $commission) { ?>
                                 <tr style="text-align:center;">
-                                    <!-- <td><?php echo $commission['commission_recipient']; ?></td> -->
-                                    <!-- <td><?php echo $commission['commission_inviter']; ?></td> -->
                                     <td>Commission</td>
-                                   
+
                                     <td><?php echo date("d F Y", strtotime($commission['create_at'])); ?></td>
                                     <td><?php echo number_format($commission['commission_price']); ?></td>
                                 </tr>
@@ -74,8 +70,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Commission</h1>
-                        <h2>Data Not Found</h2>
+                        <h1 style="font-size: 150px;">ไม่มีค่าแนะนำของฉัน</h1>
+                        <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>
             </div>

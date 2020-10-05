@@ -28,15 +28,15 @@
                 <!--register area start-->
                 <div class="col-lg-10 col-md-8">
                     <div class="account_form register">
-                        <h2 style="text-align: center;">Sign Up</h2>
+                        <h2 style="text-align: center;">สมัครเป็นผู้เรียน</h2>
                         <form action="register_success" method="POST" name="thisForm">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Countries <span class="red">*</span></label>
+                                    <label>เลือกประเทศ <span class="red">*</span></label>
                                     <!-- <input type="number" name="passport" required> -->
                                     <select class="form-control" name="countries" required>
-                                        <option selected disabled>-- SELECT COUNTRIES --</option>
+                                        <option selected disabled>-- เลือกประเทศ --</option>
                                         <?php foreach ($countries as $key => $countries) { ?>
                                             <option value="<?php echo $countries['id']; ?>"><?php echo $countries['countryName']; ?></option>
                                         <?php } ?>
@@ -46,26 +46,33 @@
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Name <span class="red">*</span></label>
+                                    <label>ชื่อ <span class="red">*</span></label>
                                     <input type="text" name="username" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Email <span class="red">*</span></label>
+                                    <label>นามสกุล <span class="red">*</span></label>
+                                    <input type="text" name="last_name" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>อีเมล์ <span class="red">*</span></label>
                                     <input type="email" name="email" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Phone Number <span class="red">* (Should not wear a special symbol /*-+\)</span> </label>
+                                    <label>หมายเลขโทรศัพท์ <span class="red">* (Should not wear a special symbol /*-+\)</span> </label>
                                     <input type="number" name="phone" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Passwords <span class="red"> Please enter a password of at least 8 characters. *</span></label>
+                                    <label>รหัสผ่าน <span class="red"> Please enter a password of at least 8 characters. *</span></label>
                                     <div class="input-group mb-3" id="show_hide_password">
                                         <input type="password" id="password" name="password" onblur="check();" minlength="8" class="form-control" aria-describedby="basic-addon1" required>
                                         <div class="input-group-prepend">
@@ -76,7 +83,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>Comfirm password <span class="red">*</span><span id="message"></span></label>
+                                    <label>ยืนยันรหัสผ่าน <span class="red">*</span><span id="message"></span></label>
                                     <div class="input-group mb-3" id="show_hide_password">
                                         <input type="password" id="c_password" name="c_password" class="form-control" minlength="8" aria-describedby="basic-addon1" required>
                                         <div class="input-group-prepend">
@@ -89,7 +96,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <div class="login_submit">
-                                        <button type="submit">Save</button>
+                                        <button type="submit">บันทึก</button>
                                     </div>
                                 </div>
                             </div>

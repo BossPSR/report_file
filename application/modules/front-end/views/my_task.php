@@ -62,7 +62,7 @@
                     <p>“คุณมีเวลา12ชม.สุดท้ายในการส่งOrder ระบบจะหักรายได้ $10 จากMy income แบบ Auto แต่หากส่งก่อนเวลา12ชม.จะเริ่มระบบจะไม่หัก หากทีมงานไม่มียอดให้หักระบบจะติดลบไว้ กรณีนี้ต่อให้ไม่มีการ Delivery ก็หัก $10"</p>
                     <br>
                     <center>
-                        <a href="#" class="btn btn-primary">ACCEPT</a>
+                        <a href="#" class="btn btn-primary">ยอมรับ</a>
                     </center>
                 </div>
             </div>
@@ -89,17 +89,18 @@
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">Date Requred</th>
-                                <th scope="col">ID Order</th>
-                                <th scope="col">Main Doc</th>
-                                <th scope="col">GT Doc</th>
-                                <th scope="col">DM Doc</th>
-                                <th scope="col">Team File</th>
-                                <th scope="col">Wage</th>
-                                <th scope="col">Select item</th>
-                                <th scope="col">Date confirm</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Option</th>
+                                <!-- <th scope="col">#</th> -->
+                                <th scope="col">เวลาคงเหลือ</th>
+                                <th scope="col">รหัสออร์เดอร์</th>
+                                <th scope="col" style="width: 100px;">รายละเอียดคำสั่งงาน</th>
+                                <th scope="col">ข้อมูลประกอบ</th>
+                                <th scope="col">ตัวอย่างงาน</th>
+                                <th scope="col">ไฟล์ที่ส่งแล้ว</th>
+                                <th scope="col">เรทค่าตอบแทน</th>
+                                <th scope="col">สาขา</th>
+                                <th scope="col">วันที่กดรับออร์เดอร์</th>
+                                <th scope="col">สถานะ</th>
+                                <th scope="col">ยกเลิกออร์เดอร์ </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,8 +114,8 @@
                             $ooo2 = 1;
                             ?>
                             <?php foreach ($task as $task) { ?>
-                                <tr style="text-align:center;">
-
+                                <tr style="text-align:center;" data-toggle="collapse" data-target="#chril<?= $task['or_id']; ?>" class="accordion-toggle">
+                                    <!-- <td><button class="btn btn-default btn-xs cilckeye $task['or_id']; ?>"><span class="fa fa-eye"></span></button></td> -->
                                     <!-- Date Requred -->
                                     <td>
                                         <?php if ($task['status_approved'] == 1) : ?>
@@ -194,7 +195,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Main Document new</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">รายละเอียดคำสั่งงาน (ใหม่)</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -204,10 +205,10 @@
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
-                                                                        <th scope="col">ID Order</th>
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Info</th>
-                                                                        <th scope="col">Downloads</th>
+                                                                        <th scope="col">รหัสออร์เดอร์</th>
+                                                                        <th scope="col">ชื่อไฟล์</th>
+                                                                        <th scope="col">ไฟล์ของฉัน</th>
+                                                                        <th scope="col">ดาวน์โหลด</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -218,7 +219,7 @@
                                                                             <td><a href="<?php echo $backmain['path_m']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                             <td>
                                                                                 <a href="<?php echo $backmain['path_m']; ?>" class="btn btn-primary" download>
-                                                                                    <i class="fa fa-download"></i> Download
+                                                                                    <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
@@ -227,7 +228,7 @@
                                                             </table>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -241,7 +242,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Main Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">รายละเอียดคำสั่งงาน</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -251,10 +252,10 @@
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Info</th>
-                                                                            <th scope="col">Downloads</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ไฟล์ของฉัน</th>
+                                                                            <th scope="col">ดาวน์โหลด</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -265,7 +266,7 @@
                                                                                 <td><a href="<?php echo $taskmain['path']; ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                                 <td>
                                                                                     <a href="<?php echo $taskmain['path']; ?>" class="btn btn-primary" download>
-                                                                                        <i class="fa fa-download"></i> Download
+                                                                                        <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                     </a>
                                                                                 </td>
                                                                             </tr>
@@ -274,7 +275,7 @@
                                                                 </table>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -312,7 +313,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel">GT Document new</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">ข้อมูลประกอบ (ใหม่)</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -322,10 +323,10 @@
                                                                 <table class="table">
                                                                     <thead class="thead-light">
                                                                         <tr style="text-align:center;">
-                                                                            <th scope="col">ID Order</th>
-                                                                            <th scope="col">File</th>
-                                                                            <th scope="col">Info</th>
-                                                                            <th scope="col">Downloads</th>
+                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                            <th scope="col">ไฟล์ของฉัน</th>
+                                                                            <th scope="col">ดาวน์โหลด</th>
 
                                                                         </tr>
                                                                     </thead>
@@ -337,7 +338,7 @@
                                                                                 <td><a href="show-pdf?dcnumber=<?= base64_encode($backgt['path_g']); ?>" target="_bank"><i class="fa fa-file-text-o"></i></a></td>
                                                                                 <td>
                                                                                     <a href="<?php echo $backgt['path_g']; ?>" class="btn btn-primary" download>
-                                                                                        <i class="fa fa-download"></i> Download
+                                                                                        <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                     </a>
                                                                                 </td>
                                                                             </tr>
@@ -347,7 +348,7 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -363,7 +364,7 @@
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">GT Document</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">ข้อมูลประกอบ </h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -373,10 +374,10 @@
                                                                     <table class="table zero-configuration">
                                                                         <thead>
                                                                             <tr style="background: aliceblue;">
-                                                                                <th>Order_id</th>
-                                                                                <th>File_name</th>
-                                                                                <th>File</th>
-                                                                                <th>create</th>
+                                                                                <th scope="col">รหัสออร์เดอร์</th>
+                                                                                <th scope="col">ชื่อไฟล์</th>
+                                                                                <th scope="col">ไฟล์ของฉัน</th>
+                                                                                <th>เวลา</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -409,10 +410,10 @@
                                                                         <table class="table zero-configuration">
                                                                             <thead>
                                                                                 <tr style="background: aliceblue;">
-                                                                                    <th>Order id</th>
-                                                                                    <th>File name</th>
-                                                                                    <th>File</th>
-                                                                                    <th>create</th>
+                                                                                    <th scope="col">รหัสออร์เดอร์</th>
+                                                                                    <th scope="col">ชื่อไฟล์</th>
+                                                                                    <th scope="col">ไฟล์ของฉัน</th>
+                                                                                    <th>เวลา</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -459,7 +460,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">DM Document</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel"> ตัวอย่างงาน</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -471,9 +472,9 @@
                                                                 <thead class="thead-light">
                                                                     <tr style="text-align:center;">
                                                                         <!-- <th scope="col">ID Order</th> -->
-                                                                        <th scope="col">File</th>
-                                                                        <th scope="col">Info</th>
-                                                                        <th scope="col">Downloads</th>
+                                                                        <th scope="col">ชื่อไฟล์</th>
+                                                                        <th scope="col">ไฟล์ของฉัน</th>
+                                                                        <th scope="col">ดาวน์โหลดs</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -490,7 +491,7 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -514,7 +515,7 @@
                                                 <div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Team Folder</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">โฟลเดอร์ทีมงาน</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -523,9 +524,9 @@
                                                             <table class="table">
                                                                 <thead class="thead-light">
                                                                     <tr>
-                                                                        <th>Folder name</th>
-                                                                        <th>Folder</th>
-                                                                        <th>create</th>
+                                                                        <th>ชื่อโฟลเดอร์</th>
+                                                                        <th>โฟลเดอร์</th>
+                                                                        <th>เวลาสร้าง</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -539,7 +540,7 @@
                                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                                         <div class="modal-content">
                                                                                             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                                                                                                <h5 class="modal-title" id="exampleModalLabel">Team File (<?php echo $teamfile['name_folder']; ?>)</h5>
+                                                                                                <h5 class="modal-title" id="exampleModalLabel">ไฟล์ของทีมงาน (<?php echo $teamfile['name_folder']; ?>)</h5>
                                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                     <span aria-hidden="true">&times;</span>
                                                                                                 </button>
@@ -549,10 +550,10 @@
                                                                                                 <table class="table">
                                                                                                     <thead class="thead-light">
                                                                                                         <tr style="text-align:center;">
-                                                                                                            <th scope="col">ID Order</th>
-                                                                                                            <th scope="col">File name</th>
-                                                                                                            <th scope="col">File</th>
-                                                                                                            <th scope="col">Downloads</th>
+                                                                                                            <th scope="col">รหัสออร์เดอร์</th>
+                                                                                                            <th scope="col">ชื่อไฟล์</th>
+                                                                                                            <th scope="col">ไฟล์ของฉัน</th>
+                                                                                                            <th scope="col">ดาวน์โหลด</th>
                                                                                                         </tr>
                                                                                                     </thead>
                                                                                                     <tbody>
@@ -567,7 +568,7 @@
                                                                                                                 </td>
                                                                                                                 <td>
                                                                                                                     <a href="<?php echo $orderTgroup['path']; ?>" class="btn btn-primary" download>
-                                                                                                                        <i class="fa fa-download"></i> Download
+                                                                                                                        <i class="fa fa-download"></i> ดาวน์โหลด
                                                                                                                     </a>
                                                                                                                 </td>
                                                                                                             </tr>
@@ -578,7 +579,7 @@
 
                                                                                             </div>
                                                                                             <div class="modal-footer">
-                                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -595,7 +596,7 @@
 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -629,17 +630,17 @@
 
 
                                         <?php if ($task['c_status'] == 3) { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback</span></td>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">แก้ไขงาน</span></td>
                                         <?php } elseif (empty($withh)) { ?>
 
                                             <td>
                                                 <?php if ($task['end_time_withdraw'] > date('Y-m-d')) : ?>
-                                                    <button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> Withdraw </button>
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> ถอนรายได้ </button>
                                                     <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Withdraw (<?php echo $task['or_id']; ?>)</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">ถอนรายได้ (<?php echo $task['or_id']; ?>)</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -662,15 +663,15 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="button" data-orderq="<?php echo $task['or_id'] ?>" id="star" class="btn btn-primary">Save changes</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                                                                    <button type="button" data-orderq="<?php echo $task['or_id'] ?>" id="star" class="btn btn-primary">ยืนยัน</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                 <?php else : ?>
-                                                    <span class="badge badge-info" style="color:#fff;font-size:16px;">Withdraw Expired </span>
+                                                    <span class="badge badge-info" style="color:#fff;font-size:16px;">การถอนหมดอายุ </span>
                                                 <?php endif; ?>
                                             </td>
                                             <script>
@@ -715,11 +716,11 @@
                                                 });
                                             </script>
                                         <?php } elseif ($withh['status'] == 1) { ?>
-                                            <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">Wait for withdraw</span></td>
+                                            <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">รอการถอนเงิน</span></td>
                                         <?php } elseif ($withh['status'] == 2) { ?>
-                                            <td><span class="badge badge-success" style="font-size:16px;">Payment successfully</span></td>
+                                            <td><span class="badge badge-success" style="font-size:16px;">ชำระเงินเรียบร้อย</span></td>
                                         <?php } else { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> Have a problem</span></td>
+                                            <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออเดอร์มีปัญหา</span></td>
                                         <?php } ?>
 
 
@@ -740,17 +741,23 @@
                                         ?>
 
                                         <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
-                                            <td><span class="badge badge-warning" style="font-size:16px;">Processing</span></td>
+                                            <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == $team['IdTeam']) : ?>
+                                                <td><span class="badge badge-warning" style="font-size:16px;">Direct Order</span></td>
+
+                                            <?php else : ?>
+                                                <td><span class="badge badge-warning" style="font-size:16px;">กำลังทำงาน</span></td>
+
+                                            <?php endif; ?>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
-                                            <td><span class="badge badge-info" style="font-size:16px;">Waiting for Approved</span></td>
+                                            <td><span class="badge badge-info" style="font-size:16px;">ส่งงานแล้ว</span></td>
                                         <?php } elseif ($task['c_status'] == 2) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Feedback <?= $z; ?></span></td>
                                         <?php } elseif ($task['c_status'] == 3) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback <?= $c; ?></span></td>
                                         <?php } elseif ($task['c_status'] == 4) { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">Not complete </span></td>
+                                            <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">ไม่ผ่านเกณฑ์ </span></td>
                                         <?php } elseif ($task['c_status'] == 5) { ?>
-                                            <td><span class="badge badge-success" style="font-size:16px;">Complete </span></td>
+                                            <td><span class="badge badge-success" style="font-size:16px;">สมบูรณ์ </span></td>
                                         <?php } else { ?>
                                             <td>-</td>
                                         <?php } ?>
@@ -804,7 +811,7 @@
                                                                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                                                                     <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
                                                                     <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Cancel Order Team</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">ทีมงานยกเลิกออเดอร์</h5>
 
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -817,8 +824,8 @@
                                                                     <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                                                                    <button type="submit" class="btn btn-success">ยืนยัน</button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -836,7 +843,7 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                                                                     <input type="text" value="<?php echo $task['or_id']; ?>" name="order_id" hidden>
-                                                                    <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">Cancel Order (<?php echo $task['or_id']; ?>) <br>
+                                                                    <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">ยกเลิกออเดอร์ (<?php echo $task['or_id']; ?>) <br>
                                                                         <span style="color : red">
                                                                             * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
                                                                         </span>
@@ -849,8 +856,8 @@
                                                                     <textarea name="note_can" id="" rows="5" class="form-control" required></textarea>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                                                                    <button type="submit" class="btn btn-success">ยืนยัน</button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -866,6 +873,57 @@
                                         <td><button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
                                     <?php endif; ?>
                                 </tr>
+                                <td colspan="12" class="hiddenRow<?= $task['or_id']; ?>" style="display: none;">
+                                    <div class="accordian-body collapse" id="chril<?= $task['or_id']; ?>">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-right">เรทค่าตอบแทน</th>
+                                                    <th class="text-center">วันที่กดรับออร์เดอร์</th>
+                                                    <th class="text-center">สถานะ </th>
+                                                    <th class="text-center"> ยกเลิกออร์เดอร์</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-right"> <span class="badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span></td>
+                                                    <td class="text-center"><?php echo date('d F Y', strtotime($task['update_confirm'])); ?></td>
+                                                    <?php if ($task['c_status'] == 0 && $task['status_approved'] == 0) { ?>
+                                                        <?php if ($task['status_check_team'] == '1' && $task['t_ch'] == $team['IdTeam']) : ?>
+                                                            <td><span class="badge badge-warning" style="font-size:16px;">Direct Order</span></td>
+
+                                                        <?php else : ?>
+                                                            <td><span class="badge badge-warning" style="font-size:16px;">กำลังทำงาน</span></td>
+
+                                                        <?php endif; ?>
+                                                    <?php } elseif ($task['c_status'] == 1) { ?>
+                                                        <td><span class="badge badge-info" style="font-size:16px;">ส่งงานแล้ว</span></td>
+                                                    <?php } elseif ($task['c_status'] == 2) { ?>
+                                                        <td><span class="badge badge-danger" style="font-size:16px;">Feedback </span></td>
+                                                    <?php } elseif ($task['c_status'] == 3) { ?>
+                                                        <td><span class="badge badge-danger" style="font-size:16px;">Re Feedback </span></td>
+                                                    <?php } elseif ($task['c_status'] == 4) { ?>
+                                                        <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">ไม่ผ่านเกณฑ์ </span></td>
+                                                    <?php } elseif ($task['c_status'] == 5) { ?>
+                                                        <td><span class="badge badge-success" style="font-size:16px;">สมบูรณ์ </span></td>
+                                                    <?php } else { ?>
+                                                        <td>-</td>
+                                                    <?php } ?>
+                                                    <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_taskODB86" data-toggled="tooltip" data-placement="top" title="" data-original-title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        $(".cilckeye<?= $task['or_id']; ?>").click(function() {
+                                            $(".hiddenRow<?= $task['or_id']; ?>").toggle();
+                                        });
+                                    });
+                                </script>
                                 <script type="text/javascript">
                                     $(document).ready(function() {
                                         if (<?= $task['status']; ?> == 4 && <?= $task['check_popup_nocom']; ?> == 0) {
@@ -892,8 +950,8 @@
                                                 <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" id="popup<?= $task['idteam']; ?>" class="btn btn-primary">Save changes</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" id="popup<?= $task['idteam']; ?>" class="btn btn-primary">ยันยิน</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                             </div>
                                         </div>
                                     </div>
@@ -914,6 +972,7 @@
                                 </script>
 
                             <?php } ?>
+
 
                             <script>
                                 $('#download<?php echo $key; ?>').click(function() {

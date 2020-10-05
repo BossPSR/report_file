@@ -52,13 +52,13 @@
             <!--register area start-->
             <div class="col-lg-10 col-md-10">
                 <div class="account_form register">
-                    <h2 class="text-center">สมัครสมาชิก (สำหรับทีมงาน)</h2>
+                    <h2 class="text-center">สมัครเป็นติวเตอร์</h2>
                     <form action="register-team-success" method="POST" id="myLogin" enctype="multipart/form-data">
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label> <span class="red">*</span></label>
+                                    <label>เลือกประเทศ <span class="red">*</span></label>
                                     <select class="form-control" name="countries" id="cs">
                                         <option selected disabled>-- SELECT COUNTRIES --</option>
                                         <?php foreach ($countries as $key => $countries) { ?>

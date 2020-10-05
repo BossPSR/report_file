@@ -165,7 +165,7 @@ $sm_del = $this->db->get()->row_array();
           method: 'post',
           data: {
             paypal_price: paypal_price,
-            userId: <?php echo $userId['id']; ?>,
+            userId: '<?php echo $userId['idUser']; ?>',
           },
           success: function(response) {
             let dataSucces = JSON.parse(response);
