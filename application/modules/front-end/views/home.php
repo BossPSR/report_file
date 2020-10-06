@@ -250,6 +250,7 @@
             <div class="col-lg-6 col-md-12 mt-5 text-center ">
                 <div class="text-white mb-3" style="background-color: #292580;width: 70%;padding: 20px;font-size: 24px;margin: auto;">
                     www.totorlearner.com คืออะไร
+                     <!--  $this->lang->line("welcometoTutorlearner"); ?> -->
                 </div>
                 <div class="text-white" style="background-color: #292580;width: 70%;padding: 35px 0 35px 0px;font-size: 22px;margin: auto;line-height: 31px;">
                     <div> เราคือเพลตฟอร์มเว็บไซต์ผู้ให้บริการ </div>

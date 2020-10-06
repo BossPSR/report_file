@@ -196,14 +196,14 @@ class Order_ctr extends CI_Controller
     $row            = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
     $user           = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
 
-    if ($row == true) {
-      $data = array(
-        'status'      => 3,
-      );
+    // if ($row == true) {
+    //   $data = array(
+    //     'status'      => 3,
+    //   );
 
-      $this->db->where('order_id', $order_id);
-      $this->db->update('tbl_upload_team', $data);
-    }
+    //   $this->db->where('order_id', $order_id);
+    //   $this->db->update('tbl_upload_team', $data);
+    // }
 
     if ($this->session->userdata('email') == '') {
       redirect('home');
@@ -220,18 +220,18 @@ class Order_ctr extends CI_Controller
 
       $this->db->where('order_id', $order_id);
       $success = $this->db->update('tbl_upload_order', $data02);
-      if ($success) {
-        $insert01 = array(
-          'teamId'          => $row['teamId'],
-          'order_id'        => $order_id,
-          'userId'          => $user['idUser'],
-          'create_at'       => date("Y-m-d H:i:s"),
-          'check_status'    => 1,
-          're_feedback'     => 1,
-        );
+      // if ($success) {
+      //   $insert01 = array(
+      //     'teamId'          => $row['teamId'],
+      //     'order_id'        => $order_id,
+      //     'userId'          => $user['idUser'],
+      //     'create_at'       => date("Y-m-d H:i:s"),
+      //     'check_status'    => 0,
+      //     're_feedback'     => 1,
+      //   );
 
-        $this->db->insert('tbl_feedback', $insert01);
-      }
+      //   $this->db->insert('tbl_feedback', $insert01);
+      // }
 
       echo $success;
     }

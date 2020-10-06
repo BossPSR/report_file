@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>หมายเลขโทรศัพท์ <span class="red">* (Should not wear a special symbol /*-+\)</span></label>
+                                    <label>หมายเลขโทรศัพท์ <span class="red">* (ไม่ควรสวมสัญลักษณ์พิเศษ /*-+\)</span></label>
                                     <input type="number" name="phone" class="form-control" required>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>รหัสผ่าน <span class="red"> Please enter a password of at least 8 characters. *</span></label>
+                                    <label>รหัสผ่าน <span class="red"> โปรดป้อนรหัสผ่านอย่างน้อย 8 ตัวอักษร *</span></label>
                                     <div class="input-group mb-3" id="show_hide_password">
                                         <input type="password" id="password" name="password" onblur="check();" minlength="8" class="form-control" aria-describedby="basic-addon1" required>
                                         <div class="input-group-prepend">
@@ -156,12 +156,12 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 noneb" style="display: none;">
                                 <div class="form-group">
                                     <label for="">กรอกเลขบัตรประชาชน <span style="color: red;">*</span></label>
-                                    <input type="text" id="ID_card_number" class="form-control" name="ID_card_number" value="">
+                                    <input type="text" id="ID_card_number" class="form-control" name="id_card_number" value="">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 noneb" style="display: none;">
                                 <div class="form-group">
-                                    <label for="">ที่อยู่ <span style="color: red;">*</span></label>
+                                    <label for="">ที่อยู่ตามบัตรประชาชน <span style="color: red;">*</span></label>
                                     <input type="text" id="address" class="form-control" name="address" value="">
                                 </div>
                             </div>
@@ -197,7 +197,7 @@
                                     </div>
                                     <div class="form-group col-sm-12 col-xs-12 col-md-6">
                                         <label for="">รูปถ่ายคู่กับบัตรประชาชน <span style="color: red;">*</span></label>
-                                        <input type="file" id="file_name_card_number2" class="form-control" name="file_name_card_number2" accept="image/jpeg, image/png" required style="padding: 10px 20px;height: auto;">
+                                        <input type="file" id="file_name_card_number2" class="form-control" name="file_name_card_number_user" accept="image/jpeg, image/png" required style="padding: 10px 20px;height: auto;">
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@
                                 <div class="row">
                                     <div class="form-group col-sm-12 col-xs-12 col-md-4">
                                         <label for="">ธนาคาร <span style="color: red;">*</span></label>
-                                        <select class="form-control" id="bank2" name="bank">
+                                        <select class="form-control" id="bank2" name="bank_name">
                                             <option value="" disabled selected>กรุณาเลือกธนาคาร</option>
                                             <option value="ไทยพาณิชย์">ไทยพาณิชย์</option>
                                             <option value="กรุงไทย">กรุงไทย</option>
@@ -217,7 +217,7 @@
                                     </div>
                                     <div class="form-group col-sm-12 col-xs-12 col-md-8">
                                         <label for="">เลขบัญชีธนาคาร <span style="color: #bbbbbb;">ต้องเป็นชื่อเดียวกันกับชื่อบัญชีธนาคารหรือ บัญชีธนาคาร</span></label>
-                                        <input type="text" id="bank" class="form-control" name="bank_account" value="">
+                                        <input type="text" id="bank" class="form-control" name="bank_number" value="">
                                     </div>
                                 </div>
                             </div>

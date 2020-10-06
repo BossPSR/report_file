@@ -53,6 +53,7 @@ class My_feedback_ctr extends CI_Controller
         $teamId     = $this->input->post('teamId');
         $refdata    = $this->input->post('refdata');
         $teamdb     = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
+        $date180    = date('Y-m-d' , strtotime('+180 day'));
         // $feedbackdb = $this->db->get_where('tbl_feedback', ['order_id' => $order_id])->row_array();
 
         if ($refdata == 1) {
@@ -73,11 +74,74 @@ class My_feedback_ctr extends CI_Controller
 
         if ($order_id) {
             $status_order = array(
-                'status_approved' => $s,
-                'status_delivery' => '0'
+                'status_approved'   => $s,
+                'status_delivery'   => '0' ,
+                'end_time_feedback' => $date180
             );
             $this->db->where('order_id', $order_id);
             $this->db->update('tbl_upload_order', $status_order);
+        }
+
+        // if ($feedbackdb == true) {
+        //     $status_order = array(
+        //         'status_c_feedack_team' => '2',
+        //     );
+        //     $this->db->where('order_id', $order_id);
+        //     $this->db->update('tbl_feedback', $status_order);
+        // }
+
+        $orf = array(
+            'feedback_detail'   => $detail,
+            'order_id'          => $order_id,
+            'teamId'            => $teamId,
+            'userId'            => $userId,
+            'create_at'         => date('Y-m-d H:i:s'),
+            'dated'             => $dated,
+            'check_status'      => 1,
+            're_feedback'       => $refdata,
+        );
+        $this->db->insert('tbl_feedback', $orf);
+
+
+        echo $success;
+    }
+
+    public function order_auto_refeedback()
+    {
+        $dated      = $this->input->post('dated');
+        $detail     = $this->input->post('detail');
+        $order_id   = $this->input->post('order_id');
+        $userId     = $this->input->post('userId');
+        $teamId     = $this->input->post('teamId');
+        $refdata    = $this->input->post('refdata');
+        $teamdb     = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id])->row_array();
+        $date180    = date('Y-m-d' , strtotime('+180 day'));
+        // $feedbackdb = $this->db->get_where('tbl_feedback', ['order_id' => $order_id])->row_array();
+
+        if ($refdata == 1) {
+            $s = 4;
+            $g = 3;
+        } else {
+            $s = 3;
+            $g = 2;
+        }
+
+        // if ($teamdb == true) {
+        //     $team = array(
+        //         'status' => $g
+        //     );
+        //     $this->db->where('order_id', $order_id);
+        //     $success = $this->db->update('tbl_upload_team', $team);
+        // }
+
+        if ($order_id) {
+            $status_order = array(
+                'status_approved'   => $s,
+                'status_delivery'   => '0' ,
+                'end_time_feedback' => $date180
+            );
+            $this->db->where('order_id', $order_id);
+            $success = $this->db->update('tbl_upload_order', $status_order);
         }
 
         // if ($feedbackdb == true) {

@@ -185,7 +185,7 @@ class Buy_ctr extends CI_Controller
   public function order_download()
   {
     $order_id = $this->input->get('order_id');
-    $get_list = $this->db->get_where('tbl_upload_order', ['order_id' => "ODB" . $order_id])->result_array();
+    $get_list = $this->db->get_where('tbl_upload_order', ['order_id' => "ODN" . $order_id])->result_array();
 
     foreach ($get_list as $key => $get_list) {
       $success = force_download($get_list['path'], $get_list['file_name']);
@@ -207,7 +207,7 @@ class Buy_ctr extends CI_Controller
     if ($this->db->insert('tbl_order_f', $orf)) {
       $insert_id = $this->db->insert_id();
       $update = array(
-        'order_main'    => 'ODB' . $insert_id,
+        'order_main'    => 'ODN' . $insert_id,
       );
       $this->db->where('id', $insert_id);
       $this->db->update('tbl_order_f', $update);
@@ -293,7 +293,7 @@ class Buy_ctr extends CI_Controller
     $message .= '</div>';
     $message .= '<div class="row">';
     $message .= '<p>Hey "' . $userId['username'] . '",</p>';
-    $message .= '<p>You have been Order number <span style="color: #0063d1;">" ODB' . $insert_id . '"</span></p>';
+    $message .= '<p>You have been Order number <span style="color: #0063d1;">" ODN' . $insert_id . '"</span></p>';
     $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
     $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
     $message .= '<p>Check below for your order details.</p><hr>';

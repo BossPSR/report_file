@@ -96,6 +96,7 @@
                                 <th scope="col">ข้อมูลประกอบ</th>
                                 <th scope="col">ตัวอย่างงาน</th>
                                 <th scope="col">ไฟล์ที่ส่งแล้ว</th>
+                                <th scope="col">หมายเหตุ</th>
                                 <th scope="col">เรทค่าตอบแทน</th>
                                 <th scope="col">สาขา</th>
                                 <th scope="col">วันที่กดรับออร์เดอร์</th>
@@ -610,16 +611,43 @@
                                         <?php } ?>
                                     </td>
 
+                                    <td>
+                                        <?php if (!empty($task['noteteam'])) { ?>
+                                            <a href="#" data-toggle="modal" data-target="#NOTE<?php echo $task['idteam']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="NOTE<?php echo $task['idteam']; ?>" tabindex="-1" role="dialog" aria-labelledby="note" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <h5 class="modal-title" id="exampleModalLabel">หมายเหตุ</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <p style="font-size:16px;font-weight:bold;"><?= $task['noteteam']; ?></p>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close"">ปิดหน้าต่าง</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
+                                    </td>
+
                                     <!-- wage -->
                                     <td>
-                                        <span class="badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
+                                        <span class=" badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
                                     </td>
 
                                     <?php $data = date('Y-m-d') ?>
                                     <?php $prosum = date('Y-m-d', strtotime('+65 day' . '+' . $task['up_order'])); ?>
-                                    <?php $or_sub = substr($task['or_id'], 3); ?>
-                                    <?php $te_sub = substr($team['IdTeam'], 2); ?>
-
+                                
                                     <!-- name_item -->
                                     <td><?php echo $task['name_item']; ?></td>
 
@@ -910,7 +938,7 @@
                                                     <?php } else { ?>
                                                         <td>-</td>
                                                     <?php } ?>
-                                                    <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_taskODB86" data-toggled="tooltip" data-placement="top" title="" data-original-title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
+                                                    <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#" data-toggled="tooltip" data-placement="top" title="" data-original-title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
                                                 </tr>
                                             </tbody>
                                         </table>

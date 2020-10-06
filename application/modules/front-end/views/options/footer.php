@@ -274,7 +274,7 @@
     <?php endif; ?>
 
     <?php if ($this->session->flashdata('success_regis_team')) : ?>
-        swal("Good job!", "Register successfull.", "success");
+        swal("ยินดีด้วย!", "คุณได้ทำการสมัครเป็นติวเตอร์แล้ว กรุณารอแอดมินตรวจสอบและจะส่งอีเมล์แจ้งให้ทราบ", "success");
     <?php endif; ?>
     <?php if ($this->session->flashdata('fail_regis_team')) : ?>
         swal("fill !", "Register successfull.", "error");

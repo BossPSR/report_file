@@ -28,7 +28,7 @@
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="single_services listProfile">
-
+                
                     <div class="image_profile">
                         <h2 class="text-center my-income">
                             <div class="name_user m17"> <i class="fa fa-user" style="color: #282390;"></i>

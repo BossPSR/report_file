@@ -122,6 +122,7 @@ $route['order_approverd']           = 'front-end/Order_ctr/order_approved';
 $route['order_not_approved']        = 'front-end/Order_ctr/order_not_approved';
 $route['order_refeedback']          = 'front-end/Order_ctr/order_refeedback';
 $route['Not_approved']              = 'front-end/My_feedback_ctr/order_auto_feedback_notApp';
+$route['order_auto_refeedback']     = 'front-end/My_feedback_ctr/order_auto_refeedback';
 $route['oder-morefile-upload']      = 'front-end/Order_ctr/order_uploadmorefile';
 $route['order_auto_morefile']       = 'front-end/Order_ctr/order_auto_morefile';
 $route['show-pdf']                  = 'front-end/My_stock_ctr/show_pdf';
