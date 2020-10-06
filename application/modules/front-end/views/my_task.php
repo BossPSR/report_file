@@ -746,7 +746,7 @@
                                         <?php } elseif ($withh['status'] == 1) { ?>
                                             <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">รอการถอนเงิน</span></td>
                                         <?php } elseif ($withh['status'] == 2) { ?>
-                                            <td><span class="badge badge-success" style="font-size:16px;">ชำระเงินเรียบร้อย</span></td>
+                                            <td><span class="badge badge-success" style="font-size:16px;">ได้รับเงินแล้ว</span></td>
                                         <?php } else { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออเดอร์มีปัญหา</span></td>
                                         <?php } ?>

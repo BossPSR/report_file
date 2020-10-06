@@ -29,9 +29,9 @@
                             <tr style="text-align:center;">
                                 <th scope="col">รหัสออร์เดอร์</th>
                                 <th scope="col">วันส่งออร์เดอร์</th>
-                                <th scope="col">ไฟล์ที่ได้รับ</th>
+                                <th scope="col">ไฟล์ที่ส่งแล้ว</th>
                                 <th scope="col">ไฟล์แก้ไขงาน</th>
-                                <th scope="col">หมายเหตุ</th>
+                                <th scope="col">คำอธิบาย</th>
                                 <th scope="col">สถานะ</th>
                                 <th scope="col">สาขา</th>
                             </tr>
