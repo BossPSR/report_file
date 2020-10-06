@@ -96,7 +96,7 @@
                                 <th scope="col">ข้อมูลประกอบ</th>
                                 <th scope="col">ตัวอย่างงาน</th>
                                 <th scope="col">ไฟล์ที่ส่งแล้ว</th>
-                                <th scope="col">หมายเหตุ</th>
+                                <th scope="col">คำอธิบาย</th>
                                 <th scope="col">เรทค่าตอบแทน</th>
                                 <th scope="col">สาขา</th>
                                 <th scope="col">วันที่กดรับออร์เดอร์</th>

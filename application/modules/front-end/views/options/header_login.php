@@ -589,7 +589,7 @@
                                                 <ul class="sub_menu pages">
                                                     <li><a class="<?php if($this->uri->segment(1) == 'my_store_team') { echo 'active';} ?>"  href="my_store_team">คะแนน</a></li>
                                                     <li><a class="<?php if($this->uri->segment(1) == 'my_score_team_deduct') { echo 'active';} ?>"  href="my_score_team_deduct">หักคะแนน</a></li>
-                                                    <li><a class="<?php if($this->uri->segment(1) == 'my_income') { echo 'active';} ?>"  href="my_income">ค่าตอบแทน</a></li>
+                                                    <!-- <li><a class="<?php if($this->uri->segment(1) == 'my_income') { echo 'active';} ?>"  href="my_income">ค่าตอบแทน</a></li> -->
                                                     <li><a class="<?php if($this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="my_income_team_deduct">หักค่าตอบแทน</a></li>
 
                                                 </ul>

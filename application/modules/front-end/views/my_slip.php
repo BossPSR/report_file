@@ -46,16 +46,7 @@
 
                 <div class="row">
 
-                    <div class="col-lg-10">
-                    </div>
-                    <div class="col-lg-2">
-                        <?php foreach ($slip_team as $slip_teamcount) { ?>
-                            <?php $ist += 1; ?>
 
-                        <?php } ?>
-                        <div class="text-center"> <?= $ist; ?></div>
-                        <div class="text-center">รายได้ทั้งหมด</div>
-                    </div>
                     <div class="col-lg-12 col-md-12 wall-center shadow-b table-w mtp-20">
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -191,6 +182,17 @@
                         <?php if ($team) { ?>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-10"></div>
+                                        <div class="col-2">
+                                            <?php foreach ($slip_team as $slip_teamcount) { ?>
+                                                <?php $ist += 1; ?>
+
+                                            <?php } ?>
+                                            <div class="text-center" style="font-size: 18px;padding: 5px 0;"> <?= $ist; ?></div>
+                                            <div class="text-center" style="font-size: 17px;">รายได้ทั้งหมด</div>
+                                        </div>
+                                    </div>
                                     <table class="table mt-15">
                                         <thead class="thead-light">
                                             <tr>
@@ -213,7 +215,7 @@
                                                     <?php if ($slip_team['st2'] == 1) { ?>
                                                         <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">รอแอดมินตรวจสอบ</span></td>
                                                     <?php } elseif ($slip_team['st2'] == 2) { ?>
-                                                        <td><span class="badge badge-success" style="font-size:16px;">อนุมัติแล้ว</span></td>
+                                                        <td><span class="badge badge-success" style="font-size:16px;">ได้รับเงินแล้ว</span></td>
                                                     <?php } else { ?>
                                                         <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออเดอร์มีปัญหา</span></td>
                                                     <?php } ?>
