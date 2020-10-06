@@ -24,19 +24,19 @@
 </style>
 <!-- customer login start -->
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="myModal2">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="staticBackdropLabel">ข้อตกลงและเงื่อนไข</h5>
+                <h5 class="modal-title" id="staticBackdropLabel" style="font-size: 20px;">ข้อตกลงและเงื่อนไข</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>1.การลงทะเบียนหรือสมัครบริการของเราผู้เรียนยอมรับที่จะรับอีเมลสมัครสมาชิกเกี่ยวกับการอัปเดตการให้บริการ www.tutorlearner.com หรือข้อเสนอส่งเสริมการขายอื่น ๆ </p>
+                <p style="font-size: 18px;">1.การลงทะเบียนหรือสมัครบริการของเราผู้เรียนยอมรับที่จะรับอีเมลสมัครสมาชิกเกี่ยวกับการอัปเดตการให้บริการ www.tutorlearner.com หรือข้อเสนอส่งเสริมการขายอื่น ๆ </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
 
             </div>
         </div>

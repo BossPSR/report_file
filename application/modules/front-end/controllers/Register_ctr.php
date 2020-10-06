@@ -128,12 +128,6 @@ class Register_ctr extends CI_Controller
 		$id_card_number		= $this->input->post('id_card_number');
 		$line_id			= $this->input->post('line_id');
 
-		// file_nmae
-		$file_name_profile   			= $this->input->post('file_name_profile');
-		$file_name_card_number   		= $this->input->post('file_name_card_number');
-		$file_name_card_number_user   	= $this->input->post('file_name_card_number_user');
-		$file_name_book_bank   			= $this->input->post('file_name_book_bank');
-
 		// Thai
 
 		$username_check     = $this->Login_model->check_usre($email);
@@ -214,7 +208,7 @@ class Register_ctr extends CI_Controller
 					if ($this->db->insert('tbl_team', $data)) {
 						$team_id = $this->db->insert_id();
 
-						if ($file_name_profile) {
+						if (!empty($_FILES['file_name_profile']['name'])) {
 							$config2['upload_path'] 		= 'public/frontend/assets/img/profile/';
 							$config2['allowed_types'] 		= '*';
 							$config2['max_size']    		= '99999'; // max_size in kb
@@ -232,7 +226,7 @@ class Register_ctr extends CI_Controller
 							}
 						}
 
-						if ($file_name_card_number) {
+						if (!empty($_FILES['file_name_card_number']['name'])) {
 							$config3['upload_path'] 		= 'uploads/card/';
 							$config3['allowed_types'] 		= '*';
 							$config3['max_size']    		= '99999'; // max_size in kb
@@ -250,7 +244,7 @@ class Register_ctr extends CI_Controller
 							}
 						}
 
-						if ($file_name_card_number_user) {
+						if (!empty($_FILES['file_name_card_number_user']['name'])) {
 							$config4['upload_path'] 		= 'uploads/carduser/';
 							$config4['allowed_types'] 		= '*';
 							$config4['max_size']    		= '99999'; // max_size in kb
@@ -268,7 +262,7 @@ class Register_ctr extends CI_Controller
 							}
 						}
 
-						if ($file_name_book_bank) {
+						if (!empty($_FILES['file_name_book_bank']['name'])) {
 							$config5['upload_path'] 		= 'uploads/bookbank/';
 							$config5['allowed_types'] 		= '*';
 							$config5['max_size']    		= '99999'; // max_size in kb

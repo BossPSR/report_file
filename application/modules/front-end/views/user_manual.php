@@ -91,13 +91,15 @@
                 <div class="accordion_area">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-2"></div>
+                            <div class="col-12 col-md-8 col-sm-12">
                                 <div id="accordion" class="card__accordion">
                                     <div class="card card_dipult">
                                         <div class="card-header card_accor" id="headingOne">
                                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 19px;">
                                                 <center>
-                                                    ประเภท Order ของเรา?</center>
+                                                    ประเภท Order ของเรา?
+                                                </center>
 
                                                 <i class="fa fa-plus"></i>
                                                 <i class="fa fa-minus"></i>
@@ -106,14 +108,15 @@
 
                                         </div>
 
-                                        <center>
-                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion" style="font-size: 17.5px;">
-                                                <div class="card-body">
-                                                    <p style="letter-spacing: 2px;line-height: 35px;">
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion" style="font-size: 17.5px;">
+                                            <div class="card-body row">
+                                                <div class="col-md-2 "></div>
+                                                <div class="col-md-8 col-sm-12 ">
+                                                    <p style="line-height: 35px;">
                                                         <span style="font-size: 24px;font-weight: bold;"> 1. New Order </span> <br>
                                                         คือ Orderใหม่ที่ติวเตอร์กด Confirm จากหน้า Order list
                                                     </p>
-                                                    <p style="letter-spacing: 1.2px;line-height: 35px;">
+                                                    <p style="line-height: 35px;">
                                                         <span style="font-size: 24px;font-weight: bold;"> 2. Direct Order </span> <br>
                                                         คือ Order ที่ส่งตรงจากเจ้าหน้าที่ทางระบบ (สามารถปฏิเสทได้)
                                                     </p>
@@ -122,10 +125,11 @@
                                                     <p style="line-height: 35px;"> <span style="font-size: 24px;font-weight: bold;"> 4. Re-Feedback </span><br>
                                                         คือ Order ที่ผู้เรียนได้ทำการแก้ไขหรือปรึกษาเพิ่มเติมครบ 3 ครั้งแล้ว แต่ผู้เรียน<br>ต้องการแก้ไขหรือปรึกษาเพิ่มเติม
                                                         (กรณีนี้ติวเตอร์จะได้รับค่าตอบแทนพิเศษเพิ่มเติม <br>อีก 50% จากค่าตอบแทนเดิมและผู้เรียนสามารถทำการแก้ไขหรือปรึกษาเพิ่มเติมได้อีก 3 ครั้ง)</p>
-
                                                 </div>
+                                                <div class="col-md-2 "></div>
                                             </div>
-                                        </center>
+                                        </div>
+
                                     </div>
                                     <div class="card  card_dipult">
                                         <div class="card-header card_accor" id="headingTwo">
@@ -136,20 +140,25 @@
 
                                             </button>
                                         </div>
-                                        <center>
-                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion01" style="font-size: 17.5px;">
-                                                <div class="card-body">
-                                                    <p style="letter-spacing: 3.2px;"> 1. กดปุ่ม My Order list เลือก Order ที่ต้องการ </p>
+
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion01" style="font-size: 17.5px;">
+                                            <div class="card-body row">
+                                                <div class="col-md-2 "></div>
+                                                <div class="col-md-8 col-sm-12 ">
+                                                    <p> 1. กดปุ่ม My Order list เลือก Order ที่ต้องการ </p>
                                                     <p style="line-height: 35px;"> 2. กด Confirm Order และ Download เอกสารรายละเอียดงานทั้ง <br> Assessment Instructions/Questions และ
                                                         Resources ข้อมูล Order <br> ที่กด Confirm แล้วจะไปแสดงที่หน้า My Task
                                                         สามารถเช็คดูวันเวลาที่กด <br> Confirm วันส่งงานและระยะเวลาที่คงเหลือในการทำ Order </p>
                                                     <p style="line-height: 35px;"> 3. เริ่มทำงาน</p>
                                                     <p style="line-height: 35px;"> 4. ส่ง Order โดยการกดปุ่ม Delivery เพื่อเลือกไฟล์ Upload เลือก ODN <br> รหัส Order ที่ต้องการส่งงาน หากเป็นOrderที่ถูก Feedback จะขึ้นคำว่า <br> Feedback
                                                         ต่อท้าย ODBนั้น ๆ (การเลือก ODN ในขั้นตอนการ Delivery <br> เป็นจุดสำคัญโปรดตรวจเช็ครหัส ODN ให้แน่ใจว่าทีมงานได้เลือกรหัส ODN ถูกต้องแล้ว)</p>
-                                                    <p style="line-height: 35px;letter-spacing: 2.2px;"> 5. รอผล Approved หรือ Feedback จาก Admin</p>
+                                                    <p style="line-height: 35px;"> 5. รอผล Approved หรือ Feedback จาก Admin</p>
                                                 </div>
+                                                <div class="col-md-2 "></div>
+
                                             </div>
-                                        </center>
+
+                                        </div>
                                     </div>
                                     <div class="card  card_dipult">
                                         <div class="card-header card_accor" id="headingThree">
@@ -159,9 +168,11 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <center>
-                                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion02" style="font-size: 17.5px;">
-                                                <div class="card-body">
+
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion02" style="font-size: 17.5px;">
+                                            <div class="card-body row">
+                                                <div class="col-md-2 "></div>
+                                                <div class="col-md-8 col-sm-12 ">
                                                     <p style="line-height: 35px;">ท่านสามารถส่ง Update ความคืบหน้าของงาน<br>ผ่านทางอีเมล updatebytutor@gmail.com โดยระบุรายละเอียดดังนี้</p>
                                                     <p style="line-height: 35px;">1. รหัสประจำตัว TN…..</p>
                                                     <p style="line-height: 35px;">2. รหัสOrder ODN…..</p>
@@ -171,8 +182,9 @@
                                                     <img src="public/frontend/assets/img/manual/1.png" alt="" style="width: 500px;"><br><br>
                                                     <p style="line-height: 35px;">หมายเหตุ: การไม่ส่ง Update บ่อยครั้งบัญชีของท่านอาจถูกระบบระงับการใช้งานแบบถาวร</p>
                                                 </div>
+                                                <div class="col-md-2 "></div>
                                             </div>
-                                        </center>
+                                        </div>
                                     </div>
                                     <div class="card  card_dipult">
                                         <div class="card-header card_accor" id="headingfour">
@@ -197,11 +209,12 @@
                                             </button>
                                         </div>
                                         <div id="collapseseven" class="collapse" aria-labelledby="headingfive" data-parent="#accordion04">
-                                            <div class="card-body">
-                                                <center>
+                                            <div class="card-body row">
+                                                <div class="col-md-2 "></div>
+                                                <div class="col-md-8 col-sm-12 ">
                                                     <p style="font-size: 18px;line-height: 35px;letter-spacing: 0.5px;">1. Popup แจ้งเตือนว่า คุณได้รับ Feedback ให้ติวเตอร์กดยอมรับ </p>
                                                     <p style="font-size: 18px;line-height: 35px;">2.เข้าไปเช็ครายละเอียดการแก้ไข Feedback ได้ที่หน้า My Feedback <br> ของติวเตอร์โดยจะแบ่ง Feedback ออกเป็น 2 ประเภทคือ</p>
-                                                    <li style="font-size: 18px;line-height: 35px;">
+                                                    <li style="font-size: 18px;line-height: 35px;margin-bottom: 1rem;">
                                                         Admin Feedback (จาก Admin) สำหรับกรณีที่ติวเตอร์ส่งรายละเอียดของ Orderไม่ครบหรือไม่ผ่านเกณฑ์<br> การตรวจเช็คจากAdmin โดย Admin สามารถส่ง Feedback ให้ติวเตอร์ได้
                                                         ไม่จำกัดจำนวนครั้ง
                                                     </li>
@@ -209,10 +222,12 @@
                                                         Learner Feedback (จากผู้เรียน) สำหรับกรณีที่ติวเตอร์มีความผิดพลาดจากการทำงานที่ไม่ถูกต้องตาม<br>รายละเอียดคำสั่งงานหรือผู้เรียนต้องการปรึกษาเพิ่มเติม โดยผู้เรียนสามารถ
                                                         แก้ไขได้ทั้งหมด 3 ครั้ง
                                                     </li>
-                                                </center>
+                                                </div>
+                                                <div class="col-md-2 "></div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="card  card_dipult">
                                         <div class="card-header card_accor" id="headingfix">
                                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#Feedback" aria-expanded="false" aria-controls="collapseseven" style="font-size: 19px;">
@@ -222,8 +237,9 @@
                                             </button>
                                         </div>
                                         <div id="Feedback" class="collapse" aria-labelledby="headingfix" data-parent="#accordion09">
-                                            <div class="card-body">
-                                                <center>
+                                            <div class="card-body row">
+                                                <div class="col-md-2 "></div>
+                                                <div class="col-md-8 col-sm-12 ">
                                                     <p style="font-size: 18px;letter-spacing: 1.5px;line-height: 35px;"> 1. อ่านและทำความเข้าใจรายละเอียดคำสั่งงานทั้งหมด </p>
                                                     <p style="font-size: 18px;letter-spacing: 1px;line-height: 35px;"> 2. เช็คข้อมูล Resources หรือ Template ที่ใช้ประกอบในการทำงานให้ครบตามที่คำสั่งงานต้องการ </p>
                                                     <p style="font-size: 18px;line-height: 35px;"> 3. ติดต่อเจ้าหน้าที่เมื่อข้อมูลไม่เพียงพอ ตัวอย่างเช่น ขาด Template/Resources (ติดต่อทางระบบแชทเท่านั้น) </p>
@@ -238,7 +254,8 @@
                                                     <p style="font-size: 18px;line-height: 35px;"> 8. แยกไฟล์ Folder ของงานแต่ล่ะ Task ให้ชัดเจนพร้อมระบุตัวเลขกำกับใน Template ที่ใช้ตอบในแต่ล่ะข้อ (ถ้ามี) </p>
                                                     <p style="font-size: 18px;line-height: 35px;"> 9. กรณีที่เป็นงานที่ต้องแก้ไข ให้ทำการ Highlight ส่วนที่แก้ไขด้วยสีเหลือง </p>
                                                     <p style="font-size: 18px;line-height: 35px;"> 10. อธิบายภาพรวมของงานผ่านคลิปวีดีโอด้วยเสียงที่ชัดเจน </p>
-                                                </center>
+                                                </div>
+                                                <div class="col-md-2 "></div>
                                             </div>
                                         </div>
                                     </div>
@@ -255,7 +272,7 @@
                                                 <center>
                                                     <p style="font-size: 20px;"> ตารางสรุปการหักรายได้กรณีต่างๆที่ต้องรู้ก่อนทำงาน </p>
                                                 </center>
-                                                <li><b style="font-size: 20px;">ส่งงานช้า</b></li>
+                                                <li class="mt-2 mb-2"><b style="font-size: 20px;">ส่งงานช้า</b></li>
                                                 <table class="table">
                                                     <thead class="thead-light">
                                                         <tr style="text-align:center;">
@@ -303,7 +320,7 @@
 
                                                 <br>
 
-                                                <li><b style="font-size: 20px;"> การยกเลิกงาน </b></li>
+                                                <li class="mt-2 mb-2"><b style="font-size: 20px;"> การยกเลิกงาน </b></li>
                                                 <table class="table">
                                                     <thead class="thead-light">
                                                         <tr style="text-align:center;">
@@ -353,7 +370,7 @@
 
                                                 <br>
 
-                                                <li><b style="font-size: 20px;"> คุณภาพผลงาน </b></li>
+                                                <li class="mt-2 mb-2"><b style="font-size: 20px;"> คุณภาพผลงาน </b></li>
                                                 <table class="table">
                                                     <thead class="thead-light">
                                                         <tr style="text-align:center;">
@@ -372,8 +389,8 @@
                                                             </td>
                                                             <td>
                                                                 <p>เลือกงานที่ตรงตามทักษะความสามารถตนเองวางแผนเวลาในการทำงานและ<br>
-                                                                ตรวจเช็ครายละเอียดงานอย่างรอบคอบก่อนกด Confirm Order กรณีผลงานไม่<br>
-                                                                ถึงเกณฑ์บ่อยครั้งอาจถูกระบบยกเลิกตำแหน่งงานดังกล่าว </p>
+                                                                    ตรวจเช็ครายละเอียดงานอย่างรอบคอบก่อนกด Confirm Order กรณีผลงานไม่<br>
+                                                                    ถึงเกณฑ์บ่อยครั้งอาจถูกระบบยกเลิกตำแหน่งงานดังกล่าว </p>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -385,7 +402,7 @@
                                                             </td>
                                                             <td>
                                                                 <p>หากข้อมูลใน Order ไม่เพียงพอติวเตอร์สามารถหาข้อมูลจากแหล่งเว็บไซต์<br>
-                                                                อินเตอร์เน็ตเพิ่มเติมได้โดยต้อง Rewrite ใหม่ก่อนนำมาใช้ประกอบผลงานทุกครั้ง</p>
+                                                                    อินเตอร์เน็ตเพิ่มเติมได้โดยต้อง Rewrite ใหม่ก่อนนำมาใช้ประกอบผลงานทุกครั้ง</p>
                                                             </td>
                                                         </tr>
 
@@ -404,8 +421,9 @@
                                             </button>
                                         </div>
                                         <div id="exp11" class="collapse" aria-labelledby="headingfix" data-parent="#accordion11" style="font-size: 16px;">
-                                            <div class="card-body">
-                                                <center>
+                                            <div class="card-body row">
+                                                <div class="col-md-2 "></div>
+                                                <div class="col-md-8 col-sm-12 ">
                                                     <p style="font-size: 18px;line-height: 35px;"> 1. ปุ่มถอนรายได้จะแสดงขึ้นหลังจากติวเตอร์ส่งงานแล้วภายในระยะเวลา 15 วันแต่<br>ไม่เกิน 65 วัน
                                                         โดย Order นั้นจะต้องไม่อยู่ในสถานะถูก Feedback หรือ Re-Feedback</p>
                                                     <p style="font-size: 18px;line-height: 35px;"> 2. ปุ่มถอนเงินนั้นจะแสดงขึ้นในหน้า My task ว่า Withdraw </p>
@@ -413,13 +431,15 @@
                                                         วันเท่านั้น หากครบกำหนด 30 วันแล้วไม่มีการกดปุ่ม Withdraw จะถือว่าติวเตอร์ได้สละสิทธิ์<br>รายได้ของออร์เดอร์ดังกล่าวทันทีและระบบจะขึ้นสถานะว่า
                                                         Withdraw Expired คือหมดอายุการถอนเงิน </p>
                                                     <p style="font-size: 18px;line-height: 35px;"> 4. ทางบริษัทไม่คิดค่าใช้จ่ายใด ๆ ในการถอนรายได้ของติวเตอร์ </p>
-                                                </center>
-
+                                                </div>
+                                                <div class="col-md-2 "></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-2"></div>
+
                         </div>
                     </div>
                 </div>

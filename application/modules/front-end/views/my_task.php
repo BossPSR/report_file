@@ -610,7 +610,7 @@
                                             -
                                         <?php } ?>
                                     </td>
-
+                                    <!-- คำอธิบาย -->
                                     <td>
                                         <?php if (!empty($task['noteteam'])) { ?>
                                             <a href="#" data-toggle="modal" data-target="#NOTE<?php echo $task['idteam']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
@@ -642,7 +642,7 @@
 
                                     <!-- wage -->
                                     <td>
-                                        <span class=" badge badge-primary" style="font-size:16px;">$ <?php echo $task['wage']; ?></span>
+                                        <span class=" badge badge-primary" style="font-size:16px;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage'] ; ?></span>
                                     </td>
 
                                     <?php $data = date('Y-m-d') ?>

@@ -268,14 +268,20 @@
 																					$team_job = $this->db->get()->result_array(); ?>
 																					<?php foreach ($team_job as $key => $team_job) { ?>
 																						<tr>
-																							<td> <?php
+																							<td>
+																								<?php if (!empty($team_job['file_name'])) : ?>
+																									<?php
 																									$img =  explode(".", $team_job['file_name']);
 																									?>
-																								<?php if ($img[1] == 'pdf') : ?>
-																									<a href="<?php echo $team_job['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																									<?php if ($img[1] == 'pdf') : ?>
+																										<a href="<?php echo $team_job['file_name'] ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																									<?php else : ?>
+																										<a href="<?php echo $team_job['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																									<?php endif; ?>
 																								<?php else : ?>
-																									<a href="<?php echo $team_job['file_name']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px; cursor: pointer;"></i></a>
+																									-
 																								<?php endif; ?>
+
 																							</td>
 																							<td>
 																								<?php $country = $this->db->get_where('countries', ['id' => $team_job['country_id']])->result_array(); ?>
@@ -301,7 +307,7 @@
 																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>" checked>
 																										<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
 																									<?php else : ?>
-																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>"  >
+																										<input type="checkbox" class="custom-control-input ckeck<?php echo $team_job['id_job']; ?>" id="customSwitch4<?php echo $team_job['id_job']; ?>" data-status="<?php echo $team_job['id_job']; ?>">
 																										<label class="custom-control-label" for="customSwitch4<?php echo $team_job['id_job']; ?>"></label>
 																									<?php endif; ?>
 																								</div>
@@ -668,7 +674,15 @@
 																								</td>
 																								<td><?php echo $team['created_at']; ?></td>
 																								<td>
-
+																									<div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+																										<?php if ($position['status_approve'] == '1') : ?>
+																											<input type="checkbox" class="custom-control-input ckeck<?php echo $position['id']; ?>" id="customSwitch5<?php echo $position['id']; ?>" data-status="<?php echo $position['id']; ?>" checked>
+																											<label class="custom-control-label" for="customSwitch5<?php echo $position['id']; ?>"></label>
+																										<?php else : ?>
+																											<input type="checkbox" class="custom-control-input ckeck<?php echo $position['id']; ?>" id="customSwitch5<?php echo $position['id']; ?>" data-status="<?php echo $position['id']; ?>">
+																											<label class="custom-control-label" for="customSwitch5<?php echo $position['id']; ?>"></label>
+																										<?php endif; ?>
+																									</div>
 																								</td>
 																							</tr>
 																						<?php } ?>

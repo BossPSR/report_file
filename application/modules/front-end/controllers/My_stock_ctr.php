@@ -69,7 +69,7 @@ class My_stock_ctr extends CI_Controller
             redirect('home');
         } else {
             $sess                   = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
-            $data['teamTM']                   = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+            $data['teamTM']         = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
             $data['stock']          = $this->Order_model->my_stock($item_id, $sess['IdTeam']);
             $data['stock_row']      = $this->Order_model->my_stock_row($sess['IdTeam']);
             $stock_capp             = $this->Order_model->my_stock_count($sess['IdTeam']);
@@ -129,14 +129,16 @@ class My_stock_ctr extends CI_Controller
 
             $this->db->where('id', $id);
             $success = $this->db->update('tbl_upload_team', $data);
-            
+
             echo $success;
         }
     }
 
     function my_task()
     {
-        $sess = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        $sess           = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        $data['teamTM'] = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+
         $see = $sess['IdTeam'];
         if ($this->session->userdata('email') == '') {
             redirect('home');

@@ -68,6 +68,51 @@
         transform: rotate(45deg);
     }
 </style>
+<style>
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+
+    .rate:not(:checked)>input {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .rate:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 40px;
+        color: #ccc;
+    }
+
+    .rate:not(:checked)>label:before {
+        content: '★ ';
+    }
+
+    .rate>input:checked~label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked)>label:hover,
+    .rate:not(:checked)>label:hover~label {
+        color: #deb217;
+    }
+
+    .rate>input:checked+label:hover,
+    .rate>input:checked+label:hover~label,
+    .rate>input:checked~label:hover,
+    .rate>input:checked~label:hover~label,
+    .rate>label:hover~input:checked~label {
+        color: #c59b08;
+    }
+
+    /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+</style>
 <!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -828,10 +873,10 @@
 
                                                         <!-- info -->
                                                         <td>
-                                                            <?php 
+                                                            <?php
                                                             $this->db->order_by('id', 'desc');
                                                             $wagenow = $this->db->get_where('tbl_upload_team', ['order_id' => $stock['orderST']])->row_array();
-                                                             ?>
+                                                            ?>
 
                                                             <?php if ($stock['teamId'] == '') : ?>
                                                                 - |
@@ -1776,8 +1821,10 @@
                                                                     <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>"><i class="fa fa-plus-circle"></i></button>
                                                                     <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
                                                                         <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation-triangle"></i></button>
-                                                                        <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="approved<?php echo $stock['orderST']; ?>"><i class="fa fa-check"></i></button>
-                                                                        <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="order_not_approved<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
+                                                                        <!-- approved echo $stock['orderST']; ?> -->
+                                                                        <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="" data-toggle="modal" data-target="#approvedstar<?php echo $stock['orderST']; ?>" id="" data-toggled="tooltip"><i class="fa fa-check"></i></button>
+                                                                        <!-- order_not_approved echo $stock['orderST']; ?> -->
+                                                                        <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id=""  data-toggle="modal" data-target="#order_not_approvedstar<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
                                                                     <?php else : ?>
                                                                         <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
                                                                         <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
@@ -1788,7 +1835,76 @@
                                                                 <?php endif; ?>
                                                             <?php endif; ?>
 
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="approvedstar<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLongTitle">อนุมัติผ่าน (<?php echo $stock['orderST']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="text-align: left;">
+                                                                            <label style="font-size:18px; " for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
+                                                                            <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea><br>
+                                                                            <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
+                                                                            <div class="rate" style="text-align: center;">
+                                                                                <input type="radio" class="star" id="star5" name="rate" value="5" />
+                                                                                <label for="star5" title="text">5 ดาว</label>
+                                                                                <input type="radio" class="star" id="star4" name="rate" value="4" />
+                                                                                <label for="star4" title="text">4 ดาว</label>
+                                                                                <input type="radio" class="star" id="star3" name="rate" value="3" />
+                                                                                <label for="star3" class="star" title="text">3 ดาว</label>
+                                                                                <input type="radio" class="star" id="star2" name="rate" value="2" />
+                                                                                <label for="star2" title="text">2 ดาว</label>
+                                                                                <input type="radio" class="star" id="star1" name="rate" value="1" />
+                                                                                <label for="star1" title="text">1 ดาว</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" data-orderq="<?php echo $stock['orderST'] ?>" id="approvedS" class="btn btn-primary">บันทึก</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="order_not_approvedstar<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLongTitle">ไม่ผ่านคุณภาพ(<?php echo $stock['orderST']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="text-align: left;">
+                                                                            <label style="font-size:18px;" for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
+                                                                            <textarea name="textareanot" id="textareanot<?php echo $stock['orderST']; ?>" class="form-control" rows="5"></textarea>
+                                                                            <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
+                                                                            <div class="rate" style="text-align: center;">
+                                                                                <input type="radio" class="star" id="star6" name="rate_not" value="5" />
+                                                                                <label for="star6" title="text">5 ดาว</label>
+                                                                                <input type="radio" class="star" id="star7" name="rate_not" value="4" />
+                                                                                <label for="star7" title="text">4 ดาว</label>
+                                                                                <input type="radio" class="star" id="star8" name="rate_not" value="3" />
+                                                                                <label for="star8" class="star" title="text">3 ดาว</label>
+                                                                                <input type="radio" class="star" id="star9" name="rate_not" value="2" />
+                                                                                <label for="star9" title="text">2 ดาว</label>
+                                                                                <input type="radio" class="star" id="star10" name="rate_not" value="1" />
+                                                                                <label for="star10" title="text">1 ดาว</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" data-ordernot="<?php echo $stock['orderST']; ?>" id="not_app<?php echo $stock['orderST']; ?>" class="btn btn-primary">บันทึก</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                             <!-- Modal Feedback -->
                                                             <div class="modal fade" id="exampleModalNotApprove<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
