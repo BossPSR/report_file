@@ -79,8 +79,7 @@ class Team_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-            $data['team'] = $this->db->get('tbl_team')->result_array();
-
+            $data['team'] = $this->Team_model->t3_job();
             $this->load->view('options/header');
             $this->load->view('t3_online', $data);
             $this->load->view('options/footer');

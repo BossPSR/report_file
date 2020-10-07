@@ -255,6 +255,13 @@
                                                                 $<?php echo $feedback_team['wage']; ?> |
                                                             <?php endif; ?>
 
+                                                            
+                                                            <?php if ($feedback_team['wage_thai'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                <?php echo $feedback_team['wage_thai']; ?> บาท |
+                                                            <?php endif; ?>
+
                                                             <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback_team['position']])->result_array(); ?>
                                                             <?php foreach ($position_name as $position_name) { ?>
                                                                 <?php echo $position_name['name_item'] ?>

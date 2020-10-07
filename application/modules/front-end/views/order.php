@@ -468,7 +468,7 @@
                                                     </div>
                                                     <script type='text/javascript'>
                                                         Dropzone.autoDiscover = false;
-                                                        var myDropzone2 = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
+                                                        var myDropzone2<?php echo $value['ORD']; ?> = new Dropzone("#fileuploadnotApprove<?php echo $value['ORD']; ?>", {
                                                             autoProcessQueue: false,
                                                             maxFiles: 5,
                                                             addRemoveLinks: true,
@@ -482,7 +482,7 @@
                                                             var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
                                                             var re = $('#refeed<?php echo $value['ORD']; ?>').val();
 
-                                                            if (myDropzone2.files == 0 && x == '') {
+                                                            if (myDropzone2<?php echo $value['ORD']; ?>.files == 0 && x == '') {
                                                                 swal("Warning!", "Can not be document Empty", "warning", {
                                                                     button: true,
                                                                 });
@@ -500,11 +500,10 @@
                                                                             refdata: re,
                                                                         },
                                                                         success: function(success) {
-                                                                            console.log(myDropzone2);
 
-                                                                            if (myDropzone2.files != 0) {
-                                                                                myDropzone2.processQueue();
-                                                                                myDropzone2.on("queuecomplete", function(file, res) {
+                                                                            if (myDropzone2<?php echo $value['ORD']; ?>.files != 0) {
+                                                                                myDropzone2<?php echo $value['ORD']; ?>.processQueue();
+                                                                                myDropzone2<?php echo $value['ORD']; ?>.on("queuecomplete", function(file, res) {
                                                                                     swal("Good job!", "Upload for data successfull", "success", {
                                                                                         button: true,
                                                                                     }).then(function(isConfirm) {
@@ -543,7 +542,7 @@
 
                                                 <?php } else { ?>
 
-                                                    <button type="button" class="btn btn-danger" id="onshownbtnrefeedback<?php echo $value['ORD']; ?>" data-toggle="modal" data-target="#feedback_userrefeed<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Re Feedback (แก้ไขงาน)">แก้ไขงานเพิ่ม
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#feedback_userrefeed<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Re Feedback (แก้ไขงาน)">แก้ไขงานเพิ่ม
                                                         <?php if ($ref_count['odref'] == '0') : ?>
 
                                                         <?php else : ?>
@@ -562,7 +561,7 @@
 
                                                                 <div class="modal-body" style="text-align:left;">
                                                                     <label for="" class="font-size F-upload">อัปโหลดข้อมูลแบบฟอร์มตาราง หรือตัวอย่างประกอบได้ที่นี่ (ถ้ามี) </label>
-                                                                    <form action="my-order-feedback" class="dropzone" id="refeedbackupload<?php echo $value['ORD']; ?>">
+                                                                    <form action="my_order_refeedback" class="dropzone" id="refeedbackupload<?php echo $value['ORD']; ?>">
                                                                         <div class="dz-message needsclick">
                                                                             วางไฟล์ที่นี่หรือคลิกเพื่ออัปโหลด<br>
 
@@ -628,7 +627,7 @@
                                                     </div>
                                                     <script type='text/javascript'>
                                                         Dropzone.autoDiscover = false;
-                                                        var myDropzone2RE = new Dropzone("#refeedbackupload<?php echo $value['ORD']; ?>", {
+                                                        var myDropzone2RE<?php echo $value['ORD']; ?> = new Dropzone("#refeedbackupload<?php echo $value['ORD']; ?>", {
                                                             autoProcessQueue: false,
                                                             maxFiles: 5,
                                                             addRemoveLinks: true,
@@ -642,7 +641,7 @@
                                                             var c = document.getElementById("userId<?php echo $value['ORD']; ?>").value;
                                                             var re = $('#refeed<?php echo $value['ORD']; ?>').val();
 
-                                                            if (myDropzone2RE.files == 0 && x == '') {
+                                                            if (myDropzone2RE<?php echo $value['ORD']; ?>.files == 0 && x == '') {
                                                                 swal("Warning!", "Can not be document Empty", "warning", {
                                                                     button: true,
                                                                 });
@@ -660,10 +659,11 @@
                                                                             refdata: re,
                                                                         },
                                                                         success: function(success) {
-                                                                            console.log(myDropzone2RE);
-                                                                            if (myDropzone2RE.files != 0) {
-                                                                                myDropzone2RE.processQueue();
-                                                                                myDropzone2RE.on("queuecomplete", function(file, res) {
+                                                                            console.log(myDropzone2RE<?php echo $value['ORD']; ?>);
+                                                                            if (myDropzone2RE<?php echo $value['ORD']; ?>.files != 0) {
+                                                                                myDropzone2RE<?php echo $value['ORD']; ?>.processQueue();
+                                                                                myDropzone2RE<?php echo $value['ORD']; ?>.on("queuecomplete", function(file, res) {
+
                                                                                     swal("Good job!", "Upload for data successfull", "success", {
                                                                                         button: true,
                                                                                     }).then(function(isConfirm) {
@@ -749,7 +749,7 @@
                                                 <?php if ($value['status_delivery'] == 1) { ?>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Not Approve (ไม่อนุมัติ)">ไม่ผ่านคุณภาพ</button>
                                                 <?php } else { ?>
-                                                    <button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Not Approved (ไม่อนุมัติ)">ไม่ผ่านคุณภาพ</button>
+                                                    <!-- <button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Not Approved (ไม่อนุมัติ)">ไม่ผ่านคุณภาพ</button> -->
                                                 <?php } ?>
 
                                                 <!-- Modal -->

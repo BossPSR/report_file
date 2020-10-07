@@ -297,6 +297,12 @@
                                                                 $<?php echo $stores['wage']; ?> |
                                                             <?php endif; ?>
 
+                                                            <?php if ($stores['wage_thai'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                <?php echo $stores['wage_thai']; ?> บาท |
+                                                            <?php endif; ?>
+
                                                             <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $stores['position']])->result_array(); ?>
                                                             <?php foreach ($position_name as $position_name) { ?>
                                                                 <?php echo $position_name['name_item'] ?>

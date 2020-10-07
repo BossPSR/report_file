@@ -32,8 +32,8 @@
                                 <th scope="col">ไฟล์ที่ส่งแล้ว</th>
                                 <th scope="col">ไฟล์แก้ไขงาน</th>
                                 <th scope="col">คำอธิบาย</th>
-                                <th scope="col">สถานะ</th>
                                 <th scope="col">สาขา</th>
+                                <th scope="col">สถานะ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -189,15 +189,20 @@
                                             -
                                         <?php } ?>
                                     </td>
+                                    <td><?= $feedback['name_item']; ?></td>
+
                                         <td>
                                          
                                             <?php if ($feedback['re_feedback'] == 1) : ?>
-                                                <?php if ($orderarray === null || $orderarray == $feedback['orIdd']) {
+                                                <?php
+                                                if ($orderarray === null || $orderarray == $feedback['orIdd']) {
                                                     $io += 1;
                                                 }
                                                 if ($orderarray != $feedback['orIdd']) {
                                                     $io = 1;
-                                                } ?>
+                                                }
+                                                ?>
+                                                
                                                 <span class=" badge badge-danger" style="font-size:16px;"> Re-feedback <?php echo $io; ?> </span>
 
                                                                 <?php elseif ($feedback['check_status'] == 0) : ?>
@@ -224,7 +229,7 @@
 
 
                                                                     ?>
-                                                                    <span class="badge badge-info" style="font-size:16px;"> Client feedback <?php echo $ip; ?></span>
+                                                                    <span class="badge badge-info" style="font-size:16px;"> Learner feedback <?php echo $ip; ?></span>
 
                                                                 <?php endif; ?>
 
@@ -240,7 +245,6 @@
                                                                     <?php endif; ?>
                                                                 <?php endif; ?>
                                         </td>
-                                        <td><?= $feedback['name_item']; ?></td>
                                     </tr>
                                     <?php $orderarray = $feedback['orIdd']; ?>
                                 <?php } ?>

@@ -48,10 +48,11 @@
                                             <thead>
                                                 <tr>
 
+                                                    <th>potion</th>
                                                     <th>Name</th>
                                                     <th>country</th>
-                                                    <th>email</th>
-                                                    <th>phone</th>
+                                                    <th>TN</th>
+                                                    <th>สาขาวิชา</th>
                                                     <!-- <th>postion</th> -->
                                                     <th>status</th>
 
@@ -61,13 +62,25 @@
                                                 <tbody>
                                                     <tr>
 
+                                                        <td>
+                                                            <?php if ($team['status'] == 0) : ?>
+                                                                <span class="badge badge-pill badge-warning">Pending approval</span>
+                                                            <?php elseif($team['status'] == 1) : ?>
+                                                                <span class="badge badge-pill badge-success">approve</span>
+                                                            <?php else : ?>
+                                                                <span class="badge badge-pill badge-danger">not approve</span>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td><?php echo $team['name']; ?></td>
-                                                        <?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->result_array(); ?>
-                                                        <?php foreach ($country as $country) { ?>
-                                                            <td><?php echo $country['countryName']; ?></td>
-                                                        <?php  } ?>
-                                                        <td><?php echo $team['email']; ?></td>
-                                                        <td><?php echo $team['phone']; ?></td>
+                                                        <?php $country = $this->db->get_where('countries', ['id' => $team['country_id']])->row_array(); ?>
+
+                                                        <td><?php echo $country == true ? $country['countryName'] : '-'; ?></td>
+
+                                                        <td><?php echo $team['IdTeam']; ?></td>
+                                                        <td>
+                                                            <?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $team['job_position']])->row_array(); ?>
+                                                            <?php echo $name_position['name_item']; ?>
+                                                        </td>
                                                         <td>
                                                             <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $team['id']; ?>" class="btn btn-info mr-1 mb-1"><i class="feather icon-mail"></i> Send Email</button>
                                                             <div class="modal fade" id="exampleModalb<?php echo $team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,28 +95,29 @@
                                                                         <div class="modal-body">
                                                                             <label for="" style="font-size: 16px;">File Document </label>
                                                                             <form action="fileUpload_team_email" class="dropzone dropzone-area" id="maindropzoneemail">
-                                                                               <input type="text" id="DM2" class="form-control " name="DM" value="" hidden>
+                                                                                <input type="text" id="DM2" class="form-control " name="DM" value="" hidden>
                                                                                 <input type="text" id="team_id" class="form-control " name="team_id" value="<?php echo $team['IdTeam']; ?>" hidden>
-                                                                               
+
                                                                                 <div class="dz-message" style="top: 24%;">Upload Document</div>
                                                                             </form>
                                                                         </div>
 
-                                                                        <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1"style="MARGIN: auto;"> Send email</button>
-                                                                       
+                                                                        <button type="button" id="uploadsfile" class="btn btn-primary mr-1 mb-1" style="MARGIN: auto;"> Send email</button>
+
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                       
-                                                                                         
+
+
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                    </div>
-                                    </td>
 
-                                    </tr>
-                                <?php  } ?>
-                                </table>
+                                                        </td>
+
+                                                    </tr>
+                                                <?php  } ?>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

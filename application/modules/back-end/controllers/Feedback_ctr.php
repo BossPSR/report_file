@@ -304,7 +304,7 @@ class Feedback_ctr extends CI_Controller
         $message .= '<p>Order Details ("' . $order_id . '")</p>';
 
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> You have received an order at : ' . $order_id . ' , Please check the binder. http://www.ip-soft.co.th/ipsoft </div>';
-        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> ' . $order_id . ' , You can cancel your order here. http://www.ip-soft.co.th/ipsoft/cancel_order?order='.$order_id.' </div>';
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> ' . $order_id . ' , You can cancel your order here. http://www.ip-soft.co.th/ipsoft/cancel_order?order=' . $order_id . ' </div>';
 
         $message .= '</center>';
 
@@ -359,7 +359,6 @@ class Feedback_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully Cancel order.');
         }
         return redirect('home');
-
     }
 
     public function status_Feedback()
@@ -385,17 +384,32 @@ class Feedback_ctr extends CI_Controller
         $id      = $this->input->get('id');
         $order   = $this->input->get('order');
 
-                    $this->db->where('order_id', $order);
-                    $this->db->where('status !=', '4');
-                    $this->db->where('teamId !=', '');
+        $this->db->where('order_id', $order);
+        $this->db->where('status !=', '4');
+        $this->db->where('teamId !=', '');
         $getw    =  $this->db->get('tbl_upload_team')->row_array();
 
+        if ($getw == true) {
+            $insert = [
+                'order_id' => $getw['order_id'] ,
+                'position' => $getw['position'] ,
+                'wage' => $getw['wage'] / 2 ,
+                'wage_thai' => $getw['wage_thai']  / 2,
+                'status' => '3' ,
+                'teamId' => $getw['teamId'] ,
+                'status_dashboard' => $getw['status_dashboard']  ,
+                'create_at' => date('Y-m-d H:i:s') ,
+                'update_at' => $getw['update_at'] ,
+                'update_confirm' => $getw['update_confirm'] ,
+            ];
+            $this->db->insert('tbl_upload_team', $insert);   
+        }
 
         $this->db->where('id', $id);
-        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'teamId' => $getw['teamId'] , 'notify_team' => 0, 'status_c_feedack_team' => 1]);
+        $resultsedit = $this->db->update('tbl_feedback', ['update_at' => date('Y-m-d H:i:s'), 'teamId' => $getw['teamId'], 'notify_team' => 0, 'status_c_feedack_team' => 1]);
 
         $this->db->where('order_id', $order);
-        $resultsedit = $this->db->update('tbl_upload_order_team', ['update_at' => date('Y-m-d H:i:s') ,'check_new' => 0]);
+        $resultsedit = $this->db->update('tbl_upload_order_team', ['update_at' => date('Y-m-d H:i:s'), 'check_new' => 0]);
 
         if ($resultsedit > 0) {
             $this->session->set_flashdata('save_ss2', ' Successfully updated Feedback information !!.');
@@ -945,6 +959,4 @@ class Feedback_ctr extends CI_Controller
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
         }
     }
-
-    
 }

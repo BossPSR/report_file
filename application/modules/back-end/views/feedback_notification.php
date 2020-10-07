@@ -808,6 +808,12 @@
                                                                 $<?php echo $feedback['wage']; ?> |
                                                             <?php endif; ?>
 
+                                                            <?php if ($feedback['wage_thai'] == '') : ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                <?php echo $feedback['wage_thai']; ?> บาท |
+                                                            <?php endif; ?>
+
                                                             <?php $position_name = $this->db->get_where('tbl_item_position', ['id' => $feedback['position']])->result_array(); ?>
                                                             <?php foreach ($position_name as $position_name) { ?>
                                                                 <?php echo $position_name['name_item'] ?>

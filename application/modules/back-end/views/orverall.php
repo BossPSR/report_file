@@ -377,11 +377,21 @@
                                                         <?php else : ?>
                                                             <td>$<?php echo $stores['price_file']; ?></td>
                                                         <?php endif; ?>
-                                                        <?php if ($stores['wage'] == '') :   ?>
-                                                            <td>-</td>
-                                                        <?php else : ?>
-                                                            <td>$<?php echo $stores['wage']; ?></td>
-                                                        <?php endif; ?>
+
+                                                        <td>
+                                                            <?php if ($stores['wage'] == '') :   ?>
+                                                                - |
+                                                            <?php else : ?>
+                                                                $<?php echo $stores['wage']; ?> |
+                                                            <?php endif; ?>
+
+                                                            <?php if ($stores['wage_thai'] == '') :   ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php echo $stores['wage_thai']; ?> บาท
+                                                            <?php endif; ?>
+
+                                                        </td>
                                                         <td>
 
                                                             <!-- if ($stores['status_team'] == 0) : ?>

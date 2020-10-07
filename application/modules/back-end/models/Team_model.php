@@ -26,5 +26,15 @@ class Team_model extends CI_Model{
         return $this->db->get()->result_array();
 
     }
+
+    public function t3_job()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_team');
+        $this->db->join('tbl_job_position','tbl_team.id = tbl_job_position.id_team','left');
+
+        return $this->db->get()->result_array();
+
+    }
     
 }

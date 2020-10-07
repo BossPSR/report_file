@@ -551,7 +551,13 @@
                                                         <!-- wage -->
                                                         <td>
                                                             <?php if ($bookmark['wageT']) { ?>
-                                                                <?php echo $bookmark['wageT'] ?>
+                                                                $<?php echo $bookmark['wageT'] ?> |
+                                                            <?php } else { ?>
+                                                                - |
+                                                            <?php } ?>
+
+                                                            <?php if ($bookmark['wage_thai']) { ?>
+                                                                <?php echo $bookmark['wage_thai'] ?> บาท
                                                             <?php } else { ?>
                                                                 -
                                                             <?php } ?>

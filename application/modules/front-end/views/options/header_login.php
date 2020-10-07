@@ -582,14 +582,14 @@
                                                 <a class="<?php if($this->uri->segment(1) == 'my-feedback') { echo 'active';} ?>"  href="my-feedback"> แก้ไขงานของฉัน</a>
                                             </li>
 
-                                            <li><a class="<?php if($this->uri->segment(1) == 'My-stock-Item' || 
+                                            <li><a class="<?php if(
                                             $this->uri->segment(1)  == 'my_score_team_deduct' ||
                                              $this->uri->segment(1) == 'my_income' || 
                                              $this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="#">การหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
                                                     <li><a class="<?php if($this->uri->segment(1) == 'my_store_team') { echo 'active';} ?>"  href="my_store_team">คะแนน</a></li>
                                                     <li><a class="<?php if($this->uri->segment(1) == 'my_score_team_deduct') { echo 'active';} ?>"  href="my_score_team_deduct">หักคะแนน</a></li>
-                                                    <!-- <li><a class="<?php if($this->uri->segment(1) == 'my_income') { echo 'active';} ?>"  href="my_income">ค่าตอบแทน</a></li> -->
+                                                    <!-- <li><a class=" if($this->uri->segment(1) == 'my_income') { echo 'active';} ?>"  href="my_income">ค่าตอบแทน</a></li> -->
                                                     <li><a class="<?php if($this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="my_income_team_deduct">หักค่าตอบแทน</a></li>
 
                                                 </ul>
@@ -599,6 +599,35 @@
                                         </li> -->
                                             <li></li>
                                             <li><?php $this->load->view('options/notify_team'); ?></li>
+                                        <?php elseif ($this->uri->segment(1) == 'register-team') : ?>
+                                            <li><a class="<?php if($this->uri->segment(1) == 'home') { echo 'active';} ?>" href="home"> หน้าแรก</a></li>
+                                            <li>
+                                                <a class="<?php if($this->uri->segment(1) == 'My-stock-Item') { echo 'active';} ?>" href=""> เลือกงานที่นี่</a>
+                                            </li>
+                                            <li>
+                                                <a class="<?php if($this->uri->segment(1) == 'My-task') { echo 'active';} ?>"  href=""> งานของฉัน</a>
+                                            </li>
+                                            <li>
+                                                <a class="<?php if($this->uri->segment(1) == 'My-delivery') { echo 'active';} ?>"  href=""> ส่งงานที่นี่ </a>
+                                            </li>
+                                            <li>
+                                                <a class="<?php if($this->uri->segment(1) == 'my-feedback') { echo 'active';} ?>"  href=""> แก้ไขงานของฉัน</a>
+                                            </li>
+
+                                            <li><a class="<?php if($this->uri->segment(1) == 'My-stock-Item' || 
+                                            $this->uri->segment(1)  == 'my_score_team_deduct' ||
+                                             $this->uri->segment(1) == 'my_income' || 
+                                             $this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="#">การหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
+                                                <ul class="sub_menu pages">
+                                                    <li><a class="<?php if($this->uri->segment(1) == 'my_store_team') { echo 'active';} ?>"  href="">คะแนน</a></li>
+                                                    <li><a class="<?php if($this->uri->segment(1) == 'my_score_team_deduct') { echo 'active';} ?>"  href="">หักคะแนน</a></li>
+                                                    <li><a class="<?php if($this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="">หักค่าตอบแทน</a></li>
+
+                                                </ul>
+                                            </li>
+                                         
+                                            <li></li>
+                                            <li></li>
                                         <?php else : ?>
                                             <li ><a class="<?php if($this->uri->segment(1) == 'home') { echo 'active';} ?>"  href="home"> หน้าแรก</a></li>
                                             <li><a href="#exampleModalCenter" data-toggle="modal"> สั่งออร์เดอร์ <div class="arrow_box"></div></a></li>

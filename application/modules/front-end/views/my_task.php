@@ -507,12 +507,12 @@
                                         <?php
                                         $this->db->join('tbl_folder', 'tbl_folder.id = tbl_upload_order_team.group', 'left');
                                         $this->db->group_by('group');
-                                        $teamfile = $this->db->get_where('tbl_upload_order_team', ['order_id' => $task['or_id']])->result_array();
+                                        $teamfile = $this->db->get_where('tbl_upload_order_team', ['id_upload_team_uot' => $task['idteam']])->result_array();
                                         ?>
                                         <?php if (!empty($teamfile)) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#DMDOC<?php echo $task['or_id']; ?>"><i class="fa fa-file-text-o"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#DMDOC<?php echo $task['idteam']; ?>"><i class="fa fa-file-text-o"></i></a>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="DMDOC<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="DMDOC<?php echo $task['idteam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
@@ -642,23 +642,37 @@
 
                                     <!-- wage -->
                                     <td>
-                                        <span class=" badge badge-primary" style="font-size:16px;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage'] ; ?></span>
+                                        <span class=" badge badge-primary" style="font-size:16px;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage']; ?></span>
                                     </td>
 
                                     <?php $data = date('Y-m-d') ?>
                                     <?php $prosum = date('Y-m-d', strtotime('+65 day' . '+' . $task['up_order'])); ?>
-                                
+
                                     <!-- name_item -->
                                     <td><?php echo $task['name_item']; ?></td>
-
+                                    <?php
+                                    $this->db->select('count(*) od');
+                                    $this->db->where('order_id', $task['or_id']);
+                                    $this->db->where('check_status', 1);
+                                    $this->db->where('re_feedback', 0);
+                                    $this->db->order_by('dated', 'DESC');
+                                    $N_feed = $this->db->get('tbl_feedback')->row_array();
+                                    ?>
                                     <!-- update_confirm -->
                                     <td><?php echo date('d F Y', strtotime($task['update_confirm'])); ?></td>
-                                    <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
+                                    <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || $N_feed['od'] >= 3 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
 
                                         <?php if ($task['c_status'] == 3) { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;">แก้ไขงาน</span></td>
+                                            <?php
+                                            $rd_cout  = 0;
+                                            $cfre = $this->db->get_where('tbl_feedback', ['order_id' => $task['or_id'], 'check_status' => 1, 're_feedback' => 1])->result_array();
+                                            foreach ($cfre as $key => $cfre) {
+                                                $rd_cout += 1;
+                                            }
+                                            ?>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">Re-feedback <?= $rd_cout; ?></span></td>
                                         <?php } elseif (empty($withh)) { ?>
 
                                             <td>

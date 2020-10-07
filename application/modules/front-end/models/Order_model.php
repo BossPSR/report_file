@@ -126,7 +126,8 @@ class Order_model extends CI_Model
         // $this->db->where('tbl_upload_order.status_confirmed_team', 1);
         $this->db->where('tbl_upload_team.teamId', $see);
 
-        $this->db->group_by('tbl_upload_order.order_id');
+        $this->db->group_by('tbl_upload_team.order_id');
+        $this->db->group_by('tbl_upload_team.status');
         $this->db->order_by('tbl_upload_order.date_required', 'DESC');
 
         $data = $this->db->get();
