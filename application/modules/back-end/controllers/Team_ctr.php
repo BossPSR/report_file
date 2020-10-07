@@ -187,7 +187,22 @@ class Team_ctr extends CI_Controller
         return redirect('back_team');
     }
 
+    public function fileUpload_team_email_date()
+    {
+        // image_lib
+        // $idteam     = $this->input->post('idteam');
+        $id         = $this->input->post('id');
+        $datetime   = $this->input->post('datetime');
 
+        $update = [
+          'date_interview' => $datetime
+        ];
+
+        $this->db->where('id', $id);
+        $success = $this->db->update('tbl_job_position', $update);
+
+        echo $success;
+    }
 
     public function fileUpload_team_email()
     {

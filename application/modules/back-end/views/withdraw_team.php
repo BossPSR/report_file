@@ -43,6 +43,9 @@
                                                     <th>Username</th>
                                                     <th>Withdraw</th>
                                                     <th>Telephone</th>
+                                                    <th>Paypal</th>
+                                                    <th>Bnak</th>
+                                                    <th>Line</th>
                                                     <th>silp</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -56,6 +59,16 @@
                                                         <td><?php echo $withdraw_team['name']; ?></td>
                                                         <td><?php echo $withdraw_team['price']; ?></td>
                                                         <td><?php echo $withdraw_team['phone']; ?></td>
+                                                        <td><?php echo $withdraw_team['bank_account'] == '' ? '-' : $withdraw_team['bank_account'] ; ?></td>
+                                                        <td>
+                                                            <?php if ($withdraw_team['bank_name'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php echo $withdraw_team['bank_name']; ?> <br>
+                                                                <?php echo $withdraw_team['bank_number']; ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td><?php echo $withdraw_team['line'] == '' ? '-' : $withdraw_team['line'] ; ?></td>
                                                         <td>
                                                             <?php if ($withdraw_team['filew'] == '') : ?>
                                                                 -

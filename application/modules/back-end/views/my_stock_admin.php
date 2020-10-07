@@ -69,46 +69,52 @@
     }
 </style>
 <style>
-    .rate {
+    .rating {
+        border: none;
         float: left;
-        height: 46px;
-        padding: 0 10px;
     }
 
-    .rate:not(:checked)>input {
+    .rating>input {
+        display: none;
+    }
+
+    .rating>label:before {
+        margin: 5px;
+        font-size: 1.25em;
+        font-family: FontAwesome;
+        display: inline-block;
+        content: "\f005";
+    }
+
+    .rating>.half:before {
+        content: "\f089";
         position: absolute;
-        top: -9999px;
     }
 
-    .rate:not(:checked)>label {
+    .rating>label {
+        color: #ddd;
         float: right;
-        width: 1em;
-        overflow: hidden;
-        white-space: nowrap;
-        cursor: pointer;
-        font-size: 40px;
-        color: #ccc;
     }
 
-    .rate:not(:checked)>label:before {
-        content: '★ ';
+    /***** CSS Magic to Highlight Stars on Hover *****/
+
+    .rating>input:checked~label,
+    /* show gold star when clicked */
+    .rating:not(:checked)>label:hover,
+    /* hover current star */
+    .rating:not(:checked)>label:hover~label {
+        color: #FFD700;
     }
 
-    .rate>input:checked~label {
-        color: #ffc700;
-    }
+    /* hover previous stars in list */
 
-    .rate:not(:checked)>label:hover,
-    .rate:not(:checked)>label:hover~label {
-        color: #deb217;
-    }
-
-    .rate>input:checked+label:hover,
-    .rate>input:checked+label:hover~label,
-    .rate>input:checked~label:hover,
-    .rate>input:checked~label:hover~label,
-    .rate>label:hover~input:checked~label {
-        color: #c59b08;
+    .rating>input:checked+label:hover,
+    /* hover current star when changing rating */
+    .rating>input:checked~label:hover,
+    .rating>label:hover~input:checked~label,
+    /* lighten current selection */
+    .rating>input:checked~label:hover~label {
+        color: #FFED85;
     }
 
     /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
@@ -1814,6 +1820,7 @@
 
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-plus-circle"></i></button>
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation"></i><i class="fa fa-exclamation"></i></button>
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-times"></i></button>
                                                                 <button type="button" class="btn btn-secondary btn-icon"><i class="feather icon-delete"></i></button>
@@ -1827,12 +1834,15 @@
                                                                     <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>"><i class="fa fa-plus-circle"></i></button>
                                                                     <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
                                                                         <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                        <button type="button" style="background-color: #ffc107 !important;" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#refeedbackmodal<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation"></i><i class="fa fa-exclamation"></i></button>
+
                                                                         <!-- approved echo $stock['orderST']; ?> -->
                                                                         <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="" data-toggle="modal" data-target="#approvedstar<?php echo $stock['orderST']; ?>" id="" data-toggled="tooltip"><i class="fa fa-check"></i></button>
                                                                         <!-- order_not_approved echo $stock['orderST']; ?> -->
-                                                                        <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id=""  data-toggle="modal" data-target="#order_not_approvedstar<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
+                                                                        <button type="button" class="btn btn-danger btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="" data-toggle="modal" data-target="#order_not_approvedstar<?php echo $stock['orderST']; ?>"><i class="fa fa-times"></i></button>
                                                                     <?php else : ?>
                                                                         <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation-triangle"></i></button>
+                                                                        <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-exclamation"></i><i class="fa fa-exclamation"></i></button>
                                                                         <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-check"></i></button>
                                                                         <button type="button" class="btn btn-secondary btn-icon"><i class="fa fa-times"></i></button>
                                                                     <?php endif; ?>
@@ -1855,18 +1865,17 @@
                                                                             <label style="font-size:18px; " for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
                                                                             <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea><br>
                                                                             <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
-                                                                            <div class="rate" style="text-align: center;">
-                                                                                <input type="radio" class="star" id="star5" name="rate" value="5" />
-                                                                                <label for="star5" title="text">5 ดาว</label>
-                                                                                <input type="radio" class="star" id="star4" name="rate" value="4" />
-                                                                                <label for="star4" title="text">4 ดาว</label>
-                                                                                <input type="radio" class="star" id="star3" name="rate" value="3" />
-                                                                                <label for="star3" class="star" title="text">3 ดาว</label>
-                                                                                <input type="radio" class="star" id="star2" name="rate" value="2" />
-                                                                                <label for="star2" title="text">2 ดาว</label>
-                                                                                <input type="radio" class="star" id="star1" name="rate" value="1" />
-                                                                                <label for="star1" title="text">1 ดาว</label>
-                                                                            </div>
+                                                                            <fieldset class="rating">
+                                                                                <input type="radio" id="star5<?php echo $stock['orderST']; ?>" name="rating" value="5" /><label class="full" style="font-size: 18px;" for="star5<?php echo $stock['orderST']; ?>" title="Awesome - 5 stars"></label>
+
+                                                                                <input type="radio" id="star4<?php echo $stock['orderST']; ?>" name="rating" value="4" /><label class="full" style="font-size: 18px;" for="star4<?php echo $stock['orderST']; ?>" title="Pretty good - 4 stars"></label>
+
+                                                                                <input type="radio" id="star3<?php echo $stock['orderST']; ?>" name="rating" value="3" /><label class="full" style="font-size: 18px;" for="star3<?php echo $stock['orderST']; ?>" title="Meh - 3 stars"></label>
+
+                                                                                <input type="radio" id="star2<?php echo $stock['orderST']; ?>" name="rating" value="2" /><label class="full" style="font-size: 18px;" for="star2<?php echo $stock['orderST']; ?>" title="Kinda bad - 2 stars"></label>
+
+                                                                                <input type="radio" id="star1<?php echo $stock['orderST']; ?>" name="rating" value="1" /><label class="full" style="font-size: 18px;" for="star1<?php echo $stock['orderST']; ?>" title="Sucks big time - 1 star"></label>
+                                                                            </fieldset>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" data-orderq="<?php echo $stock['orderST'] ?>" id="approvedS" class="btn btn-primary">บันทึก</button>
@@ -1891,18 +1900,17 @@
                                                                             <label style="font-size:18px;" for="">แสดงความคิดเห็น (คุณอยากบอกอะไรเรา)</label>
                                                                             <textarea name="textareanot" id="textareanot<?php echo $stock['orderST']; ?>" class="form-control" rows="5"></textarea>
                                                                             <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
-                                                                            <div class="rate" style="text-align: center;">
-                                                                                <input type="radio" class="star" id="star6" name="rate_not" value="5" />
-                                                                                <label for="star6" title="text">5 ดาว</label>
-                                                                                <input type="radio" class="star" id="star7" name="rate_not" value="4" />
-                                                                                <label for="star7" title="text">4 ดาว</label>
-                                                                                <input type="radio" class="star" id="star8" name="rate_not" value="3" />
-                                                                                <label for="star8" class="star" title="text">3 ดาว</label>
-                                                                                <input type="radio" class="star" id="star9" name="rate_not" value="2" />
-                                                                                <label for="star9" title="text">2 ดาว</label>
-                                                                                <input type="radio" class="star" id="star10" name="rate_not" value="1" />
-                                                                                <label for="star10" title="text">1 ดาว</label>
-                                                                            </div>
+                                                                            <fieldset class="rating">
+                                                                                <input type="radio" id="star55<?php echo $stock['orderST']; ?>" name="rating" value="5" /><label class="full" style="font-size: 18px;" for="star55<?php echo $stock['orderST']; ?>" title="Awesome - 5 stars"></label>
+
+                                                                                <input type="radio" id="star44<?php echo $stock['orderST']; ?>" name="rating" value="4" /><label class="full" style="font-size: 18px;" for="star44<?php echo $stock['orderST']; ?>" title="Pretty good - 4 stars"></label>
+
+                                                                                <input type="radio" id="star33<?php echo $stock['orderST']; ?>" name="rating" value="3" /><label class="full" style="font-size: 18px;" for="star33<?php echo $stock['orderST']; ?>" title="Meh - 3 stars"></label>
+
+                                                                                <input type="radio" id="star22<?php echo $stock['orderST']; ?>" name="rating" value="2" /><label class="full" style="font-size: 18px;" for="star22<?php echo $stock['orderST']; ?>" title="Kinda bad - 2 stars"></label>
+
+                                                                                <input type="radio" id="star11<?php echo $stock['orderST']; ?>" name="rating" value="1" /><label class="full" style="font-size: 18px;" for="star11<?php echo $stock['orderST']; ?>" title="Sucks big time - 1 star"></label>
+                                                                            </fieldset>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" data-ordernot="<?php echo $stock['orderST']; ?>" id="not_app<?php echo $stock['orderST']; ?>" class="btn btn-primary">บันทึก</button>
