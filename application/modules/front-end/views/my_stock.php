@@ -395,10 +395,28 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                         $stock_row = $this->db->get()->row_array();
                                         ?>
 
-                                        <?php if ($stock_row == true) { ?>
+                                        <?php
+                                        $blockorder = null ;
+                                        $this->db->select('*');
+                                        $this->db->from('tbl_upload_team');
+                                        $this->db->where('teamId', $teamTM['IdTeam']);
+                                        $this->db->where('order_id', $stock['or_1']);
+                                        // $this->db->where('status', '6');
+                                        $cancelorder = $this->db->get()->row_array();
+                                        ?>
+
+                                         <?php 
+                                            if (!empty($cancelorder)) {
+                                                $blockorder = $cancelorder['status'];
+                                            }
+                                            
+                                        ?>
+
+                                        <?php if ($stock_row == true || $blockorder == 6  ) { ?>
                                             <button type="button" class="btn btn-secondery"> ยืนยัน</button>
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cfmodal<?php echo $stock['mms']; ?>" id=""> ยืนยัน</button>
+                                            <?php echo $blockorder; ?>
                                         <?php } ?>
 
 
@@ -766,7 +784,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>ไม่มีข้อมูลงาน</h1>
+                        <h1 style="font-size: 100px;">ไม่มีข้อมูลงาน</h1>
                         <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>

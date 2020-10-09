@@ -233,11 +233,19 @@ class My_stock_ctr extends CI_Controller
 
             $data2 = array(
                 'status_check_team'             => 0,
-                'status'            => 4,
+                'status'                        => 0,
+                'teamId'                        => null,
                 'update_confirm'                => date('Y-m-d H:i:s')
             );
             $this->db->where('order_id',  $orb);
             $success = $this->db->update('tbl_upload_team', $data2);
+            if ($success) {
+                $update = [
+                    'status_confirmed_team' => '0'
+                ];
+                $this->db->where('order_id',  $orb);
+                $this->db->update('tbl_upload_order', $update);
+            }
 
             if ($success > 0) {
                 $this->session->set_flashdata('save_ss2', 'Successfully Cancel  !!.');
@@ -300,6 +308,7 @@ class My_stock_ctr extends CI_Controller
             $note_can           = $this->input->post('note_can');
             $status_cf_team     = 0;
             $team               = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+            $teamorder          = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id , 'teamId' => $team['IdTeam']])->row_array();
 
             $data = array(
                 'status_confirmed_team'         => $status_cf_team,
@@ -310,7 +319,7 @@ class My_stock_ctr extends CI_Controller
             if ($this->db->update('tbl_upload_order', $data)) {
 
                 $data2 = array(
-                    'status'            => 4,
+                    'status'            => 6,
                 );
 
                 $this->db->where('order_id', $order_id);
@@ -336,7 +345,22 @@ class My_stock_ctr extends CI_Controller
 
                         $this->db->where('IdTeam', $team['IdTeam']);
                         $success = $this->db->update('tbl_team', $deduct);
+
+                        $insertdb = array(
+                            'order_id'     => $teamorder['order_id'],
+                            'position'     => $teamorder['position'],
+                            'wage'         => $teamorder['wage'],
+                            'wage_thai'    => $teamorder['wage_thai'],
+                            'note'         => $teamorder['note'],
+                            'status'       => 0,
+                            'teamId'       => null,
+                            'create_at'    => date('Y-m-d H:i:s'),
+                        );
+
+                        $this->db->insert('tbl_upload_team', $insertdb);
                     }
+
+
                 }
             }
 

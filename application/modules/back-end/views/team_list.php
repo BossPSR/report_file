@@ -793,19 +793,19 @@
 																				<div class="card-body">
 																					<ul class="nav nav-tabs nav-fill ">
 																						<li class="nav-item">
-																							<a class="nav-link active" id="base-pill31" data-toggle="pill" href="#pill31" aria-expanded="true">
+																							<a class="nav-link active" id="base-pill31" data-toggle="pill" href="#pill31<?php echo $team['IdTeam']; ?>" aria-expanded="true">
 																								Deduct Income
 																							</a>
 																						</li>
 																						<li class="nav-item">
-																							<a class="nav-link" id="base-pill32" data-toggle="pill" href="#pill32" aria-expanded="false">Add Score</a>
+																							<a class="nav-link" id="base-pill32" data-toggle="pill" href="#pill32<?php echo $team['IdTeam']; ?>" aria-expanded="false">Add Score</a>
 																						</li>
 																						<li class="nav-item">
-																							<a class="nav-link" id="base-pill33" data-toggle="pill" href="#pill33" aria-expanded="false">Deduct Score</a>
+																							<a class="nav-link" id="base-pill33" data-toggle="pill" href="#pill33<?php echo $team['IdTeam']; ?>" aria-expanded="false">Deduct Score</a>
 																						</li>
 																					</ul>
 																					<div class="tab-content">
-																						<div role="tabpanel" class="tab-pane active" id="pill31" aria-expanded="true" aria-labelledby="base-pill31">
+																						<div role="tabpanel" class="tab-pane active" id="pill31<?php echo $team['IdTeam']; ?>" aria-expanded="true" aria-labelledby="base-pill31">
 																							<form action="deduct_income" method="POST" enctype="multipart/form-data">
 																								<div class="row">
 																									<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
@@ -835,7 +835,7 @@
 																								</div>
 																							</form>
 																						</div>
-																						<div class="tab-pane" id="pill32" aria-labelledby="base-pill32">
+																						<div class="tab-pane" id="pill32<?php echo $team['IdTeam']; ?>" aria-labelledby="base-pill32">
 																							<form action="add_score_team" method="POST">
 																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
 
@@ -849,12 +849,16 @@
 																										<div><?php echo $team['team_score']; ?></div>
 																									</div>
 																									<div class="col-md-12" style="margin-top: 15px;">
+																										<label for="">Detail</label>
+																										<textarea name="note_add" id="" rows="5" class="form-control"></textarea>
+																									</div>
+																									<div class="col-md-12" style="margin-top: 15px;">
 																										<button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
 																									</div>
 																								</div>
 																							</form>
 																						</div>
-																						<div class="tab-pane" id="pill33" aria-labelledby="base-pill33">
+																						<div class="tab-pane" id="pill33<?php echo $team['IdTeam']; ?>" aria-labelledby="base-pill33">
 																							<form action="deduct_score_team" method="POST" enctype="multipart/form-data">
 																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
 																								<?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array(); ?>

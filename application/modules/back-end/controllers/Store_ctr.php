@@ -291,14 +291,14 @@ class Store_ctr extends CI_Controller
         //config email settings
         $config['protocol'] = 'smtp';
         $config['smtp_host'] = 'smtp.gmail.com';
-        $config['smtp_port'] = '465'; //2002
+        $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
         $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
-        $config['charset'] = 'iso-8859-1'; //utf-8
+        $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
-        // $config['smtp_crypto'] = 'tls';
-        // $config['newline'] = "\r\n";
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
 
 
         //$file_path = 'uploads/' . $file_name;

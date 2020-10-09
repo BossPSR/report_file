@@ -193,11 +193,11 @@ class Team_ctr extends CI_Controller
         // $idteam     = $this->input->post('idteam');
         $id         = $this->input->post('id');
         $datetime   = $this->input->post('datetime');
-        $jop        = $this->db->get_where('tbl_job_position',['id' =>  $id])->row_array();
-        
+        $jop        = $this->db->get_where('tbl_job_position', ['id' =>  $id])->row_array();
+
         $update = [
-          'date_interview' => $datetime ,
-          'count_email'    => $jop['count_email'] + 1
+            'date_interview' => $datetime,
+            'count_email'    => $jop['count_email'] + 1
         ];
 
         $this->db->where('id', $id);
@@ -541,7 +541,7 @@ class Team_ctr extends CI_Controller
 
 
                 $detail       = $this->input->post('detail');
-                $admin_by       = $this->input->post('admin_by');
+                $admin_by     = $this->input->post('admin_by');
 
 
                 $this->load->library('upload');
@@ -559,18 +559,18 @@ class Team_ctr extends CI_Controller
                 $gamber     = $this->upload->data();
                 $data = array(
 
-                    'file_name'                => $gamber['file_name'],
-                    'detail'                   => $detail,
-                    'teamid_deduct'            => $idteam,
-                    'deduct'                   => $income,
-                    'admin_by'                 => $admin_by,
-                    'path'                     => 'uploads/deduct/' . $gamber['file_name'],
-                    'create_at'               => date('Y-m-d H:i:s')
+                    'file_name_dti'                => $gamber['file_name'],
+                    'path_dti'                     => 'uploads/deduct/' . $gamber['file_name'],
+                    'note_dti'                     => $detail,
+                    'teamid_dti'                   => $idteam,
+                    'income_dti'                   => $income,
+                    'admin_by_dti'                 => $admin_by,
+                    'create_at_dti'                    => date('Y-m-d H:i:s')
                 );
 
 
-                $success = $this->db->insert('tbl_deduct', $data);
-                $id_set = $this->db->insert_id();
+                $success = $this->db->insert('tbl_deduct_team_income', $data);
+                $id_set  = $this->db->insert_id();
                 $this->sendEmail_deduct_income($team, $id_set);
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', ' Successfully  !!.');
@@ -599,9 +599,9 @@ class Team_ctr extends CI_Controller
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
 
 
-        $teamsend = $this->db->get_where('tbl_deduct', ['id' => $id_set])->row_array();
-        $message .= 'โดนโทษปรับ เป็นจำนวนเงินทั้งหมด' . $teamsend['deduct'] . '';
-        $message .= 'รายละเอียด:' . $teamsend['detail'] . '';
+        $teamsend = $this->db->get_where('tbl_deduct_team_income', ['id' => $id_set])->row_array();
+        $message .= 'โดนโทษปรับ เป็นจำนวนเงินทั้งหมด' . $teamsend['income_dti'] . '';
+        $message .= 'รายละเอียด:' . $teamsend['note_dti'] . '';
         $message .= '<br>';
 
 
@@ -656,6 +656,7 @@ class Team_ctr extends CI_Controller
 
             $score      = $this->input->post('score');
             $idteam     = $this->input->post('idteam');
+            $note_add   = $this->input->post('note_add');
 
             $team = $this->db->get_where('tbl_team', ['IdTeam' => $idteam])->row_array();
 
@@ -667,6 +668,16 @@ class Team_ctr extends CI_Controller
 
             $this->db->where('IdTeam', $idteam);
             $success = $this->db->update('tbl_team', $data);
+            if ($success) {
+                $insert = array(
+                    'teamid'             => $idteam,
+                    'store'              => $score,
+                    'note'               => $note_add,
+                    'create_at'          => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('tbl_store_team', $insert);
+            }
+
             if ($success > 0) {
                 $this->session->set_flashdata('save_ss2', ' Successfully updated add score !!.');
             } else {
@@ -698,7 +709,7 @@ class Team_ctr extends CI_Controller
                 $this->db->where('IdTeam', $idteam);
                 $success = $this->db->update('tbl_team', $data);
 
-                $detail_score       = $this->input->post('detail_score');
+                $detail_score   = $this->input->post('detail_score');
                 $admin_by       = $this->input->post('admin_by');
 
 
@@ -717,18 +728,18 @@ class Team_ctr extends CI_Controller
                 $gamber     = $this->upload->data();
                 $data = array(
 
-                    'file_name'                => $gamber['file_name'],
-                    'detail_score'             => $detail_score,
-                    'teamid_deduct'            => $idteam,
-                    'deduct_score'             => $deduct,
-                    'admin_by'                 => $admin_by,
-                    'path'                     => 'uploads/deduct/' . $gamber['file_name'],
-                    'create_at'                => date('Y-m-d H:i:s')
+                    'file_name_dts'          => $gamber['file_name'],
+                    'detail_score_dts'       => $detail_score,
+                    'teamid_dts'             => $idteam,
+                    'deduct_dts'             => $deduct,
+                    'admin_by_dts'           => $admin_by,
+                    'path_dts'               => 'uploads/deduct/' . $gamber['file_name'],
+                    'create_at_dts'          => date('Y-m-d H:i:s')
                 );
 
+                $success = $this->db->insert('tbl_deduct_team_score', $data);
+                $id_set  = $this->db->insert_id();
 
-                $success = $this->db->insert('tbl_deduct_score', $data);
-                $id_set = $this->db->insert_id();
                 $this->sendEmail_deduct_score($team, $id_set);
                 if ($success > 0) {
                     $this->session->set_flashdata('save_ss2', 'Successfully updated deduct score !!.');
@@ -757,9 +768,9 @@ class Team_ctr extends CI_Controller
         $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:18px;"> </div>';
 
 
-        $teamsend = $this->db->get_where('tbl_deduct_score', ['id' => $id_set])->row_array();
-        $message .= 'โดนโทษปรับ เป็นจำนวนเงินทั้งหมด' . $teamsend['deduct'] . '';
-        $message .= 'รายละเอียด:' . $teamsend['detail'] . '';
+        $teamsend = $this->db->get_where('tbl_deduct_team_score', ['id' => $id_set])->row_array();
+        $message .= 'โดนโทษปรับ เป็นจำนวนเงินทั้งหมด' . $teamsend['deduct_dts'] . '';
+        $message .= 'รายละเอียด:' . $teamsend['detail_score_dts'] . '';
         $message .= '<br>';
 
 

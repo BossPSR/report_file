@@ -230,6 +230,7 @@ class Customer_order_ctr extends CI_Controller
             'order_id'                         => $this->input->post('order_id'),
             'position'                         => $this->input->post('position'),
             'wage'                             => $this->input->post('wage'),
+            'wage_thai'                        => $this->input->post('wagethai'),
             'note'                             => $this->input->post('note_t'),
             'create_at'                        => date('Y-m-d H:i:s')
 

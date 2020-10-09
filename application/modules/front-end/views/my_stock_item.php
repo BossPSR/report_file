@@ -25,6 +25,17 @@
         background-size: cover;
         position: relative;
     }
+
+    .poselet {
+        margin-bottom: 50px;
+        margin-top: 50px;
+        background: #0063d1;
+        box-shadow: -2px -2px 1px rgba(255, 255, 255, 1), -2px -2px 12px rgba(255, 255, 255, 0.5), inset 2px 2px 4px rgba(255, 255, 255, 0.1), 2px 2px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 40px;
+        padding: 29px 20px;
+        font-size: 20px;
+
+    }
 </style>
 <section class="slider_section slider_section_four hero-banner" style="padding: 40px 0 50px 0;">
     <br>
@@ -44,13 +55,13 @@
                 <div class="row text-center mt-60">
                     <?php foreach ($item as $item) { ?>
                         <?php if ($item >= 2) : ?>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12" style="margin-bottom:50px;margin-top:50px;">
-                                <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" style="background: #0063d1;" class="bn_e"><span style="color: white;"><?php echo $item['name_item']; ?></span></a>
+                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 poselet">
+                                <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" style="background: #0063d1;" class=""><span style="color: white;"><?php echo $item['name_item']; ?></span></a>
                             </div>
 
                         <?php else : ?>
                             <div class="col-xl-12 col-lg-2 col-md-12 col-sm-12">
-                                <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>" class="bn_e"><span><?php echo $item['name_item']; ?></span></a>
+                                <a href="My-stock?item=<?php echo base64_encode($item['id']); ?>"><span><?php echo $item['name_item']; ?></span></a>
                             </div>
                         <?php endif; ?>
                     <?php } ?>

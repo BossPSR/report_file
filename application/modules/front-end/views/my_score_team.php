@@ -47,7 +47,7 @@
                         <tbody>
                             <?php foreach ($store as $key => $store) { ?>
                                 <tr style="text-align:center;">
-                                    <td><?php echo $store['order_id']; ?></td>
+                                    <td><?php echo $store['order_id'] == '' ? 'โบนัสจากระบบ' : $store['order_id'] ; ?></td>
                                     <td><?php echo date("d F Y", strtotime($store['create_at'])); ?></td>
                                     <td><?php echo $store['note'] == '' ? '-' : $store['note'] ; ?></td>
 

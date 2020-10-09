@@ -308,14 +308,14 @@
                                                     <a style="color:#73c803;font-weight:bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fa fa-circle" aria-hidden="true"></i> Online
                                                     </a>
-                                                <!-- } else { ?>
+                                                    <!-- } else { ?>
                                                     <a style="color:#b6b6b6;font-weight:bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fa fa-circle" aria-hidden="true"></i> Offline
                                                     </a> -->
                                                 <?php } ?>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li style="margin: 5px 10px;"><a href="teamOnline"><i class="fa fa-circle" style="color:#73c803;"></i> Online</a></li>
-                                                 
+
                                                     <!-- <li style="margin: 5px 10px;"><a href="teamOffline"><i class="fa fa-circle" style="color:#b6b6b6;"></i> Offline</a></li> -->
                                                 </ul>
                                         </li>
@@ -377,7 +377,7 @@
             </style> -->
             <!--header middel start-->
             <div class="header_middle" style="background-image: linear-gradient(#2b286f, #282392);">
-                <div class="container" style="max-width: 1500px;">
+                <div class="container" style="max-width: 1600px;">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-4">
                             <div class="logo">
@@ -470,9 +470,9 @@
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
                                                         <?php foreach ($sm_del as $sm_del) { ?>
-                                                            <?php echo $test += 1; ?>
+                                                            <?php $test += 1; ?>
                                                         <?php } ?>
-
+                                                        <?php echo $test; ?>
 
                                                     </div>
                                                     <div>จำนวนชิ้นงาน</div>
@@ -499,7 +499,7 @@
                                                     </div>
                                                     <div>รายได้ปัจจุบัน</div>
                                                 </div>
-                                             
+
 
                                             </div>
                                         <?php endif ?>
@@ -516,7 +516,7 @@
             <div class="main_menu_area" style="background: #282390;border-top: 1px solid white;">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-2 col-md-12" >
+                        <div class="col-lg-2 col-md-12">
                             <div class="categories_menu" style="padding-bottom: 8px;">
                                 <div class="categories_title" style="background: #282390;">
                                     <h2 class="categori_toggle">รายการอื่นๆ</h2>
@@ -528,20 +528,20 @@
                                                 <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
                                             <li><a href="my-rewards"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
-                                           
+
 
                                         <?php elseif ($team) : ?>
                                             <li>
                                                 <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
                                             <li><a href="my-rewards-team"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
-                                           
+
                                         <?php else : ?>
                                             <li>
                                                 <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
                                             <li><a href="my-rewards"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
-                                          
+
                                         <?php endif ?>
                                     </ul>
                                 </div>
@@ -552,48 +552,92 @@
                                 <nav>
                                     <ul>
                                         <?php if ($user) :  ?>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'home') { echo 'active';} ?>"  href="home"> หน้าแรก</a></li>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'buy') { echo 'active';} ?>"  href="buy"> สั่งออร์เดอร์ <div class="arrow_box"></div></a></li>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'order') { echo 'active';} ?>" href="order"> ออร์เดอร์ของฉัน </a></li>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'store') { echo 'active';} ?>" href="store"> แลกคะแนนส่วนลด </a></li>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'my-selling' ) { echo 'active';} ?>" href="#">ข้อมูลคะแนน<i class="fa fa-angle-down"></i></a>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'home') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="home"> หน้าแรก</a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'buy') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="buy"> สั่งออร์เดอร์ <div class="arrow_box"></div></a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'order') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="order"> ออร์เดอร์ของฉัน </a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'store') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="store"> แลกคะแนนส่วนลด </a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'my-selling') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="#">ข้อมูลคะแนน<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my-selling') { echo 'active';} ?>" href="my-selling">ได้รับคะแนน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my-cashback') { echo 'active';} ?>" href="my-cashback">ได้รับเงินคืน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my-rewards-list') { echo 'active';} ?>" href="my-rewards-list">ได้รับรางวัล</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my-commission') { echo 'active';} ?>" href="my-commission">ค่าคอมมิชชั่น</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my-deduct') { echo 'active';} ?>" href="my-deduct">ถูกหักคะแนน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my-reject') { echo 'active';} ?>" href="my-reject">ไม่ผ่านเกณฑ์</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-selling') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my-selling">ได้รับคะแนน</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-cashback') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my-cashback">ได้รับเงินคืน</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-rewards-list') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my-rewards-list">ได้รับรางวัล</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-commission') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my-commission">ค่าคอมมิชชั่น</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-deduct') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my-deduct">ถูกหักคะแนน</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-reject') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my-reject">ไม่ผ่านเกณฑ์</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'package') { echo 'active';} ?>" href="package"> แพ็คเกจ</a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'package') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="package"> แพ็คเกจ</a></li>
                                             <li><?php $this->load->view('options/notify_user'); ?></li>
                                             <li> </li>
 
                                         <?php elseif ($team) : ?>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'home') { echo 'active';} ?>" href="home"> หน้าแรก</a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'home') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="home"> หน้าแรก</a></li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'My-stock-Item') { echo 'active';} ?>" href="My-stock-Item"> เลือกงานที่นี่</a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'My-stock-Item') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="My-stock-Item"> เลือกงานที่นี่</a>
                                             </li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'My-task') { echo 'active';} ?>"  href="My-task"> งานของฉัน</a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'My-task') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="My-task"> งานของฉัน</a>
                                             </li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'My-delivery') { echo 'active';} ?>"  href="My-delivery"> ส่งงานที่นี่ </a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'My-delivery') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="My-delivery"> ส่งงานที่นี่ </a>
                                             </li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'my-feedback') { echo 'active';} ?>"  href="my-feedback"> แก้ไขงานของฉัน</a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'my-feedback') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="my-feedback"> แก้ไขงานของฉัน</a>
                                             </li>
 
-                                            <li><a style="font-size: 22px;" class="<?php if(
-                                            $this->uri->segment(1)  == 'my_score_team_deduct' ||
-                                             $this->uri->segment(1) == 'my_income' || 
-                                             $this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="#">การหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
+                                            <li><a style="font-size: 22px;" class="<?php if (
+                                                                                        $this->uri->segment(1)  == 'my_score_team_deduct' ||
+                                                                                        $this->uri->segment(1) == 'my_income' ||
+                                                                                        $this->uri->segment(1) == 'my_income_team_deduct'
+                                                                                    ) {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="#">การหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my_store_team') { echo 'active';} ?>"  href="my_store_team">คะแนน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my_score_team_deduct') { echo 'active';} ?>"  href="my_score_team_deduct">หักคะแนน</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my_income_team_deduct') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my_income_team_deduct">ถูกหักรายได้</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my_store_team') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my_store_team">ได้คะแนน</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my_score_team_deduct') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="my_score_team_deduct">ถูกหักคะแนน</a></li>
                                                     <!-- <li><a class=" if($this->uri->segment(1) == 'my_income') { echo 'active';} ?>"  href="my_income">ค่าตอบแทน</a></li> -->
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="my_income_team_deduct">หักค่าตอบแทน</a></li>
+
 
                                                 </ul>
                                             </li>
@@ -603,36 +647,59 @@
                                             <li></li>
                                             <li><?php $this->load->view('options/notify_team'); ?></li>
                                         <?php elseif ($this->uri->segment(1) == 'register-team') : ?>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'home') { echo 'active';} ?>" href="home"> หน้าแรก</a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'home') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="home"> หน้าแรก</a></li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'My-stock-Item') { echo 'active';} ?>" href=""> เลือกงานที่นี่</a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'My-stock-Item') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href=""> เลือกงานที่นี่</a>
                                             </li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'My-task') { echo 'active';} ?>"  href=""> งานของฉัน</a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'My-task') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href=""> งานของฉัน</a>
                                             </li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'My-delivery') { echo 'active';} ?>"  href=""> ส่งงานที่นี่ </a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'My-delivery') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href=""> ส่งงานที่นี่ </a>
                                             </li>
                                             <li>
-                                                <a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'my-feedback') { echo 'active';} ?>"  href=""> แก้ไขงานของฉัน</a>
+                                                <a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'my-feedback') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href=""> แก้ไขงานของฉัน</a>
                                             </li>
 
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'My-stock-Item' || 
-                                            $this->uri->segment(1)  == 'my_score_team_deduct' ||
-                                             $this->uri->segment(1) == 'my_income' || 
-                                             $this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="#">การหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
+                                            <li><a style="font-size: 22px;" class="<?php if (
+                                                                                        $this->uri->segment(1) == 'My-stock-Item' ||
+                                                                                        $this->uri->segment(1)  == 'my_score_team_deduct' ||
+                                                                                        $this->uri->segment(1) == 'my_income' ||
+                                                                                        $this->uri->segment(1) == 'my_income_team_deduct'
+                                                                                    ) {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="#">การหักคะแนนและรายได้<i class="fa fa-angle-down"></i></a>
                                                 <ul class="sub_menu pages">
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my_store_team') { echo 'active';} ?>"  href="">คะแนน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my_score_team_deduct') { echo 'active';} ?>"  href="">หักคะแนน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if($this->uri->segment(1) == 'my_income_team_deduct') { echo 'active';} ?>"  href="">หักค่าตอบแทน</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my_income_team_deduct') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="">ถูกหักรายได้</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my_store_team') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="">ได้คะแนน</a></li>
+                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my_score_team_deduct') {
+                                                                                                echo 'active';
+                                                                                            } ?>" href="">ถูกหักคะแนน</a></li>
+
 
                                                 </ul>
                                             </li>
-                                         
+
                                             <li></li>
                                             <li></li>
                                         <?php else : ?>
-                                            <li><a style="font-size: 22px;" class="<?php if($this->uri->segment(1) == 'home') { echo 'active';} ?>"  href="home"> หน้าแรก</a></li>
+                                            <li><a style="font-size: 22px;" class="<?php if ($this->uri->segment(1) == 'home') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="home"> หน้าแรก</a></li>
                                             <li><a style="font-size: 22px;" href="#exampleModalCenter" data-toggle="modal"> สั่งออร์เดอร์ <div class="arrow_box"></div></a></li>
                                             <li><a style="font-size: 22px;" href="#exampleModalCenter" data-toggle="modal"> แลกคะแนนส่วนลด </a></li>
                                             <li><a style="font-size: 22px;" href="#">ข้อมูลคะแนน<i class="fa fa-angle-down"></i></a>

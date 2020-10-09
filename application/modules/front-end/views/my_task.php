@@ -453,7 +453,7 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -679,7 +679,7 @@
                                     <td><?php echo date('d F Y', strtotime($task['update_confirm'])); ?></td>
                                      <!-- wage -->
                                      <td>
-                                        <span class="" style="font-size:16px;font-weight: bold;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage']; ?></span>
+                                        <span class="" style=" font-size:16px;font-weight: bold;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage']; ?></span>
                                     </td>
                                     <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || $N_feed['od'] >= 3 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
@@ -821,6 +821,8 @@
                                             <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">ไม่ผ่านเกณฑ์ </span></td>
                                         <?php } elseif ($task['c_status'] == 5) { ?>
                                             <td><span class="badge badge-success" style="font-size:16px;">ส่งงานเพิ่มแล้ว </span></td>
+                                        <?php } elseif ($task['c_status'] == 6) { ?>
+                                            <td><span class="badge badge-danger" style="font-size:16px;">ฉันยกเลิกแล้ว </span></td>
                                         <?php } else { ?>
                                             <td>-</td>
                                         <?php } ?>
@@ -927,8 +929,6 @@
                                                     </div>
                                                 </div>
                                             </td>
-
-
                                         <?php else : ?>
                                             <td> </td>
                                         <?php endif; ?>
@@ -1086,8 +1086,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>No Task</h1>
-                        <h2>Data Not Found</h2>
+                        <h1 style="font-size: 100px;">ไม่มีงานของฉัน</h1>
+                        <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>
             </div>

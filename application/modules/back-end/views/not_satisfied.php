@@ -1328,11 +1328,18 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-xl-12 col-md-6 col-12 mb-1">
+                                                                        <div class="col-xl-6 col-md-6 col-12 mb-1">
                                                                             <div class="form-group">
                                                                                 <label for="helpInputTop">wage(10%)</label>
 
                                                                                 <input type="text" class="form-control" name="wage" value="<?php echo $store['price_file'] * 10 / 100; ?>" placeholder="Enter wage">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-6 col-md-6 col-12 mb-1">
+                                                                            <div class="form-group">
+                                                                                <label for="helpInputTop">wage thai</label>
+
+                                                                                <input type="text" class="form-control" name="wagethai" value="" placeholder="Enter wage" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-6 col-12 mb-1">

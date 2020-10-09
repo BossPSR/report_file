@@ -42,14 +42,14 @@
 
                                 <th scope="col">ไฟล์ของฉัน</th>
                                 <th scope="col">คำอธิบาย</th>
-                                <th scope="col">จำนวน</th>
+                                <th scope="col">คะแนนของฉัน</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
                         <tbody>
                             <?php foreach ($store as $key => $store) { ?>
                                 <tr style="text-align:center;">
-                                    <td scope="row"><?php echo $store['order_id_dts']; ?></td>
+                                    <td scope="row"><?php echo $store['order_id_dts'] == '' ? 'หักเงินจากระบบ' : $store['order_id_dts'] ; ?></td>
                                     <td><?php echo $store['create_at_dts']; ?></td>
 
                                     <td>
@@ -60,7 +60,7 @@
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $store['detail_score_dts']; ?></td>
-                                    <td>$<?php echo number_format($store['deduct_dts']); ?></td>
+                                    <td><?php echo number_format($store['deduct_dts']); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
