@@ -209,7 +209,8 @@
 													<th>Out Feedback</th>
 													<th>Approved</th>
 													<th>Not Approved</th>
-													<th>Income</th>
+													<th>Income EN</th>
+													<th>Income TH</th>
 													<th>Score</th>
 													<th>Withdraw</th>
 													<th>Outstanding</th>
@@ -555,6 +556,9 @@
 														</td>
 														<td>
 															<?php echo $team['income']; ?>
+														</td>
+														<td>
+															<?php echo $team['income_thai']; ?>
 														</td>
 														<td>
 															<?php echo $team['team_score']; ?>

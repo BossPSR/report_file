@@ -462,7 +462,7 @@
                                                 $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                                                 $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                                                 $this->db->where('tbl_upload_order.status_delivery', 1);
-                                                $this->db->where('tbl_upload_order.status_approved', 1);
+                                                // $this->db->where('tbl_upload_order.status_approved', 1);
                                                 $this->db->group_by('tbl_upload_order.order_id');
 
                                                 $sm_del = $this->db->get()->result_array();
@@ -479,25 +479,33 @@
                                                 </div>
 
                                                 <?php
-                                                $this->db->select('*');
-                                                $this->db->from('tbl_upload_team');
-                                                $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
-                                                $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
-                                                $this->db->where('tbl_upload_order.status_delivery', 1);
-                                                $this->db->group_by('tbl_upload_team.order_id');
-
-
-                                                $sm_de2 = $this->db->get()->result_array();
-                                                $cc = 0;
+                                                $this->db->from('tbl_team');
+                                                $this->db->where('IdTeam', $team['IdTeam']);
+                                                $income_team = $this->db->get()->row_array();
                                                 ?>
                                                 <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
                                                     <div class="menu-list">
-                                                        <?php foreach ($sm_de2 as $key => $sm_de2) : ?>
-                                                            <?php $cc += $sm_de2['wage']; ?>
-                                                        <?php endforeach; ?>
-                                                        <?php echo $cc; ?>
+                                                        <?php if ($income_team['country_id'] == '218') : ?>
+                                                            <?php echo $income_team['income_thai']; ?>
+                                                        <?php else : ?>
+                                                            <?php echo $income_team['income']; ?>
+
+                                                        <?php endif; ?>
                                                     </div>
                                                     <div>รายได้ปัจจุบัน</div>
+                                                </div>
+
+                                                <?php
+                                                $this->db->from('tbl_team');
+                                                $this->db->where('IdTeam', $team['IdTeam']);
+                                                $score_team = $this->db->get()->row_array();
+
+                                                ?>
+                                                <div class="header_wishlist text-center" style="margin-right: 30px;color: white;">
+                                                    <div class="menu-list">
+                                                        <?php echo $score_team['team_score']; ?>
+                                                    </div>
+                                                    <div>คะแนนของฉัน</div>
                                                 </div>
 
 

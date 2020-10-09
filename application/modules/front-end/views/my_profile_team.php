@@ -31,7 +31,9 @@
 
                     <div class="image_profile">
                         <h2 class="text-center my-income">
-                            <div class="name_user m17"><i class="fa fa-user"></i> <?= $this->lang->line("name"); ?> : <?php echo $team['name']; ?></div>
+                            <div class="name_user m17"><i class="fa fa-user"  style="color: #282390;"></i> 
+                            <!-- $this->lang->line("name"); ?> --> ชื่อ - นามสกุล
+                             : <?php echo $team['name']; ?></div>
                         </h2>
                         <div class="image_PF">
                             <a href="#exampleModalCenter1" data-toggle="modal"><img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  "$team[file_name]"; ?>" alt=""></a>
@@ -62,27 +64,20 @@
                         <div class="menu_profileRow">
 
                             <?php
-                            $this->db->select('* , tbl_upload_team.wage wg');
-                            $this->db->from('tbl_upload_team');
-                            $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
-                            $this->db->join('tbl_withdraw_team', 'tbl_withdraw_team.order_id = tbl_upload_team.order_id', 'left');
-                            $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
-                            $this->db->where('tbl_upload_order.status_delivery', 1);
-                            $this->db->where('tbl_withdraw_team.order_id', null);
-                            $this->db->or_where('tbl_withdraw_team.status !=', '2');
-                            $this->db->group_by('tbl_upload_order.order_id');
+                            $this->db->from('tbl_team');
+                            $this->db->where('IdTeam', $team['IdTeam']);
 
+                            $sumto = $this->db->get()->row_array();
 
-                            $sm_de2 = $this->db->get()->result_array();
-                            $sumto = 0;
-                            foreach ($sm_de2 as $key => $sm_de2) {
-                                $sumto = $sm_de2['wg'];
-                            }
                             ?>
 
                             <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?= $sumto ?>
+                                    <?php if ($sumto['country_id'] == '218') : ?>
+                                        <?= $sumto['income_thai'] ?>
+                                    <?php else : ?>
+                                        <?= $sumto['income'] ?>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="list_menu">My Income</div>
                             </div>
@@ -93,6 +88,7 @@
                             $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                             $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                             $this->db->where('tbl_upload_order.status_delivery', 1);
+                            
                             $this->db->group_by('tbl_upload_order.order_id');
 
 
@@ -153,6 +149,8 @@
                             <?php
 
                             $this->db->from('tbl_team');
+                            $this->db->where('IdTeam', $team['IdTeam']);
+
                             $sm_de5 = $this->db->get()->row_array();
 
                             ?>
@@ -290,7 +288,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="My-profile-team-update" method="POST" >
+            <form action="My-profile-team-update" method="POST">
                 <div class="modal-body">
                     <input type="hidden" name="id" value="<?php echo $team['id']; ?>">
 

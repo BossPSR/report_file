@@ -199,6 +199,7 @@
                                                 <th scope="col" class="text-center">รหัสออร์เดอร์</th>
                                                 <th scope="col" class="text-center">วันที่ส่งคำขอ</th>
                                                 <th scope="col" class="text-center">วันที่โอนสำเร็จ</th>
+                                                <th scope="col" class="text-center">ใบสลิป</th>
                                                 <th scope="col" class="text-center">รายได้</th>
                                                 <th scope="col" class="text-center">สถานะ</th>
                                             </tr>
@@ -210,6 +211,13 @@
                                                     <?php $ggh = explode(" ", $slip_team['create_at']); ?>
                                                     <td><?php echo $ggh[0]; ?></td>
                                                     <td><?= $slip_team['transaction_date'] == '' ? '-' : $slip_team['transaction_date'] ?></td>
+                                                    <td>
+                                                        <?php if ($slip_team['path'] != '') : ?>
+                                                            <a href="<?= $slip_team['path']; ?>"><i style="font-size: 18px;" class="fa fa-file-image-o" aria-hidden="true"></i></a>
+                                                        <?php else : ?>
+                                                            -
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td scope="row"><span class="badge badge-primary" style="font-size:16px;">$ <?php echo $slip_team['price']; ?></span></td>
 
                                                     <?php if ($slip_team['st2'] == 1) { ?>

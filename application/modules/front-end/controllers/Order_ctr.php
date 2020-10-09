@@ -15,7 +15,7 @@ class Order_ctr extends CI_Controller
     if ($this->session->userdata('email') == '') {
       redirect('home');
     } else {
-   
+
 
       $data['userId']   = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
       $data['package']   = $this->db->get('tbl_package')->result_array();
@@ -34,7 +34,6 @@ class Order_ctr extends CI_Controller
       $this->load->view('options/header_login');
       $this->load->view('order', $data);
       $this->load->view('options/footer');
-
     }
   }
 
@@ -82,21 +81,35 @@ class Order_ctr extends CI_Controller
           'cashback_detail' =>  'ยินดีด้วยคุณได้รับ Reward จากการสั่งซื้อเอกสารครบ 30 ออเดอร์!',
           'create_at'       => date('Y-m-d H:i:s')
         ];
-        $this->db->insert('tbl_cashback', $user_reward);
+        $this->db->insert('tbl_cashback', $before);
       }
 
       if ($team01 == true) {
         $team03   = $this->db->get_where('tbl_team', ['IdTeam' => $team01['teamid']])->row_array();
+        $team04   = $this->db->get_where('tbl_upload_team', ['teamId' => $team01['teamid']])->row_array();
+        if ($team03['country_id'] == '218') {
+          $draft_income = [
+            'income_thai' =>  $team03['income_thai'] + $team04['wage_thai']
+          ];
+        } else {
+          $draft_income = [
+            'income' =>  $team03['income'] + $team04['wage']
+          ];
+        }
+        $this->db->where('IdTeam', $team01['teamid']);
+        $tm3 = $this->db->update('tbl_team', $draft_income);
+
         $teamscore = [
           'team_score' =>  $team03['team_score'] + 10
         ];
         $this->db->where('IdTeam', $team01['teamid']);
         $tm3 = $this->db->update('tbl_team', $teamscore);
+
         if ($tm3) {
           if ($team03['team_score'] >= '500') {
 
             $teamic = [
-              'income' =>  $team03['income'] + 100 ,
+              'income' =>  $team03['income'] + 100,
               'team_score' =>  '0'
             ];
             $this->db->where('IdTeam', $team01['teamid']);

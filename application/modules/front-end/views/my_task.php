@@ -682,8 +682,8 @@
                                         <span class="" style=" font-size:16px;font-weight: bold;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage']; ?></span>
                                     </td>
                                     <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || $N_feed['od'] >= 3 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
+                                      
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
-
 
                                         <?php if ($task['c_status'] == 3) { ?>
                                             <?php
