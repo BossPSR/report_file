@@ -8,6 +8,16 @@ class History_model extends CI_Model
     {
         parent::__construct();
     }
+    function my_store_good($_team)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_store_team');
+        $this->db->where('teamid', $_team);
+        $this->db->order_by('id', 'desc');
+
+        $data = $this->db->get();
+        return $data->result_array();
+    }
 
     function my_store($_team)
     {

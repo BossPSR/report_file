@@ -75,7 +75,7 @@
                                     <table class="table mt-15 tabledata">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">รหัสออเดอร์</th>
+                                                <th scope="col">รหัสออร์เดอร์</th>
                                                 <th scope="col">Amoumt (จำนวนเงิน)</th>
                                                 <!-- <td>Request date (วันที่ส่งคำขอ)</td> -->
                                                 <th scope="col" class="text-center">สถานะ</th>
@@ -94,7 +94,7 @@
                                                         <?php } elseif ($slip_success['status_pay'] == 0) { ?>
                                                             <span class="badge badge-pill badge-warning" style="color:#fff;">ยังไม่ชำระเงิน</span>
                                                         <?php } elseif ($slip_success['is_check'] == 1) { ?>
-                                                            <span class="badge badge-pill badge-danger">ยกเลิกออเดอร์</span>
+                                                            <span class="badge badge-pill badge-danger">ยกเลิกออร์เดอร์</span>
                                                         <?php } ?>
                                                     </td>
                                                     <?php $ggh = explode(" ", $slip_success['created_at_buy']); ?>
@@ -109,7 +109,7 @@
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Amoumt (จำนวนเงิน)</th>
-                                                <th scope="col">รหัสออเดอร์สินค้า</th>
+                                                <th scope="col">รหัสออร์เดอร์สินค้า</th>
                                                 <th scope="col" class="text-center">สถานะ</th>
                                                 <th scope="col">รายละเอียดเวลา</th>
                                             </tr>
@@ -126,7 +126,7 @@
                                                         <?php } elseif ($slip_not_success['status_pay'] == 0) { ?>
                                                             <span class="badge badge-pill badge-warning" style="color:#fff;">ยังไม่ชำระเงิน</span>
                                                         <?php } elseif ($slip_not_success['is_check'] == 1) { ?>
-                                                            <span class="badge badge-pill badge-danger">ยกเลิกออเดอร์</span>
+                                                            <span class="badge badge-pill badge-danger">ยกเลิกออร์เดอร์</span>
                                                         <?php } ?>
                                                     </td>
                                                     <?php $ggh = explode(" ", $slip_not_success['created_at_buy']); ?>
@@ -196,7 +196,7 @@
                                     <table class="table mt-15">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col" class="text-center">รหัสออเดอร์</th>
+                                                <th scope="col" class="text-center">รหัสออร์เดอร์</th>
                                                 <th scope="col" class="text-center">วันที่ส่งคำขอ</th>
                                                 <th scope="col" class="text-center">วันที่โอนสำเร็จ</th>
                                                 <th scope="col" class="text-center">รายได้</th>
@@ -217,7 +217,7 @@
                                                     <?php } elseif ($slip_team['st2'] == 2) { ?>
                                                         <td><span class="badge badge-success" style="font-size:16px;">ได้รับเงินแล้ว</span></td>
                                                     <?php } else { ?>
-                                                        <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออเดอร์มีปัญหา</span></td>
+                                                        <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออร์เดอร์มีปัญหา</span></td>
                                                     <?php } ?>
 
                                                 </tr>

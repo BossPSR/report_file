@@ -27,7 +27,7 @@
                             <?php $z += 1; ?>
                         <?php } ?>
                         <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                        <div>ออเดอร์ของฉัน</div>
+                        <div>ออร์เดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -39,9 +39,10 @@
                             <tr style="text-align:center;">
                                 <th scope="col">รหัสออร์เดอร์</th>
                                 <th scope="col">หัวข้อ</th>
-                                <th scope="col">ไฟล์ของฉัน</th>
-                                <th scope="col">รายละเอียด</th>
                                 <th scope="col">วัน/เวลา</th>
+                                <th scope="col">ไฟล์ของฉัน</th>
+                                <th scope="col">คำอธิบาย</th>
+
                                 <th scope="col">จำนวน</th>
                             </tr>
                         </thead>
@@ -58,6 +59,7 @@
                                             <?php echo $income['item_dti']; ?>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?php echo $income['create_at_dti']; ?></td>
                                     <td>
                                         <?php if ($income['file_name_dti'] == '') : ?>
                                             -
@@ -66,7 +68,7 @@
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $income['note_dti']; ?></td>
-                                    <td><?php echo $income['create_at_dti']; ?></td>
+
                                     <td>$<?php echo number_format($income['income_dti']); ?></td>
 
                                 </tr>

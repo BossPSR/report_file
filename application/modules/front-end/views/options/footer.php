@@ -260,6 +260,11 @@
     <?php if ($this->session->flashdata('fail_regis_teamResum')) : ?>
         swal("Error!", "Error for send resume. Plase try agian !!", "error");
     <?php endif; ?>
+
+    <?php if ($this->session->flashdata('fail_regis_teamjob')) : ?>
+        swal("Error!", "Error for send job. Plase try agian !!", "error");
+    <?php endif; ?>
+
     <?php if ($this->session->flashdata('fail_regis_teamData')) : ?>
         swal("Error!", "Your email has been used before. Please try again.", "error");
     <?php endif; ?>

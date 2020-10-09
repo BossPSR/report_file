@@ -22,7 +22,7 @@ class My_history_ctr extends CI_Controller
             $team                           = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
             $_team                          = $team['IdTeam'];
             if ($search_key == '' || $search_key == null) {
-                $data['store']                = $this->History_model->my_store($_team);
+                $data['store']                = $this->History_model->my_store_good($_team);
             } else {
                 $data['store']                = $this->History_model->search_store($search_key, $_team);
             }

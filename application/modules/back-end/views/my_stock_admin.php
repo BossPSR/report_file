@@ -1834,7 +1834,7 @@
                                                                     <button type="button" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#gtdoc<?php echo $stock['orderST']; ?>"><i class="fa fa-plus-circle"></i></button>
                                                                     <?php if ($stock['Tstatus'] != 0 && $stock['teamId'] != '') : ?>
                                                                         <button type="button" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#exampleModalNotApprove<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation-triangle"></i></button>
-                                                                        <button type="button" style="background-color: #ffc107 !important;" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#refeedbackmodal<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation"></i><i class="fa fa-exclamation"></i></button>
+                                                                        <button type="button" style="background-color: #ffc107 !important;" class="btn btn-warning btn-icon" data-toggle="modal" data-target="#modalrefeedback<?php echo $stock['orderST']; ?>"><i class="fa fa-exclamation"></i><i class="fa fa-exclamation"></i></button>
 
                                                                         <!-- approved echo $stock['orderST']; ?> -->
                                                                         <button type="button" class="btn btn-success btn-icon" data-order="<?php echo $stock['orderST'] ?>" id="" data-toggle="modal" data-target="#approvedstar<?php echo $stock['orderST']; ?>" id="" data-toggled="tooltip"><i class="fa fa-check"></i></button>
@@ -1936,7 +1936,7 @@
                                                                             <form action="fileUpload_feedback" class="dropzone" id="fileuploadnotApprove<?php echo $stock['orderST']; ?>">
                                                                                 <div class="dz-message needsclick">
                                                                                     Drop files here or click to upload.<br>
-                                                                                    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+
                                                                                 </div>
                                                                             </form>
                                                                             <br>
@@ -1994,6 +1994,90 @@
                                                                             success: function(success) {
                                                                                 myDropzone2<?php echo $stock['orderST']; ?>.processQueue();
                                                                                 myDropzone2<?php echo $stock['orderST']; ?>.on("queuecomplete", function(file, res) {
+                                                                                    swal("Good job!", "Upload for data success Feedback", "success", {
+                                                                                        button: false,
+                                                                                    });
+                                                                                });
+                                                                                setTimeout("location.reload(true);", 1000);
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                });
+                                                            </script>
+
+                                                            <!-- Modal Re Feedback -->
+                                                            <div class="modal fade" id="modalrefeedback<?php echo $stock['orderST']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Re Feedback (<?php echo $stock['orderST']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div class="modal-body" style="text-align:left;">
+                                                                            <label for="" class="font-size F-upload">You can drop Document. </label>
+                                                                            <form action="fileUpload_refeedback" class="dropzone" id="droprefeedback<?php echo $stock['orderST']; ?>">
+                                                                                <div class="dz-message needsclick">
+                                                                                    Drop files here or click to upload.
+                                                                                </div>
+                                                                            </form>
+                                                                            <br>
+                                                                            <!-- <form action="my-order-feedAuto" method="POST"> -->
+                                                                            <label for="" class="font-size-upload">Detail :</label>
+                                                                            <textarea id="detail1<?php echo $stock['orderST']; ?>" name="detail" class="form-control" rows="5" required></textarea>
+                                                                            <br>
+
+                                                                            <label for="" class="font-size-upload">Date :</label>
+                                                                            <input type="date" name="dated" id="dated<?php echo $stock['orderST']; ?>" class="form-control" value="<?php echo date('Y-m-d'); ?>" min="<?php echo $stock['dateREST'] < date('Y-m-d') ? date('Y-m-d') : $stock['dateREST'] ; ?>" style="width:30%" required>
+                                                                            <input type="text" name="order_id" id="order_id<?php echo $stock['orderST']; ?>" value="<?php echo $stock['orderST']; ?>" hidden>
+                                                                            <input type="text" name="userId" id="userId<?php echo $stock['orderST']; ?>" value="<?php echo null; ?>" hidden>
+                                                                            <input type="text" name="teamId" id="teamId<?php echo $stock['orderST']; ?>" value="<?php echo $stock['teamId']; ?>" hidden>
+                                                                            <!-- </form> -->
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" id="Submitrefeedback<?php echo $stock['orderST']; ?>" class="btn btn-success">Success</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <script type='text/javascript'>
+                                                                Dropzone.autoDiscover = false;
+                                                                var myDropzonere<?php echo $stock['orderST']; ?> = new Dropzone("#droprefeedback<?php echo $stock['orderST']; ?>", {
+                                                                    autoProcessQueue: false,
+                                                                    maxFiles: 5,
+                                                                    addRemoveLinks: true,
+                                                                    parallelUploads: 5, // Number of files process at a time (default 2)
+                                                                });
+
+                                                                $('#Submitrefeedback<?php echo $stock['orderST']; ?>').click(function() {
+                                                                    var x = document.getElementById("detail1<?php echo $stock['orderST']; ?>").value;
+                                                                    var y = document.getElementById("dated<?php echo $stock['orderST']; ?>").value;
+                                                                    var z = document.getElementById("order_id<?php echo $stock['orderST']; ?>").value;
+                                                                    var c = document.getElementById("userId<?php echo $stock['orderST']; ?>").value;
+                                                                    var team = document.getElementById("teamId<?php echo $stock['orderST']; ?>").value;
+
+                                                                    if (myDropzonere<?php echo $stock['orderST']; ?>.files == 0) {
+                                                                        swal("Warning!", "Can not be document Empty", "warning", {
+                                                                            button: true,
+                                                                        });
+                                                                    } else {
+                                                                        $.ajax({
+                                                                            type: 'POST',
+                                                                            url: 'order_auto_refeedback_Stockadmin',
+                                                                            data: {
+                                                                                detail: x,
+                                                                                dated: y,
+                                                                                order_id: z,
+                                                                                userId: c,
+                                                                                teamId: team,
+                                                                            },
+                                                                            success: function(success) {
+                                                                                myDropzonere<?php echo $stock['orderST']; ?>.processQueue();
+                                                                                myDropzonere<?php echo $stock['orderST']; ?>.on("queuecomplete", function(file, res) {
                                                                                     swal("Good job!", "Upload for data success Feedback", "success", {
                                                                                         button: false,
                                                                                     });

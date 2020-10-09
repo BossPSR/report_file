@@ -397,7 +397,7 @@
 }
 .right_menu_new{
     position: fixed;
-    top: 25%;
+    top: 35%;
     right: 10px;
     width: 8%;
     z-index: 100;
@@ -449,8 +449,8 @@
 
 .target_menuright{
     position: fixed;
-    right: 9%;
-    top: 25%;
+    right: 8.2%;
+    top: 35%;
     z-index: 100;
     background: #f8f8f8;
     -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,.1);

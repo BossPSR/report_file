@@ -74,11 +74,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="tab">
-                                <h3 for="" class="font-size-upload">สร้างโฟลเดอร์ใหม่ </h3>
-                                <hr>
+
                                 <form action="new_folder" method="POST">
                                     <div class="form-group">
-                                        <label for="" class="">ชื่อโฟลเดอร์ </label>
+                                        <label style="font-size: 18px;" for="" class="">ตั้งชื่อโฟลเดอร์ </label>
                                         <input type="text" name="name" class="form-control" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">
@@ -92,7 +91,7 @@
                         <?php if (empty($folder)) : ?>
 
                             <div class="error_form col-12">
-                                <h1 style="font-size: 100px;margin: 0px;">ไม่มีโฟลเดอร์</h1>
+                                <h1 style="font-size: 70px;margin: 0px;">ไม่มีโฟลเดอร์</h1>
                                 <!-- <h2>Data Not Found</h2> -->
                             </div>
 
@@ -158,8 +157,12 @@
                         <div class="col-12 mt-3">
                             <hr>
                         </div>
+
+                        <div class="col-12 mt-2">
+                            <label for="" style="font-size: 18px;"> เลือกรหัสออร์เดอร์ที่ต้องการส่ง <br> <span style="color:red">* กรุณาตรวจสอบรหัสออร์เดอร์ของท่านให้ถูกต้อง หากท่านเลือกรหัสออร์เดอร์ผิด ท่านอาจจะไม่ได้รับค่าตอบแทนดังกล่าว</span> </label>
+                        </div>
+
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mt-2">
-                            <label for=""> เลือกออเดอร์ของฉัน </label>
                             <select name="select_item" class="form-control" id="position1">
                                 <option selected disabled>-- กรุณาเลือก --</option>
                                 <?php foreach ($delivery as $delivery) { ?>

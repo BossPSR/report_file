@@ -293,7 +293,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '465'; //2002
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'iso-8859-1'; //utf-8
         $config['wordwrap'] = 'TRUE';
@@ -542,7 +542,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -624,7 +624,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -653,7 +653,7 @@ class Store_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-         
+
 
             $data['store'] = $this->Store_model->reject_buy();
             $this->load->view('options/header');
@@ -778,17 +778,18 @@ class Store_ctr extends CI_Controller
         $check_price = $this->Store_model->check_price($store_id);
         $cc = 0;
         $newPrice = 0;
-        
-            if ($cccc == false) {
-                foreach ($check_price as $check_price) {$newPrice += $check_price['price_file'];}
-                $this->sendEmail_Grade($user, $newPrice, $store_id);
-                
+
+        if ($cccc == false) {
+            foreach ($check_price as $check_price) {
+                $newPrice += $check_price['price_file'];
             }
-        
+            $this->sendEmail_Grade($user, $newPrice, $store_id);
+        }
 
-        
 
-        
+
+
+
 
 
         return redirect('Section');
@@ -822,7 +823,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -942,7 +943,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -1214,7 +1215,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -1410,7 +1411,7 @@ class Store_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -1437,6 +1438,70 @@ class Store_ctr extends CI_Controller
         }
 
         return redirect('Bookmark');
+    }
+
+    public function send_email_storeforbuy()
+    {
+        $note       = $this->input->post('note');
+        $order_id   = $this->input->post('order_id');
+        $order      = $this->db->get_where('tbl_upload_order', ['order_id' => $order_id])->row_array();
+        $user       = $this->db->get_where('tbl_user', ['idUser' => $order['userId']])->row_array();
+
+        $subject = 'More details from the system.';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'More details from the system';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        if (empty($order['email'])) {
+            $message .= '<p>Hey "' . $user['username'] . '",</p>';
+        } else {
+            $message .= '<p>Hey "' . $order['Username'] . '",</p>';
+        }
+        $message .= '<p>You have been Order number <span style="color: #0063d1;">"' . $order['order_id'] . '"</span></p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your order details.</p><hr>';
+        $message .= '<p>Order Details ("' . $order['order_id'] . '")</p>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;">' . $note . ' </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        if (empty($order['email'])) {
+            $this->email->to($user['email']);
+        } else {
+            $this->email->to($order['email']);
+        }
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+
+        if ($this->email->send() == true) {
+            $this->session->set_flashdata('save_ss2', 'Successfully Update email detail !!.');
+        } else {
+            $this->session->set_flashdata('del_ss2', 'Not Successfully Update email detail ');
+        }
+        return redirect('back_store_buy');
     }
 
     public function rename_uploadmains()

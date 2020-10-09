@@ -22,12 +22,12 @@
                 <div class="col-4"></div>
                 <div class="col-2">
                     <div class="form-group text-center" style="margin-top: 1rem;">
-                    <?php  $z = 0  ?>
-                    <?php foreach ($store as $key => $counts) { ?>
-                        <?php $z+=1; ?>
-                    <?php } ?>
-                       <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                       <div>ออเดอร์ของฉัน</div>
+                        <?php $z = 0  ?>
+                        <?php foreach ($store as $key => $counts) { ?>
+                            <?php $z += 1; ?>
+                        <?php } ?>
+                        <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
+                        <div>ออร์เดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -38,9 +38,10 @@
                         <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <th scope="col">รหัสออร์เดอร์</th>
+                                <th scope="col">วัน/เวลา</th>
+
                                 <th scope="col">ไฟล์ของฉัน</th>
-                                <th scope="col">รายละเอียด</th>
-                                <th scope="col">วันที่หักคะแนน</th>
+                                <th scope="col">คำอธิบาย</th>
                                 <th scope="col">จำนวน</th>
                             </tr>
                         </thead>
@@ -48,8 +49,9 @@
                         <tbody>
                             <?php foreach ($store as $key => $store) { ?>
                                 <tr style="text-align:center;">
-                                <td scope="row"><?php echo $store['order_id_dts']; ?></td>
-                                 
+                                    <td scope="row"><?php echo $store['order_id_dts']; ?></td>
+                                    <td><?php echo $store['create_at_dts']; ?></td>
+
                                     <td>
                                         <?php if ($store['file_name_dts'] == '') : ?>
                                             -
@@ -58,7 +60,6 @@
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $store['detail_score_dts']; ?></td>
-                                    <td><?php echo $store['create_at_dts']; ?></td>
                                     <td>$<?php echo number_format($store['deduct_dts']); ?></td>
                                 </tr>
                             <?php } ?>

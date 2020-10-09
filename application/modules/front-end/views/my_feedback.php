@@ -237,11 +237,12 @@
                                                                     <span class=" badge badge-danger" style="font-size:16px;">Not Read</span>
                                                                 <?php else :  ?>
                                                                     <?php if ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 0) : ?>
-                                                                        <span class="badge badge-info" style="font-size:16px;">Read</span>
-                                                                    <?php elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1) : ?>
-                                                                        <span class="badge badge-primary" style="color:#fff;font-size:16px;">Complete</span>
-                                                                    <?php elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) : ?>
-                                                                        <span class="badge badge-success" style="font-size:16px;">Success</span>
+                                                                        <!-- read = prosseing -->
+                                                                        <span class="badge badge-info" style="font-size:16px;">กำลังแก้ไข</span>
+                                                                    <?php elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1 || $feedback['check_feedback_dalivery'] == 2) : ?>
+                                                                        <span class="badge badge-primary" style="color:#fff;font-size:16px;">แก้ไขเรียบร้อย</span>
+                                                                    <!-- elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) : ?>
+                                                                        <span class="badge badge-success" style="font-size:16px;">แก้ไขเรียบร้อย</span> -->
                                                                     <?php endif; ?>
                                                                 <?php endif; ?>
                                         </td>

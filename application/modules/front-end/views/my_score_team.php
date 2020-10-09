@@ -27,7 +27,7 @@
                         <?php $z+=1; ?>
                     <?php } ?>
                        <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                       <div>ออเดอร์ของฉัน</div>
+                       <div>ออร์เดอร์ของฉัน</div>
                     </div>
                 </div>
             </div>
@@ -39,8 +39,8 @@
                             <tr style="text-align:center;">
                                 <th scope="col">รหัสออร์เดอร์</th>
                                 <th scope="col">วัน/เวลา</th>
+                                <th scope="col">คำอธิบาย</th>
                                 <th scope="col">คะแนนของฉัน</th>
-                                <th scope="col">หมายเหตุ</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
@@ -49,8 +49,9 @@
                                 <tr style="text-align:center;">
                                     <td><?php echo $store['order_id']; ?></td>
                                     <td><?php echo date("d F Y", strtotime($store['create_at'])); ?></td>
-                                    <td><?php echo number_format($store['store']); ?></td>
                                     <td><?php echo $store['note'] == '' ? '-' : $store['note'] ; ?></td>
+
+                                    <td><?php echo number_format($store['store']); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -68,7 +69,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1>ไม่มีประวัติคะแนน</h1>
+                        <h1 style="font-size: 100px;">ไม่มีประวัติคะแนน</h1>
                         <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>

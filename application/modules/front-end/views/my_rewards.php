@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-lg-2 col-md-2 text-center"></div>
                 <div class="col-lg-4 col-md-4 text-center ">
-                    <div class="detail-vi"> รางวัล : เมื่อสั่งซื้อเอกสารครบ 30 ออเดอร์ รับเลย 100 Wallet </div>
+                    <div class="detail-vi"> รางวัล : เมื่อสั่งซื้อเอกสารครบ 30 ออร์เดอร์ รับเลย 100 Wallet </div>
                     <div style="color: #b6b6b6;"> รายละเอียดรางวัล </div>
                 </div>
                 <div class="col-lg-4 col-md-4 text-center" style="border-left: 1px solid #e5e5e5;margin-top: 20px;">

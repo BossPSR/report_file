@@ -109,6 +109,7 @@ class Register_ctr extends CI_Controller
 	{
 
 		$countries			= $this->input->post('countries');
+		$title				= $this->input->post('title');
 		$name				= $this->input->post('name');
 		$lastname           = $this->input->post('lastname');
 		$phone				= $this->input->post('phone');
@@ -127,6 +128,7 @@ class Register_ctr extends CI_Controller
 		$bank_number		= $this->input->post('bank_number');
 		$id_card_number		= $this->input->post('id_card_number');
 		$line_id			= $this->input->post('line_id');
+		$email_lang			= $this->input->post('email_lang');
 
 		// Thai
 
@@ -185,6 +187,7 @@ class Register_ctr extends CI_Controller
 					$uploadData = $this->upload->data();
 					$data = array(
 						'country_id'		=> $countries,
+						'title_name'		=> $title,
 						'name'				=> $name,
 						'lastname_user'		=> $lastname,
 						'phone'				=> $phone,
@@ -201,6 +204,7 @@ class Register_ctr extends CI_Controller
 						'zipcode'      		=> $zipcode,
 						'bank_name'      	=> $bank_name,
 						'line'      		=> $line_id,
+						'email_lang_team'   => $email_lang,
 						'passport'      	=> $id_card_number,
 						'bank_number'      	=> $bank_number,
 						'notify_admin'      => 0
@@ -299,7 +303,7 @@ class Register_ctr extends CI_Controller
 								$this->session->set_flashdata('success_regis_team', TRUE);
 								redirect('home');
 							} else {
-								$this->session->set_flashdata('fail_regis_teamResum', TRUE);
+								$this->session->set_flashdata('fail_regis_teamjob', TRUE);
 								redirect('home');
 							}
 						} else {
@@ -404,7 +408,7 @@ class Register_ctr extends CI_Controller
 		$config['smtp_host'] = 'smtp.gmail.com';
 		$config['smtp_port'] = '2002';
 		$config['smtp_user'] = 'infinityp.soft@gmail.com';
-		$config['smtp_pass'] = 'infinityP23';  //sender's password
+		$config['smtp_pass'] = 'infinity_P23';  //sender's password
 		$config['mailtype'] = 'html';
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = 'TRUE';
@@ -442,7 +446,7 @@ class Register_ctr extends CI_Controller
 		$config['smtp_host'] = 'smtp.gmail.com';
 		$config['smtp_port'] = '2002';
 		$config['smtp_user'] = 'infinityp.soft@gmail.com';
-		$config['smtp_pass'] = 'infinityP23';  //sender's password
+		$config['smtp_pass'] = 'infinity_P23';  //sender's password
 		$config['mailtype'] = 'html';
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = 'TRUE';
@@ -479,7 +483,7 @@ class Register_ctr extends CI_Controller
 		$config['smtp_host'] = 'smtp.gmail.com';
 		$config['smtp_port'] = '2002';
 		$config['smtp_user'] = 'infinityp.soft@gmail.com';
-		$config['smtp_pass'] = 'infinityP23';  //sender's password
+		$config['smtp_pass'] = 'infinity_P23';  //sender's password
 		$config['mailtype'] = 'html';
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = 'TRUE';

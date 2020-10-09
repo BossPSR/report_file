@@ -84,24 +84,44 @@
                 </div>
                 <div class="col-2"></div>
             </div>
+            <!-- <span class="badge badge-info" style="font-size:16px;">ส่งงานแล้ว</span>
+
+            <span class="badge badge-warning" style="font-size:16px;">Direct Order</span>
+
+            <span class="badge badge-warning" style="font-size:16px;background-color: #7367f0;color:white">กำลังทำงาน</span>
+
+            <span class="badge badge-danger" style="font-size:16px;">Feedback </span>
+
+            <span class="badge badge-danger" style="font-size:16px;">Re Feedback</span>
+
+            <span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">ไม่ผ่านเกณฑ์ </span>
+
+            <span class="badge badge-warning" style="font-size:16px;">รอการถอนเงิน</span>
+
+            <span class="badge badge-success" style="font-size:16px;">ได้รับเงินแล้ว</span>
+
+            <span class="badge badge-info" style="color:#fff;font-size:16px;background-color: #1762b8;">การถอนหมดอายุ </span>
+
+            <button class="btn btn-info" data-toggle="modal" style="background-color: #007bff;"><i class="fa fa-money"></i> ถอนรายได้ </button> -->
+
             <div class="row">
                 <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 ">
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <!-- <th scope="col">#</th> -->
-                                <th scope="col">เวลาคงเหลือ</th>
-                                <th scope="col">รหัสออร์เดอร์</th>
-                                <th scope="col" style="width: 100px;">รายละเอียดคำสั่งงาน</th>
-                                <th scope="col">ข้อมูลประกอบ</th>
-                                <th scope="col">ตัวอย่างงาน</th>
-                                <th scope="col">ไฟล์ที่ส่งแล้ว</th>
-                                <th scope="col">คำอธิบาย</th>
-                                <th scope="col">เรทค่าตอบแทน</th>
-                                <th scope="col">สาขา</th>
-                                <th scope="col">วันที่กดรับออร์เดอร์</th>
-                                <th scope="col">สถานะ</th>
-                                <th scope="col">ยกเลิกออร์เดอร์ </th>
+                                <th style="background-color: #efefef;" scope="col">เวลาคงเหลือ</th>
+                                <th style="background-color: #efefef;" scope="col">รหัสออร์เดอร์</th>
+                                <th style="background-color: #efefef;" scope="col" style="width: 100px;">รายละเอียดคำสั่งงาน</th>
+                                <th style="background-color: #efefef;" scope="col">ข้อมูลประกอบ</th>
+                                <th style="background-color: #efefef;" scope="col">ตัวอย่างงาน</th>
+                                <th style="background-color: #efefef;" scope="col">ไฟล์ที่ส่งแล้ว</th>
+                                <th style="background-color: #efefef;" scope="col">คำอธิบาย</th>
+                                <th style="background-color: #efefef;" scope="col">สาขา</th>
+                                <th style="background-color: #efefef;" scope="col">วันที่กดรับออร์เดอร์</th>
+                                <th style="background-color: #efefef;" scope="col">เรทค่าตอบแทน</th>
+                                <th style="background-color: #efefef;" scope="col">สถานะ</th>
+                                <th style="background-color: #efefef;" scope="col">ยกเลิกออร์เดอร์ </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,11 +140,11 @@
                                     <!-- Date Requred -->
                                     <td>
                                         <?php if ($task['status_approved'] == 1) : ?>
-                                            <span class="badge badge-success">Success</span>
+
                                         <?php elseif ($task['c_status'] == 1) : ?>
-                                            <span class="badge badge-info">Complete</span>
+
                                         <?php elseif ($task['c_status'] == 4) : ?>
-                                            <span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">Not complete</span>
+
                                         <?php elseif ($task['date_required'] <= date("Y-m-d H:i:s ") && $task['status_out'] == '0') : ?>
                                             <span class="badge badge-danger">หมดเวลา</span>
                                             <?php if ($task['status_out'] == '0') : ?>
@@ -640,10 +660,7 @@
                                         <?php } ?>
                                     </td>
 
-                                    <!-- wage -->
-                                    <td>
-                                        <span class=" badge badge-primary" style="font-size:16px;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage']; ?></span>
-                                    </td>
+                                   
 
                                     <?php $data = date('Y-m-d') ?>
                                     <?php $prosum = date('Y-m-d', strtotime('+65 day' . '+' . $task['up_order'])); ?>
@@ -660,6 +677,10 @@
                                     ?>
                                     <!-- update_confirm -->
                                     <td><?php echo date('d F Y', strtotime($task['update_confirm'])); ?></td>
+                                     <!-- wage -->
+                                     <td>
+                                        <span class="" style="font-size:16px;font-weight: bold;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage']; ?></span>
+                                    </td>
                                     <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || $N_feed['od'] >= 3 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
@@ -677,7 +698,7 @@
 
                                             <td>
                                                 <?php if ($task['end_time_withdraw'] > date('Y-m-d')) : ?>
-                                                    <button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>"><i class="fa fa-money"></i> ถอนรายได้ </button>
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#cf_draw<?php echo $task['or_id']; ?>" style="background-color: #007bff;">กดถอนรายได้ </button>
                                                     <div class="modal fade" id="cf_draw<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
@@ -713,7 +734,7 @@
                                                     </div>
 
                                                 <?php else : ?>
-                                                    <span class="badge badge-info" style="color:#fff;font-size:16px;">การถอนหมดอายุ </span>
+                                                    <span class="badge badge-info" style="color:#fff;font-size:16px;background-color: #1762b8;">การถอนหมดอายุ </span>
                                                 <?php endif; ?>
                                             </td>
                                             <script>
@@ -758,14 +779,12 @@
                                                 });
                                             </script>
                                         <?php } elseif ($withh['status'] == 1) { ?>
-                                            <td><span class="badge badge-warning" style="color:#fff;font-size:16px;">รอการถอนเงิน</span></td>
+                                            <td><span class="badge badge-warning" style="font-size:16px;">รอการถอนเงิน</span></td>
                                         <?php } elseif ($withh['status'] == 2) { ?>
                                             <td><span class="badge badge-success" style="font-size:16px;">ได้รับเงินแล้ว</span></td>
                                         <?php } else { ?>
-                                            <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออเดอร์มีปัญหา</span></td>
+                                            <td><span class="badge badge-danger" style="font-size:16px;"><i class="fa fa-exclamation-triangle"></i> ออร์เดอร์มีปัญหา</span></td>
                                         <?php } ?>
-
-
 
                                     <?php } else { ?>
 
@@ -787,11 +806,13 @@
                                                 <td><span class="badge badge-warning" style="font-size:16px;">Direct Order</span></td>
 
                                             <?php else : ?>
-                                                <td><span class="badge badge-warning" style="font-size:16px;">กำลังทำงาน</span></td>
+                                                <td><span class="badge badge-warning" style="font-size:16px;background-color: #7367f0;color:white">กำลังทำงาน</span></td>
 
                                             <?php endif; ?>
                                         <?php } elseif ($task['c_status'] == 1) { ?>
-                                            <td><span class="badge badge-info" style="font-size:16px;">ส่งงานแล้ว</span></td>
+                                            <td>
+                                                <span class="badge badge-info" style="font-size:16px;">ส่งงานแล้ว</span>
+                                            </td>
                                         <?php } elseif ($task['c_status'] == 2) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;">Feedback <?= $z; ?></span></td>
                                         <?php } elseif ($task['c_status'] == 3) { ?>
@@ -799,7 +820,7 @@
                                         <?php } elseif ($task['c_status'] == 4) { ?>
                                             <td><span class="badge badge-danger" style="font-size:16px;background-color: #ff6b75;">ไม่ผ่านเกณฑ์ </span></td>
                                         <?php } elseif ($task['c_status'] == 5) { ?>
-                                            <td><span class="badge badge-success" style="font-size:16px;">สมบูรณ์ </span></td>
+                                            <td><span class="badge badge-success" style="font-size:16px;">ส่งงานเพิ่มแล้ว </span></td>
                                         <?php } else { ?>
                                             <td>-</td>
                                         <?php } ?>
@@ -853,7 +874,7 @@
                                                                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                                                                     <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
                                                                     <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ทีมงานยกเลิกออเดอร์</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">ทีมงานยกเลิกออร์เดอร์</h5>
 
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -861,7 +882,7 @@
                                                                 </div>
                                                                 <div class="modal-body" style="text-align: left;">
                                                                     <span style="color : red">
-                                                                        * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
+                                                                        * เมื่อคุณทำการยกเลิกออร์เดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออร์เดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
                                                                     </span>
                                                                     <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
                                                                 </div>
@@ -876,7 +897,7 @@
 
                                             </td>
 
-                                        <?php elseif ($task['c_status'] == 0 || $task['c_status'] == 1 || $task['c_status'] == 2 || $task['c_status'] == 3 || $task['c_status'] == 5 && $task['status_check_team'] == 0) : ?>
+                                        <?php elseif ($task['c_status'] == 0 ||  $task['c_status'] == 2 || $task['c_status'] == 3  && $task['status_check_team'] == 0) : ?>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancel_task<?php echo $task['or_id']; ?>" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button>
                                                 <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -885,9 +906,9 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                                                                     <input type="text" value="<?php echo $task['or_id']; ?>" name="order_id" hidden>
-                                                                    <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">ยกเลิกออเดอร์ (<?php echo $task['or_id']; ?>) <br>
+                                                                    <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">ยกเลิกออร์เดอร์ (<?php echo $task['or_id']; ?>) <br>
                                                                         <span style="color : red">
-                                                                            * เมื่อคุณทำการยกเลิกออเดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออเดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
+                                                                            * เมื่อคุณทำการยกเลิกออร์เดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออร์เดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
                                                                         </span>
                                                                     </h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -909,10 +930,10 @@
 
 
                                         <?php else : ?>
-                                            <td><button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
+                                            <td> </td>
                                         <?php endif; ?>
                                     <?php else : ?>
-                                        <td><button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Cancel (ยกเลิก)"><i class="fa fa-times-circle"></i></button></td>
+                                        <td> </td>
                                     <?php endif; ?>
                                 </tr>
                                 <td colspan="12" class="hiddenRow<?= $task['or_id']; ?>" style="display: none;">
@@ -936,7 +957,7 @@
                                                             <td><span class="badge badge-warning" style="font-size:16px;">Direct Order</span></td>
 
                                                         <?php else : ?>
-                                                            <td><span class="badge badge-warning" style="font-size:16px;">กำลังทำงาน</span></td>
+                                                            <td><span class="badge badge-warning" style="font-size:16px;background-color: #7367f0;color:white">กำลังทำงาน</span></td>
 
                                                         <?php endif; ?>
                                                     <?php } elseif ($task['c_status'] == 1) { ?>

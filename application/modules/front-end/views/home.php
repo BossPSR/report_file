@@ -12,43 +12,46 @@
 
 <?php if ($teamId) : ?>
 
-    <!--slider area start-->
-    <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="myModal2">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <!-- <img src="public/frontend/assets/img/bg/home-bg.png" alt=""> -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p style="font-weight: bold;font-size: 24px;color: #006fbd;"> คุณสมบัติติวเตอร์ระดับ Premium ของบริษัท </p>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 46px;">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="font-size: 18px;">
+    <?php if ($teamId['popshow'] == '2') : ?>
+        <!--slider area start-->
+        <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="myModal2">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <!-- <img src="public/frontend/assets/img/bg/home-bg.png" alt=""> -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p style="font-weight: bold;font-size: 24px;color: #006fbd;"> เกณฑ์การคัดเลือกติวเตอร์ระดับ Premium </p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 46px;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="font-size: 18px;">
 
-                    <p>• ส่งงานตรงต่อเวลา </p>
-                    <p>• อัตราการกดยกเลิก Order ต่ำ </p>
-                    <p>• ผลงานที่มีคุณภาพตามและรอบคอบต่อรายละเอียดคำสั่งงาน </p>
-                    <p>• อัตราการถูกแก้ไขงาน Feedback ต่ำ </p>
-                    <p>• มีระยะเวลาการทำงานที่ต่อเนื่อง </p>
+                        <p>1. ส่งงานตรงต่อเวลา </p>
+                        <p>2. อัตราการกดยกเลิก Order ต่ำ </p>
+                        <p>3. อัตราการถูกแก้ไขงาน Feedback ต่ำ </p>
+                        <p>4. ผลงานมีคุณภาพและรอบคอบตามคำสั่งงาน </p>
+                        <p>5. มีระยะเวลาการทำงานที่ต่อเนื่อง </p>
 
-                    <hr>
-                    <p style="font-weight: bold;font-size: 24px;color: #006fbd;"> ติวเตอร์ระดับ Premium จะได้รับอะไรบ้าง </p>
-                    <hr>
-                    <p>• มีสิทธิ์เลือกชิ้นงานก่อน </p>
-                    <p>• ได้รับเรทค่าตอบแทนที่สูงกว่า </p>
-                    <p>• มีรายได้ที่มั่นคงกว่า</p>
-                    <p>• ได้รับรางวัลโบนัสพิเศษจากทางบริษัท </p>
-                    <p>• มีสิทธิ์ได้รับเลือกเข้าเป็นทีมงาน Admin บริษัท </p>
+                        <hr>
+                        <p style="font-weight: bold;font-size: 24px;color: #006fbd;"> ติวเตอร์ระดับ Premium จะได้รับอะไรบ้าง </p>
+                        <hr>
+                        <p>1. มีสิทธิ์เลือกชิ้นงานก่อน </p>
+                        <p>2. ได้รับเรทค่าตอบแทนที่สูงกว่า </p>
+                        <p>3. มีรายได้ที่มั่นคงกว่า</p>
+                        <p>4. ได้รับรางวัลโบนัสพิเศษจากทางบริษัท </p>
+                        <p>5. มีสิทธิ์ได้รับเลือกเป็นทีมงาน Admin บริษัท </p>
 
 
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
+
 <?php else : ?>
 
     <!--slider area start-->
@@ -202,7 +205,7 @@
     .iop {
         margin-top: 10px;
         margin-bottom: 10px;
-        font-size: 18px;
+        font-size: 20px;
         line-height: 30px;
     }
 
@@ -234,6 +237,7 @@
         background-image: url("public/frontend/assets/img/bg/banner03.png");
         background-color: #cccccc;
         /* height: 500px; */
+        height: 70vh;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -249,8 +253,8 @@
 
             <div class="col-lg-6 col-md-12 mt-5 text-center ">
                 <div class="text-white mb-3" style="background-color: #292580;width: 70%;padding: 20px;font-size: 24px;margin: auto;">
-                    www.totorlearner.com คืออะไร
-                     <!--  $this->lang->line("welcometoTutorlearner"); ?> -->
+                    www.tutorlearner.com คืออะไร
+                    <!--  $this->lang->line("welcometoTutorlearner"); ?> -->
                 </div>
                 <div class="text-white" style="background-color: #292580;width: 70%;padding: 35px 0 35px 0px;font-size: 22px;margin: auto;line-height: 31px;">
                     <div> เราคือเพลตฟอร์มเว็บไซต์ผู้ให้บริการ </div>
@@ -280,58 +284,57 @@
     </div>
 </section>
 <section class="slider_section slider_section_four hero-image" style="padding: 40px 0 50px 0;border-bottom-left-radius: 5%;border-bottom-right-radius: 5%;">
-    <div class="container">
+    <div class="container" style="max-width: 1500px;">
         <div class="row">
-            <div class="col-md-12 text-center">
-                <img src="public/frontend/assets/img/logo/1277.png" width="250">
-                <!-- <h3>Tutor Learner</h3> -->
+            <div class="col-lg-7 col-sm-12  text-center">
+                <img src="public/frontend/assets/img/logo/1299.png" width="250">
             </div>
+            <div class="col-lg-5 col-sm-12 text-center"></div>
 
-            <div class="col-lg-7 col-md-12 mt-5 row">
+            <div class="col-lg-8 col-md-12 mt-5 row">
                 <?php if ($teamId) : ?>
                     <!-- team -->
-                    <div class="col-lg-6 col-md-12 mb-3">
+                    <div class="col-lg-6 col-md-12 mb-4">
                         <div class="funfact text-white">
-                            <h3 class=" font-weight-400 mt-0 mb-15">ขั้นตอนการทำงาน</h3>
-                            <h5 class="iop">1. เลือก Order ที่ต้องการในหน้า Order list</h5>
-                            <h5 class="iop">2. กดปุ่ม Confirm Order ที่ต้องการและ Download เอกสารรายละเอียดงาน</h5>
+                            <h3 class=" font-weight-400 mt-0 mb-15" style="font-size: 26px;font-weight: bold;">ขั้นตอนการทำงาน</h3>
+                            <h5 class="iop">1. เลือก ออร์เดอร์ ที่ต้องการในหน้า "เลือกงานที่นี่"</h5>
+                            <h5 class="iop">2. กดปุ่ม "ยืนยันออร์เดอร์" ที่ต้องการและ "ดาวน์โหลด" เอกสารรายละเอียดงาน</h5>
                             <h5 class="iop">3. เริ่มทำงาน</h5>
-                            <h5 class="iop">4. กดปุ่ม Delivery เลือกรหัส Order ที่ต้องการส่งงาน</h5>
-                            <h5 class="iop">5. รอผล Approved หรือ Feedback จาก Admin</h5>
+                            <h5 class="iop">4. กดปุ่ม "ส่งงานที่นี่" เลือกรหัส ออร์เดอร์ ที่ต้องการส่งงาน</h5>
+                            <h5 class="iop">5. รอผล "รอผลอนุมิต" หรือ Feedback จากแอดมิน</h5>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-12 mb-3">
+                    <div class="col-lg-6 col-md-12 mb-4">
                         <div class="funfact text-white">
-                            <h3 class=" font-weight-400 mt-0 mb-15">ข้อดีในการร่วมงานกับเรา </h3>
-                            <h5 class="iop">• อยู่บ้านก็ทำงานได้</h5>
-                            <h5 class="iop">• รู้สึกสบายใจไม่มีใครคอยสั่งการ</h5>
-                            <h5 class="iop">• หยืดหยุ่นเวลาการทำงานได้</h5>
-                            <h5 class="iop">• สร้างรายได้อย่างมั่นคง</h5>
-                            <h5 class="iop">• ได้รับความรู้และทักษะจากสาขาวิชาเพิ่มขึ้น</h5>
-                            <h5 class="iop">• อัปเดทความรู้และเครื่องมือใหม่ตลอดเวลา</h5>
-                            <h5 class="iop">• เสริมทักษะความรู้ด้วยตัวอย่างข้อมูลบริษัทระดับสากล</h5>
+                            <h3 class=" font-weight-400 mt-0 mb-15" style="font-size: 26px;font-weight: bold;">ข้อดีในการร่วมงานกับเรา </h3>
+                            <h5 class="iop">1. อยู่บ้านก็ทำงานได้</h5>
+                            <h5 class="iop">2. รู้สึกสบายใจไม่มีใครคอยสั่งการ</h5>
+                            <h5 class="iop">3. หยืดหยุ่นเวลาการทำงานได้</h5>
+                            <h5 class="iop">4. สร้างรายได้อย่างมั่นคง</h5>
+                            <h5 class="iop">5. ได้รับความรู้และทักษะจากสาขาวิชาเพิ่มขึ้น</h5>
+                            <h5 class="iop">6. อัปเดทความรู้และเครื่องมือใหม่ตลอดเวลา</h5>
+                            <h5 class="iop">7. เสริมทักษะความรู้ด้วยตัวอย่างข้อมูลบริษัทระดับสากล</h5>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div class="funfact text-white">
-                            <h3 class=" font-weight-400 mt-0 mb-15">ขั้นตอนการทำงาน</h3>
-                            <h5 class="iop">1. เลือก Order ที่ต้องการในหน้า Order list</h5>
-                            <h5 class="iop">2. กดปุ่ม Confirm Order ที่ต้องการและ Download เอกสารรายละเอียดงาน</h5>
-                            <h5 class="iop">3. เริ่มทำงาน</h5>
-                            <h5 class="iop">4. กดปุ่ม Delivery เลือกรหัส Order ที่ต้องการส่งงาน</h5>
-                            <h5 class="iop">5. รอผล Approved หรือ Feedback จาก Admin</h5>
+                            <h3 class="mt-0 mb-15" style="font-size: 26px;font-weight: bold;">เกณฑ์การคัดเลือกติวเตอร์ <br> ระดับ Premium</h3>
+                            <h5 class="iop">1. ส่งงานตรงต่อเวลา</h5>
+                            <h5 class="iop">2. อัตราการกดยกเลิก ออร์เดอร์ ต่ำ</h5>
+                            <h5 class="iop">3. อัตราการถูกแก้ไขงาน Feedback ต่ำ</h5>
+                            <h5 class="iop">4. ผลงานมีคุณภาพและรอบคอบตามคำสั่งงาน</h5>
+                            <h5 class="iop">5. มีระยะเวลาการทำงานที่ต่อเนื่อง</h5>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div class="funfact text-white">
-                            <h3 class=" font-weight-400 mt-0 mb-15">ข้อดีในการร่วมงานกับเรา </h3>
-                            <h5 class="iop">• อยู่บ้านก็ทำงานได้</h5>
-                            <h5 class="iop">• รู้สึกสบายใจไม่มีใครคอยสั่งการ</h5>
-                            <h5 class="iop">• หยืดหยุ่นเวลาการทำงานได้</h5>
-                            <h5 class="iop">• สร้างรายได้อย่างมั่นคง</h5>
-                            <h5 class="iop">• ได้รับความรู้และทักษะจากสาขาวิชาเพิ่มขึ้น</h5>
-                            <h5 class="iop">• อัปเดทความรู้และเครื่องมือใหม่ตลอดเวลา</h5>
-                            <h5 class="iop">• เสริมทักษะความรู้ด้วยตัวอย่างข้อมูลบริษัทระดับสากล</h5>
+                            <h3 class=" font-weight-400 mt-0 mb-15" style="font-size: 26px;font-weight: bold;">ติวเตอร์ระดับ Premium <br> จะได้รับอะไรบ้าง </h3>
+                            <h5 class="iop">1. มีสิทธิ์เลือกชิ้นงานก่อน</h5>
+                            <h5 class="iop">2. ได้รับเรทค่าตอบแทนที่สูงกว่า</h5>
+                            <h5 class="iop">3. มีรายได้ที่มั่นคงกว่า</h5>
+                            <h5 class="iop">4. ได้รับรางวัลโบนัสพิเศษจากทางบริษัท</h5>
+                            <h5 class="iop">5. มีสิทธิ์ได้รับเลือกเป็นทีมงาน Admin ของบริษัท</h5>
+
                         </div>
                     </div>
                 <?php else : ?>
@@ -366,7 +369,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="col-lg-5 col-md-12">
+            <div class="col-lg-4 col-md-12">
                 <div class="slider_area owl-carousel">
                     <div class="single_slider d-flex align-items-center justify-content-center">
                         <iframe width="800" height="350" src="https://www.youtube.com/embed/rdzdbNKs0fQ" frameborder="0" allow="autoplay" allowfullscreen></iframe>

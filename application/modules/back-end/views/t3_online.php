@@ -80,7 +80,14 @@
                                                             <?php $name_position = $this->db->get_where('tbl_item_position', ['id' => $team['job_position']])->row_array(); ?>
                                                             <?php echo $name_position['name_item']; ?>
                                                         </td>
-                                                        <td><?php echo $team['date_interview'] == '' ? '-' : $team['date_interview'] ; ?></td>
+                                                        <td>
+                                                            <?php if ($team['date_interview'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php echo $team['date_interview']; ?>
+                                                                <span class="badge badge-info">นัดครั้งที่ <?= $team['count_email']; ?></span>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td>
                                                             <button type="button" data-toggle="modal" data-target="#exampleModalb<?php echo $team['id']; ?>" class="btn btn-info mr-1 mb-1"><i class="feather icon-mail"></i> Send Email</button>
                                                             <div class="modal fade" id="exampleModalb<?php echo $team['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

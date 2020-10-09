@@ -49,20 +49,20 @@ class Login_ctr extends CI_Controller
                 if ($user['package_user'] == '') {
                     $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
                     redirect('package');
-                }else{
+                } else {
                     $packAgeCheck = $this->db->order_by('id', "DESC")->get_where('tbl_paypal', ['user_id' => $user['id']])->row_array();
                     if (!empty($packAgeCheck)) {
                         $datePaypal = date("Y-m-d", strtotime($packAgeCheck['start_time']));
                         $checkDate = DateDiff($datePaypal, date("Y-m-d"));
-    
+
                         if ($checkDate == 5) {
                             $this->session->set_flashdata('package_timeOut_3_day', TRUE);
                         }
-    
+
                         if ($checkDate == 6) {
                             $this->session->set_flashdata('package_timeOut_2_day', TRUE);
                         }
-    
+
                         if ($checkDate == 7) {
                             $this->session->set_flashdata('package_timeOut_1_day', TRUE);
                         }
@@ -70,7 +70,6 @@ class Login_ctr extends CI_Controller
                     $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
                     redirect('my-profile');
                 }
-               
             } elseif ($this->Login_model->login_team($email, $password)) {
 
                 $user_data = array(
@@ -83,9 +82,19 @@ class Login_ctr extends CI_Controller
                     'IdTeam'            => $team['IdTeam'],
                     'update_date'         => date('Y-m-d H:i:s')
                 );
-
                 $this->db->insert('tbl_status_team', $check_status);
-                $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
+
+                if ($team['popshow'] == '0') {
+
+                    $this->db->where('IdTeam', $team['IdTeam']);
+                    $this->db->update('tbl_team', ['popshow' => '1']);
+
+                    $this->session->set_flashdata('save_ss2', 'ยินดีต้อนรับเข้าสู่ Filebackhelp.com ขอบคุณที่ให้ความไว้วางใจในบริการของเรา');
+                } else {
+                    $this->db->where('IdTeam', $team['IdTeam']);
+                    $this->db->update('tbl_team', ['popshow' => '2']);
+                }
+
                 redirect('home');
             } elseif ($this->Login_model->login_team_c($email, $password)) {
                 $this->session->set_flashdata('fail_login_status', TRUE);

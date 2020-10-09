@@ -37,7 +37,7 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
-                                <th scope="col">รหัสออเดอร์</th>
+                                <th scope="col">รหัสออร์เดอร์</th>
                                 <th scope="col">รายละเอียด</th>
                                 <th scope="col">วันที่</th>
                                 <th scope="col">รางวัล</th>

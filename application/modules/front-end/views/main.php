@@ -43,7 +43,7 @@
                 <img src="uploads/Main/regis_icon.png" alt="icon">
                 <!-- <h3 style="color: #ffff;    padding-top: 20px;">สมัครเป็นติวเตอร์</h3> -->
                 <div style="padding-top: 20px;">
-                    <a href="register-team" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-info"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นติวเตอร์</a>
+                    <a href="register-team" style="padding: 10px 25px;font-size: 20px;" class="btn btn-info"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นติวเตอร์</a>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
               <img src="uploads/Main/regis_icon2.png" alt="icon">
               <!-- <h3 style="color: #000000ba;font-weight: 600;padding-top: 20px;">สมัครเป็นผู้เรียน</h3> -->
               <div style="padding-top: 20px;">
-                  <a href="register" style="padding: 10px 25px;font-size: 20px;" type="button" class="btn btn-success"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นผู้เรียน</a>
+                  <a href="register" style="padding: 10px 25px;font-size: 20px;" class="btn btn-success"> <i class="fa fa-plus-square" aria-hidden="true"></i> สมัครเป็นผู้เรียน</a>
               </div>
           </div>
       </div>

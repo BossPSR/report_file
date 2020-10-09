@@ -28,7 +28,7 @@
                             <tr style="text-align:center;">
                                 <!-- <th scope="col">No.</th> -->
                                 <th scope="col">ชื่อเอกสาร</th>
-                                <th scope="col">รหัสออเดอร์</th>
+                                <th scope="col">รหัสออร์เดอร์</th>
                                 <th scope="col">ยอมรับ</th>
                                 <th scope="col">วันที่</th>
                                 <!-- <th scope="col">เหตุผล</th> -->

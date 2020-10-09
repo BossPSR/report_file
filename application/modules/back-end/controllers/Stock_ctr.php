@@ -415,7 +415,7 @@ class Stock_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -574,7 +574,7 @@ class Stock_ctr extends CI_Controller
         $config['smtp_host'] = 'smtp.gmail.com';
         $config['smtp_port'] = '2002';
         $config['smtp_user'] = 'infinityp.soft@gmail.com';
-        $config['smtp_pass'] = 'infinityP23';  //sender's password
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = 'TRUE';
@@ -594,6 +594,77 @@ class Stock_ctr extends CI_Controller
             $this->session->set_flashdata('save_ss2', 'Successfully Update PriceFile information !!.');
         } else {
             $this->session->set_flashdata('del_ss2', 'Not Successfully Update PriceFile information');
+        }
+    }
+
+    public function order_auto_refeedback_Stockadmin()
+    {
+        $dated      = $this->input->post('dated');
+        $detail     = $this->input->post('detail');
+        $order_id   = $this->input->post('order_id');
+        $userId     = $this->input->post('userId');
+        $teamId     = $this->input->post('teamId');
+
+        $orf = array(
+            'feedback_detail'           => $detail,
+            'order_id'                  => $order_id,
+            'teamId'                    => $teamId,
+            'userId'                    => $userId,
+            'dated'                     => $dated,
+            'check_status'              => 0,
+            'status_c_feedack_team'     => 1,
+            're_feedback'               => 1,
+            'create_at'                 => date('Y-m-d H:i:s'),
+
+        );
+        if ($this->db->insert('tbl_feedback', $orf)) {
+            $appro = array(
+                'status_approved' => 4
+            );
+            $this->db->where('order_id', $order_id);
+            $success = $this->db->update('tbl_upload_order', $appro);
+            if ($success) {
+                $updateT = array(
+                    'status' => 3
+                );
+                $this->db->where('order_id', $order_id);
+                $this->db->update('tbl_upload_team', $updateT);
+            }
+        }
+        echo $success;
+    }
+
+    public function fileUpload_refeedback()
+    {
+        $target_dir = "uploads/Feedback/"; // Upload directory
+        if (!empty($_FILES['file']['name'])) {
+
+            // Set preference
+            $config['upload_path']     = 'uploads/Feedback/';
+            // $config['allowed_types'] 	= 'jpg|jpeg|png|gif|pdf|docx|xlsx|pptx';
+            $config['allowed_types']   = '*';
+            $config['max_size']        = '99999'; // max_size in kb
+            $config['file_name']     = $_FILES['file']['name'];
+
+            //Load upload library
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            $feedmax = $this->db->order_by('id', 'DESC')->get('tbl_feedback')->row();
+
+            // File upload
+            if ($this->upload->do_upload('file')) {
+                // Get data about the file
+                $uploadData = $this->upload->data();
+
+                $data = array(
+                    'id_feedback'       => $feedmax->id,
+                    'file_name'         => $uploadData['file_name'],
+                    'path'              => 'uploads/Feedback/' . $uploadData['file_name'],
+                    'create_at'         => date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl_feedback_file', $data);
+            }
         }
     }
 }

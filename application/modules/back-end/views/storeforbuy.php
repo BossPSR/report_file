@@ -95,7 +95,7 @@
                                                                             </div>
                                                                             <form action="" method="POST">
                                                                                 <div class="modal-body">
-                                                                                    <?= $stored['note_user']; ?>
+                                                                                   <p style="font-size: 18px;"><?= $stored['note_user']; ?></p> 
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
@@ -258,8 +258,8 @@
                                                         </td>
                                                         <td><?php echo $stored['created_at_buy']; ?></td>
                                                         <td>
-                                                            <?php 
-                                                                $exp  = explode(" ",$stored['date_required']);
+                                                            <?php
+                                                            $exp  = explode(" ", $stored['date_required']);
                                                             ?>
                                                             <input type="date" class="form-control dateread<?php echo $stored['order_id']; ?>" name="date_required" id="datenow" data-datenow="<?php echo $stored['order_id']; ?>" value="<?php echo $exp[0]; ?>" min="<?php echo date('Y-m-d'); ?>">
                                                             <br>
@@ -267,10 +267,10 @@
                                                                 <span class="badge badge-danger">หมดเวลา</span>
                                                             <?php else : ?>
                                                                 <p id="demo<?php echo $stored['order_id']; ?>" style="font-size: 18px;font-weight: bold;"></p>
-															<?php endif; ?>
-															<script>
+                                                            <?php endif; ?>
+                                                            <script>
                                                                 var datep<?php echo $stored['order_id']; ?> = "<?= $stored['date_required']; ?>";
-                                                                
+
                                                                 // Set the date we're counting down to
                                                                 var countDownDate<?php echo $stored['order_id']; ?> = new Date(datep<?php echo $stored['order_id']; ?>);
 
@@ -301,18 +301,43 @@
                                                                 }, 1000);
                                                             </script>
                                                         </td>
-                                                        <td> <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['order_id']; ?>">
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#exampleModallCenter<?php echo $stored['order_id']; ?>">
                                                                 Satisfired
 
                                                             </button>
-                                                            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModallCenterb<?php echo $stored['order_id']; ?>">
+                                                            <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#exampleModallCenterb<?php echo $stored['order_id']; ?>">
                                                                 Not Satisfired
 
                                                             </button>
-                                                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $stored['order_id']; ?>">
+                                                            <button type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#exampleModallCenterc<?php echo $stored['order_id']; ?>">
                                                                 Reject
-
                                                             </button>
+                                                            <button type="button" data-toggle="modal" data-target="#sendnw<?php echo $stored['order_id']; ?>" class="btn btn-info waves-effect waves-light"> Send Email</button>
+                                                            <div class="modal fade" id="sendnw<?php echo $stored['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Send (<?php echo $stored['order_id']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="send_email_storeforbuy" method="POST" class="form-horizontal">
+                                                                            <input type="hidden" name="order_id" value="<?php echo $stored['order_id']; ?>">
+                                                                            <div class="modal-body">
+                                                                                <div class="form-group">
+                                                                                    <label for="helpInputTop">Note</label>
+                                                                                    <textarea class="form-control" name="note" rows="5" placeholder="Enter Note"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-primary w-100">Send</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
 
@@ -330,7 +355,7 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                     
+
                                                                         <?php
                                                                         $this->db->group_by('dm_sub');
                                                                         $this->db->order_by('dm_sub', 'asc');
