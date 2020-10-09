@@ -143,7 +143,7 @@
                 <p class="font-18"> 16.2 กรณี Order ยังไม่ครบ 65 วันหรือในอีก 1 นาทีจะครบ 65 วัน แต่หากติวเตอร์ได้รับ Feedback ที่ต้องทำการแก้ไข ปุ่ม Withdraw จะยังไม่แสดงขึ้นให้ติวเตอร์กดถอนค่าตอบแทน โดยติวเตอร์จะต้องส่ง Feedback ตามวันที่กำหนดให้เรียบร้อยก่อนถึงจะขึ้น Withdraw กดถอนค่าตอบแทนได้</p>
 
                 <center>
-                    <p style="font-size: 20px;"> ตารางสรุปการหักรายได้กรณีต่างๆที่ต้องรู้ก่อนทำงาน </p>
+                    <p style="font-size: 20px;"> 17.ตารางสรุปการหักรายได้กรณีต่างๆที่ต้องรู้ก่อนทำงาน </p>
                 </center>
                 <li class="mt-2 mb-2"><b style="font-size: 20px;">ส่งงานช้า</b></li>
                 <table class="table">
@@ -341,11 +341,11 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-12 col-xs-12 col-md-5">
-                                        <label>ชื่อ - ภาษาไทย (ตามบัตรประชาชน) <span style="color: #9c9c9c;"> <span id="55" class="noneb" style="display: none;">(ชื่อต้องตรงกับเลขบัญชีธนาคาร) *</span></span></label>
+                                        <label>ชื่อ - ภาษาไทย (ตามบัตรประชาชน) <span style="color: #9c9c9c;"> <span id="55" class="noneb" style="display: none;"> *</span></span></label>
                                         <input type="text" name="name" id="name" onkeyup="nameFunction();" class="form-control" required>
                                     </div>
                                     <div class="form-group col-sm-12 col-xs-12 col-md-5">
-                                        <label>นามสกุล - ภาษาไทย (ตามบัตรประชาชน) <span style="color: #9c9c9c;"> <span id="56" class="noneb" style="display: none;">(นามสกุลต้องตรงกับเลขบัญชีธนาคาร) *</span></span></label>
+                                        <label>นามสกุล - ภาษาไทย (ตามบัตรประชาชน) <span style="color: #9c9c9c;"> <span id="56" class="noneb" style="display: none;">*</span></span></label>
                                         <input type="text" name="lastname" id="lastname" onkeyup="nameFunction();" class="form-control" required>
                                     </div>
                                 </div>
@@ -487,7 +487,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-12 col-xs-12 col-md-8">
-                                        <label for="">เลขบัญชีธนาคาร <span style="color: #bbbbbb;">ต้องเป็นชื่อเดียวกันกับชื่อบัญชีธนาคารหรือ บัญชีธนาคาร</span></label>
+                                        <label for="">เลขบัญชีธนาคาร <span style="color: #bbbbbb;"></span></label>
                                         <input type="text" id="bank" class="form-control" name="bank_number" value="">
                                     </div>
                                 </div>
@@ -506,7 +506,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="">คุณต้องการรับอีเมล์แจ้งเตือนออร์เดอร์ด้วยภาษาใด <span style="color: #bbbbbb;">ต้องเป็นชื่อเดียวกันกับชื่อบัญชีธนาคารหรือ Pay pal</span></label>
+                                    <label for="">คุณต้องการรับอีเมล์แจ้งเตือนออร์เดอร์ด้วยภาษาใด <span style="color: #bbbbbb;"></span></label>
                                     <br>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="customRadioInline1" name="email_lang" class="custom-control-input" value="1" required checked>
