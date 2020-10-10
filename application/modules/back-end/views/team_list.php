@@ -33,6 +33,7 @@
 
 			</div>
 			<!-- Zero configuration table -->
+
 			<?php
 			$this->db->select('* ,sum(tbl_upload_team.wage )  AS total');
 			$this->db->from('tbl_withdraw_team');
@@ -199,6 +200,7 @@
 											<thead>
 												<tr>
 													<th>Online</th>
+													<th>Other</th>
 													<th>Details</th>
 													<th>Deduct income</th>
 													<th>Deduct score</th>
@@ -235,6 +237,50 @@
 																echo "<div class='badge badge-pill badge-glow badge-danger mr-1 mb-1'>offline</div>";
 															}
 															?>
+														</td>
+														<td>
+															<a href="#" data-toggle="modal" data-target="#otherteam<?php echo $team['IdTeam']; ?>"><i class="feather icon-eye" style="font-size: 25px;"></i></a>
+															<div class="modal fade" id="otherteam<?php echo $team['IdTeam']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog  modal-dialog-scrollable modal-xl" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLabel">other team</h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+
+																		<div class="modal-body">
+																			<table class="table zero-configuration">
+																				<thead>
+																					<tr>
+																						<th>passport</th>
+																						<th>bookbank</th>
+																						<th>Bank number</th>
+																						<th>address</th>
+																						<th>Paypal</th>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<?php
+																					$this->db->select('*');
+																					$this->db->from('tbl_team');
+																					$this->db->where('tbl_team.IdTeam', $team['IdTeam']);
+																					$team_other = $this->db->get()->row_array();
+																					?>
+																					
+																				</tbody>
+																			</table>
+
+																		</div>
+																		<div class="modal-footer">
+																			<div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</td>
 														<td>
 															<a href="#" data-toggle="modal" data-target="#exampleModala<?php echo $team['IdTeam']; ?>"><i class="feather icon-eye" style="font-size: 25px;"></i></a>
@@ -813,14 +859,23 @@
 																							<form action="deduct_income" method="POST" enctype="multipart/form-data">
 																								<div class="row">
 																									<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
-																									<?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array(); ?>
-
+																									<?php $admin 	 = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array(); ?>
+																									<?php $orderteam = $this->db->get_where('tbl_upload_team', ['teamId' => $team['IdTeam']])->result_array(); ?>
 																									<input type="text" name="admin_by" value="<?php echo $admin['id']; ?>" hidden>
-																									<div class="col-md-8">
+																									<div class="col-md-12">
+																										<label for="">Order</label>
+																										<select name="order_select" id="" class="form-control">
+																											<option value="" selected disabled>-- select --</option>
+																											<?php foreach ($orderteam as $key => $orderteam) : ?>
+																												<option value="<?= $orderteam['order_id']; ?>"><?= $orderteam['order_id']; ?></option>
+																											<?php endforeach; ?>
+																										</select>
+																									</div>
+																									<div class="col-md-8" style="margin-top: 15px;">
 																										<label for="">Deduct Income</label>
 																										<input type="number" name="income" class="form-control">
 																									</div>
-																									<div class="col-md-4">
+																									<div class="col-md-4" style="margin-top: 15px;">
 																										<label for="">Income team</label>
 																										<div><?php echo $team['income']; ?></div>
 																									</div>
@@ -841,9 +896,18 @@
 																						</div>
 																						<div class="tab-pane" id="pill32<?php echo $team['IdTeam']; ?>" aria-labelledby="base-pill32">
 																							<form action="add_score_team" method="POST">
+																								<?php $orderscore = $this->db->get_where('tbl_upload_team', ['teamId' => $team['IdTeam']])->result_array(); ?>
 																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
-
 																								<div class="row">
+																									<div class="col-md-12 mb-1">
+																										<label for="">Order</label>
+																										<select name="order_select" id="" class="form-control">
+																											<option value="" selected disabled>-- select --</option>
+																											<?php foreach ($orderscore as $key => $orderscore) : ?>
+																												<option value="<?= $orderscore['order_id']; ?>"><?= $orderscore['order_id']; ?></option>
+																											<?php endforeach; ?>
+																										</select>
+																									</div>
 																									<div class="col-md-8">
 																										<label for="">Add Score</label>
 																										<input type="number" name="score" class="form-control">
@@ -866,8 +930,18 @@
 																							<form action="deduct_score_team" method="POST" enctype="multipart/form-data">
 																								<input type="hidden" name="idteam" value="<?php echo $team['IdTeam']; ?>">
 																								<?php $admin = $this->db->get_where('tbl_admin', ['email' => $this->session->userdata('email_admin')])->row_array(); ?>
+																								<?php $orderdu = $this->db->get_where('tbl_upload_team', ['teamId' => $team['IdTeam']])->result_array(); ?>
 																								<input type="text" name="admin_by" value="<?php echo $admin['id']; ?>" hidden>
 																								<div class="row">
+																									<div class="col-md-12 mb-1">
+																										<label for="">Order</label>
+																										<select name="order_select" id="" class="form-control">
+																											<option value="" selected disabled>-- select --</option>
+																											<?php foreach ($orderdu as $key => $orderdu) : ?>
+																												<option value="<?= $orderdu['order_id']; ?>"><?= $orderdu['order_id']; ?></option>
+																											<?php endforeach; ?>
+																										</select>
+																									</div>
 																									<div class="col-md-8">
 																										<label for="">Deduct Score</label>
 																										<input type="number" name="deduct" class="form-control">

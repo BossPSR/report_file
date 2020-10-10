@@ -78,6 +78,32 @@ class Order_model extends CI_Model
         return $data->result_array();
     }
 
+    public function my_stock_eng($item_id, $sess)
+    {
+        $this->db->select('*,tbl_upload_order.file_name as file_or ,tbl_upload_order.date_required as or_date,
+        tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,
+        tbl_upload_team.note as uptnote , tbl_upload_team.status as up_status2 , tbl_upload_team.id idteam');
+        $this->db->from('tbl_upload_order');
+        $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_item_position', 'tbl_upload_team.position = tbl_item_position.id');
+        $this->db->join('tbl_upload_orderGT', 'tbl_upload_orderGT.order_id = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_bookmark', 'tbl_bookmark.id_orderBuy = tbl_upload_order.order_id', 'left');
+        $this->db->join('tbl_upload_main_search', 'tbl_upload_main_search.id_doc = tbl_bookmark.id_document', 'left');
+        $this->db->where('tbl_upload_order.date_required >=', date('Y-m-d'));
+        $this->db->where('tbl_upload_order.date_required <=', 'tbl_upload_order.date_required');
+        $this->db->where('tbl_upload_order.status_pay', 1);
+        $this->db->where('tbl_upload_order.status_confirmed_team', 0);
+        $this->db->where('tbl_upload_order.video_lang', 2);
+        $this->db->where('tbl_upload_team.status', 0);
+        $this->db->where('tbl_upload_team.position', $item_id);
+        $this->db->or_where('tbl_upload_order.status_confirmed_team', NULL);
+        $this->db->where_in('tbl_upload_team.teamId', $sess);
+        $this->db->group_by('tbl_upload_order.order_id');
+        $this->db->order_by('tbl_upload_order.date_required', 'DESC');
+        $data = $this->db->get();
+        return $data->result_array();
+    }
+
     public function my_stock_row($sess)
     {
         $this->db->select('*,tbl_upload_order.date_required as or_date,tbl_upload_order.order_id as or_1,tbl_upload_order.order_id as mms,tbl_upload_team.teamId as t_id,tbl_upload_team.status as up_status');
@@ -152,7 +178,7 @@ class Order_model extends CI_Model
     public function delivery_team_feed($sessi)
     {
         $fr = $this->db->get_where('tbl_feedback', ['teamId' => $sessi])->row_array();
-        
+
 
         $this->db->select('*,tbl_feedback.order_id as order_feed , tbl_upload_team.id idt , tbl_upload_team.order_id ordert');
         $this->db->from('tbl_upload_team');
@@ -160,7 +186,7 @@ class Order_model extends CI_Model
         if ($fr == true) {
             $this->db->where_in('tbl_feedback.check_feedback_dalivery', 0);
         }
-        $this->db->where_in('tbl_upload_team.status', [2,3]);
+        $this->db->where_in('tbl_upload_team.status', [2, 3]);
         $this->db->where('tbl_upload_team.teamId', $sessi);
         $this->db->group_by('tbl_feedback.order_id');
         $this->db->order_by('tbl_upload_team.order_id', 'DESC');
@@ -174,7 +200,7 @@ class Order_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_feedback');
         $this->db->where('tbl_feedback.order_id', $order_id);
-      
+
         $data = $this->db->get();
         return $data->result_array();
     }
@@ -185,7 +211,7 @@ class Order_model extends CI_Model
         $this->db->from('tbl_cancel');
         $this->db->where('teamid', $team);
         $this->db->order_by('id', 'desc');
-      
+
         $data = $this->db->get();
         return $data->row_array();
     }

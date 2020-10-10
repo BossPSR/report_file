@@ -521,6 +521,7 @@ class Team_ctr extends CI_Controller
 
             $income       = $this->input->post('income');
             $idteam       = $this->input->post('idteam');
+            $order_select = $this->input->post('order_select');
 
 
 
@@ -559,13 +560,14 @@ class Team_ctr extends CI_Controller
                 $gamber     = $this->upload->data();
                 $data = array(
 
+                    'order_id_dti'                 => $order_select,
                     'file_name_dti'                => $gamber['file_name'],
                     'path_dti'                     => 'uploads/deduct/' . $gamber['file_name'],
                     'note_dti'                     => $detail,
                     'teamid_dti'                   => $idteam,
                     'income_dti'                   => $income,
                     'admin_by_dti'                 => $admin_by,
-                    'create_at_dti'                    => date('Y-m-d H:i:s')
+                    'create_at_dti'                => date('Y-m-d H:i:s')
                 );
 
 
@@ -654,9 +656,10 @@ class Team_ctr extends CI_Controller
             redirect('backend');
         } else {
 
-            $score      = $this->input->post('score');
-            $idteam     = $this->input->post('idteam');
-            $note_add   = $this->input->post('note_add');
+            $score          = $this->input->post('score');
+            $idteam         = $this->input->post('idteam');
+            $note_add       = $this->input->post('note_add');
+            $order_select   = $this->input->post('order_select');
 
             $team = $this->db->get_where('tbl_team', ['IdTeam' => $idteam])->row_array();
 
@@ -670,10 +673,12 @@ class Team_ctr extends CI_Controller
             $success = $this->db->update('tbl_team', $data);
             if ($success) {
                 $insert = array(
+                    'order_id'           => $order_select,
                     'teamid'             => $idteam,
                     'store'              => $score,
                     'note'               => $note_add,
                     'create_at'          => date('Y-m-d H:i:s')
+
                 );
                 $this->db->insert('tbl_store_team', $insert);
             }
@@ -695,6 +700,7 @@ class Team_ctr extends CI_Controller
 
             $deduct       = $this->input->post('deduct');
             $idteam       = $this->input->post('idteam');
+            $order_select = $this->input->post('order_select');
 
             $team = $this->db->get_where('tbl_team', ['IdTeam' => $idteam])->row_array();
             $sum = $team['team_score'] - $deduct;
@@ -728,6 +734,7 @@ class Team_ctr extends CI_Controller
                 $gamber     = $this->upload->data();
                 $data = array(
 
+                    'order_id_dts'           => $order_select,
                     'file_name_dts'          => $gamber['file_name'],
                     'detail_score_dts'       => $detail_score,
                     'teamid_dts'             => $idteam,

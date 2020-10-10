@@ -190,7 +190,7 @@
 
                                             <?php } ?>
                                             <div class="text-center" style="font-size: 18px;padding: 5px 0;"> <?= $ist; ?></div>
-                                            <div class="text-center" style="font-size: 17px;">รายได้ทั้งหมด</div>
+                                            <div class="text-center" style="font-size: 17px;">ทั้งหมด</div>
                                         </div>
                                     </div>
                                     <table class="table mt-15">

@@ -27,7 +27,7 @@
                         <?php $z+=1; ?>
                     <?php } ?>
                        <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                       <div>ออร์เดอร์ของฉัน</div>
+                       <div>ทั้งหมด</div>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                                 <th scope="col">รหัสออร์เดอร์</th>
                                 <th scope="col">วัน/เวลา</th>
                                 <th scope="col">คำอธิบาย</th>
-                                <th scope="col">คะแนนของฉัน</th>
+                                <th scope="col">จำนวน</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>

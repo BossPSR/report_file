@@ -37,11 +37,16 @@
                                         <table class="table table-hover zero-configuration">
                                             <thead>
                                                 <tr>
+                                                    <th>Order Id</th>
+                                                    <th>TN</th>
                                                     <th>Email</th>
-                                                    <th>TM</th>
+                                                    <th>Comment</th>
                                                     <th>Withdraw</th>
                                                     <th>Total</th>
                                                     <th>Telephone</th>
+                                                    <th>Paypal</th>
+                                                    <th>Bnak</th>
+                                                    <th>Line</th>
                                                     <th>transaction</th>
                                                     <th>silp</th>
                                                 </tr>
@@ -49,12 +54,46 @@
                                             <tbody>
                                                 <?php foreach ($withdraw_list_team_history as $key => $withdraw_list_team_history) { ?>
                                                     <tr>
-                                                        <td><?php echo  $withdraw_list_team_history['email'] ?></td>
+                                                        <td><?php echo  $withdraw_list_team_history['order_id']; ?></td>
                                                         <td><?php echo  $withdraw_list_team_history['IdTeam'] ?></td>
+                                                        <td><?php echo  $withdraw_list_team_history['email'] ?></td>
+                                                        <td>
+                                                            <a href="#" data-toggle="modal" data-target="#note_new<?php echo $withdraw_list_team_history['order_id']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                            <div class="modal fade" id="note_new<?php echo $withdraw_list_team_history['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <?= $withdraw_list_team_history['note_approved_team']; ?>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td><?php echo  $withdraw_list_team_history['price'] ?></td>
                                                         <td><?php echo  $withdraw_list_team_history['income'] ?></td>
                                                         <td><?php echo  $withdraw_list_team_history['phone'] ?></td>
-                                                        <td><?php echo  $withdraw_list_team_history['transaction_date'] == '' ? '-' : $withdraw_list_team_history['transaction_date'] ; ?></td>
+                                                        <td><?php echo $withdraw_list_team_history['bank_account'] == '' ? '-' : $withdraw_list_team_history['bank_account']; ?></td>
+                                                        <td>
+                                                            <?php if ($withdraw_list_team_history['bank_name'] == '') : ?>
+                                                                -
+                                                            <?php else : ?>
+                                                                <?php echo $withdraw_list_team_history['bank_name']; ?> <br>
+                                                                <?php echo $withdraw_list_team_history['bank_number']; ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td><?php echo $withdraw_list_team_history['line'] == '' ? '-' : $withdraw_list_team_history['line']; ?></td>
+                                                        <td><?php echo  $withdraw_list_team_history['transaction_date'] == '' ? '-' : $withdraw_list_team_history['transaction_date']; ?></td>
                                                         <td>
                                                             <?php if (empty($withdraw_list_team_history['file_name'])) : ?>
                                                                 -

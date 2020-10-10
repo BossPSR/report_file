@@ -70,7 +70,12 @@ class My_stock_ctr extends CI_Controller
         } else {
             $sess                   = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
             $data['teamTM']         = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
-            $data['stock']          = $this->Order_model->my_stock($item_id, $sess['IdTeam']);
+            if ($sess['country_id'] == '218') {
+                $data['stock']          = $this->Order_model->my_stock($item_id, $sess['IdTeam']);
+            } else {
+                $data['stock']          = $this->Order_model->my_stock_eng($item_id, $sess['IdTeam']);
+            }
+
             $data['stock_row']      = $this->Order_model->my_stock_row($sess['IdTeam']);
             $stock_capp             = $this->Order_model->my_stock_count($sess['IdTeam']);
 
@@ -265,7 +270,7 @@ class My_stock_ctr extends CI_Controller
         $status                 = 1;
         $create_at              = date('Y-m-d H:i:s');
         $star                   = $this->input->post('star');
-        $textarea                   = $this->input->post('textarea');
+        $textarea               = $this->input->post('textarea');
 
         $data = array(
             'order_id'          => $order_id,
@@ -308,7 +313,7 @@ class My_stock_ctr extends CI_Controller
             $note_can           = $this->input->post('note_can');
             $status_cf_team     = 0;
             $team               = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
-            $teamorder          = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id , 'teamId' => $team['IdTeam']])->row_array();
+            $teamorder          = $this->db->get_where('tbl_upload_team', ['order_id' => $order_id, 'teamId' => $team['IdTeam']])->row_array();
 
             $data = array(
                 'status_confirmed_team'         => $status_cf_team,
@@ -359,8 +364,6 @@ class My_stock_ctr extends CI_Controller
 
                         $this->db->insert('tbl_upload_team', $insertdb);
                     }
-
-
                 }
             }
 

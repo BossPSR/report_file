@@ -32,7 +32,7 @@
                     <div class="image_profile">
                         <h2 class="text-center my-income">
                             <div class="name_user m17"><i class="fa fa-user"  style="color: #282390;"></i> 
-                            <!-- $this->lang->line("name"); ?> --> ชื่อ - นามสกุล
+                            <!-- $this->lang->line("name"); ?> -->
                              : <?php echo $team['name']; ?></div>
                         </h2>
                         <div class="image_PF">

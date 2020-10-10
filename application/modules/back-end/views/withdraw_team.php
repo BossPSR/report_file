@@ -38,14 +38,16 @@
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
-                                                    <th>Team Id</th>
+                                                    <th>TN</th>
                                                     <th>Email</th>
                                                     <th>Username</th>
+                                                    <th>Comment</th>
                                                     <th>Withdraw</th>
                                                     <th>Telephone</th>
                                                     <th>Paypal</th>
                                                     <th>Bnak</th>
                                                     <th>Line</th>
+                                                    <th>transaction</th>
                                                     <th>silp</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -57,9 +59,32 @@
                                                         <td><?php echo $withdraw_team['teamId']; ?></td>
                                                         <td><?php echo $withdraw_team['email']; ?></td>
                                                         <td><?php echo $withdraw_team['name']; ?></td>
+                                                        <td>
+                                                            <a href="#" data-toggle="modal" data-target="#note_new<?php echo $withdraw_team['order_id']; ?>"><i class="feather icon-search" style="font-size: 25px;"></i></a>
+                                                            <div class="modal fade" id="note_new<?php echo $withdraw_team['order_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <?= $withdraw_team['note_approved_team']; ?>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td><?php echo $withdraw_team['price']; ?></td>
                                                         <td><?php echo $withdraw_team['phone']; ?></td>
-                                                        <td><?php echo $withdraw_team['bank_account'] == '' ? '-' : $withdraw_team['bank_account'] ; ?></td>
+                                                        <td><?php echo $withdraw_team['bank_account'] == '' ? '-' : $withdraw_team['bank_account']; ?></td>
                                                         <td>
                                                             <?php if ($withdraw_team['bank_name'] == '') : ?>
                                                                 -
@@ -68,7 +93,8 @@
                                                                 <?php echo $withdraw_team['bank_number']; ?>
                                                             <?php endif; ?>
                                                         </td>
-                                                        <td><?php echo $withdraw_team['line'] == '' ? '-' : $withdraw_team['line'] ; ?></td>
+                                                        <td><?php echo $withdraw_team['line'] == '' ? '-' : $withdraw_team['line']; ?></td>
+                                                        <td><?php echo  $withdraw_team['transaction_date'] == '' ? '-' : $withdraw_team['transaction_date']; ?></td>
                                                         <td>
                                                             <?php if ($withdraw_team['filew'] == '') : ?>
                                                                 -
@@ -77,8 +103,11 @@
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
+                                                            <button class="btn btn-icon btn-info" data-toggle="modal" data-target="#emailsand<?php echo $withdraw_team['idW']; ?>" type="button">
+                                                                <i class="feather icon-mail"></i>
+                                                            </button>
                                                             <?php if ($withdraw_team['status_id'] == 1) : ?>
-                                                                <div class="dropdown" style="display: contents;">
+                                                                <div class="dropdown" style="display: inline;">
                                                                     <button class="btn btn-warning dropdown-toggle mr-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         กำลังดำเนินการ
                                                                     </button>
@@ -88,7 +117,7 @@
                                                                     </div>
                                                                 </div>
                                                             <?php elseif ($withdraw_team['status_id'] == 2) : ?>
-                                                                <div class="dropdown" style="display: contents;">
+                                                                <div class="dropdown" style="display: inline;">
                                                                     <button class="btn btn-success mr-1" type="button" id="dropdownMenuButton">
                                                                         ชำระเงินแล้ว
                                                                     </button>
@@ -103,6 +132,55 @@
                                                                 </button>
 
                                                             <?php endif; ?>
+                                                            <!-- Modal Feedback -->
+                                                            <div class="modal fade" id="emailsand<?php echo $withdraw_team['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Report a problem (<?php echo $withdraw_team['idW']; ?>)</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="" id="frmMain<?php echo $withdraw_team['idW']; ?>" method="POST">
+
+                                                                            <div class="modal-body" style="text-align:left;">
+                                                                                <input type="hidden" name="id" value="<?php echo $withdraw_team['idW']; ?>">
+                                                                                <label for="Details" class="font-size F-upload">Details notice. </label>
+                                                                                <textarea name="textemail" class="form-control" rows="10"></textarea>
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" id="SubmitSend<?php echo $withdraw_team['idW']; ?>" class="btn btn-success">Send</button>
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <script type="text/javascript">
+                                                                $(document).ready(function() {
+
+                                                                    $("#SubmitSend<?php echo $withdraw_team['idW']; ?>").click(function() {
+
+                                                                        $.ajax({
+                                                                            type: "POST",
+                                                                            url: "sendEmail_withdraw_team",
+                                                                            data: $("#frmMain<?php echo $withdraw_team['idW']; ?>").serialize(),
+                                                                            success: function(data) {
+                                                                                swal("Good job!", "Upload for data successfull", "success");
+                                                                                setTimeout(function() {
+                                                                                    location.href = "withdraw_realtime"
+                                                                                }, 1000);
+                                                                            }
+                                                                        });
+
+                                                                    });
+
+                                                                });
+                                                            </script>
+
                                                             <!-- Modal Feedback -->
                                                             <div class="modal fade" id="dropteam<?php echo $withdraw_team['idW']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">

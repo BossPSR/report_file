@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center" style="margin-top: 15px;">หักค่าตอบแทน</h2>
+<h2 class="text-center" style="margin-top: 15px;">หักรายได้</h2>
 <hr class="line_package">
 <br>
 <?php foreach ($income as $key => $data) {
@@ -27,7 +27,7 @@
                             <?php $z += 1; ?>
                         <?php } ?>
                         <div style="font-size: 21px;font-weight: 500;"><?php echo $z; ?></div>
-                        <div>ออร์เดอร์ของฉัน</div>
+                        <div>ทั้งหมด</div>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                                 <th scope="col">วัน/เวลา</th>
                                 <th scope="col">ไฟล์ของฉัน</th>
                                 <th scope="col">คำอธิบาย</th>
-                                <th scope="col">คะแนนของฉัน</th>
+                                <th scope="col">จำนวน</th>
                             </tr>
                         </thead>
                         <?php $i = 1; ?>
@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="error_form">
-                        <h1 style="font-size: 100px;">ไม่มีประวัติหักค่าตอบแทน</h1>
+                        <h1 style="font-size: 100px;">ไม่มีประวัติหักรายได้</h1>
                         <!-- <h2>Data Not Found</h2> -->
                     </div>
                 </div>

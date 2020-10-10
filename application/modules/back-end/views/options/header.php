@@ -47,7 +47,7 @@
     <link rel="stylesheet" type="text/css" href="public/backend/assets/css/plugins/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="public/backend/app-assets/css/pages/coming-soon.css">
     <link rel="stylesheet" type="text/css" href="public/backend/app-assets/css/pages/data-list-view.css">
-    
+
 
 
     <link rel="stylesheet" href="public/frontend/assets/dist/dropzone.css">
@@ -456,17 +456,15 @@
                                                                                                                                                                                                                                                                 echo "display:none";
                                                                                                                                                                                                                                                             } ?>"><?php echo $notify_notifywithdraw ?></span></a>
                                 </li>
-
+                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_history") {
+                                                                                echo 'active';
+                                                                            } ?>" href="withdraw_history" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Withdraw history </a>
+                                </li>
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_realtime") {
                                                                                 echo 'active';
                                                                             } ?>" href="withdraw_realtime" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-x-circle"></i>Withdraw Team <span class="badge badge badge-warning badge-pill" style="<?php if ($notify_notifywithdraw_team == 0) {
                                                                                                                                                                                                                                                                         echo "display:none";
                                                                                                                                                                                                                                                                     } ?>"><?php echo $notify_notifywithdraw_team ?></span></a>
-                                </li>
-
-                                <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_history") {
-                                                                                echo 'active';
-                                                                            } ?>" href="withdraw_history" data-toggle="dropdown" data-i18n="Email"><i class="feather icon-check-circle"></i>Withdraw history </a>
                                 </li>
 
                                 <li data-menu=""><a class="dropdown-item <?php if ($this->uri->segment(1) == "withdraw_team_history") {

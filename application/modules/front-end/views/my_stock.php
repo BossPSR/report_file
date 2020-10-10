@@ -54,6 +54,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                 <th scope="col">ข้อมูลประกอบ</th>
                                 <th scope="col">ตัวอย่างงาน</th>
                                 <th scope="col">คำอธิบาย</th>
+                                <th scope="col">วิดีโอ</th>
                                 <th scope="col">สาขา</th>
                                 <th scope="col">เรทค่าตอบแทน</th>
                                 <th scope="col">ยืนยัน</th>
@@ -349,7 +350,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                             -
                                         <?php } ?>
                                     </td>
-
+                                    
                                     <td>
                                         <?php if (!empty($stock['uptnote'])) { ?>
                                             <a href="#" data-toggle="modal" data-target="#NOTE<?php echo $cvv++; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
@@ -378,7 +379,10 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                             -
                                         <?php } ?>
                                     </td>
-                                    <td><?php echo $stock['name_item']; ?> <?= $stock['idteam'] ?></td>
+                                    <td>
+                                        <?php echo $stock['video_lang'] == 1 ? 'ไทย' : 'อังกฤษ'; ?>
+                                    </td>
+                                    <td><?php echo $stock['name_item']; ?> </td>
                                     <td><span class=" badge badge-danger" style="font-size:16px;"><?= $teamTM['country_id'] == '218' ? $stock['wage_thai'] . ' บาท' : '$ ' . $stock['wage']; ?></span>
                                     </td>
                                     <td>
@@ -396,7 +400,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                         ?>
 
                                         <?php
-                                        $blockorder = null ;
+                                        $blockorder = null;
                                         $this->db->select('*');
                                         $this->db->from('tbl_upload_team');
                                         $this->db->where('teamId', $teamTM['IdTeam']);
@@ -405,14 +409,14 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                         $cancelorder = $this->db->get()->row_array();
                                         ?>
 
-                                         <?php 
-                                            if (!empty($cancelorder)) {
-                                                $blockorder = $cancelorder['status'];
-                                            }
-                                            
+                                        <?php
+                                        if (!empty($cancelorder)) {
+                                            $blockorder = $cancelorder['status'];
+                                        }
+
                                         ?>
 
-                                        <?php if ($stock_row == true || $blockorder == 6  ) { ?>
+                                        <?php if ($stock_row == true || $blockorder == 6) { ?>
                                             <button type="button" class="btn btn-secondery"> ยืนยัน</button>
                                         <?php } else { ?>
                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cfmodal<?php echo $stock['mms']; ?>" id=""> ยืนยัน</button>

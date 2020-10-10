@@ -186,6 +186,7 @@ $route['backend']                                   = 'back-end/Login_ctr';
 $route['back_withdraw']                             = 'back-end/Withdraw_ctr';
 $route['back_withdraw_update']                      = 'back-end/Withdraw_ctr/withdraw_status';
 $route['sendEmail_withdraw']                        = 'back-end/Withdraw_ctr/sendEmail_withdraw';
+$route['sendEmail_withdraw_team']                   = 'back-end/Withdraw_ctr/sendEmail_withdraw_team';
 $route['back_withdraw_slip']                        = 'back-end/Withdraw_ctr/back_withdraw_slip';
 $route['upload_back_withdraw_slip']                 = 'back-end/Withdraw_ctr/upload_back_withdraw_slip';
 $route['back_upload_main_search']                   = 'back-end/Store_ctr/upload_main_search';

@@ -227,6 +227,54 @@ class Withdraw_ctr extends CI_Controller
         $this->email->send();
     }
 
+    public function sendEmail_withdraw_team()
+    {
+        $id              = $this->input->post('id');
+        $textemail       = $this->input->post('textemail');
+        $withdraw_team   = $this->db->get_where('tbl_withdraw_team', ['id' => $id])->row_array();
+        $team            = $this->db->get_where('tbl_team', ['IdTeam' => $withdraw_team['teamId']])->row_array();
+
+        $subject = 'Notify from admin About withdrawing money.';
+
+        $message  = '<center>';
+        $message .= '<div style="max-width:800px;">';
+        $message .= '<div class="content" >';
+        $message .= '<div style="background-color: #0063d1; color: #fff;text-align:center;padding:20px 1px;font-size:16px;">';
+        $message .= 'Notify from admin About withdrawing money';
+        $message .= '</div>';
+        $message .= '<div class="row">';
+        $message .= '<p>Hey "' . $team['IdTeam'] . '",</p>';
+        $message .= '<p>If you have any questions, feel free to contact us at any time viaemail at</p>';
+        $message .= '<p style="color: #0063d1;">support@reportfile.co.th</p><br />';
+        $message .= '<p>Check below for your withdrawing details.</p><hr>';
+
+        $message .= '<div style="text-align:center; margin:15px 0; color:#000000; font-size:16px;"> ' . $textemail . ' </div>';
+
+        $message .= '</center>';
+
+        //config email settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = '2002';
+        $config['smtp_user'] = 'infinityp.soft@gmail.com';
+        $config['smtp_pass'] = 'infinity_P23';  //sender's password
+        $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = 'TRUE';
+        $config['smtp_crypto'] = 'tls';
+        $config['newline'] = "\r\n";
+
+        //$file_path = 'uploads/' . $file_name;
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from('infinityp.soft@gmail.com');
+        $this->email->to($team['email']);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        $this->email->set_mailtype('html');
+        $this->email->send();
+    }
+
     public function back_withdraw_slip()
     {
         $id = $this->input->post('id');

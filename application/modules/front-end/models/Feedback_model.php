@@ -15,6 +15,7 @@ class Feedback_model extends CI_Model
         $this->db->from('tbl_feedback');
         $this->db->join('tbl_upload_team', 'tbl_upload_team.order_id = tbl_feedback.order_id');
         $this->db->join('tbl_item_position', 'tbl_item_position.id = tbl_upload_team.position');
+       
         $this->db->where('tbl_feedback.teamId', $as);
         $this->db->where('tbl_feedback.status_c_feedack_team', 1);
         

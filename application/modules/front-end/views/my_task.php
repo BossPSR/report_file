@@ -106,7 +106,7 @@
 
             <div class="row">
                 <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 ">
-                    <table class="table table-hover">
+                    <table class="table table-hover" style="white-space: nowrap;">
                         <thead class="thead-light">
                             <tr style="text-align:center;">
                                 <!-- <th scope="col">#</th> -->
@@ -117,6 +117,7 @@
                                 <th style="background-color: #efefef;" scope="col">ตัวอย่างงาน</th>
                                 <th style="background-color: #efefef;" scope="col">ไฟล์ที่ส่งแล้ว</th>
                                 <th style="background-color: #efefef;" scope="col">คำอธิบาย</th>
+                                <th style="background-color: #efefef;" scope="col">วิดีโอ</th>
                                 <th style="background-color: #efefef;" scope="col">สาขา</th>
                                 <th style="background-color: #efefef;" scope="col">วันที่กดรับออร์เดอร์</th>
                                 <th style="background-color: #efefef;" scope="col">เรทค่าตอบแทน</th>
@@ -659,6 +660,11 @@
                                             -
                                         <?php } ?>
                                     </td>
+                                            <!-- วิดีโอ -->
+                                    <td>
+                                        <?php echo $task['video_lang'] == 1 ? 'ไทย' : 'อังกฤษ'; ?>
+                                          
+                                    </td>
 
                                    
 
@@ -682,7 +688,7 @@
                                         <span class="" style=" font-size:16px;font-weight: bold;"><?= $teamTM['country_id'] == '218' ? $task['wage_thai'] . ' บาท' : '$ ' . $task['wage']; ?></span>
                                     </td>
                                     <?php if ($task['status_approved'] == 1 || $task['status_approved'] == 2 || $N_feed['od'] >= 3 || date('Y-m-d') >= $task['end_time_withdraw'] && $task['end_time_withdraw'] != '') { ?>
-                                      
+
                                         <?php $withh = $this->db->get_where('tbl_withdraw_team', ['order_id' => $task['or_id']])->row_array(); ?>
 
                                         <?php if ($task['c_status'] == 3) { ?>
@@ -713,21 +719,21 @@
                                                                     <textarea name="textarea" id="textarea" class="form-control" rows="5"></textarea><br>
                                                                     <label style="font-size:18px;" for="">คะแนนความพึงพอใจในบริการของเรา</label><br>
                                                                     <div class="rate" style="text-align: center;">
-                                                                        <input type="radio" class="star" id="star5" name="rate" value="5" />
-                                                                        <label for="star5" title="text">5 stars</label>
-                                                                        <input type="radio" class="star" id="star4" name="rate" value="4" />
-                                                                        <label for="star4" title="text">4 stars</label>
-                                                                        <input type="radio" class="star" id="star3" name="rate" value="3" />
-                                                                        <label for="star3" title="text">3 stars</label>
-                                                                        <input type="radio" class="star" id="star2" name="rate" value="2" />
-                                                                        <label for="star2" title="text">2 stars</label>
-                                                                        <input type="radio" class="star" id="star1" name="rate" value="1" />
-                                                                        <label for="star1" title="text">1 star</label>
+                                                                        <input type="radio" class="star" id="star5<?php echo $task['or_id'] ?>" name="rate" value="5" />
+                                                                        <label for="star5<?php echo $task['or_id'] ?>" title="text">5 stars</label>
+                                                                        <input type="radio" class="star" id="star4<?php echo $task['or_id'] ?>" name="rate" value="4" />
+                                                                        <label for="star4<?php echo $task['or_id'] ?>" title="text">4 stars</label>
+                                                                        <input type="radio" class="star" id="star3<?php echo $task['or_id'] ?>" name="rate" value="3" />
+                                                                        <label for="star3<?php echo $task['or_id'] ?>" title="text">3 stars</label>
+                                                                        <input type="radio" class="star" id="star2<?php echo $task['or_id'] ?>" name="rate" value="2" />
+                                                                        <label for="star2<?php echo $task['or_id'] ?>" title="text">2 stars</label>
+                                                                        <input type="radio" class="star" id="star1<?php echo $task['or_id'] ?>" name="rate" value="1" />
+                                                                        <label for="star1<?php echo $task['or_id'] ?>" title="text">1 star</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
-                                                                    <button type="button" data-orderq="<?php echo $task['or_id'] ?>" id="star" class="btn btn-primary">ยืนยัน</button>
+                                                                    <button type="button" data-orderq="<?php echo $task['or_id'] ?>" id="star<?php echo $task['or_id'] ?>" class="btn btn-primary">ยืนยัน</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -738,7 +744,7 @@
                                                 <?php endif; ?>
                                             </td>
                                             <script>
-                                                $('body').on('click', '#star', function() {
+                                                $('body').on('click', '#star<?php echo $task['or_id'] ?>', function() {
                                                     var star = $('input[name="rate"]:checked').val();
                                                     var textarea = $('#textarea').val();
 
@@ -872,21 +878,26 @@
                                                 <div class="modal fade" id="Can<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <form action="my_task_can" method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                            <div class="modal-content" style="white-space: initial;">
+                                                                <div class="modal-header text-left" style="border-bottom: 1px solid #e9ecef; border-top:0">
                                                                     <input type="text" value="<?php echo $task['or_id']; ?>" name="orb" hidden>
                                                                     <input type="text" value="<?php echo $team['IdTeam']; ?>" name="team_idd" hidden>
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ทีมงานยกเลิกออร์เดอร์</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 17px;">ทีมงานยกเลิกออร์เดอร์
+                                                                    <br>
+                                                                        <span style="color : red">
+                                                                            การกดยกเลิกออร์เดอร์ไม่มีจำกัดจำนวนครั้ง แต่หากท่านกดยกเลิกครบ 3 ครั้ง ในเดือนนั้นๆท่านไม่สามารถกดรับออร์เดอร์ใหม่ได้จน
+                                                                            กว่าจะครบ 30 วัน และท่านจะถูกหักรายได้ 100 บาท ต่อการยกเลิกออร์เดอร์ 1 ครั้ง
+                                                                        </span>
+                                                                    </h5>
 
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body" style="text-align: left;">
-                                                                    <span style="color : red">
-                                                                        * เมื่อคุณทำการยกเลิกออร์เดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออร์เดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
-                                                                    </span>
+
                                                                     <textarea name="note_can" id="" cols="30" rows="10" class="form-control" required></textarea>
+                                                                    <div class="text-left mt-1">"ช่วยบอกเราได้ไหมว่าเกิดอะไรขึ้นกับการทำงานในครั้งนี้"</div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
@@ -905,12 +916,13 @@
                                                 <div class="modal fade" id="cancel_task<?php echo $task['or_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <form action="My-task-cancel" method="post">
-                                                            <div class="modal-content">
+                                                            <div class="modal-content" style="white-space: initial;">
                                                                 <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
                                                                     <input type="text" value="<?php echo $task['or_id']; ?>" name="order_id" hidden>
                                                                     <h5 class="modal-title text-left" id="exampleModalLabel" style="font-size: 17px;">ยกเลิกออร์เดอร์ (<?php echo $task['or_id']; ?>) <br>
                                                                         <span style="color : red">
-                                                                            * เมื่อคุณทำการยกเลิกออร์เดอร์ทุกครั้ง จะโดนปรับจากระบบ $10 ทันที และสามารถยิกเลิกออร์เดอร์ได้ 2 ครั้ง หลังจากนั้นท่านจะโดนแบน 60 วัน
+                                                                            การกดยกเลิกออร์เดอร์ไม่มีจำกัดจำนวนครั้ง แต่หากท่านกดยกเลิกครบ 3 ครั้ง ในเดือนนั้นๆท่านไม่สามารถกดรับออร์เดอร์ใหม่ได้จน
+                                                                            กว่าจะครบ 30 วัน และท่านจะถูกหักรายได้ 100 บาท ต่อการยกเลิกออร์เดอร์ 1 ครั้ง
                                                                         </span>
                                                                     </h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -919,6 +931,7 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <textarea name="note_can" id="" rows="5" class="form-control" required></textarea>
+                                                                    <div class="text-left mt-1">"ช่วยบอกเราได้ไหมว่าเกิดอะไรขึ้นกับการทำงานในครั้งนี้"</div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>

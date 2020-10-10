@@ -32,6 +32,8 @@
                                 <th scope="col">ไฟล์ที่ส่งแล้ว</th>
                                 <th scope="col">ไฟล์แก้ไขงาน</th>
                                 <th scope="col">คำอธิบาย</th>
+
+                                <th scope="col">วิดีโอ</th>
                                 <th scope="col">สาขา</th>
                                 <th scope="col">สถานะ</th>
                             </tr>
@@ -161,6 +163,7 @@
                                                 -
                                             <?php endif; ?>
                                         </td>
+
                                         <td>
                                             <?php if (!empty($feedback['feedback_detail'])) { ?>
                                                 <a href="#" data-toggle="modal" data-target="#NOTE<?= $feedback['id_feed']; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
@@ -188,6 +191,10 @@
                                         <?php } else { ?>
                                             -
                                         <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?php $orderfeed = $this->db->get_where('tbl_upload_order', ['order_id' => $feedback['order_id']])->row_array(); ?>
+                                        <?php echo $orderfeed['video_lang'] == 1 ? 'ไทย' : 'อังกฤษ'; ?>
                                     </td>
                                     <td><?= $feedback['name_item']; ?></td>
 
@@ -241,7 +248,7 @@
                                                                         <span class="badge badge-info" style="font-size:16px;">กำลังแก้ไข</span>
                                                                     <?php elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 1 || $feedback['check_feedback_dalivery'] == 2) : ?>
                                                                         <span class="badge badge-primary" style="color:#fff;font-size:16px;">แก้ไขเรียบร้อย</span>
-                                                                    <!-- elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) : ?>
+                                                                        <!-- elseif ($feedback['status_feedback_read'] == 1 && $feedback['check_feedback_dalivery'] == 2) : ?>
                                                                         <span class="badge badge-success" style="font-size:16px;">แก้ไขเรียบร้อย</span> -->
                                                                     <?php endif; ?>
                                                                 <?php endif; ?>
