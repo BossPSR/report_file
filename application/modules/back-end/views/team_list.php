@@ -255,10 +255,14 @@
 																				<thead>
 																					<tr>
 																						<th>passport</th>
+																						<th>photo user&passpost</th>
+																						<th>bank name</th>
 																						<th>bookbank</th>
-																						<th>Bank number</th>
 																						<th>address</th>
 																						<th>Paypal</th>
+																						<th>line</th>
+																						<th>educational</th>
+																						<th>Email language</th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -268,7 +272,44 @@
 																					$this->db->where('tbl_team.IdTeam', $team['IdTeam']);
 																					$team_other = $this->db->get()->row_array();
 																					?>
-																					
+																					<td>
+																						<?php if ($team_other['passport'] != '') : ?>
+																							<a href="<?= $team_other['file_name_passport']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px;"></i></a> <?= $team_other['passport']; ?>
+																						<?php else : ?>
+																							-
+																						<?php endif; ?>
+																					</td>
+																					<td>
+																						<?php if ($team_other['file_name_user_passport'] != '') : ?>
+																							<a href="<?= $team_other['file_name_user_passport']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px;"></i></a>
+																						<?php else : ?>
+																							-
+																						<?php endif; ?>
+																					</td>
+																					<td><?= $team_other['bank_name'] == '' ? '-' : $team_other['bank_name']; ?></td>
+																					<td>
+																						<?php if ($team_other['bank_number'] != '') : ?>
+																							<a href="<?= $team_other['file_name_bookbank']; ?>" target="_blank"><i class="feather icon-file-text" style="font-size: 25px;"></i></a> <?= $team_other['bank_number']; ?>
+																						<?php else : ?>
+																							-
+																						<?php endif; ?>
+																					</td>
+																					<td>
+																						<?php if ($team_other['address_passport'] != '') : ?>
+																							<?= $team_other['address_passport'] . ' ' . $team_other['district'] . ' ' . $team_other['amphoe'] . ' ' . $team_other['province'] . ' ' . $team_other['zipcode']; ?>
+																						<?php else : ?>
+																							-
+																						<?php endif; ?>
+																					</td>
+																					<td><?= $team_other['bank_account'] == '' ? '-' : $team_other['bank_account']; ?></td>
+																					<td><?= $team_other['line'] == '' ? '-' : $team_other['line']; ?></td>
+																					<td>
+																						<?= $team_other['educational'] == '' ? '-' : $team_other['educational']; ?>
+																					</td>
+																					<td>
+																						<?= $team_other['email_lang_team'] == 1 ? 'TH' : 'EN'; ?>
+																					</td>
+
 																				</tbody>
 																			</table>
 

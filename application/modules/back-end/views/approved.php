@@ -102,6 +102,7 @@
                                                 <tr>
                                                     <th>CM</th>
                                                     <th>Order id</th>
+                                                    <th>Video</th>
                                                     <th>Order date</th>
                                                     <th>Main file</th>
                                                     <th>GT file</th>
@@ -125,6 +126,8 @@
 
                                                         <!-- order_id -->
                                                         <td><?php echo $Approved['order_id'] ?></td>
+
+                                                        <td><?php echo $Approved['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- date_required -->
                                                         <td><?php echo $Approved['date_required'];  ?></td>

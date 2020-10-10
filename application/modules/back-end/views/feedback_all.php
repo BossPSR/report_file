@@ -71,6 +71,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>order id</th>
+                                                    <th>Video</th>
                                                     <th>User id</th>
                                                     <th>Feedback File</th>
                                                     <th>Feedback Detail</th>
@@ -90,6 +91,7 @@
                                                 <?php foreach ($feedback_team as $keyBook => $feedback_team) { ?>
                                                     <tr>
                                                         <td><?php echo $feedback_team['order_id'] ?></td>
+                                                        <td><?php echo $feedback_team['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
                                                         <td><?php echo $feedback_team['userId'] ?></td>
                                                         <td>
                                                             <span data-toggle="modal" data-target="#exampleModala<?= $feedback_team['id_f']; ?>"><i class="feather icon-file-text" style="font-size: 25px;"></i></span>

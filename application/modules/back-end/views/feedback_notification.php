@@ -74,6 +74,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>order id</th>
+                                                    <th>Video</th>
                                                     <th>User id</th>
                                                     <th>DM</th>
                                                     <th>Main File</th>
@@ -104,6 +105,8 @@
                                                     <tr>
                                                         <!-- order id -->
                                                         <td><?php echo $feedback['order_feed'] ?></td>
+
+                                                        <td><?php echo $feedback['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- userId -->
                                                         <td><?php echo $feedback['userId'] ?></td>

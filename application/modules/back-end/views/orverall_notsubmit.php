@@ -182,6 +182,7 @@
                                                 <tr>
                                                     <th>Step</th>
                                                     <th>Order Id</th>
+                                                    <th>Video</th>
                                                     <th>User</th>
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
@@ -210,6 +211,8 @@
 
                                                         <!-- Order Id -->
                                                         <td><?php echo $stores['order'] ?></td>
+
+                                                        <td><?php echo $stores['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- User -->
                                                         <td><?php echo $stores['userId']; ?></td>

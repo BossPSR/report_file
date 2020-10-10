@@ -54,6 +54,7 @@
                                                 <tr>
                                                     <th>CM</th>
                                                     <th>Order id</th>
+                                                    <th>Video</th>
                                                     <th>Order date</th>
                                                     <th>Main file</th>
                                                     <th>GT file</th>
@@ -77,6 +78,8 @@
 
                                                         <!-- Order id -->
                                                         <td><?php echo $not_Approved['or'] ?></td>
+
+                                                        <td><?php echo $not_Approved['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- date_required -->
                                                         <td><?php echo $not_Approved['date_required'] ?></td>

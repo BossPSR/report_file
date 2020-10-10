@@ -111,6 +111,7 @@
                                                 <tr>
                                                     <th>Step</th>
                                                     <th>Order Id</th>
+                                                    <th>Video</th>
                                                     <th>DM File</th>
                                                     <th>DM</th>
                                                     <th>User</th>
@@ -140,6 +141,7 @@
                                                     <tr>
                                                         <td><button class="btn btn-primary" type="button" id="click_step<?php echo $stores['order']; ?>" onclick="click_step('<?php echo $stores['order']; ?>');"><?php echo $stores['click_step']; ?></button></td>
                                                         <td><?php echo $stores['order'] ?></td>
+                                                        <td><?php echo $stores['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
                                                         <td>
                                                             <?php if (empty($stores['id_document'])) : ?>
                                                                 -

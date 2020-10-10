@@ -66,10 +66,11 @@ class Buy_ctr extends CI_Controller
   {
     // image_lib
 
-    $userId     = $this->input->post('userId');
-    $date_req   =  $this->input->post('date');
-    $detail     =  $this->input->post('detail');
-    $datenow     =  $this->input->post('datenow');
+    $userId         = $this->input->post('userId');
+    $date_req       =  $this->input->post('date');
+    $detail         =  $this->input->post('detail');
+    $datenow        =  $this->input->post('datenow');
+    $video_lang     =  $this->input->post('video_lang');
 
     $target_dir = "uploads/Buy/"; // Upload directory
 
@@ -102,9 +103,10 @@ class Buy_ctr extends CI_Controller
           'order_id'      => $buymax->order_main,
           'note_user'     => $detail,
           'date_required' => $date_req,
+          'video_lang'    => $video_lang,
           'file_name'     => $uploadData['file_name'],
           'path'          => 'uploads/Buy/' . $uploadData['file_name'],
-          'created_at_buy' => date("Y-m-d H:i:s"),
+          'created_at_buy'=> date("Y-m-d H:i:s"),
           'update_at'     => date("Y-m-d H:i:s"),
           'notify_admin'  => 0,
         );

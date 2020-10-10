@@ -86,6 +86,7 @@
                                                 <tr>
                                                     <th>Step</th>
                                                     <th>Order Id</th>
+                                                    <th>Video</th>
                                                     <th>User</th>
                                                     <th>Order Date</th>
                                                     <th>Date required</th>
@@ -117,7 +118,8 @@
                                                         <td>
                                                             <button class="btn btn-primary" type="button"><?php echo $stores['num_check']; ?></button>
                                                         </td>
-                                                        <td> <?php echo $stores['order']; ?></td>
+                                                        <td><?php echo $stores['order']; ?></td>
+                                                        <td><?php echo $stores['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
                                                         <td><?php echo $stores['userId']; ?></td>
 
                                                         <td><?php echo $stores['created_at_buy']; ?></td>

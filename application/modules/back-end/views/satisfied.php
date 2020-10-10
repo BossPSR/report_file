@@ -54,6 +54,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
+                                                    <th>Video</th>
                                                     <th>User</th>
                                                     <th>Country</th>
                                                     <th>
@@ -88,6 +89,8 @@
                                                     <tr style="background: <?php echo $stores['status_informal'] == 1 ? '#ececec' : ''; ?>">
                                                         <!-- orderST -->
                                                         <td><?php echo $stores['orderST']; ?></td>
+
+                                                        <td><?php echo $stores['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- userOR -->
                                                         <td><?php echo $stores['Username'] == '' ? $stores['userOR'] : $stores['Username']; ?></td>

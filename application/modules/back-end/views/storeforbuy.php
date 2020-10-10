@@ -56,6 +56,7 @@
                                                 <tr>
                                                     <th style="display: none;">#</th>
                                                     <th>Order Id</th>
+                                                    <th>Video</th>
                                                     <th>User</th>
                                                     <th>country</th>
                                                     <th>Note</th>
@@ -78,6 +79,7 @@
                                                     <tr>
                                                         <td style="display: none;"><?php echo $stored['created_at_buy']; ?></td>
                                                         <td><?php echo $stored['order_id']; ?></td>
+                                                        <td><?php echo $stored['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
                                                         <td><?php echo $stored['userId']; ?></td>
                                                         <td><?php echo $stored['countryName']; ?></td>
                                                         <td>

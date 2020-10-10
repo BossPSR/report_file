@@ -123,6 +123,8 @@
 												<tr>
 													<th>Check</th>
 													<th>Order Id</th>
+                                                    <th>Video</th>
+
 													<th>TeamId</th>
 													<th>DM</th>
 													<th>DM File</th>
@@ -158,6 +160,8 @@
 														</td>
 														<!-- Order Id -->
 														<td><?php echo $complete['order_id_t']; ?> </td>
+
+														<td><?php echo $complete['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
 														<!-- TeamId -->
 														<td><?php echo $complete['teamId']; ?></td>

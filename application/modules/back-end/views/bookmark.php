@@ -133,6 +133,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>order Id</th>
+                                                    <th>Video</th>
                                                     <th>User Id</th>
                                                     <th>Country</th>
                                                     <th>DM</th>
@@ -153,6 +154,8 @@
                                                     <tr>
                                                         <!-- orderd -->
                                                         <td><?php echo $bookmark['orderd'] ?></td>
+
+                                                        <td><?php echo $bookmark['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- user_name -->
                                                         <td><?php echo $bookmark['usermain'] ?></td>

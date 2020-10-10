@@ -55,6 +55,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
+                                                    <th>Video</th>
                                                     <th>User</th>
                                                     <th>Country</th>
                                                     <th>
@@ -92,6 +93,8 @@
                                                     <tr>
                                                         <!-- order -->
                                                         <td><?php echo $store['orderNOT'] ?></td>
+
+                                                        <td><?php echo $store['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- userId -->
                                                         <td> <?php echo $store['Username'] == '' ? $store['userId'] : $store['Username']; ?></td>

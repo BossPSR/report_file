@@ -181,6 +181,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Order id</th>
+                                                    <th>Video</th>
                                                     <th>Organization</th>
                                                     <th>Email</th>
                                                     <th>Name</th>
@@ -208,6 +209,8 @@
                                                     <tr>
                                                         <!-- Order id -->
                                                         <td><?php echo $stock['orderST'] ?></td>
+
+                                                        <td><?php echo $stock['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
 
                                                         <!-- Organization -->
                                                         <td>

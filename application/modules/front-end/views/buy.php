@@ -19,7 +19,7 @@
     </div>
 </div>
 <br>
-<h2 class="text-center" style="margin-top: 15px;">  สั่งออร์เดอร์  </h2>
+<h2 class="text-center" style="margin-top: 15px;"> สั่งออร์เดอร์ </h2>
 <hr class="line_package">
 <br>
 <!--wishlist area start -->
@@ -40,9 +40,10 @@
                                         <form action="buy_upload" class="dropzone" id="fileupload" style="margin-bottom:10px;">
                                             <div class="dz-message needsclick">
                                                 อัปโหลดได้สูงสุดไม่เกิน 10 ไฟล์หรือไม่เกิน 20 เมกะไบต์
-                                              
+
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" hidden>
+                                                <input type="text" name="video_lang" id="video_lang" value="" hidden>
                                                 <textarea name="detail" class="detail" hidden></textarea>
 
                                             </div>
@@ -50,11 +51,11 @@
                                         </form>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                        <label for="" class="font-size-upload">อัปโหลดข้อมูลแบบฟอร์มตาราง หรือตัวอย่างประกอบได้ที่นี่  (ถ้ามี) <br> <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 20 File )</span></label>
+                                        <label for="" class="font-size-upload">อัปโหลดข้อมูลแบบฟอร์มตาราง หรือตัวอย่างประกอบได้ที่นี่ (ถ้ามี) <br> <span style="color:red">( คุณสามารถDrop ได้จำนวนสูงสุด 20 File )</span></label>
                                         <form action="buy_uploadGT" class="dropzone" id="fileuploadGT">
                                             <div class="dz-message needsclick">
-                                            อัปโหลดได้สูงสุดไม่เกิน 20 ไฟล์หรือไม่เกิน 50 เมกะไบต์
-                                             
+                                                อัปโหลดได้สูงสุดไม่เกิน 20 ไฟล์หรือไม่เกิน 50 เมกะไบต์
+
                                                 <input type="text" name="userId" value="<?php echo $userId['idUser']; ?>" hidden>
                                                 <input type="date" name="date" id="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" hidden>
                                             </div>
@@ -75,13 +76,29 @@
                                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                                         <input type="date" class="form-control" id="date2" name="date" value="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" min="<?php echo date('Y-m-d', strtotime(" + 1 days ")); ?>" required>
                                     </div>
-                                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                        <div class="text-right" style="font-size: 16px;color:red;">
-                                            <p> * อธิบายการสั่งOrder</p>
-                                            <p>Due date 1-4 วันคืองานด่วน</p>
-                                            <p>Due date 5-10 วันคืองานปรกติ</p>
-                                        </div>
 
+                                </div>
+                                <br>
+                                <label for="">เลือกภาษาวิดีโอที่ท่านต้องการ</label>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="radio1" name="name" class="custom-control-input radiosel" value="1">
+                                            <label class="custom-control-label" for="radio1">ภาษาไทย</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="radio2" name="name" class="custom-control-input radiosel" value="2">
+                                            <label class="custom-control-label" for="radio2">ภาษาอังกฤษ</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                                    <div class="row" style="font-size: 16px;color:red;">
+                                        <p> * อธิบายการสั่งOrder
+                                            Due date 1-4 วันคืองานด่วน
+                                            Due date 5-10 วันคืองานปรกติ</p>
                                     </div>
                                 </div>
                                 <br>
@@ -107,6 +124,17 @@
             var value = $(this).val();
 
             $("#date").val(value);
+        }).keyup();
+
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".radiosel").change(function() {
+            var value = $(this).val();
+
+            $("#video_lang").val(value);
         }).keyup();
 
     });
@@ -146,53 +174,65 @@
 
     );
     $('#uploadfiles').click(function() {
+        var ro = $('#video_lang').val();
+
+
         if (myDropzone.files == 0) {
-            swal("Warning!", "Can not be document Empty", "warning", {
+            swal("เตือน!", "ท่านยังไม่ได้อัพโหลดไฟล์", "warning", {
                 button: true,
             });
         } else {
-            $.ajax({
-                type: 'POST',
-                url: 'order_auto',
-                data: {
-                    status: 1
-                },
-                success: function(data) {
-                    var x = document.getElementById("detail2").value;
 
-                    $.ajax({
-                        type: 'POST',
-                        url: 'order_auto_morefile_buy',
-                        data: {
-                            detail: x,
-                        },
-                        success: function(success) {
+            if (ro == '') {
+                swal("เตือน!", "ท่านยังไม่ได้เลือกภาษาวิดีโอ", "warning", {
+                    button: true,
+                });
+            } else {
 
-                            myDropzone.processQueue();
-                            myDropzone.on("queuecomplete", function(file, res ) {
-                               console.log(file);
-                                if (myDropzone2.files == 0) {
-                                    swal("Good job!", "Upload for main successfull", "success", {
-                                        button: false,
-                                    });
-                                    setTimeout("location.reload(true);", 1000);
 
-                                } else {
-                                    myDropzone2.processQueue();
-                                    myDropzone2.on("queuecomplete", function(file, res) {
-                                        swal("Good job!", "Upload for main & GT successfull", "success", {
+                $.ajax({
+                    type: 'POST',
+                    url: 'order_auto',
+                    data: {
+                        status: 1
+                    },
+                    success: function(data) {
+                        var x = document.getElementById("detail2").value;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: 'order_auto_morefile_buy',
+                            data: {
+                                detail: x,
+                            },
+                            success: function(success) {
+
+                                myDropzone.processQueue();
+                                myDropzone.on("queuecomplete", function(file, res) {
+                                    console.log(file);
+                                    if (myDropzone2.files == 0) {
+                                        swal("Good job!", "Upload for main successfull", "success", {
                                             button: false,
                                         });
                                         setTimeout("location.reload(true);", 1000);
-                                    });
-                                }
-                            });
-                        }
-                    });
 
-                },
+                                    } else {
+                                        myDropzone2.processQueue();
+                                        myDropzone2.on("queuecomplete", function(file, res) {
+                                            swal("Good job!", "Upload for main & GT successfull", "success", {
+                                                button: false,
+                                            });
+                                            setTimeout("location.reload(true);", 1000);
+                                        });
+                                    }
+                                });
+                            }
+                        });
 
-            });
+                    },
+
+                });
+            }
         }
 
     });

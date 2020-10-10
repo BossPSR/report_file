@@ -63,6 +63,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Order id</th>
+                                                    <th>Video</th>
                                                     <th>User id</th>
                                                     <th>Country</th>
                                                     <th>DM</th>
@@ -80,7 +81,7 @@
                                                 <?php foreach ($bookmark_all_not as $keyBook => $bookmark_all_not) { ?>
                                                     <tr>
                                                         <td><?php echo $bookmark_all_not['order_upload'] ?></td>
-                                                        <td><?php echo $bookmark_all_not['user_upload'] ?></td>
+                                                        <td><?php echo $bookmark_all_not['video_lang'] == 1 ? 'TH' : 'EN' ; ?></td>
                                                         <td><?php echo $bookmark_all_not['countryName'] ?></td>
                                                         <td>
 
