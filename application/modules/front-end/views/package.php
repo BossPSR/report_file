@@ -1,23 +1,41 @@
-<h2 class="text-center" style="margin-top: 30px;"> แพ็คเกจ</h2>
-<hr class="line_package">
-<br>
-<div class="priceing_table">
+<style>
+	.hero-image {
+		background-image: url("public/frontend/assets/img/bg/home-bgback.png");
+		background-color: #cccccc;
+		/* height: 500px; */
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+		background-attachment: fixed;
+	}
+</style>
+<div class="priceing_table hero-image">
+
 	<div class="container">
+		<h2 class="text-center" style="color:white"> แพ็คเกจ</h2>
+		<hr class="line_package">
+		<br>
+		<br>
 		<div class="row">
+
 			<?php $i = 1; ?>
 			<?php $e = 1; ?>
+			<div class="col-lg-2" style="max-width: 13.666667%;flex: 0 0 13.666667%;"></div>
 			<?php foreach ($package as $key => $package) : ?>
 				<!--price table area -->
 
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-3 col-md-6">
 					<div class="single_priceing">
-						<div class="priceing_title" style="<?php echo $package['id'] == '1' ? 'background: #ababab' : ''; ?> <?php echo $package['id'] == '2' ? 'background: #ffeb00' : ''; ?> <?php echo $package['id'] == '3' ? 'background: #00d3f5' : ''; ?> ;">
+						<div class="priceing_title" style="<?php echo $package['id'] == '1' ? 'background: #ababab' : ''; ?> <?php echo $package['id'] == '2' ? 'background: #ffc800' : ''; ?> <?php echo $package['id'] == '3' ? 'background: #00d3f5' : ''; ?> ;">
 							<h1 style="<?php echo $package['id'] == '2' ? 'color: black' : ''; ?>;    font-size: 23px;">แพ๊คเกจระดับ <?php echo $package['title_pk']; ?></h1>
 						</div>
 						<div class="priceing_list">
-							<h1><span style="<?php echo $package['id'] == '1' ? 'color: #ababab' : ''; ?> <?php echo $package['id'] == '2' ? 'color: #ffeb00' : ''; ?> <?php echo $package['id'] == '3' ? 'color: #00d3f5' : ''; ?> ;"><?php echo $package['title_pk']; ?></h1>
+							<h1><span style="<?php echo $package['id'] == '1' ? 'color: #ababab' : ''; ?> <?php echo $package['id'] == '2' ? 'color: #ffc800' : ''; ?> <?php echo $package['id'] == '3' ? 'color: #00d3f5' : ''; ?> ;"><?php echo $package['title_pk']; ?></h1>
+							<h1 style="padding: 0px 0 24px;"><span style="font-size: 28px;    color: #5f5f5f;">นาน <?php echo $package['month_pk']; ?> เดือน</span></h1>
+							<h1 style="padding: 0px 0 24px;"><span style="font-size: 28px;    color: #5f5f5f;">ค่าแนะนำ $<?php echo $package['commission_price']; ?></span></h1>
 							<h1 style="padding: 0px 0 24px;"><span style="font-size: 28px;    color: #5f5f5f;">$<?php echo $package['price_pk']; ?></span>/ (ราคาปกติ)</h1>
-							<h1 style="padding: 25px 0px;border-top: 1px solid #e2e2e2;background: #fff93554;"><span style="color:#ff6c6c">$<?php echo $package['new_price']; ?></span>/ (ราคาพิเศษเมื่อใส่ Code)</h1>
+							<h1 style="padding: 25px 0px;border-top: 1px solid #e2e2e2;background: #fff1f1;"><span style="color:#ff6c6c">$<?php echo $package['new_price']; ?></span>/ (ราคาพิเศษเมื่อใส่ Code)</h1>
 							<div class="row" style="padding: 18px 0px 18px 0;">
 								<div class="col-12">
 
@@ -37,7 +55,8 @@
 							<?php if ($userId['package_user'] >= $package['id']) : ?>
 								<button type="button" class="btn btn-secondary">Buy package</button>
 							<?php else : ?>
-								<a class="list_button paypal-button-container<?php echo $i; ?>" href="#" onclick="testCheck();">purchase now <?php echo $package['id']; ?> </a>
+
+								<div id="paypal-button<?php echo  $i; ?>" onclick="testCheck();"></div>
 
 							<?php endif; ?>
 						</div>
@@ -153,7 +172,7 @@
 
 							});
 						}
-					}).render('.paypal-button-container<?php echo $e++; ?>');
+					}).render('#paypal-button<?php echo $e++; ?>');
 				</script>
 			<?php
 				$i++;
@@ -179,34 +198,12 @@
                 </figure>
             </article>
         </div> -->
-
+			<div class="col-lg-1"></div>
 		</div>
 	</div>
 </div>
 <br>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header" style="border-top: none;">
-				<h5 class="modal-title" id="exampleModalLabel">Free</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				ท่านต้องการใช้ Free Package ใช่มั้ย?
-			</div>
-			<div class="modal-footer">
-
-				<a href="store"><button type="button" class="btn btn-success">ตกลง</button></a>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-
-			</div>
-		</div>
-	</div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -220,8 +217,8 @@
 			</div>
 			<div class="modal-body">
 				<h4 style="font-size: 21px;color: #0088ff;">เงื่อนไขการรับและถอนค่าแนะนำ</h4>
-				<p style="font-size: 18px;">1. หากผู้เรียนสมัคร Package นี้ผู้เรียนจะได้รับค่าแนะนำจากผู้ที่ซื้อ Packageนี้เท่านั้นเป็นจำนวนเงิน $10 ต่อการแนะนำ 1 ท่าน โดยค่าแนะนำนี้ผู้เรียนจะได้รับหลังจากที่ผู้ที่ท่านแนะนำได้สมัครแพ็คเก็จอันหนึ่งอันใดเป็นที่เรียบร้อยแล้วเท่านั้น</p>
-				<p style="font-size: 18px;">2. ผู้เรียนสามารถถอนค่าคอมมิชชั่นและยอดเงินคงเหลือได้โดยผ่านรระบบถอนเงินโดยมีขั้นต่ำในการถอนต่อครั้งไม่ต่ำกว่า 100 ดอลล่าร์สหรัฐ (ระบบจะดำเนินการให้ภายใน 14 วัน ผู้เรียนสามารถเช็คได้จากหน้า My Receipt ใบเสร็จของฉัน)</p>
+				<p style="font-size: 18px;">1. หากผู้เรียนสมัคร Package นี้ผู้เรียนจะได้รับค่าแนะนำจากผู้ที่ซื้อ Packageนี้เท่านั้นเป็นจำนวนเงิน $10 ต่อการแนะนำ 1 ท่าน โดยค่าแนะนำนี้ผู้เรียนจะได้รับหลังจากผู้ที่ท่านแนะนำได้สมัครแพ็คเก็จอันหนึ่งอันใดเป็นที่เรียบร้อยแล้วเท่านั้น</p>
+				<p style="font-size: 18px;">2. ผู้เรียนสามารถถอนค่าคอมมิชชั่นและยอดเงินคงเหลือได้โดยผ่านรระบบถอนเงินโดยมีขั้นต่ำในการถอนต่อครั้งไม่ต่ำกว่า $100 (ระบบจะดำเนินการให้ภายใน 14 วัน ผู้เรียนสามารถเช็คได้จากหน้า ใบเสร็จของฉัน)</p>
 				<p style="font-size: 18px;">3. การถอนรายได้ค่าแนะนำในแต่ล่ะครั้งระบบจะมีการเรียกเก็บค่าธรรมเนียมโดยระบบจะมีการแจ้งให้ท่านทราบในขั้นตอนการถอนทุกครั้งและค่าธรรมเนียมนี้ระบบอาจมีการเปลี่ยนแปลงในภายหลังโดยไม่ต้องแจ้งให้ท่านทราบก่อนล่วงหน้า</p>
 			</div>
 			<div class="modal-footer">
@@ -243,10 +240,10 @@
 			</div>
 			<div class="modal-body">
 				<h4 style="font-size: 21px;color: #0088ff;">เงื่อนไขการรับและถอนค่าแนะนำ</h4>
-				<p style="font-size: 18px;">1.	หากผู้เรียนสมัคร Package นี้ผู้เรียนจะได้รับค่าแนะนำจากผู้ที่ซื้อ Package นี้ $20 และยังได้รับค่าแนะนำจาก Package  $59.95 เป็นจำนวนเงิน $10 ด้วยเช่นกัน โดยค่าแนะนำนี้ผู้เรียนจะได้รับหลังจากที่ผู้ที่ท่านแนะนำได้สมัครแพ็คเกจอันหนึ่งอันใดเป็นที่เรียบร้อยแล้วเท่านั้น</p>
-				<p style="font-size: 18px;">2.	ผู้เรียนสามารถถอนค่าคอมมิชชั่นและยอดเงินคงเหลือได้โดยผ่านรระบบถอนเงินโดยมีขั้นต่ำในการถอนต่อครั้งไม่ต่ำกว่า  100 ดอลล่าร์สหรัฐ (ระบบจะดำเนินการให้ภายใน 14 วัน ผู้เรียนสามารถเช็คได้จากหน้า My Receipt  ใบเสร็จของฉัน)</p>
-				<p style="font-size: 18px;">3.	การถอนรายได้ค่าแนะนำในแต่ล่ะครั้งระบบจะมีการเรียกเก็บค่าธรรมเนียมโดยระบบจะมีการแจ้งให้ท่านทราบในขั้นตอนการถอนทุกครั้งและค่าธรรมเนียมนี้ระบบอาจมีการเปลี่ยนแปลงในภายหลังโดยไม่ต้องแจ้งให้ท่านทราบก่อนล่วงหน้า</p>
-			
+				<p style="font-size: 18px;">1. หากผู้เรียนสมัคร Package นี้ผู้เรียนจะได้รับค่าแนะนำจากผู้ที่ซื้อ Package นี้ $20 และยังได้รับค่าแนะนำจาก Package $59.95 เป็นจำนวนเงิน $10 ด้วยเช่นกัน โดยค่าแนะนำนี้ผู้เรียนจะได้รับหลังจากผู้ที่ท่านแนะนำได้สมัครแพ็คเกจอันหนึ่งอันใดเป็นที่เรียบร้อยแล้วเท่านั้น</p>
+				<p style="font-size: 18px;">2. ผู้เรียนสามารถถอนค่าคอมมิชชั่นและยอดเงินคงเหลือได้โดยผ่านรระบบถอนเงินโดยมีขั้นต่ำในการถอนต่อครั้งไม่ต่ำกว่า $100 (ระบบจะดำเนินการให้ภายใน 14 วัน ผู้เรียนสามารถเช็คได้จากหน้า ใบเสร็จของฉัน)</p>
+				<p style="font-size: 18px;">3. การถอนรายได้ค่าแนะนำในแต่ล่ะครั้งระบบจะมีการเรียกเก็บค่าธรรมเนียมโดยระบบจะมีการแจ้งให้ท่านทราบในขั้นตอนการถอนทุกครั้งและค่าธรรมเนียมนี้ระบบอาจมีการเปลี่ยนแปลงในภายหลังโดยไม่ต้องแจ้งให้ท่านทราบก่อนล่วงหน้า</p>
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
@@ -267,10 +264,10 @@
 			</div>
 			<div class="modal-body">
 				<h5 style="font-size: 21px;color: #0088ff;">เงื่อนไขการรับและถอนค่าแนะนำ</h5>
-				<p style="font-size: 18px;">1.	หากผู้เรียนสมัคร Package นี้ผู้เรียนจะได้รับค่าแนะนำจากผู้ที่ซื้อ Package นี้เป็นจำนวนเงิน $40และยังได้รับค่าแนะนำจาก Package $59.95 และ Package $109.95 ตามที่ระบุใน Packageโดยค่าแนะนำนี้ผู้เรียนจะได้รับหลังจากที่ผู้ที่ท่านแนะนำได้สมัครแพ็คเกจอันหนึ่งอันใดเป็นที่เรียบร้อยแล้วเท่านั้น</p>
-				<p style="font-size: 18px;">2.	ผู้เรียนสามารถถอนค่าคอมมิชชั่นและยอดเงินคงเหลือได้โดยผ่านรระบบถอนเงินโดยมีขั้นต่ำในการถอนต่อครั้งไม่ต่ำกว่า  100 ดอลล่าร์สหรัฐ (ระบบจะดำเนินการให้ภายใน 14 วัน ผู้เรียนสามารถเช็คได้จากหน้า My Receipt  ใบเสร็จของฉัน)</p>
-				<p style="font-size: 18px;">3.	การถอนรายได้ค่าแนะนำในแต่ล่ะครั้งระบบจะมีการเรียกเก็บค่าธรรมเนียมโดยระบบจะมีการแจ้งให้ท่านทราบในขั้นตอนการถอนทุกครั้งและค่าธรรมเนียมนี้ระบบอาจมีการเปลี่ยนแปลงในภายหลังโดยไม่ต้องแจ้งให้ท่านทราบก่อนล่วงหน้า</p>
-			
+				<p style="font-size: 18px;">1. หากผู้เรียนสมัคร Package นี้ผู้เรียนจะได้รับค่าแนะนำจากผู้ที่ซื้อ Package นี้เป็นจำนวนเงิน $40และยังได้รับค่าแนะนำจาก Package $59.95 เป็นจำนวนเงิน $10 และ Package $109.95 เป็นจำนวนเงิน $10 โดยค่าแนะนำนี้ผู้เรียนจะได้รับหลังจากผู้ที่ท่านแนะนำได้สมัครแพ็คเกจอันหนึ่งอันใดเป็นที่เรียบร้อยแล้วเท่านั้น</p>
+				<p style="font-size: 18px;">2. ผู้เรียนสามารถถอนค่าคอมมิชชั่นและยอดเงินคงเหลือได้โดยผ่านรระบบถอนเงินโดยมีขั้นต่ำในการถอนต่อครั้งไม่ต่ำกว่า $100 (ระบบจะดำเนินการให้ภายใน 14 วัน ผู้เรียนสามารถเช็คได้จากหน้า ใบเสร็จของฉัน)</p>
+				<p style="font-size: 18px;">3. การถอนรายได้ค่าแนะนำในแต่ล่ะครั้งระบบจะมีการเรียกเก็บค่าธรรมเนียมโดยระบบจะมีการแจ้งให้ท่านทราบในขั้นตอนการถอนทุกครั้งและค่าธรรมเนียมนี้ระบบอาจมีการเปลี่ยนแปลงในภายหลังโดยไม่ต้องแจ้งให้ท่านทราบก่อนล่วงหน้า</p>
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>

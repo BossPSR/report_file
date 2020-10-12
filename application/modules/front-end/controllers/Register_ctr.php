@@ -29,6 +29,7 @@ class Register_ctr extends CI_Controller
 		$countries           = $this->input->post('countries');
 		$username            = $this->input->post('username');
 		$lastname            = $this->input->post('lastname');
+		$email_lang          = $this->input->post('email_lang');
 		$email               = $this->input->post('email');
 		$phone               = $this->input->post('phone');
 		$c_password          = $this->input->post('c_password');
@@ -63,6 +64,8 @@ class Register_ctr extends CI_Controller
 				'email'             => $email,
 				'phone'             => $phone,
 				'username'          => $username,
+				'lastname_user'     => $lastname,
+				'email_lang_user'   => $email_lang,
 				'password'          => md5($password),
 				'created_at'        => $created_at
 			);

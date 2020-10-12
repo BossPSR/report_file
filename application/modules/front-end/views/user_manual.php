@@ -96,7 +96,7 @@
                                 <div id="accordion" class="card__accordion">
                                     <div class="card card_dipult">
                                         <div class="card-header card_accor" id="headingOne">
-                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: 19px;">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="font-size: 19px;">
                                                 <center>
                                                     ประเภท Order ของเรา?
                                                 </center>
@@ -108,7 +108,7 @@
 
                                         </div>
 
-                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion" style="font-size: 17.5px;">
+                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="font-size: 17.5px;">
                                             <div class="card-body row">
                                                 <div class="col-md-2 "></div>
                                                 <div class="col-md-9 col-sm-12 ">
@@ -160,20 +160,21 @@
 
                                         </div>
                                     </div>
+                                    <?php $check = $this->input->get('update'); ?>
                                     <div class="card  card_dipult">
                                         <div class="card-header card_accor" id="headingThree">
-                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 19px;">
+                                            <button class="btn btn-link <?= $check == '' ? 'collapsed' : ''  ?>" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size: 19px;">
                                                 <center>ขั้นตอนการอัพเดทงาน</center>
                                                 <i class="fa fa-plus"></i>
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
 
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion02" style="font-size: 17.5px;">
+                                        <div id="collapseThree" class="collapse <?= $check == '' ? '' : 'show'  ?>" aria-labelledby="headingThree" data-parent="#accordion02" style="font-size: 17.5px;">
                                             <div class="card-body row">
                                                 <div class="col-md-2 "></div>
                                                 <div class="col-md-8 col-sm-12 ">
-                                                    <p style="line-height: 35px;">ท่านสามารถส่งอัพเดท ความคืบหน้าของงานผ่านทางอีเมล <a href="updatebytutor@gmail.com">updatebytutor@gmail.com</a>  โดยระบุรายละเอียดดังนี้</p>
+                                                    <p style="line-height: 35px;">ท่านสามารถส่งอัพเดท ความคืบหน้าของงานผ่านทางอีเมล <a href="mailto:updatebytutor@gmail.com">updatebytutor@gmail.com</a>  โดยระบุรายละเอียดดังนี้</p>
                                                     <p style="line-height: 35px;">1. รหัสประจำตัว TN…..</p>
                                                     <p style="line-height: 35px;">2. รหัสOrder ODN…..</p>
                                                     <p style="line-height: 35px;">3. ตั้งชื่อไฟล์ว่า Update1</p>

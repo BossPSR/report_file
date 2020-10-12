@@ -350,7 +350,7 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                             -
                                         <?php } ?>
                                     </td>
-                                    
+
                                     <td>
                                         <?php if (!empty($stock['uptnote'])) { ?>
                                             <a href="#" data-toggle="modal" data-target="#NOTE<?php echo $cvv++; ?>" style="color:#19baea;font-size:18px;"><i class="fa fa-search"></i></a>
@@ -700,6 +700,28 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="noteupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
+                                                        <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือนจากระบบ</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p style="font-size: 18px;">"ท่านต้องส่ง Update งานภายในวันพรุ่งนี้ก่อนเวลาเที่ยงคืน ไม่เช่นนั้น Order ของท่านจะถูกยกเลิกทันที"</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="user-manual?update=1" target="_blank"> อ่านชั้นตอนการส่ง Update งาน </a> <br>
+                                                        <button type="button" class="btn btn-success" id="nextstep<?php echo $stock['mms']; ?>">ยืนยัน</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <script>
                                             $('#cf<?php echo $stock['mms']; ?>').click(function() {
                                                 swal({
@@ -726,11 +748,15 @@ $tip  = $this->db->get_where('tbl_item_position', ['id' => $item])->row_array();
 
                                                                 $('#exampleModalCF').modal('show')
                                                                 $("#close_doc").click(function() {
-                                                                    $('#myModal').modal('hide');
-                                                                    swal("Good job!", "Upload for data successfull", "success", {
-                                                                        button: false,
+                                                                    $('#exampleModalCF').modal('hide');
+                                                                    $('#cfmodal<?php echo $stock['mms']; ?>').modal('hide');
+                                                                    $('#noteupdate').modal('show');
+                                                                    $("#nextstep<?php echo $stock['mms']; ?>").click(function() {
+                                                                        swal("สำเร็จ", "คุณได้ทำการรับงานเรียบร้อยแล้ว", "success", {
+                                                                            button: false,
+                                                                        });
+                                                                        setTimeout("location.reload(true);", 1000);
                                                                     });
-                                                                    setTimeout("location.reload(true);", 1000);
                                                                 });
                                                             }
                                                         });

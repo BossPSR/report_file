@@ -315,14 +315,14 @@
             <div class="col-lg-10 col-md-10">
                 <div class="account_form register">
                     <h2 class="text-center">สมัครเป็นติวเตอร์</h2>
-                    <h4 style="font-size: 18px;" class="text-center">ข้อมูลทุกส่วนมีผลต่อการโอนจ่ายรายได้ของติวเตอร์</h4>
-                    <h4 style="font-size: 18px;" class="text-center">กรุณาให้ข้อมูลตามความจริง</h4>
+                    <h4 style="font-size: 18px;" class="text-center red">ข้อมูลทุกส่วนมีผลต่อการโอนจ่ายรายได้ของติวเตอร์</h4>
+                    <h4 style="font-size: 18px;" class="text-center red">กรุณาให้ข้อมูลตามความจริง</h4>
                     <form action="register-team-success" method="POST" id="myLogin" enctype="multipart/form-data">
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>เลือกประเทศ <span style="color: #9c9c9c;">เลือกประเทศที่คุณอาศัยอยู่ในปัจจุบัน *</span></label>
+                                    <label>เลือกประเทศที่คุณอาศัยอยู่ในปัจจุบัน <span style="color: #9c9c9c;"> *</span></label>
                                     <select class="form-control" name="countries" id="cs">
                                         <option selected disabled>-- กรุณาเลือกประเทศ --</option>
                                         <?php foreach ($countries as $key => $countries) { ?>

@@ -47,4 +47,13 @@ class User_manual_ctr extends CI_Controller
         $this->load->view('policy', $data);
         $this->load->view('options/footer');
     }
+
+    public function contact()
+    {
+        $data['user'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['team'] = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->view('options/header_login');
+        $this->load->view('contact', $data);
+        $this->load->view('options/footer');
+    }
 }

@@ -12,6 +12,7 @@ $route['update_session']            = 'front-end/Login_ctr/update_session';
 $route['user-manual']               = 'front-end/User_manual_ctr';
 $route['condition']                 = 'front-end/User_manual_ctr/condition';
 $route['policy']                    = 'front-end/User_manual_ctr/policy';
+$route['contact']                   = 'front-end/User_manual_ctr/contact';
 $route['loginme']                   = 'front-end/Login_ctr/loginMe';
 $route['Logout']                    = 'front-end/Login_ctr/logout';
 $route['forget_password']           = 'front-end/Register_ctr/forget_password';

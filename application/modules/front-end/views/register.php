@@ -29,13 +29,13 @@
                 <div class="col-lg-10 col-md-8">
                     <div class="account_form register">
                         <h2 style="text-align: center;">สมัครเป็นผู้เรียน</h2>
-                        <h4 style="font-size: 18px;" class="text-center">ข้อมูลทุกส่วนมีผลต่อการโอนจ่ายรายได้ค่าแนะนำ</h4>
-                        <h4 style="font-size: 18px;" class="text-center">กรุณาให้ข้อมูลตามความจริง</h4>
+                        <h4 style="font-size: 18px;" class="text-center red">ข้อมูลทุกส่วนมีผลต่อการโอนจ่ายรายได้ค่าแนะนำ</h4>
+                        <h4 style="font-size: 18px;" class="text-center red">กรุณาให้ข้อมูลตามความจริง</h4>
                         <form action="register_success" method="POST" name="thisForm">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>เลือกประเทศ <span style="color: #9c9c9c;">เลือกประเทศที่คุณอาศัยอยู่ในปัจจุบัน *</span></label>
+                                    <label>เลือกประเทศที่คุณอาศัยอยู่ในปัจจุบัน <span style="color: #9c9c9c;"> *</span></label>
                                     <!-- <input type="number" name="passport" required> -->
                                     <select class="form-control" name="countries" required>
                                         <option selected disabled>-- เลือกประเทศ --</option>
@@ -48,22 +48,22 @@
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>ชื่อ <span style="color: #9c9c9c;">*</span></label>
-                                    <input type="text" name="username" required>
+                                    <label>ชื่อ - ภาษาไทย <span style="color: #9c9c9c;">*</span></label>
+                                    <input type="text" name="username" value="" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>นามสกุล <span style="color: #9c9c9c;">*</span></label>
-                                    <input type="text" name="last_name" required>
+                                    <label>นามสกุล - ภาษาไทย <span style="color: #9c9c9c;">*</span></label>
+                                    <input type="text" name="last_name" value="" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label>อีเมล์ <span style="color: #9c9c9c;">*</span></label>
-                                    <input type="email" name="email" required>
+                                    <input type="email" name="email" value="" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -91,6 +91,20 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1"><a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a></span>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="">คุณต้องการรับอีเมล์แจ้งเตือนออร์เดอร์ด้วยภาษาใด <span style="color: #bbbbbb;"></span></label>
+                                    <br>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customRadioInline1" name="email_lang" class="custom-control-input" value="1" required checked>
+                                        <label class="custom-control-label" for="customRadioInline1" style="line-height: 24px;margin-bottom: 0px;"> Thai </label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customRadioInline2" name="email_lang" class="custom-control-input" value="2">
+                                        <label class="custom-control-label" for="customRadioInline2" style="line-height: 24px;margin-bottom: 0px;"> English </label>
                                     </div>
                                 </div>
                             </div>

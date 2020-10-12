@@ -35,6 +35,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
     <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+    <!-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> -->
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -319,7 +321,7 @@
                                                     <!-- <li style="margin: 5px 10px;"><a href="teamOffline"><i class="fa fa-circle" style="color:#b6b6b6;"></i> Offline</a></li> -->
                                                 </ul>
                                         </li>
-                                        <li><a style="color: white;" href="My-profile_team"> <?php echo $team['IdTeam']; ?> </a> <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 35px;height: 35px;"></li>
+                                        <li><a style="color: white;" href="My-profile_team"> <?php echo $team['IdTeam']; ?> </a> <img class="profile" src="<?php echo (file_exists($team['file_name'])) ?  $team['file_name'] : "public/image/user.png"; ?>" alt="" style="width: 35px;height: 35px;"></li>
                                         <li><a style="color: white;" href="Logout?team=team" onclick="return confirm('Are you sure to logout?');"> ออกจากระบบ </a></li>
                                     <?php else :  ?>
                                         <li><a style="color: white;" href="#exampleModalCenter" data-toggle="modal"> เข้าสู่ระบบ </a></li>
@@ -394,11 +396,8 @@
                                   , "1.มีสิทธิ์เลือกชิ้นงานก่อน" , "2.ได้รับเรทค่าตอบแทนที่สูงกว่า" , "3.มีรายได้ที่มั่นคงกว่า" , "4.ได้รับรางวัลโบนัสพิเศษจากทางบริษัท" 
                                   , "5.มีสิทธิ์ได้รับเลือกเป็นทีมงาน Admin ของบริษัท"]
                                     <?php else : ?>
-                                        [ "รับค่าคอมมิชชั่นง่ายๆสูงสุด $40", "รับส่วนลดง่ายๆเพียงแค่กดปุ่ม Earn point",
-                                 "ปลอดภัย 100% ด้วยระบบ Wallet ป้องกันการถูกโกง", "ทีมงานติวเตอร์ทุกท่านเป็นผู้เชี่ยวชาญ",
-                                  "รับประกันการแก้ไขงานนานถึง 60 วัน" , "สะสมคะแนนรับส่วนลดแบบไม่มีวันหมดอายุ" , "ราคามาตราฐาน" ]
+                                        [ "ทำไมต้องเป็น www.tutorlearner.com" , "1. ฟรีวีดีโออธิบายจากติวเตอร์ " , "2. ฟรีตรวจเช็คการคัดลอดข้อมูลจากอินเตอร์เน็" , "3. รับค่าแนะนำสูงสุด 40 ดอลล่าร์สหรัฐ" , "4. ปลอดภัย100% ด้วยระบบWallet ป้องกันการถูกโกง" , "5. ระบบหักเงินหลังจากผู้เรียนหลังได้รับออรเดอร์แล้วเท่านั้น" , "6. ทีมงานติวเตอร์ทุกท่านผ่านการคัดกรองอย่างละเอียด" , "7. รับประกันการแก้ไขงานให้คำปรึกษานานถึง 60 วัน" , "8. สะสมคะแนนรับส่วนลดแบบไม่มีวันหมดอายุ" , "9. ราคามาตรฐาน"   ]
                                     <?php endif; ?>
-                             
                                   '></span>
                             </h1>
                         </div>
@@ -535,7 +534,14 @@
                                             <li>
                                                 <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
+                                            <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-commission') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="my-commission">ค่าคอมมิชชั่น <i class="fa fa-angle-right"></i></a></li>
+                                            <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-cashback') {
+                                                                                        echo 'active';
+                                                                                    } ?>" href="my-cashback">ได้รับเงินคืน <i class="fa fa-angle-right"></i></a></li>
                                             <li><a href="my-rewards"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
+                                            <li><a href="contact"> ติดต่อเรา <i class="fa fa-angle-right"></i></a></li>
 
 
                                         <?php elseif ($team) : ?>
@@ -543,12 +549,18 @@
                                                 <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
                                             <li><a href="my-rewards-team"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
+                                            <li><a href="contact"> ติดต่อเรา <i class="fa fa-angle-right"></i></a></li>
+
 
                                         <?php else : ?>
                                             <li>
                                                 <a href="user-manual"> คู่มือการใช้งาน <i class="fa fa-angle-right"></i></a>
                                             </li>
+                                            <li><a style="font-size: 20px;" class="" ><i class="fa fa-angle-right"></i> ค่าคอมมิชชั่น</a></li>
+                                            <li><a style="font-size: 20px;" class=""><i class="fa fa-angle-right"></i> ได้รับเงินคืน</a></li>
                                             <li><a href="my-rewards"> รางวัลของฉัน <i class="fa fa-angle-right"></i></a></li>
+                                            <li><a href="contact"> ติดต่อเรา <i class="fa fa-angle-right"></i></a></li>
+
 
                                         <?php endif ?>
                                     </ul>
@@ -579,15 +591,11 @@
                                                     <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-selling') {
                                                                                                 echo 'active';
                                                                                             } ?>" href="my-selling">ได้รับคะแนน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-cashback') {
+
+                                                    <!-- <li><a style="font-size: 20px;" class=" if ($this->uri->segment(1) == 'my-rewards-list') {
                                                                                                 echo 'active';
-                                                                                            } ?>" href="my-cashback">ได้รับเงินคืน</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-rewards-list') {
-                                                                                                echo 'active';
-                                                                                            } ?>" href="my-rewards-list">ได้รับรางวัล</a></li>
-                                                    <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-commission') {
-                                                                                                echo 'active';
-                                                                                            } ?>" href="my-commission">ค่าคอมมิชชั่น</a></li>
+                                                                                            } ?>" href="my-rewards-list">ได้รับรางวัล</a></li> -->
+
                                                     <li><a style="font-size: 20px;" class="<?php if ($this->uri->segment(1) == 'my-deduct') {
                                                                                                 echo 'active';
                                                                                             } ?>" href="my-deduct">ถูกหักคะแนน</a></li>

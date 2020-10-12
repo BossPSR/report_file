@@ -32,13 +32,13 @@
                     <div class="image_profile">
                         <h2 class="text-center my-income">
                             <div class="name_user m17"> <i class="fa fa-user" style="color: #282390;"></i>
-                                <!-- $this->lang->line("name"); ?>  --> <span style="font-size: 26px;">ชื่อของฉัน</span>
-                                : <?php echo $user['username']; ?></div>
+                                <!-- $this->lang->line("name"); ?>  --> <span style="font-size: 26px;"></span>
+                                : <?php echo $user['username'].' '.$user['lastname_user']; ?></div>
                         </h2>
 
                         <?php $p = $this->db->get_where('tbl_package', ['id' => $user['package_user']])->row_array(); ?>
                         <?php if ($p == true) : ?>
-                            <h2 class="text-center my-income" style="color: #40a6ff;font-size: 20px;">
+                            <h2 class="text-center my-income" style="color: #0063d1;font-size: 20px;">
                                 <div> <span style="color:#7b7b7b">ชื่อแพ็คเกจของฉัน </span> : <?php echo $p['title_pk']; ?></div>
                                 <div> <span style="color:#7b7b7b">ระยะเวลาแพ็คเกจ </span> : <?php echo date("d F Y", strtotime($user['package_start'])); ?> - <?php echo date("d F Y", strtotime($user['package_end'])); ?></div>
                             </h2>
@@ -75,34 +75,24 @@
                     <div class="single_banner menu_profileList">
                         <div class="menu_profileRow">
                             <div class="result_list_menu">
-                                <div class="result_menu"><?php echo number_format($user['score']); ?></div>
-                                <div class="list_menu">คะแนนสะสม</div>
+                                <div class="result_menu">  0 </div>
+                                <div class="list_menu">ออร์เดอร์ของฉัน</div>
                             </div>
                             <div class="result_list_menu">
                                 <div class="result_menu">
                                     <?php
-                                    $numScore = 0;
-
                                     $this->db->select('*');
                                     $this->db->from('tbl_user');
                                     $this->db->where('idUser', $user['idUser']);
-                                    $numScore = 0;
-                                    $scoreListNum = $this->db->get()->result_array();
-                                    foreach ($scoreListNum as $scoreListNum) {
-                                        $numScore += $scoreListNum['score'];
-                                    }
-
-                                    $discountUser = $user['score'] / 10;
                                     ?>
-                                    <?php echo $discountUser; ?>%
-
+                                   
                                 </div>
-                                <div class="list_menu">ส่วนลด</div>
+                                <div class="result_menu">0</div>
+                                <div class="list_menu">กำลังดำเนินการ</div>
                             </div>
 
                             <?php
                             $numUp = 0;
-                            $this->db->select('*');
                             $this->db->from('tbl_upload_order');
                             $this->db->where('userId', $user['idUser']);
                             $this->db->where('is_check', 0);
@@ -115,7 +105,7 @@
 
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($numUp); ?></div>
-                                <div class="list_menu">ข้อมูลออร์เดอร์</div>
+                                <div class="list_menu">เรียบร้อยแล้ว</div>
                             </div>
 
                             <?php
@@ -123,14 +113,12 @@
                             $this->db->where('is_check', 0);
                             $this->db->group_by('store_id');
                             $cost = $this->db->get_where('tbl_upload_store', ['userId' => $user['idUser']])->result_array();
-                            foreach ($cost as $cost) {
-                                $numCost += 1;
-                            }
+                         
                             ?>
 
                             <div class="result_list_menu">
                                 <div class="result_menu"><?php echo number_format($numCost); ?></div>
-                                <div class="list_menu">ข้อมูลคะแนน</div>
+                                <div class="list_menu">กำลังแก้ไข</div>
                             </div>
                         </div>
                         <!-- <div class="menu_profileRow"></div>  -->

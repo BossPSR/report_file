@@ -33,10 +33,11 @@
                         <h2 class="text-center my-income">
                             <div class="name_user m17"><i class="fa fa-user" style="color: #282390;"></i>
                                 <!-- $this->lang->line("name"); ?> -->
-                                : <?php echo $team['name']; ?></div>
+                                : <?php echo $team['title_name'].' '. $team['name'].' '. $team['lastname_user']; ?></div>
                         </h2>
+
                         <div class="image_PF">
-                            <a href="#exampleModalCenter1" data-toggle="modal"><img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  "$team[file_name]"; ?>" alt=""></a>
+                            <a href="#exampleModalCenter1" data-toggle="modal"><img class="profile" src="<?php echo (file_exists($team['file_name'])) ? $team['file_name'] :  "public/image/user.png"; ?>" alt=""></a>
                             <div class="to" data-toggle="modal" data-target="#photocheck">
                                 <i class="fa fa-camera" aria-hidden="true" style="font-size: 24px;padding-top: 8px;"></i>
                             </div>
@@ -69,16 +70,16 @@
                             $sumto = $this->db->get()->row_array();
                             ?>
 
-                            <div class="result_list_menu">
+                            <!-- <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?php if ($sumto['country_id'] == '218') : ?>
-                                        <?= $sumto['income_thai'] ?>
-                                    <?php else : ?>
-                                        <?= $sumto['income'] ?>
-                                    <?php endif; ?>
+                                     if ($sumto['country_id'] == '218') : ?>
+                                         $sumto['income_thai'] ?>
+                                     else : ?>
+                                         $sumto['income'] ?>
+                                    endif; ?>
                                 </div>
                                 <div class="list_menu">My Income</div>
-                            </div>
+                            </div> -->
 
                             <?php
                             $this->db->select('*');
@@ -89,19 +90,15 @@
 
                             $this->db->group_by('tbl_upload_order.order_id');
 
-
                             $sm_del = $this->db->get()->result_array();
-                            $sumto2 = 0;
-                            foreach ($sm_del as $key => $sm_del) {
-                                $sumto2 += 1;
-                            }
+                           
                             ?>
-                            <div class="result_list_menu">
+                            <!-- <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?= $sumto2 ?>
+                                     $sumto2 ?>
                                 </div>
                                 <div class="list_menu">My Job</div>
-                            </div>
+                            </div> -->
 
                             <?php
                             $this->db->select('*');
@@ -112,17 +109,14 @@
                             $this->db->group_by('tbl_upload_order.order_id');
 
                             $sm_de3 = $this->db->get()->result_array();
-                            $sumto3 = 0;
-                            foreach ($sm_de3 as $key => $sm_de3) {
-                                $sumto3 += 1;
-                            }
+                          
                             ?>
-                            <div class="result_list_menu">
+                            <!-- <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?= $sumto3 ?>
+                                    $sumto3 ?>
                                 </div>
                                 <div class="list_menu">My Appover</div>
-                            </div>
+                            </div> -->
 
                             <?php
                             $this->db->select('* , tbl_upload_team.status ts');
@@ -141,7 +135,7 @@
                                 <div class="result_menu">
                                     <?= $sumto4 ?>
                                 </div>
-                                <div class="list_menu">My feedback</div>
+                                <div class="list_menu">จำนวนงานแก้ไข</div>
                             </div>
 
                             <?php
@@ -152,16 +146,16 @@
                             $sm_de5 = $this->db->get()->row_array();
 
                             ?>
-                            <div class="result_list_menu">
+                            <!-- <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?php if ($sm_de5['team_score']) : ?>
-                                        <?php echo $sm_de5['team_score']; ?>
-                                    <?php else : ?>
+                                     if ($sm_de5['team_score']) : ?>
+                                         echo $sm_de5['team_score']; ?>
+                                     else : ?>
                                         0
-                                    <?php endif; ?>
+                                     endif; ?>
                                 </div>
                                 <div class="list_menu">My Score</div>
-                            </div>
+                            </div> -->
 
                             <?php
                             $this->db->select('*,tbl_upload_team.wage wg');
@@ -174,17 +168,14 @@
                             $this->db->group_by('tbl_upload_order.order_id');
 
                             $sm_de6 = $this->db->get()->result_array();
-                            $sumto6 = 0;
-                            foreach ($sm_de6 as $key => $sm_de6) {
-                                $sumto6 = $sm_de6['wg'];
-                            }
+                            
                             ?>
-                            <div class="result_list_menu">
+                            <!-- <div class="result_list_menu">
                                 <div class="result_menu">
-                                    <?= $sumto6; ?>
+                                     $sumto6; ?>
                                 </div>
                                 <div class="list_menu">My withdraw</div>
-                            </div>
+                            </div> -->
 
                             <?php
                             $this->db->select('*,tbl_upload_team.wage wg');
@@ -206,7 +197,7 @@
                                 <div class="result_menu">
                                     <?= $sumto6; ?>
                                 </div>
-                                <div class="list_menu">My cancel</div>
+                                <div class="list_menu">ฉันยกเลิกแล้ว</div>
                             </div>
 
                         </div>
