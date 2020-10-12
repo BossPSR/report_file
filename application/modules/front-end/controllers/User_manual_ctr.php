@@ -29,4 +29,22 @@ class User_manual_ctr extends CI_Controller
 
         echo $query;
     }
+
+    public function condition()
+    {
+        $data['user'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['team'] = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->view('options/header_login');
+        $this->load->view('condition', $data);
+        $this->load->view('options/footer');
+    }
+
+    public function policy()
+    {
+        $data['user'] = $this->db->get_where('tbl_user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['team'] = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->view('options/header_login');
+        $this->load->view('policy', $data);
+        $this->load->view('options/footer');
+    }
 }

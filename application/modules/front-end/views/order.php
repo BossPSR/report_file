@@ -747,7 +747,7 @@
                                             <?php if ($N_count['od'] >= 3 || $DateT > $value['end_time']) { ?>
 
                                                 <?php if ($value['status_delivery'] == 1) { ?>
-                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Not Approve (ไม่อนุมัติ)">ไม่ผ่านคุณภาพ</button>
+                                                    <button type="button" class="btn" style="background-color: #ff6b75;border-color: #ff5d67;" data-toggle="modal" data-target="#order_not_approved<?php echo $value['ORD']; ?>" data-toggled="tooltip" data-placement="top" title="Not Approve (ไม่อนุมัติ)">ไม่ผ่านคุณภาพ</button>
                                                 <?php } else { ?>
                                                     <!-- <button type="button" class="btn btn-secondary" data-toggled="tooltip" data-placement="top" title="Not Approved (ไม่อนุมัติ)">ไม่ผ่านคุณภาพ</button> -->
                                                 <?php } ?>

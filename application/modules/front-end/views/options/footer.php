@@ -5,15 +5,19 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 col-md-12 text-center">
-                        <span style="font-size: 28px;margin-bottom: 10px;">Welcome to </span> <a href="" style="color: #0076f1;"> <span style="font-size: 20px;margin-bottom: 10px;">www.tutorlearner.com</span> </a>
-                        <!-- <div style="font-size: 24px;"></div> -->
+                    <span style="font-size: 28px;margin-bottom: 10px;">Welcome to </span> <a href="" style="color: #0076f1;"> <span style="font-size: 20px;margin-bottom: 10px;">www.tutorlearner.com</span> </a>
+                    <!-- <div style="font-size: 24px;"></div> -->
                 </div>
+               
                 <div class="col-lg-12 col-md-12 text-center mt-30">
-                    <div class="copyright_area">
+                    <div class="copyright_area" style="line-height: 35px;">
                         <div style="font-size: 18px;">Everytime we can learn</div>
                         <div style="font-size: 18px;">Anytime we can earn money</div>
+                        <div style="font-size: 18px;"><a href="condition">เงื่อนไขการใช้บริการ</a> </div>
+                        <div style="font-size: 18px;"><a href="policy">นโยบายความเป็นส่วนตัว</a></div>
                     </div>
                 </div>
+               
 
             </div>
         </div>

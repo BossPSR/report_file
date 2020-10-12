@@ -210,8 +210,7 @@
     }
 
     .iop2 {
-        margin-top: 15px;
-        margin-bottom: 15px;
+        margin-bottom: 25px;
         font-size: 22px;
         line-height: 50px;
 
@@ -381,18 +380,53 @@
             <?php else : ?>
                 <hr style="border-bottom: 1px solid white;">
 
-                <div class="col-lg-12 col-md-12 mt-5">
-                    <div class="funfact text-white">
-                        <h3 class=" font-weight-400 mt-0 mb-15"> ปุ่มเครื่องมือที่จำเป็นหน้า “ออร์เดอร์ของฉัน” </h3>
-                        <h5 class="iop2">• ปุ่ม <img src="public/frontend/assets/img/button/1.png" alt="" style="width: 160px;"> คือ ปุ่มสำหรับผู้เรียนที่ต้องการใช้ส่งข้อมูลเพิ่มเติมให้กับติวเตอร์ เช่น ตัวอย่างงาน Guideline, ตารางTemplate, PowerPoint
-                            (ต้องไม่ใช่คำสั่งงานใหม่ที่เพิ่มเข้ามา)
-                        </h5>
-                        <h5 class="iop2">• ปุ่ม <img src="public/frontend/assets/img/button/2.png" alt="" style="width: 138px;"> คือ ปุ่มสำหรับผู้เรียนที่ต้องการแก้ไขงานหรือขอคำปรึกษาเพิ่มเติม โดยสามารถกดปุ่มดังกล่าวได้ 3 ครั้ง ภายใน 60 วัน</h5>
-                        <h5 class="iop2">• ปุ่ม <img src="public/frontend/assets/img/button/3.png" alt="" style="width: 139px;"> คือ ปุ่มสำหรับผู้เรียนที่แก้ไขงานหรือขอคำปรึกษาครบ 3 ครั้งแล้ว หรือประกันหมดอายุ 60 วันแล้ว แต่ต้องการแก้ไขงานหรือขอคำปรึกษาเพิ่มเติมจากติวเตอร์ (คิดค่าบริการเพิ่ม 50% ของราคา Order เดิม)</h5>
-                        <h5 class="iop2">• ปุ่ม <img src="public/frontend/assets/img/button/4.png" alt="" style="width: 100px;"> คือ ปุ่มสำหรับผู้เรียนที่พึงพอใจในบริการโดยไม่ต้องการแก้ไขหรือขอคำปรึกษาใด ๆ เพิ่มเติมแล้ว สามารถกดปุ่มให้ดาวและ Comment ให้กับติวเตอร์</h5>
-                        <h5 class="iop2">• ปุ่ม Unsatisfactory คือ ปุ่มสำหรับผู้เรียนที่ไม่พึงพอใจในบริการ สามารถกดปุ่มให้ดาวและ Comment ให้กับติวเตอร์</h5>
+                <div class="col-lg-2 col-md-12 mt-5"></div>
+                <div class="col-lg-8 col-md-12 mt-5">
+                    <div class="text-white row">
+                        <div class="col-12">
+                            <h3 class=" font-weight-400 mt-0 mb-30 text-center"> ปุ่มเครื่องมือที่จำเป็นหน้า “ออร์เดอร์ของฉัน” </h3>
+                        </div>
+                        <div class="col-12 col-lg-2 ">
+                            <button type="button" class="btn btn-info" data-toggled="tooltip" data-placement="top" title="More File (ส่งข้อมูลเพิ่มเติม)"><i class="fa fa-plus-square" aria-hidden="true"></i> ส่งข้อมูลเพิ่มเติม</button>
+                        </div>
+                        <div class="col-12 col-lg-10">
+                            <h5 class="iop2">
+                                คือ ปุ่มสำหรับผู้เรียนที่ต้องการใช้ส่งข้อมูลเพิ่มเติมให้กับติวเตอร์ เช่น ตัวอย่างงาน Guideline, ตารางTemplate, PowerPoint
+                                (ต้องไม่ใช่คำสั่งงานใหม่ที่เพิ่มเข้ามา)
+                            </h5>
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <button type="button" class="btn btn-warning" data-toggled="tooltip" data-placement="top" title="Feedback (แก้ไขงาน)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> แก้ไขงาน
+                                <span class="badge badge-light"> 1</span>
+                            </button>
+                        </div>
+                        <div class="col-12 col-lg-10">
+                            <h5 class="iop2"> คือ ปุ่มสำหรับผู้เรียนที่ต้องการแก้ไขงานหรือขอคำปรึกษาเพิ่มเติม โดยสามารถกดปุ่มดังกล่าวได้ 3 ครั้ง ภายใน 60 วัน</h5>
+                        </div>
+
+                        <div class="col-12 col-lg-2">
+                            <button type="button" class="btn btn-danger" data-toggled="tooltip" data-placement="top" title="Re Feedback (แก้ไขงาน)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> แก้ไขงานเพิ่ม </button>
+                        </div>
+                        <div class="col-12 col-lg-10">
+                            <h5 class="iop2"> คือ ปุ่มสำหรับผู้เรียนที่แก้ไขงานหรือขอคำปรึกษาครบ 3 ครั้งแล้ว หรือประกันหมดอายุ 60 วันแล้ว แต่ต้องการแก้ไขงานหรือขอคำปรึกษาเพิ่มเติมจากติวเตอร์ (คิดค่าบริการเพิ่ม 50% ของราคา Order เดิม)</h5>
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <button type="button" class="btn btn-success" data-toggled="tooltip" data-placement="top" title="Approved (อนุมัติ)"><i class="fa fa-check" aria-hidden="true"></i> อนุมัติ</button>
+                        </div>
+                        <div class="col-12 col-lg-10">
+                            <h5 class="iop2"> คือ ปุ่มสำหรับผู้เรียนที่พึงพอใจในบริการโดยไม่ต้องการแก้ไขหรือขอคำปรึกษาใด ๆ เพิ่มเติมแล้ว สามารถกดปุ่มให้ดาวและ Comment ให้กับติวเตอร์</h5>
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <button type="button" class="btn" style="background-color: #ff6b75;border-color: #ff5d67;" data-toggled="tooltip" data-placement="top" title="Not Approved (ไม่ผ่านคุณภาพ)"><i class="fa fa-times" aria-hidden="true"></i> ไม่ผ่านคุณภาพ</button>
+                        </div>
+                        <div class="col-12 col-lg-10">
+                            <h5 class="iop2"> คือ ปุ่มสำหรับผู้เรียนที่ไม่พึงพอใจในบริการ สามารถกดปุ่มให้ดาวและ Comment ให้กับติวเตอร์</h5>
+                        </div>
+
                     </div>
                 </div>
+                <div class="col-lg-2 col-md-12 mt-5"></div>
+
             <?php endif; ?>
 
 
