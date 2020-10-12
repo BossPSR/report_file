@@ -32,19 +32,52 @@ class My_team_ctr extends CI_Controller
 			$id 			= $this->input->post('id');
 			$name			= $this->input->post('name');
 			$phone			= $this->input->post('phone');
-			$country		= $this->input->post('country');
+			// $country		= $this->input->post('country');
 			$bank_account	= $this->input->post('bank_account');
+			$line			= $this->input->post('line');
+			$bank_name		= $this->input->post('bank_name');
+			$bank_number 	= $this->input->post('bank_number');
+			$bookbank		= $this->input->post('bookbank'); // รูปเลขบัญชี bookbank
 			$password		= $this->input->post('password');
 			$oldpassword	= $this->input->post('oldpassword');
 			$c_password		= $this->input->post('c_password');
 
 			$team = $this->db->get_where('tbl_team', ['email' => $this->session->userdata('email')])->row_array();
 
+			// |xlsx|pdf|docx
+			$config['upload_path'] =  'uploads/bookbank/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size']     = '200480';
+			$config['max_width'] = '5000';
+			$config['max_height'] = '5000';
+			$name_file = "bookbank-" . time();
+			$config['file_name'] = $name_file;
+
+			$this->upload->initialize($config);
+
+			$editdata = array();
+
+			if ($_FILES['bookbank']['name']) {
+				if ($this->upload->do_upload('bookbank')) {
+
+					$gamber     = $this->upload->data();
+
+					$editdata = array(
+						'file_name_bookbank'         => 'uploads/bookbank/' . $gamber['file_name'],
+					);
+
+					$this->db->where('id', $id);
+					$this->db->update('tbl_team', $editdata);
+				}
+			}
+
+
 			if ($password == '' && $c_password == '') {
 				$data = array(
-					'name'				=> $name,
+					'line'				=> $line,
+					'bank_name'			=> $bank_name,
+					'bank_number'		=> $bank_number,
 					'phone'				=> $phone,
-					'country_id'		=> $country,
 					'bank_account'		=> $bank_account,
 				);
 			} elseif (md5($oldpassword) != $team['password']) {
@@ -54,8 +87,9 @@ class My_team_ctr extends CI_Controller
 			} elseif ($password == $c_password) {
 				$data = array(
 					'phone'				=> $phone,
-					'name'				=> $name,
-					'country_id'		=> $country,
+					'line'				=> $line,
+					'bank_name'			=> $bank_name,
+					'bank_number'		=> $bank_number,
 					'bank_account'		=> $bank_account,
 					'password'			=> md5($password)
 				);
@@ -63,6 +97,7 @@ class My_team_ctr extends CI_Controller
 				$this->session->set_flashdata('error_pass', 'Password incorrect.Try again!!.');
 				redirect('My-profile_team');
 			}
+
 			$this->db->where('id', $id);
 			if ($this->db->update('tbl_team', $data)) {
 				$this->session->set_flashdata('success_pro', 'Successfull.Change for my profile.');
@@ -103,7 +138,7 @@ class My_team_ctr extends CI_Controller
 						'file_name'         => 'public/frontend/assets/img/profile/' . $gamber['file_name'],
 					);
 
-							   $this->db->where('id', $id);
+					$this->db->where('id', $id);
 					$success = $this->db->update('tbl_team', $editdata);
 				}
 			}

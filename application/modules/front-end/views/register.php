@@ -29,11 +29,13 @@
                 <div class="col-lg-10 col-md-8">
                     <div class="account_form register">
                         <h2 style="text-align: center;">สมัครเป็นผู้เรียน</h2>
+                        <h4 style="font-size: 18px;" class="text-center">ข้อมูลทุกส่วนมีผลต่อการโอนจ่ายรายได้ค่าแนะนำ</h4>
+                        <h4 style="font-size: 18px;" class="text-center">กรุณาให้ข้อมูลตามความจริง</h4>
                         <form action="register_success" method="POST" name="thisForm">
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>เลือกประเทศ <span class="red">*</span></label>
+                                    <label>เลือกประเทศ <span style="color: #9c9c9c;">เลือกประเทศที่คุณอาศัยอยู่ในปัจจุบัน *</span></label>
                                     <!-- <input type="number" name="passport" required> -->
                                     <select class="form-control" name="countries" required>
                                         <option selected disabled>-- เลือกประเทศ --</option>
@@ -46,33 +48,33 @@
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>ชื่อ <span class="red">*</span></label>
+                                    <label>ชื่อ <span style="color: #9c9c9c;">*</span></label>
                                     <input type="text" name="username" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>นามสกุล <span class="red">*</span></label>
+                                    <label>นามสกุล <span style="color: #9c9c9c;">*</span></label>
                                     <input type="text" name="last_name" required>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>อีเมล์ <span class="red">*</span></label>
+                                    <label>อีเมล์ <span style="color: #9c9c9c;">*</span></label>
                                     <input type="email" name="email" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>หมายเลขโทรศัพท์ <span class="red">* (Should not wear a special symbol /*-+\)</span> </label>
+                                    <label>หมายเลขโทรศัพท์ <span style="color: #9c9c9c;"> (Should not wear a special symbol /*-+\) *</span> </label>
                                     <input type="number" name="phone" required>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>รหัสผ่าน <span class="red"> Please enter a password of at least 8 characters. *</span></label>
+                                    <label>รหัสผ่าน <span style="color: #9c9c9c;"> Please enter a password of at least 8 characters. *</span></label>
                                     <div class="input-group mb-3" id="show_hide_password">
                                         <input type="password" id="password" name="password" onblur="check();" minlength="8" class="form-control" aria-describedby="basic-addon1" required>
                                         <div class="input-group-prepend">
@@ -83,7 +85,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label>ยืนยันรหัสผ่าน <span class="red">*</span><span id="message"></span></label>
+                                    <label>ยืนยันรหัสผ่าน <span style="color: #9c9c9c;">*</span><span id="message"></span></label>
                                     <div class="input-group mb-3" id="show_hide_password">
                                         <input type="password" id="c_password" name="c_password" class="form-control" minlength="8" aria-describedby="basic-addon1" required>
                                         <div class="input-group-prepend">

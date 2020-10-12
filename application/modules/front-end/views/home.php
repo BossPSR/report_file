@@ -256,7 +256,7 @@
                     <!--  $this->lang->line("welcometoTutorlearner"); ?> -->
                 </div>
                 <div class="text-white" style="background-color: #292580;width: 70%;padding: 35px 0 35px 0px;font-size: 22px;margin: auto;line-height: 31px;">
-                    <div> เราคือเพลตฟอร์มเว็บไซต์ผู้ให้บริการ </div>
+                    <div> เราคือแพลตฟอร์มเว็บไซต์ผู้ให้บริการ </div>
                     <div> ข่วยเหลือด้านการศึกษาที่มีติวเตอร์ </div>
                     <div> ผู้เชียวชาญในแต่ล่ะสาขาวิชาที่ผ่าน</div>
                     <div> การคัดกรองอย่างละเอียดโดยบริษัท</div>

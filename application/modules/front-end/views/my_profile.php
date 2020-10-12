@@ -35,6 +35,7 @@
                                 <!-- $this->lang->line("name"); ?>  --> <span style="font-size: 26px;">ชื่อของฉัน</span>
                                 : <?php echo $user['username']; ?></div>
                         </h2>
+
                         <?php $p = $this->db->get_where('tbl_package', ['id' => $user['package_user']])->row_array(); ?>
                         <?php if ($p == true) : ?>
                             <h2 class="text-center my-income" style="color: #40a6ff;font-size: 20px;">
@@ -44,7 +45,6 @@
                         <?php else : ?>
 
                         <?php endif; ?>
-
 
                         <div class="image_PF">
                             <img class="profile" src="<?php echo (!isset($user['file_name'])) ? "public/image/user.png" :  $user['file_name']; ?>" alt="">

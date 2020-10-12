@@ -31,9 +31,9 @@
 
                     <div class="image_profile">
                         <h2 class="text-center my-income">
-                            <div class="name_user m17"><i class="fa fa-user"  style="color: #282390;"></i> 
-                            <!-- $this->lang->line("name"); ?> -->
-                             : <?php echo $team['name']; ?></div>
+                            <div class="name_user m17"><i class="fa fa-user" style="color: #282390;"></i>
+                                <!-- $this->lang->line("name"); ?> -->
+                                : <?php echo $team['name']; ?></div>
                         </h2>
                         <div class="image_PF">
                             <a href="#exampleModalCenter1" data-toggle="modal"><img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  "$team[file_name]"; ?>" alt=""></a>
@@ -66,9 +66,7 @@
                             <?php
                             $this->db->from('tbl_team');
                             $this->db->where('IdTeam', $team['IdTeam']);
-
                             $sumto = $this->db->get()->row_array();
-
                             ?>
 
                             <div class="result_list_menu">
@@ -88,7 +86,7 @@
                             $this->db->join('tbl_upload_order', 'tbl_upload_order.order_id = tbl_upload_team.order_id');
                             $this->db->where('tbl_upload_team.teamId', $team['IdTeam']);
                             $this->db->where('tbl_upload_order.status_delivery', 1);
-                            
+
                             $this->db->group_by('tbl_upload_order.order_id');
 
 
@@ -253,7 +251,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+                <h5 class="modal-title" id="exampleModalLabel">เปลี่ยนรูปโปรไฟล์</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -265,13 +263,13 @@
                         <img class="profile" src="<?php echo (empty($team['file_name'])) ? "public/image/user.png" :  $team['file_name']; ?>" alt="" style="width: 150px;height: 150px;">
                     </div>
                     <div class="form-group">
-                        <label for="">Profile</label>
+                        <label for="">รูปโปรไฟล์</label>
                         <input type="file" class="form-control" name="profile" value="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </div>
             </form>
         </div>
@@ -283,55 +281,88 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #e9ecef; border-top:0">
-                <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+                <h5 class="modal-title" id="exampleModalLabel">ข้อมูลส่วนตัว</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="My-profile-team-update" method="POST">
+            <form action="My-profile-team-update" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" name="id" value="<?php echo $team['id']; ?>">
 
                     <div class="form-group">
-                        <label for="">Name</label>
-                        <input type="text" class="form-control" name="name" value="<?php echo $team['name']; ?>" required>
+                        <label for="">ไลน์ไอดี</label>
+                        <input type="text" class="form-control" name="line" value="<?php echo $team['line']; ?>" required>
                     </div>
 
+                    <!-- <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" class="form-control" name="name" value=" echo $team['name']; ?>" required>
+                    </div> -->
+
                     <div class="form-group">
-                        <label for="">Phone</label>
+                        <label for="">เบอร์โทรศัพท์</label>
                         <input type="text" class="form-control" name="phone" value="<?php echo $team['phone']; ?>" required>
                     </div>
-                    <div class="form-group">
+
+                    <!-- <div class="form-group">
                         <label for="">Country</label>
                         <select name="country" class="form-control" required>
-                            <option value="<?php echo $couty['id']; ?>"><?php echo $couty['countryName']; ?></option>
-                            <?php $coc = $this->db->get_where('countries', ['id !=' => $team['country_id']])->result_array(); ?>
-                            <?php foreach ($coc as $coc) { ?>
-                                <option value="<?php echo $coc['id'] ?>"><?php echo $coc['countryName']; ?></option>
-                            <?php } ?>
+                            <option value="echo $couty['id']; ?>"> echo $couty['countryName']; ?></option>
+                             $coc = $this->db->get_where('countries', ['id !=' => $team['country_id']])->result_array(); ?>
+                             foreach ($coc as $coc) { ?>
+                                <option value="echo $coc['id'] ?>">  echo $coc['countryName']; ?></option>
+                             } ?>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">PayPal</label>
-                        <input type="text" class="form-control" name="bank_account" value="<?php echo $team['bank_account']; ?>">
-                    </div>
+                    </div> -->
+                    <?php if ($team['country_id'] == '218') : ?>
+                        <div class="form-group">
+                            <label for="">ชื่อธนาคาร </label>
+                            <select class="form-control" id="bank2" name="bank_name" required>
+                                <option value="" disabled selected>กรุณาเลือกธนาคาร</option>
+                                <option value="ไทยพาณิชย์" <?php echo $team['bank_name'] == 'ไทยพาณิชย์' ? 'selected' : ''; ?>>ไทยพาณิชย์ (แนะนำ)</option>
+                                <option value="กรุงไทย" <?php echo $team['bank_name'] == 'กรุงไทย' ? 'selected' : ''; ?>>กรุงไทย</option>
+                                <option value="กสิกรไทย" <?php echo $team['bank_name'] == 'กสิกรไทย' ? 'selected' : ''; ?>>กสิกรไทย</option>
+                                <option value="กรุงเทพ" <?php echo $team['bank_name'] == 'กรุงเทพ' ? 'selected' : ''; ?>>กรุงเทพ</option>
+                                <option value="กรุงศรี" <?php echo $team['bank_name'] == 'กรุงศรี' ? 'selected' : ''; ?>>กรุงศรี</option>
+                                <option value="ทหารไทย" <?php echo $team['bank_name'] == 'ทหารไทย' ? 'selected' : ''; ?>>ทหารไทย</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">เลขบัญชี</label>
+                            <input type="text" class="form-control" name="bank_number" value="<?php echo $team['bank_number']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">บุ๊คแบงค์</label>
+                            <input type="file" class="form-control" name="bookbank" value="">
+                            <img class="mt-2" src="<?php echo $team['file_name_bookbank']; ?>" alt="" required>
+                        </div>
+                    <?php else : ?>
+                        <div class="form-group">
+                            <label for="">PayPal</label>
+                            <input type="text" class="form-control" name="bank_account" value="<?php echo $team['bank_account']; ?>" required>
+                        </div>
+                    <?php endif; ?>
+
                     <hr>
+
                     <div class="form-group">
-                        <label for="">Old Password</label>
+                        <label for="">รหัสผ่านเก่า</label>
                         <input type="password" class="form-control" name="oldpassword" value="">
                     </div>
                     <div class="form-group">
-                        <label for="">New Password</label>
+                        <label for="">รหัสผ่านใหม่</label>
                         <input type="password" class="form-control" name="password" value="">
                     </div>
                     <div class="form-group">
-                        <label for="">Confirm New Password</label>
+                        <label for="">ยืนยันรหัสผ่านใหม่</label>
                         <input type="password" class="form-control" name="c_password" value="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิดหน้าต่าง</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </div>
             </form>
         </div>
